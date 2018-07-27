@@ -141,5 +141,5 @@ dependencies {
     /*Backend all*/
     implementation project(':appthemehelper')
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
-    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 }

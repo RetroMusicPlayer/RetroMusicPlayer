@@ -70,13 +70,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/normal/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/normal/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/normal/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/assets" type="java-test-resource" />
@@ -84,6 +77,13 @@
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/testNormal/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestNormal/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -112,13 +112,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/rs" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/res" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/assets" type="java-test-resource" />
@@ -126,11 +119,17 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/annotation_processor_list" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/apk_list" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/build-info" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check-manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/compatible_screen_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
@@ -167,7 +166,6 @@
     <orderEntry type="library" name="Gradle: com.sothree.slidinguppanel:library-3.4.0" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:common:1.1.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.7@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/Users/hemanths/Desktop/logo/RetroMusicPlayer/app/libs/jaudiotagger-android-2.2.3.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.afollestad:material-cab-0.1.12" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:palette-v7-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:recyclerview-v7-27.1.1" level="project" />
@@ -182,7 +180,6 @@
     <orderEntry type="library" name="Gradle: com.github.ksoichiro:android-observablescrollview-1.6.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-fragment-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.3.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/Users/hemanths/Desktop/logo/RetroMusicPlayer/app/libs/jsoup-1.11.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.core:runtime-1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:design-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.afollestad.material-dialogs:core-0.9.6.0" level="project" />
@@ -190,10 +187,11 @@
     <orderEntry type="library" name="Gradle: com.github.jetradarmobile:android-snowfall-1.1.6" level="project" />
     <orderEntry type="library" name="Gradle: com.anjlab.android.iab.v3:library:1.0.44@jar" level="project" />
     <orderEntry type="library" name="Gradle: uk.co.chrisjenx:calligraphy-2.3.0" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:/Users/hemanths/Desktop/logo/RetroMusicPlayer/app/libs/juniversalchardet-1.0.3.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:gridlayout-v7-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:runtime-1.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/libs/juniversalchardet-1.0.3.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:transition-27.1.1" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/libs/jsoup-1.11.2.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.jakewharton:butterknife-8.8.1" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:logging-interceptor:3.10.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:27.1.1@jar" level="project" />
@@ -210,11 +208,11 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-runtime:1.0.6@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.mpatric:mp3agic:0.8.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-vector-drawable-27.1.1" level="project" />
-    <orderEntry type="library" name="Gradle: org.nanohttpd:nanohttpd:2.3.1@jar" level="project" />
     <orderEntry type="library" name="Gradle: jp.wasabeef:glide-transformations-2.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-core-utils-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.afollestad.material-dialogs:commons-0.9.6.0" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxandroid-2.0.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.AdrienPoupa:jaudiotagger-2.2.3" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.10.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:preference-v7-27.1.1" level="project" />
     <orderEntry type="library" name="Gradle: android.arch.lifecycle:livedata-core-1.1.0" level="project" />

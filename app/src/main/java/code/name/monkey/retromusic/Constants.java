@@ -34,7 +34,7 @@ public class Constants {
     public static final String PAYPAL_ME_URL = "https://www.paypal.me/h4h14";
     public static final String GOOGLE_PLUS_COMMUNITY = "https://plus.google.com/communities/110811566242871492162";
     public static final String TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534";
-    public static final String GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicApp";
+    public static final String GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer";
     public static final String BASE_API_URL_KUGOU = "http://lyrics.kugou.com/";
     public static final String TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog";
     public static final String USER_PROFILE = "profile.jpg";
