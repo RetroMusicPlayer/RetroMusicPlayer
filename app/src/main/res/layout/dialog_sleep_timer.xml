@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            fontPath="@string/circular_std_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/action_sleep_timer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:ignore="MissingPrefix" />
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            android:id="@+id/timer_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textAppearance="?android:textAppearanceLarge" />
+
+
+        <SeekBar
+            android:id="@+id/seek_arc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="3dp"
+            android:padding="16dp"
+            android:progressDrawable="@drawable/color_progress_seek"
+            android:splitTrack="false"
+            android:thumb="@drawable/switch_thumb_material"
+            tools:progress="20" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/action_set"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="@string/action_set" />
+
+            <Button
+                android:id="@+id/action_cancel"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="@string/cancel_current_timer" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

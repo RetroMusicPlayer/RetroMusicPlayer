@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<me.zhanghai.android.materialprogressbar.MaterialProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/progress"
+    style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:visibility="gone"
+    app:mpb_progressStyle="horizontal"
+    app:mpb_useIntrinsicPadding="false" />

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+  <android.support.v7.widget.AppCompatTextView xmlns:tools="http://schemas.android.com/tools"
+    fontPath="@string/circular_std_black"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:text="@string/for_you"
+    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+    android:textColor="?android:attr/textColorPrimary"
+    android:visibility="gone"
+    tools:ignore="MissingPrefix"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal">
+
+    <LinearLayout
+      android:id="@+id/action_shuffle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/abs_shuffle"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_shuffle_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:text="@string/shuffle"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/timer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/abs_timer"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_timer_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:text="@string/action_sleep_timer"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"/>
+
+    </LinearLayout>
+    <LinearLayout
+      android:id="@+id/settings"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/abs_history_playlist"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_settings_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:text="@string/action_settings"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/folder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:background="@drawable/abs_last_added_playlist"
+        android:elevation="2dp"
+        app:srcCompat="@drawable/ic_folder_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:text="@string/folders"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="12sp"/>
+
+    </LinearLayout>
+  </LinearLayout>
+
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_margin="12dp"
+    android:background="?attr/dividerColor"/>
+</LinearLayout>

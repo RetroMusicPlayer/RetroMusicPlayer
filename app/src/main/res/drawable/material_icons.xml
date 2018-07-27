@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <padding
+                android:bottom="8dp"
+                android:left="8dp"
+                android:right="8dp"
+                android:top="8dp"/>
+            <gradient
+                android:angle="135"
+                android:endColor="@color/md_light_blue_A200"
+                android:startColor="@color/md_blue_A700"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_vector_square">
+
+    </item>
+</layer-list>

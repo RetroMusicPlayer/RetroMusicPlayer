@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <android.support.design.widget.AppBarLayout
+    android:id="@+id/app_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
+      android:layout_width="match_parent"
+      android:layout_height="96dp"
+      app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
+      app:expandedTitleGravity="top"
+      app:expandedTitleMarginStart="16dp"
+      app:expandedTitleMarginTop="48dp"
+      app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
+      app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+      <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+      <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar48"
+        app:layout_collapseMode="pin"
+        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp">
+
+        <android.support.v7.widget.SwitchCompat
+          android:id="@+id/equalizer"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:layout_gravity="end"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+      </android.support.v7.widget.Toolbar>
+    </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
+
+  </android.support.design.widget.AppBarLayout>
+
+  <android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+      android:id="@+id/content"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0"
+          android:padding="16dp"
+          android:text="Select preset"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+        <Spinner
+          android:id="@+id/presets"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:background="@android:color/transparent"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+          android:id="@+id/bass_boost"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0"
+          android:padding="16dp"
+          android:text="@string/bass_boost"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+        <SeekBar
+          android:id="@+id/bass_boost_strength"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="16dp"
+          android:max="1000"
+          android:maxHeight="3dp"
+          android:progressDrawable="@drawable/color_progress_seek"
+          android:splitTrack="false"
+          android:thumb="@drawable/switch_thumb_material"
+          tools:progress="20"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+          android:id="@+id/virtualizer"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="0"
+          android:padding="16dp"
+          android:text="@string/virtualizer"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+        <SeekBar
+          android:id="@+id/virtualizer_strength"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="16dp"
+          android:max="1000"
+          android:maxHeight="3dp"
+          android:progressDrawable="@drawable/color_progress_seek"
+          android:splitTrack="false"
+          android:thumb="@drawable/switch_thumb_material"
+          tools:progress="20"/>
+      </LinearLayout>
+
+      <LinearLayout
+        android:id="@+id/bands"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:orientation="vertical"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="*Warning: It's alpha version. We don't recommend to use Equalizer, We believe without using Equalizer songs has better sound quality."/>
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

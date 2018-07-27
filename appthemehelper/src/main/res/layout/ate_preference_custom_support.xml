@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal"
+    android:paddingEnd="?android:attr/scrollbarSize"
+    android:paddingRight="?android:attr/scrollbarSize"
+    android:background="?android:attr/selectableItemBackground"
+    tools:ignore="RtlSymmetry,UnusedAttribute">
+
+    <ImageView
+        android:id="@+android:id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/ate_preference_inset"
+        android:layout_marginStart="@dimen/ate_preference_inset"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginBottom="12dip"
+        android:layout_marginEnd="6dip"
+        android:layout_marginLeft="@dimen/ate_preference_inset"
+        android:layout_marginRight="6dip"
+        android:layout_marginStart="@dimen/ate_preference_inset"
+        android:layout_marginTop="12dip"
+        android:layout_weight="1">
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:fontFamily="sans-serif"
+            android:singleLine="true"
+            android:textSize="@dimen/ate_default_textsize_subheading"
+            tools:text="Title" />
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@android:id/title"
+            android:layout_alignStart="@android:id/title"
+            android:layout_below="@android:id/title"
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif"
+            android:maxLines="4"
+            android:textSize="@dimen/ate_default_textsize_body"
+            tools:text="Summary" />
+
+    </RelativeLayout>
+
+    <!-- Preference should place its actual preference widget here. -->
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="vertical" />
+
+</LinearLayout><!-- From: file:/home/jitpack/build/commons/src/main/res/layout/md_preference_custom.xml -->

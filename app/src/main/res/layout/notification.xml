@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2014 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<!--This FrameLayout IS necessary in order tp prevent fucking TouchWiz to interpret the "background="#00000000" as making the whole notification transparent-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp">
+
+    <LinearLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <FrameLayout
+            android:id="@+id/icon_group"
+            android:layout_width="@dimen/notification_large_icon_width"
+            android:layout_height="@dimen/notification_large_icon_height"
+            android:layout_weight="0">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerInside"
+                tools:ignore="ContentDescription" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/media_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_vertical"
+            android:layout_weight="1"
+            android:minHeight="@dimen/notification_large_icon_height"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:gravity="bottom"
+                android:singleLine="true"
+                android:textAppearance="@style/Theme.RetroMusic.Notification.Title"
+                tools:ignore="NestedWeights" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textAppearance="@style/Theme.RetroMusic.Notification" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/media_actions"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="6dp"
+            android:layout_marginRight="6dp"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            tools:ignore="UnusedAttribute">
+
+            <!-- media buttons will be added here -->
+            <ImageButton
+                android:id="@+id/action_prev"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/action_play_pause"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
+
+            <ImageButton
+                android:id="@+id/action_next"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

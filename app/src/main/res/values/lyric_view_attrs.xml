@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LyricView">
+        <attr name="hint" format="string" />
+        <attr name="hintColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="highlightColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="maxLength" format="dimension" />
+        <attr name="fadeInFadeOut" format="boolean" />
+        <attr name="lineSpace" format="dimension" />
+        <attr name="textAlign">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

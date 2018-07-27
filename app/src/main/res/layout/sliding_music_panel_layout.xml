@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:sothree="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoPanelHeight="0dp"
+        sothree:umanoScrollableView="@+id/recycler_view"
+        sothree:umanoShadowHeight="@dimen/card_elevation">
+
+        <FrameLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <FrameLayout
+            android:id="@+id/sliding_panel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <FrameLayout
+                android:id="@+id/player_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <fragment
+                android:id="@+id/mini_player_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:layout="@layout/fragment_mini_player" />
+        </FrameLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    <code.name.monkey.retromusic.views.BottomNavigationViewEx
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        app:elevation="0dp"
+        app:menu="@menu/bottom_navigation_main" />
+
+</android.support.design.widget.CoordinatorLayout>
+ 

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
+
+        <item name="dividerColor">#18FFFFFF</item>
+
+        <item name="defaultFooterColor">@color/md_grey_800</item>
+
+        <item name="cardBackgroundColor">@color/md_grey_900</item>
+
+        <item name="md_background_color">@color/md_grey_900</item>
+
+        <item name="android:windowBackground">@android:color/black</item>
+        <item name="colorPrimary">?android:attr/windowBackground</item>
+
+        <item name="bottomSheetDialogTheme">@style/Theme.Design.BottomSheetDialog</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+        <item name="md_dark_theme">false</item>
+
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
+
+        <item name="cardBackgroundColor">@color/md_white_1000</item>
+
+        <item name="defaultFooterColor">@color/md_grey_500</item>
+
+        <item name="dividerColor">@color/md_divider_black</item>
+        <item name="iconColor">@color/ate_secondary_text_light</item>
+
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <!-- just in case-->
+        <item name="colorAccent">@android:color/black</item>
+        <item name="android:windowBackground">@color/md_white_1000</item>
+        <item name="colorPrimary">?android:attr/windowBackground</item>
+
+        <!-- necessary to find the overflow button later in the layout-->
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.Design.Light.BottomSheetDialog</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Base" parent="Theme.AppCompat.NoActionBar">
+
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
+
+        <item name="md_dark_theme">true</item>
+
+        <item name="roundSelector">@drawable/round_selector_dark</item>
+        <item name="rectSelector">@drawable/rect_selector_dark</item>
+        <item name="rectSelectorStrong">@drawable/rect_selector_strong_dark</item>
+
+        <item name="cardBackgroundColor">@color/md_grey_800</item>
+
+        <item name="defaultFooterColor">@color/md_grey_800</item>
+
+        <item name="dividerColor">@color/md_divider_white</item>
+        <item name="iconColor">@color/ate_secondary_text_dark</item>
+
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+
+        <!-- just in case-->
+        <item name="colorAccent">@android:color/white</item>
+        <item name="android:windowBackground">@color/md_grey_900</item>
+        <item name="colorPrimary">?android:attr/windowBackground</item>
+
+        <!-- necessary to find the overflow button later in the layout-->
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
+    </style>
+
+    <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
+        <item name="colorPrimary">@color/md_deep_purple_A400</item>
+        <item name="android:colorPrimary">?colorPrimary</item>
+        <item name="android:windowBackground">?colorPrimary</item>
+    </style>
+
+
+    <style name="FabParent">
+        <item name="borderWidth">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MusicProgressSliderParent">
+        <item name="android:progressDrawable">@android:color/transparent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:thumb">@drawable/slider_thumb</item>
+    </style>
+
+    <style name="TraditionalMusicProgressSliderParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/seek_bar_margin_left_right</item>
+        <item name="android:layout_marginRight">@dimen/seek_bar_margin_left_right</item>
+    </style>
+
+    <!-- content description is necessary to find the overflow button later in the layout-->
+    <style name="Widget.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:contentDescription">@string/abc_action_menu_overflow_description</item>
+    </style>
+
+    <style name="SearchViewTheme" parent="PlaidDarkOverlay">
+        <item name="colorControlActivated">?android:colorAccent</item>
+        <item name="android:searchViewStyle">@style/SearchView</item>
+    </style>
+
+    <style name="PlaidDarkOverlay" parent="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+        <!-- Used to theme dark elements in light themed screens.
+             Extend the material dark Action Bar overlay as this contains text styling. -->
+    </style>
+
+    <style name="SearchView" parent="android:style/Widget.Material.SearchView">
+        <item name="android:searchIcon">@android:color/transparent</item>
+        <item name="android:searchHintIcon">@android:color/transparent</item>
+        <item name="android:queryBackground">@android:color/transparent</item>
+        <item name="android:submitBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
+    </style>
+
+
+    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BaseBottomSheetDialogDark" parent="@style/Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?cardBackgroundColor</item>
+    </style>
+
+    <style name="BottomSheetDialogThemeDark" parent="BaseBottomSheetDialogDark">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">?cardBackgroundColor</item>
+    </style>
+
+</resources>

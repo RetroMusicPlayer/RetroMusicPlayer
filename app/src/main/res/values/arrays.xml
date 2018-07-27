@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_auto_download_images_titles">
+        <item>@string/always</item>
+        <item>@string/only_on_wifi</item>
+        <item>@string/never</item>
+    </array>
+    <string-array name="pref_general_theme_list_titles">
+        <item>@string/light_theme_name</item>
+        <item>@string/dark_theme_name</item>
+        <item>@string/black_theme_name</item>
+        <item>@string/color_theme_name</item>
+    </string-array>
+
+    <string-array name="pref_grid_style_list_titles">
+        <item>@string/normal_style</item>
+        <item>@string/card_style</item>
+        <item>@string/card_color_style</item>
+    </string-array>
+
+    <string-array name="pref_grid_style_list_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <array name="pref_grid_style_layout">
+        <item>@layout/item_grid</item>
+        <item>@layout/item_card</item>
+        <item>@layout/item_card_color</item>
+    </array>
+    <string-array name="pref_general_theme_list_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>black</item>
+        <item>color</item>
+    </string-array>
+
+    <array name="pref_auto_download_images_values">
+        <item>always</item>
+        <item>only_wifi</item>
+        <item>never</item>
+    </array>
+
+    <array name="pref_album_detail_style_titles">
+        <item>@string/style1</item>
+        <item>@string/style2</item>
+    </array>
+    <array name="pref_album_detail_style_index">
+        <item>0</item>
+        <item>1</item>
+    </array>
+
+    <array name="pref_album_detail_style_values">
+        <item>@layout/activity_album</item>
+        <item>@layout/activity_album_style_2</item>
+    </array>
+
+    <string-array name="pref_playlists_last_added_interval_titles">
+        <item>@string/today</item>
+        <item>@string/this_week</item>
+        <item>@string/this_month</item>
+        <item>@string/past_three_months</item>
+        <item>@string/this_year</item>
+    </string-array>
+
+    <string-array name="pref_playlists_last_added_interval_values">
+        <item>today</item>
+        <item>this_week</item>
+        <item>this_month</item>
+        <item>past_three_months</item>
+        <item>this_year</item>
+    </string-array>
+
+    <string-array name="night">
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/44.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/40.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/36.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/32.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/28.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/24.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/20.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/16.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/12.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/8.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/4.png</item>
+    </string-array>
+    <string-array name="evening">
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/43.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/39.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/35.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/31.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/27.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/23.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/19.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/15.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/11.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/7.png</item>
+    </string-array>
+    <string-array name="after_noon">
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/42.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/38.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/34.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/30.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/26.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/22.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/18.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/14.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/10.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/6.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/2.png</item>
+    </string-array>
+    <string-array name="morning">
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/41.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/37.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/33.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/29.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/25.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/21.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/17.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/13.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/9.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/5.png</item>
+        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/1.png</item>
+    </string-array>
+    <string-array name="pref_lyrics_options_list_titles">
+        <item>Offline</item>
+        <!--<item>Lyrics Wiki</item>-->
+        <item>Kugou</item>
+    </string-array>
+    <string-array name="pref_lyrics_options_list_values">
+        <item>offline</item>
+        <!--<item>wiki</item>-->
+        <item>kugou</item>
+    </string-array>
+
+    <string-array name="pref_equalizer_types_titles">
+        <item>@string/system_equalizer</item>
+        <item>@string/retro_equalizer</item>
+    </string-array>
+
+    <string-array name="pref_equalizer_types_values">
+        <item>system</item>
+        <item>retro</item>
+    </string-array>
+
+    <string name="style1">Normal style</string>
+    <string name="style2">Card style</string>
+
+</resources>

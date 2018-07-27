@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_toggle_favorite"
+        android:icon="@drawable/ic_favorite_border_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/favorites"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/now_playing"
+        android:icon="@drawable/ic_playlist_play_white_24dp"
+        android:orderInCategory="2"
+        android:title="@string/now_playing_queue"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_go_to_album"
+        android:icon="@drawable/ic_album_white_24dp"
+        android:orderInCategory="3"
+        android:title="@string/action_go_to_album" />
+    <item
+        android:id="@+id/action_go_to_artist"
+        android:orderInCategory="4"
+        android:title="@string/action_go_to_artist" />
+    <item
+        android:id="@+id/action_go_to_genre"
+        android:orderInCategory="4"
+        android:title="@string/action_go_to_genre"
+        android:visible="false" />
+    <item
+        android:id="@+id/action_add_to_playlist"
+        android:orderInCategory="5"
+        android:title="@string/action_add_to_playlist" />
+    <item
+        android:id="@+id/action_save_playing_queue"
+        android:orderInCategory="6"
+        android:title="@string/action_save_playing_queue"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="7"
+        android:title="@string/action_share" />
+    <item
+        android:id="@+id/action_set_as_ringtone"
+        android:orderInCategory="8"
+        android:title="@string/action_set_as_ringtone" />
+    <item
+        android:id="@+id/action_clear_playing_queue"
+        android:orderInCategory="9"
+        android:title="@string/action_clear_playing_queue" />
+    <item
+        android:id="@+id/action_details"
+        android:orderInCategory="10"
+        android:title="@string/action_details" />
+    <item
+        android:id="@+id/action_sleep_timer"
+        android:orderInCategory="11"
+        android:title="@string/action_sleep_timer"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_equalizer"
+        android:orderInCategory="12"
+        android:title="@string/equalizer"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_delete_from_device"
+        android:orderInCategory="13"
+        android:title="@string/action_delete_from_device" />
+</menu>

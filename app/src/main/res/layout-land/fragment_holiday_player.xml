@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/holiday_background" />
+
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:snowflakesNum="80" />
+
+    <View
+        android:id="@+id/gradient_background"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shadow_up_home"
+        android:backgroundTint="?colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/now_playing_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <code.name.monkey.retromusic.views.HeightFitSquareLayout
+            android:id="@+id/album_cover_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/player_album_cover_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_player_album_cover" />
+        </code.name.monkey.retromusic.views.HeightFitSquareLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <fragment
+                    android:id="@+id/playback_controls_fragment"
+                    android:name="code.name.monkey.retromusic.ui.fragments.player.holiday.HolidayPlaybackControlsFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    tools:layout="@layout/fragment_holiday_controls_fragment" />
+
+                <FrameLayout
+                    android:id="@+id/toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0">
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/player_toolbar"
+                        style="@style/Toolbar48"
+                        android:layout_height="48dp"
+                        android:navigationIcon="@drawable/ic_close_white_24dp"
+                        app:navigationIcon="@drawable/ic_close_white_24dp" />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+</FrameLayout>

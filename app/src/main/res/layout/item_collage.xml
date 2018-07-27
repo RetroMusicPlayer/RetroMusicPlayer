@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical">
+
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="2">
+
+      <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:cardCornerRadius="6dp"
+          app:cardUseCompatPadding="true">
+
+          <ImageView
+            android:id="@+id/image_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        </android.support.v7.widget.CardView>
+      </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+    </FrameLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_weight="2.68"
+      android:gravity="center"
+      android:orientation="vertical">
+
+      <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:cardCornerRadius="6dp"
+          app:cardUseCompatPadding="true">
+
+          <ImageView
+            android:id="@+id/image_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        </android.support.v7.widget.CardView>
+      </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
+      <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:cardCornerRadius="6dp"
+          app:cardUseCompatPadding="true">
+
+          <ImageView
+            android:id="@+id/image_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        </android.support.v7.widget.CardView>
+      </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+    </LinearLayout>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="2"
+      android:minHeight="100dp">
+
+      <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          app:cardCornerRadius="6dp"
+          app:cardUseCompatPadding="true">
+
+          <ImageView
+            android:id="@+id/image_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+        </android.support.v7.widget.CardView>
+      </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+    </FrameLayout>
+  </LinearLayout>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+          android:id="@+id/image_5"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop"/>
+      </android.support.v7.widget.CardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+          android:id="@+id/image_6"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop"/>
+      </android.support.v7.widget.CardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+          android:id="@+id/image_7"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop"/>
+      </android.support.v7.widget.CardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
+    <Space
+      android:layout_width="1dp"
+      android:layout_height="match_parent"/>
+
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+          android:id="@+id/image_8"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop"/>
+      </android.support.v7.widget.CardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_weight="1">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="6dp"
+        app:cardUseCompatPadding="true">
+
+        <ImageView
+          android:id="@+id/image_9"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:scaleType="centerCrop"/>
+      </android.support.v7.widget.CardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+  </LinearLayout>
+</LinearLayout>

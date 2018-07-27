@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/title"
+        fontPath="@string/circular_std_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp"
+        android:text="@string/add_playlist_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:ignore="MissingPrefix" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?dividerColor" />
+
+    <code.name.monkey.retromusic.views.BottomSheetListView
+        android:id="@+id/playlists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

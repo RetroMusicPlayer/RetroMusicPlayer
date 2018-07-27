@@ -1,0 +1,12 @@
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Blacklist">
+
+        <code.name.monkey.retromusic.preferences.BlacklistPreference
+            android:key="blacklist"
+            android:summary="The content of blacklisted folders is hidden from your library."
+            android:title="Blacklist"/>
+
+    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

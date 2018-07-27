@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="512dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/image_container"
+        android:layout_width="match_parent"
+        android:layout_height="282dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+        <android.support.v7.widget.AppCompatImageButton
+            android:id="@+id/play_songs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="12dp"
+            android:background="@drawable/color_circle_gradient"
+            android:backgroundTint="@color/twenty_percent_black_overlay"
+            android:padding="12dp"
+            app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:maxLines="1"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:textColor="?android:attr/textColorSecondary"
+        tools:ignore="MissingPrefix"
+        tools:text="My top tracks" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title"
+        fontPath="@string/circular_std_black"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:maxLines="2"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textColor="?android:attr/textColorPrimary"
+        tools:ignore="MissingPrefix"
+        tools:text="My top tracks" />
+
+
+</LinearLayout>

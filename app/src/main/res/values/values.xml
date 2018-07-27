@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_album_art" translatable="false">album_art_transition</string>
+    <string name="transition_artist_image" translatable="false">artist_image_transition</string>
+    <string name="transition_fab" translatable="false">fab_transition</string>
+    <string name="transition_mini_player" translatable="false">mini_player_transition</string>
+    <string name="transition_search_bar" translatable="false">search_bar_transition</string>
+</resources>

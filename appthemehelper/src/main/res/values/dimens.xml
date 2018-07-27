@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="ate_circleview_border">1dp</dimen>
+
+    <dimen name="ate_default_textsize_display4">112sp</dimen>
+    <dimen name="ate_default_textsize_display3">56sp</dimen>
+    <dimen name="ate_default_textsize_display2">45sp</dimen>
+    <dimen name="ate_default_textsize_display1">34sp</dimen>
+    <dimen name="ate_default_textsize_headline">24sp</dimen>
+    <dimen name="ate_default_textsize_title">20sp</dimen>
+    <dimen name="ate_default_textsize_subheading">16sp</dimen>
+    <dimen name="ate_default_textsize_body">14sp</dimen>
+    <dimen name="ate_default_textsize_caption">12sp</dimen>
+
+    <dimen name="ate_preference_inset">16dp</dimen>
+
+</resources>

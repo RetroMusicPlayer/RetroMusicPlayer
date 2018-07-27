@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+
+    <string name="accent_color">Warna aksen</string>
+    <string name="accent_color_desc">Warna aksen, warna bawaan adalah pink.</string>
+
+    <string name="action_about">Tentang</string>
+    <string name="action_add_to_favorites">Tambahkan sebagai favorit</string>
+    <string name="action_add_to_playing_queue">Tambahkan ke antrian</string>
+    <string name="action_add_to_playlist">Tambahkan ke daftar putar...</string>
+    <string name="action_clear_playing_queue">Bersihkan antrian</string>
+    <string name="action_delete">Hapus</string>
+    <string name="action_delete_from_device">Hapus dari perangkat</string>
+    <string name="action_details">Rincian</string>
+    <string name="action_go_to_album">Lihat album</string>
+    <string name="action_go_to_artist">Lihat artis</string>
+    <string name="action_go_to_start_directory">Lihat direktori awal</string>
+    <string name="action_grant">Izinkan</string>
+    <string name="action_grid_size">Ukuran kotak</string>
+    <string name="action_grid_size_land">Ukuran kotak (lansekap)</string>
+    <string name="action_new_playlist">Daftar putar baru...</string>
+    <string name="action_next">Selanjutnya</string>
+    <string name="action_play">Putar</string>
+    <string name="action_play_next">Putar selanjutnya</string>
+    <string name="action_play_pause">Putar/Jeda</string>
+    <string name="action_previous">Sebelumnya</string>
+    <string name="action_re_download_artist_image">Perbarui gambar artis</string>
+    <string name="action_remove_from_favorites">Hapus dari favorit</string>
+    <string name="action_remove_from_playing_queue">Hapus dari antrian</string>
+    <string name="action_remove_from_playlist">Hapus dari daftar putar</string>
+    <string name="action_rename">Ubah nama</string>
+    <string name="action_scan">Pindai</string>
+    <string name="action_search">Cari</string>
+    <string name="action_set">Atur</string>
+    <string name="action_set_as_ringtone">Atur sebagai nada dering</string>
+    <string name="action_set_as_start_directory">Atur sebagai direktori awal</string>
+    <string name="action_settings">"Setelan"</string>
+    <string name="action_share">Bagikan</string>
+    <string name="action_show_lyrics">Lihat lirik</string>
+    <string name="action_shuffle_all">Acak semua</string>
+    <string name="action_shuffle_playlist">Acak daftar putar</string>
+    <string name="action_tag_editor">Sunting Tag</string>
+
+    <string name="add_playlist_title">"Tambahkan ke daftar putar"</string>
+
+    <string name="added_title_to_playing_queue">"1 judul ditambahkan ke antrian."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d judul ditambahkan ke antrian.</string>
+
+    <string name="album">Album</string>
+    <string name="album_artist">Artis album</string>
+    <string name="album_desc">Album menurun</string>
+    <string name="album_or_artist_empty">Judul atau artis kosong.</string>
+
+    <string name="albums">Album</string>
+
+    <string name="always">Selalu</string>
+
+    <!-- App Shortcuts -->
+    <string name="app_shortcut_shuffle_all_short">Acak</string>
+    <string name="app_widget_big_name">Retro music - Besar</string>
+    <string name="app_widget_big_name_2">Retro music - Besar2</string>
+    <string name="app_widget_classic_name">Retro music - Klasik</string>
+
+    <string name="artist">Artis</string>
+    <string name="artist_desc">Artis menurun</string>
+
+    <string name="artists">Artis</string>
+
+    <string name="audio_focus_denied">Fokus suara ditolak.</string>
+
+    <string name="biography">Biografi</string>
+    <string name="biography_unavailable">Tidak dapat menemukan biografi artis.</string>
+
+    <string name="black_theme_name">Hitam</string>
+
+    <string name="changelog">Catatan ubahan</string>
+
+    <string name="colors">Warna</string>
+
+    <string name="could_not_create_playlist">Tidak dapat menambahkan daftar putar.</string>
+    <string name="could_not_download_album_cover">"Gagal mengunduh gambar album."</string>
+    <string name="could_not_scan_files">Tidak dapat memindai %d fail.</string>
+
+    <string name="create_action">Tambahkan</string>
+
+    <string name="created_playlist_x">Daftar putar %1$s ditambahkan.</string>
+
+    <string name="currently_listening_to_x_by_x">Saat ini mendengarkan %1$s oleh %2$s.</string>
+
+    <string name="dark_theme_name">Gelap</string>
+
+    <string name="date">Tanggal</string>
+
+    <string name="delete_action">Hapus</string>
+    <string name="delete_playlist_title">Hapus daftar putar</string>
+    <string name="delete_playlist_x"><![CDATA[Hapus daftar putar <b>%1$s</b>?]]></string>
+    <string name="delete_playlists_title">Hapus daftar putar</string>
+    <string name="delete_song_title">Hapus lagu</string>
+    <string name="delete_song_x"><![CDATA[Hapus lagu <b>%1$s</b>?]]></string>
+    <string name="delete_songs_title">Hapus lagu</string>
+    <string name="delete_x_playlists"><![CDATA[Hapus <b>%1$d</b> daftar putar?]]></string>
+    <string name="delete_x_songs"><![CDATA[Hapus <b>%1$d</b> lagu?]]></string>
+
+    <string name="deleted_x_songs">%1$d lagu dihapus.</string>
+
+    <string name="donate">Donasi</string>
+
+    <string name="download_from_last_fm">Unduh dari Last.fm</string>
+
+    <string name="duration">Durasi</string>
+
+    <string name="empty">Kosong</string>
+
+    <string name="equalizer">Ekualizer</string>
+
+    <string name="failed_to_save_playlist">Gagal menyimpan daftar putar (%s).</string>
+
+    <string name="favorites">Favorit</string>
+
+    <string name="folders">Direktori</string>
+
+    <string name="genre">Genre</string>
+
+    <string name="history">Riwayat</string>
+
+    <string name="home">Beranda</string>
+
+    <string name="inserted_x_songs_into_playlist_x">%1$d lagu dimasukkan ke daftar putar %2$s.</string>
+
+    <string name="inspired_designs_by">Terinspirasi dari</string>
+
+    <string name="label_bit_rate">Birate</string>
+    <string name="label_details">Rincian</string>
+    <string name="label_file_format">Format</string>
+    <string name="label_file_name">Nama fail</string>
+    <string name="label_file_path">Lokasi fail</string>
+    <string name="label_file_size">Ukuran</string>
+    <string name="label_sampling_rate">Rasio sampling</string>
+    <string name="label_track_length">Durasi</string>
+
+    <string name="last_added">Terakhir ditambahkan</string>
+
+    <string name="library">Pustaka</string>
+
+    <string name="licenses">Lisensi</string>
+
+    <string name="light_theme_name">Putih</string>
+
+    <string name="listing_files">Daftar fail</string>
+
+    <string name="loading_products">Memuat produk...</string>
+
+    <string name="lyrics">Lirik</string>
+
+    <string name="more">Selengkapnya</string>
+
+    <string name="my_top_tracks">Lagu teratas</string>
+
+    <string name="never">Tidak pernah</string>
+
+    <string name="new_playlist_title">Daftar putar baru...</string>
+    <string name="new_start_directory">%s adalah direktori awal</string>
+
+    <string name="no_albums">Tidak ada album</string>
+    <string name="no_artists">Tidak ada artis</string>
+    <string name="no_audio_ID">"Putar lagu dahulu, lalu coba lagi."</string>
+    <string name="no_equalizer">Tidak ada ekualizer ditemukan.</string>
+    <string name="no_files">Tidak ada fail</string>
+    <string name="no_playlists">Tidak ada daftar putar</string>
+    <string name="no_results">Tak ada hasil</string>
+    <string name="no_songs">Tidak ada lagu</string>
+
+    <string name="notification">Pemberitahuan</string>
+
+    <string name="now_playing_queue">Antrian daftar putar saat ini</string>
+
+    <string name="only_on_wifi">Hanya dengan Wi-Fi</string>
+
+    <string name="permission_external_storage_denied">Izin akses penyimpanan eksternal ditolak.</string>
+
+    <string name="permissions_denied">Izin ditolak.</string>
+
+    <string name="pick_from_local_storage">Pilih dari penyimpanan lokal</string>
+
+    <string name="play">Putar</string>
+
+    <string name="playlist_empty_text">Daftar putar kosong</string>
+    <string name="playlist_name_empty">Nama daftar putar</string>
+
+    <string name="playlists">Daftar putar</string>
+
+    <string name="pref_header_audio">Suara</string>
+    <string name="pref_header_images">Gambar</string>
+    <string name="pref_header_lockscreen">Layarkunci</string>
+    <string name="pref_only_lollipop">"Hanya tersedia pada Lollipop."</string>
+    <string name="pref_only_nougat_mr1">"Hanya tersedia pada Nougat 7.1."</string>
+    <string name="pref_summary_album_art_on_lockscreen">Menggunakan gambar album sebagai latar layarkunci.</string>
+    <string name="pref_summary_audio_ducking">Pemberitahuan, navigasi, dll.</string>
+    <string name="pref_summary_blurred_album_art">Kaburkan gambar album pada layarkunci. Dapat menyebabkan masalah pada apl pihak ketiga dan widget.</string>
+    <string name="pref_summary_colored_app">Warna latar, tombol kontrol berubah sesuai gambar album</string>
+    <string name="pref_summary_colored_app_shortcuts">Warnai pintasan apl dengan warna aksen. Setiap anda mengubah warna, aktifkan ini untuk menerapkan efek.</string>
+    <string name="pref_summary_colored_navigation_bar">Warnai bilah navigasi dengan warna utama.</string>
+    <string name="pref_summary_colored_notification">"Warnai pemberitahuan dengan warna gambar album."</string>
+    <string name="pref_summary_gapless_playback">"Dapat menyebabkan masalah pada beberapa perangkat."</string>
+    <string name="pref_summary_ignore_media_store_artwork">Meningkatkan kualitas gambar album namun memperlambat waktu muat. Aktifkan ini hanya jika ada masalah dengan gambar album resolusi rendah.</string>
+    <string name="pref_summary_round_corners">Lengkungan pojok jendela dan gambar album.</string>
+    <string name="pref_title_album_art_on_lockscreen">Perlihatkan gambar album</string>
+    <string name="pref_title_app_shortcuts">Pintasan apl berwarna</string>
+    <string name="pref_title_audio_ducking">Kurangi volume saat kehilangan fokus</string>
+    <string name="pref_title_auto_download_artist_images">Unduh otomatis gambar artis</string>
+    <string name="pref_title_blurred_album_art">Kaburkan gambar album</string>
+    <string name="pref_title_colored_app">Warna adaptif</string>
+    <string name="pref_title_colored_notification">Pemberitahuan berwarna</string>
+    <string name="pref_title_gapless_playback">Putar tanpa jeda</string>
+    <string name="pref_title_general_theme">Tema utama</string>
+    <string name="pref_title_ignore_media_store_artwork">Abaikan gambar Media Store</string>
+    <string name="pref_title_navigation_bar">Bilah navigasi berwarna</string>
+    <string name="pref_title_round_corners">Lengkungan pojok</string>
+
+    <string name="primary_color">Warna utama</string>
+
+    <string name="queue">Antrian</string>
+
+    <string name="rate_app">Nilai aplikasi</string>
+
+    <string name="remove_action">Hapus</string>
+    <string name="remove_cover">Hapus gambar album</string>
+    <string name="remove_song_from_playlist_title">Hapus lagu dari daftar putar</string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Hapus lagu <b>%1$s</b> dari daftar putar?]]></string>
+    <string name="remove_songs_from_playlist_title">Hapus lagu dari daftar putar</string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Hapus <b>%1$d</b> lagu dari daftar putar?]]></string>
+
+    <string name="rename_action">Ubah nama</string>
+    <string name="rename_playlist_title">Ubah nama daftar putar</string>
+
+    <string name="save_playlist_title">Simpan sebagai fail</string>
+
+    <string name="saved_playlist_to">Daftar putar tersimpan ke %s.</string>
+
+    <string name="saving_changes">Menyimpan perubahan</string>
+    <string name="saving_to_file">Menyimpan ke fail...</string>
+
+    <string name="scanned_files">Terpindai %1$d dari %2$d fail.</string>
+
+    <string name="search_hint">Cari di perpustakaan anda...</string>
+
+    <string name="shuffle">Acak</string>
+
+    <string name="song">Lagu</string>
+
+    <string name="songs">Lagu</string>
+
+    <string name="sort_order">Urutan sortir</string>
+
+    <string name="speech_not_supported">Maaf! Perangkat anda tidak mendukung input suara</string>
+    <string name="speech_prompt">Cari di perpustakaan</string>
+
+    <string name="support_development">Dukungan pengembangan</string>
+
+    <string name="thank_you">Terima kasih!</string>
+
+    <string name="the_audio_file">Fail audio</string>
+
+    <string name="title">Judul</string>
+    <string name="title_desc">Judul menurun</string>
+
+    <string name="track_hint">"Trek (2 untuk trek 2 atau 3004 untuk CD3 trek 4)"</string>
+
+    <string name="unplayable_file">Tidak dapat memutar lagu ini.</string>
+
+    <string name="up_next">Selanjutnya</string>
+
+    <string name="update_image">Perbarui gambar</string>
+
+    <string name="updated_artist_image">Gambar artis diperbarui.</string>
+
+    <string name="updating">Memperbarui...</string>
+
+    <string name="web_search">Pencarian Web</string>
+
+    <string name="what_do_you_want_to_share">Apa yang ingin anda bagikan?</string>
+
+    <string name="x_has_been_set_as_ringtone">Atur %1$s sebagai nada dering.</string>
+    <string name="x_selected">%1$d dipilh</string>
+
+    <string name="year">Tahun</string>
+
+</resources>

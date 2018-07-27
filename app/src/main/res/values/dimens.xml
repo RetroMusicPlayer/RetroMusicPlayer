@@ -1,0 +1,93 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">68dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="status_bar_padding">0dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="default_item_margin">16dp</dimen>
+
+    <dimen name="navigation_drawer_header_height">156dp</dimen>
+
+    <dimen name="title_view_height">72dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+
+    <dimen name="header_image_height">360dp</dimen>
+    <dimen name="progress_container_height">20dp</dimen>
+    <dimen name="fab_media_controller_container_height">120dp</dimen>
+    <dimen name="media_controller_container_height">104dp</dimen>
+
+
+    <dimen name="tab_height">48dp</dimen>
+
+    <dimen name="tagEditorHeaderVariableSpace">100dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="pause_bar_width">5dp</dimen>
+    <dimen name="pause_bar_distance">4dp</dimen>
+    <dimen name="pause_bar_height">16dp</dimen>
+
+
+    <dimen name="color_view_border">1dp</dimen>
+
+    <dimen name="empty_text_size">20sp</dimen>
+
+    <dimen name="seek_bar_margin_left_right">-17dp</dimen>
+    <dimen name="list_padding_vertical">2dp</dimen>
+
+    <dimen name="notification_big_image_size">134dp</dimen>
+
+    <dimen name="scrollbar_width">8dp</dimen>
+    <dimen name="scrollbar_inset">8dp</dimen>
+    <!-- MUST BE THE RESULT OF WIDTH PLUS INSET-->
+    <dimen name="scrollbar_width_plus_inset">16dp</dimen>
+
+    <!-- ONLY 0dp WHILE THERE IS THE BUG IN DESIGN SUPPORT LIBRARY 22.2.0-->
+    <dimen name="fab_margin_top_left_right">0dp</dimen>
+    <dimen name="tmp_now_playing_skip_rewind_margin">-24dp</dimen>
+
+    <dimen name="title_box_padding_small">16dp</dimen>
+    <dimen name="title_box_padding_large">32dp</dimen>
+    <dimen name="title_box_title_text_size_small">@dimen/abc_text_size_title_material</dimen>
+    <dimen name="title_box_title_text_size_large">24sp</dimen>
+    <dimen name="title_box_caption_text_size_small">@dimen/abc_text_size_caption_material</dimen>
+    <dimen name="title_box_caption_text_size_large">14sp</dimen>
+    <dimen name="title_box_text_spacing_small">0dp</dimen>
+    <dimen name="title_box_text_spacing_large">2dp</dimen>
+
+    <!-- For use with 24dp drawables in the item_list layouts-->
+    <dimen name="list_item_image_icon_padding">8dp</dimen>
+
+    <dimen name="mini_player_height">48dp</dimen>
+    <dimen name="mini_player_height_expanded">104dp</dimen>
+
+    <!--App Widgets-->
+    <dimen name="app_widget_classic_height">96dp</dimen>
+    <dimen name="app_widget_classic_image_size">96dp</dimen>
+    <dimen name="app_widget_classic_min_width">250dp</dimen>
+    <dimen name="app_widget_classic_min_height">40dp</dimen>
+
+    <dimen name="app_widget_small_button_height">48dp</dimen>
+    <dimen name="app_widget_small_image_size">48dp</dimen>
+    <dimen name="app_widget_small_min_width">250dp</dimen>
+    <dimen name="app_widget_small_min_height">40dp</dimen>
+
+    <dimen name="app_widget_big_min_width">250dp</dimen>
+    <dimen name="app_widget_big_min_height">110dp</dimen>
+
+    <dimen name="app_widget_card_image_size">56dp</dimen>
+    <dimen name="app_widget_card_min_width">250dp</dimen>
+    <dimen name="app_widget_card_min_height">64dp</dimen>
+    <dimen name="app_widget_card_buttons_width">128dp</dimen>
+    <dimen name="app_widget_card_radius">2dp</dimen>
+    <dimen name="material_component_lists_three_line_height">88dp</dimen>
+    <dimen name="player_control_icon">78dp</dimen>
+    <dimen name="bottom_padding">48dp</dimen>
+    <dimen name="lock_screen_cover_width">360dp</dimen>
+    <dimen name="now_playing_top_margin">12dp</dimen>
+
+    <dimen name="column_width">80dp</dimen>
+    <dimen name="icon_notification_dimen">32dp</dimen>
+</resources>

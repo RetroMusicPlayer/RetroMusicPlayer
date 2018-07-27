@@ -1,0 +1,12 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="72dp"
+    android:paddingTop="16dp"
+    android:text="@string/songs"
+    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+    android:textColor="?attr/colorAccent"/>

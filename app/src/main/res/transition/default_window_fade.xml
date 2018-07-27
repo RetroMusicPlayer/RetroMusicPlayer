@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fade xmlns:android="http://schemas.android.com/apk/res/android">
+    <targets>
+        <target android:excludeId="@android:id/statusBarBackground" />
+        <target android:excludeId="@android:id/navigationBarBackground" />
+        <target android:excludeId="@id/app_bar" />
+    </targets>
+</fade>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:transitionName="@string/transition_album_art" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar48" />
+        </FrameLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/status_bar_padding" />
+
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/background"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/title"
+                                    fontPath="@string/circular_std_black"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxLines="2"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                                    tools:ignore="MissingPrefix" />
+
+                                <android.support.v7.widget.AppCompatTextView
+                                    android:id="@+id/text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:ellipsize="marquee"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:freezesText="true"
+                                    android:marqueeRepeatLimit="marquee_forever"
+                                    android:scrollHorizontally="true"
+                                    android:singleLine="true"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                    tools:ignore="MissingPrefix"
+                                    tools:text="Title" />
+
+                            </LinearLayout>
+
+                            <android.support.design.widget.FloatingActionButton
+                                android:id="@+id/action_shuffle_all"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:layout_weight="0"
+                                android:background="?roundSelector"
+                                android:padding="16dp"
+                                app:srcCompat="@drawable/ic_shuffle_white_24dp" />
+                        </LinearLayout>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/biography_title"
+                            fontPath="@string/circular_std_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="@string/biography"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:visibility="gone"
+                            tools:ignore="MissingPrefix" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/biography"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="4"
+                            android:padding="16dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:visibility="gone" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/album_title"
+                            fontPath="@string/circular_std_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="@string/albums"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="?android:attr/textColorPrimary" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/album_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/song_title"
+                            fontPath="@string/circular_std_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:text="@string/songs"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="?android:attr/textColorPrimary"
+                            tools:ignore="MissingPrefix" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/shadow_down_strong" />
+
+</android.support.design.widget.CoordinatorLayout>

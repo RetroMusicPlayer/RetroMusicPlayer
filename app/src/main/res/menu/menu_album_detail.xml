@@ -1,0 +1,59 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_sort_order"
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/sort_order"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/action_sort_order_title"
+                    android:title="@string/title" />
+                <item
+                    android:id="@+id/action_sort_order_title_desc"
+                    android:title="@string/title_desc" />
+                <item
+                    android:id="@+id/action_sort_order_track_list"
+                    android:title="@string/track_list" />
+                <item
+                    android:id="@+id/action_sort_order_artist_song_duration"
+                    android:title="@string/song_duration" />
+
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_play_next"
+        android:title="@string/action_play_next"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_to_current_playing"
+        android:title="@string/action_add_to_playing_queue"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_add_to_playlist"
+        android:title="@string/action_add_to_playlist"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_go_to_artist"
+        android:title="@string/action_go_to_artist"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_tag_editor"
+        android:icon="@drawable/ic_edit_white_24dp"
+        android:title="@string/action_tag_editor"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_delete_from_device"
+        android:title="@string/action_delete_from_device"
+        app:showAsAction="never" />
+
+</menu>

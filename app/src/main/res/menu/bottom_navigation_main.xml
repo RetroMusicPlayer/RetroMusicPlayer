@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home_white_24dp"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/action_song"
+        android:enabled="true"
+        android:icon="@drawable/ic_audiotrack_black_24dp"
+        android:title="@string/songs" />
+    <item
+        android:id="@+id/action_album"
+        android:enabled="true"
+        android:icon="@drawable/ic_album_white_24dp"
+        android:title="@string/albums" />
+    <item
+        android:id="@+id/action_artist"
+        android:enabled="true"
+        android:icon="@drawable/ic_artist_white_24dp"
+        android:title="@string/artists" />
+    <item
+        android:id="@+id/action_playlist"
+        android:enabled="true"
+        android:icon="@drawable/ic_queue_music_white_24dp"
+        android:title="@string/playlists" />
+
+</menu>

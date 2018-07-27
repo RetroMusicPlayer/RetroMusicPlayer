@@ -1,0 +1,10 @@
+<!-- drawable/toggle_switch.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+  android:height="24dp"
+  android:viewportHeight="24"
+  android:viewportWidth="24"
+  android:width="24dp">
+  <path
+    android:fillColor="#000"
+    android:pathData="M17,7A5,5 0 0,1 22,12A5,5 0 0,1 17,17A5,5 0 0,1 12,12A5,5 0 0,1 17,7M4,14A2,2 0 0,1 2,12A2,2 0 0,1 4,10H10V14H4Z"/>
+</vector>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
+        android:key="now_playing_screen_id"
+        android:title="@string/pref_title_now_playing_screen_appearance" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="carousel_effect"
+        android:summary="@string/pref_summary_carousel_effect"
+        android:title="@string/pref_title_toggle_carousel_effect" />
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="circular_album_art"
+        android:summary="@string/pref_summary_circular_album_effect"
+        android:title="@string/pref_title_toggle_circular_album_effect" />
+
+</android.support.v7.preference.PreferenceScreen>

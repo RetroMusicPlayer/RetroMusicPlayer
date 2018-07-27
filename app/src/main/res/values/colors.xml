@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="twenty_percent_black_overlay">#34000000</color>
+    <color name="eighty_percent_black_overlay">#80000000</color>
+    <color name="app_shortcut_default_foreground">#607d8b</color>
+    <color name="app_shortcut_default_background">#f5f5f5</color>
+    <color name="colorOverlay">#78ffffff</color>
+</resources>

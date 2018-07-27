@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Preferences -->
+
+    <declare-styleable name="ATEPreference">
+        <attr name="ateKey_pref" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATECheckBoxPreference">
+        <attr name="ateKey_pref_checkBox" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATESwitchPreference">
+        <attr name="ateKey_pref_switch" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEColorPreference">
+        <attr name="ateKey_pref_color" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEDialogPreference">
+        <attr name="ateKey_pref_dialog" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEEditTextPreference">
+        <attr name="ateKey_pref_editText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEListPreference">
+        <attr name="ateKey_pref_list" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEMultiSelectPreference">
+        <attr name="ateKey_pref_multiSelect" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ATEPreferenceCategory">
+        <attr name="ateKey_prefCategory_textColor" format="string" />
+    </declare-styleable>
+
+</resources>

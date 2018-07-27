@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_volume"
+        android:summary="@string/pref_summary_toggle_volume"
+        android:title="@string/pref_title_toggle_volume" />
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="true"
+        android:key="toggle_tab_titles"
+        android:summary="@string/pref_summary_tab_titles"
+        android:title="@string/pref_title_toggle_tab_titles" />
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_genre"
+        android:summary="@string/pref_summary_toggle_genre"
+        android:title="@string/pref_title_toggle_genre" />
+
+</android.support.v7.preference.PreferenceScreen>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_grid_columns">4</integer>
+    <integer name="default_grid_columns_land">6</integer>
+
+    <integer name="default_list_columns">2</integer>
+    <integer name="default_list_columns_land">3</integer>
+
+    <integer name="max_columns">6</integer>
+    <integer name="max_columns_land">8</integer>
+</resources>
