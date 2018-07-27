@@ -11,12 +11,12 @@ Retro music player is an open source, local music player for Android.
 - Local playback only (based on the MediaStore)
 - Sleep timer
 - Folder browser
-- Widgets
-- Theming (Just Black, Kinda dark, Clearly White)
+- Home screen widgets
+- App themes (Just Black, Kinda Dark, Clearly White)
 - Now playing themes
 - Volume controls
 - Black list
-- Album-artist support
+- Album artist support
 - Auto download artist art(Last.FM)
 
 #### Download
