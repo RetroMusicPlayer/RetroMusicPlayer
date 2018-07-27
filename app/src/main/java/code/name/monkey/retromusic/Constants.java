@@ -29,8 +29,6 @@ public class Constants {
             RETRO_MUSIC_PACKAGE_NAME + ".shufflemodechanged";
     public static final String MEDIA_STORE_CHANGED = RETRO_MUSIC_PACKAGE_NAME + ".mediastorechanged";
     public static final String RATE_ON_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic";
-    public static final String LUIS_GOMZ_GOOGLE_PLUS = "https://plus.google.com/104046235912044592643";
-    public static final String LUIS_GOMZ_TWITTER = "https://www.twitter.com/LuisGmzz";
     public static final String PAYPAL_ME_URL = "https://www.paypal.me/h4h14";
     public static final String GOOGLE_PLUS_COMMUNITY = "https://plus.google.com/communities/110811566242871492162";
     public static final String TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534";
@@ -42,7 +40,5 @@ public class Constants {
     public static final String APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/";
     public static final String APP_TELEGRAM_LINK = "https://t.me/retromusicapp/";
     public static final String APP_TWITTER_LINK = "https://twitter.com/retromusicapp";
-    public static final int CAST_SERVER_PORT = 8080;
-    public static final String FAQ_LINK = "https://github.com/h4h13/RetroMusicApp/blob/master/FAQ.md";
-    public static String LINE_SEPARATOR = System.getProperty("line.separator");
+    public static final String FAQ_LINK = "https://raw.githubusercontent.com/h4h13/RetroMusicPlayer/master/FAQ.md";
 }
