@@ -25,9 +25,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-
-import org.mozilla.universalchardet.UniversalDetector;
-
+import code.name.monkey.retromusic.R;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,8 +38,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import code.name.monkey.retromusic.R;
+import org.mozilla.universalchardet.UniversalDetector;
 
 /**
  * Created by zhengken.me on 2016/11/27.

@@ -2,9 +2,11 @@ package code.name.monkey.retromusic.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -31,6 +33,7 @@ import code.name.monkey.retromusic.util.LyricUtil;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.LyricView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
@@ -48,7 +51,8 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
   TextView songTitle;
   @BindView(R.id.text)
   TextView songText;
-
+  @BindView(R.id.lyrics_view)
+  LyricView lyricView;
   @BindView(R.id.toolbar)
   Toolbar toolbar;
   @BindView(R.id.offline_lyrics)
@@ -91,11 +95,11 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     radioButton.setTextColor(ThemeStore.textColorPrimary(this));
 
     offlineLyrics.setVisibility(View.GONE);
-
+    lyricView.setVisibility(View.GONE);
     switch (group) {
       case R.id.synced_lyrics:
         loadLRCLyrics();
-
+        lyricView.setVisibility(View.VISIBLE);
         break;
       default:
       case R.id.normal_lyrics:
@@ -117,6 +121,13 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
   private void setupLyricsView() {
     disposable = new CompositeDisposable();
+
+    lyricView
+        .setOnPlayerClickListener((progress, content) -> MusicPlayerRemote.seekTo((int) progress));
+    //lyricView.setHighLightTextColor(ThemeStore.accentColor(this));
+    lyricView.setDefaultColor(ContextCompat.getColor(this, R.color.md_grey_400));
+    //lyricView.setTouchable(false);
+    lyricView.setHintColor(Color.WHITE);
   }
 
   private void setupToolbar() {
@@ -170,7 +181,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
   @Override
   public void onUpdateProgressViews(int progress, int total) {
-
+    lyricView.setCurrentTimeMillis(progress);
   }
 
   private void loadLrcFile() {
@@ -193,7 +204,11 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
   }
 
   private void showLyricsLocal(File file) {
-
+    if (file == null) {
+      lyricView.reset();
+    } else {
+      lyricView.setLyricFile(file, "UTF-8");
+    }
   }
 
   @OnClick({R.id.edit_lyrics})
