@@ -11,8 +11,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 203
-        versionName 'R - 1.6.400'
+        versionCode 205
+        versionName 'R - 1.7.00'
 
         multiDexEnabled true
 
@@ -76,7 +76,7 @@ android {
 }
 
 def getProperties(String fileName) {
-    final def Properties properties = new Properties()
+    final Properties properties = new Properties()
     def file = file(fileName)
     if (file.exists()) {
         file.withInputStream { stream -> properties.load(stream) }
