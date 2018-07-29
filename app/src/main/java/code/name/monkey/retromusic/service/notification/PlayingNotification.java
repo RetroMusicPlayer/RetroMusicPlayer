@@ -14,7 +14,8 @@ import code.name.monkey.retromusic.service.MusicService;
 
 public abstract class PlayingNotification {
 
-  static final String NOTIFICATION_CHANNEL_ID = "playing_notification";
+  protected static final float NOTIFICATION_CONTROLS_SIZE_MULTIPLIER = 1.0f;
+    static final String NOTIFICATION_CHANNEL_ID = "playing_notification";
   private static final int NOTIFICATION_ID = 1;
   private static final int NOTIFY_MODE_FOREGROUND = 1;
   private static final int NOTIFY_MODE_BACKGROUND = 0;
