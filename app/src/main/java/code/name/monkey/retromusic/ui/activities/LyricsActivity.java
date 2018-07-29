@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -53,8 +52,6 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
   TextView songText;
   @BindView(R.id.lyrics_view)
   LyricView lyricView;
-  @BindView(R.id.toolbar)
-  Toolbar toolbar;
   @BindView(R.id.offline_lyrics)
   TextView offlineLyrics;
   @BindView(R.id.actions)
@@ -81,11 +78,11 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
     updateHelper = new MusicProgressViewUpdateHelper(this, 500, 1000);
 
-    setupToolbar();
     setupLyricsView();
     setupWakelock();
 
     actionsLayout.setOnCheckedChangeListener((group, checkedId) -> selectLyricsTye(checkedId));
+
   }
 
   private void selectLyricsTye(int group) {
@@ -96,6 +93,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
     offlineLyrics.setVisibility(View.GONE);
     lyricView.setVisibility(View.GONE);
+
     switch (group) {
       case R.id.synced_lyrics:
         loadLRCLyrics();
@@ -128,13 +126,6 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     lyricView.setDefaultColor(ContextCompat.getColor(this, R.color.md_grey_400));
     //lyricView.setTouchable(false);
     lyricView.setHintColor(Color.WHITE);
-  }
-
-  private void setupToolbar() {
-    toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-    toolbar.setTitle("");
-    toolbar.setNavigationOnClickListener(v -> onBackPressed());
-    setSupportActionBar(toolbar);
   }
 
   @Override
@@ -211,9 +202,12 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     }
   }
 
-  @OnClick({R.id.edit_lyrics})
+  @OnClick({R.id.edit_lyrics, R.id.back})
   public void onViewClicked(View view) {
     switch (view.getId()) {
+      case R.id.back:
+        onBackPressed();
+        break;
       case R.id.edit_lyrics:
         switch (actionsLayout.getCheckedRadioButtonId()) {
           case R.id.synced_lyrics:
