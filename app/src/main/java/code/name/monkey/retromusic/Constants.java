@@ -40,5 +40,5 @@ public class Constants {
   public static final String APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/";
   public static final String APP_TELEGRAM_LINK = "https://t.me/retromusicapp/";
   public static final String APP_TWITTER_LINK = "https://twitter.com/retromusicapp";
-  public static final String FAQ_LINK = "https://raw.githubusercontent.com/h4h13/RetroMusicPlayer/master/FAQ.md";
+  public static final String FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md";
 }
