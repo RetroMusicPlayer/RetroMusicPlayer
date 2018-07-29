@@ -1,10 +1,10 @@
-# RetroMusicPlayer
+# Retro Music Player
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 
-**Android Material Design music player.**
+**Android Material Design music player**
 
-Retro music player is an open source, local music player for Android.
+Retro Music is an open source, local music player for Android.
 
 #### Features
 
@@ -12,12 +12,12 @@ Retro music player is an open source, local music player for Android.
 - Sleep timer
 - Folder browser
 - Home screen widgets
-- App themes (Just Black, Kinda Dark, Clearly White)
+- Themes (Just Black, Kinda Dark, Clearly White)
 - Now playing themes
 - Volume controls
-- Black list
+- Blacklist
 - Album artist support
-- Auto download artist art(Last.FM)
+- Auto-download artist images from Last.fm
 
 #### Download
 
