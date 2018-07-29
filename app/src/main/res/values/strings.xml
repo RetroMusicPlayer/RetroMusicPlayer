@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="accent_color">Accent color</string>
-    <string name="accent_color_desc">The accent theme color, defaults to green.</string>
+    <string name="accent_color_desc">The accent theme color, defaults to teal</string>
 
     <string name="action_about">About</string>
     <string name="action_add_to_favorites">Add to favorites</string>
@@ -109,8 +109,8 @@
 
     <string name="blur">Blur</string>
     <string name="blur_card">Blur Card</string>
-    <string name="pref_keep_screen_on_title">Keep screen on</string>
-    <string name="pref_keep_screen_on_summary">Keep in mind enabling screen on may effect battery</string>
+    <string name="pref_keep_screen_on_title">Keep the screen on</string>
+    <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
@@ -119,13 +119,13 @@
     <string name="cancel_current_timer">Cancel current timer</string>
 
     <string name="card">Card</string>
-    <string name="card_color_style">Card color style</string>
-    <string name="card_style">Card style</string>
+    <string name="card_color_style">Colored Card</string>
+    <string name="card_style">Card</string>
 
     <string name="cast">Cast</string>
 
     <string name="changelog">Changelog</string>
-    <string name="changelog_summary">Changelog maintained from Telegram channel</string>
+    <string name="changelog_summary">Changelog maintained on the Telegram channel</string>
 
     <string name="clear_action">Clear</string>
     <string name="clear_blacklist">Clear blacklist</string>
@@ -178,7 +178,7 @@
     <string name="deleting_songs">Deleting songs</string>
 
     <string name="discord_page">Discord</string>
-    <string name="discord_summary">Join the Discord server to keep up with latest news</string>
+    <string name="discord_summary">Join the Discord server to keep up with the latest news</string>
 
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
@@ -210,7 +210,7 @@
 
     <string name="failed_to_save_playlist">Failed to save playlist (%s).</string>
 
-    <string name="faq">FAQ\'s</string>
+    <string name="faq">FAQ</string>
 
     <string name="favorites">Favorites</string>
 
@@ -229,9 +229,9 @@
 
     <string name="genres">Genres</string>
 
-    <string name="git_hub_summary">Fork the project on github</string>
+    <string name="git_hub_summary">Fork the project on GitHub</string>
 
-    <string name="google_plus_community">Join the Google Plus community where you can ask for help or follow Retro Music App updates</string>
+    <string name="google_plus_community">Join the Google Plus community where you can ask for help or follow Retro Music updates</string>
 
     <string name="gradient">Gradient</string>
 
@@ -258,7 +258,7 @@
     <string name="inspired_designs_by">Inspired designs by</string>
 
     <string name="instagram_page">Instagram</string>
-    <string name="instagram_page_summary">Share your Retro Music App setup to showcase in Instagram</string>
+    <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
 
     <string name="join_community">Join the Google Plus community</string>
     <string name="join_community_summary">If you need help or have questions, the Retro Music community on Google Plus is a good place to go.</string>
@@ -315,7 +315,7 @@
     <string name="no_albums">No albums</string>
     <string name="no_artists">No artists</string>
     <string name="no_audio_ID">"Play a song first, then try again."</string>
-    <string name="no_equalizer">No equalizer found.</string>
+    <string name="no_equalizer">No equalizer found</string>
     <string name="no_files">No files</string>
     <string name="no_genres">No genres</string>
     <string name="no_lyrics_found">No lyrics found</string>
@@ -384,44 +384,44 @@
     <string name="pref_only_lollipop">"Only available on Lollipop."</string>
     <string name="pref_only_nougat_mr1">"Only available on Nougat 7.1."</string>
     <string name="pref_summary_about">People who helped on the project</string>
-    <string name="pref_summary_album_art_on_lockscreen">Uses the current song album cover as the lockscreen wallpaper.</string>
-    <string name="pref_summary_audio_ducking">Lower the volume when system sound is played or notification received</string>
-    <string name="pref_summary_blurred_album_art">Blurs the album cover on the lockscreen. Can cause problems with third party apps and widgets.</string>
-    <string name="pref_summary_carousel_effect">Carousel effect in now playing screen album art. Note that Card and Blur Card Themes won\'t work.</string>
-    <string name="pref_summary_circular_album_effect">Show circle album cover in now playing screen. Note that only a few selected themes work with this feature.</string>
-    <string name="pref_summary_classic_notification">Use the classic notification design.</string>
-    <string name="pref_summary_colored_app">The background, control button colors changes according to album art from player screen</string>
+    <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
+    <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
+    <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
+    <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
+    <string name="pref_summary_circular_album_effect">Show a circular album cover in the now playing screen. Note that only a few themes work with this feature</string>
+    <string name="pref_summary_classic_notification">Use the classic notification design</string>
+    <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
     <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
-    <string name="pref_summary_colored_navigation_bar">Colors the navigation bar in the primary color.</string>
-    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color."</string>
+    <string name="pref_summary_colored_navigation_bar">Colors the navigation bar in the primary color</string>
+    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
     <string name="pref_summary_day_dream">Shows song details on dream when music is playing</string>
-    <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover.</string>
+    <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover</string>
     <string name="pref_summary_exclude_songs">Exclude songs that are less than 30 secs. </string>
     <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
-    <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality but causes slower image loading times. Only enable this if you have problems with low resolution artworks.</string>
+    <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_language_en">Change app language forcefully to english(this is testing for multiple language option)</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
-    <string name="pref_summary_lock_screen">Lock screen controls for Retro Music.</string>
+    <string name="pref_summary_lock_screen">Use Retro Music's custom lockscreen controls</string>
     <string name="pref_summary_lock_screen_app">Show full controls from the lock screen</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
-    <string name="pref_summary_round_corners">Round the edges of window</string>
-    <string name="pref_summary_tab_titles">Enable/Disable bottom tab titles.</string>
+    <string name="pref_summary_round_corners">Round the app's edges</string>
+    <string name="pref_summary_tab_titles">Toggle titles for the bottom navigation bar tabs</string>
     <string name="pref_summary_toggle_animations">Animations makes some device run slow, load images slow</string>
     <string name="pref_summary_toggle_bottom_bar_titles">Disable titles from bottom navigation bar</string>
     <string name="pref_summary_toggle_full_screen">Immersive mode</string>
-    <string name="pref_summary_toggle_genre">Enable this if you want show genre on the home screen.</string>
-    <string name="pref_summary_toggle_headset">Start playing immediately when headphones are connected.</string>
+    <string name="pref_summary_toggle_genre">Show genres on the home screen</string>
+    <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
     <string name="pref_summary_toggle_navigation_bar">Hide only navigation bar</string>
     <string name="pref_summary_toggle_separate_line">Toggle view of separate line in list of items</string>
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_status_bar">Hide only status bar</string>
-    <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in now playing screen.</string>
+    <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_grid_style">Album grid</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
     <string name="pref_title_artist_grid_style">Artist grid</string>
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
-    <string name="pref_title_auto_download_artist_images">Auto download artist images</string>
+    <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_choose_equalizer">Choose equalizer</string>
     <string name="pref_title_classic_notification">Classic notification design</string>
@@ -454,7 +454,7 @@
     <string name="pref_title_toggle_separate_line">Separate line</string>
     <string name="pref_title_toggle_status_bar">Status bar</string>
     <string name="pref_title_toggle_tab_titles">Tab titles</string>
-    <string name="pref_title_toggle_toggle_headset">Auto play</string>
+    <string name="pref_title_toggle_toggle_headset">Auto-play</string>
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_user_info">User info</string>
@@ -469,7 +469,7 @@
     <string name="queue_label">Queue</string>
 
     <string name="rate_app">Rate the app</string>
-    <string name="rate_on_google_play_summary">Love this app? Let us know in Google play store to provide better experience</string>
+    <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
 
     <string name="recent_activity">Recent activity</string>
     <string name="recent_albums">Recent albums</string>
@@ -579,7 +579,7 @@
     <string name="summary_material_design_icons">For all icons we used from this websites www.flaticon.com or www.materialdesignicons.com</string>
     <string name="summary_user_info">Just show your name on home screen</string>
 
-    <string name="support_development">Support development</string>
+    <string name="support_development">Support the development</string>
     <string name="support_development_summary">If you enjoy using Retro Music Player consider donation as support to my work.</string>
 
     <string name="synced_lyrics">Synced lyrics</string>
@@ -596,7 +596,7 @@
     <string name="tag_retrieve_error">An error occurred retrieving tags.</string>
 
     <string name="telegram_group">Telegram</string>
-    <string name="telegram_group_summary">Join the Telegram group for discussing bugs, suggestions, show off and more</string>
+    <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
 
     <string name="text">Text</string>
 
@@ -642,7 +642,7 @@
     <string name="translate_community">Help us translate the app to your language</string>
 
     <string name="twitter_page">Twitter</string>
-    <string name="twitter_page_summary">Share your design with Retro Music App</string>
+    <string name="twitter_page_summary">Share your design with Retro Music</string>
 
     <string name="unplayable_file">Couldn\u2019t play this song.</string>
 
