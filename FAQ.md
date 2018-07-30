@@ -24,3 +24,6 @@ A: Settings -> Personalize -> Fullscreen controls -> Enable (this will only be v
 
 #### Q: Why are gallery or random pictures showing up as album art?
 A: Settings -> Images -> Ignore media store covers -> Enable
+
+#### Q: Which file types are supported?
+A: Retro Music uses the native media player that comes with your phone, so as long as a file type is supported by your phone, it is supported by Retro Music.
