@@ -25,9 +25,9 @@ A: Settings -> Personalize -> Fullscreen controls -> Enable (this will only be v
 #### Q: Why are gallery or random pictures showing up as album art?
 A: Settings -> Images -> Ignore media store covers -> Enable
 
-#### Q: File format not support
-A: Retro Music uses the native media player that comes with your Android phone, so as long as a filetype is supported by your phone, it is supported by Retro Music App.
+#### Q: Which file types are supported?
+A: Retro Music uses the native media player that comes with your Android phone, so as long as a file type is supported by your phone, it's supported by Retro Music.
 
-#### Q: Mobile becomes slow/ lagging
-A: Retro Music App is image intensive, it keeps images in cache for quick loading.
+#### Q: Why is my device slowing down when I'm using the app?
+A: Retro Music is image intensive, it keeps images in the cache for quick loading.
 
