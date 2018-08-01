@@ -11,8 +11,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 205
-        versionName 'R - 1.7.00'
+        versionCode 206
+        versionName 'R - 1.7.10'
 
         multiDexEnabled true
 
@@ -27,13 +27,10 @@ android {
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            resValue "string", "cast_app_id", "D3C555E1"
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
-
-            resValue "string", "cast_app_id", "D3C555E1"
         }
     }
     flavorDimensions "default"
@@ -128,11 +125,10 @@ dependencies {
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
-    implementation 'com.mpatric:mp3agic:0.8.3'
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
-    implementation 'jp.wasabeef:glide-transformations:2.0.2'
+
     /*UI Library*/
     implementation 'com.github.jetradarmobile:android-snowfall:1.1.6'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
