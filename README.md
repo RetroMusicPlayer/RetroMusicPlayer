@@ -29,3 +29,6 @@ Retro Music is an open source, local music player for Android.
 Retro Music Player is released under the GNU General Public License v3.0 (GPLv3), which can be found here: [License](LICENSE.md)
 
 #### FAQ [Here](https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md)
+
+#### Change-Log and Release [Here](https://github.com/h4h13/RetroMusicPlayer/releases)
+
