@@ -88,7 +88,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    setDrawUnderStatusbar(true);
+    setDrawUnderStatusBar(true);
     super.onCreate(savedInstanceState);
 
     ButterKnife.bind(this);

@@ -13,12 +13,14 @@
     android:layout_height="match_parent"
     android:scaleType="centerCrop"
     tools:src="@drawable/hemanth_s"/>
+
   <View
     android:id="@+id/mask"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_black_1000"
     android:visibility="gone"/>
+
   <View
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,13 +29,19 @@
   <include layout="@layout/shadow_statusbar_toolbar"/>
 
   <LinearLayout
-    android:id="@+id/now_playing_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="64dp"
     android:layout_marginEnd="64dp"
     android:layout_gravity="center_horizontal"
     android:orientation="vertical">
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <include layout="@layout/status_bar"/>
+    </FrameLayout>
 
     <code.name.monkey.retromusic.views.WidthFitSquareLayout
       android:id="@+id/album_cover_container"
@@ -77,5 +85,4 @@
         app:navigationIcon="@drawable/ic_close_white_24dp"/>
     </FrameLayout>
   </LinearLayout>
-
 </FrameLayout>

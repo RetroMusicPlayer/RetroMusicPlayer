@@ -401,10 +401,10 @@
     <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
     <string name="pref_summary_language_en">Change app language forcefully to english(this is testing for multiple language option)</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
-    <string name="pref_summary_lock_screen">Use Retro Music's custom lockscreen controls</string>
+    <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
     <string name="pref_summary_lock_screen_app">Show full controls from the lock screen</string>
     <string name="pref_summary_open_source_licences">License details for open source software</string>
-    <string name="pref_summary_round_corners">Round the app's edges</string>
+    <string name="pref_summary_round_corners">Round the app\'s edges</string>
     <string name="pref_summary_tab_titles">Toggle titles for the bottom navigation bar tabs</string>
     <string name="pref_summary_toggle_animations">Animations makes some device run slow, load images slow</string>
     <string name="pref_summary_toggle_bottom_bar_titles">Disable titles from bottom navigation bar</string>

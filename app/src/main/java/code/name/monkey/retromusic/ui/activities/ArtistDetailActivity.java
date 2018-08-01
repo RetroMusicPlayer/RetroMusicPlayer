@@ -118,7 +118,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
   @Override
   protected void onCreate(Bundle bundle) {
-    setDrawUnderStatusbar(true);
+    setDrawUnderStatusBar(true);
     super.onCreate(bundle);
     ButterKnife.bind(this);
 

@@ -53,7 +53,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro_version);
-        setDrawUnderStatusbar(true);
+        setDrawUnderStatusBar(true);
         ButterKnife.bind(this);
         RetroUtil.statusBarHeight(statusBar);
         setStatusbarColorAuto();

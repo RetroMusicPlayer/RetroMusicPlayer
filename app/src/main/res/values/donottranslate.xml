@@ -38,8 +38,8 @@
     <string name="circular_std_book" translatable="false">fonts/circular_std_book.otf</string>
     <string name="sans_regular" translatable="false">fonts/product_sans_regular.ttf</string>
     <string name="sans_bold" translatable="false">fonts/product_sans_bold.ttf</string>
-    <string name="leo_name" translatable="false">Leo</string>
-    <string name="leo_summary" translatable="false">Moderator</string>
+    <string name="marko_name" translatable="false">Marko Ivanović </string>
+    <string name="marko_summary" translatable="false">Contributor</string>
     <string name="yt_gaming_name" translatable="false">Gaming Inc</string>
     <string name="yt_gaming_summary" translatable="false">Discord server maintainer</string>
     <string name="moderator" translatable="false">Moderator</string>

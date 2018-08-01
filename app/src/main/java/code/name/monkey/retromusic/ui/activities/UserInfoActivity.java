@@ -12,7 +12,7 @@ public class UserInfoActivity extends AbsBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusbar(true);
+        setDrawUnderStatusBar(true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 

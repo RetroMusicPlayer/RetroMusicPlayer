@@ -22,6 +22,7 @@ import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -35,7 +36,6 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
-import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * @author Hemanth S (h4h13).
@@ -207,7 +207,7 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
     }
 
     int blurAmount = PreferenceManager.getDefaultSharedPreferences(getContext())
-        .getInt("blur_amount", 25);
+        .getInt("new_blur_amount", 25);
 
     colorBackground.clearColorFilter();
 
@@ -216,7 +216,7 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
         .generatePalette(activity)
         .build()
         .override(320, 480)
-        .transform(new BlurTransformation(getActivity(), blurAmount))
+        .transform(new BlurTransformation.Builder(getActivity()).blurRadius(blurAmount).build())
         .into(new RetroMusicColoredTarget(colorBackground) {
           @Override
           public void onColorReady(int color) {
