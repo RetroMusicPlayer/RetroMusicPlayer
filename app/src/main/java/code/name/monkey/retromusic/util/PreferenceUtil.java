@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public final class PreferenceUtil {
 
   public static final String KEEP_SCREEN_ON = "keep_screen_on";
+  public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
   public static final String NOW_PLAYING_SCREEN_ID = "now_playing_screen_id";
   public static final String CAROUSEL_EFFECT = "carousel_effect";
   public static final String COLORED_NOTIFICATION = "colored_notification";
@@ -144,6 +145,10 @@ public final class PreferenceUtil {
 
   public final String getArtistSongSortOrder() {
     return mPreferences.getString(ARTIST_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
+  }
+
+  public final boolean toggleHomeBanner() {
+    return mPreferences.getBoolean(TOGGLE_HOME_BANNER, false);
   }
 
   public final String getArtistAlbumSortOrder() {
