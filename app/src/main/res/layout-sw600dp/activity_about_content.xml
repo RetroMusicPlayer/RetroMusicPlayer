@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:grid="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+  xmlns:grid="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="8dp"
+  grid:alignmentMode="alignBounds">
+
+  <LinearLayout
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    grid:alignmentMode="alignBounds">
+    android:layout_marginEnd="4dp"
+    android:orientation="vertical"
+    grid:layout_column="0"
+    grid:layout_columnWeight="1"
+    grid:layout_row="0">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:orientation="vertical"
-        grid:layout_column="0"
-        grid:layout_columnWeight="1"
-        grid:layout_row="0">
+    <include layout="@layout/card_retro_info"/>
 
-        <include layout="@layout/card_retro_info" />
+    <include layout="@layout/card_credit"/>
+  </LinearLayout>
 
-        <include layout="@layout/card_donate" />
+  <LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:orientation="vertical"
+    grid:layout_column="1"
+    grid:layout_columnWeight="1"
+    grid:layout_row="0">
 
-        <include layout="@layout/card_credit" />
-    </LinearLayout>
+    <include layout="@layout/card_social"/>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:orientation="vertical"
-        grid:layout_column="1"
-        grid:layout_columnWeight="1"
-        grid:layout_row="0">
+    <include layout="@layout/card_other"/>
 
-        <include layout="@layout/card_social" />
-
-        <include layout="@layout/card_other" />
-
-    </LinearLayout>
+  </LinearLayout>
 </android.support.v7.widget.GridLayout>

@@ -36,8 +36,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:paddingEnd="16dp"
                 android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textStyle="bold"
                 tools:ignore="MissingPrefix" />
@@ -47,8 +47,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:paddingEnd="16dp"
                 android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 android:text="@string/lets_play_something" />
 
         </LinearLayout>
@@ -58,8 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingEnd="4dp"
-        android:paddingStart="4dp">
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
 
         <LinearLayout
             android:id="@+id/action_folder"
@@ -87,37 +87,6 @@
                     android:ellipsize="marquee"
                     android:singleLine="true"
                     android:text="@string/folders"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/action_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <code.name.monkey.retromusic.views.IconImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_settings_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:singleLine="true"
-                    android:text="@string/action_settings"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
             </LinearLayout>
@@ -154,6 +123,38 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/action_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?rectSelector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_settings_white_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@string/action_settings"
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
+
+            </LinearLayout>
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/action_about"
             android:layout_width="match_parent"
@@ -182,6 +183,36 @@
                     android:text="@string/action_about"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/action_buy_pro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?rectSelector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_card_giftcard_white_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@string/buy_retromusic_pro"
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

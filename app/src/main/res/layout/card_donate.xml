@@ -27,36 +27,7 @@
             tools:ignore="MissingPrefix" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/support_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:foreground="?rectSelector"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="6dp"
-                app:cardPreventCornerOverlap="false"
-                app:cardUseCompatPadding="true">
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:background="@drawable/gradient_1"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:text="@string/donate"
-                    android:textColor="@color/md_white_1000" />
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

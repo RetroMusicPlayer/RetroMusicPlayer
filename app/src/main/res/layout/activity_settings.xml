@@ -27,28 +27,19 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar48"
-                android:title="@string/action_settings"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-                app:title="@string/action_settings">
+                app:title="@string/support_development" />
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tabs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_gravity="end"
-                    app:tabGravity="center"
-                    app:tabMode="scrollable"
-                    app:tabTextAppearance="@style/SettingsTabsTextAppearance" />
-
-            </android.support.v7.widget.Toolbar>
         </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
 
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 </android.support.design.widget.CoordinatorLayout>
 

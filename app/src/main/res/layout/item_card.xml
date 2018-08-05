@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="3dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
     tools:ignore="MissingPrefix">

@@ -20,11 +20,9 @@
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
-      android:id="@+id/appbar"
+      android:id="@+id/app_bar"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="?attr/colorPrimary"
-      tools:ignore="UnusedAttribute">
+      android:layout_height="wrap_content">
 
       <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
         android:id="@+id/collapsing_toolbar"
@@ -35,34 +33,25 @@
         app:expandedTitleMarginStart="16dp"
         app:expandedTitleMarginTop="48dp"
         app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        app:title="@string/action_settings">
 
         <View
           android:layout_width="match_parent"
-          android:layout_height="48dp"
-          app:layout_collapseMode="parallax"
-          app:layout_collapseParallaxMultiplier="0.7"/>
+          android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.Toolbar
           android:id="@+id/toolbar"
           style="@style/Toolbar48"
-          android:background="?attr/colorPrimary"
-          tools:ignore="UnusedAttribute"/>
+          app:layout_collapseMode="pin"/>
 
       </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
-
-      <ViewStub
-        android:id="@+id/cab_stub"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:layout_collapseMode="parallax"
-        app:layout_collapseParallaxMultiplier="0.7"/>
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
       android:id="@+id/fragment_container"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
+      android:layout_height="match_parent"
       app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
   </android.support.design.widget.CoordinatorLayout>

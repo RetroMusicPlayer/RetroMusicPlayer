@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:padding="8dp"
+  android:orientation="vertical">
 
-    <include layout="@layout/card_retro_info" />
+  <include layout="@layout/card_retro_info"/>
 
-    <include layout="@layout/card_donate" />
+  <include layout="@layout/card_social"/>
 
-    <include layout="@layout/card_social" />
+  <include layout="@layout/card_other"/>
 
-    <include layout="@layout/card_other" />
-
-    <include layout="@layout/card_credit" />
+  <include layout="@layout/card_credit"/>
 </LinearLayout>

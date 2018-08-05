@@ -1,248 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:cardCornerRadius="12dp"
+  app:cardElevation="8dp"
+  app:cardPreventCornerOverlap="false"
+  app:cardUseCompatPadding="true">
+
+  <LinearLayout
+    android:id="@+id/app_support"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="8dp"
-    app:cardPreventCornerOverlap="false"
-    app:cardUseCompatPadding="true">
+    android:padding="8dp"
+    android:background="@drawable/gradient_6"
+    android:orientation="vertical">
+
+    <TextView
+      fontPath="@string/circular_std_black"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="12dp"
+      android:text="@string/support_development"
+      android:textAppearance="@style/TextAppearance.AppCompat.Title"
+      android:textColor="@color/md_white_1000"
+      tools:ignore="MissingPrefix"/>
 
     <LinearLayout
-        android:id="@+id/app_support"
+      android:id="@+id/app_github"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_github_circle_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient_6"
-        android:orientation="vertical"
-        android:padding="8dp">
-
-        <TextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@color/md_white_1000"
-            tools:ignore="MissingPrefix" />
-
-        <LinearLayout
-            android:id="@+id/app_github"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="horizontal"
-            tools:ignore="PrivateResource">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_github_circle_white_24dp"
-                app:tint="@color/md_white_1000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
 
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/git_hub"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/git_hub"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/git_hub_summary"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/app_translation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="horizontal"
-            tools:ignore="PrivateResource">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_flag_white_24dp"
-                app:tint="@color/md_white_1000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/translate"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/translate_community"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/app_rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="horizontal"
-            tools:ignore="PrivateResource">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_star_white_24dp"
-                app:tint="@color/md_white_1000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rate_app"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/rate_on_google_play_summary"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/app_share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="horizontal"
-            tools:ignore="PrivateResource">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_share_white_24dp"
-                app:tint="@color/md_white_1000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_share"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/faq_link"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="horizontal"
-            tools:ignore="PrivateResource">
-
-            <android.support.v7.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/social_buttons"
-                android:padding="16dp"
-                app:srcCompat="@drawable/ic_help_white_24dp"
-                app:tint="@color/md_white_1000" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp">
-
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/faq"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-
-            </LinearLayout>
-        </LinearLayout>
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:alpha="0.85"
+          android:text="@string/git_hub_summary"
+          android:textColor="@color/md_white_1000"/>
+      </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/app_translation"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_flag_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/translate"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:alpha="0.85"
+          android:text="@string/translate_community"
+          android:textColor="@color/md_white_1000"/>
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/app_rate"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_star_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/rate_app"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:alpha="0.85"
+          android:text="@string/rate_on_google_play_summary"
+          android:textColor="@color/md_white_1000"/>
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/donate_link"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_card_giftcard_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/donate"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:alpha="0.85"
+          android:text="@string/donate_summary"
+          android:textColor="@color/md_white_1000"/>
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/app_share"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_share_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/action_share"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
+
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/faq_link"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/rectSelector"
+      android:clickable="true"
+      android:focusable="true"
+      android:gravity="center_vertical"
+      android:minHeight="@dimen/md_listitem_height"
+      android:orientation="horizontal"
+      tools:ignore="PrivateResource">
+
+      <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:contentDescription="@string/social_buttons"
+        app:srcCompat="@drawable/ic_help_white_24dp"
+        app:tint="@color/md_white_1000"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="vertical">
+
+
+        <android.support.v7.widget.AppCompatTextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:text="@string/faq"
+          android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+          android:textColor="@color/md_white_1000"/>
+
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
 </android.support.v7.widget.CardView>
