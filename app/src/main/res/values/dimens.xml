@@ -90,4 +90,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
 
     <dimen name="column_width">80dp</dimen>
     <dimen name="icon_notification_dimen">32dp</dimen>
+  <dimen name="overlap_toolbar_height">-12dp</dimen>
 </resources>

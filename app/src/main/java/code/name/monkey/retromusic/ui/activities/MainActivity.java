@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment;
+import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -175,7 +176,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         break;
       default:
       case R.id.action_home:
-        setCurrentFragment(HomeFragment.newInstance(), false);
+        setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? BannerHomeFragment
+                .newInstance() : HomeFragment.newInstance(),
+            false);
         break;
     }
   }
@@ -313,7 +316,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         key.equals(PreferenceUtil.KEEP_SCREEN_ON) ||
         key.equals(PreferenceUtil.TOGGLE_SEPARATE_LINE) ||
         key.equals(PreferenceUtil.ALBUM_GRID_STYLE) ||
-        key.equals(PreferenceUtil.ARTIST_GRID_STYLE)) {
+        key.equals(PreferenceUtil.ARTIST_GRID_STYLE) ||
+        key.equals(PreferenceUtil.TOGGLE_HOME_BANNER)) {
       postRecreate();
     }
   }
