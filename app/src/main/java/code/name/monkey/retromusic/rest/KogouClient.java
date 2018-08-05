@@ -31,7 +31,7 @@ public class KogouClient {
     this(createDefaultOkHttpClientBuilder().build());
   }
 
-  public KogouClient(@NonNull Call.Factory client) {
+  private KogouClient(@NonNull Call.Factory client) {
     Retrofit restAdapter = new Retrofit.Builder()
         .baseUrl(BASE_URL)
         .callFactory(client)
@@ -43,7 +43,7 @@ public class KogouClient {
   }
 
   @Nullable
-  public static Cache createDefaultCache(Context context) {
+  private static Cache createDefaultCache(Context context) {
     File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
     if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
       return new Cache(cacheDir, 1024 * 1024 * 10);
@@ -51,7 +51,7 @@ public class KogouClient {
     return null;
   }
 
-  public static Interceptor createCacheControlInterceptor() {
+  private static Interceptor createCacheControlInterceptor() {
     return chain -> {
       Request modifiedRequest = chain.request().newBuilder()
           .addHeader("Cache-Control", String.format("max-age=%d, max-stale=%d", 31536000, 31536000))
@@ -60,7 +60,7 @@ public class KogouClient {
     };
   }
 
-  public static OkHttpClient.Builder createDefaultOkHttpClientBuilder() {
+  private static OkHttpClient.Builder createDefaultOkHttpClientBuilder() {
     HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 

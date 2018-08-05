@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LastFMRestClient {
 
-  public static final String BASE_URL = "http://ws.audioscrobbler.com/2.0/";
+  private static final String BASE_URL = "http://ws.audioscrobbler.com/2.0/";
 
   private LastFMService apiService;
 
@@ -37,7 +37,7 @@ public class LastFMRestClient {
   }
 
   @Nullable
-  public static Cache createDefaultCache(Context context) {
+  private static Cache createDefaultCache(Context context) {
     File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
     if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
       return new Cache(cacheDir, 1024 * 1024 * 10);
@@ -45,7 +45,7 @@ public class LastFMRestClient {
     return null;
   }
 
-  public static Interceptor createCacheControlInterceptor() {
+  private static Interceptor createCacheControlInterceptor() {
     return chain -> {
       Request modifiedRequest = chain.request().newBuilder()
           .addHeader("Cache-Control", String.format("max-age=%d, max-stale=%d", 31536000, 31536000))
