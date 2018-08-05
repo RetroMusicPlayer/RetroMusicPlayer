@@ -39,7 +39,7 @@ public class GenreFragment extends
   public void setMenuVisibility(boolean menuVisible) {
     super.setMenuVisibility(menuVisible);
     if (menuVisible) {
-      getLibraryFragment().getToolbar().setTitle(
+      getLibraryFragment().setTitle(
           PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library
               : R.string.genres);
     }
@@ -48,7 +48,7 @@ public class GenreFragment extends
   @Override
   public void onResume() {
     super.onResume();
-    getLibraryFragment().getToolbar().setTitle(
+    getLibraryFragment().setTitle(
         PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.genres);
     if (getAdapter().getDataSet().isEmpty()) {
       mPresenter.subscribe();

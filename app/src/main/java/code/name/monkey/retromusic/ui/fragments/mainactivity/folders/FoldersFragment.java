@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +32,8 @@ import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -82,6 +85,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
   CoordinatorLayout coordinatorLayout;
   @BindView(R.id.container)
   View container;
+  @BindView(R.id.title)
+  TextView title;
   @BindView(android.R.id.empty)
   View empty;
   @BindView(R.id.toolbar)
@@ -90,10 +95,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
   BreadCrumbLayout breadCrumbs;
   @BindView(R.id.appbar)
   AppBarLayout appbar;
-  @BindView(R.id.status_bar)
-  View statusBar;
+
   @BindView(R.id.recycler_view)
   FastScrollRecyclerView recyclerView;
+
   Comparator<File> fileComparator = (lhs, rhs) -> {
     if (lhs.isDirectory() && !rhs.isDirectory()) {
       return -1;
@@ -207,7 +212,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     setStatusbarColorAuto(view);
     getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
-
     getMainActivity().setBottomBarVisibility(View.GONE);
 
     setUpAppbarColor();
@@ -215,24 +219,29 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     setUpBreadCrumbs();
     setUpRecyclerView();
     setUpAdapter();
-    ViewUtil.setStatusBarHeight(getContext(), statusBar);
+
   }
 
   private void setUpAppbarColor() {
     //noinspection ConstantConditions
     int primaryColor = ThemeStore.primaryColor(getActivity());
-    appbar.setBackgroundColor(primaryColor);
-    toolbar.setBackgroundColor(primaryColor);
+    TintHelper.setTintAuto(container, primaryColor, true);
+    appbar.setBackgroundColor(ColorUtil.darkenColor(primaryColor));
+    toolbar.setBackgroundColor(ColorUtil.darkenColor(primaryColor));
     //breadCrumbs.setBackgroundColor(primaryColor);
     breadCrumbs.setActivatedContentColor(
-        ToolbarContentTintHelper.toolbarTitleColor(getActivity(), primaryColor));
+        ToolbarContentTintHelper
+            .toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
     breadCrumbs.setDeactivatedContentColor(
-        ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), primaryColor));
+        ToolbarContentTintHelper
+            .toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
     appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity()
         .setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
   }
 
   private void setUpToolbar() {
+    //noinspection ConstantConditions
+    title.setTextColor(ThemeStore.textColorPrimary(getContext()));
     toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
     //noinspection ConstantConditions
     getActivity().setTitle(R.string.folders);

@@ -9,15 +9,15 @@ import code.name.monkey.retromusic.util.schedulers.SchedulerProvider;
 
 public class Injection {
 
-  public static Repository provideRepository() {
-    return RepositoryImpl.getInstance();
-  }
+    public static Repository provideRepository() {
+        return RepositoryImpl.getInstance();
+    }
 
-  public static BaseSchedulerProvider provideSchedulerProvider() {
-    return SchedulerProvider.getInstance();
-  }
+    public static BaseSchedulerProvider provideSchedulerProvider() {
+        return SchedulerProvider.getInstance();
+    }
 
-  public static KuGouApiService provideKuGouApiService() {
-    return new KogouClient().getApiService();
-  }
+    public static KuGouApiService provideKuGouApiService() {
+        return new KogouClient().getApiService();
+    }
 }

@@ -77,9 +77,6 @@ public abstract class AbsThemeActivity extends ATHToolbarActivity implements Run
         : ContextCompat.getDrawable(this, R.drawable.square_window);
     background = TintHelper.createTintedDrawable(background, ThemeStore.primaryColor(this));
     getWindow().setBackgroundDrawable(background);
-    //View decor = getWindow().getDecorView();
-    //GradientDrawable gradientDrawable = (GradientDrawable) decor.getBackground();
-    //gradientDrawable.setColor(ThemeStore.primaryColor(this));
   }
 
   protected void setDrawUnderStatusBar(boolean drawUnderStatusbar) {
