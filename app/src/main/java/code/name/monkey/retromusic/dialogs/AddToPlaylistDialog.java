@@ -3,92 +3,84 @@ package code.name.monkey.retromusic.dialogs;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.util.PlaylistsUtil;
+import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist;
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
+import java.util.ArrayList;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Aidan Follestad (afollestad)
  */
-public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment implements AdapterView.OnItemClickListener {
+public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
 
-    @BindView(R.id.playlists)
-    ListView playlist;
-    @BindView(R.id.title)
-    TextView title;
-    List<Playlist> playlists;
+  @BindView(R.id.playlists)
+  RecyclerView playlist;
+  @BindView(R.id.title)
+  TextView title;
+  ArrayList<Playlist> playlists;
 
-    @NonNull
-    public static AddToPlaylistDialog create(Song song) {
-        ArrayList<Song> list = new ArrayList<>();
-        list.add(song);
-        return create(list);
-    }
+  @NonNull
+  public static AddToPlaylistDialog create(Song song) {
+    ArrayList<Song> list = new ArrayList<>();
+    list.add(song);
+    return create(list);
+  }
 
-    @NonNull
-    public static AddToPlaylistDialog create(ArrayList<Song> songs) {
-        AddToPlaylistDialog dialog = new AddToPlaylistDialog();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("songs", songs);
-        dialog.setArguments(args);
-        return dialog;
-    }
+  @NonNull
+  public static AddToPlaylistDialog create(ArrayList<Song> songs) {
+    AddToPlaylistDialog dialog = new AddToPlaylistDialog();
+    Bundle args = new Bundle();
+    args.putParcelableArrayList("songs", songs);
+    dialog.setArguments(args);
+    return dialog;
+  }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.dialog_add_to_playlist, container, false);
-        ButterKnife.bind(this, layout);
-        return layout;
-    }
+  @Nullable
+  @Override
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    View layout = inflater.inflate(R.layout.dialog_add_to_playlist, container, false);
+    ButterKnife.bind(this, layout);
+    return layout;
+  }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ArrayAdapter<String> playlistAdapter = new ArrayAdapter<>(getActivity(), R.layout.simple_list_item);
-        playlists = PlaylistLoader.getAllPlaylists(getActivity()).blockingFirst();
-        playlistAdapter.add(getActivity().getResources().getString(R.string.action_new_playlist));
+  @SuppressWarnings("ConstantConditions")
+  @OnClick(R.id.action_add_playlist)
+  void newPlaylist() {
+    final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
+    CreatePlaylistDialog.create(songs)
+        .show(getActivity().getSupportFragmentManager(), "ADD_TO_PLAYLIST");
+    dismiss();
+  }
 
-        for (int i = 1; i < playlists.size(); i++) {
-            playlistAdapter.add(playlists.get(i - 1).name);
-            playlistAdapter.notifyDataSetChanged();
-        }
+  @SuppressWarnings("ConstantConditions")
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
 
-        this.playlist.setAdapter(playlistAdapter);
-        this.playlist.setOnItemClickListener(this);
-    }
+    title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+    final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
+    playlists = PlaylistLoader.getAllPlaylists(getActivity()).blockingFirst();
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //noinspection unchecked
-        final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
+    AddToPlaylist playlistAdapter = new AddToPlaylist(getActivity(), playlists,
+        R.layout.item_playlist, songs, getDialog());
 
-        if (songs == null) {
-            return;
-        }
-        if (i == 0) {
-            dismiss();
-            CreatePlaylistDialog.create(songs)
-                    .show(getActivity().getSupportFragmentManager(), "ADD_TO_PLAYLIST");
-        } else {
-            dismiss();
-            PlaylistsUtil.addToPlaylist(getActivity(), songs, playlists.get(i - 1).id, true);
-        }
-    }
+    playlist.setLayoutManager(new LinearLayoutManager(getContext()));
+    playlist.setItemAnimator(new DefaultItemAnimator());
+    playlist.setAdapter(playlistAdapter);
+  }
 }
