@@ -97,11 +97,13 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
 
     @SuppressWarnings("ConstantConditions")
     @OnClick({R.id.action_about, R.id.user_info_container, R.id.action_buy_pro, R.id.action_folder,
-            R.id.action_settings, R.id.action_sleep_timer})
+            R.id.action_settings, R.id.action_sleep_timer,R.id.action_rate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_info_container:
                 NavigationUtil.goToUserInfo(getActivity());
+                break; case R.id.action_rate:
+                NavigationUtil.goToPlayStore(getActivity());
                 break;
             case R.id.action_folder:
                 MainActivity mainActivity = (MainActivity) getActivity();
