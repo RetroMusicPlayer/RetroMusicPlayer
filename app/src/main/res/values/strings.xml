@@ -184,7 +184,7 @@
   <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
 
   <string name="donate">Donate</string>
-  <string name="donate_summary">If my development deserve to get paid, you can leave some
+  <string name="donate_summary">If you think my development deserves to get paid, you can leave me some
     dollars here</string>
 
   <string name="donation_header">Buy me a</string>
@@ -303,7 +303,7 @@
 
   <string name="my_name">My Name</string>
   <string name="my_playlists">My playlist</string>
-  <string name="my_top_tracks">Top played</string>
+  <string name="my_top_tracks">Most played</string>
 
   <string name="never">Never</string>
 
