@@ -187,6 +187,37 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/action_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?rectSelector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                app:srcCompat="@drawable/ic_star_white_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@string/rate_app"
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/action_buy_pro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
