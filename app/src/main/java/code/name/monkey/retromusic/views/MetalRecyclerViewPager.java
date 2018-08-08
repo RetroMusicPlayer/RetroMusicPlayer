@@ -92,7 +92,7 @@ public class MetalRecyclerViewPager extends RecyclerView {
         }
 
         @Override
-        public void onBindViewHolder(VH holder, int position) {
+        public void onBindViewHolder(@NonNull VH holder, int position) {
             int currentItemWidth = itemWidth;
 
             if (position == 0) {

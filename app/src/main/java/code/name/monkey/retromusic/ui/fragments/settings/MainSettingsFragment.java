@@ -4,6 +4,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,29 +58,29 @@ public class MainSettingsFragment extends Fragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.general_settings:
-                inflateFragment(new ThemeSettingsFragment());
+                inflateFragment(new ThemeSettingsFragment(), R.string.general_settings_title);
                 break;
             case R.id.audio_settings:
-                inflateFragment(new AudioSettings());
+                inflateFragment(new AudioSettings(), R.string.pref_header_audio);
                 break;
             case R.id.now_playing_settings:
-                inflateFragment(new NowPlayingSettingsFragment());
+                inflateFragment(new NowPlayingSettingsFragment(), R.string.personalize);
                 break;
             case R.id.image_settings:
-                inflateFragment(new ImageSettingFragment());
+                inflateFragment(new ImageSettingFragment(), R.string.pref_header_images);
                 break;
             case R.id.notification_settings:
-                inflateFragment(new NotificationSettingsFragment());
+                inflateFragment(new NotificationSettingsFragment(), R.string.notification);
                 break;
             case R.id.other_settings:
-                inflateFragment(new OtherSettingsFragment());
+                inflateFragment(new OtherSettingsFragment(), R.string.others);
                 break;
         }
     }
 
-    private void inflateFragment(Fragment fragment) {
+    private void inflateFragment(Fragment fragment, @StringRes int title) {
         if (getActivity() != null) {
-            ((SettingsActivity) getActivity()).setupFragment(fragment);
+            ((SettingsActivity) getActivity()).setupFragment(fragment, title);
         }
     }
 }

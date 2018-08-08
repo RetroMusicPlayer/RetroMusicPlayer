@@ -29,7 +29,7 @@ public class SansFontCollapsingToolbarLayout extends CollapsingToolbarLayout {
     }
 
     private void init(Context context) {
-        Typeface typefaceBold = TypefaceHelper.get(context, getResources().getString(R.string.sans_bold));
+        Typeface typefaceBold = TypefaceHelper.get(context, getResources().getString(R.string.circular_std_black));
         setExpandedTitleTypeface(typefaceBold);
         setCollapsedTitleTypeface(typefaceBold);
 

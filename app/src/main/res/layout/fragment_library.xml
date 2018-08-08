@@ -1,58 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
-
-  <FrameLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:ignore="UnusedAttribute">
-
-    <include layout="@layout/status_bar"/>
-
-  </FrameLayout>
-
-  <android.support.design.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.widget.AppBarLayout
-      android:id="@+id/app_bar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-      <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
-        android:id="@+id/collapsing_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="96dp"
-        app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
-        app:expandedTitleGravity="top"
-        app:expandedTitleMarginStart="16dp"
-        app:expandedTitleMarginTop="48dp"
-        app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:title="@string/action_settings">
-
-        <View
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"/>
-
-        <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbar"
-          style="@style/Toolbar48"
-          app:layout_collapseMode="pin"/>
-
-      </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <FrameLayout
-      android:id="@+id/fragment_container"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="UnusedAttribute">
 
-  </android.support.design.widget.CoordinatorLayout>
+        <include layout="@layout/status_bar" />
+
+    </FrameLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                app:titleEnabled="false">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin">
+
+                    <ViewStub
+                        android:id="@+id/cab_stub"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp" />
+
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar48"
+                        app:title=""
+                        tools:ignore="UnusedAttribute">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <code.name.monkey.retromusic.views.IconImageView
+                                android:id="@+id/search"
+                                android:background="?roundSelector"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:padding="12dp"
+                                android:src="@drawable/ic_search_white_24dp" />
+
+                            <TextView
+                                android:id="@+id/title"
+                                fontPath="@string/circular_std_black"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="@string/app_name"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                tools:ignore="MissingPrefix" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.Toolbar>
+                </FrameLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

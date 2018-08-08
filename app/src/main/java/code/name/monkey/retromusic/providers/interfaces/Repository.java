@@ -16,45 +16,45 @@ import java.util.ArrayList;
 
 public interface Repository {
 
-  Observable<ArrayList<Song>> getAllSongs();
+    Observable<ArrayList<Song>> getAllSongs();
 
-  Observable<ArrayList<AbsSmartPlaylist>> getSuggestionSongs();
+    Observable<ArrayList<AbsSmartPlaylist>> getSuggestionSongs();
 
-  Observable<Song> getSong(int id);
+    Observable<Song> getSong(int id);
 
-  Observable<ArrayList<Album>> getAllAlbums();
+    Observable<ArrayList<Album>> getAllAlbums();
 
-  Observable<ArrayList<Album>> getRecentAlbums();
+    Observable<ArrayList<Album>> getRecentAlbums();
 
-  Observable<ArrayList<Album>> getTopAlbums();
+    Observable<ArrayList<Album>> getTopAlbums();
 
-  Observable<Album> getAlbum(int albumId);
+    Observable<Album> getAlbum(int albumId);
 
-  Observable<ArrayList<Artist>> getAllArtists();
+    Observable<ArrayList<Artist>> getAllArtists();
 
-  Observable<ArrayList<Artist>> getRecentArtists();
+    Observable<ArrayList<Artist>> getRecentArtists();
 
-  Observable<ArrayList<Artist>> getTopArtists();
+    Observable<ArrayList<Artist>> getTopArtists();
 
 
-  Observable<Artist> getArtistById(long artistId);
+    Observable<Artist> getArtistById(long artistId);
 
-  Observable<ArrayList<Playlist>> getAllPlaylists();
+    Observable<ArrayList<Playlist>> getAllPlaylists();
 
-  Observable<ArrayList<Song>> getFavoriteSongs();
+    Observable<ArrayList<Song>> getFavoriteSongs();
 
-  Observable<ArrayList<Object>> search(String query);
+    Observable<ArrayList<Object>> search(String query);
 
-  Observable<ArrayList<Song>> getPlaylistSongs(Playlist playlist);
+    Observable<ArrayList<Song>> getPlaylistSongs(Playlist playlist);
 
-  Observable<ArrayList<Playlist>> getHomeList();
+    Observable<ArrayList<Playlist>> getHomeList();
 
-  Observable<ArrayList<AbsSmartPlaylist>> getAllThings();
+    Observable<ArrayList<AbsSmartPlaylist>> getAllThings();
 
-  Observable<ArrayList<Genre>> getAllGenres();
+    Observable<ArrayList<Genre>> getAllGenres();
 
-  Observable<ArrayList<Song>> getGenre(int genreId);
+    Observable<ArrayList<Song>> getGenre(int genreId);
 
-  Observable<File> downloadLrcFile(final String title, final String artist, final long duration);
+    Observable<File> downloadLrcFile(final String title, final String artist, final long duration);
 
 }

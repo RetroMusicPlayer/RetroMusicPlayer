@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,13 +28,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.TintHelper;
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener;
 import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
@@ -72,8 +69,8 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
 
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.title)
+    TextView title;
 
     @BindView(R.id.status_bar)
     View statusBar;
@@ -182,33 +179,17 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     }
 
     private void setUpToolBar() {
+        title.setTextColor(ThemeStore.textColorPrimary(this));
+        TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
+
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
         appBarLayout.setBackgroundColor(primaryColor);
-
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        title.setText(playlist.name);
 
+        setTitle(null);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setTitle(playlist.name);
-
-        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
-                int color;
-                switch (state) {
-                    default:
-                    case COLLAPSED:
-                    case EXPANDED:
-                    case IDLE:
-                        color = ThemeStore.textColorPrimary(PlaylistDetailActivity.this);
-                        break;
-                }
-                toolbarLayout.setExpandedTitleColor(color);
-                ToolbarContentTintHelper.colorizeToolbar(toolbar, color, PlaylistDetailActivity.this);
-            }
-        });
-        TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
     }
 
     @Override

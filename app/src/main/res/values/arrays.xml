@@ -5,6 +5,7 @@
         <item>@string/only_on_wifi</item>
         <item>@string/never</item>
     </array>
+
     <string-array name="pref_general_theme_list_titles">
         <item>@string/light_theme_name</item>
         <item>@string/dark_theme_name</item>
@@ -16,19 +17,23 @@
         <item>@string/normal_style</item>
         <item>@string/card_style</item>
         <item>@string/card_color_style</item>
+        <item>@string/card_circular_style</item>
     </string-array>
 
     <string-array name="pref_grid_style_list_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <array name="pref_grid_style_layout">
         <item>@layout/item_grid</item>
         <item>@layout/item_card</item>
         <item>@layout/item_card_color</item>
+        <item>@layout/item_grid_circle</item>
     </array>
+
     <string-array name="pref_general_theme_list_values">
         <item>light</item>
         <item>dark</item>

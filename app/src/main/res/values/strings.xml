@@ -1,681 +1,682 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-  <string name="accent_color">Accent color</string>
-  <string name="accent_color_desc">The accent theme color, defaults to teal</string>
+    <string name="accent_color">Accent color</string>
+    <string name="accent_color_desc">The accent theme color, defaults to teal</string>
 
-  <string name="action_about">About</string>
-  <string name="action_add_to_favorites">Add to favorites</string>
-  <string name="action_add_to_playing_queue">Add to playing queue</string>
-  <string name="action_add_to_playlist">Add to playlist…</string>
-  <string name="action_clear_playing_queue">Clear playing queue</string>
-  <string name="action_clear_playlist">Clear playlist</string>
-  <string name="action_cycle_repeat">Cycle repeat mode</string>
-  <string name="action_delete">Delete</string>
-  <string name="action_delete_from_device">Delete from device</string>
-  <string name="action_details">Details</string>
-  <string name="action_go_to_album">Go to album</string>
-  <string name="action_go_to_artist">Go to artist</string>
-  <string name="action_go_to_genre">Go to genre</string>
-  <string name="action_go_to_start_directory">Go to start directory</string>
-  <string name="action_grant">Grant</string>
-  <string name="action_grid_size">Grid size</string>
-  <string name="action_grid_size_land">Grid size (land)</string>
-  <string name="action_new_playlist">New playlist…</string>
-  <string name="action_next">Next</string>
-  <string name="action_play">Play</string>
-  <string name="action_play_next">Play next</string>
-  <string name="action_play_pause">Play/Pause</string>
-  <string name="action_previous">Previous</string>
-  <string name="action_re_download_artist_image">Update artist image</string>
-  <string name="action_remove_from_favorites">Remove from favorites</string>
-  <string name="action_remove_from_playing_queue">Remove from playing queue</string>
-  <string name="action_remove_from_playlist">Remove from playlist</string>
-  <string name="action_rename">Rename</string>
-  <string name="action_save_playing_queue">Save playing queue</string>
-  <string name="action_scan">Scan</string>
-  <string name="action_scan_directory">Scan directory</string>
-  <string name="action_search">Search</string>
-  <string name="action_set">Set</string>
-  <string name="action_set_as_ringtone">Set as ringtone</string>
-  <string name="action_set_as_start_directory">Set as start directory</string>
-  <string name="action_settings">"Settings"</string>
-  <string name="action_share">Share</string>
-  <string name="action_show_lyrics">Show lyrics</string>
-  <string name="action_shuffle_album">Shuffle album</string>
-  <string name="action_shuffle_all">Shuffle all</string>
-  <string name="action_shuffle_artist">Shuffle artist</string>
-  <string name="action_shuffle_playlist">Shuffle playlist</string>
-  <string name="action_sleep_timer">Sleep timer</string>
-  <string name="action_sort_order">Sort order</string>
-  <string name="action_tag_editor">Tag editor</string>
-  <string name="action_toggle_favorite">Toggle favorite</string>
-  <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+    <string name="action_about">About</string>
+    <string name="action_add_to_favorites">Add to favorites</string>
+    <string name="action_add_to_playing_queue">Add to playing queue</string>
+    <string name="action_add_to_playlist">Add to playlist…</string>
+    <string name="action_clear_playing_queue">Clear playing queue</string>
+    <string name="action_clear_playlist">Clear playlist</string>
+    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_delete_from_device">Delete from device</string>
+    <string name="action_details">Details</string>
+    <string name="action_go_to_album">Go to album</string>
+    <string name="action_go_to_artist">Go to artist</string>
+    <string name="action_go_to_genre">Go to genre</string>
+    <string name="action_go_to_start_directory">Go to start directory</string>
+    <string name="action_grant">Grant</string>
+    <string name="action_grid_size">Grid size</string>
+    <string name="action_grid_size_land">Grid size (land)</string>
+    <string name="action_new_playlist">New playlist…</string>
+    <string name="action_next">Next</string>
+    <string name="action_play">Play</string>
+    <string name="action_play_next">Play next</string>
+    <string name="action_play_pause">Play/Pause</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_re_download_artist_image">Update artist image</string>
+    <string name="action_remove_from_favorites">Remove from favorites</string>
+    <string name="action_remove_from_playing_queue">Remove from playing queue</string>
+    <string name="action_remove_from_playlist">Remove from playlist</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_save_playing_queue">Save playing queue</string>
+    <string name="action_scan">Scan</string>
+    <string name="action_scan_directory">Scan directory</string>
+    <string name="action_search">Search</string>
+    <string name="action_set">Set</string>
+    <string name="action_set_as_ringtone">Set as ringtone</string>
+    <string name="action_set_as_start_directory">Set as start directory</string>
+    <string name="action_settings">"Settings"</string>
+    <string name="action_share">Share</string>
+    <string name="action_show_lyrics">Show lyrics</string>
+    <string name="action_shuffle_album">Shuffle album</string>
+    <string name="action_shuffle_all">Shuffle all</string>
+    <string name="action_shuffle_artist">Shuffle artist</string>
+    <string name="action_shuffle_playlist">Shuffle playlist</string>
+    <string name="action_sleep_timer">Sleep timer</string>
+    <string name="action_sort_order">Sort order</string>
+    <string name="action_tag_editor">Tag editor</string>
+    <string name="action_toggle_favorite">Toggle favorite</string>
+    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
 
-  <string name="adaptive">Adaptive</string>
+    <string name="adaptive">Adaptive</string>
 
-  <string name="add_action">Add</string>
-  <string name="add_photo">Add \nphoto</string>
-  <string name="add_playlist_title">"Add to playlist"</string>
+    <string name="add_action">Add</string>
+    <string name="add_photo">Add \nphoto</string>
+    <string name="add_playlist_title">"Add to playlist"</string>
 
-  <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-  <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
+    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
+    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
 
-  <string name="album">Album</string>
-  <string name="album_artist">Album artist</string>
-  <string name="album_desc">Album desc.</string>
-  <string name="album_or_artist_empty">The title or artist is empty.</string>
+    <string name="album">Album</string>
+    <string name="album_artist">Album artist</string>
+    <string name="album_desc">Album desc.</string>
+    <string name="album_or_artist_empty">The title or artist is empty.</string>
 
-  <string name="albums">Albums</string>
-  <!-- Android Auto -->
-  <string name="albums_label">Albums</string>
+    <string name="albums">Albums</string>
+    <!-- Android Auto -->
+    <string name="albums_label">Albums</string>
 
-  <string name="always">Always</string>
+    <string name="always">Always</string>
 
-  <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
-  <!-- App Shortcuts -->
-  <string name="app_shortcut_last_added_long">@string/last_added</string>
-  <string name="app_shortcut_last_added_short">@string/last_added</string>
-  <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-  <string name="app_shortcut_shuffle_all_short">Shuffle</string>
-  <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
-  <string name="app_shortcut_top_tracks_short">Top Tracks</string>
-  <string name="app_summary">A Hybrid application between Material design and iOS in mind.</string>
-  <string name="app_widget_big_name">Retro music - Big</string>
-  <string name="app_widget_big_name_2">Retro music - Big2</string>
-  <string name="app_widget_card_name">Retro music - Card</string>
-  <string name="app_widget_classic_name">Retro music - Classic</string>
-  <string name="app_widget_small_name">Retro music - Small</string>
+    <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
+    <!-- App Shortcuts -->
+    <string name="app_shortcut_last_added_long">@string/last_added</string>
+    <string name="app_shortcut_last_added_short">@string/last_added</string>
+    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
+    <string name="app_shortcut_shuffle_all_short">Shuffle</string>
+    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_top_tracks_short">Top Tracks</string>
+    <string name="app_summary">A Hybrid application between Material design and iOS in mind.</string>
+    <string name="app_widget_big_name">Retro music - Big</string>
+    <string name="app_widget_big_name_2">Retro music - Big2</string>
+    <string name="app_widget_card_name">Retro music - Card</string>
+    <string name="app_widget_classic_name">Retro music - Classic</string>
+    <string name="app_widget_small_name">Retro music - Small</string>
 
-  <string name="artist">Artist</string>
-  <string name="artist_desc">Artist desc.</string>
+    <string name="artist">Artist</string>
+    <string name="artist_desc">Artist desc.</string>
 
-  <string name="artists">Artists</string>
+    <string name="artists">Artists</string>
 
 
-  <string name="at_least_one_category_must_be_enabled">At least one category must be enabled.</string>
+    <string name="at_least_one_category_must_be_enabled">At least one category must be enabled.</string>
 
-  <string name="audio_focus_denied">Audio focus denied.</string>
-  <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
+    <string name="audio_focus_denied">Audio focus denied.</string>
+    <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
 
-  <string name="bass_boost">Bass Boost</string>
-  <string name="bass_boost_strength">Bass Boost Strength</string>
+    <string name="bass_boost">Bass Boost</string>
+    <string name="bass_boost_strength">Bass Boost Strength</string>
 
-  <string name="biography">Biography</string>
-  <string name="biography_unavailable">Couldn\u2019t find the artists biography.</string>
+    <string name="biography">Biography</string>
+    <string name="biography_unavailable">Couldn\u2019t find the artists biography.</string>
 
-  <string name="black_theme_name">Just Black</string>
+    <string name="black_theme_name">Just Black</string>
 
-  <string name="blacklist">Blacklist</string>
+    <string name="blacklist">Blacklist</string>
 
-  <string name="blur">Blur</string>
-  <string name="blur_card">Blur Card</string>
-  <string name="pref_keep_screen_on_title">Keep the screen on</string>
-  <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
-  <string name="pref_blur_amount_title">Blur amount</string>
-  <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
+    <string name="blur">Blur</string>
+    <string name="blur_card">Blur Card</string>
+    <string name="pref_keep_screen_on_title">Keep the screen on</string>
+    <string name="pref_keep_screen_on_summary">Keep in mind that enabling this feature may affect battery life</string>
+    <string name="pref_blur_amount_title">Blur amount</string>
+    <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
-  <string name="buy_retromusic_pro">Buy RetroMusic Pro</string>
+    <string name="buy_retromusic_pro">Buy RetroMusic Pro</string>
 
-  <string name="cancel_current_timer">Cancel current timer</string>
+    <string name="cancel_current_timer">Cancel current timer</string>
 
-  <string name="card">Card</string>
-  <string name="card_color_style">Colored Card</string>
-  <string name="card_style">Card</string>
+    <string name="card">Card</string>
+    <string name="card_color_style">Colored Card</string>
+    <string name="card_circular_style">Circular</string>
+    <string name="card_style">Card</string>
 
-  <string name="cast">Cast</string>
+    <string name="cast">Cast</string>
 
-  <string name="changelog">Changelog</string>
-  <string name="changelog_summary">Changelog maintained on the Telegram channel</string>
+    <string name="changelog">Changelog</string>
+    <string name="changelog_summary">Changelog maintained on the Telegram channel</string>
 
-  <string name="clear_action">Clear</string>
-  <string name="clear_blacklist">Clear blacklist</string>
-  <string name="clear_playlist_title">Clear playlist</string>
-  <string name="clear_playlist_x"><![CDATA[Clear the playlist <b>%1$s</b>? This can\u2019t be undone!]]></string>
+    <string name="clear_action">Clear</string>
+    <string name="clear_blacklist">Clear blacklist</string>
+    <string name="clear_playlist_title">Clear playlist</string>
+    <string name="clear_playlist_x"><![CDATA[Clear the playlist <b>%1$s</b>? This can\u2019t be undone!]]></string>
 
-  <string name="close_notification">Close</string>
+    <string name="close_notification">Close</string>
 
-  <string name="color">Color</string>
-  <string name="color_theme_name">Color</string>
-  <string name="color_type">Color style</string>
+    <string name="color">Color</string>
+    <string name="color_theme_name">Color</string>
+    <string name="color_type">Color style</string>
 
-  <string name="colored_footers">Colored footers</string>
+    <string name="colored_footers">Colored footers</string>
 
-  <string name="colors">Colors</string>
+    <string name="colors">Colors</string>
 
-  <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
-  <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
-  <string name="could_not_restore_purchase">Could not restore purchase.</string>
-  <string name="could_not_scan_files">Could not scan %d files.</string>
+    <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
+    <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
+    <string name="could_not_restore_purchase">Could not restore purchase.</string>
+    <string name="could_not_scan_files">Could not scan %d files.</string>
 
-  <string name="create_action">Create</string>
+    <string name="create_action">Create</string>
 
-  <string name="created_playlist_x">Created playlist %1$s.</string>
+    <string name="created_playlist_x">Created playlist %1$s.</string>
 
-  <string name="credit_title">Members and contributors </string>
+    <string name="credit_title">Members and contributors </string>
 
-  <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
+    <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
 
-  <string name="custom">Custom</string>
+    <string name="custom">Custom</string>
 
-  <string name="dark_theme_name">Kinda Dark</string>
+    <string name="dark_theme_name">Kinda Dark</string>
 
-  <string name="date">Date</string>
+    <string name="date">Date</string>
 
-  <string name="default_hint">No Lyrics</string>
+    <string name="default_hint">No Lyrics</string>
 
-  <string name="delete_action">Delete</string>
-  <string name="delete_playlist_title">Delete playlist</string>
-  <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
-  <string name="delete_playlists_title">Delete playlists</string>
-  <string name="delete_song_title">Delete song</string>
-  <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
-  <string name="delete_songs_title">Delete songs</string>
-  <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
-  <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
+    <string name="delete_action">Delete</string>
+    <string name="delete_playlist_title">Delete playlist</string>
+    <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
+    <string name="delete_playlists_title">Delete playlists</string>
+    <string name="delete_song_title">Delete song</string>
+    <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
+    <string name="delete_songs_title">Delete songs</string>
+    <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
+    <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
 
-  <string name="deleted_x_songs">Deleted %1$d songs.</string>
+    <string name="deleted_x_songs">Deleted %1$d songs.</string>
 
-  <string name="deleting_songs">Deleting songs</string>
+    <string name="deleting_songs">Deleting songs</string>
 
-  <string name="discord_page">Discord</string>
-  <string name="discord_summary">Join the Discord server to keep up with the latest news</string>
+    <string name="discord_page">Discord</string>
+    <string name="discord_summary">Join the Discord server to keep up with the latest news</string>
 
-  <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
-  <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
+    <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
 
-  <string name="donate">Donate</string>
-  <string name="donate_summary">If my development deserve to get paid, you can leave some
+    <string name="donate">Donate</string>
+    <string name="donate_summary">If my development deserve to get paid, you can leave some
     dollars here</string>
 
-  <string name="donation_header">Buy me a</string>
+    <string name="donation_header">Buy me a</string>
 
-  <string name="download_from_last_fm">Download from Last.fm</string>
+    <string name="download_from_last_fm">Download from Last.fm</string>
 
-  <string name="duration">Duration</string>
+    <string name="duration">Duration</string>
 
-  <string name="edit">Edit</string>
-  <string name="edit_categories">Edit categories</string>
-  <string name="edit_cover">Edit cover</string>
-  <string name="edit_tags">Edit tags</string>
+    <string name="edit">Edit</string>
+    <string name="edit_categories">Edit categories</string>
+    <string name="edit_cover">Edit cover</string>
+    <string name="edit_tags">Edit tags</string>
 
-  <string name="empty">Empty</string>
+    <string name="empty">Empty</string>
 
-  <string name="equalizer">Equalizer</string>
+    <string name="equalizer">Equalizer</string>
 
-  <string name="error_loading_lyrics_from_network">Error loading from network</string>
+    <string name="error_loading_lyrics_from_network">Error loading from network</string>
 
-  <string name="experimental">Experimental</string>
+    <string name="experimental">Experimental</string>
 
-  <string name="facebook_page">Facebook Page</string>
-  <string name="facebook_page_summary">Help us to grove faster by  sharing facebook page</string>
+    <string name="facebook_page">Facebook Page</string>
+    <string name="facebook_page_summary">Help us to grove faster by  sharing facebook page</string>
 
-  <string name="failed_to_save_playlist">Failed to save playlist (%s).</string>
+    <string name="failed_to_save_playlist">Failed to save playlist (%s).</string>
 
-  <string name="faq">FAQ</string>
+    <string name="faq">FAQ</string>
 
-  <string name="favorites">Favorites</string>
+    <string name="favorites">Favorites</string>
 
-  <string name="flat">Flat</string>
+    <string name="flat">Flat</string>
 
-  <string name="folders">Folders</string>
+    <string name="folders">Folders</string>
 
-  <string name="for_you">For you</string>
+    <string name="for_you">For you</string>
 
-  <string name="full">Full</string>
+    <string name="full">Full</string>
 
-  <string name="general_settings_summary">Change the theme and colors of the app</string>
-  <string name="general_settings_title">Look and feel</string>
+    <string name="general_settings_summary">Change the theme and colors of the app</string>
+    <string name="general_settings_title">Look and feel</string>
 
-  <string name="genre">Genre</string>
+    <string name="genre">Genre</string>
 
-  <string name="genres">Genres</string>
+    <string name="genres">Genres</string>
 
-  <string name="git_hub_summary">Fork the project on GitHub</string>
+    <string name="git_hub_summary">Fork the project on GitHub</string>
 
-  <string name="google_plus_community">Join the Google Plus community where you can ask for help or follow Retro Music updates</string>
+    <string name="google_plus_community">Join the Google Plus community where you can ask for help or follow Retro Music updates</string>
 
-  <string name="gradient">Gradient</string>
+    <string name="gradient">Gradient</string>
 
-  <string name="grid_size_1">1</string>
-  <string name="grid_size_2">2</string>
-  <string name="grid_size_3">3</string>
-  <string name="grid_size_4">4</string>
-  <string name="grid_size_5">5</string>
-  <string name="grid_size_6">6</string>
-  <string name="grid_size_7">7</string>
-  <string name="grid_size_8">8</string>
+    <string name="grid_size_1">1</string>
+    <string name="grid_size_2">2</string>
+    <string name="grid_size_3">3</string>
+    <string name="grid_size_4">4</string>
+    <string name="grid_size_5">5</string>
+    <string name="grid_size_6">6</string>
+    <string name="grid_size_7">7</string>
+    <string name="grid_size_8">8</string>
 
-  <string name="history">History</string>
-  <string name="history_label">History</string>
+    <string name="history">History</string>
+    <string name="history_label">History</string>
 
-  <string name="holiday">Holiday</string>
+    <string name="holiday">Holiday</string>
 
-  <string name="home">Home</string>
+    <string name="home">Home</string>
 
-  <string name="image_settings_summary">Change artist image download settings</string>
+    <string name="image_settings_summary">Change artist image download settings</string>
 
-  <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
+    <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
 
-  <string name="inspired_designs_by">Inspired designs by</string>
+    <string name="inspired_designs_by">Inspired designs by</string>
 
-  <string name="instagram_page">Instagram</string>
-  <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
+    <string name="instagram_page">Instagram</string>
+    <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
 
-  <string name="join_community">Join the Google Plus community</string>
-  <string name="join_community_summary">If you need help or have questions, the Retro Music community on Google Plus is a good place to go.</string>
+    <string name="join_community">Join the Google Plus community</string>
+    <string name="join_community_summary">If you need help or have questions, the Retro Music community on Google Plus is a good place to go.</string>
 
-  <string name="label_bit_rate">Bitrate</string>
-  <string name="label_details">Details</string>
-  <string name="label_file_format">Format</string>
-  <string name="label_file_name">File name</string>
-  <string name="label_file_path">File path</string>
-  <string name="label_file_size">Size</string>
-  <string name="label_sampling_rate">Sampling rate</string>
-  <string name="label_track_length">Length</string>
+    <string name="label_bit_rate">Bitrate</string>
+    <string name="label_details">Details</string>
+    <string name="label_file_format">Format</string>
+    <string name="label_file_name">File name</string>
+    <string name="label_file_path">File path</string>
+    <string name="label_file_size">Size</string>
+    <string name="label_sampling_rate">Sampling rate</string>
+    <string name="label_track_length">Length</string>
 
-  <string name="language_contributors">Language translators</string>
+    <string name="language_contributors">Language translators</string>
 
-  <string name="last_added">Last added</string>
+    <string name="last_added">Last added</string>
 
-  <string name="lets_play_something">Let\'s play some music</string>
+    <string name="lets_play_something">Let\'s play some music</string>
 
-  <string name="library">Library</string>
-  <string name="library_categories">Library categories</string>
+    <string name="library">Library</string>
+    <string name="library_categories">Library categories</string>
 
-  <string name="licenses">Licenses</string>
+    <string name="licenses">Licenses</string>
 
-  <string name="light_theme_name">Clearly White</string>
+    <string name="light_theme_name">Clearly White</string>
 
-  <string name="list_type">List style</string>
+    <string name="list_type">List style</string>
 
-  <string name="listing_files">Listing files</string>
+    <string name="listing_files">Listing files</string>
 
-  <string name="loading">Loading...</string>
-  <string name="loading_products">Loading products…</string>
+    <string name="loading">Loading...</string>
+    <string name="loading_products">Loading products…</string>
 
-  <string name="lyrics">Lyrics</string>
+    <string name="lyrics">Lyrics</string>
 
-  <string name="material">Material</string>
+    <string name="material">Material</string>
 
-  <string name="media_route_menu_title">Cast device</string>
+    <string name="media_route_menu_title">Cast device</string>
 
-  <string name="more">More</string>
+    <string name="more">More</string>
 
-  <string name="my_name">My Name</string>
-  <string name="my_playlists">My playlist</string>
-  <string name="my_top_tracks">Top played</string>
+    <string name="my_name">My Name</string>
+    <string name="my_playlists">My playlist</string>
+    <string name="my_top_tracks">Top played</string>
 
-  <string name="never">Never</string>
+    <string name="never">Never</string>
 
-  <string name="new_banner_photo">New banner photo</string>
-  <string name="new_music_mix">New Music  Mix</string>
-  <string name="new_playlist_title">New playlist</string>
-  <string name="new_profile_photo">New profile photo</string>
-  <string name="new_start_directory">%s is the new start directory.</string>
+    <string name="new_banner_photo">New banner photo</string>
+    <string name="new_music_mix">New Music  Mix</string>
+    <string name="new_playlist_title">New playlist</string>
+    <string name="new_profile_photo">New profile photo</string>
+    <string name="new_start_directory">%s is the new start directory.</string>
 
-  <string name="no_albums">No albums</string>
-  <string name="no_artists">No artists</string>
-  <string name="no_audio_ID">"Play a song first, then try again."</string>
-  <string name="no_equalizer">No equalizer found</string>
-  <string name="no_files">No files</string>
-  <string name="no_genres">No genres</string>
-  <string name="no_lyrics_found">No lyrics found</string>
-  <string name="no_playlists">No playlists</string>
-  <string name="no_purchase_found">No purchase found.</string>
-  <string name="no_results">No results</string>
-  <string name="no_songs">No songs</string>
+    <string name="no_albums">No albums</string>
+    <string name="no_artists">No artists</string>
+    <string name="no_audio_ID">"Play a song first, then try again."</string>
+    <string name="no_equalizer">No equalizer found</string>
+    <string name="no_files">No files</string>
+    <string name="no_genres">No genres</string>
+    <string name="no_lyrics_found">No lyrics found</string>
+    <string name="no_playlists">No playlists</string>
+    <string name="no_purchase_found">No purchase found.</string>
+    <string name="no_results">No results</string>
+    <string name="no_songs">No songs</string>
 
-  <string name="normal">Normal</string>
-  <string name="normal_lyrics">Normal lyrics</string>
-  <string name="normal_style">Normal</string>
+    <string name="normal">Normal</string>
+    <string name="normal_lyrics">Normal lyrics</string>
+    <string name="normal_style">Normal</string>
 
-  <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
 
-  <string name="nothing_to_scan">Nothing to scan.</string>
+    <string name="nothing_to_scan">Nothing to scan.</string>
 
-  <string name="notification">Notification</string>
-  <string name="notification_settings_summary">Customize the notification style</string>
+    <string name="notification">Notification</string>
+    <string name="notification_settings_summary">Customize the notification style</string>
 
-  <string name="now_playing">Now playing</string>
-  <string name="now_playing_queue">Now playing queue</string>
+    <string name="now_playing">Now playing</string>
+    <string name="now_playing_queue">Now playing queue</string>
 
-  <string name="only_on_wifi">Only on Wi-Fi</string>
+    <string name="only_on_wifi">Only on Wi-Fi</string>
 
-  <string name="others">Other</string>
+    <string name="others">Other</string>
 
-  <string name="past_three_months">Past 3 months</string>
+    <string name="past_three_months">Past 3 months</string>
 
-  <string name="patreon_page">Patreon page</string>
-  <string name="patreon_page_summary">Support us from patreon</string>
+    <string name="patreon_page">Patreon page</string>
+    <string name="patreon_page_summary">Support us from patreon</string>
 
-  <string name="paypal">PayPal.me</string>
-  <string name="paypal_summary">PayPal.me is an easy way to donate us money. In case you only linked a debit or credit card the fee in the U.S. is 2.9% of the donation plus $0.30 USD, otherwise there is no fee.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a>
+    <string name="paypal">PayPal.me</string>
+    <string name="paypal_summary">PayPal.me is an easy way to donate us money. In case you only linked a debit or credit card the fee in the U.S. is 2.9% of the donation plus $0.30 USD, otherwise there is no fee.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a>
     </string>
 
-  <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
-
-  <string name="permissions_denied">Permissions denied.</string>
-
-  <string name="personalize">Personalize</string>
-  <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
-
-  <string name="pick_from_local_storage">Pick from local storage</string>
-
-  <string name="plain">Plain</string>
-
-  <string name="play">Play</string>
-  <string name="play_all">Play all</string>
-
-  <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
-  <string name="playing_notification_name">Playing notification</string>
-
-  <string name="playlist_empty_text">Empty playlist</string>
-  <string name="playlist_is_empty">Playlist is empty</string>
-  <string name="playlist_name_empty">Playlist name</string>
-
-  <string name="playlists">Playlists</string>
-  <string name="playlists_label">Playlists</string>
-
-  <string name="pref_header_audio">Audio</string>
-  <string name="pref_header_general">Theme</string>
-  <string name="pref_header_images">Images</string>
-  <string name="pref_header_lockscreen">Lockscreen</string>
-  <string name="pref_header_now_playing_screen">Now playing</string>
-  <string name="pref_header_playlists">Playlists</string>
-  <string name="pref_only_lollipop">"Only available on Lollipop."</string>
-  <string name="pref_only_nougat_mr1">"Only available on Nougat 7.1."</string>
-  <string name="pref_summary_about">People who helped on the project</string>
-  <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
-  <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
-  <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
-  <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
-  <string name="pref_summary_circular_album_effect">Show a circular album cover in the now playing screen. Note that only a few themes work with this feature</string>
-  <string name="pref_summary_classic_notification">Use the classic notification design</string>
-  <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
-  <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
-  <string name="pref_summary_colored_navigation_bar">Colors the navigation bar in the primary color</string>
-  <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
-  <string name="pref_summary_day_dream">Shows song details on dream when music is playing</string>
-  <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover</string>
-  <string name="pref_summary_exclude_songs">Exclude songs that are less than 30 secs. </string>
-  <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
-  <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
-  <string name="pref_summary_language_en">Change app language forcefully to english(this is testing for multiple language option)</string>
-  <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
-  <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
-  <string name="pref_summary_lock_screen_app">Show full controls from the lock screen</string>
-  <string name="pref_summary_open_source_licences">License details for open source software</string>
-  <string name="pref_summary_round_corners">Round the app\'s edges</string>
-  <string name="pref_summary_tab_titles">Toggle titles for the bottom navigation bar tabs</string>
-  <string name="pref_summary_toggle_animations">Animations makes some device run slow, load images slow</string>
-  <string name="pref_summary_toggle_bottom_bar_titles">Disable titles from bottom navigation bar</string>
-  <string name="pref_summary_toggle_full_screen">Immersive mode</string>
-  <string name="pref_summary_toggle_genre">Show genres on the home screen</string>
-  <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
-  <string name="pref_summary_toggle_navigation_bar">Hide only navigation bar</string>
-  <string name="pref_summary_toggle_separate_line">Toggle view of separate line in list of items</string>
-  <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
-  <string name="pref_summary_toggle_status_bar">Hide only status bar</string>
-  <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
-  <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
-  <string name="pref_title_album_grid_style">Album grid</string>
-  <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
-  <string name="pref_title_artist_grid_style">Artist grid</string>
-  <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
-  <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
-  <string name="pref_title_blurred_album_art">Blur album cover</string>
-  <string name="pref_title_choose_equalizer">Choose equalizer</string>
-  <string name="pref_title_classic_notification">Classic notification design</string>
-  <string name="pref_title_colored_app">Adaptive color</string>
-  <string name="pref_title_colored_notification">Colored notification</string>
-  <string name="pref_title_day_dream">Day dream</string>
-  <string name="pref_title_exclude_songs">Exclude songs</string>
-  <string name="pref_title_external_storage_access">Give access  to external storage</string>
-  <string name="pref_title_gapless_playback">Gapless playback</string>
-  <string name="pref_title_general_theme">App theme</string>
-  <string name="pref_title_gradient_color">Choose color</string>
-  <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
-  <string name="pref_title_last_added_interval">Last added playlist interval</string>
-  <string name="pref_title_lock_screen">Fullscreen controls</string>
-  <string name="pref_title_lock_screen_app">Retro lock screen</string>
-  <string name="pref_title_lyrics_options">Lyrics options</string>
-  <string name="pref_title_navigation_bar">Colored navigation bar</string>
-  <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
-  <string name="pref_title_open_source_licences">Open source licences</string>
-  <string name="pref_title_round_corners">Corner edges</string>
-  <string name="pref_title_toggle_animations">Animations</string>
-  <string name="pref_title_toggle_bottom_bar_titles">Disable titles</string>
-  <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
-  <string name="pref_title_toggle_circular_album_effect">Circular album</string>
-  <string name="pref_title_toggle_dominant_color">Dominant color</string>
-  <string name="pref_title_toggle_full_screen">Fullscreen app</string>
-  <string name="pref_title_toggle_genre">Show genre</string>
-  <string name="pref_title_toggle_language_en">English language</string>
-  <string name="pref_title_toggle_navigation_bar">Navigation bar</string>
-  <string name="pref_title_toggle_separate_line">Separate line</string>
-  <string name="pref_title_toggle_status_bar">Status bar</string>
-  <string name="pref_title_toggle_tab_titles">Tab titles</string>
-  <string name="pref_title_toggle_toggle_headset">Auto-play</string>
-  <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
-  <string name="pref_title_toggle_volume">Volume controls</string>
-  <string name="pref_title_user_info">User info</string>
+    <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
+
+    <string name="permissions_denied">Permissions denied.</string>
+
+    <string name="personalize">Personalize</string>
+    <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
+
+    <string name="pick_from_local_storage">Pick from local storage</string>
+
+    <string name="plain">Plain</string>
+
+    <string name="play">Play</string>
+    <string name="play_all">Play all</string>
+
+    <string name="playing_notification_description">The playing notification provides actions for play/pause etc.</string>
+    <string name="playing_notification_name">Playing notification</string>
+
+    <string name="playlist_empty_text">Empty playlist</string>
+    <string name="playlist_is_empty">Playlist is empty</string>
+    <string name="playlist_name_empty">Playlist name</string>
+
+    <string name="playlists">Playlists</string>
+    <string name="playlists_label">Playlists</string>
+
+    <string name="pref_header_audio">Audio</string>
+    <string name="pref_header_general">Theme</string>
+    <string name="pref_header_images">Images</string>
+    <string name="pref_header_lockscreen">Lockscreen</string>
+    <string name="pref_header_now_playing_screen">Now playing</string>
+    <string name="pref_header_playlists">Playlists</string>
+    <string name="pref_only_lollipop">"Only available on Lollipop."</string>
+    <string name="pref_only_nougat_mr1">"Only available on Nougat 7.1."</string>
+    <string name="pref_summary_about">People who helped on the project</string>
+    <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
+    <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
+    <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
+    <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
+    <string name="pref_summary_circular_album_effect">Show a circular album cover in the now playing screen. Note that only a few themes work with this feature</string>
+    <string name="pref_summary_classic_notification">Use the classic notification design</string>
+    <string name="pref_summary_colored_app">The background and control button colors change according to the album art from the now playing screen</string>
+    <string name="pref_summary_colored_app_shortcuts">Colors the app shortcuts in the accent color. Every time you change the color please toggle this to take effect</string>
+    <string name="pref_summary_colored_navigation_bar">Colors the navigation bar in the primary color</string>
+    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
+    <string name="pref_summary_day_dream">Shows song details on dream when music is playing</string>
+    <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover</string>
+    <string name="pref_summary_exclude_songs">Exclude songs that are less than 30 secs. </string>
+    <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
+    <string name="pref_summary_ignore_media_store_artwork">Can increase the album cover quality, but causes slower image loading times. Only enable this if you have problems with low resolution artworks</string>
+    <string name="pref_summary_language_en">Change app language forcefully to english(this is testing for multiple language option)</string>
+    <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
+    <string name="pref_summary_lock_screen">Use Retro Music\'s custom lockscreen controls</string>
+    <string name="pref_summary_lock_screen_app">Show full controls from the lock screen</string>
+    <string name="pref_summary_open_source_licences">License details for open source software</string>
+    <string name="pref_summary_round_corners">Round the app\'s edges</string>
+    <string name="pref_summary_tab_titles">Toggle titles for the bottom navigation bar tabs</string>
+    <string name="pref_summary_toggle_animations">Animations makes some device run slow, load images slow</string>
+    <string name="pref_summary_toggle_bottom_bar_titles">Disable titles from bottom navigation bar</string>
+    <string name="pref_summary_toggle_full_screen">Immersive mode</string>
+    <string name="pref_summary_toggle_genre">Show genres on the home screen</string>
+    <string name="pref_summary_toggle_headset">Start playing immediately after headphones are connected</string>
+    <string name="pref_summary_toggle_navigation_bar">Hide only navigation bar</string>
+    <string name="pref_summary_toggle_separate_line">Toggle view of separate line in list of items</string>
+    <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
+    <string name="pref_summary_toggle_status_bar">Hide only status bar</string>
+    <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
+    <string name="pref_title_album_grid_style">Album grid</string>
+    <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
+    <string name="pref_title_artist_grid_style">Artist grid</string>
+    <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
+    <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
+    <string name="pref_title_blurred_album_art">Blur album cover</string>
+    <string name="pref_title_choose_equalizer">Choose equalizer</string>
+    <string name="pref_title_classic_notification">Classic notification design</string>
+    <string name="pref_title_colored_app">Adaptive color</string>
+    <string name="pref_title_colored_notification">Colored notification</string>
+    <string name="pref_title_day_dream">Day dream</string>
+    <string name="pref_title_exclude_songs">Exclude songs</string>
+    <string name="pref_title_external_storage_access">Give access  to external storage</string>
+    <string name="pref_title_gapless_playback">Gapless playback</string>
+    <string name="pref_title_general_theme">App theme</string>
+    <string name="pref_title_gradient_color">Choose color</string>
+    <string name="pref_title_ignore_media_store_artwork">Ignore Media Store covers</string>
+    <string name="pref_title_last_added_interval">Last added playlist interval</string>
+    <string name="pref_title_lock_screen">Fullscreen controls</string>
+    <string name="pref_title_lock_screen_app">Retro lock screen</string>
+    <string name="pref_title_lyrics_options">Lyrics options</string>
+    <string name="pref_title_navigation_bar">Colored navigation bar</string>
+    <string name="pref_title_now_playing_screen_appearance">Now playing theme</string>
+    <string name="pref_title_open_source_licences">Open source licences</string>
+    <string name="pref_title_round_corners">Corner edges</string>
+    <string name="pref_title_toggle_animations">Animations</string>
+    <string name="pref_title_toggle_bottom_bar_titles">Disable titles</string>
+    <string name="pref_title_toggle_carousel_effect">Carousel effect</string>
+    <string name="pref_title_toggle_circular_album_effect">Circular album</string>
+    <string name="pref_title_toggle_dominant_color">Dominant color</string>
+    <string name="pref_title_toggle_full_screen">Fullscreen app</string>
+    <string name="pref_title_toggle_genre">Show genre</string>
+    <string name="pref_title_toggle_language_en">English language</string>
+    <string name="pref_title_toggle_navigation_bar">Navigation bar</string>
+    <string name="pref_title_toggle_separate_line">Separate line</string>
+    <string name="pref_title_toggle_status_bar">Status bar</string>
+    <string name="pref_title_toggle_tab_titles">Tab titles</string>
+    <string name="pref_title_toggle_toggle_headset">Auto-play</string>
+    <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
+    <string name="pref_title_toggle_volume">Volume controls</string>
+    <string name="pref_title_user_info">User info</string>
 
-  <string name="primary_color">Primary color</string>
-  <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
+    <string name="primary_color">Primary color</string>
+    <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
 
-  <string name="purchase">Purchase</string>
-  <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
+    <string name="purchase">Purchase</string>
+    <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
 
-  <string name="queue">Queue</string>
-  <string name="queue_label">Queue</string>
+    <string name="queue">Queue</string>
+    <string name="queue_label">Queue</string>
 
-  <string name="rate_app">Rate the app</string>
-  <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
+    <string name="rate_app">Rate the app</string>
+    <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
 
-  <string name="recent_activity">Recent activity</string>
-  <string name="recent_albums">Recent albums</string>
-  <string name="recent_artists">Recent artists</string>
+    <string name="recent_activity">Recent activity</string>
+    <string name="recent_albums">Recent albums</string>
+    <string name="recent_artists">Recent artists</string>
 
-  <string name="remove_action">Remove</string>
-  <string name="remove_banner_photo">Remove banner photo</string>
-  <string name="remove_cover">Remove cover</string>
-  <string name="remove_from_blacklist">Remove from blacklist</string>
-  <string name="remove_profile_photo">Remove profile photo</string>
-  <string name="remove_song_from_playlist_title">Remove song from playlist</string>
-  <string name="remove_song_x_from_playlist"><![CDATA[Remove the song <b>%1$s</b> from the playlist?]]></string>
-  <string name="remove_songs_from_playlist_title">Remove songs from playlist</string>
-  <string name="remove_x_songs_from_playlist"><![CDATA[Remove <b>%1$d</b> songs from the playlist?]]></string>
+    <string name="remove_action">Remove</string>
+    <string name="remove_banner_photo">Remove banner photo</string>
+    <string name="remove_cover">Remove cover</string>
+    <string name="remove_from_blacklist">Remove from blacklist</string>
+    <string name="remove_profile_photo">Remove profile photo</string>
+    <string name="remove_song_from_playlist_title">Remove song from playlist</string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Remove the song <b>%1$s</b> from the playlist?]]></string>
+    <string name="remove_songs_from_playlist_title">Remove songs from playlist</string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Remove <b>%1$d</b> songs from the playlist?]]></string>
 
-  <string name="rename_action">Rename</string>
-  <string name="rename_playlist_title">Rename playlist</string>
+    <string name="rename_action">Rename</string>
+    <string name="rename_playlist_title">Rename playlist</string>
 
-  <string name="reset_action">Reset</string>
-  <string name="reset_artist_image">Reset artist image</string>
+    <string name="reset_action">Reset</string>
+    <string name="reset_artist_image">Reset artist image</string>
 
-  <string name="restore">Restore</string>
+    <string name="restore">Restore</string>
 
-  <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
-  <string name="restored_previous_purchases">Restored previous purchases.</string>
+    <string name="restored_previous_purchase_please_restart">Restored previous purchase. Please restart the app to make use of all features.</string>
+    <string name="restored_previous_purchases">Restored previous purchases.</string>
 
-  <string name="restoring_purchase">Restoring purchase…</string>
+    <string name="restoring_purchase">Restoring purchase…</string>
 
-  <string name="retro">Retro</string>
-  <string name="retro_equalizer">Retro Music Equalizer</string>
+    <string name="retro">Retro</string>
+    <string name="retro_equalizer">Retro Music Equalizer</string>
 
-  <string name="saf_delete_failed">File delete failed: %s</string>
-  <!-- SAF -->
-  <string name="saf_error_uri">Can\'t get SAF URI</string>
-  <string name="saf_guide_slide1_description">Open navigation drawer</string>
-  <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
-  <!-- SAF guide -->
-  <string name="saf_guide_slide1_title">%s needs SD card access</string>
-  <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
-  <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
-  <string name="saf_guide_slide3_description">Do not open any subfolders</string>
-  <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
-  <string name="saf_pick_file">File access required. Pick %s</string>
-  <string name="saf_pick_sdcard">SD card access required. Please pick root directory of SD card</string>
-  <string name="saf_write_failed">File write failed: %s</string>
+    <string name="saf_delete_failed">File delete failed: %s</string>
+    <!-- SAF -->
+    <string name="saf_error_uri">Can\'t get SAF URI</string>
+    <string name="saf_guide_slide1_description">Open navigation drawer</string>
+    <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
+    <!-- SAF guide -->
+    <string name="saf_guide_slide1_title">%s needs SD card access</string>
+    <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
+    <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
+    <string name="saf_guide_slide3_description">Do not open any subfolders</string>
+    <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
+    <string name="saf_pick_file">File access required. Pick %s</string>
+    <string name="saf_pick_sdcard">SD card access required. Please pick root directory of SD card</string>
+    <string name="saf_write_failed">File write failed: %s</string>
 
-  <string name="save_playlist_title">Save as file</string>
-  <string name="save_playlists_title">Save as files</string>
+    <string name="save_playlist_title">Save as file</string>
+    <string name="save_playlists_title">Save as files</string>
 
-  <string name="saved_playlist_to">Saved playlist to %s.</string>
+    <string name="saved_playlist_to">Saved playlist to %s.</string>
 
-  <string name="saving_changes">Saving changes</string>
-  <string name="saving_tags">Saving tags</string>
-  <string name="saving_to_file">Saving to file…</string>
+    <string name="saving_changes">Saving changes</string>
+    <string name="saving_tags">Saving tags</string>
+    <string name="saving_to_file">Saving to file…</string>
 
-  <string name="scan_media">Scan media</string>
+    <string name="scan_media">Scan media</string>
 
-  <string name="scanned_files">Scanned %1$d of %2$d files.</string>
+    <string name="scanned_files">Scanned %1$d of %2$d files.</string>
 
-  <string name="search_hint">Search your library…</string>
+    <string name="search_hint">Search your library…</string>
 
-  <string name="see_all">See all</string>
+    <string name="see_all">See all</string>
 
-  <string name="select_all">Select all</string>
-  <string name="select_banner_photo">Select banner photo</string>
-  <string name="select_preset">Select Preset</string>
-  <string name="select_profile_photo">Set a profile photo</string>
+    <string name="select_all">Select all</string>
+    <string name="select_banner_photo">Select banner photo</string>
+    <string name="select_preset">Select Preset</string>
+    <string name="select_profile_photo">Set a profile photo</string>
 
-  <string name="set_artist_image">Set artist image</string>
+    <string name="set_artist_image">Set artist image</string>
 
-  <string name="shuffle">Shuffle</string>
+    <string name="shuffle">Shuffle</string>
 
-  <string name="simple">Simple</string>
+    <string name="simple">Simple</string>
 
-  <string name="sleep_timer_canceled">Sleep timer canceled.</string>
-  <string name="sleep_timer_set">Sleep timer set for %d minutes from now.</string>
+    <string name="sleep_timer_canceled">Sleep timer canceled.</string>
+    <string name="sleep_timer_set">Sleep timer set for %d minutes from now.</string>
 
-  <string name="slide_unlock">Swipe to unlock</string>
+    <string name="slide_unlock">Swipe to unlock</string>
 
-  <string name="smart_playlists">Smart playlists</string>
+    <string name="smart_playlists">Smart playlists</string>
 
-  <string name="social">Social</string>
+    <string name="social">Social</string>
 
-  <string name="solid">Solid</string>
+    <string name="solid">Solid</string>
 
-  <string name="some_files_are_not_listed_in_the_media_store">Some files are not listed in the media store.</string>
+    <string name="some_files_are_not_listed_in_the_media_store">Some files are not listed in the media store.</string>
 
-  <string name="song">Song</string>
-  <string name="song_duration">Song duration</string>
+    <string name="song">Song</string>
+    <string name="song_duration">Song duration</string>
 
-  <string name="songs">Songs</string>
+    <string name="songs">Songs</string>
 
-  <string name="sort_order">Sort order</string>
-  <string name="sort_order_a_z">Ascending</string>
-  <string name="sort_order_album">Album</string>
-  <string name="sort_order_artist">Artist</string>
-  <string name="sort_order_date">Date</string>
-  <string name="sort_order_year">Year</string>
-  <string name="sort_order_z_a">Descending</string>
+    <string name="sort_order">Sort order</string>
+    <string name="sort_order_a_z">Ascending</string>
+    <string name="sort_order_album">Album</string>
+    <string name="sort_order_artist">Artist</string>
+    <string name="sort_order_date">Date</string>
+    <string name="sort_order_year">Year</string>
+    <string name="sort_order_z_a">Descending</string>
 
-  <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
-  <string name="speech_prompt">Search your library</string>
+    <string name="speech_not_supported">Sorry! Your device doesn\'t support speech input</string>
+    <string name="speech_prompt">Search your library</string>
 
-  <string name="suggestions">Suggestions</string>
+    <string name="suggestions">Suggestions</string>
 
-  <string name="summary_material_design_city_wallpaper">Material design city wallpapers from www.techjuice.pk website</string>
-  <string name="summary_material_design_icons">For all icons we used from this websites www.flaticon.com or www.materialdesignicons.com</string>
-  <string name="summary_user_info">Just show your name on home screen</string>
+    <string name="summary_material_design_city_wallpaper">Material design city wallpapers from www.techjuice.pk website</string>
+    <string name="summary_material_design_icons">For all icons we used from this websites www.flaticon.com or www.materialdesignicons.com</string>
+    <string name="summary_user_info">Just show your name on home screen</string>
 
-  <string name="support_development">Support development</string>
-  <string name="support_development_summary">If you enjoy using Retro Music Player consider donation as support to my work.</string>
+    <string name="support_development">Support development</string>
+    <string name="support_development_summary">If you enjoy using Retro Music Player consider donation as support to my work.</string>
 
-  <string name="synced_lyrics">Synced lyrics</string>
+    <string name="synced_lyrics">Synced lyrics</string>
 
-  <string name="system_equalizer">System Equalizer</string>
+    <string name="system_equalizer">System Equalizer</string>
 
-  <!-- Message displayed when tag editing fails -->
-  <string name="tag_edit_error">An error occurred editing tags.</string>
-  <string name="tag_editor_check_permission">Checking for permissions</string>
-  <string name="tag_editor_document_tree_message">Select the external storage directory</string>
-  <string name="tag_editor_document_tree_permission_failed">It seems that we don\'t have permission to edit the files. Double check the directory in the file picker.</string>
-  <string name="tag_error_kitkat">An error occurred editing tags. Is the file stored on an SD Card? If so, Google have made tag editing impossible for this file.</string>
-  <string name="tag_error_lollipop">An error occurred editing tags. If the file is stored on an SD Card, Retro Music might not have permission to access it.</string>
-  <string name="tag_retrieve_error">An error occurred retrieving tags.</string>
+    <!-- Message displayed when tag editing fails -->
+    <string name="tag_edit_error">An error occurred editing tags.</string>
+    <string name="tag_editor_check_permission">Checking for permissions</string>
+    <string name="tag_editor_document_tree_message">Select the external storage directory</string>
+    <string name="tag_editor_document_tree_permission_failed">It seems that we don\'t have permission to edit the files. Double check the directory in the file picker.</string>
+    <string name="tag_error_kitkat">An error occurred editing tags. Is the file stored on an SD Card? If so, Google have made tag editing impossible for this file.</string>
+    <string name="tag_error_lollipop">An error occurred editing tags. If the file is stored on an SD Card, Retro Music might not have permission to access it.</string>
+    <string name="tag_retrieve_error">An error occurred retrieving tags.</string>
 
-  <string name="telegram_group">Telegram</string>
-  <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
+    <string name="telegram_group">Telegram</string>
+    <string name="telegram_group_summary">Join the Telegram group to discuss bugs, make suggestions, show off and more</string>
 
-  <string name="text">Text</string>
+    <string name="text">Text</string>
 
-  <string name="thank_you">Thank you!</string>
+    <string name="thank_you">Thank you!</string>
 
-  <string name="the_audio_file">The audio file</string>
+    <string name="the_audio_file">The audio file</string>
 
-  <string name="this_month">This month</string>
-  <string name="this_week">This week</string>
-  <string name="this_year">This year</string>
+    <string name="this_month">This month</string>
+    <string name="this_week">This week</string>
+    <string name="this_year">This year</string>
 
-  <string name="tiny">Tiny</string>
+    <string name="tiny">Tiny</string>
 
-  <string name="title">Title</string>
-  <string name="title_dashboard">Dashboard</string>
-  <string name="title_desc">Title desc.</string>
-  <string name="title_good_afternoon">Good afternoon</string>
-  <string name="title_good_day">Good day</string>
-  <string name="title_good_evening">Good evening</string>
-  <string name="title_good_morning">Good morning</string>
-  <string name="title_good_night">Good night</string>
-  <string name="title_home">Home</string>
-  <string name="title_material_design_city_wallpaper">City wallpaper</string>
-  <string name="title_material_design_icons">Icons</string>
-  <string name="title_notifications">Notifications</string>
-  <string name="title_user_info">What\'s Your Name</string>
+    <string name="title">Title</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_desc">Title desc.</string>
+    <string name="title_good_afternoon">Good afternoon</string>
+    <string name="title_good_day">Good day</string>
+    <string name="title_good_evening">Good evening</string>
+    <string name="title_good_morning">Good morning</string>
+    <string name="title_good_night">Good night</string>
+    <string name="title_home">Home</string>
+    <string name="title_material_design_city_wallpaper">City wallpaper</string>
+    <string name="title_material_design_icons">Icons</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_user_info">What\'s Your Name</string>
 
-  <string name="today">Today</string>
+    <string name="today">Today</string>
 
-  <string name="toggle_lyrics_size">Toggle lyrics size</string>
+    <string name="toggle_lyrics_size">Toggle lyrics size</string>
 
-  <string name="tool_tip_see_all">See all songs</string>
+    <string name="tool_tip_see_all">See all songs</string>
 
-  <string name="top_albums">Top albums</string>
-  <string name="top_artists">Top artists</string>
-  <string name="top_tracks">Top tracks</string>
-  <string name="top_tracks_label">Top Tracks</string>
+    <string name="top_albums">Top albums</string>
+    <string name="top_artists">Top artists</string>
+    <string name="top_tracks">Top tracks</string>
+    <string name="top_tracks_label">Top Tracks</string>
 
-  <string name="track_hint">"Track (2 for track 2 or 3004 for CD3 track 4)"</string>
-  <string name="track_list">Track number</string>
+    <string name="track_hint">"Track (2 for track 2 or 3004 for CD3 track 4)"</string>
+    <string name="track_list">Track number</string>
 
-  <string name="translate">Translate</string>
-  <string name="translate_community">Help us translate the app to your language</string>
+    <string name="translate">Translate</string>
+    <string name="translate_community">Help us translate the app to your language</string>
 
-  <string name="twitter_page">Twitter</string>
-  <string name="twitter_page_summary">Share your design with Retro Music</string>
+    <string name="twitter_page">Twitter</string>
+    <string name="twitter_page_summary">Share your design with Retro Music</string>
 
-  <string name="unplayable_file">Couldn\u2019t play this song.</string>
+    <string name="unplayable_file">Couldn\u2019t play this song.</string>
 
-  <string name="up_next">Up next</string>
+    <string name="up_next">Up next</string>
 
-  <string name="update">Update</string>
-  <string name="update_image">Update image</string>
+    <string name="update">Update</string>
+    <string name="update_image">Update image</string>
 
-  <string name="updated_artist_image">Artist image updated.</string>
+    <string name="updated_artist_image">Artist image updated.</string>
 
-  <string name="updating">Updating…</string>
+    <string name="updating">Updating…</string>
 
-  <string name="user_profile_summary">Change profile and banner image</string>
+    <string name="user_profile_summary">Change profile and banner image</string>
 
-  <string name="version">Version</string>
+    <string name="version">Version</string>
 
-  <string name="virtualizer">Virtualizer</string>
-  <string name="virtualizer_strength">Virtualizer Strength</string>
+    <string name="virtualizer">Virtualizer</string>
+    <string name="virtualizer_strength">Virtualizer Strength</string>
 
-  <string name="volume_control">Volume control</string>
+    <string name="volume_control">Volume control</string>
 
-  <string name="web_search">Web search</string>
+    <string name="web_search">Web search</string>
 
-  <string name="what_do_you_want_to_share">What do you want to share?</string>
+    <string name="what_do_you_want_to_share">What do you want to share?</string>
 
-  <string name="window">Window</string>
+    <string name="window">Window</string>
 
-  <string name="x_has_been_set_as_ringtone">Set %1$s as your ringtone.</string>
-  <string name="x_selected">%1$d selected</string>
+    <string name="x_has_been_set_as_ringtone">Set %1$s as your ringtone.</string>
+    <string name="x_selected">%1$d selected</string>
 
-  <string name="year">Year</string>
+    <string name="year">Year</string>
 
-  <string name="you_have_to_select_at_least_one_category">You have to select at least one category</string>
-  <string name="made_with_love">Made with ❤️ in India</string>
+    <string name="you_have_to_select_at_least_one_category">You have to select at least one category</string>
+    <string name="made_with_love">Made with ❤️ in India</string>
 </resources>

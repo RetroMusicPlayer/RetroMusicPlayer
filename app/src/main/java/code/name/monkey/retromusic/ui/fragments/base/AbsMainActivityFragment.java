@@ -35,11 +35,11 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
             final View statusBar = view.findViewById(R.id.status_bar);
             if (statusBar != null) {
                 RetroUtil.statusBarHeight(statusBar);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    statusBar.setBackgroundColor(ColorUtil.darkenColor(color));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    statusBar.setBackgroundColor(color);
                     getMainActivity().setLightStatusbarAuto(color);
                 } else {
-                    statusBar.setBackgroundColor(color);
+                    statusBar.setBackgroundColor(ColorUtil.darkenColor(color));
                 }
             }
         }
@@ -47,6 +47,7 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
 
     public void setStatusbarColorAuto(View view) {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
+        //noinspection ConstantConditions
         setStatusbarColor(view, ThemeStore.primaryColor(getContext()));
     }
 }

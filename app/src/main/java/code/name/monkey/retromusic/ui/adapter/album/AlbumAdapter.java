@@ -60,8 +60,11 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
         this.usePalette = usePalette;
         setHasStableIds(true);
         this.textColor = ThemeStore.textColorPrimary(activity);
-        Typeface mTypeface = Typeface
-                .createFromAsset(activity.getAssets(), activity.getString(R.string.sans_regular));
+    }
+
+    public AlbumAdapter(@NonNull AppCompatActivity activity, ArrayList<Album> dataSet,
+                        @LayoutRes int itemLayoutRes) {
+        this(activity, dataSet, itemLayoutRes, false, null);
     }
 
     public void useItemLayout(int itemLayoutRes) {

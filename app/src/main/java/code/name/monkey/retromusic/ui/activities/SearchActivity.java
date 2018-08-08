@@ -44,27 +44,37 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
     public static final String TAG = SearchActivity.class.getSimpleName();
     public static final String QUERY = "query";
     private static final int REQ_CODE_SPEECH_INPUT = 9002;
+
     @BindView(R.id.voice_search)
     View micIcon;
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(android.R.id.empty)
     TextView empty;
+
+    @BindView(R.id.title)
+    TextView title;
+
     @BindView(R.id.search_view)
     EditText searchView;
+
     @BindView(R.id.root)
     CoordinatorLayout container;
-    @BindView(R.id.appbar)
+
+    @BindView(R.id.app_bar)
     AppBarLayout appbar;
+
     @BindView(R.id.status_bar)
     View statusBar;
+
     private SearchPresenter searchPresenter;
     private SearchAdapter adapter;
     private String query;
-
-    private boolean isMicSearch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +104,7 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
 
         if (getIntent().getBooleanExtra("mic_search", false)) {
             startMicSearch();
-            isMicSearch = true;
+            boolean isMicSearch = true;
         }
     }
 
@@ -145,12 +155,13 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
     }
 
     private void setUpToolBar() {
+        title.setTextColor(ThemeStore.textColorPrimary(this));
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         appbar.setBackgroundColor(primaryColor);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(null);
     }
 
     @Override

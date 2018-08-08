@@ -110,7 +110,8 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
                 if (mainActivity == null) {
                     return;
                 }
-                mainActivity.setCurrentFragment(FoldersFragment.newInstance(getContext()), true);
+                mainActivity.setCurrentFragment(FoldersFragment.newInstance(getContext()), true,
+                        FoldersFragment.TAG);
                 break;
             case R.id.action_settings:
                 NavigationUtil.goToSettings(getActivity());

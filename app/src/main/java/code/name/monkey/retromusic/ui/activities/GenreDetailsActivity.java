@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.ui.activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
-import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
@@ -39,6 +37,7 @@ import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.mvp.contract.GenreDetailsContract;
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter;
+import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
@@ -72,8 +71,8 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
 
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.title)
+    TextView title;
 
     private Genre genre;
     private GenreDetailsPresenter presenter;
@@ -99,8 +98,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
         setBottomBarVisibility(View.GONE);
 
-       RetroUtil.statusBarHeight(statusBar);
-
+        RetroUtil.statusBarHeight(statusBar);
 
         genre = getIntent().getParcelableExtra(EXTRA_GENRE_ID);
         presenter = new GenreDetailsPresenter(this, genre.id);
@@ -119,14 +117,14 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     }
 
     private void setUpToolBar() {
+        title.setText(genre.name);
+        title.setTextColor(ThemeStore.textColorPrimary(this));
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
         appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        setTitle(null);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setTitle(genre.name);
-        setTitle(R.string.app_name);
 
         appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
@@ -140,7 +138,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
                         color = ATHUtil.resolveColor(GenreDetailsActivity.this, android.R.attr.textColorPrimary);
                         break;
                 }
-                toolbarLayout.setExpandedTitleColor(color);
                 ToolbarContentTintHelper.colorizeToolbar(toolbar, color, GenreDetailsActivity.this);
             }
         });
@@ -267,6 +264,4 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         super.onMediaStoreChanged();
         presenter.subscribe();
     }
-
-
 }

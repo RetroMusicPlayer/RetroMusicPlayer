@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
+
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;
@@ -19,50 +20,56 @@ import code.name.monkey.retromusic.util.MusicUtil;
 
 public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
-  @BindView(R.id.toolbar)
-  Toolbar mToolbar;
-  @BindDrawable(R.drawable.ic_close_white_24dp)
-  Drawable mClose;
-  @BindView(R.id.player_queue_sub_header)
-  TextView mPlayerQueueSubHeader;
-  @BindString(R.string.queue)
-  String queue;
-  @BindView(R.id.app_bar)
-  AppBarLayout mAppBarLayout;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_playing_queue);
-    ButterKnife.bind(this);
+    @BindDrawable(R.drawable.ic_keyboard_backspace_black_24dp)
+    Drawable mClose;
 
-    setStatusbarColorAuto();
-    setNavigationbarColorAuto();
-    setTaskDescriptionColorAuto();
-    setLightNavigationBar(true);
+    @BindView(R.id.player_queue_sub_header)
+    TextView mPlayerQueueSubHeader;
 
-    setupToolbar();
-    if (savedInstanceState == null) {
-      getSupportFragmentManager().beginTransaction()
-          .replace(R.id.fragment_container, new PlayingQueueFragment())
-          .commit();
+    @BindString(R.string.queue)
+    String queue;
+
+    @BindView(R.id.app_bar)
+    AppBarLayout mAppBarLayout;
+
+    @BindView(R.id.title)
+    TextView title;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_playing_queue);
+        ButterKnife.bind(this);
+
+        setStatusbarColorAuto();
+        setNavigationbarColorAuto();
+        setTaskDescriptionColorAuto();
+        setLightNavigationBar(true);
+
+        setupToolbar();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new PlayingQueueFragment())
+                    .commit();
+        }
     }
-  }
 
-  protected String getUpNextAndQueueTime() {
-    return getResources().getString(R.string.up_next) + "  •  " + MusicUtil
-        .getReadableDurationString(
-            MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.getPosition()));
-  }
+    protected String getUpNextAndQueueTime() {
+        return getResources().getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.getPosition()));
+    }
 
-  private void setupToolbar() {
-    mPlayerQueueSubHeader.setText(getUpNextAndQueueTime());
-    mPlayerQueueSubHeader.setTextColor(ThemeStore.accentColor(this));
-    mAppBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
-    mToolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-    mToolbar.setNavigationIcon(mClose);
-    setSupportActionBar(mToolbar);
-    setTitle(queue);
-    mToolbar.setNavigationOnClickListener(v -> onBackPressed());
-  }
+    private void setupToolbar() {
+        title.setTextColor(ThemeStore.textColorPrimary(this));
+        mPlayerQueueSubHeader.setText(getUpNextAndQueueTime());
+        mPlayerQueueSubHeader.setTextColor(ThemeStore.accentColor(this));
+        mAppBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
+        mToolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        mToolbar.setNavigationIcon(mClose);
+        setSupportActionBar(mToolbar);
+        setTitle(null);
+        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+    }
 }

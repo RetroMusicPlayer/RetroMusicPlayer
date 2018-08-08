@@ -11,8 +11,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 207
-        versionName '1.7.10'
+        versionCode 209
+        versionName '1.7.100'
 
         multiDexEnabled true
 
@@ -86,7 +86,7 @@ static def getProperty(Properties properties, String name) {
 }
 
 static def getDate() {
-    new Date().format('yyyyMMdd')
+    new Date().format('MMdd')
 }
 
 ext {

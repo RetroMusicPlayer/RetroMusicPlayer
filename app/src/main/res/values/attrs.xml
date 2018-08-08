@@ -12,9 +12,6 @@
   <attr format="color" name="iconColor"/>
   <attr format="color" name="dividerColor"/>
 
-  <declare-styleable name="RoundCornerFrameLayout">
-    <attr format="dimension" name="corner_radius"/>
-  </declare-styleable>
 
   <declare-styleable name="BlurLayout">
     <attr format="float" name="blk_downscaleFactor"/>
@@ -26,6 +23,7 @@
   <declare-styleable name="NetworkImageView">
     <attr format="string" name="url_link"/>
   </declare-styleable>
+
   <declare-styleable name="LyricView">
     <attr format="string" name="hint"/>
     <attr format="color" name="hintColor"/>

@@ -1,56 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-
-  <android.support.design.widget.AppBarLayout
-    android:id="@+id/app_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
-      android:layout_width="match_parent"
-      android:layout_height="96dp"
-      app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
-      app:expandedTitleGravity="top"
-      app:expandedTitleMarginStart="16dp"
-      app:expandedTitleMarginTop="48dp"
-      app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-      app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="@string/action_settings">
-
-      <View
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar48"
-        app:layout_collapseMode="pin"
-        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-        app:title="@string/support_development"/>
-
-    </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
-  </android.support.design.widget.AppBarLayout>
-
-  <LinearLayout
-    android:id="@+id/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
-      android:id="@+id/content_frame"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"/>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
-    <FrameLayout
-      android:id="@+id/detail_content_frame"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"/>
-  </LinearLayout>
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleEnabled="false">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar48"
+                tools:ignore="UnusedAttribute"
+                app:layout_collapseMode="pin"
+                app:title="">
+
+
+                <TextView
+                    android:id="@+id/title"
+                    fontPath="@string/circular_std_black"
+                    tools:ignore="MissingPrefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/action_settings"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:id="@+id/content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:id="@+id/detail_content_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
 

@@ -15,13 +15,8 @@
         <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="228dp"
-            app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
+            android:layout_height="196dp"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleGravity="top"
-            app:expandedTitleMarginStart="16dp"
-            app:expandedTitleMarginTop="48dp"
-            app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="?attr/colorPrimary"
             app:titleEnabled="false">
@@ -50,7 +45,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:padding="16dp"
+                        android:background="?roundSelector"
+                        android:padding="12dp"
                         android:src="@drawable/ic_search_white_24dp" />
 
                     <TextView

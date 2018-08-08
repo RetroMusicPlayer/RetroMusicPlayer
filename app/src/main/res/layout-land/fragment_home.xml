@@ -82,21 +82,20 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nested_scroll"
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:elevation="@dimen/card_elevation"
         app:behavior_overlapTop="96dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="64dp"
-            android:layout_marginStart="64dp"
-            android:background="@drawable/bg_bottom_sheet_dialog_fragment"
             android:descendantFocusability="blocksDescendants"
-            android:elevation="@dimen/card_elevation"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:orientation="vertical">

@@ -11,8 +11,7 @@
         android:id="@+id/image_container"
         android:layout_width="match_parent"
         android:layout_height="182dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true">
 
         <android.support.v7.widget.AppCompatImageView
@@ -39,9 +38,9 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
-        android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
+        android:paddingEnd="8dp"
         android:textColor="?android:attr/textColorSecondary"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />

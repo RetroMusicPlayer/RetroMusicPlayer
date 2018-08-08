@@ -2,12 +2,11 @@ package code.name.monkey.retromusic.providers;
 
 import android.content.Context;
 
-import code.name.monkey.retromusic.RetroApplication;
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 import java.io.File;
 import java.util.ArrayList;
 
 import code.name.monkey.retromusic.Injection;
+import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.loaders.AlbumLoader;
 import code.name.monkey.retromusic.loaders.ArtistLoader;
 import code.name.monkey.retromusic.loaders.GenreLoader;
@@ -23,6 +22,7 @@ import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 import code.name.monkey.retromusic.providers.interfaces.Repository;
 import code.name.monkey.retromusic.rest.model.KuGouRawLyric;
 import code.name.monkey.retromusic.rest.model.KuGouSearchLyricResult;
@@ -39,7 +39,7 @@ public class RepositoryImpl implements Repository {
         this.context = context;
     }
 
-    public static synchronized RepositoryImpl getInstance( ) {
+    public static synchronized RepositoryImpl getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new RepositoryImpl(RetroApplication.getInstance());
         }

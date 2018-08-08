@@ -59,18 +59,17 @@ public abstract class AbsSettingsFragment extends ATEPreferenceFragmentCompat {
         setDividerHeight(0);
         setDivider(new ColorDrawable(Color.TRANSPARENT));
 
+        //noinspection ConstantConditions
         getListView().setPadding(DensityUtil.dip2px(getContext(), 0), 0, 0, 0);
         getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (getActivity() != null) {
-                    ((SettingsActivity) getActivity())
-                            .addAppbarLayoutElevation(recyclerView.canScrollVertically(RecyclerView.NO_POSITION) ? 8f : 0f);
+                    ((SettingsActivity) getActivity()).addAppbarLayoutElevation(recyclerView.canScrollVertically(RecyclerView.NO_POSITION) ? 8f : 0f);
                 }
             }
         });
-        //noinspection ConstantConditions
         getListView().setBackgroundColor(ThemeStore.primaryColor(getContext()));
         getListView().setOverScrollMode(View.OVER_SCROLL_NEVER);
         invalidateSettings();

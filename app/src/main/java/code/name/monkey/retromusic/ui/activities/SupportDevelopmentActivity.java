@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -53,18 +54,27 @@ import static code.name.monkey.retromusic.Constants.PAYPAL_ME_URL;
 public class SupportDevelopmentActivity extends AbsBaseActivity implements BillingProcessor.IBillingHandler {
     public static final String TAG = SupportDevelopmentActivity.class.getSimpleName();
     private static final int DONATION_PRODUCT_IDS = R.array.donation_ids;
+
     @BindView(R.id.progress)
     ProgressBar mProgressBar;
+
     @BindView(R.id.progress_container)
     View mProgressContainer;
+
     @BindView(R.id.list)
     RecyclerView mListView;
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
     @BindView(R.id.app_bar)
     AppBarLayout mAppBarLayout;
+
     @BindView(R.id.root)
     ViewGroup mViewGroup;
+
+    @BindView(R.id.title)
+    TextView title;
     private BillingProcessor mBillingProcessor;
     private AsyncTask skuDetailsLoadAsyncTask;
 
@@ -84,6 +94,15 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
         }
 
         return skuDetails;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void donate(int i) {
@@ -107,19 +126,25 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
-        int primaryColor = ThemeStore.primaryColor(this);
-        mAppBarLayout.setBackgroundColor(primaryColor);
-        mToolbar.setBackgroundColor(primaryColor);
-        setSupportActionBar(mToolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
+
+        setupToolbar();
 
         mBillingProcessor
                 = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
         MDTintHelper.setTint(mProgressBar, ThemeStore.accentColor(this));
 
         ((TextView) findViewById(R.id.donation)).setTextColor(ThemeStore.accentColor(this));
+    }
+
+    private void setupToolbar() {
+        title.setTextColor(ThemeStore.textColorPrimary(this));
+        int primaryColor = ThemeStore.primaryColor(this);
+        mAppBarLayout.setBackgroundColor(primaryColor);
+        mToolbar.setBackgroundColor(primaryColor);
+        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
+        mToolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        setSupportActionBar(mToolbar);
+        setTitle(null);
     }
 
     @Override
@@ -173,7 +198,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
     private static class SkuDetailsLoadAsyncTask extends AsyncTask<Void, Void, List<SkuDetails>> {
         private final WeakReference<SupportDevelopmentActivity> donationDialogWeakReference;
 
-        public SkuDetailsLoadAsyncTask(SupportDevelopmentActivity donationsDialog) {
+        SkuDetailsLoadAsyncTask(SupportDevelopmentActivity donationsDialog) {
             this.donationDialogWeakReference = new WeakReference<>(donationsDialog);
         }
 
@@ -205,8 +230,6 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             if (dialog == null) return;
 
             if (skuDetails == null || skuDetails.isEmpty()) {
-                //Toast.makeText(dialog, "Error loading items", Toast.LENGTH_SHORT).show();
-                //dialog.finish();
                 dialog.mProgressContainer.setVisibility(View.GONE);
                 return;
             }
@@ -229,7 +252,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
         SupportDevelopmentActivity donationsDialog;
         List<SkuDetails> skuDetailsList = new ArrayList<>();
 
-        public SkuDetailsAdapter(@NonNull SupportDevelopmentActivity donationsDialog, @NonNull List<SkuDetails> objects) {
+        SkuDetailsAdapter(@NonNull SupportDevelopmentActivity donationsDialog, @NonNull List<SkuDetails> objects) {
             this.donationsDialog = donationsDialog;
             skuDetailsList = objects;
         }
@@ -260,14 +283,15 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             }
         }
 
+        @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             return new ViewHolder(LayoutInflater.from(donationsDialog)
                     .inflate(LAYOUT_RES_ID, viewGroup, false));
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
             SkuDetails skuDetails = skuDetailsList.get(i);
             if (skuDetails != null) {
                 viewHolder.title.setText(skuDetails.title.replace("(Retro Music Player)", "").trim());

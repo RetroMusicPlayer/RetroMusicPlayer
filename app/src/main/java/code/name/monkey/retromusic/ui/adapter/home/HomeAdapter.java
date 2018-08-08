@@ -1,169 +1,128 @@
 package code.name.monkey.retromusic.ui.adapter.home;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.BindView;
+
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.model.Genre;
+import code.name.monkey.retromusic.model.Home;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist;
-import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
-import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
+import code.name.monkey.retromusic.ui.adapter.CollageSongAdapter;
+import code.name.monkey.retromusic.ui.adapter.GenreAdapter;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumAdapter;
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter;
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder;
-import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
-import code.name.monkey.retromusic.util.NavigationUtil;
-import java.util.ArrayList;
 
-public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
-  private static final int SUB_HEADER = 0;
-  private static final int ABS_PLAYLITS = 1;
-  private static final int DATA = 2;
-  private ArrayList<Object> dataSet = new ArrayList<>();
-  private AppCompatActivity activity;
+    private static final int ALBUMS = 0;
+    private static final int ARTISTS = 1;
+    private static final int GENERS = 2;
+    private static final int SUGGESTIONS = 3;
+    private Activity activity;
+    private ArrayList<Home> sections = new ArrayList<>();
 
-  public HomeAdapter(@NonNull AppCompatActivity activity) {
-    this.activity = activity;
-  }
 
-  @Override
-  public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-    switch (i) {
-
-      case ABS_PLAYLITS:
-        return new ViewHolder(LayoutInflater.from(activity)
-            .inflate(R.layout.abs_playlists, viewGroup, false));
-      default:
-      case DATA:
-        return new ViewHolder(LayoutInflater.from(activity)
-            .inflate(R.layout.recycler_view_sec, viewGroup, false));
-      case SUB_HEADER:
-        return new ViewHolder(LayoutInflater.from(activity)
-            .inflate(R.layout.sub_header, viewGroup, false));
+    public HomeAdapter(Activity activity) {
+        this.activity = activity;
     }
-  }
 
-  @Override
-  public int getItemViewType(int position) {
-    if (dataSet.get(position) instanceof String) {
-      return SUB_HEADER;
-    } else if (dataSet.get(position) instanceof Integer) {
-      return ABS_PLAYLITS;
-    } else if (dataSet.get(position) instanceof ArrayList) {
-      return DATA;
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.home_section_recycler_view,
+                parent, false));
     }
-    return super.getItemViewType(position);
-  }
 
-  @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int i) {
-    ViewHolder viewholder = (ViewHolder) holder;
-    switch (getItemViewType(i)) {
-      case ABS_PLAYLITS:
-        bindAbsActions(viewholder);
-        break;
-      case SUB_HEADER:
-        String title = (String) dataSet.get(i);
-        if (viewholder.title != null) {
-          viewholder.title.setText(title);
+    @Override
+    public int getItemViewType(int position) {
+        Home home = sections.get(position);
+        ArrayList arrayList = home.getList();
+        if (arrayList.get(0) instanceof Album) {
+            return ALBUMS;
+        } else if (arrayList.get(0) instanceof Artist) {
+            return ARTISTS;
+        } else if (arrayList.get(0) instanceof Genre) {
+            return GENERS;
+        } else {
+            return SUGGESTIONS;
         }
-        break;
-      case DATA:
-        parseAllSections(i, viewholder);
-        break;
     }
-  }
 
-  private void bindAbsActions(ViewHolder viewholder) {
-
-
-    if (viewholder.shuffle != null) {
-      viewholder.shuffle.setOnClickListener(view -> MusicPlayerRemote
-          .openAndShuffleQueue(SongLoader.getAllSongs(activity).blockingFirst(), true));
+    private DisplayMetrics getDisplayMetrics() {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+        return metrics;
     }
-        /*if (viewholder.search != null) {
-            viewholder.search.setBackgroundTintList(ColorStateList.valueOf(ColorUtil.withAlpha(ThemeStore.textColorPrimary(activity), 0.2f)));
-            viewholder.search.setOnClickListener(view -> {
-                activity.startActivity(new Intent(activity, SearchActivity.class));
-            });
-        }*/
-  }
 
-  @SuppressWarnings("unchecked")
-  private void parseAllSections(int i, ViewHolder viewholder) {
-    if (viewholder.recyclerView != null) {
-      ArrayList arrayList = (ArrayList) dataSet.get(i);
-      if (arrayList.isEmpty()) {
-        return;
-      }
-      Object something = arrayList.get(0);
-      if (something instanceof Artist) {
-        layoutManager(viewholder);
-        viewholder.recyclerView.setAdapter(
-            new ArtistAdapter(activity, (ArrayList<Artist>) arrayList, R.layout.item_artist, false,
-                null));
-      } else if (something instanceof Album) {
-        layoutManager(viewholder);
-        viewholder.recyclerView.setItemAnimator(new DefaultItemAnimator());
-        viewholder.recyclerView.setAdapter(
-            new AlbumAdapter(activity, (ArrayList<Album>) arrayList, R.layout.item_image, false,
-                null));
-      } else if (something instanceof Song) {
-        GridLayoutManager layoutManager = new GridLayoutManager(activity, 1,
-            LinearLayoutManager.HORIZONTAL, false);
-        viewholder.recyclerView.setLayoutManager(layoutManager);
-        viewholder.recyclerView.setAdapter(
-            new SongAdapter(activity, (ArrayList<Song>) arrayList, R.layout.item_image, false,
-                null));
-      }
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Home home = sections.get(position);
+
+        if (holder.title != null) {
+            holder.title.setText(home.getSectionTitle());
+        }
+        ArrayList arrayList = home.getList();
+        if (arrayList.get(0) instanceof Album) {
+            AlbumAdapter albumAdapter = new AlbumAdapter((AppCompatActivity) activity,
+                    (ArrayList<Album>) arrayList, R.layout.item_image);
+            if (holder.recyclerView != null) {
+                holder.recyclerView.setLayoutManager(new GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false));
+                holder.recyclerView.setAdapter(albumAdapter);
+            }
+        } else if (arrayList.get(0) instanceof Artist) {
+            ArtistAdapter artistAdapter = new ArtistAdapter((AppCompatActivity) activity, (ArrayList<Artist>) arrayList, R.layout.item_artist);
+            GridLayoutManager layoutManager = new GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false);
+            if (holder.recyclerView != null) {
+                holder.recyclerView.setLayoutManager(layoutManager);
+                holder.recyclerView.setAdapter(artistAdapter);
+            }
+        } else if (arrayList.get(0) instanceof Genre) {
+            GenreAdapter genreAdapter = new GenreAdapter(activity, (ArrayList<Genre>) arrayList, R.layout.item_list);
+            if (holder.recyclerView != null) {
+                holder.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                holder.recyclerView.setAdapter(genreAdapter);
+            }
+        } else if (arrayList.get(0) instanceof Song) {
+            CollageSongAdapter collageSongAdapter = new CollageSongAdapter(activity, (ArrayList<Song>) arrayList);
+            if (holder.recyclerView != null) {
+                holder.recyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                holder.recyclerView.setAdapter(collageSongAdapter);
+            }
+        }
     }
-  }
 
-  private void layoutManager(ViewHolder viewholder) {
-    if (viewholder.recyclerView != null) {
-      viewholder.recyclerView.setLayoutManager(
-          new GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false));
-      viewholder.recyclerView.setItemAnimator(new DefaultItemAnimator());
+    @Override
+    public int getItemCount() {
+        return sections.size();
     }
-  }
 
-
-  @Override
-  public int getItemCount() {
-    return dataSet.size();
-  }
-
-  public void swapDataSet(@NonNull ArrayList<Object> data) {
-    dataSet = data;
-    notifyDataSetChanged();
-  }
-
-  public ArrayList<Object> getDataset() {
-    return dataSet;
-  }
-
-  public class ViewHolder extends MediaEntryViewHolder {
-
-
-    @BindView(R.id.action_shuffle)
-    @Nullable
-    View shuffle;
-
-    public ViewHolder(View itemView) {
-      super(itemView);
+    public void swapData(ArrayList<Home> sections) {
+        this.sections = sections;
+        notifyDataSetChanged();
     }
-  }
+
+    public class ViewHolder extends MediaEntryViewHolder {
+
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
 }

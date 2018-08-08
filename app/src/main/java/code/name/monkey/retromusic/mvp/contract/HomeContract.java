@@ -1,14 +1,13 @@
 package code.name.monkey.retromusic.mvp.contract;
 
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 import code.name.monkey.retromusic.mvp.BasePresenter;
 import code.name.monkey.retromusic.mvp.BaseView;
-
-import java.util.ArrayList;
 
 public interface HomeContract {
 

@@ -49,10 +49,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:orientation="vertical"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp">
 
                     <TextView
                         android:id="@+id/title"
@@ -64,8 +64,6 @@
                         android:focusableInTouchMode="true"
                         android:freezesText="true"
                         android:marqueeRepeatLimit="marquee_forever"
-                        android:paddingLeft="15dip"
-                        android:paddingRight="15dip"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
                         android:textColor="?android:attr/textColorPrimary"

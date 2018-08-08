@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
+
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsThemeActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -16,24 +19,31 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 @SuppressLint("RestrictedApi")
 public class RoundedBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-  @Override
-  public int getTheme() {
-    //noinspection ConstantConditions
-    return
-        PreferenceUtil.getInstance(getContext()).getGeneralTheme() == R.style.Theme_RetroMusic_Light
-            ? R.style.BottomSheetDialogTheme : R.style.BottomSheetDialogThemeDark;
-  }
-
-  @NonNull
-  @Override
-  public Dialog onCreateDialog(Bundle savedInstanceState) {
-    AbsThemeActivity absThemeActivity = (AbsThemeActivity) getActivity();
-    if (absThemeActivity != null) {
-      absThemeActivity.setLightNavigationBar(true);
-      Dialog dialog = new BottomSheetDialog(getContext(), getTheme());
-
+    @Override
+    public int getTheme() {
+        //noinspection ConstantConditions
+        if (PreferenceUtil.getInstance(getContext()).getGeneralTheme() == R.style.Theme_RetroMusic_Light) {
+            return R.style.BottomSheetDialogTheme;
+        } else if (PreferenceUtil.getInstance(getContext()).getGeneralTheme() == R.style.Theme_RetroMusic_Color) {
+            int color = ThemeStore.primaryColor(getContext());
+            if (ColorUtil.isColorLight(color)) {
+                return R.style.BottomSheetDialogTheme;
+            } else {
+                return R.style.BottomSheetDialogThemeDark;
+            }
+        } else {
+            return R.style.BottomSheetDialogTheme;
+        }
     }
-    //noinspection ConstantConditions
-    return new BottomSheetDialog(getContext(), getTheme());
-  }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AbsThemeActivity absThemeActivity = (AbsThemeActivity) getActivity();
+        if (absThemeActivity != null) {
+            absThemeActivity.setLightNavigationBar(true);
+        }
+        //noinspection ConstantConditions
+        return new BottomSheetDialog(getContext(), getTheme());
+    }
 }

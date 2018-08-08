@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  android:id="@+id/root"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-
-  <android.support.design.widget.AppBarLayout
-    android:id="@+id/app_bar"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
-      android:layout_width="match_parent"
-      android:layout_height="96dp"
-      app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
-      app:expandedTitleGravity="top"
-      app:expandedTitleMarginStart="16dp"
-      app:expandedTitleMarginTop="48dp"
-      app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-      app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="@string/action_about">
-
-      <View
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
-      <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar48"
-        app:layout_collapseMode="pin"
-        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-        app:title="@string/support_development"/>
+        <android.support.design.widget.CollapsingToolbarLayout xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:titleEnabled="false">
 
-    </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
-  </android.support.design.widget.AppBarLayout>
-  <android.support.v4.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar48"
+                app:layout_collapseMode="pin"
+                app:title=""
+                tools:ignore="UnusedAttribute">
 
-    <include layout="@layout/activity_about_content"/>
 
-  </android.support.v4.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/title"
+                    fontPath="@string/circular_std_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/action_about"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    tools:ignore="MissingPrefix" />
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/activity_about_content" />
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

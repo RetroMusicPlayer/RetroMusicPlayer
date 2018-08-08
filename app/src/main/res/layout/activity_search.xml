@@ -1,124 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
-  <FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <include layout="@layout/status_bar"/>
-  </FrameLayout>
-  <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-    <android.support.design.widget.AppBarLayout
-      android:id="@+id/appbar"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-      <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
-        android:layout_width="match_parent"
-        android:layout_height="96dp"
-        app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
-        app:expandedTitleGravity="top"
-        app:expandedTitleMarginStart="16dp"
-        app:expandedTitleMarginTop="48dp"
-        app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-        app:layout_scrollFlags="scroll|exitUntilCollapsed"
-        app:title="@string/action_search">
-
-        <android.support.v7.widget.Toolbar
-          android:id="@+id/toolbar"
-          style="@style/Toolbar48"
-          app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-          app:title="@string/action_search"
-          tools:ignore="UnusedAttribute"/>
-      </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
-
-      <android.support.v7.widget.CardView
-        android:id="@+id/search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="25dp">
-
-
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingStart="8dp"
-          android:paddingEnd="8dp"
-          android:gravity="center_vertical">
-
-          <code.name.monkey.retromusic.views.IconImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_search_white_24dp"/>
-
-          <EditText
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="@string/search_hint"
-            android:inputType="text|textAutoComplete"
-            />
-
-
-          <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/voice_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:padding="8dp"
-            android:background="?roundSelector"
-            app:srcCompat="@drawable/ic_mic_white_24dp"/>
-        </LinearLayout>
-      </android.support.v7.widget.CardView>
-    </android.support.design.widget.AppBarLayout>
-
+    android:orientation="vertical">
 
     <FrameLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/search_toolbar"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-      <android.support.v7.widget.AppCompatTextView
-        android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="48dp"
-        android:paddingBottom="48dp"
-        android:gravity="center"
-        android:text="@string/no_results"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textSize="16sp"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        android:layout_height="wrap_content">
 
-      <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:scrollbarStyle="outsideOverlay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <include layout="@layout/status_bar" />
     </FrameLayout>
-  </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:elevation="0dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleEnabled="false">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar48"
+                    app:layout_collapseMode="pin">
+
+                    <TextView
+                        android:id="@+id/title"
+                        fontPath="@string/circular_std_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/action_search"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        tools:ignore="MissingPrefix" />
+
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="25dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp">
+
+                    <code.name.monkey.retromusic.views.IconImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:padding="12dp"
+                        app:srcCompat="@drawable/ic_search_white_24dp" />
+
+                    <EditText
+                        android:id="@+id/search_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/search_hint"
+                        android:inputType="text|textAutoComplete" />
+
+
+                    <code.name.monkey.retromusic.views.IconImageView
+                        android:id="@+id/voice_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:background="?roundSelector"
+                        android:padding="8dp"
+                        app:srcCompat="@drawable/ic_mic_white_24dp" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_toolbar"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@android:id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="48dp"
+                android:paddingBottom="48dp"
+                android:text="@string/no_results"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>

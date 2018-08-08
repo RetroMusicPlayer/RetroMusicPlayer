@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.model;
 
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
+import android.support.annotation.StringRes;
 
 import java.util.ArrayList;
 
@@ -10,41 +10,20 @@ import java.util.ArrayList;
  */
 
 public class Home {
-    public String sectionTitle;
-    public ArrayList<Object> list;
-    public AbsSmartPlaylist playlist;
 
-    public Home(String sectionTitle, AbsSmartPlaylist playlist) {
-        this.sectionTitle = sectionTitle;
-        this.playlist = playlist;
-    }
+    private int sectionTitle;
+    private ArrayList list;
 
-    public Home(String sectionTitle, ArrayList<Object> list) {
+    public Home(@StringRes int sectionTitle, ArrayList list) {
         this.sectionTitle = sectionTitle;
         this.list = list;
     }
 
-    public Home(AbsSmartPlaylist playlist) {
-        this.playlist = playlist;
-    }
-
-    public AbsSmartPlaylist getPlaylist() {
-        return playlist;
-    }
-
-    @Override
-    public String toString() {
-        return "Home{" +
-                "sectionTitle='" + sectionTitle + '\'' +
-                ", songs=" + list +
-                '}';
-    }
-
-    public String getSectionTitle() {
+    public int getSectionTitle() {
         return sectionTitle;
     }
 
-    public ArrayList<Object> getList() {
+    public ArrayList getList() {
         return list;
     }
 }

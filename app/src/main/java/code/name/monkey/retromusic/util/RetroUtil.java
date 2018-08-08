@@ -137,7 +137,7 @@ public class RetroUtil {
     }
 
 
-    public static void openUrl(AppCompatActivity context, String str) {
+    public static void openUrl(Activity context, String str) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.setData(Uri.parse(str));
         intent.setFlags(268435456);

@@ -1,78 +1,71 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".DrawerActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DrawerActivity">
 
-  <item
-    android:id="@+id/action_search"
-    android:icon="@drawable/ic_search_white_24dp"
-    android:title="@string/action_search"
-    app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_shuffle_all"
+        android:icon="@drawable/ic_shuffle_white_24dp"
+        android:title="@string/action_shuffle_all"
+        app:showAsAction="never" />
 
-  <item
-    android:id="@+id/action_shuffle_all"
-    android:icon="@drawable/ic_shuffle_white_24dp"
-    android:title="@string/action_shuffle_all"
-    app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_grid_size"
+        android:title="@string/action_grid_size">
+        <menu>
+            <group
+                android:id="@+id/group_grid_size"
+                android:checkableBehavior="single"
+                tools:ignore="HardcodedText">
+                <item
+                    android:id="@+id/action_grid_size_1"
+                    android:title="@string/grid_size_1" />
+                <item
+                    android:id="@+id/action_grid_size_2"
+                    android:title="@string/grid_size_2" />
+                <item
+                    android:id="@+id/action_grid_size_3"
+                    android:title="@string/grid_size_3" />
+                <item
+                    android:id="@+id/action_grid_size_4"
+                    android:title="@string/grid_size_4" />
+                <item
+                    android:id="@+id/action_grid_size_5"
+                    android:title="@string/grid_size_5" />
+                <item
+                    android:id="@+id/action_grid_size_6"
+                    android:title="@string/grid_size_6" />
+                <item
+                    android:id="@+id/action_grid_size_7"
+                    android:title="@string/grid_size_7" />
+                <item
+                    android:id="@+id/action_grid_size_8"
+                    android:title="@string/grid_size_8" />
+            </group>
+        </menu>
+    </item>
 
-  <item
-    android:id="@+id/action_grid_size"
-    android:title="@string/action_grid_size">
-    <menu>
-      <group
-        android:id="@+id/group_grid_size"
-        android:checkableBehavior="single"
-        tools:ignore="HardcodedText">
-        <item
-          android:id="@+id/action_grid_size_1"
-          android:title="@string/grid_size_1"/>
-        <item
-          android:id="@+id/action_grid_size_2"
-          android:title="@string/grid_size_2"/>
-        <item
-          android:id="@+id/action_grid_size_3"
-          android:title="@string/grid_size_3"/>
-        <item
-          android:id="@+id/action_grid_size_4"
-          android:title="@string/grid_size_4"/>
-        <item
-          android:id="@+id/action_grid_size_5"
-          android:title="@string/grid_size_5"/>
-        <item
-          android:id="@+id/action_grid_size_6"
-          android:title="@string/grid_size_6"/>
-        <item
-          android:id="@+id/action_grid_size_7"
-          android:title="@string/grid_size_7"/>
-        <item
-          android:id="@+id/action_grid_size_8"
-          android:title="@string/grid_size_8"/>
-      </group>
-    </menu>
-  </item>
+    <item
+        android:id="@+id/action_sort_order"
+        android:title="@string/action_sort_order">
+        <menu></menu>
+    </item>
 
-  <item
-    android:id="@+id/action_sort_order"
-    android:title="@string/action_sort_order">
-    <menu>
-    </menu>
-  </item>
+    <item
+        android:id="@+id/action_sleep_timer"
+        android:orderInCategory="98"
+        android:title="@string/action_sleep_timer"
+        app:showAsAction="never" />
 
-  <item
-    android:id="@+id/action_sleep_timer"
-    android:orderInCategory="98"
-    android:title="@string/action_sleep_timer"
-    app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_equalizer"
+        android:orderInCategory="99"
+        android:title="@string/equalizer"
+        app:showAsAction="never" />
 
-  <item
-    android:id="@+id/action_equalizer"
-    android:orderInCategory="99"
-    android:title="@string/equalizer"
-    app:showAsAction="never"/>
-
-  <item
-    android:id="@+id/action_settings"
-    android:orderInCategory="100"
-    android:title="@string/action_settings"
-    app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>

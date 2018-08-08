@@ -86,9 +86,6 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     @BindView(R.id.app_bar)
     @Nullable
     AppBarLayout appBarLayout;
-    @BindView(R.id.image_container)
-    @Nullable
-    View imageContainer;
     @BindView(R.id.content)
     View contentContainer;
     @BindView(R.id.toolbar)

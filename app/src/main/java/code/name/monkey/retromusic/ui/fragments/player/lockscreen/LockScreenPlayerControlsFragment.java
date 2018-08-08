@@ -31,9 +31,9 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 /**
  * @author Hemanth S (h4h13).
@@ -41,20 +41,30 @@ import code.name.monkey.retromusic.util.MusicUtil;
 public class LockScreenPlayerControlsFragment extends AbsPlayerControlsFragment {
     @BindView(R.id.player_play_pause_button)
     AppCompatImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.title)
     AppCompatTextView title;
+
     @BindView(R.id.text)
     AppCompatTextView text;
+
+    @BindView(R.id.volume_fragment_container)
+    View volumeContainer;
 
     private Unbinder unbinder;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
@@ -82,7 +92,9 @@ public class LockScreenPlayerControlsFragment extends AbsPlayerControlsFragment 
         super.onViewCreated(view, savedInstanceState);
         setUpMusicControllers();
 
-        VolumeFragment volumeFragment = (VolumeFragment) getChildFragmentManager().findFragmentById(R.id.volume_fragment);
+        //noinspection ConstantConditions
+        volumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle()
+                ? View.VISIBLE : View.GONE);
 
     }
 

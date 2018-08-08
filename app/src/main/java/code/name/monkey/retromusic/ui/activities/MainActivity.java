@@ -155,14 +155,16 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
     }
 
-    public void setCurrentFragment(@Nullable Fragment fragment, boolean isStackAdd) {
+    public void setCurrentFragment(@Nullable Fragment fragment, boolean isStackAdd, String tag) {
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, TAG);
+        fragmentTransaction.replace(R.id.fragment_container, fragment, tag);
         if (isStackAdd) {
-            fragmentTransaction.addToBackStack(TAG);
+            fragmentTransaction.addToBackStack(tag);
         }
         fragmentTransaction.commit();
+
         currentFragment = (MainActivityFragmentCallbacks) fragment;
     }
 
@@ -186,13 +188,13 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
             case R.id.action_album:
             case R.id.action_artist:
             case R.id.action_playlist:
-                setCurrentFragment(LibraryFragment.newInstance(menuItem), false);
+                setCurrentFragment(LibraryFragment.newInstance(menuItem), false, LibraryFragment.TAG);
                 break;
             default:
             case R.id.action_home:
-                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? BannerHomeFragment
-                                .newInstance() : HomeFragment.newInstance(),
-                        false);
+                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ?
+                                BannerHomeFragment.newInstance() : HomeFragment.newInstance(), false,
+                        HomeFragment.TAG);
                 break;
         }
     }

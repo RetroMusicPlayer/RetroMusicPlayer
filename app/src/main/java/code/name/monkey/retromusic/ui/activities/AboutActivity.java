@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -40,10 +39,15 @@ public class AboutActivity extends AbsBaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.app_bar)
     View background;
+
     @BindView(R.id.app_version)
     TextView appVersion;
+
+    @BindView(R.id.title)
+    TextView title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class AboutActivity extends AbsBaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
@@ -71,13 +75,13 @@ public class AboutActivity extends AbsBaseActivity {
     }
 
     private void setUpToolbar() {
-
+        title.setTextColor(ThemeStore.textColorPrimary(this));
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         setTitle(null);
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -91,7 +95,7 @@ public class AboutActivity extends AbsBaseActivity {
 
     @OnClick({R.id.app_github, R.id.faq_link, R.id.app_google_plus, R.id.app_translation,
             R.id.app_rate, R.id.app_share, R.id.instagram_link, R.id.twitter_link, R.id.changelog,
-            R.id.open_source, R.id.discord_link, R.id.telegram_link})
+            R.id.open_source, R.id.discord_link, R.id.telegram_link, R.id.donate_link})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.faq_link:
