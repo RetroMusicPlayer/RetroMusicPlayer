@@ -123,6 +123,7 @@
         <activity android:name=".ui.activities.LicenseActivity" />
         <activity android:name=".ui.activities.ProVersionActivity" />
         <activity android:name=".ui.activities.EqualizerActivity" />
+        <activity android:name=".ui.activities.ErrorHandlerActivity" />
 
         <service
             android:name=".service.MusicService"

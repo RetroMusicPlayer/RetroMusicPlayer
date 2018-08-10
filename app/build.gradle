@@ -11,7 +11,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 209
+        versionCode 210
         versionName '1.7.100'
 
         multiDexEnabled true
@@ -130,7 +130,6 @@ dependencies {
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
     /*UI Library*/
-    implementation 'com.github.jetradarmobile:android-snowfall:1.1.6'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
