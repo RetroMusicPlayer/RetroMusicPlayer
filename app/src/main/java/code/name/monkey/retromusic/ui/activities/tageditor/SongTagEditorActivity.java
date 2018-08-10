@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import org.jaudiotagger.tag.FieldKey;
 
@@ -28,22 +29,34 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
     public static final String TAG = SongTagEditorActivity.class.getSimpleName();
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
+
+    @BindView(R.id.title)
+    TextView title;
+
     @BindView(R.id.title1)
     EditText songTitle;
+
     @BindView(R.id.title2)
     EditText albumTitle;
+
     @BindView(R.id.artist)
     EditText artist;
+
     @BindView(R.id.genre)
     EditText genre;
+
     @BindView(R.id.year)
     EditText year;
+
     @BindView(R.id.image_text)
     EditText trackNumber;
+
     @BindView(R.id.lyrics)
     EditText lyrics;
+
     @BindView(R.id.album_artist)
     EditText albumArtist;
 
@@ -51,7 +64,8 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        setTitle(R.string.action_tag_editor);
+        setTitle(null);
+        title.setTextColor(ThemeStore.textColorPrimary(this));
         setSupportActionBar(toolbar);
     }
 

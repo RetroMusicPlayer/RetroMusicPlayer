@@ -43,10 +43,13 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
     private static final int REQUEST_CODE_SELECT_IMAGE = 1000;
     @BindView(R.id.save_fab)
     FloatingActionButton save;
+
     @BindView(R.id.image)
     ImageView image;
+
     @BindView(R.id.image_container)
     FrameLayout imageContainer;
+
     CharSequence[] items;
     private int id;
     private int paletteColorPrimary;

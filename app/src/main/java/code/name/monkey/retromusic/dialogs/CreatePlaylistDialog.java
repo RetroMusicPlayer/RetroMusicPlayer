@@ -3,12 +3,12 @@ package code.name.monkey.retromusic.dialogs;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,7 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -29,11 +30,16 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
 
     @BindView(R.id.option_1)
-    EditText playlistName;
+    TextInputEditText playlistName;
+
     @BindView(R.id.action_cancel)
-    Button actionCancel;
+    TextView actionCancel;
+
     @BindView(R.id.action_create)
-    Button actionCreate;
+    TextView actionCreate;
+
+    @BindView(R.id.action_create_container)
+    CardView actionCreateContainer;
 
     @NonNull
     public static CreatePlaylistDialog create() {
@@ -70,9 +76,17 @@ public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        TintHelper.setTintAuto(playlistName, accentColor, true);
-        TintHelper.setTintAuto(actionCreate, accentColor, true);
-        actionCancel.setTextColor(accentColor);
+        actionCreateContainer.setCardBackgroundColor(ThemeStore.accentColor(getContext()));
+
+        int primaryTextColor = MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil
+                .isColorLight(accentColor));
+        int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(getContext(), ColorUtil
+                .isColorLight(accentColor));
+
+        actionCreate.setTextColor(primaryTextColor);
+        actionCancel.setTextColor(secondaryTextColor);
+
+
     }
 
     @OnClick({R.id.action_cancel, R.id.action_create})

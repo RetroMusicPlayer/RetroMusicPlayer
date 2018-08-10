@@ -86,18 +86,25 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final int LOADER_ID = LoaderIds.FOLDERS_FRAGMENT;
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
+
     @BindView(R.id.container)
     View container;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(android.R.id.empty)
     View empty;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.bread_crumbs)
     BreadCrumbLayout breadCrumbs;
+
     @BindView(R.id.appbar)
     AppBarLayout appbar;
+
     @BindView(R.id.recycler_view)
     FastScrollRecyclerView recyclerView;
 

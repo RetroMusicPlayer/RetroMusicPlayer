@@ -5,6 +5,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -24,7 +27,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.MusicUtil;
@@ -39,9 +41,9 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.timer_display)
     TextView timerDisplay;
     @BindView(R.id.action_set)
-    Button setButton;
+    TextView setButton;
     @BindView(R.id.action_cancel)
-    Button cancelButton;
+    TextView cancelButton;
 
     private int seekArcProgress;
     private TimerUpdater timerUpdater;
@@ -68,6 +70,12 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         return layout;
     }
 
+    private void setProgressBarColor(int dark) {
+        LayerDrawable ld = (LayerDrawable) seekArc.getProgressDrawable();
+        ClipDrawable clipDrawable = (ClipDrawable) ld.findDrawableByLayerId(android.R.id.progress);
+        clipDrawable.setColorFilter(dark, PorterDuff.Mode.SRC_IN);
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -77,10 +85,8 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         updateTimeDisplayTime();
         seekArc.setProgress(seekArcProgress);
 
-        int accentColor = ThemeStore.accentColor(getContext());
-        TintHelper.setTintAuto(seekArc, accentColor, true);
-        setButton.setTextColor(accentColor);
-        cancelButton.setTextColor(accentColor);
+        //noinspection ConstantConditions
+        setProgressBarColor(ThemeStore.accentColor(getContext()));
 
         seekArc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

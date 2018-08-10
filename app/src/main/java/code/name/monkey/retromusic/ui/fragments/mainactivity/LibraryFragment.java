@@ -55,10 +55,13 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.app_bar)
     AppBarLayout appbar;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.search)
     IconImageView search;
 

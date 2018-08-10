@@ -9,14 +9,21 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView;
+import code.name.monkey.appthemehelper.common.views.ATESecondaryTextView;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
@@ -46,6 +53,12 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.title_welcome)
     AppCompatTextView titleWelcome;
 
+    @BindViews({R.id.tv_about, R.id.title_welcome, R.id.text, R.id.tv_buy_pro, R.id.tv_folder, R.id.tv_rate_app,
+            R.id.tv_settings, R.id.tv_sleep_timer})
+    List<TextView> textViews;
+
+    static ButterKnife.Setter<TextView, Integer> textColor = (view, value, index) -> view.setTextColor(value.intValue());
+
     private CompositeDisposable disposable = new CompositeDisposable();
 
     @Nullable
@@ -56,6 +69,7 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
         mUnbinder = ButterKnife.bind(this, layout);
         layout.findViewById(R.id.action_buy_pro).setVisibility(RetroApplication.isProVersion() ? View
                 .GONE : View.VISIBLE);
+        ButterKnife.apply(textViews, textColor, ThemeStore.textColorPrimary(getContext()));
         return layout;
     }
 
@@ -97,12 +111,13 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
 
     @SuppressWarnings("ConstantConditions")
     @OnClick({R.id.action_about, R.id.user_info_container, R.id.action_buy_pro, R.id.action_folder,
-            R.id.action_settings, R.id.action_sleep_timer,R.id.action_rate})
+            R.id.action_settings, R.id.action_sleep_timer, R.id.action_rate})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.user_info_container:
                 NavigationUtil.goToUserInfo(getActivity());
-                break; case R.id.action_rate:
+                break;
+            case R.id.action_rate:
                 NavigationUtil.goToPlayStore(getActivity());
                 break;
             case R.id.action_folder:

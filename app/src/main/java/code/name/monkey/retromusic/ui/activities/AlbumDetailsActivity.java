@@ -171,9 +171,10 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.artist_image:
-                Pair<View, String> pair = new Pair<>(artistImage,
-                        getString(R.string.transition_artist_image));
-                NavigationUtil.goToArtist(this, getAlbum().getArtistId(), pair);
+                Pair[] artistPairs = new Pair[]{Pair.create(image,
+                        getResources().getString(R.string.transition_artist_image))};
+                NavigationUtil.goToArtist(this, getAlbum().getArtistId(),
+                        artistPairs);
                 break;
             case R.id.action_shuffle_all:
                 MusicPlayerRemote.openAndShuffleQueue(album.songs, true);

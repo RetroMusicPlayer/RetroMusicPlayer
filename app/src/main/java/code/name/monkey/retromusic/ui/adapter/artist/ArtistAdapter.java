@@ -31,9 +31,7 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 
 
-public class ArtistAdapter extends
-        AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist> implements
-        FastScrollRecyclerView.SectionedAdapter {
+public class ArtistAdapter extends AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist> implements FastScrollRecyclerView.SectionedAdapter {
 
     protected final AppCompatActivity activity;
     protected ArrayList<Artist> dataSet;
@@ -54,7 +52,7 @@ public class ArtistAdapter extends
     }
 
     public ArtistAdapter(@NonNull AppCompatActivity activity, ArrayList<Artist> dataSet,
-                         @LayoutRes int itemLayoutRes ) {
+                         @LayoutRes int itemLayoutRes) {
         super(activity, null, R.menu.menu_media_selection);
         this.activity = activity;
         this.dataSet = dataSet;

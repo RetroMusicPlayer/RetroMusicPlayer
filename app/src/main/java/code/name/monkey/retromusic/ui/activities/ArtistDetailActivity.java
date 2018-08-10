@@ -125,18 +125,19 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         setDrawUnderStatusBar(true);
         super.onCreate(bundle);
         ButterKnife.bind(this);
-
-        supportPostponeEnterTransition();
         setBottomBarVisibility(View.GONE);
         setNavigationbarColorAuto();
         setLightNavigationBar(true);
+
+        supportPostponeEnterTransition();
+
 
         lastFMRestClient = new LastFMRestClient(this);
 
         setUpViews();
 
-        int artistID = getIntent().getIntExtra(EXTRA_ARTIST_ID, -1);
-        artistDetailsPresenter = new ArtistDetailsPresenter(this, artistID);
+        artistDetailsPresenter = new ArtistDetailsPresenter(this, getIntent().getExtras());
+        artistDetailsPresenter.subscribe();
     }
 
     private void setUpViews() {
@@ -232,7 +233,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     @Override
     protected void onResume() {
         super.onResume();
-        artistDetailsPresenter.subscribe();
+
     }
 
     @Override

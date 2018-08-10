@@ -37,11 +37,14 @@ public class ProVersionActivity extends AbsBaseActivity implements
     private static final String TAG = "ProVersionActivity";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.restore_button)
     View restoreButton;
+
     @BindView(R.id.purchase_button)
     View purchaseButton;
     @BindView(R.id.app_bar)
+
     AppBarLayout appBar;
     @BindView(R.id.status_bar)
     View statusBar;

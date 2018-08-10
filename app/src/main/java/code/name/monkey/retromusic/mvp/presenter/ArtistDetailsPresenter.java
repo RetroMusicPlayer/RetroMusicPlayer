@@ -1,10 +1,13 @@
 package code.name.monkey.retromusic.mvp.presenter;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.mvp.Presenter;
 import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract;
+
+import static code.name.monkey.retromusic.ui.activities.ArtistDetailActivity.EXTRA_ARTIST_ID;
 
 
 /**
@@ -13,19 +16,19 @@ import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract;
 
 public class ArtistDetailsPresenter extends Presenter implements ArtistDetailContract.Presenter {
 
-    private final int artistId;
     @NonNull
     private final ArtistDetailContract.ArtistsDetailsView view;
+    private Bundle bundle;
 
     public ArtistDetailsPresenter(@NonNull ArtistDetailContract.ArtistsDetailsView view,
-                                  int artistId) {
+                                  Bundle artistId) {
         this.view = view;
-        this.artistId = artistId;
+        this.bundle = artistId;
     }
 
     @Override
     public void subscribe() {
-        loadArtistById(artistId);
+        loadArtistById();
     }
 
     @Override
@@ -34,14 +37,14 @@ public class ArtistDetailsPresenter extends Presenter implements ArtistDetailCon
     }
 
     @Override
-    public void loadArtistById(int artistId) {
-        disposable.add(repository.getArtistById(artistId)
+    public void loadArtistById() {
+        disposable.add(repository.getArtistById(bundle.getInt(EXTRA_ARTIST_ID))
                 .subscribeOn(schedulerProvider.computation())
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe(disposable1 -> view.loading())
                 .subscribe(this::showArtist,
                         throwable -> view.showEmptyView(),
-                        () -> view.completed()));
+                        view::completed));
     }
 
     private void showArtist(Artist album) {

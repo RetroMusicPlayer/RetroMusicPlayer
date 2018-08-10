@@ -16,6 +16,6 @@ public interface ArtistDetailContract {
     }
 
     interface Presenter extends BasePresenter<ArtistsDetailsView> {
-        void loadArtistById(int artistId);
+        void loadArtistById();
     }
 }

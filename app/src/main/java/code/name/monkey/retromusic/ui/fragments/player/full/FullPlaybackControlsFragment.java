@@ -42,27 +42,39 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 public class FullPlaybackControlsFragment extends AbsPlayerControlsFragment {
     @BindView(R.id.player_song_current_progress)
     TextView mPlayerSongCurrentProgress;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_progress_slider)
     SeekBar progressSlider;
     @BindView(R.id.player_prev_button)
+
     ImageButton playerPrevButton;
     @BindView(R.id.player_next_button)
+
     ImageButton playerNextButton;
     @BindView(R.id.player_repeat_button)
+
     ImageButton playerRepeatButton;
     @BindView(R.id.player_shuffle_button)
+
     ImageButton playerShuffleButton;
     @BindView(R.id.player_play_pause_button)
+
     ImageButton playerPlayPauseFab;
-    Unbinder unbinder;
+
+
     @BindView(R.id.title)
     TextView mTitle;
+
     @BindView(R.id.text)
     TextView mText;
+
     @BindView(R.id.volume_fragment_container)
     View mVolumeContainer;
+
+    Unbinder unbinder;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;

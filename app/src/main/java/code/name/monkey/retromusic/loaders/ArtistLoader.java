@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import io.reactivex.Observable;
 
 public class ArtistLoader {
-    public static String getSongLoaderSortOrder(Context context) {
+    private static String getSongLoaderSortOrder(Context context) {
         return PreferenceUtil.getInstance(context).getArtistSortOrder() + ", " +
                 PreferenceUtil.getInstance(context).getArtistAlbumSortOrder() + ", " +
                 PreferenceUtil.getInstance(context).getAlbumDetailSongSortOrder() + ", " +
@@ -98,22 +98,4 @@ public class ArtistLoader {
             });
         });
     }
-
-   /* public static Observable<ArrayList<Artist>> getAllArtists(Context context) {
-        return getArtistsForCursor(makeArtistCursor(context, null, null));
-    }
-
-    public static Observable<Artist> getArtist(Context context, long id) {
-        return getArtist(makeArtistCursor(context, "_id=?", new String[]{String.valueOf(id)}));
-    }
-
-    public static Observable<ArrayList<Artist>> getArtists(Context context, String paramString) {
-        return getArtistsForCursor(makeArtistCursor(context, "artist LIKE ?", new String[]{"%" + paramString + "%"}));
-    }
-
-    private static Cursor makeArtistCursor(Context context, String selection, String[] paramArrayOfString) {
-        final String artistSortOrder = PreferenceUtil.getInstance(context).getArtistSortOrder();
-        Cursor cursor = context.getContentResolver().query(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, new String[]{"_id", "artist", "number_of_albums", "number_of_tracks"}, selection, paramArrayOfString, artistSortOrder);
-        return cursor;
-    }*/
 }
