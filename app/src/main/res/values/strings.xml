@@ -114,7 +114,7 @@
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
-    <string name="buy_retromusic_pro">Buy RetroMusic Pro</string>
+    <string name="buy_retromusic_pro">Buy Retro Music Pro</string>
 
     <string name="cancel_current_timer">Cancel</string>
 
@@ -185,10 +185,10 @@
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
 
     <string name="donate">Donate</string>
-    <string name="donate_summary">If my development deserve to get paid, you can leave some
-    dollars here</string>
+    <string name="donate_summary">If you think I deserve to get paid for my work, you can leave some
+    money here</string>
 
-    <string name="donation_header">Buy me a</string>
+    <string name="donation_header">Buy me a:</string>
 
     <string name="download_from_last_fm">Download from Last.fm</string>
 
@@ -304,7 +304,7 @@
 
     <string name="my_name">My Name</string>
     <string name="my_playlists">My playlist</string>
-    <string name="my_top_tracks">Top played</string>
+    <string name="my_top_tracks">Most played</string>
 
     <string name="never">Never</string>
 
@@ -350,7 +350,7 @@
     <string name="patreon_page_summary">Support us from patreon</string>
 
     <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me is an easy way to donate us money. In case you only linked a debit or credit card the fee in the U.S. is 2.9% of the donation plus $0.30 USD, otherwise there is no fee.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a>
+    <string name="paypal_summary">PayPal.me is an easy way to donate me money. In case you only linked a debit or a credit card the fee in the U.S. is 2.9% of the donation + $0.30 USD. Otherwise, there is no fee.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a>
     </string>
 
     <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
@@ -680,11 +680,11 @@
     <string name="you_have_to_select_at_least_one_category">You have to select at least one category</string>
     <string name="made_with_love">Made with ❤️ in India</string>
     <string name="clear_app_data">Clear app data</string>
-    <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if its
-    keep crashing \"Clear app data\"</string>
+    <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it
+    keeps crashing \"Clear app data\"</string>
     <string name="error">Error</string>
     <string name="base_color_theme">Base color theme</string>
-    <string name="now_playing_themes">9+ Now playing themes</string>
-    <string name="carousal_effect_on_now_playing_screen">Carousal effect on now playing screen</string>
-    <string name="window_corner_edges">Window corner edges</string>
+    <string name="now_playing_themes">9+ now playing themes</string>
+    <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
+    <string name="window_corner_edges">Rounded corners</string>
 </resources>
