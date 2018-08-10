@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,8 +24,8 @@
             android:id="@+id/timer_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textAppearance="?android:textAppearanceLarge" />
 
 
@@ -43,23 +44,50 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="end"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/action_set"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:text="@string/action_set" />
+                android:layout_gravity="end|bottom"
+                app:cardBackgroundColor="@color/md_green_A700"
+                app:cardCornerRadius="6dp"
+                app:cardUseCompatPadding="true">
 
-            <Button
-                android:id="@+id/action_cancel"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                <TextView
+                    android:id="@+id/action_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="28dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="28dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/action_set"
+                    android:textColor="@color/md_white_1000" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="start|center_vertical"
-                android:text="@string/cancel_current_timer" />
+                android:layout_gravity="end|bottom"
+                app:cardBackgroundColor="@color/md_red_A400"
+                app:cardCornerRadius="6dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:id="@+id/action_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingStart="28dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="28dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/cancel_current_timer"
+                    android:textColor="@color/md_white_1000" />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

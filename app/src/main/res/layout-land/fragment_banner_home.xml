@@ -23,19 +23,17 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="0dp"
             android:focusable="true"
+            app:elevation="0dp"
             tools:ignore="UnusedAttribute">
 
-            <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
-                app:expandedTitleGravity="top"
-                app:expandedTitleMarginStart="16dp"
-                app:expandedTitleMarginTop="48dp"
-                app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleEnabled="false">
 
                 <View
                     android:layout_width="match_parent"
@@ -83,7 +81,12 @@
                             app:civ_border="false" />
                     </LinearLayout>
                 </android.support.v7.widget.Toolbar>
-            </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?dividerColor" />
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -92,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:background="@drawable/bg_card_line"
             app:behavior_overlapTop="24dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

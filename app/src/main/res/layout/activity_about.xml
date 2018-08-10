@@ -22,9 +22,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar48"
-                app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
+                app:layout_collapseMode="pin">
 
 
                 <TextView

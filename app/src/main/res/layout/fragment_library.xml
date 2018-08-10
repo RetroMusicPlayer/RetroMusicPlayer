@@ -22,13 +22,15 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:elevation="0dp">
 
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+                app:layout_scrollFlags="scroll|enterAlways"
                 app:titleEnabled="false">
 
                 <FrameLayout
@@ -55,10 +57,10 @@
 
                             <code.name.monkey.retromusic.views.IconImageView
                                 android:id="@+id/search"
-                                android:background="?roundSelector"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0"
+                                android:background="?roundSelector"
                                 android:padding="12dp"
                                 android:src="@drawable/ic_search_white_24dp" />
 
@@ -77,6 +79,11 @@
                     </android.support.v7.widget.Toolbar>
                 </FrameLayout>
             </android.support.design.widget.CollapsingToolbarLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?dividerColor" />
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout

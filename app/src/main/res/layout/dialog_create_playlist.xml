@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,15 +18,20 @@
         android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix" />
 
-    <EditText
-        android:id="@+id/option_1"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/playlist_name_empty"
-        android:inputType="textPersonName|textCapWords|text"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/option_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/playlist_name_empty"
+            android:inputType="textPersonName|textCapWords|text"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+    </android.support.design.widget.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,20 +39,48 @@
         android:gravity="end"
         android:padding="12dp">
 
-        <Button
-            android:id="@+id/action_cancel"
-            style="@style/Widget.AppCompat.Button.Borderless"
+        <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@android:string/cancel" />
+            android:layout_gravity="end|bottom"
+            app:cardBackgroundColor="@color/md_white_1000"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true">
 
-        <Button
-            android:id="@+id/action_create"
-            style="@style/Widget.AppCompat.Button.Colored"
+            <TextView
+                android:id="@+id/action_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="28dp"
+                android:paddingBottom="12dp"
+                android:text="@string/cancel_current_timer"
+                android:textColor="@color/black_p50" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/action_create_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/create_action" />
+            android:layout_gravity="end|bottom"
+            app:cardBackgroundColor="@color/md_red_A400"
+            app:cardCornerRadius="6dp"
+            app:cardUseCompatPadding="true">
+
+            <TextView
+                android:id="@+id/action_create"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="28dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="28dp"
+                android:paddingBottom="12dp"
+                android:text="@string/create_action"
+                android:textColor="@color/md_white_1000" />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </LinearLayout>

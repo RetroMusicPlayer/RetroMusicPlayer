@@ -76,6 +76,11 @@
                     </android.support.v7.widget.Toolbar>
                 </FrameLayout>
             </android.support.design.widget.CollapsingToolbarLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?dividerColor" />
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
