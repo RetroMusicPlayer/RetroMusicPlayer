@@ -29,14 +29,14 @@ Retro Music uses the native media player that comes with your Android phone, so 
 #### Q: Why is my device slowing down when I'm using the app?
 Retro Music is image intensive, it keeps images in the cache for quick loading.
 
-#### Retro music title is showing at top?: 
-Please clear app cache and data.
+#### Q: The title "Retro Music" is showing on the top of the app, how can i fix this? 
+Clear the app's cache and data.
 
-##### If App crashing: Sorry settings has changed internally. 
-Please uninstall and install again 
+##### Q: My app is crashing, how do i fix this? (Sorry, settings have changed internally) 
+Reinstalling the app should fix this issue. 
 
-##### Artist images are not loading: 
-last.fm service has limited number of request to download data(downloading artist images), if that request limit exceeds it will not download for sometime.
+##### Q: Artist images are not loading, why? 
+The Last.fm service has a limited number of requests of download data it can handle (artist images). If that request limit is exceeded, it will not download for some time.
 
-##### Text is not visible: 
-Change theme (Black or Dark) and change back
+##### Q: Why has all the text gone white/dissapeared? 
+Change the theme to Black or Dark and change it back to what you had before.
