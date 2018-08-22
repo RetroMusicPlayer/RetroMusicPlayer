@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.media.ExifInterface;
 import android.support.annotation.NonNull;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,204 +20,204 @@ import java.io.IOException;
  */
 public class ImageUtil {
 
-  private static final int TOLERANCE = 20;
-  // Alpha amount for which values below are considered transparent.
-  private static final int ALPHA_TOLERANCE = 50;
-  private static int[] mTempBuffer;
+    private static final int TOLERANCE = 20;
+    // Alpha amount for which values below are considered transparent.
+    private static final int ALPHA_TOLERANCE = 50;
+    private static int[] mTempBuffer;
 
-  private ImageUtil() {
+    private ImageUtil() {
 
-  }
-
-  public static boolean isGrayscale(Bitmap bitmap) {
-    final int height = bitmap.getHeight();
-    final int width = bitmap.getWidth();
-    int size = height * width;
-    ensureBufferSize(size);
-    bitmap.getPixels(mTempBuffer, 0, width, 0, 0, width, height);
-    for (int i = 0; i < size; i++) {
-      if (!isGrayscale(mTempBuffer[i])) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  /**
-   * Makes sure that {@code mTempBuffer} has at least length {@code size}.
-   */
-  private static void ensureBufferSize(int size) {
-    if (mTempBuffer == null || mTempBuffer.length < size) {
-      mTempBuffer = new int[size];
-    }
-  }
-
-  public static Bitmap setBitmapColor(Bitmap bitmap, int color) {
-    Bitmap result = Bitmap
-        .createBitmap(bitmap, 0, 0, bitmap.getWidth() - 1, bitmap.getHeight() - 1);
-    Paint paint = new Paint();
-    paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
-
-    Canvas canvas = new Canvas(result);
-    canvas.drawBitmap(result, 0, 0, paint);
-
-    return result;
-  }
-
-  public static boolean isGrayscale(int color) {
-    int alpha = 0xFF & (color >> 24);
-    if (alpha < ALPHA_TOLERANCE) {
-      return true;
-    }
-    int r = 0xFF & (color >> 16);
-    int g = 0xFF & (color >> 8);
-    int b = 0xFF & color;
-    return Math.abs(r - g) < TOLERANCE
-        && Math.abs(r - b) < TOLERANCE
-        && Math.abs(g - b) < TOLERANCE;
-  } // Amount (max is 255) that two channels can differ before the color is no longer "gray".
-
-  public static Bitmap resizeBitmap(@NonNull Bitmap src, int maxForSmallerSize) {
-    int width = src.getWidth();
-    int height = src.getHeight();
-
-    final int dstWidth;
-    final int dstHeight;
-
-    if (width < height) {
-      if (maxForSmallerSize >= width) {
-        return src;
-      }
-      float ratio = (float) height / width;
-      dstWidth = maxForSmallerSize;
-      dstHeight = Math.round(maxForSmallerSize * ratio);
-    } else {
-      if (maxForSmallerSize >= height) {
-        return src;
-      }
-      float ratio = (float) width / height;
-      dstWidth = Math.round(maxForSmallerSize * ratio);
-      dstHeight = maxForSmallerSize;
     }
 
-    return Bitmap.createScaledBitmap(src, dstWidth, dstHeight, false);
-  }
-
-  public static int calculateInSampleSize(int width, int height, int reqWidth) {
-    // setting reqWidth matching to desired 1:1 ratio and screen-size
-    if (width < height) {
-      reqWidth = (height / width) * reqWidth;
-    } else {
-      reqWidth = (width / height) * reqWidth;
+    public static boolean isGrayscale(Bitmap bitmap) {
+        final int height = bitmap.getHeight();
+        final int width = bitmap.getWidth();
+        int size = height * width;
+        ensureBufferSize(size);
+        bitmap.getPixels(mTempBuffer, 0, width, 0, 0, width, height);
+        for (int i = 0; i < size; i++) {
+            if (!isGrayscale(mTempBuffer[i])) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    int inSampleSize = 1;
-
-    if (height > reqWidth || width > reqWidth) {
-      final int halfHeight = height / 2;
-      final int halfWidth = width / 2;
-
-      // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-      // height and width larger than the requested height and width.
-      while ((halfHeight / inSampleSize) > reqWidth
-          && (halfWidth / inSampleSize) > reqWidth) {
-        inSampleSize *= 2;
-      }
+    /**
+     * Makes sure that {@code mTempBuffer} has at least length {@code size}.
+     */
+    private static void ensureBufferSize(int size) {
+        if (mTempBuffer == null || mTempBuffer.length < size) {
+            mTempBuffer = new int[size];
+        }
     }
 
-    return inSampleSize;
-  }
+    public static Bitmap setBitmapColor(Bitmap bitmap, int color) {
+        Bitmap result = Bitmap
+                .createBitmap(bitmap, 0, 0, bitmap.getWidth() - 1, bitmap.getHeight() - 1);
+        Paint paint = new Paint();
+        paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
 
-  static File compressImage(File imageFile, int reqWidth, int reqHeight,
-      Bitmap.CompressFormat compressFormat, int quality, String destinationPath)
-      throws IOException {
-    FileOutputStream fileOutputStream = null;
-    File file = new File(destinationPath).getParentFile();
-    if (!file.exists()) {
-      file.mkdirs();
-    }
-    try {
-      fileOutputStream = new FileOutputStream(destinationPath);
-      // write the compressed bitmap at the destination specified by destinationPath.
-      decodeSampledBitmapFromFile(imageFile, reqWidth, reqHeight)
-          .compress(compressFormat, quality, fileOutputStream);
-    } finally {
-      if (fileOutputStream != null) {
-        fileOutputStream.flush();
-        fileOutputStream.close();
-      }
+        Canvas canvas = new Canvas(result);
+        canvas.drawBitmap(result, 0, 0, paint);
+
+        return result;
     }
 
-    return new File(destinationPath);
-  }
+    public static boolean isGrayscale(int color) {
+        int alpha = 0xFF & (color >> 24);
+        if (alpha < ALPHA_TOLERANCE) {
+            return true;
+        }
+        int r = 0xFF & (color >> 16);
+        int g = 0xFF & (color >> 8);
+        int b = 0xFF & color;
+        return Math.abs(r - g) < TOLERANCE
+                && Math.abs(r - b) < TOLERANCE
+                && Math.abs(g - b) < TOLERANCE;
+    } // Amount (max is 255) that two channels can differ before the color is no longer "gray".
 
-  static Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight)
-      throws IOException {
-    // First decode with inJustDecodeBounds=true to check dimensions
-    BitmapFactory.Options options = new BitmapFactory.Options();
-    options.inJustDecodeBounds = true;
-    BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+    public static Bitmap resizeBitmap(@NonNull Bitmap src, int maxForSmallerSize) {
+        int width = src.getWidth();
+        int height = src.getHeight();
 
-    // Calculate inSampleSize
-    options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        final int dstWidth;
+        final int dstHeight;
 
-    // Decode bitmap with inSampleSize set
-    options.inJustDecodeBounds = false;
+        if (width < height) {
+            if (maxForSmallerSize >= width) {
+                return src;
+            }
+            float ratio = (float) height / width;
+            dstWidth = maxForSmallerSize;
+            dstHeight = Math.round(maxForSmallerSize * ratio);
+        } else {
+            if (maxForSmallerSize >= height) {
+                return src;
+            }
+            float ratio = (float) width / height;
+            dstWidth = Math.round(maxForSmallerSize * ratio);
+            dstHeight = maxForSmallerSize;
+        }
 
-    Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
-
-    //check the rotation of the image and display it properly
-    ExifInterface exif;
-    exif = new ExifInterface(imageFile.getAbsolutePath());
-    int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
-    Matrix matrix = new Matrix();
-    if (orientation == 6) {
-      matrix.postRotate(90);
-    } else if (orientation == 3) {
-      matrix.postRotate(180);
-    } else if (orientation == 8) {
-      matrix.postRotate(270);
-    }
-    scaledBitmap = Bitmap
-        .createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
-            true);
-    return scaledBitmap;
-  }
-
-  private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
-      int reqHeight) {
-    // Raw height and width of image
-    final int height = options.outHeight;
-    final int width = options.outWidth;
-    int inSampleSize = 1;
-
-    if (height > reqHeight || width > reqWidth) {
-
-      final int halfHeight = height / 2;
-      final int halfWidth = width / 2;
-
-      // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-      // height and width larger than the requested height and width.
-      while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
-        inSampleSize *= 2;
-      }
+        return Bitmap.createScaledBitmap(src, dstWidth, dstHeight, false);
     }
 
-    return inSampleSize;
-  }
+    public static int calculateInSampleSize(int width, int height, int reqWidth) {
+        // setting reqWidth matching to desired 1:1 ratio and screen-size
+        if (width < height) {
+            reqWidth = (height / width) * reqWidth;
+        } else {
+            reqWidth = (width / height) * reqWidth;
+        }
 
-  public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-    int width = image.getWidth();
-    int height = image.getHeight();
+        int inSampleSize = 1;
 
-    float bitmapRatio = (float) width / (float) height;
-    if (bitmapRatio > 1) {
-      width = maxSize;
-      height = (int) (width / bitmapRatio);
-    } else {
-      height = maxSize;
-      width = (int) (height * bitmapRatio);
+        if (height > reqWidth || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqWidth
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
-    return Bitmap.createScaledBitmap(image, width, height, true);
-  }
+
+    static File compressImage(File imageFile, int reqWidth, int reqHeight,
+                              Bitmap.CompressFormat compressFormat, int quality, String destinationPath)
+            throws IOException {
+        FileOutputStream fileOutputStream = null;
+        File file = new File(destinationPath).getParentFile();
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        try {
+            fileOutputStream = new FileOutputStream(destinationPath);
+            // write the compressed bitmap at the destination specified by destinationPath.
+            decodeSampledBitmapFromFile(imageFile, reqWidth, reqHeight)
+                    .compress(compressFormat, quality, fileOutputStream);
+        } finally {
+            if (fileOutputStream != null) {
+                fileOutputStream.flush();
+                fileOutputStream.close();
+            }
+        }
+
+        return new File(destinationPath);
+    }
+
+    static Bitmap decodeSampledBitmapFromFile(File imageFile, int reqWidth, int reqHeight)
+            throws IOException {
+        // First decode with inJustDecodeBounds=true to check dimensions
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+
+        Bitmap scaledBitmap = BitmapFactory.decodeFile(imageFile.getAbsolutePath(), options);
+
+        //check the rotation of the image and display it properly
+        ExifInterface exif;
+        exif = new ExifInterface(imageFile.getAbsolutePath());
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
+        Matrix matrix = new Matrix();
+        if (orientation == 6) {
+            matrix.postRotate(90);
+        } else if (orientation == 3) {
+            matrix.postRotate(180);
+        } else if (orientation == 8) {
+            matrix.postRotate(270);
+        }
+        scaledBitmap = Bitmap
+                .createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix,
+                        true);
+        return scaledBitmap;
+    }
+
+    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth,
+                                             int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
 }

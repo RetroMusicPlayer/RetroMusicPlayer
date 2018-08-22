@@ -44,6 +44,7 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment;
+import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -58,6 +59,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
     private static final String TAG = "MainActivity";
     private static final int APP_USER_INFO_REQUEST = 9003;
     private static final int REQUEST_CODE_THEME = 9002;
+
+    public static final int LIBRARY = 1;
+    public static final int FOLDERS = 3;
+    public static final int HOME = 0;
 
     @Nullable
     MainActivityFragmentCallbacks currentFragment;
@@ -83,7 +88,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         }
     };
 
-
     @Override
     protected View createContentView() {
         @SuppressLint("InflateParams")
@@ -100,19 +104,20 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
 
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.VISIBLE);
-
         drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) ->
                 windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
 
         if (savedInstanceState == null) {
-            setCurrentFragment(PreferenceUtil.getInstance(this).getLastPage());
+            setCurrentFragment(PreferenceUtil.getInstance(this).getLastMusicChooser());
         } else {
             restoreCurrentFragment();
         }
-        getBottomNavigationView().setOnNavigationItemSelectedListener(this);
+        //getBottomNavigationView().setOnNavigationItemSelectedListener(this);
         checkShowChangelog();
+
+
     }
+
 
     private void checkShowChangelog() {
         try {
@@ -182,19 +187,18 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         return true;
     }
 
-    private void setCurrentFragment(int menuItem) {
+    public void setCurrentFragment(int menuItem) {
+        PreferenceUtil.getInstance(this).setLastMusicChooser(menuItem);
         switch (menuItem) {
-            case R.id.action_song:
-            case R.id.action_album:
-            case R.id.action_artist:
-            case R.id.action_playlist:
-                setCurrentFragment(LibraryFragment.newInstance(menuItem), false, LibraryFragment.TAG);
-                break;
             default:
-            case R.id.action_home:
-                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ?
-                                BannerHomeFragment.newInstance() : HomeFragment.newInstance(), false,
-                        HomeFragment.TAG);
+            case LIBRARY:
+                setCurrentFragment(LibraryFragment.newInstance(), false, LibraryFragment.TAG);
+                break;
+            case FOLDERS:
+                setCurrentFragment(FoldersFragment.newInstance(this), false, FoldersFragment.TAG);
+                break;
+            case HOME:
+                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? HomeFragment.newInstance() : BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
                 break;
         }
     }
@@ -268,7 +272,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         }
         return id;
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

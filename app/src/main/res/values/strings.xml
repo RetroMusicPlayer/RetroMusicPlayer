@@ -121,6 +121,7 @@
     <string name="card">Card</string>
     <string name="card_color_style">Colored Card</string>
     <string name="card_circular_style">Circular</string>
+    <string name="image">Image</string>
     <string name="card_style">Card</string>
 
     <string name="cast">Cast</string>

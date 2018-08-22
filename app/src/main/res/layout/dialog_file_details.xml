@@ -8,6 +8,7 @@
     tools:ignore="NewApi,RtlSymmetry">
 
     <TextView
+        android:id="@+id/title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:paddingTop="16dp"
+        android:textColor="?android:attr/textColorPrimary"
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 

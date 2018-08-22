@@ -32,10 +32,13 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.detail_content_frame)
     @Nullable
     FrameLayout detailsFrame;
@@ -89,12 +92,12 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
     private void setupToolbar() {
         title.setTextColor(ThemeStore.textColorPrimary(this));
         int primaryColor = ThemeStore.primaryColor(this);
-        appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        appBarLayout.setBackgroundColor(primaryColor);
         setTitle(null);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
 

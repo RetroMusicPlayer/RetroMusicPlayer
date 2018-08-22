@@ -12,7 +12,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SchedulerProvider implements BaseSchedulerProvider {
     @NonNull
-    private static SchedulerProvider INSTANCE ;
+    private static SchedulerProvider INSTANCE;
 
     public SchedulerProvider() {
     }

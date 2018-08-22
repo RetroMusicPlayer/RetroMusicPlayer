@@ -72,40 +72,55 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     @BindView(R.id.app_bar)
     @Nullable
     AppBarLayout appBarLayout;
+
     @BindView(R.id.collapsing_toolbar)
     @Nullable
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     @BindView(R.id.image)
     ImageView image;
+
     @BindView(R.id.biography)
     TextView biographyTextView;
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
     @BindView(R.id.album_recycler_view)
     RecyclerView albumRecyclerView;
+
     @BindView(R.id.album_title)
     AppCompatTextView albumTitle;
+
     @BindView(R.id.song_title)
     AppCompatTextView songTitle;
+
     @BindView(R.id.biography_title)
     AppCompatTextView biographyTitle;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.action_shuffle_all)
     FloatingActionButton shuffleButton;
+
     @BindView(R.id.gradient_background)
     @Nullable
     View background;
+
     @BindView(R.id.image_container)
     @Nullable
     View imageContainer;
+
     @BindView(R.id.content)
     View contentContainer;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @Nullable
     private Spanned biography;
     private Artist artist;
@@ -125,7 +140,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         setDrawUnderStatusBar(true);
         super.onCreate(bundle);
         ButterKnife.bind(this);
-        setBottomBarVisibility(View.GONE);
+
         setNavigationbarColorAuto();
         setLightNavigationBar(true);
 

@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.fragments.base;
 
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
 
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment;
 

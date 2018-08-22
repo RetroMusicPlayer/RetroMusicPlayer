@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +43,8 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     TextView setButton;
     @BindView(R.id.action_cancel)
     TextView cancelButton;
+    @BindView(R.id.action_cancel_container)
+    View cancelButtonContainer;
 
     private int seekArcProgress;
     private TimerUpdater timerUpdater;
@@ -76,6 +77,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         clipDrawable.setColorFilter(dark, PorterDuff.Mode.SRC_IN);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -84,8 +86,6 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         seekArcProgress = PreferenceUtil.getInstance(getActivity()).getLastSleepTimerValue();
         updateTimeDisplayTime();
         seekArc.setProgress(seekArcProgress);
-
-        //noinspection ConstantConditions
         setProgressBarColor(ThemeStore.accentColor(getContext()));
 
         seekArc.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -161,6 +161,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
 
     private class TimerUpdater extends CountDownTimer {
         TimerUpdater() {
+            //noinspection ConstantConditions
             super(PreferenceUtil.getInstance(getActivity()).getNextSleepTimerElapsedRealTime() - SystemClock.elapsedRealtime(), 1000);
         }
 
@@ -173,6 +174,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         @Override
         public void onFinish() {
             cancelButton.setText(null);
+            cancelButtonContainer.setVisibility(View.GONE);
             //materialDialog.setActionButton(DialogAction.NEUTRAL, null);
         }
     }

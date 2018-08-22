@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.MediaStoreSignature;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.io.File;
@@ -22,6 +21,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover;
 import code.name.monkey.retromusic.interfaces.CabHolder;
@@ -35,10 +35,10 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
     private static final int FOLDER = 1;
 
     private final AppCompatActivity activity;
-    private List<File> dataSet;
     private final int itemLayoutRes;
     @Nullable
     private final Callbacks callbacks;
+    private List<File> dataSet;
 
     public SongFileAdapter(@NonNull AppCompatActivity activity, @NonNull List<File> songFiles, @LayoutRes int itemLayoutRes, @Nullable Callbacks callback, @Nullable CabHolder cabHolder) {
         super(activity, cabHolder, R.menu.menu_media_selection);
@@ -47,6 +47,13 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
         this.itemLayoutRes = itemLayoutRes;
         this.callbacks = callback;
         setHasStableIds(true);
+    }
+
+    public static String readableFileSize(long size) {
+        if (size <= 0) return size + " B";
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.##").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
     @Override
@@ -64,13 +71,14 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int index) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int index) {
         final File file = dataSet.get(index);
 
         holder.itemView.setActivated(isChecked(file));
@@ -128,13 +136,6 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
         }
     }
 
-    public static String readableFileSize(long size) {
-        if (size <= 0) return size + " B";
-        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
-        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
-        return new DecimalFormat("#,##0.##").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
-    }
-
     @Override
     public int getItemCount() {
         return dataSet.size();
@@ -160,6 +161,14 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
     @Override
     public String getSectionName(int position) {
         return String.valueOf(dataSet.get(position).getName().charAt(0)).toUpperCase();
+    }
+
+    public interface Callbacks {
+        void onFileSelected(File file);
+
+        void onFileMenuClicked(File file, View view);
+
+        void onMultipleItemAction(MenuItem item, ArrayList<File> files);
     }
 
     public class ViewHolder extends MediaEntryViewHolder {
@@ -202,13 +211,5 @@ public class SongFileAdapter extends AbsMultiSelectAdapter<SongFileAdapter.ViewH
         private boolean isPositionInRange(int position) {
             return position >= 0 && position < dataSet.size();
         }
-    }
-
-    public interface Callbacks {
-        void onFileSelected(File file);
-
-        void onFileMenuClicked(File file, View view);
-
-        void onMultipleItemAction(MenuItem item, ArrayList<File> files);
     }
 }

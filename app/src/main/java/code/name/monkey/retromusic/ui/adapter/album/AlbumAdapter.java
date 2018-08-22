@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.ui.adapter.album;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;

@@ -908,7 +908,7 @@ public class BottomNavigationViewEx extends BottomNavigationView {
     }
 
     public void enableShiftingMode(int position, boolean enable) {
-        getBottomNavigationItemView(position).setShiftingMode(enable);
+        //getBottomNavigationItemView(position).setShiftingMode(enable);
     }
 
     public void setItemBackground(int position, int background) {

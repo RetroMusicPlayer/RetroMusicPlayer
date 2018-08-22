@@ -74,6 +74,7 @@
                 android:layout_gravity="end|bottom"
                 app:cardBackgroundColor="@color/md_red_A400"
                 app:cardCornerRadius="6dp"
+                android:id="@+id/action_cancel_container"
                 app:cardUseCompatPadding="true">
 
                 <TextView

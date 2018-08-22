@@ -79,7 +79,7 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
@@ -155,9 +155,14 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        updatePlayPauseColor();
         updateRepeatState();
         updateShuffleState();
+
+        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+            lastPlaybackControlsColor = dark;
+        }
+
+        updatePlayPauseColor();
         updatePrevNextColor();
     }
 

@@ -18,6 +18,7 @@
         <item>@string/card_style</item>
         <item>@string/card_color_style</item>
         <item>@string/card_circular_style</item>
+        <item>@string/image</item>
     </string-array>
 
     <string-array name="pref_grid_style_list_values">
@@ -25,6 +26,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 
     <array name="pref_grid_style_layout">
@@ -32,6 +34,7 @@
         <item>@layout/item_card</item>
         <item>@layout/item_card_color</item>
         <item>@layout/item_grid_circle</item>
+        <item>@layout/image</item>
     </array>
 
     <string-array name="pref_general_theme_list_values">
@@ -152,4 +155,10 @@
     <string name="style1">Normal style</string>
     <string name="style2">Card style</string>
 
+    <array name="cast_expanded_controller_control_buttons">
+        <item>@id/cast_button_type_empty</item>
+        <item>@id/cast_button_type_skip_previous</item>
+        <item>@id/cast_button_type_skip_next</item>
+        <item>@id/cast_button_type_mute_toggle</item>
+    </array>
 </resources>

@@ -70,30 +70,42 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     private static final int TAG_EDITOR_REQUEST = 2001;
     @BindView(R.id.image)
     ImageView image;
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.song_title)
     AppCompatTextView songTitle;
+
     @BindView(R.id.action_shuffle_all)
     FloatingActionButton shuffleButton;
+
     @BindView(R.id.collapsing_toolbar)
     @Nullable
     CollapsingToolbarLayout collapsingToolbarLayout;
+
     @BindView(R.id.app_bar)
     @Nullable
     AppBarLayout appBarLayout;
+
     @BindView(R.id.content)
     View contentContainer;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.more_recycler_view)
     RecyclerView moreRecyclerView;
+
     @BindView(R.id.more_title)
     TextView moreTitle;
+
     @BindView(R.id.artist_image)
     ImageView artistImage;
 
@@ -114,7 +126,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
         supportPostponeEnterTransition();
         setupToolbarMarginHeight();
-        setBottomBarVisibility(View.GONE);
+
         setLightNavigationBar(true);
         setNavigationbarColorAuto();
 
@@ -132,9 +144,9 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         }
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setTitle(null);
+        setSupportActionBar(toolbar);
 
         if (toolbar != null && !PreferenceUtil.getInstance(this).getFullScreenMode()) {
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar
@@ -177,7 +189,9 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                         artistPairs);
                 break;
             case R.id.action_shuffle_all:
-                MusicPlayerRemote.openAndShuffleQueue(album.songs, true);
+                if (album.songs != null) {
+                    MusicPlayerRemote.openAndShuffleQueue(album.songs, true);
+                }
                 break;
         }
     }
@@ -315,7 +329,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         getMenuInflater().inflate(R.menu.menu_album_detail, menu);
         MenuItem sortOrder = menu.findItem(R.id.action_sort_order);
         setUpSortOrderMenu(sortOrder.getSubMenu());
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

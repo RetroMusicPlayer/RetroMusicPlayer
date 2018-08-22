@@ -1,14 +1,15 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity.folders;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -22,6 +23,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -41,13 +43,16 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -58,12 +63,15 @@ import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.LoaderIds;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
+import code.name.monkey.retromusic.misc.NavigationIconClickListener;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.adapter.SongFileAdapter;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.FileUtil;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
@@ -85,7 +93,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     protected static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = LoaderIds.FOLDERS_FRAGMENT;
     @BindView(R.id.coordinator_layout)
-    CoordinatorLayout coordinatorLayout;
+    View coordinatorLayout;
 
     @BindView(R.id.container)
     View container;
@@ -102,13 +110,25 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @BindView(R.id.bread_crumbs)
     BreadCrumbLayout breadCrumbs;
 
-    @BindView(R.id.appbar)
+    @BindView(R.id.app_bar)
     AppBarLayout appbar;
 
     @BindView(R.id.recycler_view)
     FastScrollRecyclerView recyclerView;
 
-    Comparator<File> fileComparator = (lhs, rhs) -> {
+    @BindView(R.id.action_folders)
+    TextView actionFolders;
+
+    @BindView(R.id.menu_container)
+    View menuContainer;
+
+    @BindDrawable(R.drawable.ic_menu_white_24dp)
+    Drawable menu;
+
+    @BindDrawable(R.drawable.ic_close_white_24dp)
+    Drawable close;
+
+    private Comparator<File> fileComparator = (lhs, rhs) -> {
         if (lhs.isDirectory() && !rhs.isDirectory()) {
             return -1;
         } else if (!lhs.isDirectory() && rhs.isDirectory()) {
@@ -118,7 +138,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     (rhs.getName());
         }
     };
-
     private Unbinder unbinder;
     private SongFileAdapter adapter;
     private MaterialCab cab;
@@ -137,7 +156,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         frag.setArguments(b);
         return frag;
     }
-
 
     public static File getDefaultStartDirectory() {
         File musicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
@@ -184,6 +202,25 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+    @OnClick({R.id.action_library, R.id.action_settings, R.id.action_home})
+    void startUserInfo(View view) {
+        Activity activity = getActivity();
+        if (activity != null) {
+            switch (view.getId()) {
+                case R.id.action_home:
+                    getMainActivity().setCurrentFragment(MainActivity.HOME);
+                    break;
+                case R.id.action_library:
+                    getMainActivity().setCurrentFragment(MainActivity.LIBRARY);
+                    break;
+                case R.id.action_settings:
+                    NavigationUtil.goToSettings(activity);
+                    break;
+
+            }
+        }
+    }
+
     @Nullable
     private BreadCrumbLayout.Crumb getActiveCrumb() {
         return breadCrumbs != null && breadCrumbs.size() > 0 ? breadCrumbs
@@ -221,10 +258,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         setStatusbarColorAuto(view);
         getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
-        getMainActivity().setBottomBarVisibility(View.GONE);
 
         setUpAppbarColor();
-        setUpToolbar();
         setUpBreadCrumbs();
         setUpRecyclerView();
         setUpAdapter();
@@ -232,24 +267,37 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
+        int accentColor = ThemeStore.accentColor(getContext());
+        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        actionFolders.setTextColor(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(accentColor)));
+        actionFolders.setBackgroundResource(R.drawable.et_bg_circular_top_corners);
+        TintHelper.setTintAuto(actionFolders, ThemeStore.accentColor(getContext()), true);
+
+
         //noinspection ConstantConditions
-        int primaryColor = ThemeStore.primaryColor(getActivity());
+        int primaryColor = ThemeStore.primaryColor(getContext());
+        int darkPrimaryColor = ColorUtil.darkenColor(primaryColor);
+
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        //noinspection ConstantConditions
+        getActivity().setTitle(null);
+        getMainActivity().setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new NavigationIconClickListener(
+                getContext(),
+                container,
+                menuContainer,
+                new AccelerateDecelerateInterpolator(),
+                menu,
+                close
+        ));
         TintHelper.setTintAuto(container, primaryColor, true);
-        appbar.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(primaryColor);
-        //breadCrumbs.setBackgroundColor(primaryColor);
+        appbar.setBackgroundColor(darkPrimaryColor);
+        toolbar.setBackgroundColor(darkPrimaryColor);
+        coordinatorLayout.setBackgroundColor(darkPrimaryColor);
+
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
         appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
-    }
-
-    private void setUpToolbar() {
-        //noinspection ConstantConditions
-        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        //noinspection ConstantConditions
-        getActivity().setTitle(R.string.folders);
-        getMainActivity().setSupportActionBar(toolbar);
     }
 
     private void setUpBreadCrumbs() {
@@ -387,7 +435,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                             String.format(getString(R.string.not_listed_in_media_store), file1.getName())),
                             Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_scan,
-                                    v -> new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths))
+                                    v -> new ListPathsAsyncTask(getActivity(), this::scanPaths)
                                             .execute(new ListPathsAsyncTask.LoadingInfo(finalFile, AUDIO_FILE_FILTER)))
                             .setActionTextColor(ThemeStore.accentColor(getActivity()))
                             .show();
@@ -441,7 +489,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                 Toast.LENGTH_SHORT).show();
                         return true;
                     case R.id.action_scan:
-                        new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths))
+                        new ListPathsAsyncTask(getActivity(), this::scanPaths)
                                 .execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));
                         return true;
                 }
@@ -468,7 +516,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                         getFileComparator()));
                         return true;
                     case R.id.action_scan:
-                        new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths))
+                        new ListPathsAsyncTask(getActivity(), this::scanPaths)
                                 .execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));
                         return true;
                 }

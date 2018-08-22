@@ -9,7 +9,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,8 +18,6 @@ import code.name.monkey.retromusic.preferences.BlacklistPreference;
 import code.name.monkey.retromusic.preferences.BlacklistPreferenceDialog;
 import code.name.monkey.retromusic.preferences.NowPlayingScreenPreference;
 import code.name.monkey.retromusic.preferences.NowPlayingScreenPreferenceDialog;
-import code.name.monkey.retromusic.ui.activities.SettingsActivity;
-import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 
 /**
@@ -56,22 +53,11 @@ public abstract class AbsSettingsFragment extends ATEPreferenceFragmentCompat {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setDividerHeight(0);
         setDivider(new ColorDrawable(Color.TRANSPARENT));
-
-        //noinspection ConstantConditions
-        getListView().setPadding(DensityUtil.dip2px(getContext(), 0), 0, 0, 0);
-        getListView().addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (getActivity() != null) {
-                    ((SettingsActivity) getActivity()).addAppbarLayoutElevation(recyclerView.canScrollVertically(RecyclerView.NO_POSITION) ? 8f : 0f);
-                }
-            }
-        });
         getListView().setBackgroundColor(ThemeStore.primaryColor(getContext()));
         getListView().setOverScrollMode(View.OVER_SCROLL_NEVER);
+        getListView().setPadding(0, 0, 0, 0);
+        getListView().setPaddingRelative(0, 0, 0, 0);
         invalidateSettings();
     }
 

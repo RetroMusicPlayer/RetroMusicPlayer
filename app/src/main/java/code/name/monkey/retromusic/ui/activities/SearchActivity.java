@@ -6,16 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.transition.TransitionManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +24,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.mvp.contract.SearchContract;
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter;
@@ -51,23 +45,11 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @BindView(android.R.id.empty)
     TextView empty;
 
-    @BindView(R.id.title)
-    TextView title;
-
     @BindView(R.id.search_view)
     EditText searchView;
-
-    @BindView(R.id.root)
-    CoordinatorLayout container;
-
-    @BindView(R.id.app_bar)
-    AppBarLayout appbar;
 
     @BindView(R.id.status_bar)
     View statusBar;
@@ -155,26 +137,12 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
     }
 
     private void setUpToolBar() {
-        title.setTextColor(ThemeStore.textColorPrimary(this));
-        int primaryColor = ThemeStore.primaryColor(this);
-        toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        appbar.setBackgroundColor(primaryColor);
-        setSupportActionBar(toolbar);
         setTitle(null);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void search(@NonNull String query) {
         this.query = query.trim();
-        TransitionManager.beginDelayedTransition(toolbar);
         micIcon.setVisibility(query.length() > 0 ? View.GONE : View.VISIBLE);
         searchPresenter.search(query);
     }
@@ -242,15 +210,21 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
         }
     }
 
-    @OnClick(R.id.voice_search)
-    void searchImageView() {
-        startMicSearch();
+    @OnClick({R.id.voice_search, R.id.back})
+    void searchImageView(View view) {
+        switch (view.getId()) {
+            case R.id.voice_search:
+                startMicSearch();
+                break;
+            case R.id.back:
+                finish();
+                break;
+        }
     }
 
     private void startMicSearch() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent
-                .putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt));
         try {

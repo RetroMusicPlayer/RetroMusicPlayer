@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener;
-
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity;
 
 /**

@@ -21,11 +21,12 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 import java.util.ArrayList;
 
 public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
+    @BindView(R.id.title)
+    TextView title;
 
     @BindView(R.id.action_delete)
     TextView delete;
-    @BindView(R.id.title)
-    TextView title;
+
     @BindView(R.id.action_cancel)
     TextView cancel;
 
@@ -63,28 +64,26 @@ public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
         dismiss();
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        delete.setTextColor(ThemeStore.textColorPrimary(getContext()));
+
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        delete.setTextColor(ThemeStore.textColorPrimary(getContext()));
         cancel.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
 
         //noinspection unchecked,ConstantConditions
         final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
-        int title;
         CharSequence content;
         if (songs != null) {
             if (songs.size() > 1) {
-                title = R.string.delete_songs_title;
                 content = Html.fromHtml(getString(R.string.delete_x_songs, songs.size()));
             } else {
-                title = R.string.delete_song_title;
                 content = Html.fromHtml(getString(R.string.delete_song_x, songs.get(0).title));
             }
-            this.title.setText(title);
-            this.delete.setText(content);
+            this.title.setText(content);
         }
     }
 

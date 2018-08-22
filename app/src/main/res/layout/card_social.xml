@@ -39,7 +39,6 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -55,10 +54,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
 
 
                     <android.support.v7.widget.AppCompatTextView
@@ -84,7 +83,6 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -100,10 +98,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
 
 
                     <android.support.v7.widget.AppCompatTextView
@@ -129,7 +127,6 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -145,10 +142,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"
@@ -173,7 +170,6 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -189,10 +185,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"
@@ -217,7 +213,6 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
-                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -234,10 +229,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingBottom="8dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
-                    android:paddingTop="8dp">
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
 
 
                     <android.support.v7.widget.AppCompatTextView

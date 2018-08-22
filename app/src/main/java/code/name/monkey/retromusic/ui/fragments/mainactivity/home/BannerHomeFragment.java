@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.fragments.mainactivity.home;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,11 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AnticipateInterpolator;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,18 +29,22 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.ArrayList;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.HomeOptionDialog;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.loaders.SongLoader;
+import code.name.monkey.retromusic.misc.NavigationIconClickListener;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Genre;
@@ -44,6 +54,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
 import code.name.monkey.retromusic.mvp.contract.HomeContract;
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter;
+import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.adapter.GenreAdapter;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWithAdapter;
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter;
@@ -59,45 +70,70 @@ import io.reactivex.schedulers.Schedulers;
 
 import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
-public class BannerHomeFragment extends AbsMainActivityFragment implements
-        MainActivityFragmentCallbacks,
-        HomeContract.HomeView {
+public class BannerHomeFragment extends AbsMainActivityFragment implements MainActivityFragmentCallbacks, HomeContract.HomeView {
 
     private static final String TAG = "HomeFragment";
     Unbinder unbinder;
-    @BindView(R.id.home_toolbar)
+
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.appbar)
     AppBarLayout appbar;
+
+    @BindView(R.id.menu_container)
+    View menuContainer;
+
     @BindView(R.id.user_image)
     CircularImageView userImage;
+
     @BindView(R.id.recycler_view)
     RecyclerView recentArtistRV;
+
     @BindView(R.id.recent_album)
     RecyclerView recentAlbumRV;
+
     @BindView(R.id.top_artist)
     RecyclerView topArtistRV;
+
     @BindView(R.id.top_album)
     MetalRecyclerViewPager topAlbumRV;
+
     @BindView(R.id.recent_artist_container)
     View recentArtistContainer;
+
     @BindView(R.id.recent_albums_container)
     View recentAlbumsContainer;
+
     @BindView(R.id.top_artist_container)
     View topArtistContainer;
+
     @BindView(R.id.top_albums_container)
     View topAlbumContainer;
+
     @BindView(R.id.genres)
     RecyclerView genresRecyclerView;
+
     @BindView(R.id.genre_container)
     LinearLayout genreContainer;
-    @BindView(R.id.container)
-    View container;
+
+    @BindView(R.id.content_container)
+    View contentContainer;
+
+    @BindView(R.id.coordinator_layout)
+    View coordinatorLayout;
+
     @BindView(R.id.title)
     TextView title;
-    @BindView(R.id.search)
-    ImageView search;
 
+    @BindView(R.id.action_home)
+    TextView actionHome;
+
+    @BindDrawable(R.drawable.ic_menu_white_24dp)
+    Drawable menu;
+
+    @BindDrawable(R.drawable.ic_close_white_24dp)
+    Drawable close;
 
     private HomePresenter homePresenter;
     private CompositeDisposable disposable;
@@ -109,7 +145,6 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
         return fragment;
     }
 
-
     private void loadImageFromStorage(ImageView imageView) {
         //noinspection ConstantConditions
         disposable.add(new Compressor(getContext())
@@ -119,7 +154,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
                         new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap,
                         throwable -> imageView.setImageDrawable(ContextCompat
@@ -147,9 +182,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setStatusbarColorAuto(view);
-        getMainActivity().getSlidingUpPanelLayout().setShadowHeight(8);
-        getMainActivity().setBottomBarVisibility(View.VISIBLE);
-
+        setTextColor();
         setupToolbar();
         loadImageFromStorage(userImage);
 
@@ -159,19 +192,34 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        //noinspection ConstantConditions
         int primaryColor = ThemeStore.primaryColor(getContext());
-        appbar.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(primaryColor);
+        int darkPrimaryColor = ColorUtil.darkenColor(primaryColor);
+
+        toolbar.setBackgroundColor(darkPrimaryColor);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        appbar.setBackgroundColor(darkPrimaryColor);
         appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
-
-        getActivity().setTitle(R.string.app_name);
+        getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new NavigationIconClickListener(
+                getContext(),
+                contentContainer,
+                menuContainer,
+                new AccelerateDecelerateInterpolator(),
+                menu,
+                close
+        ));
+        coordinatorLayout.setBackgroundColor(ColorUtil.darkenColor(primaryColor));
+        TintHelper.setTintAuto(contentContainer, primaryColor, true);
+    }
 
+    private void setTextColor() {
+        int accentColor = ThemeStore.accentColor(getContext());
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        TintHelper.setTintAuto(search, ThemeStore.textColorPrimary(getContext()), false);
-        TintHelper.setTintAuto(container, primaryColor, true);
+        actionHome.setTextColor(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(accentColor)));
+        actionHome.setBackgroundResource(R.drawable.et_bg_circular_top_corners);
+        TintHelper.setTintAuto(actionHome, accentColor, true);
     }
 
     @Override
@@ -227,7 +275,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
 
     private void checkPadding() {
         int height = getResources().getDimensionPixelSize(R.dimen.mini_player_height);
-        container.setPadding(0, 0, 0, MusicPlayerRemote.getPlayingQueue().isEmpty() ? height * 2 : 0);
+        contentContainer.setPadding(0, 0, 0, MusicPlayerRemote.getPlayingQueue().isEmpty() ? height * 2 : 0);
     }
 
     @Override
@@ -293,15 +341,14 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
     }
 
 
-    @OnClick({R.id.last_added, R.id.top_played, R.id.action_shuffle, R.id.history,
-            R.id.user_image, R.id.search})
+    @OnClick({R.id.last_added, R.id.top_played, R.id.search, R.id.action_shuffle, R.id.history,
+            R.id.user_image, R.id.action_library, R.id.action_settings, R.id.action_folders})
     void startUserInfo(View view) {
         Activity activity = getActivity();
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.action_shuffle:
-                    MusicPlayerRemote
-                            .openAndShuffleQueue(SongLoader.getAllSongs(activity).blockingFirst(), true);
+                    MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(activity).blockingFirst(), true);
                     break;
                 case R.id.last_added:
                     NavigationUtil.goToPlaylistNew(activity, new LastAddedPlaylist(activity));
@@ -312,20 +359,22 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements
                 case R.id.history:
                     NavigationUtil.goToPlaylistNew(activity, new HistoryPlaylist(activity));
                     break;
-                case R.id.search:
-                    NavigationUtil.goToSearch(activity);
-                    break;
                 case R.id.user_image:
                     new HomeOptionDialog().show(getFragmentManager(), TAG);
                     break;
+                case R.id.action_folders:
+                    getMainActivity().setCurrentFragment(MainActivity.FOLDERS);
+                    break;
+                case R.id.action_library:
+                    getMainActivity().setCurrentFragment(MainActivity.LIBRARY);
+                    break;
+                case R.id.action_settings:
+                    NavigationUtil.goToSettings(activity);
+                    break;
+                case R.id.search:
+                    NavigationUtil.goToSearch(activity);
+                    break;
             }
         }
-    }
-
-    @Override
-    public void onPlayingMetaChanged() {
-        super.onPlayingMetaChanged();
-        homePresenter.loadRecentArtists();
-        homePresenter.loadRecentAlbums();
     }
 }

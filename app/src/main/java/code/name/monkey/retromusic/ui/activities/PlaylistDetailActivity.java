@@ -94,7 +94,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
-        setBottomBarVisibility(View.GONE);
 
         playlist = getIntent().getExtras().getParcelable(EXTRA_PLAYLIST);
 

@@ -2,17 +2,17 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.1'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
 
-        renderscriptTargetApi 28 //must match target sdk and build tools
+        renderscriptTargetApi 27 //must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 210
-        versionName '1.7.100'
+        versionCode 214
+        versionName '1.7.200'
 
         multiDexEnabled true
 
@@ -26,11 +26,12 @@ android {
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
+            resValue "string", "cast_app_id", "1234"
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
+            resValue "string", "cast_app_id", "BA9C3F5E"
         }
     }
     flavorDimensions "default"
@@ -60,16 +61,17 @@ android {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
 
-    configurations.all {
+    /*configurations.all {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             def requested = details.requested
             if (requested.group == 'com.android.support') {
-                if (!requested.name.startsWith("multidex")) {
-                    details.useVersion '27.1.1'
+                if (!(requested.name.startsWith("multidex") || requested.name.startsWith("mediarouter"))) {
+                    details.useVersion $supportLibVersion
                 }
             }
         }
-    }
+    }*/
+
 }
 
 def getProperties(String fileName) {
@@ -90,10 +92,10 @@ static def getDate() {
 }
 
 ext {
-    supportLibVersion = "27.1.1"
+    supportLibVersion = "28.0.0-rc01"
     firebase = "11.8.0"
     retrofit = "2.3.0"
-    butterKnife = "8.8.1"
+    butterKnife = "9.0.0-SNAPSHOT"
     materialDialog = "0.9.6.0"
 }
 dependencies {
@@ -108,9 +110,14 @@ dependencies {
     implementation "com.android.support:support-annotations:$supportLibVersion"
     implementation "com.android.support:preference-v7:$supportLibVersion"
     implementation "com.android.support:preference-v14:$supportLibVersion"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+
+    //For casting
+    implementation "com.android.support:mediarouter-v7:28.0.0-alpha5"
+    implementation 'com.google.android.gms:play-services-cast-framework:16.0.1'
+
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
     implementation "com.jakewharton:butterknife:$butterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
@@ -119,8 +126,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
@@ -137,4 +144,5 @@ dependencies {
     implementation project(':appthemehelper')
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
 }

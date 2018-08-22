@@ -96,8 +96,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
-        setBottomBarVisibility(View.GONE);
-
         RetroUtil.statusBarHeight(statusBar);
 
         genre = getIntent().getParcelableExtra(EXTRA_GENRE_ID);

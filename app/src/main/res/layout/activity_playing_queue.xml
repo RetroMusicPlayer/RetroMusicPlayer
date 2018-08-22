@@ -39,14 +39,8 @@
 
                     <TextView
                         android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/queue"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        tools:ignore="MissingPrefix" />
+                        style="@style/BigTitleTextAppearance"
+                        android:text="@string/queue"  />
 
                 </android.support.v7.widget.Toolbar>
             </FrameLayout>

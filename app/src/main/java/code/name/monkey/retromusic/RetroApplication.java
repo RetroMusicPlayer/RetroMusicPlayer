@@ -1,16 +1,15 @@
 package code.name.monkey.retromusic;
 
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.multidex.MultiDexApplication;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.bumptech.glide.Glide;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager;
-import code.name.monkey.retromusic.ui.activities.ErrorHandlerActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class RetroApplication extends MultiDexApplication {
@@ -102,6 +101,12 @@ public class RetroApplication extends MultiDexApplication {
         //Intent intent = new Intent(this, ErrorHandlerActivity.class);
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //startActivity(intent);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        Glide.with(this).onLowMemory();
     }
 
     @Override

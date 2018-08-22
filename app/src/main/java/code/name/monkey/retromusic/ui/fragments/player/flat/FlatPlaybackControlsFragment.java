@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.flat;
 
 import android.animation.ObjectAnimator;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

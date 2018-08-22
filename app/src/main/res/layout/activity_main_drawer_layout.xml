@@ -3,7 +3,8 @@
     android:id="@+id/parent_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <android.support.design.internal.ScrimInsetsFrameLayout
         android:id="@+id/drawer_content_container"

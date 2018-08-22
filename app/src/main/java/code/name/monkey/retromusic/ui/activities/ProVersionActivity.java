@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -43,11 +44,15 @@ public class ProVersionActivity extends AbsBaseActivity implements
 
     @BindView(R.id.purchase_button)
     View purchaseButton;
-    @BindView(R.id.app_bar)
 
+    @BindView(R.id.app_bar)
     AppBarLayout appBar;
+
     @BindView(R.id.status_bar)
     View statusBar;
+
+    @BindView(R.id.title)
+    TextView title;
 
     private BillingProcessor billingProcessor;
     private AsyncTask restorePurchaseAsyncTask;

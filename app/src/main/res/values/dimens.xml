@@ -21,10 +21,6 @@
 
     <dimen name="tagEditorHeaderVariableSpace">100dp</dimen>
 
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
     <dimen name="pause_bar_width">5dp</dimen>
     <dimen name="pause_bar_distance">4dp</dimen>
     <dimen name="pause_bar_height">16dp</dimen>
@@ -63,6 +59,11 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="mini_player_height">48dp</dimen>
     <dimen name="mini_player_height_expanded">104dp</dimen>
 
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
     <!--App Widgets-->
     <dimen name="app_widget_classic_height">96dp</dimen>
     <dimen name="app_widget_classic_image_size">96dp</dimen>
@@ -90,5 +91,6 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
 
     <dimen name="column_width">80dp</dimen>
     <dimen name="icon_notification_dimen">32dp</dimen>
-  <dimen name="overlap_toolbar_height">-12dp</dimen>
+    <dimen name="overlap_toolbar_height">-12dp</dimen>
+
 </resources>

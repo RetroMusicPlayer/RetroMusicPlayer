@@ -15,9 +15,9 @@ import android.support.annotation.Nullable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
+import code.name.monkey.retromusic.interfaces.MusicServiceEventListener;
 
 import static code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED;
 import static code.name.monkey.retromusic.Constants.META_CHANGED;
@@ -27,7 +27,7 @@ import static code.name.monkey.retromusic.Constants.REPEAT_MODE_CHANGED;
 import static code.name.monkey.retromusic.Constants.SHUFFLE_MODE_CHANGED;
 
 
-public abstract class AbsMusicServiceActivity extends AbsBaseActivity implements MusicServiceEventListener {
+public abstract class AbsMusicServiceActivity extends AbsCastActivity implements MusicServiceEventListener {
     public static final String TAG = AbsMusicServiceActivity.class.getSimpleName();
 
     private final ArrayList<MusicServiceEventListener> mMusicServiceEventListeners = new ArrayList<>();
@@ -52,6 +52,7 @@ public abstract class AbsMusicServiceActivity extends AbsBaseActivity implements
         });
 
         setPermissionDeniedMessage(getString(R.string.permission_external_storage_denied));
+
     }
 
     @Override
@@ -182,6 +183,7 @@ public abstract class AbsMusicServiceActivity extends AbsBaseActivity implements
     protected String[] getPermissionsToRequest() {
         return new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     }
+
 
     private static final class MusicStateReceiver extends BroadcastReceiver {
 

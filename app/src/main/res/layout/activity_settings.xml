@@ -7,10 +7,10 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
-        app:elevation="0dp"
-        android:elevation="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -27,14 +27,8 @@
 
                 <TextView
                     android:id="@+id/title"
-                    fontPath="@string/circular_std_black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/action_settings"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    tools:ignore="MissingPrefix" />
+                    style="@style/BigTitleTextAppearance"
+                    android:text="@string/action_settings" />
 
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>

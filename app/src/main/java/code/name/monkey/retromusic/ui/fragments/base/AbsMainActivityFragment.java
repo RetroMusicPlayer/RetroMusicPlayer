@@ -21,7 +21,6 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-
         getMainActivity().setNavigationbarColorAuto();
         getMainActivity().setLightNavigationBar(true);
         getMainActivity().setTaskDescriptionColorAuto();
@@ -39,7 +38,7 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
                     statusBar.setBackgroundColor(color);
                     getMainActivity().setLightStatusbarAuto(color);
                 } else {
-                    statusBar.setBackgroundColor(ColorUtil.darkenColor(color));
+                    statusBar.setBackgroundColor(color);
                 }
             }
         }
@@ -48,6 +47,6 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
     public void setStatusbarColorAuto(View view) {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         //noinspection ConstantConditions
-        setStatusbarColor(view, ThemeStore.primaryColor(getContext()));
+        setStatusbarColor(view, ColorUtil.darkenColor(ThemeStore.primaryColor(getContext())));
     }
 }

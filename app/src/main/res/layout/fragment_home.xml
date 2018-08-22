@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/retro_backdrop" />
+
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         tools:ignore="UnusedAttribute">
 
-        <code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout
+        <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="196dp"
@@ -34,52 +38,39 @@
                 style="@style/Toolbar"
                 tools:ignore="UnusedAttribute">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/app_name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    tools:ignore="MissingPrefix" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:id="@+id/search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:background="?roundSelector"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_search_white_24dp" />
+                <code.name.monkey.retromusic.views.CircularImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="16dp"
+                    app:civ_border="false" />
 
-                    <TextView
-                        android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/app_name"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        tools:ignore="MissingPrefix" />
-
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="0"
-                        app:civ_border="false" />
-                </LinearLayout>
             </android.support.v7.widget.Toolbar>
-        </code.name.monkey.retromusic.views.SansFontCollapsingToolbarLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/container"
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_circular_top_corners"
         android:elevation="@dimen/card_elevation"
         app:behavior_overlapTop="24dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,5 +84,6 @@
 
             <include layout="@layout/home_section_content" />
         </LinearLayout>
+
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

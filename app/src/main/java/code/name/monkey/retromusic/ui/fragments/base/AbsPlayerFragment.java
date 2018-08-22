@@ -34,13 +34,12 @@ import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
-public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements
-        Toolbar.OnMenuItemClickListener, PaletteColorHolder {
-
+public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
     public static final String TAG = AbsPlayerFragment.class.getSimpleName();
     private boolean isToolbarShown = true;
     private Callbacks callbacks;
     private AsyncTask updateIsFavoriteTask;
+
 
     @Override
     public void onAttach(Context context) {
@@ -48,9 +47,7 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
         try {
             callbacks = (Callbacks) context;
         } catch (ClassCastException e) {
-            throw new RuntimeException(
-                    context.getClass().getSimpleName() + " must implement " + Callbacks.class
-                            .getSimpleName());
+            throw new RuntimeException(context.getClass().getSimpleName() + " must implement " + Callbacks.class.getSimpleName());
         }
     }
 

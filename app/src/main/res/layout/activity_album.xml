@@ -64,15 +64,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingStart="8dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="8dp">
+                android:padding="12dp">
 
                 <code.name.monkey.retromusic.views.CircularImageView
                     android:id="@+id/artist_image"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
-                    android:layout_marginStart="8dp"
                     android:layout_weight="0"
                     app:civ_border="false"
                     app:civ_shadow="false" />

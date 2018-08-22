@@ -34,12 +34,11 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class MusicPlayerRemote {
-
     public static final String TAG = MusicPlayerRemote.class.getSimpleName();
     private static final WeakHashMap<Context, ServiceBinder> mConnectionMap = new WeakHashMap<>();
     @Nullable
     public static MusicService musicService;
-
+    
     public static ServiceToken bindToService(@NonNull final Context context,
                                              final ServiceConnection callback) {
         Activity realActivity = ((Activity) context).getParent();
@@ -444,6 +443,10 @@ public class MusicPlayerRemote {
         return musicService != null;
     }
 
+    @interface PlaybackLocation {
+        int REMOTE = 0;
+        int LOCAL = 1;
+    }
 
     public static final class ServiceBinder implements ServiceConnection {
         private final ServiceConnection mCallback;

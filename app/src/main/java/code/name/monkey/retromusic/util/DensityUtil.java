@@ -39,7 +39,7 @@ public class DensityUtil {
      * Converts sp to px
      *
      * @param context Context
-     * @param sp  the value in sp
+     * @param sp      the value in sp
      * @return int
      */
     public static int dip2sp(Context context, float sp) {

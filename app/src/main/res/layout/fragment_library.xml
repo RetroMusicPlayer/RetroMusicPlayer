@@ -9,88 +9,90 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         tools:ignore="UnusedAttribute">
 
         <include layout="@layout/status_bar" />
 
     </FrameLayout>
 
-    <android.support.design.widget.CoordinatorLayout
+    <FrameLayout
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        <android.support.design.widget.AppBarLayout
-            android:id="@+id/app_bar"
+        <include layout="@layout/retro_backdrop" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:titleEnabled="false">
+                android:layout_weight="0"
+                android:elevation="0dp"
+                app:elevation="0dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_collapseMode="pin">
 
+                    <android.support.v7.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar48"
+                        tools:ignore="UnusedAttribute">
+
+                        <TextView
+                            android:id="@+id/title"
+                            fontPath="@string/circular_std_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@string/app_name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            tools:ignore="MissingPrefix" />
+
+                    </android.support.v7.widget.Toolbar>
+
                     <ViewStub
                         android:id="@+id/cab_stub"
                         android:layout_width="match_parent"
                         android:layout_height="48dp" />
-
-                    <android.support.v7.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        style="@style/Toolbar48"
-                        app:title=""
-                        tools:ignore="UnusedAttribute">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <code.name.monkey.retromusic.views.IconImageView
-                                android:id="@+id/search"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="0"
-                                android:background="?roundSelector"
-                                android:padding="12dp"
-                                android:src="@drawable/ic_search_white_24dp" />
-
-                            <TextView
-                                android:id="@+id/title"
-                                fontPath="@string/circular_std_black"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="@string/app_name"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                                tools:ignore="MissingPrefix" />
-
-                        </LinearLayout>
-                    </android.support.v7.widget.Toolbar>
                 </FrameLayout>
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </android.support.design.widget.AppBarLayout>
 
-            <View
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?dividerColor" />
-        </android.support.design.widget.AppBarLayout>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_circular_top_corners"
+                android:elevation="@dimen/card_elevation"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </LinearLayout>
+    </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?dividerColor" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        app:elevation="0dp"
+        app:itemIconTint="@drawable/bottom_navigation_item_colors"
+        app:itemTextColor="@drawable/bottom_navigation_item_colors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_main"
+        tools:visibility="visible" />
 </LinearLayout>

@@ -11,10 +11,10 @@
 
                 <item
                     android:id="@+id/action_sort_order_title"
-                    android:title="@string/title" />
+                    android:title="@string/sort_order_a_z" />
                 <item
                     android:id="@+id/action_sort_order_title_desc"
-                    android:title="@string/title_desc" />
+                    android:title="@string/sort_order_z_a" />
                 <item
                     android:id="@+id/action_sort_order_track_list"
                     android:title="@string/track_list" />

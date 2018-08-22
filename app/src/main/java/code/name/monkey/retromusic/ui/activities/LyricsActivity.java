@@ -15,6 +15,18 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
+
+import org.jaudiotagger.tag.FieldKey;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -33,307 +45,304 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.views.LyricView;
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.bumptech.glide.Glide;
 import io.reactivex.disposables.CompositeDisposable;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.Map;
-import org.jaudiotagger.tag.FieldKey;
 
 public class LyricsActivity extends AbsMusicServiceActivity implements
-    MusicProgressViewUpdateHelper.Callback {
+        MusicProgressViewUpdateHelper.Callback {
 
-  @BindView(R.id.title)
-  TextView songTitle;
-  @BindView(R.id.text)
-  TextView songText;
-  @BindView(R.id.lyrics_view)
-  LyricView lyricView;
-  @BindView(R.id.offline_lyrics)
-  TextView offlineLyrics;
-  @BindView(R.id.actions)
-  RadioGroup actionsLayout;
-  @BindView(R.id.gradient_background)
-  View background;
+    @BindView(R.id.title)
+    TextView songTitle;
 
-  private MusicProgressViewUpdateHelper updateHelper;
-  private AsyncTask updateLyricsAsyncTask;
-  private CompositeDisposable disposable;
-  private Song song;
-  private Lyrics lyrics;
+    @BindView(R.id.text)
+    TextView songText;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_lyrics);
-    ButterKnife.bind(this);
+    @BindView(R.id.lyrics_view)
+    LyricView lyricView;
 
-    setStatusbarColorAuto();
-    setNavigationbarColorAuto();
-    setTaskDescriptionColorAuto();
-    setLightNavigationBar(true);
+    @BindView(R.id.offline_lyrics)
+    TextView offlineLyrics;
 
-    updateHelper = new MusicProgressViewUpdateHelper(this, 500, 1000);
+    @BindView(R.id.actions)
+    RadioGroup actionsLayout;
 
-    setupLyricsView();
-    setupWakelock();
+    @BindView(R.id.gradient_background)
+    View background;
 
-    actionsLayout.setOnCheckedChangeListener((group, checkedId) -> selectLyricsTye(checkedId));
+    private MusicProgressViewUpdateHelper updateHelper;
+    private AsyncTask updateLyricsAsyncTask;
+    private CompositeDisposable disposable;
+    private Song song;
+    private Lyrics lyrics;
 
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lyrics);
+        ButterKnife.bind(this);
 
-  private void selectLyricsTye(int group) {
+        setStatusbarColorAuto();
+        setNavigationbarColorAuto();
+        setTaskDescriptionColorAuto();
+        setLightNavigationBar(true);
 
-    RadioButton radioButton = actionsLayout.findViewById(group);
-    radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
-    radioButton.setTextColor(ThemeStore.textColorPrimary(this));
+        updateHelper = new MusicProgressViewUpdateHelper(this, 500, 1000);
 
-    offlineLyrics.setVisibility(View.GONE);
-    lyricView.setVisibility(View.GONE);
+        setupLyricsView();
+        setupWakelock();
+        loadLrcFile();
 
-    switch (group) {
-      case R.id.synced_lyrics:
-        loadLRCLyrics();
-        lyricView.setVisibility(View.VISIBLE);
-        break;
-      default:
-      case R.id.normal_lyrics:
-        loadSongLyrics();
-        offlineLyrics.setVisibility(View.VISIBLE);
-        break;
+        actionsLayout.setOnCheckedChangeListener((group, checkedId) -> selectLyricsTye(checkedId));
+        actionsLayout.check(PreferenceUtil.getInstance(this).getLastLyricsType());
     }
-  }
 
-  private void loadLRCLyrics() {
-    if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-      showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName));
+    private void selectLyricsTye(int group) {
+        PreferenceUtil.getInstance(this).setLastLyricsType(group);
+        RadioButton radioButton = actionsLayout.findViewById(group);
+        radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
+        radioButton.setTextColor(ThemeStore.textColorPrimary(this));
+
+        offlineLyrics.setVisibility(View.GONE);
+        lyricView.setVisibility(View.GONE);
+
+        switch (group) {
+            case R.id.synced_lyrics:
+                loadLRCLyrics();
+                lyricView.setVisibility(View.VISIBLE);
+                break;
+            default:
+            case R.id.normal_lyrics:
+                loadSongLyrics();
+                offlineLyrics.setVisibility(View.VISIBLE);
+                break;
+        }
     }
-  }
 
-  private void setupWakelock() {
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-  }
-
-  private void setupLyricsView() {
-    disposable = new CompositeDisposable();
-
-    lyricView
-        .setOnPlayerClickListener((progress, content) -> MusicPlayerRemote.seekTo((int) progress));
-    //lyricView.setHighLightTextColor(ThemeStore.accentColor(this));
-    lyricView.setDefaultColor(ContextCompat.getColor(this, R.color.md_grey_400));
-    //lyricView.setTouchable(false);
-    lyricView.setHintColor(Color.WHITE);
-  }
-
-  @Override
-  public void onPlayingMetaChanged() {
-    super.onPlayingMetaChanged();
-    loadLrcFile();
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
-    updateHelper.start();
-  }
-
-  @Override
-  protected void onPause() {
-    super.onPause();
-    updateHelper.stop();
-  }
-
-  @Override
-  public void onServiceConnected() {
-    super.onServiceConnected();
-    loadLrcFile();
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    disposable.clear();
-
-    if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask.isCancelled()) {
-      updateLyricsAsyncTask.cancel(true);
+    private void loadLRCLyrics() {
+        if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
+            showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName));
+        }
     }
-  }
 
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    if (item.getItemId() == android.R.id.home) {
-      onBackPressed();
+    private void setupWakelock() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
-    return super.onOptionsItemSelected(item);
-  }
 
-  @Override
-  public void onUpdateProgressViews(int progress, int total) {
-    lyricView.setCurrentTimeMillis(progress);
-  }
+    private void setupLyricsView() {
+        disposable = new CompositeDisposable();
 
-  private void loadLrcFile() {
-    song = MusicPlayerRemote.getCurrentSong();
-    songTitle.setText(song.title);
-    songText.setText(song.artistName);
-    SongGlideRequest.Builder.from(Glide.with(this), song)
-        .checkIgnoreMediaStore(this)
-        .generatePalette(this)
-        .build()
-        .into(new RetroMusicColoredTarget(findViewById(R.id.image)) {
-          @Override
-          public void onColorReady(int color) {
-            if (PreferenceUtil.getInstance(LyricsActivity.this).getAdaptiveColor()) {
-              background.setBackgroundColor(color);
+        lyricView
+                .setOnPlayerClickListener((progress, content) -> MusicPlayerRemote.seekTo((int) progress));
+        //lyricView.setHighLightTextColor(ThemeStore.accentColor(this));
+        lyricView.setDefaultColor(ContextCompat.getColor(this, R.color.md_grey_400));
+        //lyricView.setTouchable(false);
+        lyricView.setHintColor(Color.WHITE);
+    }
+
+    @Override
+    public void onPlayingMetaChanged() {
+        super.onPlayingMetaChanged();
+        loadLrcFile();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateHelper.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        updateHelper.stop();
+    }
+
+    @Override
+    public void onServiceConnected() {
+        super.onServiceConnected();
+        loadLrcFile();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        disposable.clear();
+
+        if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask.isCancelled()) {
+            updateLyricsAsyncTask.cancel(true);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onUpdateProgressViews(int progress, int total) {
+        lyricView.setCurrentTimeMillis(progress);
+    }
+
+    private void loadLrcFile() {
+        song = MusicPlayerRemote.getCurrentSong();
+        songTitle.setText(song.title);
+        songText.setText(song.artistName);
+        SongGlideRequest.Builder.from(Glide.with(this), song)
+                .checkIgnoreMediaStore(this)
+                .generatePalette(this)
+                .build()
+                .into(new RetroMusicColoredTarget(findViewById(R.id.image)) {
+                    @Override
+                    public void onColorReady(int color) {
+                        if (PreferenceUtil.getInstance(LyricsActivity.this).getAdaptiveColor()) {
+                            background.setBackgroundColor(color);
+                        }
+                    }
+                });
+    }
+
+    private void showLyricsLocal(File file) {
+        if (file == null) {
+            lyricView.reset();
+        } else {
+            lyricView.setLyricFile(file, "UTF-8");
+        }
+    }
+
+    @OnClick({R.id.edit_lyrics, R.id.back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                onBackPressed();
+                break;
+            case R.id.edit_lyrics:
+                switch (actionsLayout.getCheckedRadioButtonId()) {
+                    case R.id.synced_lyrics:
+                        showSyncedLyrics();
+                        break;
+                    case R.id.normal_lyrics:
+                        showLyricsSaveDialog();
+                        break;
+                }
+                break;
+        }
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private void loadSongLyrics() {
+        if (updateLyricsAsyncTask != null) {
+            updateLyricsAsyncTask.cancel(false);
+        }
+        final Song song = MusicPlayerRemote.getCurrentSong();
+        updateLyricsAsyncTask = new AsyncTask<Void, Void, Lyrics>() {
+            @Override
+            protected Lyrics doInBackground(Void... params) {
+                String data = MusicUtil.getLyrics(song);
+                if (TextUtils.isEmpty(data)) {
+                    return null;
+                }
+                return Lyrics.parse(song, data);
             }
-          }
-        });
-    selectLyricsTye(actionsLayout.getCheckedRadioButtonId());
-  }
 
-  private void showLyricsLocal(File file) {
-    if (file == null) {
-      lyricView.reset();
-    } else {
-      lyricView.setLyricFile(file, "UTF-8");
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                lyrics = null;
+            }
+
+            @Override
+            protected void onPostExecute(Lyrics l) {
+                lyrics = l;
+                offlineLyrics.setVisibility(View.VISIBLE);
+                if (l == null) {
+                    offlineLyrics.setText(R.string.no_lyrics_found);
+                    return;
+                }
+                offlineLyrics.setText(l.data);
+            }
+
+            @Override
+            protected void onCancelled(Lyrics s) {
+                onPostExecute(null);
+            }
+        }.execute();
     }
-  }
 
-  @OnClick({R.id.edit_lyrics, R.id.back})
-  public void onViewClicked(View view) {
-    switch (view.getId()) {
-      case R.id.back:
-        onBackPressed();
-        break;
-      case R.id.edit_lyrics:
-        switch (actionsLayout.getCheckedRadioButtonId()) {
-          case R.id.synced_lyrics:
-            showSyncedLyrics();
-            break;
-          case R.id.normal_lyrics:
-            showLyricsSaveDialog();
-            break;
+    private void showSyncedLyrics() {
+        String content = "";
+        try {
+            content = LyricUtil.getStringFromFile(song.title, song.artistName);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        break;
+        new MaterialDialog.Builder(this)
+                .title("Add lyrics")
+                .neutralText("Search")
+                .content("Add time frame lyrics")
+                .negativeText("Delete")
+                .onNegative((dialog, which) -> {
+                    LyricUtil.deleteLrcFile(song.title, song.artistName);
+                    loadLrcFile();
+                })
+                .onNeutral(
+                        (dialog, which) -> RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchLrcUrl()))
+                .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                .input("Paste lyrics here", content, (dialog, input) -> {
+                    LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString());
+                    loadLrcFile();
+                }).show();
     }
-  }
 
-  @SuppressLint("StaticFieldLeak")
-  private void loadSongLyrics() {
-    if (updateLyricsAsyncTask != null) {
-      updateLyricsAsyncTask.cancel(false);
+    private String getGoogleSearchLrcUrl() {
+        String baseUrl = "http://www.google.com/search?";
+        String query = song.title + "+" + song.artistName;
+        query = "q=" + query.replace(" ", "+") + " .lrc";
+        baseUrl += query;
+        return baseUrl;
     }
-    final Song song = MusicPlayerRemote.getCurrentSong();
-    updateLyricsAsyncTask = new AsyncTask<Void, Void, Lyrics>() {
-      @Override
-      protected Lyrics doInBackground(Void... params) {
-        String data = MusicUtil.getLyrics(song);
-        if (TextUtils.isEmpty(data)) {
-          return null;
+
+    private void showLyricsSaveDialog() {
+        String content = "";
+        if (lyrics == null) {
+            content = "";
+        } else {
+            content = lyrics.data;
         }
-        return Lyrics.parse(song, data);
-      }
+        new MaterialDialog.Builder(this)
+                .title("Add lyrics")
+                .neutralText("Search")
+                .onNeutral(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchUrl(song.title, song.artistName));
+                    }
+                })
+                .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
+                .input("Paste lyrics here", content, (dialog, input) -> {
+                    Map<FieldKey, String> fieldKeyValueMap = new EnumMap<>(FieldKey.class);
+                    fieldKeyValueMap.put(FieldKey.LYRICS, input.toString());
 
-      @Override
-      protected void onPreExecute() {
-        super.onPreExecute();
-        lyrics = null;
-      }
-
-      @Override
-      protected void onPostExecute(Lyrics l) {
-        lyrics = l;
-        offlineLyrics.setVisibility(View.VISIBLE);
-        if (l == null) {
-          offlineLyrics.setText(R.string.no_lyrics_found);
-          return;
-        }
-        offlineLyrics.setText(l.data);
-      }
-
-      @Override
-      protected void onCancelled(Lyrics s) {
-        onPostExecute(null);
-      }
-    }.execute();
-  }
-
-  private void showSyncedLyrics() {
-    String content = "";
-    try {
-      content = LyricUtil.getStringFromFile(song.title, song.artistName);
-    } catch (Exception e) {
-      e.printStackTrace();
+                    new WriteTagsAsyncTask(LyricsActivity.this)
+                            .execute(
+                                    new WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null));
+                    loadLrcFile();
+                })
+                .show();
     }
-    new MaterialDialog.Builder(this)
-        .title("Add lyrics")
-        .neutralText("Search")
-        .content("Add time frame lyrics")
-        .negativeText("Delete")
-        .onNegative((dialog, which) -> {
-          LyricUtil.deleteLrcFile(song.title, song.artistName);
-          loadLrcFile();
-        })
-        .onNeutral(
-            (dialog, which) -> RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchLrcUrl()))
-        .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
-        .input("Paste lyrics here", content, (dialog, input) -> {
-          LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString());
-          loadLrcFile();
-        }).show();
-  }
 
-  private String getGoogleSearchLrcUrl() {
-    String baseUrl = "http://www.google.com/search?";
-    String query = song.title + "+" + song.artistName;
-    query = "q=" + query.replace(" ", "+") + " .lrc";
-    baseUrl += query;
-    return baseUrl;
-  }
-
-  private void showLyricsSaveDialog() {
-    String content = "";
-    if (lyrics == null) {
-      content = "";
-    } else {
-      content = lyrics.data;
+    private ArrayList<String> getSongPaths(Song song) {
+        ArrayList<String> paths = new ArrayList<>(1);
+        paths.add(song.data);
+        return paths;
     }
-    new MaterialDialog.Builder(this)
-        .title("Add lyrics")
-        .neutralText("Search")
-        .onNeutral(new MaterialDialog.SingleButtonCallback() {
-          @Override
-          public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-            RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchUrl(song.title, song.artistName));
-          }
-        })
-        .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
-        .input("Paste lyrics here", content, (dialog, input) -> {
-          Map<FieldKey, String> fieldKeyValueMap = new EnumMap<>(FieldKey.class);
-          fieldKeyValueMap.put(FieldKey.LYRICS, input.toString());
 
-          new WriteTagsAsyncTask(LyricsActivity.this)
-              .execute(
-                  new WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null));
-          loadLrcFile();
-        })
-        .show();
-  }
-
-  private ArrayList<String> getSongPaths(Song song) {
-    ArrayList<String> paths = new ArrayList<>(1);
-    paths.add(song.data);
-    return paths;
-  }
-
-  private String getGoogleSearchUrl(String title, String text) {
-    String baseUrl = "http://www.google.com/search?";
-    String query = title + "+" + text;
-    query = "q=" + query.replace(" ", "+") + " lyrics";
-    baseUrl += query;
-    return baseUrl;
-  }
+    private String getGoogleSearchUrl(String title, String text) {
+        String baseUrl = "http://www.google.com/search?";
+        String query = title + "+" + text;
+        query = "q=" + query.replace(" ", "+") + " lyrics";
+        baseUrl += query;
+        return baseUrl;
+    }
 }

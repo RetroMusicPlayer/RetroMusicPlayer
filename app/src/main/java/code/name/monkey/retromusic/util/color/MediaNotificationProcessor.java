@@ -8,11 +8,10 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.graphics.Palette;
-import android.util.LayoutDirection;
-
-import code.name.monkey.appthemehelper.util.ColorUtil;
 
 import java.util.List;
+
+import code.name.monkey.appthemehelper.util.ColorUtil;
 
 /**
  * @author Hemanth S (h4h13).
@@ -46,13 +45,13 @@ public class MediaNotificationProcessor {
     private static final int RESIZE_BITMAP_AREA = 150 * 150;
     private final ImageGradientColorizer mColorizer;
     private final Context mContext;
-    private float[] mFilteredBackgroundHsl = null;
-    private Palette.Filter mBlackWhiteFilter = (rgb, hsl) -> !isWhiteOrBlack(hsl);
     /**
      * The context of the notification. This is the app context of the package posting the
      * notification.
      */
     private final Context mPackageContext;
+    private float[] mFilteredBackgroundHsl = null;
+    private Palette.Filter mBlackWhiteFilter = (rgb, hsl) -> !isWhiteOrBlack(hsl);
     private boolean mIsLowPriority;
     private onColorThing onColorThing;
 

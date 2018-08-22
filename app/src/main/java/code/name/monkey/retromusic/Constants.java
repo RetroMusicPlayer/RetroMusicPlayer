@@ -38,4 +38,5 @@ public class Constants {
     public static final String APP_TELEGRAM_LINK = "https://t.me/retromusicapp/";
     public static final String APP_TWITTER_LINK = "https://twitter.com/retromusicapp";
     public static final String FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md";
+    public static final int CAST_SERVER_PORT = 8080;
 }

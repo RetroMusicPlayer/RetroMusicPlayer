@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.r0adkll:slidableactivity:2.0.6@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/slidableactivity-2.0.6.aar/7d00c1f6a85d291fa31d608a4b63e6b9/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/slidableactivity-2.0.6.aar/7d00c1f6a85d291fa31d608a4b63e6b9/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.r0adkll/slidableactivity/2.0.6/c9d609040da653cf62ee8de8743cee4a1eb3f12e/slidableactivity-2.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
