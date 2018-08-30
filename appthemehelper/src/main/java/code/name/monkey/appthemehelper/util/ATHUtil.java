@@ -2,10 +2,8 @@ package code.name.monkey.appthemehelper.util;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
-import android.support.annotation.NonNull;
-
-import code.name.monkey.appthemehelper.util.ColorUtil;
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
 
 /**
  * @author Aidan Follestad (afollestad)

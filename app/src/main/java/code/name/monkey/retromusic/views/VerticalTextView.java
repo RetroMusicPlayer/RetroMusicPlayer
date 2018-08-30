@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-public class VerticalTextView extends android.support.v7.widget.AppCompatTextView {
+public class VerticalTextView extends androidx.appcompat.widget.AppCompatTextView {
     final boolean topDown;
 
     public VerticalTextView(Context context, AttributeSet attrs) {

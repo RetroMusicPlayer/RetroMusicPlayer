@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.util.schedulers;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;

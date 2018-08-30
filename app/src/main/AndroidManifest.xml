@@ -22,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroMusic.Light"
-        tools:replace="android:allowBackup">
+        >
         <activity
             android:name=".ui.activities.MainActivity"
             android:label="@string/app_name">
@@ -241,7 +241,7 @@
             android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">

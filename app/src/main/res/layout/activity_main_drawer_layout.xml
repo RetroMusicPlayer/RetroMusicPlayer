@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <android.support.design.internal.ScrimInsetsFrameLayout
+    <FrameLayout
         android:id="@+id/drawer_content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -7,6 +7,7 @@ import com.afollestad.materialdialogs.prefs.MaterialDialogPreference;
 
 import code.name.monkey.appthemehelper.R;
 
+
 /**
  * @author Aidan Follestad (afollestad)
  */

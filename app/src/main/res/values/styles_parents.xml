@@ -19,7 +19,7 @@
         <item name="bottomSheetDialogTheme">@style/Theme.Design.BottomSheetDialog</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Light" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
 
@@ -47,10 +47,13 @@
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
         <item name="bottomSheetDialogTheme">@style/Theme.Design.Light.BottomSheetDialog</item>
+
+        <item name="mediaRouteTheme">@style/BlackMediaRouterTheme</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -81,6 +84,8 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
+
+        <item name="mediaRouteTheme">@style/WhiteMediaRouterTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
@@ -158,4 +163,21 @@
         <item name="android:navigationBarColor">?cardBackgroundColor</item>
     </style>
 
+
+    <!--Cast Button-->
+    <style name="BlackMediaRouterTheme" parent="Theme.MediaRouter">
+        <item name="mediaRouteButtonStyle">@style/BlackMediaRouteButtonStyle</item>
+    </style>
+
+    <style name="BlackMediaRouteButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
+        <item name="mediaRouteButtonTint">@color/md_grey_700</item>
+    </style>
+
+    <style name="WhiteMediaRouterTheme" parent="Theme.MediaRouter">
+        <item name="mediaRouteButtonStyle">@style/WhiteMediaRouteButtonStyle</item>
+    </style>
+
+    <style name="WhiteMediaRouteButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
+        <item name="mediaRouteButtonTint">@color/md_white_1000</item>
+    </style>
 </resources>

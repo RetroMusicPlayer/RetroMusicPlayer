@@ -1,12 +1,12 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.GridLayoutManager;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.mvp.contract.AlbumContract;
@@ -15,9 +15,7 @@ import code.name.monkey.retromusic.ui.adapter.album.AlbumAdapter;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-public class AlbumsFragment extends
-        AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager> implements
-        AlbumContract.AlbumView {
+public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager> implements AlbumContract.AlbumView {
 
     public static final String TAG = AlbumsFragment.class.getSimpleName();
 
@@ -44,10 +42,8 @@ public class AlbumsFragment extends
             //noinspection ConstantConditions
             itemLayoutRes = PreferenceUtil.getInstance(getContext()).getAlbumGridStyle(getContext());
         }
-        ArrayList<Album> dataSet =
-                getAdapter() == null ? new ArrayList<>() : getAdapter().getDataSet();
-        return new AlbumAdapter(getLibraryFragment().getMainActivity(), dataSet, itemLayoutRes,
-                loadUsePalette(), getLibraryFragment());
+        ArrayList<Album> dataSet = getAdapter() == null ? new ArrayList<>() : getAdapter().getDataSet();
+        return new AlbumAdapter(getLibraryFragment().getMainActivity(), dataSet, itemLayoutRes, loadUsePalette(), getLibraryFragment());
     }
 
     @Override

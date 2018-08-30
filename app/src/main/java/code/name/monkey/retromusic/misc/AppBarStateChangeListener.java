@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.misc;
 
-import android.support.design.widget.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout;
 
 /**
  * @author Hemanth S (h4h13).

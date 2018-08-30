@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,8 +15,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -28,6 +29,7 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMusicServiceFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.views.PlayPauseDrawable;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
@@ -74,9 +76,13 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
         view.setBackgroundColor(ThemeStore.primaryColor(getContext()));
         view.setOnTouchListener(new FlingPlayBackController(getActivity()));
         setUpMiniPlayer();
-
-        next.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
-        previous.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
+        if (RetroUtil.isTablet(getResources())) {
+            next.setVisibility(View.VISIBLE);
+            previous.setVisibility(View.VISIBLE);
+        } else {
+            next.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
+            previous.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
+        }
     }
 
     @Override
@@ -153,6 +159,18 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
     public void setColor(int playerFragmentColor) {
         //noinspection ConstantConditions
         getView().setBackgroundColor(playerFragmentColor);
+    }
+
+    @OnClick({R.id.action_prev, R.id.action_next})
+    void onClicks(View view) {
+        switch (view.getId()) {
+            case R.id.action_next:
+                MusicPlayerRemote.playNextSong();
+                break;
+            case R.id.action_prev:
+                MusicPlayerRemote.back();
+                break;
+        }
     }
 
     public static class FlingPlayBackController implements View.OnTouchListener {

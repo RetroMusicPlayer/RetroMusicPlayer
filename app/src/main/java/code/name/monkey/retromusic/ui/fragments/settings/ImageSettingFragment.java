@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments.settings;
 
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
+import androidx.preference.Preference;
 
 import code.name.monkey.retromusic.R;
 

@@ -1,9 +1,9 @@
 package code.name.monkey.retromusic.dialogs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +24,10 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 public class RemoveFromPlaylistDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.action_remove)
     TextView remove;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.action_cancel)
     TextView cancel;
 

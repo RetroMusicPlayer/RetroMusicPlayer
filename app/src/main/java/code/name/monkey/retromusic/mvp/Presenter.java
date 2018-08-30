@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.mvp;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.Injection;
 import code.name.monkey.retromusic.providers.interfaces.Repository;

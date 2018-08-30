@@ -1,12 +1,13 @@
 package code.name.monkey.appthemehelper.common.views;
 
 import android.content.Context;
-import android.support.v7.widget.SwitchCompat;
+import androidx.appcompat.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
 import code.name.monkey.appthemehelper.ATH;
 import code.name.monkey.appthemehelper.ThemeStore;
+
 
 /**
  * @author Aidan Follestad (afollestad)

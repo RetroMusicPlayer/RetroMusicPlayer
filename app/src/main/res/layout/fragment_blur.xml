@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <android.support.v7.widget.AppCompatImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gradient_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/player_toolbar"
                 style="@style/Toolbar48"
                 android:layout_height="48dp"

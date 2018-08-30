@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.mvp.presenter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.mvp.Presenter;

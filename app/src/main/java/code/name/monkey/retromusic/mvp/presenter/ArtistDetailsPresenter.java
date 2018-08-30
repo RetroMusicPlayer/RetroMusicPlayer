@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.mvp.presenter;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.mvp.Presenter;

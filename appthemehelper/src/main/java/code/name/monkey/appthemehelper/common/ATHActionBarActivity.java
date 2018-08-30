@@ -1,6 +1,6 @@
 package code.name.monkey.appthemehelper.common;
 
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 

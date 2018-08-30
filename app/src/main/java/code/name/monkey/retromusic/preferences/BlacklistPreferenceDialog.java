@@ -2,8 +2,8 @@ package code.name.monkey.retromusic.preferences;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import android.text.Html;
 import android.view.View;
 import code.name.monkey.retromusic.R;

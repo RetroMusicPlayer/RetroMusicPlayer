@@ -33,7 +33,7 @@
             android:paddingEnd="0dp"
             android:paddingLeft="16dp">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/image_text_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 app:cardCornerRadius="6dp"
                 app:cardElevation="0dp">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -49,7 +49,7 @@
                     android:gravity="center_vertical"
                     android:scaleType="centerCrop" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/image_text"
                     android:layout_width="36dp"
                     android:layout_height="match_parent"
@@ -59,7 +59,7 @@
                     android:minHeight="40dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:visibility="gone" />
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </FrameLayout>
 
         <LinearLayout
@@ -74,7 +74,7 @@
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                 android:maxLines="1"
                 android:textColor="?android:attr/textColorPrimary" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"

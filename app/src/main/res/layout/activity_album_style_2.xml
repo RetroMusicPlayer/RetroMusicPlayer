@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <android.support.v7.widget.AppCompatImageButton
+                            <androidx.appcompat.widget.AppCompatImageButton
                                 android:id="@+id/menu_close"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                                 app:backgroundTint="@color/twenty_percent_black_overlay"
                                 app:srcCompat="@drawable/ic_close_white_24dp" />
 
-                            <android.support.v7.widget.AppCompatImageButton
+                            <androidx.appcompat.widget.AppCompatImageButton
                                 android:id="@+id/menu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                         </FrameLayout>
                     </LinearLayout>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/image_container"
                         android:layout_width="260dp"
                         android:layout_height="260dp"
@@ -88,7 +88,7 @@
                         app:cardElevation="8dp"
                         app:cardUseCompatPadding="true">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -96,7 +96,7 @@
                             android:scaleType="centerCrop"
                             android:transitionName="@string/transition_album_art"
                             tools:src="@drawable/hemanth_s" />
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/title"
                             fontPath="@string/circular_std_black"
                             android:layout_width="match_parent"
@@ -115,7 +115,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             tools:ignore="MissingPrefix" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -142,16 +142,16 @@
                     android:background="@drawable/shadow_down_strong" />
 
             </FrameLayout>
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
 
                 </LinearLayout>
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/song_title"
                     fontPath="@string/circular_std_black"
                     android:layout_width="match_parent"
@@ -220,16 +220,16 @@
                     android:textColor="?android:attr/textColorPrimary"
                     tools:ignore="MissingPrefix" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:nestedScrollingEnabled="false" />
             </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </android.support.v4.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+    </androidx.core.widget.NestedScrollView>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -237,4 +237,4 @@
         android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

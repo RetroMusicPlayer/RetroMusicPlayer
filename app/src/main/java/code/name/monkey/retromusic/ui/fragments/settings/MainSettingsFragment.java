@@ -2,16 +2,16 @@ package code.name.monkey.retromusic.ui.fragments.settings;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
@@ -24,17 +24,19 @@ import code.name.monkey.retromusic.views.IconImageView;
 
 public class MainSettingsFragment extends Fragment {
 
-    Unbinder unbinder;
     @BindViews({R.id.general_settings_icon, R.id.audio_settings_icon,
-            R.id.now_playing_settings_icon, R.id.image_settings_icon,
-            R.id.notification_settings_icon, R.id.other_settings_icon})
+            R.id.now_playing_settings_icon, R.id.personalize_settings_icon,
+            R.id.image_settings_icon, R.id.notification_settings_icon, R.id.other_settings_icon})
     List<IconImageView> icons;
-    ButterKnife.Action<View> apply = (view, index) -> {
+
+    @BindView(R.id.container)
+    ViewGroup container;
+
+    private Unbinder unbinder;
+    private ButterKnife.Action<View> apply = (view, index) -> {
         //noinspection ConstantConditions
         ((IconImageView) view).setColorFilter(ThemeStore.accentColor(getContext()), PorterDuff.Mode.SRC_IN);
     };
-    @BindView(R.id.container)
-    ViewGroup container;
 
     @Nullable
     @Override
@@ -54,7 +56,7 @@ public class MainSettingsFragment extends Fragment {
     }
 
     @OnClick({R.id.general_settings, R.id.audio_settings, R.id.now_playing_settings,
-            R.id.image_settings, R.id.notification_settings, R.id.other_settings})
+            R.id.image_settings, R.id.personalize_settings, R.id.notification_settings, R.id.other_settings})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.general_settings:
@@ -64,7 +66,10 @@ public class MainSettingsFragment extends Fragment {
                 inflateFragment(new AudioSettings(), R.string.pref_header_audio);
                 break;
             case R.id.now_playing_settings:
-                inflateFragment(new NowPlayingSettingsFragment(), R.string.personalize);
+                inflateFragment(new NowPlayingSettingsFragment(), R.string.now_playing);
+                break;
+            case R.id.personalize_settings:
+                inflateFragment(new PersonaizeSettingsFragment(), R.string.personalize);
                 break;
             case R.id.image_settings:
                 inflateFragment(new ImageSettingFragment(), R.string.pref_header_images);

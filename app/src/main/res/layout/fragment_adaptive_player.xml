@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/player_toolbar"
                 style="@style/Toolbar48"
                 android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
@@ -40,7 +40,7 @@
 
         </FrameLayout>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
         <FrameLayout
             android:layout_width="match_parent"

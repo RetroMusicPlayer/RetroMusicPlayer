@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.helper.menu;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import java.util.ArrayList;

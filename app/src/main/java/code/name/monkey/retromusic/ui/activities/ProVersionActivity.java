@@ -3,10 +3,10 @@ package code.name.monkey.retromusic.ui.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
-import code.name.monkey.retromusic.util.RetroUtil;
 
 /**
  * @author Hemanth S (h4h13).
@@ -48,9 +47,6 @@ public class ProVersionActivity extends AbsBaseActivity implements
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
 
-    @BindView(R.id.status_bar)
-    View statusBar;
-
     @BindView(R.id.title)
     TextView title;
 
@@ -63,7 +59,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
         setContentView(R.layout.activity_pro_version);
         setDrawUnderStatusBar(true);
         ButterKnife.bind(this);
-        RetroUtil.statusBarHeight(statusBar);
+
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
@@ -75,9 +71,10 @@ public class ProVersionActivity extends AbsBaseActivity implements
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        title.setTextColor(ThemeStore.textColorPrimary(this));
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
-        getSupportActionBar().setTitle("RetroMusic Pro");
+        getSupportActionBar().setTitle(null);
 
         restoreButton.setEnabled(false);
         purchaseButton.setEnabled(false);

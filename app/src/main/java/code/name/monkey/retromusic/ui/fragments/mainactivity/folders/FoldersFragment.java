@@ -7,15 +7,15 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -89,8 +89,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
 
-    protected static final String PATH = "path";
-    protected static final String CRUMBS = "crumbs";
+    private static final String PATH = "path";
+    private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = LoaderIds.FOLDERS_FRAGMENT;
     @BindView(R.id.coordinator_layout)
     View coordinatorLayout;
@@ -182,7 +182,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
-    public void setCrumb(BreadCrumbLayout.Crumb crumb, boolean addToHistory) {
+    private void setCrumb(BreadCrumbLayout.Crumb crumb, boolean addToHistory) {
         if (crumb == null) {
             return;
         }
@@ -197,8 +197,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private void saveScrollPosition() {
         BreadCrumbLayout.Crumb crumb = getActiveCrumb();
         if (crumb != null) {
-            crumb.setScrollPosition(
-                    ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+            crumb.setScrollPosition(((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
         }
     }
 
@@ -256,7 +255,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setStatusbarColorAuto(view);
+
         getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
 
         setUpAppbarColor();
@@ -276,7 +275,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         //noinspection ConstantConditions
         int primaryColor = ThemeStore.primaryColor(getContext());
-        int darkPrimaryColor = ColorUtil.darkenColor(primaryColor);
+
 
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         //noinspection ConstantConditions
@@ -291,9 +290,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 close
         ));
         TintHelper.setTintAuto(container, primaryColor, true);
-        appbar.setBackgroundColor(darkPrimaryColor);
-        toolbar.setBackgroundColor(darkPrimaryColor);
-        coordinatorLayout.setBackgroundColor(darkPrimaryColor);
+        appbar.setBackgroundColor(primaryColor);
+        toolbar.setBackgroundColor(primaryColor);
 
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));

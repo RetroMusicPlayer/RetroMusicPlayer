@@ -5,17 +5,17 @@ import android.content.Context;
 import android.os.Build;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 
-import java.lang.reflect.Field;
-
 import code.name.monkey.appthemehelper.ATH;
 import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.ThemeStore;
+
+import java.lang.reflect.Field;
 
 /**
  * @author Aidan Follestad (afollestad)

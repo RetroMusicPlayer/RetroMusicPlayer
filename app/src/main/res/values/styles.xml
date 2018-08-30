@@ -147,9 +147,5 @@
         <item name="titleEnabled">false</item>
     </style>
 
-    <style name="HideTabTitleTextAppearance">
-        <item name="android:visibility">gone</item>
-        <item name="android:textSize">0sp</item>
-    </style>
 
 </resources>

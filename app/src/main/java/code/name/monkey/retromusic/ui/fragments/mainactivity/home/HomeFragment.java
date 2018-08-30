@@ -4,34 +4,32 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,7 +61,6 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.views.CircularImageView;
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -78,6 +75,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
 
     public static final String TAG = "HomeFragment";
     Unbinder unbinder;
+
     @BindView(R.id.home_toolbar)
     Toolbar toolbar;
 
@@ -123,14 +121,11 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     @BindView(R.id.top_albums_container)
     View topAlbumContainer;
 
-    @BindView(R.id.genres)
-    RecyclerView genresRecyclerView;
-
-    @BindView(R.id.genre_container)
-    LinearLayout genreContainer;
-
     @BindView(R.id.content_container)
     View contentContainer;
+
+    @BindView(R.id.container)
+    View container;
 
     @BindView(R.id.title)
     TextView title;
@@ -241,17 +236,16 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
         loadImageFromStorage(userImage);
 
         homePresenter.subscribe();
-        checkPadding();
         getTimeOfTheDay();
     }
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        if (!PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
+        /*if (!PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
             params.topMargin = RetroUtil.getStatusBarHeight(getContext());
             toolbar.setLayoutParams(params);
-        }
+        }*/
 
         appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
@@ -275,7 +269,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
 
         int primaryColor = ThemeStore.primaryColor(getContext());
 
-        TintHelper.setTintAuto(coordinatorLayout, primaryColor, true);
+        TintHelper.setTintAuto(container, primaryColor, true);
         toolbarLayout.setStatusBarScrimColor(primaryColor);
         toolbarLayout.setContentScrimColor(primaryColor);
 
@@ -329,23 +323,6 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     public void onMediaStoreChanged() {
         super.onMediaStoreChanged();
         homePresenter.subscribe();
-    }
-
-    @Override
-    public void onServiceConnected() {
-        super.onServiceConnected();
-        checkPadding();
-    }
-
-    @Override
-    public void onQueueChanged() {
-        super.onQueueChanged();
-        checkPadding();
-    }
-
-    private void checkPadding() {
-        int height = getResources().getDimensionPixelSize(R.dimen.mini_player_height);
-        contentContainer.setPadding(0, 0, 0, MusicPlayerRemote.getPlayingQueue().isEmpty() ? height * 2 : 0);
     }
 
     @Override
@@ -403,11 +380,6 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
 
     @Override
     public void geners(ArrayList<Genre> genres) {
-        genreContainer.setVisibility(View.VISIBLE);
-        genresRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //noinspection ConstantConditions
-        GenreAdapter genreAdapter = new GenreAdapter(getActivity(), genres, R.layout.item_list);
-        genresRecyclerView.setAdapter(genreAdapter);
     }
 
 

@@ -419,6 +419,7 @@
     <string name="pref_summary_toggle_shuffle">Shuffle mode will turn off when playing a new list of songs</string>
     <string name="pref_summary_toggle_status_bar">Hide only status bar</string>
     <string name="pref_summary_toggle_volume">If enough space is available, show volume controls in the now playing screen</string>
+    <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
     <string name="pref_title_album_grid_style">Album grid</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
@@ -461,6 +462,7 @@
     <string name="pref_title_toggle_toggle_shuffle">Shuffle mode</string>
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_user_info">User info</string>
+    <string name="pref_title_extra_controls">Extra controls</string>
 
     <string name="primary_color">Primary color</string>
     <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
@@ -688,4 +690,8 @@
     <string name="now_playing_themes">9+ now playing themes</string>
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>
     <string name="window_corner_edges">Rounded corners</string>
+    <string name="pref_title_album_cover_style">Album cover theme</string>
+    <string name="circular">Circular</string>
+    <string name="carousal">Carousal</string>
+    <string name="now_playing_summary">Customzie now playing screen</string>
 </resources>

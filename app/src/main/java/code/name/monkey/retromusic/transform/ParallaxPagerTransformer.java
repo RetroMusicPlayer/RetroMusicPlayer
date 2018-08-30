@@ -2,8 +2,8 @@ package code.name.monkey.retromusic.transform;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.View;
 

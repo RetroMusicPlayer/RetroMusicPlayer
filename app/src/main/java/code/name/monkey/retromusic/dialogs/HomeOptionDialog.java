@@ -2,10 +2,10 @@ package code.name.monkey.retromusic.dialogs;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +40,12 @@ import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
 
     private static final String TAG = "HomeOptionDialog";
-    static ButterKnife.Setter<TextView, Integer> textColor = (view, value, index) -> view.setTextColor(value.intValue());
+    private static ButterKnife.Setter<TextView, Integer> textColor = (view, value, index) -> view.setTextColor(value.intValue());
     Unbinder mUnbinder;
+
     @BindView(R.id.user_image_bottom)
     CircularImageView userImageBottom;
+
     @BindView(R.id.title_welcome)
     AppCompatTextView titleWelcome;
     @BindViews({R.id.tv_about, R.id.title_welcome, R.id.text, R.id.tv_buy_pro, R.id.tv_rate_app,
@@ -68,8 +70,7 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         loadImageFromStorage();
         //noinspection ConstantConditions
-        titleWelcome.setText(String.format("%s, %s!", getTimeOfTheDay(),
-                PreferenceUtil.getInstance(getContext()).getUserName()));
+        titleWelcome.setText(String.format("%s, %s!", getTimeOfTheDay(), PreferenceUtil.getInstance(getContext()).getUserName()));
     }
 
     private String getTimeOfTheDay() {
@@ -109,7 +110,6 @@ public class HomeOptionDialog extends RoundedBottomSheetDialogFragment {
             case R.id.action_rate:
                 NavigationUtil.goToPlayStore(getActivity());
                 break;
-
             case R.id.action_settings:
                 NavigationUtil.goToSettings(getActivity());
                 break;

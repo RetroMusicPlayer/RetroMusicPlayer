@@ -2,9 +2,6 @@ package code.name.monkey.retromusic.dialogs;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialogFragment;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -25,7 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import butterknife.BindView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -40,6 +38,15 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 public class SongDetailDialog extends RoundedBottomSheetDialogFragment {
 
     public static final String TAG = SongDetailDialog.class.getSimpleName();
+    @BindViews({R.id.title,
+            R.id.file_name,
+            R.id.file_path,
+            R.id.file_size,
+            R.id.file_format,
+            R.id.track_length,
+            R.id.bitrate,
+            R.id.sampling_rate})
+    List<TextView> textViews;
 
     @NonNull
     public static SongDetailDialog create(Song song) {
@@ -66,16 +73,6 @@ public class SongDetailDialog extends RoundedBottomSheetDialogFragment {
             textView.setTextColor(ThemeStore.textColorPrimary(getContext()));
         }
     }
-
-    @BindViews({R.id.title,
-            R.id.file_name,
-            R.id.file_path,
-            R.id.file_size,
-            R.id.file_format,
-            R.id.track_length,
-            R.id.bitrate,
-            R.id.sampling_rate})
-    List<TextView> textViews;
 
     @SuppressWarnings("ConstantConditions")
     @Nullable

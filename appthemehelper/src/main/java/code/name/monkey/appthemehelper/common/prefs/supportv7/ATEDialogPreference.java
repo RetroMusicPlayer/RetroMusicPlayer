@@ -1,10 +1,11 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7;
 
 import android.content.Context;
-import android.support.v7.preference.DialogPreference;
+import androidx.preference.DialogPreference;
 import android.util.AttributeSet;
 
 import code.name.monkey.appthemehelper.R;
+
 
 /**
  * @author Aidan Follestad (afollestad)

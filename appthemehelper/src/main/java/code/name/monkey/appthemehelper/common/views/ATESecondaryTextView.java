@@ -1,17 +1,15 @@
 package code.name.monkey.appthemehelper.common.views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-public class ATESecondaryTextView extends android.support.v7.widget.AppCompatTextView {
+public class ATESecondaryTextView extends AppCompatTextView {
 
     public ATESecondaryTextView(Context context) {
         super(context);

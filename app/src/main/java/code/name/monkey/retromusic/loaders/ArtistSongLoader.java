@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.loaders;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.model.Song;
 

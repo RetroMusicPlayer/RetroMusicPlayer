@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,8 +34,7 @@ public class CardBlurFragment extends AbsPlayerFragment implements
 
     @BindView(R.id.player_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.status_bar)
-    View statusBar;
+
     @BindView(R.id.gradient_background)
     ImageView colorBackground;
 
@@ -126,8 +125,6 @@ public class CardBlurFragment extends AbsPlayerFragment implements
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toggleStatusBar(statusBar);
-
         setUpSubFragments();
         setUpPlayerToolbar();
     }
@@ -137,8 +134,7 @@ public class CardBlurFragment extends AbsPlayerFragment implements
                 .findFragmentById(R.id.playback_controls_fragment);
 
         PlayerAlbumCoverFragment playerAlbumCoverFragment =
-                (PlayerAlbumCoverFragment) getChildFragmentManager()
-                        .findFragmentById(R.id.player_album_cover_fragment);
+                (PlayerAlbumCoverFragment) getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
         playerAlbumCoverFragment.setCallbacks(this);
         playerAlbumCoverFragment.removeEffect();
     }

@@ -2,8 +2,8 @@ package code.name.monkey.retromusic.ui.fragments.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import android.view.View;
 
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener;

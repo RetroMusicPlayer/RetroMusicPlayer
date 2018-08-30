@@ -5,14 +5,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Locale;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,15 +42,18 @@ import static code.name.monkey.retromusic.Constants.ACTION_QUIT;
 public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.seek_arc)
     SeekBar seekArc;
+
     @BindView(R.id.timer_display)
     TextView timerDisplay;
-    @BindView(R.id.action_set)
-    TextView setButton;
-    @BindView(R.id.action_cancel)
-    TextView cancelButton;
-    @BindView(R.id.action_cancel_container)
-    View cancelButtonContainer;
 
+    @BindView(R.id.action_set)
+    MaterialButton setButton;
+
+    @BindView(R.id.action_cancel)
+    MaterialButton cancelButton;
+
+    @BindView(R.id.title)
+    TextView title;
     private int seekArcProgress;
     private TimerUpdater timerUpdater;
 
@@ -81,6 +89,14 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
+        setButton.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+        cancelButton.setStrokeColor(ColorStateList.valueOf(accentColor));
+        cancelButton.setTextColor(accentColor);
+
+        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        timerDisplay.setTextColor(ThemeStore.textColorSecondary(getContext()));
+
         timerUpdater = new TimerUpdater();
 
         seekArcProgress = PreferenceUtil.getInstance(getActivity()).getLastSleepTimerValue();
@@ -174,7 +190,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
         @Override
         public void onFinish() {
             cancelButton.setText(null);
-            cancelButtonContainer.setVisibility(View.GONE);
+            cancelButton.setVisibility(View.GONE);
             //materialDialog.setActionButton(DialogAction.NEUTRAL, null);
         }
     }

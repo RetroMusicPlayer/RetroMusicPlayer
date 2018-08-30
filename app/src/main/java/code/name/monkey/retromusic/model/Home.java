@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.model;
 
-import android.support.annotation.StringRes;
+import androidx.annotation.StringRes;
 
 import java.util.ArrayList;
 

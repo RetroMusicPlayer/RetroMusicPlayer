@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StyleRes;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -18,10 +15,15 @@ import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
+import code.name.monkey.retromusic.ui.activities.MainActivity;
+import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment;
 
@@ -53,6 +55,7 @@ public final class PreferenceUtil {
     public static final String ALBUM_GRID_STYLE = "album_grid_style";
     public static final String ARTIST_GRID_STYLE = "artist_grid_style";
     public static final String TOGGLE_ADD_CONTROLS = "toggle_add_controls";
+    public static final String ALBUM_COVER_STYLE = "album_cover_style";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LIBRARY_CATEGORIES = "library_categories";
     private static final String LAST_PAGE = "last_start_page";
@@ -293,13 +296,11 @@ public final class PreferenceUtil {
     }
 
     public final int getLastMusicChooser() {
-        return mPreferences.getInt(LAST_MUSIC_CHOOSER, 0);
+        return mPreferences.getInt(LAST_MUSIC_CHOOSER, MainActivity.HOME);
     }
 
-    public void setLastMusicChooser(final int value) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putInt(LAST_MUSIC_CHOOSER, value);
-        editor.apply();
+    public void setLastMusicChooser(int value) {
+        mPreferences.edit().putInt(LAST_MUSIC_CHOOSER, value).apply();
     }
 
     public final boolean coloredNotification() {
@@ -330,6 +331,22 @@ public final class PreferenceUtil {
     public void setNowPlayingScreen(NowPlayingScreen nowPlayingScreen) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(NOW_PLAYING_SCREEN_ID, nowPlayingScreen.id);
+        editor.apply();
+    }
+
+    public final AlbumCoverStyle getAlbumCoverStyle() {
+        int id = mPreferences.getInt(ALBUM_COVER_STYLE, 0);
+        for (AlbumCoverStyle albumCoverStyle : AlbumCoverStyle.values()) {
+            if (albumCoverStyle.id == id) {
+                return albumCoverStyle;
+            }
+        }
+        return AlbumCoverStyle.CARD;
+    }
+
+    public void setAlbumCoverStyle(AlbumCoverStyle albumCoverStyle) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(ALBUM_COVER_STYLE, albumCoverStyle.id);
         editor.apply();
     }
 

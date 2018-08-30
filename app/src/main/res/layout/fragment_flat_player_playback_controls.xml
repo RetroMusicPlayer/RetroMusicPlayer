@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-    <android.support.v7.widget.AppCompatSeekBar
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/player_progress_slider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/text"
             fontPath="@string/circular_std_black"
             android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
             android:textSize="12sp"
             tools:text="Title" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             fontPath="@string/circular_std_black"
             android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         android:paddingStart="16dp"
         tools:ignore="ContentDescription,UnusedAttribute">
 
-        <android.support.v7.widget.AppCompatImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/player_play_pause_button"
             android:layout_width="52dp"
             android:layout_height="52dp"
@@ -126,7 +126,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp">
 
-            <android.support.v7.widget.AppCompatImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/player_repeat_button"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
@@ -136,7 +136,7 @@
                 app:srcCompat="@drawable/ic_repeat_white_24dp"
                 tools:ignore="MissingPrefix" />
 
-            <android.support.v7.widget.AppCompatImageButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/player_shuffle_button"
                 android:layout_width="72dp"
                 android:layout_height="72dp"

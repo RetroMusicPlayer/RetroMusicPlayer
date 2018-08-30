@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.interfaces;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.afollestad.materialcab.MaterialCab;
 

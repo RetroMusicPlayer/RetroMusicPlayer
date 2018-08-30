@@ -15,18 +15,18 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            android:elevation="@dimen/card_elevation"
+            app:elevation="@dimen/card_elevation">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp" />
 
-                    <android.support.v7.widget.Toolbar
+                    <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar48"
                         app:layout_collapseMode="pin"
@@ -53,15 +53,15 @@
                             android:id="@+id/title"
                             style="@style/BigTitleTextAppearance" />
 
-                    </android.support.v7.widget.Toolbar>
+                    </androidx.appcompat.widget.Toolbar>
                 </FrameLayout>
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?dividerColor" />
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
             android:id="@+id/recycler_view"
@@ -82,7 +82,7 @@
             android:textSize="@dimen/empty_text_size"
             android:visibility="gone" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/action_shuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,5 +90,5 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_shuffle_white_24dp"
             app:layout_behavior="code.name.monkey.retromusic.misc.ScrollAwareFABBehavior" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

@@ -5,13 +5,14 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import butterknife.BindInt;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
@@ -65,7 +66,7 @@ public class NavigationIconClickListener implements View.OnClickListener {
             throw new IllegalArgumentException("updateIcon() must be called on an ImageView");
         }
         updateIcon((ImageView) view);
-        final int translateY = (int) RetroUtil.convertDpToPixel(RetroUtil.isLandscape(view.getResources()) ? 3 * 48 : 5 * 48, view.getContext());
+        final int translateY = (int) RetroUtil.convertDpToPixel(getHeight(view.getContext()), view.getContext());
 
         ObjectAnimator animator = ObjectAnimator.ofFloat(sheet, "translationY", backdropShown ? translateY : 0);
         animator.setDuration(500);
@@ -74,6 +75,20 @@ public class NavigationIconClickListener implements View.OnClickListener {
         }
         animatorSet.play(animator);
         animator.start();
+    }
+
+    private int getHeight(Context context) {
+        Resources resources = context.getResources();
+        if (RetroUtil.isLandscape(resources)) {
+            return 3 * 48;
+        } else if (RetroUtil.isTablet(resources)) {
+            if (RetroUtil.isLandscape(resources)) {
+                return 48;
+            } else {
+                return 2 * 48;
+            }
+        } else
+            return 5 * 48;
     }
 
     private void updateIcon(ImageView view) {

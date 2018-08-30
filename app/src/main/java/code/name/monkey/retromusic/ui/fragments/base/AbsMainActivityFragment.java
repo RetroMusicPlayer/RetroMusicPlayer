@@ -21,6 +21,7 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
+        getMainActivity().setStatusbarColorAuto();
         getMainActivity().setNavigationbarColorAuto();
         getMainActivity().setLightNavigationBar(true);
         getMainActivity().setTaskDescriptionColorAuto();
@@ -29,17 +30,14 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
 
 
     // WORKAROUND
-    public void setStatusbarColor(View view, int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            final View statusBar = view.findViewById(R.id.status_bar);
-            if (statusBar != null) {
-                RetroUtil.statusBarHeight(statusBar);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    statusBar.setBackgroundColor(color);
-                    getMainActivity().setLightStatusbarAuto(color);
-                } else {
-                    statusBar.setBackgroundColor(color);
-                }
+    private void setStatusbarColor(View view, int color) {
+        final View statusBar = view.findViewById(R.id.status_bar);
+        if (statusBar != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                statusBar.setBackgroundColor(color);
+                getMainActivity().setLightStatusbarAuto(color);
+            } else {
+                statusBar.setBackgroundColor(color);
             }
         }
     }

@@ -1,8 +1,8 @@
 package code.name.monkey.appthemehelper.common;
 
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 
 import code.name.monkey.appthemehelper.ATHActivity;

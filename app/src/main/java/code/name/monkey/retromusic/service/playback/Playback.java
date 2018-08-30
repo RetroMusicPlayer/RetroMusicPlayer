@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.service.playback;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 
 public interface Playback {

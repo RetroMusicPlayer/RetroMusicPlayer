@@ -63,7 +63,7 @@
     android:paddingEnd="12dp"
     android:orientation="horizontal">
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <RadioButton
       android:id="@+id/synced_lyrics"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -72,12 +72,11 @@
       android:padding="8dp"
       android:background="@drawable/toggle_outline_buttons"
       android:button="@null"
-      android:checked="true"
       android:gravity="center"
       android:text="@string/synced_lyrics"
       android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"/>
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <RadioButton
       android:id="@+id/normal_lyrics"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -92,7 +91,7 @@
 
   </RadioGroup>
 
-  <android.support.v7.widget.CardView
+  <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -141,5 +140,5 @@
         app:textAlign="left"
         app:textSize="18sp"/>
     </FrameLayout>
-  </android.support.v7.widget.CardView>
+  </androidx.cardview.widget.CardView>
 </LinearLayout>

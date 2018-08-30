@@ -2,8 +2,8 @@ package code.name.monkey.retromusic.loaders;
 
 import android.content.Context;
 import android.provider.MediaStore.Audio.AudioColumns;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.PreferenceUtil;

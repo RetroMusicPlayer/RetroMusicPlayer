@@ -1,14 +1,16 @@
 package code.name.monkey.appthemehelper.common.views;
 
 import android.content.Context;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 
+
 /**
  * @author Aidan Follestad (afollestad)
  */
-public class ATEPrimaryTextView extends android.support.v7.widget.AppCompatTextView {
+public class ATEPrimaryTextView extends AppCompatTextView {
 
     public ATEPrimaryTextView(Context context) {
         super(context);

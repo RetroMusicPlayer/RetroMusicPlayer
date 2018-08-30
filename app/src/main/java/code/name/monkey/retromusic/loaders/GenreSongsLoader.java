@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.model.Song;
 

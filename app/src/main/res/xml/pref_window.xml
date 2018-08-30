@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-  <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/window">
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-      android:defaultValue="false"
-      android:key="corner_window"
-      android:summary="@string/pref_summary_round_corners"
-      android:title="@string/pref_title_round_corners"/>
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-      android:defaultValue="false"
-      android:key="toggle_full_screen"
-      android:summary="@string/pref_summary_toggle_full_screen"
-      android:title="@string/pref_title_toggle_full_screen"/>
-  </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/window">
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="corner_window"
+            android:summary="@string/pref_summary_round_corners"
+            android:title="@string/pref_title_round_corners"
+            app:iconSpaceReserved="false" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="toggle_full_screen"
+            android:summary="@string/pref_summary_toggle_full_screen"
+            android:title="@string/pref_title_toggle_full_screen"
+            app:iconSpaceReserved="false" />
+    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+</androidx.preference.PreferenceScreen>

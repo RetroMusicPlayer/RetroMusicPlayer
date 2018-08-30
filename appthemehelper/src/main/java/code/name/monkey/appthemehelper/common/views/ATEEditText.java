@@ -1,18 +1,17 @@
 package code.name.monkey.appthemehelper.common.views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
+import androidx.appcompat.widget.AppCompatEditText;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 import code.name.monkey.appthemehelper.ATH;
 import code.name.monkey.appthemehelper.ThemeStore;
 
+
 /**
  * @author Aidan Follestad (afollestad)
  */
-public class ATEEditText extends EditText {
+public class ATEEditText extends AppCompatEditText {
 
     public ATEEditText(Context context) {
         super(context);
@@ -26,12 +25,6 @@ public class ATEEditText extends EditText {
 
     public ATEEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ATEEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
 

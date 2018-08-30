@@ -7,16 +7,6 @@
     android:orientation="vertical">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        tools:ignore="UnusedAttribute">
-
-        <include layout="@layout/status_bar" />
-
-    </FrameLayout>
-
-    <FrameLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,7 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/app_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +32,7 @@
                     android:layout_height="wrap_content"
                     app:layout_collapseMode="pin">
 
-                    <android.support.v7.widget.Toolbar
+                    <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar48"
                         tools:ignore="UnusedAttribute">
@@ -53,14 +43,14 @@
                             android:text="@string/folders"
                             tools:ignore="MissingPrefix" />
 
-                    </android.support.v7.widget.Toolbar>
+                    </androidx.appcompat.widget.Toolbar>
 
                     <ViewStub
                         android:id="@+id/cab_stub"
                         android:layout_width="match_parent"
                         android:layout_height="48dp" />
                 </FrameLayout>
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
 
             <FrameLayout
@@ -68,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_circular_top_corners"
+                android:background="@color/md_white_1000"
                 android:elevation="@dimen/card_elevation">
 
                 <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView

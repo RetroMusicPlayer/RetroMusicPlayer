@@ -1,14 +1,20 @@
 package code.name.monkey.retromusic.dialogs;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,17 +24,15 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 
-import java.util.ArrayList;
-
 public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
+    @BindView(R.id.action_delete)
+    MaterialButton actionDelete;
+
     @BindView(R.id.title)
     TextView title;
 
-    @BindView(R.id.action_delete)
-    TextView delete;
-
     @BindView(R.id.action_cancel)
-    TextView cancel;
+    MaterialButton actionCancel;
 
     @NonNull
     public static DeleteSongsDialog create(Song song) {
@@ -70,9 +74,10 @@ public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        delete.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        cancel.setTextColor(ThemeStore.textColorPrimary(getContext()));
-
+        int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
+        actionDelete.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
+        actionCancel.setTextColor(accentColor);
 
         //noinspection unchecked,ConstantConditions
         final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
@@ -91,7 +96,7 @@ public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.dialog_delete_songs, container, false);
+        View layout = inflater.inflate(R.layout.dialog_delete, container, false);
         ButterKnife.bind(this, layout);
         return layout;
     }

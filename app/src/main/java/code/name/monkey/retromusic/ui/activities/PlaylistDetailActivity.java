@@ -1,12 +1,6 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +9,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
@@ -23,6 +19,10 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -45,7 +45,6 @@ import code.name.monkey.retromusic.ui.adapter.song.PlaylistSongAdapter;
 import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
-import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 
 public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity implements CabHolder,
@@ -72,9 +71,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     @BindView(R.id.title)
     TextView title;
 
-    @BindView(R.id.status_bar)
-    View statusBar;
-
     private Playlist playlist;
     private MaterialCab cab;
     private SongAdapter adapter;
@@ -88,7 +84,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        RetroUtil.statusBarHeight(statusBar);
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
@@ -178,24 +173,22 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     }
 
     private void setUpToolBar() {
+        title.setText(playlist.name);
         title.setTextColor(ThemeStore.textColorPrimary(this));
         TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
 
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
         appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        title.setText(playlist.name);
 
         setTitle(null);
         setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(
-                playlist instanceof AbsCustomPlaylist ? R.menu.menu_smart_playlist_detail
-                        : R.menu.menu_playlist_detail, menu);
+        getMenuInflater().inflate(playlist instanceof AbsCustomPlaylist ? R.menu.menu_smart_playlist_detail : R.menu.menu_playlist_detail, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

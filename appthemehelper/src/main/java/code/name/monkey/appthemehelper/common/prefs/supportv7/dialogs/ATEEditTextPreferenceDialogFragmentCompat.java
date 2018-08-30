@@ -1,12 +1,15 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEEditTextPreference;
 
-
+/**
+ * @author Karim Abou Zeid (kabouzeid)
+ */
 public class ATEEditTextPreferenceDialogFragmentCompat extends ATEPreferenceDialogFragment implements MaterialDialog.InputCallback {
 
     private CharSequence input;

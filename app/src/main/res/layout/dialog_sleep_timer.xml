@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:padding="12dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,20 +13,23 @@
         android:orientation="vertical">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            android:id="@+id/title"
             fontPath="@string/circular_std_black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:layout_marginBottom="8dp"
+            android:padding="6dp"
             android:text="@string/action_sleep_timer"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?android:attr/textColorPrimary"
             tools:ignore="MissingPrefix" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/timer_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:paddingStart="6dp"
+            android:paddingTop="8dp"
             android:textAppearance="?android:textAppearanceLarge" />
 
 
@@ -34,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxHeight="3dp"
-            android:padding="16dp"
+            android:paddingTop="12dp"
             android:progressDrawable="@drawable/color_progress_seek"
             android:splitTrack="false"
             android:thumb="@drawable/switch_thumb_material"
@@ -47,48 +51,26 @@
             android:gravity="end"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.CardView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_cancel"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                app:cardBackgroundColor="@color/md_green_A700"
-                app:cardCornerRadius="6dp"
-                app:cardUseCompatPadding="true">
+                android:text="@string/cancel_current_timer"
+                app:strokeColor="@color/md_grey_700"
+                app:strokeWidth="1dp"
+                tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/action_set"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingStart="28dp"
-                    android:paddingTop="12dp"
-                    android:paddingEnd="28dp"
-                    android:paddingBottom="12dp"
-                    android:text="@string/action_set"
-                    android:textColor="@color/md_white_1000" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                app:cardBackgroundColor="@color/md_red_A400"
-                app:cardCornerRadius="6dp"
-                android:id="@+id/action_cancel_container"
-                app:cardUseCompatPadding="true">
+                android:layout_marginStart="12dp"
+                android:gravity="center"
+                android:text="@string/action_set"
+                android:textColor="@color/md_white_1000"
+                app:backgroundTint="@color/md_pink_A400" />
 
-                <TextView
-                    android:id="@+id/action_cancel"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingStart="28dp"
-                    android:paddingTop="12dp"
-                    android:paddingEnd="28dp"
-                    android:paddingBottom="12dp"
-                    android:text="@string/cancel_current_timer"
-                    android:textColor="@color/md_white_1000" />
-            </android.support.v7.widget.CardView>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

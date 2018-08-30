@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.mvp.presenter;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.mvp.Presenter;
@@ -26,10 +26,6 @@ public class HomePresenter extends Presenter implements HomeContract.HomePresent
         loadTopArtists();
 
         loadSuggestions();
-
-        if (PreferenceUtil.getInstance(RetroApplication.getInstance()).isGenreShown()) {
-            loadGenres();
-        }
 
     }
 

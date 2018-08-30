@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="12dp">
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,15 +19,30 @@
         android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix" />
 
-    <EditText
-        android:id="@+id/option_1"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/action_new_playlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/playlist_name_empty"
-        android:inputType="textPersonName|textCapWords|text"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+        app:boxBackgroundMode="outline"
+        app:boxCollapsedPaddingTop="16dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/md_grey_700"
+        app:boxStrokeWidth="1dp"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/option_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/playlist_name_empty"
+            android:inputType="textPersonName|textCapWords|text"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,20 +50,22 @@
         android:gravity="end"
         android:padding="12dp">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/action_cancel"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@android:string/cancel" />
+            android:text="@string/cancel_current_timer"
+            app:strokeColor="@color/md_grey_700"
+            app:strokeWidth="1dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/action_rename"
-            style="@style/Widget.AppCompat.Button.Colored"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/rename_action" />
+            android:layout_marginStart="12dp"
+            android:text="@string/action_rename"
+            app:backgroundTint="@color/md_pink_A400" />
     </LinearLayout>
 </LinearLayout>

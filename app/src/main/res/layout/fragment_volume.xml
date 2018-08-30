@@ -16,7 +16,7 @@
         android:padding="16dp"
         app:srcCompat="@drawable/ic_volume_down_white_24dp" />
 
-    <android.support.v7.widget.AppCompatSeekBar
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volume_seekbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

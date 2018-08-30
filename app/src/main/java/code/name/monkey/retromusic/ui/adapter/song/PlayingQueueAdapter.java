@@ -2,10 +2,6 @@ package code.name.monkey.retromusic.ui.adapter.song;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +13,10 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableI
 
 import java.util.ArrayList;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.CabHolder;
@@ -25,8 +25,7 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 
 
-public class PlayingQueueAdapter extends SongAdapter implements
-        DraggableItemAdapter<PlayingQueueAdapter.ViewHolder> {
+public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAdapter<PlayingQueueAdapter.ViewHolder> {
 
     private static final int HISTORY = 0;
     private static final int CURRENT = 1;

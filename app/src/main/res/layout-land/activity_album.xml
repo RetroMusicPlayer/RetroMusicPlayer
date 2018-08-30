@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
@@ -25,12 +24,12 @@
                 android:scaleType="centerCrop"
                 android:transitionName="@string/transition_album_art" />
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar48" />
         </FrameLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -64,7 +63,7 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/title"
                             fontPath="@string/circular_std_black"
                             android:layout_width="match_parent"
@@ -73,7 +72,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
                             tools:ignore="MissingPrefix" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -93,7 +92,7 @@
 
                 </LinearLayout>
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/song_title"
                     fontPath="@string/circular_std_black"
                     android:layout_width="match_parent"
@@ -104,7 +103,7 @@
                     android:textColor="?android:attr/textColorPrimary"
                     tools:ignore="MissingPrefix" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -119,16 +118,16 @@
                     fontPath="@string/circular_std_black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="12dp"
-                    android:paddingEnd="16dp"
                     android:paddingStart="16dp"
                     android:paddingTop="12dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp"
                     android:text="@string/songs"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:visibility="gone"
                     tools:ignore="MissingPrefix" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/more_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -136,7 +135,7 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
     <View
@@ -144,7 +143,7 @@
         android:layout_height="72dp"
         android:background="@drawable/shadow_down_strong" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,5 +152,5 @@
         android:padding="16dp"
         app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

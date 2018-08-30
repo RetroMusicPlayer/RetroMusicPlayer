@@ -2,9 +2,6 @@ package code.name.monkey.retromusic.ui.adapter.album;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +11,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -117,36 +117,29 @@ public class AlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter {
 
         private int getLayout() {
             int layout;
-            //noinspection ConstantConditions
-            switch (PreferenceUtil.getInstance(getContext()).getNowPlayingScreen()) {
-                case BLUR_CARD:
+            switch (PreferenceUtil.getInstance(getContext()).getAlbumCoverStyle()) {
+                default:
+                case NORMAL:
+                    layout = R.layout.fragment_album_cover;
+                    break;
+                case FLAT:
+                    layout = R.layout.fragment_album_flat_cover;
+                    break;
+                case CIRCLE:
+                    layout = R.layout.fragment_album_circle_cover;
+                    break;
+                case CARD:
                     layout = R.layout.fragment_album_card_cover;
                     break;
                 case MATERIAL:
                     layout = R.layout.fragment_album_material_cover;
                     break;
-                case PLAIN:
-                case FLAT:
-                    layout = R.layout.fragment_album_flat_cover;
+                case CAROUSAL:
+                    layout = R.layout.fragment_album_carousal_cover;
                     break;
-                case CARD:
                 case FULL:
-                case ADAPTIVE:
                     layout = R.layout.fragment_album_full_cover;
                     break;
-                default:
-                case NORMAL:
-                    layout = R.layout.fragment_album_cover;
-                    break;
-
-            }
-            if (PreferenceUtil.getInstance(getContext()).carouselEffect() &&
-                    !(PreferenceUtil.getInstance(getContext()).getNowPlayingScreen()
-                            == NowPlayingScreen.FULL)) {
-                layout = R.layout.fragment_carousal_album_cover;
-            }
-            if (PreferenceUtil.getInstance(getContext()).circularAlbumArt()) {
-                layout = R.layout.fragment_album_circle_cover;
             }
             return layout;
         }

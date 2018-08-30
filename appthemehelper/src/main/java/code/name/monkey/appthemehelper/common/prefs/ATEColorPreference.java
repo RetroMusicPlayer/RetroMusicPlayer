@@ -53,7 +53,7 @@ public class ATEColorPreference extends Preference {
 
     private void invalidateColor() {
         if (mView != null) {
-            BorderCircleView circle = mView.findViewById(R.id.circle);
+            BorderCircleView circle = (BorderCircleView) mView.findViewById(R.id.circle);
             if (this.color != 0) {
                 circle.setVisibility(View.VISIBLE);
                 circle.setBackgroundColor(color);

@@ -1,56 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:sothree="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sliding_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_weight="1"
+    android:gravity="bottom"
+    sothree:umanoOverlay="false"
+    sothree:umanoPanelHeight="0dp"
+    sothree:umanoScrollableView="@+id/recycler_view"
+    sothree:umanoShadowHeight="0dp">
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sliding_layout"
+    <FrameLayout
+        android:id="@+id/content_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        sothree:umanoOverlay="false"
-        sothree:umanoPanelHeight="0dp"
-        sothree:umanoScrollableView="@+id/recycler_view"
-        sothree:umanoShadowHeight="0dp">
+        android:layout_height="match_parent" />
+
+
+    <FrameLayout
+        android:id="@+id/sliding_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
         <FrameLayout
-            android:id="@+id/content_container"
+            android:id="@+id/player_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
-        <FrameLayout
-            android:id="@+id/sliding_panel"
+        <fragment
+            android:id="@+id/mini_player_fragment"
+            android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="48dp"
+            tools:layout="@layout/fragment_mini_player" />
 
-
-            <FrameLayout
-                android:id="@+id/player_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <fragment
-                android:id="@+id/mini_player_fragment"
-                android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                tools:layout="@layout/fragment_mini_player" />
-        </FrameLayout>
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
-
-    <fragment
-        android:id="@+id/castMiniController"
-        class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        tools:visibility="visible" />
-
-</LinearLayout>
+        <fragment
+            android:id="@+id/castMiniController"
+            app:castShowImageThumbnail="false"
+            class="com.google.android.gms.cast.framework.media.widget.MiniControllerFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:visibility="visible" />
+    </FrameLayout>
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>

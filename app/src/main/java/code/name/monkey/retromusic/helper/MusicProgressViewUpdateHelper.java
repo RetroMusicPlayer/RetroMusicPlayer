@@ -2,7 +2,7 @@ package code.name.monkey.retromusic.helper;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 
 public class MusicProgressViewUpdateHelper extends Handler {

@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/player_toolbar"
                 style="@style/Toolbar48"
                 android:layout_height="48dp"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_general">
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="light"
@@ -8,7 +9,8 @@
             android:key="general_theme"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
-            android:title="@string/pref_title_general_theme" />
+            android:title="@string/pref_title_general_theme"
+            app:iconSpaceReserved="false" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/colors">
 
@@ -16,32 +18,43 @@
             android:key="primary_color"
             android:persistent="false"
             android:summary="@string/primary_color_desc"
-            android:title="@string/primary_color" />
+            android:title="@string/primary_color"
+            app:iconSpaceReserved="false" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"
             android:persistent="false"
             android:summary="@string/accent_color_desc"
-            android:title="@string/accent_color" />
+            android:title="@string/accent_color"
+            app:iconSpaceReserved="false" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="should_color_navigation_bar"
             android:persistent="false"
             android:summary="@string/pref_summary_colored_navigation_bar"
-            android:title="@string/pref_title_navigation_bar" />
+            android:title="@string/pref_title_navigation_bar"
+            app:iconSpaceReserved="false" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="adaptive_color_app"
             android:summary="@string/pref_summary_colored_app"
-            android:title="@string/pref_title_colored_app" />
+            android:title="@string/pref_title_colored_app"
+            app:iconSpaceReserved="false" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="should_color_app_shortcuts"
             android:summary="@string/pref_summary_colored_app_shortcuts"
-            android:title="@string/pref_title_app_shortcuts" />
+            android:title="@string/pref_title_app_shortcuts"
+            app:iconSpaceReserved="false" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="dominant_color"
             android:summary="@string/pref_summary_dominant_color"
-            android:title="@string/pref_title_toggle_dominant_color" />
+            android:title="@string/pref_title_toggle_dominant_color"
+            app:iconSpaceReserved="false" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

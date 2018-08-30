@@ -2,19 +2,19 @@ package code.name.monkey.retromusic.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.util.Pair;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -144,13 +144,13 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         }
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setTitle(null);
-        setSupportActionBar(toolbar);
+
 
         if (toolbar != null && !PreferenceUtil.getInstance(this).getFullScreenMode()) {
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar
-                    .getLayoutParams();
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
             params.topMargin = RetroUtil.getStatusBarHeight(this);
             toolbar.setLayoutParams(params);
         }
@@ -321,7 +321,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         moreTitle.setTextColor(themeColor);
 
         TintHelper.setTintAuto(shuffleButton, themeColor, true);
-        findViewById(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this));
+        //findViewById(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this));
     }
 
     @Override

@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.model.smartplaylist;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 
 import code.name.monkey.retromusic.R;

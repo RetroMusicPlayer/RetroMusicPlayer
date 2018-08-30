@@ -5,7 +5,7 @@
   android:layout_height="wrap_content"
   android:orientation="vertical">
 
-  <android.support.v7.widget.AppCompatTextView xmlns:tools="http://schemas.android.com/tools"
+  <androidx.appcompat.widget.AppCompatTextView xmlns:tools="http://schemas.android.com/tools"
     fontPath="@string/circular_std_black"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
       android:layout_weight="1"
       android:orientation="vertical">
 
-      <android.support.v7.widget.AppCompatImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/ic_shuffle_white_24dp"
         app:tint="@color/md_white_1000"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -58,7 +58,7 @@
       android:layout_weight="1"
       android:orientation="vertical">
 
-      <android.support.v7.widget.AppCompatImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -68,7 +68,7 @@
         app:srcCompat="@drawable/ic_timer_white_24dp"
         app:tint="@color/md_white_1000"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -85,7 +85,7 @@
       android:layout_weight="1"
       android:orientation="vertical">
 
-      <android.support.v7.widget.AppCompatImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -95,7 +95,7 @@
         app:srcCompat="@drawable/ic_settings_white_24dp"
         app:tint="@color/md_white_1000"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
@@ -113,7 +113,7 @@
       android:layout_weight="1"
       android:orientation="vertical">
 
-      <android.support.v7.widget.AppCompatImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -123,7 +123,7 @@
         app:srcCompat="@drawable/ic_folder_white_24dp"
         app:tint="@color/md_white_1000"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"

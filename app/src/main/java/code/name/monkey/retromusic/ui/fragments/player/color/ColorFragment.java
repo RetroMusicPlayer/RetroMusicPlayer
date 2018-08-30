@@ -9,11 +9,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.graphics.Palette;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.palette.graphics.Palette;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,16 +49,19 @@ public class ColorFragment extends AbsPlayerFragment {
 
     @BindView(R.id.player_toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.gradient_background)
     View colorBackground;
-    @BindView(R.id.status_bar)
-    View statusBar;
+
     @BindView(R.id.image)
     ImageView imageView;
+
     @BindView(R.id.lyrics)
     TextView lyricsView;
+
     @BindView(R.id.lyrics_container)
     View lyricsViewContainer;
+
     @BindView(R.id.album_cover_container)
     View imageViewContainer;
 
@@ -139,8 +142,6 @@ public class ColorFragment extends AbsPlayerFragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toggleStatusBar(statusBar);
-
         setUpSubFragments();
         setUpPlayerToolbar();
     }

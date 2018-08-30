@@ -1,14 +1,16 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs;
 
 import android.os.Bundle;
-import android.support.v7.preference.ListPreference;
+import androidx.preference.ListPreference;
 import android.view.View;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference;
 
-
+/**
+ * @author Karim Abou Zeid (kabouzeid)
+ */
 public class ATEListPreferenceDialogFragmentCompat extends ATEPreferenceDialogFragment implements MaterialDialog.ListCallbackSingleChoice {
     private int mClickedDialogEntryIndex;
 

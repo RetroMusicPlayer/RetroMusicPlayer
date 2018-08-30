@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.rest.service;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.rest.model.LastFmAlbum;

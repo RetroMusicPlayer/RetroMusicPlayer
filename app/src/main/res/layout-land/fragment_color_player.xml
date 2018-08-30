@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardCornerRadius="8dp"
@@ -63,7 +63,7 @@
                             android:layout_height="wrap_content"
                             android:padding="16dp">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/lyrics"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
                         </FrameLayout>
                     </ScrollView>
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/expand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                         android:padding="16dp"
                         app:srcCompat="@drawable/ic_unfold_more_black_24dp"
                         app:tint="@color/md_white_1000" />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
             </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
@@ -112,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0">
 
-                    <android.support.v7.widget.Toolbar
+                    <androidx.appcompat.widget.Toolbar
                         android:id="@+id/player_toolbar"
                         style="@style/Toolbar48"
                         android:layout_height="48dp"

@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.plain;
 import android.animation.ObjectAnimator;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,20 +42,28 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     SeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
 
@@ -285,11 +293,10 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
                     MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        int finalColor = PreferenceUtil.getInstance(getContext()).getAdaptiveColor()
-                ? dark : ThemeStore.accentColor(getContext());
+        int finalColor = PreferenceUtil.getInstance(getContext()).getAdaptiveColor() ? dark : ThemeStore.accentColor(getContext());
 
 
-        setProgressBarColor(dark);
+        setProgressBarColor(finalColor);
         TintHelper.setTintAuto(playPauseFab, MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(finalColor)), false);
         TintHelper.setTintAuto(playPauseFab, finalColor, true);
 
@@ -298,15 +305,14 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
         updatePrevNextColor();
     }
 
-    public void setProgressBarColor(int newColor) {
+    private void setProgressBarColor(int newColor) {
         TintHelper.setTintAuto(progressSlider, newColor, false);
     }
 
     private void setUpPlayPauseFab() {
         playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
 
-        playPauseFab.setImageDrawable(
-                playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
+        playPauseFab.setImageDrawable(playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
         //playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
         //playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
         playPauseFab.post(() -> {

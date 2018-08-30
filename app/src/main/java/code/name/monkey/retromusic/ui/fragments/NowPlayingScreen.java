@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import code.name.monkey.retromusic.R;
 

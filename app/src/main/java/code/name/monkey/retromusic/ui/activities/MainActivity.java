@@ -12,13 +12,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,8 +21,13 @@ import android.widget.FrameLayout;
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.retromusic.R;
@@ -48,22 +46,18 @@ import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFrag
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AbsSlidingMusicPanelActivity implements
-        SharedPreferences.OnSharedPreferenceChangeListener,
-        BottomNavigationView.OnNavigationItemSelectedListener {
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final int APP_INTRO_REQUEST = 2323;
-    private static final String TAG = "MainActivity";
-    private static final int APP_USER_INFO_REQUEST = 9003;
-    private static final int REQUEST_CODE_THEME = 9002;
-
     public static final int LIBRARY = 1;
     public static final int FOLDERS = 3;
     public static final int HOME = 0;
-
+    private static final String TAG = "MainActivity";
+    private static final int APP_USER_INFO_REQUEST = 9003;
+    private static final int REQUEST_CODE_THEME = 9002;
     @Nullable
     MainActivityFragmentCallbacks currentFragment;
 
@@ -112,10 +106,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         } else {
             restoreCurrentFragment();
         }
-        //getBottomNavigationView().setOnNavigationItemSelectedListener(this);
         checkShowChangelog();
-
-
     }
 
 
@@ -178,19 +169,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
                 .findFragmentById(R.id.fragment_container);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        PreferenceUtil.getInstance(this).setLastPage(item.getItemId());
-        disposable.add(Observable.just(item.getItemId())
-                .throttleFirst(3, TimeUnit.SECONDS)
-                .subscribe(this::setCurrentFragment));
-        return true;
-    }
-
-    public void setCurrentFragment(int menuItem) {
-        PreferenceUtil.getInstance(this).setLastMusicChooser(menuItem);
-        switch (menuItem) {
-            default:
+    public void setCurrentFragment(int key) {
+        PreferenceUtil.getInstance(this).setLastMusicChooser(key);
+        switch (key) {
             case LIBRARY:
                 setCurrentFragment(LibraryFragment.newInstance(), false, LibraryFragment.TAG);
                 break;
@@ -198,7 +179,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
                 setCurrentFragment(FoldersFragment.newInstance(this), false, FoldersFragment.TAG);
                 break;
             case HOME:
-                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? HomeFragment.newInstance() : BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
+                setCurrentFragment(BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
                 break;
         }
     }
@@ -336,7 +317,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
                 key.equals(PreferenceUtil.TOGGLE_SEPARATE_LINE) ||
                 key.equals(PreferenceUtil.ALBUM_GRID_STYLE) ||
                 key.equals(PreferenceUtil.ARTIST_GRID_STYLE) ||
-                key.equals(PreferenceUtil.TOGGLE_HOME_BANNER)) postRecreate();
+                key.equals(PreferenceUtil.TOGGLE_HOME_BANNER) ||
+                key.equals(PreferenceUtil.TOGGLE_ADD_CONTROLS) ||
+                key.equals(PreferenceUtil.ALBUM_COVER_STYLE)) postRecreate();
     }
 
     private void showPromotionalOffer() {

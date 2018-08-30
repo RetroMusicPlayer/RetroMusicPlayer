@@ -11,29 +11,40 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 214
-        versionName '1.7.200'
+        versionCode 216
+        versionName '1.8.100'
 
         multiDexEnabled true
 
         buildConfigField("String", "LASTFM_API_KEY", "\"${getProperty(getProperties('../public.properties'), 'LASTFM_API_KEY')}\"")
         buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
-
+    signingConfigs {
+        release {
+            Properties properties = getProperties('/Users/hemanths/Desktop/KeepSafe/retro.properties')
+            storeFile file(getProperty(properties, 'storeFile'))
+            keyAlias getProperty(properties, 'keyAlias')
+            storePassword getProperty(properties, 'storePassword')
+            keyPassword getProperty(properties, 'keyPassword')
+        }
+    }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
-            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "cast_app_id", "1234"
+            resValue "string", "cast_app_id", "BA9C3F5E"
+            signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG'
             resValue "string", "cast_app_id", "BA9C3F5E"
+
         }
     }
+
+
     flavorDimensions "default"
     productFlavors {
         normal {
@@ -57,6 +68,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
@@ -71,7 +83,6 @@ android {
             }
         }
     }*/
-
 }
 
 def getProperties(String fileName) {
@@ -92,7 +103,7 @@ static def getDate() {
 }
 
 ext {
-    supportLibVersion = "28.0.0-rc01"
+    supportLibVersion = '1.0.0-rc01'
     firebase = "11.8.0"
     retrofit = "2.3.0"
     butterKnife = "9.0.0-SNAPSHOT"
@@ -100,19 +111,21 @@ ext {
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.android.support:appcompat-v7:$supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$supportLibVersion"
-    implementation "com.android.support:gridlayout-v7:$supportLibVersion"
-    implementation "com.android.support:cardview-v7:$supportLibVersion"
-    implementation "com.android.support:palette-v7:$supportLibVersion"
-    implementation "com.android.support:design:$supportLibVersion"
-    implementation "com.android.support:support-annotations:$supportLibVersion"
-    implementation "com.android.support:preference-v7:$supportLibVersion"
-    implementation "com.android.support:preference-v14:$supportLibVersion"
+    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation "androidx.fragment:fragment:$supportLibVersion"
+    implementation "androidx.appcompat:appcompat:$supportLibVersion"
+    implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
+    implementation "androidx.gridlayout:gridlayout:$supportLibVersion"
+    implementation "androidx.cardview:cardview:$supportLibVersion"
+    implementation "androidx.palette:palette:$supportLibVersion"
+    implementation "androidx.annotation:annotation:$supportLibVersion"
+    implementation "androidx.preference:preference:$supportLibVersion"
+    implementation "androidx.legacy:legacy-support-v13:$supportLibVersion"
+    implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
+    implementation "com.google.android.material:material:$supportLibVersion"
 
     //For casting
-    implementation "com.android.support:mediarouter-v7:28.0.0-alpha5"
+    implementation 'androidx.mediarouter:mediarouter:1.0.0-beta01'
     implementation 'com.google.android.gms:play-services-cast-framework:16.0.1'
 
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
@@ -133,7 +146,7 @@ dependencies {
         transitive = true
     }
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
+    implementation 'com.simplecityapps:recyclerview-fastscroll:1.0.18'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
     /*UI Library*/
@@ -145,4 +158,9 @@ dependencies {
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
+
+    def nav_version = "1.0.0-alpha05"
+
+    implementation "android.arch.navigation:navigation-fragment:$nav_version"
+    implementation "android.arch.navigation:navigation-ui:$nav_version"
 }

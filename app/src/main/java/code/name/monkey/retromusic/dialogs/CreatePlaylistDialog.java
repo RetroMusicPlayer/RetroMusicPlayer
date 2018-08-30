@@ -1,24 +1,25 @@
 package code.name.monkey.retromusic.dialogs;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -32,14 +33,17 @@ public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.option_1)
     TextInputEditText playlistName;
 
+    @BindView(R.id.action_new_playlist)
+    TextInputLayout textInputLayout;
+
     @BindView(R.id.action_cancel)
-    TextView actionCancel;
+    MaterialButton actionCancel;
 
     @BindView(R.id.action_create)
-    TextView actionCreate;
+    MaterialButton actionCreate;
 
-    @BindView(R.id.action_create_container)
-    CardView actionCreateContainer;
+    @BindView(R.id.title)
+    TextView title;
 
     @NonNull
     public static CreatePlaylistDialog create() {
@@ -76,16 +80,17 @@ public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        actionCreateContainer.setCardBackgroundColor(ThemeStore.accentColor(getContext()));
+        actionCreate.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
+        actionCancel.setTextColor(accentColor);
+        playlistName.setHintTextColor(ColorStateList.valueOf(accentColor));
 
-        int primaryTextColor = MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil
-                .isColorLight(accentColor));
-        int secondaryTextColor = MaterialValueHelper.getSecondaryTextColor(getContext(), ColorUtil
-                .isColorLight(accentColor));
+        textInputLayout.setBoxStrokeColor(accentColor);
+        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(accentColor));
 
-        actionCreate.setTextColor(primaryTextColor);
-        actionCancel.setTextColor(secondaryTextColor);
-
+        playlistName.setHintTextColor(accentColor);
+        playlistName.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
     }
 

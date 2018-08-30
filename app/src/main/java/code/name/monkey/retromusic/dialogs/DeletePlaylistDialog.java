@@ -1,19 +1,24 @@
 package code.name.monkey.retromusic.dialogs;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -23,11 +28,13 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 public class DeletePlaylistDialog extends RoundedBottomSheetDialogFragment {
 
     @BindView(R.id.action_delete)
-    TextView delete;
+    MaterialButton actionDelete;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.action_cancel)
-    TextView cancel;
+    MaterialButton actionCancel;
 
     @NonNull
     public static DeletePlaylistDialog create(Playlist playlist) {
@@ -47,12 +54,14 @@ public class DeletePlaylistDialog extends RoundedBottomSheetDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(R.layout.dialog_delete_playlist, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View layout = inflater.inflate(R.layout.dialog_delete, container, false);
         ButterKnife.bind(this, layout);
         return layout;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -68,8 +77,16 @@ public class DeletePlaylistDialog extends RoundedBottomSheetDialogFragment {
             title = R.string.delete_playlist_title;
             content = Html.fromHtml(getString(R.string.delete_playlist_x, playlists.get(0).name));
         }
-        this.title.setText(title);
-        this.delete.setText(content);
+        this.title.setText(content);
+        this.actionDelete.setText(title);
+
+        this.title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+
+        int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
+        actionDelete.setBackgroundTintList(ColorStateList.valueOf(accentColor));
+        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
+        actionCancel.setTextColor(accentColor);
+
     }
 
     @OnClick({R.id.action_cancel, R.id.action_delete})

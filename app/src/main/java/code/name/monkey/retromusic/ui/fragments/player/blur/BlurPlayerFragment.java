@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,15 +48,17 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
 
     @BindView(R.id.player_toolbar)
     Toolbar toolbar;
+
     @BindView(R.id.toolbar_container)
     View toolbarContainer;
+
     @BindView(R.id.gradient_background)
     ImageView colorBackground;
-    @BindView(R.id.status_bar)
-    View statusBar;
+
     @Nullable
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
     @Nullable
     @BindView(R.id.title)
     TextView title;
@@ -65,8 +67,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
     private BlurPlaybackControlsFragment playbackControlsFragment;
     private Unbinder unbinder;
 
-    private RecyclerView.Adapter wrappedAdapter;
-    private RecyclerViewDragDropManager recyclerViewDragDropManager;
     private PlayingQueueAdapter playingQueueAdapter;
     private LinearLayoutManager layoutManager;
 
@@ -143,21 +143,10 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
-        if (recyclerViewDragDropManager != null) {
-            recyclerViewDragDropManager.release();
-            recyclerViewDragDropManager = null;
-        }
-
         if (recyclerView != null) {
             recyclerView.setItemAnimator(null);
             recyclerView.setAdapter(null);
             recyclerView = null;
-        }
-
-        if (wrappedAdapter != null) {
-            WrapperAdapterUtils.releaseAll(wrappedAdapter);
-            wrappedAdapter = null;
         }
         playingQueueAdapter = null;
         layoutManager = null;
@@ -177,8 +166,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        toggleStatusBar(statusBar);
-
         setUpSubFragments();
         setUpPlayerToolbar();
     }
@@ -245,7 +232,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
 
     private void setUpRecyclerView() {
         if (recyclerView != null) {
-            recyclerViewDragDropManager = new RecyclerViewDragDropManager();
             final GeneralItemAnimator animator = new RefactoredDefaultItemAnimator();
 
             playingQueueAdapter = new PlayingQueueAdapter(
@@ -255,14 +241,11 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
                     R.layout.item_song,
                     false,
                     null);
-            wrappedAdapter = recyclerViewDragDropManager.createWrappedAdapter(playingQueueAdapter);
-
             layoutManager = new LinearLayoutManager(getContext());
 
             recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(wrappedAdapter);
+            recyclerView.setAdapter(playingQueueAdapter);
             recyclerView.setItemAnimator(animator);
-            recyclerViewDragDropManager.attachRecyclerView(recyclerView);
             layoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
         }
     }
@@ -307,13 +290,4 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements
         }
 
     }
-
-    @Override
-    public void onPause() {
-        if (recyclerViewDragDropManager != null) {
-            recyclerViewDragDropManager.cancelDrag();
-        }
-        super.onPause();
-    }
-
 }

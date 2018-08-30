@@ -2,7 +2,7 @@ package code.name.monkey.retromusic.ui.fragments.settings;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.preference.TwoStatePreference;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;

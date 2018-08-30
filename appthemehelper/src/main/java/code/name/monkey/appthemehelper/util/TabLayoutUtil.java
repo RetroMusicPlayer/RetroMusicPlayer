@@ -1,9 +1,9 @@
 package code.name.monkey.appthemehelper.util;
 
 import android.content.res.ColorStateList;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
 
 
 public final class TabLayoutUtil {

@@ -16,8 +16,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:civ_border="false"
-            app:civ_shadow="true"
-            app:civ_shadow_radius="8"
+            app:civ_shadow="false"
             tools:ignore="ContentDescription,UnusedAttribute" />
 
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>

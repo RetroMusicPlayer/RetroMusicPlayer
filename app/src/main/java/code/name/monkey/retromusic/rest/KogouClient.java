@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.rest;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.rest.service.KuGouApiService;

@@ -1,13 +1,13 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,16 +40,15 @@ import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter;
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
 import code.name.monkey.retromusic.util.RetroColorUtil;
-import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 
 /**
  * @author Hemanth S (h4h13).
  */
 
-public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implements
-        GenreDetailsContract.GenreDetailsView, CabHolder {
+public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implements GenreDetailsContract.GenreDetailsView, CabHolder {
     public static final String EXTRA_GENRE_ID = "extra_genre_id";
+
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
@@ -58,9 +57,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
     @BindView(android.R.id.empty)
     TextView empty;
-
-    @BindView(R.id.status_bar)
-    View statusBar;
 
     @BindView(R.id.action_shuffle)
     FloatingActionButton shuffleButton;
@@ -96,7 +92,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
-        RetroUtil.statusBarHeight(statusBar);
 
         genre = getIntent().getParcelableExtra(EXTRA_GENRE_ID);
         presenter = new GenreDetailsPresenter(this, genre.id);

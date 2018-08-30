@@ -1,11 +1,12 @@
 package code.name.monkey.appthemehelper.common.views;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatCheckBox;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import android.util.AttributeSet;
 
 import code.name.monkey.appthemehelper.ATH;
 import code.name.monkey.appthemehelper.ThemeStore;
+
 
 /**
  * @author Aidan Follestad (afollestad)

@@ -1,7 +1,5 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">68dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="status_bar_padding">0dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="default_item_margin">16dp</dimen>
@@ -57,7 +55,7 @@
     <dimen name="list_item_image_icon_padding">8dp</dimen>
 
     <dimen name="mini_player_height">48dp</dimen>
-    <dimen name="mini_player_height_expanded">104dp</dimen>
+    <dimen name="mini_player_height_expanded">68dp</dimen>
 
 
     <!--
@@ -92,5 +90,6 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="column_width">80dp</dimen>
     <dimen name="icon_notification_dimen">32dp</dimen>
     <dimen name="overlap_toolbar_height">-12dp</dimen>
+    <dimen name="horizontal_margin">0dp</dimen>
 
 </resources>

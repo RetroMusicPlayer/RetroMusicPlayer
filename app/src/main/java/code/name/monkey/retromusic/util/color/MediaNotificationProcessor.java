@@ -6,8 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.graphics.Palette;
+import androidx.annotation.VisibleForTesting;
+import androidx.palette.graphics.Palette;
 
 import java.util.List;
 

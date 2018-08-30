@@ -1,11 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter.album;
 
 import android.graphics.drawable.Drawable;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +12,11 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import code.name.monkey.appthemehelper.ThemeStore;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
@@ -47,7 +46,7 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
     protected int itemLayoutRes;
 
     protected boolean usePalette = false;
-    private int textColor;
+
 
     public AlbumAdapter(@NonNull AppCompatActivity activity, ArrayList<Album> dataSet,
                         @LayoutRes int itemLayoutRes, boolean usePalette,
@@ -58,7 +57,7 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
         this.itemLayoutRes = itemLayoutRes;
         this.usePalette = usePalette;
         setHasStableIds(true);
-        this.textColor = ThemeStore.textColorPrimary(activity);
+
     }
 
     public AlbumAdapter(@NonNull AppCompatActivity activity, ArrayList<Album> dataSet,
@@ -123,7 +122,6 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
 
         if (holder.title != null) {
             holder.title.setText(getAlbumTitle(album));
-            holder.title.setTextColor(textColor);
         }
         if (holder.text != null) {
             holder.text.setText(getAlbumText(album));
@@ -138,12 +136,10 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
         if (holder.paletteColorContainer != null) {
             holder.paletteColorContainer.setBackgroundColor(color);
             if (holder.title != null) {
-                holder.title.setTextColor(
-                        MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
+                holder.title.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
             if (holder.text != null) {
-                holder.text.setTextColor(
-                        MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
+                holder.text.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
         }
     }
@@ -223,12 +219,6 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
 
         return MusicUtil.getSectionName(sectionName);
     }
-
-    public void setTextColor(int textColor) {
-        this.textColor = textColor;
-        notifyDataSetChanged();
-    }
-
 
     public class ViewHolder extends MediaEntryViewHolder {
 

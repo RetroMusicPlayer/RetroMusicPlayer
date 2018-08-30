@@ -6,9 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -19,6 +16,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 import code.name.monkey.retromusic.R;
 
 /**
@@ -26,13 +26,15 @@ import code.name.monkey.retromusic.R;
  */
 public class BlacklistFolderChooserDialog extends DialogFragment implements MaterialDialog.ListCallback {
 
+    String initialPath = Environment.getExternalStorageDirectory().getAbsolutePath();
     private File parentFolder;
     private File[] parentContents;
     private boolean canGoUp = false;
-
     private FolderCallback callback;
 
-    String initialPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static BlacklistFolderChooserDialog create() {
+        return new BlacklistFolderChooserDialog();
+    }
 
     private String[] getContentsArray() {
         if (parentContents == null) {
@@ -64,10 +66,6 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
             return results.toArray(new File[results.size()]);
         }
         return null;
-    }
-
-    public static BlacklistFolderChooserDialog create() {
-        return new BlacklistFolderChooserDialog();
     }
 
     @NonNull

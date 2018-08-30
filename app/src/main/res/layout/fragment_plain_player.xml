@@ -30,7 +30,7 @@
             android:paddingEnd="16dp"
             android:paddingStart="16dp">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 fontPath="@string/circular_std_black"
                 android:layout_width="match_parent"
@@ -47,7 +47,7 @@
                 tools:ignore="MissingPrefix"
                 tools:text="Title" />
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/player_toolbar"
                 style="@style/Toolbar48"
                 android:layout_height="48dp"

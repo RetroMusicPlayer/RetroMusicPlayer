@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
         android:key="now_playing_screen_id"
-        android:title="@string/pref_title_now_playing_screen_appearance" />
+        android:title="@string/pref_title_now_playing_screen_appearance"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
+        android:key="album_cover_style_id"
+        android:title="@string/pref_title_album_cover_style"
+        app:iconSpaceReserved="false" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="carousel_effect"
         android:summary="@string/pref_summary_carousel_effect"
-        android:title="@string/pref_title_toggle_carousel_effect" />
+        android:title="@string/pref_title_toggle_carousel_effect"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
+        android:defaultValue="12"
+        android:key="new_blur_amount"
+        android:max="25"
+        android:summary="@string/pref_blur_amount_summary"
+        android:title="@string/pref_blur_amount_title"
+        app:iconSpaceReserved="false" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
-        android:key="circular_album_art"
-        android:summary="@string/pref_summary_circular_album_effect"
-        android:title="@string/pref_title_toggle_circular_album_effect" />
+        android:key="toggle_add_controls"
+        android:summary="@string/pref_summary_extra_controls"
+        android:title="@string/pref_title_extra_controls"
+        app:iconSpaceReserved="false" />
 
-</android.support.v7.preference.PreferenceScreen>
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_volume"
+        android:summary="@string/pref_summary_toggle_volume"
+        android:title="@string/pref_title_toggle_volume"
+        app:iconSpaceReserved="false" />
+
+</androidx.preference.PreferenceScreen>

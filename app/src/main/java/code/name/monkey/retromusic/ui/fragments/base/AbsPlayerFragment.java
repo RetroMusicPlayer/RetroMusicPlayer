@@ -2,19 +2,21 @@ package code.name.monkey.retromusic.ui.fragments.base;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.Toolbar;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog;
@@ -28,7 +30,6 @@ import code.name.monkey.retromusic.interfaces.PaletteColorHolder;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.ui.activities.tageditor.AbsTagEditorActivity;
 import code.name.monkey.retromusic.ui.activities.tageditor.SongTagEditorActivity;
-import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -36,7 +37,6 @@ import code.name.monkey.retromusic.util.RetroUtil;
 
 public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
     public static final String TAG = AbsPlayerFragment.class.getSimpleName();
-    private boolean isToolbarShown = true;
     private Callbacks callbacks;
     private AsyncTask updateIsFavoriteTask;
 
@@ -118,15 +118,14 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
                 MusicUtil.setRingtone(getActivity(), song.id);
                 return true;
             case R.id.action_go_to_genre:
-        /*MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        Uri trackUri = ContentUris
-            .withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id);
-        retriever.setDataSource(getActivity(), trackUri);
-        String genre = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
-        if (genre == null) {
-          genre = "Not Specified";
-        }*/
-                Toast.makeText(getContext(), "Soon", Toast.LENGTH_SHORT).show();
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id);
+                retriever.setDataSource(getActivity(), trackUri);
+                String genre = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE);
+                if (genre == null) {
+                    genre = "Not Specified";
+                }
+                Toast.makeText(getContext(), genre, Toast.LENGTH_SHORT).show();
                 return true;
         }
         return false;
@@ -134,55 +133,6 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
 
     protected void toggleFavorite(Song song) {
         MusicUtil.toggleFavorite(getActivity(), song);
-    }
-
-    protected boolean isToolbarShown() {
-        return isToolbarShown;
-    }
-
-    protected void setToolbarShown(boolean toolbarShown) {
-        isToolbarShown = toolbarShown;
-    }
-
-    protected void showToolbar(@Nullable final View toolbar) {
-        if (toolbar == null) {
-            return;
-        }
-        setToolbarShown(true);
-        toolbar.setVisibility(View.VISIBLE);
-        toolbar.animate().alpha(1f).setDuration(PlayerAlbumCoverFragment.VISIBILITY_ANIM_DURATION);
-    }
-
-    protected void hideToolbar(@Nullable final View toolbar) {
-        if (toolbar == null) {
-            return;
-        }
-
-        setToolbarShown(false);
-
-        toolbar.animate().alpha(0f).setDuration(PlayerAlbumCoverFragment.VISIBILITY_ANIM_DURATION)
-                .withEndAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        toolbar.setVisibility(View.GONE);
-                    }
-                });
-    }
-
-    protected void toggleToolbar(@Nullable final View toolbar) {
-        if (isToolbarShown()) {
-            hideToolbar(toolbar);
-        } else {
-            showToolbar(toolbar);
-        }
-    }
-
-    protected void checkToggleToolbar(@Nullable final View toolbar) {
-        if (toolbar != null && !isToolbarShown() && toolbar.getVisibility() != View.GONE) {
-            hideToolbar(toolbar);
-        } else if (toolbar != null && isToolbarShown() && toolbar.getVisibility() != View.VISIBLE) {
-            showToolbar(toolbar);
-        }
     }
 
     public abstract void onShow();
@@ -243,8 +193,7 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
                     Drawable drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor());
                     getToolbar().getMenu().findItem(R.id.action_toggle_favorite)
                             .setIcon(drawable)
-                            .setTitle(isFavorite ? getString(R.string.action_remove_from_favorites)
-                                    : getString(R.string.action_add_to_favorites));
+                            .setTitle(isFavorite ? getString(R.string.action_remove_from_favorites) : getString(R.string.action_add_to_favorites));
                 }
             }
         }.execute(MusicPlayerRemote.getCurrentSong());
@@ -254,22 +203,15 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
         return callbacks;
     }
 
-    protected void toggleStatusBar(ViewGroup viewGroup) {
-        if (!PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
-            RetroUtil.statusBarHeight(viewGroup);
-        }
-    }
 
-    protected void toggleStatusBar(View viewGroup) {
-        if (!PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
-            RetroUtil.statusBarHeight(viewGroup);
-        }
-    }
-
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(ThemeStore.primaryColor(getActivity()));
+        if (PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
+            view.findViewById(R.id.status_bar).setVisibility(View.GONE);
+        }
     }
 
     public interface Callbacks {

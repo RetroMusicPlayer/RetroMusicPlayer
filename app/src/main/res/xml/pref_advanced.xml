@@ -1,61 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Advanced">
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="toggle_headset"
             android:summary="@string/pref_summary_toggle_headset"
-            android:title="@string/pref_title_toggle_toggle_headset" />
+            android:title="@string/pref_title_toggle_toggle_headset"
+            app:iconSpaceReserved="false" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="toggle_shuffle"
             android:summary="@string/pref_summary_toggle_shuffle"
-            android:title="@string/pref_title_toggle_toggle_shuffle" />
+            android:title="@string/pref_title_toggle_toggle_shuffle"
+            app:iconSpaceReserved="false" />
 
-        <android.support.v7.preference.SeekBarPreference
-            android:defaultValue="12"
-            android:key="new_blur_amount"
-            android:max="25"
-            android:summary="@string/pref_blur_amount_summary"
-            android:title="@string/pref_blur_amount_title" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="keep_screen_on"
             android:summary="@string/pref_keep_screen_on_summary"
-            android:title="@string/pref_keep_screen_on_title" />
+            android:title="@string/pref_keep_screen_on_title"
+            app:iconSpaceReserved="false" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-            android:defaultValue="0"
-            android:entries="@array/pref_grid_style_list_titles"
-            android:entryValues="@array/pref_grid_style_list_values"
-            android:key="album_grid_style"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_album_grid_style" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
-            android:defaultValue="0"
-            android:entries="@array/pref_grid_style_list_titles"
-            android:entryValues="@array/pref_grid_style_list_values"
-            android:key="artist_grid_style"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_artist_grid_style" />
-
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        <!--<code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
+            app:iconSpaceReserved="false"
             android:key="toggle_home_banner"
             android:summary="Toggle banner image"
-            android:title="Banner" />
+            android:title="Banner" />-->
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="toggle_add_controls"
-            android:summary="Extra controls"
-            android:title="Add extra controls for mini player" />
+
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

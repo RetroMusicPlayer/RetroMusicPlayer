@@ -1,7 +1,7 @@
 package code.name.monkey.retromusic.util;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 public class ColorUtils {
 

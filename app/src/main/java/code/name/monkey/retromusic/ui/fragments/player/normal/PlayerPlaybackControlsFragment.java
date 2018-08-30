@@ -5,10 +5,10 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatSeekBar;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,26 +43,37 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.title)
     AppCompatTextView title;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.volume_fragment_container)
     View mVolumeContainer;
+
     private Unbinder unbinder;
     private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;

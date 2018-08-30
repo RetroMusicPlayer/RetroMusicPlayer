@@ -23,7 +23,7 @@
             android:textColor="?android:attr/textColorPrimary"
             tools:ignore="MissingPrefix" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             android:textColor="?android:attr/textColorPrimary"
             tools:ignore="MissingPrefix" />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_artist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,29 +127,4 @@
             android:layout_margin="12dp"
             android:background="?attr/dividerColor" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/genre_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/genres"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/genres"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
-    </LinearLayout>
-
 </LinearLayout>

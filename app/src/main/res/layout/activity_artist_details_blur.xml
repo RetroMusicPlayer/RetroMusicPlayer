@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/root"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <android.support.design.widget.AppBarLayout
+  <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/app_bar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.design.widget.CollapsingToolbarLayout
+    <com.google.android.material.appbar.CollapsingToolbarLayout
       android:id="@+id/collapsing_toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -33,13 +33,13 @@
           android:gravity="center"
           android:orientation="vertical">
 
-          <android.support.v7.widget.CardView
+          <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
               android:id="@+id/image"
               android:layout_width="196dp"
               android:layout_height="196dp"
@@ -47,7 +47,7 @@
               android:scaleType="centerCrop"
               android:transitionName="@string/transition_artist_image"
               />
-          </android.support.v7.widget.CardView>
+          </androidx.cardview.widget.CardView>
           <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:padding="16dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/title"
               fontPath="@string/circular_std_black"
               android:layout_width="match_parent"
@@ -66,7 +66,7 @@
               tools:ignore="MissingPrefix"
               tools:text="Title"/>
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/text"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
@@ -86,11 +86,11 @@
           </LinearLayout>
         </LinearLayout>
       </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-    </android.support.design.widget.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-  </android.support.design.widget.AppBarLayout>
+  </com.google.android.material.appbar.AppBarLayout>
 
-  <android.support.v4.widget.NestedScrollView
+  <androidx.core.widget.NestedScrollView
     android:id="@+id/gradient_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
         android:text="@string/action_shuffle_all"
         tools:ignore="MissingPrefix"
         />
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/biography_title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
         android:visibility="gone"
         tools:ignore="MissingPrefix"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/biography"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:visibility="gone"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/album_title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
@@ -148,14 +148,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="?android:attr/textColorPrimary"/>
 
-      <android.support.v7.widget.RecyclerView
+      <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/album_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:nestedScrollingEnabled="false"/>
 
-      <android.support.v7.widget.AppCompatTextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/song_title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
@@ -166,7 +166,7 @@
         android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix"/>
 
-      <android.support.v7.widget.RecyclerView
+      <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
 
     </LinearLayout>
 
-  </android.support.v4.widget.NestedScrollView>
+  </androidx.core.widget.NestedScrollView>
 
   <View
     android:layout_width="match_parent"
@@ -191,7 +191,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-      <android.support.v7.widget.AppCompatImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/menu_close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -202,7 +202,7 @@
         app:backgroundTint="@color/twenty_percent_black_overlay"
         app:srcCompat="@drawable/ic_close_white_24dp"/>
 
-      <android.support.v7.widget.AppCompatImageButton
+      <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -216,4 +216,4 @@
     </FrameLayout>
   </LinearLayout>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -3,14 +3,13 @@ package code.name.monkey.retromusic.views;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 
 import code.name.monkey.retromusic.R;
 
 
-public class IconImageView extends android.support.v7.widget.AppCompatImageView {
+public class IconImageView extends androidx.appcompat.widget.AppCompatImageView {
     public IconImageView(Context context) {
         super(context);
         init(context);

@@ -3,9 +3,9 @@ package code.name.monkey.retromusic.ui.fragments.settings;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
+import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 

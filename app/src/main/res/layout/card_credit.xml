@@ -1,185 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical">
-
-  <android.support.v7.widget.CardView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="8dp"
-    app:cardPreventCornerOverlap="false"
-    app:cardUseCompatPadding="true">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@drawable/gradient_1"
-      android:orientation="vertical">
-
-      <TextView
-        fontPath="@string/circular_std_black"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="@string/credit_title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="@color/md_white_1000"
-        tools:ignore="MissingPrefix"/>
-
-      <LinearLayout
-        android:id="@+id/marko_name_link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp"
-        android:background="?attr/rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/md_listitem_height"
-        android:orientation="horizontal"
-        tools:ignore="PrivateResource">
-
-        <code.name.monkey.retromusic.views.NetworkImageView
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          app:civ_border="false"
-          app:civ_shadow="false"
-          app:url_link="https://avatars2.githubusercontent.com/u/35743654?s=400&amp;u=f8b4a90a352a661625ae71d455a82aaa9bc3316b&amp;v=4"/>
+        app:cardCornerRadius="12dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingTop="8dp"
-          android:paddingBottom="8dp"
-          android:paddingStart="16dp"
-          android:paddingEnd="16dp"
-          android:orientation="vertical">
-
-          <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/marko_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/md_white_1000"/>
+            android:background="@drawable/gradient_1"
+            android:orientation="vertical">
 
-          <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.85"
-            android:text="@string/marko_summary"
-            android:textColor="@color/md_white_1000"/>
+            <TextView
+                fontPath="@string/circular_std_black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="@string/credit_title"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/md_white_1000"
+                tools:ignore="MissingPrefix" />
+
+            <LinearLayout
+                android:id="@+id/marko_name_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/rectSelector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/md_listitem_height"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                tools:ignore="PrivateResource">
+
+                <code.name.monkey.retromusic.views.NetworkImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:civ_border="false"
+                    app:civ_shadow="false"
+                    app:url_link="https://avatars2.githubusercontent.com/u/35743654?s=400&amp;u=f8b4a90a352a661625ae71d455a82aaa9bc3316b&amp;v=4" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/marko_name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/md_white_1000" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.85"
+                        android:text="@string/marko_summary"
+                        android:textColor="@color/md_white_1000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/gaurav_singh_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/rectSelector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/md_listitem_height"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                tools:ignore="PrivateResource">
+
+                <code.name.monkey.retromusic.views.NetworkImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:civ_border="false"
+                    app:civ_shadow="false"
+                    app:url_link="https://cdn5.telesco.pe/file/Gnko_d39iKSqzKhsVK53sjUFz_sfLKe_OpxFE9kR-VUEjDbm6SOr8CT09tyI3zhDSuTowqOhNY4nogFx1Z8QbixyZLAWccl94JdX4dqkPrZyHMS9K7xUzq-wgZCoNIbO8_eAnGOy8Gmu3-uzLuQf2u3G7BRIxm5mzqwqGoeX7_V-fcs3Lr6Br7hPFeCHSm1U39I69E3R9ovs-kPfxCpze-riCjD-QhwwOEOfiudx9OmkmLJGvYugX2EpHSBFfNh6WFQEvBAvR6xPrXul3LxZEebH0xwz5HX-bmyuoxdGaW0J4ywDgiiu4I7cfUJe8lKqWwkPQRg8zTtYNiG3MZio7w.jpg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/gaurav_singh_name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/md_white_1000" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.85"
+                        android:text="@string/moderator"
+                        android:textColor="@color/md_white_1000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/yt_gaming_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/rectSelector"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/md_listitem_height"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="0dp"
+                tools:ignore="PrivateResource">
+
+                <code.name.monkey.retromusic.views.NetworkImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:civ_border="false"
+                    app:civ_shadow="false"
+                    app:url_link="https://cdn.discordapp.com/attachments/469540889883181077/471361944385880065/91_98910_29110_20180616_17122501.jpg" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="8dp">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yt_gaming_name"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/md_white_1000" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.85"
+                        android:text="@string/yt_gaming_summary"
+                        android:textColor="@color/md_white_1000" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-      </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-      <LinearLayout
-        android:id="@+id/gaurav_singh_link"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/made_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp"
-        android:background="?attr/rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/md_listitem_height"
-        android:orientation="horizontal"
-        tools:ignore="PrivateResource">
-
-        <code.name.monkey.retromusic.views.NetworkImageView
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          app:civ_border="false"
-          app:civ_shadow="false"
-          app:url_link="https://cdn5.telesco.pe/file/Gnko_d39iKSqzKhsVK53sjUFz_sfLKe_OpxFE9kR-VUEjDbm6SOr8CT09tyI3zhDSuTowqOhNY4nogFx1Z8QbixyZLAWccl94JdX4dqkPrZyHMS9K7xUzq-wgZCoNIbO8_eAnGOy8Gmu3-uzLuQf2u3G7BRIxm5mzqwqGoeX7_V-fcs3Lr6Br7hPFeCHSm1U39I69E3R9ovs-kPfxCpze-riCjD-QhwwOEOfiudx9OmkmLJGvYugX2EpHSBFfNh6WFQEvBAvR6xPrXul3LxZEebH0xwz5HX-bmyuoxdGaW0J4ywDgiiu4I7cfUJe8lKqWwkPQRg8zTtYNiG3MZio7w.jpg"/>
-
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingTop="8dp"
-          android:paddingBottom="8dp"
-          android:paddingStart="16dp"
-          android:paddingEnd="16dp"
-          android:orientation="vertical">
-
-          <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/gaurav_singh_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/md_white_1000"/>
-
-          <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.85"
-            android:text="@string/moderator"
-            android:textColor="@color/md_white_1000"/>
-        </LinearLayout>
-      </LinearLayout>
-
-      <LinearLayout
-        android:id="@+id/yt_gaming_link"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp"
-        android:background="?attr/rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:minHeight="@dimen/md_listitem_height"
-        android:orientation="horizontal"
-        tools:ignore="PrivateResource">
-
-        <code.name.monkey.retromusic.views.NetworkImageView
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          app:civ_border="false"
-          app:civ_shadow="false"
-          app:url_link="https://cdn.discordapp.com/attachments/469540889883181077/471361944385880065/91_98910_29110_20180616_17122501.jpg"/>
-
-        <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:paddingTop="8dp"
-          android:paddingBottom="8dp"
-          android:paddingStart="16dp"
-          android:paddingEnd="16dp"
-          android:orientation="vertical">
-
-
-          <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/yt_gaming_name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/md_white_1000"/>
-
-          <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0.85"
-            android:text="@string/yt_gaming_summary"
-            android:textColor="@color/md_white_1000"/>
-        </LinearLayout>
-      </LinearLayout>
-    </LinearLayout>
-  </android.support.v7.widget.CardView>
-
-  <android.support.v7.widget.AppCompatTextView
-    android:id="@+id/made_text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:padding="16dp"
-    android:gravity="center"
-    android:text="@string/made_with_love"
-    android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-    android:textColor="?android:attr/textColorSecondary"
-    android:textSize="12sp"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/made_with_love"
+        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp" />
 </LinearLayout>

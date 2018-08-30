@@ -5,15 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -81,15 +82,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.fragment_container)
     View contentContainer;
 
-    @BindView(R.id.coordinator_layout)
-    View coordinatorLayout;
-
     @BindView(R.id.menu_container)
     View menuContainer;
+
     @BindDrawable(R.drawable.ic_menu_white_24dp)
     Drawable menu;
+
     @BindDrawable(R.drawable.ic_close_white_24dp)
     Drawable close;
+
     private Unbinder unBinder;
     private MaterialCab cab;
     private FragmentManager fragmentManager;
@@ -114,12 +115,11 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             bottomNavigationView.setOnNavigationItemSelectedListener(this::onOptionsItemSelected);
             int iconColor = ATHUtil.resolveColor(context, R.attr.iconColor);
             int accentColor = ThemeStore.accentColor(context);
-            NavigationViewUtil.setItemIconColors(bottomNavigationView, iconColor, accentColor);
-            NavigationViewUtil.setItemTextColors(bottomNavigationView, iconColor, accentColor);
+            NavigationViewUtil.setItemIconColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
+            NavigationViewUtil.setItemTextColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
 
-            if (PreferenceUtil.getInstance(getContext()).tabTitles()) {
-                bottomNavigationView.setItemTextAppearanceActive(R.style.HideTabTitleTextAppearance);
-                bottomNavigationView.setItemTextAppearanceInactive(R.style.HideTabTitleTextAppearance);
+            if (!PreferenceUtil.getInstance(getContext()).tabTitles()) {
+                bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
             }
         }
     }
@@ -154,7 +154,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setStatusbarColorAuto(view);
         setupBottomView();
         setupToolbar();
 
@@ -172,13 +171,13 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         TintHelper.setTintAuto(actionLibrary, ThemeStore.accentColor(getContext()), true);
 
         int primaryColor = ThemeStore.primaryColor(getContext());
-        int darkPrimaryColor = ColorUtil.darkenColor(primaryColor);
+
 
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
-        toolbar.setBackgroundColor(darkPrimaryColor);
+        toolbar.setBackgroundColor(primaryColor);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
-        appbar.setBackgroundColor(darkPrimaryColor);
+        appbar.setBackgroundColor(primaryColor);
         appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
@@ -191,7 +190,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 menu,
                 close
         ));
-        coordinatorLayout.setBackgroundColor(ColorUtil.darkenColor(primaryColor));
     }
 
     public Fragment getCurrentFragment() {
@@ -543,10 +541,5 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                     break;
             }
         }
-    }
-
-    public void addAppbarLayoutElevation(float v) {
-        //TransitionManager.beginDelayedTransition(appbar);
-        //appbar.setElevation(v);
     }
 }

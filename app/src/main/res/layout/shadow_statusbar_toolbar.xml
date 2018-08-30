@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <View
+        <code.name.monkey.retromusic.views.StatusBarView
             android:layout_width="match_parent"
             android:layout_height="@dimen/status_bar_padding" />
 

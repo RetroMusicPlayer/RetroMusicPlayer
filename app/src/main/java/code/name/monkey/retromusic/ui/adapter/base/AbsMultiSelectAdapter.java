@@ -1,9 +1,9 @@
 package code.name.monkey.retromusic.ui.adapter.base;
 
 import android.content.Context;
-import android.support.annotation.MenuRes;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.MenuRes;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 

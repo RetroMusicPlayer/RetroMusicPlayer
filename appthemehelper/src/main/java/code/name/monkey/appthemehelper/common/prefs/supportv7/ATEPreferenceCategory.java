@@ -3,8 +3,8 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceViewHolder;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.widget.TextView;
 

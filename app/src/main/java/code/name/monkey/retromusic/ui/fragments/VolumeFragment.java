@@ -6,9 +6,9 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +57,7 @@ public class VolumeFragment extends Fragment implements SeekBar.OnSeekBarChangeL
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //noinspection ConstantConditions
-        setColor(ThemeStore.textColorSecondary(getContext()));
+        setTintable(ThemeStore.textColorSecondary(getContext()));
     }
 
     @Override
@@ -146,7 +146,7 @@ public class VolumeFragment extends Fragment implements SeekBar.OnSeekBarChangeL
         setProgressBarColor(Color.WHITE);
     }
 
-    public void setProgressBarColor(int newColor) {
+    private void setProgressBarColor(int newColor) {
         TintHelper.setTintAuto(volumeSeekbar, newColor, false);
         volumeDown.setColorFilter(newColor, PorterDuff.Mode.SRC_IN);
         volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN);

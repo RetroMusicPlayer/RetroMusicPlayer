@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.volume;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Handler;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class AudioVolumeObserver {
 

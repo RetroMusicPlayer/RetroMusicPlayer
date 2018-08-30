@@ -3,10 +3,11 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.preference.CheckBoxPreference;
+import androidx.preference.CheckBoxPreference;
 import android.util.AttributeSet;
 
 import code.name.monkey.appthemehelper.R;
+
 
 /**
  * @author Aidan Follestad (afollestad)

@@ -1,12 +1,12 @@
 package code.name.monkey.retromusic.ui.fragments.player;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -62,14 +62,11 @@ public class PlayerAlbumCoverFragment extends AbsMusicServiceFragment implements
         viewPager.addOnPageChangeListener(this);
 
         //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance(getContext()).carouselEffect() && !(
-                (PreferenceUtil.getInstance(getContext()).getNowPlayingScreen() == NowPlayingScreen.FULL) ||
-                        (PreferenceUtil.getInstance(getContext()).getNowPlayingScreen()
-                                == NowPlayingScreen.FLAT))) {
+        if (PreferenceUtil.getInstance(getContext()).carouselEffect() &&
+                !((PreferenceUtil.getInstance(getContext()).getNowPlayingScreen() == NowPlayingScreen.FULL))) {
             viewPager.setClipToPadding(false);
             viewPager.setPadding(96, 0, 96, 0);
             viewPager.setPageMargin(18);
-
             viewPager.setPageTransformer(false, new CustPagerTransformer(getContext()));
         } else {
             viewPager.setPageTransformer(true, new NormalPageTransformer());
