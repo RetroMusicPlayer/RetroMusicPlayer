@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:paddingEnd="0dp"
-            android:paddingLeft="16dp">
+            android:paddingLeft="16dp"
+            android:paddingEnd="0dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/image_text_container"
@@ -51,11 +51,13 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/image_text"
-                    android:layout_width="36dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:maxLines="1"
+                    tools:text="1"
+                    tools:visibility="visible"
                     android:minHeight="40dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:visibility="gone" />
@@ -67,12 +69,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="12dp"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_weight="1.0"
             android:orientation="vertical"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"

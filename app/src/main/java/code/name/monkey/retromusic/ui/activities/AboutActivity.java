@@ -5,14 +5,25 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.core.app.ShareCompat;
-import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ShareCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -20,7 +31,9 @@ import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.ChangelogDialog;
+import code.name.monkey.retromusic.model.Contributor;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
+import code.name.monkey.retromusic.ui.adapter.ContributorAdapter;
 import code.name.monkey.retromusic.util.NavigationUtil;
 
 import static code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK;
@@ -49,6 +62,9 @@ public class AboutActivity extends AbsBaseActivity {
     @BindView(R.id.title)
     TextView title;
 
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +76,7 @@ public class AboutActivity extends AbsBaseActivity {
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
+        loadContributors();
         setUpToolbar();
 
         appVersion.setText(getAppVersion());
@@ -176,5 +193,33 @@ public class AboutActivity extends AbsBaseActivity {
             startActivity(
                     Intent.createChooser(shareIntent, getResources().getText(R.string.action_share)));
         }
+    }
+
+    public void loadContributors() {
+        String data = getAssetJsonData();
+        Type type = new TypeToken<List<Contributor>>() {
+        }.getType();
+        List<Contributor> contributors = new Gson().fromJson(data, type);
+
+        ContributorAdapter contributorAdapter = new ContributorAdapter(contributors);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(contributorAdapter);
+    }
+
+    public String getAssetJsonData() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("contributors.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

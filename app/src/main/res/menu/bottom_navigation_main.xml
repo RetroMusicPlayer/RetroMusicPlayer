@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_white_24dp"
+        android:title="@string/home" />
+
     <item
         android:id="@+id/action_song"
         android:enabled="true"
@@ -20,10 +27,5 @@
         android:enabled="true"
         android:icon="@drawable/ic_queue_music_white_24dp"
         android:title="@string/playlists" />
-    <item
-        android:id="@+id/action_genre"
-        android:enabled="true"
-        android:icon="@drawable/ic_guitar_acoustic_white_24dp"
-        android:title="@string/genre" />
 
 </menu>

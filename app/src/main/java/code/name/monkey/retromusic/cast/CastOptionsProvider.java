@@ -24,12 +24,12 @@ public class CastOptionsProvider implements OptionsProvider {
 
         NotificationOptions notificationOptions = new NotificationOptions.Builder()
                 .setActions(buttonActions, compatButtonActionsIndicies)
-                .setTargetActivityClassName(ExpandedControlsActivity.class.getName())
+                .setTargetActivityClassName(ExpandedCastControlsActivity.class.getName())
                 .build();
 
         CastMediaOptions mediaOptions = new CastMediaOptions.Builder()
                 .setNotificationOptions(notificationOptions)
-                .setExpandedControllerActivityClassName(ExpandedControlsActivity.class.getName())
+                .setExpandedControllerActivityClassName(ExpandedCastControlsActivity.class.getName())
                 .build();
 
         return new CastOptions.Builder()

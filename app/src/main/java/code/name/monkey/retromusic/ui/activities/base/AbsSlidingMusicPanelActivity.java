@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.ui.activities.base;
 
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,8 @@ import android.view.ViewTreeObserver;
 import android.view.animation.PathInterpolator;
 
 import com.google.android.gms.cast.framework.CastSession;
-import com.google.android.gms.cast.framework.media.widget.ExpandedControllerActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
 
@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.NavigationViewUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.cast.CastHelper;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -40,6 +42,7 @@ import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment;
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment;
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 
@@ -50,6 +53,9 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     @BindView(R.id.sliding_layout)
     SlidingUpPanelLayout slidingUpPanelLayout;
 
+    @BindView(R.id.bottom_navigation)
+    BottomNavigationView bottomNavigationView;
+
     private int navigationbarColor;
     private int taskColor;
     private boolean lightStatusBar;
@@ -59,32 +65,25 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     private MiniPlayerFragment miniPlayerFragment;
     private ValueAnimator navigationBarColorAnimator;
 
-    @Override
-    public void onPlayingMetaChanged() {
-        super.onPlayingMetaChanged();
-        CastSession castSession = getCastSession();
-        if (castSession == null) {
-            return;
-        }
-        //MusicPlayerRemote.pauseSong();
-        CastHelper.startCasting(castSession, MusicPlayerRemote.getCurrentSong());
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(createContentView());
         ButterKnife.bind(this);
+
         choosFragmentForTheme();
 
-        findViewById(R.id.castMiniController).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AbsSlidingMusicPanelActivity.this, ExpandedControllerActivity.class));
-            }
-        });
         //noinspection ConstantConditions
-        miniPlayerFragment.getView().setOnClickListener(v -> expandPanel());
+        miniPlayerFragment.getView().setOnClickListener(v -> {
+                    CastSession castSession = getCastSession();
+                    if (castSession != null) {
+                        NavigationUtil.gotoExpandedController(AbsSlidingMusicPanelActivity.this);
+                    } else {
+                        expandPanel();
+                    }
+                }
+        );
 
         slidingUpPanelLayout.getViewTreeObserver()
                 .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -104,7 +103,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
                 });
 
         slidingUpPanelLayout.addPanelSlideListener(this);
-
+        setupBottomView();
     }
 
     private void choosFragmentForTheme() {
@@ -203,6 +202,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
 
     @Override
     public void onPanelSlide(View panel, @FloatRange(from = 0, to = 1) float slideOffset) {
+        bottomNavigationView.setTranslationY(slideOffset * 400);
         setMiniPlayerAlphaProgress(slideOffset);
     }
 
@@ -322,14 +322,23 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     }
 
     public void hideBottomBar(final boolean hide) {
+
+        int heightOfBar =
+                getResources().getDimensionPixelSize(R.dimen.mini_player_height);
+        int heightOfBarWithTabs =
+                getResources().getDimensionPixelSize(R.dimen.mini_player_height_expanded);
+
         if (hide) {
             slidingUpPanelLayout.setPanelHeight(0);
             collapsePanel();
         } else {
-            //slidingUpPanelLayout.setPanelHeight(getCastSession() != null ? getResources().getDimensionPixelSize(R.dimen.mini_player_height_expanded) : getResources().getDimensionPixelSize(R.dimen.mini_player_height));
-            slidingUpPanelLayout.setPanelHeight(getResources().getDimensionPixelSize(R.dimen.mini_player_height));
+            if (!MusicPlayerRemote.getPlayingQueue().isEmpty()) {
+                slidingUpPanelLayout.setPanelHeight(bottomNavigationView.getVisibility() == View.VISIBLE ?
+                        heightOfBarWithTabs : heightOfBar);
+            }
         }
     }
+
 
     protected View wrapSlidingMusicPanel(@LayoutRes int resId) {
         @SuppressLint("InflateParams")
@@ -377,8 +386,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
             if (view.findViewById(R.id.toolbar) != null) {
                 view.findViewById(R.id.toolbar).setBackgroundColor(playerFragmentColorDark);
             }
-            if (view.findViewById(R.id.appbar) != null) {
-                view.findViewById(R.id.appbar).setBackgroundColor(playerFragmentColorDark);
+            if (view.findViewById(R.id.app_bar) != null) {
+                view.findViewById(R.id.app_bar).setBackgroundColor(playerFragmentColorDark);
             }
             if (view.findViewById(R.id.status_bar) != null) {
                 view.findViewById(R.id.status_bar)
@@ -421,15 +430,47 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     @Override
     public void hideCastMiniController() {
         super.hideCastMiniController();
-        hideBottomBar(false);
-        findViewById(R.id.castMiniController).setVisibility(View.GONE);
     }
 
     @Override
     public void showCastMiniController() {
         super.showCastMiniController();
-        hideBottomBar(true);
-        findViewById(R.id.castMiniController).setVisibility(View.VISIBLE);
-        MusicPlayerRemote.pauseSong();
+        MusicPlayerRemote.setZeroVolume();
+    }
+
+    private void setupBottomView() {
+        bottomNavigationView.setBackgroundColor(ThemeStore.primaryColor(this));
+        bottomNavigationView.setSelectedItemId(PreferenceUtil.getInstance(this).getLastPage());
+        int iconColor = ATHUtil.resolveColor(this, R.attr.iconColor);
+        int accentColor = ThemeStore.accentColor(this);
+        NavigationViewUtil.setItemIconColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
+        NavigationViewUtil.setItemTextColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
+
+        if (!PreferenceUtil.getInstance(this).tabTitles()) {
+            bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
+        }
+    }
+
+    @Override
+    public void onPlayingMetaChanged() {
+        super.onPlayingMetaChanged();
+        CastSession castSession = getCastSession();
+        if (castSession == null) {
+            return;
+        }
+        //MusicPlayerRemote.pauseSong();
+        CastHelper.startCasting(castSession, MusicPlayerRemote.getCurrentSong());
+    }
+
+    public void setBottomBarVisibility(int gone) {
+        if (bottomNavigationView != null) {
+            //TransitionManager.beginDelayedTransition(bottomNavigationView);
+            bottomNavigationView.setVisibility(gone);
+            hideBottomBar(false);
+        }
+    }
+
+    public BottomNavigationView getBottomNavigationView() {
+        return bottomNavigationView;
     }
 }

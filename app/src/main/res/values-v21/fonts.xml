@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- normal -->
-    <string name="font_fontFamily_medium" translatable="false">sans-serif-medium</string>
-
-</resources>

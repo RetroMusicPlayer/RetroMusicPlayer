@@ -23,20 +23,7 @@
         <item name="android:focusable">false</item>
     </style>
 
-    <style name="PlayingIndicator">
-        <item name="android:layout_width">36dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:layout_gravity">center</item>
-    </style>
-
-    <style name="Fab" parent="FabParent" />
-
     <style name="MusicProgressSlider" parent="MusicProgressSliderParent">
-        <item name="android:thumbOffset">0dp</item>
-    </style>
-
-    <style name="TraditionalMusicProgressSlider" parent="TraditionalMusicProgressSliderParent">
         <item name="android:thumbOffset">0dp</item>
     </style>
 
@@ -58,77 +45,9 @@
         <item name="android:layout_height">48dp</item>
     </style>
 
-    <style name="Theme.Transparent" parent="android:Theme">
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-
-    <style name="SettingsTabsTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textAllCaps">false</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="ExpandedTitleAppearance">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Display1</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textStyle">bold</item>
-        <item name="fontPath">@string/circular_std_black</item>
-    </style>
-
-    <style name="ExpandedTitleAppearance.White" parent="ExpandedTitleAppearance">
-        <item name="android:textColor">@color/md_white_1000</item>
-    </style>
-
-    <style name="CollapsedTitleAppearance">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-    </style>
-
-    <style name="CollapsedTitleAppearance.White">
-        <item name="android:textColor">@color/md_white_1000</item>
-    </style>
-
-    <style name="FullScreenTitleAppearance">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body2</item>
-    </style>
-
-    <style name="FullScreenSubTitleAppearance">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
-    </style>
 
     <style name="ToolbarTextAppearance">
         <item name="fontPath">fonts/sans_regular.ttf</item>
-    </style>
-
-    <style name="HintTextAppearance">
-        <item name="android:textColor">@color/md_white_1000</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="Toolbar.CenterTitle" parent="Toolbar">
-        <item name="titleTextAppearance">@style/ToolbarTitleGravity</item>
-        <item name="android:titleTextAppearance">@style/ToolbarTitleGravity</item>
-        <item name="subtitleTextAppearance">@style/ToolbarSubTitleGravity</item>
-        <item name="android:subtitleTextAppearance">@style/ToolbarSubTitleGravity</item>
-    </style>
-
-    <style name="ToolbarTitleGravity" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:gravity">center_horizontal</item>
-    </style>
-
-    <style name="ToolbarSubTitleGravity" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="BigTitleTextAppearance">
@@ -138,13 +57,6 @@
         <item name="fontPath">@string/circular_std_black</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
-    </style>
-
-    <style name="CollapsedToolbarLayout" parent="Widget.Design.CollapsingToolbar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="layout_scrollFlags">scroll|enterAlwaysCollapsed</item>
-        <item name="titleEnabled">false</item>
     </style>
 
 

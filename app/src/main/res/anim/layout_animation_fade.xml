@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layoutAnimation android:delay="15%" android:animation="@anim/item_animation_fade" android:animationOrder="normal"  xmlns:android="http://schemas.android.com/apk/res/android">
-
-</layoutAnimation>

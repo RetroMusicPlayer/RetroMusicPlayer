@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:statusBarScrim="?attr/colorPrimary">
 
             <ImageView
@@ -28,45 +29,54 @@
                 app:layout_collapseParallaxMultiplier="0.7"
                 tools:ignore="ContentDescription" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/home_toolbar"
-                style="@style/Toolbar"
-                tools:ignore="UnusedAttribute">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_collapseMode="pin">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:elevation="0dp"
+                    tools:ignore="UnusedAttribute">
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:id="@+id/search"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:padding="16dp"
-                        android:src="@drawable/ic_search_white_24dp" />
+                    <include layout="@layout/status_bar" />
 
-                    <TextView
-                        android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
+                </FrameLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/home_toolbar"
+                    style="@style/Toolbar"
+                    tools:ignore="UnusedAttribute">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/app_name"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        tools:ignore="MissingPrefix" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="0"
-                        app:civ_border="false" />
-                </LinearLayout>
-            </androidx.appcompat.widget.Toolbar>
+                        <TextView
+                            android:id="@+id/title"
+                            fontPath="@string/circular_std_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="@string/app_name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                            tools:ignore="MissingPrefix" />
+
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="0"
+                            app:civ_border="false" />
+                    </LinearLayout>
+                </androidx.appcompat.widget.Toolbar>
+            </LinearLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -76,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
         android:layout_marginEnd="96dp"
-        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:background="@drawable/bg_circular_top_corners"
         app:behavior_overlapTop="112dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

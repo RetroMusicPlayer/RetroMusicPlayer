@@ -1,42 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-  <attr format="reference" name="roundSelector"/>
-  <attr format="reference" name="rectSelector"/>
-  <attr format="reference" name="rectSelectorStrong"/>
+    <attr name="roundSelector" format="reference" />
+    <attr name="rectSelector" format="reference" />
+    <attr name="rectSelectorStrong" format="reference" />
 
-  <attr format="color" name="defaultFooterColor"/>
+    <attr name="defaultFooterColor" format="color" />
 
-  <attr format="reference" name="toolbarPopupTheme"/>
+    <attr name="toolbarPopupTheme" format="reference" />
 
-  <attr format="color" name="iconColor"/>
-  <attr format="color" name="dividerColor"/>
+    <attr name="iconColor" format="color" />
+    <attr name="dividerColor" format="color" />
 
 
-  <declare-styleable name="BlurLayout">
-    <attr format="float" name="blk_downscaleFactor"/>
-    <attr format="integer" name="blk_blurRadius"/>
-    <attr format="integer" name="blk_fps"/>
-    <attr format="dimension" name="blk_cornerRadius"/>
-  </declare-styleable>
+    <declare-styleable name="BlurLayout">
+        <attr name="blk_downscaleFactor" format="float" />
+        <attr name="blk_blurRadius" format="integer" />
+        <attr name="blk_fps" format="integer" />
+        <attr name="blk_cornerRadius" format="dimension" />
+    </declare-styleable>
 
-  <declare-styleable name="NetworkImageView">
-    <attr format="string" name="url_link"/>
-  </declare-styleable>
+    <declare-styleable name="NetworkImageView">
+        <attr name="url_link" format="string" />
+    </declare-styleable>
 
-  <declare-styleable name="LyricView">
-    <attr format="string" name="hint"/>
-    <attr format="color" name="hintColor"/>
-    <attr format="color" name="textColor"/>
-    <attr format="color" name="highlightColor"/>
-    <attr format="dimension" name="textSize"/>
-    <attr format="dimension" name="maxLength"/>
-    <attr format="boolean" name="fadeInFadeOut"/>
-    <attr format="dimension" name="lineSpace"/>
-    <attr name="textAlign">
-      <enum name="left" value="0"/>
-      <enum name="center" value="1"/>
-      <enum name="right" value="2"/>
-    </attr>
-  </declare-styleable>
+    <declare-styleable name="LyricView">
+        <attr name="hint" format="string" />
+        <attr name="hintColor" format="color" />
+        <attr name="textColor" format="color" />
+        <attr name="highlightColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="maxLength" format="dimension" />
+        <attr name="fadeInFadeOut" format="boolean" />
+        <attr name="lineSpace" format="dimension" />
+        <attr name="textAlign">
+            <enum name="left" value="0" />
+            <enum name="center" value="1" />
+            <enum name="right" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="ContributorsView">
+        <attr name="profile_url" format="string" />
+        <attr name="profile_name" format="string" />
+        <attr name="profile_summary" format="string" />
+        <attr name="profile_link" format="string" />
+    </declare-styleable>
 </resources>

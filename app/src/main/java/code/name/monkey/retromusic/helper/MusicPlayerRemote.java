@@ -15,17 +15,21 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.google.android.gms.cast.framework.CastContext;
+import com.google.android.gms.cast.framework.CastSession;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.WeakHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
@@ -38,9 +42,22 @@ public class MusicPlayerRemote {
     private static final WeakHashMap<Context, ServiceBinder> mConnectionMap = new WeakHashMap<>();
     @Nullable
     public static MusicService musicService;
-    
+    private static int playbackLocation = PlaybackLocation.LOCAL;
+
+
+    private static CastSession getCastSession() {
+        CastSession castSession = CastContext.getSharedInstance(RetroApplication.getInstance()).getSessionManager().getCurrentCastSession();
+        if (castSession != null) {
+            playbackLocation = PlaybackLocation.REMOTE;
+        } else {
+            playbackLocation = PlaybackLocation.LOCAL;
+        }
+        return castSession;
+    }
+
     public static ServiceToken bindToService(@NonNull final Context context,
                                              final ServiceConnection callback) {
+
         Activity realActivity = ((Activity) context).getParent();
         if (realActivity == null) {
             realActivity = (Activity) context;
@@ -75,24 +92,19 @@ public class MusicPlayerRemote {
 
     @Nullable
     private static String getFilePathFromUri(Context context, Uri uri) {
-        Cursor cursor = null;
+
         final String column = "_data";
         final String[] projection = {
                 column
         };
-
-        try {
-            cursor = context.getContentResolver().query(uri, projection, null, null,
-                    null);
+        try (Cursor cursor = context.getContentResolver().query(uri, projection, null, null,
+                null)) {
             if (cursor != null && cursor.moveToFirst()) {
                 final int column_index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(column_index);
             }
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
-        } finally {
-            if (cursor != null)
-                cursor.close();
         }
         return null;
     }
@@ -239,8 +251,17 @@ public class MusicPlayerRemote {
     }
 
     public static int seekTo(int millis) {
+        getCastSession();
         if (musicService != null) {
-            return musicService.seek(millis);
+            switch (playbackLocation) {
+                case PlaybackLocation.LOCAL:
+                    return musicService.seek(millis);
+                case PlaybackLocation.REMOTE:
+                    if (getCastSession() != null) {
+                        getCastSession().getRemoteMediaClient().seek(millis);
+                    }
+                    break;
+            }
         }
         return -1;
     }
@@ -443,6 +464,10 @@ public class MusicPlayerRemote {
         return musicService != null;
     }
 
+    public static void setZeroVolume() {
+
+    }
+
     @interface PlaybackLocation {
         int REMOTE = 0;
         int LOCAL = 1;
@@ -480,4 +505,5 @@ public class MusicPlayerRemote {
             mWrappedContext = context;
         }
     }
+
 }

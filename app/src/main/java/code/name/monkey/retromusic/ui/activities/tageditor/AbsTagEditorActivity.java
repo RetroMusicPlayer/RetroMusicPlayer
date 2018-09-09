@@ -6,9 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -27,6 +25,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -71,6 +71,9 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
         }
 
         setUpViews();
+
+
+        setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
     }
 

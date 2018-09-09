@@ -9,38 +9,10 @@
         <item>code_name_monkey_donate_6</item>
         <item>code_name_monkey_donate_7</item>
     </string-array>
-    <string name="dev_info" translatable="false">Hi i\'m Hemanth s, love to be Android developer, i\'m from Hosur, Tamil Nadu, India.</string>
-
-    <string name="luis_gomez" translatable="false">Luis Gomez</string>
-    <string name="luis_gomez_summary" translatable="false">For making Play Store Illustrations and App icon</string>
 
     <string name="app_name" translatable="false">Retro Music</string>
     <string name="google_plus" translatable="false">Google Plus</string>
     <string name="git_hub" translatable="false">GitHub</string>
-    <string name="twitter" translatable="false">Twitter</string>
     <string name="social_buttons" translatable="false">Social Buttons</string>
-    <string name="license_dialog_style" translatable="false">
-        body {
-        background-color: #{bg-color};
-        color: #{text-color};
-        font-family: sans-serif;
-        overflow-wrap: break-word;
-        }
-        pre {
-        background-color: #{license-bg-color};
-        padding: 1em;
-        white-space: pre-wrap;
-        }
-    </string>
-    <string name="hemanth_s" translatable="false">Hemanth S</string>
-    <string name="hosur_india" translatable="false">Hosur, India</string>
     <string name="circular_std_black" translatable="false">fonts/circular_std_black.otf</string>
-    <string name="circular_std_book" translatable="false">fonts/circular_std_book.otf</string>
-    <string name="marko_name" translatable="false">Marko Ivanović </string>
-    <string name="marko_summary" translatable="false">Contributor</string>
-    <string name="yt_gaming_name" translatable="false">Gaming Inc</string>
-    <string name="yt_gaming_summary" translatable="false">Discord server maintainer</string>
-    <string name="moderator" translatable="false">Moderator</string>
-    <string name="gaurav_singh_name" translatable="false">Gaurav Singh</string>
-    <string name="gaurav_singh_summary" translatable="false">Member</string>
 </resources>

@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.ui.activities.LyricsActivity;
-import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
 
@@ -134,11 +133,11 @@ public class AlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter {
                 case MATERIAL:
                     layout = R.layout.fragment_album_material_cover;
                     break;
-                case CAROUSAL:
-                    layout = R.layout.fragment_album_carousal_cover;
-                    break;
                 case FULL:
                     layout = R.layout.fragment_album_full_cover;
+                    break;
+                case FULL_CARD:
+                    layout = R.layout.fragment_album_full_card_cover;
                     break;
             }
             return layout;
@@ -163,7 +162,7 @@ public class AlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter {
         }
 
         private void loadAlbumCover() {
-            SongGlideRequest.Builder.from(Glide.with(this), song)
+            SongGlideRequest.Builder.from(Glide.with(getContext()), song)
                     .checkIgnoreMediaStore(getActivity())
                     .generatePalette(getActivity()).build()
                     .into(new RetroMusicColoredTarget(albumCover) {
@@ -183,7 +182,7 @@ public class AlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter {
             }
         }
 
-        public void receiveColor(ColorReceiver colorReceiver, int request) {
+        void receiveColor(ColorReceiver colorReceiver, int request) {
             if (isColorReady) {
                 colorReceiver.onColorReady(color, request);
             } else {

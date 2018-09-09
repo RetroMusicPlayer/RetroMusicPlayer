@@ -171,9 +171,6 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
             if (imageText != null) {
                 imageText.setVisibility(View.VISIBLE);
             }
-            if (image != null) {
-                image.setVisibility(View.GONE);
-            }
             if (dragView != null) {
                 dragView.setVisibility(View.VISIBLE);
             }

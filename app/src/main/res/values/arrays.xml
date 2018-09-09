@@ -50,15 +50,6 @@
         <item>never</item>
     </array>
 
-    <array name="pref_album_detail_style_titles">
-        <item>@string/style1</item>
-        <item>@string/style2</item>
-    </array>
-    <array name="pref_album_detail_style_index">
-        <item>0</item>
-        <item>1</item>
-    </array>
-
     <array name="pref_album_detail_style_values">
         <item>@layout/activity_album</item>
         <item>@layout/activity_album_style_2</item>
@@ -131,16 +122,6 @@
         <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/5.png</item>
         <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/1.png</item>
     </string-array>
-    <string-array name="pref_lyrics_options_list_titles">
-        <item>Offline</item>
-        <!--<item>Lyrics Wiki</item>-->
-        <item>Kugou</item>
-    </string-array>
-    <string-array name="pref_lyrics_options_list_values">
-        <item>offline</item>
-        <!--<item>wiki</item>-->
-        <item>kugou</item>
-    </string-array>
 
     <string-array name="pref_equalizer_types_titles">
         <item>@string/system_equalizer</item>
@@ -152,13 +133,11 @@
         <item>retro</item>
     </string-array>
 
-    <string name="style1">Normal style</string>
-    <string name="style2">Card style</string>
 
     <array name="cast_expanded_controller_control_buttons">
         <item>@id/cast_button_type_empty</item>
-        <item>@id/cast_button_type_skip_previous</item>
-        <item>@id/cast_button_type_skip_next</item>
+        <item>@id/cast_button_type_rewind_30_seconds</item>
         <item>@id/cast_button_type_mute_toggle</item>
+        <item>@id/cast_button_type_empty</item>
     </array>
 </resources>

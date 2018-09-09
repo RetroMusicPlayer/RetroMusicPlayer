@@ -2,10 +2,11 @@ package code.name.monkey.retromusic.ui.activities;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
+
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.BindView;

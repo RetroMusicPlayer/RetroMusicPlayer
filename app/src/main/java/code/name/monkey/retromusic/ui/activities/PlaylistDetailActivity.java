@@ -84,6 +84,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
+        setBottomBarVisibility(View.GONE);
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();

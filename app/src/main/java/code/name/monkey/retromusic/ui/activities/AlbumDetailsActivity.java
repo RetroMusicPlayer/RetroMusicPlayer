@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -124,11 +125,14 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        supportPostponeEnterTransition();
-        setupToolbarMarginHeight();
+        setBottomBarVisibility(View.GONE);
 
         setLightNavigationBar(true);
         setNavigationbarColorAuto();
+
+        supportPostponeEnterTransition();
+        setupToolbarMarginHeight();
+
 
         int albumId = getIntent().getIntExtra(EXTRA_ALBUM_ID, -1);
         albumDetailsPresenter = new AlbumDetailsPresenter(this, albumId);

@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -48,8 +49,7 @@ import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class MainActivity extends AbsSlidingMusicPanelActivity implements
-        SharedPreferences.OnSharedPreferenceChangeListener {
+public class MainActivity extends AbsSlidingMusicPanelActivity implements SharedPreferences.OnSharedPreferenceChangeListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     public static final int APP_INTRO_REQUEST = 2323;
     public static final int LIBRARY = 1;
@@ -58,6 +58,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
     private static final String TAG = "MainActivity";
     private static final int APP_USER_INFO_REQUEST = 9003;
     private static final int REQUEST_CODE_THEME = 9002;
+
     @Nullable
     MainActivityFragmentCallbacks currentFragment;
 
@@ -81,6 +82,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
             }
         }
     };
+    private int insideFragment = R.id.action_song;
 
     @Override
     protected View createContentView() {
@@ -95,11 +97,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         setDrawUnderStatusBar(true);
         super.onCreate(savedInstanceState);
-
         ButterKnife.bind(this);
 
-        drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) ->
-                windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
+        setBottomBarVisibility(View.VISIBLE);
+        getBottomNavigationView().setOnNavigationItemSelectedListener(this);
+
+        drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) -> windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
 
         if (savedInstanceState == null) {
             setCurrentFragment(PreferenceUtil.getInstance(this).getLastMusicChooser());
@@ -108,7 +111,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
         }
         checkShowChangelog();
     }
-
 
     private void checkShowChangelog() {
         try {
@@ -165,23 +167,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
     }
 
     private void restoreCurrentFragment() {
-        currentFragment = (MainActivityFragmentCallbacks) getSupportFragmentManager()
-                .findFragmentById(R.id.fragment_container);
-    }
-
-    public void setCurrentFragment(int key) {
-        PreferenceUtil.getInstance(this).setLastMusicChooser(key);
-        switch (key) {
-            case LIBRARY:
-                setCurrentFragment(LibraryFragment.newInstance(), false, LibraryFragment.TAG);
-                break;
-            case FOLDERS:
-                setCurrentFragment(FoldersFragment.newInstance(this), false, FoldersFragment.TAG);
-                break;
-            case HOME:
-                setCurrentFragment(BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
-                break;
-        }
+        currentFragment = (MainActivityFragmentCallbacks) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
     }
 
     private void handlePlaybackIntent(@Nullable Intent intent) {
@@ -336,5 +322,52 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements
                             .apply();
                 })
                 .show();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        PreferenceUtil.getInstance(this).setLastPage(menuItem.getItemId());
+        selectedFragment(menuItem.getItemId());
+        return true;
+    }
+
+    private void selectedFragment(int itemId) {
+        insideFragment = itemId;
+        switch (itemId) {
+            case R.id.action_album:
+                setCurrentFragment(LIBRARY);
+                break;
+            case R.id.action_artist:
+                setCurrentFragment(LIBRARY);
+                break;
+            case R.id.action_playlist:
+                setCurrentFragment(LIBRARY);
+                break;
+            case R.id.action_song:
+                setCurrentFragment(LIBRARY);
+                break;
+            default:
+            case R.id.action_home:
+                setCurrentFragment(HOME);
+                break;
+
+        }
+    }
+
+
+    public void setCurrentFragment(int key) {
+        PreferenceUtil.getInstance(this).setLastMusicChooser(key);
+        switch (key) {
+            case LIBRARY:
+                setCurrentFragment(LibraryFragment.newInstance(insideFragment), false, LibraryFragment.TAG);
+                break;
+            case FOLDERS:
+                setCurrentFragment(FoldersFragment.newInstance(this), false, FoldersFragment.TAG);
+                break;
+            case HOME:
+                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? HomeFragment.newInstance() :
+                        BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
+                break;
+        }
     }
 }

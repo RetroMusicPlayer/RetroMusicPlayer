@@ -1,20 +1,8 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,22 +10,24 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.appbar.AppBarLayout;
 
-import butterknife.BindDrawable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialValueHelper;
-import code.name.monkey.appthemehelper.util.NavigationViewUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -48,8 +38,6 @@ import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.misc.NavigationIconClickListener;
-import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
@@ -58,8 +46,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
-public class LibraryFragment extends AbsMainActivityFragment implements CabHolder,
-        MainActivityFragmentCallbacks {
+public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
 
     public static final String TAG = "LibraryFragment";
     private static final String CURRENT_TAB_ID = "current_tab_id";
@@ -73,23 +60,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.title)
     TextView title;
 
-    @BindView(R.id.action_library)
-    TextView actionLibrary;
-
-    @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
-
     @BindView(R.id.fragment_container)
     View contentContainer;
 
-    @BindView(R.id.menu_container)
-    View menuContainer;
-
-    @BindDrawable(R.drawable.ic_menu_white_24dp)
-    Drawable menu;
-
-    @BindDrawable(R.drawable.ic_close_white_24dp)
-    Drawable close;
 
     private Unbinder unBinder;
     private MaterialCab cab;
@@ -107,34 +80,16 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return new LibraryFragment();
     }
 
-    private void setupBottomView() {
-        Context context = getContext();
-        if (context != null) {
-            bottomNavigationView.setSelectedItemId(PreferenceUtil.getInstance(context).getLastPage());
-            bottomNavigationView.setBackgroundColor(ThemeStore.primaryColor(context));
-            bottomNavigationView.setOnNavigationItemSelectedListener(this::onOptionsItemSelected);
-            int iconColor = ATHUtil.resolveColor(context, R.attr.iconColor);
-            int accentColor = ThemeStore.accentColor(context);
-            NavigationViewUtil.setItemIconColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
-            NavigationViewUtil.setItemTextColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
-
-            if (!PreferenceUtil.getInstance(getContext()).tabTitles()) {
-                bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-            }
-        }
-    }
 
     public void setTitle(@StringRes int name) {
         title.setText(getString(name));
     }
 
-    public void addOnAppBarOffsetChangedListener(
-            AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+    public void addOnAppBarOffsetChangedListener(AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
         appbar.addOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    public void removeOnAppBarOffsetChangedListener(
-            AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+    public void removeOnAppBarOffsetChangedListener(AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
         appbar.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
@@ -154,25 +109,38 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupBottomView();
+        setStatusbarColorAuto(view);
         setupToolbar();
+        inflateFragment();
+    }
 
-        if (savedInstanceState == null) {
+    private void inflateFragment() {
+        if (getArguments() == null) {
             selectedFragment(SongsFragment.newInstance());
+            return;
+        }
+        switch (getArguments().getInt(CURRENT_TAB_ID)) {
+            default:
+            case R.id.action_song:
+                selectedFragment(SongsFragment.newInstance());
+                break;
+            case R.id.action_album:
+                selectedFragment(AlbumsFragment.newInstance());
+                break;
+            case R.id.action_artist:
+                selectedFragment(ArtistsFragment.newInstance());
+                break;
+            case R.id.action_playlist:
+                selectedFragment(PlaylistsFragment.newInstance());
+                break;
         }
     }
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        int accentColor = ThemeStore.accentColor(getContext());
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        actionLibrary.setTextColor(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(accentColor)));
-        actionLibrary.setBackgroundResource(R.drawable.et_bg_circular_top_corners);
-        TintHelper.setTintAuto(actionLibrary, ThemeStore.accentColor(getContext()), true);
 
         int primaryColor = ThemeStore.primaryColor(getContext());
-
-
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
@@ -182,17 +150,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(new NavigationIconClickListener(
-                getContext(),
-                contentContainer,
-                menuContainer,
-                new AccelerateDecelerateInterpolator(),
-                menu,
-                close
-        ));
+        toolbar.setNavigationOnClickListener(v -> showMainMenu( ));
     }
 
-    public Fragment getCurrentFragment() {
+    private Fragment getCurrentFragment() {
         if (fragmentManager == null) {
             return SongsFragment.newInstance();
         }
@@ -214,7 +175,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return false;
     }
 
-    public void selectedFragment(Fragment fragment) {
+    private void selectedFragment(Fragment fragment) {
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -394,21 +355,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_song:
-                selectedFragment(SongsFragment.newInstance());
-                return true;
-            case R.id.action_album:
-                selectedFragment(AlbumsFragment.newInstance());
-                return true;
-            case R.id.action_artist:
-                selectedFragment(ArtistsFragment.newInstance());
-                return true;
-            case R.id.action_playlist:
-                selectedFragment(PlaylistsFragment.newInstance());
-                return true;
-            case R.id.action_genre:
-                selectedFragment(GenreFragment.newInstance());
-                return true;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
                 return true;
@@ -523,23 +469,5 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             return true;
         }
         return false;
-    }
-
-    @OnClick({R.id.action_home, R.id.action_settings, R.id.action_folders})
-    void startUserInfo(View view) {
-        Activity activity = getActivity();
-        if (activity != null) {
-            switch (view.getId()) {
-                case R.id.action_settings:
-                    NavigationUtil.goToSettings(activity);
-                    break;
-                case R.id.action_home:
-                    getMainActivity().setCurrentFragment(MainActivity.HOME);
-                    break;
-                case R.id.action_folders:
-                    getMainActivity().setCurrentFragment(MainActivity.FOLDERS);
-                    break;
-            }
-        }
     }
 }

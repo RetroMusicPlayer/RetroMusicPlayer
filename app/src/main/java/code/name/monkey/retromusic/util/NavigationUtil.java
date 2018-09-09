@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import android.widget.Toast;
-
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.cast.ExpandedCastControlsActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
@@ -133,5 +134,9 @@ public class NavigationUtil {
 
     public static void goToPlayStore(Activity activity) {
         openUrl(activity, RATE_ON_GOOGLE_PLAY);
+    }
+
+    public static void gotoExpandedController(Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, ExpandedCastControlsActivity.class), null);
     }
 }

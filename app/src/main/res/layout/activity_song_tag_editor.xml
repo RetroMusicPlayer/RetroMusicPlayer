@@ -13,60 +13,52 @@
         android:elevation="0dp"
         app:elevation="0dp">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UnusedAttribute">
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:titleEnabled="false">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-                app:titleEnabled="false">
+            <FrameLayout
+                android:id="@+id/image_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <FrameLayout
-                    android:id="@+id/image_container"
+                <ImageView
+                    android:id="@+id/image"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+            </FrameLayout>
 
-                    <ImageView
-                        android:id="@+id/image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone" />
-                </FrameLayout>
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar48"
-                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-                    tools:ignore="UnusedAttribute">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar48"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                tools:ignore="UnusedAttribute">
 
 
-                    <TextView
-                        android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/action_tag_editor"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        tools:ignore="MissingPrefix" />
+                <TextView
+                    android:id="@+id/title"
+                    fontPath="@string/circular_std_black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/action_tag_editor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    tools:ignore="MissingPrefix" />
 
 
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?dividerColor" />
-        </com.google.android.material.appbar.AppBarLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?dividerColor" />
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

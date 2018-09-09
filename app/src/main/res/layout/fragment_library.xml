@@ -7,25 +7,34 @@
     android:orientation="vertical">
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        tools:ignore="UnusedAttribute">
+
+        <include layout="@layout/status_bar" />
+
+    </FrameLayout>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/retro_backdrop" />
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:elevation="0dp"
+            app:elevation="0dp">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/app_bar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:elevation="0dp"
-                app:elevation="0dp">
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleEnabled="false">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -55,33 +64,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp" />
                 </FrameLayout>
-            </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
 
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/md_white_1000"
-                android:elevation="@dimen/card_elevation"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </LinearLayout>
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/md_white_1000"
+            android:elevation="@dimen/card_elevation"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?dividerColor" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        app:itemIconTint="@drawable/bottom_navigation_item_colors"
-        app:itemTextColor="@drawable/bottom_navigation_item_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_main"
-        tools:visibility="visible" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

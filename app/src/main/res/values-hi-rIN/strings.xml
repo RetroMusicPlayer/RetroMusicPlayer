@@ -17,13 +17,11 @@
     <string name="action_grant">अनुदान</string>
     <string name="action_grid_size">ग्रीड आकार</string>
     <string name="action_grid_size_land">ग्रीड आकार (परीसदृश्य)</string>
-    <string name="action_new_playlist">नई प्लेलिस्ट...</string>
     <string name="action_next">अगला</string>
     <string name="action_play">चलाएं</string>
     <string name="action_play_next">अगला चलाएं</string>
     <string name="action_play_pause">चलाएं/रोकें</string>
     <string name="action_previous">पिछला</string>
-    <string name="action_re_download_artist_image">कलाकार का नाय चित्र रखे</string>
     <string name="action_remove_from_favorites">पसंदीदा में से निकाले</string>
     <string name="action_remove_from_playing_queue">कतार में से निकले</string>
     <string name="action_remove_from_playlist">प्लेलिस्ट में से निकालें</string>
@@ -36,10 +34,7 @@
     <string name="action_set_as_start_directory">शुरू निर्देशिका के रूप में सेट करें</string>
     <string name="action_settings">"सेटिंग"</string>
     <string name="action_share">शेयर</string>
-    <string name="action_show_lyrics">गीतिकाव्य दिखाएँ</string>
-    <string name="action_shuffle_album">शफ़ल एल्बम</string>
     <string name="action_shuffle_all">सभी शफ़ल करें</string>
-    <string name="action_shuffle_artist">शफ़ल कलाकार</string>
     <string name="action_shuffle_playlist">शफ़ल प्लेलिस्ट</string>
     <string name="action_sleep_timer">स्लीप टाइमर</string>
     <string name="action_tag_editor">टैग एडिटर</string>
@@ -50,7 +45,6 @@
     <string name="added_x_titles_to_playing_queue">कतार मे %1$d शीर्षक जोड़ा गया है।</string>
     <string name="album">एल्बम</string>
     <string name="album_artist">एल्बम कलाकार</string>
-    <string name="album_desc">एल्बम विवरण</string>
     <string name="album_or_artist_empty">शीर्षक या कलाकार खाली है</string>
     <string name="albums">एल्बम</string>
     <string name="always">हमेशा</string>
@@ -60,11 +54,9 @@
     <string name="app_shortcut_shuffle_all_short">शफ़ल</string>
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
     <string name="app_widget_big_name">रेट्रो म्यूजिक - बिग</string>
-    <string name="app_widget_big_name_2">रेट्रो म्यूजिक - बिग2</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
     <string name="artist">कलाकार</string>
-    <string name="artist_desc">कलाकार का वर्णन</string>
     <string name="artists">कलाकार</string>
     <string name="biography">जीवनी</string>
     <string name="black_theme_name">सिर्फ काला</string>
@@ -73,10 +65,5 @@
     <string name="changelog">चेंजलाग</string>
     <string name="changelog_summary">साफ़</string>
     <string name="clear_action">साफ़</string>
-    <string name="date">Tareekh</string>
-    <string name="duration">अवधि</string>
     <string name="home">Ghar</string>
-    <string name="inspired_designs_by">"से  डिज़ाइन प्रेरित "</string>
-    <string name="more">और</string>
-    <string name="no_files">" कोई फाइल्स नहीं"</string>
 </resources>

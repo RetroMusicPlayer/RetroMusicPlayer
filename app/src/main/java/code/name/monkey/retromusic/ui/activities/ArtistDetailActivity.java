@@ -141,6 +141,8 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         super.onCreate(bundle);
         ButterKnife.bind(this);
 
+        setBottomBarVisibility(View.GONE);
+
         setNavigationbarColorAuto();
         setLightNavigationBar(true);
 

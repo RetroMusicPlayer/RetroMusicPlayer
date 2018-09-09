@@ -15,10 +15,6 @@ import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.RetroUtil;
 
-/**
- * Created by naman on 2/12/17.
- */
-
 public class CastHelper {
 
     public static void startCasting(CastSession castSession, Song song) {
@@ -34,6 +30,7 @@ public class CastHelper {
 
         String songUrl = baseUrl.toString() + "/song?id=" + song.id;
         String albumArtUrl = baseUrl.toString() + "/albumart?id=" + song.albumId;
+
 
         MediaMetadata musicMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MUSIC_TRACK);
 

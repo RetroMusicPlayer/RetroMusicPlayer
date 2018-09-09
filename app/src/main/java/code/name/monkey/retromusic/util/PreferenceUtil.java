@@ -276,7 +276,7 @@ public final class PreferenceUtil {
 
 
     public final int getLastPage() {
-        return mPreferences.getInt(LAST_PAGE, 0);
+        return mPreferences.getInt(LAST_PAGE, R.id.action_home);
     }
 
     public void setLastPage(final int value) {

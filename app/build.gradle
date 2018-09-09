@@ -11,8 +11,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 216
-        versionName '1.8.100'
+        versionCode 222
+        versionName '2.0.010'
 
         multiDexEnabled true
 
@@ -102,13 +102,7 @@ static def getDate() {
     new Date().format('MMdd')
 }
 
-ext {
-    supportLibVersion = '1.0.0-rc01'
-    firebase = "11.8.0"
-    retrofit = "2.3.0"
-    butterKnife = "9.0.0-SNAPSHOT"
-    materialDialog = "0.9.6.0"
-}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.0'
@@ -126,7 +120,7 @@ dependencies {
 
     //For casting
     implementation 'androidx.mediarouter:mediarouter:1.0.0-beta01'
-    implementation 'com.google.android.gms:play-services-cast-framework:16.0.1'
+    implementation 'com.google.android.gms:play-services-cast-framework:16.0.2'
 
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
@@ -139,9 +133,9 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
@@ -159,8 +153,4 @@ dependencies {
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
 
-    def nav_version = "1.0.0-alpha05"
-
-    implementation "android.arch.navigation:navigation-fragment:$nav_version"
-    implementation "android.arch.navigation:navigation-ui:$nav_version"
 }

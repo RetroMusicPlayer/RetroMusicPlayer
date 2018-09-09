@@ -101,8 +101,7 @@ public abstract class AbsCastActivity extends AbsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            playServicesAvailable = GoogleApiAvailability
-                    .getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
+            playServicesAvailable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS;
         } catch (Exception ignored) {
 
         }
@@ -125,8 +124,7 @@ public abstract class AbsCastActivity extends AbsBaseActivity {
     protected void onPause() {
         super.onPause();
         if (playServicesAvailable) {
-            castContext.getSessionManager().removeSessionManagerListener(
-                    sessionManagerListener, CastSession.class);
+            castContext.getSessionManager().removeSessionManagerListener(sessionManagerListener, CastSession.class);
         }
     }
 

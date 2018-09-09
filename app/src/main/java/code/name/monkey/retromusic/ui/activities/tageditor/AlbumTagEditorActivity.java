@@ -1,26 +1,26 @@
 package code.name.monkey.retromusic.ui.activities.tageditor;
 
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jaudiotagger.tag.FieldKey;
 
@@ -29,11 +29,16 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
@@ -53,43 +58,61 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
     public static final String TAG = AlbumTagEditorActivity.class.getSimpleName();
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.app_bar)
-    AppBarLayout appBarLayout;
+
     @BindView(R.id.title)
-    EditText albumTitle;
+    TextView title;
+
+    @BindView(R.id.app_bar)
+    @Nullable
+    AppBarLayout appBarLayout;
+    @BindViews({R.id.album_title_container, R.id.album_artist_container, R.id.genre_container, R.id.year_container})
+    List<TextInputLayout> textInputLayouts;
+
+    @BindView(R.id.album_title)
+    TextInputEditText albumTitle;
+
     @BindView(R.id.album_artist)
-    EditText albumArtist;
+    TextInputEditText albumArtist;
+
     @BindView(R.id.genre)
-    EditText genre;
+    TextInputEditText genre;
+
     @BindView(R.id.year)
-    EditText year;
+    TextInputEditText year;
+
     @BindView(R.id.gradient_background)
     View background;
+
+    @BindView(R.id.content)
+    View content;
+
+    ButterKnife.Setter<TextInputLayout, Integer> textColor = (view, value, index) -> {
+        view.setBoxStrokeColor(value);
+    };
     private Bitmap albumArtBitmap;
     private boolean deleteAlbumArt;
     private LastFMRestClient lastFMRestClient;
 
     private void setupToolbar() {
-        //toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        title.setTextColor(ThemeStore.textColorPrimary(this));
+        // toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        setTitle(R.string.action_tag_editor);
+        setTitle(null);
         setSupportActionBar(toolbar);
-    }
-
-    @OnClick(R.id.edit)
-    void edit() {
-        getShow();
+        TintHelper.setTintAuto(content, ThemeStore.primaryColor(this), true);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setDrawUnderStatusBar(true);
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-
+        ButterKnife.apply(textInputLayouts, textColor, ThemeStore.accentColor((this)));
         lastFMRestClient = new LastFMRestClient(this);
 
         setUpViews();
         setupToolbar();
+
     }
 
     @Override
@@ -271,10 +294,6 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
     @Override
     protected void setColors(int color) {
         super.setColors(color);
-        background.setBackgroundColor(color);
-        toolbar.setBackgroundColor(color);
-        setStatusbarColor(ColorUtil.darkenColor(color));
-        setNavigationbarColor(ColorUtil.darkenColor(color));
-        setSupportActionBar(toolbar);
+        save.setBackgroundTintList(ColorStateList.valueOf(color));
     }
 }

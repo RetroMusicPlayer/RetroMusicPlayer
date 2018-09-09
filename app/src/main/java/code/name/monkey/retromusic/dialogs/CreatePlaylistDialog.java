@@ -83,12 +83,12 @@ public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
         actionCreate.setBackgroundTintList(ColorStateList.valueOf(accentColor));
         actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
         actionCancel.setTextColor(accentColor);
-        playlistName.setHintTextColor(ColorStateList.valueOf(accentColor));
+
 
         textInputLayout.setBoxStrokeColor(accentColor);
         textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(accentColor));
 
-        playlistName.setHintTextColor(accentColor);
+        playlistName.setHintTextColor(ColorStateList.valueOf(accentColor));
         playlistName.setTextColor(ThemeStore.textColorPrimary(getContext()));
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 

@@ -7,8 +7,8 @@ import android.view.View;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.dialogs.MainOptionsBottomSheetDialogFragment;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
-import code.name.monkey.retromusic.util.RetroUtil;
 
 
 public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
@@ -21,7 +21,7 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getMainActivity().setStatusbarColorAuto();
+        //getMainActivity().setStatusbarColorAuto();
         getMainActivity().setNavigationbarColorAuto();
         getMainActivity().setLightNavigationBar(true);
         getMainActivity().setTaskDescriptionColorAuto();
@@ -46,5 +46,9 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         //noinspection ConstantConditions
         setStatusbarColor(view, ColorUtil.darkenColor(ThemeStore.primaryColor(getContext())));
+    }
+
+    protected void showMainMenu() {
+        MainOptionsBottomSheetDialogFragment.newInstance().show(getChildFragmentManager(), "Main Menu");
     }
 }

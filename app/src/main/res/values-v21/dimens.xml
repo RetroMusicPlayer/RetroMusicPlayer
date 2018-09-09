@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="fab_margin_top_left_right">16dp</dimen>
-    <dimen name="tmp_now_playing_skip_rewind_margin">-8dp</dimen>
-</resources>

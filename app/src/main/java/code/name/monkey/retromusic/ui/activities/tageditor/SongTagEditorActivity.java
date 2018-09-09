@@ -74,12 +74,10 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setStatusbarColorAuto();
-        setNavigationbarColorAuto();
-
         setNoImageMode();
         setUpViews();
         setupToolbar();
+        setStatusbarColorAuto();
     }
 
     private void setUpViews() {

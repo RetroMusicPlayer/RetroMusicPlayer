@@ -3,10 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.material;
 import android.animation.ObjectAnimator;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +11,10 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -39,26 +39,37 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.title)
     AppCompatTextView title;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.volume_fragment_container)
     View mVolumeContainer;
+
     private Unbinder unbinder;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
@@ -160,6 +171,7 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
 
         if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
             lastPlaybackControlsColor = dark;
+            text.setTextColor(dark);
         }
 
         updatePlayPauseColor();

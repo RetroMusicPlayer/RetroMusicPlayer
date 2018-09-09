@@ -4,7 +4,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 /**
  * @author Hemanth S (h4h13).
- *         https://stackoverflow.com/a/33891727
+ * https://stackoverflow.com/a/33891727
  */
 
 public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffsetChangedListener {

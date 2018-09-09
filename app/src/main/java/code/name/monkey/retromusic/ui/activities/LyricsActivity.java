@@ -5,8 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -27,6 +25,8 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -98,8 +98,10 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     private void selectLyricsTye(int group) {
         PreferenceUtil.getInstance(this).setLastLyricsType(group);
         RadioButton radioButton = actionsLayout.findViewById(group);
-        radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
-        radioButton.setTextColor(ThemeStore.textColorPrimary(this));
+        if (radioButton != null) {
+            radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
+            radioButton.setTextColor(ThemeStore.textColorPrimary(this));
+        }
 
         offlineLyrics.setVisibility(View.GONE);
         lyricView.setVisibility(View.GONE);

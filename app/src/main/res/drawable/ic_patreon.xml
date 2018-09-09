@@ -1,8 +1,0 @@
-<!-- drawable/patreon.xml -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
-    android:width="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path android:fillColor="#000" android:pathData="M14.73,3C18.45,3 21.47,6.03 21.47,9.76C21.47,13.47 18.45,16.5 14.73,16.5C11,16.5 7.97,13.47 7.97,9.76C7.97,6.03 11,3 14.73,3M2.7,21V3H6V21H2.7Z" />
-</vector>

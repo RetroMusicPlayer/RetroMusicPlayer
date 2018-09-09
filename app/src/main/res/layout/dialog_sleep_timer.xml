@@ -56,7 +56,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cancel_current_timer"
+                android:text="@android:string/cancel"
                 app:strokeColor="@color/md_grey_700"
                 app:strokeWidth="1dp"
                 tools:visibility="visible" />

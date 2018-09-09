@@ -87,6 +87,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
+        setBottomBarVisibility(View.GONE);
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();

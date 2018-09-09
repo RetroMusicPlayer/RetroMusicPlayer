@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="header_image_height">600dp</dimen>
+    <dimen name="bottom_sheet_width">600dp</dimen>
 </resources>
