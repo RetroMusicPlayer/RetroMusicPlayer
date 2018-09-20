@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
     <string name="accent_color">Accent color</string>
-    <string name="accent_color_desc">The accent theme color, defaults to teal</string>
+    <string name="accent_color_desc">The theme accent color, defaults to teal</string>
 
     <string name="action_about">About</string>
     <string name="action_add_to_favorites">Add to favorites</string>
     <string name="action_add_to_playing_queue">Add to playing queue</string>
-    <string name="action_add_to_playlist">Add to playlist…</string>
+    <string name="action_add_to_playlist">Add to playlist</string>
     <string name="action_clear_playing_queue">Clear playing queue</string>
     <string name="action_clear_playlist">Clear playlist</string>
     <string name="action_delete">Delete</string>
@@ -527,8 +527,8 @@
     <string name="window_corner_edges">Rounded corners</string>
     <string name="pref_title_album_cover_style">Album cover theme</string>
     <string name="circular">Circular</string>
-    <string name="carousal">Carousal</string>
-    <string name="now_playing_summary">Customize now playing screen</string>
+    <string name="carousal">Carousel</string>
+    <string name="now_playing_summary">Customize the now playing screen</string>
     <string name="full_card">Full card</string>
     <string name="profile">Profile</string>
     <string name="bio">Bio</string>
