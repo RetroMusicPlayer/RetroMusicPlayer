@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="accent_color">Acentuar El Color</string>
+    <string name="accent_color">Acentuar el Color</string>
     <string name="accent_color_desc">El color de Tema de acento, por defecto es verde</string>
     <string name="action_about">Acerca de</string>
     <string name="action_add_to_favorites">"Añadir a favoritos "</string>
@@ -69,9 +69,15 @@
     <string name="blacklist">Lista negra</string>
     <string name="blur">Desenfocar</string>
     <string name="blur_card">Tarjeta con desenfoque</string>
+    <string name="pref_blur_amount_title">Ajustar desenfoque</string>
+    <string name="pref_blur_amount_summary">Ajuste de desenfoque con temas compatibles, menor es más rápido</string>
+    <string name="pref_keep_screen_on_title">Mantener pantalla encendida</string>
+    <string name="pref_keep_screen_on_summary">Ten en cuenta que habilitar esta característica puede afectar al rendimiento de la batería</string>
     <string name="buy_retromusic_pro">Comprar RetroMusic Pro</string>
     <string name="cancel_current_timer">Cancelar temporizador actual</string>
+
     <string name="card">Tarjeta</string>
+    <string name="card_color_style">Tarjeta con color</string>
     <string name="changelog">Lista de cambios</string>
     <string name="changelog_summary">Lista de cambios disponible en la app Telegram</string>
     <string name="clear_action">Limpiar</string>
@@ -120,7 +126,11 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="history">Historial</string>
+
     <string name="home">Inicio</string>
+
+    <string name="image_settings_summary">Configuración de descarga de imágenes del artista</string>
+
     <string name="inserted_x_songs_into_playlist_x">%1$d canciones han sido insertadas en la playlist %2$s.</string>
     <string name="label_bit_rate">Tasa de bits</string>
     <string name="label_file_format">"Formato "</string>
@@ -151,7 +161,10 @@
     <string name="no_playlists">No hay listas de reproducción</string>
     <string name="no_results">Sin resultados</string>
     <string name="no_songs">No hay canciones</string>
+
     <string name="normal">Normal</string>
+    <string name="normal_style">Normal</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> no aparece en la tienda multimedia.]]></string>
     <string name="nothing_to_scan">Nada para escanear</string>
     <string name="notification">"Notificación "</string>
@@ -195,9 +208,11 @@
     <string name="pref_summary_round_corners">Esquinas redondeadas para la aplicación, las ilustraciones de los álbumes, etc.</string>
     <string name="pref_summary_tab_titles">Habilitar/deshabilitar títulos de las pestañas inferiores</string>
     <string name="pref_summary_toggle_full_screen">Activar esto para modo inmersivo</string>
-    <string name="pref_summary_toggle_headset">Reproducir cuando se conecten los audífonos</string>
+    <string name="pref_summary_toggle_headset">Reproducir cuando se conecten los auriculares</string>
+    <string name="pref_summary_toggle_shuffle">Se quitará el modo aleatorio al reproducir una nueva lista de canciones</string>
     <string name="pref_summary_toggle_volume">Activar controles de volumen si hay espacio en la pantalla de reproduccióm</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar carátula del álbum</string>
+    <string name="pref_title_album_grid_style">Cuadrícula de álbumes</string>
     <string name="pref_title_app_shortcuts">Atajo de aplicación coloreada</string>
     <string name="pref_title_audio_ducking">Reduce volumen en perdida de enfoque</string>
     <string name="pref_title_auto_download_artist_images">Descarga automática de imágenes de artista</string>
@@ -219,6 +234,7 @@
     <string name="pref_title_toggle_full_screen">App en pantalla completa</string>
     <string name="pref_title_toggle_tab_titles">Títulos de pestañas</string>
     <string name="pref_title_toggle_toggle_headset">Reproducción automática</string>
+    <string name="pref_title_toggle_toggle_shuffle">Modo aleatorio</string>
     <string name="pref_title_toggle_volume">Controles de volumen</string>
     <string name="pref_title_user_info">Información del usuario</string>
     <string name="primary_color">Color primario</string>
@@ -255,7 +271,11 @@
     <string name="sort_order">Orden de clasificación</string>
     <string name="speech_not_supported">Lo siento, tu dispositivo no soporta las órdenes por voz.</string>
     <string name="speech_prompt">Busca en tu biblioteca</string>
+
     <string name="summary_user_info">Solo muestra tu nombre en la pantalla de inicio</string>
+
+    <string name="system_equalizer">Ecualizador del sistema</string>
+
     <string name="support_development">Soporte del desarrollador</string>
     <!-- Message displayed when tag editing fails -->
     <string name="thank_you">¡Gracias!</string>
@@ -286,4 +306,8 @@
     <string name="x_has_been_set_as_ringtone">Establecer %1$s como nuevo tono de llamada.</string>
     <string name="x_selected">%1$d seleccionado</string>
     <string name="year">Año</string>
+
+    <string name="pref_title_album_cover_style">Tema de portada del álbum</string>
+    <string name="now_playing_summary">Modificar pantalla de reproducción</string>
+    <string name="full_card">Modo tarjeta</string>
 </resources>
