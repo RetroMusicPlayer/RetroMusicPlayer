@@ -7,14 +7,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import androidx.annotation.NonNull;
-
-import code.name.monkey.retromusic.Constants;
-import code.name.monkey.retromusic.util.FileUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.Constants;
+import code.name.monkey.retromusic.util.FileUtil;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class BlacklistStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "blacklist.db";

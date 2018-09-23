@@ -1,12 +1,14 @@
 package code.name.monkey.retromusic.rest;
 
 import android.content.Context;
+
+import java.io.File;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.rest.service.KuGouApiService;
-import java.io.File;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Interceptor;
@@ -23,54 +25,54 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class KogouClient {
 
-  private static final String BASE_URL = Constants.BASE_API_URL_KUGOU;
+    private static final String BASE_URL = Constants.BASE_API_URL_KUGOU;
 
-  private KuGouApiService apiService;
+    private KuGouApiService apiService;
 
-  public KogouClient() {
-    this(createDefaultOkHttpClientBuilder().build());
-  }
-
-  private KogouClient(@NonNull Call.Factory client) {
-    Retrofit restAdapter = new Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .callFactory(client)
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .build();
-
-    apiService = restAdapter.create(KuGouApiService.class);
-  }
-
-  @Nullable
-  private static Cache createDefaultCache(Context context) {
-    File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
-    if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
-      return new Cache(cacheDir, 1024 * 1024 * 10);
+    public KogouClient() {
+        this(createDefaultOkHttpClientBuilder().build());
     }
-    return null;
-  }
 
-  private static Interceptor createCacheControlInterceptor() {
-    return chain -> {
-      Request modifiedRequest = chain.request().newBuilder()
-          .addHeader("Cache-Control", String.format("max-age=%d, max-stale=%d", 31536000, 31536000))
-          .build();
-      return chain.proceed(modifiedRequest);
-    };
-  }
+    private KogouClient(@NonNull Call.Factory client) {
+        Retrofit restAdapter = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .callFactory(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
 
-  private static OkHttpClient.Builder createDefaultOkHttpClientBuilder() {
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        apiService = restAdapter.create(KuGouApiService.class);
+    }
 
-    return new OkHttpClient.Builder()
-        .addInterceptor(interceptor)
-        .cache(createDefaultCache(RetroApplication.getInstance()))
-        .addInterceptor(createCacheControlInterceptor());
-  }
+    @Nullable
+    private static Cache createDefaultCache(Context context) {
+        File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
+        if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
+            return new Cache(cacheDir, 1024 * 1024 * 10);
+        }
+        return null;
+    }
 
-  public KuGouApiService getApiService() {
-    return apiService;
-  }
+    private static Interceptor createCacheControlInterceptor() {
+        return chain -> {
+            Request modifiedRequest = chain.request().newBuilder()
+                    .addHeader("Cache-Control", String.format("max-age=%d, max-stale=%d", 31536000, 31536000))
+                    .build();
+            return chain.proceed(modifiedRequest);
+        };
+    }
+
+    private static OkHttpClient.Builder createDefaultOkHttpClientBuilder() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .cache(createDefaultCache(RetroApplication.getInstance()))
+                .addInterceptor(createCacheControlInterceptor());
+    }
+
+    public KuGouApiService getApiService() {
+        return apiService;
+    }
 }

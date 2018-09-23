@@ -40,12 +40,13 @@ import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.BuildConfig;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.views.IconImageView;
 
-import static code.name.monkey.retromusic.Constants.PAYPAL_ME_URL;
+import static code.name.monkey.retromusic.Constants.INSTANCE;
 
 /**
  * @author Hemanth S (h4h13).
@@ -112,7 +113,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
 
     @OnClick(R.id.donate)
     void donate() {
-        RetroUtil.openUrl(this, PAYPAL_ME_URL);
+        RetroUtil.openUrl(this, Constants.PAYPAL_ME_URL);
     }
 
     @Override

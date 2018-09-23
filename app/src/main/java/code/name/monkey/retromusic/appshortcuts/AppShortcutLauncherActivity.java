@@ -4,17 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import code.name.monkey.retromusic.Constants;
+import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType;
+import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType;
+import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist;
-
-import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType;
-import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType;
-import code.name.monkey.retromusic.appshortcuts.shortcuttype.TopTracksShortcutType;
 import code.name.monkey.retromusic.service.MusicService;
-
-import static code.name.monkey.retromusic.Constants.*;
 
 /**
  * @author Adrian Campos
@@ -64,11 +62,11 @@ public class AppShortcutLauncherActivity extends Activity {
 
     private void startServiceWithPlaylist(int shuffleMode, Playlist playlist) {
         Intent intent = new Intent(this, MusicService.class);
-        intent.setAction(ACTION_PLAY_PLAYLIST);
+        intent.setAction(code.name.monkey.retromusic.Constants.ACTION_PLAY_PLAYLIST);
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(INTENT_EXTRA_PLAYLIST, playlist);
-        bundle.putInt(INTENT_EXTRA_SHUFFLE_MODE, shuffleMode);
+        bundle.putParcelable(Constants.INTENT_EXTRA_PLAYLIST, playlist);
+        bundle.putInt(Constants.INTENT_EXTRA_SHUFFLE_MODE, shuffleMode);
 
         intent.putExtras(bundle);
 

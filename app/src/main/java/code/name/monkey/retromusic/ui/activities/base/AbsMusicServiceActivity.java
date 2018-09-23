@@ -9,22 +9,16 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener;
-
-import static code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED;
-import static code.name.monkey.retromusic.Constants.META_CHANGED;
-import static code.name.monkey.retromusic.Constants.PLAY_STATE_CHANGED;
-import static code.name.monkey.retromusic.Constants.QUEUE_CHANGED;
-import static code.name.monkey.retromusic.Constants.REPEAT_MODE_CHANGED;
-import static code.name.monkey.retromusic.Constants.SHUFFLE_MODE_CHANGED;
 
 
 public abstract class AbsMusicServiceActivity extends AbsCastActivity implements MusicServiceEventListener {
@@ -83,12 +77,12 @@ public abstract class AbsMusicServiceActivity extends AbsCastActivity implements
             musicStateReceiver = new MusicStateReceiver(this);
 
             final IntentFilter filter = new IntentFilter();
-            filter.addAction(PLAY_STATE_CHANGED);
-            filter.addAction(SHUFFLE_MODE_CHANGED);
-            filter.addAction(REPEAT_MODE_CHANGED);
-            filter.addAction(META_CHANGED);
-            filter.addAction(QUEUE_CHANGED);
-            filter.addAction(MEDIA_STORE_CHANGED);
+            filter.addAction(Constants.PLAY_STATE_CHANGED);
+            filter.addAction(Constants.SHUFFLE_MODE_CHANGED);
+            filter.addAction(Constants.REPEAT_MODE_CHANGED);
+            filter.addAction(Constants.META_CHANGED);
+            filter.addAction(Constants.QUEUE_CHANGED);
+            filter.addAction(Constants.MEDIA_STORE_CHANGED);
 
             registerReceiver(musicStateReceiver, filter);
 
@@ -173,7 +167,7 @@ public abstract class AbsMusicServiceActivity extends AbsCastActivity implements
     @Override
     protected void onHasPermissionsChanged(boolean hasPermissions) {
         super.onHasPermissionsChanged(hasPermissions);
-        Intent intent = new Intent(MEDIA_STORE_CHANGED);
+        Intent intent = new Intent(Constants.MEDIA_STORE_CHANGED);
         intent.putExtra("from_permissions_changed", true); // just in case we need to know this at some point
         sendBroadcast(intent);
     }
@@ -199,22 +193,22 @@ public abstract class AbsMusicServiceActivity extends AbsCastActivity implements
             AbsMusicServiceActivity activity = reference.get();
             if (activity != null && action != null) {
                 switch (action) {
-                    case META_CHANGED:
+                    case Constants.META_CHANGED:
                         activity.onPlayingMetaChanged();
                         break;
-                    case QUEUE_CHANGED:
+                    case Constants.QUEUE_CHANGED:
                         activity.onQueueChanged();
                         break;
-                    case PLAY_STATE_CHANGED:
+                    case Constants.PLAY_STATE_CHANGED:
                         activity.onPlayStateChanged();
                         break;
-                    case REPEAT_MODE_CHANGED:
+                    case Constants.REPEAT_MODE_CHANGED:
                         activity.onRepeatModeChanged();
                         break;
-                    case SHUFFLE_MODE_CHANGED:
+                    case Constants.SHUFFLE_MODE_CHANGED:
                         activity.onShuffleModeChanged();
                         break;
-                    case MEDIA_STORE_CHANGED:
+                    case Constants.MEDIA_STORE_CHANGED:
                         activity.onMediaStoreChanged();
                         break;
                 }

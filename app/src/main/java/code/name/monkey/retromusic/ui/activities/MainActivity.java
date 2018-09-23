@@ -109,7 +109,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         }
         checkShowChangelog();
 
-        if (!RetroApplication.isProVersion() && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
+        if (!RetroApplication.Companion.isProVersion() && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
             showPromotionalOffer();
         }
     }

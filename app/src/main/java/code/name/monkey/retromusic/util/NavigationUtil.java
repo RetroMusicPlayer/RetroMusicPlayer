@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.cast.ExpandedCastControlsActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -31,7 +32,6 @@ import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
 
-import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.ui.activities.GenreDetailsActivity.EXTRA_GENRE_ID;
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
 
@@ -133,7 +133,7 @@ public class NavigationUtil {
     }
 
     public static void goToPlayStore(Activity activity) {
-        openUrl(activity, RATE_ON_GOOGLE_PLAY);
+        openUrl(activity, Constants.RATE_ON_GOOGLE_PLAY);
     }
 
     public static void gotoExpandedController(Activity activity) {

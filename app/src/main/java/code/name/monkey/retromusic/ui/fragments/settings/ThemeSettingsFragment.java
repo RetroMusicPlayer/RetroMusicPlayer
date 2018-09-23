@@ -49,7 +49,7 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
         generalTheme.setOnPreferenceChangeListener((preference, newValue) -> {
             String theme = (String) newValue;
 
-            if (theme.equals("color") && !RetroApplication.isProVersion()) {
+            if (theme.equals("color") && !RetroApplication.Companion.isProVersion()) {
                 primaryColorPref.setVisible(false);
                 showProToastAndNavigate("Color theme");
                 return false;

@@ -20,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -31,13 +30,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 
-import static code.name.monkey.retromusic.Constants.ACTION_QUIT;
+import static code.name.monkey.retromusic.Constants.INSTANCE;
 
 public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     @BindView(R.id.seek_arc)
@@ -172,7 +172,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
 
     private Intent makeTimerIntent() {
         return new Intent(getActivity(), MusicService.class)
-                .setAction(ACTION_QUIT);
+                .setAction(Constants.ACTION_QUIT);
     }
 
     private class TimerUpdater extends CountDownTimer {

@@ -34,6 +34,7 @@ import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
@@ -134,7 +135,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), Constants.USER_PROFILE))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap,

@@ -97,7 +97,7 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
                 nowPlayingScreen.equals(NowPlayingScreen.TINY) ||
                 nowPlayingScreen.equals(NowPlayingScreen.BLUR_CARD)||
                 nowPlayingScreen.equals(NowPlayingScreen.ADAPTIVE))
-                && !RetroApplication.isProVersion();
+                && !RetroApplication.Companion.isProVersion();
     }
 
     @Override

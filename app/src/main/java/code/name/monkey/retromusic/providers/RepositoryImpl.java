@@ -143,7 +143,7 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<File> downloadLrcFile(String title, String artist, long duration) {
-        KuGouApiService service = Injection.provideKuGouApiService();
+        KuGouApiService service = Injection.INSTANCE.provideKuGouApiService();
         return service.searchLyric(title, String.valueOf(duration))
                 .subscribeOn(Schedulers.io())
                 .flatMap(kuGouSearchLyricResult -> {

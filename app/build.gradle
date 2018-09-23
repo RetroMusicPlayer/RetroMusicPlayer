@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -72,17 +74,6 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
-
-    /*configurations.all {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            def requested = details.requested
-            if (requested.group == 'com.android.support') {
-                if (!(requested.name.startsWith("multidex") || requested.name.startsWith("mediarouter"))) {
-                    details.useVersion $supportLibVersion
-                }
-            }
-        }
-    }*/
 }
 
 def getProperties(String fileName) {
@@ -119,7 +110,7 @@ dependencies {
     implementation "com.google.android.material:material:$supportLibVersion"
 
     //For casting
-    implementation 'androidx.mediarouter:mediarouter:1.0.0-beta01'
+    implementation 'androidx.mediarouter:mediarouter:1.0.0'
     implementation 'com.google.android.gms:play-services-cast-framework:16.0.2'
 
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
@@ -152,5 +143,9 @@ dependencies {
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }

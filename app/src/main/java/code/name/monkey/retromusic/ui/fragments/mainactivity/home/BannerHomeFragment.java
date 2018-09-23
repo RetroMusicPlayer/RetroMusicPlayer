@@ -37,6 +37,7 @@ import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
@@ -64,8 +65,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static code.name.monkey.retromusic.Constants.USER_BANNER;
-import static code.name.monkey.retromusic.Constants.USER_PROFILE;
+import static code.name.monkey.retromusic.Constants.INSTANCE;
 
 public class BannerHomeFragment extends AbsMainActivityFragment implements MainActivityFragmentCallbacks, HomeContract.HomeView {
 
@@ -175,7 +175,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
                 .setQuality(100)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getBannerImage(), USER_BANNER))
+                        new File(PreferenceUtil.getInstance(getContext()).getBannerImage(), Constants.USER_BANNER))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap));
@@ -189,7 +189,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), Constants.USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap,

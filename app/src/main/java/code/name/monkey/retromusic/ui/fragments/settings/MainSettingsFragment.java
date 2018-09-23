@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.util.Compressor;
@@ -33,8 +34,6 @@ import code.name.monkey.retromusic.views.IconImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
-
-import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class MainSettingsFragment extends Fragment {
 
@@ -151,7 +150,7 @@ public class MainSettingsFragment extends Fragment {
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), Constants.USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userImageBottom::setImageBitmap,

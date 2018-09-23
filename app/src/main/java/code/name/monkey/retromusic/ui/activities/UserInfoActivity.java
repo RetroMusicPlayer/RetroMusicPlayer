@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.Compressor;
@@ -41,8 +42,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static code.name.monkey.retromusic.Constants.USER_BANNER;
-import static code.name.monkey.retromusic.Constants.USER_PROFILE;
+import static code.name.monkey.retromusic.Constants.INSTANCE;
 
 public class UserInfoActivity extends AbsBaseActivity {
     private static final String TAG = "UserInfoActivity";
@@ -210,7 +210,7 @@ public class UserInfoActivity extends AbsBaseActivity {
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = ImageUtil.getResizedBitmap(Media.getBitmap(getContentResolver(), uri), PROFILE_ICON_SIZE);
-                String profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE);
+                String profileImagePath = saveToInternalStorage(bitmap, Constants.USER_PROFILE);
                 PreferenceUtil.getInstance(this).saveProfileImage(profileImagePath);
                 loadImageFromStorage(profileImagePath);
 
@@ -223,7 +223,7 @@ public class UserInfoActivity extends AbsBaseActivity {
             Uri uri = data.getData();
             try {
                 Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
-                String profileImagePath = saveToInternalStorage(bitmap, USER_BANNER);
+                String profileImagePath = saveToInternalStorage(bitmap, Constants.USER_BANNER);
                 PreferenceUtil.getInstance(this).setBannerImagePath(profileImagePath);
                 loadBannerFromStorage(profileImagePath);
             } catch (IOException e) {
@@ -236,7 +236,7 @@ public class UserInfoActivity extends AbsBaseActivity {
         disposable.add(new Compressor(this)
                 .setQuality(100)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(new File(profileImagePath, USER_BANNER))
+                .compressToBitmapAsFlowable(new File(profileImagePath, Constants.USER_BANNER))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {
@@ -250,7 +250,7 @@ public class UserInfoActivity extends AbsBaseActivity {
                 .setMaxWidth(300)
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(new File(path, USER_PROFILE))
+                .compressToBitmapAsFlowable(new File(path,  Constants.USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(bitmap -> {

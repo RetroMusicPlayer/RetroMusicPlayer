@@ -26,13 +26,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import code.name.monkey.retromusic.BuildConfig;
+import code.name.monkey.retromusic.Constants;
 
-import static code.name.monkey.retromusic.Constants.ACTION_PAUSE;
-import static code.name.monkey.retromusic.Constants.ACTION_PLAY;
-import static code.name.monkey.retromusic.Constants.ACTION_REWIND;
-import static code.name.monkey.retromusic.Constants.ACTION_SKIP;
-import static code.name.monkey.retromusic.Constants.ACTION_STOP;
-import static code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE;
 
 /**
  * Used to control headset playback.
@@ -64,13 +59,13 @@ public class MediaButtonIntentReceiver extends BroadcastReceiver {
                     if (DEBUG) Log.v(TAG, "Handling headset click, count = " + clickCount);
                     switch (clickCount) {
                         case 1:
-                            command = ACTION_TOGGLE_PAUSE;
+                            command = Constants.ACTION_TOGGLE_PAUSE;
                             break;
                         case 2:
-                            command = ACTION_SKIP;
+                            command = Constants.ACTION_SKIP;
                             break;
                         case 3:
-                            command = ACTION_REWIND;
+                            command = Constants.ACTION_REWIND;
                             break;
                         default:
                             command = null;
@@ -103,23 +98,23 @@ public class MediaButtonIntentReceiver extends BroadcastReceiver {
             String command = null;
             switch (keycode) {
                 case KeyEvent.KEYCODE_MEDIA_STOP:
-                    command = ACTION_STOP;
+                    command = Constants.ACTION_STOP;
                     break;
                 case KeyEvent.KEYCODE_HEADSETHOOK:
                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
-                    command = ACTION_TOGGLE_PAUSE;
+                    command = Constants.ACTION_TOGGLE_PAUSE;
                     break;
                 case KeyEvent.KEYCODE_MEDIA_NEXT:
-                    command = ACTION_SKIP;
+                    command = Constants.ACTION_SKIP;
                     break;
                 case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
-                    command = ACTION_REWIND;
+                    command = Constants.ACTION_REWIND;
                     break;
                 case KeyEvent.KEYCODE_MEDIA_PAUSE:
-                    command = ACTION_PAUSE;
+                    command = Constants.ACTION_PAUSE;
                     break;
                 case KeyEvent.KEYCODE_MEDIA_PLAY:
-                    command = ACTION_PLAY;
+                    command = Constants.ACTION_PLAY;
                     break;
             }
             if (command != null) {

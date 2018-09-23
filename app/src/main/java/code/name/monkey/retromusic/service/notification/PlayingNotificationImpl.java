@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -20,8 +18,11 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
+import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
@@ -32,10 +33,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
-import static code.name.monkey.retromusic.Constants.ACTION_QUIT;
-import static code.name.monkey.retromusic.Constants.ACTION_REWIND;
-import static code.name.monkey.retromusic.Constants.ACTION_SKIP;
-import static code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE;
+import static code.name.monkey.retromusic.Constants.INSTANCE;
 import static code.name.monkey.retromusic.util.RetroUtil.createBitmap;
 
 public class PlayingNotificationImpl extends PlayingNotification {
@@ -82,7 +80,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
 
         final PendingIntent clickIntent = PendingIntent
                 .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT);
-        final PendingIntent deleteIntent = buildPendingIntent(service, ACTION_QUIT, null);
+        final PendingIntent deleteIntent = buildPendingIntent(service, Constants.ACTION_QUIT, null);
 
         final Notification notification = new NotificationCompat.Builder(service,
                 NOTIFICATION_CHANNEL_ID)
@@ -197,22 +195,22 @@ public class PlayingNotificationImpl extends PlayingNotification {
         final ComponentName serviceName = new ComponentName(service, MusicService.class);
 
         // Previous track
-        pendingIntent = buildPendingIntent(service, ACTION_REWIND, serviceName);
+        pendingIntent = buildPendingIntent(service, Constants.ACTION_REWIND, serviceName);
         notificationLayout.setOnClickPendingIntent(R.id.action_prev, pendingIntent);
         notificationLayoutBig.setOnClickPendingIntent(R.id.action_prev, pendingIntent);
 
         // Play and pause
-        pendingIntent = buildPendingIntent(service, ACTION_TOGGLE_PAUSE, serviceName);
+        pendingIntent = buildPendingIntent(service,Constants.ACTION_TOGGLE_PAUSE, serviceName);
         notificationLayout.setOnClickPendingIntent(R.id.action_play_pause, pendingIntent);
         notificationLayoutBig.setOnClickPendingIntent(R.id.action_play_pause, pendingIntent);
 
         // Next track
-        pendingIntent = buildPendingIntent(service, ACTION_SKIP, serviceName);
+        pendingIntent = buildPendingIntent(service, Constants.ACTION_SKIP, serviceName);
         notificationLayout.setOnClickPendingIntent(R.id.action_next, pendingIntent);
         notificationLayoutBig.setOnClickPendingIntent(R.id.action_next, pendingIntent);
 
         // Close
-        pendingIntent = buildPendingIntent(service, ACTION_QUIT, serviceName);
+        pendingIntent = buildPendingIntent(service, Constants.ACTION_QUIT, serviceName);
         notificationLayoutBig.setOnClickPendingIntent(R.id.action_quit, pendingIntent);
     }
 
