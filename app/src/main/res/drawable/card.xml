@@ -20,7 +20,7 @@
                 android:right="0dp"
                 android:top="0dp" />
             <solid android:color="#55d4d4d4" />
-            <corners android:radius="@dimen/card_elevation" />
+            <corners android:radius="6dp" />
         </shape>
     </item>
     <item>
@@ -31,14 +31,14 @@
                 android:right="0dp"
                 android:top="0dp" />
             <solid android:color="#55dddddd" />
-            <corners android:radius="@dimen/card_elevation" />
+            <corners android:radius="6dp" />
         </shape>
     </item>
 
     <item>
         <shape>
             <solid android:color="@android:color/white" />
-            <corners android:radius="@dimen/card_elevation" />
+            <corners android:radius="6dp" />
         </shape>
     </item>
 </layer-list>

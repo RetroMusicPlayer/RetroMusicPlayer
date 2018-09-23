@@ -72,8 +72,8 @@
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -89,8 +89,8 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 

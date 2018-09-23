@@ -16,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_3"
             android:orientation="vertical">
 
             <LinearLayout
@@ -25,14 +24,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <code.name.monkey.retromusic.views.IconImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:tint="@color/md_white_1000"
                     app:srcCompat="@drawable/ic_format_color_fill" />
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -48,14 +47,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <code.name.monkey.retromusic.views.IconImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:tint="@color/md_white_1000"
                     app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -71,14 +70,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <code.name.monkey.retromusic.views.IconImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:tint="@color/md_white_1000"
                     app:srcCompat="@drawable/ic_view_carousel_black_24dp" />
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -93,14 +92,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <code.name.monkey.retromusic.views.IconImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:tint="@color/md_white_1000"
                     app:srcCompat="@drawable/ic_rounded_corner" />
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -116,14 +115,14 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <code.name.monkey.retromusic.views.IconImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
                     android:tint="@color/md_white_1000"
                     app:srcCompat="@drawable/ic_favorite_white_24dp" />
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
@@ -140,16 +139,16 @@
                 android:paddingTop="8dp">
 
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/restore_button"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:paddingBottom="16dp"
-                    android:paddingEnd="24dp"
                     android:paddingStart="24dp"
                     android:paddingTop="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/restore"
                     android:textColor="@color/md_white_1000" />
 
@@ -161,17 +160,17 @@
                     app:cardCornerRadius="25dp"
                     app:cardUseCompatPadding="true">
 
-                    <TextView
+                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/purchase_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:backgroundTint="#80ffffff"
                         android:gravity="center"
-                        android:paddingBottom="16dp"
-                        android:paddingEnd="24dp"
                         android:paddingStart="24dp"
                         android:paddingTop="16dp"
+                        android:paddingEnd="24dp"
+                        android:paddingBottom="16dp"
                         android:text="@string/purchase"
                         android:textColor="@color/md_white_1000" />
                 </androidx.cardview.widget.CardView>

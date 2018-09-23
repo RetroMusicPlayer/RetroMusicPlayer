@@ -1,13 +1,13 @@
 package code.name.monkey.retromusic;
 
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDexApplication;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.bumptech.glide.Glide;
 
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDexApplication;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -47,6 +47,7 @@ public class RetroApplication extends MultiDexApplication {
         super.onCreate();
         app = this;
 
+        setupErrorHandler();
 
         // default theme
         if (!ThemeStore.isConfigured(this, 1)) {
@@ -98,6 +99,7 @@ public class RetroApplication extends MultiDexApplication {
 
     private void handleUncaughtException(Thread thread, Throwable throwable) {
         throwable.printStackTrace();
+        deleteAppData();
         //Intent intent = new Intent(this, ErrorHandlerActivity.class);
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //startActivity(intent);

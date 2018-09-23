@@ -28,18 +28,16 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            android:textColor="@color/md_white_1000" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.85"
-            android:textColor="@color/md_white_1000" />
+            android:alpha="0.85" />
     </LinearLayout>
 </LinearLayout>

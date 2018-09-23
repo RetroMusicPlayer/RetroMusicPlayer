@@ -42,7 +42,6 @@ import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.NavigationUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
@@ -150,7 +149,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> showMainMenu( ));
+        toolbar.setNavigationOnClickListener(v -> showMainMenu());
     }
 
     private Fragment getCurrentFragment() {

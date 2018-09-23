@@ -133,6 +133,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkNormalDebugClasspath" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkNormalReleaseClasspath" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkSansDebugClasspath" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/checkSansReleaseClasspath" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/check_manifest_result" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/compatible_screen_manifest" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />

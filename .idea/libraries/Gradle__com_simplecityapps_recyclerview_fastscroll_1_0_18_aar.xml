@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.simplecityapps:recyclerview-fastscroll:1.0.18@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/ca1e2037a0a3e58cf634cf189766746c/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/8c837cf18cfa3556d50e82adddd21d9a/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/ca1e2037a0a3e58cf634cf189766746c/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/ca1e2037a0a3e58cf634cf189766746c/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/8c837cf18cfa3556d50e82adddd21d9a/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-recyclerview-fastscroll-1.0.18.aar/8c837cf18cfa3556d50e82adddd21d9a/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

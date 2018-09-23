@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/title" tools:ignore="MissingPrefix"
-    fontPath="@string/circular_std_black"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="12dp"
-    android:text="Recent albums"
-    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-    android:textColor="?android:attr/textColorPrimary"
-    />
+<code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    style="@style/SubTitleTextAppearance"
+    android:layout_gravity="start"
+    android:gravity="start"/>

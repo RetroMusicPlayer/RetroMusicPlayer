@@ -1,23 +1,25 @@
 package code.name.monkey.retromusic.transform;
 
 import android.content.Context;
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * 实现ViewPager左右滑动时的时差
  * Created by xmuSistone on 2016/9/18.
  */
-public class CustPagerTransformer implements ViewPager.PageTransformer {
+public class CarousalPagerTransformer implements ViewPager.PageTransformer {
 
     private int maxTranslateOffsetX;
     private ViewPager viewPager;
 
-    public CustPagerTransformer(Context context) {
+    public CarousalPagerTransformer(Context context) {
         this.maxTranslateOffsetX = dp2px(context, 180);
     }
 
-    public void transformPage(View view, float position) {
+    public void transformPage(@NonNull View view, float position) {
         if (viewPager == null) {
             viewPager = (ViewPager) view.getParent();
         }
@@ -34,12 +36,10 @@ public class CustPagerTransformer implements ViewPager.PageTransformer {
         }
     }
 
-    /**
-     * dp和像素转换
-     */
     private int dp2px(Context context, float dipValue) {
         float m = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * m + 0.5f);
     }
+
 
 }

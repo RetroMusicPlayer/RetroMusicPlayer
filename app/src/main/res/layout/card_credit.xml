@@ -9,17 +9,16 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="8dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/gradient_1"
             android:orientation="vertical">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 fontPath="@string/circular_std_black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

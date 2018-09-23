@@ -25,13 +25,20 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/mini_player_title"
             android:layout_width="0dp"
-            android:gravity="center"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:singleLine="true"  />
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true" />
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/action_prev"
@@ -49,6 +56,7 @@
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:scaleType="center"
+            app:srcCompat="@drawable/ic_pause_white_24dp"
             tools:ignore="ContentDescription" />
 
         <code.name.monkey.retromusic.views.IconImageView
@@ -60,6 +68,16 @@
             android:background="?roundSelector"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_skip_next_white_24dp" />
+
+        <code.name.monkey.retromusic.views.IconImageView
+            android:id="@+id/action_playing_queue"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="?roundSelector"
+            android:padding="6dp"
+            app:srcCompat="@drawable/ic_playlist_play_white_24dp" />
+
     </LinearLayout>
 
     <me.zhanghai.android.materialprogressbar.MaterialProgressBar

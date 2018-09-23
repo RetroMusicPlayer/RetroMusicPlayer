@@ -11,17 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/recent_artists"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/recent_artists" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -32,7 +27,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_margin="8dp"
             android:background="?attr/dividerColor" />
     </LinearLayout>
 
@@ -44,14 +39,8 @@
         android:visibility="gone">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/recent_albums"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/recent_albums" />
 
         <code.name.monkey.retromusic.views.MetalRecyclerViewPager
             android:id="@+id/recent_album"
@@ -63,7 +52,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_margin="8dp"
             android:background="?attr/dividerColor" />
     </LinearLayout>
 
@@ -75,14 +64,8 @@
         android:visibility="gone">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/top_artists"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/top_artists" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/top_artist"
@@ -93,7 +76,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_margin="8dp"
             android:background="?attr/dividerColor" />
     </LinearLayout>
 
@@ -105,14 +88,8 @@
         android:visibility="gone">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="@string/top_albums"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/top_albums" />
 
         <code.name.monkey.retromusic.views.MetalRecyclerViewPager
             android:id="@+id/top_album"
@@ -124,7 +101,25 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_margin="12dp"
+            android:layout_margin="8dp"
             android:background="?attr/dividerColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/genre_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/genres" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
     </LinearLayout>
 </LinearLayout>

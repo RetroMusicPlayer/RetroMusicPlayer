@@ -7,6 +7,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -14,14 +15,18 @@ import com.google.gson.reflect.TypeToken;
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
+import code.name.monkey.retromusic.transform.CascadingPageTransformer;
+import code.name.monkey.retromusic.transform.NormalPageTransformer;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
@@ -53,9 +58,12 @@ public final class PreferenceUtil {
     public static final String ADAPTIVE_COLOR_APP = "adaptive_color_app";
     public static final String TOGGLE_SEPARATE_LINE = "toggle_separate_line";
     public static final String ALBUM_GRID_STYLE = "album_grid_style";
+    public static final String HOME_ARTIST_GRID_STYLE = "home_artist_grid_style";
     public static final String ARTIST_GRID_STYLE = "artist_grid_style";
     public static final String TOGGLE_ADD_CONTROLS = "toggle_add_controls";
     public static final String ALBUM_COVER_STYLE = "album_cover_style";
+    public static final String ALBUM_COVER_TRANSFORM = "album_cover_transform";
+    public static final String TAB_TEXT_MODE = "tab_text_mode";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LIBRARY_CATEGORIES = "library_categories";
     private static final String LAST_PAGE = "last_start_page";
@@ -93,13 +101,10 @@ public final class PreferenceUtil {
     private static final String ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order";
     private static final String ARTIST_DETAIL_SONG_SORT_ORDER = "artist_detail_song_sort_order";
     private static final String LYRICS_OPTIONS = "lyrics_options";
-    private static final String SAF_SDCARD_URI = "saf_sdcard_uri";
-    private static final String DOCUMENT_TREE_URI = "document_tree_uri";
     private static final String CHOOSE_EQUALIZER = "choose_equalizer";
     private static final String TOGGLE_SHUFFLE = "toggle_shuffle";
     private static final String SONG_GRID_STYLE = "song_grid_style";
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
-    private static final String TAG = "PreferenceUtil";
     private static final String LAST_KNOWN_LYRICS_TYPE = "LAST_KNOWN_LYRICS_TYPE";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
@@ -705,12 +710,21 @@ public final class PreferenceUtil {
         return layoutRes;
     }
 
-    public void setAlbumGridStyle(int type) {
-        mPreferences.edit().putInt(ALBUM_GRID_STYLE, type).apply();
+    @LayoutRes
+    public int getHomeGridStyle(Context context) {
+        int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
+        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
+        int layoutRes = typedArray.getResourceId(pos, -1);
+        typedArray.recycle();
+        if (layoutRes == -1) {
+            return R.layout.item_artist;
+        }
+        return layoutRes;
     }
 
+
     public int getArtistGridStyle(Context context) {
-        int pos = Integer.parseInt(mPreferences.getString(ARTIST_GRID_STYLE, "0"));
+        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ARTIST_GRID_STYLE, "0")));
         TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
         int layoutRes = typedArray.getResourceId(pos, -1);
         typedArray.recycle();
@@ -741,4 +755,30 @@ public final class PreferenceUtil {
     }
 
 
+    public ViewPager.PageTransformer getAlbumCoverTransform(Context context) {
+        int style = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_COVER_TRANSFORM, "0")));
+        switch (style) {
+            default:
+            case 0:
+                return new NormalPageTransformer();
+            case 1:
+                return new CascadingPageTransformer();
+        }
+    }
+
+    @LabelVisibilityMode
+    public int getTabTitleMode() {
+        int mode = Integer.parseInt(mPreferences.getString(TAB_TEXT_MODE, "1"));
+        switch (mode) {
+            default:
+            case 1:
+                return LabelVisibilityMode.LABEL_VISIBILITY_LABELED;
+            case 0:
+                return LabelVisibilityMode.LABEL_VISIBILITY_AUTO;
+            case 2:
+                return LabelVisibilityMode.LABEL_VISIBILITY_SELECTED;
+            case 3:
+                return LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
+        }
+    }
 }

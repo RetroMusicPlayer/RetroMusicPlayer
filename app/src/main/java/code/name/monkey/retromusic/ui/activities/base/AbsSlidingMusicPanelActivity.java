@@ -10,7 +10,6 @@ import android.view.animation.PathInterpolator;
 
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
 
@@ -167,7 +166,6 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
             postRecreate();
         }
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -445,10 +443,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         int accentColor = ThemeStore.accentColor(this);
         NavigationViewUtil.setItemIconColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
         NavigationViewUtil.setItemTextColors(bottomNavigationView, ColorUtil.withAlpha(iconColor, 0.5f), accentColor);
-
-        if (!PreferenceUtil.getInstance(this).tabTitles()) {
-            bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED);
-        }
+        bottomNavigationView.setLabelVisibilityMode(PreferenceUtil.getInstance(this).getTabTitleMode());
     }
 
     @Override
@@ -473,4 +468,6 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
+
+
 }

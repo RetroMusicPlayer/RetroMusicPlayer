@@ -32,20 +32,19 @@
             app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingStart="8dp"
-        android:paddingTop="8dp"
+        android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:textColor="?android:attr/textColorSecondary"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
@@ -53,8 +52,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="16sp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 

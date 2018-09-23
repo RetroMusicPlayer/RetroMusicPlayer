@@ -53,7 +53,6 @@
                     android:id="@+id/image_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="sans-serif"
                     android:gravity="center"
                     android:maxLines="1"
                     tools:text="1"

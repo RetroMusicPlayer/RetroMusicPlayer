@@ -1,7 +1,9 @@
 package code.name.monkey.retromusic.transform;
 
-import androidx.viewpager.widget.ViewPager;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * @author Hemanth S (h4h13).
@@ -12,7 +14,7 @@ public class NormalPageTransformer implements ViewPager.PageTransformer {
     private static final float MIN_ALPHA = 0.5f;
 
     @Override
-    public void transformPage(View view, float position) {
+    public void transformPage(@NonNull View view, float position) {
         int pageWidth = view.getWidth();
         int pageHeight = view.getHeight();
 

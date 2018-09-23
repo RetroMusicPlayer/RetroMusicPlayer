@@ -5,9 +5,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +15,9 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,26 +41,37 @@ import code.name.monkey.retromusic.views.PlayPauseDrawable;
 public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.title)
     TextView title;
+
     private Unbinder unbinder;
     private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;
@@ -88,12 +99,12 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
         hideVolumeIfAvailable();
-
+        title.setSelected(true);
     }
 
     @Override
@@ -198,7 +209,9 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
     private void setupVolumeControls() {
         VolumeFragment volumeFragment = (VolumeFragment) getChildFragmentManager()
                 .findFragmentById(R.id.volume_fragment);
-        volumeFragment.tintWhiteColor();
+        if (volumeFragment != null) {
+            volumeFragment.tintWhiteColor();
+        }
     }
 
     private void setUpPrevNext() {

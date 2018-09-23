@@ -19,12 +19,6 @@ import android.os.Build;
 import android.os.ResultReceiver;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
-import androidx.core.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -40,6 +34,12 @@ import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.RetroApplication;
@@ -55,8 +55,7 @@ public class RetroUtil {
     }
 
     public static Uri getAlbumArtUri(long paramInt) {
-        return ContentUris
-                .withAppendedId(Uri.parse("content://media/external/audio/albumart"), paramInt);
+        return ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), paramInt);
     }
 
     public static String EncodeString(String string) {

@@ -1,23 +1,25 @@
 package code.name.monkey.retromusic.ui.activities;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.transition.TransitionManager;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
+import com.google.android.material.appbar.AppBarLayout;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.transition.TransitionManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -28,7 +30,7 @@ import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-public class SettingsActivity extends AbsBaseActivity implements ColorChooserDialog.ColorCallback {
+public class SettingsActivity extends AbsBaseActivity implements ColorChooserDialog.ColorCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -102,8 +104,9 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
 
 
     public void setupFragment(Fragment fragment, @StringRes int titleName) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
-                .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down);
+        FragmentTransaction fragmentTransaction = fragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.sliding_in_left, R.anim.sliding_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         title.setText(titleName);
 
@@ -115,8 +118,6 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
             fragmentTransaction.replace(R.id.detail_content_frame, fragment, fragment.getTag());
             fragmentTransaction.commit();
         }
-
-
     }
 
 
@@ -142,5 +143,27 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
     public void addAppbarLayoutElevation(float v) {
         TransitionManager.beginDelayedTransition(appBarLayout);
         appBarLayout.setElevation(v);
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
+    }
+
+    private static final String TAG = "SettingsActivity";
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.i(TAG, "onSharedPreferenceChanged: ");
+        if (key.equals(PreferenceUtil.PROFILE_IMAGE_PATH)) {
+            recreate();
+        }
     }
 }

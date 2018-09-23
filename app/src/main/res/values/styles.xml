@@ -59,5 +59,15 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="SubTitleTextAppearance" parent="BigTitleTextAppearance">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
+        <item name="android:layout_gravity">start|center_vertical</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
 
 </resources>

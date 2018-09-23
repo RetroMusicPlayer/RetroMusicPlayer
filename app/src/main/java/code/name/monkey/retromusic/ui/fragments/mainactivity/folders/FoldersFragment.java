@@ -200,6 +200,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getMainActivity().setBottomBarVisibility(View.GONE);
+
         if (savedInstanceState == null) {
             //noinspection ConstantConditions
             setCrumb(new BreadCrumbLayout.Crumb(

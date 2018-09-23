@@ -50,19 +50,19 @@
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
+                    android:id="@+id/banner_image"
                     android:layout_width="match_parent"
                     android:layout_height="128dp"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/material_design_default" />
 
                 <View
+                    android:id="@+id/banner_select"
                     android:layout_width="match_parent"
                     android:layout_height="128dp"
                     android:background="@color/twenty_percent_black_overlay" />
 
                 <code.name.monkey.retromusic.views.IconImageView
-                    android:id="@+id/banner_select"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

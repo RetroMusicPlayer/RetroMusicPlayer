@@ -37,7 +37,6 @@ import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.ImageUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.views.CircularImageView;
-import code.name.monkey.retromusic.views.IconImageView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -63,11 +62,8 @@ public class UserInfoActivity extends AbsBaseActivity {
     @BindView(R.id.user_image)
     CircularImageView userImage;
 
-    @BindView(R.id.image)
+    @BindView(R.id.banner_image)
     ImageView image;
-
-    @BindView(R.id.banner_select)
-    IconImageView imageView;
 
     @BindView(R.id.next)
     FloatingActionButton nextButton;
@@ -171,11 +167,10 @@ public class UserInfoActivity extends AbsBaseActivity {
         } else {
             PreferenceUtil.getInstance(this).setBannerImagePath("");
             image.setImageResource(android.R.color.transparent);
-            imageView.setImageResource(R.drawable.ic_edit_white_24dp);
         }
     }
 
-    @OnClick(R.id.image)
+    @OnClick(R.id.user_image)
     public void onViewClicked() {
         //noinspection ConstantConditions
         new MaterialDialog.Builder(this)

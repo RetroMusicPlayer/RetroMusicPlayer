@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.dialogs.ChangelogDialog;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SearchQueryHelper;
@@ -43,7 +44,6 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment;
-import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -82,7 +82,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
             }
         }
     };
-    private int insideFragment = R.id.action_song;
 
     @Override
     protected View createContentView() {
@@ -99,17 +98,20 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.VISIBLE);
         getBottomNavigationView().setOnNavigationItemSelectedListener(this);
 
         drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) -> windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
 
         if (savedInstanceState == null) {
-            setCurrentFragment(PreferenceUtil.getInstance(this).getLastMusicChooser());
+            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
         } else {
             restoreCurrentFragment();
         }
         checkShowChangelog();
+
+        if (!RetroApplication.isProVersion() && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
+            showPromotionalOffer();
+        }
     }
 
     private void checkShowChangelog() {
@@ -153,7 +155,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
     }
 
-    public void setCurrentFragment(@Nullable Fragment fragment, boolean isStackAdd, String tag) {
+    public void setCurrentFragment(@NonNull Fragment fragment, boolean isStackAdd, String tag) {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -179,8 +181,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         String mimeType = intent.getType();
         boolean handled = false;
 
-        if (intent.getAction() != null && intent.getAction()
-                .equals(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)) {
+        if (intent.getAction() != null && intent.getAction().equals(MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH)) {
             final ArrayList<Song> songs = SearchQueryHelper.getSongs(this, intent.getExtras());
 
             if (MusicPlayerRemote.getShuffleMode() == MusicService.SHUFFLE_MODE_SHUFFLE) {
@@ -291,7 +292,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
                 key.equals(PreferenceUtil.USER_NAME) ||
                 key.equals(PreferenceUtil.TOGGLE_FULL_SCREEN) ||
                 key.equals(PreferenceUtil.TOGGLE_VOLUME) ||
-                key.equals(PreferenceUtil.TOGGLE_TAB_TITLES) ||
                 key.equals(PreferenceUtil.ROUND_CORNERS) ||
                 key.equals(PreferenceUtil.CAROUSEL_EFFECT) ||
                 key.equals(PreferenceUtil.NOW_PLAYING_SCREEN_ID) ||
@@ -305,7 +305,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
                 key.equals(PreferenceUtil.ARTIST_GRID_STYLE) ||
                 key.equals(PreferenceUtil.TOGGLE_HOME_BANNER) ||
                 key.equals(PreferenceUtil.TOGGLE_ADD_CONTROLS) ||
-                key.equals(PreferenceUtil.ALBUM_COVER_STYLE)) postRecreate();
+                key.equals(PreferenceUtil.ALBUM_COVER_STYLE) ||
+                key.equals(PreferenceUtil.HOME_ARTIST_GRID_STYLE) ||
+                key.equals(PreferenceUtil.ALBUM_COVER_TRANSFORM) ||
+                key.equals(PreferenceUtil.TAB_TEXT_MODE)) postRecreate();
     }
 
     private void showPromotionalOffer() {
@@ -332,42 +335,18 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
     }
 
     private void selectedFragment(int itemId) {
-        insideFragment = itemId;
         switch (itemId) {
             case R.id.action_album:
-                setCurrentFragment(LIBRARY);
-                break;
             case R.id.action_artist:
-                setCurrentFragment(LIBRARY);
-                break;
             case R.id.action_playlist:
-                setCurrentFragment(LIBRARY);
-                break;
             case R.id.action_song:
-                setCurrentFragment(LIBRARY);
+                setCurrentFragment(LibraryFragment.newInstance(itemId), false, LibraryFragment.TAG);
                 break;
-            default:
             case R.id.action_home:
-                setCurrentFragment(HOME);
-                break;
-
-        }
-    }
-
-
-    public void setCurrentFragment(int key) {
-        PreferenceUtil.getInstance(this).setLastMusicChooser(key);
-        switch (key) {
-            case LIBRARY:
-                setCurrentFragment(LibraryFragment.newInstance(insideFragment), false, LibraryFragment.TAG);
-                break;
-            case FOLDERS:
-                setCurrentFragment(FoldersFragment.newInstance(this), false, FoldersFragment.TAG);
-                break;
-            case HOME:
                 setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? HomeFragment.newInstance() :
                         BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
                 break;
+
         }
     }
 }

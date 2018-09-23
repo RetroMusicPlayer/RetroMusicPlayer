@@ -5,9 +5,9 @@
     android:id="@+id/playback_controls"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="32dp"
+    android:paddingStart="32dp"
     android:paddingEnd="32dp"
-    android:paddingStart="32dp">
+    android:paddingBottom="32dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -149,8 +149,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingEnd="12dp"
-            android:paddingStart="12dp">
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
 
 
             <TextView
@@ -158,8 +158,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingEnd="8dp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -171,8 +171,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:paddingEnd="8dp"
                 android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -183,10 +183,11 @@
             android:id="@+id/player_progress_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="20dp"
             android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:progressTint="@color/md_white_1000"
             android:splitTrack="false"
+            android:thumb="@null"
             android:thumbTint="@color/md_white_1000"
             tools:progress="20" />
 

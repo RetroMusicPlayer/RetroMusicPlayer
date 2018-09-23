@@ -20,7 +20,7 @@
       android:layout_alignParentEnd="true"
       android:adjustViewBounds="true"
       android:scaleType="centerCrop"
-      tools:src="@drawable/hemanth_s"/>
+      />
 
     <ImageView
       android:id="@+id/foregroundImage"

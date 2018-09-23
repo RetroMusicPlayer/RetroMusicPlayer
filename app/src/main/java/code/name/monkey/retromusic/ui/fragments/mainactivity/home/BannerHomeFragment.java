@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +51,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
 import code.name.monkey.retromusic.mvp.contract.HomeContract;
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter;
+import code.name.monkey.retromusic.ui.adapter.GenreAdapter;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWithAdapter;
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
@@ -107,6 +110,12 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
 
     @BindView(R.id.top_albums_container)
     View topAlbumContainer;
+
+    @BindView(R.id.genres)
+    RecyclerView genresRecyclerView;
+
+    @BindView(R.id.genre_container)
+    LinearLayout genreContainer;
 
     @BindView(R.id.container)
     View container;
@@ -290,7 +299,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         recentArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(),
                 1, GridLayoutManager.HORIZONTAL, false));
         ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists,
-                R.layout.item_artist, false, null);
+                PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
         recentArtistRV.setAdapter(artistAdapter);
     }
 
@@ -309,7 +318,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         topArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(),
                 1, GridLayoutManager.HORIZONTAL, false));
         ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists,
-                R.layout.item_artist, false, null);
+                PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
         topArtistRV.setAdapter(artistAdapter);
 
     }
@@ -339,8 +348,12 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
 
     @Override
     public void geners(ArrayList<Genre> genres) {
+        genreContainer.setVisibility(View.VISIBLE);
+        genresRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //noinspection ConstantConditions
+        GenreAdapter genreAdapter = new GenreAdapter(getActivity(), genres, R.layout.item_list);
+        genresRecyclerView.setAdapter(genreAdapter);
     }
-
 
     @OnClick({R.id.last_added, R.id.top_played, R.id.action_shuffle, R.id.history,
             R.id.user_image, R.id.search})

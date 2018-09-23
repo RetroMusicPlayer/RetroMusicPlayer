@@ -251,17 +251,8 @@ public class MusicPlayerRemote {
     }
 
     public static int seekTo(int millis) {
-        getCastSession();
         if (musicService != null) {
-            switch (playbackLocation) {
-                case PlaybackLocation.LOCAL:
-                    return musicService.seek(millis);
-                case PlaybackLocation.REMOTE:
-                    if (getCastSession() != null) {
-                        getCastSession().getRemoteMediaClient().seek(millis);
-                    }
-                    break;
-            }
+            return musicService.seek(millis);
         }
         return -1;
     }

@@ -79,7 +79,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif"
                     android:gravity="start"
                     android:paddingLeft="16dp"
                     android:text="@string/loading_products"
@@ -107,11 +106,10 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gradient_5"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         fontPath="@string/circular_std_black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -121,7 +119,7 @@
                         android:textColor="@color/md_white_1000"
                         tools:ignore="MissingPrefix" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
@@ -132,12 +130,12 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/donate"
+                        app:backgroundTint="?colorAccent"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:text="@string/donate"
-                        android:textColor="@color/md_white_1000" />
+                        android:text="@string/donate"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

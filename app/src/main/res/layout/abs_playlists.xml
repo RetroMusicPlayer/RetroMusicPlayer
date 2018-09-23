@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,44 +8,42 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardCornerRadius="20dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
             android:gravity="center_vertical">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/search_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:padding="12dp"
-                app:srcCompat="@drawable/ic_search_white_24dp" />
+                android:paddingStart="14dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="10dp"
+                app:srcCompat="@drawable/ic_search_white_24dp"
+                app:tint="?colorAccent" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/search_view"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:hint="@string/search_hint"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
 
-        </LinearLayout>
+        </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.appcompat.widget.AppCompatTextView xmlns:tools="http://schemas.android.com/tools"
-        fontPath="@string/circular_std_black"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:text="@string/for_you"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?android:attr/textColorPrimary"
-        tools:ignore="MissingPrefix" />
+    <androidx.appcompat.widget.AppCompatTextView
+        style="@style/SubTitleTextAppearance"
+        android:text="@string/for_you" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,7 +66,7 @@
                 android:background="@drawable/abs_history_playlist"
                 android:padding="12dp"
                 app:srcCompat="@drawable/ic_access_time_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="@color/md_blue_A700" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -95,7 +92,7 @@
                 android:background="@drawable/abs_last_added_playlist"
                 android:padding="12dp"
                 app:srcCompat="@drawable/ic_library_add_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="@color/md_red_A700" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -121,7 +118,7 @@
                 android:background="@drawable/abs_top_tracks_playlist"
                 android:padding="12dp"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="@color/md_deep_purple_A700" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -147,7 +144,7 @@
                 android:background="@drawable/abs_shuffle"
                 android:padding="12dp"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="@color/md_green_A700" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"

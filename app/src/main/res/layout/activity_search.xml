@@ -18,11 +18,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="25dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -53,10 +53,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:background="?roundSelector"
-                    android:padding="8dp"
+                    android:padding="12dp"
                     app:srcCompat="@drawable/ic_mic_white_24dp" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <FrameLayout
             android:layout_width="match_parent"

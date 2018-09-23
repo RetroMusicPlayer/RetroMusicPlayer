@@ -95,7 +95,7 @@
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
                             android:transitionName="@string/transition_album_art"
-                            tools:src="@drawable/hemanth_s" />
+                             />
                     </androidx.cardview.widget.CardView>
 
                     <LinearLayout

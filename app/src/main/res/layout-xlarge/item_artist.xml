@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:civ_border="false"
-            tools:src="@drawable/hemanth_s" />
+            />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

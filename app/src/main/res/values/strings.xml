@@ -334,6 +334,7 @@
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
     <string name="pref_summary_home_banner">Toggle home banner style</string>
     <string name="pref_title_album_art_on_lockscreen">Show album cover</string>
+    <string name="pref_title_tab_text_mode">Tab titles mode</string>
     <string name="pref_title_album_grid_style">Album grid</string>
     <string name="pref_title_app_shortcuts">Colored app shortcuts</string>
     <string name="pref_title_artist_grid_style">Artist grid</string>
@@ -364,6 +365,9 @@
     <string name="pref_title_extra_controls">Extra controls</string>
     <string name="pref_title_home_banner">Home banner</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
+    <string name="pref_title_home_artist_grid_style">Home artist grid</string>
+    <string name="pref_title_album_cover_transform">Now playing album cover style</string>
+    <string name="cascading">Cascading</string>
 
     <string name="primary_color">Primary color</string>
     <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
@@ -532,4 +536,10 @@
     <string name="full_card">Full card</string>
     <string name="profile">Profile</string>
     <string name="bio">Bio</string>
+
+
+    <string name="auto">Auto</string>
+    <string name="labeled">Labeled</string>
+    <string name="unlabeled">Unlabeled</string>
+    <string name="selected">Selected</string>
 </resources>

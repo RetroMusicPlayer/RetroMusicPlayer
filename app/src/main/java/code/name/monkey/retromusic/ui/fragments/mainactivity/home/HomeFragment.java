@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity.home;
 
 import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,8 +10,8 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
@@ -25,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
 import code.name.monkey.retromusic.mvp.contract.HomeContract;
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter;
+import code.name.monkey.retromusic.ui.adapter.GenreAdapter;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWithAdapter;
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
@@ -65,6 +67,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     private final AnimatorSet animatorSet = new AnimatorSet();
 
     Unbinder unbinder;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -98,11 +101,20 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     @BindView(R.id.top_albums_container)
     View topAlbumContainer;
 
+    @BindView(R.id.genres)
+    RecyclerView genresRecyclerView;
+
+    @BindView(R.id.genre_container)
+    LinearLayout genreContainer;
+
     @BindView(R.id.content_container)
     NestedScrollView contentContainer;
 
     @BindView(R.id.title)
     TextView title;
+
+    @BindView(R.id.search_icon)
+    ImageView searchIcon;
 
     private HomePresenter homePresenter;
     private CompositeDisposable disposable;
@@ -172,22 +184,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu());
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-    }
-
-    private void toggleMenu(boolean backdropShown) {
-        // Cancel the existing animations
-        animatorSet.removeAllListeners();
-        animatorSet.end();
-        animatorSet.cancel();
-
-
-        final int translateY = 300;
-
-        ObjectAnimator animator = ObjectAnimator.ofFloat(contentContainer, "translationY", backdropShown ? translateY : 0);
-        animator.setDuration(500);
-        animator.setInterpolator(new AccelerateInterpolator());
-        animatorSet.play(animator);
-        animator.start();
+        searchIcon.setImageTintList(ColorStateList.valueOf(ThemeStore.accentColor(getContext())));
     }
 
     @Override
@@ -227,7 +224,7 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     public void recentArtist(ArrayList<Artist> artists) {
         recentArtistContainer.setVisibility(View.VISIBLE);
         recentArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(), 1, GridLayoutManager.HORIZONTAL, false));
-        ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists, R.layout.item_artist, false, null);
+        ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists, PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
         recentArtistRV.setAdapter(artistAdapter);
     }
 
@@ -243,9 +240,8 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
     public void topArtists(ArrayList<Artist> artists) {
         topArtistContainer.setVisibility(View.VISIBLE);
         topArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(), 1, GridLayoutManager.HORIZONTAL, false));
-        ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists, R.layout.item_artist, false, null);
+        ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists, PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
         topArtistRV.setAdapter(artistAdapter);
-
     }
 
     @Override
@@ -260,7 +256,6 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
         Display display = getMainActivity().getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
-
         return metrics;
     }
 
@@ -272,8 +267,12 @@ public class HomeFragment extends AbsMainActivityFragment implements MainActivit
 
     @Override
     public void geners(ArrayList<Genre> genres) {
+        genreContainer.setVisibility(View.VISIBLE);
+        genresRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //noinspection ConstantConditions
+        GenreAdapter genreAdapter = new GenreAdapter(getActivity(), genres, R.layout.item_list);
+        genresRecyclerView.setAdapter(genreAdapter);
     }
-
 
     @OnClick({R.id.last_added, R.id.top_played, R.id.action_shuffle, R.id.history, R.id.user_image, R.id.search})
     void startUserInfo(View view) {

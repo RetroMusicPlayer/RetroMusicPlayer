@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient_4"
+    android:background="@color/md_blue_A200"
     android:padding="16dp">
 
     <LinearLayout
@@ -25,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="32dp"
-            android:paddingTop="32dp">
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,12 +48,12 @@
     </LinearLayout>
 
     <TextView
-        android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_container"
         android:layout_centerHorizontal="true"
-        android:text="Buy pro version now offer ends soon*"
+        android:gravity="center"
+        android:text="Buy pro version now. Offer ends soon"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
         android:textColor="@android:color/white" />
 </RelativeLayout>

@@ -29,7 +29,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:transitionName="@string/transition_album_art"
-                    tools:src="@drawable/hemanth_s" />
+                    />
 
                 <View
                     android:layout_width="match_parent"

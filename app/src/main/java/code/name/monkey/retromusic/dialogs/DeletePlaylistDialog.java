@@ -71,21 +71,29 @@ public class DeletePlaylistDialog extends RoundedBottomSheetDialogFragment {
         CharSequence content;
         //noinspection ConstantConditions
         if (playlists.size() > 1) {
-            title = R.string.delete_playlists_title;
             content = Html.fromHtml(getString(R.string.delete_x_playlists, playlists.size()));
         } else {
-            title = R.string.delete_playlist_title;
             content = Html.fromHtml(getString(R.string.delete_playlist_x, playlists.get(0).name));
         }
         this.title.setText(content);
-        this.actionDelete.setText(title);
-
         this.title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
+
+        actionDelete.setText(R.string.action_delete);
+
         int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        actionDelete.setBackgroundTintList(ColorStateList.valueOf(accentColor));
-        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
-        actionCancel.setTextColor(accentColor);
+        actionDelete.setIconTint(ColorStateList.valueOf(accentColor));
+        actionCancel.setIconTint(ColorStateList.valueOf(accentColor));
+
+        int iconColor = ThemeStore.textColorSecondary(getContext());
+        actionDelete.setStrokeColor(ColorStateList.valueOf(iconColor));
+        actionCancel.setStrokeColor(ColorStateList.valueOf(iconColor));
+
+
+        int textColor = ThemeStore.textColorPrimary(getContext());
+        actionDelete.setTextColor(ColorStateList.valueOf(textColor));
+        actionCancel.setTextColor(ColorStateList.valueOf(textColor));
+
 
     }
 

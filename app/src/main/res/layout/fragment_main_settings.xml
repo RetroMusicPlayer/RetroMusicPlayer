@@ -13,11 +13,59 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/user_info_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="12dp">
+
+            <code.name.monkey.retromusic.views.CircularImageView
+                android:id="@+id/user_image_bottom"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_weight="0"
+                app:civ_border="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="18dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="8dp">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:id="@+id/title_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    android:singleLine="true"
+                    android:text="@string/general_settings_title"
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
+
+                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="4"
+                    android:text="@string/lets_play_something"
+                    android:textSize="@dimen/ate_default_textsize_body"
+                    tools:text="Summary" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/general_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -32,23 +80,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
-                    android:textSize="@dimen/ate_default_textsize_subheading"  />
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/general_settings_summary"
                     android:textSize="@dimen/ate_default_textsize_body"
@@ -63,7 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -78,14 +123,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/now_playing"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
@@ -94,7 +138,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/now_playing_summary"
                     android:textSize="@dimen/ate_default_textsize_body" />
@@ -107,7 +150,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -122,14 +164,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/pref_header_audio"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
@@ -138,7 +179,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/audio_settings_summary"
                     android:textSize="@dimen/ate_default_textsize_body" />
@@ -151,7 +191,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -166,14 +205,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/personalize"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
@@ -182,7 +220,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/personalize_settings_summary"
                     android:textSize="@dimen/ate_default_textsize_body" />
@@ -194,7 +231,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -209,14 +245,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/pref_header_images"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
@@ -225,7 +260,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/image_settings_summary"
                     android:textSize="@dimen/ate_default_textsize_body" />
@@ -237,7 +271,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
-            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
@@ -252,14 +285,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/notification"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
@@ -268,7 +300,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:fontFamily="sans-serif"
                     android:maxLines="4"
                     android:text="@string/notification_settings_summary"
                     android:textSize="@dimen/ate_default_textsize_body" />
@@ -281,7 +312,6 @@
             android:layout_height="wrap_content"
             android:background="?rectSelector"
             android:gravity="center_vertical"
-            android:minHeight="72dp"
             android:orientation="horizontal">
 
             <code.name.monkey.retromusic.views.IconImageView
@@ -294,15 +324,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:fontFamily="sans-serif"
                     android:singleLine="true"
                     android:text="@string/others"
                     android:textSize="@dimen/ate_default_textsize_subheading" />

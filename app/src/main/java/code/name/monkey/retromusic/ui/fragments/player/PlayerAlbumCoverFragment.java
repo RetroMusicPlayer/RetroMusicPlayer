@@ -12,8 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import code.name.monkey.retromusic.transform.CustPagerTransformer;
-import code.name.monkey.retromusic.transform.NormalPageTransformer;
+import code.name.monkey.retromusic.transform.CarousalPagerTransformer;
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumCoverPagerAdapter;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
@@ -67,9 +66,9 @@ public class PlayerAlbumCoverFragment extends AbsMusicServiceFragment implements
             viewPager.setClipToPadding(false);
             viewPager.setPadding(96, 0, 96, 0);
             viewPager.setPageMargin(18);
-            viewPager.setPageTransformer(false, new CustPagerTransformer(getContext()));
+            viewPager.setPageTransformer(false, new CarousalPagerTransformer(getContext()));
         } else {
-            viewPager.setPageTransformer(true, new NormalPageTransformer());
+            viewPager.setPageTransformer(true, PreferenceUtil.getInstance(getContext()).getAlbumCoverTransform(getContext()));
         }
     }
 

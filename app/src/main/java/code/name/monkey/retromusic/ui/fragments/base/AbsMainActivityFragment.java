@@ -21,11 +21,12 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        //getMainActivity().setStatusbarColorAuto();
+
         getMainActivity().setNavigationbarColorAuto();
         getMainActivity().setLightNavigationBar(true);
         getMainActivity().setTaskDescriptionColorAuto();
         getMainActivity().hideStatusBar();
+        getMainActivity().setBottomBarVisibility(View.VISIBLE);
     }
 
 

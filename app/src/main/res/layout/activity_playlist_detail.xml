@@ -90,5 +90,6 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_shuffle_white_24dp"
             app:layout_behavior="code.name.monkey.retromusic.misc.ScrollAwareFABBehavior" />
+        
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

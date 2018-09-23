@@ -48,8 +48,7 @@
             android:id="@+id/album_cover_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            tools:background="@drawable/gradient_1">
+            android:layout_weight="0">
 
             <fragment
                 android:id="@+id/player_album_cover_fragment"

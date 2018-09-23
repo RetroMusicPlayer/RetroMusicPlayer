@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
+    android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:clickable="true"
     android:focusable="false"
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingStart="0dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="14dp">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/mini_player_image"
@@ -27,18 +27,26 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/mini_player_title"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
             android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
             android:singleLine="true" />
+
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/action_prev"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
@@ -46,8 +54,8 @@
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/mini_player_play_pause_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
@@ -57,12 +65,21 @@
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/action_next"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
             app:srcCompat="@drawable/ic_skip_next_white_24dp" />
+
+        <code.name.monkey.retromusic.views.IconImageView
+            android:id="@+id/action_playing_queue"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="?roundSelector"
+            android:padding="6dp"
+            app:srcCompat="@drawable/ic_playlist_play_white_24dp" />
 
     </LinearLayout>
 
