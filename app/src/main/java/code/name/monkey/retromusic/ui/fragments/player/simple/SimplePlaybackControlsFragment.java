@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.simple;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,8 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -24,6 +24,7 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
+import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
@@ -39,20 +40,28 @@ public class SimplePlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
+
     @BindView(R.id.title)
     TextView title;
+
     @BindView(R.id.text)
     TextView text;
     private Unbinder unbinder;
@@ -64,7 +73,7 @@ public class SimplePlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -79,7 +88,7 @@ public class SimplePlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
         updateSong();
@@ -119,11 +128,11 @@ public class SimplePlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpMusicControllers();
         volumeContainer.setVisibility(
-                PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+                PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
     }
 
     private void setUpMusicControllers() {
@@ -277,47 +286,27 @@ public class SimplePlaybackControlsFragment extends AbsPlayerControlsFragment {
                     .getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
-            TintHelper.setTintAuto(playPauseFab,
-                    MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(dark)),
-                    false);
-            TintHelper.setTintAuto(playPauseFab, dark, true);
-            text.setTextColor(dark);
-        } else {
-            int accentColor = ThemeStore.accentColor(getContext());
-            text.setTextColor(accentColor);
-            TintHelper.setTintAuto(playPauseFab,
-                    MaterialValueHelper
-                            .getPrimaryTextColor(getContext(), ColorUtil.isColorLight(accentColor)),
-                    false);
-            TintHelper.setTintAuto(playPauseFab, accentColor, true);
-        }
+        int finalColor = PreferenceUtil.getInstance().getAdaptiveColor() ? dark : ThemeStore.accentColor(getContext());
+        text.setTextColor(finalColor);
+        TintHelper.setTintAuto(playPauseFab, MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(finalColor)), false);
+        TintHelper.setTintAuto(playPauseFab, finalColor, true);
+
 
         updateRepeatState();
         updateShuffleState();
         updatePrevNextColor();
     }
 
-    private void setUpPlayPauseFab() {
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
 
-        playPauseFab.setImageDrawable(
-                playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        //playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
-        //playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
+    private void setUpPlayPauseFab() {
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
 }

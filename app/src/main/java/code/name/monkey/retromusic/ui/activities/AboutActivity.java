@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -28,9 +29,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.dialogs.ChangelogDialog;
 import code.name.monkey.retromusic.model.Contributor;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.ui.adapter.ContributorAdapter;
@@ -50,11 +51,11 @@ import static code.name.monkey.retromusic.Constants.TRANSLATE;
 
 public class AboutActivity extends AbsBaseActivity {
 
+    @BindView(R.id.app_bar)
+    AppBarLayout appBarLayout;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @BindView(R.id.app_bar)
-    View background;
 
     @BindView(R.id.app_version)
     TextView appVersion;
@@ -73,7 +74,6 @@ public class AboutActivity extends AbsBaseActivity {
 
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
-        setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
 
         loadContributors();
@@ -92,15 +92,14 @@ public class AboutActivity extends AbsBaseActivity {
     }
 
     private void setUpToolbar() {
-        title.setTextColor(ThemeStore.textColorPrimary(this));
-        int primaryColor = ThemeStore.primaryColor(this);
-        toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        setTitle(null);
+        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
+        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         setSupportActionBar(toolbar);
+        //noinspection ConstantConditions
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(null);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
-
 
     private void openUrl(String url) {
         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -166,7 +165,7 @@ public class AboutActivity extends AbsBaseActivity {
                         if (position == 0) {
                             openUrl(TELEGRAM_CHANGE_LOG);
                         } else {
-                            ChangelogDialog.create().show(getSupportFragmentManager(), "change-log");
+                            NavigationUtil.gotoWhatNews(AboutActivity.this);
                         }
                     }
                 })

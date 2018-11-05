@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
@@ -17,12 +18,12 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.ui.activities.AboutActivity;
-import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.ui.activities.ArtistDetailActivity;
 import code.name.monkey.retromusic.ui.activities.EqualizerActivity;
 import code.name.monkey.retromusic.ui.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.ui.activities.LicenseActivity;
 import code.name.monkey.retromusic.ui.activities.LyricsActivity;
+import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
 import code.name.monkey.retromusic.ui.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.ui.activities.PlaylistDetailActivity;
 import code.name.monkey.retromusic.ui.activities.ProVersionActivity;
@@ -30,6 +31,8 @@ import code.name.monkey.retromusic.ui.activities.SearchActivity;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
+import code.name.monkey.retromusic.ui.activities.WhatsNewActivity;
+import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.ui.activities.GenreDetailsActivity.EXTRA_GENRE_ID;
@@ -63,7 +66,7 @@ public class NavigationUtil {
     }
 
     public static void openEqualizer(@NonNull final Activity activity) {
-        if (PreferenceUtil.getInstance(activity).getSelectedEqualizer().equals("system")) {
+        if (PreferenceUtil.getInstance().getSelectedEqualizer().equals("system")) {
             stockEqalizer(activity);
         } else {
             ActivityCompat.startActivity(activity, new Intent(activity, EqualizerActivity.class), null);
@@ -138,5 +141,15 @@ public class NavigationUtil {
 
     public static void gotoExpandedController(Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, ExpandedCastControlsActivity.class), null);
+    }
+
+    public static void gotoWhatNews(Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, WhatsNewActivity.class), null);
+    }
+
+    public static void gotoNowPlayingActivity(Context context, @Nullable Pair... sharedElements) {
+        ActivityCompat.startActivity(context, new Intent(context, NowPayingActivity.class),
+                ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, sharedElements).toBundle());
+
     }
 }

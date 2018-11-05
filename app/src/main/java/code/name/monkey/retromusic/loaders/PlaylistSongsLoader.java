@@ -5,14 +5,13 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
 import code.name.monkey.retromusic.model.Song;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
@@ -65,11 +64,12 @@ public class PlaylistSongsLoader {
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
         final int idInPlaylist = cursor.getInt(11);
+        final String composer = cursor.getString(12);
 
-        return new PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist);
+        return new PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer);
     }
 
-    public static Cursor makePlaylistSongCursor(@NonNull final Context context, final int playlistId) {
+    private static Cursor makePlaylistSongCursor(@NonNull final Context context, final int playlistId) {
         try {
             return context.getContentResolver().query(
                     MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId),
@@ -85,7 +85,8 @@ public class PlaylistSongsLoader {
                             AudioColumns.ALBUM,// 8
                             AudioColumns.ARTIST_ID,// 9
                             AudioColumns.ARTIST,// 10
-                            MediaStore.Audio.Playlists.Members._ID // 11
+                            MediaStore.Audio.Playlists.Members._ID, // 11
+                            AudioColumns.COMPOSER,// 12
                     }, SongLoader.BASE_SELECTION, null,
                     MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER);
         } catch (SecurityException e) {

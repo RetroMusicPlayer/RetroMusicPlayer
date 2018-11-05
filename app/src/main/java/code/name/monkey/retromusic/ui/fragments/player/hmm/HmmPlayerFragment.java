@@ -2,10 +2,8 @@ package code.name.monkey.retromusic.ui.fragments.player.hmm;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,9 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -98,6 +99,11 @@ public class HmmPlayerFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hmm_player, container, false);
         unBinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -197,7 +203,7 @@ public class HmmPlayerFragment extends AbsPlayerFragment implements
 
     @Override
     public void onColorChanged(int color) {
-        lastColor = PreferenceUtil.getInstance(getContext()).getAdaptiveColor() ? color :
+        lastColor = PreferenceUtil.getInstance().getAdaptiveColor() ? color :
                 ThemeStore.accentColor(getContext());
         getCallbacks().onPaletteColorChanged();
         hmmPlaybackControlsFragment.setDark(lastColor);

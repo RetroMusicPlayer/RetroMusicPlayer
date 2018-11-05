@@ -3,4 +3,4 @@
     android:id="@+id/title"
     style="@style/SubTitleTextAppearance"
     android:layout_gravity="start"
-    android:gravity="start"/>
+    android:gravity="start" />

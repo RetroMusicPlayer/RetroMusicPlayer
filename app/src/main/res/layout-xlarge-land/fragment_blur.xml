@@ -11,8 +11,7 @@
         android:id="@+id/gradient_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        />
+        android:scaleType="centerCrop" />
 
     <View
         android:id="@+id/mask"

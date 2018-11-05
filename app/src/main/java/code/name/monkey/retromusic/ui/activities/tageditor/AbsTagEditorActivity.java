@@ -346,6 +346,15 @@ public abstract class AbsTagEditorActivity extends AbsBaseActivity {
     }
 
     @Nullable
+    protected String getComposer() {
+        try {
+            return getAudioFile(songPaths.get(0)).getTagOrCreateAndSetDefault().getFirst(FieldKey.COMPOSER);
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    @Nullable
     protected Bitmap getAlbumArt() {
         try {
             Artwork artworkTag = getAudioFile(songPaths.get(0)).getTagOrCreateAndSetDefault()

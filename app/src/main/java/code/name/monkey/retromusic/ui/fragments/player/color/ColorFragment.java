@@ -136,6 +136,10 @@ public class ColorFragment extends AbsPlayerFragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_color_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -233,7 +237,11 @@ public class ColorFragment extends AbsPlayerFragment {
 
         this.backgroundColor = backgroundColor;
 
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setLightNavigationBar(ColorUtil.isColorLight(backgroundColor));
+        }
         getCallbacks().onPaletteColorChanged();
+
     }
 
     private void colorize(int i) {
@@ -241,7 +249,7 @@ public class ColorFragment extends AbsPlayerFragment {
             valueAnimator.cancel();
         }
 
-        valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), Color.TRANSPARENT, i);
+        valueAnimator = ValueAnimator.ofObject(new ArgbEvaluator(), backgroundColor, i);
         valueAnimator.addUpdateListener(animation -> {
             if (colorBackground != null) {
                 colorBackground.setBackgroundColor((Integer) animation.getAnimatedValue());

@@ -4,12 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Song;
-
-import java.util.ArrayList;
-
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -26,7 +25,7 @@ public class LastAddedSongsLoader {
     }
 
     public static Cursor makeLastAddedCursor(@NonNull final Context context) {
-        long cutoff = PreferenceUtil.getInstance(context).getLastAddedCutoff();
+        long cutoff = PreferenceUtil.getInstance().getLastAddedCutoff();
 
         return SongLoader.makeSongCursor(
                 context,

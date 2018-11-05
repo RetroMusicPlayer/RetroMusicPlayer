@@ -17,10 +17,10 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingEnd="16dp"
-            android:paddingStart="16dp">
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
                 fontPath="@string/circular_std_black"
                 android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 tools:ignore="MissingPrefix"
                 tools:text="Title" />
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -47,7 +47,7 @@
                 android:textColor="?android:attr/textColorSecondary"
                 tools:text="Text" />
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/player_song_current_progress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:ignore="ContentDescription">
-
-
+    
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

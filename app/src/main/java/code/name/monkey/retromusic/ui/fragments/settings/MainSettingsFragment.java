@@ -74,7 +74,7 @@ public class MainSettingsFragment extends Fragment {
 
         text.setTextColor(ThemeStore.textColorSecondary(getContext()));
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        titleWelcome.setText(String.format("%s %s!", getTimeOfTheDay(), PreferenceUtil.getInstance(getContext()).getUserName()));
+        titleWelcome.setText(String.format("%s %s!", getTimeOfTheDay(), PreferenceUtil.getInstance().getUserName()));
         loadImageFromStorage();
     }
 
@@ -151,7 +151,7 @@ public class MainSettingsFragment extends Fragment {
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userImageBottom::setImageBitmap,

@@ -31,13 +31,13 @@ public class BlacklistStore extends SQLiteOpenHelper {
     public static synchronized BlacklistStore getInstance(@NonNull final Context context) {
         if (sInstance == null) {
             sInstance = new BlacklistStore(context.getApplicationContext());
-            if (!PreferenceUtil.getInstance(context).initializedBlacklist()) {
+            if (!PreferenceUtil.getInstance().initializedBlacklist()) {
                 // blacklisted by default
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
 
-                PreferenceUtil.getInstance(context).setInitializedBlacklist();
+                PreferenceUtil.getInstance().setInitializedBlacklist();
             }
         }
         return sInstance;

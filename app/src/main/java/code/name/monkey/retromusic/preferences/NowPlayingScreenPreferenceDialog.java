@@ -48,7 +48,7 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
         viewPager.setAdapter(new NowPlayingScreenAdapter(getActivity()));
         viewPager.addOnPageChangeListener(this);
         viewPager.setPageMargin((int) ViewUtil.convertDpToPixel(32, getResources()));
-        viewPager.setCurrentItem(PreferenceUtil.getInstance(getActivity()).getNowPlayingScreen().ordinal());
+        viewPager.setCurrentItem(PreferenceUtil.getInstance().getNowPlayingScreen().ordinal());
 
         return new MaterialDialog.Builder(getActivity())
                 .title(R.string.pref_title_now_playing_screen_appearance)
@@ -76,7 +76,7 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
                 Toast.makeText(getContext(), result, Toast.LENGTH_SHORT).show();
                 NavigationUtil.goToProVersion(getActivity());
             } else {
-                PreferenceUtil.getInstance(getActivity()).setNowPlayingScreen(nowPlayingScreen);
+                PreferenceUtil.getInstance().setNowPlayingScreen(nowPlayingScreen);
             }
         }
     }
@@ -84,8 +84,8 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
     private boolean isNowPlayingThemes(NowPlayingScreen nowPlayingScreen) {
 
         if (nowPlayingScreen.equals(NowPlayingScreen.BLUR_CARD)) {
-            PreferenceUtil.getInstance(getContext()).resetCarouselEffect();
-            PreferenceUtil.getInstance(getContext()).resetCircularAlbumArt();
+            PreferenceUtil.getInstance().resetCarouselEffect();
+            PreferenceUtil.getInstance().resetCircularAlbumArt();
         }
 
         return (nowPlayingScreen.equals(NowPlayingScreen.FULL) ||

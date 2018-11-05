@@ -63,7 +63,7 @@ public class SongGlideRequest {
     }
 
     public Builder checkIgnoreMediaStore(Context context) {
-      return ignoreMediaStore(PreferenceUtil.getInstance(context).ignoreMediaStoreArtwork());
+      return ignoreMediaStore(PreferenceUtil.getInstance().ignoreMediaStoreArtwork());
     }
 
     Builder ignoreMediaStore(boolean ignoreMediaStore) {

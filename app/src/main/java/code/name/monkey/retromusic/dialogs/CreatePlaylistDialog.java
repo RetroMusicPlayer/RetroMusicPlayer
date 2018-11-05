@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -80,18 +81,18 @@ public class CreatePlaylistDialog extends RoundedBottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        actionCreate.setBackgroundTintList(ColorStateList.valueOf(accentColor));
-        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
-        actionCancel.setTextColor(accentColor);
 
+        MaterialUtil.setTint(actionCreate, true);
 
-        textInputLayout.setBoxStrokeColor(accentColor);
-        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(accentColor));
+        MaterialUtil.setTint(actionCancel, false);
+
+        MaterialUtil.setTint(textInputLayout, true);
+
 
         playlistName.setHintTextColor(ColorStateList.valueOf(accentColor));
         playlistName.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
+        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
     }
 
     @OnClick({R.id.action_cancel, R.id.action_create})

@@ -1,14 +1,14 @@
 package code.name.monkey.retromusic.ui.fragments.player.material;
 
 import android.os.Bundle;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -108,6 +108,11 @@ public class MaterialFragment extends AbsPlayerFragment implements PlayerAlbumCo
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_material, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColorAuto();
+            addSafeArea(view);
+        }
         return view;
     }
 

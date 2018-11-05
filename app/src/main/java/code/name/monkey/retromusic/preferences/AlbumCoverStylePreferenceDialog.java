@@ -44,7 +44,7 @@ public class AlbumCoverStylePreferenceDialog extends DialogFragment implements
         viewPager.setAdapter(new AlbumCoverStyleAdapter(getActivity()));
         viewPager.addOnPageChangeListener(this);
         viewPager.setPageMargin((int) ViewUtil.convertDpToPixel(32, getResources()));
-        viewPager.setCurrentItem(PreferenceUtil.getInstance(getActivity()).getAlbumCoverStyle().ordinal());
+        viewPager.setCurrentItem(PreferenceUtil.getInstance().getAlbumCoverStyle().ordinal());
 
         return new MaterialDialog.Builder(getActivity())
                 .title(R.string.pref_title_album_cover_style)
@@ -67,7 +67,7 @@ public class AlbumCoverStylePreferenceDialog extends DialogFragment implements
         super.onDismiss(dialog);
         if (whichButtonClicked == DialogAction.POSITIVE) {
             AlbumCoverStyle nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition];
-            PreferenceUtil.getInstance(getActivity()).setAlbumCoverStyle(nowPlayingScreen);
+            PreferenceUtil.getInstance().setAlbumCoverStyle(nowPlayingScreen);
         }
     }
 

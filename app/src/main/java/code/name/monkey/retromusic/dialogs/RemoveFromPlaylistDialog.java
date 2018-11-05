@@ -1,9 +1,6 @@
 package code.name.monkey.retromusic.dialogs;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +9,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.PlaylistSong;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -76,7 +76,7 @@ public class RemoveFromPlaylistDialog extends RoundedBottomSheetDialogFragment {
         final ArrayList<PlaylistSong> songs = getArguments().getParcelableArrayList("songs");
         int title;
         CharSequence content;
-        if (songs.size() > 1) {
+        if (songs != null && songs.size() > 1) {
             title = R.string.remove_songs_from_playlist_title;
             content = Html.fromHtml(getString(R.string.remove_x_songs_from_playlist, songs.size()));
         } else {
@@ -85,5 +85,9 @@ public class RemoveFromPlaylistDialog extends RoundedBottomSheetDialogFragment {
         }
         this.remove.setText(content);
         this.title.setText(title);
+
+        this.title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        this.remove.setTextColor(ThemeStore.textColorSecondary(getContext()));
+        this.cancel.setTextColor(ThemeStore.textColorSecondary(getContext()));
     }
 }

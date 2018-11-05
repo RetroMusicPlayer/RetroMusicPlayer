@@ -92,11 +92,11 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         loadLrcFile();
 
         actionsLayout.setOnCheckedChangeListener((group, checkedId) -> selectLyricsTye(checkedId));
-        actionsLayout.check(PreferenceUtil.getInstance(this).getLastLyricsType());
+        actionsLayout.check(PreferenceUtil.getInstance().getLastLyricsType());
     }
 
     private void selectLyricsTye(int group) {
-        PreferenceUtil.getInstance(this).setLastLyricsType(group);
+        PreferenceUtil.getInstance().setLastLyricsType(group);
         RadioButton radioButton = actionsLayout.findViewById(group);
         if (radioButton != null) {
             radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
@@ -198,7 +198,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
                 .into(new RetroMusicColoredTarget(findViewById(R.id.image)) {
                     @Override
                     public void onColorReady(int color) {
-                        if (PreferenceUtil.getInstance(LyricsActivity.this).getAdaptiveColor()) {
+                        if (PreferenceUtil.getInstance( ).getAdaptiveColor()) {
                             background.setBackgroundColor(color);
                         }
                     }

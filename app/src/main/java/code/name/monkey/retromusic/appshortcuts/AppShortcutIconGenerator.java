@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.util.RetroUtil;
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 public final class AppShortcutIconGenerator {
     public static Icon generateThemedIcon(Context context, int iconId) {
-        if (PreferenceUtil.getInstance(context).coloredAppShortcuts()){
+        if (PreferenceUtil.getInstance().coloredAppShortcuts()){
             return generateUserThemedIcon(context, iconId);
         } else {
             return generateDefaultThemedIcon(context, iconId);

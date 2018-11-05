@@ -18,7 +18,7 @@ public interface Repository {
 
     Observable<ArrayList<Song>> getAllSongs();
 
-    Observable<ArrayList<AbsSmartPlaylist>> getSuggestionSongs();
+    Observable<ArrayList<Song>> getSuggestionSongs();
 
     Observable<Song> getSong(int id);
 

@@ -97,8 +97,8 @@ public class AlbumLoader {
   }
 
   public static String getSongLoaderSortOrder(Context context) {
-    return PreferenceUtil.getInstance(context).getAlbumSortOrder() + ", " +
-        //PreferenceUtil.getInstance(context).getAlbumSongSortOrder() + "," +
-        PreferenceUtil.getInstance(context).getAlbumDetailSongSortOrder();
+    return PreferenceUtil.getInstance().getAlbumSortOrder() + ", " +
+        //PreferenceUtil.getInstance().getAlbumSongSortOrder() + "," +
+        PreferenceUtil.getInstance().getAlbumDetailSongSortOrder();
   }
 }

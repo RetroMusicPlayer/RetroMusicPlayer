@@ -4,18 +4,19 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -102,10 +103,9 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
         lastColor = color;
         getCallbacks().onPaletteColorChanged();
 
-        ToolbarContentTintHelper.colorizeToolbar(toolbar,
-                ATHUtil.resolveColor(getContext(), R.attr.iconColor), getActivity());
+        ToolbarContentTintHelper.colorizeToolbar(toolbar, ATHUtil.resolveColor(getContext(), R.attr.iconColor), getActivity());
 
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
             colorize(color);
         }
     }
@@ -136,6 +136,11 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            //getPlayerActivity().setNavigationbarColorAuto();
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -153,7 +158,9 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
         PlayerAlbumCoverFragment playerAlbumCoverFragment =
                 (PlayerAlbumCoverFragment) getChildFragmentManager()
                         .findFragmentById(R.id.player_album_cover_fragment);
-        playerAlbumCoverFragment.setCallbacks(this);
+        if (playerAlbumCoverFragment != null) {
+            playerAlbumCoverFragment.setCallbacks(this);
+        }
     }
 
     private void setUpPlayerToolbar() {

@@ -15,107 +15,107 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <LinearLayout
+    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
+        android:id="@+id/safeArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
-
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/album_cover_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription,UnusedAttribute" />
-
-                <ScrollView
-                    android:id="@+id/lyrics_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/twenty_percent_black_overlay"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/lyrics"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:lineSpacingExtra="4dp"
-                            android:lineSpacingMultiplier="1.5"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/md_white_1000" />
-                    </FrameLayout>
-                </ScrollView>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/expand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:padding="16dp"
-                    app:srcCompat="@drawable/ic_unfold_more_black_24dp"
-                    app:tint="@color/md_white_1000" />
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
-            <fragment
-                android:id="@+id/playback_controls_fragment"
-                android:name="code.name.monkey.retromusic.ui.fragments.player.color.ColorPlaybackControlsFragment"
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="true">
+
+                <code.name.monkey.retromusic.views.WidthFitSquareLayout
+                    android:id="@+id/album_cover_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:ignore="ContentDescription,UnusedAttribute" />
+
+                    <ScrollView
+                        android:id="@+id/lyrics_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/twenty_percent_black_overlay"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/lyrics"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:lineSpacingExtra="4dp"
+                                android:lineSpacingMultiplier="1.5"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                                android:textColor="@color/md_white_1000" />
+                        </FrameLayout>
+                    </ScrollView>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/expand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:padding="16dp"
+                        app:srcCompat="@drawable/ic_unfold_more_black_24dp"
+                        app:tint="@color/md_white_1000" />
+                </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/fragment_player_playback_controls" />
-        </FrameLayout>
+                android:layout_weight="1">
 
-        <FrameLayout
-            android:id="@+id/toolbar_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0">
+                <fragment
+                    android:id="@+id/playback_controls_fragment"
+                    android:name="code.name.monkey.retromusic.ui.fragments.player.color.ColorPlaybackControlsFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:layout="@layout/fragment_player_playback_controls" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/toolbar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
 
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/player_toolbar"
-                style="@style/Toolbar48"
-                android:layout_height="48dp"
-                android:navigationIcon="@drawable/ic_close_white_24dp"
-                app:navigationIcon="@drawable/ic_close_white_24dp" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/player_toolbar"
+                    style="@style/Toolbar48"
+                    android:layout_height="48dp"
+                    android:navigationIcon="@drawable/ic_close_white_24dp"
+                    app:navigationIcon="@drawable/ic_close_white_24dp" />
 
-        </FrameLayout>
-    </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
 </FrameLayout>

@@ -6,19 +6,18 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
         fontPath="@string/circular_std_black"
         android:layout_width="match_parent"
-        android:padding="6dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:padding="6dp"
         android:text="@string/what_do_you_want_to_share"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix" />
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/option_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,7 +25,7 @@
         android:text="@string/the_audio_file"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/option_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

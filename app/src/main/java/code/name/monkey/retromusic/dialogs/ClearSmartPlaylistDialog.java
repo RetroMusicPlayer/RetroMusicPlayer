@@ -2,13 +2,13 @@ package code.name.monkey.retromusic.dialogs;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import android.text.Html;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist;
 

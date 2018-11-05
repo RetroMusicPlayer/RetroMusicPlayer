@@ -2,10 +2,12 @@ package code.name.monkey.retromusic.mvp.contract;
 
 import java.util.ArrayList;
 
+import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
+import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.mvp.BasePresenter;
 import code.name.monkey.retromusic.mvp.BaseView;
 
@@ -21,7 +23,9 @@ public interface HomeContract {
 
         void topAlbums(ArrayList<Album> albums);
 
-        void suggestions(ArrayList<Playlist> songs);
+        void suggestions(ArrayList<Song> songs);
+
+        void playlists(ArrayList<Playlist> playlists);
 
         void geners(ArrayList<Genre> songs);
     }

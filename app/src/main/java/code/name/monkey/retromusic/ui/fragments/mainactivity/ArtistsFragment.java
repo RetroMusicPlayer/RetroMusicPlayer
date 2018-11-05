@@ -49,7 +49,7 @@ public class ArtistsFragment extends
         int itemLayoutRes = getItemLayoutRes();
         notifyLayoutResChanged(itemLayoutRes);
         if (itemLayoutRes != R.layout.item_list) {
-            itemLayoutRes = PreferenceUtil.getInstance(getContext()).getArtistGridStyle(getContext());
+            itemLayoutRes = PreferenceUtil.getInstance().getArtistGridStyle(getContext());
         }
         ArrayList<Artist> dataSet =
                 getAdapter() == null ? new ArrayList<>() : getAdapter().getDataSet();
@@ -69,32 +69,32 @@ public class ArtistsFragment extends
 
     @Override
     protected int loadGridSize() {
-        return PreferenceUtil.getInstance(getActivity()).getArtistGridSize(getActivity());
+        return PreferenceUtil.getInstance().getArtistGridSize(getActivity());
     }
 
     @Override
     protected void saveGridSize(int gridSize) {
-        PreferenceUtil.getInstance(getActivity()).setArtistGridSize(gridSize);
+        PreferenceUtil.getInstance().setArtistGridSize(gridSize);
     }
 
     @Override
     protected int loadGridSizeLand() {
-        return PreferenceUtil.getInstance(getActivity()).getArtistGridSizeLand(getActivity());
+        return PreferenceUtil.getInstance().getArtistGridSizeLand(getActivity());
     }
 
     @Override
     protected void saveGridSizeLand(int gridSize) {
-        PreferenceUtil.getInstance(getActivity()).setArtistGridSizeLand(gridSize);
+        PreferenceUtil.getInstance().setArtistGridSizeLand(gridSize);
     }
 
     @Override
     protected void saveUsePalette(boolean usePalette) {
-        PreferenceUtil.getInstance(getActivity()).setArtistColoredFooters(usePalette);
+        PreferenceUtil.getInstance().setArtistColoredFooters(usePalette);
     }
 
     @Override
     public boolean loadUsePalette() {
-        return PreferenceUtil.getInstance(getActivity()).artistColoredFooters();
+        return PreferenceUtil.getInstance().artistColoredFooters();
     }
 
     @Override
@@ -111,12 +111,12 @@ public class ArtistsFragment extends
 
     @Override
     protected String loadSortOrder() {
-        return PreferenceUtil.getInstance(getActivity()).getArtistSortOrder();
+        return PreferenceUtil.getInstance().getArtistSortOrder();
     }
 
     @Override
     protected void saveSortOrder(String sortOrder) {
-        PreferenceUtil.getInstance(getActivity()).setArtistSortOrder(sortOrder);
+        PreferenceUtil.getInstance().setArtistSortOrder(sortOrder);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class ArtistsFragment extends
         super.setMenuVisibility(menuVisible);
         if (menuVisible) {
             getLibraryFragment().setTitle(
-                    PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library
+                    PreferenceUtil.getInstance().tabTitles() ? R.string.library
                             : R.string.artists);
         }
     }
@@ -139,7 +139,7 @@ public class ArtistsFragment extends
     public void onResume() {
         super.onResume();
         getLibraryFragment().setTitle(
-                PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.artists);
+                PreferenceUtil.getInstance().tabTitles() ? R.string.library : R.string.artists);
         if (getAdapter().getDataSet().isEmpty()) {
             presenter.subscribe();
         }

@@ -126,7 +126,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.getInstance(context).getStartDirectory());
+        return newInstance(PreferenceUtil.getInstance().getStartDirectory());
     }
 
     public static FoldersFragment newInstance(File directory) {
@@ -222,7 +222,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         setStatusbarColorAuto(view);
-        getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
+        //getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
 
         setUpAppbarColor();
         setUpBreadCrumbs();
@@ -313,8 +313,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor
-                        (getActivity())))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor(getActivity())))
                 .start(callback);
         return cab;
     }
@@ -346,16 +345,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 getActivity().onBackPressed();
                 break;
             case R.id.action_go_to_start_directory:
-                setCrumb(new BreadCrumbLayout.Crumb(
-                                tryGetCanonicalFile(PreferenceUtil.getInstance(getActivity()).getStartDirectory())),
-                        true);
+                setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance().getStartDirectory())), true);
                 return true;
             case R.id.action_scan:
                 BreadCrumbLayout.Crumb crumb = getActiveCrumb();
                 if (crumb != null) {
                     //noinspection Convert2MethodRef
-                    new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths))
-                            .execute(new ListPathsAsyncTask.LoadingInfo(crumb.getFile(), AUDIO_FILE_FILTER));
+                    new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths)).execute(new ListPathsAsyncTask.LoadingInfo(crumb.getFile(), AUDIO_FILE_FILTER));
                 }
                 return true;
         }
@@ -435,7 +431,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                 getFileComparator()));
                         return true;
                     case R.id.action_set_as_start_directory:
-                        PreferenceUtil.getInstance(getActivity()).setStartDirectory(file);
+                        PreferenceUtil.getInstance().setStartDirectory(file);
                         Toast.makeText(getActivity(),
                                 String.format(getString(R.string.new_start_directory), file.getPath()),
                                 Toast.LENGTH_SHORT).show();
@@ -462,14 +458,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_details:
                     case R.id.action_set_as_ringtone:
                     case R.id.action_delete_from_device:
-                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper
-                                .handleMenuClick(getActivity(), songs.get(0), itemId)).execute(
-                                new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
-                                        getFileComparator()));
+                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper.handleMenuClick(getActivity(), songs.get(0), itemId)).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER, getFileComparator()));
                         return true;
                     case R.id.action_scan:
-                        new ListPathsAsyncTask(getActivity(), this::scanPaths)
-                                .execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));
+                        new ListPathsAsyncTask(getActivity(), this::scanPaths).execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));
                         return true;
                 }
                 return false;

@@ -115,7 +115,7 @@ public class MultiPlayer implements Playback, MediaPlayer.OnErrorListener, Media
         if (path == null) {
             return;
         }
-        if (PreferenceUtil.getInstance(context).gaplessPlayback()) {
+        if (PreferenceUtil.getInstance().gaplessPlayback()) {
             mNextMediaPlayer = new MediaPlayer();
             mNextMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
             mNextMediaPlayer.setAudioSessionId(getAudioSessionId());

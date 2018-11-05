@@ -1,13 +1,6 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,22 +10,27 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper;
 import code.name.monkey.retromusic.interfaces.CabHolder;
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.mvp.contract.GenreDetailsContract;
@@ -83,14 +81,14 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.GONE);
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
+        toggleBottomNavigationView(true);
         setLightNavigationBar(true);
 
 
@@ -113,29 +111,14 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     private void setUpToolBar() {
         title.setText(genre.name);
         title.setTextColor(ThemeStore.textColorPrimary(this));
+
         int primaryColor = ThemeStore.primaryColor(this);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         toolbar.setBackgroundColor(primaryColor);
         appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
         setTitle(null);
         setSupportActionBar(toolbar);
-
-        appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
-                int color;
-                switch (state) {
-                    default:
-                    case COLLAPSED:
-                    case EXPANDED:
-                    case IDLE:
-                        color = ATHUtil.resolveColor(GenreDetailsActivity.this, android.R.attr.textColorPrimary);
-                        break;
-                }
-                ToolbarContentTintHelper.colorizeToolbar(toolbar, color, GenreDetailsActivity.this);
-            }
-        });
-
         TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
     }
 
@@ -206,30 +189,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     @Override
     public void showData(ArrayList<Song> songs) {
         songAdapter.swapDataSet(songs);
-    }
-
-    public void showHeartAnimation() {
-        shuffleButton.clearAnimation();
-
-        shuffleButton.setScaleX(0.9f);
-        shuffleButton.setScaleY(0.9f);
-        shuffleButton.setVisibility(View.VISIBLE);
-        shuffleButton.setPivotX(shuffleButton.getWidth() / 2);
-        shuffleButton.setPivotY(shuffleButton.getHeight() / 2);
-
-        shuffleButton.animate()
-                .setDuration(200)
-                .setInterpolator(new DecelerateInterpolator())
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .withEndAction(() -> shuffleButton.animate()
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .start())
-                .start();
     }
 
     @NonNull

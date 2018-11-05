@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,19 +16,12 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar48">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
-                fontPath="@string/circular_std_black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/profile"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                tools:ignore="MissingPrefix" />
+                style="@style/BigTitleTextAppearance"
+                android:text="@string/profile" />
 
         </androidx.appcompat.widget.Toolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -43,61 +35,67 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <FrameLayout
-                android:id="@+id/image_container"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/banner_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/material_design_default" />
-
-                <View
-                    android:id="@+id/banner_select"
-                    android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:background="@color/twenty_percent_black_overlay" />
-
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="?roundSelector"
-                    android:padding="16dp"
-                    app:srcCompat="@drawable/ic_round_add_a_photo_white_24dp" />
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardUseCompatPadding="true">
 
                 <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="8dp">
-
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
-                        android:layout_gravity="center"
-                        android:scaleType="centerCrop"
-                        app:civ_border="false"
-                        app:civ_shadow="false"
-                        app:srcCompat="@drawable/ic_person_flat" />
+                    android:id="@+id/image_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/banner_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="156dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/material_design_default" />
+
+                    <View
+                        android:id="@+id/banner_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="156dp"
+                        android:background="@color/twenty_percent_black_overlay" />
+
+                    <code.name.monkey.retromusic.views.IconImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="16dp"
-                        android:gravity="center"
-                        android:padding="12dp"
-                        android:src="@drawable/ic_round_add_a_photo_white_24dp"
-                        app:tint="?iconColor" />
-                </FrameLayout>
+                        android:background="?roundSelector"
+                        android:padding="16dp"
+                        app:srcCompat="@drawable/ic_round_add_a_photo_white_24dp" />
 
-            </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="8dp">
+
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            app:civ_border="false"
+                            app:civ_shadow="false"
+                            app:srcCompat="@drawable/ic_person_flat" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="16dp"
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:src="@drawable/ic_round_add_a_photo_white_24dp"
+                            app:tint="?iconColor" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/name_container"

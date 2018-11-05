@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.util.CustomArtistImageUtil;
 public class ArtistGlideRequest {
 
     private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
-    private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.SOURCE;
+    private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.ALL;
     private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_artist_art;
 
     private static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Artist artist,
@@ -129,6 +129,7 @@ public class ArtistGlideRequest {
                     builder.forceDownload)
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
+
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)

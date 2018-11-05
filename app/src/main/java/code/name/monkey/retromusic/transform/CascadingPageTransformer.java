@@ -13,7 +13,6 @@ import androidx.viewpager.widget.ViewPager;
  *    * * * *   * * * *   *     *.Yang  Web site:www.ocnyang.com 
  *******************************************************************/
 
-
 public class CascadingPageTransformer implements ViewPager.PageTransformer {
     /**
      * 偏移量

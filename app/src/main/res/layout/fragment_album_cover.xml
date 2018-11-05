@@ -7,7 +7,7 @@
     android:layout_gravity="center_vertical">
 
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/player_album_art_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,5 +27,5 @@
                 android:scaleType="centerCrop"
                 tools:ignore="ContentDescription,UnusedAttribute" />
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

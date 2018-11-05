@@ -95,7 +95,7 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
 
-        if (PreferenceUtil.getInstance(getContext()).getVolumeToggle()) {
+        if (PreferenceUtil.getInstance().getVolumeToggle()) {
             mVolumeContainer.setVisibility(View.VISIBLE);
         } else {
             mVolumeContainer.setVisibility(View.GONE);
@@ -169,7 +169,7 @@ public class MaterialControlsFragment extends AbsPlayerControlsFragment {
         updateRepeatState();
         updateShuffleState();
 
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
             lastPlaybackControlsColor = dark;
             text.setTextColor(dark);
         }

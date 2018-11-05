@@ -31,4 +31,18 @@
         app:iconSpaceReserved="false"
         android:title="@string/equalizer" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_headset"
+        android:summary="@string/pref_summary_toggle_headset"
+        android:title="@string/pref_title_toggle_toggle_headset"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_shuffle"
+        android:summary="@string/pref_summary_toggle_shuffle"
+        android:title="@string/pref_title_toggle_toggle_shuffle"
+        app:iconSpaceReserved="false" />
+
 </androidx.preference.PreferenceScreen>

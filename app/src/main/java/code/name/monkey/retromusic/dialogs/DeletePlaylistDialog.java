@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.dialogs;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
@@ -78,21 +77,10 @@ public class DeletePlaylistDialog extends RoundedBottomSheetDialogFragment {
         this.title.setText(content);
         this.title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
-
         actionDelete.setText(R.string.action_delete);
 
-        int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        actionDelete.setIconTint(ColorStateList.valueOf(accentColor));
-        actionCancel.setIconTint(ColorStateList.valueOf(accentColor));
-
-        int iconColor = ThemeStore.textColorSecondary(getContext());
-        actionDelete.setStrokeColor(ColorStateList.valueOf(iconColor));
-        actionCancel.setStrokeColor(ColorStateList.valueOf(iconColor));
-
-
-        int textColor = ThemeStore.textColorPrimary(getContext());
-        actionDelete.setTextColor(ColorStateList.valueOf(textColor));
-        actionCancel.setTextColor(ColorStateList.valueOf(textColor));
+        MaterialUtil.setTint(actionDelete, true);
+        MaterialUtil.setTint(actionCancel, false);
 
 
     }

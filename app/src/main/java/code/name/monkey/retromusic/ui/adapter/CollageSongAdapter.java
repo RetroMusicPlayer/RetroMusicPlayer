@@ -1,9 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter;
 
 import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +11,14 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
+import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.ui.adapter.CollageSongAdapter.CollageSongViewHolder;
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder;
@@ -37,10 +38,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
 
     @Override
     public void onBindViewHolder(@NonNull CollageSongViewHolder holder, int position) {
-
-
         holder.bindSongs();
-
         if (dataSet.size() > 9) {
             for (int i = 0; i < dataSet.subList(0, 9).size(); i++) {
                 if (holder.imageViews != null) {
@@ -83,7 +81,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
                     final int startPosition = i;
                     ImageView imageView = imageViews.get(i);
                     imageView.setOnClickListener(view -> {
-
+                        MusicPlayerRemote.playNext(dataSet.get(startPosition));
                     });
                 }
             }

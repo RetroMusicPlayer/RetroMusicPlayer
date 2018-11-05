@@ -116,7 +116,7 @@ public class AlbumCoverPagerAdapter extends CustomFragmentStatePagerAdapter {
 
         private int getLayout() {
             int layout;
-            switch (PreferenceUtil.getInstance(getContext()).getAlbumCoverStyle()) {
+            switch (PreferenceUtil.getInstance().getAlbumCoverStyle()) {
                 default:
                 case NORMAL:
                     layout = R.layout.fragment_album_cover;

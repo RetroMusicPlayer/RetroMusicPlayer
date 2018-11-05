@@ -62,7 +62,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.fragment_container)
     View contentContainer;
 
-
     private Unbinder unBinder;
     private MaterialCab cab;
     private FragmentManager fragmentManager;
@@ -226,9 +225,19 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         if (activity == null) {
             return;
         }
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu,
-                ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
     }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(activity, toolbar);
+    }
+
 
     private void setUpSortOrderMenu(
             @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
@@ -263,6 +272,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_YEAR));
             sortOrderMenu.add(0, R.id.action_song_sort_order_date, 4, R.string.sort_order_date)
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_DATE));
+            sortOrderMenu.add(0, R.id.action_song_sort_composer, 4, R.string.composer)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.COMPOSER));
         }
 
         sortOrderMenu.setGroupCheckable(0, true, true);
@@ -316,6 +327,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 case R.id.action_song_sort_order_date:
                     sortOrder = SortOrder.SongSortOrder.SONG_DATE;
                     break;
+                case R.id.action_song_sort_composer:
+                    sortOrder = SortOrder.SongSortOrder.COMPOSER;
+                    break;
             }
         }
 
@@ -328,15 +342,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return false;
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(activity, toolbar);
-    }
 
     @SuppressWarnings("ConstantConditions")
     @Override
@@ -469,4 +474,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
         return false;
     }
+
+
 }

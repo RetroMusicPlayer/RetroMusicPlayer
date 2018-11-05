@@ -2,54 +2,61 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentPanel"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sliding_layout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="bottom"
-        sothree:umanoOverlay="false"
-        sothree:umanoPanelHeight="0dp"
-        sothree:umanoScrollableView="@+id/recycler_view"
-        sothree:umanoShadowHeight="0dp">
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
 
-        <FrameLayout
-            android:id="@+id/sliding_panel"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@drawable/bg_circular_top_corners"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?dividerColor" />
 
             <FrameLayout
-                android:id="@+id/player_fragment_container"
+                android:id="@+id/mini_player_container"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
-            <fragment
-                android:id="@+id/mini_player_fragment"
-                android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
+                <fragment
+                    android:id="@+id/mini_player_fragment"
+                    android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    tools:layout="@layout/fragment_mini_player" />
+            </FrameLayout>
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                tools:layout="@layout/fragment_mini_player" />
+                android:layout_height="56dp"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                app:itemIconTint="@drawable/bottom_navigation_item_colors"
+                app:itemTextAppearanceActive="@style/BottomSheetTextAppearance"
+                app:itemTextAppearanceInactive="@style/BottomSheetTextAppearance"
+                app:itemTextColor="@drawable/bottom_navigation_item_colors"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_navigation_main" />
+        </LinearLayout>
 
-        </FrameLayout>
-    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_gravity="bottom"
-        app:itemIconTint="@drawable/bottom_navigation_item_colors"
-        app:itemTextColor="@drawable/bottom_navigation_item_colors"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_main" />
-
+    </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

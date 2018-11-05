@@ -67,4 +67,8 @@
         android:id="@+id/action_delete_from_device"
         android:orderInCategory="13"
         android:title="@string/action_delete_from_device" />
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="13"
+        android:title="@string/action_settings" />
 </menu>

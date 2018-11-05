@@ -41,7 +41,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "music_playback_state.db";
     public static final String PLAYING_QUEUE_TABLE_NAME = "playing_queue";
     public static final String ORIGINAL_PLAYING_QUEUE_TABLE_NAME = "original_playing_queue";
-    private static final int VERSION = 3;
+    private static final int VERSION = 4;
     @Nullable
     private static MusicPlaybackQueueStore sInstance = null;
 
@@ -110,6 +110,9 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
         builder.append(" INT NOT NULL,");
 
         builder.append(AudioColumns.ARTIST);
+        builder.append(" STRING NOT NULL,");
+
+        builder.append(AudioColumns.COMPOSER);
         builder.append(" STRING NOT NULL);");
 
         db.execSQL(builder.toString());
@@ -173,6 +176,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
                     values.put(AudioColumns.ALBUM, song.albumName);
                     values.put(AudioColumns.ARTIST_ID, song.artistId);
                     values.put(AudioColumns.ARTIST, song.artistName);
+                    values.put(AudioColumns.COMPOSER, song.composer);
 
                     database.insert(tableName, null, values);
                 }

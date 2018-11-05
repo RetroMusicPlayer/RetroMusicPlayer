@@ -1,15 +1,16 @@
 package code.name.monkey.retromusic.ui.fragments.player.plain;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -74,6 +75,11 @@ public class PlainPlayerFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_plain_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColorAuto();
+            addSafeArea(view);
+        }
         return view;
     }
 

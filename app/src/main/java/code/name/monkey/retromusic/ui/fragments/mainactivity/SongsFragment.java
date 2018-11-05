@@ -75,32 +75,32 @@ public class SongsFragment extends
 
     @Override
     protected int loadGridSize() {
-        return PreferenceUtil.getInstance(getActivity()).getSongGridSize(getActivity());
+        return PreferenceUtil.getInstance().getSongGridSize(getActivity());
     }
 
     @Override
     protected void saveGridSize(int gridSize) {
-        PreferenceUtil.getInstance(getActivity()).setSongGridSize(gridSize);
+        PreferenceUtil.getInstance().setSongGridSize(gridSize);
     }
 
     @Override
     protected int loadGridSizeLand() {
-        return PreferenceUtil.getInstance(getActivity()).getSongGridSizeLand(getActivity());
+        return PreferenceUtil.getInstance().getSongGridSizeLand(getActivity());
     }
 
     @Override
     protected void saveGridSizeLand(int gridSize) {
-        PreferenceUtil.getInstance(getActivity()).setSongGridSizeLand(gridSize);
+        PreferenceUtil.getInstance().setSongGridSizeLand(gridSize);
     }
 
     @Override
     public void saveUsePalette(boolean usePalette) {
-        PreferenceUtil.getInstance(getActivity()).setSongColoredFooters(usePalette);
+        PreferenceUtil.getInstance().setSongColoredFooters(usePalette);
     }
 
     @Override
     public boolean loadUsePalette() {
-        return PreferenceUtil.getInstance(getActivity()).songColoredFooters();
+        return PreferenceUtil.getInstance().songColoredFooters();
     }
 
     @Override
@@ -118,7 +118,7 @@ public class SongsFragment extends
     public void onResume() {
         super.onResume();
         getLibraryFragment().setTitle(
-                PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.songs);
+                PreferenceUtil.getInstance().tabTitles() ? R.string.library : R.string.songs);
         if (getAdapter().getDataSet().isEmpty()) {
             presenter.subscribe();
         }
@@ -129,7 +129,7 @@ public class SongsFragment extends
         super.setMenuVisibility(menuVisible);
         if (menuVisible) {
             getLibraryFragment().setTitle(
-                    PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library
+                    PreferenceUtil.getInstance().tabTitles() ? R.string.library
                             : R.string.songs);
         }
     }
@@ -162,12 +162,12 @@ public class SongsFragment extends
 
     @Override
     protected String loadSortOrder() {
-        return PreferenceUtil.getInstance(getActivity()).getSongSortOrder();
+        return PreferenceUtil.getInstance().getSongSortOrder();
     }
 
     @Override
     protected void saveSortOrder(String sortOrder) {
-        PreferenceUtil.getInstance(getActivity()).setSongSortOrder(sortOrder);
+        PreferenceUtil.getInstance().setSongSortOrder(sortOrder);
     }
 
     @Override

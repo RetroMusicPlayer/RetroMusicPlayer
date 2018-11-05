@@ -56,9 +56,7 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
                 (AppCompatActivity) getActivity(),
                 MusicPlayerRemote.getPlayingQueue(),
                 MusicPlayerRemote.getPosition(),
-                R.layout.item_queue,
-                false,
-                null);
+                R.layout.item_queue);
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(mPlayingQueueAdapter);
 
         mLayoutManager = new LinearLayoutManager(getContext());

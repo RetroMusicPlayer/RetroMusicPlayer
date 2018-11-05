@@ -40,7 +40,7 @@ public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFra
         notifyLayoutResChanged(itemLayoutRes);
         if (itemLayoutRes != R.layout.item_list) {
             //noinspection ConstantConditions
-            itemLayoutRes = PreferenceUtil.getInstance(getContext()).getAlbumGridStyle(getContext());
+            itemLayoutRes = PreferenceUtil.getInstance().getAlbumGridStyle(getContext());
         }
         ArrayList<Album> dataSet = getAdapter() == null ? new ArrayList<>() : getAdapter().getDataSet();
         return new AlbumAdapter(getLibraryFragment().getMainActivity(), dataSet, itemLayoutRes, loadUsePalette(), getLibraryFragment());
@@ -54,7 +54,7 @@ public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFra
     @Override
     public boolean loadUsePalette() {
         //noinspection ConstantConditions
-        return PreferenceUtil.getInstance(getActivity()).albumColoredFooters();
+        return PreferenceUtil.getInstance().albumColoredFooters();
     }
 
     @Override
@@ -76,43 +76,43 @@ public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFra
     @Override
     protected String loadSortOrder() {
         //noinspection ConstantConditions
-        return PreferenceUtil.getInstance(getActivity()).getAlbumSortOrder();
+        return PreferenceUtil.getInstance().getAlbumSortOrder();
     }
 
     @Override
     protected void saveSortOrder(String sortOrder) {
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getActivity()).setAlbumSortOrder(sortOrder);
+        PreferenceUtil.getInstance().setAlbumSortOrder(sortOrder);
     }
 
     @Override
     protected int loadGridSize() {
         //noinspection ConstantConditions
-        return PreferenceUtil.getInstance(getActivity()).getAlbumGridSize(getActivity());
+        return PreferenceUtil.getInstance().getAlbumGridSize(getActivity());
     }
 
     @Override
     protected void saveGridSize(int gridSize) {
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getActivity()).setAlbumGridSize(gridSize);
+        PreferenceUtil.getInstance().setAlbumGridSize(gridSize);
     }
 
     @Override
     protected int loadGridSizeLand() {
         //noinspection ConstantConditions
-        return PreferenceUtil.getInstance(getActivity()).getAlbumGridSizeLand(getActivity());
+        return PreferenceUtil.getInstance().getAlbumGridSizeLand(getActivity());
     }
 
     @Override
     protected void saveGridSizeLand(int gridSize) {
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getActivity()).setAlbumGridSizeLand(gridSize);
+        PreferenceUtil.getInstance().setAlbumGridSizeLand(gridSize);
     }
 
     @Override
     protected void saveUsePalette(boolean usePalette) {
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getActivity()).setAlbumColoredFooters(usePalette);
+        PreferenceUtil.getInstance().setAlbumColoredFooters(usePalette);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFra
         if (menuVisible) {
             //noinspection ConstantConditions
             getLibraryFragment().setTitle(
-                    PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library
+                    PreferenceUtil.getInstance().tabTitles() ? R.string.library
                             : R.string.albums);
         }
     }
@@ -142,7 +142,7 @@ public class AlbumsFragment extends AbsLibraryPagerRecyclerViewCustomGridSizeFra
         super.onResume();
         //noinspection ConstantConditions
         getLibraryFragment().setTitle(
-                PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.albums);
+                PreferenceUtil.getInstance().tabTitles() ? R.string.library : R.string.albums);
         if (getAdapter().getDataSet().isEmpty()) {
             presenter.subscribe();
         }

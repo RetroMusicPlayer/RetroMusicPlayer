@@ -54,14 +54,14 @@ public class PlaylistsFragment extends AbsLibraryPagerRecyclerViewFragment<Playl
     public void setMenuVisibility(boolean menuVisible) {
         super.setMenuVisibility(menuVisible);
         if (menuVisible) {
-            getLibraryFragment().setTitle(PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.playlists);
+            getLibraryFragment().setTitle(PreferenceUtil.getInstance().tabTitles() ? R.string.library : R.string.playlists);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getLibraryFragment().setTitle(PreferenceUtil.getInstance(getContext()).tabTitles() ? R.string.library : R.string.playlists);
+        getLibraryFragment().setTitle(PreferenceUtil.getInstance().tabTitles() ? R.string.library : R.string.playlists);
         if (getAdapter().getDataSet().isEmpty()) {
             presenter.subscribe();
         }

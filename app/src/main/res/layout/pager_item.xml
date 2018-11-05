@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/image_container"
         android:layout_width="match_parent"
         android:layout_height="182dp"
@@ -30,7 +30,7 @@
             android:backgroundTint="@color/eighty_percent_black_overlay"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/text"
@@ -41,6 +41,8 @@
         android:paddingStart="8dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
+        android:textSize="13sp"
+        android:paddingBottom="4dp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 
@@ -51,10 +53,10 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
-        android:padding="8dp"
-        android:textSize="16sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="14sp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
-
 
 </LinearLayout>

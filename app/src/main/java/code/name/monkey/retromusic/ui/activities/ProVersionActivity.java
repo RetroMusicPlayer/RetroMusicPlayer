@@ -3,10 +3,6 @@ package code.name.monkey.retromusic.ui.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,13 +11,20 @@ import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.button.MaterialButton;
 
 import java.lang.ref.WeakReference;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
@@ -39,10 +42,10 @@ public class ProVersionActivity extends AbsBaseActivity implements
     Toolbar toolbar;
 
     @BindView(R.id.restore_button)
-    View restoreButton;
+    MaterialButton restoreButton;
 
     @BindView(R.id.purchase_button)
-    View purchaseButton;
+    MaterialButton purchaseButton;
 
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
@@ -57,7 +60,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pro_version);
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         ButterKnife.bind(this);
 
         setStatusbarColorAuto();
@@ -73,13 +76,16 @@ public class ProVersionActivity extends AbsBaseActivity implements
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         title.setTextColor(ThemeStore.textColorPrimary(this));
         setSupportActionBar(toolbar);
-        //noinspection ConstantConditions
-        getSupportActionBar().setTitle(null);
+        setTitle(null);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
 
         restoreButton.setEnabled(false);
         purchaseButton.setEnabled(false);
 
         billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
+
+        MaterialUtil.setTint(restoreButton, false);
+        MaterialUtil.setTint(purchaseButton, true);
 
     }
 

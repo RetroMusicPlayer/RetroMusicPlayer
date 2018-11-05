@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
@@ -31,6 +32,8 @@ import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class SettingsActivity extends AbsBaseActivity implements ColorChooserDialog.ColorCallback, SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private static final String TAG = "SettingsActivity";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -44,6 +47,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
     @BindView(R.id.detail_content_frame)
     @Nullable
     FrameLayout detailsFrame;
+
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
@@ -80,7 +84,7 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
 
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
-        setTaskDescriptionColorAuto();
+
         setLightNavigationBar(true);
 
         setupToolbar();
@@ -92,16 +96,14 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
     }
 
     private void setupToolbar() {
-        title.setTextColor(ThemeStore.textColorPrimary(this));
-        int primaryColor = ThemeStore.primaryColor(this);
-        toolbar.setBackgroundColor(primaryColor);
-        appBarLayout.setBackgroundColor(primaryColor);
-        setTitle(null);
+        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
         setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        setTitle(null);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        title.setTextColor(ThemeStore.textColorPrimary(this));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
-
 
     public void setupFragment(Fragment fragment, @StringRes int titleName) {
         FragmentTransaction fragmentTransaction = fragmentManager
@@ -119,7 +121,6 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
             fragmentTransaction.commit();
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -145,20 +146,18 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
         appBarLayout.setElevation(v);
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
-        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
     }
 
-    private static final String TAG = "SettingsActivity";
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         Log.i(TAG, "onSharedPreferenceChanged: ");

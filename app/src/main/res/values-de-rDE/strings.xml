@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Beachte, dass diese Funktion sich auf die Akkulaufzeit auswirkt.</string>
     <string name="pref_blur_amount_title">Unschärfe</string>
     <string name="pref_blur_amount_summary">Geringere Unschärfe benötigt weniger Rechenleistung.</string>
-    <string name="buy_retromusic_pro">Retro Music Pro kaufen</string>
+    <string name="buy_retro_music_pro">Retro Music Pro kaufen</string>
     <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Karte (Farbe)</string>

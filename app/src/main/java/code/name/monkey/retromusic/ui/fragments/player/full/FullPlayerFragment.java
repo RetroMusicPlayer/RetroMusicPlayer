@@ -42,6 +42,11 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_full, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -59,8 +64,11 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
 
         PlayerAlbumCoverFragment playerAlbumCoverFragment = (PlayerAlbumCoverFragment)
                 getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
-        playerAlbumCoverFragment.setCallbacks(this);
-        playerAlbumCoverFragment.removeSlideEffect();
+        if (playerAlbumCoverFragment != null) {
+            playerAlbumCoverFragment.setCallbacks(this);
+            playerAlbumCoverFragment.removeSlideEffect();
+        }
+
     }
 
     @Override

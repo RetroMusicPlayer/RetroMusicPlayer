@@ -2,41 +2,45 @@ package code.name.monkey.retromusic.ui.activities;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -105,7 +109,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     TextView text;
 
     @BindView(R.id.action_shuffle_all)
-    FloatingActionButton shuffleButton;
+    MaterialButton shuffleButton;
 
     @BindView(R.id.gradient_background)
     @Nullable
@@ -130,6 +134,15 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     private AlbumAdapter albumAdapter;
     private boolean forceDownload;
 
+    void setupWindowTransistion() {
+        Slide slide = new Slide(Gravity.BOTTOM);
+        slide.setInterpolator(
+                AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in));
+        getWindow().setEnterTransition(slide);
+
+    }
+
+
     @Override
     protected View createContentView() {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details);
@@ -137,17 +150,16 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     @Override
     protected void onCreate(Bundle bundle) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
+        setupWindowTransistion();
         super.onCreate(bundle);
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.GONE);
-
+        toggleBottomNavigationView(true);
         setNavigationbarColorAuto();
         setLightNavigationBar(true);
 
-        supportPostponeEnterTransition();
-
+        ActivityCompat.postponeEnterTransition(this);
 
         lastFMRestClient = new LastFMRestClient(this);
 
@@ -159,7 +171,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setUpViews() {
         setupRecyclerView();
-        setupToolbar();
+        setupToolbarMarginHeight();
         setupContainerHeight();
     }
 
@@ -171,48 +183,46 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         }
     }
 
-    private void setupToolbar() {
+    private void setupToolbarMarginHeight() {
+        int primaryColor = ThemeStore.primaryColor(this);
+        TintHelper.setTintAuto(contentContainer, primaryColor, true);
+        if (collapsingToolbarLayout != null) {
+            collapsingToolbarLayout.setContentScrimColor(primaryColor);
+            collapsingToolbarLayout.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor));
+        }
+
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         setSupportActionBar(toolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setTitle(null);
 
-        if (toolbar != null && !PreferenceUtil.getInstance(this).getFullScreenMode()) {
-            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar
-                    .getLayoutParams();
+
+        if (toolbar != null && !PreferenceUtil.getInstance().getFullScreenMode()) {
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
             params.topMargin = RetroUtil.getStatusBarHeight(this);
             toolbar.setLayoutParams(params);
         }
 
-        int primaryColor = ThemeStore.primaryColor(this);
-        TintHelper.setTintAuto(contentContainer, primaryColor, true);
-
         if (appBarLayout != null) {
-            appBarLayout.setBackgroundColor(primaryColor);
             appBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
                 @Override
-                public void onStateChanged(AppBarLayout appBarLayout,
-                                           AppBarStateChangeListener.State state) {
+                public void onStateChanged(AppBarLayout appBarLayout, State state) {
                     int color;
                     switch (state) {
                         case COLLAPSED:
-                            setLightStatusbar(!ATHUtil.isWindowBackgroundDark(ArtistDetailActivity.this));
-                            color = ATHUtil.resolveColor(ArtistDetailActivity.this, R.attr.iconColor);
+                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.getContext())));
+                            color = ThemeStore.primaryColor(appBarLayout.getContext());
                             break;
                         default:
                         case EXPANDED:
                         case IDLE:
                             setLightStatusbar(false);
-                            color = ContextCompat.getColor(ArtistDetailActivity.this, R.color.md_white_1000);
+                            color = Color.TRANSPARENT;
                             break;
                     }
-                    ToolbarContentTintHelper.colorizeToolbar(toolbar, color, ArtistDetailActivity.this);
+                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.getContext(), toolbar, color);
                 }
             });
-        }
-        if (collapsingToolbarLayout != null) {
-            collapsingToolbarLayout.setContentScrimColor(primaryColor);
-            collapsingToolbarLayout.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor));
         }
     }
 
@@ -270,7 +280,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     @Override
     public void completed() {
-        supportStartPostponedEnterTransition();
+        ActivityCompat.startPostponedEnterTransition(this);
     }
 
     @Override
@@ -367,14 +377,13 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setColors(int color) {
 
-        int textColor =
-                PreferenceUtil.getInstance(this).getAdaptiveColor() ? color : ThemeStore.accentColor(this);
+        int textColor = PreferenceUtil.getInstance().getAdaptiveColor() ? color : ThemeStore.accentColor(this);
 
         albumTitle.setTextColor(textColor);
         songTitle.setTextColor(textColor);
         biographyTitle.setTextColor(textColor);
 
-        TintHelper.setTintAuto(shuffleButton, textColor, true);
+        MaterialUtil.setTint(shuffleButton, true, textColor);
 
         if (background != null) {
             background.setBackgroundTintList(ColorStateList.valueOf(color));

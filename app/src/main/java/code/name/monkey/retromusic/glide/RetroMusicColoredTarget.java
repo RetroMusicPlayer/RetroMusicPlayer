@@ -37,7 +37,7 @@ public abstract class RetroMusicColoredTarget extends BitmapPaletteTarget {
         int primaryColor = getColor(resource.getPalette(), defaultColor);
         int dominantColor = getDominantColor(resource.getBitmap(), defaultColor);
 
-        onColorReady(PreferenceUtil.getInstance(RetroApplication.getInstance()).isDominantColor() ?
+        onColorReady(PreferenceUtil.getInstance().isDominantColor() ?
                 dominantColor : primaryColor);
     }
 

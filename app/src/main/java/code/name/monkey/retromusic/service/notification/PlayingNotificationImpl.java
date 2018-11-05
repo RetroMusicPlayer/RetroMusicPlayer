@@ -9,8 +9,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -20,6 +18,8 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
+import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
@@ -76,7 +77,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
 
         linkButtons(notificationLayout, notificationLayoutBig);
 
-        Intent action = new Intent(service, MainActivity.class);
+        Intent action = new Intent(service, NowPayingActivity.class);
         action.putExtra("expand", true);
         action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -114,7 +115,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
                             public void onResourceReady(BitmapPaletteWrapper resource,
                                                         GlideAnimation<? super BitmapPaletteWrapper> glideAnimation) {
                                 update(resource.getBitmap(),
-                                        PreferenceUtil.getInstance(service).isDominantColor() ?
+                                        PreferenceUtil.getInstance().isDominantColor() ?
                                                 RetroColorUtil.getDominantColor(resource.getBitmap(), Color.TRANSPARENT) :
                                                 RetroColorUtil.getColor(resource.getPalette(), Color.TRANSPARENT));
                             }
@@ -135,7 +136,7 @@ public class PlayingNotificationImpl extends PlayingNotification {
                                             .setImageViewResource(R.id.image, R.drawable.default_album_art);
                                 }
 
-                                if (!PreferenceUtil.getInstance(service).coloredNotification()) {
+                                if (!PreferenceUtil.getInstance().coloredNotification()) {
                                     bgColor = Color.WHITE;
                                 }
                                 setBackgroundColor(bgColor);

@@ -52,8 +52,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<ArrayList<AbsSmartPlaylist>> getSuggestionSongs() {
-        return HomeLoader.getRecentAndTopThings(context);
+    public Observable<ArrayList<Song>> getSuggestionSongs() {
+        return SongLoader.suggestSongs(context);
     }
 
     @Override

@@ -19,7 +19,7 @@ public class AudioSettings extends AbsSettingsFragment {
     @Override
     public void invalidateSettings() {
         Preference findPreference = findPreference("equalizer");
-        if (!hasEqualizer() && !PreferenceUtil.getInstance(getContext()).getSelectedEqualizer().equals("retro")) {
+        if (!hasEqualizer() && !PreferenceUtil.getInstance().getSelectedEqualizer().equals("retro")) {
             findPreference.setEnabled(false);
             findPreference.setSummary(getResources().getString(R.string.no_equalizer));
         } else {

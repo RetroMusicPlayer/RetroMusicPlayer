@@ -43,14 +43,14 @@ public class PersonaizeSettingsFragment extends AbsSettingsFragment implements S
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getContext()).registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getContext()).unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Override

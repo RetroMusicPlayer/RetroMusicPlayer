@@ -5,8 +5,16 @@ import android.os.Parcelable;
 
 
 public class Song implements Parcelable {
-    public static final Song EMPTY_SONG = new Song(-1, "", -1, -1, -1, "", -1, -1, "", -1, "");
+    public static final Song EMPTY_SONG = new Song(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", "");
+    public static final Creator<Song> CREATOR = new Creator<Song>() {
+        public Song createFromParcel(Parcel source) {
+            return new Song(source);
+        }
 
+        public Song[] newArray(int size) {
+            return new Song[size];
+        }
+    };
     public final int id;
     public final String title;
     public final int trackNumber;
@@ -18,8 +26,9 @@ public class Song implements Parcelable {
     public final String albumName;
     public final int artistId;
     public final String artistName;
+    public final String composer;
 
-    public Song(int id, String title, int trackNumber, int year, long duration, String data, long dateModified, int albumId, String albumName, int artistId, String artistName) {
+    public Song(int id, String title, int trackNumber, int year, long duration, String data, long dateModified, int albumId, String albumName, int artistId, String artistName, String composer) {
         this.id = id;
         this.title = title;
         this.trackNumber = trackNumber;
@@ -31,6 +40,22 @@ public class Song implements Parcelable {
         this.albumName = albumName;
         this.artistId = artistId;
         this.artistName = artistName;
+        this.composer = composer;
+    }
+
+    protected Song(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.trackNumber = in.readInt();
+        this.year = in.readInt();
+        this.duration = in.readLong();
+        this.data = in.readString();
+        this.dateModified = in.readLong();
+        this.albumId = in.readInt();
+        this.albumName = in.readString();
+        this.artistId = in.readInt();
+        this.artistName = in.readString();
+        this.composer = in.readString();
     }
 
     @Override
@@ -68,6 +93,7 @@ public class Song implements Parcelable {
         result = 31 * result + (albumName != null ? albumName.hashCode() : 0);
         result = 31 * result + artistId;
         result = 31 * result + (artistName != null ? artistName.hashCode() : 0);
+        result = 31 * result + (composer != null ? composer.hashCode() : 0);
         return result;
     }
 
@@ -85,9 +111,9 @@ public class Song implements Parcelable {
                 ", albumName='" + albumName + '\'' +
                 ", artistId=" + artistId +
                 ", artistName='" + artistName + '\'' +
+                ", composer='" + composer + '\'' +
                 '}';
     }
-
 
     @Override
     public int describeContents() {
@@ -107,29 +133,6 @@ public class Song implements Parcelable {
         dest.writeString(this.albumName);
         dest.writeInt(this.artistId);
         dest.writeString(this.artistName);
+        dest.writeString(this.composer);
     }
-
-    protected Song(Parcel in) {
-        this.id = in.readInt();
-        this.title = in.readString();
-        this.trackNumber = in.readInt();
-        this.year = in.readInt();
-        this.duration = in.readLong();
-        this.data = in.readString();
-        this.dateModified = in.readLong();
-        this.albumId = in.readInt();
-        this.albumName = in.readString();
-        this.artistId = in.readInt();
-        this.artistName = in.readString();
-    }
-
-    public static final Creator<Song> CREATOR = new Creator<Song>() {
-        public Song createFromParcel(Parcel source) {
-            return new Song(source);
-        }
-
-        public Song[] newArray(int size) {
-            return new Song[size];
-        }
-    };
 }

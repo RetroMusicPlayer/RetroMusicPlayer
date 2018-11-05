@@ -30,7 +30,7 @@ public class LockScreenActivity extends AbsMusicServiceActivity {
                 | WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         setContentView(R.layout.activity_lock_screen_old_style);
 
         hideStatusBar();

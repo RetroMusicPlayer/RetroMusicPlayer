@@ -16,7 +16,16 @@
         <item name="colorPrimary">@android:color/black</item>
         <item name="android:colorPrimary">@android:color/black</item>
 
-        <item name="bottomSheetDialogTheme">@style/Theme.Design.BottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
+
+
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowExitTransition">@transition/grid_exit</item>
+        <item name="android:windowEnterTransition">@transition/grid_exit</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
+        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -48,9 +57,16 @@
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
-        <item name="bottomSheetDialogTheme">@style/Theme.Design.Light.BottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
 
         <item name="mediaRouteTheme">@style/BlackMediaRouterTheme</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowExitTransition">@transition/grid_exit</item>
+        <item name="android:windowEnterTransition">@transition/grid_exit</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
+        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -83,9 +99,16 @@
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
-        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
 
         <item name="mediaRouteTheme">@style/WhiteMediaRouterTheme</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowExitTransition">@transition/grid_exit</item>
+        <item name="android:windowEnterTransition">@transition/grid_exit</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
+        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
@@ -110,9 +133,7 @@
     <!-- set the rounded drawable as background to your bottom sheet -->
     <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
-       <!-- <item name="behavior_peekHeight">200dp</item>-->
     </style>
-
 
     <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
@@ -151,4 +172,13 @@
     <style name="WhiteMediaRouteButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
         <item name="mediaRouteButtonTint">@color/md_white_1000</item>
     </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
 </resources>

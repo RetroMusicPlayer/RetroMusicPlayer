@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment;
 import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment;
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment;
@@ -93,6 +92,9 @@ public class CardBlurFragment extends AbsPlayerFragment implements
         lastColor = color;
         getCallbacks().onPaletteColorChanged();
         ToolbarContentTintHelper.colorizeToolbar(toolbar, Color.WHITE, getActivity());
+
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitleTextColor(Color.WHITE);
     }
 
     @Override
@@ -120,6 +122,11 @@ public class CardBlurFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_blur_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -136,9 +143,10 @@ public class CardBlurFragment extends AbsPlayerFragment implements
 
         PlayerAlbumCoverFragment playerAlbumCoverFragment =
                 (PlayerAlbumCoverFragment) getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
-        playerAlbumCoverFragment.setCallbacks(this);
-        playerAlbumCoverFragment.removeEffect();
-
+        if (playerAlbumCoverFragment != null) {
+            playerAlbumCoverFragment.setCallbacks(this);
+            playerAlbumCoverFragment.removeEffect();
+        }
 
     }
 
@@ -147,23 +155,29 @@ public class CardBlurFragment extends AbsPlayerFragment implements
         toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
         toolbar.setOnMenuItemClickListener(this);
 
-       /* for (int i = 0; i < toolbar.getMenu().size(); i++) {
-            MenuItem menuItem = toolbar.getMenu().getItem(i);
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        }*/
         ToolbarContentTintHelper.colorizeToolbar(toolbar, Color.WHITE, getActivity());
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitleTextColor(Color.WHITE);
     }
 
     @Override
     public void onServiceConnected() {
         updateIsFavorite();
         updateBlur();
+        updateSong();
     }
 
     @Override
     public void onPlayingMetaChanged() {
         updateIsFavorite();
         updateBlur();
+        updateSong();
+    }
+
+    private void updateSong() {
+        Song song = MusicPlayerRemote.getCurrentSong();
+        toolbar.setTitle(song.title);
+        toolbar.setSubtitle(song.artistName);
     }
 
     private void updateBlur() {

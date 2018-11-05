@@ -1,9 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter;
 
 import android.app.Activity;
-import android.graphics.PorterDuff;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +8,8 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import code.name.monkey.appthemehelper.util.ATHUtil;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder;
@@ -36,13 +34,14 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.ViewHolder> 
         return mGenres;
     }
 
+    @NonNull
     @Override
-    public GenreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GenreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(LayoutInflater.from(mActivity).inflate(mItemLayoutRes, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(GenreAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GenreAdapter.ViewHolder holder, int position) {
         Genre genre = mGenres.get(position);
         if (holder.title != null) {
             holder.title.setText(genre.name);
@@ -52,11 +51,9 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.ViewHolder> 
                     mActivity.getString(R.string.songs) :
                     mActivity.getString(R.string.song)));
         }
-        if (holder.image != null) {
-            holder.image.setImageResource(R.drawable.ic_recent_actors_white_24dp);
-        }
-        if (holder.shortSeparator != null) {
-            holder.shortSeparator.setVisibility(View.VISIBLE);
+
+        if (holder.separator != null) {
+            holder.separator.setVisibility(View.VISIBLE);
         }
     }
 
@@ -76,11 +73,8 @@ public class GenreAdapter extends RecyclerView.Adapter<GenreAdapter.ViewHolder> 
             if (menu != null) {
                 menu.setVisibility(View.GONE);
             }
-            if (image != null) {
-                int iconPadding = mActivity.getResources().getDimensionPixelSize(R.dimen.list_item_image_icon_padding);
-                image.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-                image.setColorFilter(ATHUtil.resolveColor(mActivity, R.attr.iconColor), PorterDuff.Mode.SRC_IN);
-            }
+            assert imageContainer != null;
+            imageContainer.setVisibility(View.GONE);
         }
 
         @Override

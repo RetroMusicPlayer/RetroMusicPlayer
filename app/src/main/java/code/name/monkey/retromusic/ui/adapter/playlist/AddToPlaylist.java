@@ -2,23 +2,20 @@ package code.name.monkey.retromusic.ui.adapter.playlist;
 
 import android.app.Activity;
 import android.app.Dialog;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder;
 import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist.ViewHolder;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
 
-/**
- * @author Hemanth S (h4h13).
- */
 public class AddToPlaylist extends RecyclerView.Adapter<ViewHolder> {
 
     private Activity activity;

@@ -1,16 +1,18 @@
 package code.name.monkey.retromusic.dialogs;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,8 +24,6 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist;
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
 
-import java.util.ArrayList;
-
 /**
  * @author Karim Abou Zeid (kabouzeid), Aidan Follestad (afollestad)
  */
@@ -34,8 +34,6 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
 
     @BindView(R.id.title)
     TextView title;
-
-    ArrayList<Playlist> playlists;
 
     @NonNull
     public static AddToPlaylistDialog create(Song song) {
@@ -75,14 +73,10 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
         final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
-        playlists = PlaylistLoader.getAllPlaylists(getActivity()).blockingFirst();
-
-        AddToPlaylist playlistAdapter = new AddToPlaylist(getActivity(), playlists,
-                R.layout.item_playlist, songs, getDialog());
-
+        final ArrayList<Playlist> playlists = PlaylistLoader.getAllPlaylists(getActivity()).blockingFirst();
+        final AddToPlaylist playlistAdapter = new AddToPlaylist(getActivity(), playlists, R.layout.item_playlist, songs, getDialog());
         playlist.setLayoutManager(new LinearLayoutManager(getContext()));
         playlist.setItemAnimator(new DefaultItemAnimator());
         playlist.setAdapter(playlistAdapter);

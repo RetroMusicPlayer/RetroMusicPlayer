@@ -15,11 +15,9 @@ import java.util.ArrayList;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
@@ -34,8 +32,8 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
     private int current;
 
     public PlayingQueueAdapter(AppCompatActivity activity, ArrayList<Song> dataSet, int current,
-                               @LayoutRes int itemLayoutRes, boolean usePalette, @Nullable CabHolder cabHolder) {
-        super(activity, dataSet, itemLayoutRes, usePalette, cabHolder);
+                               @LayoutRes int itemLayoutRes) {
+        super(activity, dataSet, itemLayoutRes, false, null);
         this.current = current;
     }
 

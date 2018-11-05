@@ -12,6 +12,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity;
@@ -22,19 +23,19 @@ import code.name.monkey.retromusic.util.MusicUtil;
 public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
 
     @BindDrawable(R.drawable.ic_keyboard_backspace_black_24dp)
-    Drawable mClose;
+    Drawable close;
 
     @BindView(R.id.player_queue_sub_header)
-    TextView mPlayerQueueSubHeader;
+    TextView textView;
 
     @BindString(R.string.queue)
     String queue;
 
     @BindView(R.id.app_bar)
-    AppBarLayout mAppBarLayout;
+    AppBarLayout appBarLayout;
 
     @BindView(R.id.title)
     TextView title;
@@ -64,13 +65,15 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
     private void setupToolbar() {
         title.setTextColor(ThemeStore.textColorPrimary(this));
-        mPlayerQueueSubHeader.setText(getUpNextAndQueueTime());
-        mPlayerQueueSubHeader.setTextColor(ThemeStore.accentColor(this));
-        mAppBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
-        mToolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        mToolbar.setNavigationIcon(mClose);
-        setSupportActionBar(mToolbar);
+        textView.setText(getUpNextAndQueueTime());
+        textView.setTextColor(ThemeStore.accentColor(this));
+
+        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
+        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        toolbar.setNavigationIcon(close);
+        setSupportActionBar(toolbar);
         setTitle(null);
-        mToolbar.setNavigationOnClickListener(v -> onBackPressed());
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
 }

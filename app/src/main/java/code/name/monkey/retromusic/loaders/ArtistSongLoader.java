@@ -28,7 +28,7 @@ public class ArtistSongLoader extends SongLoader {
                     new String[]{
                             String.valueOf(artistId)
                     },
-                    PreferenceUtil.getInstance(context).getArtistSongSortOrder()
+                    PreferenceUtil.getInstance().getArtistSongSortOrder()
             );
         } catch (SecurityException e) {
             return null;

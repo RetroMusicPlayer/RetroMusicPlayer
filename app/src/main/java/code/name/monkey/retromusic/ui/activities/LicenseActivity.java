@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 
@@ -19,7 +20,7 @@ public class LicenseActivity extends AbsBaseActivity {
     WebView mLicense;
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.app_bar)
     AppBarLayout mAppbar;
@@ -50,11 +51,12 @@ public class LicenseActivity extends AbsBaseActivity {
         mLicense.loadUrl("file:///android_asset/index.html");
 
         title.setTextColor(ThemeStore.textColorPrimary(this));
-        mToolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
-        mToolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         mAppbar.setBackgroundColor(ThemeStore.primaryColor(this));
         setTitle(null);
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(toolbar);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
 }

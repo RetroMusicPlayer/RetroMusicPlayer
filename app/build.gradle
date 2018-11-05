@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -11,12 +11,11 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 232
-        versionName '2.0.210'
+        versionCode 242
+        versionName '2.1.000'
 
         multiDexEnabled true
 
-        buildConfigField("String", "LASTFM_API_KEY", "\"${getProperty(getProperties('../public.properties'), 'LASTFM_API_KEY')}\"")
         buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
     signingConfigs {
@@ -46,12 +45,14 @@ android {
 
 
     flavorDimensions "default"
+
     productFlavors {
         normal {
             versionCode defaultConfig.versionCode + 10000
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
         }
+
     }
 
     packagingOptions {
@@ -73,16 +74,7 @@ android {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
 
-    /*configurations.all {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-            def requested = details.requested
-            if (requested.group == 'com.android.support') {
-                if (!(requested.name.startsWith("multidex") || requested.name.startsWith("mediarouter"))) {
-                    details.useVersion $supportLibVersion
-                }
-            }
-        }
-    }*/
+
 }
 
 def getProperties(String fileName) {
@@ -119,28 +111,30 @@ dependencies {
     implementation "com.google.android.material:material:$supportLibVersion"
 
     //For casting
-    implementation 'androidx.mediarouter:mediarouter:1.0.0-beta01'
+    implementation 'androidx.mediarouter:mediarouter:1.0.0'
     implementation 'com.google.android.gms:play-services-cast-framework:16.0.2'
 
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+
     implementation "com.jakewharton:butterknife:$butterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"
     implementation 'com.afollestad:material-cab:0.1.12'
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.17'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    implementation 'com.simplecityapps:recyclerview-fastscroll:1.0.18'
+    implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
     /*UI Library*/

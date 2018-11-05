@@ -19,12 +19,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
@@ -78,8 +78,9 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //noinspection ConstantConditions
-        view.setBackgroundColor(ColorUtil.darkenColor(ThemeStore.primaryColor(getContext())));
+        view.setBackgroundColor(ThemeStore.primaryColor(getContext()));
         view.setOnTouchListener(new FlingPlayBackController(getActivity()));
+        view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext(), Pair.create(v, getString(R.string.transition_mini_player))));
         setUpMiniPlayer();
 
         if (RetroUtil.isTablet(getResources())) {
@@ -87,9 +88,9 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
             previous.setVisibility(View.VISIBLE);
             playingQueue.setVisibility(View.VISIBLE);
         } else {
-            next.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
-            playingQueue.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.GONE : View.VISIBLE);
-            previous.setVisibility(PreferenceUtil.getInstance(getContext()).isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
+            next.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
+            playingQueue.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.GONE : View.VISIBLE);
+            previous.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
         }
     }
 

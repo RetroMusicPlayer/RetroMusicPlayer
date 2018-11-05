@@ -20,10 +20,10 @@ public class NotificationSettingsFragment extends AbsSettingsFragment {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             classicNotification.setVisible(false);
         } else {
-            classicNotification.setChecked(PreferenceUtil.getInstance(getActivity()).classicNotification());
+            classicNotification.setChecked(PreferenceUtil.getInstance().classicNotification());
             classicNotification.setOnPreferenceChangeListener((preference, newValue) -> {
                 // Save preference
-                PreferenceUtil.getInstance(getActivity()).setClassicNotification((Boolean) newValue);
+                PreferenceUtil.getInstance().setClassicNotification((Boolean) newValue);
 
                 final MusicService service = MusicPlayerRemote.musicService;
                 if (service != null) {

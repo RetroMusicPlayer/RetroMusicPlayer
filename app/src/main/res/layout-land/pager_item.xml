@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/image_container"
         android:layout_width="match_parent"
         android:layout_height="182dp"
@@ -30,7 +30,7 @@
             android:backgroundTint="@color/eighty_percent_black_overlay"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/text"

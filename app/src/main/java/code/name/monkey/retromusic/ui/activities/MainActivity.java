@@ -33,7 +33,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
-import code.name.monkey.retromusic.dialogs.ChangelogDialog;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SearchQueryHelper;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
@@ -45,12 +44,10 @@ import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment;
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
-import code.name.monkey.retromusic.ui.fragments.mainactivity.home.HomeFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class MainActivity extends AbsSlidingMusicPanelActivity implements SharedPreferences.OnSharedPreferenceChangeListener, BottomNavigationView.OnNavigationItemSelectedListener {
-
     public static final int APP_INTRO_REQUEST = 2323;
     public static final int LIBRARY = 1;
     public static final int FOLDERS = 3;
@@ -65,15 +62,15 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
     @BindView(R.id.parent_container)
     FrameLayout drawerLayout;
 
+
     private boolean blockRequestPermissions;
     private CompositeDisposable disposable = new CompositeDisposable();
-
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action != null && action.equals(Intent.ACTION_SCREEN_OFF)) {
-                if (PreferenceUtil.getInstance(context).getLockScreen() && MusicPlayerRemote.isPlaying()) {
+                if (PreferenceUtil.getInstance().getLockScreen() && MusicPlayerRemote.isPlaying()) {
                     Intent activity = new Intent(context, LockScreenActivity.class);
                     activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -94,7 +91,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
@@ -103,7 +100,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) -> windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
+            selectedFragment(PreferenceUtil.getInstance().getLastPage());
+            //setCurrentFragment(new LibraryFragment(), false, LibraryFragment.TAG);
         } else {
             restoreCurrentFragment();
         }
@@ -118,8 +116,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             int currentVersion = pInfo.versionCode;
-            if (currentVersion != PreferenceUtil.getInstance(this).getLastChangelogVersion()) {
-                ChangelogDialog.create().show(getSupportFragmentManager(), "CHANGE_LOG_DIALOG");
+            if (currentVersion != PreferenceUtil.getInstance().getLastChangelogVersion()) {
+                startActivity(new Intent(this, WhatsNewActivity.class));
             }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -133,11 +131,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
         screenOnOff.addAction(Intent.ACTION_SCREEN_OFF);
         registerReceiver(broadcastReceiver, screenOnOff);
 
-        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
 
         if (getIntent().hasExtra("expand")) {
             if (getIntent().getBooleanExtra("expand", false)) {
-                expandPanel();
+                //expandPanel();
                 getIntent().putExtra("expand", false);
             }
         }
@@ -152,7 +150,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
             return;
         }
         unregisterReceiver(broadcastReceiver);
-        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
     }
 
     public void setCurrentFragment(@NonNull Fragment fragment, boolean isStackAdd, String tag) {
@@ -327,9 +325,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
                 .show();
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        PreferenceUtil.getInstance(this).setLastPage(menuItem.getItemId());
+        PreferenceUtil.getInstance().setLastPage(menuItem.getItemId());
         selectedFragment(menuItem.getItemId());
         return true;
     }
@@ -343,8 +342,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
                 setCurrentFragment(LibraryFragment.newInstance(itemId), false, LibraryFragment.TAG);
                 break;
             case R.id.action_home:
-                setCurrentFragment(PreferenceUtil.getInstance(this).toggleHomeBanner() ? HomeFragment.newInstance() :
-                        BannerHomeFragment.newInstance(), false, HomeFragment.TAG);
+                setCurrentFragment(BannerHomeFragment.newInstance(), false, BannerHomeFragment.TAG);
                 break;
 
         }

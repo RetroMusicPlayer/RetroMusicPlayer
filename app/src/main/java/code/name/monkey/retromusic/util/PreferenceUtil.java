@@ -26,7 +26,11 @@ import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
+import code.name.monkey.retromusic.transform.DepthTransformation;
+import code.name.monkey.retromusic.transform.HingeTransformation;
+import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
+import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
@@ -106,6 +110,8 @@ public final class PreferenceUtil {
     private static final String SONG_GRID_STYLE = "song_grid_style";
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
     private static final String LAST_KNOWN_LYRICS_TYPE = "LAST_KNOWN_LYRICS_TYPE";
+    private static final String ALBUM_DETAIL_STYLE = "album_detail_style";
+    private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
@@ -113,9 +119,9 @@ public final class PreferenceUtil {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static PreferenceUtil getInstance(@NonNull final Context context) {
+    public static PreferenceUtil getInstance() {
         if (sInstance == null) {
-            sInstance = new PreferenceUtil(context.getApplicationContext());
+            sInstance = new PreferenceUtil(RetroApplication.getContext());
         }
         return sInstance;
     }
@@ -135,15 +141,6 @@ public final class PreferenceUtil {
             default:
                 return R.style.Theme_RetroMusic_Light;
         }
-    }
-
-    public int getAlbumDetailsPageStyle() {
-
-        TypedArray typedArray = RetroApplication.getInstance().
-                getResources().obtainTypedArray(R.array.pref_album_detail_style_values);
-        int layout = typedArray.getResourceId(mPreferences.getInt("album_detail_style", 0), -1);
-        typedArray.recycle();
-        return layout;
     }
 
     public final String getArtistSortOrder() {
@@ -734,6 +731,21 @@ public final class PreferenceUtil {
         return layoutRes;
     }
 
+    public String getAlbumDetailsStyle() {
+        return mPreferences.getString(ALBUM_DETAIL_STYLE, "0");
+    }
+
+    public int getAlbumDetailsStyle(Context context) {
+        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_DETAIL_STYLE, "0")));
+        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_album_details_style_layout);
+        int layoutRes = typedArray.getResourceId(pos, -1);
+        typedArray.recycle();
+        if (layoutRes == -1) {
+            return R.layout.activity_album;
+        }
+        return layoutRes;
+    }
+
     public void setArtistGridStyle(int viewAs) {
         mPreferences.edit().putInt(ARTIST_GRID_STYLE, viewAs).apply();
     }
@@ -754,6 +766,10 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_ANIMATIONS, false);
     }
 
+    public boolean pauseOnZeroVolume() {
+        return mPreferences.getBoolean(PAUSE_ON_ZERO_VOLUME, false);
+    }
+
 
     public ViewPager.PageTransformer getAlbumCoverTransform(Context context) {
         int style = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_COVER_TRANSFORM, "0")));
@@ -763,6 +779,14 @@ public final class PreferenceUtil {
                 return new NormalPageTransformer();
             case 1:
                 return new CascadingPageTransformer();
+            case 2:
+                return new DepthTransformation();
+            case 3:
+                return new HorizontalFlipTransformation();
+            case 4:
+                return new VerticalFlipTransformation();
+            case 5:
+                return new HingeTransformation();
         }
     }
 

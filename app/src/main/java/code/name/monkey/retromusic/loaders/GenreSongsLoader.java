@@ -4,13 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
-import androidx.annotation.NonNull;
-
-import code.name.monkey.retromusic.model.Song;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.model.Song;
 import io.reactivex.Observable;
 
 /**
@@ -19,7 +18,7 @@ import io.reactivex.Observable;
 
 public class GenreSongsLoader {
 
-    public static Observable<ArrayList<Song>> getGenreSongsList(@NonNull Context context, @NonNull int genreId) {
+    public static Observable<ArrayList<Song>> getGenreSongsList(@NonNull Context context, int genreId) {
         return Observable.create(e -> {
             ArrayList<Song> list = new ArrayList<>();
             Cursor cursor = makeGenreSongCursor(context, genreId);
@@ -49,8 +48,9 @@ public class GenreSongsLoader {
         final String albumName = cursor.getString(8);
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
+        final String composer = cursor.getString(11);
 
-        return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName);
+        return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, composer);
     }
 
     private static Cursor makeGenreSongCursor(Context context, long genreId) {
@@ -69,6 +69,7 @@ public class GenreSongsLoader {
                             AudioColumns.ALBUM,// 8
                             AudioColumns.ARTIST_ID,// 9
                             AudioColumns.ARTIST,// 10
+                            AudioColumns.COMPOSER,// 11
                     }, SongLoader.BASE_SELECTION, null,
                     MediaStore.Audio.Genres.Members.DEFAULT_SORT_ORDER);
         } catch (SecurityException e) {

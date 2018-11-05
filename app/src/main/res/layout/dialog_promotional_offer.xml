@@ -1,59 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/md_blue_A200"
-    android:padding="16dp">
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/title_container"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:scaleType="centerCrop"
+        android:src="@drawable/diwali" />
 
-        <TextView xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="55"
-            android:textColor="@android:color/white"
-            android:textSize="108sp"
-            tools:ignore="MissingPrefix" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/md_red_500"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingTop="32dp"
-            android:paddingBottom="32dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/title_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="%"
+                android:layout_gravity="center">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="70"
+                    android:textColor="@android:color/white"
+                    android:textSize="108sp"
+                    tools:ignore="MissingPrefix" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingTop="32dp"
+                    android:paddingBottom="32dp">
+
+                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="%"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@android:color/white" />
+
+                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                        android:id="@+id/off"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:text="Off"
+                        android:textColor="@android:color/white"
+                        android:textStyle="italic" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Diwali offer"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                 android:textColor="@android:color/white" />
-
-            <TextView
-                android:id="@+id/off"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="Off"
-                android:textColor="@android:color/white"
-                android:textStyle="italic" />
         </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title_container"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:text="Buy pro version now. Offer ends soon"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-        android:textColor="@android:color/white" />
-</RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,14 +13,9 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            fontPath="@string/circular_std_black"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/SubTitleTextAppearance"
             android:layout_weight="1"
-            android:padding="14dp"
-            android:text="@string/add_playlist_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            tools:ignore="MissingPrefix" />
+            android:text="@string/add_playlist_title" />
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/action_add_playlist"

@@ -205,7 +205,7 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
     @Override
     public String getSectionName(int position) {
         @Nullable String sectionName = null;
-        switch (PreferenceUtil.getInstance(activity).getAlbumSortOrder()) {
+        switch (PreferenceUtil.getInstance().getAlbumSortOrder()) {
             case SortOrder.AlbumSortOrder.ALBUM_A_Z:
             case SortOrder.AlbumSortOrder.ALBUM_Z_A:
                 sectionName = dataSet.get(position).getTitle();
@@ -235,8 +235,8 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
             if (isInQuickSelectMode()) {
                 toggleChecked(getAdapterPosition());
             } else {
-                Pair[] albumPairs = new Pair[]{
-                        Pair.create(image, activity.getResources().getString(R.string.transition_album_art))};
+
+                Pair[] albumPairs = new Pair[]{Pair.create(image, activity.getResources().getString(R.string.transition_album_art))};
                 NavigationUtil.goToAlbum(activity, dataSet.get(getAdapterPosition()).getId(), albumPairs);
             }
         }

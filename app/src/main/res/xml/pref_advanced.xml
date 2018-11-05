@@ -3,19 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Advanced">
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="toggle_headset"
-            android:summary="@string/pref_summary_toggle_headset"
-            android:title="@string/pref_title_toggle_toggle_headset"
-            app:iconSpaceReserved="false" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="toggle_shuffle"
-            android:summary="@string/pref_summary_toggle_shuffle"
-            android:title="@string/pref_title_toggle_toggle_shuffle"
-            app:iconSpaceReserved="false" />
 
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -26,13 +14,12 @@
             app:iconSpaceReserved="false" />
 
 
-        <!--<code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
-            app:iconSpaceReserved="false"
-            android:key="toggle_home_banner"
-            android:summary="Toggle banner image"
-            android:title="Banner" />-->
-
+            android:key="pause_on_zero_volume"
+            android:summary="@string/pref_keep_pause_on_zero_volume_summary"
+            android:title="@string/pref_keep_pause_on_zero_volume_title"
+            app:iconSpaceReserved="false" />
 
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>

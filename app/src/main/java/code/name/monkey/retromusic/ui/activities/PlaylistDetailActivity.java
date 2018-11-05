@@ -28,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper;
@@ -80,16 +81,15 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.GONE);
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
-
+        toggleBottomNavigationView(true);
 
         playlist = getIntent().getExtras().getParcelable(EXTRA_PLAYLIST);
 
@@ -106,7 +106,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
 
         shuffleButton.setScaleX(0.9f);
         shuffleButton.setScaleY(0.9f);
-        shuffleButton.setVisibility(View.VISIBLE);
+        shuffleButton.show();
         shuffleButton.setPivotX(shuffleButton.getWidth() / 2);
         shuffleButton.setPivotY(shuffleButton.getHeight() / 2);
 
@@ -185,6 +185,8 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         setTitle(null);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
 
     @Override

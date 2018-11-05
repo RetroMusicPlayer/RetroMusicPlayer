@@ -41,21 +41,21 @@ public class NowPlayingSettingsFragment extends AbsSettingsFragment implements
 
     private void updateNowPlayingScreenSummary() {
         //noinspection ConstantConditions
-        findPreference("now_playing_screen_id").setSummary(PreferenceUtil.getInstance(getActivity()).getNowPlayingScreen().titleRes);
+        findPreference("now_playing_screen_id").setSummary(PreferenceUtil.getInstance().getNowPlayingScreen().titleRes);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getContext()).registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         //noinspection ConstantConditions
-        PreferenceUtil.getInstance(getContext()).unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Override
@@ -75,6 +75,6 @@ public class NowPlayingSettingsFragment extends AbsSettingsFragment implements
     }
 
     private void updateAlbumCoverStyleSummary() {
-        findPreference("album_cover_style_id").setSummary(PreferenceUtil.getInstance(getActivity()).getAlbumCoverStyle().titleRes);
+        findPreference("album_cover_style_id").setSummary(PreferenceUtil.getInstance().getAlbumCoverStyle().titleRes);
     }
 }

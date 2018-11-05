@@ -5,10 +5,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +15,10 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -31,13 +31,13 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
+import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.views.PlayPauseDrawable;
 
 public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
@@ -75,7 +75,6 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
     View mVolumeContainer;
 
     private Unbinder unbinder;
-    private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
@@ -100,7 +99,7 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
 
-        if (PreferenceUtil.getInstance(getContext()).getVolumeToggle()) {
+        if (PreferenceUtil.getInstance().getVolumeToggle()) {
             mVolumeContainer.setVisibility(View.VISIBLE);
         } else {
             mVolumeContainer.setVisibility(View.GONE);
@@ -133,7 +132,7 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
         updateSong();
@@ -147,7 +146,7 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -171,7 +170,7 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
             setFabColor(dark);
         } else {
             setFabColor(ThemeStore.accentColor(getContext()));
@@ -188,32 +187,21 @@ public class PlayerPlaybackControlsFragment extends AbsPlayerControlsFragment {
         setProgressBarColor(i);
     }
 
-    public void setProgressBarColor(int newColor) {
+    private void setProgressBarColor(int newColor) {
         LayerDrawable ld = (LayerDrawable) progressSlider.getProgressDrawable();
         ClipDrawable clipDrawable = (ClipDrawable) ld.findDrawableByLayerId(android.R.id.progress);
         clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN);
     }
 
     private void setUpPlayPauseFab() {
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
-
-        playPauseFab.setImageDrawable(
-                playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        //playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
-        //playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
 

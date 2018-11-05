@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Small album</string>
     <string name="accent_color">Accent color</string>
     <string name="accent_color_desc">The accent theme color, defaults to teal</string>
 
@@ -97,7 +98,7 @@
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
-    <string name="buy_retromusic_pro">Buy Retro Music Pro</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
 
     <string name="cancel_current_timer">Cancel</string>
 
@@ -366,7 +367,8 @@
     <string name="pref_title_home_banner">Home banner</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
     <string name="pref_title_home_artist_grid_style">Home artist grid</string>
-    <string name="pref_title_album_cover_transform">Now playing album cover style</string>
+    <string name="pref_title_album_cover_transform">Album cover skip</string>
+    <string name="pref_album_detail_style">Album detail style</string>
     <string name="cascading">Cascading</string>
 
     <string name="primary_color">Primary color</string>
@@ -542,4 +544,15 @@
     <string name="labeled">Labeled</string>
     <string name="unlabeled">Unlabeled</string>
     <string name="selected">Selected</string>
+
+    <string name="depth">Depth</string>
+    <string name="vertical_flip">Vertical flip</string>
+    <string name="hinge">Hinge</string>
+    <string name="horizontal_flip">Horizontal flip</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pause playing on zero and plays after raise volume. Warning when you increase the volume it starts playing even your outside the app</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
+    <string name="whats_new">What\'s New</string>
+    <string name="composer">Composer</string>
+    <string name="suggestion_songs">Suggestions</string>
+    <string name="fit">Fit</string>
 </resources>

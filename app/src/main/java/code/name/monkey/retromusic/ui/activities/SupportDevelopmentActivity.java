@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.SkuDetails;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
@@ -56,26 +59,30 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
     private static final int DONATION_PRODUCT_IDS = R.array.donation_ids;
 
     @BindView(R.id.progress)
-    ProgressBar mProgressBar;
+    ProgressBar progressBar;
 
     @BindView(R.id.progress_container)
-    View mProgressContainer;
+    View progressContainer;
 
     @BindView(R.id.list)
-    RecyclerView mListView;
+    RecyclerView recyclerView;
 
     @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    Toolbar toolbar;
 
     @BindView(R.id.app_bar)
-    AppBarLayout mAppBarLayout;
+    AppBarLayout appBarLayout;
 
     @BindView(R.id.root)
-    ViewGroup mViewGroup;
+    ViewGroup viewGroup;
 
     @BindView(R.id.title)
     TextView title;
-    private BillingProcessor mBillingProcessor;
+
+    @BindView(R.id.donate)
+    MaterialButton materialButton;
+
+    private BillingProcessor billingProcessor;
     private AsyncTask skuDetailsLoadAsyncTask;
 
     private static List<SkuDetails> getDetails() {
@@ -107,7 +114,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
 
     private void donate(int i) {
         final String[] ids = getResources().getStringArray(DONATION_PRODUCT_IDS);
-        mBillingProcessor.purchase(this, ids[i]);
+        billingProcessor.purchase(this, ids[i]);
     }
 
     @OnClick(R.id.donate)
@@ -129,9 +136,8 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
 
         setupToolbar();
 
-        mBillingProcessor
-                = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
-        MDTintHelper.setTint(mProgressBar, ThemeStore.accentColor(this));
+        billingProcessor = new BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this);
+        MDTintHelper.setTint(progressBar, ThemeStore.accentColor(this));
 
         ((TextView) findViewById(R.id.donation)).setTextColor(ThemeStore.accentColor(this));
     }
@@ -139,12 +145,16 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
     private void setupToolbar() {
         title.setTextColor(ThemeStore.textColorPrimary(this));
         int primaryColor = ThemeStore.primaryColor(this);
-        mAppBarLayout.setBackgroundColor(primaryColor);
-        mToolbar.setBackgroundColor(primaryColor);
-        mToolbar.setNavigationOnClickListener(view -> onBackPressed());
-        mToolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        setSupportActionBar(mToolbar);
+        appBarLayout.setBackgroundColor(primaryColor);
+        toolbar.setBackgroundColor(primaryColor);
+
+        toolbar.setNavigationOnClickListener(view -> onBackPressed());
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        setSupportActionBar(toolbar);
         setTitle(null);
+
+        materialButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
     }
 
     @Override
@@ -179,15 +189,15 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (!mBillingProcessor.handleActivityResult(requestCode, resultCode, data)) {
+        if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
     public void onDestroy() {
-        if (mBillingProcessor != null) {
-            mBillingProcessor.release();
+        if (billingProcessor != null) {
+            billingProcessor.release();
         }
         if (skuDetailsLoadAsyncTask != null) {
             skuDetailsLoadAsyncTask.cancel(true);
@@ -208,8 +218,8 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             SupportDevelopmentActivity dialog = donationDialogWeakReference.get();
             if (dialog == null) return;
 
-            dialog.mProgressContainer.setVisibility(View.VISIBLE);
-            dialog.mListView.setVisibility(View.GONE);
+            dialog.progressContainer.setVisibility(View.VISIBLE);
+            dialog.recyclerView.setVisibility(View.GONE);
         }
 
         @Override
@@ -217,7 +227,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             SupportDevelopmentActivity dialog = donationDialogWeakReference.get();
             if (dialog != null) {
                 final String[] ids = dialog.getResources().getStringArray(DONATION_PRODUCT_IDS);
-                return dialog.mBillingProcessor.getPurchaseListingDetails(new ArrayList<>(Arrays.asList(ids)));
+                return dialog.billingProcessor.getPurchaseListingDetails(new ArrayList<>(Arrays.asList(ids)));
             }
             cancel(false);
             return null;
@@ -230,16 +240,16 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             if (dialog == null) return;
 
             if (skuDetails == null || skuDetails.isEmpty()) {
-                dialog.mProgressContainer.setVisibility(View.GONE);
+                dialog.progressContainer.setVisibility(View.GONE);
                 return;
             }
 
             //noinspection ConstantConditions
-            dialog.mProgressContainer.setVisibility(View.GONE);
-            dialog.mListView.setItemAnimator(new DefaultItemAnimator());
-            dialog.mListView.setLayoutManager(new GridLayoutManager(dialog, 2));
-            dialog.mListView.setAdapter(new SkuDetailsAdapter(dialog, skuDetails));
-            dialog.mListView.setVisibility(View.VISIBLE);
+            dialog.progressContainer.setVisibility(View.GONE);
+            dialog.recyclerView.setItemAnimator(new DefaultItemAnimator());
+            dialog.recyclerView.setLayoutManager(new GridLayoutManager(dialog, 2));
+            dialog.recyclerView.setAdapter(new SkuDetailsAdapter(dialog, skuDetails));
+            dialog.recyclerView.setVisibility(View.VISIBLE);
         }
 
 
@@ -300,7 +310,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
                 viewHolder.price.setText(skuDetails.priceText);
                 viewHolder.image.setImageResource(getIcon(i));
 
-                final boolean purchased = donationsDialog.mBillingProcessor.isPurchased(skuDetails.productId);
+                final boolean purchased = donationsDialog.billingProcessor.isPurchased(skuDetails.productId);
                 int titleTextColor = purchased ? ATHUtil.resolveColor(donationsDialog, android.R.attr.textColorHint) : ThemeStore.textColorPrimary(donationsDialog);
                 int contentTextColor = purchased ? titleTextColor : ThemeStore.textColorSecondary(donationsDialog);
 

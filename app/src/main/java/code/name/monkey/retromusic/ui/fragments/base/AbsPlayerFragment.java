@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 
 public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
     public static final String TAG = AbsPlayerFragment.class.getSimpleName();
@@ -48,6 +49,14 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
             callbacks = (Callbacks) context;
         } catch (ClassCastException e) {
             throw new RuntimeException(context.getClass().getSimpleName() + " must implement " + Callbacks.class.getSimpleName());
+        }
+    }
+
+    protected void addSafeArea(View view) {
+        FitSystemWindowsLayout safeArea = view.findViewById(R.id.safeArea);
+        if (safeArea != null) {
+            if (PreferenceUtil.getInstance().getFullScreenMode()) safeArea.setFit(false);
+            else safeArea.setFit(true);
         }
     }
 
@@ -117,6 +126,9 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
             case R.id.action_set_as_ringtone:
                 MusicUtil.setRingtone(getActivity(), song.id);
                 return true;
+            case R.id.action_settings:
+                NavigationUtil.goToSettings(getActivity());
+                return true;
             case R.id.action_go_to_genre:
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id);
@@ -148,23 +160,19 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
     @Override
     public void onServiceConnected() {
         updateIsFavorite();
-        //updateLyrics();
     }
 
     @Override
     public void onPlayingMetaChanged() {
         updateIsFavorite();
-        //updateLyrics();
     }
 
     @Override
     public void onDestroyView() {
-
         if (updateIsFavoriteTask != null && !updateIsFavoriteTask.isCancelled()) {
             updateIsFavoriteTask.cancel(true);
         }
         super.onDestroyView();
-
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -209,8 +217,9 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(ThemeStore.primaryColor(getActivity()));
-        if (PreferenceUtil.getInstance(getContext()).getFullScreenMode()) {
-            view.findViewById(R.id.status_bar).setVisibility(View.GONE);
+        if (PreferenceUtil.getInstance().getFullScreenMode()) {
+            if (view.findViewById(R.id.status_bar) != null)
+                view.findViewById(R.id.status_bar).setVisibility(View.GONE);
         }
     }
 

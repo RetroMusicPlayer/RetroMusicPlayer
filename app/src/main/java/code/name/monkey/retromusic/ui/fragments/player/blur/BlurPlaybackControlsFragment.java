@@ -4,11 +4,6 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +13,14 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -35,35 +33,44 @@ import code.name.monkey.retromusic.ui.fragments.VolumeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.views.PlayPauseDrawable;
 
 
 public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.title)
-    AppCompatTextView title;
+    AppCompatTextView songTitle;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.volume_fragment_container)
     View mVolumeContainer;
+
     private Unbinder unbinder;
-    private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
@@ -89,10 +96,12 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
 
-        mVolumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+        mVolumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
 
         VolumeFragment mVolumeFragment = (VolumeFragment) getChildFragmentManager().findFragmentById(R.id.volume_fragment);
-        mVolumeFragment.tintWhiteColor();
+        if (mVolumeFragment != null) {
+            mVolumeFragment.tintWhiteColor();
+        }
     }
 
     @Override
@@ -103,7 +112,7 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     private void updateSong() {
         Song song = MusicPlayerRemote.getCurrentSong();
-        title.setText(song.title);
+        songTitle.setText(song.title);
         text.setText(song.artistName);
     }
 
@@ -121,7 +130,7 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
         updateSong();
@@ -135,7 +144,7 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -153,7 +162,10 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
         lastPlaybackControlsColor = Color.WHITE;
         lastDisabledPlaybackControlsColor = ContextCompat.getColor(getContext(), R.color.md_grey_500);
 
-        setProgressBarColor(Color.WHITE);
+        songTitle.setTextColor(lastPlaybackControlsColor);
+        text.setTextColor(lastDisabledPlaybackControlsColor);
+
+        setProgressBarColor();
 
         songCurrentProgress.setTextColor(lastPlaybackControlsColor);
         songTotalTime.setTextColor(lastPlaybackControlsColor);
@@ -163,34 +175,24 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
         updatePrevNextColor();
     }
 
-    public void setProgressBarColor(int newColor) {
-        TintHelper.setTintAuto(progressSlider, newColor, false);
+    private void setProgressBarColor() {
+        TintHelper.setTintAuto(progressSlider, Color.WHITE, false);
     }
 
     private void setUpPlayPauseFab() {
-        final int fabColor = Color.WHITE;
-        TintHelper.setTintAuto(playPauseFab, fabColor, true);
-
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
-
-        playPauseFab.setImageDrawable(playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
+        TintHelper.setTintAuto(playPauseFab, Color.WHITE, true);
+        TintHelper.setTintAuto(playPauseFab, Color.BLACK, false);
         playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
+
 
     private void setUpMusicControllers() {
         setUpPlayPauseFab();
@@ -293,9 +295,5 @@ public class BlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
         songTotalTime.setText(MusicUtil.getReadableDurationString(total));
         songCurrentProgress.setText(MusicUtil.getReadableDurationString(progress));
-    }
-
-    public void hideVolumeIfAvailable() {
-        mVolumeContainer.setVisibility(View.GONE);
     }
 }

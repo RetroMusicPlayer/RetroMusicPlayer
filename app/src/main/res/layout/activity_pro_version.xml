@@ -45,7 +45,7 @@
                     <TextView
                         android:id="@+id/title"
                         style="@style/BigTitleTextAppearance"
-                        android:text="@string/buy_retromusic_pro" />
+                        android:text="@string/buy_retro_music_pro" />
 
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>

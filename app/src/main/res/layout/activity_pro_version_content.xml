@@ -5,180 +5,151 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_format_color_fill" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:tint="@color/md_white_1000"
-                    app:srcCompat="@drawable/ic_format_color_fill" />
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/base_color_theme"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
+                android:padding="16dp"
+                android:text="@string/base_color_theme"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:tint="@color/md_white_1000"
-                    app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/now_playing_themes"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
+                android:padding="16dp"
+                android:text="@string/now_playing_themes"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_view_carousel_black_24dp" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:padding="16dp"
+                android:text="@string/carousal_effect_on_now_playing_screen"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
 
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:tint="@color/md_white_1000"
-                    app:srcCompat="@drawable/ic_view_carousel_black_24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/carousal_effect_on_now_playing_screen"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_rounded_corner" />
 
-            <LinearLayout
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:tint="@color/md_white_1000"
-                    app:srcCompat="@drawable/ic_rounded_corner" />
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/window_corner_edges"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
+                android:padding="16dp"
+                android:text="@string/window_corner_edges"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:tint="@color/md_white_1000"
+                app:srcCompat="@drawable/ic_favorite_white_24dp" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:padding="16dp"
+                android:text="@string/support_development"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="@color/md_white_1000" />
+        </LinearLayout>
 
-                <code.name.monkey.retromusic.views.IconImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:tint="@color/md_white_1000"
-                    app:srcCompat="@drawable/ic_favorite_white_24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:text="@string/support_development"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/md_white_1000" />
-            </LinearLayout>
-
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/restore_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:orientation="horizontal"
-                android:paddingTop="8dp">
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="@string/restore"
+                app:strokeColor="@color/md_red_500"
+                app:strokeWidth="1dp" />
 
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/restore_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingStart="24dp"
-                    android:paddingTop="16dp"
-                    android:paddingEnd="24dp"
-                    android:paddingBottom="16dp"
-                    android:text="@string/restore"
-                    android:textColor="@color/md_white_1000" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#80ffffff"
-                    app:cardCornerRadius="25dp"
-                    app:cardUseCompatPadding="true">
-
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/purchase_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:backgroundTint="#80ffffff"
-                        android:gravity="center"
-                        android:paddingStart="24dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="24dp"
-                        android:paddingBottom="16dp"
-                        android:text="@string/purchase"
-                        android:textColor="@color/md_white_1000" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/purchase_button"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:text="@string/purchase" />
 
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    </LinearLayout>
 
 </LinearLayout>

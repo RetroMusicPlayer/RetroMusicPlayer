@@ -4,14 +4,14 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -52,7 +52,9 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements
 
         PlayerAlbumCoverFragment playerAlbumCoverFragment = (PlayerAlbumCoverFragment)
                 getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
-        playerAlbumCoverFragment.setCallbacks(this);
+        if (playerAlbumCoverFragment != null) {
+            playerAlbumCoverFragment.setCallbacks(this);
+        }
     }
 
     private void setUpPlayerToolbar() {
@@ -86,6 +88,11 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_flat_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            //getPlayerActivity().setNavigationbarColorAuto();
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -126,7 +133,7 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements
     @Override
     public int toolbarIconColor() {
         boolean isLight = ColorUtil.isColorLight(lastColor);
-        return PreferenceUtil.getInstance(getContext()).getAdaptiveColor() ?
+        return PreferenceUtil.getInstance().getAdaptiveColor() ?
                 MaterialValueHelper.getPrimaryTextColor(getContext(), isLight) :
                 ATHUtil.resolveColor(getContext(), R.attr.iconColor);
     }
@@ -140,11 +147,11 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements
         boolean isLight = ColorUtil.isColorLight(color);
 
         //TransitionManager.beginDelayedTransition(mToolbar);
-        int iconColor = PreferenceUtil.getInstance(getContext()).getAdaptiveColor() ?
+        int iconColor = PreferenceUtil.getInstance().getAdaptiveColor() ?
                 MaterialValueHelper.getPrimaryTextColor(getContext(), isLight) :
                 ATHUtil.resolveColor(getContext(), R.attr.iconColor);
         ToolbarContentTintHelper.colorizeToolbar(toolbar, iconColor, getActivity());
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
             colorize(color);
         }
     }

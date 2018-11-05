@@ -27,6 +27,7 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
+import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
@@ -75,7 +76,7 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -90,7 +91,7 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
     }
@@ -130,10 +131,10 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setUpMusicControllers();
-        if (PreferenceUtil.getInstance(getContext()).getVolumeToggle()) {
+        if (PreferenceUtil.getInstance().getVolumeToggle()) {
             volumeContainer.setVisibility(View.VISIBLE);
         } else {
             volumeContainer.setVisibility(View.GONE);
@@ -293,7 +294,7 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
                     MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        int finalColor = PreferenceUtil.getInstance(getContext()).getAdaptiveColor() ? dark : ThemeStore.accentColor(getContext());
+        int finalColor = PreferenceUtil.getInstance().getAdaptiveColor() ? dark : ThemeStore.accentColor(getContext());
 
 
         setProgressBarColor(finalColor);
@@ -310,24 +311,14 @@ public class PlainPlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     private void setUpPlayPauseFab() {
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
-
-        playPauseFab.setImageDrawable(playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        //playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
-        //playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
 }

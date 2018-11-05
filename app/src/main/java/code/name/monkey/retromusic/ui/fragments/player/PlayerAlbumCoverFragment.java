@@ -61,14 +61,14 @@ public class PlayerAlbumCoverFragment extends AbsMusicServiceFragment implements
         viewPager.addOnPageChangeListener(this);
 
         //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance(getContext()).carouselEffect() &&
-                !((PreferenceUtil.getInstance(getContext()).getNowPlayingScreen() == NowPlayingScreen.FULL))) {
+        if (PreferenceUtil.getInstance().carouselEffect() &&
+                !((PreferenceUtil.getInstance().getNowPlayingScreen() == NowPlayingScreen.FULL) || (PreferenceUtil.getInstance().getNowPlayingScreen() == NowPlayingScreen.FIT))) {
             viewPager.setClipToPadding(false);
             viewPager.setPadding(96, 0, 96, 0);
             viewPager.setPageMargin(18);
             viewPager.setPageTransformer(false, new CarousalPagerTransformer(getContext()));
         } else {
-            viewPager.setPageTransformer(true, PreferenceUtil.getInstance(getContext()).getAlbumCoverTransform(getContext()));
+            viewPager.setPageTransformer(true, PreferenceUtil.getInstance().getAlbumCoverTransform(getContext()));
         }
     }
 

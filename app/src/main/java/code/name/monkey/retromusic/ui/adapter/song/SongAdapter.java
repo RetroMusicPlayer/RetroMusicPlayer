@@ -198,7 +198,7 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
             return "";
         }
         @Nullable String sectionName = null;
-        switch (PreferenceUtil.getInstance(activity).getSongSortOrder()) {
+        switch (PreferenceUtil.getInstance().getSongSortOrder()) {
             case SortOrder.SongSortOrder.SONG_A_Z:
             case SortOrder.SongSortOrder.SONG_Z_A:
                 sectionName = dataSet.get(position).title;
@@ -211,6 +211,9 @@ public class SongAdapter extends AbsMultiSelectAdapter<SongAdapter.ViewHolder, S
                 break;
             case SortOrder.SongSortOrder.SONG_YEAR:
                 return MusicUtil.getYearString(dataSet.get(position).year);
+            case SortOrder.SongSortOrder.COMPOSER:
+                sectionName = dataSet.get(position).composer;
+                break;
         }
 
         return MusicUtil.getSectionName(sectionName);

@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity.home;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -41,16 +41,17 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
+import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist;
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist;
 import code.name.monkey.retromusic.mvp.contract.HomeContract;
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter;
+import code.name.monkey.retromusic.ui.adapter.CollageSongAdapter;
 import code.name.monkey.retromusic.ui.adapter.GenreAdapter;
 import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWithAdapter;
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter;
@@ -69,16 +70,15 @@ import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class BannerHomeFragment extends AbsMainActivityFragment implements MainActivityFragmentCallbacks, HomeContract.HomeView {
 
-    public static final String TAG = "HomeFragment";
-    Unbinder unbinder;
-
-    @BindView(R.id.home_toolbar)
+    public static final String TAG = "BannerHomeFragment";
+    @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.app_bar)
     AppBarLayout appbar;
 
     @BindView(R.id.image)
+    @Nullable
     ImageView imageView;
 
     @BindView(R.id.user_image)
@@ -123,18 +123,27 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @BindView(R.id.title)
     TextView title;
 
+    @BindView(R.id.suggestion_songs)
+    RecyclerView suggestionsSongs;
 
+    @BindView(R.id.suggestion_container)
+    LinearLayout suggestionsContainer;
+
+    @BindView(R.id.search_icon)
+    ImageView searchIcon;
+
+    private Unbinder unbinder;
     private HomePresenter homePresenter;
     private CompositeDisposable disposable;
 
-    public static HomeFragment newInstance() {
+    public static BannerHomeFragment newInstance() {
         Bundle args = new Bundle();
-        HomeFragment fragment = new HomeFragment();
+        BannerHomeFragment fragment = new BannerHomeFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
-    private void getTimeOfTheDay() {
+    private void getTimeOfTheDay(boolean b) {
         Calendar c = Calendar.getInstance();
         int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
 
@@ -150,22 +159,24 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         } else if (timeOfDay >= 20 && timeOfDay < 24) {
             images = getResources().getStringArray(R.array.night);
         }
+
         String day = images[new Random().nextInt(images.length)];
         loadTimeImage(day);
     }
 
+
     private void loadTimeImage(String day) {
         //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance(getActivity()).getBannerImage().isEmpty()) {
-            if (imageView != null) {
+        if (imageView != null) {
+            if (PreferenceUtil.getInstance().getBannerImage().isEmpty()) {
                 Glide.with(getActivity()).load(day)
                         .asBitmap()
                         .placeholder(R.drawable.material_design_default)
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                         .into(imageView);
+            } else {
+                loadBannerFromStorage();
             }
-        } else {
-            loadBannerFromStorage();
         }
     }
 
@@ -175,7 +186,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
                 .setQuality(100)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getBannerImage(), USER_BANNER))
+                        new File(PreferenceUtil.getInstance().getBannerImage(), USER_BANNER))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap));
@@ -189,7 +200,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance(getContext()).getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(imageView::setImageBitmap,
@@ -209,7 +220,8 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(PreferenceUtil.getInstance().toggleHomeBanner() ? R.layout.fragment_banner_home : R.layout.fragment_home,
+                container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -217,47 +229,28 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //setStatusbarColorAuto(view);
-        getMainActivity().getSlidingUpPanelLayout().setShadowHeight(8);
         setupToolbar();
         loadImageFromStorage(userImage);
         homePresenter.subscribe();
-        getTimeOfTheDay();
+        getTimeOfTheDay(PreferenceUtil.getInstance().toggleHomeBanner());
     }
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        appbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
-            @Override
-            public void onStateChanged(AppBarLayout appBarLayout, AppBarStateChangeListener.State state) {
-                int color;
-                switch (state) {
-                    case COLLAPSED:
-                        getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext()));
-                        color = ThemeStore.textColorPrimary(getContext());
-                        break;
-                    default:
-                    case EXPANDED:
-                    case IDLE:
-                        getMainActivity().setLightStatusbar(false);
-                        color = ContextCompat.getColor(getContext(), R.color.md_white_1000);
-                        break;
-                }
-                title.setTextColor(color);
-                toolbar.getNavigationIcon().setColorFilter(color, PorterDuff.Mode.SRC_IN);
-            }
-        });
-
         int primaryColor = ThemeStore.primaryColor(getContext());
-
         TintHelper.setTintAuto(container, primaryColor, true);
-        toolbarLayout.setStatusBarScrimColor(primaryColor);
-        toolbarLayout.setContentScrimColor(primaryColor);
+
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setBackgroundColor(primaryColor);
+        appbar.setBackgroundColor(primaryColor);
+        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
+                getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
 
         getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(v -> showMainMenu());
+        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        searchIcon.setImageTintList(ColorStateList.valueOf(ThemeStore.accentColor(getContext())));
     }
 
     @Override
@@ -299,7 +292,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         recentArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(),
                 1, GridLayoutManager.HORIZONTAL, false));
         ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists,
-                PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
+                PreferenceUtil.getInstance().getHomeGridStyle(getContext()), false, null);
         recentArtistRV.setAdapter(artistAdapter);
     }
 
@@ -318,7 +311,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         topArtistRV.setLayoutManager(new GridLayoutManager(getMainActivity(),
                 1, GridLayoutManager.HORIZONTAL, false));
         ArtistAdapter artistAdapter = new ArtistAdapter(getMainActivity(), artists,
-                PreferenceUtil.getInstance(getContext()).getHomeGridStyle(getContext()), false, null);
+                PreferenceUtil.getInstance().getHomeGridStyle(getContext()), false, null);
         topArtistRV.setAdapter(artistAdapter);
 
     }
@@ -332,6 +325,21 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         topAlbumRV.setAdapter(artistAdapter);
     }
 
+    @Override
+    public void suggestions(ArrayList<Song> songs) {
+        if (!songs.isEmpty()) {
+            suggestionsContainer.setVisibility(View.VISIBLE);
+            CollageSongAdapter artistAdapter = new CollageSongAdapter(getMainActivity(), songs);
+            suggestionsSongs.setLayoutManager(new LinearLayoutManager(getMainActivity()));
+            suggestionsSongs.setAdapter(artistAdapter);
+        }
+    }
+
+    @Override
+    public void playlists(ArrayList<Playlist> playlists) {
+
+    }
+
     private DisplayMetrics getDisplayMetrics() {
         Display display = getMainActivity().getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
@@ -339,12 +347,6 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
 
         return metrics;
     }
-
-    @Override
-    public void suggestions(ArrayList<Playlist> playlists) {
-
-    }
-
 
     @Override
     public void geners(ArrayList<Genre> genres) {

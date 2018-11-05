@@ -2,11 +2,6 @@ package code.name.monkey.retromusic.ui.adapter.playlist;
 
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -20,6 +15,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
@@ -41,9 +41,6 @@ import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import io.reactivex.Observable;
 
-/**
- * Created by BlackFootSanji on 9/19/2016.
- */
 public class PlaylistAdapter extends AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist> {
 
     public static final String TAG = PlaylistAdapter.class.getSimpleName();

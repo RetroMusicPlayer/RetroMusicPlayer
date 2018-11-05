@@ -9,13 +9,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.core.app.ActivityCompat;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.view.ViewCompat;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -32,7 +35,6 @@ public abstract class AbsBaseActivity extends AbsThemeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         permissions = getPermissionsToRequest();
@@ -59,7 +61,6 @@ public abstract class AbsBaseActivity extends AbsThemeActivity {
                 onHasPermissionsChanged(hasPermissions);
             }
         }
-
     }
 
     protected void onHasPermissionsChanged(boolean hasPermissions) {

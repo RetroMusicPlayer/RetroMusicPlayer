@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
+import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
 import code.name.monkey.retromusic.util.RetroUtil;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -160,7 +161,7 @@ public class AppWidgetClassic extends BaseAppWidget {
     final ComponentName serviceName = new ComponentName(context, MusicService.class);
 
     // Home
-    action = new Intent(context, MainActivity.class);
+    action = new Intent(context, NowPayingActivity.class);
     action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
     views.setOnClickPendingIntent(R.id.image, pendingIntent);

@@ -18,7 +18,8 @@ public enum NowPlayingScreen {
     SIMPLE(R.string.simple, R.drawable.np_simple, 8),
     BLUR_CARD(R.string.blur_card, R.drawable.np_blur_card, 9),
     ADAPTIVE(R.string.adaptive, R.drawable.np_adaptive, 10),
-    MATERIAL(R.string.material, R.drawable.np_material, 11);
+    MATERIAL(R.string.material, R.drawable.np_material, 11),
+    FIT(R.string.fit, R.drawable.np_adaptive, 12);
 
     @StringRes
     public final int titleRes;

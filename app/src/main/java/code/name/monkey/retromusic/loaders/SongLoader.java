@@ -5,16 +5,18 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.BlacklistStore;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 
 /**
  * Created by hemanths on 10/08/17.
@@ -36,6 +38,7 @@ public class SongLoader {
             AudioColumns.ALBUM,// 8
             AudioColumns.ARTIST_ID,// 9
             AudioColumns.ARTIST,// 10
+            AudioColumns.COMPOSER,// 11
     };
 
     @NonNull
@@ -83,16 +86,17 @@ public class SongLoader {
         final String albumName = cursor.getString(8);
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
+        final String composer = cursor.getString(11);
 
         return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName,
-                artistId, artistName);
+                artistId, artistName, composer);
     }
 
     @Nullable
     public static Cursor makeSongCursor(@NonNull final Context context,
                                         @Nullable final String selection, final String[] selectionValues) {
         return makeSongCursor(context, selection, selectionValues,
-                PreferenceUtil.getInstance(context).getSongSortOrder());
+                PreferenceUtil.getInstance().getSongSortOrder());
     }
 
     @Nullable
@@ -167,25 +171,28 @@ public class SongLoader {
     }
 
     public static Observable<ArrayList<Song>> suggestSongs(@NonNull Context context) {
-        return Observable.create(observer -> {
-            SongLoader.getAllSongs(context)
-                    .subscribe(songs -> {
-                        ArrayList<Song> list = new ArrayList<>();
-                        if (songs.isEmpty()) {
-                            observer.onNext(new ArrayList<>());
-                            observer.onComplete();
-                            return;
-                        }
-                        ShuffleHelper.makeShuffleList(songs, -1);
-                        if (songs.size() > 10) {
-                            list.addAll(songs.subList(0, 10));
-                        } else {
-                            list.addAll(songs);
-                        }
-                        observer.onNext(list);
-                        observer.onComplete();
-                    });
-        });
+        return SongLoader.getAllSongs(context)
+                .flatMap((Function<ArrayList<Song>, ObservableSource<ArrayList<Song>>>) songs -> {
+                    ArrayList<Song> list = new ArrayList<>();
+                    ShuffleHelper.makeShuffleList(songs, -1);
+                    if (songs.size() > 10) {
+                        list.addAll(songs.subList(0, 10));
+                    }
+                    return Observable.just(list);
+                });
+                /*.subscribe(songs -> {
+                    ArrayList<Song> list = new ArrayList<>();
+                    if (songs.isEmpty()) {
+                        return;
+                    }
+                    ShuffleHelper.makeShuffleList(songs, -1);
+                    if (songs.size() > 10) {
+                        list.addAll(songs.subList(0, 10));
+                    } else {
+                        list.addAll(songs);
+                    }
+                   return;
+                });*/
     }
 
 }

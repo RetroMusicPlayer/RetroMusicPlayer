@@ -22,7 +22,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/dummy_statusbar_actionbar"
         android:layout_alignTop="@id/dummy_statusbar_actionbar"
+        android:layout_alignBottom="@id/dummy_statusbar_actionbar"
         android:background="@drawable/shadow_down" />
 </RelativeLayout>

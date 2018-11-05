@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.Compressor;
@@ -95,20 +96,20 @@ public class UserInfoActivity extends AbsBaseActivity {
 
         title.setTextColor(ThemeStore.textColorPrimary(this));
         nameLayout.setBoxStrokeColor(ThemeStore.accentColor(this));
-        name.setText(PreferenceUtil.getInstance(this).getUserName());
+        name.setText(PreferenceUtil.getInstance().getUserName());
 
-        if (!PreferenceUtil.getInstance(this).getProfileImage().isEmpty()) {
-            loadImageFromStorage(PreferenceUtil.getInstance(this).getProfileImage());
+        if (!PreferenceUtil.getInstance().getProfileImage().isEmpty()) {
+            loadImageFromStorage(PreferenceUtil.getInstance().getProfileImage());
         }
-        if (!PreferenceUtil.getInstance(this).getBannerImage().isEmpty()) {
-            loadBannerFromStorage(PreferenceUtil.getInstance(this).getBannerImage());
+        if (!PreferenceUtil.getInstance().getBannerImage().isEmpty()) {
+            loadBannerFromStorage(PreferenceUtil.getInstance().getBannerImage());
         }
     }
 
     private void setupToolbar() {
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
-        nextButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
+        TintHelper.setTintAuto(nextButton, ThemeStore.accentColor(this), true);
     }
 
     @OnClick({R.id.next, R.id.banner_select})
@@ -124,7 +125,7 @@ public class UserInfoActivity extends AbsBaseActivity {
                     return;
                 }
                 //noinspection ConstantConditions
-                PreferenceUtil.getInstance(this).setUserName(nameString);
+                PreferenceUtil.getInstance().setUserName(nameString);
                 setResult(RESULT_OK);
                 //((UserInfoActivity) getActivity()).setFragment(new ChooseThemeFragment(), true);
                 finish();
@@ -144,7 +145,7 @@ public class UserInfoActivity extends AbsBaseActivity {
                             selectBannerImage();
                             break;
                         case 1:
-                            PreferenceUtil.getInstance(this).setBannerImagePath("");
+                            PreferenceUtil.getInstance().setBannerImagePath("");
                             break;
                     }
                 }).show();
@@ -152,7 +153,7 @@ public class UserInfoActivity extends AbsBaseActivity {
 
     private void selectBannerImage() {
         //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance(this).getBannerImage().isEmpty()) {
+        if (PreferenceUtil.getInstance().getBannerImage().isEmpty()) {
             Intent pickImageIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             pickImageIntent.setType("image/*");
             pickImageIntent.putExtra("crop", "true");
@@ -165,7 +166,7 @@ public class UserInfoActivity extends AbsBaseActivity {
             startActivityForResult(Intent.createChooser(pickImageIntent,
                     "Select Picture"), PICK_BANNER_REQUEST);
         } else {
-            PreferenceUtil.getInstance(this).setBannerImagePath("");
+            PreferenceUtil.getInstance().setBannerImagePath("");
             image.setImageResource(android.R.color.transparent);
         }
     }
@@ -183,7 +184,7 @@ public class UserInfoActivity extends AbsBaseActivity {
                             pickNewPhoto();
                             break;
                         case 1:
-                            PreferenceUtil.getInstance(this).saveProfileImage("");
+                            PreferenceUtil.getInstance().saveProfileImage("");
                             break;
                     }
                 }).show();
@@ -211,7 +212,7 @@ public class UserInfoActivity extends AbsBaseActivity {
             try {
                 Bitmap bitmap = ImageUtil.getResizedBitmap(Media.getBitmap(getContentResolver(), uri), PROFILE_ICON_SIZE);
                 String profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE);
-                PreferenceUtil.getInstance(this).saveProfileImage(profileImagePath);
+                PreferenceUtil.getInstance().saveProfileImage(profileImagePath);
                 loadImageFromStorage(profileImagePath);
 
             } catch (IOException e) {
@@ -224,7 +225,7 @@ public class UserInfoActivity extends AbsBaseActivity {
             try {
                 Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                 String profileImagePath = saveToInternalStorage(bitmap, USER_BANNER);
-                PreferenceUtil.getInstance(this).setBannerImagePath(profileImagePath);
+                PreferenceUtil.getInstance().setBannerImagePath(profileImagePath);
                 loadBannerFromStorage(profileImagePath);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -60,7 +60,7 @@ public class SearchActivity extends AbsMusicServiceActivity implements OnQueryTe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 

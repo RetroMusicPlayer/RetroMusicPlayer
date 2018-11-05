@@ -95,7 +95,6 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-
         <activity android:name=".ui.activities.AlbumDetailsActivity" />
         <activity android:name=".ui.activities.ArtistDetailActivity" />
         <activity android:name=".ui.activities.PlaylistDetailActivity" />
@@ -133,7 +132,6 @@
         <service
             android:name=".service.MusicService"
             android:enabled="true" />
-
         <service
             android:name=".service.WearBrowserService"
             android:exported="true">
@@ -142,25 +140,27 @@
             </intent-filter>
         </service>
 
-        <!--<service-->
-        <!--android:name=".service.daydream.RetroMusicAlbums"-->
-        <!--android:exported="true"-->
-        <!--android:label="Retro Music Albums"-->
-        <!--android:permission="android.permission.BIND_DREAM_SERVICE">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.service.dreams.DreamService" />-->
-        <!--<category android:name="android.intent.category.DEFAULT" />-->
-        <!--</intent-filter>-->
-        <!--</service>-->
+        <!-- <service -->
+        <!-- android:name=".service.daydream.RetroMusicAlbums" -->
+        <!-- android:exported="true" -->
+        <!-- android:label="Retro Music Albums" -->
+        <!-- android:permission="android.permission.BIND_DREAM_SERVICE"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.service.dreams.DreamService" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
         <!-- Widgets -->
-        <!-- <receiver
+        <!--
+         <receiver
              android:name=".headset.HeadsetReceiver"
              android:enabled="true"
              android:exported="true">
              <intent-filter>
                  <action android:name="android.intent.action.HEADSET_PLUG" />
              </intent-filter>
-         </receiver>-->
+         </receiver>
+        -->
         <receiver android:name=".appwidgets.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -220,8 +220,7 @@
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
         </receiver>
-        <!--Widgets ends-->
-
+        <!-- Widgets ends -->
 
         <meta-data
             android:name="android.max_aspect"
@@ -238,9 +237,12 @@
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
-        <!-- <meta-data
+
+        <!--
+             <meta-data
              android:name="com.google.android.gms.car.application"
-             android:resource="@xml/automotive_app_desc" />-->
+             android:resource="@xml/automotive_app_desc" />
+        -->
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -252,6 +254,9 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <activity android:name=".ui.activities.WhatsNewActivity"></activity>
+        <activity android:name=".ui.activities.album.SmallAlbumDetailsActivity" />
+        <activity android:name=".ui.activities.NowPayingActivity" />
     </application>
 
 </manifest>

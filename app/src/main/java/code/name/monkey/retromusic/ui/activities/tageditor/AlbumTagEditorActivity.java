@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
@@ -50,6 +51,7 @@ import code.name.monkey.retromusic.util.ImageUtil;
 import code.name.monkey.retromusic.util.LastFMUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -92,11 +94,12 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
     private Bitmap albumArtBitmap;
     private boolean deleteAlbumArt;
     private LastFMRestClient lastFMRestClient;
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     private void setupToolbar() {
-        title.setTextColor(ThemeStore.textColorPrimary(this));
-        // toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
+        title.setTextColor(Color.WHITE);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this, toolbar, Color.TRANSPARENT);
         setTitle(null);
         setSupportActionBar(toolbar);
         TintHelper.setTintAuto(content, ThemeStore.primaryColor(this), true);
@@ -104,7 +107,7 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         ButterKnife.apply(textInputLayouts, textColor, ThemeStore.accentColor((this)));
@@ -127,7 +130,6 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
         genre.addTextChangedListener(this);
         year.addTextChangedListener(this);
     }
-
 
     private void fillViewsWithFileTags() {
         albumTitle.setText(getAlbumTitle());
@@ -154,11 +156,17 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
             return;
         }
 
-        lastFMRestClient.getApiService()
+        disposable.add(lastFMRestClient.getApiService()
                 .getAlbumInfo(albumTitleStr, albumArtistNameStr, null)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.computation())
-                .subscribe(this::extractDetails);
+                .subscribe(this::extractDetails));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        disposable.clear();
     }
 
     private void extractDetails(@NonNull LastFmAlbum lastFmAlbum) {

@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -20,10 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Locale;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.MusicUtil;
@@ -89,17 +87,15 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        setButton.setBackgroundTintList(ColorStateList.valueOf(accentColor));
-        cancelButton.setStrokeColor(ColorStateList.valueOf(accentColor));
-        cancelButton.setTextColor(accentColor);
+        MaterialUtil.setTint(setButton, true);
+        MaterialUtil.setTint(cancelButton, false);
 
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
         timerDisplay.setTextColor(ThemeStore.textColorSecondary(getContext()));
 
         timerUpdater = new TimerUpdater();
 
-        seekArcProgress = PreferenceUtil.getInstance(getActivity()).getLastSleepTimerValue();
+        seekArcProgress = PreferenceUtil.getInstance().getLastSleepTimerValue();
         updateTimeDisplayTime();
         seekArc.setProgress(seekArcProgress);
         setProgressBarColor(ThemeStore.accentColor(getContext()));
@@ -122,7 +118,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                PreferenceUtil.getInstance(getActivity()).setLastSleepTimerValue(seekArcProgress);
+                PreferenceUtil.getInstance().setLastSleepTimerValue(seekArcProgress);
             }
         });
     }
@@ -151,7 +147,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
                 final int minutes = seekArcProgress;
                 PendingIntent pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT);
                 final long nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000;
-                PreferenceUtil.getInstance(getActivity()).setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime);
+                PreferenceUtil.getInstance().setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime);
                 AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
                 if (am != null) {
                     am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi);
@@ -178,7 +174,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
     private class TimerUpdater extends CountDownTimer {
         TimerUpdater() {
             //noinspection ConstantConditions
-            super(PreferenceUtil.getInstance(getActivity()).getNextSleepTimerElapsedRealTime() - SystemClock.elapsedRealtime(), 1000);
+            super(PreferenceUtil.getInstance().getNextSleepTimerElapsedRealTime() - SystemClock.elapsedRealtime(), 1000);
         }
 
         @Override

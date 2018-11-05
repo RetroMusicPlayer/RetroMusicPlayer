@@ -91,7 +91,7 @@
 
   </RadioGroup>
 
-  <androidx.cardview.widget.CardView
+  <com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="1"
@@ -140,5 +140,5 @@
         app:textAlign="left"
         app:textSize="18sp"/>
     </FrameLayout>
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

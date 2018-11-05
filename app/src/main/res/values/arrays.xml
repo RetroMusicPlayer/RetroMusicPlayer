@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
     <array name="pref_album_cover_transform_entities">
         <item>@string/normal</item>
         <item>@string/cascading</item>
+        <item>@string/depth</item>
+        <item>@string/vertical_flip</item>
+        <item>@string/horizontal_flip</item>
+        <item>@string/hinge</item>
     </array>
 
     <string-array name="pref_album_cover_transform_values">
         <item>0</item>
         <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <string-array name="pref_tab_text_mode_values">
@@ -75,7 +81,7 @@
 
     <array name="pref_home_grid_style_layout">
         <item>@layout/item_artist</item>
-        <item>@layout/item_artist_sqaure</item>
+        <item>@layout/item_artist_square</item>
     </array>
 
     <string-array name="pref_general_theme_list_values">
@@ -181,4 +187,20 @@
         <item>@id/cast_button_type_mute_toggle</item>
         <item>@id/cast_button_type_empty</item>
     </array>
+
+    <array name="pref_album_details_style_titles">
+        <item>@string/normal</item>
+        <item>@string/small</item>
+    </array>
+
+    <array name="pref_album_details_style_layout">
+        <item>@layout/activity_album</item>
+        <item>@layout/activity_album_small</item>
+    </array>
+
+    <string-array name="pref_album_details_style_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
 </resources>

@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="6dp"
             android:paddingTop="8dp"
+            android:paddingEnd="6dp"
             android:textAppearance="?android:textAppearanceLarge" />
 
 

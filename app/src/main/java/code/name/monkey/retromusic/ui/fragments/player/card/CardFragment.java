@@ -2,13 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.card;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +12,13 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemA
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -42,8 +42,10 @@ public class CardFragment extends AbsPlayerFragment implements PlayerAlbumCoverF
 
     RecyclerView recyclerView;
     @Nullable
+
     @BindView(R.id.title)
     TextView title;
+
     private RecyclerView.Adapter wrappedAdapter;
     private RecyclerViewDragDropManager recyclerViewDragDropManager;
     private PlayingQueueAdapter playingQueueAdapter;
@@ -158,6 +160,11 @@ public class CardFragment extends AbsPlayerFragment implements PlayerAlbumCoverF
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_player, container, false);
         unbinder = ButterKnife.bind(this, view);
+        if (getPlayerActivity() != null) {
+            getPlayerActivity().setDrawUnderNavigationBar();
+            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
+            addSafeArea(view);
+        }
         return view;
     }
 
@@ -212,9 +219,7 @@ public class CardFragment extends AbsPlayerFragment implements PlayerAlbumCoverF
                     (AppCompatActivity) getActivity(),
                     MusicPlayerRemote.getPlayingQueue(),
                     MusicPlayerRemote.getPosition(),
-                    R.layout.item_song,
-                    false,
-                    null);
+                    R.layout.item_song);
             wrappedAdapter = recyclerViewDragDropManager.createWrappedAdapter(playingQueueAdapter);
 
             layoutManager = new LinearLayoutManager(getContext());

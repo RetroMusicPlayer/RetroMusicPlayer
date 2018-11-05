@@ -4,30 +4,28 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
+import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
@@ -35,35 +33,43 @@ import code.name.monkey.retromusic.ui.fragments.VolumeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.views.PlayPauseDrawable;
 
 public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
     ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.title)
     AppCompatTextView title;
+
     @BindView(R.id.text)
     TextView text;
+
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
 
     private Unbinder unbinder;
-    private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
@@ -85,12 +91,24 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onResume() {
+        super.onResume();
+        progressViewUpdateHelper.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        progressViewUpdateHelper.stop();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
 
-        if (PreferenceUtil.getInstance(getContext()).getVolumeToggle()) {
+        if (PreferenceUtil.getInstance().getVolumeToggle()) {
             volumeContainer.setVisibility(View.VISIBLE);
         } else {
             volumeContainer.setVisibility(View.GONE);
@@ -109,24 +127,11 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
         Song song = MusicPlayerRemote.getCurrentSong();
         title.setText(song.title);
         text.setText(song.artistName);
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        progressViewUpdateHelper.start();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        progressViewUpdateHelper.stop();
     }
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
         updateSong();
@@ -140,7 +145,7 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -182,26 +187,20 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
 
 
     private void setUpPlayPauseFab() {
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
-
-        playPauseFab.setImageDrawable(playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(Color.BLACK)), PorterDuff.Mode.SRC_IN);
-        //playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
+        TintHelper.setTintAuto(playPauseFab, Color.WHITE, true);
+        TintHelper.setTintAuto(playPauseFab, Color.BLACK, false);
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
+
 
     private void setUpMusicControllers() {
         setUpPlayPauseFab();
@@ -293,40 +292,6 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
         });
     }
 
-    public void showBouceAnimation() {
-        playPauseFab.clearAnimation();
-
-        playPauseFab.setScaleX(0.9f);
-        playPauseFab.setScaleY(0.9f);
-        playPauseFab.setVisibility(View.VISIBLE);
-        playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-        playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-
-        playPauseFab.animate()
-                .setDuration(200)
-                .setInterpolator(new DecelerateInterpolator())
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .withEndAction(() -> playPauseFab.animate()
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .start())
-                .start();
-    }
-
-    @OnClick(R.id.player_play_pause_button)
-    void showAnimation() {
-        if (MusicPlayerRemote.isPlaying()) {
-            MusicPlayerRemote.pauseSong();
-        } else {
-            MusicPlayerRemote.resumePlaying();
-        }
-        showBouceAnimation();
-    }
-
     @Override
     public void onUpdateProgressViews(int progress, int total) {
         progressSlider.setMax(total);
@@ -341,8 +306,6 @@ public class ColorPlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     public void hideVolumeIfAvailable() {
-        volumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+        volumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
     }
-
-
 }

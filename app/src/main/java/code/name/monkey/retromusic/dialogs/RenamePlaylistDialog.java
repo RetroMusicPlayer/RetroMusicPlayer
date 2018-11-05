@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment;
@@ -79,17 +80,13 @@ public class RenamePlaylistDialog extends RoundedBottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         int accentColor = ThemeStore.accentColor(Objects.requireNonNull(getContext()));
-        rename.setBackgroundTintList(ColorStateList.valueOf(accentColor));
-        actionCancel.setStrokeColor(ColorStateList.valueOf(accentColor));
-        actionCancel.setTextColor(accentColor);
+        MaterialUtil.setTint(rename,true);
+        MaterialUtil.setTint(actionCancel,false);
+        MaterialUtil.setTint(textInputLayout,false);
+
         playlistName.setHintTextColor(ColorStateList.valueOf(accentColor));
-
-        textInputLayout.setBoxStrokeColor(accentColor);
-        textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(accentColor));
-
-        playlistName.setHintTextColor(accentColor);
-
         playlistName.setTextColor(ThemeStore.textColorPrimary(getContext()));
+
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
 
         long playlistId = 0;

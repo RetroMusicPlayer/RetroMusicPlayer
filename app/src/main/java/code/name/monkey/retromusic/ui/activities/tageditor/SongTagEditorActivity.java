@@ -2,13 +2,12 @@ package code.name.monkey.retromusic.ui.activities.tageditor;
 
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import com.google.android.material.appbar.AppBarLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.material.appbar.AppBarLayout;
 
 import org.jaudiotagger.tag.FieldKey;
 
@@ -17,6 +16,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -60,6 +61,9 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
     @BindView(R.id.album_artist)
     EditText albumArtist;
 
+    @BindView(R.id.composer)
+    EditText composer;
+
     private void setupToolbar() {
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
@@ -90,7 +94,7 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         year.addTextChangedListener(this);
         trackNumber.addTextChangedListener(this);
         lyrics.addTextChangedListener(this);
-
+        composer.addTextChangedListener(this);
     }
 
     private void fillViewsWithFileTags() {
@@ -102,6 +106,7 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         year.setText(getSongYear());
         trackNumber.setText(getTrackNumber());
         lyrics.setText(getLyrics());
+        composer.setText(getComposer());
     }
 
     @Override
@@ -135,6 +140,7 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         fieldKeyValueMap.put(FieldKey.TRACK, trackNumber.getText().toString());
         fieldKeyValueMap.put(FieldKey.LYRICS, lyrics.getText().toString());
         fieldKeyValueMap.put(FieldKey.ALBUM_ARTIST, albumArtist.getText().toString());
+        fieldKeyValueMap.put(FieldKey.COMPOSER, composer.getText().toString());
         writeValuesToFiles(fieldKeyValueMap, null);
     }
 

@@ -3,19 +3,17 @@ package code.name.monkey.retromusic.ui.fragments.player.adaptive;
 import android.animation.ObjectAnimator;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatSeekBar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,21 +36,29 @@ import code.name.monkey.retromusic.views.PlayPauseDrawable;
 public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment {
 
     @BindView(R.id.player_play_pause_button)
-    ImageButton playPauseButton;
+    ImageButton playPauseFab;
+
     @BindView(R.id.player_prev_button)
     ImageButton prevButton;
+
     @BindView(R.id.player_next_button)
     ImageButton nextButton;
+
     @BindView(R.id.player_repeat_button)
     ImageButton repeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton shuffleButton;
+
     @BindView(R.id.player_progress_slider)
     AppCompatSeekBar progressSlider;
+
     @BindView(R.id.player_song_total_time)
     TextView songTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView songCurrentProgress;
+
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
 
@@ -108,7 +114,7 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
 
@@ -116,7 +122,7 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -145,8 +151,8 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
         updatePrevNextColor();
         updatePlayPauseColor();
 
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(dark)), false);
-        TintHelper.setTintAuto(playPauseButton, dark, true);
+        TintHelper.setTintAuto(playPauseFab, MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(dark)), false);
+        TintHelper.setTintAuto(playPauseFab, dark, true);
         TintHelper.setTintAuto(progressSlider, dark, false);
     }
 
@@ -154,29 +160,21 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
         //playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN);
     }
 
-    private void setUpPlayPauseButton() {
-        playPauseDrawable = new PlayPauseDrawable(getActivity());
-        playPauseButton.setImageDrawable(playPauseDrawable);
-        updatePlayPauseColor();
-        playPauseButton.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseButton.post(() -> {
-            if (playPauseButton != null) {
-                playPauseButton.setPivotX(playPauseButton.getWidth() / 2);
-                playPauseButton.setPivotY(playPauseButton.getHeight() / 2);
-            }
-        });
+    private void setUpPlayPauseFab() {
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
 
+
     private void setUpMusicControllers() {
-        setUpPlayPauseButton();
+        setUpPlayPauseFab();
         setUpPrevNext();
         setUpRepeatButton();
         setUpShuffleButton();
@@ -249,8 +247,6 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
-
-
                     MusicPlayerRemote.seekTo(progress);
                     onUpdateProgressViews(MusicPlayerRemote.getSongProgressMillis(),
                             MusicPlayerRemote.getSongDurationMillis());
@@ -259,29 +255,6 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
         });
     }
 
-    public void showBouceAnimation() {
-        playPauseButton.clearAnimation();
-
-        playPauseButton.setScaleX(0.9f);
-        playPauseButton.setScaleY(0.9f);
-        playPauseButton.setVisibility(View.VISIBLE);
-        playPauseButton.setPivotX(playPauseButton.getWidth() / 2);
-        playPauseButton.setPivotY(playPauseButton.getHeight() / 2);
-
-        playPauseButton.animate()
-                .setDuration(200)
-                .setInterpolator(new DecelerateInterpolator())
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .withEndAction(() -> playPauseButton.animate()
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .start())
-                .start();
-    }
 
     @OnClick(R.id.player_play_pause_button)
     void showAnimation() {
@@ -290,7 +263,7 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
         } else {
             MusicPlayerRemote.resumePlaying();
         }
-        showBouceAnimation();
+        showBouceAnimation(playPauseFab);
     }
 
     @Override
@@ -306,8 +279,7 @@ public class AdaptivePlaybackControlsFragment extends AbsPlayerControlsFragment 
         songCurrentProgress.setText(MusicUtil.getReadableDurationString(progress));
     }
 
-    public void hideVolumeIfAvailable() {
-        volumeContainer.setVisibility(
-                PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+    private void hideVolumeIfAvailable() {
+        volumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
     }
 }

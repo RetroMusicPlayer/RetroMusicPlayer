@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
+import code.name.monkey.retromusic.R;
 
 public class ViewUtil {
 

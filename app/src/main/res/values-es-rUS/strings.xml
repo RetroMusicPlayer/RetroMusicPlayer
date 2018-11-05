@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Tenga en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_blur_amount_title">Cantidad de desenfoque</string>
     <string name="pref_blur_amount_summary">Cantidad de desenfoque aplicado a los temas de desenfoque, más bajo es más rápido</string>
-    <string name="buy_retromusic_pro">Comprar Retro Music Pro</string>
+    <string name="buy_retro_music_pro">Comprar Retro Music Pro</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Tarjeta</string>
     <string name="card_color_style">Tarjeta coloreada</string>

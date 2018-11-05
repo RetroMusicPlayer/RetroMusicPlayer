@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic;
 
+import android.content.Context;
 import android.os.Build;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -22,6 +23,10 @@ public class RetroApplication extends MultiDexApplication {
 
     public static RetroApplication getInstance() {
         return app;
+    }
+
+    public static Context getContext() {
+        return app.getApplicationContext();
     }
 
     public static boolean isProVersion() {

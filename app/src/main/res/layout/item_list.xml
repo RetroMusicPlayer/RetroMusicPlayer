@@ -33,7 +33,7 @@
             android:paddingLeft="16dp"
             android:paddingEnd="0dp">
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image_text_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                     android:minHeight="40dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:visibility="gone" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
         </FrameLayout>
 
         <LinearLayout

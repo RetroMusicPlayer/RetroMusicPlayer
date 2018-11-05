@@ -31,7 +31,7 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
         final ATEColorPreference primaryColorPref = (ATEColorPreference) findPreference(
                 "primary_color");
         //noinspection ConstantConditions
-        primaryColorPref.setVisible(PreferenceUtil.getInstance(getActivity()).getGeneralTheme() == R.style.Theme_RetroMusic_Color);
+        primaryColorPref.setVisible(PreferenceUtil.getInstance().getGeneralTheme() == R.style.Theme_RetroMusic_Color);
         final int primaryColor = ThemeStore.primaryColor(getActivity());
         primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor));
         primaryColorPref.setOnPreferenceClickListener(preference -> {
@@ -123,10 +123,10 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.setVisible(false);
         } else {
-            colorAppShortcuts.setChecked(PreferenceUtil.getInstance(getActivity()).coloredAppShortcuts());
+            colorAppShortcuts.setChecked(PreferenceUtil.getInstance().coloredAppShortcuts());
             colorAppShortcuts.setOnPreferenceChangeListener((preference, newValue) -> {
                 // Save preference
-                PreferenceUtil.getInstance(getActivity()).setColoredAppShortcuts((Boolean) newValue);
+                PreferenceUtil.getInstance().setColoredAppShortcuts((Boolean) newValue);
                 // Update app shortcuts
                 new DynamicShortcutManager(getActivity()).updateDynamicShortcuts();
 

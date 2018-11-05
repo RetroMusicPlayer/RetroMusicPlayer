@@ -8,7 +8,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:cardUseCompatPadding="true">
 
         <FrameLayout
@@ -41,7 +43,7 @@
         </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         style="@style/SubTitleTextAppearance"
         android:text="@string/for_you" />
 

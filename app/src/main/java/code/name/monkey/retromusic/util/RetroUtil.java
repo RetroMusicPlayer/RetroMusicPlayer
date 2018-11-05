@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
@@ -21,6 +22,7 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -100,10 +102,6 @@ public class RetroUtil {
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
 
-    public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
-        window.getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
 
     public static boolean isMarshMellow() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
@@ -223,7 +221,7 @@ public class RetroUtil {
     }
 
     public static boolean isAllowedToDownloadMetadata(final Context context) {
-        switch (PreferenceUtil.getInstance(context).autoDownloadImagesPolicy()) {
+        switch (PreferenceUtil.getInstance().autoDownloadImagesPolicy()) {
             case "always":
                 return true;
             case "only_wifi":
@@ -307,5 +305,103 @@ public class RetroUtil {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public static int getNavigationBarHeight(Context context) {
+        int result = 0;
+        int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = context.getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+
+    public static void setAllowDrawUnderNavigationBar(Window window) {
+        window.setNavigationBarColor(Color.TRANSPARENT);
+        window.getDecorView().setSystemUiVisibility(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION :
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        );
+    }
+
+    public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
+        window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
+
+    public static int getSoftButtonsBarSizePort(Activity activity) {
+        // getRealMetrics is only available with API 17 and +
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int usableHeight = metrics.heightPixels;
+        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        int realHeight = metrics.heightPixels;
+        if (realHeight > usableHeight)
+            return realHeight - usableHeight;
+        else
+            return 0;
+    }
+
+    public static boolean hasNavBar(Resources resources) {
+        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0)
+            return resources.getBoolean(id);
+        else
+            return false;
+    }
+
+    public static int getNavigationBarHeight(Resources resources) {
+        if (!hasNavBar(resources))
+            return 0;
+
+        int orientation = resources.getConfiguration().orientation;
+
+        //Only phone between 0-599 has navigationbar can move
+        boolean isSmartphone = resources.getConfiguration().smallestScreenWidthDp < 600;
+        if (isSmartphone && Configuration.ORIENTATION_LANDSCAPE == orientation)
+            return 0;
+
+        int id = resources
+                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        if (id > 0)
+            return resources.getDimensionPixelSize(id);
+
+        return 0;
+    }
+
+    public static int getNavigationBarWidth(Resources resources) {
+        if (!hasNavBar(resources))
+            return 0;
+
+        int orientation = resources.getConfiguration().orientation;
+
+        //Only phone between 0-599 has navigationbar can move
+        boolean isSmartphone = resources.getConfiguration().smallestScreenWidthDp < 600;
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone) {
+            int id = resources.getIdentifier("navigation_bar_width", "dimen", "android");
+            if (id > 0)
+                return resources.getDimensionPixelSize(id);
+        }
+
+        return 0;
+    }
+
+    public static boolean isNavigationBarLeftSide() {
+        Display display = ((WindowManager) RetroApplication.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int screenOrientation = display.getRotation();
+        return screenOrientation == Surface.ROTATION_180;
+    }
+
+    public static boolean isNavigationBarRightSide() {
+        Display display = ((WindowManager) RetroApplication.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int screenOrientation = display.getRotation();
+        return screenOrientation == Surface.ROTATION_90;
     }
 }

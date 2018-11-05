@@ -14,10 +14,10 @@ import io.reactivex.Observable;
 
 public class ArtistLoader {
     private static String getSongLoaderSortOrder(Context context) {
-        return PreferenceUtil.getInstance(context).getArtistSortOrder() + ", " +
-                PreferenceUtil.getInstance(context).getArtistAlbumSortOrder() + ", " +
-                PreferenceUtil.getInstance(context).getAlbumDetailSongSortOrder() + ", " +
-                PreferenceUtil.getInstance(context).getArtistDetailSongSortOrder();
+        return PreferenceUtil.getInstance().getArtistSortOrder() + ", " +
+                PreferenceUtil.getInstance().getArtistAlbumSortOrder() + ", " +
+                PreferenceUtil.getInstance().getAlbumDetailSongSortOrder() + ", " +
+                PreferenceUtil.getInstance().getArtistDetailSongSortOrder();
     }
 
     @NonNull

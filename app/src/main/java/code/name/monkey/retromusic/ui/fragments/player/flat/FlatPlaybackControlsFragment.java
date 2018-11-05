@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.flat;
 import android.animation.ObjectAnimator;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -40,25 +40,35 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
 
     @BindView(R.id.text)
     TextView mText;
+
     @BindView(R.id.title)
     TextView mTitle;
+
     @BindView(R.id.playback_controls)
     ViewGroup viewGroup;
+
     @BindView(R.id.player_song_total_time)
     TextView mSongTotalTime;
+
     @BindView(R.id.player_song_current_progress)
     TextView mPlayerSongCurrentProgress;
+
     @BindView(R.id.player_repeat_button)
     ImageButton mPlayerRepeatButton;
+
     @BindView(R.id.player_shuffle_button)
     ImageButton mPlayerShuffleButton;
+
     @BindView(R.id.player_play_pause_button)
-    ImageView mPlayerPlayPauseFab;
-    Unbinder unbinder;
+    ImageView playPauseFab;
+
     @BindView(R.id.player_progress_slider)
     SeekBar progressSlider;
+
     @BindView(R.id.volume_fragment_container)
     View mVolumeContainer;
+
+    Unbinder unbinder;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
@@ -84,7 +94,7 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
         super.onViewCreated(view, savedInstanceState);
         setUpMusicControllers();
 
-        mVolumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+        mVolumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -114,7 +124,7 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
 
 
     public void show() {
-        mPlayerPlayPauseFab.animate()
+        playPauseFab.animate()
                 .scaleX(1f)
                 .scaleY(1f)
                 .setInterpolator(new DecelerateInterpolator())
@@ -123,10 +133,10 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
 
 
     public void hide() {
-        if (mPlayerPlayPauseFab != null) {
-            mPlayerPlayPauseFab.setScaleX(0f);
-            mPlayerPlayPauseFab.setScaleY(0f);
-            mPlayerPlayPauseFab.setRotation(0f);
+        if (playPauseFab != null) {
+            playPauseFab.setScaleX(0f);
+            playPauseFab.setScaleY(0f);
+            playPauseFab.setRotation(0f);
         }
     }
 
@@ -141,7 +151,7 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
         int accentColor = ThemeStore.accentColor(getContext());
-        boolean b = PreferenceUtil.getInstance(getContext()).getAdaptiveColor();
+        boolean b = PreferenceUtil.getInstance().getAdaptiveColor();
         updateTextColors(b ? dark : accentColor);
         setProgressBarColor(b ? dark : accentColor);
 
@@ -163,8 +173,8 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
         int colorPrimary = MaterialValueHelper.getPrimaryTextColor(getContext(), isDark);
         int colorSecondary = MaterialValueHelper.getSecondaryTextColor(getContext(), ColorUtil.isColorLight(darkColor));
 
-        TintHelper.setTintAuto(mPlayerPlayPauseFab, colorPrimary, false);
-        TintHelper.setTintAuto(mPlayerPlayPauseFab, color, true);
+        TintHelper.setTintAuto(playPauseFab, colorPrimary, false);
+        TintHelper.setTintAuto(playPauseFab, color, true);
 
         mTitle.setBackgroundColor(color);
         mTitle.setTextColor(colorPrimary);
@@ -180,7 +190,7 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
         updateShuffleState();
         updateSong();
@@ -194,30 +204,19 @@ public class FlatPlaybackControlsFragment extends AbsMusicServiceFragment implem
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
-    }
-
-    protected void updatePlayPauseDrawableState(boolean animate) {
-        if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
-        } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
-        }
+        updatePlayPauseDrawableState();
     }
 
     private void setUpPlayPauseFab() {
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
+        playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
+    }
 
-        mPlayerPlayPauseFab.setImageDrawable(
-                playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        //playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
-        mPlayerPlayPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        mPlayerPlayPauseFab.post(() -> {
-            if (mPlayerPlayPauseFab != null) {
-                mPlayerPlayPauseFab.setPivotX(mPlayerPlayPauseFab.getWidth() / 2);
-                mPlayerPlayPauseFab.setPivotY(mPlayerPlayPauseFab.getHeight() / 2);
-            }
-        });
+    protected void updatePlayPauseDrawableState() {
+        if (MusicPlayerRemote.isPlaying()) {
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
+        } else {
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
+        }
     }
 
     private void setUpMusicControllers() {

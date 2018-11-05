@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
+        android:visibility="gone">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/recent_artists" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -36,11 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/recent_albums" />
+
 
         <code.name.monkey.retromusic.views.MetalRecyclerViewPager
             android:id="@+id/recent_album"
@@ -63,7 +67,7 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/top_artists" />
 
@@ -87,7 +91,8 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/top_albums" />
 
@@ -106,13 +111,38 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/suggestion_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/suggestion_songs" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/suggestion_songs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="8dp"
+            android:background="?attr/dividerColor" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/genre_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/genres" />
 

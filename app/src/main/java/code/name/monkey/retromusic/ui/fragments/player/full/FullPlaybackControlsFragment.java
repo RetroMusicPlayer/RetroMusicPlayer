@@ -102,12 +102,12 @@ public class FullPlaybackControlsFragment extends AbsPlayerControlsFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         setUpMusicControllers();
 
-        mVolumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+        mVolumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
         VolumeFragment volumeFragment = (VolumeFragment) getChildFragmentManager().findFragmentById(R.id.volume_fragment);
         volumeFragment.tintWhiteColor();
 
@@ -160,7 +160,7 @@ public class FullPlaybackControlsFragment extends AbsPlayerControlsFragment {
         lastPlaybackControlsColor = Color.WHITE;
         lastDisabledPlaybackControlsColor = ContextCompat.getColor(getContext(), R.color.md_grey_500);
 
-        if (PreferenceUtil.getInstance(getContext()).getAdaptiveColor()) {
+        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
             setProgressBarColor(dark);
         } else {
             int accentColor = ThemeStore.accentColor(getContext());

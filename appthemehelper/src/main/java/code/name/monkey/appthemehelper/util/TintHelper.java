@@ -7,15 +7,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
-import androidx.annotation.CheckResult;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.SwitchCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -27,9 +18,19 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import code.name.monkey.appthemehelper.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.lang.reflect.Field;
+
+import androidx.annotation.CheckResult;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import code.name.monkey.appthemehelper.R;
 
 /**
  * @author afollestad, plusCubed
@@ -154,8 +155,7 @@ public final class TintHelper {
                     !background && view.getBackground() instanceof RippleDrawable) {
                 // Ripples for the above views (e.g. when you tap and hold a switch or checkbox)
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
-                @SuppressLint("PrivateResource")
-                final int unchecked = ContextCompat.getColor(view.getContext(),
+                @SuppressLint("PrivateResource") final int unchecked = ContextCompat.getColor(view.getContext(),
                         isDark ? R.color.ripple_material_dark : R.color.ripple_material_light);
                 final int checked = ColorUtil.adjustAlpha(color, 0.4f);
                 final ColorStateList sl = new ColorStateList(
@@ -186,6 +186,7 @@ public final class TintHelper {
             }
         }
     }
+
 
     public static void setTint(@NonNull RadioButton radioButton, @ColorInt int color, boolean useDarker) {
         ColorStateList sl = new ColorStateList(new int[][]{

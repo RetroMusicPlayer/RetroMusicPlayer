@@ -93,7 +93,7 @@ public class LockScreenPlayerControlsFragment extends AbsPlayerControlsFragment 
         setUpMusicControllers();
 
         //noinspection ConstantConditions
-        volumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle()
+        volumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle()
                 ? View.VISIBLE : View.GONE);
 
     }

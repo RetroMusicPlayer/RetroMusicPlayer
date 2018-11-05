@@ -5,12 +5,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.ColorInt;
-import androidx.core.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.ColorInt;
+import androidx.core.content.ContextCompat;
 import code.name.monkey.appthemehelper.ATH;
 import code.name.monkey.appthemehelper.ATHActivity;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -29,7 +29,7 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(PreferenceUtil.getInstance(this).getGeneralTheme());
+        setTheme(PreferenceUtil.getInstance().getGeneralTheme());
         hideStatusBar();
         super.onCreate(savedInstanceState);
         MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this);
@@ -41,7 +41,7 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
     }
 
     private void toggleScreenOn() {
-        if (PreferenceUtil.getInstance(this).isScreenOnEnabled()) {
+        if (PreferenceUtil.getInstance().isScreenOnEnabled()) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         } else {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -61,7 +61,7 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
     }
 
     public void hideStatusBar() {
-        hideStatusBar(PreferenceUtil.getInstance(this).getFullScreenMode());
+        hideStatusBar(PreferenceUtil.getInstance().getFullScreenMode());
     }
 
     private void hideStatusBar(boolean fullscreen) {
@@ -73,16 +73,24 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
 
 
     private void changeBackgroundShape() {
-        Drawable background = PreferenceUtil.getInstance(this).isRoundCorners() ?
+        Drawable background = PreferenceUtil.getInstance().isRoundCorners() ?
                 ContextCompat.getDrawable(this, R.drawable.round_window)
                 : ContextCompat.getDrawable(this, R.drawable.square_window);
         background = TintHelper.createTintedDrawable(background, ThemeStore.primaryColor(this));
         getWindow().setBackgroundDrawable(background);
     }
 
-    protected void setDrawUnderStatusBar(boolean drawUnderStatusbar) {
+    public void setDrawUnderStatusBar() {
         if (VersionUtils.hasLollipop()) {
             RetroUtil.setAllowDrawUnderStatusBar(getWindow());
+        } else if (VersionUtils.hasKitKat()) {
+            RetroUtil.setStatusBarTranslucent(getWindow());
+        }
+    }
+
+    public void setDrawUnderNavigationBar() {
+        if (VersionUtils.hasLollipop()) {
+            RetroUtil.setAllowDrawUnderNavigationBar(getWindow());
         } else if (VersionUtils.hasKitKat()) {
             RetroUtil.setStatusBarTranslucent(getWindow());
         }
@@ -104,6 +112,9 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
                 } else {
                     statusBar.setBackgroundColor(color);
                 }
+            } else if (VersionUtils.hasMarshmallow()) {
+                getWindow().setStatusBarColor(color);
+                setLightStatusbarAuto(color);
             } else if (Build.VERSION.SDK_INT >= 21) {
                 getWindow().setStatusBarColor(ColorUtil.darkenColor(color));
                 setLightStatusbarAuto(color);
@@ -171,7 +182,7 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        if (PreferenceUtil.getInstance(this).getFullScreenMode()) {
+        if (PreferenceUtil.getInstance().getFullScreenMode()) {
             getWindow().getDecorView().setSystemUiVisibility(flags);
         }
     }

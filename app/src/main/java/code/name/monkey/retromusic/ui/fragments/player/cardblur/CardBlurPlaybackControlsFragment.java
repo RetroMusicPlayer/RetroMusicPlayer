@@ -30,13 +30,11 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper;
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler;
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener;
-import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.fragments.VolumeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.views.PlayPauseDrawable;
 
 public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment {
     @BindView(R.id.player_play_pause_button)
@@ -66,23 +64,12 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
     @BindView(R.id.volume_fragment_container)
     View volumeContainer;
 
-    @BindView(R.id.text)
-    TextView text;
-
-    @BindView(R.id.title)
-    TextView title;
 
     private Unbinder unbinder;
-    private PlayPauseDrawable playerFabPlayPauseDrawable;
     private int lastPlaybackControlsColor;
     private int lastDisabledPlaybackControlsColor;
     private MusicProgressViewUpdateHelper progressViewUpdateHelper;
 
-    private void updateSong() {
-        Song song = MusicPlayerRemote.getCurrentSong();
-        title.setText(song.title);
-        text.setText(song.artistName);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,7 +91,6 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
         unbinder = ButterKnife.bind(this, view);
         setUpMusicControllers();
         hideVolumeIfAvailable();
-        title.setSelected(true);
     }
 
     @Override
@@ -127,22 +113,15 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
 
     @Override
     public void onServiceConnected() {
-        updatePlayPauseDrawableState(false);
+        updatePlayPauseDrawableState();
         updateRepeatState();
-        updateSong();
         updateShuffleState();
-
     }
 
-    @Override
-    public void onPlayingMetaChanged() {
-        super.onPlayingMetaChanged();
-        updateSong();
-    }
 
     @Override
     public void onPlayStateChanged() {
-        updatePlayPauseDrawableState(true);
+        updatePlayPauseDrawableState();
     }
 
     @Override
@@ -157,10 +136,6 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
 
     @Override
     public void setDark(int dark) {
-
-        title.setTextColor(Color.WHITE);
-        text.setTextColor(Color.WHITE);
-
         lastPlaybackControlsColor = Color.WHITE;
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(Color.WHITE, 0.3f);
 
@@ -172,28 +147,16 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
 
 
     private void setUpPlayPauseFab() {
-        final int fabColor = Color.WHITE;
-        TintHelper.setTintAuto(playPauseFab, fabColor, true);
-
-        playerFabPlayPauseDrawable = new PlayPauseDrawable(getActivity());
-
-        playPauseFab.setImageDrawable(playerFabPlayPauseDrawable); // Note: set the drawable AFTER TintHelper.setTintAuto() was called
-        playPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(getContext(),
-                ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN);
+        TintHelper.setTintAuto(playPauseFab, Color.WHITE, true);
+        TintHelper.setTintAuto(playPauseFab, Color.BLACK, false);
         playPauseFab.setOnClickListener(new PlayPauseButtonOnClickHandler());
-        playPauseFab.post(() -> {
-            if (playPauseFab != null) {
-                playPauseFab.setPivotX(playPauseFab.getWidth() / 2);
-                playPauseFab.setPivotY(playPauseFab.getHeight() / 2);
-            }
-        });
     }
 
-    protected void updatePlayPauseDrawableState(boolean animate) {
+    protected void updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying()) {
-            playerFabPlayPauseDrawable.setPause(animate);
+            playPauseFab.setImageResource(R.drawable.ic_pause_white_24dp);
         } else {
-            playerFabPlayPauseDrawable.setPlay(animate);
+            playPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp);
         }
     }
 
@@ -341,8 +304,6 @@ public class CardBlurPlaybackControlsFragment extends AbsPlayerControlsFragment 
     }
 
     public void hideVolumeIfAvailable() {
-        volumeContainer.setVisibility(PreferenceUtil.getInstance(getContext()).getVolumeToggle() ? View.VISIBLE : View.GONE);
+        volumeContainer.setVisibility(PreferenceUtil.getInstance().getVolumeToggle() ? View.VISIBLE : View.GONE);
     }
-
-
 }

@@ -1,41 +1,42 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import androidx.core.content.ContextCompat;
-import androidx.core.util.Pair;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.Toolbar;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewStub;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.util.Pair;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -44,7 +45,6 @@ import code.name.monkey.retromusic.dialogs.DeleteSongsDialog;
 import code.name.monkey.retromusic.glide.ArtistGlideRequest;
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.loaders.ArtistLoader;
@@ -85,7 +85,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     AppCompatTextView songTitle;
 
     @BindView(R.id.action_shuffle_all)
-    FloatingActionButton shuffleButton;
+    MaterialButton shuffleButton;
 
     @BindView(R.id.collapsing_toolbar)
     @Nullable
@@ -108,35 +108,49 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     TextView moreTitle;
 
     @BindView(R.id.artist_image)
+    @Nullable
     ImageView artistImage;
 
     private AlbumDetailsPresenter albumDetailsPresenter;
-    private Album album;
+
     private SimpleSongAdapter adapter;
+    private Album album;
 
     @Override
     protected View createContentView() {
         return wrapSlidingMusicPanel(R.layout.activity_album);
     }
 
+    void setupWindowTransition() {
+        Slide slide = new Slide(Gravity.BOTTOM);
+        slide.setInterpolator(
+                AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in));
+        getWindow().setEnterTransition(slide);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setDrawUnderStatusBar(true);
+        setDrawUnderStatusBar();
+        setupWindowTransition();
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setBottomBarVisibility(View.GONE);
-
+        toggleBottomNavigationView(true);
         setLightNavigationBar(true);
         setNavigationbarColorAuto();
 
-        supportPostponeEnterTransition();
-        setupToolbarMarginHeight();
+        ActivityCompat.postponeEnterTransition(this);
 
+        adapter = new SimpleSongAdapter(this, new ArrayList<>(), R.layout.item_song);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(adapter);
+
+        setupToolbarMarginHeight();
 
         int albumId = getIntent().getIntExtra(EXTRA_ALBUM_ID, -1);
         albumDetailsPresenter = new AlbumDetailsPresenter(this, albumId);
-
     }
 
     private void setupToolbarMarginHeight() {
@@ -153,7 +167,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         getSupportActionBar().setTitle(null);
 
 
-        if (toolbar != null && !PreferenceUtil.getInstance(this).getFullScreenMode()) {
+        if (toolbar != null && !PreferenceUtil.getInstance().getFullScreenMode()) {
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
             params.topMargin = RetroUtil.getStatusBarHeight(this);
             toolbar.setLayoutParams(params);
@@ -166,21 +180,20 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                     int color;
                     switch (state) {
                         case COLLAPSED:
-                            setLightStatusbar(!ATHUtil.isWindowBackgroundDark(AlbumDetailsActivity.this));
-                            color = ATHUtil.resolveColor(AlbumDetailsActivity.this, R.attr.iconColor);
+                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(AlbumDetailsActivity.this)));
+                            color = ThemeStore.primaryColor(AlbumDetailsActivity.this);
                             break;
                         default:
                         case EXPANDED:
                         case IDLE:
                             setLightStatusbar(false);
-                            color = ContextCompat.getColor(AlbumDetailsActivity.this, R.color.md_white_1000);
+                            color = Color.TRANSPARENT;
                             break;
                     }
-                    ToolbarContentTintHelper.colorizeToolbar(toolbar, color, AlbumDetailsActivity.this);
+                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(AlbumDetailsActivity.this, toolbar, color);
                 }
             });
         }
-
     }
 
     @OnClick({R.id.action_shuffle_all, R.id.artist_image})
@@ -193,8 +206,8 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                         artistPairs);
                 break;
             case R.id.action_shuffle_all:
-                if (album.songs != null) {
-                    MusicPlayerRemote.openAndShuffleQueue(album.songs, true);
+                if (getAlbum().songs != null) {
+                    MusicPlayerRemote.openAndShuffleQueue(getAlbum().songs, true);
                 }
                 break;
         }
@@ -224,7 +237,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
     @Override
     public void completed() {
-        supportStartPostponedEnterTransition();
+        ActivityCompat.startPostponedEnterTransition(this);
     }
 
     @Override
@@ -241,31 +254,24 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                 MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs))));
 
         loadAlbumCover();
-
-        adapter = new SimpleSongAdapter(this, this.album.songs, R.layout.item_song);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        recyclerView.setNestedScrollingEnabled(false);
-
         loadMoreFrom(album);
-
+        adapter.swapDataSet(album.songs);
     }
 
     private void loadMoreFrom(Album album) {
-
-        ArtistGlideRequest.Builder.from(Glide.with(this),
-                ArtistLoader.getArtist(this, album.getArtistId()).blockingFirst())
-                .forceDownload(false)
-                .generatePalette(this).build()
-                .dontAnimate()
-                .into(new RetroMusicColoredTarget(artistImage) {
-                    @Override
-                    public void onColorReady(int color) {
-                        //setColors(color);
-                    }
-                });
+        if (artistImage != null) {
+            ArtistGlideRequest.Builder.from(Glide.with(this),
+                    ArtistLoader.getArtist(this, album.getArtistId()).blockingFirst())
+                    .forceDownload(false)
+                    .generatePalette(this).build()
+                    .dontAnimate()
+                    .into(new RetroMusicColoredTarget(artistImage) {
+                        @Override
+                        public void onColorReady(int color) {
+                            //setColors(color);
+                        }
+                    });
+        }
 
         ArrayList<Album> albums = ArtistLoader.getArtist(this, album.getArtistId())
                 .blockingFirst().albums;
@@ -278,11 +284,11 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         }
         moreTitle.setText(String.format("More from %s", album.getArtistName()));
 
-        AlbumAdapter albumAdapter = new HorizontalAlbumAdapter(this, albums,
-                false, null);
-        moreRecyclerView
-                .setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
+        AlbumAdapter albumAdapter = new HorizontalAlbumAdapter(this, albums, false, null);
+        moreRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
         moreRecyclerView.setAdapter(albumAdapter);
+
+        ActivityCompat.startPostponedEnterTransition(this);
     }
 
     public Album getAlbum() {
@@ -294,22 +300,6 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                 .checkIgnoreMediaStore(this)
                 .generatePalette(this).build()
                 .dontAnimate()
-                .listener(new RequestListener<Object, BitmapPaletteWrapper>() {
-                    @Override
-                    public boolean onException(Exception e, Object model, Target<BitmapPaletteWrapper> target,
-                                               boolean isFirstResource) {
-                        supportStartPostponedEnterTransition();
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(BitmapPaletteWrapper resource, Object model,
-                                                   Target<BitmapPaletteWrapper> target, boolean isFromMemoryCache,
-                                                   boolean isFirstResource) {
-                        supportStartPostponedEnterTransition();
-                        return false;
-                    }
-                })
                 .into(new RetroMusicColoredTarget(image) {
                     @Override
                     public void onColorReady(int color) {
@@ -320,13 +310,14 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
     private void setColors(int color) {
         int themeColor =
-                PreferenceUtil.getInstance(this).getAdaptiveColor() ? color : ThemeStore.accentColor(this);
+                PreferenceUtil.getInstance().getAdaptiveColor() ? color : ThemeStore.accentColor(this);
         songTitle.setTextColor(themeColor);
         moreTitle.setTextColor(themeColor);
 
-        TintHelper.setTintAuto(shuffleButton, themeColor, true);
+        MaterialUtil.setTint(shuffleButton, true, themeColor);
         //findViewById(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this));
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -390,7 +381,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     }
 
     private String getSavedSortOrder() {
-        return PreferenceUtil.getInstance(this).getAlbumDetailSongSortOrder();
+        return PreferenceUtil.getInstance().getAlbumDetailSongSortOrder();
     }
 
     private void setUpSortOrderMenu(@NonNull SubMenu sortOrder) {
@@ -411,7 +402,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     }
 
     private void setSaveSortOrder(String sortOrder) {
-        PreferenceUtil.getInstance(this).setAlbumDetailSongSortOrder(sortOrder);
+        PreferenceUtil.getInstance().setAlbumDetailSongSortOrder(sortOrder);
         reload();
     }
 

@@ -15,4 +15,5 @@
     <string name="git_hub" translatable="false">GitHub</string>
     <string name="social_buttons" translatable="false">Social Buttons</string>
     <string name="circular_std_black" translatable="false">fonts/circular_std_black.otf</string>
+    <string name="circular_std" translatable="false">fonts/circular_std_book.otf</string>
 </resources>

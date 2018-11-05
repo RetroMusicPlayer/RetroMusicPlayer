@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">請記住當您啟用此選項後或會影響電池壽命</string>
     <string name="pref_blur_amount_title">模糊值</string>
     <string name="pref_blur_amount_summary">給模糊模式主題的值，每值愈低就愈快</string>
-    <string name="buy_retromusic_pro">購買Retro Music Pro</string>
+    <string name="buy_retro_music_pro">購買Retro Music Pro</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡片</string>
     <string name="card_color_style">彩色卡片</string>

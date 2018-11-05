@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.R;
  */
 public class BlacklistFolderChooserDialog extends DialogFragment implements MaterialDialog.ListCallback {
 
-    String initialPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+    private String initialPath = Environment.getExternalStorageDirectory().getAbsolutePath();
     private File parentFolder;
     private File[] parentContents;
     private boolean canGoUp = false;

@@ -114,7 +114,7 @@
             android:layout_marginTop="8dp"
             android:background="?colorAccent"
             android:foreground="?attr/rectSelector"
-            android:padding="16dp"
+            android:padding="12dp"
             android:scaleType="fitCenter"
             tools:ignore="MissingPrefix"
             tools:src="@drawable/ic_pause_white_24dp" />
