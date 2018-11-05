@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.ui.activities;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.InputType;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jaudiotagger.tag.FieldKey;
 
@@ -24,6 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -31,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
@@ -44,17 +49,15 @@ import code.name.monkey.retromusic.util.LyricUtil;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 import code.name.monkey.retromusic.views.LyricView;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class LyricsActivity extends AbsMusicServiceActivity implements
         MusicProgressViewUpdateHelper.Callback {
 
-    @BindView(R.id.title)
-    TextView songTitle;
-
-    @BindView(R.id.text)
-    TextView songText;
+    @BindView(R.id.bottom_app_bar)
+    BottomAppBar bottomAppBar;
 
     @BindView(R.id.lyrics_view)
     LyricView lyricView;
@@ -65,8 +68,12 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     @BindView(R.id.actions)
     RadioGroup actionsLayout;
 
-    @BindView(R.id.gradient_background)
-    View background;
+
+    @BindView(R.id.fab)
+    FloatingActionButton actionButton;
+
+    @BindView(R.id.container)
+    FitSystemWindowsLayout fitSystemWindowsLayout;
 
     private MusicProgressViewUpdateHelper updateHelper;
     private AsyncTask updateLyricsAsyncTask;
@@ -76,14 +83,24 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setDrawUnderStatusBar();
+        setDrawUnderNavigationBar();
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_lyrics);
         ButterKnife.bind(this);
 
-        setStatusbarColorAuto();
-        setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
-        setLightNavigationBar(true);
+        setNavigationbarColorAuto();
+
+        fitSystemWindowsLayout.setFit(true);
+
+        setSupportActionBar(bottomAppBar);
+        Objects.requireNonNull(bottomAppBar.getNavigationIcon())
+                .setColorFilter(ThemeStore.textColorPrimary(this), PorterDuff.Mode.SRC_IN);
+        bottomAppBar.setBackgroundTint(ColorStateList.valueOf(ThemeStore.primaryColor(this)));
+
+        TintHelper.setTintAuto(actionButton, ThemeStore.accentColor(this), true);
 
         updateHelper = new MusicProgressViewUpdateHelper(this, 500, 1000);
 
@@ -99,8 +116,8 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         PreferenceUtil.getInstance().setLastLyricsType(group);
         RadioButton radioButton = actionsLayout.findViewById(group);
         if (radioButton != null) {
-            radioButton.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.accentColor(this)));
-            radioButton.setTextColor(ThemeStore.textColorPrimary(this));
+            radioButton.setBackgroundTintList(ColorStateList.valueOf(Color.WHITE));
+            //radioButton.setTextColor(ThemeStore.textColorPrimary(this));
         }
 
         offlineLyrics.setVisibility(View.GONE);
@@ -189,8 +206,8 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
     private void loadLrcFile() {
         song = MusicPlayerRemote.getCurrentSong();
-        songTitle.setText(song.title);
-        songText.setText(song.artistName);
+        bottomAppBar.setTitle(song.title);
+        bottomAppBar.setSubtitle(song.artistName);
         SongGlideRequest.Builder.from(Glide.with(this), song)
                 .checkIgnoreMediaStore(this)
                 .generatePalette(this)
@@ -198,8 +215,8 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
                 .into(new RetroMusicColoredTarget(findViewById(R.id.image)) {
                     @Override
                     public void onColorReady(int color) {
-                        if (PreferenceUtil.getInstance( ).getAdaptiveColor()) {
-                            background.setBackgroundColor(color);
+                        if (PreferenceUtil.getInstance().getAdaptiveColor()) {
+                            //background.setBackgroundColor(color);
                         }
                     }
                 });
@@ -213,13 +230,13 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         }
     }
 
-    @OnClick({R.id.edit_lyrics, R.id.back})
+    @OnClick({R.id.fab})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.back:
                 onBackPressed();
                 break;
-            case R.id.edit_lyrics:
+            case R.id.fab:
                 switch (actionsLayout.getCheckedRadioButtonId()) {
                     case R.id.synced_lyrics:
                         showSyncedLyrics();
