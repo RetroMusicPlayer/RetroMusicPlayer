@@ -21,13 +21,14 @@ import code.name.monkey.retromusic.cast.CastHelper;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.views.BottomNavigationBarTinted;
 
 public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivity {
 
     public static final String TAG = AbsSlidingMusicPanelActivity.class.getSimpleName();
 
     @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
+    BottomNavigationBarTinted bottomNavigationView;
 
     @BindView(R.id.parentPanel)
     ViewGroup parentPanel;
@@ -47,7 +48,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         ButterKnife.bind(this);
         setLightStatusbar(true);
         setLightNavigationBar(true);
-        setupBottomView();
+        //setupBottomView();
         miniPlayerFragment = (MiniPlayerFragment) getSupportFragmentManager().findFragmentById(R.id.mini_player_fragment);
     }
 

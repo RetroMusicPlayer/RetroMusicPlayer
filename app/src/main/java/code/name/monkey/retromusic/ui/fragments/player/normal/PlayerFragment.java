@@ -138,7 +138,6 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
         unbinder = ButterKnife.bind(this, view);
         if (getPlayerActivity() != null) {
             getPlayerActivity().setDrawUnderNavigationBar();
-            //getPlayerActivity().setNavigationbarColorAuto();
             addSafeArea(view);
         }
         return view;

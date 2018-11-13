@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
-    android:layout_width="400dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/image_container"
         android:layout_width="match_parent"
-        android:layout_height="182dp"
+        android:layout_height="256dp"
         app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true">
 
@@ -39,9 +39,10 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingStart="8dp"
-        android:paddingTop="8dp"
+        android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:textColor="?android:attr/textColorSecondary"
+        android:paddingBottom="4dp"
+        android:textSize="13sp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 
@@ -52,11 +53,9 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:textColor="?android:attr/textColorPrimary"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="14sp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
-
-
 </LinearLayout>

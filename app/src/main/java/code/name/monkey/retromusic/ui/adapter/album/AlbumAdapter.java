@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter.album;
 
+import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -60,10 +61,6 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
 
     }
 
-    public AlbumAdapter(@NonNull AppCompatActivity activity, ArrayList<Album> dataSet,
-                        @LayoutRes int itemLayoutRes) {
-        this(activity, dataSet, itemLayoutRes, false, null);
-    }
 
     public void useItemLayout(int itemLayoutRes) {
         this.itemLayoutRes = itemLayoutRes;
@@ -141,6 +138,9 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
             if (holder.text != null) {
                 holder.text.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
+        }
+        if (holder.mask != null) {
+            holder.mask.setBackgroundTintList(ColorStateList.valueOf(color));
         }
     }
 
@@ -235,7 +235,6 @@ public class AlbumAdapter extends AbsMultiSelectAdapter<AlbumAdapter.ViewHolder,
             if (isInQuickSelectMode()) {
                 toggleChecked(getAdapterPosition());
             } else {
-
                 Pair[] albumPairs = new Pair[]{Pair.create(image, activity.getResources().getString(R.string.transition_album_art))};
                 NavigationUtil.goToAlbum(activity, dataSet.get(getAdapterPosition()).getId(), albumPairs);
             }

@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.h6ah4i.android.widget.advrecyclerview.animator.GeneralItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator;
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager;
@@ -27,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -47,6 +43,7 @@ import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
 import code.name.monkey.retromusic.util.PlaylistsUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
+import code.name.monkey.retromusic.views.CollapsingFAB;
 
 public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity implements CabHolder,
         PlaylistSongsContract.PlaylistSongsView {
@@ -64,7 +61,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     TextView empty;
 
     @BindView(R.id.action_shuffle)
-    FloatingActionButton shuffleButton;
+    CollapsingFAB shuffleButton;
 
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
@@ -100,31 +97,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         setUpToolBar();
         setUpRecyclerView();
     }
-
-    public void showHeartAnimation() {
-        shuffleButton.clearAnimation();
-
-        shuffleButton.setScaleX(0.9f);
-        shuffleButton.setScaleY(0.9f);
-        shuffleButton.show();
-        shuffleButton.setPivotX(shuffleButton.getWidth() / 2);
-        shuffleButton.setPivotY(shuffleButton.getHeight() / 2);
-
-        shuffleButton.animate()
-                .setDuration(200)
-                .setInterpolator(new DecelerateInterpolator())
-                .scaleX(1.1f)
-                .scaleY(1.1f)
-                .withEndAction(() -> shuffleButton.animate()
-                        .setDuration(200)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .start())
-                .start();
-    }
-
 
     @Override
     protected View createContentView() {
@@ -165,6 +137,17 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
                 checkIsEmpty();
             }
         });
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    shuffleButton.setShowTitle(false);
+                } else if (dy < 0) {
+                    shuffleButton.setShowTitle(true);
+                }
+            }
+        });
     }
 
     @Override
@@ -176,7 +159,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
     private void setUpToolBar() {
         title.setText(playlist.name);
         title.setTextColor(ThemeStore.textColorPrimary(this));
-        TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
+        shuffleButton.setColor(ThemeStore.accentColor(this));
 
         int primaryColor = ThemeStore.primaryColor(this);
         toolbar.setBackgroundColor(primaryColor);
@@ -320,7 +303,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
 
     @OnClick(R.id.action_shuffle)
     public void onViewClicked() {
-        showHeartAnimation();
         if (adapter.getDataSet().isEmpty()) {
             return;
         }

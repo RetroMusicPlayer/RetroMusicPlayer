@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    android:padding="12dp">
+    android:background="@android:color/transparent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,23 +13,20 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            fontPath="@string/circular_std_black"
+            style="@style/SubTitleTextAppearance"
+            android:padding="12dp"
+            android:text="@string/action_sleep_timer" />
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:padding="6dp"
-            android:text="@string/action_sleep_timer"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:attr/textColorPrimary"
-            tools:ignore="MissingPrefix" />
+            android:layout_height="1dp"
+            android:background="?dividerColor" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/timer_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="6dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="6dp"
+            android:padding="12dp"
             android:textAppearance="?android:textAppearanceLarge" />
 
 
@@ -49,6 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
             android:gravity="end"
             android:orientation="horizontal">
 

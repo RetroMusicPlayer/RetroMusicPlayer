@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     app:layout_collapseMode="pin">
 
-                    <androidx.appcompat.widget.Toolbar
+                    <code.name.monkey.retromusic.views.TintIconColorToolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar48"
                         tools:ignore="UnusedAttribute">
@@ -57,7 +57,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             tools:ignore="MissingPrefix" />
 
-                    </androidx.appcompat.widget.Toolbar>
+                    </code.name.monkey.retromusic.views.TintIconColorToolbar>
 
                     <ViewStub
                         android:id="@+id/cab_stub"

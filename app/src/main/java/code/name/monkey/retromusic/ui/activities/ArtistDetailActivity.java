@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -31,6 +30,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,7 +40,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -64,6 +63,7 @@ import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.CollapsingFAB;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -109,7 +109,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     TextView text;
 
     @BindView(R.id.action_shuffle_all)
-    MaterialButton shuffleButton;
+    CollapsingFAB shuffleButton;
 
     @BindView(R.id.gradient_background)
     @Nullable
@@ -120,7 +120,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     View imageContainer;
 
     @BindView(R.id.content)
-    View contentContainer;
+    NestedScrollView contentContainer;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -167,6 +167,15 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
         artistDetailsPresenter = new ArtistDetailsPresenter(this, getIntent().getExtras());
         artistDetailsPresenter.subscribe();
+
+        contentContainer.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > oldScrollY) {
+                shuffleButton.setShowTitle(false);
+            }
+            if (scrollY < oldScrollY) {
+                shuffleButton.setShowTitle(true);
+            }
+        });
     }
 
     private void setUpViews() {
@@ -255,12 +264,6 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
                 }
                 break;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
     }
 
     @Override
@@ -383,7 +386,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
         songTitle.setTextColor(textColor);
         biographyTitle.setTextColor(textColor);
 
-        MaterialUtil.setTint(shuffleButton, true, textColor);
+        shuffleButton.setColor(textColor);
 
         if (background != null) {
             background.setBackgroundTintList(ColorStateList.valueOf(color));

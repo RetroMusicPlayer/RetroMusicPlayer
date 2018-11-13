@@ -32,7 +32,7 @@ import android.view.animation.Interpolator;
  */
 public class SongPlayCountStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "song_play_count.db";
-    private static final int VERSION = 2;
+    private static final int VERSION = 3;
     // how many weeks worth of playback to track
     private static final int NUM_WEEKS = 52;
     @Nullable

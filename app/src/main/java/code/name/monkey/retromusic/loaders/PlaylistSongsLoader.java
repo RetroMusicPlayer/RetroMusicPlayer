@@ -64,9 +64,8 @@ public class PlaylistSongsLoader {
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
         final int idInPlaylist = cursor.getInt(11);
-        final String composer = cursor.getString(12);
 
-        return new PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer);
+        return new PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist);
     }
 
     private static Cursor makePlaylistSongCursor(@NonNull final Context context, final int playlistId) {
@@ -85,8 +84,7 @@ public class PlaylistSongsLoader {
                             AudioColumns.ALBUM,// 8
                             AudioColumns.ARTIST_ID,// 9
                             AudioColumns.ARTIST,// 10
-                            MediaStore.Audio.Playlists.Members._ID, // 11
-                            AudioColumns.COMPOSER,// 12
+                            MediaStore.Audio.Playlists.Members._ID, // 11 
                     }, SongLoader.BASE_SELECTION, null,
                     MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER);
         } catch (SecurityException e) {

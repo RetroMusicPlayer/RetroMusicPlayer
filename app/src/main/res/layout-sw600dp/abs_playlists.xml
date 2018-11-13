@@ -48,9 +48,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="horizontal">
-
 
         <LinearLayout
             android:id="@+id/history"
@@ -66,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_history_playlist"
-                android:padding="12dp"
+                android:padding="24dp"
                 app:srcCompat="@drawable/ic_access_time_white_24dp"
                 app:tint="@color/md_blue_A700" />
 
@@ -75,8 +73,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="@string/history"
-                android:textSize="12sp" />
+                android:text="@string/history" />
 
         </LinearLayout>
 
@@ -94,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_last_added_playlist"
-                android:padding="12dp"
+                android:padding="24dp"
                 app:srcCompat="@drawable/ic_library_add_white_24dp"
                 app:tint="@color/md_red_A700" />
 
@@ -103,8 +100,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="@string/last_added"
-                android:textSize="12sp" />
+                android:text="@string/last_added" />
 
         </LinearLayout>
 
@@ -122,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_top_tracks_playlist"
-                android:padding="12dp"
+                android:padding="24dp"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp"
                 app:tint="@color/md_deep_purple_A700" />
 
@@ -131,8 +127,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="@string/my_top_tracks"
-                android:textSize="12sp" />
+                android:text="@string/my_top_tracks" />
 
         </LinearLayout>
 
@@ -150,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_shuffle"
-                android:padding="12dp"
+                android:padding="24dp"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp"
                 app:tint="@color/md_green_A700" />
 
@@ -159,8 +154,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingTop="8dp"
-                android:text="@string/shuffle"
-                android:textSize="12sp" />
+                android:text="@string/shuffle" />
 
         </LinearLayout>
     </LinearLayout>

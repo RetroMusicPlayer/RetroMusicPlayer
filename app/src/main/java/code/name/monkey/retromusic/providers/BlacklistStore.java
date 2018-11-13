@@ -7,18 +7,18 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
-import androidx.annotation.NonNull;
-
-import code.name.monkey.retromusic.Constants;
-import code.name.monkey.retromusic.util.FileUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.Constants;
+import code.name.monkey.retromusic.util.FileUtil;
+import code.name.monkey.retromusic.util.PreferenceUtil;
+
 public class BlacklistStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "blacklist.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
     private static BlacklistStore sInstance = null;
     private Context context;
 
@@ -45,8 +45,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(@NonNull final SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + BlacklistStoreColumns.NAME + " ("
-                + BlacklistStoreColumns.PATH + " STRING NOT NULL);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + BlacklistStoreColumns.NAME + " (" + BlacklistStoreColumns.PATH + " STRING NOT NULL);");
     }
 
     @Override

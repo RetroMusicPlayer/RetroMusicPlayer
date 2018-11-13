@@ -4,14 +4,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.ArrayList;
@@ -25,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -39,6 +35,7 @@ import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivi
 import code.name.monkey.retromusic.ui.adapter.song.SongAdapter;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
+import code.name.monkey.retromusic.views.CollapsingFAB;
 
 /**
  * @author Hemanth S (h4h13).
@@ -57,7 +54,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     TextView empty;
 
     @BindView(R.id.action_shuffle)
-    FloatingActionButton shuffleButton;
+    CollapsingFAB shuffleButton;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -85,7 +82,6 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
 
-        setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
         toggleBottomNavigationView(true);
@@ -119,7 +115,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
         setTitle(null);
         setSupportActionBar(toolbar);
-        TintHelper.setTintAuto(shuffleButton, ThemeStore.accentColor(this), true);
+        shuffleButton.setColor(ThemeStore.accentColor(this));
     }
 
     @Override
@@ -172,11 +168,21 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     private void setupRecyclerView() {
         ViewUtil.setUpFastScrollRecyclerViewColor(this,
                 ((FastScrollRecyclerView) recyclerView), ThemeStore.accentColor(this));
-        songAdapter = new SongAdapter(this, new ArrayList<Song>(), R.layout.item_list, false, this);
+        songAdapter = new SongAdapter(this, new ArrayList<>(), R.layout.item_list, false, this);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(songAdapter);
-
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    shuffleButton.setShowTitle(false);
+                } else if (dy < 0) {
+                    shuffleButton.setShowTitle(true);
+                }
+            }
+        });
         songAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {

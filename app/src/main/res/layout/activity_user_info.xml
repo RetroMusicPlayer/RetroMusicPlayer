@@ -14,7 +14,8 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar48">
+            style="@style/Toolbar48"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp">
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"

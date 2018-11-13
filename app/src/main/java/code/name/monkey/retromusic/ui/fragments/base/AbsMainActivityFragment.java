@@ -30,8 +30,6 @@ public abstract class AbsMainActivityFragment extends AbsMusicServiceFragment {
         getMainActivity().setBottomBarVisibility(View.VISIBLE);
     }
 
-
-    // WORKAROUND
     private void setStatusbarColor(View view, int color) {
         final View statusBar = view.findViewById(R.id.status_bar);
         if (statusBar != null) {

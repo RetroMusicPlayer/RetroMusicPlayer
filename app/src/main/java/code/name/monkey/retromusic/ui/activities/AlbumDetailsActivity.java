@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
@@ -27,6 +26,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.Pair;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +36,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -63,12 +62,14 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.CollapsingFAB;
 
 public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implements
         AlbumDetailsContract.AlbumDetailsView {
 
     public static final String EXTRA_ALBUM_ID = "extra_album_id";
     private static final int TAG_EDITOR_REQUEST = 2001;
+
     @BindView(R.id.image)
     ImageView image;
 
@@ -85,7 +86,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     AppCompatTextView songTitle;
 
     @BindView(R.id.action_shuffle_all)
-    MaterialButton shuffleButton;
+    CollapsingFAB shuffleButton;
 
     @BindView(R.id.collapsing_toolbar)
     @Nullable
@@ -96,7 +97,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
     AppBarLayout appBarLayout;
 
     @BindView(R.id.content)
-    View contentContainer;
+    NestedScrollView contentContainer;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -141,16 +142,32 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
         ActivityCompat.postponeEnterTransition(this);
 
+        int albumId = getIntent().getIntExtra(EXTRA_ALBUM_ID, -1);
+        albumDetailsPresenter = new AlbumDetailsPresenter(this, albumId);
+        albumDetailsPresenter.subscribe();
+
+        setupRecyclerView();
+        setupToolbarMarginHeight();
+
+        contentContainer.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > oldScrollY) {
+                shuffleButton.setShowTitle(false);
+            }
+            if (scrollY < oldScrollY) {
+                shuffleButton.setShowTitle(true);
+            }
+        });
+
+
+    }
+
+    private void setupRecyclerView() {
         adapter = new SimpleSongAdapter(this, new ArrayList<>(), R.layout.item_song);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
 
-        setupToolbarMarginHeight();
-
-        int albumId = getIntent().getIntExtra(EXTRA_ALBUM_ID, -1);
-        albumDetailsPresenter = new AlbumDetailsPresenter(this, albumId);
     }
 
     private void setupToolbarMarginHeight() {
@@ -211,12 +228,6 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
                 }
                 break;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        albumDetailsPresenter.subscribe();
     }
 
     @Override
@@ -287,8 +298,6 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         AlbumAdapter albumAdapter = new HorizontalAlbumAdapter(this, albums, false, null);
         moreRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
         moreRecyclerView.setAdapter(albumAdapter);
-
-        ActivityCompat.startPostponedEnterTransition(this);
     }
 
     public Album getAlbum() {
@@ -314,8 +323,7 @@ public class AlbumDetailsActivity extends AbsSlidingMusicPanelActivity implement
         songTitle.setTextColor(themeColor);
         moreTitle.setTextColor(themeColor);
 
-        MaterialUtil.setTint(shuffleButton, true, themeColor);
-        //findViewById(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this));
+        shuffleButton.setColor(themeColor);
     }
 
 

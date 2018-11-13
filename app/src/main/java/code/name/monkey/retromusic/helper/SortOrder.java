@@ -93,9 +93,6 @@ public final class SortOrder {
 
         /* Song sort order date */
         String SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC";
-
-        /* Song sort order date */
-        String COMPOSER = MediaStore.Audio.Media.COMPOSER;
     }
 
     /**

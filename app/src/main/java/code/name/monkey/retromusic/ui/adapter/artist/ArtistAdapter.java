@@ -1,10 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter.artist;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.util.Pair;
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +12,11 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Pair;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
@@ -114,6 +115,9 @@ public class ArtistAdapter extends AbsMultiSelectAdapter<ArtistAdapter.ViewHolde
                 holder.title.setTextColor(
                         MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)));
             }
+        }
+        if (holder.mask != null) {
+            holder.mask.setBackgroundTintList(ColorStateList.valueOf(color));
         }
     }
 

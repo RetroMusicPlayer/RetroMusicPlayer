@@ -2,32 +2,33 @@ package code.name.monkey.retromusic.views;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.content.res.ColorStateList;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
+import code.name.monkey.retromusic.util.RetroUtil;
 
 /**
  * Created by yu on 2016/11/10.
  */
 @SuppressLint("RestrictedApi")
-public class RoundedBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
 
    /* @Override
     public int getTheme() {
@@ -52,22 +53,26 @@ public class RoundedBottomSheetDialogFragment extends BottomSheetDialogFragment 
         view.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
             FrameLayout bottomSheet = dialog.findViewById(R.id.design_bottom_sheet);
-
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                bottomSheet.setBackground(RetroUtil.getTintedDrawable(getContext(), R.drawable.bg_bottom_sheet_dialog_fragment, ThemeStore.primaryColor(getContext())));
             }
         });
-        view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.bg_bottom_sheet_dialog_fragment));
-        view.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.primaryColor(view.getContext())));
-        ((AbsBaseActivity) Objects.requireNonNull(getActivity())).setNavigationbarColorAuto();
+        if (getActivity() != null) {
+            if (VersionUtils.hasNougat()) {
+                ((AbsBaseActivity) getActivity()).setNavigationbarColor(ThemeStore.primaryColor(getContext()));
+            } else {
+                ((AbsBaseActivity) getActivity()).setNavigationbarColorAuto();
+            }
+        }
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //noinspection ConstantConditions
-        return new BottomSheetDialog(getContext());
+        return new CustomWidthBottomSheetDialog(getContext(), getTheme());
     }
 
     @Override
@@ -78,6 +83,20 @@ public class RoundedBottomSheetDialogFragment extends BottomSheetDialogFragment 
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             window.setNavigationBarColor(ThemeStore.primaryColor(getContext()));
             window.findViewById(com.google.android.material.R.id.container).setFitsSystemWindows(true);
+        }
+    }
+
+    static class CustomWidthBottomSheetDialog extends BottomSheetDialog {
+        CustomWidthBottomSheetDialog(@NonNull Context context, @StyleRes int theme) {
+            super(context, theme);
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            int width = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_width);
+            getWindow().setLayout(width > 0 ? width : ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
         }
     }
 }

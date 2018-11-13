@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,6 +30,7 @@
         </FrameLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -37,7 +38,6 @@
             android:overScrollMode="never">
 
             <LinearLayout
-                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -71,7 +71,6 @@
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                            android:transitionName="@string/transition_album_name"
                             tools:ignore="MissingPrefix" />
 
                         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -88,7 +87,6 @@
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:transitionName="@string/transition_album_text"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 
@@ -101,25 +99,14 @@
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@drawable/shadow_down_strong" />
-
-    <com.google.android.material.button.MaterialButton
+    <code.name.monkey.retromusic.views.CollapsingFAB
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp"
-        android:text="@string/shuffle"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/md_red_500"
-        app:cornerRadius="25dp"
-        app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="start"
-        app:iconPadding="12dp"
-        app:layout_dodgeInsetEdges="all" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        app:showTitle="true"
+        app:shuffleBackgroundColor="@color/md_black_1000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

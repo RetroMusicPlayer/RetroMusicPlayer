@@ -55,9 +55,10 @@ public class RetroApplication extends MultiDexApplication {
         setupErrorHandler();
 
         // default theme
-        if (!ThemeStore.isConfigured(this, 1)) {
+        if (!ThemeStore.isConfigured(this, 3)) {
             ThemeStore.editTheme(this)
                     .accentColorRes(R.color.md_green_A200)
+                    .coloredNavigationBar(true)
                     .commit();
         }
 

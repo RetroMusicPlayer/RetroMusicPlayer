@@ -226,7 +226,7 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
                     (AppCompatActivity) getActivity(),
                     MusicPlayerRemote.getPlayingQueue(),
                     MusicPlayerRemote.getPosition(),
-                    R.layout.item_song);
+                    R.layout.item_song, Color.WHITE);
             layoutManager = new LinearLayoutManager(getContext());
 
             recyclerView.setLayoutManager(layoutManager);

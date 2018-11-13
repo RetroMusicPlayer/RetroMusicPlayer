@@ -42,19 +42,52 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.ThemeStore;
 
-
 public final class ToolbarContentTintHelper {
 
-
     private ToolbarContentTintHelper() {
+    }
+
+    public static void tintAllIcons(Menu menu, final int color) {
+        for (int i = 0; i < menu.size(); ++i) {
+            final MenuItem item = menu.getItem(i);
+            tintMenuItemIcon(color, item);
+            tintShareIconIfPresent(color, item);
+        }
+    }
+
+    private static void tintMenuItemIcon(int color, MenuItem item) {
+        final Drawable drawable = item.getIcon();
+        if (drawable != null) {
+            final Drawable wrapped = DrawableCompat.wrap(drawable);
+            drawable.mutate();
+            DrawableCompat.setTint(wrapped, color);
+            item.setIcon(drawable);
+        }
+    }
+
+    private static void tintShareIconIfPresent(int color, MenuItem item) {
+        if (item.getActionView() != null) {
+            final View actionView = item.getActionView();
+            final View expandActivitiesButton = actionView.findViewById(R.id.expand_activities_button);
+            if (expandActivitiesButton != null) {
+                final ImageView image = (ImageView) expandActivitiesButton.findViewById(R.id.image);
+                if (image != null) {
+                    final Drawable drawable = image.getDrawable();
+                    final Drawable wrapped = DrawableCompat.wrap(drawable);
+                    drawable.mutate();
+                    DrawableCompat.setTint(wrapped, color);
+                    image.setImageDrawable(drawable);
+                }
+            }
+        }
     }
 
     public static void colorBackButton(Toolbar toolbar, @ColorInt int color) {
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);
-            if (backButton instanceof ImageButton) {
-                ((ImageButton) backButton).getDrawable().setColorFilter(colorFilter);
+            if (backButton instanceof ImageView) {
+                ((ImageView) backButton).getDrawable().setColorFilter(colorFilter);
             }
         }
     }
@@ -87,8 +120,7 @@ public final class ToolbarContentTintHelper {
                     //Colorize the ActionViews -> all icons that are NOT: back button | overflow menu
                     final View innerView = ((ActionMenuView) v).getChildAt(j);
                     if (innerView instanceof ActionMenuItemView) {
-                        for (int k = 0; k < ((ActionMenuItemView) innerView).getCompoundDrawables().length;
-                             k++) {
+                        for (int k = 0; k < ((ActionMenuItemView) innerView).getCompoundDrawables().length; k++) {
                             if (((ActionMenuItemView) innerView).getCompoundDrawables()[k] != null) {
                                 final int finalK = k;
 

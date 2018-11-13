@@ -7,7 +7,6 @@
     android:background="@android:color/transparent"
     android:clickable="true"
     android:focusable="false"
-    android:transitionName="@string/transition_mini_player"
     tools:ignore="UnusedAttribute">
 
     <LinearLayout

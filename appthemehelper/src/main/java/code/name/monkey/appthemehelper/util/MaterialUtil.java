@@ -18,7 +18,7 @@ public class MaterialUtil {
     }
 
     public static void setTint(@NonNull MaterialButton button, boolean background, int color) {
-        button.setPadding(48, 48, 48, 48);
+        //button.setPadding(48, 48, 48, 48);
         button.setAllCaps(false);
         final Context context = button.getContext();
         final ColorStateList colorState = ColorStateList.valueOf(color);

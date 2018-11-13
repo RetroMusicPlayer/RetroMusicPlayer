@@ -162,7 +162,7 @@ public abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A extend
     }
 
     protected final boolean isLandscape() {
-        return RetroUtil.isLandscape(getResources());
+        return RetroUtil.isLandscape( );
     }
 
 

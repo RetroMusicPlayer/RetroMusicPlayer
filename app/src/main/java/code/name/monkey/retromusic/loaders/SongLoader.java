@@ -38,7 +38,6 @@ public class SongLoader {
             AudioColumns.ALBUM,// 8
             AudioColumns.ARTIST_ID,// 9
             AudioColumns.ARTIST,// 10
-            AudioColumns.COMPOSER,// 11
     };
 
     @NonNull
@@ -86,10 +85,9 @@ public class SongLoader {
         final String albumName = cursor.getString(8);
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
-        final String composer = cursor.getString(11);
 
         return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName,
-                artistId, artistName, composer);
+                artistId, artistName);
     }
 
     @Nullable
@@ -175,8 +173,8 @@ public class SongLoader {
                 .flatMap((Function<ArrayList<Song>, ObservableSource<ArrayList<Song>>>) songs -> {
                     ArrayList<Song> list = new ArrayList<>();
                     ShuffleHelper.makeShuffleList(songs, -1);
-                    if (songs.size() > 10) {
-                        list.addAll(songs.subList(0, 10));
+                    if (songs.size() > 9) {
+                        list.addAll(songs.subList(0, 9));
                     }
                     return Observable.just(list);
                 });

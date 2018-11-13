@@ -37,7 +37,6 @@
                     android:layout_height="72dp"
                     android:background="@drawable/shadow_down_strong" />
 
-
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
             <androidx.appcompat.widget.Toolbar
@@ -96,24 +95,16 @@
 
             <include layout="@layout/activity_artist_content" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="72dp" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
+    <code.name.monkey.retromusic.views.CollapsingFAB
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/shuffle"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/md_red_500"
-        app:cornerRadius="25dp"
-        app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="start"
-        app:iconPadding="12dp"
-        app:layout_dodgeInsetEdges="all" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        app:showTitle="true"
+        app:shuffleBackgroundColor="@color/md_black_1000" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

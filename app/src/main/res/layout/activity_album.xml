@@ -14,6 +14,7 @@
             android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:contentScrim="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
 
@@ -39,8 +40,8 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48" />
-
+                style="@style/Toolbar48"
+                app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -86,7 +87,6 @@
                         android:layout_height="wrap_content"
                         android:maxLines="2"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:transitionName="@string/transition_album_name"
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -103,7 +103,6 @@
                         android:scrollHorizontally="true"
                         android:singleLine="true"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:transitionName="@string/transition_album_text"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
@@ -112,25 +111,18 @@
 
             <include layout="@layout/activity_album_content" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="72dp" />
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.button.MaterialButton
+
+    <code.name.monkey.retromusic.views.CollapsingFAB
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/shuffle"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/md_red_500"
-        app:cornerRadius="25dp"
-        app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="start"
-        app:iconPadding="12dp"
-        app:layout_dodgeInsetEdges="all" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        app:showTitle="true"
+        app:shuffleBackgroundColor="@color/md_black_1000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

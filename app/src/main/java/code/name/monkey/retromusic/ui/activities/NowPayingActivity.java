@@ -66,14 +66,18 @@ public class NowPayingActivity extends AbsMusicServiceActivity implements AbsPla
     public void onPaletteColorChanged() {
         int paletteColor = playerFragment.getPaletteColor();
         if ((currentNowPlayingScreen == NowPlayingScreen.FLAT || currentNowPlayingScreen == NowPlayingScreen.NORMAL) && PreferenceUtil.getInstance().getAdaptiveColor()) {
-            setNavigationbarColor(Color.TRANSPARENT);
+            setLightNavigationBar(true);
             setLightStatusbar(ColorUtil.isColorLight(paletteColor));
         } else if (currentNowPlayingScreen == NowPlayingScreen.COLOR) {
             setLightStatusbar(ColorUtil.isColorLight(paletteColor));
         } else if (currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
             setLightStatusbar(false);
+        } else if (currentNowPlayingScreen == NowPlayingScreen.CARD || currentNowPlayingScreen == NowPlayingScreen.FULL) {
+            setNavigationbarColor(Color.TRANSPARENT);
         } else {
+            setStatusbarColor(Color.TRANSPARENT);
             setLightStatusbar(isOneOfTheseThemes() && ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
+            setNavigationbarColorAuto();
         }
     }
 

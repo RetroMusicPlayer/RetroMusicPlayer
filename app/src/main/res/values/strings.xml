@@ -552,7 +552,7 @@
     <string name="pref_keep_pause_on_zero_volume_summary">Pause playing on zero and plays after raise volume. Warning when you increase the volume it starts playing even your outside the app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
     <string name="whats_new">What\'s New</string>
-    <string name="composer">Composer</string>
+
     <string name="suggestion_songs">Suggestions</string>
     <string name="fit">Fit</string>
 </resources>

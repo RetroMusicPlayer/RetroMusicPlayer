@@ -63,6 +63,7 @@
                 android:background="?dividerColor" />
         </com.google.android.material.appbar.AppBarLayout>
 
+
         <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
@@ -70,6 +71,7 @@
             android:clipToPadding="false"
             android:scrollbars="none"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
         <TextView
             android:id="@android:id/empty"
@@ -82,14 +84,14 @@
             android:textSize="@dimen/empty_text_size"
             android:visibility="gone" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <code.name.monkey.retromusic.views.CollapsingFAB
             android:id="@+id/action_shuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:src="@drawable/ic_shuffle_white_24dp"
-            app:layout_behavior="code.name.monkey.retromusic.misc.ScrollAwareFABBehavior" />
-        
+            app:showTitle="true" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

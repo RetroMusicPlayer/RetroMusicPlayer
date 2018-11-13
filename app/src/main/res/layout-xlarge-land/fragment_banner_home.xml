@@ -59,14 +59,13 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/content_container"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_weight="1"
             android:background="@color/md_white_1000"
-            android:elevation="@dimen/card_elevation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout

@@ -1,16 +1,16 @@
 package code.name.monkey.retromusic.ui.adapter.base;
 
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -61,6 +61,9 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
     @BindView(R.id.play_songs)
     @Nullable
     public ImageButton playSongs;
+    @BindView(R.id.mask)
+    @Nullable
+    public View mask;
     @BindView(R.id.image_text_container)
     @Nullable
     public CardView imageTextContainer;

@@ -13,6 +13,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableI
 
 import java.util.ArrayList;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,11 +31,19 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
     private static final int UP_NEXT = 2;
 
     private int current;
+    private int color = -1;
 
     public PlayingQueueAdapter(AppCompatActivity activity, ArrayList<Song> dataSet, int current,
                                @LayoutRes int itemLayoutRes) {
         super(activity, dataSet, itemLayoutRes, false, null);
         this.current = current;
+    }
+
+    public PlayingQueueAdapter(AppCompatActivity activity, ArrayList<Song> dataSet, int current,
+                               @LayoutRes int itemLayoutRes, @ColorInt int color) {
+        super(activity, dataSet, itemLayoutRes, false, null);
+        this.current = current;
+        this.color = color;
     }
 
     @Override
@@ -63,6 +72,9 @@ public class PlayingQueueAdapter extends SongAdapter implements DraggableItemAda
 
         if (holder.title != null) {
             holder.title.setTextColor(white);
+            if (color != -1) {
+                holder.title.setTextColor(color);
+            }
         }
         if (holder.text != null) {
             holder.text.setTextColor(white);

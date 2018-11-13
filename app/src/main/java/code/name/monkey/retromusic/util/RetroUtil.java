@@ -80,12 +80,12 @@ public class RetroUtil {
                 .replace("%5D", "]");
     }
 
-    public static boolean isTablet(@NonNull final Resources resources) {
-        return resources.getConfiguration().smallestScreenWidthDp >= 600;
+    public static boolean isTablet() {
+        return RetroApplication.getContext().getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }
 
-    public static boolean isLandscape(@NonNull final Resources resources) {
-        return resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    public static boolean isLandscape() {
+        return RetroApplication.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
 

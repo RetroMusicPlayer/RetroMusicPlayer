@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class PlaylistSong extends Song {
-    public static final PlaylistSong EMPTY_PLAYLIST_SONG = new PlaylistSong(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", -1, -1, "");
     public static final Parcelable.Creator<PlaylistSong> CREATOR = new Parcelable.Creator<PlaylistSong>() {
         public PlaylistSong createFromParcel(Parcel source) {
             return new PlaylistSong(source);
@@ -17,8 +16,8 @@ public class PlaylistSong extends Song {
     public final int playlistId;
     public final int idInPlayList;
 
-    public PlaylistSong(int id, String title, int trackNumber, int year, long duration, String data, int dateModified, int albumId, String albumName, int artistId, String artistName, final int playlistId, final int idInPlayList, final String composer) {
-        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, composer);
+    public PlaylistSong(int id, String title, int trackNumber, int year, long duration, String data, int dateModified, int albumId, String albumName, int artistId, String artistName, final int playlistId, final int idInPlayList) {
+        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName);
         this.playlistId = playlistId;
         this.idInPlayList = idInPlayList;
     }

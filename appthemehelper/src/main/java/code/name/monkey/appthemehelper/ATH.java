@@ -80,10 +80,12 @@ public final class ATH {
     }
 
     public static void setNavigationbarColor(Activity activity, int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             activity.getWindow().setNavigationBarColor(color);
-            setLightNavigationbarAuto(activity, color);
+        } else {
+            activity.getWindow().setNavigationBarColor(ColorUtil.darkenColor(color));
         }
+        setLightNavigationbarAuto(activity, color);
     }
 
     public static void setActivityToolbarColorAuto(Activity activity, @Nullable Toolbar toolbar) {

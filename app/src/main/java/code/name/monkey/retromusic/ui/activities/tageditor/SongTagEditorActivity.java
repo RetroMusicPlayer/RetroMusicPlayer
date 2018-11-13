@@ -61,9 +61,6 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
     @BindView(R.id.album_artist)
     EditText albumArtist;
 
-    @BindView(R.id.composer)
-    EditText composer;
-
     private void setupToolbar() {
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
@@ -94,7 +91,6 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         year.addTextChangedListener(this);
         trackNumber.addTextChangedListener(this);
         lyrics.addTextChangedListener(this);
-        composer.addTextChangedListener(this);
     }
 
     private void fillViewsWithFileTags() {
@@ -106,7 +102,6 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         year.setText(getSongYear());
         trackNumber.setText(getTrackNumber());
         lyrics.setText(getLyrics());
-        composer.setText(getComposer());
     }
 
     @Override
@@ -140,7 +135,6 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
         fieldKeyValueMap.put(FieldKey.TRACK, trackNumber.getText().toString());
         fieldKeyValueMap.put(FieldKey.LYRICS, lyrics.getText().toString());
         fieldKeyValueMap.put(FieldKey.ALBUM_ARTIST, albumArtist.getText().toString());
-        fieldKeyValueMap.put(FieldKey.COMPOSER, composer.getText().toString());
         writeValuesToFiles(fieldKeyValueMap, null);
     }
 

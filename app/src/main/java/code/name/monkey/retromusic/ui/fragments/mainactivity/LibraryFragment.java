@@ -210,7 +210,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
 
             MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
-            if (RetroUtil.isLandscape(getResources())) {
+            if (RetroUtil.isLandscape()) {
                 gridSizeItem.setTitle(R.string.action_grid_size_land);
             }
             setUpGridSizeMenu(fragment, gridSizeItem.getSubMenu());
@@ -272,8 +272,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_YEAR));
             sortOrderMenu.add(0, R.id.action_song_sort_order_date, 4, R.string.sort_order_date)
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_DATE));
-            sortOrderMenu.add(0, R.id.action_song_sort_composer, 4, R.string.composer)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.COMPOSER));
+
         }
 
         sortOrderMenu.setGroupCheckable(0, true, true);
@@ -327,9 +326,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 case R.id.action_song_sort_order_date:
                     sortOrder = SortOrder.SongSortOrder.SONG_DATE;
                     break;
-                case R.id.action_song_sort_composer:
-                    sortOrder = SortOrder.SongSortOrder.COMPOSER;
-                    break;
+
             }
         }
 

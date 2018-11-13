@@ -102,22 +102,6 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
             return true;
         });
 
-        TwoStatePreference colorNavBar = (TwoStatePreference) findPreference(
-                "should_color_navigation_bar");
-        if (!VersionUtils.hasLollipop()) {
-            colorNavBar.setEnabled(false);
-            colorNavBar.setSummary(R.string.pref_only_lollipop);
-        } else {
-            colorNavBar.setChecked(ThemeStore.coloredNavigationBar(getActivity()));
-            colorNavBar.setOnPreferenceChangeListener((preference, newValue) -> {
-                ThemeStore.editTheme(getActivity())
-                        .coloredNavigationBar((Boolean) newValue)
-                        .commit();
-                getActivity().recreate();
-                return true;
-            });
-        }
-
         TwoStatePreference colorAppShortcuts = (TwoStatePreference) findPreference(
                 "should_color_app_shortcuts");
         if (!VersionUtils.hasNougatMR()) {

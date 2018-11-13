@@ -80,14 +80,14 @@ public class MiniPlayerFragment extends AbsMusicServiceFragment implements Music
         //noinspection ConstantConditions
         view.setBackgroundColor(ThemeStore.primaryColor(getContext()));
         view.setOnTouchListener(new FlingPlayBackController(getActivity()));
-        view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext(), Pair.create(v, getString(R.string.transition_mini_player))));
+        view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer();
 
-        if (RetroUtil.isTablet(getResources())) {
+        if (RetroUtil.isTablet()) {
             next.setVisibility(View.VISIBLE);
             previous.setVisibility(View.VISIBLE);
             playingQueue.setVisibility(View.VISIBLE);
-        } else {
+        } else{
             next.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);
             playingQueue.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.GONE : View.VISIBLE);
             previous.setVisibility(PreferenceUtil.getInstance().isExtraMiniExtraControls() ? View.VISIBLE : View.GONE);

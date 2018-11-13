@@ -106,20 +106,18 @@ public abstract class AbsThemeActivity extends ATHActivity implements Runnable {
         if (VersionUtils.hasKitKat()) {
             final View statusBar = getWindow().getDecorView().getRootView().findViewById(R.id.status_bar);
             if (statusBar != null) {
-                if (VersionUtils.hasLollipop()) {
+                if (VersionUtils.hasMarshmallow()) {
+                    getWindow().setStatusBarColor(color);
+                } else if (VersionUtils.hasLollipop()) {
                     statusBar.setBackgroundColor(ColorUtil.darkenColor(color));
-                    setLightStatusbarAuto(color);
                 } else {
                     statusBar.setBackgroundColor(color);
                 }
-            } else if (VersionUtils.hasMarshmallow()) {
-                getWindow().setStatusBarColor(color);
-                setLightStatusbarAuto(color);
             } else if (Build.VERSION.SDK_INT >= 21) {
                 getWindow().setStatusBarColor(ColorUtil.darkenColor(color));
-                setLightStatusbarAuto(color);
             }
         }
+        setLightStatusbarAuto(color);
     }
 
     public void setStatusbarColorAuto() {

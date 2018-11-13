@@ -59,6 +59,7 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.views.CircularImageView;
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -223,6 +224,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         View view = inflater.inflate(PreferenceUtil.getInstance().toggleHomeBanner() ? R.layout.fragment_banner_home : R.layout.fragment_home,
                 container, false);
         unbinder = ButterKnife.bind(this, view);
+        setStatusbarColorAuto(view);
         return view;
     }
 
@@ -330,7 +332,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         if (!songs.isEmpty()) {
             suggestionsContainer.setVisibility(View.VISIBLE);
             CollageSongAdapter artistAdapter = new CollageSongAdapter(getMainActivity(), songs);
-            suggestionsSongs.setLayoutManager(new LinearLayoutManager(getMainActivity()));
+            suggestionsSongs.setLayoutManager(RetroUtil.isTablet() ? new GridLayoutManager(getMainActivity(), 2) : new LinearLayoutManager(getMainActivity()));
             suggestionsSongs.setAdapter(artistAdapter);
         }
     }

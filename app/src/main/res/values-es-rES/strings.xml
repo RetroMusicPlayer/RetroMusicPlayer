@@ -73,7 +73,7 @@
     <string name="pref_blur_amount_summary">Ajuste de desenfoque con temas compatibles, menor es más rápido</string>
     <string name="pref_keep_screen_on_title">Mantener pantalla encendida</string>
     <string name="pref_keep_screen_on_summary">Ten en cuenta que habilitar esta característica puede afectar al rendimiento de la batería</string>
-    <string name="buy_retromusic_pro">Comprar RetroMusic Pro</string>
+
     <string name="cancel_current_timer">Cancelar temporizador actual</string>
 
     <string name="card">Tarjeta</string>

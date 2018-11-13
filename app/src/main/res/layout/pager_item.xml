@@ -41,8 +41,8 @@
         android:paddingStart="8dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:textSize="13sp"
         android:paddingBottom="4dp"
+        android:textSize="13sp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 

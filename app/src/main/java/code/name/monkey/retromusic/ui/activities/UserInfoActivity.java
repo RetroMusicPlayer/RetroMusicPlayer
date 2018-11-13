@@ -3,13 +3,13 @@ package code.name.monkey.retromusic.ui.activities;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.Compressor;
@@ -46,7 +46,6 @@ import static code.name.monkey.retromusic.Constants.USER_BANNER;
 import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class UserInfoActivity extends AbsBaseActivity {
-    private static final String TAG = "UserInfoActivity";
 
     private static final int PICK_IMAGE_REQUEST = 9002;
     private static final int PICK_BANNER_REQUEST = 9003;
@@ -82,7 +81,6 @@ public class UserInfoActivity extends AbsBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
-
         ButterKnife.bind(this);
 
         setStatusbarColorAuto();
@@ -106,10 +104,22 @@ public class UserInfoActivity extends AbsBaseActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupToolbar() {
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
-        TintHelper.setTintAuto(nextButton, ThemeStore.accentColor(this), true);
+        int primaryColor = ThemeStore.primaryColor(this);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        toolbar.setBackgroundColor(primaryColor);
+        appBarLayout.setBackgroundColor(primaryColor);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
+        setTitle(null);
+        setSupportActionBar(toolbar);
     }
 
     @OnClick({R.id.next, R.id.banner_select})
@@ -176,8 +186,7 @@ public class UserInfoActivity extends AbsBaseActivity {
         //noinspection ConstantConditions
         new MaterialDialog.Builder(this)
                 .title("Set a profile photo")
-                .items(Arrays.asList(getString(R.string.new_profile_photo),
-                        getString(R.string.remove_profile_photo)))
+                .items(Arrays.asList(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo)))
                 .itemsCallback((dialog, itemView, position, text) -> {
                     switch (position) {
                         case 0:

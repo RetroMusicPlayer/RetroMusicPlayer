@@ -30,14 +30,6 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
-            android:key="should_color_navigation_bar"
-            android:persistent="false"
-            android:summary="@string/pref_summary_colored_navigation_bar"
-            android:title="@string/pref_title_navigation_bar"
-            app:iconSpaceReserved="false" />
-
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
             android:key="adaptive_color_app"
             android:summary="@string/pref_summary_colored_app"
             android:title="@string/pref_title_colored_app"

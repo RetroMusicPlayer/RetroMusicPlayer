@@ -48,9 +48,7 @@ public class GenreSongsLoader {
         final String albumName = cursor.getString(8);
         final int artistId = cursor.getInt(9);
         final String artistName = cursor.getString(10);
-        final String composer = cursor.getString(11);
-
-        return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, composer);
+        return new Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName);
     }
 
     private static Cursor makeGenreSongCursor(Context context, long genreId) {
@@ -69,7 +67,6 @@ public class GenreSongsLoader {
                             AudioColumns.ALBUM,// 8
                             AudioColumns.ARTIST_ID,// 9
                             AudioColumns.ARTIST,// 10
-                            AudioColumns.COMPOSER,// 11
                     }, SongLoader.BASE_SELECTION, null,
                     MediaStore.Audio.Genres.Members.DEFAULT_SORT_ORDER);
         } catch (SecurityException e) {

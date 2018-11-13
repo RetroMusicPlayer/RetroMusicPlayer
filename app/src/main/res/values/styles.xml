@@ -50,7 +50,7 @@
     </style>
 
     <style name="BigTitleTextAppearance">
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="fontPath">@string/circular_std_black</item>
@@ -74,6 +74,19 @@
         <item name="android:hyphenationFrequency">none</item>
         <item name="android:textSize">13sp</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MaterialShuffleButtonStyle" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">16dp</item>
+        <item name="android:text">@string/action_shuffle_all</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">25dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="icon">@drawable/ic_shuffle_white_24dp</item>
+        <item name="backgroundTint">@color/md_red_400</item>
+        <item name="iconGravity">start</item>
     </style>
 
 

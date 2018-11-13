@@ -17,19 +17,20 @@ package code.name.monkey.retromusic.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
-import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.ViewGroup;
-
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder;
+import code.name.monkey.retromusic.util.RetroUtil;
 
 public class MetalRecyclerViewPager extends RecyclerView {
 
@@ -88,7 +89,11 @@ public class MetalRecyclerViewPager extends RecyclerView {
         }
 
         void updateDisplayMetrics() {
-            itemWidth = metrics.widthPixels - itemMargin * 2;
+            if (RetroUtil.isTablet()) {
+                itemWidth = (metrics.widthPixels / 2) - itemMargin * 3;
+            } else {
+                itemWidth = metrics.widthPixels - itemMargin * 2;
+            }
         }
 
         @Override

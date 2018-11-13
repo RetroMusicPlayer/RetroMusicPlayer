@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <declare-styleable name="CollapsingFAB">
+        <attr name="shuffleBackgroundColor" format="color" />
+        <attr name="showTitle" format="boolean" />
+    </declare-styleable>
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
     <attr name="rectSelectorStrong" format="reference" />

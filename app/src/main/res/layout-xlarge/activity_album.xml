@@ -4,21 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:transitionName="@string/transition_album_art">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/artist_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:transitionName="@string/transition_album_art" />
+        android:scaleType="centerCrop" />
 
-    <View
-        android:id="@+id/gradient_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shadow_up_home" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -46,39 +40,46 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
         android:layout_marginStart="96dp"
         android:layout_marginEnd="96dp"
+        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
         android:fillViewport="true"
         android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_bottom_sheet_dialog_fragment"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp">
+                android:orientation="horizontal">
 
                 <code.name.monkey.retromusic.views.WidthFitSquareLayout
                     android:layout_width="196dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0">
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/image"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:transitionName="@string/transition_album_art" />
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
+                    </com.google.android.material.card.MaterialCardView>
                 </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
                 <LinearLayout
@@ -95,8 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        android:transitionName="@string/transition_album_name"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -112,8 +112,7 @@
                         android:paddingTop="4dp"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:transitionName="@string/transition_album_text"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
@@ -130,20 +129,13 @@
         android:layout_height="72dp"
         android:background="@drawable/shadow_down_strong" />
 
-
-    <com.google.android.material.button.MaterialButton
+    <code.name.monkey.retromusic.views.CollapsingFAB
         android:id="@+id/action_shuffle_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/shuffle"
-        android:textAllCaps="false"
-        app:backgroundTint="@color/md_red_500"
-        app:cornerRadius="25dp"
-        app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="start"
-        app:iconPadding="12dp"
-        app:layout_dodgeInsetEdges="all" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="10dp"
+        app:showTitle="false"
+        app:shuffleBackgroundColor="@color/md_black_1000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
