@@ -103,7 +103,9 @@
         <activity android:name=".ui.activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".ui.activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".ui.activities.SettingsActivity" />
-        <activity android:name=".ui.activities.SearchActivity" />
+        <activity android:name=".ui.activities.SearchActivity" 
+                  android:windowSoftInputMode="stateVisible" >
+        </activity>
         <activity android:name=".ui.activities.LyricsActivity" />
         <activity android:name=".ui.activities.UserInfoActivity" />
         <activity
