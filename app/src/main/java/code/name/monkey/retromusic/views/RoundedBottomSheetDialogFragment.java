@@ -14,6 +14,8 @@ import android.widget.FrameLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -22,6 +24,7 @@ import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
 /**
@@ -29,23 +32,6 @@ import code.name.monkey.retromusic.util.RetroUtil;
  */
 @SuppressLint("RestrictedApi")
 public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
-
-   /* @Override
-    public int getTheme() {
-        //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance().getGeneralTheme() == R.style.Theme_RetroMusic_Light) {
-            return R.style.BottomSheetDialogTheme;
-        } else if (PreferenceUtil.getInstance().getGeneralTheme() == R.style.Theme_RetroMusic_Color) {
-            int color = ThemeStore.primaryColor(getContext());
-            if (ColorUtil.isColorLight(color)) {
-                return R.style.BottomSheetDialogTheme;
-            } else {
-                return R.style.BottomSheetDialogThemeDark;
-            }
-        } else {
-            return R.style.BottomSheetDialogTheme;
-        }
-    }*/
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -95,7 +81,7 @@ public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             int width = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_width);
-            getWindow().setLayout(width > 0 ? width : ViewGroup.LayoutParams.MATCH_PARENT,
+            Objects.requireNonNull(getWindow()).setLayout(width > 0 ? width : ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT);
         }
     }

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -41,7 +40,7 @@ import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 public class MainOptionsBottomSheetDialogFragment extends RoundedBottomSheetDialogFragment {
 
     private static final String TAG = "MainOptionsBottomSheetD";
-    private static ButterKnife.Setter<TextView, Integer> textColor = (view, value, index) -> view.setTextColor(ColorStateList.valueOf(value));
+    private static ButterKnife.Setter<MaterialButton, Integer> textColor = (view, value, index) -> view.setTextColor(ColorStateList.valueOf(value));
 
 
     @BindViews({R.id.action_folders, R.id.action_about, R.id.action_buy_pro, R.id.action_rate,
