@@ -33,12 +33,7 @@ public class FitSystemWindowsLayout extends FrameLayout {
         }
 
         mFit = fit;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-            requestApplyInsets();
-        } else {
-            //noinspection deprecation
-            requestFitSystemWindows();
-        }
+        requestApplyInsets();
     }
 
     @SuppressWarnings("deprecation")

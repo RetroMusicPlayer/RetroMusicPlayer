@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.cast;
 import android.net.Uri;
 
 import com.google.android.gms.cast.MediaInfo;
+import com.google.android.gms.cast.MediaLoadOptions;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
@@ -22,7 +23,7 @@ public class CastHelper {
         String ipAddress = RetroUtil.getIPAddress(true);
         URL baseUrl;
         try {
-            baseUrl = new URL("http", ipAddress, Constants.CAST_SERVER_PORT, "");
+            baseUrl = new URL("https", ipAddress, Constants.CAST_SERVER_PORT, "");
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return;
@@ -48,7 +49,9 @@ public class CastHelper {
                     .setStreamDuration(song.duration)
                     .build();
             RemoteMediaClient remoteMediaClient = castSession.getRemoteMediaClient();
-            remoteMediaClient.load(mediaInfo, true, 0);
+            remoteMediaClient.load(mediaInfo, new MediaLoadOptions.Builder()
+                    .build());
+            //remoteMediaClient.load(mediaInfo, true, 0);
         } catch (Exception e) {
             e.printStackTrace();
         }

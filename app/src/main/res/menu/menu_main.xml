@@ -4,12 +4,6 @@
     tools:context=".DrawerActivity">
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_white_24dp"
-        android:title="@string/action_search"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_shuffle_all"
         android:icon="@drawable/ic_shuffle_white_24dp"
         android:title="@string/action_shuffle_all"

@@ -22,8 +22,10 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.Surface;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -49,6 +51,7 @@ import code.name.monkey.retromusic.RetroApplication;
 public class RetroUtil {
 
     private static final int[] TEMP_ARRAY = new int[1];
+    private static final String SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar";
 
     public static int calculateNoOfColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
@@ -88,20 +91,17 @@ public class RetroUtil {
         return RetroApplication.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     public static boolean isRTL(@NonNull Context context) {
         Configuration config = context.getResources().getConfiguration();
         return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
 
-
     @TargetApi(19)
     public static void setStatusBarTranslucent(@NonNull Window window) {
         window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                 WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
     }
-
 
     public static boolean isMarshMellow() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
@@ -131,7 +131,6 @@ public class RetroUtil {
         return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-
     public static void openUrl(Activity context, String str) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.setData(Uri.parse(str));
@@ -150,7 +149,6 @@ public class RetroUtil {
         }
         return size;
     }
-
 
     public static void hideSoftKeyboard(@Nullable Activity activity) {
         if (activity != null) {
@@ -178,7 +176,6 @@ public class RetroUtil {
             // ho hum
         }
     }
-
 
     public static Drawable getVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
                                              @Nullable Resources.Theme theme) {
@@ -295,27 +292,17 @@ public class RetroUtil {
     }
 
     public static void statusBarHeight(View statusBar) {
-        statusBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(statusBar.getContext())));
+        statusBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
     }
 
-    public static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight() {
         int result = 0;
-        int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = RetroApplication.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
+            result = RetroApplication.getContext().getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }
-
-    public static int getNavigationBarHeight(Context context) {
-        int result = 0;
-        int resourceId = context.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = context.getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
-
 
     public static void setAllowDrawUnderNavigationBar(Window window) {
         window.setNavigationBarColor(Color.TRANSPARENT);
@@ -348,7 +335,59 @@ public class RetroUtil {
             return 0;
     }
 
-    public static boolean hasNavBar(Resources resources) {
+    public static int getNavigationBarHeight(Activity activity) {
+       /* int result = 0;
+        int resourceId = RetroApplication.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = RetroApplication.getContext().getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;*/
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int usableHeight = metrics.heightPixels;
+        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        int realHeight = metrics.heightPixels;
+        if (realHeight > usableHeight)
+            if (PreferenceUtil.getInstance().getFullScreenMode()) {
+                return 0;
+            } else
+                return realHeight - usableHeight;
+        else
+            return 0;
+    }
+
+    public static int getNavBarHeight(Context c) {
+        int result = 0;
+        boolean hasMenuKey = ViewConfiguration.get(c).hasPermanentMenuKey();
+        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+
+        if (!hasMenuKey && !hasBackKey) {
+            //The device has a navigation bar
+            Resources resources = c.getResources();
+
+            int orientation = resources.getConfiguration().orientation;
+            int resourceId;
+            if (isTablet(c)) {
+                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+            } else {
+                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_width", "dimen", "android");
+            }
+
+            if (resourceId > 0) {
+                return resources.getDimensionPixelSize(resourceId);
+            }
+        }
+        return result;
+    }
+
+
+    private static boolean isTablet(Context c) {
+        return (c.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
+    private static boolean hasNavBar(Resources resources) {
         int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
         if (id > 0)
             return resources.getBoolean(id);
@@ -375,33 +414,17 @@ public class RetroUtil {
         return 0;
     }
 
-    public static int getNavigationBarWidth(Resources resources) {
-        if (!hasNavBar(resources))
-            return 0;
-
+    public static boolean checkNavigationBarHeight() {
+        Resources resources = RetroApplication.getContext().getResources();
         int orientation = resources.getConfiguration().orientation;
-
-        //Only phone between 0-599 has navigationbar can move
-        boolean isSmartphone = resources.getConfiguration().smallestScreenWidthDp < 600;
-
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone) {
-            int id = resources.getIdentifier("navigation_bar_width", "dimen", "android");
-            if (id > 0)
-                return resources.getDimensionPixelSize(id);
+        if (!hasNavBar(resources)) {
+            return false;
         }
-
-        return 0;
-    }
-
-    public static boolean isNavigationBarLeftSide() {
-        Display display = ((WindowManager) RetroApplication.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        int screenOrientation = display.getRotation();
-        return screenOrientation == Surface.ROTATION_180;
-    }
-
-    public static boolean isNavigationBarRightSide() {
-        Display display = ((WindowManager) RetroApplication.getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        int screenOrientation = display.getRotation();
-        return screenOrientation == Surface.ROTATION_90;
+        boolean isSmartPhone = resources.getConfiguration().smallestScreenWidthDp < 600;
+        if (isSmartPhone && Configuration.ORIENTATION_LANDSCAPE == orientation)
+            return false;
+        int id = resources
+                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
+        return id > 0;
     }
 }

@@ -61,6 +61,7 @@
         android:layoutDirection="ltr"
         android:paddingEnd="4dp"
         android:paddingStart="4dp"
+        android:layout_marginBottom="8dp"
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <ImageButton

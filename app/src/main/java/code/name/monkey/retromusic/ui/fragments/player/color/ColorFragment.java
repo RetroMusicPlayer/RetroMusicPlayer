@@ -5,7 +5,6 @@ import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -136,10 +135,6 @@ public class ColorFragment extends AbsPlayerFragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_color_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            addSafeArea(view);
-        }
         return view;
     }
 

@@ -84,7 +84,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setDrawUnderStatusBar();
-        setDrawUnderNavigationBar();
+        //setDrawUnderNavigationBar();
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_lyrics);

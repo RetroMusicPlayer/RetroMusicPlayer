@@ -88,11 +88,7 @@ public class FlatPlayerFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_flat_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            //getPlayerActivity().setNavigationbarColorAuto();
-            addSafeArea(view);
-        }
+
         return view;
     }
 

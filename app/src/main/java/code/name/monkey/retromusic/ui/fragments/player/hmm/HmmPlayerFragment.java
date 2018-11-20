@@ -99,11 +99,7 @@ public class HmmPlayerFragment extends AbsPlayerFragment implements
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hmm_player, container, false);
         unBinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
-            addSafeArea(view);
-        }
+
         return view;
     }
 

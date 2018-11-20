@@ -160,12 +160,7 @@ public class CardFragment extends AbsPlayerFragment implements PlayerAlbumCoverF
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
-            addSafeArea(view);
-        }
-        return view;
+         return view;
     }
 
     @Override

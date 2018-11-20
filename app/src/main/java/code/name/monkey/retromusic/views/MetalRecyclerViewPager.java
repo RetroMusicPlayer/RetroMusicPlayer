@@ -92,7 +92,7 @@ public class MetalRecyclerViewPager extends RecyclerView {
             if (RetroUtil.isTablet()) {
                 itemWidth = (metrics.widthPixels / 2) - itemMargin * 3;
             } else {
-                itemWidth = metrics.widthPixels - itemMargin * 2;
+                itemWidth = metrics.widthPixels - itemMargin ;
             }
         }
 

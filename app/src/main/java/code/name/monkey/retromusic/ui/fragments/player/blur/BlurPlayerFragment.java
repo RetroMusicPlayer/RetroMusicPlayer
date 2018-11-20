@@ -140,11 +140,6 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_blur, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
-            addSafeArea(view);
-        }
         return view;
     }
 

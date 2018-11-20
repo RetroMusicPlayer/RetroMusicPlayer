@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.util.SystemUtils;
 import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 
 public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
@@ -55,8 +56,11 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
     protected void addSafeArea(View view) {
         FitSystemWindowsLayout safeArea = view.findViewById(R.id.safeArea);
         if (safeArea != null) {
-            if (PreferenceUtil.getInstance().getFullScreenMode()) safeArea.setFit(false);
-            else safeArea.setFit(true);
+            //ViewGroup.MarginLayoutParams params = ((ViewGroup.MarginLayoutParams) safeArea.getLayoutParams());
+            //params.topMargin = RetroUtil.getStatusBarHeight();
+            //params.bottomMargin = RetroUtil.getNavigationBarHeight();
+            //if (PreferenceUtil.getInstance().getFullScreenMode()) safeArea.setFit(false);
+            //else safeArea.setFit(true);
         }
     }
 
@@ -227,4 +231,5 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
 
         void onPaletteColorChanged();
     }
+
 }

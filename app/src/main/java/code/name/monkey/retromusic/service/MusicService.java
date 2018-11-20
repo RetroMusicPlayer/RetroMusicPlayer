@@ -305,6 +305,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         registerHeadsetEvents();
 
+
     }
 
     private AudioManager getAudioManager() {
@@ -1208,6 +1209,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         acquireWakeLock(30000);
         playerHandler.sendEmptyMessage(TRACK_ENDED);
     }
+
 
     private static final class QueueSaveHandler extends Handler {
         @NonNull

@@ -455,10 +455,6 @@ public class MusicPlayerRemote {
         return musicService != null;
     }
 
-    public static void setZeroVolume() {
-
-    }
-
     @interface PlaybackLocation {
         int REMOTE = 0;
         int LOCAL = 1;

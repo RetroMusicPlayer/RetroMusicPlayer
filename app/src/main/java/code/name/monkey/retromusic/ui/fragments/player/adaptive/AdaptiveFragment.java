@@ -107,11 +107,6 @@ public class AdaptiveFragment extends AbsPlayerFragment implements Callbacks {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_adaptive_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColorAuto();
-            addSafeArea(view);
-        }
         return view;
     }
 
@@ -162,5 +157,4 @@ public class AdaptiveFragment extends AbsPlayerFragment implements Callbacks {
         updateIsFavorite();
         updateSong();
     }
-
 }

@@ -59,5 +59,4 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="horizontal_margin">0dp</dimen>
     <dimen name="bottom_sheet_width">0dp</dimen>
     <dimen name="mini_player_height_expanded">104dp</dimen>
-
 </resources>

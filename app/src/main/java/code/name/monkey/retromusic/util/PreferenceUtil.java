@@ -695,41 +695,6 @@ public final class PreferenceUtil {
         mPreferences.edit().putBoolean(CIRCULAR_ALBUM_ART, false).apply();
     }
 
-    @LayoutRes
-    public int getAlbumGridStyle(Context context) {
-        int pos = Integer.parseInt(mPreferences.getString(ALBUM_GRID_STYLE, "0"));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.item_card;
-        }
-        return layoutRes;
-    }
-
-    @LayoutRes
-    public int getHomeGridStyle(Context context) {
-        int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.item_artist;
-        }
-        return layoutRes;
-    }
-
-
-    public int getArtistGridStyle(Context context) {
-        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ARTIST_GRID_STYLE, "0")));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.item_card;
-        }
-        return layoutRes;
-    }
 
     public String getAlbumDetailsStyle() {
         return mPreferences.getString(ALBUM_DETAIL_STYLE, "0");
@@ -805,4 +770,41 @@ public final class PreferenceUtil {
                 return LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
         }
     }
+
+    @LayoutRes
+    public int getHomeGridStyle(Context context) {
+        int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
+        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
+        int layoutRes = typedArray.getResourceId(pos, -1);
+        typedArray.recycle();
+        if (layoutRes == -1) {
+            return R.layout.item_artist;
+        }
+        return layoutRes;
+    }
+
+    @LayoutRes
+    public int getArtistGridStyle(Context context) {
+        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ARTIST_GRID_STYLE, "0")));
+        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
+        int layoutRes = typedArray.getResourceId(pos, -1);
+        typedArray.recycle();
+        if (layoutRes == -1) {
+            return R.layout.item_card;
+        }
+        return layoutRes;
+    }
+
+    @LayoutRes
+    public int getAlbumGridStyle(Context context) {
+        int pos = Integer.parseInt(mPreferences.getString(ALBUM_GRID_STYLE, "0"));
+        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
+        int layoutRes = typedArray.getResourceId(pos, -1);
+        typedArray.recycle();
+        if (layoutRes == -1) {
+            return R.layout.item_card;
+        }
+        return layoutRes;
+    }
+
 }

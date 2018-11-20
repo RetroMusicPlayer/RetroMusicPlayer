@@ -62,6 +62,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @BindView(R.id.fragment_container)
     View contentContainer;
 
+
     private Unbinder unBinder;
     private MaterialCab cab;
     private FragmentManager fragmentManager;
@@ -110,6 +111,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         setStatusbarColorAuto(view);
         setupToolbar();
         inflateFragment();
+
     }
 
     private void inflateFragment() {
@@ -142,13 +144,14 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         appbar.setBackgroundColor(primaryColor);
         appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> showMainMenu());
+        toolbar.setNavigationOnClickListener(v -> NavigationUtil.goToSearch(getMainActivity()));
+        toolbar.setOnClickListener(v -> showMainMenu());
+        toolbar.setNavigationIcon(RetroUtil.getTintedDrawable(getMainActivity(), R.drawable.ic_search_white_24dp, ThemeStore.textColorPrimary(getMainActivity())));
     }
 
     private Fragment getCurrentFragment() {
@@ -363,9 +366,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(getContext())
                         .blockingFirst(), true);
                 return true;
-            case R.id.action_search:
-                NavigationUtil.goToSearch(getMainActivity());
-                break;
             case R.id.action_equalizer:
                 NavigationUtil.openEqualizer(getActivity());
                 return true;

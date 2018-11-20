@@ -24,7 +24,7 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
     @BindView(R.id.player_toolbar)
     Toolbar toolbar;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
 
     private int lastColor;
     private FullPlaybackControlsFragment fullPlaybackControlsFragment;
@@ -42,11 +42,7 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_full, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColor(Color.TRANSPARENT);
-            addSafeArea(view);
-        }
+
         return view;
     }
 

@@ -51,7 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            app:itemMargin="28dp" />
+            app:itemMargin="96dp" />
 
         <View
             android:layout_width="match_parent"

@@ -2,7 +2,9 @@ package code.name.monkey.retromusic.ui.activities.base;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
+import com.google.android.gms.cast.framework.CastButtonFactory;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.SessionManagerListener;
@@ -11,6 +13,7 @@ import com.google.android.gms.common.GoogleApiAvailability;
 
 import java.io.IOException;
 
+import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.cast.WebServer;
 
 public abstract class AbsCastActivity extends AbsBaseActivity {

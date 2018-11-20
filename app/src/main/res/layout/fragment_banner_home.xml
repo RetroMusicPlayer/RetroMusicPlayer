@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main_fragment_content"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -16,44 +17,6 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            android:focusable="true"
-            app:elevation="0dp"
-            tools:ignore="UnusedAttribute">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:titleEnabled="false">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar48"
-                    app:layout_collapseMode="pin"
-                    tools:ignore="UnusedAttribute">
-
-                    <TextView
-                        android:id="@+id/title"
-                        style="@style/BigTitleTextAppearance"
-                        android:text="@string/app_name" />
-
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:layout_gravity="end"
-                        android:layout_marginEnd="16dp"
-                        app:civ_border="false" />
-                </androidx.appcompat.widget.Toolbar>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/container"
@@ -71,6 +34,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
+
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/image_container"

@@ -208,7 +208,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
 
         if (toolbar != null && !PreferenceUtil.getInstance().getFullScreenMode()) {
             ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
-            params.topMargin = RetroUtil.getStatusBarHeight(this);
+            params.topMargin = RetroUtil.getStatusBarHeight( );
             toolbar.setLayoutParams(params);
         }
 

@@ -97,8 +97,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
 
         getBottomNavigationView().setOnNavigationItemSelectedListener(this);
 
-        drawerLayout.setOnApplyWindowInsetsListener((view, windowInsets) -> windowInsets.replaceSystemWindowInsets(0, 0, 0, 0));
-
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance().getLastPage());
             //setCurrentFragment(new LibraryFragment(), false, LibraryFragment.TAG);
@@ -278,11 +276,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(PreferenceUtil.GENERAL_THEME) ||
                 key.equals(PreferenceUtil.ADAPTIVE_COLOR_APP) ||
@@ -325,11 +318,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
                 .show();
     }
 
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         PreferenceUtil.getInstance().setLastPage(menuItem.getItemId());
         selectedFragment(menuItem.getItemId());
+        applyInsets();
         return true;
     }
 

@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity.home;
 
 import android.app.Activity;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,12 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,7 +31,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -75,9 +70,9 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.app_bar)
+    /*@BindView(R.id.app_bar)
     AppBarLayout appbar;
-
+*/
     @BindView(R.id.image)
     @Nullable
     ImageView imageView;
@@ -85,8 +80,8 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @BindView(R.id.user_image)
     CircularImageView userImage;
 
-    @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout toolbarLayout;
+  /*  @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout toolbarLayout;*/
 
     @BindView(R.id.recycler_view)
     RecyclerView recentArtistRV;
@@ -121,17 +116,11 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @BindView(R.id.container)
     View container;
 
-    @BindView(R.id.title)
-    TextView title;
-
     @BindView(R.id.suggestion_songs)
     RecyclerView suggestionsSongs;
 
     @BindView(R.id.suggestion_container)
     LinearLayout suggestionsContainer;
-
-    @BindView(R.id.search_icon)
-    ImageView searchIcon;
 
     private Unbinder unbinder;
     private HomePresenter homePresenter;
@@ -241,18 +230,13 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     private void setupToolbar() {
         int primaryColor = ThemeStore.primaryColor(getContext());
         TintHelper.setTintAuto(container, primaryColor, true);
-
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
-        toolbar.setBackgroundColor(primaryColor);
-        appbar.setBackgroundColor(primaryColor);
-        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
-                getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
+        userImage.setOnClickListener(v -> showMainMenu());
 
         getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(RetroUtil.getTintedDrawable(getMainActivity(), R.drawable.ic_menu_white_24dp, ThemeStore.textColorPrimary(getMainActivity())));
+        toolbar.setOnClickListener(v -> NavigationUtil.goToSearch(getMainActivity()));
         toolbar.setNavigationOnClickListener(v -> showMainMenu());
-        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
-        searchIcon.setImageTintList(ColorStateList.valueOf(ThemeStore.accentColor(getContext())));
     }
 
     @Override
@@ -346,7 +330,6 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         Display display = getMainActivity().getWindowManager().getDefaultDisplay();
         DisplayMetrics metrics = new DisplayMetrics();
         display.getMetrics(metrics);
-
         return metrics;
     }
 
@@ -360,7 +343,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     }
 
     @OnClick({R.id.last_added, R.id.top_played, R.id.action_shuffle, R.id.history,
-            R.id.user_image, R.id.search})
+            R.id.user_image})
     void startUserInfo(View view) {
         Activity activity = getActivity();
         if (activity != null) {
@@ -380,12 +363,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
                 case R.id.user_image:
                     NavigationUtil.goToUserInfo(getActivity());
                     break;
-                case R.id.search:
-                    NavigationUtil.goToSearch(activity);
-                    break;
             }
         }
     }
-
-
 }

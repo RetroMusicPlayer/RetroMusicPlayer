@@ -108,11 +108,6 @@ public class MaterialFragment extends AbsPlayerFragment implements PlayerAlbumCo
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_material, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            getPlayerActivity().setNavigationbarColorAuto();
-            addSafeArea(view);
-        }
         return view;
     }
 

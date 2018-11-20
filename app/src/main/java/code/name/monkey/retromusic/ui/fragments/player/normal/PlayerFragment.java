@@ -16,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
@@ -136,10 +135,7 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-        if (getPlayerActivity() != null) {
-            getPlayerActivity().setDrawUnderNavigationBar();
-            addSafeArea(view);
-        }
+
         return view;
     }
 
