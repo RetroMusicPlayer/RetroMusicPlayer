@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"ହୋମ୍ ପେଜ୍‍କୁ ନେଭିଗେଟ୍ କରନ୍ତୁ"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"ଉପରକୁ ନେଭିଗେଟ୍ କରନ୍ତୁ"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"ଅଧିକ ବିକଳ୍ପ"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"ହୋଇଗଲା"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"ସବୁ ଦେଖନ୍ତୁ"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"ଗୋଟିଏ ଆପ୍‍ ବାଛନ୍ତୁ"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"ଅଫ୍"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ଅନ୍"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"ଡିଲିଟ୍‍"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"ଏଣ୍ଟର୍"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"ସ୍ପେସ୍‍"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"ମେନୁ"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"ସର୍ଚ୍ଚ…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"କ୍ୱେରୀ ଖାଲି କରନ୍ତୁ"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"ସର୍ଚ୍ଚ କ୍ୱେରୀ"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"ସର୍ଚ୍ଚ କରନ୍ତୁ"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"କ୍ୱେରୀ ଦାଖଲ କରନ୍ତୁ"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"ଭଏସ୍‌ ସର୍ଚ୍ଚ"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"ଏହାଙ୍କ ସହ ଶେୟାର୍‌ କରନ୍ତୁ"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> ସହ ଶେୟାର୍‍ କରନ୍ତୁ"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"ଛୋଟ କରନ୍ତୁ"</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"ବିଜ୍ଞାପନ"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"%1$sକୁ କାଷ୍ଟ କରୁଛି"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"ସବଟାଇଟଲ୍‌"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"ସବଟାଇଟଲ୍‌ ଉପଲବ୍ଧ ନାହିଁ"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"<ns1:g id="NAME">%1$s</ns1:g> ସହ ସଂଯୋଗ ହେଉଛି"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"ବିଛିନ୍ନ କରନ୍ତୁ"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"କାଷ୍ଟ ରିସିଭର୍‍ ଏକ ବିଜ୍ଞାପନ ଚଳାଉଥିବା ବେଳେ ଇମେଜ୍‍ ଦେଖାଗଲା"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"ବିଜ୍ଞାପନ ଚାଲୁଅଛି…"</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"ଆଲବମ୍ ଆର୍ଟ"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"ଲାଇଭ୍ ଷ୍ଟ୍ରୀମ୍"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"ଲୋଡ୍ କରୁଛି…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"ବିଜ୍ଞାପନକୁ ଛାଡ଼ିଦିଅନ୍ତୁ"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"ଆପଣ ବିଜ୍ଞାପନକୁ %1$d…ରେ ଛାଡ଼ିପାରିବେ"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"ଆଗକୁ ବଢ଼ାନ୍ତୁ"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"ଦଶ ସେକେଣ୍ଡ ଆଗକୁ ବଢ଼ାନ୍ତୁ"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"30 ସେକେଣ୍ଡ ଆଗକୁ ବଢ଼ାନ୍ତୁ"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:ଷ୍ଟ୍ରିଙ୍ଗ/ଠିକ୍‍ ଅଛି"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"ମ୍ୟୁଟ୍ କରନ୍ତୁ"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"<ns1:g id="NAME">%1$s</ns1:g> ସହ ସଂଯୁକ୍ତ"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"<ns1:g id="NAME">%1$s</ns1:g> ସହ ସଂଯୋଗ ହେଉଛି"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"କାଷ୍ଟ"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"ବିଛିନ୍ନ କରନ୍ତୁ"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"ପଜ୍‍ କରନ୍ତୁ"</string>
+    <string msgid="5906987965619702702" name="cast_play">"ଚଲାନ୍ତୁ"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"ପଛକୁ ନିଅନ୍ତୁ"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"ଦଶ ସେକେଣ୍ଡ ପଛକୁ ନିଅନ୍ତୁ"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"ତିରିଶ ସେକେଣ୍ଡ ପଛକୁ ନିଅନ୍ତୁ"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"ପ୍ଲେବ୍ୟାକ୍‌ ନିୟନ୍ତ୍ରଣ"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"ପରବର୍ତ୍ତୀ ଆଇଟମ୍‌କୁ ଯାଆନ୍ତୁ"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"ପୂର୍ବ ଆଇଟମ୍‌କୁ ଯାଆନ୍ତୁ"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"ବନ୍ଦ କରନ୍ତୁ"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"ଲାଇଭ୍ ଷ୍ଟ୍ରୀମ୍ ବନ୍ଦ କରନ୍ତୁ"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"ଅଡିଓ"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"କ୍ୟାନ୍ସଲ୍‍ କରନ୍ତୁ"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"ସବଟାଇଟଲ୍‌"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"<ns1:g id="POSITION">%1$d</ns1:g> ଟ୍ରାକ୍‌ କରନ୍ତୁ"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"କିଛି ନୁହେଁ"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"ଠିକ୍‍ ଅଛି"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"ସବଟାଇଟଲ୍‌"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"ଅନମ୍ୟୁଟ୍ କରନ୍ତୁ"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"ସକ୍ଷମ କରନ୍ତୁ"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"ଆପଣ Google Play ସେବା ସକ୍ଷମ ନ କରିବା ପର୍ଯ୍ୟନ୍ତ <ns1:g id="APP_NAME">%1$s</ns1:g> କାମ କରିବ ନାହିଁ।"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play ସେବାଗୁଡ଼ିକ ସକ୍ଷମ କରନ୍ତୁ"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"ଇନ୍‍ଷ୍ଟଲ୍‍ କରନ୍ତୁ"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ଏହି Google Play ସେବାଗୁଡ଼ିକ ବିନା ଚାଲେ ନାହିଁ, ଏବଂ ସେଗୁଡ଼ିକ ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ ନାହିଁ।"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play ସେବାଗୁଡ଼ିକ ପ୍ରାପ୍ତ କରନ୍ତୁ"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play ସେବାଗୁଡ଼ିକର ଉପଲବ୍ଧତା"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play ସେବା ସମ୍ପର୍କିତ ସମସ୍ୟା"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g>ର Google Play ସେବା ସହ ଏକ ସମସ୍ୟା ରହିଛି। ଦୟାକରି ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"<ns1:g id="APP_NAME">%1$s</ns1:g> ଏହି Google Play ସେବାଗୁଡ଼ିକ ବିନା ଚାଲେ ନାହିଁ, ଏବଂ ସେଗୁଡ଼ିକ ଆପଣଙ୍କ ଡିଭାଇସ୍‌ରେ କାମ କରେ ନାହିଁ।"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"ଅପଡେଟ୍‍ କରନ୍ତୁ"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"ଆପଣ Google Play ସେବା ଅପଡେଟ୍‌ ନ କରିବା ପର୍ଯ୍ୟନ୍ତ <ns1:g id="APP_NAME">%1$s</ns1:g> ଚାଲିବ ନାହିଁ।"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google Play ସେବାଗୁଡ଼ିକ ଅପଡେଟ୍ କରନ୍ତୁ"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"Google Play ସେବାଗୁଡ଼ିକ ବିନା <ns1:g id="APP_NAME">%1$s</ns1:g> ଚାଲିବ ନାହିଁ, ଯେଉଁଗୁଡ଼ିକ ବର୍ତ୍ତମାନ ଅପଡେଟ୍‌ ହେଉଛି।"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play ସେବାଗୁଡ଼ିକର ନୂତନ ଭର୍ସନ୍‌ ଆବଶ୍ୟକ। ଏହା ନିଜକୁ କିଛି ସମୟ ମଧ୍ୟରେ ଅପଡେଟ୍‌ କରିବ।"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"ଫୋନ୍‌ରେ ଖୋଲନ୍ତୁ"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"ସାଇନ୍‌-ଇନ୍ କରନ୍ତୁ"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Google ସହ ସାଇନ୍‌-ଇନ୍ କରନ୍ତୁ"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"ସର୍ଚ୍ଚ କରନ୍ତୁ"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+</resources>

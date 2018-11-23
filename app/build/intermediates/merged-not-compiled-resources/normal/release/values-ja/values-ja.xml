@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"ホームへ移動"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"上へ移動"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"その他のオプション"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"完了"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"すべて表示"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"アプリの選択"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"OFF"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ON"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"Delete"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"Enter"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"Space"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"検索…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"検索キーワードを削除"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"検索キーワード"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"検索"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"検索キーワードを送信"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"音声検索"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"共有"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g>と共有"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"折りたたむ"</string>
+    <string name="accent_color">アクセントカラー</string>
+    <string name="accent_color_desc">テーマのアクセントカラー、既定は緑です。</string>
+    <string name="action_about">このアプリについて</string>
+    <string name="action_add_to_favorites">お気に入りに追加</string>
+    <string name="action_add_to_playing_queue">再生中のキューに追加</string>
+    <string name="action_add_to_playlist">プレイリストに追加</string>
+    <string name="action_clear_playing_queue">キューを削除</string>
+    <string name="action_clear_playlist">プレイリストをクリア</string>
+    <string name="action_delete">削除</string>
+    <string name="action_delete_from_device">端末から削除</string>
+    <string name="action_details">詳細</string>
+    <string name="action_go_to_album">アルバムに移動</string>
+    <string name="action_go_to_artist">アーティストに移動</string>
+    <string name="action_go_to_start_directory">初期ディレクトリに移動</string>
+    <string name="action_grant">許可</string>
+    <string name="action_grid_size">グリッドサイズ</string>
+    <string name="action_grid_size_land">グリッドサイズ(横画面)</string>
+    <string name="action_next">次</string>
+    <string name="action_play">再生</string>
+    <string name="action_play_next">次を再生</string>
+    <string name="action_play_pause">再生/一時停止</string>
+    <string name="action_previous">前</string>
+    <string name="action_remove_from_favorites">お気に入りから削除</string>
+    <string name="action_remove_from_playing_queue">キューから削除</string>
+    <string name="action_remove_from_playlist">再生リストから削除</string>
+    <string name="action_rename">リネーム</string>
+    <string name="action_save_playing_queue">再生中のキューを保存</string>
+    <string name="action_scan">スキャン</string>
+    <string name="action_search">検索</string>
+    <string name="action_set">セット</string>
+    <string name="action_set_as_ringtone">着信音にする</string>
+    <string name="action_set_as_start_directory">初期ディレクトリに設定</string>
+    <string name="action_settings">"設定"</string>
+    <string name="action_share">シェア</string>
+    <string name="action_shuffle_all">すべてシャッフル</string>
+    <string name="action_shuffle_playlist">再生リストをシャッフル</string>
+    <string name="action_sleep_timer">スリープタイマー</string>
+    <string name="action_tag_editor">タグを編集</string>
+    <string name="add_action">追加</string>
+    <string name="add_photo">写真を追加</string>
+    <string name="add_playlist_title">"再生リストに追加"</string>
+    <string name="added_title_to_playing_queue">"1タイトルを再生中のキューに追加しました"</string>
+    <string name="added_x_titles_to_playing_queue">%1$d曲を再生中のキューに追加しました</string>
+    <string name="album">アルバム</string>
+    <string name="album_artist">アルバムアーティスト</string>
+    <string name="album_or_artist_empty">タイトルかアーティストが空です</string>
+    <string name="albums">アルバム</string>
+    <string name="always">常に</string>
+    <string name="app_share">私達の音楽プレーヤーをチェック
+https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_shortcut_last_added_long">\@string/last_added</string>
+    <string name="app_shortcut_last_added_short">\@string/last_added</string>
+    <string name="app_shortcut_shuffle_all_long">\@string/action_shuffle_all</string>
+    <string name="app_shortcut_shuffle_all_short">シャッフル</string>
+    <string name="app_shortcut_top_tracks_long">\@string/my_top_tracks</string>
+    <string name="app_shortcut_top_tracks_short">トップのトラック</string>
+    <string name="app_widget_big_name">Retro music - 大</string>
+    <string name="app_widget_card_name">Retro music - カード</string>
+    <string name="app_widget_classic_name">Retro music - クラシック</string>
+    <string name="app_widget_small_name">Retro music - 小</string>
+    <string name="artist">アーティスト</string>
+    <string name="artists">アーティスト</string>
+    <string name="audio_focus_denied">オーディオフォーカスが拒否されました</string>
+    <string name="biography">略歴</string>
+    <string name="black_theme_name">ブラック</string>
+    <string name="blacklist">ブラックリスト</string>
+    <string name="cancel_current_timer">現在のタイマーをキャンセル</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"広告"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"「%1$s」にキャストしています"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"クローズド キャプション"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"クローズド キャプションを使用できません"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"「<ns1:g id="NAME">%1$s</ns1:g>」に接続しています"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"接続を解除"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"Cast レシーバーが広告を再生している間に表示された画像"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"広告の編集中…"</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"アルバムアート"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"ライブ ストリーム"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"読み込んでいます…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"広告をスキップ"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"広告は %1$d 後にスキップできます…"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"早送り"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"10 秒早送り"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"30 秒早送り"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:string/ok"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"ミュート"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"<ns1:g id="NAME">%1$s</ns1:g> に接続しました"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"<ns1:g id="NAME">%1$s</ns1:g> に接続しています"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"Cast"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"接続を解除"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"一時停止"</string>
+    <string msgid="5906987965619702702" name="cast_play">"再生"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"巻き戻し"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"10 秒巻き戻し"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"30 秒巻き戻し"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"再生スライダー"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"次の項目にスキップ"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"前の項目にスキップ"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"停止"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"ライブ ストリームを停止"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"音声"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"キャンセル"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"クローズド キャプション"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"トラック <ns1:g id="POSITION">%1$d</ns1:g>"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"なし"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"OK"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"字幕"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"ミュートを解除"</string>
+    <string name="changelog">変更履歴</string>
+    <string name="changelog_summary">Telegram appに保管されている更新履歴</string>
+    <string name="clear_action">クリア</string>
+    <string name="clear_blacklist">ブラックリストをクリア</string>
+    <string name="clear_playlist_title">再生リストをクリア</string>
+    <string name="clear_playlist_x"><![CDATA[<b>%1$s</b>\u3092\u524a\u9664\u3057\u307e\u3059\u304b\uff1f\u3053\u306e\u64cd\u4f5c\u306f\u3082\u3068\u306b\u623b\u305b\u307e\u305b\u3093]]></string>
+    <string name="colors">色</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"有効にする"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行には、Google Play開発者サービスの有効化が必要です。"</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play開発者サービスの有効化"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"インストール"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」の実行には Google Play 開発者サービスが必要ですが、お使いの端末にはインストールされていません。"</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play開発者サービスの入手"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play 開発者サービスの利用"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play開発者サービスのエラー"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」で Google Play 開発者サービスに問題が発生しています。もう一度お試しください。"</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"「<ns1:g id="APP_NAME">%1$s</ns1:g>」の実行には Google Play 開発者サービスが必要ですが、お使いの端末ではサポートされていません。"</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"更新"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行にはGoogle Play開発者サービスの更新が必要です。"</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google Play開発者サービスの更新"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"<ns1:g id="APP_NAME">%1$s</ns1:g>の実行にはGoogle Play開発者サービスが必要ですが、このサービスは現在更新中です。"</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play開発者サービスの新しいバージョンが必要です。まもなく自動更新されます。"</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"スマートフォンで開く"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"ログイン"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Googleにログイン"</string>
+    <string name="could_not_create_playlist">\u518d\u751f\u30ea\u30b9\u30c8\u3092\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f</string>
+    <string name="could_not_download_album_cover">"\u5bfe\u5fdc\u3059\u308b\u30a2\u30eb\u30d0\u30e0\u30ab\u30d0\u30fc\u3092\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u51fa\u6765\u307e\u305b\u3093\u3067\u3057\u305f\u3002"</string>
+    <string name="could_not_scan_files">%d個のファイルをスキャンできませんでした</string>
+    <string name="create_action">作成</string>
+    <string name="created_playlist_x">作成されたプレイリスト %1$s</string>
+    <string name="currently_listening_to_x_by_x">%1$sから%2$sを再生中</string>
+    <string name="dark_theme_name">ダーク</string>
+    <string name="default_hint">歌詞なし</string>
+    <string name="delete_playlist_title">再生リストを削除</string>
+    <string name="delete_playlist_x"><![CDATA[<b>%1$s</b>を削除しますか？]]></string>
+    <string name="delete_playlists_title">再生リストを削除</string>
+    <string name="delete_song_x"><![CDATA[ <b>%1$s</b>を削除しますか？]]></string>
+    <string name="delete_x_playlists"><![CDATA[<b>%1$d</b>個のプレイリストを削除しますか？]]></string>
+    <string name="delete_x_songs"><![CDATA[<b>%1$d</b>曲削除しますか？]]></string>
+    <string name="deleted_x_songs">%1$d曲を削除しました</string>
+    <string name="do_you_want_to_clear_the_blacklist">ブラックリストを削除しますか？</string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[<b>%1$s</b>をブラックリストから削除しますか？]]></string>
+    <string name="donate">寄付</string>
+    <string name="donate_summary">もしあなたが私の仕事を評価した場合、数ドルの寄付ができます。</string>
+    <string name="donation_header">私に買ってください</string>
+    <string name="download_from_last_fm">Last.fmからダウンロード</string>
+    <string name="empty">空</string>
+    <string name="equalizer">イコライザー</string>
+    <string msgid="1234962710353108940" name="expand_button_title">"詳細設定"</string>
+    <string name="favorites">お気に入り</string>
+    <string name="flat">フラット</string>
+    <string name="folders">フォルダ</string>
+    <string name="for_you">あなたへのおすすめ</string>
+    <string name="full">フル</string>
+    <string name="genre">ジャンル</string>
+    <string name="grid_size_1">1</string>
+    <string name="grid_size_2">2</string>
+    <string name="grid_size_3">3</string>
+    <string name="grid_size_4">4</string>
+    <string name="grid_size_5">5</string>
+    <string name="grid_size_6">6</string>
+    <string name="grid_size_7">7</string>
+    <string name="grid_size_8">8</string>
+    <string name="history">履歴</string>
+    <string name="home">ホーム</string>
+    <string name="inserted_x_songs_into_playlist_x">再生リスト %2$sに%1$d曲を追加しました</string>
+    <string name="label_bit_rate">ビットレート</string>
+    <string name="label_file_format">フォーマット</string>
+    <string name="label_file_name">ファイル名</string>
+    <string name="label_file_path">ファイルパス</string>
+    <string name="label_file_size">サイズ</string>
+    <string name="label_sampling_rate">サンプリングレート</string>
+    <string name="label_track_length">長さ</string>
+    <string name="last_added">最近追加したもの</string>
+    <string name="lets_play_something">何か再生しましょう</string>
+    <string name="library">ブラウズ</string>
+    <string name="licenses">ライセンス</string>
+    <string name="light_theme_name">ホワイト</string>
+    <string name="listing_files">リストファイル</string>
+    <string name="loading_products">プロダクトを読み込み中...</string>
+    <string name="lyrics">歌詞</string>
+    <string msgid="1685185767093348095" name="mr_button_content_description">"キャスト アイコン"</string>
+    <string msgid="1350095112462806159" name="mr_cast_button_connected">"キャスト アイコン。接続済み"</string>
+    <string msgid="8959304318293841992" name="mr_cast_button_connecting">"キャスト アイコン。接続中"</string>
+    <string msgid="5501231066847739632" name="mr_cast_button_disconnected">"キャスト アイコン。接続解除済み"</string>
+    <string msgid="5504553798429329689" name="mr_chooser_searching">"端末を検出しています"</string>
+    <string msgid="7548226170787476564" name="mr_chooser_title">"キャスト先"</string>
+    <string msgid="5813284753012893250" name="mr_controller_album_art">"アルバムアート"</string>
+    <string msgid="5286734709674025661" name="mr_controller_casting_screen">"画面をキャストしています"</string>
+    <string msgid="5468775621814500662" name="mr_controller_close_description">"閉じる"</string>
+    <string msgid="5518911192681928413" name="mr_controller_collapse_group">"折りたたむ"</string>
+    <string msgid="1370654436555555647" name="mr_controller_disconnect">"接続を解除"</string>
+    <string msgid="2422682304043876468" name="mr_controller_expand_group">"展開"</string>
+    <string msgid="7299368841849988218" name="mr_controller_no_info_available">"情報がありません"</string>
+    <string msgid="4342878516155861006" name="mr_controller_no_media_selected">"メディアが選択されていません"</string>
+    <string msgid="4701315813294065305" name="mr_controller_pause">"一時停止"</string>
+    <string msgid="4443315438268112801" name="mr_controller_play">"再生"</string>
+    <string msgid="5106056093749454009" name="mr_controller_stop">"停止"</string>
+    <string msgid="7617024847862349259" name="mr_controller_stop_casting">"キャストを停止"</string>
+    <string msgid="691656961160498512" name="mr_controller_volume_slider">"音量スライダー"</string>
+    <string msgid="3117964881088969586" name="mr_system_route_name">"システム"</string>
+    <string msgid="8236416097133080726" name="mr_user_route_category_name">"端末"</string>
+    <string name="my_name">私の名前</string>
+    <string name="my_top_tracks">自分のトップトラック</string>
+    <string name="never">無効</string>
+    <string name="new_playlist_title">新規再生リスト</string>
+    <string name="new_start_directory">%sが新しい初期ディレクトリです</string>
+    <string name="no_albums">アルバムなし</string>
+    <string name="no_artists">アーティスト無し</string>
+    <string name="no_audio_ID">"曲を再生して、もう一度お試し下さい"</string>
+    <string name="no_equalizer">イコライザーは準備中です</string>
+    <string name="no_genres">ジャンルなし</string>
+    <string name="no_lyrics_found">歌詞が見つかりませんでした</string>
+    <string name="no_playlists">再生リストなし</string>
+    <string name="no_results">検索結果なし</string>
+    <string name="no_songs">曲なし</string>
+    <string name="normal">ノーマル</string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b>はメディアストアに登録されていません]]></string>
+    <string name="nothing_to_scan">スキャンするものがありません</string>
+    <string name="notification">通知</string>
+    <string name="now_playing">再生中</string>
+    <string name="now_playing_queue">再生中のキュー</string>
+    <string name="only_on_wifi">Wi-Fiでのみ</string>
+    <string name="past_three_months">3ヶ月前</string>
+    <string name="paypal">PayPal.me</string>
+    <string name="paypal_summary">PayPal.meを使えば簡単に私達にお金を寄付することができます。クレジットカード又はデビットカードを用いた場合、手数料は寄付額の2.9%と固定額の0.3ドル(約34円)がかかります。<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">詳細</a></string>
+    <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
+    <string name="permissions_denied">パーミッションが拒否されました</string>
+    <string name="pick_from_local_storage">ローカルストレージから選択</string>
+    <string name="plain">プレーン</string>
+    <string name="playing_notification_description">再生中の通知がコントローラーを提供します</string>
+    <string name="playing_notification_name">再生中の通知</string>
+    <string name="playlist_empty_text">空のプレイリスト</string>
+    <string name="playlist_is_empty">プレイリストが空です</string>
+    <string name="playlist_name_empty">プレイリスト名</string>
+    <string name="playlists">プレイリスト</string>
+    <string name="pref_header_audio">オーディオ</string>
+    <string name="pref_header_general">一般</string>
+    <string name="pref_header_images">画像</string>
+    <string name="pref_header_lockscreen">ロック画面</string>
+    <string name="pref_header_playlists">プレイリスト</string>
+    <string name="pref_only_lollipop">"Lollipop(Android5.0)以上で使用可能"</string>
+    <string name="pref_summary_album_art_on_lockscreen">再生中のアルバムカバーをロック画面の壁紙に使用</string>
+    <string name="pref_summary_audio_ducking">通知などが来た際にボリュームを下げます。</string>
+    <string name="pref_summary_blurred_album_art">ロック画面でアルバムカバーをぼかします。他のアプリやウィジェットで問題が起こる場合があります。</string>
+    <string name="pref_summary_carousel_effect">再生画面のアルバムアートにカルーセル エフェクトを使用します</string>
+    <string name="pref_summary_classic_notification">クラシックな通知スタイルを使用</string>
+    <string name="pref_summary_colored_app">プレイヤーの操作ボタンや背景色がアルバムアートによって変化します</string>
+    <string name="pref_summary_colored_app_shortcuts">アプリのショートカットにアクセントカラーを適用します。あなたがいつも色を変更する場合、有効にしてください。</string>
+    <string name="pref_summary_colored_navigation_bar">ナビゲーションバーがプライマリカラーで着色されます</string>
+    <string name="pref_summary_colored_notification">"\u901a\u77e5\u306b\u30a2\u30eb\u30d0\u30e0\u30ab\u30d0\u30fc\u304b\u3089\u62bd\u51fa\u3057\u305f\u8272\u3092\u4f7f\u7528"</string>
+    <string name="pref_summary_dominant_color">アルバム/アーティスト画像から選択されます</string>
+    <string name="pref_summary_gapless_playback">"幾つかの端末で再生に問題が発生する場合があります"</string>
+    <string name="pref_summary_ignore_media_store_artwork">アルバムカバーの品質を上げることができますが、読み込みに時間がかかる場合があります。低品質の画像に問題がある場合のみ有効にしてください。</string>
+    <string name="pref_summary_lock_screen">Retroプレイヤーのロック画面コントロールを表示</string>
+    <string name="pref_summary_open_source_licences">オープンソースソフトウェアのライセンス詳細</string>
+    <string name="pref_summary_round_corners">ウィンドウやアルバムアートの角を丸くします</string>
+    <string name="pref_summary_tab_titles">最下部タブの見出しを有効/無効</string>
+    <string name="pref_summary_toggle_full_screen">没入モードを有効</string>
+    <string name="pref_summary_toggle_headset">有線ヘッドフォンの接続時に再生を開始する</string>
+    <string name="pref_summary_toggle_volume">再生画面にスペースがあれば音量コントロールを有効にする</string>
+    <string name="pref_title_album_art_on_lockscreen">アルバムカバーを表示</string>
+    <string name="pref_title_app_shortcuts">アプリのショートカットを着色</string>
+    <string name="pref_title_audio_ducking">フォーカスが外れた時に音量を下げる</string>
+    <string name="pref_title_auto_download_artist_images">アーティストの画像を自動でダウンロードする</string>
+    <string name="pref_title_blurred_album_art">アルバムカバーをぼかす</string>
+    <string name="pref_title_classic_notification">クラシックな通知デザイン</string>
+    <string name="pref_title_colored_app">色を変化させる</string>
+    <string name="pref_title_colored_notification">通知に色を付ける</string>
+    <string name="pref_title_gapless_playback">ギャップレス再生</string>
+    <string name="pref_title_general_theme">全体のテーマ</string>
+    <string name="pref_title_ignore_media_store_artwork">メディアストアのカバーを無視</string>
+    <string name="pref_title_last_added_interval">最後に追加されたプレイリストに表示する間隔</string>
+    <string name="pref_title_lock_screen">フルスクリーンコントロール</string>
+    <string name="pref_title_navigation_bar">ナビゲーションバーを着色</string>
+    <string name="pref_title_now_playing_screen_appearance">外観</string>
+    <string name="pref_title_open_source_licences">オープンソースライセンス</string>
+    <string name="pref_title_round_corners">角を丸める</string>
+    <string name="pref_title_toggle_carousel_effect">カルーセル エフェクト</string>
+    <string name="pref_title_toggle_dominant_color">テーマ色</string>
+    <string name="pref_title_toggle_full_screen">アプリを全画面にする</string>
+    <string name="pref_title_toggle_tab_titles">タブの見出し</string>
+    <string name="pref_title_toggle_toggle_headset">自動再生</string>
+    <string name="pref_title_toggle_volume">音量調節</string>
+    <string name="pref_title_user_info">ユーザー情報</string>
+    <string name="primary_color">プライマリーカラー</string>
+    <string name="primary_color_desc">テーマのプライマリーカラー、デフォルトはホワイト</string>
+    <string name="queue">キュー</string>
+    <string name="rate_app">このアプリを評価</string>
+    <string name="rate_on_google_play_summary">このアプリを気に入っていただけたら、改善のためにGoogle Play ストアでお知らせください。</string>
+    <string name="remove_action">除外</string>
+    <string name="remove_cover">カバーを削除</string>
+    <string name="remove_from_blacklist">ブラックリストから削除</string>
+    <string name="remove_song_from_playlist_title">再生リストから削除</string>
+    <string name="remove_song_x_from_playlist"><![CDATA[再生リストから<b>%1$s</b>を削除しますか？]]></string>
+    <string name="remove_songs_from_playlist_title">再生リストから削除</string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[再生リストから<b>%1$d</b>曲削除しますか？]]></string>
+    <string name="rename_playlist_title">再生リストの名前を変更</string>
+    <string name="reset_artist_image">アーティストの画像をリセット</string>
+    <string name="restored_previous_purchases">以前の購入を復元</string>
+    <string name="retro_equalizer">Retriイコライザー</string>
+    <string name="save_playlist_title">ファイルに保存</string>
+    <string name="saved_playlist_to">%sへ保存しました</string>
+    <string name="saving_changes">変更を保存</string>
+    <string name="scanned_files">%2$d中%1$d個のファイルをスキャンしました</string>
+    <string name="search_hint">ライブラリを検索中...</string>
+    <string msgid="146198913615257606" name="search_menu_title">"検索"</string>
+    <string name="set_artist_image">アーティストの画像をセット</string>
+    <string name="shuffle">シャッフル</string>
+    <string name="simple">シンプル</string>
+    <string name="sleep_timer_canceled">スリープタイマーがキャンセルされました</string>
+    <string name="sleep_timer_set">%d分後にスリープタイマーがセットされました。</string>
+    <string name="song">曲</string>
+    <string name="song_duration">再生時間</string>
+    <string name="songs">曲</string>
+    <string name="sort_order">並べ替え</string>
+    <string name="speech_not_supported">申し訳ありません、この機種は音声入力に対応していません</string>
+    <string name="speech_prompt">ライブラリを検索</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="5190123168583152844" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>、<ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string name="summary_user_info">ホーム画面であなたの名前を表示します</string>
+    <string name="support_development">開発を支援</string>
+    <string name="thank_you">ありがとう！</string>
+    <string name="the_audio_file">オーディオファイル</string>
+    <string name="this_month">今月</string>
+    <string name="this_week">今週</string>
+    <string name="this_year">今年</string>
+    <string name="tiny">小さい</string>
+    <string name="title_dashboard">ダッシュボード</string>
+    <string name="title_good_afternoon">こんにちは</string>
+    <string name="title_good_day">こんにちは</string>
+    <string name="title_good_evening">こんにちは</string>
+    <string name="title_good_morning">おはようございます</string>
+    <string name="title_good_night">おやすみなさい</string>
+    <string name="title_user_info">あなたの名前を教えて下さい</string>
+    <string name="today">今日</string>
+    <string name="track_hint">"トラック("2"でトラック2、"3004"でCD3のトラック4)"</string>
+    <string name="track_list">トラック番号</string>
+    <string name="translate">翻訳</string>
+    <string name="unplayable_file">\u3053\u306e\u30c8\u30e9\u30c3\u30af\u3092\u518d\u751f\u3067\u304d\u307e\u305b\u3093</string>
+    <string name="up_next">次</string>
+    <string name="update_image">画像を更新</string>
+    <string name="updating">更新中...</string>
+    <string msgid="5138405918326871307" name="v7_preference_off">"OFF"</string>
+    <string msgid="27351710992731591" name="v7_preference_on">"ON"</string>
+    <string name="version">バージョン</string>
+    <string name="web_search">web検索</string>
+    <string name="what_do_you_want_to_share">何をシェアしますか？</string>
+    <string name="x_has_been_set_as_ringtone">%1$sを着信メロディーに設定しました</string>
+    <string name="x_selected">%1$d個選択されています</string>
+    <string name="year">年</string>
+</resources>

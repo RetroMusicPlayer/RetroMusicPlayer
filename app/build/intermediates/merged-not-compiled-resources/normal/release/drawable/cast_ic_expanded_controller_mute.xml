@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- activated, not selected-->
+    <item android:state_enabled="true" android:state_selected="false"
+          android:drawable="@drawable/quantum_ic_volume_up_white_36"/>
+    <!-- activated, selected-->
+    <item android:state_enabled="true" android:state_selected="true"
+          android:drawable="@drawable/quantum_ic_volume_off_white_36"/>
+    <!-- deactivated, not selected -->
+    <item android:state_enabled="false" android:state_selected="false"
+          android:drawable="@drawable/quantum_ic_volume_up_grey600_36"/>
+    <!-- deactivated, selected -->
+    <item android:state_enabled="false" android:state_selected="true"
+          android:drawable="@drawable/quantum_ic_volume_off_grey600_36"/>
+    <!-- default -->
+    <item android:drawable="@drawable/quantum_ic_volume_up_white_36"/>
+</selector>

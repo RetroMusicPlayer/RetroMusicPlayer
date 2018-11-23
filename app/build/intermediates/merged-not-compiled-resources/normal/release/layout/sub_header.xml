@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    style="@style/SubTitleTextAppearance"
+    android:layout_gravity="start"
+    android:gravity="start" />

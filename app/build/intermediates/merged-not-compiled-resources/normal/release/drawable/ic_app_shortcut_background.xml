@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="176dp"
+    android:height="176dp"
+    android:viewportHeight="176"
+    android:viewportWidth="176">
+
+    <group
+        android:pivotX="88"
+        android:pivotY="88"
+        android:scaleX="0.916"
+        android:scaleY="0.916">
+        <path
+            android:name="ic_app_shortcut_background"
+            android:fillColor="#000"
+            android:pathData="M 88 0 C 136.601057985 0 176 39.3989420149 176 88 C 176 136.601057985 136.601057985 176 88 176 C 39.3989420149 176 0 136.601057985 0 88 C 0 39.3989420149 39.3989420149 0 88 0 Z" />
+    </group>
+</vector>

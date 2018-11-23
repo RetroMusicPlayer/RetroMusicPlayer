@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="abc_config_prefDialogWidth">440dp</dimen>
+    <item name="abc_dialog_fixed_height_major" type="dimen">60%</item>
+    <item name="abc_dialog_fixed_height_minor" type="dimen">90%</item>
+    <item name="abc_dialog_fixed_width_major" type="dimen">60%</item>
+    <item name="abc_dialog_fixed_width_minor" type="dimen">90%</item>
+    <item name="abc_dialog_min_width_major" type="dimen">55%</item>
+    <item name="abc_dialog_min_width_minor" type="dimen">80%</item>
+    <dimen name="ate_preference_inset">28dp</dimen>
+    <dimen name="md_preference_content_inset">28dp</dimen>
+    <style name="Base.Theme.AppCompat.DialogWhenLarge" parent="Base.Theme.AppCompat.Dialog.FixedSize"/>
+    <style name="Base.Theme.AppCompat.Light.DialogWhenLarge" parent="Base.Theme.AppCompat.Light.Dialog.FixedSize"/>
+    <style name="Base.Theme.MaterialComponents.DialogWhenLarge" parent="Base.Theme.MaterialComponents.Dialog.FixedSize"/>
+    <style name="Base.Theme.MaterialComponents.Light.DialogWhenLarge" parent="Base.Theme.MaterialComponents.Light.Dialog.FixedSize"/>
+</resources>

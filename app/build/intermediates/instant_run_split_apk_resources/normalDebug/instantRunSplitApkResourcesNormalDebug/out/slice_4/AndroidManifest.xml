@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="code.name.monkey.retromusic.debug"
+      android:versionCode="10253"
+      android:versionName="2.2.100_1123 DEBUG"
+      split="lib_slice_4_apk">
+</manifest>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expanded_controller_layout"
+    android:background="@color/cast_expanded_controller_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/background_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/cast_expanded_controller_background_image" />
+    <ImageView
+        android:id="@+id/blurred_background_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:contentDescription="@string/cast_expanded_controller_background_image" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/cast_expanded_controller_bg_gradient_light">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="@drawable/cast_expanded_controller_actionbar_bg_gradient_light"
+            android:minHeight="@dimen/cast_expanded_controller_control_toolbar_min_height"
+            android:theme="?attr/castExpandedControllerToolbarStyle" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@+id/controllers">
+
+            <ImageView
+                android:id="@+id/background_place_holder_image_view"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:scaleType="fitCenter"
+                android:layout_centerInParent="true"
+                android:src="@drawable/quantum_ic_art_track_grey600_48"
+                android:contentDescription="@string/cast_expanded_controller_background_image" />
+
+            <RelativeLayout
+                android:id="@+id/ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/cast_expanded_controller_ad_container_layout_height"
+                android:layout_centerInParent="true"
+                android:visibility="gone">
+                <TextView
+                    android:id="@+id/ad_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/cast_expanded_controller_ad_label_layout_height"
+                    android:layout_centerHorizontal="true"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@string/cast_ad_label"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/cast_expanded_controller_text_color"
+                    android:background="@color/cast_expanded_controller_ad_label_background_color" />
+                <RelativeLayout
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ad_label">
+                    <View
+                        android:id="@+id/ad_background_image_view"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="@dimen/cast_expanded_controller_ad_background_layout_width"
+                        android:visibility="gone"
+                        android:layout_height="@dimen/cast_expanded_controller_ad_background_layout_height"
+                        android:background="@android:color/black" />
+                    <TextView
+                        android:id="@+id/ad_in_progress_label"
+                        android:layout_width="@dimen/cast_expanded_controller_ad_layout_width"
+                        android:layout_height="@dimen/cast_expanded_controller_ad_layout_height"
+                        android:layout_centerHorizontal="true"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/cast_expanded_controller_text_color"
+                        android:text="@string/cast_expanded_controller_ad_in_progress" />
+                    <ImageView
+                        android:id="@+id/ad_image_view"
+                        android:layout_width="@dimen/cast_expanded_controller_ad_layout_width"
+                        android:layout_height="@dimen/cast_expanded_controller_ad_layout_height"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="centerInside"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/cast_expanded_controller_ad_image_description"
+                        android:src="@drawable/quantum_ic_bigtop_updates_white_24"
+                        android:visibility="gone"
+                        android:layout_centerInParent="true"
+                        android:clickable="false"/>
+                </RelativeLayout>
+            </RelativeLayout>
+            <TextView
+                android:clickable="false"
+                android:id="@+id/ad_skip_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/cast_expanded_controller_skip_ad_text"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/cast_expanded_controller_text_color"
+                android:visibility="gone" />
+            <TextView
+                android:clickable="false"
+                android:id="@+id/ad_skip_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="4dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="@string/cast_expanded_controller_skip_ad_label"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/cast_expanded_controller_text_color"
+                android:background="@drawable/cast_skip_ad_label_border"
+                android:visibility="gone" />
+            <ProgressBar
+                android:id="@+id/loading_indicator"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@id/controllers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp">
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="@dimen/cast_expanded_controller_margin_between_status_text_and_seek_bar"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/cast_expanded_controller_text_color" />
+
+            <!-- Note: The views inside the seek bar controls are deliberately laid out in absolute
+                 LTR positioning in order to maintain the directionality of the time bar -->
+            <RelativeLayout
+                android:id="@+id/seek_bar_controls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_below="@id/status_text"
+                android:layoutDirection="ltr" >
+
+                <TextView
+                    android:id="@+id/start_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:maxLines="1"
+                    android:text="@string/cast_invalid_stream_position_text"
+                    android:textColor="@color/cast_expanded_controller_progress_text_color" />
+
+                <TextView
+                    android:id="@+id/end_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignWithParentIfMissing="true"
+                    android:layout_centerVertical="true"
+                    android:maxLines="1"
+                    android:text="@string/cast_invalid_stream_duration_text"
+                    android:textColor="@color/cast_expanded_controller_progress_text_color" />
+
+                <ImageView
+                    android:id="@+id/live_stream_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@id/end_text"
+                    android:layout_alignLeft="@id/end_text"
+                    android:layout_alignRight="@id/end_text"
+                    android:layout_alignTop="@id/end_text"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"
+                    android:contentDescription="@string/cast_expanded_controller_live_stream_indicator"
+                    android:src="@drawable/quantum_ic_bigtop_updates_white_24" />
+
+                <SeekBar
+                    android:id="@+id/seek_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/end_text"
+                    android:layout_toRightOf="@+id/start_text"
+                    android:disabledAlpha="1.0"
+                    android:contentDescription="@string/cast_seek_bar" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cast_expanded_controller_margin_between_seek_bar_and_control_buttons"
+                android:layout_below="@id/seek_bar_controls">
+
+                <ImageButton
+                    android:id="@+id/button_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/button_1"
+                    android:layout_toStartOf="@+id/button_1"
+                    android:layout_marginRight="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_marginEnd="@dimen/cast_expanded_controller_control_button_margin"
+                    android:padding="0dp"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_marginEnd="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_toLeftOf="@+id/button_play_pause_toggle"
+                    android:layout_toStartOf="@+id/button_play_pause_toggle"
+                    android:padding="0dp"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_play_pause_toggle"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:scaleType="fitCenter"
+                    android:layout_centerInParent="true"
+                    android:padding="0dp"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_marginStart="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_toRightOf="@+id/button_play_pause_toggle"
+                    android:layout_toEndOf="@+id/button_play_pause_toggle"
+                    android:padding="0dp"
+                    tools:ignore="ContentDescription" />
+
+                <ImageButton
+                    android:id="@+id/button_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_marginStart="@dimen/cast_expanded_controller_control_button_margin"
+                    android:layout_toRightOf="@+id/button_2"
+                    android:layout_toEndOf="@+id/button_2"
+                    android:padding="0dp"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,106 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/incremental/mergeNormalReleaseResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/values-sw600dp/dimens.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "50",
+                        "endOffsets": "101"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "611",
+                        "endColumns": "50",
+                        "endOffsets": "657"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,124,193,263,337,413,472,543",
+                        "endColumns": "68,68,69,73,75,58,70,67",
+                        "endOffsets": "119,188,258,332,408,467,538,606"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/values-sw600dp/integers.xml",
+                    "from": {
+                        "startLines": "2,3,5,6,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,108,167,220,279,323",
+                        "endColumns": "52,57,52,57,43,48",
+                        "endOffsets": "103,161,215,273,318,367"
+                    },
+                    "to": {
+                        "startLines": "23,24,25,26,28,29",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "1414,1467,1525,1578,1699,1743",
+                        "endColumns": "52,57,52,57,43,48",
+                        "endOffsets": "1462,1520,1573,1631,1738,1787"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,10,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,115,185,256,328,386,444,553,617,680",
+                        "endLines": "2,3,4,5,6,7,9,10,11,15",
+                        "endColumns": "59,69,70,71,57,57,10,63,62,10",
+                        "endOffsets": "110,180,251,323,381,439,548,612,675,847"
+                    },
+                    "to": {
+                        "startLines": "11,12,13,14,15,16,17,19,27,30",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "662,722,792,863,935,993,1051,1160,1636,1792",
+                        "endLines": "11,12,13,14,15,16,18,19,27,33",
+                        "endColumns": "59,69,70,71,57,57,10,63,62,10",
+                        "endOffsets": "717,787,858,930,988,1046,1155,1219,1694,1959"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "51",
+                        "endOffsets": "102"
+                    },
+                    "to": {
+                        "startLines": "20",
+                        "startColumns": "4",
+                        "startOffsets": "1224",
+                        "endColumns": "51",
+                        "endOffsets": "1271"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,124",
+                        "endColumns": "68,68",
+                        "endOffsets": "119,188"
+                    },
+                    "to": {
+                        "startLines": "21,22",
+                        "startColumns": "4,4",
+                        "startOffsets": "1276,1345",
+                        "endColumns": "68,68",
+                        "endOffsets": "1340,1409"
+                    }
+                }
+            ]
+        }
+    ]
+}

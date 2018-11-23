@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:initialLayout="@layout/app_widget_card"
+                    android:minHeight="@dimen/app_widget_card_min_height"
+                    android:minWidth="@dimen/app_widget_card_min_width"
+                    android:resizeMode="horizontal|vertical"
+                    android:updatePeriodMillis="0"
+                    android:widgetCategory="keyguard|home_screen"
+                    tools:ignore="UnusedAttribute"/>
+
+    <!--android:previewImage="@drawable/app_widget_classic"-->

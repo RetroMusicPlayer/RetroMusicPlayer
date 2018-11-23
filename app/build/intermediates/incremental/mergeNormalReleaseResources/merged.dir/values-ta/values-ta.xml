@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"முகப்பிற்கு வழிசெலுத்து"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"மேலே செல்"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"மேலும் விருப்பங்கள்"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"முடிந்தது"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"எல்லாம் காட்டு"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"பயன்பாட்டைத் தேர்வுசெய்க"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"ஆஃப்"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ஆன்"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"ஆல்ட் மற்றும்"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"கண்ட்ரோல் மற்றும்"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"டெலிட்"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"எண்டர்"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"ஃபங்ஷன் மற்றும்"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"மெட்டா மற்றும்"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"ஷிஃப்ட் மற்றும்"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"ஸ்பேஸ்"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"சிம்பல் மற்றும்"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"மெனு மற்றும்"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"தேடு..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"வினவலை அழி"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"தேடல் வினவல்"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"தேடு"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"வினவலைச் சமர்ப்பி"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"குரல் தேடல்"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"இதனுடன் பகிர்"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"<ns1:g id="APPLICATION_NAME">%s</ns1:g> மூலம் பகிர்"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"சுருக்கு"</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"விளம்பரம்"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"%1$sக்கு அனுப்புகிறது"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"வசனம்"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"வசனம் இல்லை"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"<ns1:g id="NAME">%1$s</ns1:g> உடன் இணைக்கிறது"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"தொடர்பைத் துண்டி"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"Cast ரிசீவர் விளம்பரத்தை இயக்கும் போது காட்டப்படும் படம்"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"விளம்பரம் செயலில் உள்ளது…"</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"ஆல்பம் ஆர்ட்"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"லைவ் ஸ்ட்ரீம்"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"ஏற்றுகிறது…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"விளம்பரத்தைத் தவிர்"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"%1$d இல் விளம்பரத்தைத் தவிர்க்கலாம்…"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"முன்செல்"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"பத்து வினாடிகள் முன்செல்"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"முப்பது வினாடிகள் முன்செல்"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:string/ok"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"ஒலியடக்கு"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"<ns1:g id="NAME">%1$s</ns1:g> உடன் இணைக்கப்பட்டது"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"<ns1:g id="NAME">%1$s</ns1:g> உடன் இணைக்கிறது"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"Cast"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"இணைப்பைத் துண்டி"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"இடைநிறுத்து"</string>
+    <string msgid="5906987965619702702" name="cast_play">"இயக்கு"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"பின்செல்"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"பத்து வினாடிகள் பின்செல்"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"முப்பது வினாடிகள் பின்செல்"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"பிளேபேக் நகர்தல் கட்டுப்பாடு"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"அடுத்த உருப்படிக்குச் செல்"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"முந்தைய உருப்படிக்குச் செல்"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"நிறுத்து"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"லைவ் ஸ்ட்ரீமை நிறுத்து"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"ஆடியோ"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"ரத்துசெய்"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"வசனம்"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"ட்ராக்: <ns1:g id="POSITION">%1$d</ns1:g>"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"ஏதுமில்லை"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"சரி"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"வசனங்கள்"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"ஒலி இயக்கு"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"இயக்கு"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"Google Play சேவைகளை இயக்கினால் மட்டுமே, <ns1:g id="APP_NAME">%1$s</ns1:g> செயல்படும்."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play சேவைகளை இயக்கவும்"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"நிறுவு"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"Google Play சேவைகள் இருந்தால் மட்டுமே, <ns1:g id="APP_NAME">%1$s</ns1:g> இயங்கும். அவை உங்கள் சாதனத்தில் இல்லை."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Google Play சேவைகளைப் பெறவும்"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"கிடைக்கும் Google Play சேவைகள்"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play சேவைகள் பிழை"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"Google Play சேவைகளில் சிக்கல் ஏற்பட்டதால், <ns1:g id="APP_NAME">%1$s</ns1:g> பயன்பாட்டை அணுக முடியவில்லை. மீண்டும் முயலவும்."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"Google Play சேவைகள் இருந்தால் மட்டுமே <ns1:g id="APP_NAME">%1$s</ns1:g> பயன்பாடு இயங்கும். ஆனால், உங்கள் சாதனத்தில் அவை ஆதரிக்கப்படவில்லை."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"புதுப்பி"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"Google Play சேவைகளை இயக்கினால் மட்டுமே, <ns1:g id="APP_NAME">%1$s</ns1:g> செயல்படும்."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Google Play சேவைகளைப் புதுப்பிக்கவும்"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"தற்போது புதுப்பிக்கப்படும், Google Play சேவைகள் இருந்தால் மட்டுமே, <ns1:g id="APP_NAME">%1$s</ns1:g> செயல்படும்."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Google Play சேவைகளின் புதிய பதிப்பு தேவை. அது விரைவில் தானாகவே புதுப்பிக்கப்படும்."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"மொபைலில் திற"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"உள்நுழைக"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Google மூலம் உள்நுழைக"</string>
+    <string msgid="1234962710353108940" name="expand_button_title">"மேம்பட்டவை"</string>
+    <string msgid="1685185767093348095" name="mr_button_content_description">"அலைபரப்பும் பட்டன்"</string>
+    <string msgid="1350095112462806159" name="mr_cast_button_connected">"அலைபரப்பும் பட்டன். இணைக்கப்பட்டது"</string>
+    <string msgid="8959304318293841992" name="mr_cast_button_connecting">"அலைபரப்பும் பட்டன். இணைக்கிறது"</string>
+    <string msgid="5501231066847739632" name="mr_cast_button_disconnected">"அலைபரப்பும் பட்டன். துண்டிக்கப்பட்டது"</string>
+    <string msgid="5504553798429329689" name="mr_chooser_searching">"சாதனங்களைத் தேடுகிறது"</string>
+    <string msgid="7548226170787476564" name="mr_chooser_title">"இதற்கு அலைபரப்பு:"</string>
+    <string msgid="5813284753012893250" name="mr_controller_album_art">"ஆல்பம் ஆர்ட்"</string>
+    <string msgid="5286734709674025661" name="mr_controller_casting_screen">"திரையை அலைபரப்புகிறது"</string>
+    <string msgid="5468775621814500662" name="mr_controller_close_description">"மூடுவதற்கான பட்டன்"</string>
+    <string msgid="5518911192681928413" name="mr_controller_collapse_group">"சுருக்குவதற்கான பட்டன்"</string>
+    <string msgid="1370654436555555647" name="mr_controller_disconnect">"தொடர்பைத் துண்டி"</string>
+    <string msgid="2422682304043876468" name="mr_controller_expand_group">"விரிப்பதற்கான பட்டன்"</string>
+    <string msgid="7299368841849988218" name="mr_controller_no_info_available">"தகவல் எதுவுமில்லை"</string>
+    <string msgid="4342878516155861006" name="mr_controller_no_media_selected">"மீடியா எதுவும் தேர்ந்தெடுக்கப்படவில்லை"</string>
+    <string msgid="4701315813294065305" name="mr_controller_pause">"இடைநிறுத்துவதற்கான பட்டன்"</string>
+    <string msgid="4443315438268112801" name="mr_controller_play">"இயக்குவதற்கான பட்டன்"</string>
+    <string msgid="5106056093749454009" name="mr_controller_stop">"நிறுத்துவதற்கான பட்டன்"</string>
+    <string msgid="7617024847862349259" name="mr_controller_stop_casting">"அலைபரப்புவதை நிறுத்து"</string>
+    <string msgid="691656961160498512" name="mr_controller_volume_slider">"ஒலியளவு ஸ்லைடர்"</string>
+    <string msgid="3117964881088969586" name="mr_system_route_name">"சிஸ்டம்"</string>
+    <string msgid="8236416097133080726" name="mr_user_route_category_name">"சாதனங்கள்"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"தேடு"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="5190123168583152844" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="5138405918326871307" name="v7_preference_off">"ஆஃப்"</string>
+    <string msgid="27351710992731591" name="v7_preference_on">"ஆன்"</string>
+</resources>

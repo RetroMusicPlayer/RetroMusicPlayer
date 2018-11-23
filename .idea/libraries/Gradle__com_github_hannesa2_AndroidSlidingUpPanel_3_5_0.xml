@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.hannesa2:AndroidSlidingUpPanel-3.5.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-AndroidSlidingUpPanel-3.5.0.aar/b22a3b7dd9b0bb872cf28fa0da4b33e8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-AndroidSlidingUpPanel-3.5.0.aar/b22a3b7dd9b0bb872cf28fa0da4b33e8/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

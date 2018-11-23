@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -354,6 +355,15 @@ public final class TintHelper {
                     switchView.getThumbDrawable(), color, true, true, useDarker));
         }
     }
+
+    @CheckResult
+    @Nullable
+    public static Drawable createTintedDrawable(Context context,
+                                                @DrawableRes int res, @ColorInt int color) {
+        Drawable drawable = ContextCompat.getDrawable(context, res);
+        return createTintedDrawable(drawable, color);
+    }
+
 
     // This returns a NEW Drawable because of the mutate() call. The mutate() call is necessary because Drawables with the same resource have shared states otherwise.
     @CheckResult

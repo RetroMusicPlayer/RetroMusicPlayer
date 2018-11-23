@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2014 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License
+  -->
+
+<!-- Layout to be used with only max 3 actions. It has a much larger picture at the left side-->
+
+<!--This FrameLayout IS necessary in order tp prevent fucking TouchWiz to interpret the "background="#00000000" as making the whole notification transparent-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="128dp">
+
+    <RelativeLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        tools:ignore="UselessParent">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="@dimen/notification_big_image_size"
+            android:layout_height="@dimen/notification_big_image_size"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription"/>
+
+        <ImageButton
+            android:id="@+id/action_quit"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="2dp"
+            android:background="@drawable/notification_selector"
+            android:padding="6dp"
+            android:scaleType="fitCenter"
+            tools:ignore="ContentDescription"/>
+
+        <LinearLayout
+            android:id="@+id/media_titles"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/image"
+            android:layout_toLeftOf="@id/action_quit"
+            android:layout_toRightOf="@id/image"
+            android:layout_toStartOf="@id/action_quit"
+            android:minHeight="@dimen/notification_large_icon_height"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textAppearance="@style/Theme.RetroMusic.Notification.Title"/>
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-1dp"
+                android:layout_marginTop="-1dp"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textAppearance="@style/Theme.RetroMusic.Notification"/>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:singleLine="true"
+                android:textAppearance="@style/Theme.RetroMusic.Notification"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/media_actions"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/media_titles"
+            android:layout_marginEnd="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/image"
+            android:layout_toRightOf="@id/image"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            tools:ignore="UnusedAttribute">
+
+            <!-- media buttons will be added here -->
+            <ImageButton
+                android:id="@+id/action_prev"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription"/>
+
+            <ImageButton
+                android:id="@+id/action_play_pause"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription"/>
+
+            <ImageButton
+                android:id="@+id/action_next"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/notification_selector"
+                android:gravity="center"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                tools:ignore="ContentDescription"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

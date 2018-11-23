@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleEnabled="false">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:background="@drawable/shadow_down_strong" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar48" />
+
+                    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+                        android:id="@+id/image_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        app:layout_collapseMode="parallax">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardUseCompatPadding="true">
+
+                            <code.name.monkey.retromusic.views.CircularImageView
+                                android:id="@+id/artist_image"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:layout_weight="0"
+                                android:visibility="gone"
+                                app:civ_border="false"
+                                app:civ_shadow="false" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/image"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:transitionName="@string/transition_album_art" />
+
+                        </com.google.android.material.card.MaterialCardView>
+                    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+                </LinearLayout>
+            </FrameLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/title"
+                fontPath="@string/circular_std_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                tools:ignore="MissingPrefix" />
+
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingTop="4dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:ignore="MissingPrefix"
+                tools:text="Title" />
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/song_title"
+                fontPath="@string/circular_std_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:text="@string/songs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                tools:ignore="MissingPrefix" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/more_title"
+                fontPath="@string/circular_std_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:text="@string/songs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:visibility="gone"
+                tools:ignore="MissingPrefix" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/more_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/action_shuffle_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:layout_behavior="code.name.monkey.retromusic.misc.ScrollAwareFABBehavior"
+        app:srcCompat="@drawable/ic_shuffle_white_24dp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

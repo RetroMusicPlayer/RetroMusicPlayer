@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar48"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp">
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/title"
+                style="@style/BigTitleTextAppearance"
+                android:text="@string/profile" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_marginEnd="128dp"
+        android:layout_marginStart="128dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardUseCompatPadding="true">
+
+                <FrameLayout
+                    android:id="@+id/image_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/banner_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="228dp"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/material_design_default" />
+
+                    <View
+                        android:id="@+id/banner_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="228dp"
+                        android:background="@color/twenty_percent_black_overlay" />
+
+                    <code.name.monkey.retromusic.views.IconImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="?roundSelector"
+                        android:padding="16dp"
+                        app:srcCompat="@drawable/ic_round_add_a_photo_white_24dp" />
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_margin="8dp">
+
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            app:civ_border="false"
+                            app:civ_shadow="false"
+                            app:srcCompat="@drawable/ic_person_flat" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="16dp"
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:src="@drawable/ic_round_add_a_photo_white_24dp"
+                            app:tint="?iconColor" />
+                    </FrameLayout>
+
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                app:boxBackgroundMode="outline"
+                app:boxCollapsedPaddingTop="16dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="@color/md_grey_700"
+                app:boxStrokeWidth="1dp"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/my_name"
+                    android:inputType="textPersonName|textCapWords|text"
+                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:elevation="8dp"
+        android:padding="16dp"
+        app:srcCompat="@drawable/ate_check" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
