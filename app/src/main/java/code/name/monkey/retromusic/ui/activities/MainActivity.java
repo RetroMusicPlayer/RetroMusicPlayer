@@ -322,7 +322,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         PreferenceUtil.getInstance().setLastPage(menuItem.getItemId());
         selectedFragment(menuItem.getItemId());
-        applyInsets();
         return true;
     }
 

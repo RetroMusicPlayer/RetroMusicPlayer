@@ -34,8 +34,6 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
-import code.name.monkey.retromusic.util.SystemUtils;
-import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 
 public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
     public static final String TAG = AbsPlayerFragment.class.getSimpleName();
@@ -50,17 +48,6 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
             callbacks = (Callbacks) context;
         } catch (ClassCastException e) {
             throw new RuntimeException(context.getClass().getSimpleName() + " must implement " + Callbacks.class.getSimpleName());
-        }
-    }
-
-    protected void addSafeArea(View view) {
-        FitSystemWindowsLayout safeArea = view.findViewById(R.id.safeArea);
-        if (safeArea != null) {
-            //ViewGroup.MarginLayoutParams params = ((ViewGroup.MarginLayoutParams) safeArea.getLayoutParams());
-            //params.topMargin = RetroUtil.getStatusBarHeight();
-            //params.bottomMargin = RetroUtil.getNavigationBarHeight();
-            //if (PreferenceUtil.getInstance().getFullScreenMode()) safeArea.setFit(false);
-            //else safeArea.setFit(true);
         }
     }
 

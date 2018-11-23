@@ -42,14 +42,12 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_full, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setUpSubFragments();
         setUpPlayerToolbar();
     }
@@ -64,7 +62,6 @@ public class FullPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
             playerAlbumCoverFragment.setCallbacks(this);
             playerAlbumCoverFragment.removeSlideEffect();
         }
-
     }
 
     @Override

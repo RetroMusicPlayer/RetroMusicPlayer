@@ -5,8 +5,8 @@
     android:id="@+id/playback_controls"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="32dp"
-    android:paddingEnd="32dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
     android:paddingBottom="32dp">
 
     <LinearLayout

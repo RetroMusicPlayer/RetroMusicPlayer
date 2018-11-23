@@ -70,18 +70,12 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    /*@BindView(R.id.app_bar)
-    AppBarLayout appbar;
-*/
     @BindView(R.id.image)
     @Nullable
     ImageView imageView;
 
     @BindView(R.id.user_image)
     CircularImageView userImage;
-
-  /*  @BindView(R.id.collapsing_toolbar)
-    CollapsingToolbarLayout toolbarLayout;*/
 
     @BindView(R.id.recycler_view)
     RecyclerView recentArtistRV;

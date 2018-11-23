@@ -16,10 +16,13 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
+    <LinearLayout
         android:id="@+id/safeArea"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/status_bar" />
 
         <LinearLayout
 
@@ -69,5 +72,5 @@
                 </FrameLayout>
             </LinearLayout>
         </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+    </LinearLayout>
 </FrameLayout>

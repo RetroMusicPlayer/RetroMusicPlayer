@@ -9,56 +9,53 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <include layout="@layout/status_bar" />
+
+        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+            android:id="@+id/album_cover_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/album_cover_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <fragment
-                    android:id="@+id/player_album_cover_fragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_album_cover" />
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-
-            <FrameLayout
+            <fragment
+                android:id="@+id/player_album_cover_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                tools:layout="@layout/fragment_album_cover" />
+        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-                <fragment
-                    android:id="@+id/playback_controls_fragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.material.MaterialControlsFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_material_playback_controls" />
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-            <FrameLayout
-                android:id="@+id/toolbar_container"
+            <fragment
+                android:id="@+id/playback_controls_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.player.material.MaterialControlsFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_material_playback_controls" />
+        </FrameLayout>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
-                    style="@style/Toolbar48"
-                    android:layout_height="48dp"
-                    android:layout_gravity="bottom"
-                    android:navigationIcon="@drawable/ic_close_white_24dp"
-                    app:navigationIcon="@drawable/ic_close_white_24dp" />
-            </FrameLayout>
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/player_toolbar"
+                style="@style/Toolbar48"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom"
+                android:navigationIcon="@drawable/ic_close_white_24dp"
+                app:navigationIcon="@drawable/ic_close_white_24dp" />
+        </FrameLayout>
+    </LinearLayout>
+
 </FrameLayout>

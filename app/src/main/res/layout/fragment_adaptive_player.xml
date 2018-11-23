@@ -9,65 +9,62 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/status_bar" />
+
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/player_toolbar"
+                style="@style/Toolbar48"
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
+                app:titleMargin="0dp"
+                app:titleMarginStart="0dp"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        </FrameLayout>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
 
-            <FrameLayout
-                android:id="@+id/toolbar_container"
+            <fragment
+                android:id="@+id/player_album_cover_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:layout_height="match_parent" />
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
-                    style="@style/Toolbar48"
-                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:titleMargin="0dp"
-                    app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
+        </com.google.android.material.card.MaterialCardView>
 
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
 
-            <com.google.android.material.card.MaterialCardView
+            <fragment
+                android:id="@+id/playback_controls_fragment"
+                android:name="code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true">
-
-                <fragment
-                    android:id="@+id/player_album_cover_fragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0">
-
-                <fragment
-                    android:id="@+id/playback_controls_fragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_adaptive_player_playback_controls" />
-            </FrameLayout>
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+                tools:layout="@layout/fragment_adaptive_player_playback_controls" />
+        </FrameLayout>
+    </LinearLayout>
 </FrameLayout>
