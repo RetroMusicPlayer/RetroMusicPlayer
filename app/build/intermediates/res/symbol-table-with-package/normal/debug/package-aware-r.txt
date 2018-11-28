@@ -641,6 +641,8 @@ attr seekBarStyle
 attr selectable
 attr selectableItemBackground
 attr selectableItemBackgroundBorderless
+attr setIcon
+attr setText
 attr shouldDisableView
 attr showAsAction
 attr showDividers
@@ -1482,6 +1484,7 @@ drawable bg_card_line
 drawable bg_circular_corners
 drawable bg_circular_top_corners
 drawable black_overlay
+drawable bottom_corners
 drawable bottom_navigation_item_colors
 drawable card
 drawable cast_abc_scrubber_control_off_mtrl_alpha
@@ -1587,6 +1590,7 @@ drawable ic_beer_white_24dp
 drawable ic_bookmark_music_white_24dp
 drawable ic_bug_report_white_24dp
 drawable ic_card_giftcard_white_24dp
+drawable ic_clear_all_black_24dp
 drawable ic_close_white_24dp
 drawable ic_cookie_white_24dp
 drawable ic_delete_white_24dp
@@ -2178,6 +2182,7 @@ id chronometer
 id circle
 id circular
 id clear_app_data
+id clear_queue
 id clickable_area
 id clip_horizontal
 id clip_vertical
@@ -2252,6 +2257,7 @@ id genre
 id genre_container
 id genres
 id ghost_view
+id google_pay
 id gradient_background
 id group_divider
 id group_grid_size
@@ -2496,6 +2502,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchIcon
 id search_badge
 id search_bar
 id search_button
@@ -3131,6 +3138,7 @@ string circular_std_black
 string clear_action
 string clear_app_data
 string clear_blacklist
+string clear_playing_queue
 string clear_playlist_title
 string clear_playlist_x
 string close_notification
@@ -3337,6 +3345,8 @@ string pref_keep_pause_on_zero_volume_summary
 string pref_keep_pause_on_zero_volume_title
 string pref_keep_screen_on_summary
 string pref_keep_screen_on_title
+string pref_now_playing_screen_summary
+string pref_now_playing_screen_title
 string pref_only_lollipop
 string pref_summary_album_art_on_lockscreen
 string pref_summary_audio_ducking
@@ -4151,7 +4161,7 @@ styleable CheckBoxPreference android_summaryOn android_summaryOff android_disabl
 styleable Chip android_textAppearance android_ellipsize android_maxWidth android_text android_checkable checkedIcon checkedIconEnabled checkedIconVisible chipBackgroundColor chipCornerRadius chipEndPadding chipIcon chipIconEnabled chipIconSize chipIconTint chipIconVisible chipMinHeight chipStartPadding chipStrokeColor chipStrokeWidth closeIcon closeIconEnabled closeIconEndPadding closeIconSize closeIconStartPadding closeIconTint closeIconVisible hideMotionSpec iconEndPadding iconStartPadding rippleColor showMotionSpec textEndPadding textStartPadding
 styleable ChipGroup checkedChip chipSpacing chipSpacingHorizontal chipSpacingVertical singleLine singleSelection
 styleable CircularImageView civ_border civ_border_color civ_border_width civ_shadow civ_shadow_color civ_shadow_radius
-styleable CollapsingFAB showTitle shuffleBackgroundColor
+styleable CollapsingFAB setIcon setText showTitle shuffleBackgroundColor
 styleable CollapsingToolbarLayout collapsedTitleGravity collapsedTitleTextAppearance contentScrim expandedTitleGravity expandedTitleMargin expandedTitleMarginBottom expandedTitleMarginEnd expandedTitleMarginStart expandedTitleMarginTop expandedTitleTextAppearance scrimAnimationDuration scrimVisibleHeightTrigger statusBarScrim title titleEnabled toolbarId
 styleable CollapsingToolbarLayout_Layout layout_collapseMode layout_collapseParallaxMultiplier
 styleable ColorStateListItem android_color android_alpha alpha

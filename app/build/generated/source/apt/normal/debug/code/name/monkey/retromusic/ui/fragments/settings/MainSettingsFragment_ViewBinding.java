@@ -18,21 +18,21 @@ import java.lang.Override;
 public class MainSettingsFragment_ViewBinding implements Unbinder {
   private MainSettingsFragment target;
 
-  private View view7f0a0110;
+  private View view7f0a0111;
 
   private View view7f0a0093;
 
-  private View view7f0a01c1;
+  private View view7f0a01c3;
 
-  private View view7f0a027a;
+  private View view7f0a027d;
 
-  private View view7f0a0131;
+  private View view7f0a0133;
 
-  private View view7f0a01d0;
+  private View view7f0a01d2;
 
-  private View view7f0a01bc;
+  private View view7f0a01be;
 
-  private View view7f0a01c8;
+  private View view7f0a01ca;
 
   @UiThread
   public MainSettingsFragment_ViewBinding(final MainSettingsFragment target, View source) {
@@ -44,7 +44,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
     target.titleWelcome = Utils.findRequiredViewAsType(source, R.id.title_welcome, "field 'titleWelcome'", AppCompatTextView.class);
     target.text = Utils.findRequiredViewAsType(source, R.id.text, "field 'text'", AppCompatTextView.class);
     view = Utils.findRequiredView(source, R.id.general_settings, "method 'onViewClicked'");
-    view7f0a0110 = view;
+    view7f0a0111 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -60,7 +60,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.now_playing_settings, "method 'onViewClicked'");
-    view7f0a01c1 = view;
+    view7f0a01c3 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -68,7 +68,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.user_info_container, "method 'onViewClicked'");
-    view7f0a027a = view;
+    view7f0a027d = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -76,7 +76,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.image_settings, "method 'onViewClicked'");
-    view7f0a0131 = view;
+    view7f0a0133 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -84,7 +84,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.personalize_settings, "method 'onViewClicked'");
-    view7f0a01d0 = view;
+    view7f0a01d2 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -92,7 +92,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.notification_settings, "method 'onViewClicked'");
-    view7f0a01bc = view;
+    view7f0a01be = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -100,7 +100,7 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.other_settings, "method 'onViewClicked'");
-    view7f0a01c8 = view;
+    view7f0a01ca = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -130,21 +130,21 @@ public class MainSettingsFragment_ViewBinding implements Unbinder {
     target.text = null;
     target.icons = null;
 
-    view7f0a0110.setOnClickListener(null);
-    view7f0a0110 = null;
+    view7f0a0111.setOnClickListener(null);
+    view7f0a0111 = null;
     view7f0a0093.setOnClickListener(null);
     view7f0a0093 = null;
-    view7f0a01c1.setOnClickListener(null);
-    view7f0a01c1 = null;
-    view7f0a027a.setOnClickListener(null);
-    view7f0a027a = null;
-    view7f0a0131.setOnClickListener(null);
-    view7f0a0131 = null;
-    view7f0a01d0.setOnClickListener(null);
-    view7f0a01d0 = null;
-    view7f0a01bc.setOnClickListener(null);
-    view7f0a01bc = null;
-    view7f0a01c8.setOnClickListener(null);
-    view7f0a01c8 = null;
+    view7f0a01c3.setOnClickListener(null);
+    view7f0a01c3 = null;
+    view7f0a027d.setOnClickListener(null);
+    view7f0a027d = null;
+    view7f0a0133.setOnClickListener(null);
+    view7f0a0133 = null;
+    view7f0a01d2.setOnClickListener(null);
+    view7f0a01d2 = null;
+    view7f0a01be.setOnClickListener(null);
+    view7f0a01be = null;
+    view7f0a01ca.setOnClickListener(null);
+    view7f0a01ca = null;
   }
 }

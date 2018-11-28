@@ -12,11 +12,11 @@ public final class R {
     public static final class drawable {
         private drawable() {}
 
-        public static final int cast_ic_notification_0 = 0x7f080092;
-        public static final int cast_ic_notification_1 = 0x7f080093;
-        public static final int cast_ic_notification_2 = 0x7f080094;
-        public static final int cast_ic_notification_connecting = 0x7f080095;
-        public static final int cast_ic_notification_on = 0x7f08009a;
+        public static final int cast_ic_notification_0 = 0x7f080093;
+        public static final int cast_ic_notification_1 = 0x7f080094;
+        public static final int cast_ic_notification_2 = 0x7f080095;
+        public static final int cast_ic_notification_connecting = 0x7f080096;
+        public static final int cast_ic_notification_on = 0x7f08009b;
     }
     public static final class id {
         private id() {}

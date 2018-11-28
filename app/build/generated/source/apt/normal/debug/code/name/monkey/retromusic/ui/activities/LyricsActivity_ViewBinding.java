@@ -20,7 +20,7 @@ import java.lang.Override;
 public class LyricsActivity_ViewBinding implements Unbinder {
   private LyricsActivity target;
 
-  private View view7f0a0101;
+  private View view7f0a0102;
 
   @UiThread
   public LyricsActivity_ViewBinding(LyricsActivity target) {
@@ -38,7 +38,7 @@ public class LyricsActivity_ViewBinding implements Unbinder {
     target.actionsLayout = Utils.findRequiredViewAsType(source, R.id.actions, "field 'actionsLayout'", RadioGroup.class);
     view = Utils.findRequiredView(source, R.id.fab, "field 'actionButton' and method 'onViewClicked'");
     target.actionButton = Utils.castView(view, R.id.fab, "field 'actionButton'", FloatingActionButton.class);
-    view7f0a0101 = view;
+    view7f0a0102 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -62,7 +62,7 @@ public class LyricsActivity_ViewBinding implements Unbinder {
     target.actionButton = null;
     target.fitSystemWindowsLayout = null;
 
-    view7f0a0101.setOnClickListener(null);
-    view7f0a0101 = null;
+    view7f0a0102.setOnClickListener(null);
+    view7f0a0102 = null;
   }
 }

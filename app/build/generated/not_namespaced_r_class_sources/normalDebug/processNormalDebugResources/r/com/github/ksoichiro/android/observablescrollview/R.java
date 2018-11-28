@@ -14,8 +14,8 @@ public final class R {
 
         public static final int layoutManager = 0x7f040185;
         public static final int reverseLayout = 0x7f04022b;
-        public static final int spanCount = 0x7f04024c;
-        public static final int stackFromEnd = 0x7f040252;
+        public static final int spanCount = 0x7f04024e;
+        public static final int stackFromEnd = 0x7f040254;
     }
     public static final class dimen {
         private dimen() {}
@@ -25,12 +25,12 @@ public final class R {
     public static final class id {
         private id() {}
 
-        public static final int item_touch_helper_previous_elevation = 0x7f0a0138;
+        public static final int item_touch_helper_previous_elevation = 0x7f0a013a;
     }
     public static final class styleable {
         private styleable() {}
 
-        public static final int[] RecyclerView = { 0x10100c4, 0x10100f1, 0x7f040126, 0x7f040127, 0x7f040128, 0x7f040130, 0x7f040131, 0x7f040185, 0x7f04022b, 0x7f04024c, 0x7f040252 };
+        public static final int[] RecyclerView = { 0x10100c4, 0x10100f1, 0x7f040126, 0x7f040127, 0x7f040128, 0x7f040130, 0x7f040131, 0x7f040185, 0x7f04022b, 0x7f04024e, 0x7f040254 };
         public static final int RecyclerView_android_orientation = 0;
         public static final int RecyclerView_android_descendantFocusability = 1;
         public static final int RecyclerView_fastScrollEnabled = 2;

@@ -18,9 +18,9 @@ import java.lang.Override;
 public class ProVersionActivity_ViewBinding implements Unbinder {
   private ProVersionActivity target;
 
-  private View view7f0a01f8;
+  private View view7f0a01fa;
 
-  private View view7f0a01f2;
+  private View view7f0a01f4;
 
   @UiThread
   public ProVersionActivity_ViewBinding(ProVersionActivity target) {
@@ -35,7 +35,7 @@ public class ProVersionActivity_ViewBinding implements Unbinder {
     target.toolbar = Utils.findRequiredViewAsType(source, R.id.toolbar, "field 'toolbar'", Toolbar.class);
     view = Utils.findRequiredView(source, R.id.restore_button, "field 'restoreButton' and method 'onViewClicked'");
     target.restoreButton = Utils.castView(view, R.id.restore_button, "field 'restoreButton'", MaterialButton.class);
-    view7f0a01f8 = view;
+    view7f0a01fa = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -44,7 +44,7 @@ public class ProVersionActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.purchase_button, "field 'purchaseButton' and method 'onViewClicked'");
     target.purchaseButton = Utils.castView(view, R.id.purchase_button, "field 'purchaseButton'", MaterialButton.class);
-    view7f0a01f2 = view;
+    view7f0a01f4 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -68,9 +68,9 @@ public class ProVersionActivity_ViewBinding implements Unbinder {
     target.appBar = null;
     target.title = null;
 
-    view7f0a01f8.setOnClickListener(null);
-    view7f0a01f8 = null;
-    view7f0a01f2.setOnClickListener(null);
-    view7f0a01f2 = null;
+    view7f0a01fa.setOnClickListener(null);
+    view7f0a01fa = null;
+    view7f0a01f4.setOnClickListener(null);
+    view7f0a01f4 = null;
   }
 }

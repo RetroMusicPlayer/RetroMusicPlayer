@@ -17,9 +17,9 @@ import java.lang.Override;
 public class VolumeFragment_ViewBinding implements Unbinder {
   private VolumeFragment target;
 
-  private View view7f0a0281;
+  private View view7f0a0284;
 
-  private View view7f0a0286;
+  private View view7f0a0289;
 
   @UiThread
   public VolumeFragment_ViewBinding(final VolumeFragment target, View source) {
@@ -29,7 +29,7 @@ public class VolumeFragment_ViewBinding implements Unbinder {
     target.volumeSeekbar = Utils.findRequiredViewAsType(source, R.id.volume_seekbar, "field 'volumeSeekbar'", SeekBar.class);
     view = Utils.findRequiredView(source, R.id.volume_down, "field 'volumeDown' and method 'onViewClicked'");
     target.volumeDown = Utils.castView(view, R.id.volume_down, "field 'volumeDown'", ImageView.class);
-    view7f0a0281 = view;
+    view7f0a0284 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -39,7 +39,7 @@ public class VolumeFragment_ViewBinding implements Unbinder {
     target.viewGroup = Utils.findRequiredViewAsType(source, R.id.container, "field 'viewGroup'", ViewGroup.class);
     view = Utils.findRequiredView(source, R.id.volume_up, "field 'volumeUp' and method 'onViewClicked'");
     target.volumeUp = Utils.castView(view, R.id.volume_up, "field 'volumeUp'", ImageView.class);
-    view7f0a0286 = view;
+    view7f0a0289 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -60,9 +60,9 @@ public class VolumeFragment_ViewBinding implements Unbinder {
     target.viewGroup = null;
     target.volumeUp = null;
 
-    view7f0a0281.setOnClickListener(null);
-    view7f0a0281 = null;
-    view7f0a0286.setOnClickListener(null);
-    view7f0a0286 = null;
+    view7f0a0284.setOnClickListener(null);
+    view7f0a0284 = null;
+    view7f0a0289.setOnClickListener(null);
+    view7f0a0289 = null;
   }
 }

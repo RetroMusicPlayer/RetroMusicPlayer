@@ -18,7 +18,7 @@ import java.lang.Override;
 public class FitPlaybackControlsFragment_ViewBinding implements Unbinder {
   private FitPlaybackControlsFragment target;
 
-  private View view7f0a01df;
+  private View view7f0a01e1;
 
   @UiThread
   public FitPlaybackControlsFragment_ViewBinding(final FitPlaybackControlsFragment target,
@@ -28,7 +28,7 @@ public class FitPlaybackControlsFragment_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.player_play_pause_button, "field 'playPauseFab' and method 'showAnimation'");
     target.playPauseFab = Utils.castView(view, R.id.player_play_pause_button, "field 'playPauseFab'", ImageButton.class);
-    view7f0a01df = view;
+    view7f0a01e1 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -66,7 +66,7 @@ public class FitPlaybackControlsFragment_ViewBinding implements Unbinder {
     target.text = null;
     target.mVolumeContainer = null;
 
-    view7f0a01df.setOnClickListener(null);
-    view7f0a01df = null;
+    view7f0a01e1.setOnClickListener(null);
+    view7f0a01e1 = null;
   }
 }

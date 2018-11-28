@@ -17,11 +17,11 @@ import java.lang.Override;
 public class ColorFragment_ViewBinding implements Unbinder {
   private ColorFragment target;
 
-  private View view7f0a0125;
+  private View view7f0a0127;
 
-  private View view7f0a0147;
+  private View view7f0a0149;
 
-  private View view7f0a00fc;
+  private View view7f0a00fd;
 
   @UiThread
   public ColorFragment_ViewBinding(final ColorFragment target, View source) {
@@ -32,7 +32,7 @@ public class ColorFragment_ViewBinding implements Unbinder {
     target.colorBackground = Utils.findRequiredView(source, R.id.gradient_background, "field 'colorBackground'");
     view = Utils.findRequiredView(source, R.id.image, "field 'imageView' and method 'toggleLyrics'");
     target.imageView = Utils.castView(view, R.id.image, "field 'imageView'", ImageView.class);
-    view7f0a0125 = view;
+    view7f0a0127 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -41,7 +41,7 @@ public class ColorFragment_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.lyrics, "field 'lyricsView' and method 'toggleLyrics'");
     target.lyricsView = Utils.castView(view, R.id.lyrics, "field 'lyricsView'", TextView.class);
-    view7f0a0147 = view;
+    view7f0a0149 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -51,7 +51,7 @@ public class ColorFragment_ViewBinding implements Unbinder {
     target.lyricsViewContainer = Utils.findRequiredView(source, R.id.lyrics_container, "field 'lyricsViewContainer'");
     target.imageViewContainer = Utils.findRequiredView(source, R.id.album_cover_container, "field 'imageViewContainer'");
     view = Utils.findRequiredView(source, R.id.expand, "method 'expand'");
-    view7f0a00fc = view;
+    view7f0a00fd = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -74,11 +74,11 @@ public class ColorFragment_ViewBinding implements Unbinder {
     target.lyricsViewContainer = null;
     target.imageViewContainer = null;
 
-    view7f0a0125.setOnClickListener(null);
-    view7f0a0125 = null;
-    view7f0a0147.setOnClickListener(null);
-    view7f0a0147 = null;
-    view7f0a00fc.setOnClickListener(null);
-    view7f0a00fc = null;
+    view7f0a0127.setOnClickListener(null);
+    view7f0a0127 = null;
+    view7f0a0149.setOnClickListener(null);
+    view7f0a0149 = null;
+    view7f0a00fd.setOnClickListener(null);
+    view7f0a00fd = null;
   }
 }

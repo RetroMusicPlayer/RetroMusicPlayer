@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.annotation.CallSuper;
 import androidx.annotation.UiThread;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.Unbinder;
 import butterknife.internal.DebouncingOnClickListener;
@@ -20,26 +19,27 @@ import java.lang.Override;
 public class BannerHomeFragment_ViewBinding implements Unbinder {
   private BannerHomeFragment target;
 
-  private View view7f0a0278;
+  private View view7f0a027b;
 
-  private View view7f0a013c;
+  private View view7f0a020c;
 
-  private View view7f0a026b;
+  private View view7f0a013e;
+
+  private View view7f0a026e;
 
   private View view7f0a0057;
 
-  private View view7f0a011a;
+  private View view7f0a011c;
 
   @UiThread
   public BannerHomeFragment_ViewBinding(final BannerHomeFragment target, View source) {
     this.target = target;
 
     View view;
-    target.toolbar = Utils.findRequiredViewAsType(source, R.id.toolbar, "field 'toolbar'", Toolbar.class);
     target.imageView = Utils.findOptionalViewAsType(source, R.id.image, "field 'imageView'", ImageView.class);
     view = Utils.findRequiredView(source, R.id.user_image, "field 'userImage' and method 'startUserInfo'");
     target.userImage = Utils.castView(view, R.id.user_image, "field 'userImage'", CircularImageView.class);
-    view7f0a0278 = view;
+    view7f0a027b = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -57,10 +57,19 @@ public class BannerHomeFragment_ViewBinding implements Unbinder {
     target.genresRecyclerView = Utils.findRequiredViewAsType(source, R.id.genres, "field 'genresRecyclerView'", RecyclerView.class);
     target.genreContainer = Utils.findRequiredViewAsType(source, R.id.genre_container, "field 'genreContainer'", LinearLayout.class);
     target.container = Utils.findRequiredView(source, R.id.container, "field 'container'");
+    target.contentContainer = Utils.findRequiredView(source, R.id.content_container, "field 'contentContainer'");
     target.suggestionsSongs = Utils.findRequiredViewAsType(source, R.id.suggestion_songs, "field 'suggestionsSongs'", RecyclerView.class);
     target.suggestionsContainer = Utils.findRequiredViewAsType(source, R.id.suggestion_container, "field 'suggestionsContainer'", LinearLayout.class);
+    view = Utils.findRequiredView(source, R.id.searchIcon, "method 'search'");
+    view7f0a020c = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.search();
+      }
+    });
     view = Utils.findRequiredView(source, R.id.last_added, "method 'startUserInfo'");
-    view7f0a013c = view;
+    view7f0a013e = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -68,7 +77,7 @@ public class BannerHomeFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.top_played, "method 'startUserInfo'");
-    view7f0a026b = view;
+    view7f0a026e = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -84,7 +93,7 @@ public class BannerHomeFragment_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.history, "method 'startUserInfo'");
-    view7f0a011a = view;
+    view7f0a011c = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -100,7 +109,6 @@ public class BannerHomeFragment_ViewBinding implements Unbinder {
     if (target == null) throw new IllegalStateException("Bindings already cleared.");
     this.target = null;
 
-    target.toolbar = null;
     target.imageView = null;
     target.userImage = null;
     target.recentArtistRV = null;
@@ -114,18 +122,21 @@ public class BannerHomeFragment_ViewBinding implements Unbinder {
     target.genresRecyclerView = null;
     target.genreContainer = null;
     target.container = null;
+    target.contentContainer = null;
     target.suggestionsSongs = null;
     target.suggestionsContainer = null;
 
-    view7f0a0278.setOnClickListener(null);
-    view7f0a0278 = null;
-    view7f0a013c.setOnClickListener(null);
-    view7f0a013c = null;
-    view7f0a026b.setOnClickListener(null);
-    view7f0a026b = null;
+    view7f0a027b.setOnClickListener(null);
+    view7f0a027b = null;
+    view7f0a020c.setOnClickListener(null);
+    view7f0a020c = null;
+    view7f0a013e.setOnClickListener(null);
+    view7f0a013e = null;
+    view7f0a026e.setOnClickListener(null);
+    view7f0a026e = null;
     view7f0a0057.setOnClickListener(null);
     view7f0a0057 = null;
-    view7f0a011a.setOnClickListener(null);
-    view7f0a011a = null;
+    view7f0a011c.setOnClickListener(null);
+    view7f0a011c = null;
   }
 }

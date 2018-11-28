@@ -21,7 +21,9 @@ import java.lang.Override;
 public class SupportDevelopmentActivity_ViewBinding implements Unbinder {
   private SupportDevelopmentActivity target;
 
-  private View view7f0a00ea;
+  private View view7f0a00eb;
+
+  private View view7f0a0117;
 
   @UiThread
   public SupportDevelopmentActivity_ViewBinding(SupportDevelopmentActivity target) {
@@ -43,11 +45,19 @@ public class SupportDevelopmentActivity_ViewBinding implements Unbinder {
     target.title = Utils.findRequiredViewAsType(source, R.id.title, "field 'title'", TextView.class);
     view = Utils.findRequiredView(source, R.id.donate, "field 'materialButton' and method 'donate'");
     target.materialButton = Utils.castView(view, R.id.donate, "field 'materialButton'", MaterialButton.class);
-    view7f0a00ea = view;
+    view7f0a00eb = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
         target.donate();
+      }
+    });
+    view = Utils.findRequiredView(source, R.id.google_pay, "method 'googlePay'");
+    view7f0a0117 = view;
+    view.setOnClickListener(new DebouncingOnClickListener() {
+      @Override
+      public void doClick(View p0) {
+        target.googlePay();
       }
     });
   }
@@ -68,7 +78,9 @@ public class SupportDevelopmentActivity_ViewBinding implements Unbinder {
     target.title = null;
     target.materialButton = null;
 
-    view7f0a00ea.setOnClickListener(null);
-    view7f0a00ea = null;
+    view7f0a00eb.setOnClickListener(null);
+    view7f0a00eb = null;
+    view7f0a0117.setOnClickListener(null);
+    view7f0a0117 = null;
   }
 }

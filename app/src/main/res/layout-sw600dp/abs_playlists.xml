@@ -7,9 +7,13 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         style="@style/SubTitleTextAppearance"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:text="@string/for_you" />
 
     <LinearLayout
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

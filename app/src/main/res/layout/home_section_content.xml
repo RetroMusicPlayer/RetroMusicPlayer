@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            app:itemMargin="96dp" />
+            app:itemMargin="28dp" />
 
         <View
             android:layout_width="match_parent"

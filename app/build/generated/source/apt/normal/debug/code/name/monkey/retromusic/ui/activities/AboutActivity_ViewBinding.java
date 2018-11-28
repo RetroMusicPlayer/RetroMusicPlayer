@@ -20,7 +20,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
 
   private View view7f0a0087;
 
-  private View view7f0a0102;
+  private View view7f0a0103;
 
   private View view7f0a0088;
 
@@ -30,19 +30,19 @@ public class AboutActivity_ViewBinding implements Unbinder {
 
   private View view7f0a008a;
 
-  private View view7f0a0136;
+  private View view7f0a0138;
 
-  private View view7f0a0273;
+  private View view7f0a0276;
 
   private View view7f0a00c6;
 
-  private View view7f0a01c5;
+  private View view7f0a01c7;
 
-  private View view7f0a00e9;
+  private View view7f0a00ea;
 
-  private View view7f0a024c;
+  private View view7f0a024f;
 
-  private View view7f0a00eb;
+  private View view7f0a00ec;
 
   @UiThread
   public AboutActivity_ViewBinding(AboutActivity target) {
@@ -68,7 +68,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.faq_link, "method 'onViewClicked'");
-    view7f0a0102 = view;
+    view7f0a0103 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -108,7 +108,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.instagram_link, "method 'onViewClicked'");
-    view7f0a0136 = view;
+    view7f0a0138 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -116,7 +116,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.twitter_link, "method 'onViewClicked'");
-    view7f0a0273 = view;
+    view7f0a0276 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -132,7 +132,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.open_source, "method 'onViewClicked'");
-    view7f0a01c5 = view;
+    view7f0a01c7 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -140,7 +140,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.discord_link, "method 'onViewClicked'");
-    view7f0a00e9 = view;
+    view7f0a00ea = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -148,7 +148,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.telegram_link, "method 'onViewClicked'");
-    view7f0a024c = view;
+    view7f0a024f = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -156,7 +156,7 @@ public class AboutActivity_ViewBinding implements Unbinder {
       }
     });
     view = Utils.findRequiredView(source, R.id.donate_link, "method 'onViewClicked'");
-    view7f0a00eb = view;
+    view7f0a00ec = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -180,8 +180,8 @@ public class AboutActivity_ViewBinding implements Unbinder {
 
     view7f0a0087.setOnClickListener(null);
     view7f0a0087 = null;
-    view7f0a0102.setOnClickListener(null);
-    view7f0a0102 = null;
+    view7f0a0103.setOnClickListener(null);
+    view7f0a0103 = null;
     view7f0a0088.setOnClickListener(null);
     view7f0a0088 = null;
     view7f0a008c.setOnClickListener(null);
@@ -190,19 +190,19 @@ public class AboutActivity_ViewBinding implements Unbinder {
     view7f0a0089 = null;
     view7f0a008a.setOnClickListener(null);
     view7f0a008a = null;
-    view7f0a0136.setOnClickListener(null);
-    view7f0a0136 = null;
-    view7f0a0273.setOnClickListener(null);
-    view7f0a0273 = null;
+    view7f0a0138.setOnClickListener(null);
+    view7f0a0138 = null;
+    view7f0a0276.setOnClickListener(null);
+    view7f0a0276 = null;
     view7f0a00c6.setOnClickListener(null);
     view7f0a00c6 = null;
-    view7f0a01c5.setOnClickListener(null);
-    view7f0a01c5 = null;
-    view7f0a00e9.setOnClickListener(null);
-    view7f0a00e9 = null;
-    view7f0a024c.setOnClickListener(null);
-    view7f0a024c = null;
-    view7f0a00eb.setOnClickListener(null);
-    view7f0a00eb = null;
+    view7f0a01c7.setOnClickListener(null);
+    view7f0a01c7 = null;
+    view7f0a00ea.setOnClickListener(null);
+    view7f0a00ea = null;
+    view7f0a024f.setOnClickListener(null);
+    view7f0a024f = null;
+    view7f0a00ec.setOnClickListener(null);
+    view7f0a00ec = null;
   }
 }

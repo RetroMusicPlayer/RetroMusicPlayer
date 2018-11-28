@@ -15,9 +15,9 @@ import java.lang.Override;
 public class SongShareDialog_ViewBinding implements Unbinder {
   private SongShareDialog target;
 
-  private View view7f0a01c6;
+  private View view7f0a01c8;
 
-  private View view7f0a01c7;
+  private View view7f0a01c9;
 
   @UiThread
   public SongShareDialog_ViewBinding(final SongShareDialog target, View source) {
@@ -26,7 +26,7 @@ public class SongShareDialog_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.option_1, "field 'audioFile' and method 'onClick'");
     target.audioFile = Utils.castView(view, R.id.option_1, "field 'audioFile'", TextView.class);
-    view7f0a01c6 = view;
+    view7f0a01c8 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -35,7 +35,7 @@ public class SongShareDialog_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.option_2, "field 'audioText' and method 'onClick'");
     target.audioText = Utils.castView(view, R.id.option_2, "field 'audioText'", TextView.class);
-    view7f0a01c7 = view;
+    view7f0a01c9 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -56,9 +56,9 @@ public class SongShareDialog_ViewBinding implements Unbinder {
     target.audioText = null;
     target.title = null;
 
-    view7f0a01c6.setOnClickListener(null);
-    view7f0a01c6 = null;
-    view7f0a01c7.setOnClickListener(null);
-    view7f0a01c7 = null;
+    view7f0a01c8.setOnClickListener(null);
+    view7f0a01c8 = null;
+    view7f0a01c9.setOnClickListener(null);
+    view7f0a01c9 = null;
   }
 }

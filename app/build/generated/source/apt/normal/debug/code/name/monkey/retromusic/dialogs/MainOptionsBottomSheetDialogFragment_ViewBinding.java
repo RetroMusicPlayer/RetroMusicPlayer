@@ -19,7 +19,7 @@ public class MainOptionsBottomSheetDialogFragment_ViewBinding implements Unbinde
 
   private View view7f0a0027;
 
-  private View view7f0a027a;
+  private View view7f0a027d;
 
   private View view7f0a0054;
 
@@ -49,7 +49,7 @@ public class MainOptionsBottomSheetDialogFragment_ViewBinding implements Unbinde
       }
     });
     view = Utils.findRequiredView(source, R.id.user_info_container, "method 'onClick'");
-    view7f0a027a = view;
+    view7f0a027d = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -118,8 +118,8 @@ public class MainOptionsBottomSheetDialogFragment_ViewBinding implements Unbinde
 
     view7f0a0027.setOnClickListener(null);
     view7f0a0027 = null;
-    view7f0a027a.setOnClickListener(null);
-    view7f0a027a = null;
+    view7f0a027d.setOnClickListener(null);
+    view7f0a027d = null;
     view7f0a0054.setOnClickListener(null);
     view7f0a0054 = null;
     view7f0a005a.setOnClickListener(null);

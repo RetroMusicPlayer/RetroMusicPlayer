@@ -15,7 +15,7 @@ import java.lang.Override;
 public class AlbumCoverPagerAdapter$AlbumCoverFragment_ViewBinding implements Unbinder {
   private AlbumCoverPagerAdapter.AlbumCoverFragment target;
 
-  private View view7f0a01dc;
+  private View view7f0a01de;
 
   @UiThread
   public AlbumCoverPagerAdapter$AlbumCoverFragment_ViewBinding(
@@ -25,7 +25,7 @@ public class AlbumCoverPagerAdapter$AlbumCoverFragment_ViewBinding implements Un
     View view;
     view = Utils.findRequiredView(source, R.id.player_image, "field 'albumCover' and method 'showLyrics'");
     target.albumCover = Utils.castView(view, R.id.player_image, "field 'albumCover'", ImageView.class);
-    view7f0a01dc = view;
+    view7f0a01de = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -43,7 +43,7 @@ public class AlbumCoverPagerAdapter$AlbumCoverFragment_ViewBinding implements Un
 
     target.albumCover = null;
 
-    view7f0a01dc.setOnClickListener(null);
-    view7f0a01dc = null;
+    view7f0a01de.setOnClickListener(null);
+    view7f0a01de = null;
   }
 }

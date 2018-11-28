@@ -22,9 +22,9 @@ import java.lang.Override;
 public class UserInfoActivity_ViewBinding implements Unbinder {
   private UserInfoActivity target;
 
-  private View view7f0a0278;
+  private View view7f0a027b;
 
-  private View view7f0a01b5;
+  private View view7f0a01b7;
 
   private View view7f0a009c;
 
@@ -43,7 +43,7 @@ public class UserInfoActivity_ViewBinding implements Unbinder {
     target.name = Utils.findRequiredViewAsType(source, R.id.name, "field 'name'", TextInputEditText.class);
     view = Utils.findRequiredView(source, R.id.user_image, "field 'userImage' and method 'onViewClicked'");
     target.userImage = Utils.castView(view, R.id.user_image, "field 'userImage'", CircularImageView.class);
-    view7f0a0278 = view;
+    view7f0a027b = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -53,7 +53,7 @@ public class UserInfoActivity_ViewBinding implements Unbinder {
     target.image = Utils.findRequiredViewAsType(source, R.id.banner_image, "field 'image'", ImageView.class);
     view = Utils.findRequiredView(source, R.id.next, "field 'nextButton' and method 'next'");
     target.nextButton = Utils.castView(view, R.id.next, "field 'nextButton'", FloatingActionButton.class);
-    view7f0a01b5 = view;
+    view7f0a01b7 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -88,10 +88,10 @@ public class UserInfoActivity_ViewBinding implements Unbinder {
     target.toolbar = null;
     target.appBarLayout = null;
 
-    view7f0a0278.setOnClickListener(null);
-    view7f0a0278 = null;
-    view7f0a01b5.setOnClickListener(null);
-    view7f0a01b5 = null;
+    view7f0a027b.setOnClickListener(null);
+    view7f0a027b = null;
+    view7f0a01b7.setOnClickListener(null);
+    view7f0a01b7 = null;
     view7f0a009c.setOnClickListener(null);
     view7f0a009c = null;
   }

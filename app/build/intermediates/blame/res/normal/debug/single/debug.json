@@ -84,12 +84,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-mdpi-v4/quantum_ic_replay_30_grey600_36.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_mr_media_stop_light.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable/mr_media_stop_light.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_ic_unfold_more_black_24dp.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_unfold_more_black_24dp.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_mr_media_stop_light.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable/mr_media_stop_light.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -108,20 +108,20 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_ic_settings_white_24dp.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_settings_white_24dp.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_cast_skip_ad_label_border.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable/cast_skip_ad_label_border.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_30_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_30_light.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_ic_settings_white_24dp.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_settings_white_24dp.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_ic_vol_type_tv_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_vol_type_tv_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_30_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_30_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_quantum_ic_replay_white_24.png.flat",
@@ -264,12 +264,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable-xhdpi-v4/common_google_signin_btn_text_dark_normal_background.9.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/color_abc_tint_default.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/color/abc_tint_default.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-mdpi-v4_ic_media_stop_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-mdpi-v4/ic_media_stop_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/color_abc_tint_default.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/color/abc_tint_default.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_shadow_up_strong.xml.flat",
@@ -284,12 +284,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout-xlarge-land/pager_item.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_quantum_ic_skip_next_white_24.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-hdpi-v4/quantum_ic_skip_next_white_24.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/color_abc_tint_edittext.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/color/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_quantum_ic_skip_next_white_24.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-hdpi-v4/quantum_ic_skip_next_white_24.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_cast_abc_scrubber_control_off_mtrl_alpha.png.flat",
@@ -372,12 +372,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_14_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_30_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_30_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-v21_avd_hide_password.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/drawable-v21/avd_hide_password.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_30_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_30_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-mdpi_default_album_art.webp.flat",
@@ -392,16 +392,16 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable/cast_mini_controller_gradient_light.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/animator_mtrl_fab_transformation_sheet_expand_spec.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/animator/mtrl_fab_transformation_sheet_expand_spec.xml"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_quantum_ic_replay_30_white_24.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xxhdpi-v4/quantum_ic_replay_30_white_24.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_05_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_05_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_quantum_ic_replay_30_white_24.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xxhdpi-v4/quantum_ic_replay_30_white_24.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/animator_mtrl_fab_transformation_sheet_expand_spec.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/animator/mtrl_fab_transformation_sheet_expand_spec.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/menu_menu_artist_detail.xml.flat",
@@ -424,12 +424,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_mr_button_disconnected_dark.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_quantum_ic_replay_white_24.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_replay_white_24.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_quantum_ic_replay_white_24.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_replay_white_24.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_design_snackbar_background.xml.flat",
@@ -484,12 +484,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_01_dark.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_md_btn_selector.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/drawable/md_btn_selector.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_media_play_dark.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_media_play_dark.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_md_btn_selector.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/drawable/md_btn_selector.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_design_ic_visibility.png.flat",
@@ -528,12 +528,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable/abc_list_selector_background_transition_holo_dark.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_ic_dialog_close_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_dialog_close_light.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_03_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_03_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_ic_dialog_close_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_dialog_close_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-v21_preference_list_divider_material.xml.flat",
@@ -748,12 +748,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_27_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_ic_media_stop_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_media_stop_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xxxhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_ic_media_stop_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-hdpi-v4/ic_media_stop_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_quantum_ic_play_circle_filled_white_36.png.flat",
@@ -780,12 +780,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable-xhdpi-v4/common_google_signin_btn_text_light_normal_background.9.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_select_dialog_singlechoice_material.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/layout/select_dialog_singlechoice_material.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/mipmap-xxxhdpi_ic_launcher_background.png.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_select_dialog_singlechoice_material.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/layout/select_dialog_singlechoice_material.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_quantum_ic_skip_previous_white_36.png.flat",
@@ -852,12 +852,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xxhdpi-v4/quantum_ic_bigtop_updates_white_24.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_ic_group_collapse_00.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxxhdpi-v4/ic_group_collapse_00.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_ic_delete_white_24dp.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_delete_white_24dp.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_ic_group_collapse_00.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxxhdpi-v4/ic_group_collapse_00.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-mdpi-v4_ic_audiotrack_light.png.flat",
@@ -868,12 +868,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/shadow_up_home.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_activity_whats_new.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/activity_whats_new.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/animator_mtrl_fab_show_motion_spec.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/animator/mtrl_fab_show_motion_spec.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_activity_whats_new.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/activity_whats_new.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_material_playback_controls.xml.flat",
@@ -1004,12 +1004,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/90fd5ebf9e268fab140fb5ee26c6fdd2/res/drawable/notification_icon_background.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/animator_mtrl_fab_hide_motion_spec.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/animator/mtrl_fab_hide_motion_spec.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_mini_player.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/fragment_mini_player.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/animator_mtrl_fab_hide_motion_spec.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/animator/mtrl_fab_hide_motion_spec.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_13_light.png.flat",
@@ -1096,32 +1096,32 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_drag_vertical_white_24dp.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-ldrtl-xxxhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable-xhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout-land_fragment_color_player.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout-land/fragment_color_player.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout-xlarge-land_activity_album.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout-xlarge-land/activity_album.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_notification_template_big_media_narrow.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/e3fc80efca10081a3e198b86f6f308a1/res/layout/notification_template_big_media_narrow.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_common_google_signin_btn_text_dark.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable/common_google_signin_btn_text_dark.xml"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout-xlarge-land_activity_album.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout-xlarge-land/activity_album.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-v21_design_password_eye.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/drawable-v21/design_password_eye.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_common_google_signin_btn_text_dark.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable/common_google_signin_btn_text_dark.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_22_dark.png.flat",
@@ -1268,12 +1268,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_forward_30_white_36.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_quantum_ic_refresh_white_24.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_refresh_white_24.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_quantum_ic_replay_30_grey600_36.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_replay_30_grey600_36.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_quantum_ic_refresh_white_24.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_refresh_white_24.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
@@ -1288,12 +1288,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xhdpi-v4/quantum_ic_forward_30_grey600_36.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_00_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_00_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_abc_text_select_handle_middle_mtrl_dark.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-hdpi-v4/abc_text_select_handle_middle_mtrl_dark.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_00_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_00_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_preference_dialog_edittext.xml.flat",
@@ -1352,16 +1352,16 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-hdpi-v4/quantum_ic_play_circle_filled_grey600_36.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_blur_playback_controls.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/fragment_blur_playback_controls.xml"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_md_item_selected.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/drawable/md_item_selected.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_abc_expanded_menu_layout.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/layout/abc_expanded_menu_layout.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_md_item_selected.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/drawable/md_item_selected.xml"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_blur_playback_controls.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/fragment_blur_playback_controls.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_md_dialog_basic_check.xml.flat",
@@ -1436,12 +1436,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_05_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/interpolator-v21_mtrl_linear_out_slow_in.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/interpolator-v21/mtrl_linear_out_slow_in.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-mdpi-v4_quantum_ic_art_track_grey600_48.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-mdpi-v4/quantum_ic_art_track_grey600_48.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/interpolator-v21_mtrl_linear_out_slow_in.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/interpolator-v21/mtrl_linear_out_slow_in.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/menu_menu_album_detail.xml.flat",
@@ -1456,12 +1456,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-hdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_13_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_13_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_ic_commit_search_api_mtrl_alpha.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xhdpi-v4/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_13_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_13_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi_default_album_art.webp.flat",
@@ -1480,12 +1480,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_23_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_14_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_14_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_29_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_29_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_14_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_14_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_abc_scrubber_primary_mtrl_alpha.9.png.flat",
@@ -1540,12 +1540,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/menu/menu_player.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_common_google_signin_btn_icon_light_normal.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable/common_google_signin_btn_icon_light_normal.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_abc_tooltip.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/layout/abc_tooltip.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_common_google_signin_btn_icon_light_normal.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable/common_google_signin_btn_icon_light_normal.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_ic_group_expand_11.png.flat",
@@ -1588,16 +1588,16 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_28_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_07_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_07_light.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_22_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_22_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_cast_ic_notification_on.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-16.1.0.aar/a58b7f1b9ef74e43f50fa8af67f574ff/res/drawable-xxhdpi-v4/cast_ic_notification_on.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_22_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_22_light.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_07_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_07_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_mr_media_play_dark.xml.flat",
@@ -1664,12 +1664,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/drawable/mtrl_snackbar_background.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_mr_cast_media_metadata.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/layout/mr_cast_media_metadata.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout-v21_preference_information_material.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/preference-1.0.0.aar/c537d92dcb8efcebcf952a623650e9e8/res/layout-v21/preference_information_material.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_mr_cast_media_metadata.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/layout/mr_cast_media_metadata.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_abc_list_menu_item_checkbox.xml.flat",
@@ -2092,12 +2092,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_more_vert_white_24dp.xml"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_ic_group_expand_06.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxxhdpi-v4/ic_group_expand_06.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_abc_list_selector_disabled_holo_light.9.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xxhdpi-v4/abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_ic_group_expand_06.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxxhdpi-v4/ic_group_expand_06.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_disabled_light.png.flat",
@@ -2160,12 +2160,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_20_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi_np_simple.webp.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable-xxxhdpi/np_simple.webp"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_23_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_23_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi_np_simple.webp.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable-xxxhdpi/np_simple.webp"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_item_image_gradient.xml.flat",
@@ -2192,16 +2192,16 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_21_dark.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_activity_artist_details.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/activity_artist_details.xml"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_25_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_25_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi_np_color.webp.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable-xxxhdpi/np_color.webp"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_25_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connecting_25_light.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_activity_artist_details.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/activity_artist_details.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -2232,12 +2232,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/32032819531e78c88630bbdb6ac1ad7b/res/drawable-xxhdpi-v4/googleg_standard_color_18.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-v21_avd_show_password.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/drawable-v21/avd_show_password.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_quantum_ic_play_arrow_grey600_48.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-xxhdpi-v4/quantum_ic_play_arrow_grey600_48.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-v21_avd_show_password.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/54bb6f04ac0b42113e732c3e14a00b57/res/drawable-v21/avd_show_password.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_23_dark.png.flat",
@@ -2292,12 +2292,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable-xxxhdpi/np_card.webp"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_notification_bg_low.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/90fd5ebf9e268fab140fb5ee26c6fdd2/res/drawable/notification_bg_low.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_md_dialog_basic.xml.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-core-0.9.6.0.aar/1fa5fb63a841b48a97eef7ef11ee5155/res/layout/md_dialog_basic.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_notification_bg_low.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/core-1.0.1.aar/90fd5ebf9e268fab140fb5ee26c6fdd2/res/drawable/notification_bg_low.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_abc_cascading_menu_item_layout.xml.flat",
@@ -2484,16 +2484,16 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-mdpi-v4/abc_list_divider_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_16_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_16_dark.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-hdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-hdpi-v4/abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-ldrtl-hdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-ldrtl-hdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_16_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_16_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxxhdpi-v4_abc_tab_indicator_mtrl_alpha.9.png.flat",
@@ -2548,12 +2548,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-mdpi-v4/abc_ic_star_black_36dp.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_mr_cast_route_item.xml.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/layout/mr_cast_route_item.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_03_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_03_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_mr_cast_route_item.xml.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/layout/mr_cast_route_item.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_abc_textfield_default_mtrl_alpha.9.png.flat",
@@ -2632,12 +2632,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-mdpi-v4/quantum_ic_stop_white_24.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_13_dark.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_13_dark.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_text_select_handle_left_mtrl_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_cast_ic_notification_skip_next.xml.flat",
@@ -2720,12 +2720,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_25_light.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_plain_player.xml.flat",
-        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/fragment_plain_player.xml"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_abc_btn_check_to_on_mtrl_000.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xhdpi-v4/abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_plain_player.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout/fragment_plain_player.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_fragment_library.xml.flat",
@@ -2768,12 +2768,12 @@
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-play-services-cast-framework-16.1.0.aar/850725d39541aebf5936d996e87aa308/res/drawable-mdpi-v4/quantum_ic_play_circle_filled_grey600_36.png"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_04_dark.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_04_dark.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_22_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_22_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_ic_mr_button_connected_04_dark.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xxhdpi-v4/ic_mr_button_connected_04_dark.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_26_dark.png.flat",
@@ -2788,12 +2788,12 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable-hdpi/default_artist_art.webp"
     },
     {
-        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_16_light.png.flat",
-        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_16_light.png"
-    },
-    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout-land_fragment_card_blur_player.xml.flat",
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/layout-land/fragment_card_blur_player.xml"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connecting_16_light.png.flat",
+        "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connecting_16_light.png"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_27_dark.png.flat",
@@ -4972,6 +4972,10 @@
         "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_view_carousel_black_24dp.xml"
     },
     {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_bottom_corners.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/bottom_corners.xml"
+    },
+    {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xxhdpi-v4_abc_ic_star_black_36dp.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/4a7d2a4aa5fee0e7867aadbde755bdfc/res/drawable-xxhdpi-v4/abc_ic_star_black_36dp.png"
     },
@@ -6146,6 +6150,10 @@
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable-xhdpi-v4_ic_mr_button_connected_16_light.png.flat",
         "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/mediarouter-1.0.0.aar/236b694f244743bfb7f862a263d44070/res/drawable-xhdpi-v4/ic_mr_button_connected_16_light.png"
+    },
+    {
+        "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/drawable_ic_clear_all_black_24dp.xml.flat",
+        "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/drawable/ic_clear_all_black_24dp.xml"
     },
     {
         "merged": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/res/merged/normal/debug/layout_dialog_changelog.xml.flat",

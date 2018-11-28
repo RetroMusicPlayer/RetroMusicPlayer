@@ -17,7 +17,7 @@ import java.lang.Override;
 public class SearchActivity_ViewBinding implements Unbinder {
   private SearchActivity target;
 
-  private View view7f0a0280;
+  private View view7f0a0283;
 
   private View view7f0a0096;
 
@@ -33,7 +33,7 @@ public class SearchActivity_ViewBinding implements Unbinder {
     View view;
     view = Utils.findRequiredView(source, R.id.voice_search, "field 'micIcon' and method 'searchImageView'");
     target.micIcon = view;
-    view7f0a0280 = view;
+    view7f0a0283 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -67,8 +67,8 @@ public class SearchActivity_ViewBinding implements Unbinder {
     target.searchView = null;
     target.statusBar = null;
 
-    view7f0a0280.setOnClickListener(null);
-    view7f0a0280 = null;
+    view7f0a0283.setOnClickListener(null);
+    view7f0a0283 = null;
     view7f0a0096.setOnClickListener(null);
     view7f0a0096 = null;
   }
