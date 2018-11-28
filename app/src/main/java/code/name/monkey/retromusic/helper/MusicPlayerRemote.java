@@ -409,7 +409,7 @@ public class MusicPlayerRemote {
                                 MediaStore.Audio.AudioColumns._ID + "=?",
                                 new String[]{songId}
                         ));*/
-                        songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                        songs = SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
                                 musicService,
                                 MediaStore.Audio.AudioColumns._ID + "=?",
                                 new String[]{songId}))
@@ -431,7 +431,7 @@ public class MusicPlayerRemote {
                     songFile = new File(uri.getPath());
                 }
                 if (songFile != null) {
-                    songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                    songs = SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
                             musicService,
                             MediaStore.Audio.AudioColumns.DATA + "=?",
                             new String[]{songFile.getAbsolutePath()}

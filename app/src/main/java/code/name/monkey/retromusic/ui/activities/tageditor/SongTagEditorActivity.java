@@ -147,7 +147,7 @@ public class SongTagEditorActivity extends AbsTagEditorActivity implements TextW
     @Override
     protected List<String> getSongPaths() {
         ArrayList<String> paths = new ArrayList<>(1);
-        paths.add(SongLoader.getSong(this, getId()).blockingFirst().data);
+        paths.add(SongLoader.Companion.getSong(this, getId()).blockingFirst().data);
         return paths;
     }
 

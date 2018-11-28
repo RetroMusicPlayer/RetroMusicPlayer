@@ -5,11 +5,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio.Genres;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -30,7 +30,7 @@ public class GenreLoader {
             return getSongsWithNoGenre(context);
         }
 
-        return SongLoader.getSongs(makeGenreSongCursor(context, genreId));
+        return SongLoader.Companion.getSongs(makeGenreSongCursor(context, genreId));
     }
 
     @NonNull
@@ -46,11 +46,11 @@ public class GenreLoader {
     private static Observable<ArrayList<Song>> getSongsWithNoGenre(@NonNull final Context context) {
         String selection = BaseColumns._ID + " NOT IN " +
                 "(SELECT " + Genres.Members.AUDIO_ID + " FROM audio_genres_map)";
-        return SongLoader.getSongs(SongLoader.makeSongCursor(context, selection, null));
+        return SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(context, selection, null));
     }
 
     private static boolean hasSongsWithNoGenre(@NonNull final Context context) {
-        final Cursor allSongsCursor = SongLoader.makeSongCursor(context, null, null);
+        final Cursor allSongsCursor = SongLoader.Companion.makeSongCursor(context, null, null);
         final Cursor allSongsWithGenreCursor = makeAllSongsWithGenreCursor(context);
 
         if (allSongsCursor == null || allSongsWithGenreCursor == null) {
@@ -79,7 +79,7 @@ public class GenreLoader {
         try {
             return context.getContentResolver().query(
                     Genres.Members.getContentUri("external", genreId),
-                    SongLoader.BASE_PROJECTION, SongLoader.BASE_SELECTION, null, PreferenceUtil.getInstance().getSongSortOrder());
+                    SongLoader.Companion.getBASE_PROJECTION(), SongLoader.BASE_SELECTION, null, PreferenceUtil.getInstance().getSongSortOrder());
         } catch (SecurityException e) {
             return null;
         }

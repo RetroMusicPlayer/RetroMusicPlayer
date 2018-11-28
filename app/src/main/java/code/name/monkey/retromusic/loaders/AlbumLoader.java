@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class AlbumLoader {
 
   public static Observable<ArrayList<Album>> getAllAlbums(@NonNull Context context) {
-    Observable<ArrayList<Song>> songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+    Observable<ArrayList<Song>> songs = SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
         context,
         null,
         null,
@@ -30,7 +30,7 @@ public class AlbumLoader {
   @NonNull
   public static Observable<ArrayList<Album>> getAlbums(@NonNull final Context context,
       String query) {
-    Observable<ArrayList<Song>> songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+    Observable<ArrayList<Song>> songs = SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
         context,
         AudioColumns.ALBUM + " LIKE ?",
         new String[]{"%" + query + "%"},
@@ -42,7 +42,7 @@ public class AlbumLoader {
   @NonNull
   public static Observable<Album> getAlbum(@NonNull final Context context, int albumId) {
     return Observable.create(e -> {
-      Observable<ArrayList<Song>> songs = SongLoader.getSongs(SongLoader
+      Observable<ArrayList<Song>> songs = SongLoader.Companion.getSongs(SongLoader.Companion
           .makeSongCursor(context, AudioColumns.ALBUM_ID + "=?",
               new String[]{String.valueOf(albumId)}, getSongLoaderSortOrder(context)));
       songs.subscribe(songs1 -> {

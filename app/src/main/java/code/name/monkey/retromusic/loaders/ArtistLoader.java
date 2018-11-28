@@ -22,7 +22,7 @@ public class ArtistLoader {
 
     @NonNull
     public static Observable<Artist> getArtist(@NonNull final Context context, int artistId) {
-        return Observable.create(e -> SongLoader.getSongs(SongLoader.makeSongCursor(
+        return Observable.create(e -> SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
                 context,
                 AudioColumns.ARTIST_ID + "=?",
                 new String[]{String.valueOf(artistId)},
@@ -36,8 +36,8 @@ public class ArtistLoader {
 
     @NonNull
     public static Observable<ArrayList<Artist>> getAllArtists(@NonNull final Context context) {
-        return Observable.create(e -> SongLoader
-                .getSongs(SongLoader.makeSongCursor(
+        return Observable.create(e -> SongLoader.Companion
+                .getSongs(SongLoader.Companion.makeSongCursor(
                         context,
                         null,
                         null,
@@ -51,7 +51,7 @@ public class ArtistLoader {
 
     @NonNull
     public static Observable<ArrayList<Artist>> getArtists(@NonNull final Context context, String query) {
-        return Observable.create(e -> SongLoader.getSongs(SongLoader.makeSongCursor(
+        return Observable.create(e -> SongLoader.Companion.getSongs(SongLoader.Companion.makeSongCursor(
                 context,
                 AudioColumns.ARTIST + " LIKE ?",
                 new String[]{"%" + query + "%"},

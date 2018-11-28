@@ -37,7 +37,7 @@ public class ShuffleAllPlaylist extends AbsSmartPlaylist {
     @NonNull
     @Override
     public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
-        return SongLoader.getAllSongs(context);
+        return SongLoader.Companion.getAllSongs(context);
     }
 
     @Override

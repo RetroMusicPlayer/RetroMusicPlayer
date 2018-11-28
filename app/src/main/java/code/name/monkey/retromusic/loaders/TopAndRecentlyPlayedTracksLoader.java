@@ -23,12 +23,12 @@ public class TopAndRecentlyPlayedTracksLoader {
 
   @NonNull
   public static Observable<ArrayList<Song>> getRecentlyPlayedTracks(@NonNull Context context) {
-    return SongLoader.getSongs(makeRecentTracksCursorAndClearUpDatabase(context));
+    return SongLoader.Companion.getSongs(makeRecentTracksCursorAndClearUpDatabase(context));
   }
 
   @NonNull
   public static Observable<ArrayList<Song>> getTopTracks(@NonNull Context context) {
-    return SongLoader.getSongs(makeTopTracksCursorAndClearUpDatabase(context));
+    return SongLoader.Companion.getSongs(makeTopTracksCursorAndClearUpDatabase(context));
   }
 
   @Nullable
@@ -122,7 +122,7 @@ public class TopAndRecentlyPlayedTracksLoader {
       selection.append(")");
 
       // get a list of songs with the data given the selection statement
-      Cursor songCursor = SongLoader.makeSongCursor(context, selection.toString(), null);
+      Cursor songCursor = SongLoader.Companion.makeSongCursor(context, selection.toString(), null);
       if (songCursor != null) {
         // now return the wrapped TopTracksCursor to handle sorting given order
         return new SortedLongCursor(songCursor, order, BaseColumns._ID);

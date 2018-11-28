@@ -198,6 +198,6 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     private Observable<ArrayList<Song>> getQueue(@NonNull final String tableName) {
         Cursor cursor = getReadableDatabase().query(tableName, null,
                 null, null, null, null, null);
-        return SongLoader.getSongs(cursor);
+        return SongLoader.Companion.getSongs(cursor);
     }
 }
