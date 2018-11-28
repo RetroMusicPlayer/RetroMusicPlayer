@@ -22,12 +22,16 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.ui.adapter.song.PlayingQueueAdapter;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMusicServiceFragment;
+import code.name.monkey.retromusic.views.CollapsingFAB;
 
 public class PlayingQueueFragment extends AbsMusicServiceFragment {
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
+
+
     Unbinder unbinder;
+
     private RecyclerView.Adapter mWrappedAdapter;
     private RecyclerViewDragDropManager mRecyclerViewDragDropManager;
     private PlayingQueueAdapter mPlayingQueueAdapter;
@@ -66,6 +70,7 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
         mRecyclerView.setItemAnimator(animator);
         mRecyclerViewDragDropManager.attachRecyclerView(mRecyclerView);
         mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
+
     }
 
     @Override

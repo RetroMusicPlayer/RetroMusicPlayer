@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="176dp"
+    android:height="176dp"
+    android:viewportHeight="176"
+    android:viewportWidth="176">
+
+    <group
+        android:pivotX="88"
+        android:pivotY="88"
+        android:scaleX="0.916"
+        android:scaleY="0.916"
+        android:translateX="-8"
+        android:translateY="-8">
+        <path
+            android:name="ic_app_shortcut_top_tracks_ic"
+            android:fillColor="#000"
+            android:pathData="M113.7,69.45l10.13,10.13-21.59,21.59-17.7-17.7L51.75,116.31,58,122.55,84.54,96l17.7,17.7,27.88-27.83L140.25,96V69.45Z" />
+    </group>
+</vector>

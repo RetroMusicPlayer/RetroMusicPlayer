@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
 import code.name.monkey.retromusic.ui.activities.WhatsNewActivity;
 import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
+import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.ui.activities.GenreDetailsActivity.EXTRA_GENRE_ID;
@@ -151,5 +152,9 @@ public class NavigationUtil {
         ActivityCompat.startActivity(context, new Intent(context, NowPayingActivity.class),
                 ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, sharedElements).toBundle());
 
+    }
+
+    public static void gotoNowPlaying(Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, NowPayingActivity.class),null);
     }
 }

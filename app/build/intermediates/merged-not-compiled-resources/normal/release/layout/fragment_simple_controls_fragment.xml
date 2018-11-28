@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/title_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/title"
+                fontPath="@string/circular_std_black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:ignore="MissingPrefix"
+                tools:text="Title" />
+
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingTop="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="Text" />
+
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:id="@+id/player_song_current_progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="4dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="22.00/ 33.00" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/player_media_controller_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:ignore="ContentDescription,UnusedAttribute">
+
+        <ImageButton
+            android:id="@+id/player_prev_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/dummy_fab"
+            android:background="?attr/roundSelector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+            tools:ignore="MissingPrefix"
+            tools:tint="@color/md_black_1000" />
+
+        <ImageButton
+            android:id="@+id/player_next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/dummy_fab"
+            android:background="?attr/roundSelector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_skip_next_white_24dp"
+            tools:ignore="MissingPrefix"
+            tools:tint="@color/md_black_1000" />
+
+        <ImageButton
+            android:id="@+id/player_repeat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/roundSelector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_repeat_white_24dp"
+            tools:ignore="MissingPrefix"
+            tools:tint="@color/md_black_1000" />
+
+        <ImageButton
+            android:id="@+id/player_shuffle_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/roundSelector"
+            android:padding="16dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_shuffle_white_24dp"
+            tools:ignore="MissingPrefix"
+            tools:tint="@color/md_black_1000" />
+
+        <Space
+            android:id="@+id/dummy_fab"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_centerInParent="true" />
+
+        <ImageButton
+            android:id="@+id/player_play_pause_button"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/color_circle_gradient"
+            android:elevation="6dp"
+            android:padding="16dp"
+            app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/volume_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
+
+        <fragment
+            android:id="@+id/volume_fragment"
+            android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_volume" />
+    </FrameLayout>
+</LinearLayout>

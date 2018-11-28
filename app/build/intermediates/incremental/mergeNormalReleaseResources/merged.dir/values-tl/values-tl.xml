@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Mag-navigate patungo sa home"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Mag-navigate pataas"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Higit pang mga opsyon"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Tapos na"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Tingnan lahat"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Pumili ng isang app"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"I-OFF"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"I-ON"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"delete"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"space"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Maghanap…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"I-clear ang query"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Query sa paghahanap"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Maghanap"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Isumite ang query"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Paghahanap gamit ang boses"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Ibahagi sa/kay"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Ibahagi gamit ang <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"I-collapse"</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"Ad"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"Nagka-cast sa %1$s"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"Mga closed caption"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"Hindi available ang mga closed caption"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"Kumokonekta sa <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"Idiskonekta"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"Ipinapakitang larawan habang nagpe-play ng ad ang cast receiver"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"Nasa proseso ang paggawa ng ad..."</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"Album art"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"Live stream"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"Naglo-load…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"Laktawan ang Ad"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"Malalaktawan mo ang ad sa loob ng %1$d…"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"I-forward"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"I-forward nang sampung segundo"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"I-forward nang tatlumpung segundo"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:string/ok"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"I-mute"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"Nakakonekta sa <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"Kumokonekta sa <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"Cast"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"Idiskonekta"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"I-pause"</string>
+    <string msgid="5906987965619702702" name="cast_play">"I-play"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"I-rewind"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"I-rewind nang sampung segundo"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"I-rewind nang tatlumpung segundo"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"Kontrol sa paghahanap sa pag-playback"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"Lumaktaw sa susunod na item"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"Lumaktaw sa nakaraang item"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"Ihinto"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"Ihinto ang live stream"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"Audio"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"Kanselahin"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"Mga Nakasarang Caption"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"Track <ns1:g id="POSITION">%1$d</ns1:g>"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"Wala"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"OK"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"Mga Subtitle"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"I-unmute"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"I-enable"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"Hindi gagana ang <ns1:g id="APP_NAME">%1$s</ns1:g> maliban kung ie-enable mo ang mga serbisyo ng Google Play."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"I-enable ang mga serbisyo ng Google Play"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"I-install"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"Hindi gagana ang <ns1:g id="APP_NAME">%1$s</ns1:g> nang wala ang mga serbisyo ng Google Play na wala sa iyong device."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Kunin ang mga serbisyo ng Google Play"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Availability ng serbisyo ng Google Play"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Error sa Mga Serbisyo ng Google Play"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"Nagkakaproblema ang <ns1:g id="APP_NAME">%1$s</ns1:g> sa mga serbisyo ng Google Play. Pakisubukang muli."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"Hindi gagana ang <ns1:g id="APP_NAME">%1$s</ns1:g> nang wala ang mga serbisyo ng Google Play, na hindi nasusuportahan ng iyong device."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"I-update"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"Hindi gagana ang <ns1:g id="APP_NAME">%1$s</ns1:g> maliban kung i-a-update mo ang mga serbisyo ng Google Play."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"I-update ang mga serbisyo ng Google Play"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"Hindi gagana ang <ns1:g id="APP_NAME">%1$s</ns1:g> nang wala ang mga serbisyo ng Google Play na kasalukuyang ina-update."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"Kailangan ang bagong bersyon ng mga serbisyo ng Google Play. Mag-a-update itong mag-isa sa ilang sandali."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Buksan sa telepono"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Mag-sign in"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Mag-sign in sa Google"</string>
+    <string msgid="1234962710353108940" name="expand_button_title">"Advanced"</string>
+    <string msgid="1685185767093348095" name="mr_button_content_description">"Button na I-cast"</string>
+    <string msgid="1350095112462806159" name="mr_cast_button_connected">"Button na I-cast. Nakakonekta"</string>
+    <string msgid="8959304318293841992" name="mr_cast_button_connecting">"Button na I-cast. Kumokonekta"</string>
+    <string msgid="5501231066847739632" name="mr_cast_button_disconnected">"Button na I-cast. Nadiskonekta"</string>
+    <string msgid="5504553798429329689" name="mr_chooser_searching">"Naghahanap ng mga device"</string>
+    <string msgid="7548226170787476564" name="mr_chooser_title">"I-cast sa"</string>
+    <string msgid="5813284753012893250" name="mr_controller_album_art">"Album art"</string>
+    <string msgid="5286734709674025661" name="mr_controller_casting_screen">"Ikina-cast ang screen"</string>
+    <string msgid="5468775621814500662" name="mr_controller_close_description">"Isara"</string>
+    <string msgid="5518911192681928413" name="mr_controller_collapse_group">"I-collapse"</string>
+    <string msgid="1370654436555555647" name="mr_controller_disconnect">"Idiskonekta"</string>
+    <string msgid="2422682304043876468" name="mr_controller_expand_group">"I-expand"</string>
+    <string msgid="7299368841849988218" name="mr_controller_no_info_available">"Walang available na impormasyon"</string>
+    <string msgid="4342878516155861006" name="mr_controller_no_media_selected">"Walang napiling media"</string>
+    <string msgid="4701315813294065305" name="mr_controller_pause">"I-pause"</string>
+    <string msgid="4443315438268112801" name="mr_controller_play">"I-play"</string>
+    <string msgid="5106056093749454009" name="mr_controller_stop">"Ihinto"</string>
+    <string msgid="7617024847862349259" name="mr_controller_stop_casting">"Ihinto ang pag-cast"</string>
+    <string msgid="691656961160498512" name="mr_controller_volume_slider">"Slider ng volume"</string>
+    <string msgid="3117964881088969586" name="mr_system_route_name">"System"</string>
+    <string msgid="8236416097133080726" name="mr_user_route_category_name">"Mga Device"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Maghanap"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="5190123168583152844" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="5138405918326871307" name="v7_preference_off">"NAKA-OFF"</string>
+    <string msgid="27351710992731591" name="v7_preference_on">"NAKA-ON"</string>
+</resources>

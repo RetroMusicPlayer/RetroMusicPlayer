@@ -135,7 +135,6 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_player, container, false);
         unbinder = ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -147,12 +146,8 @@ public class PlayerFragment extends AbsPlayerFragment implements PlayerAlbumCove
     }
 
     private void setUpSubFragments() {
-        playbackControlsFragment = (PlayerPlaybackControlsFragment) getChildFragmentManager()
-                .findFragmentById(R.id.playback_controls_fragment);
-
-        PlayerAlbumCoverFragment playerAlbumCoverFragment =
-                (PlayerAlbumCoverFragment) getChildFragmentManager()
-                        .findFragmentById(R.id.player_album_cover_fragment);
+        playbackControlsFragment = (PlayerPlaybackControlsFragment) getChildFragmentManager().findFragmentById(R.id.playback_controls_fragment);
+        PlayerAlbumCoverFragment playerAlbumCoverFragment = (PlayerAlbumCoverFragment) getChildFragmentManager().findFragmentById(R.id.player_album_cover_fragment);
         if (playerAlbumCoverFragment != null) {
             playerAlbumCoverFragment.setCallbacks(this);
         }

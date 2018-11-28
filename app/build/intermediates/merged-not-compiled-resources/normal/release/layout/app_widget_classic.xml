@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/app_widget_classic_height"
+    android:background="#AA000000"
+    android:orientation="horizontal"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/app_widget_classic_image_size"
+        android:layout_height="@dimen/app_widget_classic_image_size"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/media_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layoutDirection="ltr"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="8dp">
+
+            <ImageButton
+                android:id="@+id/button_prev"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_skip_previous_white_24dp"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+            <ImageButton
+                android:id="@+id/button_toggle_play_pause"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_play_arrow_white_24dp"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+            <ImageButton
+                android:id="@+id/button_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/widget_selector"
+                tools:src="@drawable/ic_skip_next_white_24dp"
+                tools:tint="@color/ate_secondary_text_dark" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/media_titles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/media_actions"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/ate_primary_text_dark"
+                tools:text="Title" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/ate_secondary_text_dark"
+                tools:text="Text" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

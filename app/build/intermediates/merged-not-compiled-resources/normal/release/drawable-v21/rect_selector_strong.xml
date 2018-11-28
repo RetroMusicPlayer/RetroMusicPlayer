@@ -1,0 +1,15 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ate_control_normal_light">
+
+    <item
+        android:id="@android:id/mask"
+        android:drawable="@android:color/white" />
+    <item>
+        <selector>
+            <item
+                android:drawable="@color/ate_control_normal_light"
+                android:state_activated="true" />
+        </selector>
+    </item>
+
+</ripple>

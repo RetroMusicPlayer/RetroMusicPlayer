@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_all"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    android:orientation="vertical">
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/cast_mini_controller_gradient_light"/>
+
+    <RelativeLayout
+        android:id="@+id/container_current"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/cast_mini_controller_icon_height">
+
+        <View
+            android:id="@+id/center"
+            android:layout_centerVertical="true"
+            android:layout_width="fill_parent"
+            android:visibility="invisible"
+            android:layout_height="1dp" />
+
+        <ImageView
+            android:id="@+id/icon_view"
+            android:layout_width="@dimen/cast_mini_controller_icon_width"
+            android:layout_height="@dimen/cast_mini_controller_icon_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cast_album_art_placeholder" />
+
+        <ImageView
+            android:id="@+id/button_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button_1"
+            android:layout_toStartOf="@+id/button_1"
+            android:layout_marginRight="@dimen/cast_mini_controller_control_button_margin"
+            android:layout_marginEnd="@dimen/cast_mini_controller_control_button_margin" />
+
+        <ImageView
+            android:id="@+id/button_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/button_2"
+            android:layout_toStartOf="@+id/button_2"
+            android:layout_marginRight="@dimen/cast_mini_controller_control_button_margin"
+            android:layout_marginEnd="@dimen/cast_mini_controller_control_button_margin" />
+
+        <ImageView
+            android:id="@+id/button_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/title_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_above="@+id/center"
+            android:layout_toLeftOf="@+id/button_0"
+            android:layout_toStartOf="@+id/button_0"
+            android:layout_toRightOf="@+id/icon_view"
+            android:layout_toEndOf="@+id/icon_view"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_marginBottom="-3dp"
+            android:textAppearance="?attr/castTitleTextAppearance" />
+
+        <TextView
+            android:id="@+id/subtitle_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/center"
+            android:layout_alignLeft="@+id/title_view"
+            android:layout_alignStart="@+id/title_view"
+            android:layout_alignRight="@+id/title_view"
+            android:layout_alignEnd="@+id/title_view"
+            android:layout_toLeftOf="@+id/button_0"
+            android:layout_toStartOf="@+id/button_0"
+            android:layout_toRightOf="@+id/icon_view"
+            android:layout_toEndOf="@+id/icon_view"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="?attr/castSubtitleTextAppearance" />
+
+        <!-- Note: The ProgressBar is deliberately laid out in absolute LTR -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:layout_alignParentBottom="true"
+            android:progressDrawable="@drawable/cast_mini_controller_progress_drawable"
+            android:layoutDirection="ltr" />
+    </RelativeLayout>
+
+</LinearLayout>

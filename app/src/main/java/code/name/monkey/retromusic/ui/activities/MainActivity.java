@@ -99,7 +99,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity implements Shared
 
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance().getLastPage());
-            //setCurrentFragment(new LibraryFragment(), false, LibraryFragment.TAG);
         } else {
             restoreCurrentFragment();
         }

@@ -2,6 +2,8 @@ package code.name.monkey.appthemehelper.common.views;
 
 import android.content.Context;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.text.Layout;
 import android.util.AttributeSet;
 
 import code.name.monkey.appthemehelper.ThemeStore;

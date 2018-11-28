@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#AA000000"
+            android:columnCount="2"
+            android:gravity="top"
+            android:rowCount="3">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/app_widget_small_image_size"
+        android:layout_height="@dimen/app_widget_small_image_size"
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription"/>
+
+    <LinearLayout
+        android:id="@+id/media_actions"
+        android:layout_gravity="fill_horizontal"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/button_prev"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_widget_small_button_height"
+            android:layout_weight="1"
+            android:background="@drawable/widget_selector"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_skip_previous_white_24dp"
+            tools:tint="@color/ate_secondary_text_dark"/>
+
+        <ImageButton
+            android:id="@+id/button_toggle_play_pause"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_widget_small_button_height"
+            android:layout_weight="1"
+            android:background="@drawable/widget_selector"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_play_arrow_white_24dp"
+            tools:tint="@color/ate_secondary_text_dark"/>
+
+        <ImageButton
+            android:id="@+id/button_next"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_widget_small_button_height"
+            android:layout_weight="1"
+            android:background="@drawable/widget_selector"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_skip_next_white_24dp"
+            tools:tint="@color/ate_secondary_text_dark"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill_horizontal"
+        android:background="@color/md_divider_white"
+        tools:ignore="Orientation"/>
+
+    <LinearLayout
+        android:id="@+id/media_titles"
+        android:layout_columnSpan="2"
+        android:layout_gravity="fill"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/ate_primary_text_dark"
+            tools:text="Title"/>
+
+        <TextView
+            android:id="@+id/text_separator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/ate_secondary_text_dark"
+            tools:ignore="HardcodedText"
+            tools:text="•"/>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@color/ate_secondary_text_dark"
+            tools:text="Text"/>
+
+    </LinearLayout>
+
+</GridLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_play_next"
+        android:icon="@drawable/ic_redo_white_24dp"
+        android:title="@string/action_play_next"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_add_to_current_playing"
+        android:icon="@drawable/ic_library_add_white_24dp"
+        android:title="@string/action_add_to_playing_queue"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_add_to_playlist"
+        android:icon="@drawable/ic_playlist_add_white_24dp"
+        android:title="@string/action_add_to_playlist"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@id/action_multi_select_adapter_check_all"
+        android:icon="@drawable/ic_select_all_white_24dp"
+        android:title="@string/select_all"
+        app:showAsAction="ifRoom" />
+</menu>

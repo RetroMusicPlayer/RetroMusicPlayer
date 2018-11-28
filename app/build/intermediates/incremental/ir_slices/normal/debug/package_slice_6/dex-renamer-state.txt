@@ -1,0 +1,4 @@
+#Fri Nov 23 21:00:28 IST 2018
+base.0=/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/transforms/dexMerger/normal/debug/6
+path.0=classes.dex
+renamed.0=classes.dex

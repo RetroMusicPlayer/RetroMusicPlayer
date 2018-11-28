@@ -1,0 +1,36 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:visible="false"
+        android:id="@+id/action_shuffle_playlist"
+        android:icon="@drawable/ic_shuffle_white_24dp"
+        android:title="@string/action_shuffle_playlist"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_play"
+        android:title="@string/action_play"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_play_next"
+        android:title="@string/action_play_next"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_to_current_playing"
+        android:title="@string/action_add_to_playing_queue"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_add_to_playlist"
+        android:title="@string/action_add_to_playlist" />
+    <item
+        android:id="@+id/action_rename_playlist"
+        android:title="@string/action_rename"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_delete_playlist"
+        android:title="@string/action_delete"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_save_playlist"
+        android:title="@string/save_playlist_title"
+        app:showAsAction="never" />
+</menu>

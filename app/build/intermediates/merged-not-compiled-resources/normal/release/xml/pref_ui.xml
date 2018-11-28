@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_grid_style_list_titles"
+        android:entryValues="@array/pref_grid_style_list_values"
+        android:key="album_grid_style"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_album_grid_style"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_grid_style_list_titles"
+        android:entryValues="@array/pref_grid_style_list_values"
+        android:key="artist_grid_style"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_artist_grid_style"
+        app:iconSpaceReserved="false" />
+
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_home_grid_style_list_titles"
+        android:entryValues="@array/pref_home_grid_style_list_values"
+        android:key="home_artist_grid_style"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_home_artist_grid_style"
+        app:iconSpaceReserved="false" />
+<!--
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_album_details_style_titles"
+        android:entryValues="@array/pref_album_details_style_values"
+        android:key="album_detail_style"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_album_detail_style"
+        app:iconSpaceReserved="false" />-->
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        android:defaultValue="0"
+        android:entries="@array/pref_tab_text_mode_titles"
+        android:entryValues="@array/pref_tab_text_mode_values"
+        android:key="tab_text_mode"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_tab_text_mode"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_home_banner"
+        android:summary="@string/pref_summary_home_banner"
+        android:title="@string/pref_title_home_banner"
+        app:iconSpaceReserved="false" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="toggle_genre"
+        android:summary="@string/pref_summary_genre_toggle"
+        android:title="@string/pref_title_genre_toggle"
+        app:iconSpaceReserved="false" />
+
+</androidx.preference.PreferenceScreen>

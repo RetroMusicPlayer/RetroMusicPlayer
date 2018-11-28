@@ -89,7 +89,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_shuffle_white_24dp"
+            app:setText="@string/action_shuffle_all"
+            app:setIcon="@drawable/ic_shuffle_white_24dp"
             app:showTitle="true" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

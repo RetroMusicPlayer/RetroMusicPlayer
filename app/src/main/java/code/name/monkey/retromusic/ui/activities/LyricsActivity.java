@@ -93,7 +93,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         setTaskDescriptionColorAuto();
         setNavigationbarColorAuto();
 
-        fitSystemWindowsLayout.setFit(true);
+        fitSystemWindowsLayout.setFit(!PreferenceUtil.getInstance().getFullScreenMode());
 
         setSupportActionBar(bottomAppBar);
         Objects.requireNonNull(bottomAppBar.getNavigationIcon())

@@ -5,7 +5,7 @@ buildscript {
         supportLibVersion = '1.0.0'
         firebase = "11.8.0"
         retrofit = "2.3.0"
-        butterKnife = "9.0.0-SNAPSHOT"
+        butterKnife = "9.0.0-rc1"
         materialDialog = "0.9.6.0"
     }
     repositories {

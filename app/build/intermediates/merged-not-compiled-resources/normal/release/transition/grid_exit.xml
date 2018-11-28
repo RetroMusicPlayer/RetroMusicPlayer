@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+    <changeBounds>
+        <arcMotion />
+    </changeBounds>
+    <changeTransform />
+    <changeClipBounds />
+    <changeImageTransform />
+    <targets>
+        <target android:excludeId="@android:id/statusBarBackground" />
+        <target android:excludeId="@android:id/navigationBarBackground" />
+        <target android:excludeId="@id/toolbar" />
+    </targets>
+</transitionSet>

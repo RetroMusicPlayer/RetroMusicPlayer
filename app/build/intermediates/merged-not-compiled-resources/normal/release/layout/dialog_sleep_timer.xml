@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            android:id="@+id/title"
+            style="@style/SubTitleTextAppearance"
+            android:padding="12dp"
+            android:text="@string/action_sleep_timer" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?dividerColor" />
+
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            android:id="@+id/timer_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:textAppearance="?android:textAppearanceLarge" />
+
+
+        <SeekBar
+            android:id="@+id/seek_arc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="3dp"
+            android:paddingTop="12dp"
+            android:progressDrawable="@drawable/color_progress_seek"
+            android:splitTrack="false"
+            android:thumb="@drawable/switch_thumb_material"
+            tools:progress="20" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_cancel"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel"
+                app:strokeColor="@color/md_grey_700"
+                app:strokeWidth="1dp"
+                tools:visibility="visible" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/action_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:gravity="center"
+                android:text="@string/action_set"
+                android:textColor="@color/md_white_1000"
+                app:backgroundTint="@color/md_pink_A400" />
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

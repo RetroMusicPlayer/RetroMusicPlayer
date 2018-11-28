@@ -555,4 +555,7 @@
 
     <string name="suggestion_songs">Suggestions</string>
     <string name="fit">Fit</string>
+    <string name="pref_now_playing_screen_title">Click or Slide</string>
+    <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
+    <string name="clear_playing_queue">Clear queue</string>
 </resources>

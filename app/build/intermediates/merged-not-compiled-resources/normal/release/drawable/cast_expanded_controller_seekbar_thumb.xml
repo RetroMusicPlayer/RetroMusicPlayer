@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          android:constantSize="true">
+    <item android:state_enabled="false" android:state_pressed="true"
+          android:drawable="@android:color/transparent" />
+    <item android:state_enabled="false"
+          android:drawable="@android:color/transparent" />
+    <item android:state_pressed="true">
+        <bitmap android:src="@drawable/cast_abc_scrubber_control_to_pressed_mtrl_005"
+                android:gravity="center"/>
+    </item>
+    <item>
+        <bitmap android:src="@drawable/cast_abc_scrubber_control_to_pressed_mtrl_000"
+                android:gravity="center"/>
+    </item>
+</selector>
+

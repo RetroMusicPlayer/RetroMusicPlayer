@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.ui.activities;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.internal.MDTintHelper;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.SkuDetails;
@@ -57,31 +59,25 @@ import static code.name.monkey.retromusic.Constants.PAYPAL_ME_URL;
 public class SupportDevelopmentActivity extends AbsBaseActivity implements BillingProcessor.IBillingHandler {
     public static final String TAG = SupportDevelopmentActivity.class.getSimpleName();
     private static final int DONATION_PRODUCT_IDS = R.array.donation_ids;
+    private static final int TEZ_REQUEST_CODE = 123;
+    private static final String GOOGLE_TEZ_PACKAGE_NAME = "com.google.android.apps.nbu.paisa.user";
 
     @BindView(R.id.progress)
     ProgressBar progressBar;
-
     @BindView(R.id.progress_container)
     View progressContainer;
-
     @BindView(R.id.list)
     RecyclerView recyclerView;
-
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
-
     @BindView(R.id.root)
     ViewGroup viewGroup;
-
     @BindView(R.id.title)
     TextView title;
-
     @BindView(R.id.donate)
     MaterialButton materialButton;
-
     private BillingProcessor billingProcessor;
     private AsyncTask skuDetailsLoadAsyncTask;
 
@@ -192,6 +188,10 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
         if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
         }
+        if (requestCode == TEZ_REQUEST_CODE) {
+            // Process based on the data in response.
+            Log.d("result", data.getStringExtra("Status"));
+        }
     }
 
     @Override
@@ -203,6 +203,33 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
             skuDetailsLoadAsyncTask.cancel(true);
         }
         super.onDestroy();
+    }
+
+    @OnClick(R.id.google_pay)
+    void googlePay() {
+
+        new MaterialDialog.Builder(this)
+                .title(R.string.support_development)
+                .input("Enter amount", null, false, (dialog, input) -> {
+                    Uri uri = new Uri.Builder()
+                            .scheme("upi")
+                            .authority("pay")
+                            .appendQueryParameter("pa", "hemanth.vaniraviram@okaxis")
+                            .appendQueryParameter("pn", "Retro Music")
+                            .appendQueryParameter("mc", "1234")
+                            .appendQueryParameter("tr", "7406201323")
+                            .appendQueryParameter("tn", "Retro Music Player Donation")
+                            .appendQueryParameter("am", "10.01")
+                            .appendQueryParameter("cu", "INR")
+                            .build();
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(uri);
+                    intent.setPackage(GOOGLE_TEZ_PACKAGE_NAME);
+                    startActivityForResult(intent, TEZ_REQUEST_CODE);
+                }).positiveText("Donate")
+                .onPositive((dialog, which) -> {
+
+                }).show();
     }
 
     private static class SkuDetailsLoadAsyncTask extends AsyncTask<Void, Void, List<SkuDetails>> {

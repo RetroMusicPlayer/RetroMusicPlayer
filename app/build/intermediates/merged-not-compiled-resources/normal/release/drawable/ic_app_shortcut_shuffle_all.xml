@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="176dp"
+    android:height="176dp"
+    android:viewportHeight="176"
+    android:viewportWidth="176">
+
+    <group
+        android:pivotX="88"
+        android:pivotY="88"
+        android:scaleX="0.916"
+        android:scaleY="0.916"
+        android:translateX="-8"
+        android:translateY="-8">
+        <path
+            android:name="ic_app_shortcut_shuffle_ic"
+            android:fillColor="#000"
+            android:pathData="M110.15,103l-7,7,15.65,15.65L108.5,136H136V108.5l-10.2,10.2L110.15,103M108.5,56l10.2,10.2L56,128.95l7,7L125.8,73.3,136,83.5V56M89,81.85,63.05,56l-7,7L81.85,88.9Z" />
+    </group>
+</vector>

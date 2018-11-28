@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/title"
+        fontPath="@string/circular_std_black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:padding="6dp"
+        android:text="@string/what_do_you_want_to_share"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        tools:ignore="MissingPrefix" />
+
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        android:id="@+id/option_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/the_audio_file"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        android:id="@+id/option_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/the_audio_file"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+</LinearLayout>

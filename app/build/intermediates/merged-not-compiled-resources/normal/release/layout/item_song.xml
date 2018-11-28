@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="?rectSelector"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:paddingEnd="0dp"
+        android:paddingLeft="16dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/image_text"
+            android:layout_width="36dp"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:maxLines="1"
+            android:minHeight="40dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/title_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingEnd="0dp"
+            android:paddingStart="6dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:textColor="?android:attr/textColorPrimary"
+                tools:text="Song title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:padding="4dp"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="22:00" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <code.name.monkey.retromusic.views.IconImageView
+        android:id="@+id/menu"
+        style="@style/OverFlowButton"
+        android:layout_margin="0dp"
+        android:layout_weight="0"
+        android:background="@null"
+        android:rotation="90"
+        tools:visibility="visible" />
+</LinearLayout>

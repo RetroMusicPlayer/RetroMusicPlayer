@@ -1,0 +1,1 @@
+[{"outputType":{"type":"INSTANT_RUN_MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":10253,"versionName":"2.2.100_1120","enabled":true,"outputFile":"app-normal-release.apk","fullName":"normalRelease","baseName":"normal-release"},"path":"AndroidManifest.xml","properties":{"packageId":"code.name.monkey.retromusic","split":"","minSdkVersion":"21"}}]

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<code.name.monkey.appthemehelper.common.views.ATECheckBox android:id="@android:id/checkbox"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:layout_margin="6dp"
+    android:clickable="false"
+    android:focusable="false" />

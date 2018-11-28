@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,48 +7,102 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/image_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="8dp"
-                app:cardUseCompatPadding="true">
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax"
-                    tools:ignore="ContentDescription" />
-            </com.google.android.material.card.MaterialCardView>
-
-            <androidx.core.widget.NestedScrollView
-                android:id="@+id/container"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:elevation="@dimen/card_elevation"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:background="@android:color/transparent"
+                app:contentScrim="@android:color/transparent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:statusBarScrim="@color/md_black_1000"
+                app:titleEnabled="false">
 
+                <FrameLayout
+                    android:id="@+id/image_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="182dp"
+                    app:layout_collapseMode="pin">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        app:layout_collapseMode="parallax"
+                        tools:background="@color/md_red_400"
+                        tools:ignore="ContentDescription" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="pin"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <include layout="@layout/status_bar" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="UnusedAttribute">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/searchIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_search_white_24dp"
+                            app:tint="@color/md_white_1000" />
+
+                        <TextView
+                            style="@style/BigTitleTextAppearanceToolbar"
+                            android:text="@string/app_name"
+                            android:textColor="@color/md_white_1000" />
+
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginEnd="16dp"
+                            app:civ_border="false" />
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            app:behavior_overlapTop="24dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="12dp">
 
                 <LinearLayout
                     android:id="@+id/content_container"
@@ -60,57 +113,12 @@
                     android:focusableInTouchMode="true"
                     android:orientation="vertical">
 
-                    <com.google.android.material.appbar.AppBarLayout
-                        android:id="@+id/app_bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elevation="0dp"
-                        android:background="@android:color/transparent"
-                        app:elevation="0dp">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="8dp"
-                            app:cardUseCompatPadding="true"
-                            app:layout_scrollFlags="scroll|enterAlways">
-
-                            <androidx.appcompat.widget.Toolbar
-                                android:id="@+id/toolbar"
-                                style="@style/Toolbar48"
-                                android:layout_gravity="center_vertical"
-                                app:layout_collapseMode="pin"
-                                tools:ignore="UnusedAttribute">
-
-                                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                                    android:id="@+id/search_view"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:hint="@string/search_hint"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
-
-
-                                <code.name.monkey.retromusic.views.CircularImageView
-                                    android:id="@+id/user_image"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:layout_gravity="end|center_vertical"
-                                    android:layout_marginEnd="16dp"
-                                    app:civ_border="false" />
-                            </androidx.appcompat.widget.Toolbar>
-                        </com.google.android.material.card.MaterialCardView>
-                    </com.google.android.material.appbar.AppBarLayout>
-
                     <include layout="@layout/abs_playlists" />
 
                     <include layout="@layout/home_section_content" />
 
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
