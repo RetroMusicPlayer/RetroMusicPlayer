@@ -80,10 +80,10 @@ public abstract class AbsBaseActivity extends AbsThemeActivity {
 
     }
 
-    @Override
+   /* @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+    }*/
 
     @Nullable
     protected String[] getPermissionsToRequest() {
