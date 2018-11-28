@@ -224,7 +224,7 @@ public class MusicUtil {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     final int id = cursor.getInt(0);
-                    Song song = SongLoader.getSong(activity, id).blockingFirst();
+                    Song song = SongLoader.Companion.getSong(activity, id).blockingFirst();
                     MusicPlayerRemote.removeFromQueue(song);
                     cursor.moveToNext();
                 }

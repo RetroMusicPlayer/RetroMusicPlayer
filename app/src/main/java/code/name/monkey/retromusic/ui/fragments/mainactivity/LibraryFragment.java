@@ -363,7 +363,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 CreatePlaylistDialog.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
                 return true;
             case R.id.action_shuffle_all:
-                MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(getContext())
+                MusicPlayerRemote.openAndShuffleQueue(SongLoader.Companion.getAllSongs(getContext())
                         .blockingFirst(), true);
                 return true;
             case R.id.action_equalizer:

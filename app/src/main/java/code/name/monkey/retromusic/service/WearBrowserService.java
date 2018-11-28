@@ -238,7 +238,7 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_SONG:
-                            List<Song> songList = SongLoader.getAllSongs(mContext).blockingFirst();
+                            List<Song> songList = SongLoader.Companion.getAllSongs(mContext).blockingFirst();
                             for (Song song : songList) {
                                 fillMediaItems(mediaItems,
                                         String.valueOf(song.id),
@@ -326,7 +326,7 @@ public class WearBrowserService extends MediaBrowserService {
             long songId = Long.parseLong(mediaId);
             setSessionActive();
             ArrayList<Song> songs = new ArrayList<>();
-            songs.add(SongLoader.getSong(mContext, Integer.parseInt(mediaId)).blockingFirst());
+            songs.add(SongLoader.Companion.getSong(mContext, Integer.parseInt(mediaId)).blockingFirst());
             MusicPlayerRemote.openQueue(songs, 0, true);
         }
 

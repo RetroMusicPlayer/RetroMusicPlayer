@@ -4,8 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Environment;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.webkit.MimeTypeMap;
 
 import java.io.BufferedReader;
@@ -22,6 +20,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.loaders.SortedCursor;
 import code.name.monkey.retromusic.model.Song;
@@ -47,7 +47,7 @@ public final class FileUtil {
     @NonNull
     public static Observable<ArrayList<Song>> matchFilesWithMediaStore(@NonNull Context context,
                                                                        @Nullable List<File> files) {
-        return SongLoader.getSongs(makeSongCursor(context, files));
+        return SongLoader.Companion.getSongs(makeSongCursor(context, files));
     }
 
     public static String safeGetCanonicalPath(File file) {
@@ -75,8 +75,7 @@ public final class FileUtil {
             }
         }
 
-        Cursor songCursor = SongLoader
-                .makeSongCursor(context, selection, selection == null ? null : paths);
+        Cursor songCursor = SongLoader.Companion.makeSongCursor(context, selection, selection == null ? null : paths);
 
         return songCursor == null ? null
                 : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);

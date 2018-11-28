@@ -14,7 +14,7 @@ public class SearchLoader {
         ArrayList<Object> results = new ArrayList<>();
         return Observable.create(e -> {
             if (!TextUtils.isEmpty(query)) {
-                SongLoader.getSongs(context, query)
+                SongLoader.Companion.getSongs(context, query)
                         .subscribe(songs -> {
                             if (!songs.isEmpty()) {
                                 results.add(context.getResources().getString(R.string.songs));

@@ -17,12 +17,12 @@ public class ArtistSongLoader extends SongLoader {
 
     @NonNull
     public static Observable<ArrayList<Song>> getArtistSongList(@NonNull final Context context, final int artistId) {
-        return getSongs(makeArtistSongCursor(context, artistId));
+        return Companion.getSongs(makeArtistSongCursor(context, artistId));
     }
 
     public static Cursor makeArtistSongCursor(@NonNull final Context context, final int artistId) {
         try {
-            return makeSongCursor(
+            return Companion.makeSongCursor(
                     context,
                     MediaStore.Audio.AudioColumns.ARTIST_ID + "=?",
                     new String[]{

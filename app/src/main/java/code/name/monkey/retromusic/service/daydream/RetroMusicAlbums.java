@@ -92,7 +92,7 @@ public class RetroMusicAlbums extends DreamService {
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap((Function<ArrayList<Song>, ObservableSource<ArrayList<Song>>>) songs -> Observable.create(e -> {
                     if (songs.isEmpty()) {
-                        e.onNext(SongLoader.getAllSongs(RetroMusicAlbums.this).blockingFirst());
+                        e.onNext(SongLoader.Companion.getAllSongs(RetroMusicAlbums.this).blockingFirst());
                     } else {
                         e.onNext(songs);
                     }

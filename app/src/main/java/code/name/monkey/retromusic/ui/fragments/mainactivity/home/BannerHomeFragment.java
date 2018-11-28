@@ -341,7 +341,7 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         if (activity != null) {
             switch (view.getId()) {
                 case R.id.action_shuffle:
-                    MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(activity).blockingFirst(), true);
+                    MusicPlayerRemote.openAndShuffleQueue(SongLoader.Companion.getAllSongs(activity).blockingFirst(), true);
                     break;
                 case R.id.last_added:
                     NavigationUtil.goToPlaylistNew(activity, new LastAddedPlaylist(activity));

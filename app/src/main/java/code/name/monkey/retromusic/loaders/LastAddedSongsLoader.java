@@ -21,13 +21,13 @@ public class LastAddedSongsLoader {
 
     @NonNull
     public static Observable<ArrayList<Song>> getLastAddedSongs(@NonNull Context context) {
-        return SongLoader.getSongs(makeLastAddedCursor(context));
+        return SongLoader.Companion.getSongs(makeLastAddedCursor(context));
     }
 
     public static Cursor makeLastAddedCursor(@NonNull final Context context) {
         long cutoff = PreferenceUtil.getInstance().getLastAddedCutoff();
 
-        return SongLoader.makeSongCursor(
+        return SongLoader.Companion.makeSongCursor(
                 context,
                 MediaStore.Audio.Media.DATE_ADDED + ">?",
                 new String[]{String.valueOf(cutoff)},

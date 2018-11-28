@@ -48,17 +48,17 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<ArrayList<Song>> getAllSongs() {
-        return SongLoader.getAllSongs(context);
+        return SongLoader.Companion.getAllSongs(context);
     }
 
     @Override
     public Observable<ArrayList<Song>> getSuggestionSongs() {
-        return SongLoader.suggestSongs(context);
+        return SongLoader.Companion.suggestSongs(context);
     }
 
     @Override
     public Observable<Song> getSong(int id) {
-        return SongLoader.getSong(context, id);
+        return SongLoader.Companion.getSong(context, id);
     }
 
     @Override

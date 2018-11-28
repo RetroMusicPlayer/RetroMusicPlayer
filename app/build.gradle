@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -52,7 +53,9 @@ android {
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
         }
-
+        sans {
+            dimension "default"
+        }
     }
 
     packagingOptions {
@@ -146,5 +149,9 @@ dependencies {
     implementation 'com.github.hannesa2:AndroidSlidingUpPanel:3.5.0'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+}
+repositories {
+    mavenCentral()
 }
