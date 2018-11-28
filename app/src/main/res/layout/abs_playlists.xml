@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         style="@style/SubTitleTextAppearance"
         android:text="@string/for_you" />
 
@@ -120,7 +120,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
 
     <View
         android:layout_width="match_parent"

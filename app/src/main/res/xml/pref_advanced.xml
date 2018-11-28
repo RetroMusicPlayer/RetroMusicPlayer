@@ -4,8 +4,6 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Advanced">
 
 
-
-
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="keep_screen_on"
@@ -20,6 +18,13 @@
             android:summary="@string/pref_keep_pause_on_zero_volume_summary"
             android:title="@string/pref_keep_pause_on_zero_volume_title"
             app:iconSpaceReserved="false" />
+
+      <!--  <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="now_playing_screen"
+            android:summary="@string/pref_now_playing_screen_summary"
+            android:title="@string/pref_now_playing_screen_title"
+            app:iconSpaceReserved="false" />-->
 
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>

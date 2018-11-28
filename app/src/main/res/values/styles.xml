@@ -60,7 +60,8 @@
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="fontPath">@string/circular_std_black</item>
@@ -71,12 +72,11 @@
     <style name="SubTitleTextAppearance">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="android:layout_gravity">start|center_vertical</item>
-        <item name="android:paddingStart">12dp</item>
-        <item name="android:paddingEnd">12dp</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="fontPath">@string/circular_std_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="android:paddingBottom">8dp</item>
     </style>
 
     <style name="BottomSheetTextAppearance">

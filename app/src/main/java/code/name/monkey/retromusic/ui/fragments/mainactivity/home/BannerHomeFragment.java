@@ -21,7 +21,6 @@ import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,7 +30,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
@@ -67,8 +65,6 @@ import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 public class BannerHomeFragment extends AbsMainActivityFragment implements MainActivityFragmentCallbacks, HomeContract.HomeView {
 
     public static final String TAG = "BannerHomeFragment";
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
 
     @BindView(R.id.image)
     @Nullable
@@ -109,6 +105,9 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
 
     @BindView(R.id.container)
     View container;
+
+    @BindView(R.id.content_container)
+    View contentContainer;
 
     @BindView(R.id.suggestion_songs)
     RecyclerView suggestionsSongs;
@@ -204,10 +203,11 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(PreferenceUtil.getInstance().toggleHomeBanner() ? R.layout.fragment_banner_home : R.layout.fragment_home,
+        View view = inflater.inflate(PreferenceUtil.getInstance().isHomeBanner() ? R.layout.fragment_banner_home : R.layout.fragment_home,
                 container, false);
         unbinder = ButterKnife.bind(this, view);
-        setStatusbarColorAuto(view);
+        if (!PreferenceUtil.getInstance().isHomeBanner())
+            setStatusbarColorAuto(view);
         return view;
     }
 
@@ -217,20 +217,18 @@ public class BannerHomeFragment extends AbsMainActivityFragment implements MainA
         setupToolbar();
         loadImageFromStorage(userImage);
         homePresenter.subscribe();
-        getTimeOfTheDay(PreferenceUtil.getInstance().toggleHomeBanner());
+        getTimeOfTheDay(PreferenceUtil.getInstance().isHomeBanner());
     }
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        int primaryColor = ThemeStore.primaryColor(getContext());
-        TintHelper.setTintAuto(container, primaryColor, true);
         userImage.setOnClickListener(v -> showMainMenu());
+        contentContainer.setBackgroundColor(ThemeStore.primaryColor(getMainActivity()));
+    }
 
-        getActivity().setTitle(null);
-        getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(RetroUtil.getTintedDrawable(getMainActivity(), R.drawable.ic_menu_white_24dp, ThemeStore.textColorPrimary(getMainActivity())));
-        toolbar.setOnClickListener(v -> NavigationUtil.goToSearch(getMainActivity()));
-        toolbar.setNavigationOnClickListener(v -> showMainMenu());
+    @OnClick(R.id.searchIcon)
+    void search() {
+        NavigationUtil.goToSearch(getMainActivity());
     }
 
     @Override

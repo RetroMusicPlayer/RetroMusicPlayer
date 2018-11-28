@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 
 public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implements Toolbar.OnMenuItemClickListener, PaletteColorHolder {
     public static final String TAG = AbsPlayerFragment.class.getSimpleName();
@@ -208,9 +209,17 @@ public abstract class AbsPlayerFragment extends AbsMusicServiceFragment implemen
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.setBackgroundColor(ThemeStore.primaryColor(getActivity()));
+
         if (PreferenceUtil.getInstance().getFullScreenMode()) {
             if (view.findViewById(R.id.status_bar) != null)
                 view.findViewById(R.id.status_bar).setVisibility(View.GONE);
+        }
+    }
+
+    public void setSafeArea(View safeArea) {
+        FitSystemWindowsLayout layout = safeArea.findViewById(R.id.safeArea);
+        if (layout != null) {
+            layout.setFit(!PreferenceUtil.getInstance().getFullScreenMode());
         }
     }
 

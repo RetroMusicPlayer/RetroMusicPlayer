@@ -128,6 +128,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="10dp"
+        app:setIcon="@drawable/ic_shuffle_white_24dp"
+        app:setText="@string/action_shuffle_all"
         app:showTitle="false"
         app:shuffleBackgroundColor="@color/md_black_1000" />
 

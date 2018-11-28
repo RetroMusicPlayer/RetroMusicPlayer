@@ -146,14 +146,12 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setUpSubFragments();
         setUpPlayerToolbar();
     }
 
     private void setUpSubFragments() {
-        playbackControlsFragment = (BlurPlaybackControlsFragment) getChildFragmentManager()
-                .findFragmentById(R.id.playback_controls_fragment);
+        playbackControlsFragment = (BlurPlaybackControlsFragment) getChildFragmentManager().findFragmentById(R.id.playback_controls_fragment);
 
         PlayerAlbumCoverFragment playerAlbumCoverFragment =
                 (PlayerAlbumCoverFragment) getChildFragmentManager()
@@ -269,6 +267,5 @@ public class BlurPlayerFragment extends AbsPlayerFragment implements PlayerAlbum
             recyclerView.stopScroll();
             layoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
         }
-
     }
 }

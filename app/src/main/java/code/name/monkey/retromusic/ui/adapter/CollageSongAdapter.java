@@ -74,6 +74,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
                 R.id.image_7, R.id.image_8, R.id.image_9})
         @Nullable
         List<ImageView> imageViews;
+
         @BindView(R.id.image_1)
         TextView view;
 
@@ -82,6 +83,9 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
             ButterKnife.bind(this, itemView);
             Context context = itemView.getContext();
             int color = ThemeStore.accentColor(context);
+            view.setOnClickListener(v -> {
+                MusicPlayerRemote.openQueue(dataSet, 0, true);
+            });
             view.setBackgroundColor(color);
             view.setTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)));
         }

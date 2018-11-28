@@ -28,8 +28,9 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/image_1"
                         android:layout_width="match_parent"
-                        android:id="@+id/image_1"  android:layout_height="match_parent"
+                        android:layout_height="match_parent"
                         android:background="@color/md_red_400"
                         android:padding="8dp"
                         android:text="New music mix"

@@ -30,13 +30,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingStart="12dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:paddingEnd="12dp"
+            android:orientation="vertical">
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title_welcome"
                 style="@style/SubTitleTextAppearance"
-                android:paddingBottom="0dp" />
+                android:padding="0dp"  />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
@@ -44,8 +47,6 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.75"
                 android:ellipsize="end"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
                 android:text="@string/lets_play_something" />
 
         </LinearLayout>

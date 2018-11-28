@@ -46,6 +46,7 @@ public class NowPayingActivity extends AbsMusicServiceActivity implements AbsPla
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLightNavigationBar(true);
+        setDrawUnderNavigationBar();
         setupWindowTransition();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_now_playng);
@@ -65,19 +66,30 @@ public class NowPayingActivity extends AbsMusicServiceActivity implements AbsPla
     @Override
     public void onPaletteColorChanged() {
         int paletteColor = playerFragment.getPaletteColor();
+        boolean isColorLight = ColorUtil.isColorLight(paletteColor);
+        super.setTaskDescriptionColor(paletteColor);
         if ((currentNowPlayingScreen == NowPlayingScreen.FLAT || currentNowPlayingScreen == NowPlayingScreen.NORMAL) && PreferenceUtil.getInstance().getAdaptiveColor()) {
-            setLightNavigationBar(true);
-            setLightStatusbar(ColorUtil.isColorLight(paletteColor));
+            setLightNavigationBar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
+            setLightStatusbar(isColorLight);
         } else if (currentNowPlayingScreen == NowPlayingScreen.COLOR) {
-            setLightStatusbar(ColorUtil.isColorLight(paletteColor));
+            setLightStatusbar(isColorLight);
+            setLightNavigationBar(isColorLight);
+            setNavigationbarColor(paletteColor);
         } else if (currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
             setLightStatusbar(false);
+            setLightNavigationBar(false);
         } else if (currentNowPlayingScreen == NowPlayingScreen.CARD || currentNowPlayingScreen == NowPlayingScreen.FULL) {
-            setNavigationbarColor(Color.TRANSPARENT);
+            setLightStatusbar(false);
+            setLightNavigationBar(false);
+        } else if (currentNowPlayingScreen == NowPlayingScreen.FIT) {
+            setNavigationbarColor(ThemeStore.primaryColor(this));
+            setLightNavigationBar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
+            setLightStatusbar(false);
         } else {
+            boolean isTheme = isOneOfTheseThemes() && ColorUtil.isColorLight(ThemeStore.primaryColor(this));
             setStatusbarColor(Color.TRANSPARENT);
-            setLightStatusbar(isOneOfTheseThemes() && ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
-            setNavigationbarColorAuto();
+            setLightStatusbar(isTheme);
+            setLightNavigationBar(isTheme);
         }
     }
 
@@ -155,6 +167,8 @@ public class NowPayingActivity extends AbsMusicServiceActivity implements AbsPla
 
         playerFragment = (AbsPlayerFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.player_fragment_container);
+
+
     }
 
     @Override

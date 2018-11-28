@@ -18,7 +18,10 @@
         android:layout_height="match_parent"
         android:background="#50000000" />
 
-
+    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
+        android:id="@+id/safeArea"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,5 +49,5 @@
 
             </FrameLayout>
         </LinearLayout>
-
+    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
 </FrameLayout>

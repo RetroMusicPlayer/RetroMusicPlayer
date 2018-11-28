@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_fragment_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,14 +16,13 @@
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
             android:layout_weight="1"
@@ -34,7 +32,7 @@
             <LinearLayout
                 android:id="@+id/content_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -47,41 +45,30 @@
                     android:elevation="0dp"
                     app:elevation="0dp">
 
-                    <com.google.android.material.card.MaterialCardView
+                    <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardUseCompatPadding="true"
-                        app:layout_scrollFlags="scroll|enterAlways">
+                        tools:ignore="UnusedAttribute">
 
-                        <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/toolbar"
-                            style="@style/Toolbar48"
-                            android:layout_gravity="center_vertical"
-                            app:layout_collapseMode="pin"
-                            tools:ignore="UnusedAttribute">
+                        <code.name.monkey.retromusic.views.IconImageView
+                            android:id="@+id/searchIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            app:srcCompat="@drawable/ic_search_white_24dp" />
 
-                            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                                android:id="@+id/search_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:hint="@string/search_hint"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead" />
+                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                            style="@style/BigTitleTextAppearanceToolbar"
+                            android:text="@string/app_name" />
 
-
-                            <code.name.monkey.retromusic.views.CircularImageView
-                                android:id="@+id/user_image"
-                                android:layout_width="32dp"
-                                android:layout_height="32dp"
-                                android:layout_gravity="end|center_vertical"
-                                android:layout_marginEnd="16dp"
-                                app:civ_border="false" />
-                        </androidx.appcompat.widget.Toolbar>
-                    </com.google.android.material.card.MaterialCardView>
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_marginEnd="16dp"
+                            app:civ_border="false" />
+                    </FrameLayout>
                 </com.google.android.material.appbar.AppBarLayout>
 
                 <include layout="@layout/abs_playlists" />

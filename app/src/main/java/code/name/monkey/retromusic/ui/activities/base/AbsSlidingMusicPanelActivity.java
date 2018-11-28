@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.PathInterpolator;
-import android.widget.FrameLayout;
 
 import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +20,6 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
 import androidx.annotation.FloatRange;
 import androidx.annotation.LayoutRes;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,10 +43,10 @@ import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment;
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment;
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted;
-import code.name.monkey.retromusic.views.FitSystemWindowsLayout;
 
 public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivity implements
         SlidingUpPanelLayout.PanelSlideListener, PlayerFragment.Callbacks {
@@ -227,61 +225,6 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
 
     }
 
-    protected void applyInsets() {
-        ViewCompat.setOnApplyWindowInsetsListener(coordinatorLayout, (v, insets) -> {
-            //Bottom navigation view
-            ViewGroup.MarginLayoutParams bParams = (ViewGroup.MarginLayoutParams) bottomNavigationView.getLayoutParams();
-            if (!PreferenceUtil.getInstance().getFullScreenMode())
-                bParams.bottomMargin = insets.getSystemWindowInsetBottom();
-            bParams.rightMargin = insets.getSystemWindowInsetRight();
-            bParams.leftMargin = insets.getSystemWindowInsetLeft();
-
-
-            //For now playing screen
-            FrameLayout layout = findViewById(R.id.safeArea);
-            if (layout != null) {
-                ViewGroup.MarginLayoutParams fParams = (ViewGroup.MarginLayoutParams) layout.getLayoutParams();
-                if (!PreferenceUtil.getInstance().getFullScreenMode()) {
-                    fParams.topMargin = insets.getSystemWindowInsetTop();
-                    fParams.bottomMargin = insets.getSystemWindowInsetBottom();
-                }
-                fParams.leftMargin = insets.getSystemWindowInsetLeft();
-                fParams.rightMargin = insets.getSystemWindowInsetRight();
-            }
-
-            //Mini player
-            FitSystemWindowsLayout miniPlayer = (FitSystemWindowsLayout) miniPlayerFragment.getView();
-            if (miniPlayer != null) {
-                ViewGroup.MarginLayoutParams mParams = (ViewGroup.MarginLayoutParams) miniPlayer.getLayoutParams();
-                mParams.bottomMargin = insets.getSystemWindowInsetBottom();//RetroUtil.checkNavigationBarHeight() ? 0 : getResources().getDimensionPixelSize(R.dimen.mini_player_height);
-                mParams.leftMargin = insets.getSystemWindowInsetLeft();
-                mParams.rightMargin = insets.getSystemWindowInsetRight();
-            }
-
-            //For Library, Folder, Home etc
-            ViewGroup viewGroup = findViewById(R.id.content_container);
-            if (viewGroup != null) {
-                ViewGroup.MarginLayoutParams mParams = (ViewGroup.MarginLayoutParams) viewGroup.getLayoutParams();
-                mParams.leftMargin = insets.getSystemWindowInsetLeft();
-                mParams.rightMargin = insets.getSystemWindowInsetRight();
-                mParams.bottomMargin = insets.getSystemWindowInsetBottom();
-            }
-
-            FrameLayout frameLayout = findViewById(R.id.sliding_panel);
-            if (frameLayout != null) {
-                ViewGroup.MarginLayoutParams mParams = (ViewGroup.MarginLayoutParams) frameLayout.getLayoutParams();
-                mParams.leftMargin = insets.getSystemWindowInsetLeft();
-                mParams.rightMargin = insets.getSystemWindowInsetRight();
-                if (!PreferenceUtil.getInstance().getFullScreenMode()) {
-                    mParams.bottomMargin = insets.getSystemWindowInsetBottom();
-                }
-            }
-
-            coordinatorLayout.setOnApplyWindowInsetsListener(null);
-            return insets.consumeSystemWindowInsets();
-        });
-    }
-
     public SlidingUpPanelLayout.PanelState getPanelState() {
         return slidingUpPanelLayout == null ? null : slidingUpPanelLayout.getPanelState();
     }
@@ -313,7 +256,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
         // restore values
         super.setLightStatusbar(lightStatusbar);
         super.setTaskDescriptionColor(taskColor);
-        super.setNavigationbarColor(ThemeStore.primaryColor(this));
+        super.setNavigationbarColor(navigationbarColor);
         super.setLightNavigationBar(lightNavigationBar);
 
 
@@ -325,12 +268,11 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
     public void onPanelExpanded(View panel) {
         int playerFragmentColor = playerFragment.getPaletteColor();
         super.setTaskDescriptionColor(playerFragmentColor);
-        super.setLightStatusbar(lightStatusbar);
 
         playerFragment.setMenuVisibility(true);
         playerFragment.setUserVisibleHint(true);
         playerFragment.onShow();
-
+        onPaletteColorChanged();
     }
 
     private void setMiniPlayerAlphaProgress(@FloatRange(from = 0, to = 1) float progress) {
@@ -395,6 +337,7 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
 
         //noinspection ConstantConditions
         miniPlayerFragment.getView().setOnClickListener(v -> expandPanel());
+
     }
 
     @Override
@@ -437,7 +380,8 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
                 super.setLightStatusbar(false);
                 super.setLightNavigationBar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
             } else if (currentNowPlayingScreen == NowPlayingScreen.FIT) {
-                super.setNavigationbarColor(Color.TRANSPARENT);
+                super.setNavigationbarColor(ThemeStore.primaryColor(this));
+                super.setLightNavigationBar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)));
                 super.setLightStatusbar(false);
             } else {
                 boolean isTheme = isOneOfTheseThemes() && ColorUtil.isColorLight(ThemeStore.primaryColor(this));
@@ -476,10 +420,18 @@ public abstract class AbsSlidingMusicPanelActivity extends AbsMusicServiceActivi
 
     @Override
     public void setNavigationbarColor(int color) {
-        this.navigationbarColor = color;
-        if (getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+        navigationbarColor = color;
+        if (getPanelState() == PanelState.COLLAPSED) {
             if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
             super.setNavigationbarColor(color);
+        }
+    }
+
+    @Override
+    public void setTaskDescriptionColor(int color) {
+        taskColor = color;
+        if (getPanelState() == PanelState.COLLAPSED) {
+            super.setTaskDescriptionColor(color);
         }
     }
 

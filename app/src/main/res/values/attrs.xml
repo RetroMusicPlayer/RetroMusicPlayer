@@ -3,6 +3,8 @@
     <declare-styleable name="CollapsingFAB">
         <attr name="shuffleBackgroundColor" format="color" />
         <attr name="showTitle" format="boolean" />
+        <attr name="setIcon" format="reference" />
+        <attr name="setText" format="string" />
     </declare-styleable>
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />

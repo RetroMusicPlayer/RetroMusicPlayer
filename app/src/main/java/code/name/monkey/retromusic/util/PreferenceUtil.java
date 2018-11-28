@@ -112,6 +112,7 @@ public final class PreferenceUtil {
     private static final String LAST_KNOWN_LYRICS_TYPE = "LAST_KNOWN_LYRICS_TYPE";
     private static final String ALBUM_DETAIL_STYLE = "album_detail_style";
     private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
+    private static final String NOW_PLAYING_SCREEN = "now_playing_screen";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
@@ -157,7 +158,7 @@ public final class PreferenceUtil {
         return mPreferences.getString(ARTIST_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
     }
 
-    public final boolean toggleHomeBanner() {
+    public final boolean isHomeBanner() {
         return mPreferences.getBoolean(TOGGLE_HOME_BANNER, false);
     }
 
@@ -807,4 +808,7 @@ public final class PreferenceUtil {
         return layoutRes;
     }
 
+    public boolean isClickOrSave() {
+        return mPreferences.getBoolean(NOW_PLAYING_SCREEN, false);
+    }
 }

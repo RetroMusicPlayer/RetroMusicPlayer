@@ -52,9 +52,34 @@
             android:background="?dividerColor" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+
+    <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/empty"
+        android:textColor="?android:textColorSecondary"
+        android:visibility="gone" />
+
+    <code.name.monkey.retromusic.views.CollapsingFAB
+        android:id="@+id/clear_queue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:setIcon="@drawable/ic_clear_all_black_24dp"
+        app:showTitle="true"
+        app:setText="@string/clear_playing_queue"
+        app:shuffleBackgroundColor="@color/md_deep_purple_A700" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
