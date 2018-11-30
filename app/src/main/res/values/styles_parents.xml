@@ -26,6 +26,7 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
 
+        <item name="android:fontFamily">@font/font</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -67,6 +68,7 @@
 
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
+        <item name="android:fontFamily">@font/font</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -109,12 +111,14 @@
 
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
+        <item name="android:fontFamily">@font/font</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
         <item name="colorPrimary">@color/md_deep_purple_A400</item>
         <item name="android:colorPrimary">?colorPrimary</item>
         <item name="android:windowBackground">?colorPrimary</item>
+        <item name="android:fontFamily">@font/font</item>
     </style>
 
 
