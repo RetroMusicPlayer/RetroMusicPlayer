@@ -89,7 +89,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
 
 
         genre = getIntent().getParcelableExtra(EXTRA_GENRE_ID);
-        presenter = new GenreDetailsPresenter(this, genre.id);
+        presenter = new GenreDetailsPresenter(this, genre.getId());
 
         setUpToolBar();
         setupRecyclerView();
@@ -99,13 +99,13 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.action_shuffle:
-                MusicPlayerRemote.openAndShuffleQueue(songAdapter.getDataSet(), true);
+                MusicPlayerRemote.INSTANCE.openAndShuffleQueue(songAdapter.getDataSet(), true);
                 break;
         }
     }
 
     private void setUpToolBar() {
-        title.setText(genre.name);
+        title.setText(genre.getName());
         title.setTextColor(ThemeStore.textColorPrimary(this));
 
         int primaryColor = ThemeStore.primaryColor(this);
@@ -162,7 +162,7 @@ public class GenreDetailsActivity extends AbsSlidingMusicPanelActivity implement
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
-        return GenreMenuHelper.handleMenuClick(this, genre, item);
+        return GenreMenuHelper.INSTANCE.handleMenuClick(this, genre, item);
     }
 
     private void setupRecyclerView() {

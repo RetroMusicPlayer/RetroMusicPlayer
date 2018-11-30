@@ -16,6 +16,8 @@ import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.RetroUtil;
 
+import static code.name.monkey.retromusic.Constants.CAST_SERVER_PORT;
+
 public class CastHelper {
 
     public static void startCasting(CastSession castSession, Song song) {
@@ -23,22 +25,22 @@ public class CastHelper {
         String ipAddress = RetroUtil.getIPAddress(true);
         URL baseUrl;
         try {
-            baseUrl = new URL("https", ipAddress, Constants.CAST_SERVER_PORT, "");
+            baseUrl = new URL("https", ipAddress,CAST_SERVER_PORT, "");
         } catch (MalformedURLException e) {
             e.printStackTrace();
             return;
         }
 
-        String songUrl = baseUrl.toString() + "/song?id=" + song.id;
-        String albumArtUrl = baseUrl.toString() + "/albumart?id=" + song.albumId;
+        String songUrl = baseUrl.toString() + "/song?id=" + song.getId();
+        String albumArtUrl = baseUrl.toString() + "/albumart?id=" + song.getAlbumId();
 
 
         MediaMetadata musicMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MUSIC_TRACK);
 
-        musicMetadata.putString(MediaMetadata.KEY_TITLE, song.title);
-        musicMetadata.putString(MediaMetadata.KEY_ARTIST, song.artistName);
-        musicMetadata.putString(MediaMetadata.KEY_ALBUM_TITLE, song.albumName);
-        musicMetadata.putInt(MediaMetadata.KEY_TRACK_NUMBER, song.trackNumber);
+        musicMetadata.putString(MediaMetadata.KEY_TITLE, song.getTitle());
+        musicMetadata.putString(MediaMetadata.KEY_ARTIST, song.getArtistName());
+        musicMetadata.putString(MediaMetadata.KEY_ALBUM_TITLE, song.getAlbumName());
+        musicMetadata.putInt(MediaMetadata.KEY_TRACK_NUMBER, song.getTrackNumber());
         musicMetadata.addImage(new WebImage(Uri.parse(albumArtUrl)));
 
         try {
@@ -46,7 +48,7 @@ public class CastHelper {
                     .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
                     .setContentType("audio/mpeg")
                     .setMetadata(musicMetadata)
-                    .setStreamDuration(song.duration)
+                    .setStreamDuration(song.getDuration())
                     .build();
             RemoteMediaClient remoteMediaClient = castSession.getRemoteMediaClient();
             remoteMediaClient.load(mediaInfo, new MediaLoadOptions.Builder()

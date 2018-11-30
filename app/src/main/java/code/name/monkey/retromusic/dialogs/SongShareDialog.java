@@ -51,7 +51,7 @@ public class SongShareDialog extends RoundedBottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         final Song song = getArguments().getParcelable("song");
 
-        audioFile.setText(getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName));
+        audioFile.setText(getString(R.string.currently_listening_to_x_by_x, song.getTitle(), song.getArtistName()));
         audioFile.setTextColor(ThemeStore.textColorSecondary(getContext()));
         audioText.setTextColor(ThemeStore.textColorSecondary(getContext()));
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
@@ -60,7 +60,7 @@ public class SongShareDialog extends RoundedBottomSheetDialogFragment {
     @OnClick({R.id.option_2, R.id.option_1})
     void onClick(View view) {
         final Song song = getArguments().getParcelable("song");
-        final String currentlyListening = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName);
+        final String currentlyListening = getString(R.string.currently_listening_to_x_by_x, song.getTitle(), song.getArtistName());
         switch (view.getId()) {
             case R.id.option_1:
                 startActivity(Intent.createChooser(

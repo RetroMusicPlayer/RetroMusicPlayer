@@ -81,8 +81,8 @@ public class MainOptionsBottomSheetDialogFragment extends RoundedBottomSheetDial
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_main_options, container, false);
         ButterKnife.bind(this, layout);
-        layout.findViewById(R.id.action_buy_pro).setVisibility(RetroApplication.isProVersion() ? View.GONE : View.VISIBLE);
-        ButterKnife.apply(materialButtons, textColor, ThemeStore.textColorPrimary(getContext()));
+        layout.findViewById(R.id.action_buy_pro).setVisibility(RetroApplication.Companion.isProVersion() ? View.GONE : View.VISIBLE);
+        //ButterKnife.apply(materialButtons, textColor, ThemeStore.textColorPrimary(getContext()));
         return layout;
     }
 
@@ -157,7 +157,7 @@ public class MainOptionsBottomSheetDialogFragment extends RoundedBottomSheetDial
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance().getProfileImage(),USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userImageBottom::setImageBitmap,

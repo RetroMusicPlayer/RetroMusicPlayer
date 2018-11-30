@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
-import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
@@ -57,27 +56,27 @@ public class PlayingNotificationImpl extends PlayingNotification {
         final RemoteViews notificationLayoutBig = new RemoteViews(service.getPackageName(),
                 R.layout.notification_big);
 
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
+        if (TextUtils.isEmpty(song.getTitle()) && TextUtils.isEmpty(song.getArtistName())) {
             notificationLayout.setViewVisibility(R.id.media_titles, View.INVISIBLE);
         } else {
             notificationLayout.setViewVisibility(R.id.media_titles, View.VISIBLE);
-            notificationLayout.setTextViewText(R.id.title, song.title);
-            notificationLayout.setTextViewText(R.id.text, song.artistName);
+            notificationLayout.setTextViewText(R.id.title, song.getTitle());
+            notificationLayout.setTextViewText(R.id.text, song.getArtistName());
         }
 
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName) && TextUtils
-                .isEmpty(song.albumName)) {
+        if (TextUtils.isEmpty(song.getTitle()) && TextUtils.isEmpty(song.getArtistName()) && TextUtils
+                .isEmpty(song.getAlbumName())) {
             notificationLayoutBig.setViewVisibility(R.id.media_titles, View.INVISIBLE);
         } else {
             notificationLayoutBig.setViewVisibility(R.id.media_titles, View.VISIBLE);
-            notificationLayoutBig.setTextViewText(R.id.title, song.title);
-            notificationLayoutBig.setTextViewText(R.id.text, song.artistName);
-            notificationLayoutBig.setTextViewText(R.id.text2, song.albumName);
+            notificationLayoutBig.setTextViewText(R.id.title, song.getTitle());
+            notificationLayoutBig.setTextViewText(R.id.text, song.getArtistName());
+            notificationLayoutBig.setTextViewText(R.id.text2, song.getAlbumName());
         }
 
         linkButtons(notificationLayout, notificationLayoutBig);
 
-        Intent action = new Intent(service, NowPayingActivity.class);
+        Intent action = new Intent(service, MainActivity.class);
         action.putExtra("expand", true);
         action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

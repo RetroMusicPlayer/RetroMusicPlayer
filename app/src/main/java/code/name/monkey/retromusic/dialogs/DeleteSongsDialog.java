@@ -82,7 +82,7 @@ public class DeleteSongsDialog extends RoundedBottomSheetDialogFragment {
             if (songs.size() > 1) {
                 content = Html.fromHtml(getString(R.string.delete_x_songs, songs.size()));
             } else {
-                content = Html.fromHtml(getString(R.string.delete_song_x, songs.get(0).title));
+                content = Html.fromHtml(getString(R.string.delete_song_x, songs.get(0).getTitle()));
             }
             this.title.setText(content);
         }

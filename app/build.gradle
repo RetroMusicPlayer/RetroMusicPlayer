@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -122,7 +123,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
 
     implementation "com.jakewharton:butterknife:$butterKnife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+    kapt "com.jakewharton:butterknife-compiler:$butterKnife"
 
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"

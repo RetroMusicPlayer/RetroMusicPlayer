@@ -151,7 +151,7 @@ public class MainSettingsFragment extends Fragment {
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(
-                        new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                        new File(PreferenceUtil.getInstance().getProfileImage(),USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userImageBottom::setImageBitmap,

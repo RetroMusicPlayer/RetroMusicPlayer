@@ -5,10 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +16,10 @@ import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
@@ -83,12 +83,12 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
 
     private boolean isNowPlayingThemes(NowPlayingScreen nowPlayingScreen) {
 
-        if (nowPlayingScreen.equals(NowPlayingScreen.BLUR_CARD)) {
+        /*if (nowPlayingScreen.equals(NowPlayingScreen.BLUR_CARD)) {
             PreferenceUtil.getInstance().resetCarouselEffect();
             PreferenceUtil.getInstance().resetCircularAlbumArt();
-        }
+        }*/
 
-        return (nowPlayingScreen.equals(NowPlayingScreen.FULL) ||
+       /* return (nowPlayingScreen.equals(NowPlayingScreen.FULL) ||
                 nowPlayingScreen.equals(NowPlayingScreen.CARD) ||
                 nowPlayingScreen.equals(NowPlayingScreen.PLAIN) ||
                 nowPlayingScreen.equals(NowPlayingScreen.BLUR) ||
@@ -97,7 +97,8 @@ public class NowPlayingScreenPreferenceDialog extends DialogFragment implements
                 nowPlayingScreen.equals(NowPlayingScreen.TINY) ||
                 nowPlayingScreen.equals(NowPlayingScreen.BLUR_CARD)||
                 nowPlayingScreen.equals(NowPlayingScreen.ADAPTIVE))
-                && !RetroApplication.isProVersion();
+                && !RetroApplication.Companion.isProVersion();*/
+        return !RetroApplication.Companion.isProVersion();
     }
 
     @Override

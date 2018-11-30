@@ -38,9 +38,9 @@ public class SystemUtils {
 
     public static int getNavigationBarHeight() {
         int result = 0;
-        int resourceId = RetroApplication.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        int resourceId = RetroApplication.Companion.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = RetroApplication.getContext().getResources().getDimensionPixelSize(resourceId);
+            result = RetroApplication.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }

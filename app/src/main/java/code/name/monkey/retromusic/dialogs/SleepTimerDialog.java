@@ -168,7 +168,7 @@ public class SleepTimerDialog extends RoundedBottomSheetDialogFragment {
 
     private Intent makeTimerIntent() {
         return new Intent(getActivity(), MusicService.class)
-                .setAction(ACTION_QUIT);
+                .setAction( ACTION_QUIT);
     }
 
     private class TimerUpdater extends CountDownTimer {

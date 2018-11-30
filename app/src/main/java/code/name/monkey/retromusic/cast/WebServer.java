@@ -13,13 +13,15 @@ import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.util.RetroUtil;
 import fi.iki.elonen.NanoHTTPD;
 
+import static code.name.monkey.retromusic.Constants.CAST_SERVER_PORT;
+
 public class WebServer extends NanoHTTPD {
 
     private Context context;
     private Uri songUri, albumArtUri;
 
     public WebServer(Context context) {
-        super(Constants.CAST_SERVER_PORT);
+        super(CAST_SERVER_PORT);
         this.context = context;
     }
 

@@ -37,7 +37,7 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
     @NonNull
     @Override
     public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
-        return TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context);
+        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getRecentlyPlayedTracks(context);
     }
 
     @Override

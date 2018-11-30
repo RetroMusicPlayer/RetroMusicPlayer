@@ -82,7 +82,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private static final String PATH = "path";
     private static final String CRUMBS = "crumbs";
-    private static final int LOADER_ID = LoaderIds.FOLDERS_FRAGMENT;
+    private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
     @BindView(R.id.coordinator_layout)
     View coordinatorLayout;
 
@@ -370,13 +370,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 File file1 = (File) extra;
                 int startIndex = -1;
                 for (int i = 0; i < songs.size(); i++) {
-                    if (file1.getPath().equals(songs.get(i).data)) { // path is already canonical here
+                    if (file1.getPath().equals(songs.get(i).getData())) { // path is already canonical here
                         startIndex = i;
                         break;
                     }
                 }
                 if (startIndex > -1) {
-                    MusicPlayerRemote.openQueue(songs, startIndex, true);
+                    MusicPlayerRemote.INSTANCE.openQueue(songs, startIndex, true);
                 } else {
                     final File finalFile = file1;
                     Snackbar.make(coordinatorLayout, Html.fromHtml(
@@ -397,7 +397,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public void onMultipleItemAction(MenuItem item, ArrayList<File> files) {
         final int itemId = item.getItemId();
         new ListSongsAsyncTask(getActivity(), null,
-                (songs, extra) -> SongsMenuHelper.handleMenuClick(getActivity(), songs, itemId))
+                (songs, extra) -> SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId))
                 .execute(new ListSongsAsyncTask.LoadingInfo(files, AUDIO_FILE_FILTER, getFileComparator()));
     }
 
@@ -425,7 +425,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_delete_from_device:
                         new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> {
                             if (!songs.isEmpty()) {
-                                SongsMenuHelper.handleMenuClick(getActivity(), songs, itemId);
+                                SongsMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs, itemId);
                             }
                         }).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
                                 getFileComparator()));
@@ -458,7 +458,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_details:
                     case R.id.action_set_as_ringtone:
                     case R.id.action_delete_from_device:
-                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper.handleMenuClick(getActivity(), songs.get(0), itemId)).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER, getFileComparator()));
+                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs.get(0), itemId)).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER, getFileComparator()));
                         return true;
                     case R.id.action_scan:
                         new ListPathsAsyncTask(getActivity(), this::scanPaths).execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));

@@ -75,7 +75,7 @@ public class AddToPlaylistDialog extends RoundedBottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         title.setTextColor(ThemeStore.textColorPrimary(getContext()));
         final ArrayList<Song> songs = getArguments().getParcelableArrayList("songs");
-        final ArrayList<Playlist> playlists = PlaylistLoader.getAllPlaylists(getActivity()).blockingFirst();
+        final ArrayList<Playlist> playlists = PlaylistLoader.INSTANCE.getAllPlaylists(getActivity()).blockingFirst();
         final AddToPlaylist playlistAdapter = new AddToPlaylist(getActivity(), playlists, R.layout.item_playlist, songs, getDialog());
         playlist.setLayoutManager(new LinearLayoutManager(getContext()));
         playlist.setItemAnimator(new DefaultItemAnimator());

@@ -16,13 +16,12 @@ import com.bumptech.glide.request.target.SimpleTarget;
 
 import androidx.core.app.NotificationCompat;
 import androidx.media.app.NotificationCompat.MediaStyle;
-import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.service.MusicService;
-import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
+import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 
@@ -43,14 +42,14 @@ public class PlayingNotificationImpl24 extends PlayingNotification {
         final int playButtonResId = isPlaying ? R.drawable.ic_pause_white_24dp :
                 R.drawable.ic_play_arrow_white_24dp;
 
-        Intent action = new Intent(service, NowPayingActivity.class);
+        Intent action = new Intent(service, MainActivity.class);
         action.putExtra("expand", true);
         action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         final PendingIntent clickIntent = PendingIntent
                 .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT);
 
         final ComponentName serviceName = new ComponentName(service, MusicService.class);
-        Intent intent = new Intent(Constants.ACTION_QUIT);
+        Intent intent = new Intent(ACTION_QUIT);
         intent.setComponent(serviceName);
         final PendingIntent deleteIntent = PendingIntent.getService(service, 0, intent, 0);
 
@@ -106,9 +105,9 @@ public class PlayingNotificationImpl24 extends PlayingNotification {
                                 .setLargeIcon(bitmap)
                                 .setContentIntent(clickIntent)
                                 .setDeleteIntent(deleteIntent)
-                                .setContentTitle(Html.fromHtml("<b>" + song.title + "</b>"))
-                                .setContentText(song.artistName)
-                                .setSubText(Html.fromHtml("<b>" + song.albumName + "</b>"))
+                                .setContentTitle(Html.fromHtml("<b>" + song.getTitle() + "</b>"))
+                                .setContentText(song.getArtistName())
+                                .setSubText(Html.fromHtml("<b>" + song.getAlbumName() + "</b>"))
                                 .setOngoing(isPlaying)
                                 .setShowWhen(false)
                                 .addAction(previousAction)

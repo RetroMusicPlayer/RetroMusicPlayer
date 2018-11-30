@@ -162,17 +162,17 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
                     Song song = queue.get(i);
                     ContentValues values = new ContentValues(4);
 
-                    values.put(BaseColumns._ID, song.id);
-                    values.put(AudioColumns.TITLE, song.title);
-                    values.put(AudioColumns.TRACK, song.trackNumber);
-                    values.put(AudioColumns.YEAR, song.year);
-                    values.put(AudioColumns.DURATION, song.duration);
-                    values.put(AudioColumns.DATA, song.data);
-                    values.put(AudioColumns.DATE_MODIFIED, song.dateModified);
-                    values.put(AudioColumns.ALBUM_ID, song.albumId);
-                    values.put(AudioColumns.ALBUM, song.albumName);
-                    values.put(AudioColumns.ARTIST_ID, song.artistId);
-                    values.put(AudioColumns.ARTIST, song.artistName);
+                    values.put(BaseColumns._ID, song.getId());
+                    values.put(AudioColumns.TITLE, song.getTitle());
+                    values.put(AudioColumns.TRACK, song.getTrackNumber());
+                    values.put(AudioColumns.YEAR, song.getYear());
+                    values.put(AudioColumns.DURATION, song.getDuration());
+                    values.put(AudioColumns.DATA, song.getData());
+                    values.put(AudioColumns.DATE_MODIFIED, song.getDateModified());
+                    values.put(AudioColumns.ALBUM_ID, song.getAlbumId());
+                    values.put(AudioColumns.ALBUM, song.getAlbumName());
+                    values.put(AudioColumns.ARTIST_ID, song.getArtistId());
+                    values.put(AudioColumns.ARTIST, song.getArtistName());
 
                     database.insert(tableName, null, values);
                 }
@@ -198,6 +198,6 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     private Observable<ArrayList<Song>> getQueue(@NonNull final String tableName) {
         Cursor cursor = getReadableDatabase().query(tableName, null,
                 null, null, null, null, null);
-        return SongLoader.Companion.getSongs(cursor);
+        return SongLoader.INSTANCE.getSongs(cursor);
     }
 }

@@ -31,7 +31,7 @@ public class ArtistGlideRequest {
 
     private static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Artist artist,
                                                          boolean noCustomImage, boolean forceDownload) {
-        boolean hasCustomImage = CustomArtistImageUtil.getInstance(RetroApplication.getInstance())
+        boolean hasCustomImage = CustomArtistImageUtil.getInstance(RetroApplication.Companion.getInstance())
                 .hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {
             return requestManager.load(new ArtistImage(artist.getName(), forceDownload));
@@ -41,7 +41,7 @@ public class ArtistGlideRequest {
     }
 
     private static Key createSignature(Artist artist) {
-        return ArtistSignatureUtil.getInstance(RetroApplication.getInstance())
+        return ArtistSignatureUtil.getInstance(RetroApplication.Companion.getInstance())
                 .getArtistSignature(artist.getName());
     }
 

@@ -46,7 +46,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/last_added"
+            android:id="@+id/lastAdded"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -73,7 +73,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/top_played"
+            android:id="@+id/topPlayed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -100,7 +100,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/action_shuffle"
+            android:id="@+id/actionShuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"

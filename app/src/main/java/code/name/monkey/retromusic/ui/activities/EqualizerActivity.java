@@ -66,7 +66,7 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
     private CompoundButton.OnCheckedChangeListener mListener = (buttonView, isChecked) -> {
         switch (buttonView.getId()) {
             case R.id.equalizer:
-                EqualizerHelper.getInstance().getEqualizer().setEnabled(isChecked);
+                EqualizerHelper.Companion.getInstance().getEqualizer().setEnabled(isChecked);
                 TransitionManager.beginDelayedTransition(mContent);
                 mContent.setVisibility(isChecked ? View.VISIBLE : View.GONE);
                 break;
@@ -78,12 +78,12 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
             if (fromUser) {
                 if (seekBar == mBassBoostStrength) {
                     mBassBoost.setEnabled(progress > 0);
-                    EqualizerHelper.getInstance().setBassBoostStrength(progress);
-                    EqualizerHelper.getInstance().setBassBoostEnabled(progress > 0);
+                    EqualizerHelper.Companion.getInstance().setBassBoostStrength(progress);
+                    EqualizerHelper.Companion.getInstance().setBassBoostEnabled(progress > 0);
                 } else if (seekBar == mVirtualizerStrength) {
                     mVirtualizer.setEnabled(progress > 0);
-                    EqualizerHelper.getInstance().setVirtualizerEnabled(progress > 0);
-                    EqualizerHelper.getInstance().setVirtualizerStrength(progress);
+                    EqualizerHelper.Companion.getInstance().setVirtualizerEnabled(progress > 0);
+                    EqualizerHelper.Companion.getInstance().setVirtualizerStrength(progress);
                 }
             }
         }
@@ -113,17 +113,17 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
 
         setupToolbar();
 
-        mEnable.setChecked(EqualizerHelper.getInstance().getEqualizer().getEnabled());
+        mEnable.setChecked(EqualizerHelper.Companion.getInstance().getEqualizer().getEnabled());
         mEnable.setOnCheckedChangeListener(mListener);
 
         mPresetsNamesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         mPresets.setAdapter(mPresetsNamesAdapter);
         mPresets.setOnItemSelectedListener(this);
 
-        mBassBoostStrength.setProgress(EqualizerHelper.getInstance().getBassBoostStrength());
+        mBassBoostStrength.setProgress(EqualizerHelper.Companion.getInstance().getBassBoostStrength());
         mBassBoostStrength.setOnSeekBarChangeListener(mSeekBarChangeListener);
 
-        mVirtualizerStrength.setProgress(EqualizerHelper.getInstance().getVirtualizerStrength());
+        mVirtualizerStrength.setProgress(EqualizerHelper.Companion.getInstance().getVirtualizerStrength());
         mVirtualizerStrength.setOnSeekBarChangeListener(mSeekBarChangeListener);
 
         setupUI();
@@ -153,13 +153,13 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
     private void addPresets() {
         mPresetsNamesAdapter.clear();
         mPresetsNamesAdapter.add("Custom");
-        for (int j = 0; j < EqualizerHelper.getInstance().getEqualizer().getNumberOfPresets(); j++) {
+        for (int j = 0; j < EqualizerHelper.Companion.getInstance().getEqualizer().getNumberOfPresets(); j++) {
             mPresetsNamesAdapter
-                    .add(EqualizerHelper.getInstance().getEqualizer().getPresetName((short) j));
+                    .add(EqualizerHelper.Companion.getInstance().getEqualizer().getPresetName((short) j));
             mPresetsNamesAdapter.notifyDataSetChanged();
         }
         mPresets
-                .setSelection((int) EqualizerHelper.getInstance().getEqualizer().getCurrentPreset() + 1);
+                .setSelection((int) EqualizerHelper.Companion.getInstance().getEqualizer().getCurrentPreset() + 1);
     }
 
     private void setupUI() {
@@ -167,7 +167,7 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
         short bands;
         try {
             // get number of supported bands
-            bands = (short) EqualizerHelper.getInstance().getNumberOfBands();
+            bands = (short) EqualizerHelper.Companion.getInstance().getNumberOfBands();
 
             // for each of the supported bands, we will set up a slider from -10dB to 10dB boost/attenuation,
             // as well as text labels to assist the user
@@ -177,26 +177,26 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
                 View view = LayoutInflater.from(this).inflate(R.layout.retro_seekbar, mLinearLayout, false);
                 TextView freqTextView = view.findViewById(R.id.hurtz);
                 freqTextView.setText(
-                        String.format("%d Hz", EqualizerHelper.getInstance().getCenterFreq((int) band) / 1000));
+                        String.format("%d Hz", EqualizerHelper.Companion.getInstance().getCenterFreq((int) band) / 1000));
 
                 TextView minDbTextView = view.findViewById(R.id.minus_db);
                 minDbTextView
-                        .setText(String.format("%d dB", EqualizerHelper.getInstance().getBandLevelLow() / 100));
+                        .setText(String.format("%d dB", EqualizerHelper.Companion.getInstance().getBandLevelLow() / 100));
 
                 TextView maxDbTextView = view.findViewById(R.id.plus_db);
                 maxDbTextView.setText(
-                        String.format("%d dB", EqualizerHelper.getInstance().getBandLevelHigh() / 100));
+                        String.format("%d dB", EqualizerHelper.Companion.getInstance().getBandLevelHigh() / 100));
 
                 SeekBar bar = view.findViewById(R.id.seekbar);
-                bar.setMax(EqualizerHelper.getInstance().getBandLevelHigh() - EqualizerHelper.getInstance()
+                bar.setMax(EqualizerHelper.Companion.getInstance().getBandLevelHigh() - EqualizerHelper.Companion.getInstance()
                         .getBandLevelLow());
                 bar.setProgress(
-                        EqualizerHelper.getInstance().getBandLevel((int) band) - EqualizerHelper.getInstance()
+                        EqualizerHelper.Companion.getInstance().getBandLevel((int) band) - EqualizerHelper.Companion.getInstance()
                                 .getBandLevelLow());
                 bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        EqualizerHelper.getInstance().setBandLevel((int) band,
-                                (int) (progress + EqualizerHelper.getInstance().getBandLevelLow()));
+                        EqualizerHelper.Companion.getInstance().setBandLevel((int) band,
+                                (int) (progress + EqualizerHelper.Companion.getInstance().getBandLevelLow()));
                         if (fromUser) {
                             mPresets.setSelection(0);
                         }
@@ -221,7 +221,7 @@ public class EqualizerActivity extends AbsMusicServiceActivity implements
         if (position == 0) {
             return;
         }
-        EqualizerHelper.getInstance().getEqualizer().usePreset((short) (position - 1));
+        EqualizerHelper.Companion.getInstance().getEqualizer().usePreset((short) (position - 1));
         setupUI();
     }
 

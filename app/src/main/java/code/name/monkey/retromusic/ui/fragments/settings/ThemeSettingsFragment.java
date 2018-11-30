@@ -3,19 +3,18 @@ package code.name.monkey.retromusic.ui.fragments.settings;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.core.content.ContextCompat;
-import androidx.preference.Preference;
-import androidx.preference.TwoStatePreference;
 
 import com.afollestad.materialdialogs.color.ColorChooserDialog;
 
+import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
+import androidx.preference.TwoStatePreference;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.RetroApplication;
-import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
@@ -49,7 +48,7 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
         generalTheme.setOnPreferenceChangeListener((preference, newValue) -> {
             String theme = (String) newValue;
 
-            if (theme.equals("color") && !RetroApplication.isProVersion()) {
+            if (theme.equals("color") && !RetroApplication.Companion.isProVersion()) {
                 primaryColorPref.setVisible(false);
                 showProToastAndNavigate("Color theme");
                 return false;
@@ -81,7 +80,6 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 getActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue(theme));
-                new DynamicShortcutManager(getActivity()).updateDynamicShortcuts();
             }
             getActivity().recreate();
             //invalidateSettings();
@@ -111,9 +109,6 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
             colorAppShortcuts.setOnPreferenceChangeListener((preference, newValue) -> {
                 // Save preference
                 PreferenceUtil.getInstance().setColoredAppShortcuts((Boolean) newValue);
-                // Update app shortcuts
-                new DynamicShortcutManager(getActivity()).updateDynamicShortcuts();
-
                 return true;
             });
         }

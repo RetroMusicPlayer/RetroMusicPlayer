@@ -8,7 +8,7 @@
     android:transitionName="@string/transition_album_art">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/artist_image"
+        android:id="@+id/artistImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
@@ -16,12 +16,14 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:id="@+id/appBarLayout"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/collapsingToolbarLayout"
             android:background="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
@@ -40,7 +42,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
@@ -91,7 +93,7 @@
                     android:paddingEnd="16dp">
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/title"
+                        android:id="@+id/albumTitle"
                         fontPath="@string/circular_std_black"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -100,7 +102,7 @@
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                        android:id="@+id/text"
+                        android:id="@+id/albumText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -130,7 +132,7 @@
         android:background="@drawable/shadow_down_strong" />
 
     <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/action_shuffle_all"
+        android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

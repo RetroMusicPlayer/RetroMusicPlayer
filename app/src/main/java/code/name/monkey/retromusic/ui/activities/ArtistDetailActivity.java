@@ -238,8 +238,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     private void setupRecyclerView() {
         albumAdapter = new HorizontalAlbumAdapter(this, new ArrayList<>(), false, null);
         albumRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        albumRecyclerView
-                .setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
+        albumRecyclerView.setLayoutManager(new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false));
         albumRecyclerView.setAdapter(albumAdapter);
 
         songAdapter = new SimpleSongAdapter(this, new ArrayList<>(), R.layout.item_song);
@@ -313,7 +312,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
                 .getReadableDurationString(MusicUtil.getTotalDuration(this, artist.getSongs()))));
 
         songAdapter.swapDataSet(artist.getSongs());
-        albumAdapter.swapDataSet(artist.albums);
+        albumAdapter.swapDataSet(artist.getAlbums());
     }
 
     private void loadBiography() {
@@ -398,7 +397,7 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.action_shuffle_all:
-                MusicPlayerRemote.openAndShuffleQueue(getArtist().getSongs(), true);
+                MusicPlayerRemote.INSTANCE.openAndShuffleQueue(getArtist().getSongs(), true);
                 break;
         }
     }
@@ -415,10 +414,10 @@ public class ArtistDetailActivity extends AbsSlidingMusicPanelActivity implement
                 super.onBackPressed();
                 return true;
             case R.id.action_play_next:
-                MusicPlayerRemote.playNext(songs);
+                MusicPlayerRemote.INSTANCE.playNext(songs);
                 return true;
             case R.id.action_add_to_current_playing:
-                MusicPlayerRemote.enqueue(songs);
+                MusicPlayerRemote.INSTANCE.enqueue(songs);
                 return true;
             case R.id.action_add_to_playlist:
                 AddToPlaylistDialog.create(songs).show(getSupportFragmentManager(), "ADD_PLAYLIST");

@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.activities;
 
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,7 +25,6 @@ import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -65,9 +63,6 @@ public class SettingsActivity extends AbsBaseActivity implements ColorChooserDia
                 break;
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            new DynamicShortcutManager(this).updateDynamicShortcuts();
-        }
         recreate();
     }
 

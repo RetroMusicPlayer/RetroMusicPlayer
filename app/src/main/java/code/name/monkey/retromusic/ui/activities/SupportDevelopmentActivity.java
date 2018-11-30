@@ -115,7 +115,7 @@ public class SupportDevelopmentActivity extends AbsBaseActivity implements Billi
 
     @OnClick(R.id.donate)
     void donate() {
-        RetroUtil.openUrl(this, PAYPAL_ME_URL);
+        RetroUtil.openUrl(this,PAYPAL_ME_URL);
     }
 
     @Override

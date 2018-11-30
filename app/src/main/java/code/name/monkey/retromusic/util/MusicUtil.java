@@ -65,7 +65,7 @@ public class MusicUtil {
                     .putExtra(Intent.EXTRA_STREAM,
                             FileProvider.getUriForFile(context,
                                     context.getApplicationContext().getPackageName(),
-                                    new File(song.data)))
+                                    new File(song.getData())))
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     .setType("audio/*");
         } catch (IllegalArgumentException e) {
@@ -142,7 +142,7 @@ public class MusicUtil {
 
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
-            duration += songs.get(i).duration;
+            duration += songs.get(i).getDuration();
         }
 
         return songCount + " " + songString + " • " + MusicUtil.getReadableDurationString(duration);
@@ -207,7 +207,7 @@ public class MusicUtil {
         final StringBuilder selection = new StringBuilder();
         selection.append(BaseColumns._ID + " IN (");
         for (int i = 0; i < songs.size(); i++) {
-            selection.append(songs.get(i).id);
+            selection.append(songs.get(i).getId());
             if (i < songs.size() - 1) {
                 selection.append(",");
             }
@@ -224,8 +224,8 @@ public class MusicUtil {
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
                     final int id = cursor.getInt(0);
-                    Song song = SongLoader.Companion.getSong(activity, id).blockingFirst();
-                    MusicPlayerRemote.removeFromQueue(song);
+                    Song song = SongLoader.INSTANCE.getSong(activity, id).blockingFirst();
+                    MusicPlayerRemote.INSTANCE.removeFromQueue(song);
                     cursor.moveToNext();
                 }
 
@@ -271,7 +271,7 @@ public class MusicUtil {
     public static String getLyrics(Song song) {
         String lyrics = null;
 
-        File file = new File(song.data);
+        File file = new File(song.getData());
 
         try {
             lyrics = AudioFileIO.read(file).getTagOrCreateDefault().getFirst(FieldKey.LYRICS);
@@ -286,7 +286,7 @@ public class MusicUtil {
             if (dir != null && dir.exists() && dir.isDirectory()) {
                 String format = ".*%s.*\\.(lrc|txt)";
                 String filename = Pattern.quote(FileUtil.stripExtension(file.getName()));
-                String songtitle = Pattern.quote(song.title);
+                String songtitle = Pattern.quote(song.getTitle());
 
                 final ArrayList<Pattern> patterns = new ArrayList<>();
                 patterns.add(Pattern.compile(String.format(format, filename),
@@ -341,11 +341,11 @@ public class MusicUtil {
     }
 
     private static Observable<Playlist> getFavoritesPlaylist(@NonNull final Context context) {
-        return PlaylistLoader.getPlaylist(context, context.getString(R.string.favorites));
+        return PlaylistLoader.INSTANCE.getPlaylist(context, context.getString(R.string.favorites));
     }
 
     private static Observable<Playlist> getOrCreateFavoritesPlaylist(@NonNull final Context context) {
-        return PlaylistLoader.getPlaylist(context,
+        return PlaylistLoader.INSTANCE.getPlaylist(context,
                 PlaylistsUtil.createPlaylist(context, context.getString(R.string.favorites)));
     }
 
@@ -359,7 +359,7 @@ public class MusicUtil {
         //getFavoritesPlaylist(context).blockingFirst().id.subscribe(MusicUtil::setPlaylist);
         //return PlaylistsUtil.doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
         return PlaylistsUtil
-                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
+                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.getId());
     }
 
     public static boolean isArtistNameUnknown(@Nullable String artistName) {
@@ -401,7 +401,7 @@ public class MusicUtil {
     public static long getTotalDuration(@NonNull final Context context, @NonNull List<Song> songs) {
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
-            duration += songs.get(i).duration;
+            duration += songs.get(i).getDuration();
         }
         return duration;
     }

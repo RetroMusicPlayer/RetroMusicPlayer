@@ -119,7 +119,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
 
     @Override
     public void onPurchaseHistoryRestored() {
-        if (RetroApplication.isProVersion()) {
+        if (RetroApplication.Companion.isProVersion()) {
             Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG)
                     .show();
             setResult(RESULT_OK);

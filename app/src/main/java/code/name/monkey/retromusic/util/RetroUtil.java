@@ -84,11 +84,11 @@ public class RetroUtil {
     }
 
     public static boolean isTablet() {
-        return RetroApplication.getContext().getResources().getConfiguration().smallestScreenWidthDp >= 600;
+        return RetroApplication.Companion.getContext().getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }
 
     public static boolean isLandscape() {
-        return RetroApplication.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        return RetroApplication.Companion.getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -199,8 +199,8 @@ public class RetroUtil {
 
     public static Drawable getTintedDrawable(@DrawableRes int id) {
         return TintHelper
-                .createTintedDrawable(ContextCompat.getDrawable(RetroApplication.getInstance(), id),
-                        ThemeStore.accentColor(RetroApplication.getInstance()));
+                .createTintedDrawable(ContextCompat.getDrawable(RetroApplication.Companion.getInstance(), id),
+                        ThemeStore.accentColor(RetroApplication.Companion.getInstance()));
     }
 
     public static Bitmap createBitmap(Drawable drawable, float sizeMultiplier) {
@@ -297,9 +297,9 @@ public class RetroUtil {
 
     public static int getStatusBarHeight() {
         int result = 0;
-        int resourceId = RetroApplication.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int resourceId = RetroApplication.Companion.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = RetroApplication.getContext().getResources().getDimensionPixelSize(resourceId);
+            result = RetroApplication.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }
@@ -415,7 +415,7 @@ public class RetroUtil {
     }
 
     public static boolean checkNavigationBarHeight() {
-        Resources resources = RetroApplication.getContext().getResources();
+        Resources resources = RetroApplication.Companion.getContext().getResources();
         int orientation = resources.getConfiguration().orientation;
         if (!hasNavBar(resources)) {
             return false;

@@ -32,7 +32,6 @@ import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Playlist;
-import code.name.monkey.retromusic.model.PlaylistSong;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.mvp.contract.PlaylistSongsContract;
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter;
@@ -114,10 +113,9 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         } else {
             recyclerViewDragDropManager = new RecyclerViewDragDropManager();
             final GeneralItemAnimator animator = new RefactoredDefaultItemAnimator();
-            adapter = new OrderablePlaylistSongAdapter(this, new ArrayList<PlaylistSong>(),
+            adapter = new OrderablePlaylistSongAdapter(this, new ArrayList<>(),
                     R.layout.item_list, false, this, (fromPosition, toPosition) -> {
-                if (PlaylistsUtil
-                        .moveItem(PlaylistDetailActivity.this, playlist.id, fromPosition, toPosition)) {
+                if (PlaylistsUtil.moveItem(PlaylistDetailActivity.this, playlist.id, fromPosition, toPosition)) {
                     Song song = adapter.getDataSet().remove(fromPosition);
                     adapter.getDataSet().add(toPosition, song);
                     adapter.notifyItemMoved(fromPosition, toPosition);
@@ -186,7 +184,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
                 onBackPressed();
                 return true;
         }
-        return PlaylistMenuHelper.handleMenuClick(this, playlist, item);
+        return PlaylistMenuHelper.INSTANCE.handleMenuClick(this, playlist, item);
     }
 
     @NonNull
@@ -228,7 +226,7 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
             // Playlist renamed
             final String playlistName = PlaylistsUtil.getNameForPlaylist(this, playlist.id);
             if (!playlistName.equals(playlist.name)) {
-                playlist = PlaylistLoader.getPlaylist(this, playlist.id).blockingFirst();
+                playlist = PlaylistLoader.INSTANCE.getPlaylist(this, playlist.id).blockingFirst();
                 setToolbarTitle(playlist.name);
             }
         }
@@ -306,6 +304,6 @@ public class PlaylistDetailActivity extends AbsSlidingMusicPanelActivity impleme
         if (adapter.getDataSet().isEmpty()) {
             return;
         }
-        MusicPlayerRemote.openAndShuffleQueue(adapter.getDataSet(), true);
+        MusicPlayerRemote.INSTANCE.openAndShuffleQueue(adapter.getDataSet(), true);
     }
 }

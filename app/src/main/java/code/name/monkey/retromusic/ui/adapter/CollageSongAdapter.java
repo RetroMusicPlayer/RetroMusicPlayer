@@ -84,7 +84,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
             Context context = itemView.getContext();
             int color = ThemeStore.accentColor(context);
             view.setOnClickListener(v -> {
-                MusicPlayerRemote.openQueue(dataSet, 0, true);
+                MusicPlayerRemote.INSTANCE.openQueue(dataSet, 0, true);
             });
             view.setBackgroundColor(color);
             view.setTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)));
@@ -96,7 +96,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
                     final int startPosition = i;
                     ImageView imageView = imageViews.get(i);
                     imageView.setOnClickListener(view -> {
-                        MusicPlayerRemote.playNext(dataSet.get(startPosition));
+                        MusicPlayerRemote.INSTANCE.playNext(dataSet.get(startPosition));
                     });
                 }
             }

@@ -25,7 +25,7 @@ public class NowPlayingSettingsFragment extends AbsSettingsFragment implements
 
         final TwoStatePreference carouselEffect = (TwoStatePreference) findPreference("carousel_effect");
         carouselEffect.setOnPreferenceChangeListener((preference, newValue) -> {
-            if ((Boolean) newValue && !RetroApplication.isProVersion()) {
+            if ((Boolean) newValue && !RetroApplication.Companion.isProVersion()) {
                 showProToastAndNavigate(getActivity().getString(R.string.pref_title_toggle_carousel_effect));
                 return false;
             }

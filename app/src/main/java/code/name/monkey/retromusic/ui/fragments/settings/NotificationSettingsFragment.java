@@ -25,7 +25,7 @@ public class NotificationSettingsFragment extends AbsSettingsFragment {
                 // Save preference
                 PreferenceUtil.getInstance().setClassicNotification((Boolean) newValue);
 
-                final MusicService service = MusicPlayerRemote.musicService;
+                final MusicService service = MusicPlayerRemote.INSTANCE.getMusicService();
                 if (service != null) {
                     service.initNotification();
                     service.updateNotification();

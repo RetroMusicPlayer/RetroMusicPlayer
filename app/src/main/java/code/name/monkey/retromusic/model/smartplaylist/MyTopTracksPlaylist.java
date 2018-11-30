@@ -38,7 +38,7 @@ public class MyTopTracksPlaylist extends AbsSmartPlaylist implements Parcelable 
     @NonNull
     @Override
     public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
-        return TopAndRecentlyPlayedTracksLoader.getTopTracks(context);
+        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getTopTracks(context);
     }
 
     @Override

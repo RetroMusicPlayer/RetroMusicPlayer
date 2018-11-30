@@ -58,8 +58,8 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
 
         mPlayingQueueAdapter = new PlayingQueueAdapter(
                 (AppCompatActivity) getActivity(),
-                MusicPlayerRemote.getPlayingQueue(),
-                MusicPlayerRemote.getPosition(),
+                MusicPlayerRemote.INSTANCE.getPlayingQueue(),
+                MusicPlayerRemote.INSTANCE.getPosition(),
                 R.layout.item_queue);
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(mPlayingQueueAdapter);
 
@@ -69,7 +69,7 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
         mRecyclerView.setAdapter(mWrappedAdapter);
         mRecyclerView.setItemAnimator(animator);
         mRecyclerViewDragDropManager.attachRecyclerView(mRecyclerView);
-        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
+        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.INSTANCE.getPosition() + 1, 0);
 
     }
 
@@ -98,7 +98,7 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
     }
 
     private void updateQueuePosition() {
-        mPlayingQueueAdapter.setCurrent(MusicPlayerRemote.getPosition());
+        mPlayingQueueAdapter.setCurrent(MusicPlayerRemote.INSTANCE.getPosition());
         // if (slidingUpPanelLayout.getPanelState() == SlidingUpPanelLayout.PanelState.COLLAPSED) {
         resetToCurrentPosition();
         //}
@@ -106,13 +106,13 @@ public class PlayingQueueFragment extends AbsMusicServiceFragment {
 
     private void updateQueue() {
         mPlayingQueueAdapter
-                .swapDataSet(MusicPlayerRemote.getPlayingQueue(), MusicPlayerRemote.getPosition());
+                .swapDataSet(MusicPlayerRemote.INSTANCE.getPlayingQueue(), MusicPlayerRemote.INSTANCE.getPosition());
         resetToCurrentPosition();
     }
 
     private void resetToCurrentPosition() {
         mRecyclerView.stopScroll();
-        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
+        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.INSTANCE.getPosition() + 1, 0);
     }
 
     @Override

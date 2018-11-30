@@ -81,8 +81,8 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
         mPlayingQueueAdapter = new PlayingQueueAdapter(
                 this,
-                MusicPlayerRemote.getPlayingQueue(),
-                MusicPlayerRemote.getPosition(),
+                MusicPlayerRemote.INSTANCE.getPlayingQueue(),
+                MusicPlayerRemote.INSTANCE.getPosition(),
                 R.layout.item_queue);
         mWrappedAdapter = mRecyclerViewDragDropManager.createWrappedAdapter(mPlayingQueueAdapter);
 
@@ -92,7 +92,7 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
         mRecyclerView.setAdapter(mWrappedAdapter);
         mRecyclerView.setItemAnimator(animator);
         mRecyclerViewDragDropManager.attachRecyclerView(mRecyclerView);
-        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
+        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.INSTANCE.getPosition() + 1, 0);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -109,7 +109,7 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
     @Override
     public void onQueueChanged() {
-        if (MusicPlayerRemote.getPlayingQueue().isEmpty()) {
+        if (MusicPlayerRemote.INSTANCE.getPlayingQueue().isEmpty()) {
             finish();
             return;
         }
@@ -133,18 +133,18 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
     }
 
     private void updateQueuePosition() {
-        mPlayingQueueAdapter.setCurrent(MusicPlayerRemote.getPosition());
+        mPlayingQueueAdapter.setCurrent(MusicPlayerRemote.INSTANCE.getPosition());
         resetToCurrentPosition();
     }
 
     private void updateQueue() {
-        mPlayingQueueAdapter.swapDataSet(MusicPlayerRemote.getPlayingQueue(), MusicPlayerRemote.getPosition());
+        mPlayingQueueAdapter.swapDataSet(MusicPlayerRemote.INSTANCE.getPlayingQueue(), MusicPlayerRemote.INSTANCE.getPosition());
         resetToCurrentPosition();
     }
 
     private void resetToCurrentPosition() {
         mRecyclerView.stopScroll();
-        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.getPosition() + 1, 0);
+        mLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.INSTANCE.getPosition() + 1, 0);
     }
 
     @Override
@@ -178,7 +178,7 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
     }
 
     protected String getUpNextAndQueueTime() {
-        return getResources().getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.getPosition()));
+        return getResources().getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.INSTANCE.getQueueDurationMillis(MusicPlayerRemote.INSTANCE.getPosition()));
     }
 
     private void setupToolbar() {
@@ -198,6 +198,6 @@ public class PlayingQueueActivity extends AbsMusicServiceActivity {
 
     @OnClick(R.id.clear_queue)
     void clearQueue() {
-        MusicPlayerRemote.clearQueue();
+        MusicPlayerRemote.INSTANCE.clearQueue();
     }
 }

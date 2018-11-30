@@ -16,7 +16,7 @@ public class PersonaizeSettingsFragment extends AbsSettingsFragment implements S
     public void invalidateSettings() {
         final TwoStatePreference cornerWindow = (TwoStatePreference) findPreference("corner_window");
         cornerWindow.setOnPreferenceChangeListener((preference, newValue) -> {
-            if ((Boolean) newValue && !RetroApplication.isProVersion()) {
+            if ((Boolean) newValue && !RetroApplication.Companion.isProVersion()) {
                 showProToastAndNavigate(getActivity().getString(R.string.pref_title_round_corners));
                 return false;
             }

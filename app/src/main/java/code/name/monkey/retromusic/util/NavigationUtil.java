@@ -18,12 +18,12 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.ui.activities.AboutActivity;
+import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.ui.activities.ArtistDetailActivity;
 import code.name.monkey.retromusic.ui.activities.EqualizerActivity;
 import code.name.monkey.retromusic.ui.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.ui.activities.LicenseActivity;
 import code.name.monkey.retromusic.ui.activities.LyricsActivity;
-import code.name.monkey.retromusic.ui.activities.NowPayingActivity;
 import code.name.monkey.retromusic.ui.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.ui.activities.PlaylistDetailActivity;
 import code.name.monkey.retromusic.ui.activities.ProVersionActivity;
@@ -32,8 +32,6 @@ import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
 import code.name.monkey.retromusic.ui.activities.WhatsNewActivity;
-import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
-import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.ui.activities.GenreDetailsActivity.EXTRA_GENRE_ID;
@@ -75,7 +73,7 @@ public class NavigationUtil {
     }
 
     private static void stockEqalizer(@NonNull Activity activity) {
-        final int sessionId = MusicPlayerRemote.getAudioSessionId();
+        final int sessionId = MusicPlayerRemote.INSTANCE.getAudioSessionId();
         if (sessionId == AudioEffect.ERROR_BAD_VALUE) {
             Toast.makeText(activity, activity.getResources().getString(R.string.no_audio_ID),
                     Toast.LENGTH_LONG).show();
@@ -149,12 +147,11 @@ public class NavigationUtil {
     }
 
     public static void gotoNowPlayingActivity(Context context, @Nullable Pair... sharedElements) {
-        ActivityCompat.startActivity(context, new Intent(context, NowPayingActivity.class),
-                ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, sharedElements).toBundle());
+        //ActivityCompat.startActivity(context, new Intent(context, NowPayingActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, sharedElements).toBundle());
 
     }
 
     public static void gotoNowPlaying(Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, NowPayingActivity.class),null);
+        //ActivityCompat.startActivity(activity, new Intent(activity, NowPayingActivity.class),null);
     }
 }

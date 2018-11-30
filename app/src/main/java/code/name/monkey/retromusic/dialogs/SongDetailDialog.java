@@ -94,7 +94,7 @@ public class SongDetailDialog extends RoundedBottomSheetDialogFragment {
 
         final Song song = getArguments().getParcelable("song");
         if (song != null) {
-            final File songFile = new File(song.data);
+            final File songFile = new File(song.getData());
             if (songFile.exists()) {
                 textViews.get(1).setText(makeTextWithTitle(context, R.string.label_file_name, songFile.getName()));
                 textViews.get(2).setText(makeTextWithTitle(context, R.string.label_file_path, songFile.getAbsolutePath()));
@@ -110,12 +110,12 @@ public class SongDetailDialog extends RoundedBottomSheetDialogFragment {
                 } catch (@NonNull CannotReadException | IOException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
                     Log.e(TAG, "error while reading the song file", e);
                     // fallback
-                    textViews.get(5).setText(makeTextWithTitle(context, R.string.label_track_length, MusicUtil.getReadableDurationString(song.duration)));
+                    textViews.get(5).setText(makeTextWithTitle(context, R.string.label_track_length, MusicUtil.getReadableDurationString(song.getDuration())));
                 }
             } else {
                 // fallback
-                textViews.get(1).setText(makeTextWithTitle(context, R.string.label_file_name, song.title));
-                textViews.get(5).setText(makeTextWithTitle(context, R.string.label_track_length, MusicUtil.getReadableDurationString(song.duration)));
+                textViews.get(1).setText(makeTextWithTitle(context, R.string.label_file_name, song.getTitle()));
+                textViews.get(5).setText(makeTextWithTitle(context, R.string.label_track_length, MusicUtil.getReadableDurationString(song.getDuration())));
             }
         }
 

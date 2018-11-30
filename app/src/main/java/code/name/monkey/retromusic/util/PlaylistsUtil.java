@@ -149,7 +149,7 @@ public class PlaylistsUtil {
         for (int i = 0; i < len; i++) {
             contentValues[i] = new ContentValues();
             contentValues[i].put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, base + offset + i);
-            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).id);
+            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).getId());
         }
         return contentValues;
     }
@@ -158,7 +158,7 @@ public class PlaylistsUtil {
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String selection = MediaStore.Audio.Playlists.Members.AUDIO_ID + " =?";
-        String[] selectionArgs = new String[]{String.valueOf(song.id)};
+        String[] selectionArgs = new String[]{String.valueOf(song.getId())};
 
         try {
             context.getContentResolver().delete(uri, selection, selectionArgs);
@@ -244,7 +244,7 @@ public class PlaylistsUtil {
     }
 
     public static Observable<File> savePlaylist(Context context, Playlist playlist) {
-        return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
+        return M3UWriter.Companion.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
 }
