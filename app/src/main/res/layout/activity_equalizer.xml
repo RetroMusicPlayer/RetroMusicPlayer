@@ -21,7 +21,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48"
+                style="@style/Toolbar"
                 app:layout_collapseMode="pin"
                 app:title=""
                 tools:ignore="UnusedAttribute">
@@ -29,7 +29,7 @@
 
                 <TextView
                     android:id="@+id/title"
-                    fontPath="@string/circular_std_black"
+                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

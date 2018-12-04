@@ -6,8 +6,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/biography_title"
-        fontPath="@string/circular_std_black"
+        android:id="@+id/biographyTitle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
@@ -21,7 +21,7 @@
         tools:ignore="MissingPrefix" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/biography"
+        android:id="@+id/biographyText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -31,8 +31,8 @@
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/album_title"
-        fontPath="@string/circular_std_black"
+        android:id="@+id/albumTitle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
@@ -44,14 +44,14 @@
         android:textColor="?android:attr/textColorPrimary" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/album_recycler_view"
+        android:id="@+id/albumRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/song_title"
-        fontPath="@string/circular_std_black"
+        android:id="@+id/songTitle"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
@@ -64,7 +64,7 @@
         tools:ignore="MissingPrefix" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false" />

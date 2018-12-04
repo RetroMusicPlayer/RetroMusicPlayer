@@ -37,7 +37,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/title"
-                    fontPath="@string/circular_std_black"
+                    android:textStyle="bold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -95,8 +95,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/player_toolbar"
-                    style="@style/Toolbar48"
-                    android:layout_height="48dp"
+                    style="@style/Toolbar"
                     android:navigationIcon="@drawable/ic_close_white_24dp"
                     app:navigationIcon="@drawable/ic_close_white_24dp" />
             </FrameLayout>

@@ -36,7 +36,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48" />
+                style="@style/Toolbar" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -92,7 +92,7 @@
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/albumTitle"
-                        fontPath="@string/circular_std_black"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"

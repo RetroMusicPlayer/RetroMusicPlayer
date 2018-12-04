@@ -33,7 +33,7 @@
                 android:layout_weight="0">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
+                    android:id="@+id/playerToolbar"
                     style="@style/Toolbar48"
                     android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
                     app:contentInsetLeft="0dp"

@@ -23,7 +23,7 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48"
+                style="@style/Toolbar"
                 app:layout_collapseMode="pin"
                 app:title=""
                 tools:ignore="UnusedAttribute">

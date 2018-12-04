@@ -5,22 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
     tools:ignore="MissingPrefix">
 
+
+
     <LinearLayout
-        android:id="@+id/user_info_container"
+        android:id="@+id/userInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingStart="8dp"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:paddingEnd="8dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="16dp">
 
         <code.name.monkey.retromusic.views.CircularImageView
-            android:id="@+id/user_image_bottom"
+            android:id="@+id/userImage"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_weight="0"
@@ -29,17 +29,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="12dp"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:paddingEnd="12dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/title_welcome"
+                android:id="@+id/titleWelcome"
                 style="@style/SubTitleTextAppearance"
-                android:padding="0dp"  />
+                android:padding="0dp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
@@ -52,7 +52,7 @@
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/action_settings"
+            android:id="@+id/actionSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?roundSelector"
@@ -61,23 +61,8 @@
             android:textAllCaps="false"
             app:srcCompat="@drawable/ic_settings_white_24dp" />
     </LinearLayout>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_folders"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/folders"
-        android:textAllCaps="false"
-        android:textColor="?android:attr/textColorPrimary"
-        app:icon="@drawable/ic_folder_white_24dp"
-        app:iconPadding="12dp"
-        app:iconTint="?iconColor"
-        app:rippleColor="?iconColor" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_sleep_timer"
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionSleepTimer"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,8 +75,8 @@
         app:iconTint="?iconColor"
         app:rippleColor="?iconColor" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_about"
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionAbout"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,8 +89,8 @@
         app:iconTint="?iconColor"
         app:rippleColor="?iconColor" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_rate"
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionRate"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,18 +103,5 @@
         app:iconTint="?iconColor"
         app:rippleColor="?iconColor" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_buy_pro"
-        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/buy_retro_music_pro"
-        android:textAllCaps="false"
-        android:textColor="?android:attr/textColorPrimary"
-        app:icon="@drawable/ic_card_giftcard_white_24dp"
-        app:iconPadding="12dp"
-        app:iconTint="?iconColor"
-        app:rippleColor="?iconColor" />
 
 </LinearLayout>

@@ -19,14 +19,14 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar48"
+            style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             tools:ignore="UnusedAttribute">
 
 
             <TextView
                 android:id="@+id/title"
-                fontPath="@string/circular_std_black"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

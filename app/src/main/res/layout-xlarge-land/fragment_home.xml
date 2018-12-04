@@ -21,7 +21,6 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -33,30 +32,32 @@
                 android:layout_height="wrap_content"
                 tools:ignore="UnusedAttribute">
 
-                <code.name.monkey.retromusic.views.IconImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/searchIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="22dp"
-                    app:srcCompat="@drawable/ic_search_white_24dp" />
+                    android:padding="16dp"
+                    app:srcCompat="@drawable/ic_search_white_24dp"
+                    app:tint="@color/md_white_1000" />
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <TextView
+                    android:id="@+id/bannerTitle"
                     style="@style/BigTitleTextAppearanceToolbar"
-                    android:text="@string/app_name" />
+                    android:text="@string/app_name"
+                    android:textColor="@color/md_white_1000" />
 
                 <code.name.monkey.retromusic.views.CircularImageView
-                    android:id="@+id/user_image"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:id="@+id/userImage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="22dp"
+                    android:layout_marginEnd="16dp"
                     app:civ_border="false" />
             </FrameLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
@@ -64,7 +65,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:id="@+id/content_container"
+                android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:descendantFocusability="blocksDescendants"

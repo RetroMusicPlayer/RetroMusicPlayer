@@ -12,13 +12,13 @@
         android:orientation="horizontal">
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            android:id="@+id/title"
+            android:id="@+id/bannerTitle"
             style="@style/SubTitleTextAppearance"
             android:layout_weight="1"
             android:text="@string/add_playlist_title" />
 
         <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/action_add_playlist"
+            android:id="@+id/actionAddPlaylist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -34,7 +34,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/playlists"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

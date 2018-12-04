@@ -36,7 +36,7 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar48"
+                    style="@style/Toolbar"
                     android:layout_gravity="center_vertical"
                     app:layout_collapseMode="pin"
                     tools:ignore="UnusedAttribute">
@@ -47,13 +47,6 @@
                         android:text="@string/app_name"
                         tools:ignore="MissingPrefix" />
 
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/user_image"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="16dp"
-                        app:civ_border="false" />
                 </androidx.appcompat.widget.Toolbar>
 
                 <ViewStub

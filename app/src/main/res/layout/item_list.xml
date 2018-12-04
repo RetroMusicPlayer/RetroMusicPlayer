@@ -53,13 +53,14 @@
                     android:id="@+id/image_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:fontFamily="@font/font"
                     android:gravity="center"
                     android:maxLines="1"
-                    tools:text="1"
-                    tools:visibility="visible"
                     android:minHeight="40dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    tools:text="1"
+                    tools:visibility="visible" />
             </com.google.android.material.card.MaterialCardView>
         </FrameLayout>
 
@@ -75,25 +76,24 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/font"
                 android:maxLines="1"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textSize="16sp"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:maxLines="1" />
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView
