@@ -12,7 +12,7 @@
     tools:ignore="RtlSymmetry,UnusedAttribute">
 
     <ImageView
-        android:id="@+android:id/icon"
+        android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -40,7 +40,6 @@
             android:layout_alignParentStart="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            android:fontFamily="sans-serif"
             android:singleLine="true"
             android:textSize="@dimen/ate_default_textsize_subheading"
             tools:text="Title" />
@@ -53,7 +52,6 @@
             android:layout_alignStart="@android:id/title"
             android:layout_below="@android:id/title"
             android:layout_marginTop="2dp"
-            android:fontFamily="sans-serif"
             android:maxLines="4"
             android:textSize="@dimen/ate_default_textsize_body"
             tools:text="Summary" />
