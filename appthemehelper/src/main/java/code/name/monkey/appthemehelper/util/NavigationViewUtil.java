@@ -1,10 +1,14 @@
 package code.name.monkey.appthemehelper.util;
 
 import android.content.res.ColorStateList;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
+import android.graphics.drawable.Drawable;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import code.name.monkey.appthemehelper.ThemeStore;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -25,6 +29,8 @@ public final class NavigationViewUtil {
                         selectedColor
                 });
         navigationView.setItemIconTintList(iconSl);
+        Drawable drawable = navigationView.getItemBackground();
+        navigationView.setItemBackground(TintHelper.createTintedDrawable(drawable, ColorUtil.withAlpha(ThemeStore.accentColor(navigationView.getContext()), 0.2f)));
     }
 
     public static void setItemTextColors(@NonNull NavigationView navigationView, @ColorInt int normalColor, @ColorInt int selectedColor) {

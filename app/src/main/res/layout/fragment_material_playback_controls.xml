@@ -10,48 +10,15 @@
     tools:ignore="MissingPrefix">
 
     <SeekBar
-        android:id="@+id/player_progress_slider"
+        android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
-        android:paddingEnd="24dp"
         android:paddingStart="24dp"
+        android:paddingEnd="24dp"
         tools:progress="20" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
-
-
-        <TextView
-            android:id="@+id/player_song_current_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="22.00" />
-
-
-        <TextView
-            android:id="@+id/player_song_total_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="22.00" />
-    </LinearLayout>
+    <include layout="@layout/player_time" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,8 +39,8 @@
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingEnd="12dp"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -89,8 +56,8 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingEnd="12dp"
             android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 
@@ -102,7 +69,7 @@
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <ImageButton
-            android:id="@+id/player_prev_button"
+            android:id="@+id/previousButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -116,7 +83,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_next_button"
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -130,7 +97,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_repeat_button"
+            android:id="@+id/repeatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -143,7 +110,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_shuffle_button"
+            android:id="@+id/shuffleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -162,7 +129,7 @@
             android:layout_centerInParent="true" />
 
         <ImageButton
-            android:id="@+id/player_play_pause_button"
+            android:id="@+id/playPauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/title_container"
@@ -173,18 +140,5 @@
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/volume_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0">
-
-        <fragment
-            android:id="@+id/volume_fragment"
-            android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            tools:layout="@layout/fragment_volume" />
-    </FrameLayout>
+    <include layout="@layout/volume_controls" />
 </LinearLayout>

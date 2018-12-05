@@ -103,7 +103,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
     }
 
-    private fun setTintable(color: Int) {
+    fun setTintable(color: Int) {
         setProgressBarColor(color)
     }
 

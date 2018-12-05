@@ -172,7 +172,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { v -> MusicPlayerRemote.toggleShuffleMode() }
+        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
     }
 
     override fun updateShuffleState() {

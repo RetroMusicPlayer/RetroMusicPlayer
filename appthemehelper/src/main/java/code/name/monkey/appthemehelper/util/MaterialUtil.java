@@ -35,9 +35,6 @@ public class MaterialUtil {
             button.setIconTint(colorState);
         }
 
-        Typeface font = ResourcesCompat.getFont(button.getContext(), R.font.product_sans);
-        button.setTypeface(font);
-
     }
 
     public static void setTint(TextInputLayout textInputLayout, boolean background) {

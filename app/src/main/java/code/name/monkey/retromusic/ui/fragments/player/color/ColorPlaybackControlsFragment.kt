@@ -1,21 +1,16 @@
-package code.name.monkey.retromusic.ui.fragments.player.fit
+package code.name.monkey.retromusic.ui.fragments.player.color
 
 import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -23,59 +18,51 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import kotlinx.android.synthetic.main.volume_controls.*
 
-class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
-
+class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_fit_playback_controls, container, false)
+        return inflater.inflate(R.layout.fragment_color_player_playback_controls, container, false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        progressViewUpdateHelper.start()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        progressViewUpdateHelper.stop()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-        playPauseButton.setOnClickListener {
-            if (MusicPlayerRemote.isPlaying) {
-                MusicPlayerRemote.pauseSong()
-            } else {
-                MusicPlayerRemote.resumePlaying()
-            }
-            showBonceAnimation()
-        }
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
-    }
-
-    override fun onResume() {
-        super.onResume()
-        progressViewUpdateHelper!!.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        progressViewUpdateHelper!!.stop()
     }
 
     override fun onServiceConnected() {
@@ -102,44 +89,47 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
-        if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
-        } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
-        }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setFabColor(color)
-        } else {
-            setFabColor(ThemeStore.accentColor(context!!))
-        }
+    fun setDark(textColor: Int, background: Int) {
+        setDark(textColor)
+        TintHelper.setTintAuto(playPauseButton, background, false)
+        TintHelper.setTintAuto(playPauseButton, textColor, true)
+    }
+
+    override fun setDark(color: Int) {
+        lastPlaybackControlsColor = color
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color, 0.5f)
+
+        title!!.setTextColor(lastPlaybackControlsColor)
+        text!!.setTextColor(lastDisabledPlaybackControlsColor)
+
+        TintHelper.setTintAuto(progressSlider!!, lastPlaybackControlsColor, false)
+
+        volumeFragment.setTintable(lastPlaybackControlsColor)
+
+        songCurrentProgress.setTextColor(lastDisabledPlaybackControlsColor)
+        songTotalTime.setTextColor(lastDisabledPlaybackControlsColor)
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
     }
 
-    private fun setFabColor(i: Int) {
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)), false)
-        TintHelper.setTintAuto(playPauseButton, i, true)
-
-    }
 
     private fun setUpPlayPauseFab() {
+        TintHelper.setTintAuto(playPauseButton, Color.WHITE, true)
+        TintHelper.setTintAuto(playPauseButton, Color.BLACK, false)
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
+
     private fun updatePlayPauseDrawableState() {
-        if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
-        } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+        when {
+            MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
         }
     }
+
 
     private fun setUpMusicControllers() {
         setUpPlayPauseFab()
@@ -156,8 +146,8 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updatePrevNextColor() {
-        nextButton!!.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton!!.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpShuffleButton() {
@@ -192,6 +182,7 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         }
     }
 
+
     public override fun show() {
         playPauseButton!!.animate()
                 .scaleX(1f)
@@ -202,12 +193,10 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     public override fun hide() {
-        if (playPauseButton != null) {
-            playPauseButton!!.apply {
-                scaleX = 0f
-                scaleY = 0f
-                rotation = 0f
-            }
+        playPauseButton.apply {
+            scaleX = 0f
+            scaleY = 0f
+            rotation = 0f
         }
     }
 
@@ -216,38 +205,14 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis,
-                            MusicPlayerRemote.songDurationMillis)
+                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis, MusicPlayerRemote.songDurationMillis)
                 }
             }
         })
     }
 
-    private fun showBonceAnimation() {
-        playPauseButton.apply {
-            clearAnimation()
-            scaleX = 0.9f
-            scaleY = 0.9f
-            visibility = View.VISIBLE
-            pivotX = (width / 2).toFloat()
-            pivotY = (height / 2).toFloat()
-
-            animate().setDuration(200)
-                    .setInterpolator(DecelerateInterpolator())
-                    .scaleX(1.1f)
-                    .scaleY(1.1f)
-                    .withEndAction {
-                        animate().setDuration(200)
-                                .setInterpolator(AccelerateInterpolator())
-                                .scaleX(1f)
-                                .scaleY(1f)
-                                .alpha(1f).start()
-                    }.start()
-        }
-    }
-
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
+        progressSlider!!.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
         animator.duration = 1500
@@ -257,5 +222,4 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
-
 }

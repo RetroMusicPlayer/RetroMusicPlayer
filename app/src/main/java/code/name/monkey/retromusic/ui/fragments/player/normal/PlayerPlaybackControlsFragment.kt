@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.ui.fragments.player.fit
+package code.name.monkey.retromusic.ui.fragments.player.normal
 
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
@@ -31,8 +30,7 @@ import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
 import kotlinx.android.synthetic.main.volume_controls.*
 
-class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
-
+class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -46,7 +44,7 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_fit_playback_controls, container, false)
+        return inflater.inflate(R.layout.fragment_player_playback_controls, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,8 +56,35 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
             } else {
                 MusicPlayerRemote.resumePlaying()
             }
-            showBonceAnimation()
+            showBonceAnimation(playPauseButton)
         }
+    }
+
+    override fun setDark(color: Int) {
+        val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
+        if (ColorUtil.isColorLight(colorBg)) {
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
+        } else {
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
+        }
+
+        if (PreferenceUtil.getInstance().adaptiveColor) {
+            setFabColor(color)
+        } else {
+            setFabColor(ThemeStore.accentColor(context!!))
+        }
+
+        updateRepeatState()
+        updateShuffleState()
+        updatePrevNextColor()
+    }
+
+    private fun setFabColor(i: Int) {
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)), false)
+        TintHelper.setTintAuto(playPauseButton, i, true)
+        setProgressBarColor(i)
     }
 
     private fun updateSong() {
@@ -102,31 +127,11 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
-        if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
-        } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
-        }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setFabColor(color)
-        } else {
-            setFabColor(ThemeStore.accentColor(context!!))
-        }
-
-        updateRepeatState()
-        updateShuffleState()
-        updatePrevNextColor()
-    }
-
-    private fun setFabColor(i: Int) {
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)), false)
-        TintHelper.setTintAuto(playPauseButton, i, true)
-
+    private fun setProgressBarColor(newColor: Int) {
+        val ld = progressSlider.progressDrawable as LayerDrawable
+        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
+        clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {
@@ -156,8 +161,8 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updatePrevNextColor() {
-        nextButton!!.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton!!.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpShuffleButton() {
@@ -221,29 +226,6 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
                 }
             }
         })
-    }
-
-    private fun showBonceAnimation() {
-        playPauseButton.apply {
-            clearAnimation()
-            scaleX = 0.9f
-            scaleY = 0.9f
-            visibility = View.VISIBLE
-            pivotX = (width / 2).toFloat()
-            pivotY = (height / 2).toFloat()
-
-            animate().setDuration(200)
-                    .setInterpolator(DecelerateInterpolator())
-                    .scaleX(1.1f)
-                    .scaleY(1.1f)
-                    .withEndAction {
-                        animate().setDuration(200)
-                                .setInterpolator(AccelerateInterpolator())
-                                .scaleX(1f)
-                                .scaleY(1f)
-                                .alpha(1f).start()
-                    }.start()
-        }
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
