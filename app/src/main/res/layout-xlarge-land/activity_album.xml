@@ -8,19 +8,21 @@
     android:transitionName="@string/transition_album_art">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/artist_image"
+        android:id="@+id/artistImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -34,12 +36,12 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48" />
+                style="@style/Toolbar" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
@@ -89,8 +91,8 @@
                     android:padding="16dp">
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
+                        android:id="@+id/albumTitle"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
@@ -98,7 +100,7 @@
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                        android:id="@+id/text"
+                        android:id="@+id/albumText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -123,7 +125,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/action_shuffle_all"
+        android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

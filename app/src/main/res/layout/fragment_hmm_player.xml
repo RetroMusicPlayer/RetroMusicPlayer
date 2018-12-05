@@ -61,7 +61,7 @@
 
                     <code.name.monkey.retromusic.views.VerticalTextView
                         android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:ellipsize="end"
@@ -103,8 +103,7 @@
 
                         <androidx.appcompat.widget.Toolbar
                             android:id="@+id/player_toolbar"
-                            style="@style/Toolbar48"
-                            android:layout_height="48dp"
+                            style="@style/Toolbar"
                             app:navigationIcon="@drawable/ic_close_white_24dp" />
                     </FrameLayout>
                 </LinearLayout>
@@ -118,7 +117,7 @@
 
                     <code.name.monkey.retromusic.views.VerticalTextView
                         android:id="@+id/player_song_total_time"
-                        fontPath="@string/circular_std_black"
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"

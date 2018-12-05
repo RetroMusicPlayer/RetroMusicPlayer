@@ -7,7 +7,7 @@
     tools:context="code.name.monkey.retromusic.ui.activities.WhatsNewActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
@@ -15,13 +15,13 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/Toolbar48"
+            style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:title="">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/whatNewtitle"
                 style="@style/BigTitleTextAppearance"
                 android:text="@string/whats_new" />
 
@@ -34,7 +34,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <WebView
-        android:id="@+id/web_view"
+        android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="none"

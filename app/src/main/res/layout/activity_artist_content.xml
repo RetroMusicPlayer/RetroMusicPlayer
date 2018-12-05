@@ -6,14 +6,14 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/biography_title"
+        android:id="@+id/biographyTitle"
         style="@style/SubTitleTextAppearance"
         android:text="@string/biography"
         android:visibility="gone"
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/biography"
+        android:id="@+id/biographyText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -24,23 +24,23 @@
         tools:visibility="visible" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/album_title"
+        android:id="@+id/albumTitle"
         style="@style/SubTitleTextAppearance"
         android:text="@string/albums" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/album_recycler_view"
+        android:id="@+id/albumRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/song_title"
+        android:id="@+id/songTitle"
         style="@style/SubTitleTextAppearance"
         android:text="@string/songs" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false" />

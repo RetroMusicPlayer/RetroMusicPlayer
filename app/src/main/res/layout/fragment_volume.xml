@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    android:id="@+id/viewGroup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <code.name.monkey.retromusic.views.IconImageView
-        android:id="@+id/volume_down"
+        android:id="@+id/volumeDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
@@ -17,13 +17,13 @@
         app:srcCompat="@drawable/ic_volume_down_white_24dp" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/volume_seekbar"
+        android:id="@+id/volumeSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"  />
+        android:layout_weight="1" />
 
     <code.name.monkey.retromusic.views.IconImageView
-        android:id="@+id/volume_up"
+        android:id="@+id/volumeUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"

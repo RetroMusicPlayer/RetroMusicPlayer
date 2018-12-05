@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_fragment_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -18,14 +17,14 @@
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
 
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="0dp"
@@ -38,15 +37,16 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar48"
+                    style="@style/Toolbar"
                     android:layout_gravity="center_vertical"
                     app:layout_collapseMode="pin"
                     tools:ignore="UnusedAttribute">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/title"
+                    <TextView
+                        android:id="@+id/bannerTitle"
                         style="@style/BigTitleTextAppearanceToolbar"
-                        android:text="@string/folders" />
+                        android:text="@string/folders"
+                        tools:ignore="MissingPrefix" />
 
                 </androidx.appcompat.widget.Toolbar>
 
@@ -65,7 +65,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
@@ -91,7 +91,7 @@
         android:background="?dividerColor" />
 
     <code.name.monkey.retromusic.views.BreadCrumbLayout
-        android:id="@+id/bread_crumbs"
+        android:id="@+id/breadCrumbs"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
         android:layout_weight="0"

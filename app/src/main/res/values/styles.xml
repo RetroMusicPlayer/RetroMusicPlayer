@@ -40,13 +40,10 @@
         <item name="titleMarginStart">16dp</item>
     </style>
 
-    <style name="Toolbar48" parent="Toolbar">
-        <item name="android:layout_height">48dp</item>
-    </style>
-
 
     <style name="ToolbarTextAppearance">
-        <item name="fontPath">fonts/sans_regular.ttf</item>
+        <item name="android:fontFamily">@font/font</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="BigTitleTextAppearance">
@@ -54,7 +51,7 @@
         </item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="fontPath">@string/circular_std_black</item>
+        <item name="android:fontFamily">@font/font</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
@@ -65,17 +62,19 @@
         </item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="fontPath">@string/circular_std_black</item>
+        <item name="android:fontFamily">@font/font</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="SubTitleTextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
         <item name="android:layout_gravity">start|center_vertical</item>
         <item name="android:padding">12dp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="fontPath">@string/circular_std_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -98,6 +97,12 @@
         <item name="icon">@drawable/ic_shuffle_white_24dp</item>
         <item name="backgroundTint">@color/md_red_400</item>
         <item name="iconGravity">start</item>
+    </style>
+
+    <style name="NavigationViewTitleTextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/font</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
     </style>
 
 

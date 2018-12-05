@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
+        android:id="@+id/artistImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -26,20 +26,20 @@
             app:titleEnabled="false">
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48"
+                style="@style/Toolbar"
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
@@ -64,12 +64,12 @@
                 android:padding="24dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/title"
-                    fontPath="@string/circular_std_black"
+                    android:id="@+id/artistTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textStyle="bold"
                     tools:ignore="MissingPrefix"
                     tools:text="Title" />
 
@@ -97,7 +97,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/action_shuffle_all"
+        android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

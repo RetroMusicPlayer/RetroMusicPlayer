@@ -27,7 +27,7 @@ import code.name.monkey.appthemehelper.util.MaterialUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.BuildConfig;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
 
 /**
@@ -106,7 +106,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
                 }
                 break;
             case R.id.purchase_button:
-                billingProcessor.purchase(ProVersionActivity.this, RetroApplication.PRO_VERSION_PRODUCT_ID);
+                billingProcessor.purchase(ProVersionActivity.this, App.PRO_VERSION_PRODUCT_ID);
                 break;
         }
     }
@@ -119,7 +119,7 @@ public class ProVersionActivity extends AbsBaseActivity implements
 
     @Override
     public void onPurchaseHistoryRestored() {
-        if (RetroApplication.isProVersion()) {
+        if (App.Companion.isProVersion()) {
             Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG)
                     .show();
             setResult(RESULT_OK);

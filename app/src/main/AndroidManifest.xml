@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name=".RetroApplication"
+        android:name=".App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -103,27 +103,19 @@
         <activity android:name=".ui.activities.tageditor.AlbumTagEditorActivity" />
         <activity android:name=".ui.activities.tageditor.SongTagEditorActivity" />
         <activity android:name=".ui.activities.SettingsActivity" />
-        <activity android:name=".ui.activities.SearchActivity" 
-                  android:windowSoftInputMode="stateVisible" >
-        </activity>
+        <activity
+            android:name=".ui.activities.SearchActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".ui.activities.LyricsActivity" />
         <activity android:name=".ui.activities.UserInfoActivity" />
-        <activity
-            android:name=".appshortcuts.AppShortcutLauncherActivity"
-            android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".ui.activities.LockScreenActivity"
-            android:autoRemoveFromRecents="true"
-            android:launchMode="singleInstance"
-            android:screenOrientation="sensorPortrait"
-            android:showOnLockScreen="true" />
+
         <activity android:name=".ui.activities.SupportDevelopmentActivity" />
         <activity android:name=".ui.activities.GenreDetailsActivity" />
         <activity android:name=".ui.activities.LicenseActivity" />
         <activity android:name=".ui.activities.ProVersionActivity" />
         <activity android:name=".ui.activities.EqualizerActivity" />
         <activity android:name=".ui.activities.ErrorHandlerActivity" />
+        <activity android:name=".ui.activities.WhatsNewActivity" />
         <activity
             android:name=".cast.ExpandedCastControlsActivity"
             android:label="@string/app_name"
@@ -163,66 +155,7 @@
              </intent-filter>
          </receiver>
         -->
-        <receiver android:name=".appwidgets.BootReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name=".appwidgets.AppWidgetBig"
-            android:exported="false"
-            android:label="@string/app_widget_big_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_big_info" />
-        </receiver>
-        <receiver
-            android:name=".appwidgets.AppWidgetClassic"
-            android:exported="false"
-            android:label="@string/app_widget_classic_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_classic_info" />
-        </receiver>
-        <receiver
-            android:name=".appwidgets.AppWidgetSmall"
-            android:exported="false"
-            android:label="@string/app_widget_small_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_small_info" />
-        </receiver>
-        <receiver
-            android:name=".appwidgets.AppWidgetCard"
-            android:exported="false"
-            android:label="@string/app_widget_card_name">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_card_info" />
-        </receiver>
-        <receiver android:name=".service.MediaButtonIntentReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
-        <!-- Widgets ends -->
 
         <meta-data
             android:name="android.max_aspect"
@@ -256,9 +189,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.activities.WhatsNewActivity"></activity>
-        <activity android:name=".ui.activities.album.SmallAlbumDetailsActivity" />
-        <activity android:name=".ui.activities.NowPayingActivity" />
     </application>
 
 </manifest>

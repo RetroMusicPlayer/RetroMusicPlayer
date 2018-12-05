@@ -20,8 +20,8 @@ public class Presenter {
     protected BaseSchedulerProvider schedulerProvider;
 
     public Presenter() {
-        this.repository = Injection.provideRepository();
-        this.schedulerProvider = Injection.provideSchedulerProvider();
+        this.repository = Injection.INSTANCE.provideRepository();
+        this.schedulerProvider = Injection.INSTANCE.provideSchedulerProvider();
         this.disposable = new CompositeDisposable();
     }
 }

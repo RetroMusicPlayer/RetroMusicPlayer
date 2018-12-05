@@ -137,8 +137,8 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     }
 
     private void loadLRCLyrics() {
-        if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-            showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName));
+        if (LyricUtil.isLrcFileExist(song.getTitle(), song.getArtistName())) {
+            showLyricsLocal(LyricUtil.getLocalLyricFile(song.getTitle(), song.getArtistName()));
         }
     }
 
@@ -150,7 +150,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         disposable = new CompositeDisposable();
 
         lyricView
-                .setOnPlayerClickListener((progress, content) -> MusicPlayerRemote.seekTo((int) progress));
+                .setOnPlayerClickListener((progress, content) -> MusicPlayerRemote.INSTANCE.seekTo((int) progress));
         //lyricView.setHighLightTextColor(ThemeStore.accentColor(this));
         lyricView.setDefaultColor(ContextCompat.getColor(this, R.color.md_grey_400));
         //lyricView.setTouchable(false);
@@ -205,9 +205,9 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     }
 
     private void loadLrcFile() {
-        song = MusicPlayerRemote.getCurrentSong();
-        bottomAppBar.setTitle(song.title);
-        bottomAppBar.setSubtitle(song.artistName);
+        song = MusicPlayerRemote.INSTANCE.getCurrentSong();
+        bottomAppBar.setTitle(song.getTitle());
+        bottomAppBar.setSubtitle(song.getArtistName());
         SongGlideRequest.Builder.from(Glide.with(this), song)
                 .checkIgnoreMediaStore(this)
                 .generatePalette(this)
@@ -254,7 +254,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
         if (updateLyricsAsyncTask != null) {
             updateLyricsAsyncTask.cancel(false);
         }
-        final Song song = MusicPlayerRemote.getCurrentSong();
+        final Song song = MusicPlayerRemote.INSTANCE.getCurrentSong();
         updateLyricsAsyncTask = new AsyncTask<Void, Void, Lyrics>() {
             @Override
             protected Lyrics doInBackground(Void... params) {
@@ -292,7 +292,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
     private void showSyncedLyrics() {
         String content = "";
         try {
-            content = LyricUtil.getStringFromFile(song.title, song.artistName);
+            content = LyricUtil.getStringFromFile(song.getTitle(), song.getArtistName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -302,21 +302,21 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
                 .content("Add time frame lyrics")
                 .negativeText("Delete")
                 .onNegative((dialog, which) -> {
-                    LyricUtil.deleteLrcFile(song.title, song.artistName);
+                    LyricUtil.deleteLrcFile(song.getTitle(), song.getArtistName());
                     loadLrcFile();
                 })
                 .onNeutral(
                         (dialog, which) -> RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchLrcUrl()))
                 .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
                 .input("Paste lyrics here", content, (dialog, input) -> {
-                    LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString());
+                    LyricUtil.writeLrcToLoc(song.getTitle(), song.getArtistName(), input.toString());
                     loadLrcFile();
                 }).show();
     }
 
     private String getGoogleSearchLrcUrl() {
         String baseUrl = "http://www.google.com/search?";
-        String query = song.title + "+" + song.artistName;
+        String query = song.getTitle() + "+" + song.getArtistName();
         query = "q=" + query.replace(" ", "+") + " .lrc";
         baseUrl += query;
         return baseUrl;
@@ -335,7 +335,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
                 .onNeutral(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchUrl(song.title, song.artistName));
+                        RetroUtil.openUrl(LyricsActivity.this, getGoogleSearchUrl(song.getTitle(), song.getArtistName()));
                     }
                 })
                 .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE)
@@ -353,7 +353,7 @@ public class LyricsActivity extends AbsMusicServiceActivity implements
 
     private ArrayList<String> getSongPaths(Song song) {
         ArrayList<String> paths = new ArrayList<>(1);
-        paths.add(song.data);
+        paths.add(song.getData());
         return paths;
     }
 

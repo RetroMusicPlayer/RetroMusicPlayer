@@ -19,18 +19,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"
+                android:layout_gravity="center_vertical"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways"
+                tools:ignore="UnusedAttribute">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:id="@+id/bannerTitle"
+                    style="@style/BigTitleTextAppearanceToolbar"
+                    android:text="@string/app_name"
+                    tools:ignore="MissingPrefix" />
+
+                <code.name.monkey.retromusic.views.CircularImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    app:civ_border="false" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/horizontal_margin"
             android:layout_marginEnd="@dimen/horizontal_margin"
-            android:layout_weight="1"
-            app:behavior_overlapTop="24dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:id="@+id/content_container"
+                android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:descendantFocusability="blocksDescendants"
@@ -38,38 +65,6 @@
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
 
-                <com.google.android.material.appbar.AppBarLayout
-                    android:id="@+id/app_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:elevation="0dp"
-                    app:elevation="0dp">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:ignore="UnusedAttribute">
-
-                        <code.name.monkey.retromusic.views.IconImageView
-                            android:id="@+id/searchIcon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="14dp"
-                            app:srcCompat="@drawable/ic_search_white_24dp" />
-
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            style="@style/BigTitleTextAppearanceToolbar"
-                            android:text="@string/app_name" />
-
-                        <code.name.monkey.retromusic.views.CircularImageView
-                            android:id="@+id/user_image"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="16dp"
-                            app:civ_border="false" />
-                    </FrameLayout>
-                </com.google.android.material.appbar.AppBarLayout>
 
                 <include layout="@layout/abs_playlists" />
 

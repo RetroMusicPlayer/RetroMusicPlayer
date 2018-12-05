@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
@@ -30,7 +31,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
-import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.Contributor;
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
@@ -38,7 +38,10 @@ import code.name.monkey.retromusic.ui.adapter.ContributorAdapter;
 import code.name.monkey.retromusic.util.NavigationUtil;
 
 import static code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK;
+import static code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK;
 import static code.name.monkey.retromusic.Constants.APP_TWITTER_LINK;
+import static code.name.monkey.retromusic.Constants.DISCORD_LINK;
+import static code.name.monkey.retromusic.Constants.FAQ_LINK;
 import static code.name.monkey.retromusic.Constants.GITHUB_PROJECT;
 import static code.name.monkey.retromusic.Constants.GOOGLE_PLUS_COMMUNITY;
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
@@ -115,13 +118,13 @@ public class AboutActivity extends AbsBaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.faq_link:
-                openUrl(Constants.FAQ_LINK);
+                openUrl(FAQ_LINK);
                 break;
             case R.id.telegram_link:
-                openUrl(Constants.APP_TELEGRAM_LINK);
+                openUrl(APP_TELEGRAM_LINK);
                 break;
             case R.id.discord_link:
-                openUrl(Constants.DISCORD_LINK);
+                openUrl(DISCORD_LINK);
                 break;
             case R.id.app_github:
                 openUrl(GITHUB_PROJECT);
@@ -200,7 +203,7 @@ public class AboutActivity extends AbsBaseActivity {
         }.getType();
         List<Contributor> contributors = new Gson().fromJson(data, type);
 
-        ContributorAdapter contributorAdapter = new ContributorAdapter(contributors);
+        ContributorAdapter contributorAdapter = new ContributorAdapter((ArrayList<Contributor>) contributors);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(contributorAdapter);

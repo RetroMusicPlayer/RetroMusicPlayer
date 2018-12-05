@@ -8,7 +8,7 @@
     android:focusable="true">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/gradient_background"
+        android:id="@+id/colorBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
@@ -73,8 +73,8 @@
                 tools:background="@color/md_red_A700">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
-                    style="@style/Toolbar48"
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:layout_height="48dp"
                     android:navigationIcon="@drawable/ic_close_white_24dp"
                     app:navigationIcon="@drawable/ic_close_white_24dp" />

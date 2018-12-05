@@ -26,11 +26,11 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48" />
+                style="@style/Toolbar" />
         </FrameLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/content"
+            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -49,7 +49,7 @@
                     android:orientation="horizontal">
 
                     <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/artist_image"
+                        android:id="@+id/artistImage"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:layout_marginStart="8dp"
@@ -65,8 +65,8 @@
                         android:padding="16dp">
 
                         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/title"
-                            fontPath="@string/circular_std_black"
+                            android:id="@+id/albumTitle"
+                            android:textStyle="bold"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
@@ -74,7 +74,7 @@
                             tools:ignore="MissingPrefix" />
 
                         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                            android:id="@+id/text"
+                            android:id="@+id/albumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -100,7 +100,7 @@
     </LinearLayout>
 
     <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/action_shuffle_all"
+        android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

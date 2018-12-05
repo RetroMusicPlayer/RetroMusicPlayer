@@ -1,13 +1,12 @@
 package code.name.monkey.retromusic.mvp.presenter;
 
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.mvp.Presenter;
 import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract;
-
-import static code.name.monkey.retromusic.ui.activities.ArtistDetailActivity.EXTRA_ARTIST_ID;
+import code.name.monkey.retromusic.ui.activities.ArtistDetailActivity;
 
 
 /**
@@ -38,7 +37,7 @@ public class ArtistDetailsPresenter extends Presenter implements ArtistDetailCon
 
     @Override
     public void loadArtistById() {
-        disposable.add(repository.getArtistById(bundle.getInt(EXTRA_ARTIST_ID))
+        disposable.add(repository.getArtistById(bundle.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID))
                 .subscribeOn(schedulerProvider.computation())
                 .observeOn(schedulerProvider.ui())
                 .doOnSubscribe(disposable1 -> view.loading())

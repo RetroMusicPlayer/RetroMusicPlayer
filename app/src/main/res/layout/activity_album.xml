@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@android:color/transparent"
@@ -40,13 +40,13 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48"
+                style="@style/Toolbar"
                 app:layout_collapseMode="pin" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/content"
+        android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_circular_top_corners"
@@ -65,7 +65,7 @@
                 android:padding="12dp">
 
                 <code.name.monkey.retromusic.views.CircularImageView
-                    android:id="@+id/artist_image"
+                    android:id="@+id/artistImage"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:layout_weight="0"
@@ -81,8 +81,8 @@
                     android:paddingEnd="0dp">
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/title"
-                        fontPath="@string/circular_std_black"
+                        android:id="@+id/albumTitle"
+                        android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
@@ -90,7 +90,7 @@
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                        android:id="@+id/text"
+                        android:id="@+id/albumText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -117,7 +117,7 @@
 
 
     <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/action_shuffle_all"
+        android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

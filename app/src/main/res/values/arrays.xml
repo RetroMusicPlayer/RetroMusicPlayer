@@ -105,7 +105,6 @@
 
     <array name="pref_album_detail_style_values">
         <item>@layout/activity_album</item>
-        <item>@layout/activity_album_style_2</item>
     </array>
 
     <string-array name="pref_playlists_last_added_interval_titles">
@@ -201,7 +200,6 @@
 
     <array name="pref_album_details_style_layout">
         <item>@layout/activity_album</item>
-        <item>@layout/activity_album_small</item>
     </array>
 
     <string-array name="pref_album_details_style_values">

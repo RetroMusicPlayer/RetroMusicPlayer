@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -102,7 +103,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation "androidx.fragment:fragment:$supportLibVersion"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
     implementation "androidx.gridlayout:gridlayout:$supportLibVersion"
     implementation "androidx.cardview:cardview:$supportLibVersion"
@@ -112,14 +113,18 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v13:$supportLibVersion"
     implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
+
     //For casting
     implementation 'androidx.mediarouter:mediarouter:1.0.0'
     implementation 'com.google.android.gms:play-services-cast-framework:16.1.0'
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+
     implementation "com.jakewharton:butterknife:$butterKnife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnife"
+    kapt "com.jakewharton:butterknife-compiler:$butterKnife"
+
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"
     implementation 'com.afollestad:material-cab:0.1.12'
@@ -135,8 +140,8 @@ dependencies {
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+
     /*UI Library*/
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     /*Backend all*/
@@ -144,10 +149,8 @@ dependencies {
     implementation 'com.github.hannesa2:AndroidSlidingUpPanel:3.5.0'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
- 
 }
 repositories {
     mavenCentral()

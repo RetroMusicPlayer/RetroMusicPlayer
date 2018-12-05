@@ -8,7 +8,7 @@
     android:focusable="true">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/gradient_background"
+        android:id="@+id/colorBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
@@ -36,14 +36,20 @@
                 android:orientation="vertical">
 
                 <FrameLayout
-                    android:id="@+id/toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/status_bar" />
+                </FrameLayout>
+
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0">
 
                     <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/player_toolbar"
-                        style="@style/Toolbar48"
+                        android:id="@+id/playerToolbar"
+                        style="@style/Toolbar"
                         android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
                         app:contentInsetLeft="0dp"
                         app:contentInsetStart="0dp"
@@ -56,14 +62,13 @@
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/album_cover_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1">
 
                     <fragment
-                        android:id="@+id/player_album_cover_fragment"
+                        android:id="@+id/playerAlbumCoverFragment"
                         android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -77,7 +82,7 @@
                 android:layout_gravity="bottom">
 
                 <fragment
-                    android:id="@+id/playback_controls_fragment"
+                    android:id="@+id/playbackControlsFragment"
                     android:name="code.name.monkey.retromusic.ui.fragments.player.cardblur.CardBlurPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -15,7 +15,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
@@ -31,7 +31,7 @@ public class ArtistGlideRequest {
 
     private static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Artist artist,
                                                          boolean noCustomImage, boolean forceDownload) {
-        boolean hasCustomImage = CustomArtistImageUtil.getInstance(RetroApplication.getInstance())
+        boolean hasCustomImage = CustomArtistImageUtil.getInstance(App.Companion.getInstance())
                 .hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {
             return requestManager.load(new ArtistImage(artist.getName(), forceDownload));
@@ -41,7 +41,7 @@ public class ArtistGlideRequest {
     }
 
     private static Key createSignature(Artist artist) {
-        return ArtistSignatureUtil.getInstance(RetroApplication.getInstance())
+        return ArtistSignatureUtil.getInstance(App.Companion.getInstance())
                 .getArtistSignature(artist.getName());
     }
 

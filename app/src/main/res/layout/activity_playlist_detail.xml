@@ -20,14 +20,14 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="@dimen/card_elevation"
             app:elevation="@dimen/card_elevation">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
+                android:id="@+id/collapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
@@ -44,13 +44,13 @@
 
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
-                        style="@style/Toolbar48"
+                        style="@style/Toolbar"
                         app:layout_collapseMode="pin"
                         app:title=""
                         tools:ignore="UnusedAttribute">
 
                         <TextView
-                            android:id="@+id/title"
+                            android:id="@+id/bannerTitle"
                             style="@style/BigTitleTextAppearance" />
 
                     </androidx.appcompat.widget.Toolbar>
@@ -65,7 +65,7 @@
 
 
         <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
@@ -85,7 +85,7 @@
             android:visibility="gone" />
 
         <code.name.monkey.retromusic.views.CollapsingFAB
-            android:id="@+id/action_shuffle"
+            android:id="@+id/actionShuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

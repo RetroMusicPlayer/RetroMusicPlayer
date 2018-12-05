@@ -47,7 +47,7 @@ public final class FileUtil {
     @NonNull
     public static Observable<ArrayList<Song>> matchFilesWithMediaStore(@NonNull Context context,
                                                                        @Nullable List<File> files) {
-        return SongLoader.Companion.getSongs(makeSongCursor(context, files));
+        return SongLoader.INSTANCE.getSongs(makeSongCursor(context, files));
     }
 
     public static String safeGetCanonicalPath(File file) {
@@ -75,7 +75,7 @@ public final class FileUtil {
             }
         }
 
-        Cursor songCursor = SongLoader.Companion.makeSongCursor(context, selection, selection == null ? null : paths);
+        Cursor songCursor = SongLoader.INSTANCE.makeSongCursor(context, selection, selection == null ? null : paths);
 
         return songCursor == null ? null
                 : new SortedCursor(songCursor, paths, MediaStore.Audio.AudioColumns.DATA);

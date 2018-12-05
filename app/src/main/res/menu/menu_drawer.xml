@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/navigation_drawer_menu_category_sections"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_white_24dp"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_library"
+            android:icon="@drawable/ic_library_music_white_24dp"
+            android:title="@string/library" />
+        <item
+            android:id="@+id/nav_folders"
+            android:icon="@drawable/ic_folder_white_24dp"
+            android:title="@string/folders" />
+    </group>
+
+    <group
+        android:id="@+id/navigation_drawer_menu_category_buy_pro"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/buy_pro"
+            android:icon="@drawable/ic_card_giftcard_white_24dp"
+            android:title="@string/buy_pro" />
+    </group>
+</menu>

@@ -9,11 +9,12 @@
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
-        fontPath="@string/circular_std_black"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:padding="6dp"
+        android:padding="12dp"
+
         android:text="@string/rename_playlist_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="?android:attr/textColorPrimary"

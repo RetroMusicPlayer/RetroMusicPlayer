@@ -245,10 +245,10 @@ public class AlbumTagEditorActivity extends AbsTagEditorActivity implements Text
     @NonNull
     @Override
     protected List<String> getSongPaths() {
-        ArrayList<Song> songs = AlbumLoader.getAlbum(this, getId()).blockingFirst().songs;
+        ArrayList<Song> songs = AlbumLoader.Companion.getAlbum(this, getId()).blockingFirst().getSongs();
         ArrayList<String> paths = new ArrayList<>(songs.size());
         for (Song song : songs) {
-            paths.add(song.data);
+            paths.add(song.getData());
         }
         return paths;
     }

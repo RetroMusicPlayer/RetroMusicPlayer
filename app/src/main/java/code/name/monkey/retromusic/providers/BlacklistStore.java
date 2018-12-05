@@ -16,6 +16,8 @@ import code.name.monkey.retromusic.Constants;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
+import static code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED;
+
 public class BlacklistStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "blacklist.db";
     private static final int VERSION = 2;
@@ -125,7 +127,7 @@ public class BlacklistStore extends SQLiteOpenHelper {
     }
 
     private void notifyMediaStoreChanged() {
-        context.sendBroadcast(new Intent(Constants.MEDIA_STORE_CHANGED));
+        context.sendBroadcast(new Intent(MEDIA_STORE_CHANGED));
     }
 
     @NonNull

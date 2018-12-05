@@ -48,7 +48,7 @@
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
-        fontPath="@string/circular_std_black"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ellipsize="end"

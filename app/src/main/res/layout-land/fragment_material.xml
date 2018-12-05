@@ -70,8 +70,7 @@
 
                         <androidx.appcompat.widget.Toolbar
                             android:id="@+id/player_toolbar"
-                            style="@style/Toolbar48"
-                            android:layout_height="48dp"
+                            style="@style/Toolbar"
                             android:layout_gravity="bottom"
                             android:navigationIcon="@drawable/ic_close_white_24dp"
                             app:navigationIcon="@drawable/ic_close_white_24dp" />

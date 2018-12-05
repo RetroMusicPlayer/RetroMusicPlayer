@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="8dp"
     android:orientation="vertical">
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-        android:id="@+id/title"
+        android:id="@+id/bannerTitle"
         style="@style/SubTitleTextAppearance"
         android:padding="12dp"
         android:text="@string/remove_song_from_playlist_title" />
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-        android:id="@+id/action_remove"
+        android:id="@+id/actionRemove"
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +20,7 @@
         android:text="@string/remove_action" />
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-        android:id="@+id/action_cancel"
+        android:id="@+id/actionCancel"
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -29,14 +29,14 @@ public class SongGlideRequest {
   static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Song song,
       boolean ignoreMediaStore) {
     if (ignoreMediaStore) {
-      return requestManager.load(new AudioFileCover(song.data));
+      return requestManager.load(new AudioFileCover(song.getData()));
     } else {
-      return requestManager.loadFromMediaStore(MusicUtil.getMediaStoreAlbumCoverUri(song.albumId));
+      return requestManager.loadFromMediaStore(MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId()));
     }
   }
 
   static Key createSignature(Song song) {
-    return new MediaStoreSignature("", song.dateModified, 0);
+    return new MediaStoreSignature("", song.getDateModified(), 0);
   }
 
   public static class Builder {
