@@ -70,8 +70,7 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
 
     class CollageSongViewHolder extends MediaEntryViewHolder {
 
-        @BindViews({R.id.image_2, R.id.image_3, R.id.image_4, R.id.image_5, R.id.image_6,
-                R.id.image_7, R.id.image_8, R.id.image_9})
+        @BindViews({R.id.image_2, R.id.image_3, R.id.image_4, R.id.image_5, R.id.image_6, R.id.image_7, R.id.image_8, R.id.image_9})
         @Nullable
         List<ImageView> imageViews;
 
@@ -80,14 +79,12 @@ public class CollageSongAdapter extends RecyclerView.Adapter<CollageSongViewHold
 
         CollageSongViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
-            Context context = itemView.getContext();
-            int color = ThemeStore.accentColor(context);
-            view.setOnClickListener(v -> {
-                MusicPlayerRemote.INSTANCE.openQueue(dataSet, 0, true);
-            });
-            view.setBackgroundColor(color);
-            view.setTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)));
+            //ButterKnife.bind(this, itemView);
+            //Context context = itemView.getContext();
+            //int color = ThemeStore.accentColor(context);
+            //view.setOnClickListener(v -> MusicPlayerRemote.INSTANCE.openQueue(dataSet, 0, true));
+            //view.setBackgroundColor(color);
+            //view.setTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)));
         }
 
         void bindSongs() {

@@ -36,7 +36,7 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
         positionFinal--
 
         var long: Long = 0
-        if (position < 0) {
+        if (positionFinal < 0) {
             long = -2
         } else {
             if (dataSet[positionFinal] is PlaylistSong) {

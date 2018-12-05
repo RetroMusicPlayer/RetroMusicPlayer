@@ -6,40 +6,17 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
+import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
 import java.util.*
 
 
 class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
-    @BindView(R.id.action_remove)
-    internal var remove: TextView? = null
-
-    @BindView(R.id.title)
-    internal var title: TextView? = null
-
-    @BindView(R.id.action_cancel)
-    internal var cancel: TextView? = null
-
-    @OnClick(R.id.action_cancel, R.id.action_remove)
-    internal fun actions(view: View) {
-        val songs = arguments!!.getParcelableArrayList<PlaylistSong>("songs")
-        when (view.id) {
-            R.id.action_remove -> {
-                if (activity == null)
-                    return
-                PlaylistsUtil.removeFromPlaylist(activity!!, songs!!)
-            }
-        }
-        dismiss()
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout = inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
@@ -64,12 +41,17 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             title = R.string.remove_song_from_playlist_title
             content = Html.fromHtml(getString(R.string.remove_song_x_from_playlist, songs!![0].title))
         }
-        this.remove!!.text = content
-        this.title!!.setText(title)
+        actionRemove.text = content
+        bannerTitle.setText(title)
 
-        this.title!!.setTextColor(ThemeStore.textColorPrimary(context!!))
-        this.remove!!.setTextColor(ThemeStore.textColorSecondary(context!!))
-        this.cancel!!.setTextColor(ThemeStore.textColorSecondary(context!!))
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        actionRemove.setTextColor(ThemeStore.textColorSecondary(context!!))
+        actionCancel.setTextColor(ThemeStore.textColorSecondary(context!!))
+
+        actionRemove.setOnClickListener {
+            PlaylistsUtil.removeFromPlaylist(activity!!, songs)
+        }
+        actionCancel.setOnClickListener { dismiss() }
     }
 
     companion object {

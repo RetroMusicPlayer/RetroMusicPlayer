@@ -32,8 +32,6 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         private set
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
 
-    protected var toolbar: Toolbar? = null
-
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -146,6 +144,8 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         MusicUtil.toggleFavorite(activity!!, song)
     }
 
+    abstract fun toolbarGet(): Toolbar
+
     abstract fun onShow()
 
     abstract fun onHide()
@@ -193,7 +193,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                     else
                         R.drawable.ic_favorite_border_white_24dp
                     val drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor())
-                    //toolbar!!.menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
+                    toolbarGet().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
                 }
             }
         }.execute(MusicPlayerRemote.currentSong)

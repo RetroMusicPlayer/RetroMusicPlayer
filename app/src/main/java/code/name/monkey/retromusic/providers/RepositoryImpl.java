@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import code.name.monkey.retromusic.Injection;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.loaders.AlbumLoader;
 import code.name.monkey.retromusic.loaders.ArtistLoader;
 import code.name.monkey.retromusic.loaders.GenreLoader;
@@ -41,7 +41,7 @@ public class RepositoryImpl implements Repository {
 
     public static synchronized RepositoryImpl getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new RepositoryImpl(RetroApplication.Companion.getInstance());
+            INSTANCE = new RepositoryImpl(App.Companion.getInstance());
         }
         return INSTANCE;
     }

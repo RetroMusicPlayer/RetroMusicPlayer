@@ -9,7 +9,7 @@ import android.widget.Toast
 import java.util.ArrayList
 
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroApplication
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
 import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
@@ -76,8 +76,8 @@ object PlaylistMenuHelper {
     private class SavePlaylistAsyncTask internal constructor(context: Context) : WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {
-            return String.format(RetroApplication.instance.applicationContext.getString(R.string
-                    .saved_playlist_to), PlaylistsUtil.savePlaylist(RetroApplication.instance.applicationContext, params[0]).blockingFirst())
+            return String.format(App.instance.applicationContext.getString(R.string
+                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.instance.applicationContext, params[0]).blockingFirst())
         }
 
         override fun onPostExecute(string: String) {

@@ -119,7 +119,7 @@ object SongLoader {
             val song: Song = if (cursor != null && cursor.moveToFirst()) {
                 getSongFromCursorImpl(cursor)
             } else {
-                Song.EMPTY_SONG
+                Song.emptySong
             }
             cursor?.close()
             e.onNext(song)

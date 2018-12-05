@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -12,18 +13,22 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment
+import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
 class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+    override fun toolbarGet(): Toolbar {
+        return playerToolbar
+    }
+
     private var lastColor: Int = 0
-    lateinit var playbackControlsFragment: AdaptivePlaybackControlsFragment
+    private lateinit var playbackControlsFragment: AdaptivePlaybackControlsFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_adaptive_player, container, false);
+        return inflater.inflate(R.layout.fragment_adaptive_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar = view.findViewById(R.id.toolbar)
         setUpSubFragments()
         setUpPlayerToolbar()
     }
@@ -31,19 +36,21 @@ class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
     private fun setUpSubFragments() {
         playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playback_controls_fragment) as AdaptivePlaybackControlsFragment
         val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.player_album_cover_fragment) as PlayerAlbumCoverFragment
-        playerAlbumCoverFragment.setCallbacks(this)
-        playerAlbumCoverFragment.removeSlideEffect()
+        playerAlbumCoverFragment.apply {
+            removeSlideEffect()
+        }.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
-        val primaryColor = ATHUtil.resolveColor(context, R.attr.iconColor)
-        /*toolbar!!.apply {
+        ATHUtil.resolveColor(context, R.attr.iconColor)
+        val primaryColor = ThemeStore.primaryColor(context!!)
+        playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { activity!!.onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, activity)
             setTitleTextColor(primaryColor)
             setSubtitleTextColor(ThemeStore.textColorSecondary(context!!))
-        }.setOnMenuItemClickListener(this)*/
+        }.setOnMenuItemClickListener(this)
     }
 
     override fun onServiceConnected() {
@@ -59,10 +66,10 @@ class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        /*toolbar!!.apply {
+        playerToolbar.apply {
             title = song.title
             subtitle = song.artistName
-        }*/
+        }
     }
 
     override fun toggleFavorite(song: Song) {
@@ -80,7 +87,7 @@ class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
         playbackControlsFragment.setDark(color)
         lastColor = color
         callbacks!!.onPaletteColorChanged()
-        //ToolbarContentTintHelper.colorizeToolbar(toolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
     }
 
     override fun onShow() {

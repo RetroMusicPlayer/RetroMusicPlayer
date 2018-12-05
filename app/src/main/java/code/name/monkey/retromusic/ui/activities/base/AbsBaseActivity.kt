@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.activities.base
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioManager
@@ -15,17 +14,16 @@ import androidx.core.app.ActivityCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import com.google.android.material.snackbar.Snackbar
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 abstract class AbsBaseActivity : AbsThemeActivity() {
     private var hadPermissions: Boolean = false
-    private var permissions: Array<String>? = null
+    private lateinit var permissions: Array<String>
     private var permissionDeniedMessage: String? = null
 
 
-    open fun getPermissionsToRequest(): Array<String>? {
-        return null
+    open fun getPermissionsToRequest(): Array<String> {
+        return arrayOf()
     }
 
     protected fun setPermissionDeniedMessage(message: String) {
@@ -82,20 +80,16 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     protected fun showOverflowMenu() {
 
     }
-
-    override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase))
-    }
-
+    
     protected open fun requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(permissions!!, PERMISSION_REQUEST)
+            requestPermissions(permissions, PERMISSION_REQUEST)
         }
     }
 
     protected fun hasPermissions(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (permission in permissions!!) {
+            for (permission in permissions) {
                 if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
                     return false
                 }

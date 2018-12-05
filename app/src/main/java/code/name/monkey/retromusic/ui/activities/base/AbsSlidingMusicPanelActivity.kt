@@ -21,6 +21,10 @@ import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.ui.fragments.player.blur.BlurPlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.card.CardFragment
+import code.name.monkey.retromusic.ui.fragments.player.cardblur.CardBlurFragment
+import code.name.monkey.retromusic.ui.fragments.player.fit.FitFragment
+import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -58,7 +62,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         slidingUpPanelLayout = findViewById(R.id.sliding_layout);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        choosFragmentForTheme()
+        chooseFragmentForTheme()
         setupSlidingUpPanel()
     }
 
@@ -207,22 +211,23 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         miniPlayerFragment!!.view!!.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
     }
 
-    private fun choosFragmentForTheme() {
+    private fun chooseFragmentForTheme() {
         currentNowPlayingScreen = PreferenceUtil.getInstance().nowPlayingScreen
 
-        val fragment: Fragment // must implement AbsPlayerFragment
-        when (currentNowPlayingScreen) {
-            NowPlayingScreen.BLUR -> fragment = BlurPlayerFragment()
-            NowPlayingScreen.ADAPTIVE -> fragment = AdaptiveFragment()
-            else -> fragment = AdaptiveFragment()
-        }
+        val fragment: Fragment = when (currentNowPlayingScreen) {
+            NowPlayingScreen.BLUR -> BlurPlayerFragment()
+            NowPlayingScreen.ADAPTIVE -> AdaptiveFragment()
+            NowPlayingScreen.NORMAL -> PlayerFragment()
+            NowPlayingScreen.CARD -> CardFragment()
+            NowPlayingScreen.BLUR_CARD -> CardBlurFragment()
+            NowPlayingScreen.FIT -> FitFragment()
+            else -> PlayerFragment()
+        } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.player_fragment_container, fragment).commit()
         supportFragmentManager.executePendingTransactions()
 
-        playerFragment = supportFragmentManager.findFragmentById(R.id.player_fragment_container) as AbsPlayerFragment?
-        miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.mini_player_fragment) as MiniPlayerFragment?
-
-
+        playerFragment = supportFragmentManager.findFragmentById(R.id.player_fragment_container) as AbsPlayerFragment
+        miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.mini_player_fragment) as MiniPlayerFragment
         miniPlayerFragment!!.view!!.setOnClickListener { expandPanel() }
 
     }
@@ -296,6 +301,6 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
 
     companion object {
 
-        val TAG = AbsSlidingMusicPanelActivity::class.java.simpleName
+        val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 }

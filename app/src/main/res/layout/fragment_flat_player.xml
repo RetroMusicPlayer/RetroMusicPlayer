@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <View
-        android:id="@+id/gradient_background"
+        android:id="@+id/colorGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -33,26 +33,24 @@
             </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/toolbar_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
-                    style="@style/Toolbar48"
-                    android:layout_height="48dp"
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
                     android:navigationIcon="@drawable/ic_close_white_24dp"
                     app:navigationIcon="@drawable/ic_close_white_24dp" />
             </FrameLayout>
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/album_cover_container"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <fragment
-                    android:id="@+id/player_album_cover_fragment"
+                    android:id="@+id/playerAlbumCoverFragment"
                     android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -65,7 +63,7 @@
                 android:layout_weight="1">
 
                 <fragment
-                    android:id="@+id/playback_controls_fragment"
+                    android:id="@+id/playbackControlsFragment"
                     android:name="code.name.monkey.retromusic.ui.fragments.player.flat.FlatPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

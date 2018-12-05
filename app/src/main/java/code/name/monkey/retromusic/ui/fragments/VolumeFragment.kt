@@ -47,19 +47,19 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
         val audioManager = audioManager
         if (audioManager != null) {
-            volumeSeekBar!!.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            volumeSeekBar!!.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+            volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+            volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
         }
-        volumeSeekBar!!.setOnSeekBarChangeListener(this)
+        volumeSeekBar.setOnSeekBarChangeListener(this)
     }
 
     override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
         if (volumeSeekBar == null) {
             return
         }
-        volumeSeekBar!!.max = maxVolume
-        volumeSeekBar!!.progress = currentVolume
-        volumeDown!!.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
+        volumeSeekBar.max = maxVolume
+        volumeSeekBar.progress = currentVolume
+        volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
     }
 
     override fun onDestroyView() {
@@ -98,9 +98,9 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     private fun setProgressBarColor(newColor: Int) {
-        TintHelper.setTintAuto(volumeSeekBar!!, newColor, false)
-        volumeDown!!.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-        volumeUp!!.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        TintHelper.setTintAuto(volumeSeekBar, newColor, false)
+        volumeDown.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setTintable(color: Int) {
@@ -108,7 +108,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun removeThumb() {
-        volumeSeekBar!!.thumb = null
+        volumeSeekBar.thumb = null
     }
 
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {

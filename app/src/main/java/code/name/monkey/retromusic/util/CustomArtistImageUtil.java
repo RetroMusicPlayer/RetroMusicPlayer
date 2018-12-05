@@ -22,7 +22,7 @@ import java.io.OutputStream;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.model.Artist;
 
 
@@ -55,12 +55,12 @@ public class CustomArtistImageUtil {
     }
 
     public static File getFile(Artist artist) {
-        File dir = new File(RetroApplication.Companion.getInstance().getFilesDir(), FOLDER_NAME);
+        File dir = new File(App.Companion.getInstance().getFilesDir(), FOLDER_NAME);
         return new File(dir, getFileName(artist));
     }
 
     public void setCustomArtistImage(final Artist artist, Uri uri) {
-        Glide.with(RetroApplication.Companion.getInstance())
+        Glide.with(App.Companion.getInstance())
                 .load(uri)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -70,7 +70,7 @@ public class CustomArtistImageUtil {
                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
                         super.onLoadFailed(e, errorDrawable);
                         e.printStackTrace();
-                        Toast.makeText(RetroApplication.Companion.getInstance(), e.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(App.Companion.getInstance(), e.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     @SuppressLint("StaticFieldLeak")
@@ -80,7 +80,7 @@ public class CustomArtistImageUtil {
                             @SuppressLint("ApplySharedPref")
                             @Override
                             protected Void doInBackground(Void... params) {
-                                File dir = new File(RetroApplication.Companion.getInstance().getFilesDir(), FOLDER_NAME);
+                                File dir = new File(App.Companion.getInstance().getFilesDir(), FOLDER_NAME);
                                 if (!dir.exists()) {
                                     if (!dir.mkdirs()) { // create the folder
                                         return null;
@@ -94,13 +94,13 @@ public class CustomArtistImageUtil {
                                     succesful = ImageUtil.resizeBitmap(resource, 2048).compress(Bitmap.CompressFormat.JPEG, 100, os);
                                     os.close();
                                 } catch (IOException e) {
-                                    Toast.makeText(RetroApplication.Companion.getInstance(), e.toString(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(App.Companion.getInstance(), e.toString(), Toast.LENGTH_LONG).show();
                                 }
 
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit();
-                                    ArtistSignatureUtil.getInstance(RetroApplication.Companion.getInstance()).updateArtistSignature(artist.getName());
-                                    RetroApplication.Companion.getInstance().getContentResolver().notifyChange(Uri.parse("content://media"), null); // trigger media store changed to force artist image reload
+                                    ArtistSignatureUtil.getInstance(App.Companion.getInstance()).updateArtistSignature(artist.getName());
+                                    App.Companion.getInstance().getContentResolver().notifyChange(Uri.parse("content://media"), null); // trigger media store changed to force artist image reload
                                 }
                                 return null;
                             }
@@ -116,8 +116,8 @@ public class CustomArtistImageUtil {
             @Override
             protected Void doInBackground(Void... params) {
                 mPreferences.edit().putBoolean(getFileName(artist), false).commit();
-                ArtistSignatureUtil.getInstance(RetroApplication.Companion.getInstance()).updateArtistSignature(artist.getName());
-                RetroApplication.Companion.getInstance().getContentResolver().notifyChange(Uri.parse("content://media"), null); // trigger media store changed to force artist image reload
+                ArtistSignatureUtil.getInstance(App.Companion.getInstance()).updateArtistSignature(artist.getName());
+                App.Companion.getInstance().getContentResolver().notifyChange(Uri.parse("content://media"), null); // trigger media store changed to force artist image reload
 
                 File file = getFile(artist);
                 if (!file.exists()) {

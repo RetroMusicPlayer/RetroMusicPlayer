@@ -138,7 +138,7 @@ abstract class AbsMusicServiceActivity : AbsCastActivity(), MusicServiceEventLis
     }
 
 
-    override fun getPermissionsToRequest(): Array<String>? {
+    override fun getPermissionsToRequest(): Array<String> {
         return arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
@@ -163,6 +163,6 @@ abstract class AbsMusicServiceActivity : AbsCastActivity(), MusicServiceEventLis
     }
 
     companion object {
-        val TAG = AbsMusicServiceActivity::class.java.simpleName
+        val TAG: String = AbsMusicServiceActivity::class.java.simpleName
     }
 }

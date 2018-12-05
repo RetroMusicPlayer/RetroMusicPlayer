@@ -40,7 +40,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -74,8 +73,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         AppBarLayout.OnOffsetChangedListener, LoaderManager.LoaderCallbacks<List<File>> {
 
     public static final String TAG = FoldersFragment.class.getSimpleName();
-    public static final FileFilter AUDIO_FILE_FILTER = file -> !file.isHidden() && (file.isDirectory()
-            ||
+    public static final FileFilter AUDIO_FILE_FILTER = file -> !file.isHidden() && (file.isDirectory() ||
             FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
@@ -83,30 +81,18 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final String PATH = "path";
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
-    @BindView(R.id.coordinator_layout)
-    View coordinatorLayout;
 
-    @BindView(R.id.container)
-    View container;
+    private View coordinatorLayout, container, empty;
 
-    @BindView(R.id.title)
-    TextView title;
+    private TextView title;
 
-    @BindView(android.R.id.empty)
-    View empty;
+    private Toolbar toolbar;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    private BreadCrumbLayout breadCrumbs;
 
-    @BindView(R.id.bread_crumbs)
-    BreadCrumbLayout breadCrumbs;
+    private AppBarLayout appBarLayout;
 
-    @BindView(R.id.app_bar)
-    AppBarLayout appbar;
-
-    @BindView(R.id.recycler_view)
-    FastScrollRecyclerView recyclerView;
-
+    private FastScrollRecyclerView recyclerView;
 
     private Comparator<File> fileComparator = (lhs, rhs) -> {
         if (lhs.isDirectory() && !rhs.isDirectory()) {
@@ -118,10 +104,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     (rhs.getName());
         }
     };
-    private Unbinder unbinder;
     private SongFileAdapter adapter;
     private MaterialCab cab;
-
     public FoldersFragment() {
     }
 
@@ -160,6 +144,17 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             e.printStackTrace();
             return file;
         }
+    }
+
+    private void initViews(View view) {
+        coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        appBarLayout = view.findViewById(R.id.appBarLayout);
+        breadCrumbs = view.findViewById(R.id.breadCrumbs);
+        toolbar = view.findViewById(R.id.toolbar);
+        empty = view.findViewById(android.R.id.empty);
+        title = view.findViewById(R.id.bannerTitle);
+        container = view.findViewById(R.id.container);
     }
 
     private void setCrumb(BreadCrumbLayout.Crumb crumb, boolean addToHistory) {
@@ -215,15 +210,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_folder, container, false);
-        unbinder = ButterKnife.bind(this, view);
+        initViews(view);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         setStatusbarColorAuto(view);
-        //getMainActivity().getSlidingUpPanelLayout().setShadowHeight(0);
-
         setUpAppbarColor();
         setUpBreadCrumbs();
         setUpRecyclerView();
@@ -238,18 +231,17 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         int primaryColor = ThemeStore.primaryColor(getContext());
 
 
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         //noinspection ConstantConditions
         getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> getActivity().onBackPressed());
         TintHelper.setTintAuto(container, primaryColor, true);
-        appbar.setBackgroundColor(primaryColor);
+        appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(primaryColor);
 
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
-        appbar.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
     }
 
     private void setUpBreadCrumbs() {
@@ -261,7 +253,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         ViewUtil.setUpFastScrollRecyclerViewColor(getActivity(), recyclerView,
                 ThemeStore.accentColor(getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        appbar.addOnOffsetChangedListener(this);
+        appBarLayout.addOnOffsetChangedListener(this);
     }
 
     private void setUpAdapter() {
@@ -286,8 +278,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onDestroyView() {
-        appbar.removeOnOffsetChangedListener(this);
-        unbinder.unbind();
+        appBarLayout.removeOnOffsetChangedListener(this);
         super.onDestroyView();
     }
 
@@ -473,7 +464,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         container.setPadding(container.getPaddingLeft(), container.getPaddingTop(),
-                container.getPaddingRight(), appbar.getTotalScrollRange() + verticalOffset);
+                container.getPaddingRight(), this.appBarLayout.getTotalScrollRange() + verticalOffset);
     }
 
     private void checkIsEmpty() {

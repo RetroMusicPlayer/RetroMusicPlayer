@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/playback_controls"
+    android:id="@+id/playbackControls"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
@@ -11,7 +11,7 @@
     tools:ignore="MissingPrefix">
 
     <SeekBar
-        android:id="@+id/player_progress_slider"
+        android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingEnd="24dp"
@@ -28,7 +28,7 @@
 
 
         <TextView
-            android:id="@+id/player_song_current_progress"
+            android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -41,7 +41,7 @@
 
 
         <TextView
-            android:id="@+id/player_song_total_time"
+            android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -54,7 +54,7 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/player_media_controller_container"
+        android:id="@+id/playerMediaControllerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -65,7 +65,7 @@
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <ImageButton
-            android:id="@+id/player_prev_button"
+            android:id="@+id/previousButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -79,7 +79,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_next_button"
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -93,7 +93,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_repeat_button"
+            android:id="@+id/repeatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -106,7 +106,7 @@
             tools:tint="@color/md_black_1000" />
 
         <ImageButton
-            android:id="@+id/player_shuffle_button"
+            android:id="@+id/shuffleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -125,7 +125,7 @@
             android:layout_centerInParent="true" />
 
         <ImageButton
-            android:id="@+id/player_play_pause_button"
+            android:id="@+id/playPauseButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_above="@id/title_container"
@@ -138,7 +138,7 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/volume_fragment_container"
+        android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -146,7 +146,7 @@
         android:paddingStart="8dp">
 
         <fragment
-            android:id="@+id/volume_fragment"
+            android:id="@+id/volumeFragment"
             android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

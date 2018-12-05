@@ -142,7 +142,6 @@ dependencies {
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
     /*UI Library*/
-    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     /*Backend all*/

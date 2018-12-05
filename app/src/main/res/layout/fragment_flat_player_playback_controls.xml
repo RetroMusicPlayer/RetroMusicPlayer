@@ -9,7 +9,7 @@
     tools:ignore="MissingPrefix">
 
     <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/player_progress_slider"
+        android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
@@ -19,38 +19,7 @@
         tools:ignore="RtlHardcoded,UnusedAttribute" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
-
-        <TextView
-            android:id="@+id/player_song_current_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="22.00" />
-
-
-        <TextView
-            android:id="@+id/player_song_total_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="22.00" />
-    </LinearLayout>
+    <include layout="@layout/player_time" />
 
 
     <LinearLayout
@@ -106,7 +75,7 @@
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/player_play_pause_button"
+            android:id="@+id/playPauseButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
             android:layout_centerVertical="true"
@@ -126,7 +95,7 @@
             android:layout_marginEnd="8dp">
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/player_repeat_button"
+                android:id="@+id/repeatButton"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:background="?attr/roundSelector"
@@ -136,7 +105,7 @@
                 tools:ignore="MissingPrefix" />
 
             <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/player_shuffle_button"
+                android:id="@+id/shuffleButton"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 android:background="?attr/roundSelector"
@@ -148,20 +117,5 @@
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/volume_fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:visibility="gone"
-        tools:visibility="visible">
-
-        <fragment
-            android:id="@+id/volume_fragment"
-            android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            tools:layout="@layout/fragment_volume" />
-    </FrameLayout>
+    <include layout="@layout/volume_controls" />
 </LinearLayout>

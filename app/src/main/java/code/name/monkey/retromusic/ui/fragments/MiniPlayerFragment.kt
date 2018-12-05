@@ -10,7 +10,6 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import butterknife.OnClick
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -76,7 +75,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     private fun updateSongTitle() {
         val builder = SpannableStringBuilder()
 
-        val song = MusicPlayerRemote.currentSong ?: return
+        val song = MusicPlayerRemote.currentSong
         val title = SpannableString(song.title)
         title.setSpan(ForegroundColorSpan(ThemeStore.textColorPrimary(context!!)), 0, title.length, 0)
 

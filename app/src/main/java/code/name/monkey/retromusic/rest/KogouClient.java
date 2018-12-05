@@ -6,7 +6,7 @@ import java.io.File;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.rest.service.KuGouApiService;
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -69,7 +69,7 @@ public class KogouClient {
 
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .cache(createDefaultCache(RetroApplication.Companion.getInstance()))
+                .cache(createDefaultCache(App.Companion.getInstance()))
                 .addInterceptor(createCacheControlInterceptor());
     }
 

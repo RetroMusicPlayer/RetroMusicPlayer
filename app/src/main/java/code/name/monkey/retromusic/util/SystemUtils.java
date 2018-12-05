@@ -7,7 +7,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 
 public class SystemUtils {
 
@@ -38,9 +38,9 @@ public class SystemUtils {
 
     public static int getNavigationBarHeight() {
         int result = 0;
-        int resourceId = RetroApplication.Companion.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        int resourceId = App.Companion.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
-            result = RetroApplication.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
+            result = App.Companion.getContext().getResources().getDimensionPixelSize(resourceId);
         }
         return result;
     }

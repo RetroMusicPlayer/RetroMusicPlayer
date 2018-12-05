@@ -1,12 +1,9 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
-
-import java.util.ArrayList
-
+import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.mvp.contract.GenreContract
@@ -14,6 +11,7 @@ import code.name.monkey.retromusic.mvp.presenter.GenrePresenter
 import code.name.monkey.retromusic.ui.adapter.GenreAdapter
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
+import java.util.*
 
 class GenreFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenreContract.GenreView {
 

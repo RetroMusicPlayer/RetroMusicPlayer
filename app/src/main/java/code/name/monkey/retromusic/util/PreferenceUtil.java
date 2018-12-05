@@ -21,8 +21,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.RetroApplication;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
@@ -122,7 +122,7 @@ public final class PreferenceUtil {
 
     public static PreferenceUtil getInstance() {
         if (sInstance == null) {
-            sInstance = new PreferenceUtil(RetroApplication.Companion.getContext());
+            sInstance = new PreferenceUtil(App.Companion.getContext());
         }
         return sInstance;
     }
@@ -279,7 +279,7 @@ public final class PreferenceUtil {
 
 
     public final int getLastPage() {
-        return mPreferences.getInt(LAST_PAGE, R.id.action_home);
+        return mPreferences.getInt(LAST_PAGE, R.id.action_song);
     }
 
     public void setLastPage(final int value) {

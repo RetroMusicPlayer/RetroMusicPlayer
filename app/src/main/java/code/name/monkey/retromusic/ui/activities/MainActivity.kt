@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
@@ -12,8 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import butterknife.ButterKnife
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.NavigationViewUtil
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroApplication
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
@@ -23,16 +27,18 @@ import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment
+import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_main_drawer_layout.*
 import java.util.*
 
-class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedPreferenceChangeListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var currentFragment: MainActivityFragmentCallbacks
+class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private lateinit var currentFragment: MainActivityFragmentCallbacks
 
     private var blockRequestPermissions: Boolean = false
     private val disposable = CompositeDisposable()
@@ -63,16 +69,23 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         super.onCreate(savedInstanceState)
         ButterKnife.bind(this)
 
-        getBottomNavigationView()!!.setOnNavigationItemSelectedListener(this)
+        getBottomNavigationView()!!.setOnNavigationItemSelectedListener {
+            PreferenceUtil.getInstance().lastPage = it.itemId
+            selectedFragment(it.itemId)
+            true
+        }
+
+        setUpDrawerLayout()
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance().lastPage)
+            setMusicChooser(PreferenceUtil.getInstance().lastMusicChooser)
         } else {
-            restoreCurrentFragment()
+            restoreCurrentFragment();
         }
+
         checkShowChangelog()
 
-        if (!RetroApplication.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
+        if (!App.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
             showPromotionalOffer()
         }
     }
@@ -104,7 +117,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 intent.putExtra("expand", false)
             }
         }
-
     }
 
     override fun onDestroy() {
@@ -114,15 +126,11 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    fun setCurrentFragment(fragment: Fragment, isStackAdd: Boolean, tag: String) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment, tag)
-        if (isStackAdd) {
-            fragmentTransaction.addToBackStack(tag)
-        }
-        fragmentTransaction.commit()
+    private fun setCurrentFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, null).commit()
         currentFragment = fragment as MainActivityFragmentCallbacks
     }
+
 
     private fun restoreCurrentFragment() {
         currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MainActivityFragmentCallbacks
@@ -139,7 +147,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
         if (intent.action != null && intent.action == MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
             val songs = SearchQueryHelper.getSongs(this, intent.extras!!)
-
             if (MusicPlayerRemote.shuffleMode == MusicService.SHUFFLE_MODE_SHUFFLE) {
                 MusicPlayerRemote.openAndShuffleQueue(songs, true)
             } else {
@@ -148,15 +155,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             handled = true
         }
 
-        if (uri != null && uri.toString().length > 0) {
+        if (uri != null && uri.toString().isNotEmpty()) {
             MusicPlayerRemote.playFromUri(uri)
             handled = true
         } else if (MediaStore.Audio.Playlists.CONTENT_TYPE == mimeType) {
             val id = parseIdFromIntent(intent, "playlistId", "playlist").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                val songs = ArrayList(
-                        PlaylistSongsLoader.getPlaylistSongList(this, id).blockingFirst())
+                val songs = ArrayList(PlaylistSongsLoader.getPlaylistSongList(this, id).blockingFirst())
                 MusicPlayerRemote.openQueue(songs, position, true)
                 handled = true
             }
@@ -164,16 +170,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val id = parseIdFromIntent(intent, "albumId", "album").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                MusicPlayerRemote
-                        .openQueue(AlbumLoader.getAlbum(this, id).blockingFirst().songs!!, position, true)
+                MusicPlayerRemote.openQueue(AlbumLoader.getAlbum(this, id).blockingFirst().songs!!, position, true)
                 handled = true
             }
         } else if (MediaStore.Audio.Artists.CONTENT_TYPE == mimeType) {
             val id = parseIdFromIntent(intent, "artistId", "artist").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                MusicPlayerRemote
-                        .openQueue(ArtistLoader.getArtist(this, id).blockingFirst().songs, position, true)
+                MusicPlayerRemote.openQueue(ArtistLoader.getArtist(this, id).blockingFirst().songs, position, true)
                 handled = true
             }
         }
@@ -192,7 +196,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 } catch (e: NumberFormatException) {
                     Log.e(TAG, e.message)
                 }
-
             }
         }
         return id
@@ -213,6 +216,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun handleBackPress(): Boolean {
+        if (drawerLayout.isDrawerOpen(navigationView)) {
+            drawerLayout.closeDrawers()
+            return true
+        }
         return super.handleBackPress() || currentFragment.handleBackPress()
     }
 
@@ -257,10 +264,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     private fun showPromotionalOffer() {
         MaterialDialog.Builder(this)
                 .positiveText("Buy")
-                .onPositive { dialog, which -> startActivity(Intent(this@MainActivity, ProVersionActivity::class.java)) }
+                .onPositive { _, _ -> startActivity(Intent(this@MainActivity, ProVersionActivity::class.java)) }
                 .negativeText(android.R.string.cancel)
                 .customView(R.layout.dialog_promotional_offer, false)
-                .dismissListener { dialog ->
+                .dismissListener {
                     PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
                             .edit()
                             .putBoolean("shown", true)
@@ -269,17 +276,80 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 .show()
     }
 
-    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        PreferenceUtil.getInstance().lastPage = menuItem.itemId
-        selectedFragment(menuItem.itemId)
-        return true
-    }
-
     private fun selectedFragment(itemId: Int) {
         when (itemId) {
-            R.id.action_album, R.id.action_artist, R.id.action_playlist, R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false, LibraryFragment.TAG)
-            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false, BannerHomeFragment.TAG)
+            R.id.action_album,
+            R.id.action_artist,
+            R.id.action_playlist,
+            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId))
         }
+    }
+
+    private fun setUpNavigationView() {
+        val accentColor = ThemeStore.accentColor(this)
+        NavigationViewUtil.setItemIconColors(navigationView, ATHUtil.resolveColor(this, R.attr.iconColor, ThemeStore.textColorSecondary(this)), accentColor)
+        NavigationViewUtil.setItemTextColors(navigationView, ThemeStore.textColorPrimary(this), accentColor)
+
+        checkSetUpPro()
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            drawerLayout.closeDrawers()
+            when (menuItem.itemId) {
+                R.id.nav_library -> Handler().postDelayed({ setMusicChooser(LIBRARY) }, 200)
+                R.id.nav_home -> Handler().postDelayed({ setMusicChooser(HOME) }, 200)
+                R.id.nav_folders -> Handler().postDelayed({ setMusicChooser(FOLDERS) }, 200)
+                R.id.buy_pro -> Handler().postDelayed({ startActivityForResult(Intent(this@MainActivity, ProVersionActivity::class.java), PURCHASE_REQUEST) }, 200)
+            }
+            true
+        }
+    }
+
+    private fun setMusicChooser(key: Int) {
+        PreferenceUtil.getInstance().lastMusicChooser = key
+        when (key) {
+            LIBRARY -> {
+                navigationView.setCheckedItem(R.id.nav_library)
+                setCurrentFragment(LibraryFragment.newInstance())
+            }
+            FOLDERS -> {
+                navigationView.setCheckedItem(R.id.nav_folders)
+                setCurrentFragment(FoldersFragment.newInstance(this))
+            }
+            HOME -> {
+                navigationView.setCheckedItem(R.id.nav_home)
+                setCurrentFragment(BannerHomeFragment())
+            }
+        }
+    }
+
+
+    private fun checkSetUpPro() {
+        if (App.isProVersion) {
+            setUpPro()
+        }
+    }
+
+    private fun setUpPro() {
+        navigationView.menu.removeGroup(R.id.navigation_drawer_menu_category_buy_pro)
+    }
+
+    private fun setUpDrawerLayout() {
+        setUpNavigationView()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(navigationView)) {
+                drawerLayout.closeDrawer(navigationView)
+            } else {
+                drawerLayout.openDrawer(navigationView)
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun updateNavigationDrawerHeader() {
+
     }
 
     companion object {
@@ -290,5 +360,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         private const val TAG = "MainActivity"
         private const val APP_USER_INFO_REQUEST = 9003
         private const val REQUEST_CODE_THEME = 9002
+        private const val PURCHASE_REQUEST = 101
     }
 }

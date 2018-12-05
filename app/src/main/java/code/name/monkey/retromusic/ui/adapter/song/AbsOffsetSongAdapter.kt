@@ -61,7 +61,7 @@ abstract class AbsOffsetSongAdapter : SongAdapter {
 
         override// could also return null, just to be safe return empty song
         val song: Song
-            get() = if (itemViewType == OFFSET_ITEM) Song.EMPTY_SONG else dataSet[adapterPosition - 1]
+            get() = if (itemViewType == OFFSET_ITEM) Song.emptySong else dataSet[adapterPosition - 1]
 
         override fun onClick(v: View?) {
             if (isInQuickSelectMode && itemViewType != OFFSET_ITEM) {

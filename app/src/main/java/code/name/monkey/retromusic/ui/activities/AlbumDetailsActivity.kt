@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import butterknife.ButterKnife
-import butterknife.OnClick
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -49,9 +48,9 @@ import java.util.*
 
 class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContract.AlbumDetailsView {
 
-    private var albumDetailsPresenter: AlbumDetailsPresenter? = null
+    private lateinit var albumDetailsPresenter: AlbumDetailsPresenter
+    private lateinit var simpleSongAdapter: SimpleSongAdapter
 
-    private var adapter: SimpleSongAdapter? = null
     var album: Album? = null
         private set
 
@@ -82,13 +81,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         val albumId = intent.getIntExtra(EXTRA_ALBUM_ID, -1)
         albumDetailsPresenter = AlbumDetailsPresenter(this, albumId)
-        albumDetailsPresenter!!.subscribe()
+        albumDetailsPresenter.subscribe()
 
         setupRecyclerView()
         setupToolbarMarginHeight()
 
-
-        contentContainer.setOnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+        contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
             run {
                 if (scrollY > oldScrollY) {
                     actionShuffleAll!!.setShowTitle(false)
@@ -98,31 +96,40 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                 }
             }
         }
+
+        actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album!!.songs!!, true) }
+        artistImage.setOnClickListener {
+            val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
+            NavigationUtil.goToArtist(this, album!!.artistId, *artistPairs)
+        }
     }
 
     private fun setupRecyclerView() {
-        adapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song)
+        simpleSongAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@AlbumDetailsActivity)
             itemAnimator = DefaultItemAnimator()
             isNestedScrollingEnabled = false
-            adapter = adapter
+            adapter = simpleSongAdapter
         }
     }
 
     private fun setupToolbarMarginHeight() {
-        val primaryColor = ThemeStore.primaryColor(this)
-        TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
-        if (collapsingToolbarLayout != null) {
-            collapsingToolbarLayout!!.setContentScrimColor(primaryColor)
-            collapsingToolbarLayout!!.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
-        }
-
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
         setSupportActionBar(toolbar)
-
         supportActionBar!!.title = null
 
+        val primaryColor = ThemeStore.primaryColor(this)
+        TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
+
+        if (collapsingToolbarLayout != null) {
+            collapsingToolbarLayout!!.apply {
+                setContentScrimColor(primaryColor)
+                setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
+            }
+        }
+
+
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
 
         if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
             val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
@@ -131,45 +138,29 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         }
 
         if (appBarLayout != null) {
-            appBarLayout!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-                override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
-                    val color: Int
-                    when (state) {
-                        AppBarStateChangeListener.State.COLLAPSED -> {
-                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
-                            color = ThemeStore.primaryColor(this@AlbumDetailsActivity)
+            appBarLayout!!.apply {
+                addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+                    override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
+                        val color: Int = when (state) {
+                            AppBarStateChangeListener.State.COLLAPSED -> {
+                                setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
+                                ThemeStore.primaryColor(this@AlbumDetailsActivity)
+                            }
+                            AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
+                                setLightStatusbar(false)
+                                Color.TRANSPARENT
+                            }
                         }
-                        AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
-                            setLightStatusbar(false)
-                            color = Color.TRANSPARENT
-                        }
-                        else -> {
-                            setLightStatusbar(false)
-                            color = Color.TRANSPARENT
-                        }
+                        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
                     }
-                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
-                }
-            })
-        }
-    }
-
-    @OnClick(R.id.action_shuffle_all, R.id.artist_image)
-    fun onViewClicked(view: View) {
-        when (view.id) {
-            R.id.artist_image -> {
-                val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
-                NavigationUtil.goToArtist(this, album!!.artistId, *artistPairs)
-            }
-            R.id.action_shuffle_all -> if (album!!.songs != null) {
-                MusicPlayerRemote.openAndShuffleQueue(album!!.songs!!, true)
+                })
             }
         }
     }
 
     override fun onPause() {
         super.onPause()
-        albumDetailsPresenter!!.unsubscribe()
+        albumDetailsPresenter.unsubscribe()
     }
 
     override fun loading() {
@@ -196,7 +187,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         loadAlbumCover()
         loadMoreFrom(album)
-        adapter!!.swapDataSet(album.songs)
+
+        simpleSongAdapter.swapDataSet(album.songs)
     }
 
     private fun loadMoreFrom(album: Album) {
@@ -213,20 +205,19 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                     })
         }
 
-        val albums = ArtistLoader.getArtist(this, album.artistId)
-                .blockingFirst().albums
+        val albums = ArtistLoader.getArtist(this, album.artistId).blockingFirst().albums
         albums!!.remove(album)
         if (!albums.isEmpty()) {
             moreTitle.visibility = View.VISIBLE
-            moreRecyclerView!!.visibility = View.VISIBLE
+            moreRecyclerView.visibility = View.VISIBLE
         } else {
             return
         }
         moreTitle.text = String.format("More from %s", album.artistName)
 
         val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
-        moreRecyclerView!!.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-        moreRecyclerView!!.adapter = albumAdapter
+        moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        moreRecyclerView.adapter = albumAdapter
     }
 
     private fun loadAlbumCover() {
@@ -262,7 +253,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
     private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
         var sortOrder: String? = null
-        val songs = adapter!!.dataSet
+        val songs = simpleSongAdapter.dataSet
         when (item.itemId) {
             R.id.action_play_next -> {
                 MusicPlayerRemote.playNext(songs)
@@ -327,7 +318,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     }
 
     private fun reload() {
-        albumDetailsPresenter!!.subscribe()
+        albumDetailsPresenter.subscribe()
     }
 
     companion object {

@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import butterknife.Unbinder
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -109,10 +108,7 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
         appbar.addOnOffsetChangedListener(this)
         mainActivity.title = null
         mainActivity.setSupportActionBar(toolbar)
-
-        toolbar.setNavigationOnClickListener { NavigationUtil.goToSearch(mainActivity) }
-        toolbar.setOnClickListener { showMainMenu() }
-        toolbar.navigationIcon = RetroUtil.getTintedDrawable(mainActivity, R.drawable.ic_search_white_24dp, ThemeStore.textColorPrimary(mainActivity))
+        toolbar.navigationIcon = RetroUtil.getTintedDrawable(mainActivity, R.drawable.ic_menu_white_24dp, ThemeStore.textColorPrimary(mainActivity))
     }
 
 

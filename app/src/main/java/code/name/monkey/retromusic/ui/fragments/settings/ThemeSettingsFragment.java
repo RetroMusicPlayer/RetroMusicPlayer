@@ -14,7 +14,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.RetroApplication;
+import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
@@ -48,7 +48,7 @@ public class ThemeSettingsFragment extends AbsSettingsFragment {
         generalTheme.setOnPreferenceChangeListener((preference, newValue) -> {
             String theme = (String) newValue;
 
-            if (theme.equals("color") && !RetroApplication.Companion.isProVersion()) {
+            if (theme.equals("color") && !App.Companion.isProVersion()) {
                 primaryColorPref.setVisible(false);
                 showProToastAndNavigate("Color theme");
                 return false;

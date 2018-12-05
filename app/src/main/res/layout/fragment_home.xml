@@ -27,13 +27,13 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar48"
+                style="@style/Toolbar"
                 android:layout_gravity="center_vertical"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
                 tools:ignore="UnusedAttribute">
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/bannerTitle"
                     style="@style/BigTitleTextAppearanceToolbar"
                     android:text="@string/app_name"

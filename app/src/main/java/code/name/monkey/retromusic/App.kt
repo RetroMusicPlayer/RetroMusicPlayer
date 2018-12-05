@@ -6,9 +6,8 @@ import code.name.monkey.appthemehelper.ThemeStore
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 import com.bumptech.glide.Glide
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
-class RetroApplication : MultiDexApplication() {
+class App : MultiDexApplication() {
 
     lateinit var billingProcessor: BillingProcessor
 
@@ -67,7 +66,7 @@ class RetroApplication : MultiDexApplication() {
 
         const val PRO_VERSION_PRODUCT_ID = "pro_version"
 
-        lateinit var instance: RetroApplication
+        lateinit var instance: App
             private set
 
         val context: Context

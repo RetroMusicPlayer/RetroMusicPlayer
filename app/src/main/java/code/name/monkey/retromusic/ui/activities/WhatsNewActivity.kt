@@ -46,7 +46,7 @@ class WhatsNewActivity : AbsBaseActivity() {
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
         setSupportActionBar(toolbar)
         title = null
-        toolbar.setNavigationOnClickListener({ v -> onBackPressed() })
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         whatNewtitle.setTextColor(ThemeStore.textColorPrimary(this))
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
 

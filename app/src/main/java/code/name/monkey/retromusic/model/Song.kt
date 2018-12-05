@@ -64,7 +64,9 @@ open class Song : Parcelable {
     }
 
     companion object {
-        val EMPTY_SONG = Song(-1, "", -1, -1, -1, "", -1, -1, "", -1, "")
+
+        var emptySong = Song(-1, "", -1, -1, -1, "", -1, -1, "", -1, "")
+
         @JvmField
         val CREATOR: Parcelable.Creator<Song> = object : Parcelable.Creator<Song> {
             override fun createFromParcel(source: Parcel): Song {

@@ -55,7 +55,7 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     }
 
 
-    var prevButton: ImageButton? = null
+  /*  var prevButton: ImageButton? = null
     var nextButton: ImageButton? = null
     var repeatButton: ImageButton? = null
     var shuffleButton: ImageButton? = null
@@ -63,11 +63,12 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     var songTotalTime: TextView? = null
     var songCurrentProgress: TextView? = null
     var volumeContainer: View? = null
-    var playPauseFab: ImageButton? = null
+    var playPauseFab: ImageButton? = null*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playPauseFab = view.findViewById(R.id.player_play_pause_button)
+
+       /* playPauseFab = view.findViewById(R.id.player_play_pause_button)
         prevButton = view.findViewById(R.id.player_prev_button)
         nextButton = view.findViewById(R.id.player_next_button)
         repeatButton = view.findViewById(R.id.player_repeat_button)
@@ -75,6 +76,6 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
         progressSlider = view.findViewById(R.id.player_progress_slider)
         songTotalTime = view.findViewById(R.id.player_song_total_time)
         songCurrentProgress = view.findViewById(R.id.player_song_current_progress)
-        volumeContainer = view.findViewById(R.id.volume_fragment_container)
+        volumeContainer = view.findViewById(R.id.volume_fragment_container)*/
     }
 }

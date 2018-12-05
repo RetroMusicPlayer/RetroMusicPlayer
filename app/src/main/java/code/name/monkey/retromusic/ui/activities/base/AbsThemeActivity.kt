@@ -96,15 +96,16 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
         if (VersionUtils.hasKitKat()) {
             val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
             if (statusBar != null) {
-                if (VersionUtils.hasMarshmallow()) {
-                    window.statusBarColor = color
-                } else if (VersionUtils.hasLollipop()) {
-                    statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
-                } else {
-                    statusBar.setBackgroundColor(color)
+                when {
+                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                    VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
+                    else -> statusBar.setBackgroundColor(color)
                 }
             } else if (Build.VERSION.SDK_INT >= 21) {
-                window.statusBarColor = ColorUtil.darkenColor(color)
+                when {
+                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                    else -> window.statusBarColor = ColorUtil.darkenColor(color)
+                }
             }
         }
         setLightStatusbarAuto(color)

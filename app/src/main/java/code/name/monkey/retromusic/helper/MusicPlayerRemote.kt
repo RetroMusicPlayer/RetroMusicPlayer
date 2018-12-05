@@ -12,7 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.RetroApplication
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
@@ -33,7 +33,7 @@ object MusicPlayerRemote {
 
     private val castSession: CastSession?
         get() {
-            val castSession = CastContext.getSharedInstance(RetroApplication.instance).sessionManager.currentCastSession
+            val castSession = CastContext.getSharedInstance(App.instance).sessionManager.currentCastSession
             if (castSession != null) {
                 playbackLocation = PlaybackLocation.REMOTE
             } else {
@@ -48,7 +48,7 @@ object MusicPlayerRemote {
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
-        } else Song.EMPTY_SONG
+        } else Song.emptySong
 
     /**
      * Async

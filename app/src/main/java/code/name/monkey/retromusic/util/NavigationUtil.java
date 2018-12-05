@@ -34,7 +34,6 @@ import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
 import code.name.monkey.retromusic.ui.activities.WhatsNewActivity;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
-import static code.name.monkey.retromusic.ui.activities.GenreDetailsActivity.EXTRA_GENRE_ID;
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
 
 
@@ -60,7 +59,7 @@ public class NavigationUtil {
 
     public static void goToPlaylistNew(@NonNull Activity activity, Playlist playlist) {
         Intent intent = new Intent(activity, PlaylistDetailActivity.class);
-        intent.putExtra(PlaylistDetailActivity.EXTRA_PLAYLIST, playlist);
+        intent.putExtra(PlaylistDetailActivity.Companion.getEXTRA_PLAYLIST(), playlist);
         ActivityCompat.startActivity(activity, intent, null);
     }
 
@@ -102,7 +101,7 @@ public class NavigationUtil {
 
     public static void goToGenre(@NonNull Activity activity, @NonNull Genre genre) {
         Intent intent = new Intent(activity, GenreDetailsActivity.class);
-        intent.putExtra(EXTRA_GENRE_ID, genre);
+        intent.putExtra(GenreDetailsActivity.EXTRA_GENRE_ID, genre);
         ActivityCompat.startActivity(activity, intent, null);
     }
 

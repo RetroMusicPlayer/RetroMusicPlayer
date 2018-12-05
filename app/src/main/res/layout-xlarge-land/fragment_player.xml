@@ -8,7 +8,7 @@
     android:focusable="true">
 
     <View
-        android:id="@+id/gradient_background"
+        android:id="@+id/colorGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -54,13 +54,12 @@
             </LinearLayout>
 
             <FrameLayout
-                android:id="@+id/toolbar_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
+                    android:id="@+id/playerToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:navigationIcon="@drawable/ic_close_white_24dp" />
