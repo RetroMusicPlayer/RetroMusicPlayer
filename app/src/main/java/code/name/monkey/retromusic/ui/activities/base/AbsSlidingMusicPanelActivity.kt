@@ -24,7 +24,11 @@ import code.name.monkey.retromusic.ui.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.ui.fragments.player.cardblur.CardBlurFragment
 import code.name.monkey.retromusic.ui.fragments.player.fit.FitFragment
+import code.name.monkey.retromusic.ui.fragments.player.flat.FlatPlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -221,6 +225,10 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
             NowPlayingScreen.CARD -> CardFragment()
             NowPlayingScreen.BLUR_CARD -> CardBlurFragment()
             NowPlayingScreen.FIT -> FitFragment()
+            NowPlayingScreen.FLAT -> FlatPlayerFragment()
+            NowPlayingScreen.FULL -> FullPlayerFragment()
+            NowPlayingScreen.PLAIN -> PlainPlayerFragment()
+            NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.player_fragment_container, fragment).commit()

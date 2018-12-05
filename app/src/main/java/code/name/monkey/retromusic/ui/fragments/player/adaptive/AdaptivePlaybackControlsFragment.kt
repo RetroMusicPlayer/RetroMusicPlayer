@@ -20,7 +20,6 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
 class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -42,7 +41,6 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-        hideVolumeIfAvailable()
 
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
@@ -50,7 +48,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
             } else {
                 MusicPlayerRemote.resumePlaying()
             }
-            showBouceAnimation(playPauseButton)
+            showBonceAnimation(playPauseButton)
         }
     }
 
@@ -180,10 +178,6 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
-    private fun hideVolumeIfAvailable() {
-        volumeFragmentContainer.visibility = if (PreferenceUtil.getInstance().volumeToggle) View.VISIBLE else View.GONE
-    }
-
     public override fun show() {
         //Ignore
     }
@@ -203,6 +197,4 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
         })
     }
-
-
 }

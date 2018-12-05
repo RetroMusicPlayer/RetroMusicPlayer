@@ -32,12 +32,13 @@
           <option name="moduleName" value="app_sansDebug" />
           <option name="addCompilerBuiltIns" value="true" />
           <option name="loadBuiltInsFromDependencies" value="true" />
+          <option name="languageVersion" value="1.3" />
+          <option name="apiVersion" value="1.3" />
           <option name="pluginOptions">
             <array>
               <option value="plugin:org.jetbrains.kotlin.android:experimental=false" />
               <option value="plugin:org.jetbrains.kotlin.android:enabled=true" />
               <option value="plugin:org.jetbrains.kotlin.android:defaultCacheImplementation=hashMap" />
-              <option value="plugin:org.jetbrains.kotlin.android:configuration=rO0ABXoAAAEvAAAAAwAIZmVhdHVyZXMAAAABAAV2aWV3cwAHcGFja2FnZQAAAAEAG2NvZGUubmFtZS5tb25rZXkucmV0cm9tdXNpYwAHdmFyaWFudAAAAAMAR21haW47L1VzZXJzL2hlbWFudGhzL0Rlc2t0b3AvS2VlcFNhZmUvUmV0cm9NdXNpY1BsYXllci9hcHAvc3JjL21haW4vcmVzAEtub3JtYWw7L1VzZXJzL2hlbWFudGhzL0Rlc2t0b3AvS2VlcFNhZmUvUmV0cm9NdXNpY1BsYXllci9hcHAvc3JjL25vcm1hbC9yZXMAR3NhbnM7L1VzZXJzL2hlbWFudGhzL0Rlc2t0b3AvS2VlcFNhZmUvUmV0cm9NdXNpY1BsYXllci9hcHAvc3JjL3NhbnMvcmVz" />
             </array>
           </option>
           <option name="pluginClasspaths">
