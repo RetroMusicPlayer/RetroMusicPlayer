@@ -196,7 +196,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     }
 
     private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { v -> MusicPlayerRemote.cycleRepeatMode() }
+        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
     }
 
     override fun updateRepeatState() {

@@ -23,9 +23,11 @@ import code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.ui.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.ui.fragments.player.cardblur.CardBlurFragment
+import code.name.monkey.retromusic.ui.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.ui.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.ui.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.full.FullPlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
@@ -229,6 +231,8 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
             NowPlayingScreen.FULL -> FullPlayerFragment()
             NowPlayingScreen.PLAIN -> PlainPlayerFragment()
             NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
+            NowPlayingScreen.MATERIAL -> MaterialFragment()
+            NowPlayingScreen.COLOR->ColorFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.player_fragment_container, fragment).commit()
