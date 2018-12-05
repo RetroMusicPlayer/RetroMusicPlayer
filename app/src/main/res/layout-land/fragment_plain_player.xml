@@ -37,7 +37,7 @@
                     android:layout_height="match_parent">
 
                     <fragment
-                        android:id="@+id/player_album_cover_fragment"
+                        android:id="@+id/playerAlbumCoverFragment"
                         android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -50,7 +50,6 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/title_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
@@ -60,9 +59,8 @@
                         android:paddingEnd="16dp"
                         android:paddingBottom="16dp">
 
-                        <TextView
-                            android:id="@+id/title"
-                            android:textStyle="bold"
+                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                            android:id="@+id/playerTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="marquee"
@@ -72,18 +70,17 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:textColor="?android:attr/textColorPrimary"
                             android:textSize="24sp"
+                            android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 
-                        <TextView
-                            android:id="@+id/text"
+                        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                            android:id="@+id/playerText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:textColor="?android:attr/textColorSecondary"
                             tools:text="Text" />
                     </LinearLayout>
 
@@ -93,7 +90,7 @@
                         android:layout_weight="1">
 
                         <fragment
-                            android:id="@+id/playback_controls_fragment"
+                            android:id="@+id/playbackControlsFragment"
                             android:name="code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlaybackControlsFragment"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -101,13 +98,12 @@
                     </FrameLayout>
 
                     <FrameLayout
-                        android:id="@+id/toolbar_container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0">
 
                         <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/player_toolbar"
+                            android:id="@+id/playerToolbar"
                             style="@style/Toolbar"
                             android:navigationIcon="@drawable/ic_close_white_24dp"
                             app:navigationIcon="@drawable/ic_close_white_24dp" />

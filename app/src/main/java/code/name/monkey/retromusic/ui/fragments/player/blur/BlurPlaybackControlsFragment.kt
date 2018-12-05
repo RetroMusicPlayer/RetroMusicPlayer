@@ -57,13 +57,6 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        if (PreferenceUtil.getInstance().volumeToggle) {
-            volumeFragmentContainer.visibility = View.VISIBLE
-        } else {
-            volumeFragmentContainer.visibility = View.GONE
-        }
-
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()

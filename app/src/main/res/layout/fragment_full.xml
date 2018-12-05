@@ -7,7 +7,7 @@
     android:focusable="true">
 
     <fragment
-        android:id="@+id/player_album_cover_fragment"
+        android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/playback_controls_fragment"
+                android:id="@+id/playbackControlsFragment"
                 android:name="code.name.monkey.retromusic.ui.fragments.player.full.FullPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/player_toolbar"
+                    android:id="@+id/playerToolbar"
                     style="@style/Toolbar"
                     android:navigationIcon="@drawable/ic_close_white_24dp" />
 
