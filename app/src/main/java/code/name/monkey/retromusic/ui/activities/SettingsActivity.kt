@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -43,7 +42,6 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        ButterKnife.bind(this)
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()

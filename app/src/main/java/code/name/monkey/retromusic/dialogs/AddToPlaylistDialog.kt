@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
@@ -24,9 +23,8 @@ class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val layout = inflater.inflate(R.layout.dialog_add_to_playlist, container, false)
-        ButterKnife.bind(this, layout)
-        return layout
+
+        return inflater.inflate(R.layout.dialog_add_to_playlist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

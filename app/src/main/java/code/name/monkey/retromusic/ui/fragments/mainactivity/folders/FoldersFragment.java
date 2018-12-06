@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,8 +41,6 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -106,6 +105,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     };
     private SongFileAdapter adapter;
     private MaterialCab cab;
+
     public FoldersFragment() {
     }
 
@@ -515,8 +515,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         private WeakReference<FoldersFragment> fragmentWeakReference;
 
-        public AsyncFileLoader(FoldersFragment foldersFragment) {
-            super(foldersFragment.getActivity());
+        AsyncFileLoader(FoldersFragment foldersFragment) {
+            super(Objects.requireNonNull(foldersFragment.getActivity()));
             fragmentWeakReference = new WeakReference<>(foldersFragment);
         }
 

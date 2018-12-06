@@ -7,7 +7,6 @@ import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -44,7 +43,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        ButterKnife.bind(this)
+
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -140,8 +139,8 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
         })
     }
 
-    override fun showData(songs: ArrayList<Song>) {
-        songAdapter!!.swapDataSet(songs)
+    override fun showData(list: ArrayList<Song>) {
+        songAdapter!!.swapDataSet(list)
     }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {

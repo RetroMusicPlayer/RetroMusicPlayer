@@ -87,7 +87,7 @@ class PlayingNotificationOreo : PlayingNotification() {
 
         val bigNotificationImageSize = service.resources
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
-        service.runOnUiThread(Runnable {
+        service.runOnUiThread {
             if (target != null) {
                 Glide.clear(target!!)
             }
@@ -179,7 +179,7 @@ class PlayingNotificationOreo : PlayingNotification() {
 
                         }
                     })
-        })
+        }
 
         if (stopped) {
             return  // notification has been stopped before loading was finished

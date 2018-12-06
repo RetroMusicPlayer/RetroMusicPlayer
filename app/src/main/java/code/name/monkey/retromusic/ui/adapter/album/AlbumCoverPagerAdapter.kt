@@ -118,9 +118,9 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         private fun loadAlbumCover() {
-            SongGlideRequest.Builder.from(Glide.with(context), song)
-                    .checkIgnoreMediaStore(activity)
-                    .generatePalette(activity).build()
+            SongGlideRequest.Builder.from(Glide.with(context), song!!)
+                    .checkIgnoreMediaStore(activity!!)
+                    .generatePalette(activity!!).build()
                     .into(object : RetroMusicColoredTarget(albumCover) {
                         override fun onColorReady(color: Int) {
                             setColor(color)

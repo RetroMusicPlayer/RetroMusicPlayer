@@ -12,7 +12,6 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -71,7 +70,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setDrawUnderStatusBar()
         setupWindowTransition()
         super.onCreate(savedInstanceState)
-        ButterKnife.bind(this)
 
         toggleBottomNavigationView(true)
         setLightNavigationBar(true)
@@ -175,20 +173,20 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun showData(album: Album) {
-        if (album.songs!!.isEmpty()) {
+    override fun showData(list: Album) {
+        if (list.songs!!.isEmpty()) {
             finish()
             return
         }
-        this.album = album
+        this.album = list
 
-        albumTitle.text = album.title
-        albumText.text = String.format("%s • %s • %s", album.artistName, MusicUtil.getYearString(album.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
+        albumTitle.text = list.title
+        albumText.text = String.format("%s • %s • %s", list.artistName, MusicUtil.getYearString(list.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, list.songs)))
 
         loadAlbumCover()
-        loadMoreFrom(album)
+        loadMoreFrom(list)
 
-        simpleSongAdapter.swapDataSet(album.songs)
+        simpleSongAdapter.swapDataSet(list.songs)
     }
 
     private fun loadMoreFrom(album: Album) {

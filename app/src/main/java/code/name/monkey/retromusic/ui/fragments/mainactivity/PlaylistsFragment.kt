@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.View
 
 import java.util.ArrayList
 
@@ -76,8 +75,8 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
 
     }
 
-    override fun showData(playlists: ArrayList<Playlist>) {
-        adapter!!.swapDataSet(playlists)
+    override fun showData(list: ArrayList<Playlist>) {
+        adapter!!.swapDataSet(list)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

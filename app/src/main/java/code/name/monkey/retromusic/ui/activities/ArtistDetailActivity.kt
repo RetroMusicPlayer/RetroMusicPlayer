@@ -16,7 +16,6 @@ import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -71,7 +70,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         setDrawUnderStatusBar()
         setupWindowTransistion()
         super.onCreate(savedInstanceState)
-        ButterKnife.bind(this)
+
 
         toggleBottomNavigationView(true)
         setNavigationbarColorAuto()
@@ -273,7 +272,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
 
     private fun loadArtistImage() {
-        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist!!)
                 .forceDownload(forceDownload)
                 .generatePalette(this).build()
                 .dontAnimate()

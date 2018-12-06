@@ -265,10 +265,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     }
 
-    override fun geners(genres: ArrayList<Genre>) {
+    override fun geners(songs: ArrayList<Genre>) {
         genreContainer.visibility = View.VISIBLE
         genresRecyclerView.apply {
-            val genreAdapter = GenreAdapter(activity!!, genres, R.layout.item_list)
+            val genreAdapter = GenreAdapter(activity!!, songs, R.layout.item_list)
             layoutManager = LinearLayoutManager(context)
             adapter = genreAdapter
         }

@@ -56,11 +56,22 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
     val totalAppBarScrollingRange: Int
         get() = appbar.totalScrollRange
 
-    private val currentFragment: Fragment?
-        get() = if (fragmentManager == null) {
+    private fun getCurrentFragment(): Fragment? {
+        return if (fragmentManager == null) {
             SongsFragment.newInstance()
-        } else fragmentManager!!.findFragmentByTag(LibraryFragment.TAG)
+        } else fragmentManager!!.findFragmentById(R.id.fragment_container)
+    }
 
+    private fun selectedFragment(fragment: Fragment) {
+        val fragmentManager = childFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction
+                .replace(R.id.fragment_container, fragment, TAG)
+                .commit()
+
+        fragmentManager.executePendingTransactions()
+    }
 
     fun setTitle(@StringRes name: Int) {
         title.text = getString(name)
@@ -120,14 +131,6 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
         return false
     }
 
-    private fun selectedFragment(fragment: Fragment) {
-        val fragmentManager = childFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction
-                .replace(R.id.fragment_container, fragment, TAG)
-                .commit()
-    }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         if (cab != null && cab!!.isActive) {
@@ -143,12 +146,17 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
         return cab as MaterialCab
     }
 
+    private fun isPlaylistFragment(): Boolean {
+        return true
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater!!.inflate(R.menu.menu_main, menu)
-
-        val currentFragment = currentFragment
+        if (isPlaylistFragment()) {
+            menu!!.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
+        }
+        val currentFragment = getCurrentFragment()
         if (currentFragment is AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *> && currentFragment.isAdded) {
             val fragment = currentFragment as AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>?
 
@@ -161,11 +169,9 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).subMenu)
 
         } else {
-            menu!!.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
-            menu.removeItem(R.id.action_grid_size)
+            menu!!.removeItem(R.id.action_grid_size)
         }
-        activity ?: return
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(activity!!, toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
@@ -181,22 +187,26 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
         val currentSortOrder = fragment.getSortOrder()
         sortOrderMenu.clear()
 
-        if (fragment is AlbumsFragment) {
-            sortOrderMenu.add(0, R.id.action_album_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_A_Z
-            sortOrderMenu.add(0, R.id.action_album_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_Z_A
-            sortOrderMenu.add(0, R.id.action_album_sort_order_artist, 2, R.string.sort_order_artist).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_ARTIST
-            sortOrderMenu.add(0, R.id.action_album_sort_order_year, 3, R.string.sort_order_year).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_YEAR
-        } else if (fragment is ArtistsFragment) {
-            sortOrderMenu.add(0, R.id.action_artist_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z
-            sortOrderMenu.add(0, R.id.action_artist_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.ArtistSortOrder.ARTIST_Z_A
-        } else if (fragment is SongsFragment) {
-            sortOrderMenu.add(0, R.id.action_song_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_A_Z
-            sortOrderMenu.add(0, R.id.action_song_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_Z_A
-            sortOrderMenu.add(0, R.id.action_song_sort_order_artist, 2, R.string.sort_order_artist).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_ARTIST
-            sortOrderMenu.add(0, R.id.action_song_sort_order_album, 3, R.string.sort_order_album).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_ALBUM
-            sortOrderMenu.add(0, R.id.action_song_sort_order_year, 4, R.string.sort_order_year).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_YEAR
-            sortOrderMenu.add(0, R.id.action_song_sort_order_date, 4, R.string.sort_order_date).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_DATE
+        when (fragment) {
+            is AlbumsFragment -> {
+                sortOrderMenu.add(0, R.id.action_album_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_A_Z
+                sortOrderMenu.add(0, R.id.action_album_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_Z_A
+                sortOrderMenu.add(0, R.id.action_album_sort_order_artist, 2, R.string.sort_order_artist).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_ARTIST
+                sortOrderMenu.add(0, R.id.action_album_sort_order_year, 3, R.string.sort_order_year).isChecked = currentSortOrder == SortOrder.AlbumSortOrder.ALBUM_YEAR
+            }
+            is ArtistsFragment -> {
+                sortOrderMenu.add(0, R.id.action_artist_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.ArtistSortOrder.ARTIST_A_Z
+                sortOrderMenu.add(0, R.id.action_artist_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.ArtistSortOrder.ARTIST_Z_A
+            }
+            is SongsFragment -> {
+                sortOrderMenu.add(0, R.id.action_song_sort_order_asc, 0, R.string.sort_order_a_z).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_A_Z
+                sortOrderMenu.add(0, R.id.action_song_sort_order_desc, 1, R.string.sort_order_z_a).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_Z_A
+                sortOrderMenu.add(0, R.id.action_song_sort_order_artist, 2, R.string.sort_order_artist).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_ARTIST
+                sortOrderMenu.add(0, R.id.action_song_sort_order_album, 3, R.string.sort_order_album).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_ALBUM
+                sortOrderMenu.add(0, R.id.action_song_sort_order_year, 4, R.string.sort_order_year).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_YEAR
+                sortOrderMenu.add(0, R.id.action_song_sort_order_date, 4, R.string.sort_order_date).isChecked = currentSortOrder == SortOrder.SongSortOrder.SONG_DATE
 
+            }
         }
 
         sortOrderMenu.setGroupCheckable(0, true, true)
@@ -205,20 +215,18 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
     private fun handleSortOrderMenuItem(
             fragment: AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>, item: MenuItem): Boolean {
         var sortOrder: String? = null
-        if (fragment is AlbumsFragment) {
-            when (item.itemId) {
+        when (fragment) {
+            is AlbumsFragment -> when (item.itemId) {
                 R.id.action_album_sort_order_asc -> sortOrder = SortOrder.AlbumSortOrder.ALBUM_A_Z
                 R.id.action_album_sort_order_desc -> sortOrder = SortOrder.AlbumSortOrder.ALBUM_Z_A
                 R.id.action_album_sort_order_artist -> sortOrder = SortOrder.AlbumSortOrder.ALBUM_ARTIST
                 R.id.action_album_sort_order_year -> sortOrder = SortOrder.AlbumSortOrder.ALBUM_YEAR
             }
-        } else if (fragment is ArtistsFragment) {
-            when (item.itemId) {
+            is ArtistsFragment -> when (item.itemId) {
                 R.id.action_artist_sort_order_asc -> sortOrder = SortOrder.ArtistSortOrder.ARTIST_A_Z
                 R.id.action_artist_sort_order_desc -> sortOrder = SortOrder.ArtistSortOrder.ARTIST_Z_A
             }
-        } else if (fragment is SongsFragment) {
-            when (item.itemId) {
+            is SongsFragment -> when (item.itemId) {
                 R.id.action_song_sort_order_asc -> sortOrder = SortOrder.SongSortOrder.SONG_A_Z
                 R.id.action_song_sort_order_desc -> sortOrder = SortOrder.SongSortOrder.SONG_Z_A
                 R.id.action_song_sort_order_artist -> sortOrder = SortOrder.SongSortOrder.SONG_ARTIST
@@ -240,7 +248,7 @@ class LibraryFragment : AbsMainActivityFragment(), CabHolder, MainActivityFragme
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         //if (pager == null) return false;
-        val currentFragment = currentFragment
+        val currentFragment = getCurrentFragment()
         if (currentFragment is AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>) {
             val fragment = currentFragment as AbsLibraryPagerRecyclerViewCustomGridSizeFragment<*, *>?
             if (handleGridSizeMenuItem(fragment!!, item)) {

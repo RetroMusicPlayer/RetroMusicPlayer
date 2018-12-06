@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.ClearSmartPlaylistDialog
@@ -207,7 +206,6 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         init {
-            ButterKnife.bind(this, itemView)
             if (image != null) {
                 val iconPadding = activity.resources
                         .getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
