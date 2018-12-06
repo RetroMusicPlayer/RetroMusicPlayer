@@ -7,26 +7,26 @@
     android:focusableInTouchMode="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:titleEnabled="false">
 
             <FrameLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/image"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editorImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone" />
@@ -40,14 +40,14 @@
 
 
                 <TextView
-                    android:id="@+id/title"
-                    android:textStyle="bold"
+                    android:id="@+id/bannerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/action_tag_editor"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textStyle="bold"
                     tools:ignore="MissingPrefix" />
 
 
@@ -77,8 +77,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/title1"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/songText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
@@ -95,8 +95,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/title2"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/albumText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
@@ -113,8 +113,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/artist"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/artistText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -130,8 +130,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/album_artist"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/albumArtistText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -154,8 +154,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/genre"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/genreText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -173,8 +173,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <EditText
-                        android:id="@+id/year"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/yearText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -192,8 +192,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/image_text"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/trackNumberText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -209,8 +209,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/lyrics"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lyricsText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -227,7 +227,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save_fab"
+        android:id="@+id/saveFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
@@ -241,7 +241,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

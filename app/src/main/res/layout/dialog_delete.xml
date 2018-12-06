@@ -18,7 +18,7 @@
         android:padding="12dp">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/action_cancel"
+            android:id="@+id/actionCancel"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/action_delete"
+            android:id="@+id/actionDelete"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

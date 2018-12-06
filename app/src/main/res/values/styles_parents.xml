@@ -185,4 +185,9 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="FabParent">
+        <item name="borderWidth">0dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

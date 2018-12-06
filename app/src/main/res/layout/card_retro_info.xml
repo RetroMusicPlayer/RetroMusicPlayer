@@ -18,14 +18,13 @@
         app:cardUseCompatPadding="true">
 
         <LinearLayout
-            android:id="@+id/app_support"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
             <LinearLayout
-                android:id="@+id/app_github"
+                android:id="@+id/appGithub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -68,7 +67,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/app_translation"
+                android:id="@+id/appTranslation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -111,7 +110,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/app_rate"
+                android:id="@+id/appRate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -154,7 +153,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/donate_link"
+                android:id="@+id/donateLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -197,7 +196,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/app_share"
+                android:id="@+id/appShare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -237,7 +236,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/faq_link"
+                android:id="@+id/faqLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"

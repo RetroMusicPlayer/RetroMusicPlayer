@@ -40,7 +40,7 @@ class AudioSettings : AbsSettingsFragment() {
         return ri != null
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_audio)
     }
 }

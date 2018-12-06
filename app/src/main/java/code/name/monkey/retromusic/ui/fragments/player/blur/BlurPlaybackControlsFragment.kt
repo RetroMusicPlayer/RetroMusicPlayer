@@ -13,11 +13,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -27,14 +23,14 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import kotlinx.android.synthetic.main.volume_controls.*
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
+
+
 
 
 class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -65,6 +61,8 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation()
         }
+        val volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
+        volumeFragment.tintWhiteColor()
     }
 
     private fun updateSong() {
@@ -108,20 +106,15 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
-        if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
-        } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
-        }
+        lastPlaybackControlsColor = Color.WHITE
+        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setFabColor(color)
-        } else {
-            setFabColor(ThemeStore.accentColor(context!!))
-        }
+        title.setTextColor(lastPlaybackControlsColor)
+        text.setTextColor(lastDisabledPlaybackControlsColor)
+
+        setFabColor(lastPlaybackControlsColor)
+        songCurrentProgress.setTextColor(lastPlaybackControlsColor)
+        songTotalTime.setTextColor(lastPlaybackControlsColor)
 
         updateRepeatState()
         updateShuffleState()

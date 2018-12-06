@@ -24,16 +24,10 @@
             tools:ignore="UnusedAttribute">
 
 
-            <TextView
-                android:id="@+id/title"
-                android:textStyle="bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/action_tag_editor"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                tools:ignore="MissingPrefix" />
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/bannerTitle"
+                style="@style/BigTitleTextAppearance"
+                android:text="@string/action_tag_editor" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -43,7 +37,7 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -51,7 +45,7 @@
                 app:layout_collapseParallaxMultiplier="0.5">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
+                    android:id="@+id/editorImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -86,7 +80,7 @@
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/album_title_container"
+                        android:id="@+id/albumTitleContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:boxBackgroundMode="outline"
@@ -100,7 +94,7 @@
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/album_title"
+                            android:id="@+id/albumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -112,7 +106,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/album_artist_container"
+                        android:id="@+id/albumArtistContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -127,7 +121,7 @@
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/album_artist"
+                            android:id="@+id/albumArtistText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -139,7 +133,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/genre_container"
+                        android:id="@+id/genreContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -154,7 +148,7 @@
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/genre"
+                            android:id="@+id/genreTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -166,7 +160,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/year_container"
+                        android:id="@+id/yearContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -181,7 +175,7 @@
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/year"
+                            android:id="@+id/yearTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -198,7 +192,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/save_fab"
+        android:id="@+id/saveFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

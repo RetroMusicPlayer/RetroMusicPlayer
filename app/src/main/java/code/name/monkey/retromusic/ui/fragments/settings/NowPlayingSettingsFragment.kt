@@ -29,7 +29,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_now_playing_screen)
     }
 

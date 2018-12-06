@@ -122,9 +122,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
 
-    implementation "com.jakewharton:butterknife:$butterKnife"
-    kapt "com.jakewharton:butterknife-compiler:$butterKnife"
-
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"
     implementation 'com.afollestad:material-cab:0.1.12'
@@ -150,6 +147,8 @@ dependencies {
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
 
 }
 repositories {

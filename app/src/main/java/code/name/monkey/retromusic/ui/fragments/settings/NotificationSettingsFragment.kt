@@ -35,7 +35,7 @@ class NotificationSettingsFragment : AbsSettingsFragment() {
         }
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_notification)
     }
 }

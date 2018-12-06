@@ -12,9 +12,6 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,6 +26,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
@@ -59,20 +59,13 @@ public class MusicUtil {
     @NonNull
     public static Intent createShareSongFileIntent(@NonNull final Song song, Context context) {
         try {
-
-            return new Intent()
-                    .setAction(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_STREAM,
-                            FileProvider.getUriForFile(context,
-                                    context.getApplicationContext().getPackageName(),
-                                    new File(song.getData())))
+            return new Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM,
+                    FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName(), new File(song.getData())))
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     .setType("audio/*");
         } catch (IllegalArgumentException e) {
-            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
             e.printStackTrace();
-            Toast.makeText(context, "Could not share this file, I'm aware of the issue.",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
             return new Intent();
         }
     }

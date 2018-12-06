@@ -24,7 +24,7 @@
 
 
             <LinearLayout
-                android:id="@+id/instagram_link"
+                android:id="@+id/instagramLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -66,7 +66,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/twitter_link"
+                android:id="@+id/twitterLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -107,7 +107,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/discord_link"
+                android:id="@+id/discordLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -148,7 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/telegram_link"
+                android:id="@+id/telegramLink"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -189,7 +189,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/app_google_plus"
+                android:id="@+id/googlePlus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"

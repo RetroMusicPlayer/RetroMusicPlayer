@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <group
+        android:id="@+id/navigation_drawer_menu_category_buy_pro"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/buy_pro"
+            android:icon="@drawable/ic_card_giftcard_white_24dp"
+            android:title="@string/buy_pro" />
+    </group>
     <group
         android:id="@+id/navigation_drawer_menu_category_sections"
         android:checkableBehavior="single">
@@ -17,13 +24,27 @@
             android:icon="@drawable/ic_folder_white_24dp"
             android:title="@string/folders" />
     </group>
-
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_equalizer"
+            android:icon="@drawable/ic_equalizer_white_24dp"
+            android:title="@string/equalizer" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings_white_24dp"
+            android:title="@string/action_settings" />
+    </group>
     <group
-        android:id="@+id/navigation_drawer_menu_category_buy_pro"
+        android:id="@+id/others"
         android:checkableBehavior="none">
         <item
-            android:id="@+id/buy_pro"
-            android:icon="@drawable/ic_card_giftcard_white_24dp"
-            android:title="@string/buy_pro" />
+            android:id="@+id/nav_share_app"
+            android:icon="@drawable/ic_share_white_24dp"
+            android:title="@string/share_app" />
+        <item
+            android:id="@+id/nav_report_bug"
+            android:icon="@drawable/ic_bug_report_white_24dp"
+            android:title="@string/report_bug" />
     </group>
+
 </menu>
