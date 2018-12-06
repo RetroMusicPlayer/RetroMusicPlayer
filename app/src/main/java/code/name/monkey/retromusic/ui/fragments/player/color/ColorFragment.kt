@@ -133,7 +133,7 @@ class ColorFragment : AbsPlayerFragment() {
         val activity = activity
 
         SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(activity)
+                .checkIgnoreMediaStore(activity!!)
                 .generatePalette(activity).build().dontAnimate()
                 .into(object : RetroMusicColoredTarget(playerImage) {
                     override fun onColorReady(color: Int) {

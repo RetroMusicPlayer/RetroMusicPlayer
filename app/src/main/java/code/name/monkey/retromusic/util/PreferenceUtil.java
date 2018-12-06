@@ -289,7 +289,7 @@ public final class PreferenceUtil {
     }
 
     public int getLastLyricsType() {
-        return mPreferences.getInt(LAST_KNOWN_LYRICS_TYPE, R.id.normal_lyrics);
+        return mPreferences.getInt(LAST_KNOWN_LYRICS_TYPE, R.id.normalLyrics);
     }
 
     public void setLastLyricsType(int group) {
@@ -323,7 +323,7 @@ public final class PreferenceUtil {
     public final NowPlayingScreen getNowPlayingScreen() {
         int id = mPreferences.getInt(NOW_PLAYING_SCREEN_ID, 0);
         for (NowPlayingScreen nowPlayingScreen : NowPlayingScreen.values()) {
-            if (nowPlayingScreen.id == id) {
+            if (nowPlayingScreen.getId() == id) {
                 return nowPlayingScreen;
             }
         }
@@ -333,14 +333,14 @@ public final class PreferenceUtil {
     @SuppressLint("CommitPrefEdits")
     public void setNowPlayingScreen(NowPlayingScreen nowPlayingScreen) {
         final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putInt(NOW_PLAYING_SCREEN_ID, nowPlayingScreen.id);
+        editor.putInt(NOW_PLAYING_SCREEN_ID, nowPlayingScreen.getId());
         editor.apply();
     }
 
     public final AlbumCoverStyle getAlbumCoverStyle() {
         int id = mPreferences.getInt(ALBUM_COVER_STYLE, 0);
         for (AlbumCoverStyle albumCoverStyle : AlbumCoverStyle.values()) {
-            if (albumCoverStyle.id == id) {
+            if (albumCoverStyle.getId() == id) {
                 return albumCoverStyle;
             }
         }
@@ -349,7 +349,7 @@ public final class PreferenceUtil {
 
     public void setAlbumCoverStyle(AlbumCoverStyle albumCoverStyle) {
         final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putInt(ALBUM_COVER_STYLE, albumCoverStyle.id);
+        editor.putInt(ALBUM_COVER_STYLE, albumCoverStyle.getId());
         editor.apply();
     }
 

@@ -11,8 +11,8 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivi
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment
+import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import io.reactivex.disposables.CompositeDisposable
@@ -67,7 +68,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        ButterKnife.bind(this)
 
         getBottomNavigationView()!!.setOnNavigationItemSelectedListener {
             PreferenceUtil.getInstance().lastPage = it.itemId
@@ -298,10 +298,30 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 R.id.nav_home -> Handler().postDelayed({ setMusicChooser(HOME) }, 200)
                 R.id.nav_folders -> Handler().postDelayed({ setMusicChooser(FOLDERS) }, 200)
                 R.id.buy_pro -> Handler().postDelayed({ startActivityForResult(Intent(this@MainActivity, ProVersionActivity::class.java), PURCHASE_REQUEST) }, 200)
+                R.id.nav_settings -> Handler().postDelayed({ NavigationUtil.goToSettings(this@MainActivity) }, 200)
+                R.id.nav_equalizer -> Handler().postDelayed({ NavigationUtil.openEqualizer(this@MainActivity) }, 200)
+                R.id.nav_share_app -> Handler().postDelayed({ shareApp() }, 200)
+                R.id.nav_report_bug -> Handler().postDelayed({ prepareBugReport() }, 200)
             }
             true
         }
     }
+
+    private fun prepareBugReport() {
+
+    }
+
+    private fun shareApp() {
+        val shareIntent = ShareCompat.IntentBuilder.from(this)
+                .setType("songText/plain")
+                .setText(String.format(getString(R.string.app_share), packageName))
+                .intent
+        if (shareIntent.resolveActivity(packageManager) != null) {
+            startActivity(
+                    Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
+        }
+    }
+
 
     private fun setMusicChooser(key: Int) {
         PreferenceUtil.getInstance().lastMusicChooser = key

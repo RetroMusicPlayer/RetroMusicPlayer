@@ -105,8 +105,8 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     }
 
-    override fun showData(songs: ArrayList<Song>) {
-        adapter!!.swapDataSet(songs)
+    override fun showData(list: ArrayList<Song>) {
+        adapter!!.swapDataSet(list)
     }
 
     override fun showEmptyView() {

@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.ui.activities
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -36,7 +35,7 @@ class WhatsNewActivity : AbsBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_whats_new)
-        ButterKnife.bind(this)
+
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()

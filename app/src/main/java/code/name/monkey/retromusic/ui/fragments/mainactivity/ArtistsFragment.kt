@@ -122,8 +122,8 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     }
 
-    override fun showData(artists: ArrayList<Artist>) {
-        adapter!!.swapDataSet(artists)
+    override fun showData(list: ArrayList<Artist>) {
+        adapter!!.swapDataSet(list)
     }
 
     companion object {

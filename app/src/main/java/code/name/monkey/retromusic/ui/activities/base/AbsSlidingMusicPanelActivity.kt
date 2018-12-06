@@ -11,7 +11,6 @@ import android.view.ViewTreeObserver
 import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
@@ -63,7 +62,6 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(createContentView())
-        ButterKnife.bind(this)
 
         slidingUpPanelLayout = findViewById(R.id.sliding_layout);
         bottomNavigationView = findViewById(R.id.bottom_navigation);

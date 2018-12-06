@@ -67,11 +67,11 @@ public abstract class AbsSettingsFragment extends ATEPreferenceFragmentCompat {
     @Override
     public DialogFragment onCreatePreferenceDialog(Preference preference) {
         if (preference instanceof NowPlayingScreenPreference) {
-            return NowPlayingScreenPreferenceDialog.newInstance();
+            return NowPlayingScreenPreferenceDialog.Companion.newInstance();
         } else if (preference instanceof BlacklistPreference) {
             return BlacklistPreferenceDialog.newInstance();
         } else if (preference instanceof AlbumCoverStylePreference) {
-            return AlbumCoverStylePreferenceDialog.newInstance();
+            return AlbumCoverStylePreferenceDialog.Companion.newInstance();
         }
         return super.onCreatePreferenceDialog(preference);
     }

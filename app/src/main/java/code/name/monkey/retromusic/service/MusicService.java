@@ -653,7 +653,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         if (PreferenceUtil.getInstance().albumArtOnLockscreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
-            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
+            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.Companion.from(Glide.with(MusicService.this), song)
                     .checkIgnoreMediaStore(MusicService.this)
                     .asBitmap().build();
             if (PreferenceUtil.getInstance().blurredAlbumArt()) {

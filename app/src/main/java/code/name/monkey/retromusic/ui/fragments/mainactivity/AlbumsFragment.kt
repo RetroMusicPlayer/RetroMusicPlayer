@@ -130,8 +130,8 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
 
     override fun completed() {}
 
-    override fun showData(albums: ArrayList<Album>) {
-        adapter!!.swapDataSet(albums)
+    override fun showData(list: ArrayList<Album>) {
+        adapter!!.swapDataSet(list)
     }
 
     companion object {

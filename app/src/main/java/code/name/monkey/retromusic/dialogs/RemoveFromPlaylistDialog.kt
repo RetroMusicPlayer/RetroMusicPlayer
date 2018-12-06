@@ -6,7 +6,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.PlaylistSong
@@ -19,9 +18,8 @@ import java.util.*
 class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val layout = inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
-        ButterKnife.bind(this, layout)
-        return layout
+
+        return inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

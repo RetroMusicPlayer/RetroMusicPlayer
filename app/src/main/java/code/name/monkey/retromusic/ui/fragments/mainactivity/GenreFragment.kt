@@ -60,8 +60,8 @@ class GenreFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLa
 
     }
 
-    override fun showData(songs: ArrayList<Genre>) {
-        adapter!!.swapDataSet(songs)
+    override fun showData(list: ArrayList<Genre>) {
+        adapter!!.swapDataSet(list)
     }
 
     override fun showEmptyView() {
