@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.ui.activities.base
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.view.ViewTreeObserver
 import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -170,8 +168,6 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     override fun onPanelSlide(panel: View?, slideOffset: Float) {
         bottomNavigationView.translationY = slideOffset * 400
         setMiniPlayerAlphaProgress(slideOffset)
-        //if (navigationBarColorAnimator != null) navigationBarColorAnimator.cancel();
-        //super.setNavigationbarColor((int) argbEvaluator.evaluate(slideOffset, navigationbarColor, Color.TRANSPARENT));
     }
 
     override fun onPanelStateChanged(panel: View, previousState: PanelState, newState: PanelState) {
@@ -230,7 +226,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
             NowPlayingScreen.PLAIN -> PlainPlayerFragment()
             NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
             NowPlayingScreen.MATERIAL -> MaterialFragment()
-            NowPlayingScreen.COLOR->ColorFragment()
+            NowPlayingScreen.COLOR -> ColorFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.player_fragment_container, fragment).commit()
@@ -261,16 +257,17 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     override fun onPaletteColorChanged() {
         if (panelState == PanelState.EXPANDED) {
             val paletteColor = playerFragment!!.paletteColor
-            ColorUtil.isColorLight(paletteColor)
             super.setTaskDescriptionColor(paletteColor)
-            if (currentNowPlayingScreen == NowPlayingScreen.BLUR) {
+
+            val isColorLight = ColorUtil.isColorLight(paletteColor)
+            if (PreferenceUtil.getInstance().adaptiveColor &&
+                    (currentNowPlayingScreen == NowPlayingScreen.NORMAL || currentNowPlayingScreen == NowPlayingScreen.FLAT)) {
+                super.setLightNavigationBar(true)
+                super.setLightStatusbar(isColorLight)
+            } else if (currentNowPlayingScreen == NowPlayingScreen.FULL || currentNowPlayingScreen == NowPlayingScreen.CARD ||
+                    currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
-            } else {
-                val isTheme = isOneOfTheseThemes && ColorUtil.isColorLight(ThemeStore.primaryColor(this))
-                super.setStatusbarColor(Color.TRANSPARENT)
-                super.setLightStatusbar(isTheme)
-                super.setLightNavigationBar(isTheme)
             }
         }
     }

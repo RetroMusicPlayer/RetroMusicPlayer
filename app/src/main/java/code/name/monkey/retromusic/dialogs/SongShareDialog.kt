@@ -24,7 +24,7 @@ class SongShareDialog : RoundedBottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val song = arguments!!.getParcelable<Song>("song")!!
 
-        audioFile.text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
+        audioText.text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
         audioFile.setTextColor(ThemeStore.textColorSecondary(context!!))
         audioText.setTextColor(ThemeStore.textColorSecondary(context!!))
         title.setTextColor(ThemeStore.textColorPrimary(context!!))

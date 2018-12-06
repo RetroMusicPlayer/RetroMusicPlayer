@@ -559,4 +559,31 @@
     <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
     <string name="clear_playing_queue">Clear queue</string>
     <string name="buy_pro">Buy Retro Music Pro</string>
+    <string name="share_app">Share app</string>
+    <string name="report_bug">Report bug</string>
+
+    <string name="bug_report_use_account">Send using GitHub account</string>
+
+    <string name="login">Login</string>
+    <string name="bug_report_manual">Send manually</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
+    <string name="bug_report_issue">Issue</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="device_info">Device info</string>
+    <string name="report_an_issue">Report an issue</string>
+    <string name="bug_report_no_username">Please enter your valid GitHub username</string>
+    <string name="bug_report_no_password">Please enter your valid GitHub password</string>
+    <string name="bug_report_no_title">Please enter an issue title</string>
+    <string name="bug_report_no_description">Please enter an issue description</string>
+    <string name="bug_report_uploading">Uploading report to GitHub…</string>
+    <string name="bug_report_failed">Unable to send report</string>
+    <string name="bug_report_failed_wrong_credentials">Wrong username or password</string>
+    <string name="bug_report_failed_invalid_token">Invalid access token. Please contact the app developer.</string>
+    <string name="bug_report_failed_issues_not_available">Issues are not enabled for the selected repository. Please contact the app developer.</string>
+    <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
+    <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
+    <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
 </resources>

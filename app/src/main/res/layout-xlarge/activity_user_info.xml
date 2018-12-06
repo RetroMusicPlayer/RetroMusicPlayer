@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
@@ -18,7 +18,7 @@
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp">
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/title"
+                android:id="@+id/bannerTitle"
                 style="@style/BigTitleTextAppearance"
                 android:text="@string/profile" />
 
@@ -45,19 +45,19 @@
                 app:cardUseCompatPadding="true">
 
                 <FrameLayout
-                    android:id="@+id/image_container"
+                    android:id="@+id/imageContainer"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/banner_image"
+                        android:id="@+id/bannerImage"
                         android:layout_width="match_parent"
                         android:layout_height="228dp"
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/material_design_default" />
 
                     <View
-                        android:id="@+id/banner_select"
+                        android:id="@+id/bannerSelect"
                         android:layout_width="match_parent"
                         android:layout_height="228dp"
                         android:background="@color/twenty_percent_black_overlay" />
@@ -77,7 +77,7 @@
                         android:layout_margin="8dp">
 
                         <code.name.monkey.retromusic.views.CircularImageView
-                            android:id="@+id/user_image"
+                            android:id="@+id/userImage"
                             android:layout_width="72dp"
                             android:layout_height="72dp"
                             android:layout_gravity="center"
@@ -101,7 +101,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/name_container"
+                android:id="@+id/nameContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"

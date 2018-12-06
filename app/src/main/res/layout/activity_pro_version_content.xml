@@ -129,7 +129,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/restore_button"
+                android:id="@+id/restoreButton"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/purchase_button"
+                android:id="@+id/purchaseButton"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

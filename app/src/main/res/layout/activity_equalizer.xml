@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/collapsing_toolbar"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
@@ -27,8 +27,8 @@
                 tools:ignore="UnusedAttribute">
 
 
-                <TextView
-                    android:id="@+id/title"
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:id="@+id/bannerTitle"
                     android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                     tools:ignore="MissingPrefix" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/equalizer"
+                    android:id="@+id/equalizerSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -90,8 +90,8 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/bass_boost"
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:id="@+id/bassBoost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -100,7 +100,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 <SeekBar
-                    android:id="@+id/bass_boost_strength"
+                    android:id="@+id/bassBoostStrength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -119,7 +119,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/virtualizer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 <SeekBar
-                    android:id="@+id/virtualizer_strength"
+                    android:id="@+id/virtualizerStrength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -143,7 +143,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/bands"
+                android:id="@+id/frequencyBands"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

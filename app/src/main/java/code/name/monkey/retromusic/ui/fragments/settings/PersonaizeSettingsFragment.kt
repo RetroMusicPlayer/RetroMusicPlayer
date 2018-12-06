@@ -28,7 +28,7 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
         }
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
         addPreferencesFromResource(R.xml.pref_window)
         addPreferencesFromResource(R.xml.pref_lockscreen)

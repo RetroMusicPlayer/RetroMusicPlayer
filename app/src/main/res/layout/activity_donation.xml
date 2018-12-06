@@ -7,14 +7,13 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="0dp"
         app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:titleEnabled="false">
@@ -27,7 +26,7 @@
                 tools:ignore="UnusedAttribute">
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/bannerTitle"
                     style="@style/BigTitleTextAppearance"
                     android:text="@string/support_development" />
 
@@ -60,7 +59,7 @@
                 android:textColor="?attr/colorAccent" />
 
             <LinearLayout
-                android:id="@+id/progress_container"
+                android:id="@+id/progressContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="end|center_vertical"
@@ -85,7 +84,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/list"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="6dp"

@@ -56,7 +56,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/open_source"
+                android:id="@+id/openSource"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/rectSelector"
@@ -107,7 +107,7 @@
                     android:textColor="@color/md_white_1000" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    android:id="@+id/app_version"
+                    android:id="@+id/appVersion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"

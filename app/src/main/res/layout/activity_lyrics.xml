@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/albumImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -22,7 +22,7 @@
 
 
             <com.google.android.material.bottomappbar.BottomAppBar
-                android:id="@+id/bottom_app_bar"
+                android:id="@+id/bottomAppBar"
                 style="@style/Widget.MaterialComponents.BottomAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_edit_white_24dp"
-                app:layout_anchor="@id/bottom_app_bar" />
+                app:layout_anchor="@id/bottomAppBar" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                     android:paddingEnd="12dp">
 
                     <RadioButton
-                        android:id="@+id/synced_lyrics"
+                        android:id="@+id/syncedLyrics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -75,7 +75,7 @@
                         android:textColor="@color/md_white_1000" />
 
                     <RadioButton
-                        android:id="@+id/normal_lyrics"
+                        android:id="@+id/normalLyrics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -101,7 +101,7 @@
                         android:fadingEdge="vertical">
 
                         <TextView
-                            android:id="@+id/offline_lyrics"
+                            android:id="@+id/offlineLyrics"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="start"
@@ -116,7 +116,7 @@
                     </ScrollView>
 
                     <code.name.monkey.retromusic.views.LyricView
-                        android:id="@+id/lyrics_view"
+                        android:id="@+id/lyricsView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:fadeInFadeOut="true"

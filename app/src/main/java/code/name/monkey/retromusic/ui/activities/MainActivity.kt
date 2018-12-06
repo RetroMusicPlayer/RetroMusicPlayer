@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.ui.activities.bugreport.BugReportActivity
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment
@@ -308,7 +309,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     private fun prepareBugReport() {
-
+        startActivity(Intent(this, BugReportActivity::class.java))
     }
 
     private fun shareApp() {

@@ -82,7 +82,7 @@
     <style name="BottomSheetTextAppearance">
         <item name="android:breakStrategy">simple</item>
         <item name="android:hyphenationFrequency">none</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -105,5 +105,5 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
     </style>
 
-
+    <style name="Fab" parent="FabParent" />
 </resources>

@@ -21,10 +21,7 @@ import com.afollestad.materialdialogs.color.ColorChooserDialog
 class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
-
-        val primaryColorPref = findPreference(
-                "primary_color") as ATEColorPreference
-
+        val primaryColorPref = findPreference("primary_color") as ATEColorPreference
         primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
         val primaryColor = ThemeStore.primaryColor(activity!!)
         primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
@@ -87,8 +84,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
-        val colorAppShortcuts = findPreference(
-                "should_color_app_shortcuts") as TwoStatePreference
+        val colorAppShortcuts = findPreference("should_color_app_shortcuts") as TwoStatePreference
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
         } else {
@@ -102,7 +98,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
     }
 
-    override fun onCreatePreferences(savedInstanceState: Bundle, rootKey: String) {
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_general)
     }
 }

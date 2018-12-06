@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/itemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -33,7 +33,7 @@
                 android:layout_height="36dp">
 
                 <code.name.monkey.retromusic.views.IconImageView
-                    android:id="@+id/image"
+                    android:id="@+id/itemImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"
@@ -42,7 +42,7 @@
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/itemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -50,7 +50,7 @@
                 tools:text="Title" />
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/itemText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"

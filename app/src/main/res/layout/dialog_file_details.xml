@@ -7,37 +7,37 @@
     android:padding="12dp"
     tools:ignore="NewApi,RtlSymmetry">
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:textColor="?android:attr/textColorPrimary"
         android:text="@string/action_details"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
         tools:ignore="MissingPrefix" />
 
-    <TextView
-        android:id="@+id/file_path"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/filePath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/file_name"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/fileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:paddingTop="16dp"
+        android:textAppearance="?android:textAppearanceMedium"
         android:textColor="?android:attr/textColorPrimary"
-        android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/file_size"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/fileSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -45,8 +45,8 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/file_format"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/fileFormat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -54,8 +54,8 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/track_length"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/trackLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
@@ -63,7 +63,7 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/bitrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,8 +72,8 @@
         android:textAppearance="?android:textAppearanceMedium"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/sampling_rate"
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/samplingRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
