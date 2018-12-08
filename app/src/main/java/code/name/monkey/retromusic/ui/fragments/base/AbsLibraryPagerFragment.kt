@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.fragments.base
 
 import android.os.Bundle
-
 import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment
 
 open class AbsLibraryPagerFragment : AbsMusicServiceFragment() {

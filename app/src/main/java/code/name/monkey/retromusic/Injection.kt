@@ -10,7 +10,7 @@ import code.name.monkey.retromusic.util.schedulers.SchedulerProvider
 object Injection {
 
     fun provideRepository(): Repository {
-        return RepositoryImpl.getInstance()
+        return RepositoryImpl.instance
     }
 
     fun provideSchedulerProvider(): BaseSchedulerProvider {

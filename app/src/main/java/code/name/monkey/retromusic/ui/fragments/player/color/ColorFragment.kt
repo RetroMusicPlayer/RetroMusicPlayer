@@ -210,14 +210,14 @@ class ColorFragment : AbsPlayerFragment() {
             updateLyricsAsyncTask!!.cancel(false)
         }
         val song = MusicPlayerRemote.currentSong
-        updateLyricsAsyncTask = object : AsyncTask<Void, Void, Lyrics>() {
+        updateLyricsAsyncTask = object : AsyncTask<Void?, Void?, Lyrics?>() {
             override fun onPreExecute() {
                 super.onPreExecute()
                 lyrics = null
                 playerToolbar.menu.removeItem(R.id.action_show_lyrics)
             }
 
-            override fun doInBackground(vararg params: Void): Lyrics? {
+            override fun doInBackground(vararg params: Void?): Lyrics? {
                 val data = MusicUtil.getLyrics(song)
                 return if (TextUtils.isEmpty(data)) {
                     null
@@ -233,7 +233,7 @@ class ColorFragment : AbsPlayerFragment() {
                 }
             }
 
-            override fun onCancelled(s: Lyrics) {
+            override fun onCancelled(s: Lyrics?) {
                 onPostExecute(null)
             }
         }.execute()

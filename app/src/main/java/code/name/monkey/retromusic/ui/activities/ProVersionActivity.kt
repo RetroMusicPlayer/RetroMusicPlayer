@@ -78,14 +78,13 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
     override fun onProductPurchased(productId: String, details: TransactionDetails?) {
         Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
-        setResult(Activity.RESULT_OK)
+        setResult(RESULT_OK)
     }
 
     override fun onPurchaseHistoryRestored() {
         if (App.isProVersion) {
-            Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG)
-                    .show()
-            setResult(Activity.RESULT_OK)
+            Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show()
+            setResult(RESULT_OK)
         } else {
             Toast.makeText(this, R.string.no_purchase_found, Toast.LENGTH_SHORT).show()
         }
@@ -161,7 +160,6 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     companion object {
-
-        private val TAG: String = "ProVersionActivity"
+        private const val TAG: String = "ProVersionActivity"
     }
 }

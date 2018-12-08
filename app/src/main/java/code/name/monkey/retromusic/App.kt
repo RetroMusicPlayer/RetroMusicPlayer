@@ -3,6 +3,8 @@ package code.name.monkey.retromusic
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 import com.bumptech.glide.Glide
@@ -24,6 +26,10 @@ class App : MultiDexApplication() {
                     .coloredNavigationBar(true)
                     .commit()
         }
+
+        if (VersionUtils.hasNougatMR())
+            DynamicShortcutManager(this).initDynamicShortcuts()
+
 
         // automatically restores purchases
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY,

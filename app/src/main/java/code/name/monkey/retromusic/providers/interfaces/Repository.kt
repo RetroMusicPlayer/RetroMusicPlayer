@@ -1,14 +1,9 @@
 package code.name.monkey.retromusic.providers.interfaces
 
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import io.reactivex.Observable
-import java.io.File
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 11/08/17.
@@ -34,8 +29,6 @@ interface Repository {
 
     val allPlaylists: Observable<ArrayList<Playlist>>
 
-    val favoriteSongs: Observable<ArrayList<Song>>
-
     val homeList: Observable<ArrayList<Playlist>>
 
     val allThings: Observable<ArrayList<AbsSmartPlaylist>>
@@ -46,15 +39,13 @@ interface Repository {
 
     fun getAlbum(albumId: Int): Observable<Album>
 
-
     fun getArtistById(artistId: Long): Observable<Artist>
 
-    fun search(query: String): Observable<ArrayList<Any>>
+    fun search(query: String?): Observable<ArrayList<Any>>
 
     fun getPlaylistSongs(playlist: Playlist): Observable<ArrayList<Song>>
 
     fun getGenre(genreId: Int): Observable<ArrayList<Song>>
 
-    fun downloadLrcFile(title: String, artist: String, duration: Long): Observable<File>
 
 }

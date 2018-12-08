@@ -114,7 +114,7 @@ object SongLoader {
         return newSelectionValues
     }
 
-    fun getSong(cursor: Cursor?): Observable<Song> {
+    private fun getSong(cursor: Cursor?): Observable<Song> {
         return Observable.create { e ->
             val song: Song = if (cursor != null && cursor.moveToFirst()) {
                 getSongFromCursorImpl(cursor)

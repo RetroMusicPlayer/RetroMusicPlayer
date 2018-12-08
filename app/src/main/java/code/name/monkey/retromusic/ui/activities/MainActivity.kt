@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
@@ -49,10 +50,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val action = intent.action
             if (action != null && action == Intent.ACTION_SCREEN_OFF) {
                 if (PreferenceUtil.getInstance().lockScreen && MusicPlayerRemote.isPlaying) {
-                    /*Intent activity = new Intent(context, LockScreenActivity.class);
-                    activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    ActivityCompat.startActivity(context, activity, null);*/
+                    val activity = Intent(context, LockScreenActivity::class.java)
+                    activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                    ActivityCompat.startActivity(context, activity, null)
                 }
             }
         }
@@ -210,8 +211,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 if (!hasPermissions()) {
                     requestPermissions()
                 }
+                checkSetUpPro(); // good chance that pro version check was delayed on first start
             }
             REQUEST_CODE_THEME, APP_USER_INFO_REQUEST -> postRecreate()
+            PURCHASE_REQUEST -> {
+                if (resultCode == RESULT_OK) {
+                    checkSetUpPro();
+                }
+            }
         }
 
     }
@@ -367,10 +374,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun updateNavigationDrawerHeader() {
-
     }
 
     companion object {

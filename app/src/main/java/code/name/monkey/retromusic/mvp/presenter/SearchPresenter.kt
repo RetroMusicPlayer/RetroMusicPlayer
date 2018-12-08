@@ -27,7 +27,7 @@ class SearchPresenter(private val view: SearchContract.SearchView) : Presenter()
         }
     }
 
-    override fun search(query: String) {
+    override fun search(query: String?) {
         disposable.add(repository.search(query)
                 .debounce(500, TimeUnit.MILLISECONDS)
                 .subscribeOn(schedulerProvider.computation())

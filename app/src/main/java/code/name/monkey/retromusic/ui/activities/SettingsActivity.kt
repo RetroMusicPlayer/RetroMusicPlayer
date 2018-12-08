@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -32,6 +34,8 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
             }
             R.string.accent_color -> ThemeStore.editTheme(this).accentColor(selectedColor).commit()
         }
+        if (VersionUtils.hasNougatMR())
+            DynamicShortcutManager(this).updateDynamicShortcuts()
         recreate()
     }
 

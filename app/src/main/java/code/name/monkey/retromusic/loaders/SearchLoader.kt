@@ -2,18 +2,17 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import android.text.TextUtils
-import java.util.ArrayList
-
 import code.name.monkey.retromusic.R
 import io.reactivex.Observable
+import java.util.*
 
 object SearchLoader {
 
-    fun searchAll(context: Context, query: String): Observable<ArrayList<Any>> {
+    fun searchAll(context: Context, query: String?): Observable<ArrayList<Any>> {
         val results = ArrayList<Any>()
         return Observable.create { e ->
             if (!TextUtils.isEmpty(query)) {
-                SongLoader.getSongs(context, query)
+                SongLoader.getSongs(context, query!!)
                         .subscribe { songs ->
                             if (!songs.isEmpty()) {
                                 results.add(context.resources.getString(R.string.songs))

@@ -24,7 +24,7 @@ class DeletePlaylistDialog : RoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val playlists = arguments!!.getParcelableArrayList<Playlist>("playlists")
+        val playlists = arguments!!.getParcelableArrayList<Playlist>("playlist")
         val content: CharSequence
 
         content = if (playlists!!.size > 1) {

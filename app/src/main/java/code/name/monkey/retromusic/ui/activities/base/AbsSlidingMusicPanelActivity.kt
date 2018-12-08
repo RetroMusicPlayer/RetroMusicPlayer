@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -28,6 +29,7 @@ import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
+import code.name.monkey.retromusic.util.ColorUtils
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -267,6 +269,13 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
             } else if (currentNowPlayingScreen == NowPlayingScreen.FULL || currentNowPlayingScreen == NowPlayingScreen.CARD ||
                     currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
                 super.setLightStatusbar(false)
+                super.setLightNavigationBar(true)
+            } else if (currentNowPlayingScreen == NowPlayingScreen.COLOR) {
+                super.setNavigationbarColor(paletteColor)
+                super.setLightNavigationBar(isColorLight)
+                super.setLightStatusbar(isColorLight)
+            } else {
+                super.setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
                 super.setLightNavigationBar(true)
             }
         }
