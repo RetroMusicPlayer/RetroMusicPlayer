@@ -18,6 +18,7 @@
         android:fitsSystemWindows="true"
         android:paddingStart="0dp"
         android:paddingEnd="8dp"
+        app:headerLayout="@layout/navigation_drawer_header"
         app:itemBackground="@drawable/navigation_item"
         app:itemTextAppearance="@style/NavigationViewTitleTextAppearance"
         app:menu="@menu/menu_drawer" />

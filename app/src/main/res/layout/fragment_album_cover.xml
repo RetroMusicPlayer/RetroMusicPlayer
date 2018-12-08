@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/player_album_art_frame"
+    <code.name.monkey.retromusic.views.WidthFitSquareLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
 
-        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/player_album_art_frame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:cardUseCompatPadding="true">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/player_image"
@@ -24,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:ignore="ContentDescription,UnusedAttribute" />
-        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-    </com.google.android.material.card.MaterialCardView>
+
+        </com.google.android.material.card.MaterialCardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 </FrameLayout>

@@ -82,7 +82,8 @@
     <style name="BottomSheetTextAppearance">
         <item name="android:breakStrategy">simple</item>
         <item name="android:hyphenationFrequency">none</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -106,4 +107,8 @@
     </style>
 
     <style name="Fab" parent="FabParent" />
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textAllCaps">false</item>
+    </style>
 </resources>

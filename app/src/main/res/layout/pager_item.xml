@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/image_container"
+        android:id="@+id/imageContainer"
         android:layout_width="match_parent"
         android:layout_height="172dp"
         app:cardCornerRadius="12dp"
@@ -21,7 +21,7 @@
             android:scaleType="centerCrop" />
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/play_songs"
+            android:id="@+id/playSongs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -48,7 +48,6 @@
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ellipsize="end"
@@ -56,6 +55,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textSize="14sp"
+        android:textStyle="bold"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 

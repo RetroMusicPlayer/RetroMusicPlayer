@@ -21,7 +21,7 @@
             app:title="">
 
             <TextView
-                android:id="@+id/whatNewtitle"
+                android:id="@+id/bannerTitle"
                 style="@style/BigTitleTextAppearance"
                 android:text="@string/whats_new" />
 
