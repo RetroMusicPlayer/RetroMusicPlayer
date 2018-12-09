@@ -10,7 +10,7 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import java.io.IOException
 
-abstract class AbsCastActivity : AbsBaseActivity() {
+abstract class AbsCastActivity : AbsCheckPiracy() {
 
     var playServicesAvailable = false
 

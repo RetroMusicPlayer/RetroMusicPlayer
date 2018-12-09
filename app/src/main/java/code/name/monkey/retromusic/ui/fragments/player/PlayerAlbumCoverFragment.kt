@@ -43,13 +43,16 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         super.onViewCreated(view, savedInstanceState)
         viewPager.addOnPageChangeListener(this)
         //noinspection ConstantConditions
-        if (PreferenceUtil.getInstance().carouselEffect() && !((PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FULL) || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FIT))) {
-            viewPager.clipToPadding = false;
-            viewPager.setPadding(96, 0, 96, 0);
-            viewPager.pageMargin = 18;
-            viewPager.setPageTransformer(false, CarousalPagerTransformer(context!!));
+        if (PreferenceUtil.getInstance().carouselEffect() &&
+                !((PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FULL)
+                        || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FIT))) {
+            viewPager.clipToPadding = false
+            viewPager.setPadding(96, 0, 96, 0)
+            viewPager.pageMargin = 18
+            viewPager.setPageTransformer(false, CarousalPagerTransformer(context!!))
         } else {
-            viewPager.setPageTransformer(true, PreferenceUtil.getInstance().getAlbumCoverTransform(context!!));
+            viewPager.offscreenPageLimit = 2
+            viewPager.setPageTransformer(true, PreferenceUtil.getInstance().albumCoverTransform)
         }
     }
 
@@ -123,6 +126,5 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
-        const val VISIBILITY_ANIM_DURATION: Long = 300
     }
 }

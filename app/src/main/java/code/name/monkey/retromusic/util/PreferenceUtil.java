@@ -30,6 +30,8 @@ import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
+import code.name.monkey.retromusic.transform.StackPagerTransformer;
+import code.name.monkey.retromusic.transform.StackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
@@ -739,7 +741,7 @@ public final class PreferenceUtil {
     }
 
 
-    public ViewPager.PageTransformer getAlbumCoverTransform(Context context) {
+    public ViewPager.PageTransformer getAlbumCoverTransform() {
         int style = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_COVER_TRANSFORM, "0")));
         switch (style) {
             default:
@@ -755,6 +757,8 @@ public final class PreferenceUtil {
                 return new VerticalFlipTransformation();
             case 5:
                 return new HingeTransformation();
+            case 6:
+                return new StackTransformer();
         }
     }
 

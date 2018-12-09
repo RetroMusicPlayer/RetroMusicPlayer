@@ -1,14 +1,22 @@
 package code.name.monkey.retromusic.ui.fragments.settings
 
+import android.app.ActivityManager
+import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.ui.activities.SettingsActivity.Companion.RESULT_ENABLE
 import code.name.monkey.retromusic.util.PreferenceUtil
 
+
 class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+
     override fun invalidateSettings() {
         val cornerWindow = findPreference("corner_window") as TwoStatePreference
         cornerWindow.setOnPreferenceChangeListener { _, newValue ->
@@ -17,15 +25,17 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
                 return@setOnPreferenceChangeListener false
             }
             activity!!.recreate()
-            true
+            return@setOnPreferenceChangeListener true
         }
 
 
         val toggleFullScreen = findPreference("toggle_full_screen") as TwoStatePreference
-        toggleFullScreen.setOnPreferenceChangeListener { _, newValue ->
+        toggleFullScreen.setOnPreferenceChangeListener { _, _ ->
             activity!!.recreate()
             true
         }
+
+
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -36,9 +46,8 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
-    }
+  }
 
     override fun onDestroyView() {
         super.onDestroyView()

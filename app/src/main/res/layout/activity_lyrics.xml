@@ -25,16 +25,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
+            style="@style/TabLayoutStyle"
             android:background="@android:color/transparent"
-            app:tabTextAppearance="@style/TabTextAppearance"
-            app:tabIndicator="@drawable/tab_indicator"
-            app:tabIndicatorAnimationDuration="@integer/anim_duration_medium"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorHeight="4dp"
-            app:tabInlineLabel="true">
+            app:tabTextAppearance="@style/TabTextAppearance">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"

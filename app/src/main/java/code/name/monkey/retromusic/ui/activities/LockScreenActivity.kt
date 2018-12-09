@@ -1,24 +1,23 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.ViewCompat
 import android.view.WindowManager
-import android.widget.ImageView
-
-import com.bumptech.glide.Glide
-import com.r0adkll.slidr.Slidr
-import com.r0adkll.slidr.model.SlidrConfig
-import com.r0adkll.slidr.model.SlidrPosition
-
+import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.ui.fragments.player.lockscreen.LockScreenPlayerControlsFragment
+import com.bumptech.glide.Glide
+import com.r0adkll.slidr.Slidr
+import com.r0adkll.slidr.model.SlidrConfig
+import com.r0adkll.slidr.model.SlidrListener
+import com.r0adkll.slidr.model.SlidrPosition
 
 class LockScreenActivity : AbsMusicServiceActivity() {
     private var mFragment: LockScreenPlayerControlsFragment? = null
@@ -47,13 +46,15 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
         mFragment = supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
 
-        findViewById<View>(R.id.slide).setTranslationY(100f)
-        findViewById<View>(R.id.slide).setAlpha(0f)
-        ViewCompat.animate(findViewById<View>(R.id.slide))
-                .translationY(0f)
-                .alpha(1f)
-                .setDuration(1500)
-                .start()
+        findViewById<View>(R.id.slide).apply {
+            translationY = 100f
+            alpha = 0f
+            ViewCompat.animate(this)
+                    .translationY(0f)
+                    .alpha(1f)
+                    .setDuration(1500)
+                    .start()
+        }
 
         findViewById<View>(R.id.root_layout).setBackgroundColor(ThemeStore.primaryColor(this))
     }

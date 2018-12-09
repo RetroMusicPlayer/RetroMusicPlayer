@@ -29,23 +29,19 @@ import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
-import code.name.monkey.retromusic.util.ColorUtils
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 
 abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicServiceActivity(), SlidingUpPanelLayout.PanelSlideListener, AbsPlayerFragment.Callbacks {
 
 
-    lateinit var slidingUpPanelLayout: SlidingUpPanelLayout
-    private lateinit var bottomNavigationView: BottomNavigationBarTinted
-
     private var miniPlayerFragment: MiniPlayerFragment? = null
-    var playerFragment: AbsPlayerFragment? = null
+    private var playerFragment: AbsPlayerFragment? = null
     private var currentNowPlayingScreen: NowPlayingScreen? = null
-
     private var navigationbarColor: Int = 0
     private var taskColor: Int = 0
     private var lightStatusbar: Boolean = false
@@ -54,7 +50,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     private val argbEvaluator = ArgbEvaluator()
 
     val panelState: SlidingUpPanelLayout.PanelState?
-        get() = slidingUpPanelLayout.panelState
+        get() = slidingLayout.panelState
 
     private val isOneOfTheseThemes: Boolean
         get() = (currentNowPlayingScreen == NowPlayingScreen.ADAPTIVE)
@@ -63,8 +59,6 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         super.onCreate(savedInstanceState)
         setContentView(createContentView())
 
-        slidingUpPanelLayout = findViewById(R.id.sliding_layout);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         chooseFragmentForTheme()
         setupSlidingUpPanel()
@@ -80,9 +74,9 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     override fun onServiceConnected() {
         super.onServiceConnected()
         if (!MusicPlayerRemote.playingQueue.isEmpty()) {
-            slidingUpPanelLayout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            slidingLayout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    slidingUpPanelLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    slidingLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     hideBottomBar(false)
                 }
             })
@@ -99,11 +93,11 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         val heightOfBarWithTabs = resources.getDimensionPixelSize(R.dimen.mini_player_height_expanded)
 
         if (hide) {
-            slidingUpPanelLayout.panelHeight = 0
+            slidingLayout.panelHeight = 0
             collapsePanel()
         } else {
             if (!MusicPlayerRemote.playingQueue.isEmpty()) {
-                slidingUpPanelLayout.panelHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
+                slidingLayout.panelHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
             }
         }
     }
@@ -111,7 +105,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     protected fun wrapSlidingMusicPanel(@LayoutRes resId: Int): View {
         @SuppressLint("InflateParams")
         val slidingMusicPanelLayout = layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
-        val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.content_container)
+        val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
         layoutInflater.inflate(resId, contentContainer)
         return slidingMusicPanelLayout
     }
@@ -122,7 +116,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     }
 
     open fun handleBackPress(): Boolean {
-        if (slidingUpPanelLayout.panelHeight != 0 && playerFragment!!.onBackPressed())
+        if (slidingLayout.panelHeight != 0 && playerFragment!!.onBackPressed())
             return true
         if (panelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
             collapsePanel()
@@ -142,18 +136,18 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         bottomNavigationView.visibility = if (toggle) View.GONE else View.VISIBLE
     }
 
-    fun getBottomNavigationView(): BottomNavigationView? {
+    fun getBottomNavigationView(): BottomNavigationBarTinted? {
         return bottomNavigationView
     }
 
     private fun setupSlidingUpPanel() {
-        slidingUpPanelLayout.viewTreeObserver
+        slidingLayout.viewTreeObserver
                 .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
-                        slidingUpPanelLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        slidingLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                         if (panelState == PanelState.EXPANDED) {
-                            onPanelSlide(slidingUpPanelLayout, 1f)
+                            onPanelSlide(slidingLayout, 1f)
                             onPanelExpanded()
                         } else if (panelState == PanelState.COLLAPSED) {
                             onPanelCollapsed()
@@ -163,7 +157,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
                     }
                 })
 
-        slidingUpPanelLayout.addPanelSlideListener(this)
+        slidingLayout.addPanelSlideListener(this)
 
     }
 
@@ -182,7 +176,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         }
     }
 
-    fun onPanelCollapsed() {
+    open fun onPanelCollapsed() {
         // restore values
         super.setLightStatusbar(lightStatusbar)
         super.setTaskDescriptionColor(taskColor)
@@ -195,7 +189,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         playerFragment!!.onHide()
     }
 
-    fun onPanelExpanded() {
+   open fun onPanelExpanded() {
         val playerFragmentColor = playerFragment!!.paletteColor
         super.setTaskDescriptionColor(playerFragmentColor)
 
@@ -231,11 +225,11 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
             NowPlayingScreen.COLOR -> ColorFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
-        supportFragmentManager.beginTransaction().replace(R.id.player_fragment_container, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()
         supportFragmentManager.executePendingTransactions()
 
-        playerFragment = supportFragmentManager.findFragmentById(R.id.player_fragment_container) as AbsPlayerFragment
-        miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.mini_player_fragment) as MiniPlayerFragment
+        playerFragment = supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
+        miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.miniPlayerFragment) as MiniPlayerFragment
         miniPlayerFragment!!.view!!.setOnClickListener { expandPanel() }
 
     }
@@ -248,11 +242,11 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     }
 
     private fun collapsePanel() {
-        slidingUpPanelLayout.panelState = PanelState.COLLAPSED
+        slidingLayout.panelState = PanelState.COLLAPSED
     }
 
     private fun expandPanel() {
-        slidingUpPanelLayout.panelState = PanelState.EXPANDED
+        slidingLayout.panelState = PanelState.EXPANDED
     }
 
 
@@ -267,6 +261,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
             } else if (currentNowPlayingScreen == NowPlayingScreen.FULL || currentNowPlayingScreen == NowPlayingScreen.CARD ||
+                    currentNowPlayingScreen == NowPlayingScreen.FIT ||
                     currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)

@@ -35,9 +35,9 @@ class AppWidgetSmall : BaseAppWidget() {
 
         appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_album_art)
-        appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
 
         linkButtons(context, appWidgetView)
         pushUpdate(context, appWidgetIds, appWidgetView)

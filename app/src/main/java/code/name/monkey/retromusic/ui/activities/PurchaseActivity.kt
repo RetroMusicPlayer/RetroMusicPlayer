@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.ui.activities
 
-import android.app.Activity
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -21,17 +20,16 @@ import kotlinx.android.synthetic.main.activity_pro_version_content.*
 import java.lang.ref.WeakReference
 
 
-class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
+class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
 
-    private var billingProcessor: BillingProcessor? = null
+    private lateinit var billingProcessor: BillingProcessor
     private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pro_version)
         setDrawUnderStatusBar()
-
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -52,7 +50,7 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         restoreButton.isEnabled = false
         purchaseButton.isEnabled = false
 
-        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this)
+        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
 
         MaterialUtil.setTint(restoreButton, false)
         MaterialUtil.setTint(purchaseButton, true)
@@ -64,7 +62,7 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
         }
         purchaseButton.setOnClickListener {
-            billingProcessor!!.purchase(this@ProVersionActivity, App.PRO_VERSION_PRODUCT_ID)
+            billingProcessor.purchase(this@PurchaseActivity, App.PRO_VERSION_PRODUCT_ID)
         }
     }
 
@@ -102,7 +100,7 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!billingProcessor!!.handleActivityResult(requestCode, resultCode, data)) {
+        if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
@@ -115,15 +113,13 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     override fun onDestroy() {
-        if (billingProcessor != null) {
-            billingProcessor!!.release()
-        }
+        billingProcessor.release()
         super.onDestroy()
     }
 
-    private class RestorePurchaseAsyncTask internal constructor(purchaseActivity: ProVersionActivity) : AsyncTask<Void, Void, Boolean>() {
+    private class RestorePurchaseAsyncTask internal constructor(purchaseActivity: PurchaseActivity) : AsyncTask<Void, Void, Boolean>() {
 
-        private val buyActivityWeakReference: WeakReference<ProVersionActivity> = WeakReference(purchaseActivity)
+        private val buyActivityWeakReference: WeakReference<PurchaseActivity> = WeakReference(purchaseActivity)
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -138,7 +134,7 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         override fun doInBackground(vararg params: Void): Boolean? {
             val purchaseActivity = buyActivityWeakReference.get()
             if (purchaseActivity != null) {
-                return purchaseActivity.billingProcessor!!.loadOwnedPurchasesFromGoogle()
+                return purchaseActivity.billingProcessor.loadOwnedPurchasesFromGoogle()
             }
             cancel(false)
             return null
@@ -160,6 +156,6 @@ class ProVersionActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
     }
 
     companion object {
-        private const val TAG: String = "ProVersionActivity"
+        private const val TAG: String = "PurchaseActivity"
     }
 }

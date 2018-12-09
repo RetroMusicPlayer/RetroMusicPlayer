@@ -59,7 +59,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener {
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
         setNavigationbarColorAuto()
-        setLightStatusbar(true)
+
 
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
         toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))

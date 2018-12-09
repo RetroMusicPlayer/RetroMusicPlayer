@@ -55,6 +55,9 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment?
         volumeFragment!!.tintWhiteColor()
 
+
+        songTotalTime.setTextColor(Color.WHITE)
+        songCurrentProgress.setTextColor(Color.WHITE)
     }
 
     override fun onResume() {

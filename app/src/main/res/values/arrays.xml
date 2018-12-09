@@ -7,6 +7,7 @@
         <item>@string/vertical_flip</item>
         <item>@string/horizontal_flip</item>
         <item>@string/hinge</item>
+        <item>@string/stack</item>
     </array>
 
     <string-array name="pref_album_cover_transform_values">
@@ -16,6 +17,7 @@
         <item>3</item>
         <item>4</item>
         <item>5</item>
+        <item>6</item>
     </string-array>
 
     <string-array name="pref_tab_text_mode_values">
@@ -208,4 +210,5 @@
     </string-array>
 
     <string name="image_gradient">Gradient image</string>
+    <string name="stack">Stack</string>
 </resources>

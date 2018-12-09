@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic
 
 import android.content.Context
+import android.widget.Toast
 import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -32,12 +33,12 @@ class App : MultiDexApplication() {
 
 
         // automatically restores purchases
-        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY,
+        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
                 object : BillingProcessor.IBillingHandler {
                     override fun onProductPurchased(productId: String, details: TransactionDetails?) {}
 
                     override fun onPurchaseHistoryRestored() {
-                        //Toast.makeText(App.this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show();
+                        Toast.makeText(this@App, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show();
                     }
 
                     override fun onBillingError(errorCode: Int, error: Throwable?) {}

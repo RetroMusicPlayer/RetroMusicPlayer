@@ -52,6 +52,7 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
+import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
@@ -129,6 +130,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
     private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
     private AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
+    private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
     private final BroadcastReceiver widgetIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
@@ -150,6 +152,10 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                 }
                 case AppWidgetCard.NAME: {
                     appWidgetCard.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetText.NAME: {
+                    appWidgetText.performUpdate(MusicService.this, ids);
                     break;
                 }
             }
@@ -1114,6 +1120,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         appWidgetClassic.notifyChange(this, what);
         appWidgetSmall.notifyChange(this, what);
         appWidgetCard.notifyChange(this, what);
+        appWidgetText.notifyChange(this, what);
     }
 
     private void handleChangeInternal(@NonNull final String what) {
