@@ -105,14 +105,14 @@
         <activity android:name=".ui.activities.SettingsActivity" />
         <activity
             android:name=".ui.activities.SearchActivity"
-            android:windowSoftInputMode="stateVisible"/>
+            android:windowSoftInputMode="stateVisible" />
         <activity android:name=".ui.activities.LyricsActivity" />
         <activity android:name=".ui.activities.UserInfoActivity" />
 
         <activity android:name=".ui.activities.SupportDevelopmentActivity" />
         <activity android:name=".ui.activities.GenreDetailsActivity" />
         <activity android:name=".ui.activities.LicenseActivity" />
-        <activity android:name=".ui.activities.ProVersionActivity" />
+        <activity android:name=".ui.activities.PurchaseActivity" />
         <activity android:name=".ui.activities.EqualizerActivity" />
         <activity android:name=".ui.activities.ErrorHandlerActivity" />
         <activity android:name=".ui.activities.WhatsNewActivity" />
@@ -122,10 +122,13 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.ExpandedCastController" />
+        <activity android:name=".ui.activities.bugreport.BugReportActivity" />
+        <activity android:name=".ui.activities.LockScreenActivity" />
 
         <service
             android:name=".service.MusicService"
             android:enabled="true" />
+
         <service
             android:name=".service.WearBrowserService"
             android:exported="true">
@@ -134,27 +137,11 @@
             </intent-filter>
         </service>
 
-        <!-- <service -->
-        <!-- android:name=".service.daydream.RetroMusicAlbums" -->
-        <!-- android:exported="true" -->
-        <!-- android:label="Retro Music Albums" -->
-        <!-- android:permission="android.permission.BIND_DREAM_SERVICE"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.service.dreams.DreamService" /> -->
-        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-        <!-- </intent-filter> -->
-        <!-- </service> -->
-        <!-- Widgets -->
-        <!--
-         <receiver
-             android:name=".headset.HeadsetReceiver"
-             android:enabled="true"
-             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.HEADSET_PLUG" />
-             </intent-filter>
-         </receiver>
-        -->
+        <receiver android:name=".service.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
 
 
         <meta-data
@@ -173,12 +160,6 @@
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
             android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
 
-        <!--
-             <meta-data
-             android:name="com.google.android.gms.car.application"
-             android:resource="@xml/automotive_app_desc" />
-        -->
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
@@ -189,6 +170,73 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-    </application>
+        <receiver android:name=".appwidgets.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetBig"
+            android:exported="false"
+            android:label="@string/app_widget_big_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_big_info" />
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetClassic"
+            android:exported="false"
+            android:label="@string/app_widget_classic_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_classic_info" />
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetSmall"
+            android:exported="false"
+            android:label="@string/app_widget_small_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_small_info" />
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetText"
+            android:exported="false"
+            android:label="@string/app_widget_text_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_text" />
+        </receiver>
+        <receiver
+            android:name=".appwidgets.AppWidgetCard"
+            android:exported="false"
+            android:label="@string/app_widget_card_name">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_card_info" />
+        </receiver>
+
+
+    </application>
 </manifest>

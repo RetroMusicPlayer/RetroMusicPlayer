@@ -21,7 +21,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
     private var playingQueueAdapter: PlayingQueueAdapter? = null
-    private lateinit var layoutManager: LinearLayoutManager
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val upNextAndQueueTime: String
         get() = resources.getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position))
@@ -54,16 +54,16 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
                 R.layout.item_queue)
         wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(playingQueueAdapter!!)
 
-        layoutManager = LinearLayoutManager(this)
+        linearLayoutManager = LinearLayoutManager(this)
 
         recyclerView.apply {
-            layoutManager = layoutManager
+            layoutManager = linearLayoutManager
             adapter = wrappedAdapter
             itemAnimator = animator
             recyclerViewDragDropManager!!.attachRecyclerView(this)
         }
 
-        layoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
+        linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -109,7 +109,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private fun resetToCurrentPosition() {
         recyclerView.stopScroll()
-        layoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
+        linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
     override fun onPause() {

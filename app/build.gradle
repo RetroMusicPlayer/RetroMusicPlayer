@@ -13,12 +13,12 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 255
-        versionName '2.2.100'
+        versionCode 260
+        versionName '3.0.010'
 
         multiDexEnabled true
 
-        buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
+        buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
     }
     signingConfigs {
         release {
@@ -149,7 +149,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
-
+    implementation 'com.github.jetradarmobile:android-snowfall:1.2.0'
+    implementation 'com.github.javiersantos:PiracyChecker:1.2.4'
 }
 repositories {
     mavenCentral()

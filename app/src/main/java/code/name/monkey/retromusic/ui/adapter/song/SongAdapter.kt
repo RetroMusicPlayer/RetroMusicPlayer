@@ -177,17 +177,19 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
 
         init {
             setImageTransitionName(activity.getString(R.string.transition_album_art))
-            menu!!.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
-                override val song: Song
-                    get() = this@ViewHolder.song
+            if (menu != null) {
+                menu!!.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
+                    override val song: Song
+                        get() = this@ViewHolder.song
 
-                override val menuRes: Int
-                    get() = songMenuRes
+                    override val menuRes: Int
+                        get() = songMenuRes
 
-                override fun onMenuItemClick(item: MenuItem): Boolean {
-                    return onSongMenuItemClick(item) || super.onMenuItemClick(item)
-                }
-            })
+                    override fun onMenuItemClick(item: MenuItem): Boolean {
+                        return onSongMenuItemClick(item) || super.onMenuItemClick(item)
+                    }
+                })
+            }
         }
 
         protected open fun onSongMenuItemClick(item: MenuItem): Boolean {

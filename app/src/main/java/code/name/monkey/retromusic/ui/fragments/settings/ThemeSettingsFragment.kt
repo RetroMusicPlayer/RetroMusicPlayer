@@ -11,6 +11,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 
@@ -64,6 +65,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 activity!!.setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
+                DynamicShortcutManager(activity!!).updateDynamicShortcuts()
             }
             activity!!.recreate()
             //invalidateSettings();
@@ -92,6 +94,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
                 // Save preference
                 PreferenceUtil.getInstance().setColoredAppShortcuts(newValue as Boolean)
+                DynamicShortcutManager(activity!!).updateDynamicShortcuts()
                 true
             }
         }

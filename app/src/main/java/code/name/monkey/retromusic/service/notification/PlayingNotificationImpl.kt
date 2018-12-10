@@ -45,10 +45,8 @@ class PlayingNotificationImpl : PlayingNotification() {
 
         val isPlaying = service.isPlaying
 
-        val notificationLayout = RemoteViews(service.packageName,
-                R.layout.notification)
-        val notificationLayoutBig = RemoteViews(service.packageName,
-                R.layout.notification_big)
+        val notificationLayout = RemoteViews(service.packageName, R.layout.notification)
+        val notificationLayoutBig = RemoteViews(service.packageName, R.layout.notification_big)
 
         if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
             notificationLayout.setViewVisibility(R.id.media_titles, View.INVISIBLE)
@@ -58,8 +56,7 @@ class PlayingNotificationImpl : PlayingNotification() {
             notificationLayout.setTextViewText(R.id.text, song.artistName)
         }
 
-        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName) && TextUtils
-                        .isEmpty(song.albumName)) {
+        if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName) && TextUtils.isEmpty(song.albumName)) {
             notificationLayoutBig.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         } else {
             notificationLayoutBig.setViewVisibility(R.id.media_titles, View.VISIBLE)

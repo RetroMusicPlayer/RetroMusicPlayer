@@ -121,9 +121,9 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_big);
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_big);
         }
     }
 

@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.service;
 
 import android.app.PendingIntent;
 import android.app.Service;
+import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -47,6 +48,11 @@ import java.util.Random;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
+import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
+import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
+import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
+import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
@@ -92,12 +98,10 @@ import static code.name.monkey.retromusic.Constants.SHUFFLE_MODE_CHANGED;
  */
 public class MusicService extends Service implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
     public static final String TAG = MusicService.class.getSimpleName();
-
     public static final String SAVED_POSITION = "POSITION";
     public static final String SAVED_POSITION_IN_TRACK = "POSITION_IN_TRACK";
     public static final String SAVED_SHUFFLE_MODE = "SHUFFLE_MODE";
     public static final String SAVED_REPEAT_MODE = "REPEAT_MODE";
-
     public static final int RELEASE_WAKELOCK = 0;
     public static final int TRACK_ENDED = 1;
     public static final int TRACK_WENT_TO_NEXT = 2;
@@ -122,10 +126,39 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
             | PlaybackStateCompat.ACTION_STOP
             | PlaybackStateCompat.ACTION_SEEK_TO;
     private final IBinder musicBind = new MusicBinder();
+    private AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
+    private AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
+    private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
+    private AppWidgetCard appWidgetCard = AppWidgetCard.Companion.getInstance();
+    private AppWidgetText appWidgetText = AppWidgetText.Companion.getInstance();
     private final BroadcastReceiver widgetIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final String command = intent.getStringExtra(EXTRA_APP_WIDGET_NAME);
+
+            final int[] ids = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+            switch (command) {
+                case AppWidgetClassic.NAME: {
+                    appWidgetClassic.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetSmall.NAME: {
+                    appWidgetSmall.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetBig.NAME: {
+                    appWidgetBig.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetCard.NAME: {
+                    appWidgetCard.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetText.NAME: {
+                    appWidgetText.performUpdate(MusicService.this, ids);
+                    break;
+                }
+            }
 
         }
     };
@@ -1083,7 +1116,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
     private void sendChangeInternal(final String what) {
         sendBroadcast(new Intent(what));
-
+        appWidgetBig.notifyChange(this, what);
+        appWidgetClassic.notifyChange(this, what);
+        appWidgetSmall.notifyChange(this, what);
+        appWidgetCard.notifyChange(this, what);
+        appWidgetText.notifyChange(this, what);
     }
 
     private void handleChangeInternal(@NonNull final String what) {

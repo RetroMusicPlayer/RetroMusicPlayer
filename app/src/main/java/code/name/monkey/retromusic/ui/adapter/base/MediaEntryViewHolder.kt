@@ -59,7 +59,7 @@ open class MediaEntryViewHolder(w: View) : RecyclerView.ViewHolder(w), View.OnCl
         recyclerView = w.findViewById(R.id.recycler_view)
 
         mask = w.findViewById(R.id.mask)
-        playSongs = w.findViewById(R.id.play_songs)
+        playSongs = w.findViewById(R.id.playSongs)
 
         w.setOnClickListener(this)
         w.setOnLongClickListener(this)

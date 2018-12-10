@@ -71,9 +71,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupWindowTransition()
         super.onCreate(savedInstanceState)
 
-        toggleBottomNavigationView(true)
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
+
+        toggleBottomNavigationView(true)
 
         ActivityCompat.postponeEnterTransition(this)
 

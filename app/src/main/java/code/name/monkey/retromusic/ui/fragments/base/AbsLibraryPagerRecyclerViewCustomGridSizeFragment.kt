@@ -41,15 +41,15 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
             activity!!.resources.getInteger(R.integer.default_list_columns_land)
         } else activity!!.resources.getInteger(R.integer.default_list_columns)
 
-    protected val isLandscape: Boolean
+    private val isLandscape: Boolean
         get() = RetroUtil.isLandscape()
 
     fun getGridSize(): Int {
         if (gridSize == 0) {
-            if (isLandscape) {
-                gridSize = loadGridSizeLand()
+            gridSize = if (isLandscape) {
+                loadGridSizeLand()
             } else {
-                gridSize = loadGridSize()
+                loadGridSize()
             }
         }
         return gridSize

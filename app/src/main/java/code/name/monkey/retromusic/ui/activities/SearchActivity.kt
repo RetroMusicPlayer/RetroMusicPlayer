@@ -55,7 +55,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         if (intent.getBooleanExtra("mic_search", false)) {
             startMicSearch()
         }
-
+        back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
     }
 
@@ -83,7 +83,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
     override fun onResume() {
         super.onResume()
         searchPresenter!!.subscribe()
-        searchPresenter!!.search(query!!)
+        searchPresenter!!.search(query)
     }
 
     override fun onDestroy() {

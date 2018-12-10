@@ -12,6 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.jetradarmobile.snowfall.SnowfallView
+        android:id="@+id/snowfall"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <include layout="@layout/shadow_statusbar_toolbar" />
 
     <code.name.monkey.retromusic.views.FitSystemWindowsLayout
@@ -37,12 +42,11 @@
                 android:orientation="horizontal">
 
                 <code.name.monkey.retromusic.views.HeightFitSquareLayout
-                    android:id="@+id/album_cover_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <fragment
-                        android:id="@+id/player_album_cover_fragment"
+                        android:id="@+id/playerAlbumCoverFragment"
                         android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -68,7 +72,7 @@
                     </FrameLayout>
 
                     <fragment
-                        android:id="@+id/playback_controls_fragment"
+                        android:id="@+id/playbackControlsFragment"
                         android:name="code.name.monkey.retromusic.ui.fragments.player.normal.PlayerPlaybackControlsFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

@@ -1,7 +1,10 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
@@ -9,12 +12,15 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 import kotlinx.android.synthetic.main.activity_settings.*
+
 
 class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -32,6 +38,8 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
             }
             R.string.accent_color -> ThemeStore.editTheme(this).accentColor(selectedColor).commit()
         }
+        if (VersionUtils.hasNougatMR())
+            DynamicShortcutManager(this).updateDynamicShortcuts()
         recreate()
     }
 
@@ -116,7 +124,8 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
         }
     }
 
+
     companion object {
-        const val TAG: String = "SettingsActivity"
+        const val TAG: String = "SettingsActivity" 
     }
 }

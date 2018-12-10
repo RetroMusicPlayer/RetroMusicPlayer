@@ -70,7 +70,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
         setupToolbar()
 
-        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSE_KEY, this)
+        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
         TintHelper.setTint(progress, ThemeStore.accentColor(this))
         donation.setTextColor(ThemeStore.accentColor(this))
         donate.setOnClickListener {

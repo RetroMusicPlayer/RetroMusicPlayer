@@ -11,7 +11,10 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ShareCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.*
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -49,10 +52,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val action = intent.action
             if (action != null && action == Intent.ACTION_SCREEN_OFF) {
                 if (PreferenceUtil.getInstance().lockScreen && MusicPlayerRemote.isPlaying) {
-                    /*Intent activity = new Intent(context, LockScreenActivity.class);
-                    activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    ActivityCompat.startActivity(context, activity, null);*/
+                    val activity = Intent(context, LockScreenActivity::class.java)
+                    activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                    ActivityCompat.startActivity(context, activity, null)
                 }
             }
         }
@@ -210,8 +213,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 if (!hasPermissions()) {
                     requestPermissions()
                 }
+                checkSetUpPro(); // good chance that pro version check was delayed on first start
             }
             REQUEST_CODE_THEME, APP_USER_INFO_REQUEST -> postRecreate()
+            PURCHASE_REQUEST -> {
+                if (resultCode == RESULT_OK) {
+                    checkSetUpPro();
+                }
+            }
         }
 
     }
@@ -265,7 +274,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     private fun showPromotionalOffer() {
         MaterialDialog.Builder(this)
                 .positiveText("Buy")
-                .onPositive { _, _ -> startActivity(Intent(this@MainActivity, ProVersionActivity::class.java)) }
+                .onPositive { _, _ -> startActivity(Intent(this@MainActivity, PurchaseActivity::class.java)) }
                 .negativeText(android.R.string.cancel)
                 .customView(R.layout.dialog_promotional_offer, false)
                 .dismissListener {
@@ -298,7 +307,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 R.id.nav_library -> Handler().postDelayed({ setMusicChooser(LIBRARY) }, 200)
                 R.id.nav_home -> Handler().postDelayed({ setMusicChooser(HOME) }, 200)
                 R.id.nav_folders -> Handler().postDelayed({ setMusicChooser(FOLDERS) }, 200)
-                R.id.buy_pro -> Handler().postDelayed({ startActivityForResult(Intent(this@MainActivity, ProVersionActivity::class.java), PURCHASE_REQUEST) }, 200)
+                R.id.buy_pro -> Handler().postDelayed({ startActivityForResult(Intent(this@MainActivity, PurchaseActivity::class.java), PURCHASE_REQUEST) }, 200)
                 R.id.nav_settings -> Handler().postDelayed({ NavigationUtil.goToSettings(this@MainActivity) }, 200)
                 R.id.nav_equalizer -> Handler().postDelayed({ NavigationUtil.openEqualizer(this@MainActivity) }, 200)
                 R.id.nav_share_app -> Handler().postDelayed({ shareApp() }, 200)
@@ -329,7 +338,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         when (key) {
             LIBRARY -> {
                 navigationView.setCheckedItem(R.id.nav_library)
-                setCurrentFragment(LibraryFragment.newInstance())
+                setCurrentFragment(LibraryFragment.newInstance(PreferenceUtil.getInstance().lastPage))
             }
             FOLDERS -> {
                 navigationView.setCheckedItem(R.id.nav_folders)
@@ -369,10 +378,15 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         return super.onOptionsItemSelected(item)
     }
 
-    private fun updateNavigationDrawerHeader() {
-
+    override fun onPanelCollapsed() {
+        super.onPanelCollapsed()
+        drawerLayout.setDrawerLockMode(LOCK_MODE_UNLOCKED)
     }
 
+    override fun onPanelExpanded() {
+        super.onPanelExpanded()
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+    }
     companion object {
         const val APP_INTRO_REQUEST = 2323
         const val LIBRARY = 1

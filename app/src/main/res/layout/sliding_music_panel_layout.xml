@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/main_content"
+    android:id="@+id/mainContent"
     android:layout_height="match_parent">
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/sliding_layout"
+        android:id="@+id/slidingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
@@ -17,24 +17,24 @@
         sothree:umanoShadowHeight="0dp">
 
         <FrameLayout
-            android:id="@+id/content_container"
+            android:id="@+id/mainContentFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <FrameLayout
-            android:id="@+id/sliding_panel"
+            android:id="@+id/slidingPanel"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
             <FrameLayout
-                android:id="@+id/player_fragment_container"
+                android:id="@+id/playerFragmentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <fragment
-                android:id="@+id/mini_player_fragment"
+                android:id="@+id/miniPlayerFragment"
                 android:name="code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -44,7 +44,7 @@
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
-        android:id="@+id/bottom_navigation"
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"

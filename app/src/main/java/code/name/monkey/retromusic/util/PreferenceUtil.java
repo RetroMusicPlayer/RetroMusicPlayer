@@ -30,6 +30,8 @@ import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
+import code.name.monkey.retromusic.transform.StackPagerTransformer;
+import code.name.monkey.retromusic.transform.StackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
@@ -113,6 +115,7 @@ public final class PreferenceUtil {
     private static final String ALBUM_DETAIL_STYLE = "album_detail_style";
     private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
     private static final String NOW_PLAYING_SCREEN = "now_playing_screen";
+    private static final String SNOW_FALL_EFFECT = "snow_fall_effect";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
@@ -144,8 +147,12 @@ public final class PreferenceUtil {
         }
     }
 
+    public boolean isSnowFall() {
+        return mPreferences.getBoolean(SNOW_FALL_EFFECT, false);
+    }
+
     public final String getArtistSortOrder() {
-        return mPreferences.getString(ARTIST_SORT_ORDER, SortOrder.ArtistSortOrder.Companion.getARTIST_A_Z());
+        return mPreferences.getString(ARTIST_SORT_ORDER, SortOrder.ArtistSortOrder.ARTIST_A_Z);
     }
 
     public void setArtistSortOrder(final String sortOrder) {
@@ -155,7 +162,7 @@ public final class PreferenceUtil {
     }
 
     public final String getArtistSongSortOrder() {
-        return mPreferences.getString(ARTIST_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.Companion.getSONG_A_Z());
+        return mPreferences.getString(ARTIST_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
     }
 
     public final boolean isHomeBanner() {
@@ -164,11 +171,11 @@ public final class PreferenceUtil {
 
     public final String getArtistAlbumSortOrder() {
         return mPreferences
-                .getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.Companion.getALBUM_YEAR());
+                .getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR);
     }
 
     public final String getAlbumSortOrder() {
-        return mPreferences.getString(ALBUM_SORT_ORDER, SortOrder.AlbumSortOrder.Companion.getALBUM_A_Z());
+        return mPreferences.getString(ALBUM_SORT_ORDER, SortOrder.AlbumSortOrder.ALBUM_A_Z);
     }
 
     public void setAlbumSortOrder(final String sortOrder) {
@@ -179,11 +186,11 @@ public final class PreferenceUtil {
 
     public final String getAlbumSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.Companion.getSONG_TRACK_LIST());
+                .getString(ALBUM_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public final String getSongSortOrder() {
-        return mPreferences.getString(SONG_SORT_ORDER, SortOrder.SongSortOrder.Companion.getSONG_A_Z());
+        return mPreferences.getString(SONG_SORT_ORDER, SortOrder.SongSortOrder.SONG_A_Z);
     }
 
     public void setSongSortOrder(final String sortOrder) {
@@ -193,7 +200,7 @@ public final class PreferenceUtil {
     }
 
     public final String getGenreSortOrder() {
-        return mPreferences.getString(GENRE_SORT_ORDER, SortOrder.GenreSortOrder.Companion.getGENRE_A_Z());
+        return mPreferences.getString(GENRE_SORT_ORDER, SortOrder.GenreSortOrder.GENRE_A_Z);
     }
 
     public boolean isScreenOnEnabled() {
@@ -288,9 +295,6 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
-    public int getLastLyricsType() {
-        return mPreferences.getInt(LAST_KNOWN_LYRICS_TYPE, R.id.normalLyrics);
-    }
 
     public void setLastLyricsType(int group) {
         final SharedPreferences.Editor editor = mPreferences.edit();
@@ -632,7 +636,7 @@ public final class PreferenceUtil {
 
     public String getAlbumDetailSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.Companion.getSONG_TRACK_LIST());
+                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public void setAlbumDetailSongSortOrder(String sortOrder) {
@@ -643,7 +647,7 @@ public final class PreferenceUtil {
 
     public String getArtistDetailSongSortOrder() {
         return mPreferences
-                .getString(ARTIST_DETAIL_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.Companion.getSONG_A_Z());
+                .getString(ARTIST_DETAIL_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
     }
 
     public void setArtistDetailSongSortOrder(String sortOrder) {
@@ -737,7 +741,7 @@ public final class PreferenceUtil {
     }
 
 
-    public ViewPager.PageTransformer getAlbumCoverTransform(Context context) {
+    public ViewPager.PageTransformer getAlbumCoverTransform() {
         int style = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_COVER_TRANSFORM, "0")));
         switch (style) {
             default:
@@ -753,6 +757,8 @@ public final class PreferenceUtil {
                 return new VerticalFlipTransformation();
             case 5:
                 return new HingeTransformation();
+            case 6:
+                return new StackTransformer();
         }
     }
 

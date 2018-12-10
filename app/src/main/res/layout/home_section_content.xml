@@ -150,4 +150,9 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false" />
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="16dp" />
 </LinearLayout>

@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.ui.activities.LicenseActivity;
 import code.name.monkey.retromusic.ui.activities.LyricsActivity;
 import code.name.monkey.retromusic.ui.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.ui.activities.PlaylistDetailActivity;
-import code.name.monkey.retromusic.ui.activities.ProVersionActivity;
+import code.name.monkey.retromusic.ui.activities.PurchaseActivity;
 import code.name.monkey.retromusic.ui.activities.SearchActivity;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
@@ -106,7 +106,7 @@ public class NavigationUtil {
     }
 
     public static void goToProVersion(@NonNull Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, ProVersionActivity.class), null);
+        ActivityCompat.startActivity(activity, new Intent(activity, PurchaseActivity.class), null);
     }
 
     public static void goToSettings(@NonNull Activity activity) {

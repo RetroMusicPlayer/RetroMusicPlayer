@@ -74,6 +74,7 @@
     <string name="app_widget_card_name">Retro music - Card</string>
     <string name="app_widget_classic_name">Retro music - Classic</string>
     <string name="app_widget_small_name">Retro music - Small</string>
+    <string name="app_widget_text_name">Retro music - Text</string>
 
     <string name="artist">Artist</string>
 
@@ -586,4 +587,5 @@
     <string name="bug_report_failed_unknown">An unexpected error occurred. Please contact the app developer.</string>
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+    <string name="pref_snow_fall_title">Snow fall effect</string>
 </resources>

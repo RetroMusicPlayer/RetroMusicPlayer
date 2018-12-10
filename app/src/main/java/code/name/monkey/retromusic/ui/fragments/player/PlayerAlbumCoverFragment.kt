@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.ui.adapter.album.AlbumCoverPagerAdapter
+import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.ui.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
@@ -40,7 +42,18 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.addOnPageChangeListener(this)
-        viewPager.setPageTransformer(true, PreferenceUtil.getInstance().getAlbumCoverTransform(context))
+        //noinspection ConstantConditions
+        if (PreferenceUtil.getInstance().carouselEffect() &&
+                !((PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FULL)
+                        || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FIT))) {
+            viewPager.clipToPadding = false
+            viewPager.setPadding(96, 0, 96, 0)
+            viewPager.pageMargin = 18
+            viewPager.setPageTransformer(false, CarousalPagerTransformer(context!!))
+        } else {
+            viewPager.offscreenPageLimit = 2
+            viewPager.setPageTransformer(true, PreferenceUtil.getInstance().albumCoverTransform)
+        }
     }
 
     override fun onDestroyView() {
@@ -113,6 +126,5 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
-        const val VISIBILITY_ANIM_DURATION: Long = 300
     }
 }

@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.ui.activities.base
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.KeyEvent
@@ -101,7 +100,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
                     VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
                     else -> statusBar.setBackgroundColor(color)
                 }
-            } else if (Build.VERSION.SDK_INT >= 21) {
+            } else {
                 when {
                     VersionUtils.hasMarshmallow() -> window.statusBarColor = color
                     else -> window.statusBarColor = ColorUtil.darkenColor(color)

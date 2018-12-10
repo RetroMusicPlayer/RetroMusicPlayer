@@ -12,6 +12,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -32,21 +33,17 @@ import java.util.*
 
 class UserInfoActivity : AbsBaseActivity() {
 
-    private var disposable: CompositeDisposable? = null
+    private var disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
-
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
         setupToolbar()
-
-        disposable = CompositeDisposable()
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         nameContainer.boxStrokeColor = ThemeStore.accentColor(this)
@@ -58,7 +55,7 @@ class UserInfoActivity : AbsBaseActivity() {
         if (!PreferenceUtil.getInstance().bannerImage.isEmpty()) {
             loadBannerFromStorage(PreferenceUtil.getInstance().bannerImage)
         }
-        bannerImage.setOnClickListener {
+        userImage.setOnClickListener {
             MaterialDialog.Builder(this)
                     .title("Set a profile photo")
                     .items(Arrays.asList(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo)))
@@ -82,6 +79,7 @@ class UserInfoActivity : AbsBaseActivity() {
             setResult(Activity.RESULT_OK)
             finish()
         }
+        TintHelper.setTintAuto(next, ThemeStore.accentColor(this), true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -96,11 +94,11 @@ class UserInfoActivity : AbsBaseActivity() {
         toolbar.apply {
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
             setBackgroundColor(primaryColor)
+            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.accentColor(this@UserInfoActivity))
+            setSupportActionBar(this)
         }
         appBarLayout.setBackgroundColor(primaryColor)
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
         title = null
-        setSupportActionBar(toolbar)
     }
 
     private fun showBannerOptions() {
@@ -226,8 +224,8 @@ class UserInfoActivity : AbsBaseActivity() {
 
     companion object {
 
-        private val PICK_IMAGE_REQUEST = 9002
-        private val PICK_BANNER_REQUEST = 9003
-        private val PROFILE_ICON_SIZE = 400
+        private const val PICK_IMAGE_REQUEST = 9002
+        private const val PICK_BANNER_REQUEST = 9003
+        private const val PROFILE_ICON_SIZE = 400
     }
 }

@@ -23,7 +23,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:elevation="0dp"
@@ -42,7 +42,7 @@
                     tools:ignore="UnusedAttribute">
 
                     <TextView
-                        android:id="@+id/title"
+                        android:id="@+id/bannerTitle"
                         style="@style/BigTitleTextAppearanceToolbar"
                         android:text="@string/app_name"
                         tools:ignore="MissingPrefix" />
@@ -57,7 +57,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
-            android:id="@+id/fragment_container"
+            android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

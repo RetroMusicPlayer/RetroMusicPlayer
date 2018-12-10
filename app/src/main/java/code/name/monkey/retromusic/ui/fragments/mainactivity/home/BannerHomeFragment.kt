@@ -40,6 +40,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_section_content.*
 import java.io.File
@@ -181,6 +182,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         loadImageFromStorage(userImage)
         getTimeOfTheDay()
+
+        searchView.setOnClickListener {
+            NavigationUtil.goToSearch(activity!!)
+        }
     }
 
     private fun setupToolbar() {
@@ -212,7 +217,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     }
 
-    override fun showData(homes: ArrayList<Any>) {
+    override fun showData(list: ArrayList<Any>) {
         //homeAdapter.swapDataSet(homes);
     }
 
