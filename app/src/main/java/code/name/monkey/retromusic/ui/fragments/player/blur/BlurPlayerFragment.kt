@@ -41,8 +41,8 @@ class BlurPlayerFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playback_controls_fragment) as BlurPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.player_album_cover_fragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as BlurPlaybackControlsFragment
+        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
     }
 

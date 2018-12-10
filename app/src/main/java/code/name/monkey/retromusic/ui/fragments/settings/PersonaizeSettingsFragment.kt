@@ -1,17 +1,11 @@
 package code.name.monkey.retromusic.ui.fragments.settings
 
-import android.app.ActivityManager
-import android.app.admin.DevicePolicyManager
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.ui.activities.SettingsActivity.Companion.RESULT_ENABLE
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 
@@ -47,7 +41,7 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
-  }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

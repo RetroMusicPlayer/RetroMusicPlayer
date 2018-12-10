@@ -2,6 +2,24 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+static def gitBranch() {
+    def branch = 'GitHub'
+    try {
+        def gitcheck = 'command -v git >/dev/null 2>&1'.execute()
+        gitcheck.waitFor()
+        if (gitcheck.exitValue() == 0) {
+            def proc = 'git rev-parse --abbrev-ref HEAD'.execute()
+            proc.in.eachLine { line -> branch = line }
+            proc.err.eachLine { line -> println line }
+            proc.waitFor()
+        }
+    } catch (Exception e) {
+        // Do nothing
+        println e
+    }
+    branch
+}
+
 android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
@@ -13,8 +31,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 260
-        versionName '3.0.010'
+        versionCode 262
+        versionName '3.0.030'
 
         multiDexEnabled true
 
@@ -39,7 +57,7 @@ android {
         }
         debug {
             applicationIdSuffix '.debug'
-            versionNameSuffix ' DEBUG'
+            versionNameSuffix ' DEBUG (' + gitBranch() + ')'
             resValue "string", "cast_app_id", "BA9C3F5E"
 
         }
@@ -56,6 +74,7 @@ android {
         }
         sans {
             dimension "default"
+            versionName defaultConfig.versionName + "_" + getDate()
         }
     }
 
