@@ -157,12 +157,17 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
     }
 
     override fun getSectionName(position: Int): String {
-        var sectionName: String? = null
-        when (PreferenceUtil.getInstance().songSortOrder) {
-            SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> sectionName = dataSet[position].title
-            SortOrder.SongSortOrder.SONG_ALBUM -> sectionName = dataSet[position].albumName
-            SortOrder.SongSortOrder.SONG_ARTIST -> sectionName = dataSet[position].artistName
+        if (!showSectionName) {
+            return "";
+        }
+        val sectionName: String? = when (PreferenceUtil.getInstance().songSortOrder) {
+            SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
+            SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
+            SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
             SortOrder.SongSortOrder.SONG_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
+            else -> {
+                return ""
+            }
         }
 
         return MusicUtil.getSectionName(sectionName)
@@ -221,6 +226,6 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
 
     companion object {
 
-        val TAG = SongAdapter::class.java.simpleName
+        val TAG:String = SongAdapter::class.java.simpleName
     }
 }
