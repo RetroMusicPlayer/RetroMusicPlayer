@@ -301,6 +301,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         NavigationViewUtil.setItemTextColors(navigationView, ThemeStore.textColorPrimary(this), accentColor)
 
         checkSetUpPro()
+        navigationView.setBackgroundColor(ThemeStore.primaryColor(this))
         navigationView.setNavigationItemSelectedListener { menuItem ->
             drawerLayout.closeDrawers()
             when (menuItem.itemId) {
@@ -315,6 +316,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             }
             true
         }
+
     }
 
     private fun prepareBugReport() {
