@@ -1,15 +1,20 @@
 package code.name.monkey.retromusic.dialogs
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.activities.MainActivity
+import code.name.monkey.retromusic.ui.activities.bugreport.BugReportActivity
+import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -21,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_main_options.*
 import java.io.File
 import java.util.*
 
-class MainOptionsBottomSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnClickListener {
+class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnClickListener {
 
     private val disposable = CompositeDisposable()
 
@@ -52,6 +57,7 @@ class MainOptionsBottomSheetDialogFragment : RoundedBottomSheetDialogFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        actionBuyPro.visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
         text!!.setTextColor(ThemeStore.textColorSecondary(context!!))
         titleWelcome!!.setTextColor(ThemeStore.textColorPrimary(context!!))
         titleWelcome!!.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
@@ -61,22 +67,49 @@ class MainOptionsBottomSheetDialogFragment : RoundedBottomSheetDialogFragment(),
         actionAbout.setOnClickListener(this)
         actionSleepTimer.setOnClickListener(this)
         userInfoContainer.setOnClickListener(this)
+        actionEqualizer.setOnClickListener(this)
+        actionFolders.setOnClickListener(this)
         actionRate.setOnClickListener(this)
+        actionShare.setOnClickListener(this)
+        actionBuyPro.setOnClickListener(this)
+        actionBugReport.setOnClickListener(this)
     }
 
 
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
+            R.id.actionFolders -> {
+                mainActivity.setCurrentFragment(FoldersFragment.newInstance(context), true)
+            }
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
             R.id.actionAbout -> NavigationUtil.goToAbout(mainActivity)
             R.id.actionSleepTimer -> if (fragmentManager != null) {
                 SleepTimerDialog().show(fragmentManager!!, TAG)
             }
-            R.id.userInfoContainer -> NavigationUtil.goToUserInfo(activity!!)
+            R.id.userInfoContainer -> NavigationUtil.goToUserInfo(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
+            R.id.actionShare -> shareApp()
+            R.id.actionBugReport -> prepareBugReport()
+            R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
+            R.id.actionBuyPro -> NavigationUtil.goToProVersion(mainActivity)
         }
         dismiss()
+    }
+
+    private fun prepareBugReport() {
+        startActivity(Intent(activity, BugReportActivity::class.java))
+    }
+
+    private fun shareApp() {
+        val shareIntent = ShareCompat.IntentBuilder.from(activity)
+                .setType("songText/plain")
+                .setText(String.format(getString(R.string.app_share), activity!!.packageName))
+                .intent
+        if (shareIntent.resolveActivity(activity!!.packageManager) != null) {
+            startActivity(
+                    Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
+        }
     }
 
     private fun loadImageFromStorage() {
@@ -102,16 +135,16 @@ class MainOptionsBottomSheetDialogFragment : RoundedBottomSheetDialogFragment(),
 
         private const val TAG: String = "MainOptionsBottomSheetD"
 
-        fun newInstance(selected_id: Int): MainOptionsBottomSheetDialogFragment {
+        fun newInstance(selected_id: Int): OptionsSheetDialogFragment {
             val bundle = Bundle()
             bundle.putInt("selected_id", selected_id)
-            val fragment = MainOptionsBottomSheetDialogFragment()
+            val fragment = OptionsSheetDialogFragment()
             fragment.arguments = bundle
             return fragment
         }
 
-        fun newInstance(): MainOptionsBottomSheetDialogFragment {
-            return MainOptionsBottomSheetDialogFragment()
+        fun newInstance(): OptionsSheetDialogFragment {
+            return OptionsSheetDialogFragment()
         }
     }
 }

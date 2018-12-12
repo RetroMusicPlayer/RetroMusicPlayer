@@ -89,6 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:progress="20"
+        android:progressDrawable="@drawable/color_progress_seek"
         app:mpb_progressStyle="horizontal"
         app:mpb_useIntrinsicPadding="false" />
 </code.name.monkey.retromusic.views.FitSystemWindowsLayout>

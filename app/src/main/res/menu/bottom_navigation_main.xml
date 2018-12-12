@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_white_24dp"
+        android:title="@string/home" />
+
+    <item
         android:id="@+id/action_song"
         android:enabled="true"
         android:icon="@drawable/ic_audiotrack_black_24dp"

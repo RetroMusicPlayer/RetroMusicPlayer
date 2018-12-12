@@ -2,9 +2,9 @@ package code.name.monkey.retromusic.loaders
 
 
 import android.content.Context
-
-import java.util.ArrayList
+import code.name.monkey.retromusic.misc.DisposingObserver
 import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
@@ -13,9 +13,9 @@ import io.reactivex.Observable
 
 object HomeLoader {
 
-    fun getRecentAndTopThings(
-            context: Context): Observable<ArrayList<AbsSmartPlaylist>> {
+    fun getRecentAndTopThings(context: Context): Observable<ArrayList<AbsSmartPlaylist>> {
         val objects = ArrayList<AbsSmartPlaylist>()
+
         return Observable.create { e ->
 
             HistoryPlaylist(context).getSongs(context).subscribe { songs ->
@@ -56,6 +56,4 @@ object HomeLoader {
                 }
         return Observable.just(playlists)
     }
-
-
 }
