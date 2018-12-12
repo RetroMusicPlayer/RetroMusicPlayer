@@ -23,20 +23,33 @@ import org.jaudiotagger.tag.TagException
 import java.io.File
 import java.io.IOException
 
+inline fun ViewGroup.forEach(action: (View) -> Unit) {
+    for (i in 0 until childCount) {
+        action(getChildAt(i))
+    }
+}
+
 class SongDetailDialog : RoundedBottomSheetDialogFragment() {
 
-    private fun setTextColor(textColor: List<TextView>) {
-        for (textView in textColor) {
-
-            textView.setTextColor(ThemeStore.textColorPrimary(context!!))
+    private fun setTextColor(view: ViewGroup) {
+        view.forEach {
+            if (it is TextView) {
+                it.setTextColor(ThemeStore.textColorPrimary(context!!))
+            }
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val dialogView = inflater.inflate(R.layout.dialog_file_details, container, false)
-        val context = context
+        return inflater.inflate(R.layout.dialog_file_details, container, false)
+    }
 
-        fileName.text = makeTextWithTitle(context!!, R.string.label_file_name, "-")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val context = context!!
+
+        setTextColor(view as ViewGroup)
+
+        fileName.text = makeTextWithTitle(context, R.string.label_file_name, "-")
         filePath.text = makeTextWithTitle(context, R.string.label_file_path, "-")
         fileSize.text = makeTextWithTitle(context, R.string.label_file_size, "-")
         fileFormat.text = makeTextWithTitle(context, R.string.label_file_format, "-")
@@ -83,13 +96,11 @@ class SongDetailDialog : RoundedBottomSheetDialogFragment() {
                 trackLength.text = makeTextWithTitle(context, R.string.label_track_length, MusicUtil.getReadableDurationString(song.duration))
             }
         }
-
-        return dialogView
     }
 
     companion object {
 
-        val TAG = SongDetailDialog::class.java.simpleName
+        val TAG: String = SongDetailDialog::class.java.simpleName
 
 
         fun create(song: Song): SongDetailDialog {

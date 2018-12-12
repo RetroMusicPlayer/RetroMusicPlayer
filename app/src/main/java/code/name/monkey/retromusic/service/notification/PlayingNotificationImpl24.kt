@@ -10,24 +10,24 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
 import androidx.core.app.NotificationCompat
-import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.retromusic.Constants.ACTION_QUIT
 import code.name.monkey.retromusic.Constants.ACTION_REWIND
 import code.name.monkey.retromusic.Constants.ACTION_SKIP
 import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.activities.MainActivity
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
-import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 
 class PlayingNotificationImpl24 : PlayingNotification() {
-
+    private var target: Target<BitmapPaletteWrapper>? = null
     @Synchronized
     override fun update() {
         stopped = false
@@ -54,18 +54,23 @@ class PlayingNotificationImpl24 : PlayingNotification() {
         val bigNotificationImageSize = service.resources
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
         service.runOnUiThread {
-            SongGlideRequest.Builder.from(Glide.with(service), song)
-                    .checkIgnoreMediaStore(service)
-                    .generatePalette(service).build()
-                    .into(object : SimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
+            if (target != null) {
+                GlideApp.with(service).clear(target);
+            }
+            target = GlideApp.with(service)
+                    .asBitmapPalette()
+                    .load(RetroGlideExtension.getSongModel(song))
+                    .transition(RetroGlideExtension.getDefaultTransition())
+                    .songOptions(song)
+                    .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
+                        override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
                             update(resource.bitmap, when {
                                 PreferenceUtil.getInstance().isDominantColor -> RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
                                 else -> RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
                             })
                         }
 
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        override fun onLoadFailed(errorDrawable: Drawable?) {
                             update(null, Color.TRANSPARENT)
                         }
 
@@ -111,7 +116,7 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                     .addAction(closeAction)
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                builder.setStyle(MediaStyle()
+                                builder.setStyle(androidx.media.app.NotificationCompat.MediaStyle()
                                         .setMediaSession(service.mediaSession.sessionToken)
                                         .setShowActionsInCompactView(0, 1, 2, 3, 4))
                                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)

@@ -3,9 +3,11 @@ package code.name.monkey.retromusic.util;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import androidx.annotation.NonNull;
 
-import com.bumptech.glide.signature.StringSignature;
+import com.bumptech.glide.signature.ObjectKey;
+
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.App;
 
 
 public class ArtistSignatureUtil {
@@ -19,9 +21,9 @@ public class ArtistSignatureUtil {
         mPreferences = context.getSharedPreferences(ARTIST_SIGNATURE_PREFS, Context.MODE_PRIVATE);
     }
 
-    public static ArtistSignatureUtil getInstance(@NonNull final Context context) {
+    public static ArtistSignatureUtil getInstance() {
         if (sInstance == null) {
-            sInstance = new ArtistSignatureUtil(context.getApplicationContext());
+            sInstance = new ArtistSignatureUtil(App.Companion.getContext());
         }
         return sInstance;
     }
@@ -35,7 +37,7 @@ public class ArtistSignatureUtil {
         return mPreferences.getLong(artistName, 0);
     }
 
-    public StringSignature getArtistSignature(String artistName) {
-        return new StringSignature(String.valueOf(getArtistSignatureRaw(artistName)));
+    public ObjectKey getArtistSignature(String artistName) {
+        return new ObjectKey(String.valueOf(getArtistSignatureRaw(artistName)));
     }
 }

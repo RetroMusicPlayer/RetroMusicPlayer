@@ -33,10 +33,10 @@ public class NetworkImageView extends CircularImageView {
     }
 
     public void setImageUrl(Context context, String imageUrl) {
-        Glide.with(context).load(imageUrl).asBitmap()
+        /*Glide.with(context).load(imageUrl).asBitmap()
                 .error(R.drawable.ic_person_flat)
                 .placeholder(R.drawable.ic_person_flat)
-                .into(this);
+                .into(this);*/
     }
 
     private void init(Context context, AttributeSet attributeSet) {

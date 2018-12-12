@@ -12,7 +12,8 @@ import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
@@ -22,7 +23,6 @@ import code.name.monkey.retromusic.ui.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.util.*
 
@@ -91,8 +91,12 @@ class ArtistAdapter(val activity: AppCompatActivity,
         if (holder.image == null) {
             return
         }
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-                .generatePalette(activity).build()
+        GlideApp.with(activity)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getArtistModel(artist))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .artistOptions(artist)
+                .dontAnimate()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
                     override fun onColorReady(color: Int) {
                         setColors(color, holder)

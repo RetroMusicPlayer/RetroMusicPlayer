@@ -12,8 +12,9 @@ import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
@@ -127,17 +128,20 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             return
         }
 
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                .checkIgnoreMediaStore(activity)
-                .generatePalette(activity).build()
+        GlideApp.with(activity)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .songOptions(album.safeGetFirstSong())
+                .dontAnimate()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        super.onLoadCleared(placeholder)
-                        setColors(defaultFooterColor, holder)
-                    }
-
                     override fun onColorReady(color: Int) {
                         setColors(color, holder)
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        setColors(defaultFooterColor, holder)
                     }
                 })
     }

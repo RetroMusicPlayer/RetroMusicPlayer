@@ -17,8 +17,9 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
@@ -28,8 +29,7 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment() {
@@ -130,9 +130,40 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     private fun updateSong() {
-        val activity = activity
 
-        SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
+        GlideApp.with(activity!!).asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
+                .songOptions(MusicPlayerRemote.currentSong)
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .into(object : RetroMusicColoredTarget(playerImage) {
+                    override fun onColorReady(color: Int) {
+
+                    }
+
+                    override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: Transition<in BitmapPaletteWrapper>?) {
+                        super.onResourceReady(resource, glideAnimation)
+                        val palette = resource.palette
+                        val swatch = RetroColorUtil.getSwatch(palette)
+
+                        val textColor = RetroColorUtil.getTextColor(palette)
+                        val backgroundColor = swatch.rgb
+
+                        setColors(backgroundColor, textColor)
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        val backgroundColor = defaultFooterColor
+                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor))
+                            MaterialValueHelper.getPrimaryTextColor(context, true)
+                        else
+                            MaterialValueHelper.getPrimaryTextColor(context, false)
+
+                        setColors(backgroundColor, textColor)
+                    }
+                })
+
+        /*SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
                 .checkIgnoreMediaStore(activity!!)
                 .generatePalette(activity).build().dontAnimate()
                 .into(object : RetroMusicColoredTarget(playerImage) {
@@ -155,13 +186,13 @@ class ColorFragment : AbsPlayerFragment() {
                     override fun onResourceReady(resource: BitmapPaletteWrapper,
                                                  glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
                         super.onResourceReady(resource, glideAnimation)
-                        /* MediaNotificationProcessor processor = new MediaNotificationProcessor(getContext(),
+                        *//* MediaNotificationProcessor processor = new MediaNotificationProcessor(getContext(),
                 getContext());
             Palette.Builder builder = MediaNotificationProcessor
                 .generatePalette(resource.getBitmap());
 
             int backgroundColor = processor.getBackgroundColor(builder);
-            int textColor = processor.getTextColor(builder);*/
+            int textColor = processor.getTextColor(builder);*//*
 
                         val palette = resource.palette
                         val swatch = RetroColorUtil.getSwatch(palette)
@@ -171,7 +202,7 @@ class ColorFragment : AbsPlayerFragment() {
 
                         setColors(backgroundColor, textColor)
                     }
-                })
+                })*/
     }
 
     private fun setColors(backgroundColor: Int, textColor: Int) {

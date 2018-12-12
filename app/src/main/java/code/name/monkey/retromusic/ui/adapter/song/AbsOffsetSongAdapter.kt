@@ -52,9 +52,9 @@ abstract class AbsOffsetSongAdapter : SongAdapter {
     }
 
     override fun getSectionName(position: Int): String {
-        var positionFinal = position
-        positionFinal--
-        return if (position < 0) "" else super.getSectionName(positionFinal)
+        var positionF = position
+        positionF--
+        return if (positionF < 0) "" else super.getSectionName(positionF)
     }
 
     open inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView) {

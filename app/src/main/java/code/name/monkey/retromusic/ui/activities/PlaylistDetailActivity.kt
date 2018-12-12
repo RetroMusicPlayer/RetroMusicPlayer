@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -29,6 +31,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
+
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import java.util.*
 
@@ -46,12 +49,13 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
-        setStatusbarColorAuto()
+
+        setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
         toggleBottomNavigationView(true)
-
 
         playlist = intent.extras!!.getParcelable(EXTRA_PLAYLIST)
         songsPresenter = PlaylistSongsPresenter(this, playlist!!)
@@ -125,14 +129,13 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         actionShuffle.setColor(ThemeStore.accentColor(this))
 
         val primaryColor = ThemeStore.primaryColor(this)
-        toolbar!!.setBackgroundColor(primaryColor)
-        appBarLayout!!.setBackgroundColor(primaryColor)
-
+        toolbar!!.apply {
+            setBackgroundColor(primaryColor)
+            setSupportActionBar(toolbar)
+            setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
+            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@PlaylistDetailActivity))
+        }
         title = null
-        setSupportActionBar(toolbar)
-        toolbar!!.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-
-        ToolbarContentTintHelper.colorBackButton(toolbar!!, ThemeStore.accentColor(this))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

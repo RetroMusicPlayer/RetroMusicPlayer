@@ -59,11 +59,6 @@ class App : MultiDexApplication() {
         //startActivity(intent);
     }
 
-    override fun onLowMemory() {
-        super.onLowMemory()
-        Glide.with(this).onLowMemory()
-    }
-
     override fun onTerminate() {
         super.onTerminate()
         billingProcessor.release()

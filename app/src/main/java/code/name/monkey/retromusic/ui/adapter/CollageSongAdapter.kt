@@ -11,12 +11,13 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.adapter.CollageSongAdapter.CollageSongViewHolder
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
-import com.bumptech.glide.Glide
 import java.util.*
 
 /**
@@ -28,10 +29,16 @@ class CollageSongAdapter(private val activity: Activity, private val dataSet: Ar
         holder.bindSongs()
         if (dataSet.size > 8) {
             for (i in 0 until dataSet.subList(0, 8).size) {
-                SongGlideRequest.Builder.from(Glide.with(activity), dataSet[i])
-                        .checkIgnoreMediaStore(activity)
-                        .build()
-                        .into(holder.itemView.findViewById(holder.ids[i]) as ImageView)
+                GlideApp.with(activity)
+                        .asBitmapPalette()
+                        .load(RetroGlideExtension.getSongModel(dataSet[i]))
+                        .transition(RetroGlideExtension.getDefaultTransition())
+                        .songOptions(dataSet[i])
+                        .into(object : RetroMusicColoredTarget(holder.itemView.findViewById(holder.ids[i]) as ImageView) {
+                            override fun onColorReady(color: Int) {
+
+                            }
+                        })
             }
         }
     }

@@ -60,16 +60,16 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener {
         setTaskDescriptionColorAuto()
         setNavigationbarColorAuto()
 
-
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        setSupportActionBar(toolbar)
+        toolbar.apply {
+            setBackgroundColor(ThemeStore.primaryColor(this@LyricsActivity))
+            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
+            setSupportActionBar(toolbar)
+        }
 
 
         TintHelper.setTintAuto(fab, ThemeStore.accentColor(this), true)
         setupWakelock()
-
 
         viewPager.apply {
             adapter = PagerAdapter(supportFragmentManager)

@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -45,13 +47,12 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
         super.onCreate(savedInstanceState)
 
 
-        setStatusbarColorAuto()
+        setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
-
-        toggleBottomNavigationView(true)
         setLightNavigationBar(true)
-
+        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+        toggleBottomNavigationView(true)
 
         genre = intent.extras!!.getParcelable(EXTRA_GENRE_ID)
         presenter = GenreDetailsPresenter(this, genre!!.id)
@@ -66,13 +67,15 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
         bannerTitle!!.setTextColor(ThemeStore.textColorPrimary(this))
 
         val primaryColor = ThemeStore.primaryColor(this)
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        toolbar.setBackgroundColor(primaryColor)
         appBarLayout.setBackgroundColor(primaryColor)
-        ToolbarContentTintHelper.colorBackButton(toolbar!!, ThemeStore.accentColor(this))
+        toolbar.apply {
+            setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
+            setBackgroundColor(primaryColor)
+            setSupportActionBar(this)
+            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@GenreDetailsActivity))
+        }
+        actionShuffle.setColor(ThemeStore.accentColor(this@GenreDetailsActivity))
         title = null
-        setSupportActionBar(toolbar)
-        actionShuffle.setColor(ThemeStore.accentColor(this))
     }
 
     override fun onResume() {

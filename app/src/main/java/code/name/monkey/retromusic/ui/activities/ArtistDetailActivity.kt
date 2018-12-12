@@ -22,7 +22,8 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
@@ -36,7 +37,6 @@ import code.name.monkey.retromusic.ui.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.ui.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.ui.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.util.*
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
@@ -181,7 +181,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist, data!!.data)
+                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist!!, data!!.data!!)
             }
             else -> if (resultCode == Activity.RESULT_OK) {
                 reload()
@@ -272,16 +272,18 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
 
     private fun loadArtistImage() {
-        ArtistGlideRequest.Builder.from(Glide.with(this), artist!!)
-                .forceDownload(forceDownload)
-                .generatePalette(this).build()
+        GlideApp.with(this)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getArtistModel(artist!!, forceDownload))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .artistOptions(artist)
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(artistImage) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
                 })
-        forceDownload = false
+        forceDownload = false;
     }
 
     private fun setColors(color: Int) {
@@ -331,7 +333,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             R.id.action_reset_artist_image -> {
                 Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating),
                         Toast.LENGTH_SHORT).show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist!!)
                 forceDownload = true
                 return true
             }

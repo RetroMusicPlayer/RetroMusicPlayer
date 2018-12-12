@@ -1,14 +1,17 @@
 package code.name.monkey.retromusic.glide.palette
 
 import com.bumptech.glide.load.engine.Resource
-import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.util.Util
 
 
-class BitmapPaletteResource(private val bitmapPaletteWrapper: BitmapPaletteWrapper, private val bitmapPool: BitmapPool) : Resource<BitmapPaletteWrapper> {
+class BitmapPaletteResource(private val bitmapPaletteWrapper: BitmapPaletteWrapper) : Resource<BitmapPaletteWrapper> {
 
     override fun get(): BitmapPaletteWrapper {
         return bitmapPaletteWrapper
+    }
+
+    override fun getResourceClass(): Class<BitmapPaletteWrapper> {
+        return BitmapPaletteWrapper::class.java
     }
 
     override fun getSize(): Int {
@@ -16,8 +19,6 @@ class BitmapPaletteResource(private val bitmapPaletteWrapper: BitmapPaletteWrapp
     }
 
     override fun recycle() {
-        if (!bitmapPool.put(bitmapPaletteWrapper.bitmap)) {
-            bitmapPaletteWrapper.bitmap.recycle()
-        }
+        bitmapPaletteWrapper.bitmap.recycle()
     }
 }

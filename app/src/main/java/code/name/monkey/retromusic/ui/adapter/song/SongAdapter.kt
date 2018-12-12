@@ -11,8 +11,9 @@ import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
@@ -25,7 +26,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
-import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.util.*
 
@@ -115,18 +115,18 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
         if (holder.image == null) {
             return
         }
-
-        SongGlideRequest.Builder.from(Glide.with(activity), song)
-                .checkIgnoreMediaStore(activity)
-                .generatePalette(activity).build()
+        GlideApp.with(activity).asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(song))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .songOptions(song)
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        super.onLoadCleared(placeholder)
-                        setColors(defaultFooterColor, holder)
-                    }
-
                     override fun onColorReady(color: Int) {
                         setColors(color, holder)
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        setColors(defaultFooterColor, holder)
                     }
                 })
     }
@@ -157,12 +157,17 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
     }
 
     override fun getSectionName(position: Int): String {
-        var sectionName: String? = null
-        when (PreferenceUtil.getInstance().songSortOrder) {
-            SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> sectionName = dataSet[position].title
-            SortOrder.SongSortOrder.SONG_ALBUM -> sectionName = dataSet[position].albumName
-            SortOrder.SongSortOrder.SONG_ARTIST -> sectionName = dataSet[position].artistName
+        if (!showSectionName) {
+            return "";
+        }
+        val sectionName: String? = when (PreferenceUtil.getInstance().songSortOrder) {
+            SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
+            SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
+            SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
             SortOrder.SongSortOrder.SONG_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
+            else -> {
+                return ""
+            }
         }
 
         return MusicUtil.getSectionName(sectionName)
@@ -221,6 +226,6 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
 
     companion object {
 
-        val TAG = SongAdapter::class.java.simpleName
+        val TAG: String = SongAdapter::class.java.simpleName
     }
 }
