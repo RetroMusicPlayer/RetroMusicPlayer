@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/incremental/mergeNormalDebugResources/merged.dir/values-sw360dp-v13/values-sw360dp-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/preference-1.0.0.aar/09d14c4319f2ea0e6a7d9ea2ed2acdcf/res/values-sw360dp-v13/values-sw360dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,127",
+                        "endColumns": "71,64",
+                        "endOffsets": "122,187"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.fragments.mainactivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,15 +11,20 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
 
+import java.io.File;
+import java.util.Objects;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,9 +44,17 @@ import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
+import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
+import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.NavigationUtil;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+
+import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
 
@@ -54,6 +68,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private MaterialCab cab;
     private FragmentManager fragmentManager;
+    private ImageView userImage;
+    private CompositeDisposable disposable = new CompositeDisposable();
 
     public static Fragment newInstance(int tab) {
         Bundle args = new Bundle();
@@ -76,7 +92,23 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         bannerTitle = view.findViewById(R.id.bannerTitle);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
+        userImage = view.findViewById(R.id.userImage);
+        userImage.setOnClickListener(v -> showMainMenu());
+        loadImageFromStorage();
         return view;
+    }
+
+    private void loadImageFromStorage() {
+        disposable.add(new Compressor(Objects.requireNonNull(getContext()))
+                .setMaxHeight(300)
+                .setMaxWidth(300)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(bitmap -> userImage.setImageBitmap(bitmap),
+                        throwable -> userImage.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_person_flat))));
     }
 
     public void setTitle(@StringRes int name) {
@@ -134,7 +166,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_search_white_24dp);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
@@ -169,7 +201,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @NonNull
     @Override
-    public MaterialCab openCab(int menuRes, MaterialCab.Callback callback) {
+    public MaterialCab openCab(int menuRes, @NonNull MaterialCab.Callback callback) {
         if (cab != null && cab.isActive()) {
             cab.finish();
         }
@@ -348,9 +380,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 MusicPlayerRemote.INSTANCE.openAndShuffleQueue(SongLoader.INSTANCE.getAllSongs(getContext())
                         .blockingFirst(), true);
                 return true;
-            case R.id.action_search:
-                NavigationUtil.goToSearch(getMainActivity());
-                break;
+
             case R.id.action_equalizer:
                 NavigationUtil.openEqualizer(getActivity());
                 return true;

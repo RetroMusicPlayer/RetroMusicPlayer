@@ -40,7 +40,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_section_content.*
 import java.io.File
@@ -57,11 +56,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var history: View
     private lateinit var userImage: ImageView
     private lateinit var toolbar: Toolbar
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.GONE)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
@@ -95,16 +89,14 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
 
     private fun loadTimeImage(day: String) {
-
         if (bannerImage != null) {
             if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
-                Glide.with(activity).load(day)
+                /*Glide.with(activity).load(day)
                         .asBitmap()
                         .placeholder(R.drawable.material_design_default)
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                        .into(bannerImage!!)
+                        .into(bannerImage!!)*/
             } else {
-
                 disposable.add(Compressor(context!!)
                         .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
@@ -140,8 +132,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainActivity.setBottomBarVisibility(View.GONE)
-
         toolbar = view.findViewById(R.id.toolbar)
 
         if (!PreferenceUtil.getInstance().isHomeBanner)
@@ -183,13 +173,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         loadImageFromStorage(userImage)
         getTimeOfTheDay()
 
-        searchView.setOnClickListener {
-            NavigationUtil.goToSearch(activity!!)
-        }
     }
 
     private fun setupToolbar() {
-        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_menu_white_24dp), ThemeStore.textColorPrimary(context!!))
+        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorPrimary(context!!))
         mainActivity.title = null
         mainActivity.setSupportActionBar(toolbar)
         toolbar.setBackgroundColor(Color.TRANSPARENT)

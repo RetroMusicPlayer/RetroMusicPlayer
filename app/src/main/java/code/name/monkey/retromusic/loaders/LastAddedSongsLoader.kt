@@ -24,7 +24,7 @@ object LastAddedSongsLoader {
         return SongLoader.getSongs(makeLastAddedCursor(context))
     }
 
-    fun makeLastAddedCursor(@NonNull context: Context): Cursor? {
+    private fun makeLastAddedCursor(@NonNull context: Context): Cursor? {
         val cutoff = PreferenceUtil.getInstance().lastAddedCutoff
 
         return SongLoader.makeSongCursor(

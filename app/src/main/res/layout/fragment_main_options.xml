@@ -7,8 +7,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-
-
     <LinearLayout
         android:id="@+id/userInfoContainer"
         android:layout_width="match_parent"
@@ -61,6 +59,35 @@
             android:textAllCaps="false"
             app:srcCompat="@drawable/ic_settings_white_24dp" />
     </LinearLayout>
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionFolders"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/folders"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_folder_white_24dp"
+        app:iconPadding="12dp"
+        app:iconTint="?iconColor"
+        app:rippleColor="?iconColor" />
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionEqualizer"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/equalizer"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_equalizer_white_24dp"
+        app:iconPadding="12dp"
+        app:iconTint="?iconColor"
+        app:rippleColor="?iconColor" />
+
     <code.name.monkey.retromusic.views.MaterialButtonTextColor
         android:id="@+id/actionSleepTimer"
         style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
@@ -71,6 +98,34 @@
         android:textAllCaps="false"
         android:textColor="?android:attr/textColorPrimary"
         app:icon="@drawable/ic_timer_white_24dp"
+        app:iconPadding="12dp"
+        app:iconTint="?iconColor"
+        app:rippleColor="?iconColor" />
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionShare"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/action_share"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_share_white_24dp"
+        app:iconPadding="12dp"
+        app:iconTint="?iconColor"
+        app:rippleColor="?iconColor" />
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionBugReport"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/report_bug"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_bug_report_white_24dp"
         app:iconPadding="12dp"
         app:iconTint="?iconColor"
         app:rippleColor="?iconColor" />
@@ -103,5 +158,18 @@
         app:iconTint="?iconColor"
         app:rippleColor="?iconColor" />
 
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionBuyPro"
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/buy_pro"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorPrimary"
+        app:icon="@drawable/ic_card_giftcard_white_24dp"
+        app:iconPadding="12dp"
+        app:iconTint="?iconColor"
+        app:rippleColor="?iconColor" />
 
 </LinearLayout>

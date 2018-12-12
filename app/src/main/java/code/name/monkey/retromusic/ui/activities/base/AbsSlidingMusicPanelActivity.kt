@@ -136,7 +136,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         bottomNavigationView.visibility = if (toggle) View.GONE else View.VISIBLE
     }
 
-    fun getBottomNavigationView(): BottomNavigationBarTinted? {
+    fun getBottomNavigationView(): BottomNavigationBarTinted {
         return bottomNavigationView
     }
 

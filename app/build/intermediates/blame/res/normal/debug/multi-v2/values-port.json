@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/incremental/mergeNormalDebugResources/merged.dir/values-port/values-port.xml",
+            "map": [
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/51d975e57330a62a61a7c5076b372a3b/res/values-port/values-port.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "55",
+                        "endOffsets": "106"
+                    }
+                }
+            ]
+        }
+    ]
+}

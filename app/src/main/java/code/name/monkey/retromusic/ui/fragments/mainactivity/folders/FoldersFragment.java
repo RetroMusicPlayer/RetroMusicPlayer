@@ -230,14 +230,17 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         //noinspection ConstantConditions
         int primaryColor = ThemeStore.primaryColor(getContext());
 
-
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         //noinspection ConstantConditions
+
         getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(primaryColor);
+        toolbar.setNavigationOnClickListener(v -> {
+            getActivity().onBackPressed();
+        });
 
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));

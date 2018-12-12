@@ -8,9 +8,8 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.MainOptionsBottomSheetDialogFragment
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.ui.activities.MainActivity
-
 
 abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
 
@@ -51,6 +50,6 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
     }
 
     protected fun showMainMenu() {
-        MainOptionsBottomSheetDialogFragment.newInstance().show(childFragmentManager, "Main Menu")
+        OptionsSheetDialogFragment.newInstance().show(childFragmentManager, "Main Menu")
     }
 }
