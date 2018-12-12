@@ -8,8 +8,8 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Album
@@ -18,7 +18,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-import com.bumptech.glide.Glide
 import java.util.*
 
 
@@ -45,16 +44,23 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
                 val album = dataSet!![position] as Album
                 holder.title!!.text = album.title
                 holder.text!!.text = album.artistName
-                SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                        .checkIgnoreMediaStore(activity).build()
+                GlideApp.with(activity)
+                        .asDrawable()
+                        .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                        .transition(RetroGlideExtension.getDefaultTransition())
+                        .songOptions(album.safeGetFirstSong())
                         .into(holder.image!!)
             }
             ARTIST -> {
                 val artist = dataSet!![position] as Artist
                 holder.title!!.text = artist.name
                 holder.text!!.text = MusicUtil.getArtistInfoString(activity, artist)
-                ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-                        .build().into(holder.image!!)
+                GlideApp.with(activity)
+                        .asBitmap()
+                        .load(RetroGlideExtension.getArtistModel(artist))
+                        .transition(RetroGlideExtension.getDefaultTransition())
+                        .artistOptions(artist)
+                        .into(holder.image!!)
             }
             SONG -> {
                 val song = dataSet!![position] as Song

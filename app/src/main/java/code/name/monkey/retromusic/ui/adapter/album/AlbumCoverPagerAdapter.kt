@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.adapter.album
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,14 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.activities.LyricsActivity
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.bumptech.glide.Glide
 import java.util.*
 
 
@@ -118,12 +119,20 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         private fun loadAlbumCover() {
-            SongGlideRequest.Builder.from(Glide.with(context), song!!)
-                    .checkIgnoreMediaStore(activity!!)
-                    .generatePalette(activity!!).build()
+            GlideApp.with(context!!)
+                    .asBitmapPalette()
+                    .load(RetroGlideExtension.getSongModel(song))
+                    .transition(RetroGlideExtension.getDefaultTransition())
+                    .songOptions(song)
+                    .dontAnimate()
                     .into(object : RetroMusicColoredTarget(albumCover) {
                         override fun onColorReady(color: Int) {
                             setColor(color)
+                        }
+
+                        override fun onLoadFailed(errorDrawable: Drawable?) {
+                            super.onLoadFailed(errorDrawable)
+                            setColor(defaultFooterColor)
                         }
                     })
         }

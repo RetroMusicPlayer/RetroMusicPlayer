@@ -19,9 +19,9 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
-import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
 import code.name.monkey.retromusic.loaders.ArtistLoader
@@ -38,8 +38,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.views.CircularImageView
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
@@ -192,7 +190,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
     private fun loadMoreFrom(album: Album) {
         if (artistImage != null) {
-            ArtistGlideRequest.Builder.from(Glide.with(this),
+            /*ArtistGlideRequest.Builder.from(Glide.with(this),
                     ArtistLoader.getArtist(this, album.artistId).blockingFirst())
                     .forceDownload(false)
                     .generatePalette(this).build()
@@ -201,7 +199,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                         override fun onColorReady(color: Int) {
                             //setColors(color);
                         }
-                    })
+                    })*/
         }
 
         val albums = ArtistLoader.getArtist(this, album.artistId).blockingFirst().albums
@@ -220,14 +218,17 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     }
 
     private fun loadAlbumCover() {
-        SongGlideRequest.Builder.from(Glide.with(this), album!!.safeGetFirstSong())
-                .checkIgnoreMediaStore(this)
-                .generatePalette(this).build()
+        GlideApp.with(this)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(album!!.safeGetFirstSong()))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .songOptions(album!!.safeGetFirstSong())
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
+
                 })
     }
 

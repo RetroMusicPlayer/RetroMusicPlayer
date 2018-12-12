@@ -1,37 +1,30 @@
 package code.name.monkey.retromusic.glide
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.os.Build
-import android.renderscript.Allocation
-import android.renderscript.Element
-import android.renderscript.RSRuntimeException
-import android.renderscript.RenderScript
-import android.renderscript.ScriptIntrinsicBlur
+import android.renderscript.*
 import androidx.annotation.FloatRange
-
+import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.helper.StackBlur
+import code.name.monkey.retromusic.util.ImageUtil
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import code.name.monkey.retromusic.helper.StackBlur
-
-import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.util.ImageUtil
+import java.security.MessageDigest
 
 
 class BlurTransformation : BitmapTransformation {
-
     private var context: Context? = null
     private var blurRadius: Float = 0.toFloat()
     private var sampling: Int = 0
 
-    private constructor(builder: Builder) : super(builder.context) {
+    private constructor(builder: Builder) : super() {
         init(builder)
     }
 
-    private constructor(builder: Builder, bitmapPool: BitmapPool) : super(bitmapPool) {
+    private constructor(builder: Builder, bitmapPool: BitmapPool) : super() {
         init(builder)
     }
 
@@ -40,7 +33,6 @@ class BlurTransformation : BitmapTransformation {
         this.blurRadius = builder.blurRadius
         this.sampling = builder.sampling
     }
-
 
     override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap? {
         val sampling: Int
@@ -93,14 +85,22 @@ class BlurTransformation : BitmapTransformation {
         return StackBlur.blur(out, blurRadius)
     }
 
-    override fun getId(): String {
-        return "BlurTransformation(radius=$blurRadius, sampling=$sampling)"
+    override fun equals(o: Any?): Boolean {
+        return o is BlurTransformation
     }
 
-    class Builder(internal val context: Context) {
-        private var bitmapPool: BitmapPool? = null
-        internal var blurRadius = DEFAULT_BLUR_RADIUS
-        internal var sampling: Int = 0
+    override fun hashCode(): Int {
+        return ID.hashCode()
+    }
+
+    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
+        messageDigest.update("BlurTransformation(radius=$blurRadius, sampling=$sampling)".toByteArray(CHARSET))
+    }
+
+    class Builder(val context: Context) {
+        var bitmapPool: BitmapPool? = null
+        var blurRadius = DEFAULT_BLUR_RADIUS
+        var sampling: Int = 0
 
         /**
          * @param blurRadius The radius to use. Must be between 0 and 25. Default is 5.
@@ -137,6 +137,8 @@ class BlurTransformation : BitmapTransformation {
     }
 
     companion object {
-        internal const val DEFAULT_BLUR_RADIUS = 5f
+
+        val DEFAULT_BLUR_RADIUS = 5f
+        private val ID = "com.poupa.vinylmusicplayer.glide.BlurTransformation"
     }
 }

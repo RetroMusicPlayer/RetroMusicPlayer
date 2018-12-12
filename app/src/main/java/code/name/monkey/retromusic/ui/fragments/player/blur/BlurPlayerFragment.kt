@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments.player.blur
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
@@ -10,13 +11,13 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.BlurTransformation
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_blur.*
 
 class BlurPlayerFragment : AbsPlayerFragment() {
@@ -94,22 +95,25 @@ class BlurPlayerFragment : AbsPlayerFragment() {
 
     private fun updateBlur() {
         val activity = activity ?: return
-
         val blurAmount = PreferenceManager.getDefaultSharedPreferences(context).getInt("new_blur_amount", 25)
-
         colorBackground!!.clearColorFilter()
-
-        SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(activity)
-                .generatePalette(activity)
-                .build()
+        GlideApp.with(activity)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .transform(BlurTransformation.Builder(activity).blurRadius(blurAmount.toFloat()).build())
+                .songOptions(MusicPlayerRemote.currentSong)
                 .override(320, 480)
-                .transform(BlurTransformation.Builder(getActivity()!!).blurRadius(blurAmount.toFloat()).build())
-                .into(object : RetroMusicColoredTarget(colorBackground!!) {
+                .into(object : RetroMusicColoredTarget(colorBackground) {
                     override fun onColorReady(color: Int) {
                         if (color == defaultFooterColor) {
                             colorBackground!!.setColorFilter(color)
                         }
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+
                     }
                 })
     }

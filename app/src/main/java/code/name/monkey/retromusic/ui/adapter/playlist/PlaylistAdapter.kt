@@ -1,8 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter.playlist
 
-import android.graphics.Bitmap
 import android.graphics.PorterDuff
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -27,11 +25,7 @@ import code.name.monkey.retromusic.ui.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.Glide
-import io.reactivex.Observable
 import java.util.*
-import java.util.concurrent.ExecutionException
 
 class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayList<Playlist>,
                       @param:LayoutRes protected var itemLayoutRes: Int, cabHolder: CabHolder?) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(activity, cabHolder, R.menu.menu_playlists_selection) {
@@ -175,34 +169,6 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         return songs
     }
 
-    private fun loadBitmaps(songs: ArrayList<Song>): Observable<ArrayList<Bitmap>> {
-        return Observable.create { e ->
-            val bitmaps = ArrayList<Bitmap>()
-            for (song in songs) {
-                try {
-                    val bitmap = Glide.with(activity)
-                            .load(RetroUtil.getAlbumArtUri(song.albumId.toLong()))
-                            .asBitmap()
-                            .into(500, 500)
-                            .get()
-                    if (bitmap != null) {
-                        Log.i(TAG, "loadBitmaps: has")
-                        bitmaps.add(bitmap)
-                    }
-                    if (bitmaps.size == 4) {
-                        break
-                    }
-                } catch (ex: InterruptedException) {
-                    ex.printStackTrace()
-                } catch (ex: ExecutionException) {
-                    ex.printStackTrace()
-                }
-
-            }
-            e.onNext(bitmaps)
-            e.onComplete()
-        }
-    }
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         init {

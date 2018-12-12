@@ -16,23 +16,20 @@
 package code.name.monkey.retromusic.ui.adapter.album
 
 import android.app.Activity
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.util.Pair
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
-import com.bumptech.glide.Glide
 import java.util.*
 
 class AlbumFullWithAdapter(private val activity: Activity,
@@ -80,10 +77,12 @@ class AlbumFullWithAdapter(private val activity: Activity,
         if (holder.image == null) {
             return
         }
-
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                .checkIgnoreMediaStore(activity)
-                .generatePalette(activity).build()
+        GlideApp.with(activity)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .songOptions(album.safeGetFirstSong())
+                .dontAnimate()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
                     override fun onColorReady(color: Int) {
 

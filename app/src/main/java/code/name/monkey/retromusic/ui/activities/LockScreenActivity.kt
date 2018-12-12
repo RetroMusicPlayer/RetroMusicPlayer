@@ -1,23 +1,21 @@
 package code.name.monkey.retromusic.ui.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
+import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.ui.fragments.player.lockscreen.LockScreenPlayerControlsFragment
-import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
-import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
+import kotlinx.android.synthetic.main.activity_album.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
     private var mFragment: LockScreenPlayerControlsFragment? = null
@@ -71,10 +69,13 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
     private fun updateSongs() {
         val song = MusicPlayerRemote.currentSong
-        SongGlideRequest.Builder.from(Glide.with(this), song)
-                .checkIgnoreMediaStore(this)
-                .generatePalette(this)
-                .build().into(object : RetroMusicColoredTarget(findViewById(R.id.image)) {
+        GlideApp.with(this)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getSongModel(song))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .songOptions(song)
+                .dontAnimate()
+                .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
                         mFragment!!.setDark(color)
                     }
