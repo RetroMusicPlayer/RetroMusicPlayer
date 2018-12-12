@@ -1,0 +1,57 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/incremental/mergeNormalDebugResources/merged.dir/values-v23/values-v23.xml",
+            "map": [
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/cb28f2f7a3c0f50c6e51bdf131dc03c2/res/values-v23/values-v23.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "200"
+                    },
+                    "to": {
+                        "startLines": "38",
+                        "startColumns": "4",
+                        "startOffsets": "2696",
+                        "endLines": "40",
+                        "endColumns": "12",
+                        "endOffsets": "2841"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/51d975e57330a62a61a7c5076b372a3b/res/values-v23/values-v23.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,19,32,33,34,35,36",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,190,325,400,487,1277,2079,2206,2311,2426,2533",
+                        "endLines": "2,3,4,5,18,31,32,33,34,35,36",
+                        "endColumns": "134,134,74,86,12,12,126,104,114,106,112",
+                        "endOffsets": "185,320,395,482,1272,2074,2201,2306,2421,2528,2641"
+                    },
+                    "to": {
+                        "startLines": "3,4,5,6,7,20,33,34,35,36,37",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,240,375,450,537,1327,2129,2256,2361,2476,2583",
+                        "endLines": "3,4,5,6,19,32,33,34,35,36,37",
+                        "endColumns": "134,134,74,86,12,12,126,104,114,106,112",
+                        "endOffsets": "235,370,445,532,1322,2124,2251,2356,2471,2578,2691"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/src/main/res/values-v23/dimens.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "49",
+                        "endOffsets": "100"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Ugrás a főoldalra"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Felfelé mozgatás"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"További lehetőségek"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Kész"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Összes megtekintése"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Válasszon ki egy alkalmazást"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"KI"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"BE"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt+"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl+"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"Delete"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"Enter"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Function+"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta+"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift+"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"Szóköz"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym+"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menu+"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Keresés…"</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Lekérdezés törlése"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Keresési lekérdezés"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Keresés"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Lekérdezés küldése"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Hangalapú keresés"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Megosztás a következővel:"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Megosztás a következő alkalmazással: <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Összecsukás"</string>
+    <string name="accent_color">A hangsúly színe</string>
+    <string name="accent_color_desc">Az akcentus téma színe alapértelmezés szerint zöld.</string>
+    <string name="action_about">Rólunk</string>
+    <string name="action_add_to_favorites">Add hozzá a kedvencekhez</string>
+    <string name="action_add_to_playing_queue">Add a lejátszási sorhoz</string>
+    <string name="action_add_to_playlist">Lejátszási listához adni…</string>
+    <string name="action_clear_playing_queue">Lejátszási sor törlése</string>
+    <string name="action_clear_playlist">Lejátszási listát törlése</string>
+    <string name="action_delete">Törlés</string>
+    <string name="action_delete_from_device">Törlés eszközről</string>
+    <string name="action_details">Részletek</string>
+    <string name="action_go_to_album">Ugrás az albumhoz</string>
+    <string name="action_go_to_artist">Ugrás az előadóhoz</string>
+    <string name="action_go_to_start_directory">Ugrás a könyvtár indításához</string>
+    <string name="action_grant">Engedélyezés</string>
+    <string name="action_grid_size">Rácsméret</string>
+    <string name="action_grid_size_land">Rácsméret (Forditott)</string>
+    <string name="action_next">Következő</string>
+    <string name="action_play">Lejátszás</string>
+    <string name="action_play_next">Lejátszás következőnek</string>
+    <string name="action_play_pause">Lejátszás / Szünet</string>
+    <string name="action_previous">Előző</string>
+    <string name="action_remove_from_favorites">Eltávolítás a kedvencekből</string>
+    <string name="action_remove_from_playing_queue">Eltávolítás a lejátszási sorból</string>
+    <string name="action_remove_from_playlist">Eltávolítás a lejátszási listáról</string>
+    <string name="action_rename">Átnevezése</string>
+    <string name="action_save_playing_queue">Lejátszási sor mentése</string>
+    <string name="action_scan">Letapogatás</string>
+    <string name="action_search">Keresés</string>
+    <string name="action_set">Beállítás</string>
+    <string name="action_set_as_ringtone">Beállítás csengőhangként</string>
+    <string name="action_set_as_start_directory">Beállítás kezdőkönyvtárként</string>
+    <string name="action_settings">"Beállítások"</string>
+    <string name="action_share">Ossza meg</string>
+    <string name="action_shuffle_all">Összes keverése</string>
+    <string name="action_shuffle_playlist">Lejátszási lista keverése</string>
+    <string name="action_sleep_timer">Ébresztő óra</string>
+    <string name="action_tag_editor">Címkeszerkesztő</string>
+    <string name="add_action">Hozzáad</string>
+    <string name="add_photo">Fénykép\nhozzáadása</string>
+    <string name="add_playlist_title">"Lejátszási listához adni"</string>
+    <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási sorhoz."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d címsort hozzáadott a lejátszási sorhoz.</string>
+    <string name="album">Album</string>
+    <string name="album_artist">Album előadó</string>
+    <string name="album_or_artist_empty">A cím vagy az előadó üres.</string>
+    <string name="albums">Albumok</string>
+    <string name="always">Mindig</string>
+    <string name="app_share">Hé, nézd meg ezt a Retro Zenelejátszót: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_shortcut_last_added_long">@string/last_added</string>
+    <string name="app_shortcut_last_added_short">@string/last_added</string>
+    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
+    <string name="app_shortcut_shuffle_all_short">Keverés</string>
+    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_top_tracks_short">Legjobb zeneszámok</string>
+    <string name="app_widget_big_name">Retro music - Nagy</string>
+    <string name="app_widget_card_name">Retro music - Kártya</string>
+    <string name="app_widget_classic_name">Retro music - Klasszikus</string>
+    <string name="app_widget_small_name">Retro music - Kicsi</string>
+    <string name="artist">Előadó</string>
+    <string name="artists">Előadók</string>
+    <string name="audio_focus_denied">Az audiofókusz megtagadva.</string>
+    <string name="audio_settings_summary">Állítsa be a hangbeállításokat és a hangszínszabályzókat</string>
+    <string name="bass_boost">Basszuskiemelés</string>
+    <string name="biography">Életrajz</string>
+    <string name="black_theme_name">Csak fekete</string>
+    <string name="blacklist">Feketelista</string>
+    <string name="blur">Elhomályosít</string>
+    <string name="blur_card">Elhomályosított Kártya</string>
+    <string name="buy_retro_music_pro">Vedd meg a Retro  Music Pro-t</string>
+    <string name="cancel_current_timer">Az aktuális időzítő törlése</string>
+    <string name="card">Kártya</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"Hirdetés"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"Átküldés ide: %1$s"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"Feliratok"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"A feliratok nem érhetők el"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"Csatlakozás a következőhöz: <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"Szétválasztás"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"Ez a kép látható, amíg a Cast-erősítő hirdetést jelenít meg"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"Hirdetés folyamatban…"</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"Lemezborító"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"Élő közvetítés"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"Betöltés…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"Hirdetés átugrása"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"A hirdetést átugorhatja %1$d múlva…"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"Előretekerés"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"Előretekerés tíz másodperccel"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"Előretekerés harminc másodperccel"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:string/ok"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"Némítás"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"Csatlakozva a következőhöz: <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"Csatlakozás a következőhöz: <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"Cast"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"Leválasztás"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"Szüneteltetés"</string>
+    <string msgid="5906987965619702702" name="cast_play">"Lejátszás"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"Visszatekerés"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"Visszatekerés tíz másodperccel"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"Visszatekerés 30 másodperccel"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"Lejátszási keresősáv"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"Ugrás a következő elemre"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"Ugrás az előző elemre"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"Leállítás"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"Élő közvetítés leállítása"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"Hang"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"Mégse"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"Feliratok"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"<ns1:g id="POSITION">%1$d</ns1:g> követése"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"Nincs"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"OK"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"Feliratok"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"Némítás feloldása"</string>
+    <string name="changelog">Változási napló</string>
+    <string name="changelog_summary">A Telegram alkalmazás által fenntartott naplófájl módosítása</string>
+    <string name="clear_action">Tisztitás</string>
+    <string name="clear_blacklist">Törölje a feketelistát</string>
+    <string name="clear_playlist_title">Törölje a lejátszási listát</string>
+    <string name="clear_playlist_x"><![CDATA[T\u00f6r\u00f6li a <b>%1$s</b> lej\u00e1tsz\u00e1si list\u00e1t? Ezt nem lehet visszavonni!]]></string>
+    <string name="color">Szín</string>
+    <string name="color_theme_name">Szín</string>
+    <string name="colors">Színek</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Engedélyezés"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás csak akkor működik, ha  engedélyezi a Google Play-szolgáltatásokat."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Google Play-szolgáltatások engedélyezése"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Telepítés"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyek hiányoznak az eszközről."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"A Google Play-szolgáltatások beszerzése"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Google Play-szolgáltatások elérhetősége"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Google Play-szolgáltatások – hiba"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás problémába ütközött a Google Play-szolgáltatások használata során. Próbálkozzon újra."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyeket eszköze nem támogat."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Frissítés"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás csak akkor fog működni, ha frissíti a Google Play-szolgáltatásokat."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"A Google Play-szolgáltatások frissítése"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"A(z) <ns1:g id="APP_NAME">%1$s</ns1:g> alkalmazás nem fut a Google Play-szolgáltatások nélkül, amelyek frissítése folyamatban van."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"A Google Play-szolgáltatások új verziójára van szükség. A szolgáltatás hamarosan frissíti önmagát."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Megnyitás a telefonon"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Bejelentkezés"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Bejelentkezés Google-fiókkal"</string>
+    <string name="could_not_create_playlist">Lej\u00e1tsz\u00e1si lista l\u00e9trehoz\u00e1sa nem siker\u00fclt.</string>
+    <string name="could_not_download_album_cover">"Nem siker\u00fclt lek\u00e9rni a megfelel\u0151 albumbor\u00edt\u00f3t."</string>
+    <string name="could_not_restore_purchase">A vásárlást nem sikerült visszaállítani.</string>
+    <string name="could_not_scan_files">Nem sikerült beolvasni %d fájlt.</string>
+    <string name="create_action">Létrehozás</string>
+    <string name="created_playlist_x">Létrehozott lejátszási lista %1$s</string>
+    <string name="currently_listening_to_x_by_x">Jelenleg hallgat %1$s által %2$s</string>
+    <string name="dark_theme_name">Kinda Sötét</string>
+    <string name="default_hint">Nincs dalszöveg</string>
+    <string name="delete_playlist_title">Lejátszási lista törlése</string>
+    <string name="delete_playlist_x"><![CDATA[Törli a <b>%1$s</b> lejátszási listát?]]></string>
+    <string name="delete_playlists_title">Lejátszási listák törlése</string>
+    <string name="delete_song_x"><![CDATA[Törli a <b>%1$s</b> dalt?]]></string>
+    <string name="delete_x_playlists"><![CDATA[Törli a <b>%1$d</b> lejátszási listát?]]></string>
+    <string name="delete_x_songs"><![CDATA[Törli a <b>%1$d</b> zenét?]]></string>
+    <string name="deleted_x_songs">Törölte a %1$d zenét.</string>
+    <string name="do_you_want_to_clear_the_blacklist">Szeretné törölni a feketelistát?</string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Szeretné eltávolítani a <b>%1$s</b> a feketelistáról?]]></string>
+    <string name="donate">Támogatás</string>
+    <string name="donate_summary">Ha úgy gondolja, hogy megérdemlem fizetni a munkámért, itt hagyhatsz néhány dollárt.</string>
+    <string name="donation_header">Vegyél nekem egy</string>
+    <string name="download_from_last_fm">Letöltés a Last.fm-ről</string>
+    <string name="empty">Üres</string>
+    <string name="equalizer">Hangszínszabályzó</string>
+    <string msgid="1234962710353108940" name="expand_button_title">"Speciális"</string>
+    <string name="favorites">Kedvencek</string>
+    <string name="flat">Lapos</string>
+    <string name="folders">Mappák</string>
+    <string name="for_you">Neked</string>
+    <string name="full">Teljes</string>
+    <string name="general_settings_summary">Az alkalmazás általános színeinek módosítása</string>
+    <string name="general_settings_title">Nézz és élvezd</string>
+    <string name="genre">Műfaj</string>
+    <string name="genres">Műfajok</string>
+    <string name="git_hub_summary">Szerezd meg a projektet a githubban</string>
+    <string name="google_plus_community">Csatlakozzon a Google Plus közösséghez, ahol segítséget kérhet, vagy követheti a Retro Zene Alkalmazás frissítéseit</string>
+    <string name="history">Előzmény</string>
+    <string name="home">Krzdőlap</string>
+    <string name="image_settings_summary">A művészképek letöltésének megváltoztatása</string>
+    <string name="inserted_x_songs_into_playlist_x">%1$d dalt betett a %2$s lejátszási listába.</string>
+    <string name="instagram_page">Instagram</string>
+    <string name="instagram_page_summary">Ossza meg a Retro Zene beállításait az Instagram példányban</string>
+    <string name="label_bit_rate">Bitrát</string>
+    <string name="label_file_format">Formátum</string>
+    <string name="label_file_name">Fájl név</string>
+    <string name="label_file_path">Fájl elérési út</string>
+    <string name="label_file_size">Méret</string>
+    <string name="label_sampling_rate">Mintavételi arány</string>
+    <string name="label_track_length">Hossz</string>
+    <string name="last_added">Utoljára hozzáadva</string>
+    <string name="lets_play_something">Játsszunk le egy zenét</string>
+    <string name="library">Könyvtár</string>
+    <string name="licenses">Licencek</string>
+    <string name="light_theme_name">Világos fehér</string>
+    <string name="listing_files">Listázási fájlok</string>
+    <string name="loading_products">A termékek betöltése ...</string>
+    <string name="lyrics">Dalszöveg</string>
+    <string msgid="1685185767093348095" name="mr_button_content_description">"Átküldés gomb"</string>
+    <string msgid="1350095112462806159" name="mr_cast_button_connected">"Átküldés gomb. Csatlakoztatva"</string>
+    <string msgid="8959304318293841992" name="mr_cast_button_connecting">"Átküldés gomb. Csatlakozás"</string>
+    <string msgid="5501231066847739632" name="mr_cast_button_disconnected">"Átküldés gomb. Kapcsolat bontva"</string>
+    <string msgid="5504553798429329689" name="mr_chooser_searching">"Eszközök keresése"</string>
+    <string msgid="7548226170787476564" name="mr_chooser_title">"Átküldés ide:"</string>
+    <string msgid="5813284753012893250" name="mr_controller_album_art">"Lemezborító"</string>
+    <string msgid="5286734709674025661" name="mr_controller_casting_screen">"Képernyőtartalom átküldése…"</string>
+    <string msgid="5468775621814500662" name="mr_controller_close_description">"Bezárás"</string>
+    <string msgid="5518911192681928413" name="mr_controller_collapse_group">"Összecsukás"</string>
+    <string msgid="1370654436555555647" name="mr_controller_disconnect">"Leválasztás"</string>
+    <string msgid="2422682304043876468" name="mr_controller_expand_group">"Kibontás"</string>
+    <string msgid="7299368841849988218" name="mr_controller_no_info_available">"Nincs információ"</string>
+    <string msgid="4342878516155861006" name="mr_controller_no_media_selected">"Nincs kiválasztott médiatartalom"</string>
+    <string msgid="4701315813294065305" name="mr_controller_pause">"Szünet"</string>
+    <string msgid="4443315438268112801" name="mr_controller_play">"Lejátszás"</string>
+    <string msgid="5106056093749454009" name="mr_controller_stop">"Leállítás"</string>
+    <string msgid="7617024847862349259" name="mr_controller_stop_casting">"Átküldés leállítása"</string>
+    <string msgid="691656961160498512" name="mr_controller_volume_slider">"Hangerőszabályzó"</string>
+    <string msgid="3117964881088969586" name="mr_system_route_name">"Rendszer"</string>
+    <string msgid="8236416097133080726" name="mr_user_route_category_name">"Eszközök"</string>
+    <string name="my_name">Nevem</string>
+    <string name="my_top_tracks">Legjobb számok</string>
+    <string name="never">Soha</string>
+    <string name="new_playlist_title">Új lejátszási lista</string>
+    <string name="new_profile_photo">Új profilfotó</string>
+    <string name="new_start_directory">%s az új indítókönyvtár.</string>
+    <string name="no_albums">Nincsenek albumok</string>
+    <string name="no_artists">Nincs előadó</string>
+    <string name="no_audio_ID">"Először játssz le egy dalt, majd próbálkozzon újra."</string>
+    <string name="no_equalizer">Nem találtunk hangszínszabályzott.</string>
+    <string name="no_genres">Nincsenek műfajok</string>
+    <string name="no_lyrics_found">Nem található dalszöveg</string>
+    <string name="no_playlists">Nincs lejátszási lista</string>
+    <string name="no_purchase_found">Nincs vásárlás.</string>
+    <string name="no_results">Nincs eredmény</string>
+    <string name="no_songs">Nincs dal</string>
+    <string name="normal">Normál</string>
+    <string name="normal_lyrics">Normál dalszövegek</string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nem szerepel a médiában.]]></string>
+    <string name="nothing_to_scan">Nincs szkennelve.</string>
+    <string name="notification">Értesítés</string>
+    <string name="notification_settings_summary">Értesítési stílus testreszabása</string>
+    <string name="now_playing">Most lejátszott</string>
+    <string name="now_playing_queue">Sorban áll</string>
+    <string name="only_on_wifi">Csak Wi-Fi-n</string>
+    <string name="others">Egyéb</string>
+    <string name="past_three_months">3 hónapnál túl</string>
+    <string name="paypal">PayPal.me</string>
+    <string name="paypal_summary">A PayPal.me egy egyszerű módja annak, hogy pénzt adjon nekünk. Abban az esetben, ha csak terhelési vagy hitelkártyát vehet fel, az Egyesült Államokban az összeg az adomány 2.9% -a, plusz $ 0.30 USD, ellenkező esetben nincs díj.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">több</a></string>
+    <string name="permission_external_storage_denied">A külső tárolási hozzáférés engedélyezése tiltva.</string>
+    <string name="permissions_denied">Engedélyek megtagadva.</string>
+    <string name="personalize">Megszemélyesít</string>
+    <string name="personalize_settings_summary">A most lejátszott és felhasználói felület testreszabása</string>
+    <string name="pick_from_local_storage">Válasszon a helyi tárolóból</string>
+    <string name="plain">Egyszerű</string>
+    <string name="playing_notification_description">A lejátszási értesítés lejátszási/szüneteltetési intézkedéseket tartalmaz.</string>
+    <string name="playing_notification_name">Értesítés lejátszása</string>
+    <string name="playlist_empty_text">Üres lejátszási lista</string>
+    <string name="playlist_is_empty">A lejátszási lista üres</string>
+    <string name="playlist_name_empty">Lejátszási lista neve</string>
+    <string name="playlists">Lejátszási listák</string>
+    <string name="pref_header_audio">Hang</string>
+    <string name="pref_header_general">Általános</string>
+    <string name="pref_header_images">Képek</string>
+    <string name="pref_header_lockscreen">Zárképernyő</string>
+    <string name="pref_header_playlists">Lejátszási listák</string>
+    <string name="pref_only_lollipop">"Csak a Lollipopon elérhető."</string>
+    <string name="pref_summary_album_art_on_lockscreen">A jelenlegi zeneszámok albumborítóját zárolt háttérképként használja.</string>
+    <string name="pref_summary_audio_ducking">Értesítések, navigáció stb.</string>
+    <string name="pref_summary_blurred_album_art">Blokkolja az album borítóját a zárolás képernyőjén. Problémákat okozhat harmadik féltől származó alkalmazásokkal és kütyükkel.</string>
+    <string name="pref_summary_carousel_effect">Carousel effektus mostantól a képernyőn megjelenő albumlemezen. Ne feledje, hogy a kártya és a Homályosított Kártya téma nem fog működni</string>
+    <string name="pref_summary_classic_notification">Használja a klasszikus értesítési tervet.</string>
+    <string name="pref_summary_colored_app">Háttér, A vezérlőgomb színe a lejátszók képernyőjén megjelenő albumminták szerint változik</string>
+    <string name="pref_summary_colored_app_shortcuts">Színek az alkalmazás parancsikonjai az akcentus színében. Minden alkalommal, amikor megváltoztatta a színét, kérjük, kapcsolja be ezt a hatást</string>
+    <string name="pref_summary_colored_navigation_bar">Színezi a navigációs sávot az elsődleges színben.</string>
+    <string name="pref_summary_colored_notification">"Sz\u00ednek az \u00e9rtes\u00edt\u00e9st az albumbor\u00edt\u00f3 \u00e9l\u00e9nk sz\u00edn\u00e9ben."</string>
+    <string name="pref_summary_dominant_color">A legtöbb domináns színt az album vagy az előadó borítója veszi fel.</string>
+    <string name="pref_summary_gapless_playback">"Egyes eszközökön lejátszási problémákat okozhat."</string>
+    <string name="pref_summary_ignore_media_store_artwork">Növelheti az album borításminőségét, de lassabb kép betöltési időt eredményez. Csak akkor engedélyezze ezt, ha problémái vannak az alacsony felbontású művekkel kapcsolatban.</string>
+    <string name="pref_summary_lock_screen">Retro zeneszámok zárolása a képernyőn.</string>
+    <string name="pref_summary_open_source_licences">A nyílt forráskódú szoftverek licence részletei</string>
+    <string name="pref_summary_round_corners">Sarokszegélyek az ablakhoz, albumművészethez stb.</string>
+    <string name="pref_summary_tab_titles">Az alsó fül címének engedélyezése / tiltása.</string>
+    <string name="pref_summary_toggle_full_screen">Kiterjesztett üzemmód</string>
+    <string name="pref_summary_toggle_headset">Indítsa el a lejátszást, amikor a fejhallgató csatlakoztatva van.</string>
+    <string name="pref_summary_toggle_shuffle">A véletlen sorrendű mód kikapcsol, ha új számlistát játszik le</string>
+    <string name="pref_summary_toggle_volume">Ha van szabad hely a képernyőn engedélyezett hangerőszabályzókkal</string>
+    <string name="pref_title_album_art_on_lockscreen">Az album borítójának megjelenítése</string>
+    <string name="pref_title_album_grid_style">Album rács stílusa</string>
+    <string name="pref_title_app_shortcuts">Színes alkalmazás parancsikonok</string>
+    <string name="pref_title_artist_grid_style">Előadói rács stílusa</string>
+    <string name="pref_title_audio_ducking">Csökkentse a fókuszvesztés hangerejét</string>
+    <string name="pref_title_auto_download_artist_images">Automatikus letölti képeket</string>
+    <string name="pref_title_blurred_album_art">Elhomályosított albumborító</string>
+    <string name="pref_title_choose_equalizer">Válasszon Hangszínszabélyzott</string>
+    <string name="pref_title_classic_notification">Klasszikus értesítési terv</string>
+    <string name="pref_title_colored_app">Adaptív szín</string>
+    <string name="pref_title_colored_notification">Színes értesítés</string>
+    <string name="pref_title_gapless_playback">Gapless lejátszás</string>
+    <string name="pref_title_general_theme">Általános téma</string>
+    <string name="pref_title_ignore_media_store_artwork">Figyelmen kívül hagyja a médiatárolók fedelét</string>
+    <string name="pref_title_last_added_interval">Utoljára hozzáadott lejátszási lista intervallum</string>
+    <string name="pref_title_lock_screen">Teljes képernyős vezérlők</string>
+    <string name="pref_title_navigation_bar">Színes navigációs sáv</string>
+    <string name="pref_title_now_playing_screen_appearance">Megjelenés</string>
+    <string name="pref_title_open_source_licences">Nyílt forráskódú licencek</string>
+    <string name="pref_title_round_corners">Sarokélek</string>
+    <string name="pref_title_toggle_carousel_effect">Carousel hatás</string>
+    <string name="pref_title_toggle_dominant_color">Domináns szín</string>
+    <string name="pref_title_toggle_full_screen">Teljes képernyős alkalmazás</string>
+    <string name="pref_title_toggle_tab_titles">Alcímek</string>
+    <string name="pref_title_toggle_toggle_headset">Automatikus lejátszás</string>
+    <string name="pref_title_toggle_toggle_shuffle">Kevert mód</string>
+    <string name="pref_title_toggle_volume">Hangerőszabályzók</string>
+    <string name="pref_title_user_info">Felhasználói adatok</string>
+    <string name="primary_color">Elsődleges szín</string>
+    <string name="primary_color_desc">Az elsődleges téma színe, alapértelmezés szerint kék szürke, jelenleg sötét színekkel működik</string>
+    <string name="purchase">Vásárlás</string>
+    <string name="purchase_summary">*Gondolja vásárolása előtt, ne kérjen visszatérítést.</string>
+    <string name="queue">Sorban áll</string>
+    <string name="rate_app">Értékeld az alkalmazást</string>
+    <string name="rate_on_google_play_summary">Szereted ezt az app-ot a Google Play áruházban, hogy jobb élményt nyújtsunk</string>
+    <string name="recent_albums">Legutóbbi albumok</string>
+    <string name="recent_artists">Legújabb előadók</string>
+    <string name="remove_action">Eltávolítás</string>
+    <string name="remove_cover">Borító eltávolítása</string>
+    <string name="remove_from_blacklist">Eltávolítás a feketelistáról</string>
+    <string name="remove_profile_photo">Profilfotó eltávolítása</string>
+    <string name="remove_song_from_playlist_title">Távolítsa el a dalt a lejátszási listáról</string>
+    <string name="remove_song_x_from_playlist"><![CDATA[Eltávolítja a <b>%1$s</b> dalt a lejátszási listából?]]></string>
+    <string name="remove_songs_from_playlist_title">A dalok eltávolítása a lejátszási listáról</string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Eltávolítja a <b>%1$d</b> dalt a lejátszási listából?]]></string>
+    <string name="rename_playlist_title">Lejátszási lista átnevezése</string>
+    <string name="reset_artist_image">Az előadó képének visszaállítása</string>
+    <string name="restore">Visszaállítás</string>
+    <string name="restored_previous_purchase_please_restart">Az előző vásárlás helyreállítása. Kérjük, indítsa újra az alkalmazást az összes funkció használatához.</string>
+    <string name="restored_previous_purchases">Korábbi vásárlások visszaállítása.</string>
+    <string name="restoring_purchase">A vásárlás visszaállítása ...</string>
+    <string name="retro_equalizer">Retro Zene Hangszínszabályzó</string>
+    <string name="save_playlist_title">Mentés fájlként</string>
+    <string name="saved_playlist_to">Mentett lejátszási lista a következőhöz: %s</string>
+    <string name="saving_changes">A változtatások mentése</string>
+    <string name="scanned_files">%2$d fájlt %1$d szkennelt.</string>
+    <string name="search_hint">Keresés a könyvtárban ...</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Keresés"</string>
+    <string name="set_artist_image">Állítsa be az előadó képét</string>
+    <string name="shuffle">Keverés</string>
+    <string name="simple">Egyszerű</string>
+    <string name="sleep_timer_canceled">Az elalváskapcsoló kikapcsolva.</string>
+    <string name="sleep_timer_set">Az elalvási időzítő beállítása %d perc múlva.</string>
+    <string name="social">Közösségi</string>
+    <string name="song">Dal</string>
+    <string name="song_duration">A dal időtartama</string>
+    <string name="songs">Dalok</string>
+    <string name="sort_order">Sorrend</string>
+    <string name="speech_not_supported">Sajnálom! A készülék nem támogatja a beszédet</string>
+    <string name="speech_prompt">Keresés a könyvtárban</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="5190123168583152844" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string name="summary_user_info">Csak mutassa meg a nevét a kezdőképernyőn</string>
+    <string name="support_development">Támogatás fejlesztése</string>
+    <string name="synced_lyrics">Szinkronizált dalszövegek</string>
+    <string name="system_equalizer">Rendszer kiegyenlítő</string>
+    <string name="thank_you">Köszönöm!</string>
+    <string name="the_audio_file">Az audio fájl</string>
+    <string name="this_month">Ebben a hónapban</string>
+    <string name="this_week">Ezen a héten</string>
+    <string name="this_year">Egy éve</string>
+    <string name="tiny">Apró</string>
+    <string name="title_dashboard">Irányítópult</string>
+    <string name="title_good_afternoon">Jó napot</string>
+    <string name="title_good_day">Jó nap</string>
+    <string name="title_good_evening">Jó estét</string>
+    <string name="title_good_morning">Jó reggelt</string>
+    <string name="title_good_night">Jó éjszakát</string>
+    <string name="title_user_info">Mi a neved?</string>
+    <string name="today">Ma</string>
+    <string name="top_albums">Legjobb albumok</string>
+    <string name="top_artists">Legjobb előadok</string>
+    <string name="track_hint">"Sáv (2 a 2. vagy a 3004-es számhoz a CD3 4. sávjához)"</string>
+    <string name="track_list">Sáv száma</string>
+    <string name="translate">Fordítás</string>
+    <string name="translate_community">Segítsen nekünk az alkalmazás nyelvének fordításához</string>
+    <string name="twitter_page">Twitter oldal</string>
+    <string name="twitter_page_summary">Ossza meg tervét a RetroMusicApp segítségével</string>
+    <string name="unplayable_file">Nem lehetett j\u00e1tszani ezt a dalt.</string>
+    <string name="up_next">A következő</string>
+    <string name="update_image">Kép frissítése</string>
+    <string name="updating">Frissítés...</string>
+    <string msgid="5138405918326871307" name="v7_preference_off">"KI"</string>
+    <string msgid="27351710992731591" name="v7_preference_on">"BE"</string>
+    <string name="version">Verzió</string>
+    <string name="virtualizer">Virtualizáló</string>
+    <string name="web_search">Webes keresés</string>
+    <string name="what_do_you_want_to_share">Mit szeretne megosztani?</string>
+    <string name="window">Ablak</string>
+    <string name="x_has_been_set_as_ringtone">Állítsa be a (z) %1$s csengőhangot.</string>
+    <string name="x_selected">%1$d kiválasztása</string>
+    <string name="year">Év</string>
+</resources>

@@ -1,0 +1,77 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/app/build/intermediates/incremental/mergeNormalDebugResources/merged.dir/values-large-v4/values-large-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/appcompat-1.0.2.aar/51d975e57330a62a61a7c5076b372a3b/res/values-large-v4/values-large-v4.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,185,256,326,396,464,532,636",
+                        "endColumns": "58,70,70,69,69,67,67,103,115",
+                        "endOffsets": "109,180,251,321,391,459,527,631,747"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,11,12",
+                        "startColumns": "4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,114,185,256,326,396,464,643,747",
+                        "endColumns": "58,70,70,69,69,67,67,103,115",
+                        "endOffsets": "109,180,251,321,391,459,527,742,858"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/b08b25f9ffa1263b349fc2c360eb949d/res/values-large-v4/values-large-v4.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,177",
+                        "endColumns": "121,133",
+                        "endOffsets": "172,306"
+                    },
+                    "to": {
+                        "startLines": "13,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "863,985",
+                        "endColumns": "121,133",
+                        "endOffsets": "980,1114"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/.gradle/caches/transforms-1/files-1.1/jetified-commons-0.9.6.0.aar/58a879902cb0ac3ddc64df096149fe46/res/values-large-v4/values-large-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "584",
+                        "endColumns": "58",
+                        "endOffsets": "638"
+                    }
+                },
+                {
+                    "source": "/Users/hemanths/Desktop/KeepSafe/RetroMusicPlayer/appthemehelper/build/intermediates/packaged_res/debug/values-large-v4/values-large-v4.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "51",
+                        "endOffsets": "102"
+                    },
+                    "to": {
+                        "startLines": "9",
+                        "startColumns": "4",
+                        "startOffsets": "532",
+                        "endColumns": "51",
+                        "endOffsets": "579"
+                    }
+                }
+            ]
+        }
+    ]
+}

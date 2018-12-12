@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.mylyn.github/org.eclipse.egit.github.core/2.1.5/e1c010e279ff0355a996f00b71512a8636e681d7/org.eclipse.egit.github.core-2.1.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.eclipse.mylyn.github/org.eclipse.egit.github.core/2.1.5/4704e7f370d7d2fe59c82a5f128e390a36508cbc/org.eclipse.egit.github.core-2.1.5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

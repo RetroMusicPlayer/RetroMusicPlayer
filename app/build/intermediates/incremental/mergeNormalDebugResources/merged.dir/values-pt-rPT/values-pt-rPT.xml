@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="urn:oasis:names:tc:xliff:document:1.2">
+    <string msgid="4600421777120114993" name="abc_action_bar_home_description">"Navegar para a página inicial"</string>
+    <string msgid="1594238315039666878" name="abc_action_bar_up_description">"Navegar para cima"</string>
+    <string msgid="3588849162933574182" name="abc_action_menu_overflow_description">"Mais opções"</string>
+    <string msgid="4076576682505996667" name="abc_action_mode_done">"Concluído"</string>
+    <string msgid="7468859129482906941" name="abc_activity_chooser_view_see_all">"Ver tudo"</string>
+    <string msgid="2031811694353399454" name="abc_activitychooserview_choose_application">"Escolher uma aplicação"</string>
+    <string msgid="121134116657445385" name="abc_capital_off">"DESATIVADO"</string>
+    <string msgid="3405795526292276155" name="abc_capital_on">"ATIVADO"</string>
+    <string msgid="1302280443949172191" name="abc_menu_alt_shortcut_label">"Alt +"</string>
+    <string msgid="1324831542140195728" name="abc_menu_ctrl_shortcut_label">"Ctrl +"</string>
+    <string msgid="8362206064229013510" name="abc_menu_delete_shortcut_label">"eliminar"</string>
+    <string msgid="8341180395196749340" name="abc_menu_enter_shortcut_label">"enter"</string>
+    <string msgid="4792426091847145555" name="abc_menu_function_shortcut_label">"Função +"</string>
+    <string msgid="7643535737296831317" name="abc_menu_meta_shortcut_label">"Meta +"</string>
+    <string msgid="8126296154200614004" name="abc_menu_shift_shortcut_label">"Shift +"</string>
+    <string msgid="2378550843553983978" name="abc_menu_space_shortcut_label">"espaço"</string>
+    <string msgid="9002602288060866689" name="abc_menu_sym_shortcut_label">"Sym +"</string>
+    <string msgid="1351762916121158029" name="abc_prepend_shortcut_label">"Menu +"</string>
+    <string msgid="7723749260725869598" name="abc_search_hint">"Pesquisar..."</string>
+    <string msgid="3691816814315814921" name="abc_searchview_description_clear">"Limpar consulta"</string>
+    <string msgid="2550479030709304392" name="abc_searchview_description_query">"Consulta de pesquisa"</string>
+    <string msgid="8264924765203268293" name="abc_searchview_description_search">"Pesquisar"</string>
+    <string msgid="8928215447528550784" name="abc_searchview_description_submit">"Enviar consulta"</string>
+    <string msgid="893419373245838918" name="abc_searchview_description_voice">"Pesquisa por voz"</string>
+    <string msgid="3421042268587513524" name="abc_shareactionprovider_share_with">"Partilhar com"</string>
+    <string msgid="3300176832234831527" name="abc_shareactionprovider_share_with_application">"Partilhar com a aplicação <ns1:g id="APPLICATION_NAME">%s</ns1:g>"</string>
+    <string msgid="1603543279005712093" name="abc_toolbar_collapse_description">"Reduzir"</string>
+    <string msgid="4778414446709286370" name="cast_ad_label">"Anúncio"</string>
+    <string msgid="366047012176970604" name="cast_casting_to_device">"A transmitir para %1$s"</string>
+    <string msgid="2888745622334830481" name="cast_closed_captions">"Legendas ocultas"</string>
+    <string msgid="4476421850100851087" name="cast_closed_captions_unavailable">"Legendas ocultas não disponíveis"</string>
+    <string msgid="6769392312239056170" name="cast_connecting_to_device">"A ligar a <ns1:g id="NAME">%1$s</ns1:g>…"</string>
+    <string msgid="4431992200264667209" name="cast_disconnect">"Desassociar"</string>
+    <string msgid="5668979866539349222" name="cast_expanded_controller_ad_image_description">"Imagem apresentada enquanto o recetor de transmissão está a reproduzir um anúncio"</string>
+    <string msgid="9069517964239146855" name="cast_expanded_controller_ad_in_progress">"Anúncio em curso…"</string>
+    <string msgid="8886260998635257149" name="cast_expanded_controller_background_image">"Imagem do álbum"</string>
+    <string msgid="1316611227831672183" name="cast_expanded_controller_live_stream_indicator">"Transmissão em direto"</string>
+    <string msgid="7334411994450681286" name="cast_expanded_controller_loading">"A carregar…"</string>
+    <string msgid="8524154027649233400" name="cast_expanded_controller_skip_ad_label">"Ignorar anúncio"</string>
+    <string msgid="1171005989073753111" name="cast_expanded_controller_skip_ad_text">"Pode ignorar o anúncio em %1$d…"</string>
+    <string msgid="7884080323096468593" name="cast_forward">"Avançar"</string>
+    <string msgid="6424889955881797947" name="cast_forward_10">"Avançar dez segundos"</string>
+    <string msgid="7868672855975238403" name="cast_forward_30">"Avançar trinta segundos"</string>
+    <string msgid="6885943100773268783" name="cast_intro_overlay_button_text">"@android:string/ok"</string>
+    <string msgid="5637297909372905371" name="cast_mute">"Desativar som"</string>
+    <string msgid="5319032370587661362" name="cast_notification_connected_message">"Ligado a <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2758865089947797888" name="cast_notification_connecting_message">"A ligar a <ns1:g id="NAME">%1$s</ns1:g>"</string>
+    <string msgid="2568179715202151240" name="cast_notification_default_channel_name">"Cast"</string>
+    <string msgid="5232008641593292969" name="cast_notification_disconnect">"Desligar"</string>
+    <string msgid="5308503786390460607" name="cast_pause">"Colocar em pausa"</string>
+    <string msgid="5906987965619702702" name="cast_play">"Reproduzir"</string>
+    <string msgid="1739665135565985480" name="cast_rewind">"Recuar"</string>
+    <string msgid="6432793028560778843" name="cast_rewind_10">"Recuar dez segundos"</string>
+    <string msgid="4677199707225681325" name="cast_rewind_30">"Recuar trinta segundos"</string>
+    <string msgid="9078075166993780241" name="cast_seek_bar">"Controlo de deslize de reprodução"</string>
+    <string msgid="3991548379225047363" name="cast_skip_next">"Ir para o item seguinte"</string>
+    <string msgid="8369073097776576935" name="cast_skip_prev">"Ir para o item anterior"</string>
+    <string msgid="9191388946729723891" name="cast_stop">"Parar"</string>
+    <string msgid="1219622777438777099" name="cast_stop_live_stream">"Parar transmissão em direto"</string>
+    <string msgid="4250321332248956563" name="cast_tracks_chooser_dialog_audio">"Áudio"</string>
+    <string msgid="1162380934229249476" name="cast_tracks_chooser_dialog_cancel">"Cancelar"</string>
+    <string msgid="1779359505126875127" name="cast_tracks_chooser_dialog_closed_captions">"Legendas ocultas"</string>
+    <string msgid="3012268736704635952" name="cast_tracks_chooser_dialog_default_track_name">"Faixa <ns1:g id="POSITION">%1$d</ns1:g>"</string>
+    <string msgid="1176688358580178396" name="cast_tracks_chooser_dialog_none">"Nenhum"</string>
+    <string msgid="3804878371876790270" name="cast_tracks_chooser_dialog_ok">"OK"</string>
+    <string msgid="2454147715032376208" name="cast_tracks_chooser_dialog_subtitles">"Legendas"</string>
+    <string msgid="2913461521603516868" name="cast_unmute">"Reativar o som"</string>
+    <string msgid="8585111718777012708" name="common_google_play_services_enable_button">"Ativar"</string>
+    <string msgid="7045129128108380659" name="common_google_play_services_enable_text">"O <ns1:g id="APP_NAME">%1$s</ns1:g> não funciona enquanto não ativar os serviços do Google Play."</string>
+    <string msgid="3147157405986503375" name="common_google_play_services_enable_title">"Ativar serviços do Google Play"</string>
+    <string msgid="9115728400623041681" name="common_google_play_services_install_button">"Instalar"</string>
+    <string msgid="8179894293032530091" name="common_google_play_services_install_text">"O <ns1:g id="APP_NAME">%1$s</ns1:g> não é executado sem os Serviços do Google Play, os quais estão em falta no seu dispositivo."</string>
+    <string msgid="7442193194585196676" name="common_google_play_services_install_title">"Obter serviços do Google Play"</string>
+    <string msgid="4293541511340436975" name="common_google_play_services_notification_channel_name">"Disponibilidade Serviços do Google Play"</string>
+    <string msgid="180394615667698242" name="common_google_play_services_notification_ticker">"Erro dos Serviços do Google Play"</string>
+    <string msgid="2518680582564677258" name="common_google_play_services_unknown_issue">"<ns1:g id="APP_NAME">%1$s</ns1:g> está a ter problemas com os Serviços do Google Play. Tente novamente."</string>
+    <string msgid="5501187292256987189" name="common_google_play_services_unsupported_text">"Não é possível executar o <ns1:g id="APP_NAME">%1$s</ns1:g> sem os Serviços do Google Play, os quais não são compatíveis com o seu dispositivo."</string>
+    <string msgid="8172070149091615356" name="common_google_play_services_update_button">"Atualizar"</string>
+    <string msgid="7773943415006962566" name="common_google_play_services_update_text">"O <ns1:g id="APP_NAME">%1$s</ns1:g> não é executado enquanto não atualizar os serviços do Google Play."</string>
+    <string msgid="8706675115216073244" name="common_google_play_services_update_title">"Atualizar serviços do Google Play"</string>
+    <string msgid="7894275749778928941" name="common_google_play_services_updating_text">"O <ns1:g id="APP_NAME">%1$s</ns1:g> não é executado sem os serviços do Google Play, os quais estão a ser atualizados."</string>
+    <string msgid="2804989272736383918" name="common_google_play_services_wear_update_text">"É necessária uma nova versão dos serviços do Google Play. Esta será atualizada automaticamente em breve."</string>
+    <string msgid="5201977337835724196" name="common_open_on_phone">"Abrir no telemóvel"</string>
+    <string msgid="3441753203274453993" name="common_signin_button_text">"Iniciar sessão"</string>
+    <string msgid="669893613918351210" name="common_signin_button_text_long">"Iniciar sessão com o Google"</string>
+    <string msgid="1234962710353108940" name="expand_button_title">"Avançadas"</string>
+    <string msgid="1685185767093348095" name="mr_button_content_description">"Botão Transmitir"</string>
+    <string msgid="1350095112462806159" name="mr_cast_button_connected">"Botão Transmitir. Ligado."</string>
+    <string msgid="8959304318293841992" name="mr_cast_button_connecting">"Botão Transmitir. A ligar..."</string>
+    <string msgid="5501231066847739632" name="mr_cast_button_disconnected">"Botão Transmitir. Desligado."</string>
+    <string msgid="5504553798429329689" name="mr_chooser_searching">"A localizar dispositivos..."</string>
+    <string msgid="7548226170787476564" name="mr_chooser_title">"Transmitir para"</string>
+    <string msgid="5813284753012893250" name="mr_controller_album_art">"Imagem do álbum"</string>
+    <string msgid="5286734709674025661" name="mr_controller_casting_screen">"A transmitir o ecrã..."</string>
+    <string msgid="5468775621814500662" name="mr_controller_close_description">"Fechar"</string>
+    <string msgid="5518911192681928413" name="mr_controller_collapse_group">"Reduzir"</string>
+    <string msgid="1370654436555555647" name="mr_controller_disconnect">"Desligar"</string>
+    <string msgid="2422682304043876468" name="mr_controller_expand_group">"Expandir"</string>
+    <string msgid="7299368841849988218" name="mr_controller_no_info_available">"Nenhuma informação disponível."</string>
+    <string msgid="4342878516155861006" name="mr_controller_no_media_selected">"Nenhum conteúdo multimédia selecionado."</string>
+    <string msgid="4701315813294065305" name="mr_controller_pause">"Colocar em pausa"</string>
+    <string msgid="4443315438268112801" name="mr_controller_play">"Reproduzir"</string>
+    <string msgid="5106056093749454009" name="mr_controller_stop">"Parar"</string>
+    <string msgid="7617024847862349259" name="mr_controller_stop_casting">"Parar transmissão"</string>
+    <string msgid="691656961160498512" name="mr_controller_volume_slider">"Controlo de deslize do volume"</string>
+    <string msgid="3117964881088969586" name="mr_system_route_name">"Sistema"</string>
+    <string msgid="8236416097133080726" name="mr_user_route_category_name">"Dispositivos"</string>
+    <string msgid="146198913615257606" name="search_menu_title">"Pesquisar"</string>
+    <string msgid="7988687684186075107" name="status_bar_notification_info_overflow">"999+"</string>
+    <string msgid="5190123168583152844" name="summary_collapsed_preference_list">"<ns1:g id="CURRENT_ITEMS">%1$s</ns1:g>, <ns1:g id="ADDED_ITEMS">%2$s</ns1:g>"</string>
+    <string msgid="5138405918326871307" name="v7_preference_off">"DESATIVADO"</string>
+    <string msgid="27351710992731591" name="v7_preference_on">"ATIVADO"</string>
+</resources>
