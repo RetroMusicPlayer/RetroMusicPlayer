@@ -1,10 +1,7 @@
 package code.name.monkey.retromusic.ui.activities
 
-import android.app.Activity
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
@@ -13,6 +10,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.App.Companion.context
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
@@ -67,11 +65,13 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
     private fun setupToolbar() {
         setSupportActionBar(toolbar)
         title = null
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
+        toolbar.apply {
+            setBackgroundColor(ThemeStore.primaryColor(context))
+            setNavigationOnClickListener { onBackPressed() }
+            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
+        }
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setNavigationOnClickListener { onBackPressed() }
         settingsTitle.setTextColor(ThemeStore.textColorPrimary(this))
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {
@@ -126,6 +126,6 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
 
 
     companion object {
-        const val TAG: String = "SettingsActivity" 
+        const val TAG: String = "SettingsActivity"
     }
 }

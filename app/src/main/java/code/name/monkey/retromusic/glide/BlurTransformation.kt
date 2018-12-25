@@ -85,8 +85,8 @@ class BlurTransformation : BitmapTransformation {
         return StackBlur.blur(out, blurRadius)
     }
 
-    override fun equals(o: Any?): Boolean {
-        return o is BlurTransformation
+    override fun equals(other: Any?): Boolean {
+        return other is BlurTransformation
     }
 
     override fun hashCode(): Int {
@@ -138,7 +138,7 @@ class BlurTransformation : BitmapTransformation {
 
     companion object {
 
-        val DEFAULT_BLUR_RADIUS = 5f
-        private val ID = "com.poupa.vinylmusicplayer.glide.BlurTransformation"
+        const val DEFAULT_BLUR_RADIUS = 5f
+        private const val ID = "code.name.monkey.retromusic.glide.BlurTransformation"
     }
 }

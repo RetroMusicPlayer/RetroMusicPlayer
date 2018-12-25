@@ -110,7 +110,7 @@ open class BugReportActivity : AbsThemeActivity() {
             })
         }
 
-        inputPassword!!.setOnEditorActionListener { _, actionId, event ->
+        inputPassword!!.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {
                 reportIssue()
                 return@setOnEditorActionListener true

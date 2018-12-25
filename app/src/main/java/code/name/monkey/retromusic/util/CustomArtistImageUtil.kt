@@ -43,7 +43,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                         object : AsyncTask<Void, Void, Void>() {
                             @SuppressLint("ApplySharedPref")
                             override fun doInBackground(vararg params: Void): Void? {
-                                val dir = File(App.context.getFilesDir(), FOLDER_NAME)
+                                val dir = File(App.context.filesDir, FOLDER_NAME)
                                 if (!dir.exists()) {
                                     if (!dir.mkdirs()) { // create the folder
                                         return null
@@ -63,7 +63,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit()
                                     ArtistSignatureUtil.getInstance().updateArtistSignature(artist.name)
-                                    App.context.getContentResolver().notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                                    App.context.contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
                                 }
                                 return null
                             }
@@ -118,7 +118,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
 
         @JvmStatic
         fun getFile(artist: Artist): File {
-            val dir = File(App.context.getFilesDir(), FOLDER_NAME)
+            val dir = File(App.context.filesDir, FOLDER_NAME)
             return File(dir, getFileName(artist))
         }
     }

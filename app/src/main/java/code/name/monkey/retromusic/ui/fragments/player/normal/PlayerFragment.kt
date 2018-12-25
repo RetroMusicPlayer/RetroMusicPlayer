@@ -1,16 +1,21 @@
 package code.name.monkey.retromusic.ui.fragments.player.normal
 
+import android.animation.Animator
+import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
@@ -19,6 +24,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
+import kotlinx.android.synthetic.main.media_button.*
 
 
 class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
@@ -59,7 +66,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.iconColor)
+        return ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
@@ -67,7 +74,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         lastColor = color
         callbacks!!.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor), activity)
 
         if (PreferenceUtil.getInstance().adaptiveColor) {
             colorize(color)
@@ -89,28 +96,28 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_player, container, false)
+        return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
-        snowfall.visibility= if (PreferenceUtil.getInstance().isSnowFall) View.VISIBLE else View.GONE
+        snowfall.visibility = if (PreferenceUtil.getInstance().isSnowFall) View.VISIBLE else View.GONE
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment = childFragmentManager.findFragmentById(code.name.monkey.retromusic.R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
+        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(code.name.monkey.retromusic.R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(R.menu.menu_player)
+        playerToolbar.inflateMenu(code.name.monkey.retromusic.R.menu.menu_player)
         playerToolbar.setNavigationOnClickListener { activity!!.onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor), activity)
     }
 
     override fun onServiceConnected() {
@@ -133,3 +140,4 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         }
     }
 }
+

@@ -55,7 +55,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private var albumAdapter: AlbumAdapter? = null
     private var forceDownload: Boolean = false
 
-    private fun setupWindowTransistion() {
+    private fun setupWindowTransitions() {
         val slide = Slide(Gravity.BOTTOM)
         slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
         window.enterTransition = slide
@@ -68,7 +68,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        setupWindowTransistion()
+        setupWindowTransitions()
         super.onCreate(savedInstanceState)
 
 
@@ -143,15 +143,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         if (appBarLayout != null) {
             appBarLayout!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
                 override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
-                    val color: Int
-                    when (state) {
+                    val color: Int = when (state) {
                         AppBarStateChangeListener.State.COLLAPSED -> {
                             setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
-                            color = ThemeStore.primaryColor(appBarLayout.context)
+                            ThemeStore.primaryColor(appBarLayout.context)
                         }
                         AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
                             setLightStatusbar(false)
-                            color = Color.TRANSPARENT
+                            Color.TRANSPARENT
                         }
 
                     }
@@ -204,8 +203,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun showData(artist: Artist) {
-        setArtist(artist)
+    override fun showData(list: Artist) {
+        setArtist(list)
     }
 
     private fun getArtist(): Artist {
@@ -295,7 +294,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         biographyTitle.setTextColor(textColor)
 
         actionShuffleAll.setColor(textColor)
-
 
         findViewById<View>(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this))
     }

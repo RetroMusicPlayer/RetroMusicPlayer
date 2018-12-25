@@ -1,5 +1,7 @@
 package code.name.monkey.retromusic.glide;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
@@ -8,11 +10,11 @@ import com.bumptech.glide.annotation.GlideOption;
 import com.bumptech.glide.annotation.GlideType;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
@@ -34,6 +36,7 @@ public final class RetroGlideExtension {
     public static void asBitmapPalette(RequestBuilder<BitmapPaletteWrapper> requestBuilder) {
     }
 
+    @NonNull
     @GlideOption
     public static RequestOptions artistOptions(@NonNull RequestOptions requestOptions, Artist artist) {
         return requestOptions
@@ -46,11 +49,12 @@ public final class RetroGlideExtension {
     }
 
     @GlideOption
+    @NonNull
     public static RequestOptions songOptions(@NonNull RequestOptions requestOptions, Song song) {
         return requestOptions
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.default_album_art)
-                .placeholder(R.drawable.default_album_art)
+                //.placeholder(R.drawable.default_album_art)
                 .signature(createSignature(song));
     }
 
@@ -93,4 +97,5 @@ public final class RetroGlideExtension {
     public static <TranscodeType> GenericTransitionOptions<TranscodeType> getDefaultTransition() {
         return new GenericTransitionOptions<TranscodeType>().transition(android.R.anim.fade_in);
     }
+
 }

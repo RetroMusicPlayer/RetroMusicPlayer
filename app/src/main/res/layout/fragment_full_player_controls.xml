@@ -112,7 +112,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/line_button"
             android:foreground="?attr/roundSelector"
-            android:padding="16dp"
+            android:padding="20dp"
             android:scaleType="fitCenter"
             tools:ignore="MissingPrefix"
             tools:src="@drawable/ic_pause_white_24dp" />

@@ -58,7 +58,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         get() = R.string.empty
 
     private fun checkIsEmpty() {
-        empty.setText(emptyMessage)
+        emptyText.setText(emptyMessage)
         empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }
 

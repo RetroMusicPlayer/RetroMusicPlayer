@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.media.AudioManager
@@ -10,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -33,7 +34,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setTintable(ATHUtil.resolveColor(context, R.attr.iconColor))
+        setTintable(ThemeStore.textColorSecondary(context!!))
         volumeDown.setOnClickListener(this)
         volumeUp.setOnClickListener(this)
     }
@@ -98,7 +99,13 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     private fun setProgressBarColor(newColor: Int) {
-        TintHelper.setTintAuto(volumeSeekBar, newColor, false)
+
+        val text = ColorStateList(arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)), intArrayOf(ThemeStore.textColorSecondary(context!!), ThemeStore.textColorPrimary(context!!)))
+
+        volumeSeekBar.progressTintList = text
+        volumeSeekBar.progressBackgroundTintList = text
+
+        //TintHelper.setTint(volumeSeekBar, newColor, false)
         volumeDown.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
     }

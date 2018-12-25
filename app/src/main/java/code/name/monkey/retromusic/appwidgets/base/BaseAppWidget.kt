@@ -136,16 +136,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
         }
 
         protected fun composeRoundedRectPath(rect: RectF, tl: Float, tr: Float, bl: Float, br: Float): Path {
-            var tlf = tl
-            var trf = tr
-            var blf = bl
-            var brf = br
             val path = Path()
-            tlf = if (tl < 0) 0F else tl
-            trf = if (tr < 0) 0f else tr
-            blf = if (bl < 0) 0f else bl
-            brf = if (br < 0) 0f else br
-
             path.moveTo(rect.left + tl, rect.top)
             path.lineTo(rect.right - tr, rect.top)
             path.quadTo(rect.right, rect.top, rect.right, rect.top + tr)

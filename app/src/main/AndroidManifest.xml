@@ -15,7 +15,7 @@
 
     <application
         android:name=".App"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -116,14 +116,12 @@
         <activity android:name=".ui.activities.EqualizerActivity" />
         <activity android:name=".ui.activities.ErrorHandlerActivity" />
         <activity android:name=".ui.activities.WhatsNewActivity" />
-        <activity
-            android:name=".cast.ExpandedCastControlsActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ExpandedCastController" />
         <activity android:name=".ui.activities.bugreport.BugReportActivity" />
         <activity android:name=".ui.activities.LockScreenActivity" />
+        <activity
+            android:name=".appshortcuts.AppShortcutLauncherActivity"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
             android:name=".service.MusicService"

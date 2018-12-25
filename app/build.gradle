@@ -32,8 +32,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 263
-        versionName '3.0.130'
+        versionCode 272
+        versionName '3.0.501'
 
         multiDexEnabled true
 
@@ -134,10 +134,6 @@ dependencies {
     implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
 
-    //For casting
-    implementation 'androidx.mediarouter:mediarouter:1.0.0'
-    implementation 'com.google.android.gms:play-services-cast-framework:16.1.0'
-
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
@@ -145,10 +141,13 @@ dependencies {
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"
     implementation 'com.afollestad:material-cab:0.1.12'
+
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
+
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.17'
+
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }

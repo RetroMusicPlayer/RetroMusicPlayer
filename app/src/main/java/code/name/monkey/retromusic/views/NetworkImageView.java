@@ -4,9 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
-import com.bumptech.glide.Glide;
-
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.glide.GlideApp;
 
 /**
  * @author Hemanth S (h4h13).
@@ -33,10 +32,11 @@ public class NetworkImageView extends CircularImageView {
     }
 
     public void setImageUrl(Context context, String imageUrl) {
-        /*Glide.with(context).load(imageUrl).asBitmap()
+        GlideApp.with(context)
+                .load(imageUrl)
                 .error(R.drawable.ic_person_flat)
                 .placeholder(R.drawable.ic_person_flat)
-                .into(this);*/
+                .into(this);
     }
 
     private void init(Context context, AttributeSet attributeSet) {

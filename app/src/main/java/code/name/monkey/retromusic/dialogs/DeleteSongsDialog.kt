@@ -20,8 +20,8 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         title.setTextColor(ThemeStore.textColorPrimary(context!!))
-        MaterialUtil.setTint(actionDelete, true)
-        MaterialUtil.setTint(actionCancel, false)
+        MaterialUtil.setTint(actionDelete)
+        MaterialUtil.setTint(actionCancel)
 
         //noinspection unchecked,ConstantConditions
         val songs = arguments!!.getParcelableArrayList<Song>("songs")

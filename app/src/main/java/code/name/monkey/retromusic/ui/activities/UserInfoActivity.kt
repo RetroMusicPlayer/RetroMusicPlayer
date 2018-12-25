@@ -180,7 +180,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun loadBannerFromStorage(profileImagePath: String) {
-        disposable!!.add(Compressor(this)
+        disposable.add(Compressor(this)
                 .setQuality(100)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
                 .compressToBitmapAsFlowable(File(profileImagePath, USER_BANNER))
@@ -190,7 +190,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun loadImageFromStorage(path: String) {
-        disposable!!.add(Compressor(this)
+        disposable.add(Compressor(this)
                 .setMaxHeight(300)
                 .setMaxWidth(300)
                 .setQuality(75)

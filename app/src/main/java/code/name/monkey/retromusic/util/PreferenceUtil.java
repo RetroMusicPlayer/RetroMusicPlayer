@@ -7,30 +7,24 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Objects;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+
+import java.io.File;
+import java.util.Objects;
+
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.SortOrder;
-import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
-import code.name.monkey.retromusic.transform.StackPagerTransformer;
 import code.name.monkey.retromusic.transform.StackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
@@ -71,7 +65,6 @@ public final class PreferenceUtil {
     public static final String ALBUM_COVER_TRANSFORM = "album_cover_transform";
     public static final String TAB_TEXT_MODE = "tab_text_mode";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
-    private static final String LIBRARY_CATEGORIES = "library_categories";
     private static final String LAST_PAGE = "last_start_page";
     private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
     private static final String DEFAULT_START_PAGE = "default_start_page";
@@ -106,7 +99,7 @@ public final class PreferenceUtil {
     private static final String LOCK_SCREEN = "lock_screen";
     private static final String ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order";
     private static final String ARTIST_DETAIL_SONG_SORT_ORDER = "artist_detail_song_sort_order";
-    private static final String LYRICS_OPTIONS = "lyrics_options";
+    private static final String LYRICS_OPTIONS = "lyrics_tab_position";
     private static final String CHOOSE_EQUALIZER = "choose_equalizer";
     private static final String TOGGLE_SHUFFLE = "toggle_shuffle";
     private static final String SONG_GRID_STYLE = "song_grid_style";
@@ -133,17 +126,17 @@ public final class PreferenceUtil {
     @StyleRes
     public static int getThemeResFromPrefValue(String themePrefValue) {
         switch (themePrefValue) {
-            case "dark":
-                return R.style.Theme_RetroMusic;
+            case "light":
+                return R.style.Theme_RetroMusic_Light;
             case "color":
                 return R.style.Theme_RetroMusic_Color;
             case "acolor":
                 return R.style.Theme_RetroMusic_Black;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
-            case "light":
+            case "dark":
             default:
-                return R.style.Theme_RetroMusic_Light;
+                return R.style.Theme_RetroMusic;
         }
     }
 
@@ -170,8 +163,7 @@ public final class PreferenceUtil {
     }
 
     public final String getArtistAlbumSortOrder() {
-        return mPreferences
-                .getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR);
+        return mPreferences.getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR);
     }
 
     public final String getAlbumSortOrder() {
@@ -221,49 +213,8 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_ADD_CONTROLS, false);
     }
 
-    public boolean circularAlbumArt() {
-        return mPreferences.getBoolean(CIRCULAR_ALBUM_ART, false);
-    }
-
     public boolean carouselEffect() {
         return mPreferences.getBoolean(CAROUSEL_EFFECT, false);
-    }
-
-    public ArrayList<CategoryInfo> getLibraryCategoryInfos() {
-        String data = mPreferences.getString(LIBRARY_CATEGORIES, null);
-        if (data != null) {
-            Gson gson = new Gson();
-            Type collectionType = new TypeToken<ArrayList<CategoryInfo>>() {
-            }.getType();
-
-            try {
-                return gson.fromJson(data, collectionType);
-            } catch (JsonSyntaxException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return getDefaultLibraryCategoryInfos();
-    }
-
-    public void setLibraryCategoryInfos(ArrayList<CategoryInfo> categories) {
-        Gson gson = new Gson();
-        Type collectionType = new TypeToken<ArrayList<CategoryInfo>>() {
-        }.getType();
-
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(LIBRARY_CATEGORIES, gson.toJson(categories, collectionType));
-        editor.apply();
-    }
-
-    public ArrayList<CategoryInfo> getDefaultLibraryCategoryInfos() {
-        ArrayList<CategoryInfo> defaultCategoryInfos = new ArrayList<>(5);
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.SONGS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ALBUMS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ARTISTS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
-        return defaultCategoryInfos;
     }
 
     public boolean isRoundCorners() {
@@ -552,7 +503,7 @@ public final class PreferenceUtil {
     }
 
     public int getGeneralTheme() {
-        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "light"));
+        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "dark"));
     }
 
     public void setGeneralTheme(String theme) {
@@ -609,10 +560,6 @@ public final class PreferenceUtil {
 
     public void setFullScreenMode(int newValue) {
         mPreferences.edit().putInt(TOGGLE_FULL_SCREEN, newValue).apply();
-    }
-
-    public String lyricsOptions() {
-        return mPreferences.getString(LYRICS_OPTIONS, "offline");
     }
 
     public void saveProfileImage(String profileImagePath) {

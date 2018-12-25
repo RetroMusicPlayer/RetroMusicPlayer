@@ -68,7 +68,7 @@
                         android:layout_gravity="center"
                         android:background="?roundSelector"
                         android:padding="16dp"
-                        app:srcCompat="@drawable/ic_round_add_a_photo_white_24dp" />
+                        app:srcCompat="@drawable/ic_add_photo_white_24dp" />
 
                     <FrameLayout
                         android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
                             android:layout_margin="16dp"
                             android:gravity="center"
                             android:padding="12dp"
-                            android:src="@drawable/ic_round_add_a_photo_white_24dp"
+                            android:src="@drawable/ic_add_photo_white_24dp"
                             app:tint="?iconColor" />
                     </FrameLayout>
 

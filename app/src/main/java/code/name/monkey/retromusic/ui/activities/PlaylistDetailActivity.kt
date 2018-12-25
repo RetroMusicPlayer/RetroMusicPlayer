@@ -37,7 +37,6 @@ import java.util.*
 
 class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsContract.PlaylistSongsView {
 
-
     private var playlist: Playlist? = null
     private var cab: MaterialCab? = null
     private lateinit var adapter: SongAdapter
@@ -48,7 +47,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-
 
         setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
@@ -203,6 +201,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     private fun checkIsEmpty() {
         empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
+        emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 
     public override fun onPause() {
@@ -239,7 +238,8 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     override fun loading() {}
 
     override fun showEmptyView() {
-        empty!!.visibility = View.VISIBLE
+        empty.visibility = View.VISIBLE
+        emptyText.visibility = View.VISIBLE
     }
 
     override fun completed() {}

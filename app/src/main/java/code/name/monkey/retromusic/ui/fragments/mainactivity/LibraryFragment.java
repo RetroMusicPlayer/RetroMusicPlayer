@@ -71,6 +71,12 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private ImageView userImage;
     private CompositeDisposable disposable = new CompositeDisposable();
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        disposable.dispose();
+    }
+
     public static Fragment newInstance(int tab) {
         Bundle args = new Bundle();
         args.putInt(CURRENT_TAB_ID, tab);

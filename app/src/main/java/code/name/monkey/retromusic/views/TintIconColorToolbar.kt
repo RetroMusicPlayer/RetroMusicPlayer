@@ -17,6 +17,6 @@ class TintIconColorToolbar : Toolbar {
 
     override fun setNavigationIcon(icon: Drawable?) {
         super.setNavigationIcon(icon)
-        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }

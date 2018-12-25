@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
@@ -12,8 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.cast.ExpandedCastControlsActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
@@ -137,20 +136,7 @@ public class NavigationUtil {
         openUrl(activity, RATE_ON_GOOGLE_PLAY);
     }
 
-    public static void gotoExpandedController(Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, ExpandedCastControlsActivity.class), null);
-    }
-
     public static void gotoWhatNews(Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, WhatsNewActivity.class), null);
-    }
-
-    public static void gotoNowPlayingActivity(Context context, @Nullable Pair... sharedElements) {
-        //ActivityCompat.startActivity(context, new Intent(context, NowPayingActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) context, sharedElements).toBundle());
-
-    }
-
-    public static void gotoNowPlaying(Activity activity) {
-        //ActivityCompat.startActivity(activity, new Intent(activity, NowPayingActivity.class),null);
     }
 }

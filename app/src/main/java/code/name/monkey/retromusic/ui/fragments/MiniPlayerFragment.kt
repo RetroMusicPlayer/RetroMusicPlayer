@@ -32,7 +32,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mini_player, container, false)
     }
-     override fun onClick(view: View) {
+
+    override fun onClick(view: View) {
         when (view.id) {
             R.id.actionPlayingQueue -> NavigationUtil.goToPlayingQueue(activity!!)
             R.id.actionNext -> MusicPlayerRemote.playNextSong()
@@ -49,13 +50,13 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         setUpMiniPlayer()
 
         if (RetroUtil.isTablet()) {
-            actionNext!!.visibility = View.VISIBLE
-            actionPrevious!!.visibility = View.VISIBLE
-            actionPlayingQueue!!.visibility = View.VISIBLE
+            actionNext.visibility = View.VISIBLE
+            actionPrevious.visibility = View.VISIBLE
+            actionPlayingQueue.visibility = View.VISIBLE
         } else {
-            actionNext!!.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
-            actionPlayingQueue!!.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.GONE else View.VISIBLE
-            actionPrevious!!.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.GONE else View.VISIBLE
+            actionPrevious.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
         }
 
         actionPlayingQueue.setOnClickListener(this)
@@ -65,7 +66,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     private fun setUpMiniPlayer() {
         setUpPlayPauseButton()
-        progressBar!!.progressTintList = ColorStateList.valueOf(ThemeStore.accentColor(activity!!))
+        progressBar.progressTintList = ColorStateList.valueOf(ThemeStore.accentColor(activity!!))
     }
 
     private fun setUpPlayPauseButton() {
@@ -128,14 +129,13 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     }
 
     fun setColor(playerFragmentColor: Int) {
-
         view!!.setBackgroundColor(playerFragmentColor)
     }
 
 
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
 
-        internal var flingPlayBackController: GestureDetector
+        var flingPlayBackController: GestureDetector
 
         init {
             flingPlayBackController = GestureDetector(context,

@@ -44,12 +44,15 @@ class HorizontalAlbumAdapter(activity: AppCompatActivity, dataSet: ArrayList<Alb
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
                     override fun onColorReady(color: Int) {
-                        setColors(color, holder)
+                        if (usePalette)
+                            setColors(color, holder)
+                        else
+                            setColors(albumArtistFooterColor, holder)
                     }
 
                     override fun onLoadFailed(errorDrawable: Drawable?) {
                         super.onLoadFailed(errorDrawable)
-                        setColors(defaultFooterColor, holder)
+                        setColors(albumArtistFooterColor, holder)
                     }
                 })
     }

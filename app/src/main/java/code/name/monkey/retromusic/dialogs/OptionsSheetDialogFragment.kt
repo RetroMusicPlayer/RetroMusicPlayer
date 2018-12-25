@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.dialogs
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -57,7 +58,11 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        actionBuyPro.visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+        actionBuyPro.let {
+            it.visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+            it.iconTint = ColorStateList.valueOf(ThemeStore.accentColor(it.context))
+            it.setTextColor(ColorStateList.valueOf(ThemeStore.accentColor(it.context)))
+        }
         text!!.setTextColor(ThemeStore.textColorSecondary(context!!))
         titleWelcome!!.setTextColor(ThemeStore.textColorPrimary(context!!))
         titleWelcome!!.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)

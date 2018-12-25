@@ -17,6 +17,7 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -35,7 +36,6 @@ import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -91,11 +91,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun loadTimeImage(day: String) {
         if (bannerImage != null) {
             if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
-                /*Glide.with(activity).load(day)
-                        .asBitmap()
+                GlideApp.with(activity!!)
+                        .load(day)
                         .placeholder(R.drawable.material_design_default)
-                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                        .into(bannerImage!!)*/
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(bannerImage!!)
             } else {
                 disposable.add(Compressor(context!!)
                         .setQuality(100)
@@ -176,7 +176,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun setupToolbar() {
-        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorPrimary(context!!))
+        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorSecondary(context!!))
         mainActivity.title = null
         mainActivity.setSupportActionBar(toolbar)
         toolbar.setBackgroundColor(Color.TRANSPARENT)
@@ -188,7 +188,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onDestroyView() {
         super.onDestroyView()
-        disposable.clear()
+        disposable.dispose()
         homePresenter.unsubscribe()
     }
 
@@ -236,8 +236,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun topAlbums(albums: ArrayList<Album>) {
         topAlbumsContainer.visibility = View.VISIBLE
-        val artistAdapter = AlbumFullWithAdapter(mainActivity,
-                displayMetrics)
+        val artistAdapter = AlbumFullWithAdapter(mainActivity, displayMetrics)
         artistAdapter.swapData(albums)
         topAlbum.adapter = artistAdapter
     }

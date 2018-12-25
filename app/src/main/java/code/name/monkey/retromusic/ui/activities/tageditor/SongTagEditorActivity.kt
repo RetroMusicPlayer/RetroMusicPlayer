@@ -4,7 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.SongLoader
 import kotlinx.android.synthetic.main.activity_song_tag_editor.*
@@ -19,11 +21,14 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     private fun setupToolbar() {
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.apply {
+            setBackgroundColor(ThemeStore.primaryColor(context))
+            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorPrimary(context))
+            setNavigationOnClickListener { onBackPressed() }
+            setSupportActionBar(toolbar)
+        }
         title = null
-        bannerTitle!!.setTextColor(ThemeStore.textColorPrimary(this))
-        setSupportActionBar(toolbar)
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,5 +118,4 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     companion object {
         val TAG: String = SongTagEditorActivity::class.java.simpleName
     }
-
 }

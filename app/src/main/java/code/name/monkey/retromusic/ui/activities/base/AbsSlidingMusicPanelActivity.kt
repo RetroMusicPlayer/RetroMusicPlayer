@@ -31,7 +31,6 @@ import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
@@ -125,13 +124,6 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         return false
     }
 
-    override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
-        castSession ?: return
-        //MusicPlayerRemote.setZeroVolume();
-        //CastHelper.startCasting(castSession, MusicPlayerRemote.getCurrentSong());
-    }
-
     fun toggleBottomNavigationView(toggle: Boolean) {
         bottomNavigationView.visibility = if (toggle) View.GONE else View.VISIBLE
     }
@@ -189,7 +181,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         playerFragment!!.onHide()
     }
 
-   open fun onPanelExpanded() {
+    open fun onPanelExpanded() {
         val playerFragmentColor = playerFragment!!.paletteColor
         super.setTaskDescriptionColor(playerFragmentColor)
 

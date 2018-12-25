@@ -13,7 +13,6 @@ import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Looper;
-import androidx.annotation.IntDef;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
@@ -25,7 +24,12 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-import code.name.monkey.retromusic.R;
+
+import androidx.annotation.IntDef;
+import androidx.core.content.res.ResourcesCompat;
+
+import org.mozilla.universalchardet.UniversalDetector;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -38,7 +42,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import org.mozilla.universalchardet.UniversalDetector;
+
+import code.name.monkey.retromusic.R;
 
 /**
  * Created by zhengken.me on 2016/11/27.
@@ -588,7 +593,7 @@ public class LyricView extends View {
         mTextPaint = new TextPaint();
         mTextPaint.setDither(true);
         mTextPaint.setAntiAlias(true);
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/circular_std_book.otf");
+        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.font);
         mTextPaint.setTypeface(typeface);
 
         switch (mTextAlign) {

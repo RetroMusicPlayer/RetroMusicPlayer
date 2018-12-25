@@ -1,23 +1,52 @@
 package code.name.monkey.retromusic.util;
 
+import android.animation.Animator;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import androidx.core.view.ViewCompat;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.PathInterpolator;
+import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.core.view.ViewCompat;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
-import code.name.monkey.appthemehelper.util.ATHUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.MaterialValueHelper;
-import code.name.monkey.retromusic.R;
 
 public class ViewUtil {
 
     public final static int RETRO_MUSIC_ANIM_TIME = 1000;
+
+    public static Animator createTextColorTransition(final TextView v, @ColorInt final int startColor, @ColorInt final int endColor) {
+        return createColorAnimator(v, "textColor", startColor, endColor);
+    }
+
+    private static Animator createColorAnimator(Object target, String propertyName, @ColorInt int startColor, @ColorInt int endColor) {
+        ObjectAnimator animator;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            animator = ObjectAnimator.ofArgb(target, propertyName, startColor, endColor);
+        } else {
+            animator = ObjectAnimator.ofInt(target, propertyName, startColor, endColor);
+            animator.setEvaluator(new ArgbEvaluator());
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            animator.setInterpolator(new PathInterpolator(0.4f, 0f, 1f, 1f));
+        }
+        animator.setDuration(RETRO_MUSIC_ANIM_TIME);
+        return animator;
+    }
 
     public static void setStatusBarHeight(final Context context, View statusBar) {
         ViewGroup.LayoutParams lp = statusBar.getLayoutParams();
@@ -58,5 +87,10 @@ public class ViewUtil {
     public static float convertDpToPixel(float dp, Resources resources) {
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return dp * metrics.density;
+    }
+
+    @NotNull
+    public static Animator createBackgroundColorTransition(@Nullable View colorGradientBackground, int lastColor, int newColor) {
+        return null;
     }
 }

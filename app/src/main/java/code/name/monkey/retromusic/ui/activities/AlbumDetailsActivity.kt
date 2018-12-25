@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.transition.Slide
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.util.Pair
 import androidx.core.widget.NestedScrollView
@@ -39,6 +40,9 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.appbar.AppBarLayout
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
 import java.util.*
@@ -47,6 +51,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
     private lateinit var albumDetailsPresenter: AlbumDetailsPresenter
     private lateinit var simpleSongAdapter: SimpleSongAdapter
+    private var disposable = CompositeDisposable()
 
     var album: Album? = null
         private set
@@ -68,11 +73,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setDrawUnderStatusBar()
         setupWindowTransition()
         super.onCreate(savedInstanceState)
+        toggleBottomNavigationView(true)
 
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 
-        toggleBottomNavigationView(true)
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -95,6 +100,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         }
 
         actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album!!.songs!!, true) }
+
+        artistImage = findViewById(R.id.artistImage)
         artistImage.setOnClickListener {
             val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
             NavigationUtil.goToArtist(this, album!!.artistId, *artistPairs)
@@ -134,30 +141,33 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
             toolbar!!.layoutParams = params
         }
 
-        if (appBarLayout != null) {
-            appBarLayout!!.apply {
-                addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-                    override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
-                        val color: Int = when (state) {
-                            AppBarStateChangeListener.State.COLLAPSED -> {
-                                setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
-                                ThemeStore.primaryColor(this@AlbumDetailsActivity)
-                            }
-                            AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
-                                setLightStatusbar(false)
-                                Color.TRANSPARENT
-                            }
+        appBarLayout!!.apply {
+            addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+                override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
+                    val color: Int = when (state) {
+                        AppBarStateChangeListener.State.COLLAPSED -> {
+                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
+                            ThemeStore.primaryColor(this@AlbumDetailsActivity)
                         }
-                        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
+                        AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
+                            setLightStatusbar(false)
+                            Color.TRANSPARENT
+                        }
                     }
-                })
-            }
+                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
+                }
+            })
         }
     }
 
     override fun onPause() {
         super.onPause()
         albumDetailsPresenter.unsubscribe()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposable.dispose()
     }
 
     override fun loading() {
@@ -188,33 +198,42 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         simpleSongAdapter.swapDataSet(list.songs)
     }
 
+    private lateinit var artistImage: ImageView
+
     private fun loadMoreFrom(album: Album) {
-        if (artistImage != null) {
-            /*ArtistGlideRequest.Builder.from(Glide.with(this),
-                    ArtistLoader.getArtist(this, album.artistId).blockingFirst())
-                    .forceDownload(false)
-                    .generatePalette(this).build()
-                    .dontAnimate()
-                    .into(object : RetroMusicColoredTarget(artistImage as CircularImageView) {
-                        override fun onColorReady(color: Int) {
-                            //setColors(color);
-                        }
-                    })*/
-        }
+        disposable.add(ArtistLoader.getArtist(this, album.artistId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map {
+                    GlideApp.with(this@AlbumDetailsActivity)
+                            .asBitmapPalette()
+                            .load(RetroGlideExtension.getArtistModel(it))
+                            .transition(RetroGlideExtension.getDefaultTransition())
+                            .artistOptions(it)
+                            .dontAnimate()
+                            .into(object : RetroMusicColoredTarget(artistImage) {
+                                override fun onColorReady(color: Int) {
 
-        val albums = ArtistLoader.getArtist(this, album.artistId).blockingFirst().albums
-        albums!!.remove(album)
-        if (!albums.isEmpty()) {
-            moreTitle.visibility = View.VISIBLE
-            moreRecyclerView.visibility = View.VISIBLE
-        } else {
-            return
-        }
-        moreTitle.text = String.format("More from %s", album.artistName)
+                                }
+                            })
+                    return@map it.albums!!
+                }
+                .subscribe {
 
-        val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
-        moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-        moreRecyclerView.adapter = albumAdapter
+                    it.remove(album)
+                    if (!it.isEmpty()) {
+                        moreTitle.visibility = View.VISIBLE
+                        moreRecyclerView.visibility = View.VISIBLE
+                    } else {
+                        return@subscribe
+                    }
+                    moreTitle.text = String.format("More from %s", album.artistName)
+
+                    val albumAdapter = HorizontalAlbumAdapter(this, it, false, null)
+                    moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+                    moreRecyclerView.adapter = albumAdapter
+
+                })
     }
 
     private fun loadAlbumCover() {

@@ -72,24 +72,37 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
-        <TextView
+        <LinearLayout
             android:id="@android:id/empty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif-light"
-            android:text="@string/playlist_empty_text"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="@dimen/empty_text_size"
-            android:visibility="gone" />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/ic_disc_full_black_24dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/playlist_empty_text"
+                android:textColor="?android:textColorSecondary"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
 
         <code.name.monkey.retromusic.views.CollapsingFAB
             android:id="@+id/actionShuffle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:setText="@string/action_shuffle_all"
             app:setIcon="@drawable/ic_shuffle_white_24dp"
+            app:setText="@string/action_shuffle_all"
             app:showTitle="true" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

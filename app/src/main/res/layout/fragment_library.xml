@@ -34,36 +34,29 @@
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    app:layout_collapseMode="pin"
+                    tools:ignore="UnusedAttribute">
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        style="@style/Toolbar"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        app:layout_collapseMode="pin"
-                        tools:ignore="UnusedAttribute">
+                    <TextView
+                        android:id="@+id/bannerTitle"
+                        style="@style/BigTitleTextAppearanceToolbar"
+                        android:text="@string/app_name"
+                        tools:ignore="MissingPrefix" />
 
-                        <TextView
-                            android:id="@+id/bannerTitle"
-                            style="@style/BigTitleTextAppearanceToolbar"
-                            android:text="@string/app_name"
-                            tools:ignore="MissingPrefix" />
-
-                        <code.name.monkey.retromusic.views.CircularImageView
-                            android:id="@+id/userImage"
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="0"
-                            app:civ_border="false" />
-                    </androidx.appcompat.widget.Toolbar>
-
-                </LinearLayout>
+                    <code.name.monkey.retromusic.views.CircularImageView
+                        android:id="@+id/userImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end|center_vertical"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="0"
+                        app:civ_border="false" />
+                </androidx.appcompat.widget.Toolbar>
 
                 <ViewStub
                     android:id="@+id/cab_stub"

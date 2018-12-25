@@ -88,7 +88,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
         setSupportActionBar(toolbar)
         title = null
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 
     private fun openUrl(url: String) {
@@ -161,8 +161,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
                 .setText(String.format(getString(R.string.app_share), packageName))
                 .intent
         if (shareIntent.resolveActivity(packageManager) != null) {
-            startActivity(
-                    Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
+            startActivity(Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
         }
     }
 

@@ -5,6 +5,7 @@ import android.app.SearchManager
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.text.Editable
@@ -15,6 +16,8 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.mvp.contract.SearchContract
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
@@ -34,7 +37,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
 
         searchPresenter = SearchPresenter(this)
 
@@ -57,10 +59,12 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         }
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
+
+        searchContainer.setCardBackgroundColor(ColorStateList.valueOf(ColorUtil.darkenColor(ThemeStore.primaryColor(this))))
+
     }
 
     private fun setupRecyclerView() {
-
         searchAdapter = SearchAdapter(this, emptyList())
         searchAdapter!!.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {

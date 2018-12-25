@@ -4,11 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.signature.ObjectKey;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.App;
-
 
 public class ArtistSignatureUtil {
     private static final String ARTIST_SIGNATURE_PREFS = "artist_signatures";

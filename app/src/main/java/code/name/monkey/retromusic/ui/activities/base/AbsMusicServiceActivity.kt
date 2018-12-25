@@ -17,7 +17,7 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 
-abstract class AbsMusicServiceActivity : AbsCastActivity(), MusicServiceEventListener {
+abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventListener {
 
     private val mMusicServiceEventListeners = ArrayList<MusicServiceEventListener>()
 

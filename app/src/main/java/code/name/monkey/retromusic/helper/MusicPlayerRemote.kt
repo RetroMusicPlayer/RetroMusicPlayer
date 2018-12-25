@@ -12,13 +12,10 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.CastSession
 import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.util.*
@@ -28,19 +25,6 @@ object MusicPlayerRemote {
     val TAG = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
-    private var playbackLocation = PlaybackLocation.LOCAL
-
-
-    private val castSession: CastSession?
-        get() {
-            val castSession = CastContext.getSharedInstance(App.instance).sessionManager.currentCastSession
-            if (castSession != null) {
-                playbackLocation = PlaybackLocation.REMOTE
-            } else {
-                playbackLocation = PlaybackLocation.LOCAL
-            }
-            return castSession
-        }
 
     val isPlaying: Boolean
         get() = musicService != null && musicService!!.isPlaying

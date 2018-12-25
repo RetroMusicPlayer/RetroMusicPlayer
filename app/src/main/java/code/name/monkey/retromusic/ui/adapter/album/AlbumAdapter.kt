@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.util.*
 
@@ -131,6 +131,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
         GlideApp.with(activity)
                 .asBitmapPalette()
                 .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
+
                 .transition(RetroGlideExtension.getDefaultTransition())
                 .songOptions(album.safeGetFirstSong())
                 .dontAnimate()

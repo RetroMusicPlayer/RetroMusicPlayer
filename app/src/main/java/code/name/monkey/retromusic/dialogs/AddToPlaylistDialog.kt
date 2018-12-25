@@ -32,7 +32,7 @@ class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
         actionAddPlaylist.setOnClickListener {
             val songs = arguments!!.getParcelableArrayList<Song>("songs")
-            CreatePlaylistDialog.create(songs).show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
+            CreatePlaylistDialog.create(songs!!).show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
             dismiss()
         }
 
