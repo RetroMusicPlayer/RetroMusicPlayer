@@ -53,7 +53,6 @@
                     android:id="@+id/image_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/font"
                     android:gravity="center"
                     android:maxLines="1"
                     android:minHeight="40dp"
@@ -82,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:ellipsize="end"
-                android:fontFamily="@font/font"
                 android:maxLines="1"
                 android:textSize="16sp"/>
 

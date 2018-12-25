@@ -593,8 +593,6 @@ public class LyricView extends View {
         mTextPaint = new TextPaint();
         mTextPaint.setDither(true);
         mTextPaint.setAntiAlias(true);
-        Typeface typeface = ResourcesCompat.getFont(getContext(), R.font.font);
-        mTextPaint.setTypeface(typeface);
 
         switch (mTextAlign) {
             case LEFT:

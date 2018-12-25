@@ -243,7 +243,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                 .transition(RetroGlideExtension.getDefaultTransition())
                 .songOptions(album!!.safeGetFirstSong())
                 .dontAnimate()
-                .into(object : RetroMusicColoredTarget(image) {
+                .into(object : RetroMusicColoredTarget(image as ImageView) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }

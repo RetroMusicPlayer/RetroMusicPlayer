@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:shape="rectangle">
     <corners
         android:topLeftRadius="12dp"
         android:topRightRadius="12dp" />
     <solid
-        android:color="?attr/cardBackgroundColor"
-        tools:color="@color/md_deep_purple_A700" />
+        android:color="?attr/cardBackgroundColor" />
 
 </shape>
