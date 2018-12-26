@@ -60,10 +60,10 @@ public final class TintHelper {
 
     @SuppressWarnings("deprecation")
     public static void setTintSelector(@NonNull View view, @ColorInt final int color, final boolean darker, final boolean useDarkTheme) {
-        final boolean isColorLight = ColorUtil.isColorLight(color);
+        final boolean isColorLight = ColorUtil.INSTANCE.isColorLight(color);
         final int disabled = ContextCompat.getColor(view.getContext(), useDarkTheme ? R.color.ate_button_disabled_dark : R.color.ate_button_disabled_light);
-        final int pressed = ColorUtil.shiftColor(color, darker ? 0.9f : 1.1f);
-        final int activated = ColorUtil.shiftColor(color, darker ? 1.1f : 0.9f);
+        final int pressed = ColorUtil.INSTANCE.shiftColor(color, darker ? 0.9f : 1.1f);
+        final int activated = ColorUtil.INSTANCE.shiftColor(color, darker ? 1.1f : 0.9f);
         final int rippleColor = getDefaultRippleColor(view.getContext(), isColorLight);
         final int textColor = ContextCompat.getColor(view.getContext(), isColorLight ? R.color.ate_primary_text_light : R.color.ate_primary_text_dark);
 
@@ -117,7 +117,7 @@ public final class TintHelper {
         Drawable drawable = view.getBackground();
         if (drawable != null) {
             drawable = createTintedDrawable(drawable, sl);
-            ViewUtil.setBackgroundCompat(view, drawable);
+            ViewUtil.INSTANCE.setBackgroundCompat(view, drawable);
         }
 
         if (view instanceof TextView && !(view instanceof Button)) {
@@ -128,7 +128,7 @@ public final class TintHelper {
 
     public static void setTintAuto(final @NonNull View view, final @ColorInt int color,
                                    boolean background) {
-        setTintAuto(view, color, background, ATHUtil.isWindowBackgroundDark(view.getContext()));
+        setTintAuto(view, color, background, ATHUtil.INSTANCE.isWindowBackgroundDark(view.getContext()));
     }
 
     @SuppressWarnings("deprecation")
@@ -159,7 +159,7 @@ public final class TintHelper {
                 RippleDrawable rd = (RippleDrawable) view.getBackground();
                 @SuppressLint("PrivateResource") final int unchecked = ContextCompat.getColor(view.getContext(),
                         isDark ? R.color.ripple_material_dark : R.color.ripple_material_light);
-                final int checked = ColorUtil.adjustAlpha(color, 0.4f);
+                final int checked = ColorUtil.INSTANCE.adjustAlpha(color, 0.4f);
                 final ColorStateList sl = new ColorStateList(
                         new int[][]{
                                 new int[]{-android.R.attr.state_activated, -android.R.attr.state_checked},
@@ -183,7 +183,7 @@ public final class TintHelper {
                 Drawable drawable = view.getBackground();
                 if (drawable != null) {
                     drawable = createTintedDrawable(drawable, color);
-                    ViewUtil.setBackgroundCompat(view, drawable);
+                    ViewUtil.INSTANCE.setBackgroundCompat(view, drawable);
                 }
             }
         }
@@ -197,7 +197,7 @@ public final class TintHelper {
                 new int[]{android.R.attr.state_enabled, android.R.attr.state_checked}
         }, new int[]{
                 // Rdio button includes own alpha for disabled state
-                ColorUtil.stripAlpha(ContextCompat.getColor(radioButton.getContext(), useDarker ? R.color.ate_control_disabled_dark : R.color.ate_control_disabled_light)),
+                ColorUtil.INSTANCE.stripAlpha(ContextCompat.getColor(radioButton.getContext(), useDarker ? R.color.ate_control_disabled_dark : R.color.ate_control_disabled_light)),
                 ContextCompat.getColor(radioButton.getContext(), useDarker ? R.color.ate_control_normal_dark : R.color.ate_control_normal_light),
                 color
         });
@@ -298,9 +298,9 @@ public final class TintHelper {
 
     private static Drawable modifySwitchDrawable(@NonNull Context context, @NonNull Drawable from, @ColorInt int tint, boolean thumb, boolean compatSwitch, boolean useDarker) {
         if (useDarker) {
-            tint = ColorUtil.shiftColor(tint, 1.1f);
+            tint = ColorUtil.INSTANCE.shiftColor(tint, 1.1f);
         }
-        tint = ColorUtil.adjustAlpha(tint, (compatSwitch && !thumb) ? 0.5f : 1.0f);
+        tint = ColorUtil.INSTANCE.adjustAlpha(tint, (compatSwitch && !thumb) ? 0.5f : 1.0f);
         int disabled;
         int normal;
         if (thumb) {
@@ -313,7 +313,7 @@ public final class TintHelper {
 
         // Stock switch includes its own alpha
         if (!compatSwitch) {
-            normal = ColorUtil.stripAlpha(normal);
+            normal = ColorUtil.INSTANCE.stripAlpha(normal);
         }
 
         final ColorStateList sl = new ColorStateList(

@@ -140,8 +140,8 @@ public final class ToolbarContentTintHelper {
             }
 
             //Step 3: Changing the color of title and subtitle.
-            toolbarView.setTitleTextColor(ThemeStore.textColorPrimary(activity));
-            toolbarView.setSubtitleTextColor(ThemeStore.textColorSecondary(activity));
+            toolbarView.setTitleTextColor(ThemeStore.Companion.textColorPrimary(activity));
+            toolbarView.setSubtitleTextColor(ThemeStore.Companion.textColorSecondary(activity));
 
             //Step 4: Changing the color of the Overflow Menu icon.
             setOverflowButtonColor(activity, toolbarView, toolbarIconsColor);
@@ -204,7 +204,7 @@ public final class ToolbarContentTintHelper {
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
                                                                  Toolbar toolbar, @Nullable Menu menu, int toolbarColor) {
         setToolbarContentColorBasedOnToolbarColor(context, toolbar, menu, toolbarColor,
-                ThemeStore.accentColor(context));
+                ThemeStore.Companion.accentColor(context));
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
@@ -309,7 +309,7 @@ public final class ToolbarContentTintHelper {
     }
 
     public static void handleOnPrepareOptionsMenu(Activity activity, Toolbar toolbar) {
-        handleOnPrepareOptionsMenu(activity, toolbar, ThemeStore.accentColor(activity));
+        handleOnPrepareOptionsMenu(activity, toolbar, ThemeStore.Companion.accentColor(activity));
     }
 
     public static void handleOnPrepareOptionsMenu(Activity activity, Toolbar toolbar,
@@ -332,7 +332,7 @@ public final class ToolbarContentTintHelper {
     @CheckResult
     @ColorInt
     public static int toolbarContentColor(@NonNull Context context, @ColorInt int toolbarColor) {
-        if (ColorUtil.isColorLight(toolbarColor)) {
+        if (ColorUtil.INSTANCE.isColorLight(toolbarColor)) {
             return toolbarSubtitleColor(context, toolbarColor);
         }
         return toolbarTitleColor(context, toolbarColor);
@@ -341,13 +341,13 @@ public final class ToolbarContentTintHelper {
     @CheckResult
     @ColorInt
     public static int toolbarSubtitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-        return MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(toolbarColor));
+        return MaterialValueHelper.INSTANCE.getSecondaryTextColor(context, ColorUtil.INSTANCE.isColorLight(toolbarColor));
     }
 
     @CheckResult
     @ColorInt
     public static int toolbarTitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-        return MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(toolbarColor));
+        return MaterialValueHelper.INSTANCE.getPrimaryTextColor(context, ColorUtil.INSTANCE.isColorLight(toolbarColor));
     }
 
     private static class ATHMenuPresenterCallback implements MenuPresenter.Callback {
@@ -485,8 +485,8 @@ public final class ToolbarContentTintHelper {
                                                 .getDeclaredField("mRadioButton");
                                         radioButtonField.setAccessible(true);
 
-                                        final boolean isDark = !ColorUtil.isColorLight(
-                                                ATHUtil.resolveColor(context, android.R.attr.windowBackground));
+                                        final boolean isDark = !ColorUtil.INSTANCE.isColorLight(
+                                                ATHUtil.INSTANCE.resolveColor(context, android.R.attr.windowBackground));
 
                                         for (int i = 0; i < listView.getChildCount(); i++) {
                                             View v = listView.getChildAt(i);
@@ -545,7 +545,7 @@ public final class ToolbarContentTintHelper {
                     }
                     final AppCompatImageView overflow = (AppCompatImageView) outViews.get(0);
                     overflow.setImageDrawable(TintHelper.createTintedDrawable(overflow.getDrawable(), color));
-                    ViewUtil.removeOnGlobalLayoutListener(decorView, this);
+                    ViewUtil.INSTANCE.removeOnGlobalLayoutListener(decorView, this);
                 }
             });
         }
@@ -576,7 +576,7 @@ public final class ToolbarContentTintHelper {
                     mSearchSrcTextViewField.setAccessible(true);
                     final EditText mSearchSrcTextView = (EditText) mSearchSrcTextViewField.get(searchView);
                     mSearchSrcTextView.setTextColor(color);
-                    mSearchSrcTextView.setHintTextColor(ColorUtil.adjustAlpha(color, 0.5f));
+                    mSearchSrcTextView.setHintTextColor(ColorUtil.INSTANCE.adjustAlpha(color, 0.5f));
                     TintHelper.setCursorTint(mSearchSrcTextView, color);
 
                     Field field = cls.getDeclaredField("mSearchButton");
