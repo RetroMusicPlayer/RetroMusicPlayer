@@ -114,7 +114,13 @@
         <activity android:name=".ui.activities.LicenseActivity" />
         <activity android:name=".ui.activities.PurchaseActivity" />
         <activity android:name=".ui.activities.EqualizerActivity" />
-        <activity android:name=".ui.activities.ErrorHandlerActivity" />
+        <activity
+            android:name=".ui.activities.ErrorHandlerActivity"
+            android:immersive="true"
+            android:label="@string/error"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/ErrorHandlingTheme" />
         <activity android:name=".ui.activities.WhatsNewActivity" />
         <activity android:name=".ui.activities.bugreport.BugReportActivity" />
         <activity android:name=".ui.activities.LockScreenActivity" />

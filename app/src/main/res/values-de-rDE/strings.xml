@@ -14,7 +14,7 @@
     <string name="action_go_to_album">Zum Album</string>
     <string name="action_go_to_artist">Zum Interpreten</string>
     <string name="action_go_to_genre">Zu Genre gehen</string>
-    <string name="action_go_to_start_directory">Zu Startverzeichnis</string>
+    <string name="action_go_to_start_directory">"Zum Startverzeichnis "</string>
     <string name="action_grant">Gewähren</string>
     <string name="action_grid_size">Rastergröße</string>
     <string name="action_grid_size_land">Rastergröße (Land)</string>
@@ -79,7 +79,6 @@
     <string name="pref_keep_screen_on_summary">Beachte, dass diese Funktion sich auf die Akkulaufzeit auswirkt.</string>
     <string name="pref_blur_amount_title">Unschärfe</string>
     <string name="pref_blur_amount_summary">Geringere Unschärfe benötigt weniger Rechenleistung.</string>
-    <string name="buy_retro_music_pro">Retro Music Pro kaufen</string>
     <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Karte (Farbe)</string>
@@ -240,6 +239,7 @@
     <string name="pref_summary_genre_toggle">Genre-Tab</string>
     <string name="pref_summary_home_banner">Home-Banner</string>
     <string name="pref_title_album_art_on_lockscreen">Albumcover zeigen</string>
+    <string name="pref_title_tab_text_mode">Beschriftung der Navigationselemente</string>
     <string name="pref_title_album_grid_style">Album-Rasteransicht</string>
     <string name="pref_title_app_shortcuts">Gefärbte App-Schaltflächen</string>
     <string name="pref_title_artist_grid_style">Interpreten-Rasteransicht</string>
@@ -270,6 +270,9 @@
     <string name="pref_title_extra_controls">Zusätzliche Schaltflächen</string>
     <string name="pref_title_home_banner">Home-Banner</string>
     <string name="pref_title_genre_toggle">Genre-Tab anzeigen</string>
+    <string name="pref_title_home_artist_grid_style">Künstlerbilder auf der Startseite</string>
+    <string name="pref_title_album_cover_transform">Stil des Album-Covers</string>
+    <string name="cascading">Kaskadierend</string>
     <string name="primary_color">Primärfarbe</string>
     <string name="primary_color_desc">Die Primärfarbe, standardmäßig blau/grau, funktioniert nun auch mit dunklen Farben</string>
     <string name="purchase">Kaufen</string>
@@ -380,4 +383,8 @@
     <string name="full_card">Karte (Voll)</string>
     <string name="profile">Profil</string>
     <string name="bio">Beschreibung</string>
+    <string name="auto">Automatisch</string>
+    <string name="labeled">Beschriftet</string>
+    <string name="unlabeled">Unbeschriftet</string>
+    <string name="selected">Ausgewähltes beschriftet</string>
 </resources>

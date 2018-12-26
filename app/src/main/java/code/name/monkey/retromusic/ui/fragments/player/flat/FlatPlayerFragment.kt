@@ -104,9 +104,9 @@ class FlatPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
 
         //TransitionManager.beginDelayedTransition(mToolbar);
         val iconColor = if (PreferenceUtil.getInstance().adaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(context, isLight)
+            MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
         else
-            ATHUtil.resolveColor(context, R.attr.iconColor)
+            ATHUtil.resolveColor(context!!, R.attr.iconColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
         if (PreferenceUtil.getInstance().adaptiveColor) {
             colorize(color)

@@ -225,10 +225,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        title.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        title.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
 
         //noinspection ConstantConditions
-        int primaryColor = ThemeStore.primaryColor(getContext());
+        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
         //noinspection ConstantConditions
@@ -242,9 +242,9 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             getActivity().onBackPressed();
         });
 
-        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.darkenColor(primaryColor)));
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
+        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
     }
 
     private void setUpBreadCrumbs() {
@@ -254,7 +254,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private void setUpRecyclerView() {
         //noinspection ConstantConditions
         ViewUtil.setUpFastScrollRecyclerViewColor(getActivity(), recyclerView,
-                ThemeStore.accentColor(getActivity()));
+                ThemeStore.Companion.accentColor(getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         appBarLayout.addOnOffsetChangedListener(this);
     }
@@ -307,7 +307,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor(getActivity())))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(getActivity())))
                 .start(callback);
         return cab;
     }
@@ -379,7 +379,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                             .setAction(R.string.action_scan,
                                     v -> new ListPathsAsyncTask(getActivity(), this::scanPaths)
                                             .execute(new ListPathsAsyncTask.LoadingInfo(finalFile, AUDIO_FILE_FILTER)))
-                            .setActionTextColor(ThemeStore.accentColor(getActivity()))
+                            .setActionTextColor(ThemeStore.Companion.accentColor(getActivity()))
                             .show();
                 }
             }).execute(new ListSongsAsyncTask.LoadingInfo(toList(file.getParentFile()), fileFilter,

@@ -59,13 +59,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
 
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this));
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this));
+        toolbar.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
+        appBarLayout.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
         setSupportActionBar(toolbar);
         setTitle(null);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        title.setTextColor(ThemeStore.textColorPrimary(this));
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this));
+        title.setTextColor(ThemeStore.Companion.textColorPrimary(this));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.accentColor(this));
 
         try {
             // Load from phonograph-changelog.html in the assets folder
@@ -78,13 +78,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
             in.close();
 
             // Inject color values for WebView body background and links
-            final String backgroundColor = colorToHex(ThemeStore.primaryColor(this));
+            final String backgroundColor = colorToHex(ThemeStore.Companion.primaryColor(this));
             final String contentColor = ThemeSingleton.get().darkTheme ? "#ffffff" : "#000000";
             webView.loadData(buf.toString()
                             .replace("{style-placeholder}",
                                     String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
                             .replace("{link-color}", colorToHex(ThemeSingleton.get().positiveColor.getDefaultColor()))
-                            .replace("{link-color-active}", colorToHex(ColorUtil.lightenColor(ThemeSingleton.get().positiveColor.getDefaultColor())))
+                            .replace("{link-color-active}", colorToHex(ColorUtil.INSTANCE.lightenColor(ThemeSingleton.get().positiveColor.getDefaultColor())))
                     , "text/html", "UTF-8");
         } catch (Throwable e) {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");

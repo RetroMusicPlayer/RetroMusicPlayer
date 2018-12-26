@@ -79,7 +79,6 @@
     <string name="pref_keep_screen_on_summary">請記住當您啟用此選項後或會影響電池壽命</string>
     <string name="pref_blur_amount_title">模糊值</string>
     <string name="pref_blur_amount_summary">給模糊模式主題的值，每值愈低就愈快</string>
-    <string name="buy_retro_music_pro">購買Retro Music Pro</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡片</string>
     <string name="card_color_style">彩色卡片</string>
@@ -172,7 +171,7 @@
     <string name="never">永不</string>
     <string name="new_banner_photo">新橫幅圖片</string>
     <string name="new_playlist_title">新播放清單</string>
-    <string name="new_profile_photo">最新個人資料圖片</string>
+    <string name="new_profile_photo">新個人資料圖片</string>
     <string name="new_start_directory">最新的主目錄是%s。</string>
     <string name="no_albums">沒有專輯</string>
     <string name="no_artists">沒有歌手</string>
@@ -240,6 +239,7 @@
     <string name="pref_summary_genre_toggle">切換類型標籤</string>
     <string name="pref_summary_home_banner">切換首頁橫幅樣式</string>
     <string name="pref_title_album_art_on_lockscreen">顯示專輯圖片</string>
+    <string name="pref_title_tab_text_mode">標題標籤模式</string>
     <string name="pref_title_album_grid_style">專輯網格</string>
     <string name="pref_title_app_shortcuts">彩色程式捷徑</string>
     <string name="pref_title_artist_grid_style">歌手網格</string>
@@ -270,6 +270,8 @@
     <string name="pref_title_extra_controls">額外控制項</string>
     <string name="pref_title_home_banner">首頁橫幅</string>
     <string name="pref_title_genre_toggle">顯示類型標籤</string>
+    <string name="pref_title_home_artist_grid_style">首頁歌手網格</string>
+    <string name="pref_title_album_cover_transform">現在播放專輯圖片風格</string>
     <string name="primary_color">原色</string>
     <string name="primary_color_desc">主原色預設為灰藍色，現在適用於深色色彩</string>
     <string name="purchase">購買</string>
@@ -380,4 +382,8 @@
     <string name="full_card">完整卡片</string>
     <string name="profile">個人資料</string>
     <string name="bio">個人簡歷</string>
+    <string name="auto">自動</string>
+    <string name="labeled">已標記</string>
+    <string name="unlabeled">未標記</string>
+    <string name="selected">已選</string>
 </resources>

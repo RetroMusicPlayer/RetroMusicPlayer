@@ -18,8 +18,6 @@ class App : MultiDexApplication() {
         super.onCreate()
         instance = this
 
-        setupErrorHandler()
-
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
             ThemeStore.editTheme(this)

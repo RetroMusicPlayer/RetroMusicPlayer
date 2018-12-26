@@ -78,7 +78,7 @@ public class ViewUtil {
                                                         FastScrollRecyclerView recyclerView, int accentColor) {
         recyclerView.setPopupBgColor(accentColor);
         recyclerView.setPopupTextColor(
-                MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)));
+                MaterialValueHelper.INSTANCE.getPrimaryTextColor(context, ColorUtil.INSTANCE.isColorLight(accentColor)));
         recyclerView.setThumbColor(accentColor);
         recyclerView.setTrackColor(Color.TRANSPARENT);
         //recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));

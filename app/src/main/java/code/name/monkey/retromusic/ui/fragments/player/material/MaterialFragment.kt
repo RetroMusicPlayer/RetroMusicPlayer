@@ -43,7 +43,7 @@ class MaterialFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.iconColor)
+        return ATHUtil.resolveColor(context!!, R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
@@ -51,7 +51,7 @@ class MaterialFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
         lastColor = color
         callbacks!!.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context!!, R.attr.iconColor), activity)
     }
 
     override fun toggleFavorite(song: Song) {

@@ -135,8 +135,8 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
     private SelectionCallback mCallback;
 
     private void init() {
-        contentColorActivated = ThemeStore.textColorPrimary(getContext());
-        contentColorDeactivated = ThemeStore.textColorSecondary(getContext());
+        contentColorActivated = ThemeStore.Companion.textColorPrimary(getContext());
+        contentColorDeactivated = ThemeStore.Companion.textColorSecondary(getContext());
         setMinimumHeight((int) getResources().getDimension(R.dimen.tab_height));
         setClipToPadding(false);
         setHorizontalScrollBarEnabled(false);

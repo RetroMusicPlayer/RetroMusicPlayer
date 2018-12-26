@@ -17,7 +17,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
-abstract class AbsThemeActivity : ATHActivity(), Runnable {
+abstract class AbsThemeActivity : AbsCrashCollector(), Runnable {
 
     private val handler = Handler()
 

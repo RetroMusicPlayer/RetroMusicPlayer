@@ -42,7 +42,7 @@ public class RetroColorUtil {
         if (inverse != -1) {
             return ColorUtils.getReadableText(inverse, background, 150);
         }
-        return ColorUtil.stripAlpha(getSwatch(palette).getTitleTextColor());
+        return ColorUtil.INSTANCE.stripAlpha(getSwatch(palette).getTitleTextColor());
     }
 
     @NonNull
@@ -163,8 +163,8 @@ public class RetroColorUtil {
 
     @ColorInt
     public static int shiftBackgroundColorForLightText(@ColorInt int backgroundColor) {
-        while (ColorUtil.isColorLight(backgroundColor)) {
-            backgroundColor = ColorUtil.darkenColor(backgroundColor);
+        while (ColorUtil.INSTANCE.isColorLight(backgroundColor)) {
+            backgroundColor = ColorUtil.INSTANCE.darkenColor(backgroundColor);
         }
         return backgroundColor;
     }

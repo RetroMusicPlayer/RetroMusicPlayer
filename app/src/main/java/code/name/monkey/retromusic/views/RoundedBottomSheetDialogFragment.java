@@ -42,12 +42,12 @@ public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
             if (bottomSheet != null) {
                 BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                bottomSheet.setBackground(RetroUtil.getTintedDrawable(getContext(), R.drawable.bg_bottom_sheet_dialog_fragment, ThemeStore.primaryColor(getContext())));
+                bottomSheet.setBackground(RetroUtil.getTintedDrawable(getContext(), R.drawable.bg_bottom_sheet_dialog_fragment, ThemeStore.Companion.primaryColor(getContext())));
             }
         });
         if (getActivity() != null) {
-            if (VersionUtils.hasNougat()) {
-                ((AbsBaseActivity) getActivity()).setNavigationbarColor(ThemeStore.primaryColor(getContext()));
+            if (VersionUtils.INSTANCE.hasNougat()) {
+                ((AbsBaseActivity) getActivity()).setNavigationbarColor(ThemeStore.Companion.primaryColor(getContext()));
             } else {
                 ((AbsBaseActivity) getActivity()).setNavigationbarColorAuto();
             }
@@ -67,7 +67,7 @@ public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
         if (getDialog() != null && getDialog().getWindow() != null) {
             Window window = getDialog().getWindow();
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            window.setNavigationBarColor(ThemeStore.primaryColor(getContext()));
+            window.setNavigationBarColor(ThemeStore.Companion.primaryColor(getContext()));
             window.findViewById(com.google.android.material.R.id.container).setFitsSystemWindows(true);
         }
     }

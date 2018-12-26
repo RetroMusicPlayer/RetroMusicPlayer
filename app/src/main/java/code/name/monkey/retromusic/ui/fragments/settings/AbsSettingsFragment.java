@@ -56,7 +56,7 @@ public abstract class AbsSettingsFragment extends ATEPreferenceFragmentCompat {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setDivider(new ColorDrawable(Color.TRANSPARENT));
-        getListView().setBackgroundColor(ThemeStore.primaryColor(getContext()));
+        getListView().setBackgroundColor(ThemeStore.Companion.primaryColor(getContext()));
         getListView().setOverScrollMode(View.OVER_SCROLL_NEVER);
         getListView().setPadding(0, 0, 0, 0);
         getListView().setPaddingRelative(0, 0, 0, 0);

@@ -90,13 +90,13 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(context, android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(context, true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(context, true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(context, false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
         }
 
         updateRepeatState()

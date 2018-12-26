@@ -200,7 +200,7 @@ public class RetroUtil {
     public static Drawable getTintedDrawable(@DrawableRes int id) {
         return TintHelper
                 .createTintedDrawable(ContextCompat.getDrawable(App.Companion.getInstance(), id),
-                        ThemeStore.accentColor(App.Companion.getInstance()));
+                        ThemeStore.Companion.accentColor(App.Companion.getInstance()));
     }
 
     public static Bitmap createBitmap(Drawable drawable, float sizeMultiplier) {

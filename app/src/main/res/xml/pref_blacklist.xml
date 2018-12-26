@@ -5,8 +5,8 @@
 
         <code.name.monkey.retromusic.preferences.BlacklistPreference
             android:key="blacklist"
-            android:summary="The content of blacklisted folders is hidden from your library."
-            android:title="Blacklist"
+            android:summary="@string/pref_summary_blacklist"
+            android:title="@string/pref_title_blacklist"
             app:iconSpaceReserved="false" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>

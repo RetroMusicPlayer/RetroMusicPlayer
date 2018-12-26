@@ -27,6 +27,6 @@ public class IconImageView extends androidx.appcompat.widget.AppCompatImageView 
 
     private void init(Context context) {
         if (context == null) return;
-        setColorFilter(ATHUtil.resolveColor(context, R.attr.iconColor), PorterDuff.Mode.SRC_IN);
+        setColorFilter(ATHUtil.INSTANCE.resolveColor(context, R.attr.iconColor), PorterDuff.Mode.SRC_IN);
     }
 }

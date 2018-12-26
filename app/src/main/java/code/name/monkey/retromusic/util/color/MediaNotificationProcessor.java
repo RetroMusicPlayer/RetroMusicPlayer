@@ -124,7 +124,7 @@ public class MediaNotificationProcessor {
     }
 
     private int selectForegroundColor(int backgroundColor, Palette palette) {
-        if (ColorUtil.isColorLight(backgroundColor)) {
+        if (ColorUtil.INSTANCE.isColorLight(backgroundColor)) {
             return selectForegroundColorForSwatches(palette.getDarkVibrantSwatch(),
                     palette.getVibrantSwatch(),
                     palette.getDarkMutedSwatch(),

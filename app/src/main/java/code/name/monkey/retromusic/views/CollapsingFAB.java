@@ -72,7 +72,7 @@ public class CollapsingFAB extends FrameLayout {
 
     public void setColor(int color) {
         this.color = color;
-        int textColor = MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(color));
+        int textColor = MaterialValueHelper.INSTANCE.getPrimaryTextColor(getContext(), ColorUtil.INSTANCE.isColorLight(color));
         shuffleIcon.setColorFilter(textColor);
         textView.setTextColor(textColor);
         cardView.setCardBackgroundColor(ColorStateList.valueOf(color));

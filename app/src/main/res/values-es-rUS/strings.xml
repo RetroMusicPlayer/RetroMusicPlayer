@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="accent_color">Color de énfasis</string>
+    <string name="accent_color">Hello</string>
     <string name="accent_color_desc">El color de énfasis del tema, por defecto es verde azulado</string>
     <string name="action_about">Acerca de Retro Music Player</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
@@ -60,7 +60,7 @@
     <string name="app_shortcut_shuffle_all_long">Mezclar todo</string>
     <string name="app_shortcut_shuffle_all_short">Aleatorio</string>
     <string name="app_shortcut_top_tracks_long">Más Reproducidas</string>
-    <string name="app_shortcut_top_tracks_short">Más Reproducidas</string>
+    <string name="app_shortcut_top_tracks_short">Hello</string>
     <string name="app_widget_big_name">Retro Music - Grande</string>
     <string name="app_widget_card_name">Retro Music - Tarjeta</string>
     <string name="app_widget_classic_name">Retro Music - Clásico</string>
@@ -79,7 +79,6 @@
     <string name="pref_keep_screen_on_summary">Tenga en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_blur_amount_title">Cantidad de desenfoque</string>
     <string name="pref_blur_amount_summary">Cantidad de desenfoque aplicado a los temas de desenfoque, más bajo es más rápido</string>
-    <string name="buy_retro_music_pro">Comprar Retro Music Pro</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Tarjeta</string>
     <string name="card_color_style">Tarjeta coloreada</string>
@@ -238,9 +237,9 @@
     <string name="pref_summary_toggle_volume">Muestra los controles de volumen en la ventana de reproducción, si hay suficiente espacio disponible</string>
     <string name="pref_summary_extra_controls">"Añadir controles extra al minireproductor "</string>
     <string name="pref_summary_genre_toggle">Mostrar/Ocultar pestaña de géneros</string>
-    <string name="pref_summary_home_banner">Mostar/Ocultar banner de inicio</string>
+    <string name="pref_summary_home_banner">Mostar/Ocultar banner de pantalla de inicio</string>
     <string name="pref_title_album_art_on_lockscreen">Mostrar portada del álbum</string>
-    <string name="pref_title_tab_text_mode">Modo de títulos de pestañas</string>
+    <string name="pref_title_tab_text_mode">Tipo de títulos de pestañas</string>
     <string name="pref_title_album_grid_style">Cuadrícula del álbum</string>
     <string name="pref_title_app_shortcuts">Accesos directos coloreados</string>
     <string name="pref_title_artist_grid_style">Cuadrícula de artistas</string>
@@ -269,9 +268,10 @@
     <string name="pref_title_toggle_volume">Controles de volumen</string>
     <string name="pref_title_user_info">Información de usuario</string>
     <string name="pref_title_extra_controls">Controles extra</string>
-    <string name="pref_title_home_banner">Banner de inicio</string>
+    <string name="pref_title_home_banner">Banner de pantalla de inicio</string>
     <string name="pref_title_genre_toggle">Mostrar pestaña de géneros</string>
-    <string name="pref_title_home_artist_grid_style">Cuadrícula de artista en inicio</string>
+    <string name="pref_title_home_artist_grid_style">Cuadrícula de artista en pantalla de inicio</string>
+    <string name="pref_title_album_cover_transform">Estilo de portada del álbum en reproducción</string>
     <string name="cascading">En cascada</string>
     <string name="primary_color">Color principal</string>
     <string name="primary_color_desc">El color principal del tema -por defecto es azul grisáceo- temporalmente funciona con colores oscuros</string>

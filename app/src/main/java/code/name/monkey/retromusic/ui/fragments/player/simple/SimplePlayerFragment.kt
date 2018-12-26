@@ -61,14 +61,14 @@ class SimplePlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callb
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.iconColor)
+        return ATHUtil.resolveColor(context!!, R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
         lastColor = color
         callbacks!!.onPaletteColorChanged()
         simplePlaybackControlsFragment.setDark(color)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context!!, R.attr.iconColor), activity)
 
     }
 

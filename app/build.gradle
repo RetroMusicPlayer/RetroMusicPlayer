@@ -28,12 +28,12 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
 
-        renderscriptTargetApi 27 //must match target sdk and build tools
+        renderscriptTargetApi 28 //must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 273
-        versionName '3.0.511'
+        versionCode 274
+        versionName '3.0.520'
 
         multiDexEnabled true
 
@@ -72,10 +72,6 @@ android {
             versionCode defaultConfig.versionCode + 10000
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
-        }
-        sans {
-            dimension "default"
-            versionName defaultConfig.versionName + "_" + getDate()
         }
     }
 

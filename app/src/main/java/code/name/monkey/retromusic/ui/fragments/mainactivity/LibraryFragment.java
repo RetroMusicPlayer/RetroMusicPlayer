@@ -166,16 +166,16 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(getContext()));
+        bannerTitle.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
 
-        int primaryColor = ThemeStore.primaryColor(getContext());
+        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
         toolbar.setNavigationIcon(R.drawable.ic_search_white_24dp);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
-                getMainActivity().setLightStatusbar(!ATHUtil.isWindowBackgroundDark(getContext())));
+                getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
     }
@@ -216,7 +216,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
                 .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor(getActivity())))
+                        RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(getActivity())))
                 .start(callback);
         return cab;
     }

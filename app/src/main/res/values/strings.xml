@@ -67,8 +67,8 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
     <string name="app_widget_big_name">Retro music - Big</string>
     <string name="app_widget_card_name">Retro music - Card</string>
@@ -526,7 +526,7 @@
     <string name="made_with_love">Made with ❤️ in India</string>
     <string name="clear_app_data">Clear app data</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it
-    keeps crashing \"Clear app data\"</string>
+    keeps crashing \"Clear app data\" or Send an Email </string>
     <string name="error">Error</string>
     <string name="base_color_theme">Base color theme</string>
     <string name="now_playing_themes">9+ now playing themes</string>
@@ -588,4 +588,7 @@
     <string name="copied_device_info_to_clipboard">Copied device info to clipboard.</string>
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="pref_snow_fall_title">Snow fall effect</string>
+    <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
+    <string name="send_crash_log">Send crash log</string>
 </resources>

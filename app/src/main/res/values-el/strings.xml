@@ -46,12 +46,10 @@
     <string name="added_x_titles_to_playing_queue">Προστέθηκαν %1$d κομμάτια στην ουρά αναπ/γης.</string>
     <string name="album">Άλμπουμ</string>
     <string name="album_artist">Καλλιτέχνης Άλμπουμ</string>
-    <string name="album_or_artist_empty">"Ο τίτλος ή το όνομα του καλλιτέχνη είναι κενό
-"</string>
+    <string name="album_or_artist_empty">"Ο τίτλος ή το όνομα του καλλιτέχνη είναι κενό"</string>
     <string name="albums">Άλμπουμ</string>
     <string name="always">Πάντα</string>
-    <string name="app_share">Τσεκάρετε αυτό το κούλ music player στο:
-https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">Τσεκάρετε αυτό το κούλ music player στο:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <!-- App Shortcuts -->
