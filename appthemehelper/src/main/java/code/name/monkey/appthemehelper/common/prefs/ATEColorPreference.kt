@@ -4,22 +4,33 @@ import android.content.Context
 import android.preference.Preference
 import android.util.AttributeSet
 import android.view.View
-
 import code.name.monkey.appthemehelper.R
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATEColorPreference(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : Preference(context, attrs, defStyleAttr) {
+class ATEColorPreference : Preference {
 
     private var mView: View? = null
     private var color: Int = 0
     private var border: Int = 0
 
-    init {
+    constructor(context: Context) : super(context) {
         init()
-
     }
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
+        init()
+    }
+
 
     private fun init() {
         layoutResource = R.layout.ate_preference_custom

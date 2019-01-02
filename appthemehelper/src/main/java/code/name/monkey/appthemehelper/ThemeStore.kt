@@ -182,7 +182,7 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         }
 
         @CheckResult
-        protected fun prefs(context: Context): SharedPreferences {
+        fun prefs(context: Context): SharedPreferences {
             return context.getSharedPreferences(ThemeStorePrefKeys.CONFIG_PREFS_KEY_DEFAULT, Context.MODE_PRIVATE)
         }
 

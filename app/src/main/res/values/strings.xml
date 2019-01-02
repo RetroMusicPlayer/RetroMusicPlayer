@@ -526,7 +526,7 @@
     <string name="made_with_love">Made with ❤️ in India</string>
     <string name="clear_app_data">Clear app data</string>
     <string name="bug_report_summary">An unexpected error occurred. Sorry you found this bug, if it
-    keeps crashing \"Clear app data\" or Send an Email </string>
+    keeps crashing \"Clear app data\" or send an Email </string>
     <string name="error">Error</string>
     <string name="base_color_theme">Base color theme</string>
     <string name="now_playing_themes">9+ now playing themes</string>
@@ -591,4 +591,6 @@
     <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="send_crash_log">Send crash log</string>
+    <string name="pinterest_page">Pinterest</string>
+    <string name="pinterest_page_summary">Hmm</string>
 </resources>

@@ -14,8 +14,8 @@ object ATHUtil {
     }
 
     @JvmOverloads
-    fun resolveColor(context: Context, @AttrRes attr: Int, fallback: Int = 0): Int {
-        val a = context.theme.obtainStyledAttributes(intArrayOf(attr))
+    fun resolveColor(context: Context?, @AttrRes attr: Int, fallback: Int = 0): Int {
+        val a = context!!.theme.obtainStyledAttributes(intArrayOf(attr))
         try {
             return a.getColor(0, fallback)
         } finally {

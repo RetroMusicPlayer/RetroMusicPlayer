@@ -140,24 +140,22 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             toolbar!!.layoutParams = params
         }
 
-        if (appBarLayout != null) {
-            appBarLayout!!.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-                override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
-                    val color: Int = when (state) {
-                        AppBarStateChangeListener.State.COLLAPSED -> {
-                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
-                            ThemeStore.primaryColor(appBarLayout.context)
-                        }
-                        AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
-                            setLightStatusbar(false)
-                            Color.TRANSPARENT
-                        }
-
+        appBarLayout?.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
+            override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
+                val color: Int = when (state) {
+                    AppBarStateChangeListener.State.COLLAPSED -> {
+                        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
+                        ThemeStore.primaryColor(appBarLayout.context)
                     }
-                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.context, toolbar, color)
+                    AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
+                        setLightStatusbar(false)
+                        Color.TRANSPARENT
+                    }
+
                 }
-            })
-        }
+                ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.context, toolbar, color)
+            }
+        })
     }
 
     private fun setupRecyclerView() {

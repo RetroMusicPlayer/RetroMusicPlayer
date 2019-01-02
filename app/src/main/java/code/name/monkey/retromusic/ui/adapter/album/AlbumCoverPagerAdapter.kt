@@ -57,16 +57,6 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
             currentColorReceiver = colorReceiver
             currentColorReceiverPosition = position
         }
-
-        /*val fragment = getFragment(position) as AlbumCoverFragment
-        if (fragment != null) {
-            currentColorReceiver = null
-            currentColorReceiverPosition = -1
-            fragment.receiveColor(colorReceiver, position)
-        } else {
-            currentColorReceiver = colorReceiver
-            currentColorReceiverPosition = position
-        }*/
     }
 
     class AlbumCoverFragment : Fragment() {

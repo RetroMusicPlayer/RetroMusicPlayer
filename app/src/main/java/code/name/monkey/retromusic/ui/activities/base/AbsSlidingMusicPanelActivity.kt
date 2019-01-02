@@ -237,7 +237,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         slidingLayout.panelState = PanelState.COLLAPSED
     }
 
-    private fun expandPanel() {
+    fun expandPanel() {
         slidingLayout.panelState = PanelState.EXPANDED
     }
 

@@ -107,7 +107,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
         if (intent.hasExtra("expand")) {
             if (intent.getBooleanExtra("expand", false)) {
-                //expandPanel();
+                expandPanel()
                 intent.putExtra("expand", false)
             }
         }

@@ -22,7 +22,7 @@ object ATH {
 
     @SuppressLint("CommitPrefEdits")
     fun didThemeValuesChange(context: Context, since: Long): Boolean {
-        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(ThemeStore.VALUES_CHANGED, -1) > since
+        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(ThemeStorePrefKeys.VALUES_CHANGED, -1) > since
     }
 
     fun setStatusbarColorAuto(activity: Activity) {
@@ -105,7 +105,7 @@ object ATH {
             // Task description requires fully opaque color
             colorFinal = ColorUtil.stripAlpha(colorFinal)
             // Sets color of entry in the system recents page
-            activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String, null, colorFinal))
+            activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String?, null, colorFinal))
         }
     }
 

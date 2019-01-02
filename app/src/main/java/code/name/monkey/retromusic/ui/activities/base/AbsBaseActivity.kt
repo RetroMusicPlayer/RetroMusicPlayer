@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.activities.base
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioManager
@@ -12,8 +13,8 @@ import android.view.KeyEvent
 import android.view.View
 import androidx.core.app.ActivityCompat
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.retromusic.R
 import com.google.android.material.snackbar.Snackbar
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 
 
 abstract class AbsBaseActivity : AbsThemeActivity() {
@@ -31,7 +32,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     }
 
     fun getPermissionDeniedMessage(): String {
-        return if (permissionDeniedMessage == null) getString(R.string.permissions_denied) else permissionDeniedMessage!!
+        return if (permissionDeniedMessage == null) getString(code.name.monkey.retromusic.R.string.permissions_denied) else permissionDeniedMessage!!
     }
 
 
@@ -80,7 +81,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
     protected fun showOverflowMenu() {
 
     }
-    
+
     protected open fun requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(permissions, PERMISSION_REQUEST)
@@ -108,14 +109,14 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                         //User has deny from permission dialog
                         Snackbar.make(snackBarContainer, permissionDeniedMessage!!,
                                 Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.action_grant) { requestPermissions() }
+                                .setAction(code.name.monkey.retromusic.R.string.action_grant) { requestPermissions() }
                                 .setActionTextColor(ThemeStore.accentColor(this))
                                 .show()
                     } else {
                         // User has deny permission and checked never show permission dialog so you can redirect to Application settings page
                         Snackbar.make(snackBarContainer, permissionDeniedMessage!!,
                                 Snackbar.LENGTH_INDEFINITE)
-                                .setAction(R.string.action_settings) {
+                                .setAction(code.name.monkey.retromusic.R.string.action_settings) {
                                     val intent = Intent()
                                     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                                     val uri = Uri.fromParts("package", this@AbsBaseActivity.packageName, null)

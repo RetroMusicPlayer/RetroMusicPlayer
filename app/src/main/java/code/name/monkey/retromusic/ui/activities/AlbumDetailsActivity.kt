@@ -141,7 +141,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
             toolbar!!.layoutParams = params
         }
 
-        appBarLayout!!.apply {
+        appBarLayout?.apply {
             addOnOffsetChangedListener(object : AppBarStateChangeListener() {
                 override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
                     val color: Int = when (state) {

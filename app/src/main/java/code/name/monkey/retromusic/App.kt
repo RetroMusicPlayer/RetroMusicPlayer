@@ -8,7 +8,8 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import com.bumptech.glide.Glide
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig
+
 
 class App : MultiDexApplication() {
 
@@ -30,6 +31,11 @@ class App : MultiDexApplication() {
             DynamicShortcutManager(this).initDynamicShortcuts()
 
 
+        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
+                .setDefaultFont(R.font.circular_std_book)
+                .build()
+        )
+
         // automatically restores purchases
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
                 object : BillingProcessor.IBillingHandler {
@@ -43,18 +49,6 @@ class App : MultiDexApplication() {
 
                     override fun onBillingInitialized() {}
                 })
-    }
-
-    private fun setupErrorHandler() {
-        Thread.setDefaultUncaughtExceptionHandler { _, throwable -> handleUncaughtException(throwable) }
-    }
-
-    private fun handleUncaughtException(throwable: Throwable) {
-        throwable.printStackTrace()
-        deleteAppData()
-        //Intent intent = new Intent(this, ErrorHandlerActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        //startActivity(intent);
     }
 
     override fun onTerminate() {
@@ -74,20 +68,5 @@ class App : MultiDexApplication() {
 
         val isProVersion: Boolean
             get() = BuildConfig.DEBUG || instance.billingProcessor.isPurchased(PRO_VERSION_PRODUCT_ID)
-
-        fun deleteAppData() {
-            try {
-                // clearing app data
-                val packageName = instance.packageName
-                val runtime = Runtime.getRuntime()
-                runtime.exec("pm clear $packageName")
-
-                System.exit(0)
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-
-        }
     }
 }

@@ -32,8 +32,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 274
-        versionName '3.0.520'
+        versionCode 277
+        versionName '3.0.530'
 
         multiDexEnabled true
 
@@ -130,7 +130,7 @@ dependencies {
     implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
 
-    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:retrofit:2.5.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
 
@@ -163,6 +163,7 @@ dependencies {
 
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.jetradarmobile:android-snowfall:1.2.0'
+    implementation 'com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.3'
 
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 }

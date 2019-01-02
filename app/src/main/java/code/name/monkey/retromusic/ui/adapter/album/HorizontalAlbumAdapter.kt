@@ -65,6 +65,14 @@ class HorizontalAlbumAdapter(activity: AppCompatActivity, dataSet: ArrayList<Alb
         return HorizontalAdapterHelper.getItemViewtype(position, itemCount)
     }
 
+    override fun getItemCount(): Int {
+        return when {
+            dataSet.size < 5 -> dataSet.size
+            dataSet.size >= 5 -> 5
+            else -> super.getItemCount()
+        }
+    }
+
     companion object {
         val TAG: String = AlbumAdapter::class.java.simpleName
     }

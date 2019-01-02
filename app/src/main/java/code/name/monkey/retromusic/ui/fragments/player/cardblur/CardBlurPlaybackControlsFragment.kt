@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -23,11 +23,9 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_card_blur_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import kotlinx.android.synthetic.main.volume_controls.*
 
 class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -71,7 +69,6 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             TintHelper.setTintAuto(this, Color.BLACK, false)
             setOnClickListener(PlayPauseButtonOnClickHandler())
         }
-
     }
 
     private fun updatePlayPauseDrawableState() {
@@ -83,7 +80,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private fun setupVolumeControls() {
         val volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
-        volumeFragment.tintWhiteColor()
+        volumeFragment.setTintable(ContextCompat.getColor(context!!, R.color.md_white_1000))
     }
 
     private fun updateProgressTextColor() {

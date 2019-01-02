@@ -26,8 +26,10 @@
             android:maxLines="2"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
+            android:shadowColor="@color/md_black_1000"
+            android:shadowRadius="8"
             android:text="@string/normal_lyrics"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textColor="@color/md_white_1000" />
 
         <TextView
@@ -38,8 +40,10 @@
             android:maxLines="1"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
+            android:shadowColor="@color/md_grey_800"
+            android:shadowRadius="6"
             android:text="@string/normal_lyrics"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             android:textColor="@color/md_white_1000" />
     </LinearLayout>
 

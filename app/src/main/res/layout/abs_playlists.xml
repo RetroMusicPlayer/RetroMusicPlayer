@@ -15,7 +15,6 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-
         <LinearLayout
             android:id="@+id/history"
             android:layout_width="match_parent"

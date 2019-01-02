@@ -8,7 +8,6 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App.Companion.context
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R

@@ -18,6 +18,7 @@ import code.name.monkey.retromusic.Constants.DISCORD_LINK
 import code.name.monkey.retromusic.Constants.FAQ_LINK
 import code.name.monkey.retromusic.Constants.GITHUB_PROJECT
 import code.name.monkey.retromusic.Constants.GOOGLE_PLUS_COMMUNITY
+import code.name.monkey.retromusic.Constants.PINTEREST
 import code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY
 import code.name.monkey.retromusic.Constants.TELEGRAM_CHANGE_LOG
 import code.name.monkey.retromusic.Constants.TRANSLATE
@@ -111,10 +112,12 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         twitterLink.setOnClickListener(this)
         changelog.setOnClickListener(this)
         openSource.setOnClickListener(this)
+        pinterestLink.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
+            R.id.pinterestLink->openUrl(PINTEREST)
             R.id.faqLink -> openUrl(FAQ_LINK)
             R.id.telegramLink -> openUrl(APP_TELEGRAM_LINK)
             R.id.discordLink -> openUrl(DISCORD_LINK)

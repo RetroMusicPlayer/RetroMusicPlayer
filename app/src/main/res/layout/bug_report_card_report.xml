@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
     app:cardBackgroundColor="?cardBackgroundColor"
+    app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -98,8 +98,10 @@
                     android:id="@+id/inputDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="top"
                     android:hint="@string/description"
-                    android:inputType="textCapSentences" />
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

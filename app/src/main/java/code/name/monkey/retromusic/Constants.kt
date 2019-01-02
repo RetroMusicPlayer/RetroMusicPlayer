@@ -76,6 +76,8 @@ object Constants {
     @JvmField
     val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
     @JvmField
+    val PINTEREST = "https://in.pinterest.com/retromusicapp/"
+    @JvmField
     val CAST_SERVER_PORT = 8080
 
     const val BASE_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"

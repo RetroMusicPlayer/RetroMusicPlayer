@@ -1,11 +1,8 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.os.Build
-import androidx.preference.Preference
 import android.util.AttributeSet
-
+import androidx.preference.Preference
 import code.name.monkey.appthemehelper.R
 
 /**
@@ -14,23 +11,23 @@ import code.name.monkey.appthemehelper.R
 class ATEPreference : Preference {
 
     constructor(context: Context) : super(context) {
-        init(context, null)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context, attrs)
+        init()
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context, attrs)
+        init()
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
+
+    private fun init() {
         layoutResource = R.layout.ate_preference_custom_support
     }
 }
