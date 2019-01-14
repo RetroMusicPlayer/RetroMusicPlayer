@@ -149,7 +149,7 @@ public class PlaylistsUtil {
         for (int i = 0; i < len; i++) {
             contentValues[i] = new ContentValues();
             contentValues[i].put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, base + offset + i);
-            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).getId());
+            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).id);
         }
         return contentValues;
     }
@@ -158,7 +158,7 @@ public class PlaylistsUtil {
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String selection = MediaStore.Audio.Playlists.Members.AUDIO_ID + " =?";
-        String[] selectionArgs = new String[]{String.valueOf(song.getId())};
+        String[] selectionArgs = new String[]{String.valueOf(song.id)};
 
         try {
             context.getContentResolver().delete(uri, selection, selectionArgs);

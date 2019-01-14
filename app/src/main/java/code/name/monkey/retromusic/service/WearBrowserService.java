@@ -241,9 +241,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> songList = SongLoader.INSTANCE.getAllSongs(mContext).blockingFirst();
                             for (Song song : songList) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.getId()),
-                                        song.getTitle(),
-                                        song.getArtistName(),
+                                        String.valueOf(song.id),
+                                        song.title,
+                                        song.albumName,
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -253,9 +253,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> albumSongList = AlbumLoader.Companion.getAlbum(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
                             for (Song song : albumSongList) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.getId()),
-                                        song.getTitle(),
-                                        song.getArtistName(),
+                                        String.valueOf(song.id),
+                                        song.title,
+                                        song.albumName,
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -264,9 +264,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> artistSongs = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
                             for (Song song : artistSongs) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.getId()),
-                                        song.getTitle(),
-                                        song.getAlbumName(),
+                                        String.valueOf(song.id),
+                                        song.title,
+                                        song.albumName,
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -288,9 +288,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst();
                             for (Song song : playlistSongs) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.getId()),
-                                        song.getTitle(),
-                                        song.getAlbumName(),
+                                        String.valueOf(song.id),
+                                        song.title,
+                                        song.albumName,
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }

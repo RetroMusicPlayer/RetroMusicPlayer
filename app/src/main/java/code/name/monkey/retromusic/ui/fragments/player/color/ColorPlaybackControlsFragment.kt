@@ -1,8 +1,11 @@
 package code.name.monkey.retromusic.ui.fragments.player.color
 
 import android.animation.ObjectAnimator
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.ClipDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +24,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
 
@@ -38,7 +41,6 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.fragment_color_player_playback_controls, container, false)
     }
 
@@ -103,7 +105,7 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         title!!.setTextColor(lastPlaybackControlsColor)
         text!!.setTextColor(lastDisabledPlaybackControlsColor)
 
-        TintHelper.setTintAuto(progressSlider!!, lastPlaybackControlsColor, false)
+        setProgressBarColor(lastPlaybackControlsColor, lastDisabledPlaybackControlsColor)
 
         volumeFragment.setTintable(lastPlaybackControlsColor)
 
@@ -115,6 +117,16 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePrevNextColor()
     }
 
+    private fun setProgressBarColor(c1: Int, c2: Int) {
+        progressSlider.thumbTintList = ColorStateList.valueOf(c1)
+        val ld = progressSlider.progressDrawable as LayerDrawable
+
+        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
+        clipDrawableProgress.setColorFilter(c1, PorterDuff.Mode.SRC_IN)
+
+        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
+        clipDrawableBackground.setColorFilter(c2, PorterDuff.Mode.SRC_IN)
+    }
 
     private fun setUpPlayPauseFab() {
         TintHelper.setTintAuto(playPauseButton, Color.WHITE, true)

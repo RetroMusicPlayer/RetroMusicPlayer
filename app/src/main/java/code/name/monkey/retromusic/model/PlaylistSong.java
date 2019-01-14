@@ -1,18 +1,10 @@
 package code.name.monkey.retromusic.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 public class PlaylistSong extends Song {
-    public static final Parcelable.Creator<PlaylistSong> CREATOR = new Parcelable.Creator<PlaylistSong>() {
-        public PlaylistSong createFromParcel(Parcel source) {
-            return new PlaylistSong(source);
-        }
+    public static PlaylistSong EMPTY_PLAYLIST_SONG = new PlaylistSong(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", -1, -1);
 
-        public PlaylistSong[] newArray(int size) {
-            return new PlaylistSong[size];
-        }
-    };
     public final int playlistId;
     public final int idInPlayList;
 
@@ -20,12 +12,6 @@ public class PlaylistSong extends Song {
         super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName);
         this.playlistId = playlistId;
         this.idInPlayList = idInPlayList;
-    }
-
-    protected PlaylistSong(Parcel in) {
-        super(in);
-        this.playlistId = in.readInt();
-        this.idInPlayList = in.readInt();
     }
 
     @Override
@@ -58,6 +44,7 @@ public class PlaylistSong extends Song {
                 '}';
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -69,4 +56,20 @@ public class PlaylistSong extends Song {
         dest.writeInt(this.playlistId);
         dest.writeInt(this.idInPlayList);
     }
+
+    protected PlaylistSong(Parcel in) {
+        super(in);
+        this.playlistId = in.readInt();
+        this.idInPlayList = in.readInt();
+    }
+
+    public static final Creator<PlaylistSong> CREATOR = new Creator<PlaylistSong>() {
+        public PlaylistSong createFromParcel(Parcel source) {
+            return new PlaylistSong(source);
+        }
+
+        public PlaylistSong[] newArray(int size) {
+            return new PlaylistSong[size];
+        }
+    };
 }

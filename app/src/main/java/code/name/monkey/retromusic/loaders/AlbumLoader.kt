@@ -86,7 +86,7 @@ open class AlbumLoader {
             }
         }
 
-        fun getSongLoaderSortOrder(): String {
+        private fun getSongLoaderSortOrder(): String {
             return PreferenceUtil.getInstance().albumSortOrder + ", " +
                     //PreferenceUtil.getInstance().getAlbumSongSortOrder() + "," +
                     PreferenceUtil.getInstance().albumDetailSongSortOrder

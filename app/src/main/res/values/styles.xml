@@ -67,7 +67,6 @@
     </style>
 
     <style name="SubTitleTextAppearance">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:layout_gravity">start|center_vertical</item>
         <item name="android:padding">12dp</item>

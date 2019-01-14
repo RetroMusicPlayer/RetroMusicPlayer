@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import kotlinx.android.synthetic.main.volume_controls.*
 
 class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -130,8 +129,12 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private fun setProgressBarColor(newColor: Int) {
         val ld = progressSlider.progressDrawable as LayerDrawable
-        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
+        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
+        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(context!!, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!))), PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {

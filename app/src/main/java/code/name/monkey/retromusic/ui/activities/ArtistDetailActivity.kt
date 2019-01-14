@@ -82,7 +82,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
         setUpViews()
 
-        artistDetailsPresenter = ArtistDetailsPresenter(this, intent.extras)
+        artistDetailsPresenter = ArtistDetailsPresenter(this, intent.extras!!)
         artistDetailsPresenter!!.subscribe()
 
         contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->

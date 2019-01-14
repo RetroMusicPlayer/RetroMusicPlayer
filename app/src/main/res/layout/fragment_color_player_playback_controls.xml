@@ -11,7 +11,7 @@
         android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="3dp"
+        android:maxHeight="2dp"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:progressDrawable="@drawable/color_progress_seek"

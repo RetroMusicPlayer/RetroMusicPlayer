@@ -14,6 +14,7 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -129,8 +130,12 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private fun setProgressBarColor(newColor: Int) {
         val ld = progressSlider.progressDrawable as LayerDrawable
-        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
+        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
+        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(context!!, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!))), PorterDuff.Mode.SRC_IN)
+
     }
 
     private fun setUpPlayPauseFab() {

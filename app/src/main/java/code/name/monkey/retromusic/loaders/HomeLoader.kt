@@ -2,9 +2,7 @@ package code.name.monkey.retromusic.loaders
 
 
 import android.content.Context
-import code.name.monkey.retromusic.misc.DisposingObserver
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist

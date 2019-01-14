@@ -63,7 +63,7 @@ public final class RetroGlideExtension {
     }
 
     public static Key createSignature(Song song) {
-        return new MediaStoreSignature("", song.getDateModified(), 0);
+        return new MediaStoreSignature("", song.dateModified, 0);
     }
 
     public static Object getArtistModel(Artist artist) {
@@ -88,9 +88,9 @@ public final class RetroGlideExtension {
 
     public static Object getSongModel(Song song, boolean ignoreMediaStore) {
         if (ignoreMediaStore) {
-            return new AudioFileCover(song.getData());
+            return new AudioFileCover(song.data);
         } else {
-            return MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId());
+            return MusicUtil.getMediaStoreAlbumCoverUri(song.albumId);
         }
     }
 

@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments.player.material
 
 import android.animation.ObjectAnimator
+import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_volume.*
 import kotlinx.android.synthetic.main.player_time.*
 
 /**
@@ -105,6 +107,10 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         if (PreferenceUtil.getInstance().adaptiveColor) {
             lastPlaybackControlsColor = color
             text.setTextColor(color)
+
+            progressSlider.thumbTintList = ColorStateList.valueOf(color)
+            progressSlider.progressTintList = ColorStateList.valueOf(color)
+            progressSlider.progressBackgroundTintList = ColorStateList.valueOf(color)
         }
 
         updatePlayPauseColor()

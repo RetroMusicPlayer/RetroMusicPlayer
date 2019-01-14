@@ -58,7 +58,7 @@ object SongLoader {
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
 
-        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName,
+        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName?:"",
                 artistId, artistName)
     }
 
@@ -119,7 +119,7 @@ object SongLoader {
             val song: Song = if (cursor != null && cursor.moveToFirst()) {
                 getSongFromCursorImpl(cursor)
             } else {
-                Song.emptySong
+                Song.EMPTY_SONG
             }
             cursor?.close()
             e.onNext(song)

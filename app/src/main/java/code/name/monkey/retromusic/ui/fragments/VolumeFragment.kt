@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -95,17 +94,14 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun tintWhiteColor() {
-        setProgressBarColor(Color.WHITE)
+        setTintable(Color.WHITE)
     }
 
     private fun setProgressBarColor(newColor: Int) {
 
-        val text = ColorStateList(arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)), intArrayOf(ThemeStore.textColorSecondary(context!!), ThemeStore.textColorPrimary(context!!)))
-
-        volumeSeekBar.progressTintList = text
-        volumeSeekBar.progressBackgroundTintList = text
-
-        //TintHelper.setTint(volumeSeekBar, newColor, false)
+        volumeSeekBar.thumbTintList = ColorStateList.valueOf(newColor)
+        volumeSeekBar.progressTintList = ColorStateList.valueOf(newColor)
+        volumeSeekBar.progressBackgroundTintList = ColorStateList.valueOf(newColor)
         volumeDown.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
     }

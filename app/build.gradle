@@ -32,8 +32,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 277
-        versionName '3.0.530'
+        versionCode 281
+        versionName '3.0.540'
 
         multiDexEnabled true
 
@@ -166,6 +166,7 @@ dependencies {
     implementation 'com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.3'
 
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
 repositories {
     mavenCentral()

@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.util.*
 

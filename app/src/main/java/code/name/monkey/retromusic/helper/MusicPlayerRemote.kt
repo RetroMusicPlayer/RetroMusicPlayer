@@ -32,7 +32,7 @@ object MusicPlayerRemote {
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
-        } else Song.emptySong
+        } else Song.EMPTY_SONG
 
     /**
      * Async

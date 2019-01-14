@@ -195,7 +195,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     private fun setToolbarTitle(title: String) {
-
         supportActionBar!!.title = title
     }
 
@@ -230,11 +229,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         super.onDestroy()
     }
 
-    override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
-        songsPresenter!!.subscribe()
-    }
-
     override fun loading() {}
 
     override fun showEmptyView() {
@@ -249,7 +243,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     companion object {
-
         var EXTRA_PLAYLIST = "extra_playlist"
     }
 }

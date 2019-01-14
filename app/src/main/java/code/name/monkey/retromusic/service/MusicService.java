@@ -248,7 +248,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     };
 
     private static String getTrackUri(@NonNull Song song) {
-        return MusicUtil.getSongFileUri(song.getId()).toString();
+        return MusicUtil.getSongFileUri(song.id).toString();
     }
 
     private static Bitmap copy(Bitmap bitmap) {
@@ -649,7 +649,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     public void updateNotification() {
-        if (playingNotification != null && getCurrentSong().getId() != -1) {
+        if (playingNotification != null && getCurrentSong().id != -1) {
             playingNotification.update();
         }
     }
@@ -666,19 +666,19 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private void updateMediaSessionMetaData() {
         final Song song = getCurrentSong();
 
-        if (song.getId() == -1) {
+        if (song.id == -1) {
             mediaSession.setMetadata(null);
             return;
         }
 
         final MediaMetadataCompat.Builder metaData = new MediaMetadataCompat.Builder()
-                .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.getArtistName())
-                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, song.getArtistName())
-                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, song.getAlbumName())
-                .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.getTitle())
-                .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.getDuration())
+                .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, song.artistName)
+                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ARTIST, song.artistName)
+                .putString(MediaMetadataCompat.METADATA_KEY_ALBUM, song.albumName)
+                .putString(MediaMetadataCompat.METADATA_KEY_TITLE, song.title)
+                .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.duration)
                 .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, getPosition() + 1)
-                .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
+                .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.year)
                 .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -730,7 +730,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         if (position >= 0 && position < getPlayingQueue().size()) {
             return getPlayingQueue().get(position);
         } else {
-            return Song.Companion.getEmptySong();
+            return Song.EMPTY_SONG;
         }
     }
 
@@ -847,13 +847,13 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
     public void removeSong(@NonNull Song song) {
         for (int i = 0; i < playingQueue.size(); i++) {
-            if (playingQueue.get(i).getId() == song.getId()) {
+            if (playingQueue.get(i).id == song.id) {
                 playingQueue.remove(i);
                 rePosition(i);
             }
         }
         for (int i = 0; i < originalPlayingQueue.size(); i++) {
-            if (originalPlayingQueue.get(i).getId() == song.getId()) {
+            if (originalPlayingQueue.get(i).id == song.id) {
                 originalPlayingQueue.remove(i);
             }
         }
@@ -1019,7 +1019,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     public long getQueueDurationMillis(int position) {
         long duration = 0;
         for (int i = position + 1; i < playingQueue.size(); i++)
-            duration += playingQueue.get(i).getDuration();
+            duration += playingQueue.get(i).duration;
         return duration;
     }
 
@@ -1073,11 +1073,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                 break;
             case SHUFFLE_MODE_NONE:
                 this.shuffleMode = shuffleMode;
-                int currentSongId = getCurrentSong().getId();
+                int currentSongId = getCurrentSong().id;
                 playingQueue = new ArrayList<>(originalPlayingQueue);
                 int newPosition = 0;
                 for (Song song : getPlayingQueue()) {
-                    if (song.getId() == currentSongId) {
+                    if (song.id == currentSongId) {
                         newPosition = getPlayingQueue().indexOf(song);
                     }
                 }
@@ -1104,11 +1104,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         final Song song = getCurrentSong();
 
-        intent.putExtra("id", song.getId());
-        intent.putExtra("artist", song.getArtistName());
-        intent.putExtra("album", song.getAlbumName());
-        intent.putExtra("track", song.getTitle());
-        intent.putExtra("duration", song.getDuration());
+        intent.putExtra("id", song.id);
+        intent.putExtra("artist", song.artistName);
+        intent.putExtra("album", song.albumName);
+        intent.putExtra("track", song.title);
+        intent.putExtra("duration", song.duration);
         intent.putExtra("position", (long) getSongProgressMillis());
         intent.putExtra("playing", isPlaying());
         intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME);
@@ -1143,9 +1143,9 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                 savePosition();
                 savePositionInTrack();
                 final Song currentSong = getCurrentSong();
-                HistoryStore.getInstance(this).addSongId(currentSong.getId());
+                HistoryStore.getInstance(this).addSongId(currentSong.id);
                 if (songPlayCountHelper.shouldBumpPlayCount()) {
-                    SongPlayCountStore.getInstance(this).bumpPlayCount(songPlayCountHelper.getSong().getId());
+                    SongPlayCountStore.getInstance(this).bumpPlayCount(songPlayCountHelper.getSong().id);
                 }
                 songPlayCountHelper.notifySongChanged(currentSong);
                 break;
@@ -1375,14 +1375,14 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         public static final String TAG = SongPlayCountHelper.class.getSimpleName();
 
         private StopWatch stopWatch = new StopWatch();
-        private Song song = Song.Companion.getEmptySong();
+        private Song song = Song.EMPTY_SONG;
 
         public Song getSong() {
             return song;
         }
 
         boolean shouldBumpPlayCount() {
-            return song.getDuration() * 0.5d < stopWatch.getElapsedTime();
+            return song.duration * 0.5d < stopWatch.getElapsedTime();
         }
 
         void notifySongChanged(Song song) {

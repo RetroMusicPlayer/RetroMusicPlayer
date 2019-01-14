@@ -364,7 +364,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 File file1 = (File) extra;
                 int startIndex = -1;
                 for (int i = 0; i < songs.size(); i++) {
-                    if (file1.getPath().equals(songs.get(i).getData())) { // path is already canonical here
+                    if (file1.getPath().equals(songs.get(i).data)) { // path is already canonical here
                         startIndex = i;
                         break;
                     }

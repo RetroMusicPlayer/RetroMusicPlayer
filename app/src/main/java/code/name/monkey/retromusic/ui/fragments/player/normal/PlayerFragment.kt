@@ -1,20 +1,14 @@
 package code.name.monkey.retromusic.ui.fragments.player.normal
 
-import android.animation.Animator
-import android.animation.AnimatorSet
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
@@ -24,8 +18,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
 
 
 class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
@@ -45,9 +37,8 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
 
         valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), android.R.color.transparent, i)
         valueAnimator!!.addUpdateListener { animation ->
-            val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM,
-                    intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0)
-            colorGradientBackground.background = drawable
+            val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0)
+            colorGradientBackground!!.background = drawable
         }
         valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
     }

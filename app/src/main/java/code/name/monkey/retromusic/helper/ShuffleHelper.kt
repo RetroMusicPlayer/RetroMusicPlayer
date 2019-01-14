@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.helper
 
 import code.name.monkey.retromusic.model.Song
 
-import java.util.Collections
-
 
 object ShuffleHelper {
 

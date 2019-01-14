@@ -2,14 +2,12 @@ package code.name.monkey.retromusic.ui.adapter.song
 
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.interfaces.CabHolder
-import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
