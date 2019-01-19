@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        android:id="@+id/sectionTitle"
+        style="@style/SubTitleTextAppearance"
+        android:textStyle="bold" />
+
+
+    <code.name.monkey.retromusic.views.MetalRecyclerViewPager
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:itemMargin="28dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="?attr/dividerColor" />
+</LinearLayout>

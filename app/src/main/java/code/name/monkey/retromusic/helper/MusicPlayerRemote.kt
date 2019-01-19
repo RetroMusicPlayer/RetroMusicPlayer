@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.helper
 import android.annotation.TargetApi
 import android.app.Activity
 import android.content.*
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -116,15 +117,19 @@ object MusicPlayerRemote {
 
         val column = "_data"
         val projection = arrayOf(column)
+        var cursor: Cursor? = null
         try {
-            context.contentResolver.query(uri, projection, null, null, null)!!.use { cursor ->
-                if (cursor.moveToFirst()) {
-                    val column_index = cursor.getColumnIndexOrThrow(column)
-                    return cursor.getString(column_index)
+            cursor = context.contentResolver.query(uri, projection, null, null, null)
+            cursor.use { it ->
+                if (it.moveToFirst()) {
+                    val columnIndex = it.getColumnIndexOrThrow(column)
+                    return it.getString(columnIndex)
                 }
             }
         } catch (e: Exception) {
             Log.e(TAG, e.message)
+        } finally {
+            cursor!!.close()
         }
 
         return null
@@ -396,13 +401,6 @@ object MusicPlayerRemote {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private fun getSongIdFromMediaProvider(uri: Uri): String {
         return DocumentsContract.getDocumentId(uri).split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-    }
-
-    internal annotation class PlaybackLocation {
-        companion object {
-            val REMOTE = 0
-            val LOCAL = 1
-        }
     }
 
     class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) : ServiceConnection {

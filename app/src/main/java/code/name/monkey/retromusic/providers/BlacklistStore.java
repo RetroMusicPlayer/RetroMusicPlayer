@@ -8,15 +8,27 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
+import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
-import androidx.annotation.NonNull;
-import code.name.monkey.retromusic.Constants;
+import code.name.monkey.retromusic.App;
+import code.name.monkey.retromusic.model.Album;
+import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.model.Genre;
+import code.name.monkey.retromusic.model.Home;
+import code.name.monkey.retromusic.model.Playlist;
+import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import io.reactivex.Observable;
+import io.reactivex.functions.Function7;
 
 import static code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED;
+import static code.name.monkey.retromusic.ui.adapter.HomeAdapter.RECENT_ALBUMS;
+import static code.name.monkey.retromusic.ui.adapter.HomeAdapter.SUGGESTIONS;
 
 public class BlacklistStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "blacklist.db";
@@ -146,6 +158,45 @@ public class BlacklistStore extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.close();
         return paths;
+    }
+
+    private void hmm() {
+        RepositoryImpl repository = new RepositoryImpl(App.Companion.getContext());
+
+
+        Observable.combineLatest(repository.getSuggestionSongs(), repository.getRecentAlbums(),
+                repository.getTopAlbums(), repository.getRecentArtists(), repository.getTopArtists(),
+                repository.getAllGenres(), repository.getAllPlaylists(), new Function7<ArrayList<Song>, ArrayList<Album>, ArrayList<Album>, ArrayList<Artist>, ArrayList<Artist>, ArrayList<Genre>, ArrayList<Playlist>, List<Home>>() {
+                    @Override
+                    public List<Home> apply(ArrayList<Song> songs, ArrayList<Album> albums, ArrayList<Album> albums2, ArrayList<Artist> artists, ArrayList<Artist> artists2, ArrayList<Genre> genres, ArrayList<Playlist> playlists) throws Exception {
+                        List<Home> homes = new ArrayList<>();
+                        homes.add(new Home(0, 0, songs, SUGGESTIONS));
+                        homes.add(new Home(0, 0, albums, RECENT_ALBUMS));
+                        return homes;
+
+                    }
+                }).subscribe(homes -> {
+            if (homes.isEmpty()) {
+
+            }
+        });
+
+
+        Observable.combineLatest(
+                repository.getSuggestionSongs(),
+                repository.getRecentAlbums(),
+                repository.getTopAlbums(),
+                repository.getRecentArtists(),
+                repository.getTopArtists(),
+                repository.getAllGenres(),
+                repository.getAllPlaylists(),
+                (ArrayList<Song> suggestions, ArrayList<Album> recentAlbums, ArrayList<Album> topAlbums,
+                 ArrayList<Artist> recentArtists, ArrayList<Artist> topArtists,
+                 ArrayList<Genre> genres, ArrayList<Playlist> playlists) -> {
+                    List<Home> homes = new ArrayList<>();
+
+                    return homes;
+                }).subscribe();
     }
 
     public interface BlacklistStoreColumns {

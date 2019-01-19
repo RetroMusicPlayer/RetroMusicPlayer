@@ -208,7 +208,7 @@ class ColorFragment : AbsPlayerFragment() {
     private fun setColors(backgroundColor: Int, textColor: Int) {
         playbackControlsFragment!!.setDark(textColor, backgroundColor)
 
-        colorGradientBackground.setBackgroundColor(backgroundColor)
+        colorGradientBackground?.setBackgroundColor(backgroundColor)
 
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, textColor, activity)
 
@@ -230,7 +230,7 @@ class ColorFragment : AbsPlayerFragment() {
 
         valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), paletteColor, i)
         valueAnimator!!.addUpdateListener { animation ->
-            colorGradientBackground.setBackgroundColor(animation.animatedValue as Int)
+            colorGradientBackground?.setBackgroundColor(animation.animatedValue as Int)
         }
         valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
     }

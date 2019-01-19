@@ -117,7 +117,7 @@ static def getDate() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.fragment:fragment:$supportLibVersion"
     implementation "androidx.appcompat:appcompat:1.0.2"
     implementation "androidx.recyclerview:recyclerview:$supportLibVersion"

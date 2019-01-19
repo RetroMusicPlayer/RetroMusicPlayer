@@ -20,7 +20,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.util.Pair
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
@@ -30,21 +29,12 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
-import java.util.*
 
-class AlbumFullWithAdapter(private val activity: Activity,
-                           metrics: DisplayMetrics) : MetalRecyclerViewPager.MetalAdapter<AlbumFullWithAdapter.FullMetalViewHolder>(metrics) {
-    private var dataSet: List<Album> = ArrayList()
-
-    fun swapData(list: ArrayList<Album>) {
-        dataSet = list
-        notifyDataSetChanged()
-    }
+class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet: ArrayList<Album>, metrics: DisplayMetrics) :
+        MetalRecyclerViewPager.MetalAdapter<AlbumFullWidthAdapter.FullMetalViewHolder>(metrics) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FullMetalViewHolder {
-        val viewItem = LayoutInflater.from(parent.context)
-                .inflate(R.layout.pager_item, parent, false)
-        return FullMetalViewHolder(viewItem)
+        return FullMetalViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.pager_item, parent, false))
     }
 
     override fun onBindViewHolder(holder: FullMetalViewHolder, position: Int) {
@@ -97,7 +87,7 @@ class AlbumFullWithAdapter(private val activity: Activity,
     inner class FullMetalViewHolder(itemView: View) : MetalRecyclerViewPager.MetalViewHolder(itemView) {
 
         override fun onClick(v: View?) {
-            val albumPairs = arrayOf<Pair<*, *>>(Pair.create<ImageView, String>(image, activity.resources.getString(R.string.transition_album_art)))
+            val albumPairs = arrayOf<Pair<*, *>>(Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
             NavigationUtil.goToAlbum(activity, dataSet[adapterPosition].id, *albumPairs)
         }
     }
