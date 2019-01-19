@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -21,31 +20,33 @@ import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
-import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
-import code.name.monkey.retromusic.ui.adapter.CollageSongAdapter
-import code.name.monkey.retromusic.ui.adapter.GenreAdapter
-import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWithAdapter
-import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter
+import code.name.monkey.retromusic.ui.adapter.HomeAdapter
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_banner_home.*
-import kotlinx.android.synthetic.main.home_section_content.*
 import java.io.File
 import java.util.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
+    override fun loadHomes(homes: ArrayList<Home>) {
+        recyclerView.apply {
+            val homeAdapter = HomeAdapter(mainActivity, homes, displayMetrics)
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
+        }
+    }
 
     val disposable: CompositeDisposable = CompositeDisposable()
     private lateinit var homePresenter: HomePresenter
@@ -208,19 +209,18 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         //homeAdapter.swapDataSet(homes);
     }
 
-    override fun recentArtist(artists: ArrayList<Artist>) {
-        recentArtistContainer.visibility = View.VISIBLE
-        recentArtist.apply {
-            val artistAdapter = ArtistAdapter(mainActivity, artists, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
-            layoutManager = GridLayoutManager(mainActivity, 1, GridLayoutManager.HORIZONTAL, false)
-            adapter = artistAdapter
-        }
+    /*override fun recentArtist(artists: ArrayList<Artist>) {
+        *//* recentArtistContainer.visibility = View.VISIBLE
+         recentArtist.apply {
+             val artistAdapter = ArtistAdapter(mainActivity, artists, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
+             layoutManager = GridLayoutManager(mainActivity, 1, GridLayoutManager.HORIZONTAL, false)
+             adapter = artistAdapter
+         }*//*
     }
 
     override fun recentAlbum(albums: ArrayList<Album>) {
         recentAlbumsContainer.visibility = View.VISIBLE
-        val artistAdapter = AlbumFullWithAdapter(mainActivity, displayMetrics)
-        artistAdapter.swapData(albums)
+        val artistAdapter = AlbumFullWidthAdapter(mainActivity, albums, displayMetrics)
         recentAlbum.adapter = artistAdapter
     }
 
@@ -236,17 +236,27 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun topAlbums(albums: ArrayList<Album>) {
         topAlbumsContainer.visibility = View.VISIBLE
-        val artistAdapter = AlbumFullWithAdapter(mainActivity, displayMetrics)
-        artistAdapter.swapData(albums)
+        val artistAdapter = AlbumFullWidthAdapter(mainActivity, albums, displayMetrics)
         topAlbum.adapter = artistAdapter
     }
 
     override fun suggestions(songs: ArrayList<Song>) {
         if (!songs.isEmpty()) {
             suggestionContainer.visibility = View.VISIBLE
-            val artistAdapter = CollageSongAdapter(mainActivity, songs)
+            val artistAdapter = SpanSongsAdapter(mainActivity, songs, R.layout.image, false, null)
+            val manager = GridLayoutManager(mainActivity, 2, GridLayoutManager.HORIZONTAL, false)
+            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (position) {
+                        0 -> 2
+                        else -> {
+                            1
+                        }
+                    }
+                }
+            }
             suggestionSongs.apply {
-                layoutManager = if (RetroUtil.isTablet()) GridLayoutManager(mainActivity, 2) else LinearLayoutManager(mainActivity)
+                layoutManager = if (RetroUtil.isTablet()) GridLayoutManager(mainActivity, 2) else manager
                 adapter = artistAdapter
             }
         }
@@ -264,7 +274,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             adapter = genreAdapter
         }
     }
-
+*/
 
     companion object {
 

@@ -1,8 +1,6 @@
 package code.name.monkey.retromusic.mvp.contract
 
 import code.name.monkey.retromusic.model.*
-import java.util.ArrayList
-
 import code.name.monkey.retromusic.mvp.BasePresenter
 import code.name.monkey.retromusic.mvp.BaseView
 
@@ -10,7 +8,7 @@ interface HomeContract {
 
     interface HomeView : BaseView<ArrayList<Any>> {
 
-        fun recentArtist(artists: ArrayList<Artist>)
+        /*fun recentArtist(artists: ArrayList<Artist>)
 
         fun recentAlbum(albums: ArrayList<Album>)
 
@@ -22,12 +20,14 @@ interface HomeContract {
 
         fun playlists(playlists: ArrayList<Playlist>)
 
-        fun geners(songs: ArrayList<Genre>)
+        fun geners(songs: ArrayList<Genre>)*/
+
+        fun loadHomes(homes: ArrayList<Home>)
     }
 
     interface HomePresenter : BasePresenter<HomeView> {
 
-        fun loadRecentAlbums()
+        /*fun loadRecentAlbums()
 
         fun loadTopAlbums()
 
@@ -37,6 +37,7 @@ interface HomeContract {
 
         fun loadSuggestions()
 
-        fun loadGenres()
+        fun loadGenres()*/
+        fun loadAll();
     }
 }

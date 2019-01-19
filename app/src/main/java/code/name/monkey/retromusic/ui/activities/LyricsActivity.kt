@@ -250,13 +250,13 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
                 override fun onPostExecute(l: Lyrics?) {
                     lyrics = l
-                    offlineLyrics.visibility = View.VISIBLE
+                    offlineLyrics?.visibility = View.VISIBLE
                     if (l == null) {
-                        offlineLyrics.setText(R.string.no_lyrics_found)
+                        offlineLyrics?.setText(R.string.no_lyrics_found)
                         return
                     }
                     (activity as LyricsActivity).lyricsString = l.data
-                    offlineLyrics.text = l.data
+                    offlineLyrics?.text = l.data
                 }
 
                 override fun onCancelled(s: Lyrics?) {
