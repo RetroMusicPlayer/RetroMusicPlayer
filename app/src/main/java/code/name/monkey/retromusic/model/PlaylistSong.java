@@ -2,6 +2,8 @@ package code.name.monkey.retromusic.model;
 
 import android.os.Parcel;
 
+import code.name.monkey.models.Song;
+
 public class PlaylistSong extends Song {
     public static PlaylistSong EMPTY_PLAYLIST_SONG = new PlaylistSong(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", -1, -1);
 

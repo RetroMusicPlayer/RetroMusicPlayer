@@ -30,9 +30,9 @@ class Artist {
     val albumCount: Int
         get() = albums!!.size
 
-    val songs: ArrayList<Song>
+    val songs: ArrayList<code.name.monkey.models.Song>
         get() {
-            val songs = ArrayList<Song>()
+            val songs = ArrayList<code.name.monkey.models.Song>()
             for (album in albums!!) {
                 songs.addAll(album.songs!!)
             }

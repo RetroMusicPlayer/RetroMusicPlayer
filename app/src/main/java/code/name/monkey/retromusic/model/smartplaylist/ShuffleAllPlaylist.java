@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.models.Song;
 
 import java.util.ArrayList;
 

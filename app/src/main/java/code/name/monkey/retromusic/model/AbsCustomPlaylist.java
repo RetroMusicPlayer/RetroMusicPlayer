@@ -2,12 +2,12 @@ package code.name.monkey.retromusic.model;
 
 import android.content.Context;
 import android.os.Parcel;
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import code.name.monkey.models.Song;
 import io.reactivex.Observable;
-
 
 
 public abstract class AbsCustomPlaylist extends Playlist {

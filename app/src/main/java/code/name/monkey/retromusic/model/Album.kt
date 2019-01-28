@@ -1,10 +1,10 @@
-package code.name.monkey.retromusic.model
+package code.name.monkey.models
 
 import java.util.*
 
 
 class Album {
-    val songs: ArrayList<Song>?
+    val songs: ArrayList<code.name.monkey.models.Song>?
 
     val id: Int
         get() = safeGetFirstSong().albumId
@@ -27,7 +27,7 @@ class Album {
     val songCount: Int
         get() = songs!!.size
 
-    constructor(songs: ArrayList<Song>) {
+    constructor(songs: ArrayList<code.name.monkey.models.Song>) {
         this.songs = songs
     }
 
@@ -35,7 +35,7 @@ class Album {
         this.songs = ArrayList()
     }
 
-    fun safeGetFirstSong(): Song {
-        return if (songs!!.isEmpty()) Song.EMPTY_SONG else songs[0]
+    fun safeGetFirstSong(): code.name.monkey.models.Song {
+        return if (songs!!.isEmpty()) code.name.monkey.models.Song.EMPTY_SONG else songs[0]
     }
 }
