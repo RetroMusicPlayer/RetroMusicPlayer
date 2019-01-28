@@ -62,6 +62,53 @@
             app:srcCompat="@drawable/ic_settings_white_24dp" />
     </LinearLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/buyProContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/md_grey_400"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/md_grey_200"
+                    style="@style/TextAppearance.MaterialComponents.Overline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:text="Upgrade to premium" />
+
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/md_white_1000"
+                    android:text="@string/buy_pro" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/promotional" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
     <code.name.monkey.retromusic.views.MaterialButtonTextColor
         android:id="@+id/actionFolders"
         style="@style/OptionButtonsStyle"
@@ -104,10 +151,6 @@
         android:text="@string/rate_app"
         app:icon="@drawable/ic_star_white_24dp" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
-        android:id="@+id/actionBuyPro"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/buy_pro"
-        app:icon="@drawable/ic_card_giftcard_white_24dp" />
+
 
 </LinearLayout>

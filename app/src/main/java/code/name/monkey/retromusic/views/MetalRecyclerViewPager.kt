@@ -59,20 +59,21 @@ class MetalRecyclerViewPager : RecyclerView {
         fun updateDisplayMetrics() {
             itemWidth = if (RetroUtil.isTablet()) {
                 displayMetrics.widthPixels / 2 - itemMargin * 3
+            } else if (RetroUtil.isLandscape()) {
+                ((displayMetrics.widthPixels / 1.5f) - itemMargin).toInt()
             } else {
                 displayMetrics.widthPixels - itemMargin
             }
         }
 
         override fun onBindViewHolder(holder: VH, position: Int) {
-            var currentItemWidth = itemWidth
-
+            val currentItemWidth = itemWidth
             if (position == 0) {
-                currentItemWidth += itemMargin
-                holder.rootLayout.setPadding(0, 0, 0, 0)
+                //currentItemWidth += itemMargin;
+                holder.rootLayout.setPadding(0, 0, 0, 0);
             } else if (position == itemCount - 1) {
-                currentItemWidth += itemMargin
-                holder.rootLayout.setPadding(0, 0, 0, 0)
+                //currentItemWidth += itemMargin;
+                holder.rootLayout.setPadding(0, 0, 0, 0);
             }
 
             val height = holder.rootLayout.layoutParams.height

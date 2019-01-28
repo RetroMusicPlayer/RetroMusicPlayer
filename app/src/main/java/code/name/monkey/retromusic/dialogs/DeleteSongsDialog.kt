@@ -5,6 +5,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
@@ -19,28 +20,33 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        title.setTextColor(ThemeStore.textColorPrimary(context!!))
-        MaterialUtil.setTint(actionDelete)
-        MaterialUtil.setTint(actionCancel)
-
+        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         //noinspection unchecked,ConstantConditions
         val songs = arguments!!.getParcelableArrayList<Song>("songs")
         val content: CharSequence
         if (songs != null) {
             content = if (songs.size > 1) {
-                Html.fromHtml(getString(R.string.delete_x_songs, songs.size))
+               getString(R.string.delete_x_songs, songs.size)
             } else {
-                Html.fromHtml(getString(R.string.delete_song_x, songs[0].title))
+                getString(R.string.delete_song_x, songs[0].title)
             }
-            this.title.text = content
+            dialogTitle.text = content
         }
-        actionDelete.setOnClickListener {
-            if (songs != null) {
-                MusicUtil.deleteTracks(activity!!, songs)
+        actionDelete.apply {
+            setOnClickListener {
+                if (songs != null) {
+                    MusicUtil.deleteTracks(activity!!, songs)
+                }
+                dismiss()
             }
-            dismiss()
+            MaterialUtil.setTint(this)
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_24dp)
         }
-        actionCancel.setOnClickListener { dismiss() }
+        actionCancel.apply {
+            MaterialUtil.setTint(this, false)
+            setOnClickListener { dismiss() }
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
+        }
     }
 
 

@@ -1,4 +1,4 @@
-package code.name.monkey.models;
+package code.name.monkey.retromusic.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

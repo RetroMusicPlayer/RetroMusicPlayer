@@ -2,13 +2,13 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import android.provider.MediaStore.Audio.AudioColumns
-
-import java.util.ArrayList
-
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
+import java.util.*
+import kotlin.collections.ArrayList
 
 object ArtistLoader {
     private fun getSongLoaderSortOrder(): String {
@@ -20,9 +20,7 @@ object ArtistLoader {
 
     fun getArtist(context: Context, artistId: Int): Observable<Artist> {
         return Observable.create { e ->
-            SongLoader.getSongs(SongLoader.makeSongCursor(
-                    context,
-                    AudioColumns.ARTIST_ID + "=?",
+            SongLoader.getSongs(SongLoader.makeSongCursor(context, AudioColumns.ARTIST_ID + "=?",
                     arrayOf(artistId.toString()),
                     getSongLoaderSortOrder()))
                     .subscribe { songs ->

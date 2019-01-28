@@ -132,7 +132,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
             }
         }
 
-
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
 
         if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
@@ -218,6 +217,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                             })
                     return@map it.albums!!
                 }
+
                 .subscribe {
 
                     it.remove(album)

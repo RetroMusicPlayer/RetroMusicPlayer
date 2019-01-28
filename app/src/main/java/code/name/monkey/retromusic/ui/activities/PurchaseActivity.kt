@@ -16,7 +16,6 @@ import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 import kotlinx.android.synthetic.main.activity_pro_version.*
-import kotlinx.android.synthetic.main.activity_pro_version_content.*
 import java.lang.ref.WeakReference
 
 

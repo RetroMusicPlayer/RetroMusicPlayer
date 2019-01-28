@@ -80,14 +80,12 @@
 
     </LinearLayout>
 
-    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+    <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:progress="20"
-        app:mpb_progressStyle="horizontal"
-        app:mpb_showProgressBackground="false"
-        app:mpb_useIntrinsicPadding="false" />
+        android:progressDrawable="@drawable/color_progress_seek" />
 
 </code.name.monkey.retromusic.views.FitSystemWindowsLayout>

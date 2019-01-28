@@ -7,6 +7,7 @@
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         style="@style/SubTitleTextAppearance"
+        android:textStyle="bold"
         android:text="@string/for_you" />
 
     <LinearLayout

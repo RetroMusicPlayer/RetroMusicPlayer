@@ -1,28 +1,16 @@
 package code.name.monkey.appthemehelper.util
 
-import android.content.Context
 import android.content.res.ColorStateList
-
+import code.name.monkey.appthemehelper.ThemeStore
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
-import code.name.monkey.appthemehelper.ThemeStore
-
 object MaterialUtil {
 
-    fun setTint(button: MaterialButton) {
-        setTint(button, ThemeStore.accentColor(button.context))
-    }
-
-    private fun setTint(button: MaterialButton, accentColor: Int) {
-        val context = button.context
-        val textColor = ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
-        button.setTextColor(textColor)
-    }
-
     @JvmOverloads
-    fun setTint(button: MaterialButton, background: Boolean, color: Int = ThemeStore.accentColor(button.context)) {
-        //button.setPadding(48, 48, 48, 48);
+    fun setTint(button: MaterialButton, background: Boolean = true,
+                color: Int = ThemeStore.accentColor(button.context)) {
+
         button.isAllCaps = false
         val context = button.context
         val colorState = ColorStateList.valueOf(color)
@@ -34,7 +22,6 @@ object MaterialUtil {
             button.setTextColor(textColor)
             button.iconTint = textColor
         } else {
-            button.strokeColor = colorState
             button.setTextColor(colorState)
             button.iconTint = colorState
         }

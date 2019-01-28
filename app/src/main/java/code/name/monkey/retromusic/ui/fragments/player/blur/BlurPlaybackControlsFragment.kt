@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.blur
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,6 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -24,14 +21,13 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment
-
-
 
 
 class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -108,7 +104,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
         lastPlaybackControlsColor = Color.WHITE
-        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
+        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_200)
 
         title.setTextColor(lastPlaybackControlsColor)
         text.setTextColor(lastDisabledPlaybackControlsColor)
@@ -129,13 +125,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setProgressBarColor(newColor: Int) {
-        val ld = progressSlider.progressDrawable as LayerDrawable
-        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-
-        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(context!!, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!))), PorterDuff.Mode.SRC_IN)
-
+        ViewUtil.setProgressDrawable(progressSlider, newColor)
     }
 
     private fun setUpPlayPauseFab() {

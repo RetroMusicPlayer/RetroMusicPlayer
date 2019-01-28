@@ -44,8 +44,8 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         viewPager.addOnPageChangeListener(this)
         //noinspection ConstantConditions
         if (PreferenceUtil.getInstance().carouselEffect() &&
-                !((PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FULL)
-                        || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
+                !((PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FULL) ||
+                        (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
                         || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FIT))) {
             viewPager.clipToPadding = false
             viewPager.setPadding(96, 0, 96, 0)

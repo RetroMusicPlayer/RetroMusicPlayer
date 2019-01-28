@@ -120,8 +120,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         return playlist.name
     }
 
-    override fun onMultipleItemAction(menuItem: MenuItem,
-                                      selection: ArrayList<Playlist>) {
+    override fun onMultipleItemAction(menuItem: MenuItem, selection: ArrayList<Playlist>) {
         when (menuItem.itemId) {
             R.id.action_delete_playlist -> {
                 var i = 0
@@ -172,39 +171,39 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
 
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         init {
-            if (image != null) {
-                val iconPadding = activity.resources
-                        .getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
-                image!!.setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
-                image!!.setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor),
-                        PorterDuff.Mode.SRC_IN)
+
+            image?.apply {
+                val iconPadding = activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
+                setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
+                setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor), PorterDuff.Mode.SRC_IN)
             }
-            if (menu != null) {
-                menu!!.setOnClickListener { view ->
-                    val playlist = dataSet[adapterPosition]
-                    val popupMenu = PopupMenu(activity, view)
-                    popupMenu.inflate(if (getItemViewType() == SMART_PLAYLIST)
-                        R.menu.menu_item_smart_playlist
-                    else
-                        R.menu.menu_item_playlist)
-                    if (playlist is LastAddedPlaylist) {
-                        popupMenu.menu.findItem(R.id.action_clear_playlist).isVisible = false
-                    }
-                    popupMenu.setOnMenuItemClickListener { item ->
-                        if (item.itemId == R.id.action_clear_playlist) {
-                            if (playlist is AbsSmartPlaylist) {
-                                ClearSmartPlaylistDialog.create(playlist)
-                                        .show(activity.supportFragmentManager,
-                                                "CLEAR_SMART_PLAYLIST_" + playlist.name)
-                                return@setOnMenuItemClickListener true
-                            }
-                        }
-                        PlaylistMenuHelper.handleMenuClick(
-                                activity, dataSet[adapterPosition], item)
-                    }
-                    popupMenu.show()
+
+            menu?.setOnClickListener { view ->
+                val playlist = dataSet[adapterPosition]
+                val popupMenu = PopupMenu(activity, view)
+                popupMenu.inflate(if (itemViewType == SMART_PLAYLIST)
+                    R.menu.menu_item_smart_playlist
+                else
+                    R.menu.menu_item_playlist)
+                if (playlist is LastAddedPlaylist) {
+                    popupMenu.menu.findItem(R.id.action_clear_playlist).isVisible = false
                 }
+                popupMenu.setOnMenuItemClickListener { item ->
+                    if (item.itemId == R.id.action_clear_playlist) {
+                        if (playlist is AbsSmartPlaylist) {
+                            ClearSmartPlaylistDialog.create(playlist)
+                                    .show(activity.supportFragmentManager,
+                                            "CLEAR_SMART_PLAYLIST_" + playlist.name)
+                            return@setOnMenuItemClickListener true
+                        }
+                    }
+                    PlaylistMenuHelper.handleMenuClick(
+                            activity, dataSet[adapterPosition], item)
+                }
+                popupMenu.show()
             }
+
+            imageTextContainer?.cardElevation = 0f
         }
 
         override fun onClick(v: View?) {

@@ -66,11 +66,7 @@ class HorizontalAlbumAdapter(activity: AppCompatActivity, dataSet: ArrayList<Alb
     }
 
     override fun getItemCount(): Int {
-        return when {
-            dataSet.size < 5 -> dataSet.size
-            dataSet.size >= 5 -> 5
-            else -> super.getItemCount()
-        }
+        return dataSet.size
     }
 
     companion object {

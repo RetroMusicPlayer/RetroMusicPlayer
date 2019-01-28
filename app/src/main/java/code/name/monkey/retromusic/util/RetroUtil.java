@@ -63,26 +63,6 @@ public class RetroUtil {
         return ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), paramInt);
     }
 
-    public static String EncodeString(String string) {
-        return string.replace("%", "%25")
-                .replace(".", "%2E")
-                .replace("#", "%23")
-                .replace("$", "%24")
-                .replace("/", "%2F")
-                .replace("[", "%5B")
-                .replace("]", "%5D");
-    }
-
-    public static String DecodeString(String string) {
-        return string.replace("%25", "%")
-                .replace("%2E", ".")
-                .replace("%23", "#")
-                .replace("%24", "$")
-                .replace("%2F", "/")
-                .replace("%5B", "[")
-                .replace("%5D", "]");
-    }
-
     public static boolean isTablet() {
         return App.Companion.getContext().getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }

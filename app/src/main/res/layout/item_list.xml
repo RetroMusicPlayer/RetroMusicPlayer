@@ -38,8 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="0dp">
+                app:cardCornerRadius="6dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
@@ -83,7 +82,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:textSize="16sp"  />
+                android:textSize="16sp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"

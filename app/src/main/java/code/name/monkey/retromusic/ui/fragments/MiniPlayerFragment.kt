@@ -135,7 +135,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
 
-        var flingPlayBackController: GestureDetector
+        private var flingPlayBackController: GestureDetector
 
         init {
             flingPlayBackController = GestureDetector(context,

@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
 import kotlinx.android.synthetic.main.player_time.*
 import kotlinx.android.synthetic.main.volume_controls.*
@@ -114,7 +115,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     }
 
     private fun setProgressBarColor(dark: Int) {
-        TintHelper.setTintAuto(progressSlider!!, dark, false)
+        ViewUtil.setProgressDrawable(progressSlider, dark)
     }
 
     private fun updateTextColors(color: Int) {

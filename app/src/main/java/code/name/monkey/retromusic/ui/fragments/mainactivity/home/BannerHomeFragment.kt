@@ -40,13 +40,6 @@ import java.io.File
 import java.util.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
-    override fun loadHomes(homes: ArrayList<Home>) {
-        recyclerView.apply {
-            val homeAdapter = HomeAdapter(mainActivity, homes, displayMetrics)
-            layoutManager = LinearLayoutManager(mainActivity)
-            adapter = homeAdapter
-        }
-    }
 
     val disposable: CompositeDisposable = CompositeDisposable()
     private lateinit var homePresenter: HomePresenter
@@ -61,7 +54,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
     }
-
 
     private val displayMetrics: DisplayMetrics
         get() {
@@ -205,76 +197,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     }
 
-    override fun showData(list: ArrayList<Any>) {
-        //homeAdapter.swapDataSet(homes);
-    }
-
-    /*override fun recentArtist(artists: ArrayList<Artist>) {
-        *//* recentArtistContainer.visibility = View.VISIBLE
-         recentArtist.apply {
-             val artistAdapter = ArtistAdapter(mainActivity, artists, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
-             layoutManager = GridLayoutManager(mainActivity, 1, GridLayoutManager.HORIZONTAL, false)
-             adapter = artistAdapter
-         }*//*
-    }
-
-    override fun recentAlbum(albums: ArrayList<Album>) {
-        recentAlbumsContainer.visibility = View.VISIBLE
-        val artistAdapter = AlbumFullWidthAdapter(mainActivity, albums, displayMetrics)
-        recentAlbum.adapter = artistAdapter
-    }
-
-    override fun topArtists(artists: ArrayList<Artist>) {
-        topArtistContainer.visibility = View.VISIBLE
-        topArtist.apply {
-            layoutManager = GridLayoutManager(mainActivity, 1, GridLayoutManager.HORIZONTAL, false)
-            val artistAdapter = ArtistAdapter(mainActivity, artists, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
-            adapter = artistAdapter
-        }
-
-    }
-
-    override fun topAlbums(albums: ArrayList<Album>) {
-        topAlbumsContainer.visibility = View.VISIBLE
-        val artistAdapter = AlbumFullWidthAdapter(mainActivity, albums, displayMetrics)
-        topAlbum.adapter = artistAdapter
-    }
-
-    override fun suggestions(songs: ArrayList<Song>) {
-        if (!songs.isEmpty()) {
-            suggestionContainer.visibility = View.VISIBLE
-            val artistAdapter = SpanSongsAdapter(mainActivity, songs, R.layout.image, false, null)
-            val manager = GridLayoutManager(mainActivity, 2, GridLayoutManager.HORIZONTAL, false)
-            manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (position) {
-                        0 -> 2
-                        else -> {
-                            1
-                        }
-                    }
-                }
-            }
-            suggestionSongs.apply {
-                layoutManager = if (RetroUtil.isTablet()) GridLayoutManager(mainActivity, 2) else manager
-                adapter = artistAdapter
-            }
+    override fun showData(list: ArrayList<Home>) {
+        recyclerView.apply {
+            val homeAdapter = HomeAdapter(mainActivity, list, displayMetrics)
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
         }
     }
-
-    override fun playlists(playlists: ArrayList<Playlist>) {
-
-    }
-
-    override fun geners(songs: ArrayList<Genre>) {
-        genreContainer.visibility = View.VISIBLE
-        genresRecyclerView.apply {
-            val genreAdapter = GenreAdapter(activity!!, songs, R.layout.item_list)
-            layoutManager = LinearLayoutManager(context)
-            adapter = genreAdapter
-        }
-    }
-*/
 
     companion object {
 

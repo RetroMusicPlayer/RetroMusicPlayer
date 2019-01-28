@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.plain
 import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +24,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
@@ -139,9 +138,7 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private fun setProgressBarColor(newColor: Int) {
         progressSlider.thumbTintList = ColorStateList.valueOf(newColor)
-        val ld = progressSlider.progressDrawable as LayerDrawable
-        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        ViewUtil.setProgressDrawable(progressSlider, newColor)
     }
 
     private fun setUpShuffleButton() {

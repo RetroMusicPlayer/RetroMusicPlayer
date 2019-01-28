@@ -13,18 +13,18 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
-        android:paddingEnd="0dp"
-        android:paddingLeft="16dp">
+        android:paddingLeft="16dp"
+        android:paddingEnd="0dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/image_text"
+            style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="36dp"
             android:layout_height="match_parent"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:maxLines="1"
-            android:minHeight="40dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:minHeight="40dp" />
     </FrameLayout>
 
 
@@ -33,37 +33,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="12dp"
         android:layout_weight="1.0"
         android:orientation="vertical"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingEnd="0dp"
-            android:paddingStart="6dp">
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
+                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
-                android:textColor="?android:attr/textColorPrimary"
                 tools:text="Song title" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/time"
+                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:padding="4dp"
-                android:textColor="?android:attr/textColorSecondary"
                 tools:text="22:00" />
         </LinearLayout>
     </FrameLayout>

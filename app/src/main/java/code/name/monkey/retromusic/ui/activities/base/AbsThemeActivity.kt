@@ -10,7 +10,6 @@ import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.ATHActivity
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
@@ -144,7 +143,7 @@ abstract class AbsThemeActivity : AbsCrashCollector(), Runnable {
     }
 
     open fun setLightNavigationBar(enabled: Boolean) {
-        if (!ATHUtil.isWindowBackgroundDark(this) && ThemeStore.coloredNavigationBar(this)) {
+        if (!ATHUtil.isWindowBackgroundDark(this) and ThemeStore.coloredNavigationBar(this)) {
             ATH.setLightNavigationbar(this, enabled)
         }
     }

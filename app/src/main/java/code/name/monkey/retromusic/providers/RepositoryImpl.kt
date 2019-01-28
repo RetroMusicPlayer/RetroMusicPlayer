@@ -7,9 +7,11 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import io.reactivex.Observable
-import java.util.*
 
 class RepositoryImpl(private val context: Context) : Repository {
+    override val favoritePlaylist: Observable<ArrayList<Playlist>>
+        get() = PlaylistLoader.getFavoritePlaylist(context)
+
 
     override val allSongs: Observable<ArrayList<Song>>
         get() = SongLoader.getAllSongs(context)

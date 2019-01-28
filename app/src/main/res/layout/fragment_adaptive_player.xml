@@ -47,13 +47,10 @@
 
             </FrameLayout>
 
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                app:cardUseCompatPadding="true">
+                android:layout_weight="1">
 
                 <fragment
                     android:id="@+id/playerAlbumCoverFragment"
@@ -61,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"

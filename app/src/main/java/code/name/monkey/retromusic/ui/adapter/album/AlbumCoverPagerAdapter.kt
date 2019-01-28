@@ -146,7 +146,6 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         interface ColorReceiver {
-
             fun onColorReady(color: Int, request: Int)
         }
 

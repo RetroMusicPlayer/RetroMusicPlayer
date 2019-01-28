@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
-import code.name.monkey.models.Song;
+import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.SongPlayCountStore;
 
 import java.util.ArrayList;

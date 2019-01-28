@@ -5,12 +5,14 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
+import kotlinx.android.synthetic.main.dialog_delete.*
 import java.util.*
 
 
@@ -18,7 +20,7 @@ class DeletePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
+        return inflater.inflate(R.layout.dialog_delete, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,17 +34,22 @@ class DeletePlaylistDialog : RoundedBottomSheetDialogFragment() {
         } else {
             Html.fromHtml(getString(R.string.delete_playlist_x, playlists[0].name))
         }
-        bannerTitle.text = content
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        dialogTitle.text = content
+        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
 
-        actionRemove.setText(R.string.action_delete)
-        actionRemove.setTextColor(ThemeStore.textColorSecondary(context!!))
-        actionCancel.setTextColor(ThemeStore.textColorSecondary(context!!))
-
-        actionCancel.setOnClickListener { dismiss() }
-        actionRemove.setOnClickListener {
-            PlaylistsUtil.deletePlaylists(activity!!, playlists)
-            dismiss()
+        actionDelete.apply {
+            setText(R.string.action_delete)
+            setOnClickListener {
+                PlaylistsUtil.deletePlaylists(context, playlists)
+                dismiss()
+            }
+            MaterialUtil.setTint(this)
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_delete_white_24dp)
+        }
+        actionCancel.apply {
+            MaterialUtil.setTint(this, false)
+            setOnClickListener { dismiss() }
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
         }
     }
 

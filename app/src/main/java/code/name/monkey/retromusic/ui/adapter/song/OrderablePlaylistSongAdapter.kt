@@ -58,7 +58,7 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
         return onMoveItemListener != null && position > 0 &&
-                (ViewUtil.hitTest(holder.dragView, x, y) || ViewUtil.hitTest(holder.image, x, y))
+                (ViewUtil.hitTest(holder.dragView!!, x, y) || ViewUtil.hitTest(holder.image!!, x, y))
     }
 
     override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange {

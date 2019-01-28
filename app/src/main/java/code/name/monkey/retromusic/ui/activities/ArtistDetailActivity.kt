@@ -27,7 +27,9 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
+import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.rest.LastFMRestClient
@@ -44,6 +46,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContract.ArtistsDetailsView {
 
@@ -51,8 +54,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private var artist: Artist? = null
     private var lastFMRestClient: LastFMRestClient? = null
     private var artistDetailsPresenter: ArtistDetailsPresenter? = null
-    private var songAdapter: SimpleSongAdapter? = null
-    private var albumAdapter: AlbumAdapter? = null
+    private lateinit var songAdapter: SimpleSongAdapter
+    private lateinit var albumAdapter: AlbumAdapter
     private var forceDownload: Boolean = false
 
     private fun setupWindowTransitions() {
@@ -225,9 +228,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         artistTitle.text = artist.name
         text.text = String.format("%s • %s", MusicUtil.getArtistInfoString(this, artist), MusicUtil
                 .getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs)))
+        //val songs = artist.songs.sortedWith(compareBy { it.title }) as ArrayList<Song>
+        songAdapter.swapDataSet(artist.songs)
 
-        songAdapter!!.swapDataSet(artist.songs)
-        albumAdapter!!.swapDataSet(artist.albums!!)
+        //val albums = artist.albums?.sortedWith(compareBy { it.artistName }) as ArrayList<Album>
+        albumAdapter.swapDataSet(artist.albums!!)
     }
 
     private fun loadBiography(lang: String? = Locale.getDefault().language) {

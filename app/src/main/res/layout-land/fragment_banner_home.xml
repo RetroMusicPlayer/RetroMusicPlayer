@@ -67,7 +67,10 @@
                         <TextView
                             android:id="@+id/bannerTitle"
                             style="@style/BigTitleTextAppearanceToolbar"
+                            android:shadowColor="@color/md_black_1000"
+                            android:shadowRadius="2"
                             android:text="@string/app_name"
+                            android:textColor="@color/md_white_1000"
                             tools:ignore="MissingPrefix" />
 
                         <code.name.monkey.retromusic.views.CircularImageView
@@ -108,7 +111,11 @@
 
                     <include layout="@layout/abs_playlists" />
 
-                    <include layout="@layout/home_section_content" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

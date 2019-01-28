@@ -253,7 +253,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void setUpRecyclerView() {
         //noinspection ConstantConditions
-        ViewUtil.setUpFastScrollRecyclerViewColor(getActivity(), recyclerView,
+        ViewUtil.INSTANCE.setUpFastScrollRecyclerViewColor(getActivity(), recyclerView,
                 ThemeStore.Companion.accentColor(getActivity()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         appBarLayout.addOnOffsetChangedListener(this);

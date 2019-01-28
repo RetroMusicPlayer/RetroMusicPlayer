@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
@@ -104,8 +105,8 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public static void goToProVersion(@NonNull Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, PurchaseActivity.class), null);
+    public static void goToProVersion(@NonNull Context context) {
+        ActivityCompat.startActivity(context, new Intent(context, PurchaseActivity.class), null);
     }
 
     public static void goToSettings(@NonNull Activity activity) {

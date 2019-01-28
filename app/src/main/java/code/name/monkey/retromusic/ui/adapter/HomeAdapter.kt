@@ -20,9 +20,11 @@ import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter
+import code.name.monkey.retromusic.ui.adapter.song.SongAdapter
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -41,6 +43,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
             SUGGESTIONS -> SuggestionViewHolder(LayoutInflater.from(activity).inflate(R.layout.section_item_collage, parent, false))
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
             GENRES -> GenreViewHolder(layout)
+            PLAYLISTS -> PlaylistViewHolder(layout)
             else -> {
                 AlbumViewHolder(LayoutInflater.from(activity).inflate(R.layout.metal_section_recycler_view, parent, false))
             }
@@ -64,6 +67,10 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
             }
             GENRES -> {
                 val viewHolder = holder as GenreViewHolder
+                viewHolder.bindView(home)
+            }
+            PLAYLISTS -> {
+                val viewHolder = holder as PlaylistViewHolder
                 viewHolder.bindView(home)
             }
         }
@@ -165,6 +172,23 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
                 val genreAdapter = GenreAdapter(activity, home.arrayList as ArrayList<Genre>, R.layout.item_list)
                 layoutManager = LinearLayoutManager(context)
                 adapter = genreAdapter
+
+            }
+            title.text = activity.getString(home.title)
+        }
+
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        val title: TextView = view.findViewById(R.id.sectionTitle)
+
+    }
+
+    private inner class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        fun bindView(home: Home) {
+            val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist).blockingFirst()
+            recyclerView.apply {
+                val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
+                layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                adapter = songAdapter
 
             }
             title.text = activity.getString(home.title)

@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.ui.fragments.player.full
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +22,7 @@ import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
 import kotlinx.android.synthetic.main.player_time.*
 
@@ -117,9 +116,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setProgressBarColor(dark: Int) {
-        val ld = progressSlider!!.progressDrawable as LayerDrawable
-        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawable.setColorFilter(dark, PorterDuff.Mode.SRC_IN)
+        ViewUtil.setProgressDrawable(progressSlider, dark)
     }
 
     override fun onServiceConnected() {

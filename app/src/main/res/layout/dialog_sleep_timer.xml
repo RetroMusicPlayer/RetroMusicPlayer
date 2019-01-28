@@ -41,34 +41,34 @@
             android:thumb="@drawable/switch_thumb_material"
             tools:progress="20" />
 
-
-        <LinearLayout
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionSet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/action_set"
+            android:textColor="@color/md_white_1000"
+            app:backgroundTint="@color/md_pink_A400" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/actionCancel"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@android:string/cancel"
-                app:strokeColor="@color/md_grey_700"
-                app:strokeWidth="1dp"
-                tools:visibility="visible" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/actionSet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:gravity="center"
-                android:text="@string/action_set"
-                android:textColor="@color/md_white_1000"
-                app:backgroundTint="@color/md_pink_A400" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionCancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@android:string/cancel"
+            app:strokeWidth="2dp"
+            tools:visibility="visible" />
 
-        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

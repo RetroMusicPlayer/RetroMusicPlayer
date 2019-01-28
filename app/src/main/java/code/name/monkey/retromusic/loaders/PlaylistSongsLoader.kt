@@ -81,6 +81,5 @@ object PlaylistSongsLoader {
         } catch (e: SecurityException) {
             return null
         }
-
     }
 }

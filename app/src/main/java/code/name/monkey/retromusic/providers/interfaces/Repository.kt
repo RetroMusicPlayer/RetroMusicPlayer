@@ -4,6 +4,7 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import io.reactivex.Observable
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by hemanths on 11/08/17.
@@ -47,5 +48,6 @@ interface Repository {
 
     fun getGenre(genreId: Int): Observable<ArrayList<Song>>
 
+    val favoritePlaylist: Observable<ArrayList<Playlist>>
 
 }

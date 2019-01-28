@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -121,7 +120,7 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.thumbTintList = ColorStateList.valueOf(c1)
         val ld = progressSlider.progressDrawable as LayerDrawable
 
-        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
+        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
         clipDrawableProgress.setColorFilter(c1, PorterDuff.Mode.SRC_IN)
 
         val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)

@@ -1,7 +1,7 @@
-package code.name.monkey.models.lyrics;
+package code.name.monkey.retromusic.model.lyrics;
 
 
-import code.name.monkey.models.Song;
+import code.name.monkey.retromusic.model.Song;
 
 import java.util.ArrayList;
 

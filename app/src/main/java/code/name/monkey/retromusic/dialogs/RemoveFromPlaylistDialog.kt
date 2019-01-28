@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.PlaylistSong
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
@@ -40,18 +39,23 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             title = R.string.remove_song_from_playlist_title
             content = Html.fromHtml(getString(R.string.remove_song_x_from_playlist, songs[0].title))
         }
-        actionRemove.text = content
-        bannerTitle.setText(title)
-
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        actionRemove.setTextColor(ThemeStore.textColorSecondary(context!!))
-        actionCancel.setTextColor(ThemeStore.textColorSecondary(context!!))
-
-        actionRemove.setOnClickListener {
-            PlaylistsUtil.removeFromPlaylist(activity!!, songs)
-            dismiss()
+        actionDelete.apply {
+            text = content
+            setTextColor(ThemeStore.textColorSecondary(context))
+            setOnClickListener {
+                PlaylistsUtil.removeFromPlaylist(activity!!, songs)
+                dismiss()
+            }
         }
-        actionCancel.setOnClickListener { dismiss() }
+        bannerTitle.apply {
+            setText(title)
+            setTextColor(ThemeStore.textColorPrimary(context))
+        }
+
+        actionCancel.apply {
+            setTextColor(ThemeStore.textColorSecondary(context))
+            setOnClickListener { dismiss() }
+        }
     }
 
     companion object {

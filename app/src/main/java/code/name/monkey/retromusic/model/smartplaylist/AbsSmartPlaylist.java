@@ -1,4 +1,4 @@
-package code.name.monkey.models.smartplaylist;
+package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;

@@ -16,6 +16,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.Constants.ACTION_QUIT
@@ -45,7 +46,6 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.dialog_sleep_timer, container, false)
     }
 
@@ -57,7 +57,7 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MaterialUtil.setTint(actionSet, true)
+
         MaterialUtil.setTint(actionCancel, false)
 
         title.setTextColor(ThemeStore.textColorPrimary(context!!))
@@ -88,26 +88,32 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
             }
         })
 
-        actionCancel.setOnClickListener {
-
-            val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
-            if (previous != null) {
-                val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                am.cancel(previous)
-                previous.cancel()
-                Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_canceled), Toast.LENGTH_SHORT).show()
+        actionCancel.apply {
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
+            setOnClickListener {
+                val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
+                if (previous != null) {
+                    val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                    am.cancel(previous)
+                    previous.cancel()
+                    Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_canceled), Toast.LENGTH_SHORT).show()
+                }
+                dismiss()
             }
-            dismiss()
         }
-        actionSet.setOnClickListener {
-            val minutes = seekArcProgress
-            val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
-            val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
-            PreferenceUtil.getInstance().setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
-            val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
-            Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_set, minutes), Toast.LENGTH_SHORT).show()
-            dismiss()
+        actionSet.apply {
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_time_lapse_white_24dp)
+            MaterialUtil.setTint(actionSet)
+            setOnClickListener {
+                val minutes = seekArcProgress
+                val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
+                val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
+                PreferenceUtil.getInstance().setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
+                val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
+                Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_set, minutes), Toast.LENGTH_SHORT).show()
+                dismiss()
+            }
         }
     }
 

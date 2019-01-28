@@ -2,16 +2,13 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import android.database.Cursor
-import android.net.Uri
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.PlaylistsColumns
-
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Playlist
-
-import java.util.ArrayList
-
 import io.reactivex.Observable
+import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.
@@ -90,6 +87,13 @@ object PlaylistLoader {
 
     fun getAllPlaylists(context: Context): Observable<ArrayList<Playlist>> {
         return getAllPlaylists(makePlaylistCursor(context, null, null))
+    }
+
+    fun getFavoritePlaylist(context: Context): Observable<ArrayList<Playlist>> {
+        return getAllPlaylists(makePlaylistCursor(
+                context,
+                PlaylistsColumns.NAME + "=?",
+                arrayOf(context.getString(R.string.favorites))))
     }
 
     fun deletePlaylists(context: Context, playlistId: Long) {

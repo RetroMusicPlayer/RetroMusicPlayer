@@ -7,31 +7,38 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.PathInterpolator
 import android.widget.SeekBar
 import android.widget.TextView
-
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 object ViewUtil {
 
-    val RETRO_MUSIC_ANIM_TIME = 1000
+    const val RETRO_MUSIC_ANIM_TIME = 1000
 
     fun createTextColorTransition(v: TextView, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
         return createColorAnimator(v, "textColor", startColor, endColor)
     }
 
-    fun setProgressDrawable(progressSlider: SeekBar, newColor: Int) {}
+    fun setProgressDrawable(progressSlider: SeekBar, newColor: Int) {
+        val ld = progressSlider.progressDrawable as LayerDrawable
+
+        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
+        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
+        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
+
+
+    }
 
     private fun createColorAnimator(target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
         val animator: ObjectAnimator
@@ -88,9 +95,5 @@ object ViewUtil {
     fun convertDpToPixel(dp: Float, resources: Resources): Float {
         val metrics = resources.displayMetrics
         return dp * metrics.density
-    }
-
-    fun createBackgroundColorTransition(colorGradientBackground: View?, lastColor: Int, newColor: Int): Animator {
-        return null
     }
 }

@@ -10,7 +10,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageContainer"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
+        android:layout_height="156dp"
         app:cardCornerRadius="12dp"
         app:cardUseCompatPadding="true">
 

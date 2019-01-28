@@ -36,3 +36,5 @@ build/
 obj/
 
 captures
+app/normal/release/
+/models/

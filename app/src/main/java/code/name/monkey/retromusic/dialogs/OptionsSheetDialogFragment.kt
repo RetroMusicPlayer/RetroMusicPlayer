@@ -58,11 +58,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        actionBuyPro.let {
-            it.visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
-            it.iconTint = ColorStateList.valueOf(ThemeStore.accentColor(it.context))
-            it.setTextColor(ColorStateList.valueOf(ThemeStore.accentColor(it.context)))
-        }
+
         text!!.setTextColor(ThemeStore.textColorSecondary(context!!))
         titleWelcome!!.setTextColor(ThemeStore.textColorPrimary(context!!))
         titleWelcome!!.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
@@ -76,8 +72,14 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         actionFolders.setOnClickListener(this)
         actionRate.setOnClickListener(this)
         actionShare.setOnClickListener(this)
-        actionBuyPro.setOnClickListener(this)
         actionBugReport.setOnClickListener(this)
+        buyProContainer.apply {
+            setCardBackgroundColor(ThemeStore.accentColor(context!!))
+            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+            setOnClickListener {
+                NavigationUtil.goToProVersion(context)
+            }
+        }
     }
 
 
@@ -97,7 +99,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
             R.id.actionShare -> shareApp()
             R.id.actionBugReport -> prepareBugReport()
             R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
-            R.id.actionBuyPro -> NavigationUtil.goToProVersion(mainActivity)
+
         }
         dismiss()
     }

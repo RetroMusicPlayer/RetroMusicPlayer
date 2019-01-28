@@ -38,7 +38,8 @@ class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
         val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.apply {
             removeSlideEffect()
-        }.setCallbacks(this)
+            setCallbacks(this@AdaptiveFragment)
+        }
     }
 
     private fun setUpPlayerToolbar() {
@@ -50,7 +51,8 @@ class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks
             ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, activity)
             setTitleTextColor(primaryColor)
             setSubtitleTextColor(ThemeStore.textColorSecondary(context!!))
-        }.setOnMenuItemClickListener(this)
+            setOnMenuItemClickListener(this@AdaptiveFragment)
+        }
     }
 
     override fun onServiceConnected() {

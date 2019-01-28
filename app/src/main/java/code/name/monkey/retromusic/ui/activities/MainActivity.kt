@@ -79,9 +79,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
         checkShowChangelog()
 
-        if (!App.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
+        /*if (!App.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
             showPromotionalOffer()
-        }
+        }*/
     }
 
     private fun checkShowChangelog() {

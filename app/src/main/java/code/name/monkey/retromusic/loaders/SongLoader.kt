@@ -58,7 +58,8 @@ object SongLoader {
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
 
-        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName?:"",
+        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName
+                ?: "",
                 artistId, artistName)
     }
 
@@ -138,31 +139,10 @@ object SongLoader {
                 .flatMap {
                     val list = ArrayList<Song>()
                     ShuffleHelper.makeShuffleList(it, -1)
-                    if (it.size > 9) {
-                        list.addAll(it.subList(0, 9))
+                    if (it.size >= 7) {
+                        list.addAll(it.subList(0, 7))
                     }
                     return@flatMap Observable.just(list)
                 }
-        /*.flatMap({ songs ->
-            val list = ArrayList<Song>()
-            ShuffleHelper.makeShuffleList(songs, -1)
-            if (songs.size > 9) {
-                list.addAll(songs.subList(0, 9))
-            }
-            Observable.just(list)
-        } as Function<ArrayList<Song>, ObservableSource<ArrayList<Song>>>)*/
-        /*.subscribe(songs -> {
-                ArrayList<Song> list = new ArrayList<>();
-                if (songs.isEmpty()) {
-                    return;
-                }
-                ShuffleHelper.makeShuffleList(songs, -1);
-                if (songs.size() > 10) {
-                    list.addAll(songs.subList(0, 10));
-                } else {
-                    list.addAll(songs);
-                }
-               return;
-            });*/
     }
 }

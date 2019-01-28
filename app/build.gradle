@@ -32,8 +32,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 281
-        versionName '3.0.540'
+        versionCode 283
+        versionName '3.0.550'
 
         multiDexEnabled true
 
@@ -132,7 +132,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:2.5.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
 
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:commons:$materialDialog"

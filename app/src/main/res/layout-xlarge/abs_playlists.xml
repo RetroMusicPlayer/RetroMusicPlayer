@@ -5,9 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         style="@style/SubTitleTextAppearance"
-        android:text="@string/for_you" />
+        android:text="@string/for_you"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"

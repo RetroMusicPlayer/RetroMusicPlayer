@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
@@ -23,10 +24,8 @@ class RenamePlaylistDialog : RoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val accentColor = ThemeStore.accentColor(context!!)
-        actionCreate.setText(R.string.action_rename)
 
-        MaterialUtil.setTint(actionCreate, true)
-        MaterialUtil.setTint(actionCancel, false)
+
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
         actionNewPlaylist.apply {
@@ -41,12 +40,22 @@ class RenamePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         bannerTitle.setText(R.string.rename_playlist_title)
-        actionCancel.setOnClickListener { dismiss() }
-        actionCreate.setOnClickListener {
-            if (actionNewPlaylist.toString().trim { it <= ' ' } != "") {
-                val playlistId = arguments!!.getLong("playlist_id")
-                PlaylistsUtil.renamePlaylist(context!!, playlistId, actionNewPlaylist.text!!.toString())
+        actionCancel.apply {
+            MaterialUtil.setTint(actionCancel, false)
+            setOnClickListener { dismiss() }
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
+        }
+
+        actionCreate.apply {
+            setText(R.string.action_rename)
+            setOnClickListener {
+                if (actionNewPlaylist.toString().trim { it <= ' ' } != "") {
+                    val playlistId = arguments!!.getLong("playlist_id")
+                    PlaylistsUtil.renamePlaylist(context!!, playlistId, actionNewPlaylist.text!!.toString())
+                }
             }
+            MaterialUtil.setTint(this)
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_edit_white_24dp)
         }
     }
 
