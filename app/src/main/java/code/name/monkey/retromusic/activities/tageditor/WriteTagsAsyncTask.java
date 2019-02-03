@@ -18,7 +18,6 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
-import org.jaudiotagger.tag.images.ArtworkFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
+import code.name.monkey.retromusic.misc.MyAndroidArtwork;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.util.MusicUtil;
 
@@ -53,9 +53,9 @@ public class WriteTagsAsyncTask extends
             if (info.artworkInfo != null && info.artworkInfo.getArtwork() != null) {
                 try {
                     albumArtFile = MusicUtil.createAlbumArtFile().getCanonicalFile();
-                    info.artworkInfo.getArtwork()
-                            .compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(albumArtFile));
-                    artwork = ArtworkFactory.createArtworkFromFile(albumArtFile);
+                    Bitmap artworkBitmap = info.artworkInfo.getArtwork();
+                    artworkBitmap.compress(Bitmap.CompressFormat.PNG, 0, new FileOutputStream(albumArtFile));
+                    artwork = MyAndroidArtwork.create(albumArtFile, artworkBitmap);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
