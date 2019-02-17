@@ -59,10 +59,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
+            android:maxHeight="3dp"
             android:paddingEnd="20dp"
+            android:progressDrawable="@drawable/color_progress_seek"
             android:progressTint="@color/md_white_1000"
             android:splitTrack="false"
-            android:thumb="@null"
             android:thumbTint="@color/md_white_1000"
             tools:progress="20" />
 

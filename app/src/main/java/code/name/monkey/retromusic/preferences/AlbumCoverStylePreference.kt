@@ -2,11 +2,10 @@ package code.name.monkey.retromusic.preferences
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.preference.DialogPreference
 
-import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 
-
-class AlbumCoverStylePreference : ATEDialogPreference {
+class AlbumCoverStylePreference : DialogPreference {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

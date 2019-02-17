@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.helper
 import android.content.Intent
 import androidx.core.app.ActivityCompat
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.ui.activities.ErrorHandlerActivity
+import code.name.monkey.retromusic.ui.activities.bugreport.ErrorHandlerActivity
 
 class TopExceptionHandler() : Thread.UncaughtExceptionHandler {
     private val defaultUEH: Thread.UncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
@@ -11,6 +11,7 @@ class TopExceptionHandler() : Thread.UncaughtExceptionHandler {
     override fun uncaughtException(t: Thread, e: Throwable) {
         var arr = e.stackTrace
         var report = e.toString() + "\n\n"
+
         report += "--------- Stack trace ---------\n\n"
         for (i in arr.indices) {
             report += "    " + arr[i].toString() + "\n"

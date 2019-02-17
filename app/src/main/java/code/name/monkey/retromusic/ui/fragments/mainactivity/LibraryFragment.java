@@ -69,7 +69,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private MaterialCab cab;
     private FragmentManager fragmentManager;
     private ImageView userImage;
-    private CompositeDisposable disposable = new CompositeDisposable();
+    private CompositeDisposable disposable ;
 
     @Override
     public void onDestroyView() {
@@ -94,12 +94,14 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
+        disposable = new CompositeDisposable();
         contentContainer = view.findViewById(R.id.fragmentContainer);
         bannerTitle = view.findViewById(R.id.bannerTitle);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
         userImage = view.findViewById(R.id.userImage);
         userImage.setOnClickListener(v -> showMainMenu());
+
         loadImageFromStorage();
         return view;
     }

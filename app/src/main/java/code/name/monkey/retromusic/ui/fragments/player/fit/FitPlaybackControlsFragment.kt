@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.fit
 
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +27,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.player_time.*
-import kotlinx.android.synthetic.main.volume_controls.*
 
 class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -112,12 +109,12 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setFabColor(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
         } else {
-            setFabColor(ThemeStore.accentColor(context!!))
+            ThemeStore.accentColor(context!!)
         }
-
+        setFabColor(colorFinal)
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
@@ -126,7 +123,6 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private fun setFabColor(i: Int) {
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)), false)
         TintHelper.setTintAuto(playPauseButton, i, true)
-
     }
 
     private fun setUpPlayPauseFab() {

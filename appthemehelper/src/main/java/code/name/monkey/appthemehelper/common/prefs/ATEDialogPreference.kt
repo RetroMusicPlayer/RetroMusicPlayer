@@ -3,6 +3,7 @@ package code.name.monkey.appthemehelper.common.prefs
 import android.content.Context
 import android.util.AttributeSet
 import code.name.monkey.appthemehelper.R
+import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.prefs.MaterialDialogPreference
 
 

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -20,6 +21,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
 class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -94,9 +96,14 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePrevNextColor()
         updatePlayPauseColor()
 
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)), false)
-        TintHelper.setTintAuto(playPauseButton, color, true)
-        TintHelper.setTintAuto(progressSlider, color, false)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
+        } else {
+            ThemeStore.accentColor(context!!)
+        }
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
+        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
+        TintHelper.setTintAuto(progressSlider, colorFinal, false)
     }
 
     private fun updatePlayPauseColor() {

@@ -13,12 +13,12 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_delete.*
+import kotlinx.android.synthetic.main.dialog_file_share.*
 
 
 class SongShareDialog : RoundedBottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_delete, container, false)
+        return inflater.inflate(R.layout.dialog_file_share, container, false)
     }
 
     @SuppressLint("StringFormatInvalid")
@@ -27,7 +27,7 @@ class SongShareDialog : RoundedBottomSheetDialogFragment() {
         val song = arguments!!.getParcelable<Song>("song")!!
         dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
 
-        actionDelete.apply {
+        audioText.apply {
             text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
             setTextColor(ThemeStore.textColorSecondary(context!!))
             setOnClickListener {
@@ -41,15 +41,16 @@ class SongShareDialog : RoundedBottomSheetDialogFragment() {
             MaterialUtil.setTint(this)
         }
 
-        actionCancel.apply {
+        audioFile.apply {
             setTextColor(ThemeStore.textColorSecondary(context!!))
             setOnClickListener {
-                MusicUtil.createShareSongFileIntent(song, context)
+                activity!!.startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, activity), null))
                 dismiss()
             }
             icon = ContextCompat.getDrawable(context, R.drawable.ic_share_white_24dp)
             MaterialUtil.setTint(this, false)
         }
+
     }
 
     companion object {

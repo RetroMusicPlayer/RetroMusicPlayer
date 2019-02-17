@@ -14,8 +14,10 @@
         android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingEnd="24dp"
+        android:maxHeight="3dp"
         android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:progressDrawable="@drawable/color_progress_seek"
         tools:progress="20" />
 
     <LinearLayout
@@ -23,8 +25,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
 
         <TextView
@@ -32,8 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingEnd="8dp"
             android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -45,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:paddingEnd="8dp"
             android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -57,11 +59,11 @@
         android:id="@+id/playerMediaControllerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:layoutDirection="ltr"
-        android:paddingEnd="4dp"
         android:paddingStart="4dp"
-        android:layout_marginBottom="8dp"
+        android:paddingEnd="4dp"
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <ImageButton
@@ -142,8 +144,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp">
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
 
         <fragment
             android:id="@+id/volumeFragment"

@@ -188,13 +188,15 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
         }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(color)), false)
-            TintHelper.setTintAuto(playPauseButton, color, true)
-            text.setTextColor(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
         } else {
-            text.setTextColor(ThemeStore.accentColor(context!!))
+            ThemeStore.accentColor(context!!)
         }
+
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
+        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
+        text.setTextColor(colorFinal)
 
         updateRepeatState()
         updateShuffleState()

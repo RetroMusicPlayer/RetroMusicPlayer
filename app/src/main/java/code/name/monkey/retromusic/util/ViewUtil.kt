@@ -37,7 +37,6 @@ object ViewUtil {
         val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
         clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
 
-
     }
 
     private fun createColorAnimator(target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {

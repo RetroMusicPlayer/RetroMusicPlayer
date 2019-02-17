@@ -20,7 +20,9 @@
         android:id="@+id/volumeSeekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:maxHeight="3dp"
+        android:progressDrawable="@drawable/color_progress_seek" />
 
     <code.name.monkey.retromusic.views.IconImageView
         android:id="@+id/volumeUp"

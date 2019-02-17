@@ -5,9 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.SystemClock
@@ -24,6 +21,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_sleep_timer.*
 import java.util.*
@@ -50,9 +48,7 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
     }
 
     private fun setProgressBarColor(dark: Int) {
-        val ld = seekBar.progressDrawable as LayerDrawable
-        val clipDrawable = ld.findDrawableByLayerId(android.R.id.progress) as ClipDrawable
-        clipDrawable.setColorFilter(dark, PorterDuff.Mode.SRC_IN)
+        ViewUtil.setProgressDrawable(progressSlider = seekBar, newColor = dark)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -68,7 +64,9 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
         seekArcProgress = PreferenceUtil.getInstance().lastSleepTimerValue
         updateTimeDisplayTime()
         seekBar.progress = seekArcProgress
+
         setProgressBarColor(ThemeStore.accentColor(context!!))
+
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 if (i < 1) {

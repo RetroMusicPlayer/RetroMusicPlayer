@@ -30,7 +30,7 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
             } else {
                 getString(R.string.delete_song_x, songs[0].title)
             }
-            dialogTitle.text = content
+            dialogTitle.text = Html.fromHtml(content)
         }
         actionDelete.apply {
             setOnClickListener {

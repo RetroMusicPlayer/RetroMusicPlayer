@@ -115,7 +115,7 @@
         <activity android:name=".ui.activities.PurchaseActivity" />
         <activity android:name=".ui.activities.EqualizerActivity" />
         <activity
-            android:name=".ui.activities.ErrorHandlerActivity"
+            android:name=".ui.activities.bugreport.ErrorHandlerActivity"
             android:immersive="true"
             android:label="@string/error"
             android:launchMode="singleInstance"

@@ -11,6 +11,7 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -126,11 +127,16 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
         }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(color)), false)
-            TintHelper.setTintAuto(playPauseButton, color, true)
-            setProgressBarColor(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
+        } else {
+            ThemeStore.accentColor(context!!)
         }
+
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
+        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
+        setProgressBarColor(colorFinal)
+
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
