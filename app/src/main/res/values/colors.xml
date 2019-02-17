@@ -4,4 +4,6 @@
     <color name="eighty_percent_black_overlay">#80000000</color>
     <color name="app_shortcut_default_foreground">#607d8b</color>
     <color name="app_shortcut_default_background">#f5f5f5</color>
+    <color name="md_indigo_A400">#3D5AFE</color>
+
 </resources>

@@ -46,9 +46,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        settingsIcons.forEach {
-            view.findViewById<ImageView>(it).setColorFilter(ThemeStore.accentColor(context!!))
-        }
+
         generalSettings.setOnClickListener(this)
         audioSettings.setOnClickListener(this)
         nowPlayingSettings.setOnClickListener(this)
