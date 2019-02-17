@@ -40,7 +40,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         appBarLayout.setBackgroundColor(primaryColor)
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        toolbar.setNavigationOnClickListener { v -> onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressed() }
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         setSupportActionBar(toolbar)
         title = null

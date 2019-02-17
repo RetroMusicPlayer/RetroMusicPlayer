@@ -6,7 +6,9 @@ import code.name.monkey.retromusic.mvp.BaseView
 
 interface HomeContract {
 
-    interface HomeView : BaseView<ArrayList<Home>>
+    interface HomeView : BaseView<ArrayList<Home>> {
+        fun showEmpty()
+    }
 
     interface HomePresenter : BasePresenter<HomeView> {
 

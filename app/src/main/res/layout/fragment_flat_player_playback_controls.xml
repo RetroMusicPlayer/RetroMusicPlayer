@@ -12,10 +12,8 @@
         android:id="@+id/progressSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="3dp"
-        android:progressDrawable="@drawable/color_progress_seek"
         android:splitTrack="false"
-        android:thumb="@drawable/switch_thumb_material"
+        android:thumb="@drawable/flat_shadow_thumb"
         tools:ignore="RtlHardcoded,UnusedAttribute" />
 
 

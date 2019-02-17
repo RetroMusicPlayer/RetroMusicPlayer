@@ -41,11 +41,13 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (favoritePlaylist.isNotEmpty()) homes.add(Home(R.string.favorites, 0, favoritePlaylist, PLAYLISTS))
                     if (genres.isNotEmpty() && PreferenceUtil.getInstance().isGenreShown) homes.add(Home(R.string.genres, 0, genres, GENRES))
                     homes
-                }).subscribe { homes ->
+                }).subscribe({ homes ->
             if (homes.isNotEmpty()) {
                 view.showData(homes as ArrayList<Home>)
             }
-        }
+        }, {
+            view.showEmpty()
+        }, { })
     }
 
     override fun subscribe() {

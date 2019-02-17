@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
+        android:progressDrawable="@drawable/color_progress_seek"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         tools:progress="20" />

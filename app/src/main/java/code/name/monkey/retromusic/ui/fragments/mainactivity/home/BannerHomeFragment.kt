@@ -40,8 +40,11 @@ import java.io.File
 import java.util.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
+    override fun showEmpty() {
 
-    val disposable: CompositeDisposable = CompositeDisposable()
+    }
+
+    private lateinit var disposable: CompositeDisposable
     private lateinit var homePresenter: HomePresenter
     private lateinit var contentContainerView: View
     private lateinit var lastAdded: View
@@ -111,7 +114,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    imageView.setImageBitmap(it)
+                    if (it != null) {
+                        imageView.setImageBitmap(it)
+                    } else {
+                        imageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                    }
                 }) {
                     imageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
                 })
@@ -132,22 +139,22 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         lastAdded = view.findViewById(R.id.lastAdded)
         lastAdded.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(activity!!, LastAddedPlaylist(activity!!))
+            NavigationUtil.goToPlaylistNew(mainActivity, LastAddedPlaylist(mainActivity))
         }
 
         topPlayed = view.findViewById(R.id.topPlayed)
         topPlayed.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(activity!!, MyTopTracksPlaylist(activity!!))
+            NavigationUtil.goToPlaylistNew(mainActivity, MyTopTracksPlaylist(mainActivity))
         }
 
         actionShuffle = view.findViewById(R.id.actionShuffle)
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(activity!!).blockingFirst(), true)
+            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(mainActivity).blockingFirst(), true)
         }
 
         history = view.findViewById(R.id.history)
         history.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(activity!!, HistoryPlaylist(activity!!))
+            NavigationUtil.goToPlaylistNew(mainActivity, HistoryPlaylist(mainActivity))
         }
 
         userImage = view.findViewById(R.id.userImage)
@@ -163,9 +170,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         setupToolbar()
         homePresenter.subscribe()
 
-        loadImageFromStorage(userImage)
-        getTimeOfTheDay()
-
     }
 
     private fun setupToolbar() {
@@ -177,6 +181,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun handleBackPress(): Boolean {
         return false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        disposable = CompositeDisposable()
+        loadImageFromStorage(userImage)
+        getTimeOfTheDay()
     }
 
     override fun onDestroyView() {

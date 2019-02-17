@@ -104,11 +104,15 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
-        val accentColor = ThemeStore.accentColor(context!!)
-        val b = PreferenceUtil.getInstance().adaptiveColor
-        updateTextColors(if (b) color else accentColor)
-        setProgressBarColor(if (b) color else accentColor)
 
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
+        } else {
+            ThemeStore.accentColor(context!!)
+        }
+
+        updateTextColors(colorFinal)
+        setProgressBarColor(colorFinal)
 
         updateRepeatState()
         updateShuffleState()

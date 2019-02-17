@@ -30,7 +30,7 @@
             android:textAppearance="?android:textAppearanceLarge" />
 
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

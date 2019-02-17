@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.fragments.player.material
 
 import android.animation.ObjectAnimator
-import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -22,7 +23,6 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
-import kotlinx.android.synthetic.main.fragment_volume.*
 import kotlinx.android.synthetic.main.player_time.*
 
 /**
@@ -104,14 +104,16 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            lastPlaybackControlsColor = color
-            text.setTextColor(color)
 
-            progressSlider.thumbTintList = ColorStateList.valueOf(color)
-            progressSlider.progressTintList = ColorStateList.valueOf(color)
-            progressSlider.progressBackgroundTintList = ColorStateList.valueOf(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
+        } else {
+            ThemeStore.accentColor(context!!)
         }
+
+        lastPlaybackControlsColor = colorFinal
+        text.setTextColor(colorFinal)
+        TintHelper.setTintAuto(progressSlider, colorFinal, false)
 
         updatePlayPauseColor()
         updatePrevNextColor()

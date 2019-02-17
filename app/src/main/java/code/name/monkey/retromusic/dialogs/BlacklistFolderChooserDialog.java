@@ -24,7 +24,7 @@ import code.name.monkey.retromusic.R;
 /**
  * @author Aidan Follestad (afollestad), modified by Karim Abou Zeid
  */
-public class BlacklistFolderChooserDialog extends DialogFragment implements MaterialDialog.ListCallback {
+public class BlacklistFolderChooserDialog extends DialogFragment /*implements MaterialDialog.ListCallback */{
 
     private String initialPath = Environment.getExternalStorageDirectory().getAbsolutePath();
     private File parentFolder;
@@ -68,7 +68,7 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
         return null;
     }
 
-    @NonNull
+    /*@NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -102,9 +102,9 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
                         .positiveText(R.string.add_action)
                         .negativeText(android.R.string.cancel);
         return builder.build();
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onSelection(MaterialDialog materialDialog, View view, int i, CharSequence s) {
         if (canGoUp && i == 0) {
             parentFolder = parentFolder.getParentFile();
@@ -120,7 +120,7 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
             }
         }
         reload();
-    }
+    }*/
 
     private void checkIfCanGoUp() {
         canGoUp = parentFolder.getParent() != null;
@@ -130,7 +130,7 @@ public class BlacklistFolderChooserDialog extends DialogFragment implements Mate
         parentContents = listFiles();
         MaterialDialog dialog = (MaterialDialog) getDialog();
         dialog.setTitle(parentFolder.getAbsolutePath());
-        dialog.setItems((CharSequence[]) getContentsArray());
+        //dialog.setItems((CharSequence[]) getContentsArray());
     }
 
     @Override
