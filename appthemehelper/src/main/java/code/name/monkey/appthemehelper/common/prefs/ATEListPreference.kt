@@ -2,14 +2,13 @@ package code.name.monkey.appthemehelper.common.prefs
 
 import android.content.Context
 import android.util.AttributeSet
-
-import com.afollestad.materialdialogs.prefs.MaterialListPreference
+import android.preference.ListPreference
 import code.name.monkey.appthemehelper.R
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATEListPreference : MaterialListPreference {
+class ATEListPreference : ListPreference {
 
     constructor(context: Context) : super(context) {
         init()
@@ -31,5 +30,7 @@ class ATEListPreference : MaterialListPreference {
         layoutResource = R.layout.ate_preference_custom
         if (summary == null || summary.toString().trim { it <= ' ' }.isEmpty())
             summary = "%s"
+
     }
+
 }

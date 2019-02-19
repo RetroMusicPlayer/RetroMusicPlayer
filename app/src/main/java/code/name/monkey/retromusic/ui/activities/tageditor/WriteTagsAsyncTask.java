@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -28,6 +26,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
@@ -134,18 +134,16 @@ public class WriteTagsAsyncTask extends
 
     @Override
     protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialDialog.Builder(context)
-                .title(R.string.saving_changes)
-                .cancelable(false)
-                .progress(false, 0)
-                .build();
+        return new MaterialDialog(context)
+                .title(R.string.saving_changes, "")
+                .cancelable(false);
     }
 
     @Override
     protected void onProgressUpdate(@NonNull Dialog dialog, Integer... values) {
         super.onProgressUpdate(dialog, values);
-        ((MaterialDialog) dialog).setMaxProgress(values[1]);
-        ((MaterialDialog) dialog).setProgress(values[0]);
+        //((MaterialDialog) dialog).setMaxProgress(values[1]);
+        //((MaterialDialog) dialog).setProgress(values[0]);
     }
 
     public static class LoadingInfo {

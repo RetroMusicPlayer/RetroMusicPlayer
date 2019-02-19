@@ -53,4 +53,7 @@
     <color name="md_black_1000">#000000</color>
     <color name="md_white_1000">#FFFFFF</color>
 
+
+    <color name="md_teal_A400">#1DE9B6</color>
+    <color name="md_orange_A400">#FF3D00</color>
 </resources>

@@ -16,25 +16,24 @@
             android:id="@+id/userInfoContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="12dp">
+            android:gravity="center_vertical"
+            android:minHeight="72dp"
+            android:orientation="horizontal">
 
             <code.name.monkey.retromusic.views.CircularImageView
                 android:id="@+id/userImage"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="16dp"
                 android:layout_weight="0"
                 app:civ_border="false" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:paddingStart="18dp"
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
@@ -66,21 +65,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/general_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_blue_A400"
                 app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -109,21 +111,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/now_playing_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_red_A400"
                 app:srcCompat="@drawable/ic_play_circle_filled_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -150,21 +155,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/audio_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_deep_purple_A400"
                 app:srcCompat="@drawable/ic_volume_up_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -191,21 +199,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/personalize_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_teal_A400"
                 app:srcCompat="@drawable/ic_hdr_strong_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -231,21 +242,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/image_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_orange_A400"
                 app:srcCompat="@drawable/ic_image_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -271,21 +285,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:gravity="center_vertical"
             android:minHeight="72dp"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/notification_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_yellow_A400"
                 app:srcCompat="@drawable/ic_notifications_active_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"
@@ -310,24 +327,27 @@
             android:id="@+id/otherSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="72dp"
             android:background="?rectSelector"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:id="@+id/other_settings_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_indigo_A400"
                 app:srcCompat="@drawable/ic_settings_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
                 android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:orientation="vertical">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:layout_width="wrap_content"

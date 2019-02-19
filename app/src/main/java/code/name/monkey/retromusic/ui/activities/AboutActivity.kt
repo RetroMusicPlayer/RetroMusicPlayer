@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.ui.adapter.ContributorAdapter
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_about.*
@@ -117,7 +118,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.pinterestLink->openUrl(PINTEREST)
+            R.id.pinterestLink -> openUrl(PINTEREST)
             R.id.faqLink -> openUrl(FAQ_LINK)
             R.id.telegramLink -> openUrl(APP_TELEGRAM_LINK)
             R.id.discordLink -> openUrl(DISCORD_LINK)
@@ -135,17 +136,15 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun showChangeLogOptions() {
-        MaterialDialog.Builder(this)
-                .items("Telegram Channel", "App")
-                .itemsCallback { _, _, position, _ ->
-                    if (position == 0) {
-                        openUrl(TELEGRAM_CHANGE_LOG)
-                    } else {
-                        NavigationUtil.gotoWhatNews(this@AboutActivity)
-                    }
+        MaterialDialog(this).show {
+            listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
+                if (position == 0) {
+                    openUrl(TELEGRAM_CHANGE_LOG)
+                } else {
+                    NavigationUtil.gotoWhatNews(this@AboutActivity)
                 }
-                .build()
-                .show()
+            }
+        }
     }
 
     private fun getAppVersion(): String {

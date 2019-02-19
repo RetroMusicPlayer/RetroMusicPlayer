@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_list_view_row_table_row"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:paddingLeft="10dip"
+    android:paddingTop="8dip"
+    android:paddingRight="10dip"
+    android:paddingBottom="8dip">
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="0dip">
+
+        <TextView
+            android:id="@+id/custom_list_view_row_text_view"
+            android:layout_width="fill_parent"
+            android:layout_height="22dip"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/custom_list_view_row_subtext_view"
+            android:layout_width="fill_parent"
+            android:layout_height="18dip"
+            android:gravity="center_vertical"
+            android:textColor="#000000"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/custom_list_view_row_selected_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_toggle_switch" />
+</TableRow>

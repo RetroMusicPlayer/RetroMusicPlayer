@@ -82,7 +82,7 @@ object SongLoader {
 
         try {
             return context.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    BASE_PROJECTION, selectionFinal, selectionValuesFinal, sortOrder)
+                    BASE_PROJECTION, selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance().filterLength * 1000), selectionValuesFinal, sortOrder)
         } catch (e: SecurityException) {
             return null
         }

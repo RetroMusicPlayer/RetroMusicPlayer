@@ -154,7 +154,7 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
     }
 
     override fun onPanelSlide(panel: View?, slideOffset: Float) {
-        bottomNavigationView.translationY = slideOffset * 400
+
         setMiniPlayerAlphaProgress(slideOffset)
     }
 
@@ -197,6 +197,9 @@ abstract class AbsSlidingMusicPanelActivity protected constructor() : AbsMusicSe
         miniPlayerFragment!!.view!!.alpha = alpha
         // necessary to make the views below clickable
         miniPlayerFragment!!.view!!.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
+
+        bottomNavigationView.translationY = progress * 500
+        bottomNavigationView.alpha = alpha
     }
 
     private fun chooseFragmentForTheme() {

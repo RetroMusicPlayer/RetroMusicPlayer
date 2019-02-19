@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.internal.ThemeSingleton;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.BufferedReader;
@@ -17,6 +16,7 @@ import java.io.InputStreamReader;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -79,12 +79,12 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final String backgroundColor = colorToHex(ThemeStore.Companion.primaryColor(this));
-            final String contentColor = ThemeSingleton.get().darkTheme ? "#ffffff" : "#000000";
+            final String contentColor = ATHUtil.INSTANCE.isWindowBackgroundDark(this) ? "#ffffff" : "#000000";
             webView.loadData(buf.toString()
                             .replace("{style-placeholder}",
                                     String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
-                            .replace("{link-color}", colorToHex(ThemeSingleton.get().positiveColor.getDefaultColor()))
-                            .replace("{link-color-active}", colorToHex(ColorUtil.INSTANCE.lightenColor(ThemeSingleton.get().positiveColor.getDefaultColor())))
+                            .replace("{link-color}", colorToHex(ThemeStore.Companion.accentColor(this)))
+                            .replace("{link-color-active}",  colorToHex(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))))
                     , "text/html", "UTF-8");
         } catch (Throwable e) {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");

@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper
@@ -27,6 +26,7 @@ import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFrag
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 
@@ -262,18 +262,17 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     private fun showPromotionalOffer() {
-        MaterialDialog.Builder(this)
-                .positiveText("Buy")
-                .onPositive { _, _ -> startActivity(Intent(this@MainActivity, PurchaseActivity::class.java)) }
-                .negativeText(android.R.string.cancel)
-                .customView(R.layout.dialog_promotional_offer, false)
-                .dismissListener {
-                    PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
-                            .edit()
-                            .putBoolean("shown", true)
-                            .apply()
-                }
-                .show()
+        /*MaterialDialog(this).show {
+            positiveButton(text = "Buy") { startActivity(Intent(this@MainActivity, PurchaseActivity::class.java)) }
+            negativeButton(android.R.string.cancel)
+            customView(R.layout.dialog_promotional_offer)
+            onDismiss {
+                PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
+                        .edit()
+                        .putBoolean("shown", true)
+                        .apply()
+            }
+        }*/
     }
 
     private fun selectedFragment(itemId: Int) {

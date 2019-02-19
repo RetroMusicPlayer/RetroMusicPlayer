@@ -7,16 +7,15 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.io.File;
 import java.util.Objects;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.SortOrder;
@@ -61,7 +60,7 @@ public final class PreferenceUtil {
     public static final String HOME_ARTIST_GRID_STYLE = "home_artist_grid_style";
     public static final String ARTIST_GRID_STYLE = "artist_grid_style";
     public static final String TOGGLE_ADD_CONTROLS = "toggle_add_controls";
-    public static final String ALBUM_COVER_STYLE = "album_cover_style";
+    public static final String ALBUM_COVER_STYLE = "album_cover_style_id";
     public static final String ALBUM_COVER_TRANSFORM = "album_cover_transform";
     public static final String TAB_TEXT_MODE = "tab_text_mode";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
@@ -109,6 +108,7 @@ public final class PreferenceUtil {
     private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
     private static final String NOW_PLAYING_SCREEN = "now_playing_screen";
     private static final String SNOW_FALL_EFFECT = "snow_fall_effect";
+    private static final String FILTER_SONG = "filter_song";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
@@ -138,6 +138,10 @@ public final class PreferenceUtil {
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public int getFilterLength() {
+        return mPreferences.getInt(FILTER_SONG, 20);
     }
 
     public boolean isSnowFall() {

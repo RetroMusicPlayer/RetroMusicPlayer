@@ -3,28 +3,50 @@ package code.name.monkey.retromusic.preferences
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.DialogFragment
+import androidx.preference.DialogPreference
+import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
 
-class AlbumCoverStylePreferenceDialog : DialogFragment(), ViewPager.OnPageChangeListener, MaterialDialog.SingleButtonCallback {
+class AlbumCoverStylePreference : DialogPreference {
+    constructor(context: Context) : super(context)
 
-    private var whichButtonClicked: DialogAction? = null
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+
+    private val mLayoutRes = R.layout.preference_dialog_now_playing_screen
+
+    override fun getDialogLayoutResource(): Int {
+        return mLayoutRes;
+    }
+}
+
+class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPager.OnPageChangeListener {
+    override fun onDialogClosed(positiveResult: Boolean) {
+        if (positiveResult) {
+            val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]
+            PreferenceUtil.getInstance().albumCoverStyle = nowPlayingScreen
+        }
+    }
+
     private var viewPagerPosition: Int = 0
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -35,28 +57,13 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(), ViewPager.OnPageChange
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.getInstance().albumCoverStyle.ordinal
 
-        return MaterialDialog.Builder(activity!!)
-                .title(R.string.pref_title_album_cover_style)
-                .positiveText(android.R.string.ok)
-                .negativeText(android.R.string.cancel)
-                .onAny(this)
-                .customView(view, false)
-                .build()
-    }
-
-    override fun onClick(dialog: MaterialDialog,
-                         which: DialogAction) {
-        whichButtonClicked = which
-    }
-
-    override fun onDismiss(dialog: DialogInterface?) {
-        super.onDismiss(dialog)
-        if (whichButtonClicked == DialogAction.POSITIVE) {
-            val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]
-            PreferenceUtil.getInstance().albumCoverStyle = nowPlayingScreen
+        return MaterialDialog(activity!!).show {
+            title(R.string.pref_title_album_cover_style)
+            positiveButton(android.R.string.ok)
+            negativeButton(android.R.string.cancel)
+            customView(view = view, scrollable = false, noVerticalPadding = false)
         }
     }
-
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
@@ -109,8 +116,14 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(), ViewPager.OnPageChange
     companion object {
         val TAG: String = AlbumCoverStylePreferenceDialog::class.java.simpleName
 
-        fun newInstance(): AlbumCoverStylePreferenceDialog {
-            return AlbumCoverStylePreferenceDialog()
+        private const val EXTRA_KEY = "key"
+
+        fun newInstance(key: String): AlbumCoverStylePreferenceDialog {
+            val args = Bundle()
+            args.putString(EXTRA_KEY, key)
+            val fragment = AlbumCoverStylePreferenceDialog()
+            fragment.arguments = args
+            return fragment
         }
     }
 }

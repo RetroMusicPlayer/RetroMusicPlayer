@@ -2,13 +2,13 @@ package code.name.monkey.appthemehelper.common.prefs
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.preference.EditTextPreference
 
-import com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATEEditTextPreference : MaterialEditTextPreference {
+class ATEEditTextPreference : EditTextPreference {
 
     constructor(context: Context) : super(context) {
         init()

@@ -54,5 +54,8 @@
     <declare-styleable name="InsettableFrameLayout_Layout">
         <attr name="layout_ignoreInsets" format="boolean" />
     </declare-styleable>
-
+    <declare-styleable name="ColorIconsImageView">
+        <attr name="iconBackgroundColor" format="color" />
+        <attr name="icon" format="reference" />
+    </declare-styleable>
 </resources>

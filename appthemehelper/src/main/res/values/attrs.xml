@@ -7,9 +7,6 @@
         <attr name="ateKey_pref" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="ATECheckBoxPreference">
-        <attr name="ateKey_pref_checkBox" format="string" />
-    </declare-styleable>
 
     <declare-styleable name="ATESwitchPreference">
         <attr name="ateKey_pref_switch" format="string" />

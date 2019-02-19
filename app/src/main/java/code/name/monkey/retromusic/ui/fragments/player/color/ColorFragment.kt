@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.palette.graphics.Palette
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -142,6 +144,10 @@ class ColorFragment : AbsPlayerFragment() {
 
                     override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: Transition<in BitmapPaletteWrapper>?) {
                         super.onResourceReady(resource, glideAnimation)
+
+                        val background = resource.palette.getColor()
+                        val accentColor = resource.palette.getContrastColor(background)
+
                         val palette = resource.palette
                         val swatch = RetroColorUtil.getSwatch(palette)
 
@@ -296,5 +302,19 @@ class ColorFragment : AbsPlayerFragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+}
+
+private fun Palette.getContrastColor(background: Int): Int {
+
+    return 0
+}
+
+private fun Palette.getColor(): Int {
+    return when {
+        darkMutedSwatch != null -> darkMutedSwatch!!.rgb
+        mutedSwatch != null -> mutedSwatch!!.rgb
+        lightMutedSwatch != null -> lightMutedSwatch!!.rgb
+        else -> Palette.Swatch(Color.BLACK, 1).rgb
     }
 }

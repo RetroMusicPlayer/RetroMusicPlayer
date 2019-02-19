@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -105,15 +104,11 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
 
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
-            color
-        } else {
-            ThemeStore.accentColor(context!!)
+        if (PreferenceUtil.getInstance().adaptiveColor) {
+            lastPlaybackControlsColor = color
+            text.setTextColor(color)
+            TintHelper.setTintAuto(progressSlider, color, false)
         }
-
-        lastPlaybackControlsColor = colorFinal
-        text.setTextColor(colorFinal)
-        TintHelper.setTintAuto(progressSlider, colorFinal, false)
 
         updatePlayPauseColor()
         updatePrevNextColor()

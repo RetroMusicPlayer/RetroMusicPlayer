@@ -7,8 +7,8 @@
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         style="@style/SubTitleTextAppearance"
-        android:textStyle="bold"
-        android:text="@string/for_you" />
+        android:text="@string/for_you"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,14 +23,14 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_history_playlist"
                 android:padding="12dp"
-                app:srcCompat="@drawable/ic_access_time_white_24dp"
-                app:tint="@color/md_blue_A700" />
+                app:iconBackgroundColor="@color/md_blue_A700"
+                app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -49,14 +49,14 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_last_added_playlist"
                 android:padding="12dp"
-                app:srcCompat="@drawable/ic_library_add_white_24dp"
-                app:tint="@color/md_red_A700" />
+                app:iconBackgroundColor="@color/md_red_A700"
+                app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -75,14 +75,14 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_top_tracks_playlist"
                 android:padding="12dp"
-                app:srcCompat="@drawable/ic_trending_up_white_24dp"
-                app:tint="@color/md_deep_purple_A700" />
+                app:iconBackgroundColor="@color/md_deep_purple_A700"
+                app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -101,14 +101,14 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <code.name.monkey.retromusic.views.ColorIconsImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/abs_shuffle"
                 android:padding="12dp"
-                app:srcCompat="@drawable/ic_shuffle_white_24dp"
-                app:tint="@color/md_green_A700" />
+                app:iconBackgroundColor="@color/md_green_A700"
+                app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"

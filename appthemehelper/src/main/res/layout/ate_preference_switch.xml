@@ -6,4 +6,5 @@
     android:background="@null"
     android:button="@drawable/ate_switch"
     android:clickable="false"
-    android:focusable="false" />
+    android:focusable="false"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />

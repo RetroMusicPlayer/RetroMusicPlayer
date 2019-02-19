@@ -543,8 +543,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
-    private static class ListSongsAsyncTask extends
-            ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
+    private static class ListSongsAsyncTask extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
 
         private final Object extra;
         private WeakReference<Context> contextWeakReference;
@@ -738,15 +737,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            return new MaterialDialog.Builder(context)
-                    .title(R.string.listing_files)
-                    .progress(true, 0)
-                    .progressIndeterminateStyle(true)
-                    .cancelListener(dialog -> cancel(false))
-                    .dismissListener(dialog -> cancel(false))
-                    .negativeText(android.R.string.cancel)
-                    .onNegative((dialog, which) -> cancel(false))
-                    .show();
+            return new MaterialDialog(context)
+                    .title(R.string.listing_files,"");
         }
     }
 }

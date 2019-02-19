@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItems
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -29,7 +30,6 @@ import kotlinx.android.synthetic.main.activity_user_info.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.*
 
 class UserInfoActivity : AbsBaseActivity() {
 
@@ -56,15 +56,15 @@ class UserInfoActivity : AbsBaseActivity() {
             loadBannerFromStorage(PreferenceUtil.getInstance().bannerImage)
         }
         userImage.setOnClickListener {
-            MaterialDialog.Builder(this)
-                    .title("Set a profile photo")
-                    .items(Arrays.asList(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo)))
-                    .itemsCallback { _, _, position, _ ->
-                        when (position) {
-                            0 -> pickNewPhoto()
-                            1 -> PreferenceUtil.getInstance().saveProfileImage("")
-                        }
-                    }.show()
+            MaterialDialog(this).show {
+                title(text = "Set a profile photo")
+                listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
+                    when (position) {
+                        0 -> pickNewPhoto()
+                        1 -> PreferenceUtil.getInstance().saveProfileImage("")
+                    }
+                }
+            }
         }
         bannerSelect.setOnClickListener {
             showBannerOptions()
@@ -103,16 +103,16 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun showBannerOptions() {
 
-        MaterialDialog.Builder(this)
-                .title(R.string.select_banner_photo)
-                .items(Arrays.asList(getString(R.string.new_banner_photo),
-                        getString(R.string.remove_banner_photo)))
-                .itemsCallback { _, _, position, _ ->
-                    when (position) {
-                        0 -> selectBannerImage()
-                        1 -> PreferenceUtil.getInstance().setBannerImagePath("")
-                    }
-                }.show()
+        MaterialDialog(this).show {
+            title(R.string.select_banner_photo)
+            listItems(items = listOf(getString(R.string.new_banner_photo), getString(R.string.remove_banner_photo)))
+            { _, position, _ ->
+                when (position) {
+                    0 -> selectBannerImage()
+                    1 -> PreferenceUtil.getInstance().setBannerImagePath("")
+                }
+            }
+        }
     }
 
     private fun selectBannerImage() {
