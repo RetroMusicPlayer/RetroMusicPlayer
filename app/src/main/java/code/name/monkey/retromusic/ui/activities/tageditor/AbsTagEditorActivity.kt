@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItems
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -34,18 +35,17 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var songPaths: List<String>? = null
 
     protected val show: MaterialDialog
-        get() = MaterialDialog.Builder(this@AbsTagEditorActivity)
-                .title(R.string.update_image)
-                .items(*items)
-                .itemsCallback { _, _, position, _ ->
-                    when (position) {
-                        0 -> getImageFromLastFM()
-                        1 -> startImagePicker()
-                        2 -> searchImageOnWeb()
-                        3 -> deleteImage()
-                    }
-                }.show()
-
+        get() = MaterialDialog(this@AbsTagEditorActivity).show {
+            title(R.string.update_image)
+            listItems(items = items as List<String>) { _, position, _ ->
+                when (position) {
+                    0 -> getImageFromLastFM()
+                    1 -> startImagePicker()
+                    2 -> searchImageOnWeb()
+                    3 -> deleteImage()
+                }
+            }
+        }
     protected abstract val contentViewLayout: Int
 
     internal val albumArtist: String?

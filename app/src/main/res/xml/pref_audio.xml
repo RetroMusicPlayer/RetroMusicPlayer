@@ -16,7 +16,7 @@
         android:summary="@string/pref_summary_gapless_playback"
         android:title="@string/pref_title_gapless_playback" />
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+    <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="system"
         app:iconSpaceReserved="false"
         android:entries="@array/pref_equalizer_types_titles"

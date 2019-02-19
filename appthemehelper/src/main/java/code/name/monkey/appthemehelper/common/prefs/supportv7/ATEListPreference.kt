@@ -1,9 +1,8 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
-import androidx.preference.ListPreference
 import android.util.AttributeSet
-
+import androidx.preference.ListPreference
 import code.name.monkey.appthemehelper.R
 
 /**

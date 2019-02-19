@@ -1,11 +1,12 @@
 package code.name.monkey.retromusic.ui.fragments.settings
 
 import android.graphics.Color
+import android.graphics.Color.BLUE
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.preference.TwoStatePreference
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.*
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
@@ -13,7 +14,9 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.color.ColorChooserDialog
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.color.colorChooser
+
 
 /**
  * @author Hemanth S (h4h13).
@@ -23,16 +26,26 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
         val primaryColorPref = findPreference("primary_color") as ATEColorPreference
-        primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
+        primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == code.name.monkey.retromusic.R.style.Theme_RetroMusic_Color
         val primaryColor = ThemeStore.primaryColor(activity!!)
         primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
         primaryColorPref.setOnPreferenceClickListener {
-            ColorChooserDialog.Builder(activity!!, R.string.primary_color)
-                    .accentMode(false)
-                    .allowUserColorInput(true)
-                    .allowUserColorInputAlpha(false)
-                    .preselect(primaryColor)
-                    .show(activity!!)
+            MaterialDialog(activity!!).show {
+                title(code.name.monkey.retromusic.R.string.primary_color)
+                positiveButton(R.string.set)
+                colorChooser(initialSelection = BLUE, allowCustomArgb = true, colors = PRIMARY_COLORS, subColors = PRIMARY_COLORS_SUB) { _, color ->
+                    val theme = if (ColorUtil.isColorLight(color))
+                        PreferenceUtil.getThemeResFromPrefValue("light")
+                    else
+                        PreferenceUtil.getThemeResFromPrefValue("dark")
+
+                    ThemeStore.editTheme(context).activityTheme(theme).primaryColor(color).commit()
+
+                    if (VersionUtils.hasNougatMR())
+                        DynamicShortcutManager(context).updateDynamicShortcuts()
+                    activity!!.recreate()
+                }
+            }
             true
         }
 
@@ -55,8 +68,8 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             when (theme) {
                 "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
                 "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
-                "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
-                "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
+                "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, code.name.monkey.retromusic.R.color.md_grey_900)).commit()
+                "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, code.name.monkey.retromusic.R.color.md_blue_grey_800)).commit()
             }
 
             ThemeStore.editTheme(activity!!)
@@ -77,13 +90,17 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            ColorChooserDialog.Builder(context!!, R.string.accent_color)
-                    .accentMode(true)
-                    .allowUserColorInput(true)
-                    .allowUserColorInputAlpha(false)
-                    .preselect(accentColor)
-                    .show(activity!!)
-            true
+            MaterialDialog(activity!!).show {
+                title(code.name.monkey.retromusic.R.string.primary_color)
+                positiveButton(R.string.set)
+                colorChooser(colors = ACCENT_COLORS, subColors = ACCENT_COLORS_SUB) { _, color ->
+                    ThemeStore.editTheme(context).accentColor(color).commit()
+                    if (VersionUtils.hasNougatMR())
+                        DynamicShortcutManager(context).updateDynamicShortcuts()
+                    activity!!.recreate()
+                }
+            }
+            return@setOnPreferenceClickListener true
         }
 
         val colorAppShortcuts = findPreference("should_color_app_shortcuts") as TwoStatePreference
@@ -102,6 +119,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.pref_general)
+        addPreferencesFromResource( R.xml.pref_general)
     }
 }

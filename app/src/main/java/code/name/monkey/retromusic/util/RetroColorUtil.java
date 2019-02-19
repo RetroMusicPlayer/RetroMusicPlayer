@@ -40,7 +40,7 @@ public class RetroColorUtil {
         int background = getSwatch(palette).getRgb();
 
         if (inverse != -1) {
-            return ColorUtils.getReadableText(inverse, background, 150);
+            return ColorUtil.INSTANCE.getReadableText(inverse, background, 150);
         }
         return ColorUtil.INSTANCE.stripAlpha(getSwatch(palette).getTitleTextColor());
     }

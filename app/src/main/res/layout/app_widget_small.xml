@@ -61,7 +61,7 @@
         android:layout_height="1dp"
         android:layout_columnSpan="2"
         android:layout_gravity="fill_horizontal"
-        android:background="@color/md_divider_white"
+        android:background="@color/md_white_1000"
         tools:ignore="Orientation"/>
 
     <LinearLayout

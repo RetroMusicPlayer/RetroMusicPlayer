@@ -28,8 +28,6 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
             activity!!.recreate()
             true
         }
-
-
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -41,11 +39,19 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
+
+        var preference = findPreference("album_grid_style")
+        setSummary(preference)
+        preference = findPreference("artist_grid_style")
+        setSummary(preference)
+        preference = findPreference("home_artist_grid_style")
+        setSummary(preference)
+        preference = findPreference("tab_text_mode")
+        setSummary(preference)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
     }
 
@@ -54,5 +60,4 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
             PreferenceUtil.CAROUSEL_EFFECT -> invalidateSettings()
         }
     }
-
 }

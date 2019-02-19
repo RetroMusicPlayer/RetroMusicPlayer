@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.glide
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.palette.graphics.Palette
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTarget
@@ -28,6 +29,8 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
     override fun onResourceReady(resource: BitmapPaletteWrapper,
                                  glideAnimation: Transition<in BitmapPaletteWrapper>?) {
         super.onResourceReady(resource, glideAnimation)
+
+
         val defaultColor = defaultFooterColor
 
         val primaryColor = getColor(resource.palette, defaultColor)

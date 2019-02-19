@@ -1,14 +1,14 @@
 package code.name.monkey.appthemehelper.common.prefs
 
 import android.content.Context
+import android.preference.ListPreference
 import android.util.AttributeSet
 import code.name.monkey.appthemehelper.R
-import com.afollestad.materialdialogs.prefs.MaterialListPreference
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATEMultiSelectPreference : MaterialListPreference {
+class ATEMultiSelectPreference :  ListPreference {
 
     constructor(context: Context) : super(context) {
         init()

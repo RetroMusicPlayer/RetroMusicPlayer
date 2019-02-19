@@ -18,18 +18,17 @@ class ClearSmartPlaylistDialog : DialogFragment() {
 
         val content = Html.fromHtml(getString(R.string.clear_playlist_x, playlist!!.name))
 
-        return MaterialDialog.Builder(activity!!)
-                .title(title)
-                .content(content)
-                .positiveText(R.string.clear_action)
-                .negativeText(android.R.string.cancel)
-                .onPositive { _, _ ->
-                    if (activity == null) {
-                        return@onPositive
-                    }
-                    playlist.clear(activity)
+        return MaterialDialog(activity!!).show {
+            title(title)
+            message(text = content)
+            positiveButton(R.string.clear_action) {
+                if (activity == null) {
+                    return@positiveButton
                 }
-                .build()
+                playlist.clear(activity)
+            }
+            negativeButton { (android.R.string.cancel) }
+        }
     }
 
     companion object {

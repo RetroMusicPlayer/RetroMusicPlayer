@@ -71,4 +71,67 @@ object ColorUtil {
         val b = Color.blue(color1) * inverseRatio + Color.blue(color2) * ratio
         return Color.argb(a.toInt(), r.toInt(), g.toInt(), b.toInt())
     }
+
+
+    private fun getColorDarkness(@ColorInt color: Int): Double {
+        return if (color == Color.BLACK)
+            1.0
+        else if (color == Color.WHITE || color == Color.TRANSPARENT)
+            0.0
+        else
+            1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
+    }
+
+    @ColorInt
+    fun getInverseColor(@ColorInt color: Int): Int {
+        return 0xFFFFFF - color or -0x1
+    }
+
+    fun isColorSaturated(@ColorInt color: Int): Boolean {
+        val max = Math.max(0.299 * Color.red(color), Math.max(0.587 * Color.green(color), 0.114 * Color.blue(color)))
+        val min = Math.min(0.299 * Color.red(color), Math.min(0.587 * Color.green(color), 0.114 * Color.blue(color)))
+        val diff = Math.abs(max - min)
+        return diff > 20
+    }
+
+    @ColorInt
+    fun getMixedColor(@ColorInt color1: Int, @ColorInt color2: Int): Int {
+        return Color.rgb(
+                (Color.red(color1) + Color.red(color2)) / 2,
+                (Color.green(color1) + Color.green(color2)) / 2,
+                (Color.blue(color1) + Color.blue(color2)) / 2
+        )
+    }
+
+    fun getDifference(@ColorInt color1: Int, @ColorInt color2: Int): Double {
+        var diff = Math.abs(0.299 * (Color.red(color1) - Color.red(color2)))
+        diff += Math.abs(0.587 * (Color.green(color1) - Color.green(color2)))
+        diff += Math.abs(0.114 * (Color.blue(color1) - Color.blue(color2)))
+        return diff
+    }
+
+    @ColorInt
+    fun getReadableText(@ColorInt textColor: Int, @ColorInt backgroundColor: Int): Int {
+        return getReadableText(textColor, backgroundColor, 100)
+    }
+
+    @ColorInt
+    fun getReadableText(@ColorInt textColor: Int, @ColorInt backgroundColor: Int, difference: Int): Int {
+        var textColor = textColor
+        val isLight = isColorLight(backgroundColor)
+        var i = 0
+        while (getDifference(textColor, backgroundColor) < difference && i < 100) {
+            textColor = getMixedColor(textColor, if (isLight) Color.BLACK else Color.WHITE)
+            i++
+        }
+
+        return textColor
+    }
+
+    @ColorInt
+    fun getContrastColor(@ColorInt color: Int): Int {
+        // Counting the perceptive luminance - human eye favors green color...
+        val a = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255
+        return if (a < 0.5) Color.BLACK else Color.WHITE
+    }
 }

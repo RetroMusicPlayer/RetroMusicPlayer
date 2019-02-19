@@ -3,28 +3,22 @@ package code.name.monkey.retromusic.ui.activities
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.App.Companion.context
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.ui.fragments.settings.MainSettingsFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.color.ColorChooserDialog
 import kotlinx.android.synthetic.main.activity_settings.*
 
 
-class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : AbsBaseActivity(), /*ColorChooserDialog.ColorCallback,*/ SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val fragmentManager = supportFragmentManager
 
-    override fun onColorSelection(dialog: ColorChooserDialog, @ColorInt selectedColor: Int) {
+   /* override fun onColorSelection(dialog: ColorChooserDialog, @ColorInt selectedColor: Int) {
         when (dialog.title) {
             R.string.primary_color -> {
                 val theme = if (ColorUtil.isColorLight(selectedColor))
@@ -43,7 +37,7 @@ class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback, Sh
 
     override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
 
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

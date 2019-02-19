@@ -24,7 +24,7 @@ abstract class AbsThemeActivity : AbsCrashCollector(), Runnable {
         setTheme(PreferenceUtil.getInstance().generalTheme)
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
+        //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
 
         changeBackgroundShape()
         setImmersiveFullscreen()

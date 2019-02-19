@@ -4,9 +4,10 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtil.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -26,39 +27,37 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
             }
             true
         }
-
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_now_playing_screen)
     }
 
-    private fun updateNowPlayingScreenSummary() {
+    private fun updateAlbumCoverStyleSummary() {
+        findPreference(ALBUM_COVER_STYLE).setSummary(getInstance().albumCoverStyle.titleRes)
+    }
 
-        findPreference("now_playing_screen_id").setSummary(PreferenceUtil.getInstance().nowPlayingScreen.titleRes)
+    private fun updateNowPlayingScreenSummary() {
+        findPreference(NOW_PLAYING_SCREEN_ID).setSummary(getInstance().nowPlayingScreen.titleRes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
+        getInstance().registerOnSharedPreferenceChangedListener(this)
+        val preference = findPreference("album_cover_transform")
+        setSummary(preference)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
+        getInstance().unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         when (key) {
-            PreferenceUtil.NOW_PLAYING_SCREEN_ID -> updateNowPlayingScreenSummary()
-            PreferenceUtil.ALBUM_COVER_STYLE -> updateAlbumCoverStyleSummary()
-            PreferenceUtil.CIRCULAR_ALBUM_ART, PreferenceUtil.CAROUSEL_EFFECT -> invalidateSettings()
+            NOW_PLAYING_SCREEN_ID -> updateNowPlayingScreenSummary()
+            ALBUM_COVER_STYLE -> updateAlbumCoverStyleSummary()
+            CIRCULAR_ALBUM_ART, CAROUSEL_EFFECT -> invalidateSettings()
         }
-    }
-
-    private fun updateAlbumCoverStyleSummary() {
-        findPreference("album_cover_style_id").setSummary(PreferenceUtil.getInstance().albumCoverStyle.titleRes)
     }
 }

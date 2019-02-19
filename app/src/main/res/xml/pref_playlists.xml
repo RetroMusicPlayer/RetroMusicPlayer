@@ -3,7 +3,7 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_playlists">
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+        <code.name.monkey.retromusic.preferences.MaterialListPreference
             android:defaultValue="this_month"
             android:entries="@array/pref_playlists_last_added_interval_titles"
             android:entryValues="@array/pref_playlists_last_added_interval_values"

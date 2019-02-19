@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+    <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/pref_grid_style_list_titles"
         android:entryValues="@array/pref_grid_style_list_values"
@@ -12,7 +12,7 @@
         android:title="@string/pref_title_album_grid_style"
         app:iconSpaceReserved="false" />
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+    <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/pref_grid_style_list_titles"
         android:entryValues="@array/pref_grid_style_list_values"
@@ -23,7 +23,7 @@
         app:iconSpaceReserved="false" />
 
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+    <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/pref_home_grid_style_list_titles"
         android:entryValues="@array/pref_home_grid_style_list_values"
@@ -43,7 +43,7 @@
         android:title="@string/pref_album_detail_style"
         app:iconSpaceReserved="false" />-->
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
+    <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"
         android:entries="@array/pref_tab_text_mode_titles"
         android:entryValues="@array/pref_tab_text_mode_values"

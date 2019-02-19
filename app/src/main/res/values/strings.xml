@@ -33,6 +33,7 @@
     <string name="action_scan">Scan</string>
     <string name="action_scan_directory">Scan directory</string>
     <string name="action_search">Search</string>
+    <string name="set">Set</string>
     <string name="action_set">Start</string>
     <string name="action_set_as_ringtone">Set as ringtone</string>
     <string name="action_set_as_start_directory">Set as start directory</string>
@@ -593,4 +594,8 @@
     <string name="send_crash_log">Send crash log</string>
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">Hmm</string>
+    <string name="pref_filter_song_title">Filter song length</string>
+    <string name="md_error_label">Error</string>
+    <string name="md_storage_perm_error">Permission error</string>
+
 </resources>

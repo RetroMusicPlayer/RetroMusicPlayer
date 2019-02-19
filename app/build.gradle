@@ -129,13 +129,16 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v13:$supportLibVersion"
     implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
+    implementation "androidx.palette:palette-ktx:1.0.0"
 
     implementation "com.squareup.retrofit2:retrofit:2.5.0"
     implementation "com.squareup.retrofit2:converter-gson:2.5.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
 
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
-    implementation "com.afollestad.material-dialogs:commons:$materialDialog"
+    implementation "com.afollestad.material-dialogs:core:$materialDialog"
+    implementation 'com.afollestad.material-dialogs:input:2.0.0'
+    implementation 'com.afollestad.material-dialogs:color:2.0.0'
     implementation 'com.afollestad:material-cab:0.1.12'
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'

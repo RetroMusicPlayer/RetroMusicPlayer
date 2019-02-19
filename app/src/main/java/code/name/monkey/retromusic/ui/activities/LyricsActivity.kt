@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
 import kotlinx.android.synthetic.main.fragment_synced.*
@@ -133,19 +134,18 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             e.printStackTrace()
         }
 
-        MaterialDialog.Builder(this)
-                .title("Add lyrics")
-                .neutralText("Search")
-                .content("Add time frame lyrics")
-                .negativeText("Delete")
-                .onNegative { _, _ ->
-                    LyricUtil.deleteLrcFile(song.title, song.artistName)
-                }
-                .onNeutral { _, _ -> RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
-                .inputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE)
-                .input("Paste lyrics here", content) { _, input ->
-                    LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
-                }.show()
+        MaterialDialog(this).show {
+            title(text = "Add lyrics")
+            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
+            message(text = "Add time frame lyrics")
+            negativeButton(text = "Delete") { LyricUtil.deleteLrcFile(song.title, song.artistName) }
+            input(hint = "Paste lyrics here",
+                    prefill = content,
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
+                LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
+            }
+            positiveButton(android.R.string.ok)
+        }
     }
 
     private fun showLyricsSaveDialog() {
@@ -154,17 +154,20 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         } else {
             lyricsString!!
         }
-        MaterialDialog.Builder(this)
-                .title("Add lyrics")
-                .neutralText("Search")
-                .onNeutral { _, _ -> RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl(song.title, song.artistName)) }
-                .inputType(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE)
-                .input("Paste lyrics here", content) { _, input ->
-                    val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
-                    fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                    WriteTagsAsyncTask(this@LyricsActivity).execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null))
-                }
-                .show()
+
+        MaterialDialog(this).show {
+            title(text = "Add lyrics")
+            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
+            negativeButton(text = "Delete") { LyricUtil.deleteLrcFile(song.title, song.artistName) }
+            input(hint = "Paste lyrics here",
+                    prefill = content,
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
+                val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
+                fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
+                WriteTagsAsyncTask(this@LyricsActivity).execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null))
+            }
+            positiveButton(android.R.string.ok)
+        }
     }
 
     private fun getSongPaths(song: Song): ArrayList<String> {

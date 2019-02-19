@@ -5,4 +5,5 @@
     android:layout_height="wrap_content"
     android:background="@null"
     android:clickable="false"
-    android:focusable="false" />
+    android:focusable="false"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />

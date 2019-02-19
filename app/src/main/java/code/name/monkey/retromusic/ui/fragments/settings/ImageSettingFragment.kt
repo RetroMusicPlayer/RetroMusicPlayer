@@ -1,8 +1,7 @@
 package code.name.monkey.retromusic.ui.fragments.settings
 
 import android.os.Bundle
-import androidx.preference.Preference
-
+import android.view.View
 import code.name.monkey.retromusic.R
 
 /**
@@ -22,5 +21,11 @@ class ImageSettingFragment : AbsSettingsFragment() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_images)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val preference = findPreference("auto_download_images_policy")
+        setSummary(preference)
     }
 }
