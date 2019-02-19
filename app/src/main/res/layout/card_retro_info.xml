@@ -202,6 +202,7 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">
@@ -242,6 +243,7 @@
                 android:background="?attr/rectSelector"
                 android:clickable="true"
                 android:focusable="true"
+                android:gravity="center_vertical"
                 android:minHeight="@dimen/md_listitem_height"
                 android:orientation="horizontal"
                 tools:ignore="PrivateResource">

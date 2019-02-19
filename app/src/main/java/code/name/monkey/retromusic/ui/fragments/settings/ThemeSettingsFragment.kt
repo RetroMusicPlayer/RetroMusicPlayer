@@ -91,9 +91,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
         accentColorPref.setOnPreferenceClickListener {
             MaterialDialog(activity!!).show {
-                title(code.name.monkey.retromusic.R.string.primary_color)
+                title(code.name.monkey.retromusic.R.string.accent_color)
                 positiveButton(R.string.set)
-                colorChooser(colors = ACCENT_COLORS, subColors = ACCENT_COLORS_SUB) { _, color ->
+                colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
                     ThemeStore.editTheme(context).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(context).updateDynamicShortcuts()
@@ -119,6 +119,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource( R.xml.pref_general)
+        addPreferencesFromResource(R.xml.pref_general)
     }
 }

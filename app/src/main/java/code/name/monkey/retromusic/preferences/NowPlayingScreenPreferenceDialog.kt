@@ -56,15 +56,13 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
-        if (positiveResult) {
-            val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
-            if (isNowPlayingThemes(nowPlayingScreen)) {
-                val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
-                Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
-                NavigationUtil.goToProVersion(activity!!)
-            } else {
-                PreferenceUtil.getInstance().nowPlayingScreen = nowPlayingScreen
-            }
+        val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
+        if (isNowPlayingThemes(nowPlayingScreen)) {
+            val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
+            Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+            NavigationUtil.goToProVersion(activity!!)
+        } else {
+            PreferenceUtil.getInstance().nowPlayingScreen = nowPlayingScreen
         }
     }
 

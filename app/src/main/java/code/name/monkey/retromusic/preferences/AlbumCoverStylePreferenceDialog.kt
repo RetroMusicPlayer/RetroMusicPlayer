@@ -41,10 +41,8 @@ class AlbumCoverStylePreference : DialogPreference {
 
 class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPager.OnPageChangeListener {
     override fun onDialogClosed(positiveResult: Boolean) {
-        if (positiveResult) {
-            val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]
-            PreferenceUtil.getInstance().albumCoverStyle = nowPlayingScreen
-        }
+        val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]
+        PreferenceUtil.getInstance().albumCoverStyle = nowPlayingScreen
     }
 
     private var viewPagerPosition: Int = 0

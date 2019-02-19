@@ -593,8 +593,8 @@
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
     <string name="send_crash_log">Send crash log</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Hmm</string>
-    <string name="pref_filter_song_title">Filter song length</string>
+    <string name="pinterest_page_summary">Follow Pintrest page for Retro Music design inspiration</string>
+    <string name="pref_filter_song_title">Filter song duration</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
 

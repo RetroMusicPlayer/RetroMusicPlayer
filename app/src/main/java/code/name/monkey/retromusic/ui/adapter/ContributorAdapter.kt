@@ -11,7 +11,7 @@ import code.name.monkey.retromusic.ui.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.RetroUtil.openUrl
 import code.name.monkey.retromusic.views.NetworkImageView
 
-class ContributorAdapter(private var contributors: ArrayList<Contributor>) : RecyclerView.Adapter<ContributorAdapter.ViewHolder>() {
+class ContributorAdapter(private var contributors: List<Contributor>) : RecyclerView.Adapter<ContributorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_contributor, parent, false))

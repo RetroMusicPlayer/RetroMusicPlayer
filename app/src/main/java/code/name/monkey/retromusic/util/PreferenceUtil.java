@@ -516,6 +516,10 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
+    public String getBaseTheme() {
+        return mPreferences.getString(GENERAL_THEME, "dark");
+    }
+
     public long getLastAddedCutoff() {
         final CalendarUtil calendarUtil = new CalendarUtil();
         long interval;

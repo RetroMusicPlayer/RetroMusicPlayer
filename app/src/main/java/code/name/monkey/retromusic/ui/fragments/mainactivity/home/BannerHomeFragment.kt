@@ -165,8 +165,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         contentContainerView = view.findViewById(R.id.contentContainer)
         contentContainerView.setBackgroundColor(ThemeStore.primaryColor(context!!))
 
-        //bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-
         setupToolbar()
         homePresenter.subscribe()
 

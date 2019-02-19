@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.adapter.playlist
 
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -8,7 +9,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.ClearSmartPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
@@ -81,7 +84,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
             holder.text!!.text = String.format(Locale.getDefault(), "%d Songs", songs!!.size)
         }
         if (holder.image != null) {
-            holder.image!!.setImageResource(getIconRes(playlist))
+            holder.image!!.setImageDrawable(getIconRes(playlist))
         }
         if (holder.adapterPosition == itemCount - 1) {
             if (holder.shortSeparator != null) {
@@ -94,14 +97,14 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         }
     }
 
-    private fun getIconRes(playlist: Playlist): Int {
+    private fun getIconRes(playlist: Playlist): Drawable {
         if (playlist is AbsSmartPlaylist) {
-            return playlist.iconRes
+            return TintHelper.createTintedDrawable(activity, playlist.iconRes, ATHUtil.resolveColor(activity, R.attr.iconColor))!!
         }
         return if (MusicUtil.isFavoritePlaylist(activity, playlist))
-            R.drawable.ic_favorite_white_24dp
+            TintHelper.createTintedDrawable(activity, R.drawable.ic_favorite_white_24dp, ThemeStore.accentColor(activity))!!
         else
-            R.drawable.ic_playlist_play_white_24dp
+            TintHelper.createTintedDrawable(activity, R.drawable.ic_playlist_play_white_24dp, ATHUtil.resolveColor(activity, R.attr.iconColor))!!
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -175,7 +178,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
             image?.apply {
                 val iconPadding = activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
                 setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
-                setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor), PorterDuff.Mode.SRC_IN)
+                //setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor), PorterDuff.Mode.SRC_IN)
             }
 
             menu?.setOnClickListener { view ->

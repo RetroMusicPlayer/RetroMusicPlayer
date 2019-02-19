@@ -9,6 +9,7 @@ import android.os.Build;
 import java.util.Arrays;
 
 import androidx.annotation.IntRange;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class DeviceInfo {
     private final int versionCode;
@@ -24,6 +25,8 @@ public class DeviceInfo {
     private final String model = Build.MODEL;
     private final String product = Build.PRODUCT;
     private final String hardware = Build.HARDWARE;
+    private final String baseTheme;
+    private final String nowPlayingTheme;
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private final String[] abis = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
@@ -50,6 +53,8 @@ public class DeviceInfo {
             versionCode = -1;
             versionName = null;
         }
+        baseTheme = PreferenceUtil.getInstance().getBaseTheme();
+        nowPlayingTheme = context.getString(PreferenceUtil.getInstance().getNowPlayingScreen().getTitleRes());
     }
 
     public String toMarkdown() {
@@ -90,6 +95,8 @@ public class DeviceInfo {
                 + "Device hardware name: " + hardware + "\n"
                 + "ABIs: " + Arrays.toString(abis) + "\n"
                 + "ABIs (32bit): " + Arrays.toString(abis32Bits) + "\n"
-                + "ABIs (64bit): " + Arrays.toString(abis64Bits);
+                + "ABIs (64bit): " + Arrays.toString(abis64Bits) + "\n"
+                + "Base theme: " + baseTheme + "\n"
+                + "Now playing theme: " + nowPlayingTheme;
     }
 }

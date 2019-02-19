@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.card_retro_info.*
 import kotlinx.android.synthetic.main.card_social.*
 import java.io.IOException
 import java.nio.charset.StandardCharsets
-import java.util.*
 
 class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
@@ -174,7 +173,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         }.type
         val contributors = Gson().fromJson<List<Contributor>>(data, type)
 
-        val contributorAdapter = ContributorAdapter(contributors as ArrayList<Contributor>)
+        val contributorAdapter = ContributorAdapter(contributors)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = contributorAdapter
