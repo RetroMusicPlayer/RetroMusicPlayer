@@ -33,13 +33,13 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                   topArtists: ArrayList<Artist>, genres: ArrayList<Genre>,
                   favoritePlaylist: ArrayList<Playlist> ->
                     val homes: ArrayList<Home> = ArrayList()
-                    if (suggestions.isNotEmpty()) homes.add(Home(R.string.suggestion_songs, 0, suggestions, SUGGESTIONS))
-                    if (recentArtists.isNotEmpty()) homes.add(Home(R.string.recent_artists, 0, recentArtists, RECENT_ARTISTS))
-                    if (recentAlbums.isNotEmpty()) homes.add(Home(R.string.recent_albums, 0, recentAlbums, RECENT_ALBUMS))
-                    if (topArtists.isNotEmpty()) homes.add(Home(R.string.top_artists, 0, topArtists, TOP_ARTISTS))
-                    if (topAlbums.isNotEmpty()) homes.add(Home(R.string.top_albums, 0, topAlbums, TOP_ALBUMS))
-                    if (favoritePlaylist.isNotEmpty()) homes.add(Home(R.string.favorites, 0, favoritePlaylist, PLAYLISTS))
-                    if (genres.isNotEmpty() && PreferenceUtil.getInstance().isGenreShown) homes.add(Home(R.string.genres, 0, genres, GENRES))
+                    if (suggestions.isNotEmpty()) homes.add(Home(R.string.suggestion_songs, 0, suggestions, SUGGESTIONS, R.drawable.ic_audiotrack_black_24dp))
+                    if (recentArtists.isNotEmpty()) homes.add(Home(R.string.recent_artists, 0, recentArtists, RECENT_ARTISTS, R.drawable.ic_artist_white_24dp))
+                    if (recentAlbums.isNotEmpty()) homes.add(Home(R.string.recent_albums, 0, recentAlbums, RECENT_ALBUMS, R.drawable.ic_album_white_24dp))
+                    if (topArtists.isNotEmpty()) homes.add(Home(R.string.top_artists, 0, topArtists, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
+                    if (topAlbums.isNotEmpty()) homes.add(Home(R.string.top_albums, 0, topAlbums, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
+                    if (favoritePlaylist.isNotEmpty()) homes.add(Home(R.string.favorites, 0, favoritePlaylist, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
+                    if (genres.isNotEmpty() && PreferenceUtil.getInstance().isGenreShown) homes.add(Home(R.string.genres, 0, genres, GENRES, R.drawable.ic_guitar_acoustic_white_24dp))
                     homes
                 }).subscribe({ homes ->
             if (homes.isNotEmpty()) {

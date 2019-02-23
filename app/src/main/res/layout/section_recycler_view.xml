@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recentArtistContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        android:id="@+id/sectionTitle"
-        android:textStyle="bold"
-        style="@style/SubTitleTextAppearance" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
+        <code.name.monkey.retromusic.views.IconImageView
+            android:id="@+id/sectionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:paddingEnd="0dp"
+            app:srcCompat="@drawable/ic_artist_selected_white_24dp" />
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            android:id="@+id/sectionTitle"
+            style="@style/SubTitleTextAppearance"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

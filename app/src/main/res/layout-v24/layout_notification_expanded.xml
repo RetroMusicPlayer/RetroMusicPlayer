@@ -19,7 +19,7 @@
       android:layout_alignParentEnd="true"
       android:layout_centerVertical="true"
       android:scaleType="centerCrop"
-      />
+        android:contentDescription="TODO" />
 
     <ImageView
       android:id="@+id/foregroundImage"
@@ -27,7 +27,8 @@
       android:layout_height="match_parent"
       android:layout_alignStart="@id/largeIcon"
       android:src="@drawable/background_image"
-      android:tint="@color/md_black_1000"/>
+      android:tint="@color/md_black_1000"
+        android:contentDescription="TODO" />
 
   </RelativeLayout>
 
@@ -57,7 +58,8 @@
         android:layout_height="16dp"
         android:layout_marginStart="8dp"
         tools:src="@drawable/ic_audiotrack_black_24dp"
-        tools:tint="@color/md_black_1000"/>
+        tools:tint="@color/md_black_1000"
+          android:contentDescription="TODO" />
 
       <TextView
         android:id="@+id/appName"
@@ -77,7 +79,8 @@
         android:layout_marginStart="2dp"
         android:scaleType="centerInside"
         android:src="@drawable/ic_keyboard_arrow_up_24dp"
-        tools:ignore="VectorDrawableCompat"/>
+        tools:ignore="VectorDrawableCompat"
+          android:contentDescription="TODO" />
 
     </LinearLayout>
 

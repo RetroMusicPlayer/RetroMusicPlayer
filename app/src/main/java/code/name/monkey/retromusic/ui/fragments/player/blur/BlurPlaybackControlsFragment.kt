@@ -35,6 +35,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,8 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+
+
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()
@@ -58,7 +61,8 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation()
         }
-        val volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
         volumeFragment.tintWhiteColor()
     }
 
@@ -250,7 +254,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 

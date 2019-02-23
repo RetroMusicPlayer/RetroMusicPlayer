@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -33,9 +34,13 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        TintHelper.setTintAuto(volumeSeekBar, ThemeStore.textColorPrimary(context!!), false)
+        setTintable(ThemeStore.accentColor(context!!))
         volumeDown.setOnClickListener(this)
         volumeUp.setOnClickListener(this)
+
+        val iconColor = ATHUtil.resolveColor(context!!, R.attr.iconColor)
+        volumeDown.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
     }
 
     override fun onResume() {
@@ -95,21 +100,16 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun tintWhiteColor() {
-        setTintable(Color.WHITE)
+        val iconColor = Color.WHITE
+        volumeDown.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
+        TintHelper.setTintAuto(volumeSeekBar, iconColor, false)
+
     }
 
-    private fun setProgressBarColor(newColor: Int) {
-
-        //volumeSeekBar.thumbTintList = ColorStateList.valueOf(newColor)
-        //volumeSeekBar.progressTintList = ColorStateList.valueOf(newColor)
-        //volumeSeekBar.progressBackgroundTintList = ColorStateList.valueOf(newColor)
-        TintHelper.setTintAuto(volumeSeekBar, newColor, false)
-        volumeDown.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-        volumeUp.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-    }
 
     fun setTintable(color: Int) {
-        setProgressBarColor(color)
+        TintHelper.setTintAuto(volumeSeekBar, color, false)
     }
 
     fun removeThumb() {
@@ -123,6 +123,12 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
             } else {
                 MusicPlayerRemote.resumePlaying()
             }
+    }
+
+    fun setTintableColor(color: Int) {
+        volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        TintHelper.setTintAuto(volumeSeekBar, color, false)
     }
 
     companion object {

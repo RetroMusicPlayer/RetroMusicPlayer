@@ -37,7 +37,7 @@ class ColorIconsImageView : AppCompatImageView {
         val alpha = if (ATHUtil.isWindowBackgroundDark(context)) {
             1.0f
         } else {
-            0.28f
+            0.12f
         }
         val filterColor = if (ATHUtil.isWindowBackgroundDark(context)) {
             ThemeStore.textColorPrimary(context)

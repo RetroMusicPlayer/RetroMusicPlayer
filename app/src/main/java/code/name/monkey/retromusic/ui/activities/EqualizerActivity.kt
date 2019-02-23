@@ -10,9 +10,12 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.EqualizerHelper
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.activity_equalizer.*
 
 /**
@@ -71,6 +74,7 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
         setupToolbar()
 
         equalizerSwitch.isChecked = EqualizerHelper.instance!!.equalizer.enabled
+        TintHelper.setTintAuto(equalizerSwitch, ThemeStore.accentColor(this), false)
         equalizerSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             when (buttonView.id) {
                 R.id.equalizerSwitch -> {
@@ -86,9 +90,11 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
         presets.onItemSelectedListener = this
 
         bassBoostStrength.progress = EqualizerHelper.instance!!.bassBoostStrength
+        ViewUtil.setProgressDrawable(bassBoostStrength, ThemeStore.accentColor(this))
         bassBoostStrength.setOnSeekBarChangeListener(mSeekBarChangeListener)
 
         virtualizerStrength.progress = EqualizerHelper.instance!!.virtualizerStrength
+        ViewUtil.setProgressDrawable(virtualizerStrength, ThemeStore.accentColor(this))
         virtualizerStrength.setOnSeekBarChangeListener(mSeekBarChangeListener)
 
         setupUI()
@@ -112,6 +118,7 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
             setNavigationOnClickListener { onBackPressed() }
             setSupportActionBar(this)
+            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(context))
         }
         title = null
     }
@@ -149,6 +156,7 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
                 maxDbTextView.text = String.format("%d dB", EqualizerHelper.instance!!.bandLevelHigh / 100)
 
                 val bar = view.findViewById<SeekBar>(R.id.seekbar)
+                ViewUtil.setProgressDrawable(bar, ThemeStore.accentColor(this))
                 bar.max = EqualizerHelper.instance!!.bandLevelHigh - EqualizerHelper.instance!!
                         .bandLevelLow
                 bar.progress = EqualizerHelper.instance!!.getBandLevel(i) - EqualizerHelper.instance!!

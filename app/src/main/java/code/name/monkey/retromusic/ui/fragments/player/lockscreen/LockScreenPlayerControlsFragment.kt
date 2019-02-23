@@ -219,7 +219,7 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 

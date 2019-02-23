@@ -19,9 +19,11 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
 class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -29,6 +31,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +46,8 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
 
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
@@ -103,7 +108,8 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         }
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
-        TintHelper.setTintAuto(progressSlider, colorFinal, false)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
+        volumeFragment.setTintable(colorFinal)
     }
 
     private fun updatePlayPauseColor() {
@@ -177,7 +183,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 

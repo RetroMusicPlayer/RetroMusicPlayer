@@ -8,19 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
 import kotlinx.android.synthetic.main.player_time.*
 
@@ -31,7 +33,8 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,14 +43,14 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_material_playback_controls, container, false)
-
-        return view
+        return inflater.inflate(R.layout.fragment_material_playback_controls, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun updateSong() {
@@ -58,12 +61,12 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper.stop()
     }
 
     override fun onServiceConnected() {
@@ -103,12 +106,15 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
 
-
-        if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
             lastPlaybackControlsColor = color
-            text.setTextColor(color)
-            TintHelper.setTintAuto(progressSlider, color, false)
+            color
+        } else {
+            ThemeStore.textColorSecondary(context!!)
         }
+        text.setTextColor(colorFinal)
+        ViewUtil.setProgressDrawable(progressSlider, ColorUtil.stripAlpha(colorFinal), true)
+        volumeFragment.setTintable(colorFinal)
 
         updatePlayPauseColor()
         updatePrevNextColor()
@@ -205,7 +211,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         progressSlider!!.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 

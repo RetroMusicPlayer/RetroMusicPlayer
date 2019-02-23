@@ -597,5 +597,6 @@
     <string name="pref_filter_song_title">Filter song duration</string>
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
+    <string name="classic">Classic</string>
 
 </resources>

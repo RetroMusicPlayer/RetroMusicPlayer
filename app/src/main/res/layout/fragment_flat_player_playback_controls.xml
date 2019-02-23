@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:splitTrack="false"
-        android:thumb="@drawable/flat_shadow_thumb"
+        android:thumb="@drawable/slider_thumb"
         tools:ignore="RtlHardcoded,UnusedAttribute" />
 
 

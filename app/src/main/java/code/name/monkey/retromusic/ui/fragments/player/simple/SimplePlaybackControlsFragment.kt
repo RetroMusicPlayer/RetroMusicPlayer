@@ -16,6 +16,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -30,7 +31,8 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private lateinit var volumeFragment: VolumeFragment
 
 
     override fun onPlayStateChanged() {
@@ -64,17 +66,19 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper.stop()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
 
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
@@ -193,6 +197,8 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         } else {
             ThemeStore.accentColor(context!!)
         }
+
+        volumeFragment.setTintable(colorFinal)
 
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)

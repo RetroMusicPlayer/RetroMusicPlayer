@@ -1,9 +1,9 @@
 package code.name.monkey.retromusic.model;
 
-import androidx.annotation.StringRes;
-
 import java.util.ArrayList;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.HomeSection;
 
 public class Home {
@@ -13,14 +13,17 @@ public class Home {
     int subtitle;
     @HomeSection
     int homeSection;
+    @DrawableRes
+    int icon;
 
     ArrayList arrayList;
 
-    public Home(int title, int subtitle, ArrayList arrayList, @HomeSection int homeSection) {
+    public Home(int title, int subtitle, ArrayList arrayList, @HomeSection int homeSection, @DrawableRes int icon) {
         this.title = title;
         this.subtitle = subtitle;
         this.arrayList = arrayList;
         this.homeSection = homeSection;
+        this.icon = icon;
     }
 
     @HomeSection
@@ -40,5 +43,10 @@ public class Home {
 
     public ArrayList getArrayList() {
         return arrayList;
+    }
+
+    @DrawableRes
+    public int getIcon() {
+        return icon;
     }
 }

@@ -73,7 +73,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 
@@ -102,12 +102,12 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setProgressBarColor(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
         } else {
-            val accentColor = ThemeStore.accentColor(context!!)
-            setProgressBarColor(accentColor)
+            ThemeStore.accentColor(context!!)
         }
+        setProgressBarColor(colorFinal)
 
         updateRepeatState()
         updateShuffleState()

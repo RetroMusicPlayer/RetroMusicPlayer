@@ -15,15 +15,15 @@
 
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
         android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/collapsingToolbarLayout"
             android:background="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false">
@@ -94,15 +94,15 @@
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/albumTitle"
-                        android:textStyle="bold"
+                        style="@style/TextAppearance.MaterialComponents.Headline4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                         android:id="@+id/albumText"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -114,7 +114,6 @@
                         android:paddingTop="4dp"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
@@ -137,9 +136,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="10dp"
-        app:showTitle="false"
         app:setIcon="@drawable/ic_shuffle_white_24dp"
         app:setText="@string/action_shuffle_all"
+        app:showTitle="false"
         app:shuffleBackgroundColor="@color/md_black_1000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

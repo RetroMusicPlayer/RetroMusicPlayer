@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -737,8 +738,15 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            return new MaterialDialog(context)
-                    .title(R.string.listing_files,"");
+            View view= LayoutInflater.from(context).inflate(R.layout.progress_bar,null);
+            ProgressBar progressBar= view.findViewById(R.id.progressBar);
+            ViewUtil.INSTANCE.setProgressDrawable(progressBar,ThemeStore.Companion.accentColor(context));
+
+            MaterialDialog materialDialog= new MaterialDialog(context);
+            materialDialog.setContentView(R.layout.progress_bar);
+            materialDialog.title(R.string.listing_files,"");
+            return materialDialog;
+
         }
     }
 }

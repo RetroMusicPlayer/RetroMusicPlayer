@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--The unused FrameLayout layout is necessary to prevent a crash on rotate-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <include layout="@layout/status_bar" />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/playerToolbar"
+            style="@style/Toolbar"
+            android:background="@android:color/transparent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <code.name.monkey.retromusic.views.HeightFitSquareLayout
+                android:id="@+id/coverContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <fragment
+                    android:id="@+id/playerAlbumCoverFragment"
+                    class="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </code.name.monkey.retromusic.views.HeightFitSquareLayout>
+
+            <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/playerSlidingLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/coverContainer"
+                android:layout_toRightOf="@+id/coverContainer"
+                android:clickable="false"
+                android:focusable="true"
+                android:gravity="bottom"
+                sothree:umanoFadeColor="#00000000"
+                sothree:umanoOverlay="true"
+                sothree:umanoPanelHeight="0dp"
+                sothree:umanoScrollableView="@+id/playerRecyclerView"
+                sothree:umanoShadowHeight="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <View
+                        android:id="@+id/colorBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <fragment
+                        android:id="@+id/playbackControlsFragment"
+                        class="code.name.monkey.retromusic.ui.fragments.player.classic.ClassicPlayerPlaybackControlsFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/playerPanel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/playingQueueCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        sothree:cardCornerRadius="12dp"
+                        android:layout_marginBottom="-8dp"
+                        app:cardBackgroundColor="?cardBackgroundColor"
+                        app:cardElevation="@dimen/card_elevation"
+                        app:cardUseCompatPadding="false">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <!--This is necessary for the drag sorting to work at the top-->
+                            <View
+                                android:id="@+id/draggableArea"
+                                android:layout_width="72dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@+id/cardContent"
+                                android:layout_alignBottom="@+id/cardContent"
+                                android:layout_marginTop="48dp" />
+
+                            <LinearLayout
+                                android:id="@+id/cardContent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/playerQueueSubHeader"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:gravity="center_vertical"
+                                    android:paddingLeft="16dp"
+                                    android:paddingRight="16dp"
+                                    android:text="@string/up_next"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                                    android:textColor="?android:textColorSecondary" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/playerRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:paddingBottom="8dp"
+                                    android:requiresFadingEdge="vertical" />
+
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </FrameLayout>
+            </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -45,7 +45,7 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="Title" />
 
@@ -60,6 +60,7 @@
             android:maxLines="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 

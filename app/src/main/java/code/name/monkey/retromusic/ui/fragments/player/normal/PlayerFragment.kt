@@ -3,18 +3,22 @@ package code.name.monkey.retromusic.ui.fragments.player.normal
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
@@ -57,7 +61,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor)
+        return ATHUtil.resolveColor(context, R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
@@ -70,6 +74,20 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         if (PreferenceUtil.getInstance().adaptiveColor) {
             colorize(color)
         }
+
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
+            val display = activity?.windowManager?.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display?.getMetrics(outMetrics)
+
+            val density = resources.displayMetrics.density
+            val dpHeight = outMetrics.heightPixels / density
+            val dpWidth = outMetrics.widthPixels / density
+
+            playerAlbumCoverContainer?.layoutParams?.width = RetroUtil.convertDpToPixel(dpWidth - 20, context!!).toInt()
+        }
+
     }
 
     override fun toggleFavorite(song: Song) {
@@ -125,6 +143,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     }
 
     companion object {
+
 
         fun newInstance(): PlayerFragment {
             return PlayerFragment()

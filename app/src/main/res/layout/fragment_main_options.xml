@@ -105,7 +105,8 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/promotional" />
+                android:src="@drawable/promotional"
+                android:contentDescription="TODO" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 

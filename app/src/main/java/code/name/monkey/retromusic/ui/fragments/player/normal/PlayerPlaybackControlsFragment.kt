@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.normal
 
 import android.animation.ObjectAnimator
 import android.graphics.PorterDuff
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +20,7 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -34,7 +33,8 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
+    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,9 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
+
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()
@@ -70,21 +73,20 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
         }
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
-            setFabColor(color)
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
         } else {
-            setFabColor(ThemeStore.accentColor(context!!))
+            ThemeStore.accentColor(context!!)
         }
+
+        volumeFragment.setTintable(colorFinal)
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
+        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal)
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
-    }
-
-    private fun setFabColor(i: Int) {
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(i)), false)
-        TintHelper.setTintAuto(playPauseButton, i, true)
-        setProgressBarColor(i)
     }
 
     private fun updateSong() {
@@ -95,12 +97,12 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper.stop()
     }
 
     override fun onServiceConnected() {
@@ -125,11 +127,6 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onShuffleModeChanged() {
         updateShuffleState()
-    }
-
-
-    private fun setProgressBarColor(newColor: Int) {
-        ViewUtil.setProgressDrawable(progressSlider, newColor)
     }
 
     private fun setUpPlayPauseFab() {
@@ -230,7 +227,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressSlider.max = total
 
         val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = 1500
+        animator.duration = SLIDER_ANIMATION_TIME
         animator.interpolator = LinearInterpolator()
         animator.start()
 

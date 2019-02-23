@@ -82,15 +82,15 @@
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/albumTitle"
-                        android:textStyle="bold"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         tools:ignore="MissingPrefix" />
 
                     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                         android:id="@+id/albumText"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -102,7 +102,6 @@
                         android:paddingTop="4dp"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
@@ -122,9 +121,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="10dp"
-        app:showTitle="true"
         app:setIcon="@drawable/ic_shuffle_white_24dp"
         app:setText="@string/action_shuffle_all"
+        app:showTitle="true"
         app:shuffleBackgroundColor="@color/md_black_1000" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

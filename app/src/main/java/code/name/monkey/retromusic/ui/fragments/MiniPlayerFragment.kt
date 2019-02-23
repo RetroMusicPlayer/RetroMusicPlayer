@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.ui.fragments
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -19,6 +18,7 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_mini_player.*
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
@@ -66,7 +66,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     private fun setUpMiniPlayer() {
         setUpPlayPauseButton()
-        progressBar.progressTintList = ColorStateList.valueOf(ThemeStore.accentColor(activity!!))
+        ViewUtil.setProgressDrawable(progressBar, ThemeStore.accentColor(context!!))
     }
 
     private fun setUpPlayPauseButton() {

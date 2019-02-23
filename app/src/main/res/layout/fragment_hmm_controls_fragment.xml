@@ -16,7 +16,8 @@
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/ic_repeat_white_24dp"
         tools:ignore="MissingPrefix"
-        tools:tint="@color/md_black_1000" />
+        tools:tint="@color/md_black_1000"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/player_shuffle_button"
@@ -27,5 +28,6 @@
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/ic_shuffle_white_24dp"
         tools:ignore="MissingPrefix"
-        tools:tint="@color/md_black_1000" />
+        tools:tint="@color/md_black_1000"
+        android:contentDescription="TODO" />
 </LinearLayout>

@@ -206,11 +206,14 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <code.name.monkey.retromusic.views.CollapsingFAB
         android:id="@+id/saveFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        app:srcCompat="@drawable/ic_save_white_24dp" />
+        android:layout_gravity="center_horizontal|bottom"
+        app:setIcon="@drawable/ic_save_white_24dp"
+        app:setText="Save"
+        app:showTitle="true"
+        app:shuffleBackgroundColor="@color/md_grey_200" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

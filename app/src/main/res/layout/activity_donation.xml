@@ -51,11 +51,11 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/donation"
+                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/donation_header"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:textColor="?attr/colorAccent" />
 
             <LinearLayout
@@ -73,12 +73,12 @@
                     android:indeterminate="true" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/TextAppearance.MaterialComponents.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:paddingLeft="16dp"
                     android:text="@string/loading_products"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
             </LinearLayout>
@@ -112,6 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
+                        style="@style/TextAppearance.MaterialComponents.Caption"
                         android:paddingEnd="16dp"
                         android:text="@string/paypal_summary"
                         android:textColor="@color/md_white_1000" />

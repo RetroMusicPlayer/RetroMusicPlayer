@@ -5,10 +5,25 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        android:id="@+id/sectionTitle"
-        style="@style/SubTitleTextAppearance"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <code.name.monkey.retromusic.views.IconImageView
+            android:id="@+id/sectionIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="14dp"
+            android:paddingEnd="0dp"
+            app:srcCompat="@drawable/ic_audiotrack_black_24dp" />
+
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            android:id="@+id/sectionTitle"
+            style="@style/SubTitleTextAppearance"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -11,6 +12,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.view.View
 import android.view.animation.PathInterpolator
+import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -28,7 +30,33 @@ object ViewUtil {
         return createColorAnimator(v, "textColor", startColor, endColor)
     }
 
-    fun setProgressDrawable(progressSlider: SeekBar, newColor: Int) {
+    fun createBackgroundColorTransition(v: View, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
+        return createColorAnimator(v, "backgroundColor", startColor, endColor)
+    }
+
+    fun setProgressDrawable(progressSlider: SeekBar, newColor: Int, thumbTint: Boolean = false) {
+
+        if (thumbTint) {
+            progressSlider.thumbTintList = ColorStateList.valueOf(newColor)
+        }
+
+        if (progressSlider.progressDrawable is LayerDrawable) {
+            val ld = progressSlider.progressDrawable as LayerDrawable?
+
+            if (ld != null) {
+                val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
+                clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+                val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
+                clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
+            }
+        } else {
+            progressSlider.progressTintList = ColorStateList.valueOf(newColor)
+        }
+    }
+
+    fun setProgressDrawable(progressSlider: ProgressBar, newColor: Int) {
+
         val ld = progressSlider.progressDrawable as LayerDrawable
 
         val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)

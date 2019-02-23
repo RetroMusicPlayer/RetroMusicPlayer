@@ -157,7 +157,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         MaterialDialog(this).show {
             title(text = "Add lyrics")
-            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
+            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
             negativeButton(text = "Delete") { LyricUtil.deleteLrcFile(song.title, song.artistName) }
             input(hint = "Paste lyrics here",
                     prefill = content,
@@ -176,9 +176,9 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         return paths
     }
 
-    private fun getGoogleSearchUrl(title: String?, text: String?): String {
+    private fun getGoogleSearchUrl(): String {
         var baseUrl = "http://www.google.com/search?"
-        var query = "$title+$text"
+        var query = song.title + "+" + song.artistName
         query = "q=" + query.replace(" ", "+") + " lyrics"
         baseUrl += query
         return baseUrl

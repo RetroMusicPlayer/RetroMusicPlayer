@@ -57,6 +57,10 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     }
 
     private fun hideVolumeIfAvailable() {
-        volumeFragmentContainer.visibility = if (PreferenceUtil.getInstance().volumeToggle) View.VISIBLE else View.GONE
+        volumeFragmentContainer?.visibility = if (PreferenceUtil.getInstance().volumeToggle) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val SLIDER_ANIMATION_TIME: Long = 400
     }
 }

@@ -27,7 +27,6 @@ import java.io.File
 abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
 
-    private lateinit var items: Array<CharSequence>
     protected var id: Int = 0
         private set
     private var paletteColorPrimary: Int = 0
@@ -37,7 +36,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     protected val show: MaterialDialog
         get() = MaterialDialog(this@AbsTagEditorActivity).show {
             title(R.string.update_image)
-            listItems(items = items as List<String>) { _, position, _ ->
+            listItems(items = items) { _, position, _ ->
                 when (position) {
                     0 -> getImageFromLastFM()
                     1 -> startImagePicker()
@@ -187,9 +186,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         //observableScrollView.setScrollViewCallbacks(observableScrollViewCallbacks);
     }
 
+    private lateinit var items: List<String>
+
     private fun setUpImageView() {
         loadCurrentImage()
-        items = arrayOf(getString(R.string.download_from_last_fm), getString(R.string.pick_from_local_storage), getString(R.string.web_search), getString(R.string.remove_cover))
+        items = listOf(getString(R.string.download_from_last_fm), getString(R.string.pick_from_local_storage), getString(R.string.web_search), getString(R.string.remove_cover))
         editorImage.setOnClickListener { show }
     }
 
@@ -210,6 +211,8 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     protected abstract fun deleteImage()
 
     private fun setUpFab() {
+        saveFab.setColor(ThemeStore.accentColor(this))
+        saveFab.setShowTitle(true)
         saveFab.apply {
             scaleX = 0f
             scaleY = 0f
@@ -311,11 +314,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     protected abstract fun loadImageFromFile(selectedFile: Uri?)
 
     private fun getAudioFile(path: String): AudioFile {
-        try {
-            return AudioFileIO.read(File(path))
+        return try {
+            AudioFileIO.read(File(path))
         } catch (e: Exception) {
             Log.e(TAG, "Could not read audio file $path", e)
-            return AudioFile()
+            AudioFile()
         }
 
     }

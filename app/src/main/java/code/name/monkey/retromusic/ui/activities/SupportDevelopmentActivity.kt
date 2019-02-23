@@ -92,7 +92,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         title = null
 
         donate.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 
     override fun onBillingInitialized() {

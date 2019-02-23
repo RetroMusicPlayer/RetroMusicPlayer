@@ -67,7 +67,7 @@
     </style>
 
     <style name="SubTitleTextAppearance">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
         <item name="android:layout_gravity">start|center_vertical</item>
         <item name="android:padding">12dp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>

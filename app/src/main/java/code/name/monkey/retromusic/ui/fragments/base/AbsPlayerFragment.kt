@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.views.FitSystemWindowsLayout
 
+
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
     var callbacks: Callbacks? = null
         private set
@@ -189,9 +190,9 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 val activity = activity
                 if (activity != null) {
                     val res = if (isFavorite!!)
-                        R.drawable.ic_favorite_white_24dp
+                        code.name.monkey.retromusic.R.drawable.ic_favorite_white_24dp
                     else
-                        R.drawable.ic_favorite_border_white_24dp
+                        code.name.monkey.retromusic.R.drawable.ic_favorite_border_white_24dp
                     val drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor())
                     toolbarGet().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
                 }
@@ -202,14 +203,13 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setBackgroundColor(ThemeStore.primaryColor(activity!!))
-        if (PreferenceUtil.getInstance().fullScreenMode) {
-            if (view.findViewById<View>(R.id.status_bar) != null)
-                view.findViewById<View>(R.id.status_bar).visibility = View.GONE
+        if (PreferenceUtil.getInstance().fullScreenMode && view.findViewById<View>(R.id.status_bar) != null) {
+            view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
     }
 
     fun setSafeArea(safeArea: View) {
-        val layout = safeArea.findViewById<FitSystemWindowsLayout>(R.id.safeArea)
+        val layout = safeArea.findViewById<FitSystemWindowsLayout>(code.name.monkey.retromusic.R.id.safeArea)
         if (layout != null) {
             layout.isFit = !PreferenceUtil.getInstance().fullScreenMode
         }
@@ -222,6 +222,15 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
 
     companion object {
         val TAG: String = AbsPlayerFragment::class.java.simpleName
+    }
+
+    protected fun getUpNextAndQueueTime(): String {
+        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
+
+        return MusicUtil.buildInfoString(
+                resources.getString(R.string.up_next),
+                MusicUtil.getReadableDurationString(duration)
+        )
     }
 
 }

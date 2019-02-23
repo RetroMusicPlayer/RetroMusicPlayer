@@ -32,8 +32,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 289
-        versionName '3.1.00'
+        versionCode 291
+        versionName '3.1.100'
 
         multiDexEnabled true
 
@@ -159,7 +159,7 @@ dependencies {
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     /*Backend all*/
     implementation project(':appthemehelper')
-    implementation 'com.github.hannesa2:AndroidSlidingUpPanel:3.5.0'
+    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

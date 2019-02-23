@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.ui.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.ui.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.ui.adapter.song.SongAdapter
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.views.IconImageView
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -97,6 +98,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
     }
 
     private inner class SuggestionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
         private val ids: ArrayList<Int> = arrayListOf(R.id.image_1, R.id.image_2, R.id.image_3, R.id.image_4, R.id.image_5, R.id.image_6, R.id.image_7)
         private var textView: TextView = itemView.findViewById(R.id.text)
         private var playSuggestion: FloatingActionButton = itemView.findViewById(R.id.playSuggestions)
@@ -129,6 +131,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
                 setTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)))
             }
             title.text = activity.getString(home.title)
+            icon.setImageResource(home.icon)
 
             playSuggestion.apply {
                 TintHelper.setTintAuto(this, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)), false)
@@ -144,10 +147,12 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
                 adapter = AlbumFullWidthAdapter(activity, home.arrayList as ArrayList<Album>, displayMetrics)
             }
             title.text = activity.getString(home.title)
+            icon.setImageResource(home.icon)
         }
 
-        val recyclerView: MetalRecyclerViewPager = view.findViewById(R.id.recyclerView)
-        val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val recyclerView: MetalRecyclerViewPager = view.findViewById(R.id.recyclerView)
+        private val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
 
     }
 
@@ -159,11 +164,12 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
                 adapter = artistAdapter
             }
             title.text = activity.getString(home.title)
+            icon.setImageResource(home.icon)
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        val title: TextView = view.findViewById(R.id.sectionTitle)
-
+        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        private val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
     }
 
     private inner class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -175,10 +181,12 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
 
             }
             title.text = activity.getString(home.title)
+            icon.setImageResource(home.icon)
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        private val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
 
     }
 
@@ -192,10 +200,11 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Ar
 
             }
             title.text = activity.getString(home.title)
+            icon.setImageResource(home.icon)
         }
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        val title: TextView = view.findViewById(R.id.sectionTitle)
-
+        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+        private val title: TextView = view.findViewById(R.id.sectionTitle)
+        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
     }
 }

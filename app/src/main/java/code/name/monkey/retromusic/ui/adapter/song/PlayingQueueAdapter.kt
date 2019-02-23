@@ -30,8 +30,10 @@ class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapte
         this.current = current
     }
 
-    constructor(activity: AppCompatActivity, dataSet: ArrayList<Song>, current: Int,
-                @LayoutRes itemLayoutRes: Int, @ColorInt color: Int) : super(activity, dataSet, itemLayoutRes, false, null) {
+    constructor(activity: AppCompatActivity,
+                dataSet: ArrayList<Song>, current: Int,
+                @LayoutRes itemLayoutRes: Int,
+                @ColorInt color: Int) : super(activity, dataSet, itemLayoutRes, false, null) {
         this.current = current
         this.color = color
     }

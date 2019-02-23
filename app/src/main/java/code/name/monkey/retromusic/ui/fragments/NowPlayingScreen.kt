@@ -20,7 +20,7 @@ enum class NowPlayingScreen constructor(@param:StringRes @field:StringRes
     MATERIAL(R.string.material, R.drawable.np_material, 11),
     NORMAL(R.string.normal, R.drawable.np_normal, 0),
     PLAIN(R.string.plain, R.drawable.np_plain, 3),
-    //TINY(R.string.tiny, R.drawable.np_tiny, 7),
+    CLASSIC(R.string.classic, R.drawable.np_normal, 7),
     SIMPLE(R.string.simple, R.drawable.np_simple, 8)
 
 }
