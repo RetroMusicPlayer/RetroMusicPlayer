@@ -14,7 +14,6 @@
 
     <style name="OverFlowButton">
         <item name="srcCompat">@drawable/ic_more_vert_white_24dp</item>
-        <item name="android:layout_margin">8dp</item>
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:scaleType">center</item>
@@ -33,7 +32,7 @@
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="android:titleTextAppearance">@style/ToolbarTextAppearance</item>
-        <item name="android:subtitleTextAppearance">@style/ToolbarTextAppearance</item>
+        <item name="android:subtitleTextAppearance">@style/ToolbarSubTitleTextAppearance</item>
         <item name="layout_collapseMode">pin</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
@@ -43,6 +42,10 @@
 
     <style name="ToolbarTextAppearance">
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+
+    <style name="ToolbarSubTitleTextAppearance">
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
@@ -67,7 +70,8 @@
     </style>
 
     <style name="SubTitleTextAppearance">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Subtitle1
+        </item>
         <item name="android:layout_gravity">start|center_vertical</item>
         <item name="android:padding">12dp</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>

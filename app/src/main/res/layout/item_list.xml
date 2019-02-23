@@ -7,12 +7,14 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?rectSelector"
-    android:minHeight="72dp"
+    android:minHeight="64dp"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <code.name.monkey.retromusic.views.IconImageView
@@ -46,16 +48,16 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"  />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/image_text"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:maxLines="1"
                     android:minHeight="40dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:visibility="gone"
                     tools:text="1"
                     tools:visibility="visible" />
@@ -65,11 +67,10 @@
         <LinearLayout
             android:id="@+id/title_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
             android:layout_weight="1.0"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
@@ -78,7 +79,6 @@
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"

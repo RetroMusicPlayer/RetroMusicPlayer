@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.adapter.base
 
+import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,9 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import com.google.android.material.card.MaterialCardView
 
-open class MediaEntryViewHolder(w: View) : RecyclerView.ViewHolder(w), View.OnClickListener, View.OnLongClickListener {
+open class MediaEntryViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
     override fun onLongClick(v: View?): Boolean {
         return false
     }
@@ -38,31 +40,33 @@ open class MediaEntryViewHolder(w: View) : RecyclerView.ViewHolder(w), View.OnCl
     var imageTextContainer: CardView? = null
 
     init {
-        title = w.findViewById(R.id.title)
-        text = w.findViewById(R.id.text)
 
-        image = w.findViewById(R.id.image)
-        imageContainer = w.findViewById(R.id.image_container)
-        imageTextContainer = w.findViewById(R.id.image_text_container)
-        imageContainerCard = w.findViewById(R.id.image_container_card)
 
-        imageText = w.findViewById(R.id.image_text)
+        title = view.findViewById(R.id.title)
+        text = view.findViewById(R.id.text)
 
-        menu = w.findViewById(R.id.menu)
-        dragView = w.findViewById(R.id.drag_view)
+        image = view.findViewById(R.id.image)
+        imageContainer = view.findViewById(R.id.image_container)
+        imageTextContainer = view.findViewById(R.id.image_text_container)
+        imageContainerCard = view.findViewById(R.id.image_container_card)
 
-        separator = w.findViewById(R.id.separator)
-        shortSeparator = w.findViewById(R.id.short_separator)
-        paletteColorContainer = w.findViewById(R.id.palette_color_container)
+        imageText = view.findViewById(R.id.image_text)
 
-        time = w.findViewById(R.id.time);
-        recyclerView = w.findViewById(R.id.recycler_view)
+        menu = view.findViewById(R.id.menu)
+        dragView = view.findViewById(R.id.drag_view)
 
-        mask = w.findViewById(R.id.mask)
-        playSongs = w.findViewById(R.id.playSongs)
+        separator = view.findViewById(R.id.separator)
+        shortSeparator = view.findViewById(R.id.short_separator)
+        paletteColorContainer = view.findViewById(R.id.palette_color_container)
 
-        w.setOnClickListener(this)
-        w.setOnLongClickListener(this)
+        time = view.findViewById(R.id.time);
+        recyclerView = view.findViewById(R.id.recycler_view)
+
+        mask = view.findViewById(R.id.mask)
+        playSongs = view.findViewById(R.id.playSongs)
+
+        view.setOnClickListener(this@MediaEntryViewHolder)
+        view.setOnLongClickListener(this)
 
         if (imageTextContainer != null) {
             imageTextContainer!!.setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))

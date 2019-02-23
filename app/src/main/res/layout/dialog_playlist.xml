@@ -48,8 +48,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
         android:gravity="center_vertical"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
         android:text="@string/create_action"
         app:backgroundTint="@color/md_pink_A400" />
 
@@ -59,11 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
         android:gravity="center_vertical"
-        android:paddingTop="12dp"
-        android:paddingBottom="12dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
         android:text="@android:string/cancel"
         app:strokeWidth="2dp" />
 

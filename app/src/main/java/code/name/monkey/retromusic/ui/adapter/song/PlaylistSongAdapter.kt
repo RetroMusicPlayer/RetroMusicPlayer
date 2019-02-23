@@ -49,7 +49,7 @@ open class PlaylistSongAdapter(activity: AppCompatActivity, dataSet: ArrayList<S
                 holder.dragView!!.visibility = View.GONE
             }
             if (holder.separator != null) {
-                holder.separator!!.visibility = View.VISIBLE
+                holder.separator!!.visibility = View.GONE
             }
             if (holder.shortSeparator != null) {
                 holder.shortSeparator!!.visibility = View.GONE

@@ -36,8 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 app:cardCornerRadius="25dp"
-                app:cardElevation="0dp"
-                app:cardUseCompatPadding="true">
+                app:cardElevation="0dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEEditText
                     android:id="@+id/searchView"
@@ -46,7 +45,10 @@
                     android:background="@null"
                     android:hint="@string/action_search"
                     android:inputType="text|textAutoComplete"
-                    android:padding="12dp" />
+                    android:padding="12dp">
+
+                    <requestFocus />
+                </code.name.monkey.appthemehelper.common.views.ATEEditText>
 
             </com.google.android.material.card.MaterialCardView>
 

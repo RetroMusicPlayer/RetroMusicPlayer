@@ -84,7 +84,7 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
             }
         } else {
             if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.VISIBLE
+                holder.shortSeparator!!.visibility = View.GONE
             }
         }
 

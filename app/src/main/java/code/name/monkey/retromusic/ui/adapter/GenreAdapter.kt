@@ -42,7 +42,7 @@ class GenreAdapter(private val mActivity: Activity, dataSet: ArrayList<Genre>, p
         }
 
         if (holder.separator != null) {
-            holder.separator!!.visibility = View.VISIBLE
+            holder.separator!!.visibility = View.GONE
         }
     }
 

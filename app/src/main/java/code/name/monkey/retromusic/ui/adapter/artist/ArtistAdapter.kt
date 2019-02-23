@@ -52,7 +52,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
         return createViewHolder(view)
     }
 
-    protected fun createViewHolder(view: View): ViewHolder {
+    private fun createViewHolder(view: View): ViewHolder {
         return ViewHolder(view)
     }
 
@@ -69,7 +69,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
             holder.text!!.visibility = View.GONE
         }
         if (holder.shortSeparator != null) {
-            holder.shortSeparator!!.visibility = View.VISIBLE
+            holder.shortSeparator!!.visibility = View.GONE
         }
         loadArtistImage(artist, holder)
     }

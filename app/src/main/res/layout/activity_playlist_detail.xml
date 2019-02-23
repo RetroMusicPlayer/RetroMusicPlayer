@@ -55,11 +55,6 @@
                     </androidx.appcompat.widget.Toolbar>
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?dividerColor" />
         </com.google.android.material.appbar.AppBarLayout>
 
 

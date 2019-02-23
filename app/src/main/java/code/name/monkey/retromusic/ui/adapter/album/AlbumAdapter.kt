@@ -91,7 +91,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             }
         } else {
             if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.VISIBLE
+                holder.shortSeparator!!.visibility = View.GONE
             }
         }
 

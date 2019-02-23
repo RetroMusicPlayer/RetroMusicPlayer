@@ -92,7 +92,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
             }
         } else {
             if (holder.shortSeparator != null && dataSet[position] !is AbsSmartPlaylist) {
-                holder.shortSeparator!!.visibility = View.VISIBLE
+                holder.shortSeparator!!.visibility = View.GONE
             }
         }
     }

@@ -29,7 +29,7 @@ import java.util.*
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchContract.SearchView, TextWatcher {
 
-    private var searchPresenter: SearchPresenter? = null
+    private lateinit var searchPresenter: SearchPresenter
     private var searchAdapter: SearchAdapter? = null
     private var query: String? = null
 
@@ -48,11 +48,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         setupRecyclerView()
         setUpToolBar()
         setupSearchView()
-
-        if (savedInstanceState != null) {
-            query = savedInstanceState.getString(QUERY)
-            searchPresenter!!.search(query!!)
-        }
 
         if (intent.getBooleanExtra("mic_search", false)) {
             startMicSearch()
@@ -76,7 +71,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
             layoutManager = LinearLayoutManager(this@SearchActivity)
             adapter = searchAdapter
         }
-
     }
 
     private fun setupSearchView() {
@@ -86,13 +80,13 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
     override fun onResume() {
         super.onResume()
-        searchPresenter!!.subscribe()
-        searchPresenter!!.search(query)
+        searchPresenter.subscribe()
+        searchPresenter.search(query)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        searchPresenter!!.unsubscribe()
+        searchPresenter.unsubscribe()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -102,7 +96,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        searchPresenter!!.search(savedInstanceState.getString(QUERY, ""))
+        searchPresenter.search(savedInstanceState.getString(QUERY, ""))
     }
 
     private fun setUpToolBar() {
@@ -113,12 +107,12 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
     private fun search(query: String) {
         this.query = query.trim { it <= ' ' }
         voiceSearch.visibility = if (query.isNotEmpty()) View.GONE else View.VISIBLE
-        searchPresenter!!.search(query)
+        searchPresenter.search(query)
     }
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        searchPresenter!!.search(query!!)
+        searchPresenter.search(query!!)
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {
@@ -164,7 +158,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     query = result[0]
                     searchView.setText(query, BufferType.EDITABLE)
-                    searchPresenter!!.search(query!!)
+                    searchPresenter.search(query!!)
                 }
             }
         }

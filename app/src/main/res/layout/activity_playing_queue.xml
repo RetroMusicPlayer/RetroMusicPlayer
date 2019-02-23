@@ -46,10 +46,6 @@
             android:text="@string/up_next"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?dividerColor" />
     </com.google.android.material.appbar.AppBarLayout>
 
 

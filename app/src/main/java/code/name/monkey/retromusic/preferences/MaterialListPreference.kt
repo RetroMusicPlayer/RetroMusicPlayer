@@ -52,7 +52,7 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         return MaterialDialog(activity!!).show {
             title(text = materialListPreference.title.toString())
             positiveButton(R.string.set)
-            listItemsSingleChoice(items = entries, initialSelection = position) { dialog, index, text ->
+            listItemsSingleChoice(items = entries, initialSelection = position) { _, index, _ ->
                 materialListPreference.callChangeListener(entriesValues!![index])
                 materialListPreference.setCustomValue(entriesValues[index])
                 materialListPreference.summary = entries!![index]

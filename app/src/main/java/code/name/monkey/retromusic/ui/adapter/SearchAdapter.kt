@@ -115,10 +115,8 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
         override fun onClick(v: View?) {
             val item = dataSet!![adapterPosition]
             when (itemViewType) {
-                ALBUM -> NavigationUtil.goToAlbum(activity,
-                        (item as Album).id, Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
-                ARTIST -> NavigationUtil.goToArtist(activity,
-                        (item as Artist).id, Pair.create(image, activity.resources.getString(R.string.transition_artist_image)))
+                ALBUM -> NavigationUtil.goToAlbum(activity, (item as Album).id, Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
+                ARTIST -> NavigationUtil.goToArtist(activity, (item as Artist).id, Pair.create(image, activity.resources.getString(R.string.transition_artist_image)))
                 SONG -> {
                     val playList = ArrayList<Song>()
                     playList.add(item as Song)

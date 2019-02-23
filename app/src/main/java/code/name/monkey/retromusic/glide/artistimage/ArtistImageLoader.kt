@@ -38,9 +38,8 @@ class ArtistImageFetcher(private val context: Context, private val lastFMRestCli
         return InputStream::class.java
     }
 
-
     override fun getDataSource(): DataSource {
-        return DataSource.REMOTE
+        return DataSource.MEMORY_CACHE
     }
 
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {

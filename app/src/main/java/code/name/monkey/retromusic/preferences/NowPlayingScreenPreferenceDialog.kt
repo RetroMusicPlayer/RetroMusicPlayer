@@ -56,14 +56,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
-        val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
-        if (isNowPlayingThemes(nowPlayingScreen)) {
-            val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
-            Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
-            NavigationUtil.goToProVersion(activity!!)
-        } else {
-            PreferenceUtil.getInstance().nowPlayingScreen = nowPlayingScreen
-        }
+
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -78,7 +71,16 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
 
         return MaterialDialog(activity!!).show {
             title(R.string.pref_title_album_cover_style)
-            positiveButton(android.R.string.ok)
+            positiveButton(R.string.set) {
+                val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
+                if (isNowPlayingThemes(nowPlayingScreen)) {
+                    val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
+                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+                    NavigationUtil.goToProVersion(activity!!)
+                } else {
+                    PreferenceUtil.getInstance().nowPlayingScreen = nowPlayingScreen
+                }
+            }
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)
         }

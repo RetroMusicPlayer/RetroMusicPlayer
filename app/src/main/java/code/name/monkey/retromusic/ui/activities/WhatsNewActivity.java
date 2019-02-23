@@ -65,7 +65,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setTitle(null);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         title.setTextColor(ThemeStore.Companion.textColorPrimary(this));
-
+ToolbarContentTintHelper.colorBackButton(toolbar,ThemeStore.Companion.textColorSecondary(this));
 
         try {
             // Load from phonograph-changelog.html in the assets folder

@@ -41,7 +41,7 @@ class ShuffleButtonSongAdapter(activity: AppCompatActivity,
                 holder.image!!.setImageResource(R.drawable.ic_shuffle_white_24dp)
             }
             if (holder.separator != null) {
-                holder.separator!!.visibility = View.VISIBLE
+                holder.separator!!.visibility = View.GONE
             }
             if (holder.shortSeparator != null) {
                 holder.shortSeparator!!.visibility = View.GONE
