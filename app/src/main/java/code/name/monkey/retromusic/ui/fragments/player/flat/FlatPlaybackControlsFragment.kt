@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
-import kotlinx.android.synthetic.main.player_time.*
 
 class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
 

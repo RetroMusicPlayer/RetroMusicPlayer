@@ -92,6 +92,9 @@ class SortOrder {
 
             /* Song sort order date */
             const val SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC"
+
+            /* Song sort order composer*/
+            const val COMPOSER = MediaStore.Audio.Media.COMPOSER
         }
     }
 

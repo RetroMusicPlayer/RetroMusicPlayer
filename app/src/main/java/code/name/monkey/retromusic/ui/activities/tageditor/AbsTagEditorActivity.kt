@@ -67,6 +67,15 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             }
 
         }
+    protected val composer: String?
+        get() {
+            return try {
+                getAudioFile(songPaths!![0]).tagOrCreateAndSetDefault.getFirst(FieldKey.COMPOSER)
+            } catch (ignored: Exception) {
+                null
+            }
+
+        }
 
     protected val albumTitle: String?
         get() {

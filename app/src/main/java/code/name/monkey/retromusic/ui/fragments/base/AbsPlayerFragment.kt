@@ -194,7 +194,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                     else
                         code.name.monkey.retromusic.R.drawable.ic_favorite_border_white_24dp
                     val drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor())
-                    toolbarGet().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
+                    toolbarGet().menu.findItem(R.id.action_toggle_favorite)?.setIcon(drawable)?.title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
                 }
             }
         }.execute(MusicPlayerRemote.currentSong)

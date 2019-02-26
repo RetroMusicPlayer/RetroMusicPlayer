@@ -5,50 +5,127 @@
     android:id="@+id/player_footer_frame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/md_grey_800">
 
-    <TextView
-        android:id="@+id/title"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp"
-        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-        android:textColor="@color/md_white_1000" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/playerMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more_vert_white_24dp" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/md_white_1000"
+            app:layout_constraintEnd_toStartOf="@+id/songFavourite"
+            app:layout_constraintStart_toEndOf="@+id/playerMenu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/for_you" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.75"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/md_white_1000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/songFavourite"
+            app:layout_constraintStart_toEndOf="@+id/playerMenu"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="@string/for_you" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/songFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_favorite_border_white_24dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0.75"
-        android:gravity="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="16dp"
-        android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle"
-        android:textColor="@color/md_white_1000" />
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
-    <SeekBar
-        android:id="@+id/progressSlider"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:maxHeight="3dp"
-        android:paddingStart="22dp"
-        android:paddingEnd="22dp"
-        android:paddingBottom="4dp"
-        android:progressDrawable="@drawable/color_progress_seek"
-        android:splitTrack="false"
-        android:thumb="@drawable/switch_thumb_material"
-        tools:progress="20" />
+        <TextView
+            android:id="@+id/songCurrentProgress"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|left|end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:00" />
 
-    <include layout="@layout/player_time" />
+        <TextView
+            android:id="@+id/songTotalTime"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:00" />
+
+        <SeekBar
+            android:id="@+id/progressSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
+            android:maxHeight="3dp"
+            android:progressDrawable="@drawable/color_progress_seek"
+            android:splitTrack="false"
+            tools:ignore="RtlHardcoded,UnusedAttribute"
+            tools:progress="20" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layoutDirection="ltr"
+        android:minHeight="96dp"
         tools:ignore="ContentDescription,UnusedAttribute">
 
         <ImageButton
@@ -105,15 +182,22 @@
             app:srcCompat="@drawable/ic_shuffle_white_24dp"
             tools:ignore="MissingPrefix" />
 
-        <ImageButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/playPauseButton"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/line_button"
             android:foreground="?attr/roundSelector"
             android:padding="20dp"
             android:scaleType="fitCenter"
+            app:backgroundTint="@color/md_grey_200"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabCustomSize="68dp"
+            app:fabSize="auto"
+            app:maxImageSize="32dp"
+            app:pressedTranslationZ="12dp"
             tools:ignore="MissingPrefix"
             tools:src="@drawable/ic_pause_white_24dp" />
 

@@ -56,8 +56,9 @@ object PlaylistSongsLoader {
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
         val idInPlaylist = cursor.getInt(11)
+        val composer = cursor.getString(12)
 
-        return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist)
+        return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer)
     }
 
     private fun makePlaylistSongCursor(@NonNull context: Context, playlistId: Int): Cursor? {
@@ -75,7 +76,8 @@ object PlaylistSongsLoader {
                             AudioColumns.ALBUM, // 8
                             AudioColumns.ARTIST_ID, // 9
                             AudioColumns.ARTIST, // 10
-                            MediaStore.Audio.Playlists.Members._ID)// 11
+                            MediaStore.Audio.Playlists.Members._ID,//11
+                            AudioColumns.COMPOSER)// 12
                     , BASE_SELECTION, null,
                     MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER)
         } catch (e: SecurityException) {

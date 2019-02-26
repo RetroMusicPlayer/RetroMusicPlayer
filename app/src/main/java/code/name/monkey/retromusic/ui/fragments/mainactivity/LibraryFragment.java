@@ -44,7 +44,6 @@ import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
-import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -69,13 +68,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private MaterialCab cab;
     private FragmentManager fragmentManager;
     private ImageView userImage;
-    private CompositeDisposable disposable ;
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        disposable.dispose();
-    }
+    private CompositeDisposable disposable;
 
     public static Fragment newInstance(int tab) {
         Bundle args = new Bundle();
@@ -87,6 +80,12 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     public static Fragment newInstance() {
         return new LibraryFragment();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        disposable.dispose();
     }
 
     @Nullable
@@ -295,9 +294,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM));
             sortOrderMenu.add(0, R.id.action_song_sort_order_year, 4, R.string.sort_order_year)
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_YEAR));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_date, 4, R.string.sort_order_date)
+            sortOrderMenu.add(0, R.id.action_song_sort_order_date, 5, R.string.sort_order_date)
                     .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_DATE));
-
+            sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 6, R.string.sort_order_composer)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.COMPOSER));
         }
 
         sortOrderMenu.setGroupCheckable(0, true, true);
@@ -350,6 +350,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                     break;
                 case R.id.action_song_sort_order_date:
                     sortOrder = SortOrder.SongSortOrder.SONG_DATE;
+                    break;
+                case R.id.action_song_sort_order_composer:
+                    sortOrder = SortOrder.SongSortOrder.COMPOSER;
                     break;
 
             }

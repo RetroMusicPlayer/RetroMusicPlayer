@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
-import kotlinx.android.synthetic.main.player_time.*
 
 class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -79,10 +78,13 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             ThemeStore.accentColor(context!!)
         }
 
-        volumeFragment.setTintable(colorFinal)
+
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
         ViewUtil.setProgressDrawable(progressSlider, colorFinal)
+
+        volumeFragment.setTintable(colorFinal)
+
 
         updateRepeatState()
         updateShuffleState()

@@ -22,7 +22,7 @@
             android:id="@+id/sectionTitle"
             style="@style/SubTitleTextAppearance"
             android:text="@string/for_you"
-            android:textStyle="bold" />
+             />
 
     </LinearLayout>
 
