@@ -1,22 +1,32 @@
 package code.name.monkey.retromusic.ui.fragments.player.full
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
+import android.widget.PopupMenu
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
@@ -24,13 +34,12 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
-import kotlinx.android.synthetic.main.player_time.*
 
 /**
  * Created by hemanths on 20/09/17.
  */
 
-class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMenuItemClickListener {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -107,16 +116,16 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         } else {
             ThemeStore.accentColor(context!!)
         }
-        setProgressBarColor(colorFinal)
+        text.setTextColor(colorFinal)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
+
+        playPauseButton.backgroundTintList = ColorStateList.valueOf(colorFinal)
+        playPauseButton.imageTintList = ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)))
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
 
-    }
-
-    private fun setProgressBarColor(dark: Int) {
-        ViewUtil.setProgressDrawable(progressSlider, dark)
     }
 
     override fun onServiceConnected() {
@@ -130,6 +139,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+        updateIsFavorite()
     }
 
     override fun onPlayingMetaChanged() {
@@ -166,6 +176,21 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
         setUpRepeatButton()
         setUpShuffleButton()
         setUpProgressSlider()
+        setupFavourite()
+        setupMenu()
+    }
+
+    private fun setupMenu() {
+        playerMenu.setOnClickListener {
+            val popupMenu = PopupMenu(context!!, it)
+            popupMenu.setOnMenuItemClickListener(this)
+            popupMenu.inflate(R.menu.menu_player)
+            popupMenu.show()
+        }
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        return (parentFragment as FullPlayerFragment).onMenuItemClick(item!!)
     }
 
     private fun setUpPrevNext() {
@@ -231,4 +256,55 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
         }
     }
+
+    private fun setupFavourite() {
+        songFavourite?.setOnClickListener {
+            toggleFavorite(MusicPlayerRemote.currentSong)
+        }
+    }
+
+    private fun toggleFavorite(song: Song) {
+        MusicUtil.toggleFavorite(activity!!, song)
+        if (song.id == MusicPlayerRemote.currentSong.id) {
+            updateIsFavorite()
+        }
+    }
+
+    private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
+
+    @SuppressLint("StaticFieldLeak")
+    fun updateIsFavorite() {
+        if (updateIsFavoriteTask != null) {
+            updateIsFavoriteTask!!.cancel(false)
+        }
+        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
+            override fun doInBackground(vararg params: Song): Boolean? {
+                val activity = activity
+                return if (activity != null) {
+                    MusicUtil.isFavorite(getActivity()!!, params[0])
+                } else {
+                    cancel(false)
+                    null
+                }
+            }
+
+            override fun onPostExecute(isFavorite: Boolean?) {
+                val activity = activity
+                if (activity != null) {
+                    val res = if (isFavorite!!)
+                        R.drawable.ic_favorite_white_24dp
+                    else
+                        R.drawable.ic_favorite_border_white_24dp
+
+                    val drawable = TintHelper.createTintedDrawable(activity, res, Color.WHITE)
+                    songFavourite?.setImageDrawable(drawable)
+                }
+            }
+        }.execute(MusicPlayerRemote.currentSong)
+    }
+
+    fun onFavoriteToggled() {
+        toggleFavorite(MusicPlayerRemote.currentSong)
+    }
+
 }

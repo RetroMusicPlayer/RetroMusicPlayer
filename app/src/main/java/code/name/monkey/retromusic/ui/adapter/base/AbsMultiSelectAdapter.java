@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.adapter.base;
 
 import android.content.Context;
 import androidx.annotation.MenuRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
@@ -23,7 +24,7 @@ public abstract class AbsMultiSelectAdapter<VH extends RecyclerView.ViewHolder, 
     private ArrayList<I> checked;
     private int menuRes;
 
-    public AbsMultiSelectAdapter(Context context, @Nullable CabHolder cabHolder, @MenuRes int menuRes) {
+    public AbsMultiSelectAdapter(@NonNull Context context, @Nullable CabHolder cabHolder, @MenuRes int menuRes) {
         this.cabHolder = cabHolder;
         checked = new ArrayList<>();
         this.menuRes = menuRes;

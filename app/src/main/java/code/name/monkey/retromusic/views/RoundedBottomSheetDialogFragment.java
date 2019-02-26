@@ -56,7 +56,7 @@ public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         //noinspection ConstantConditions
         return new CustomWidthBottomSheetDialog(getContext(), getTheme());
     }

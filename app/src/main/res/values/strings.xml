@@ -598,5 +598,9 @@
     <string name="md_error_label">Error</string>
     <string name="md_storage_perm_error">Permission error</string>
     <string name="classic">Classic</string>
+    <string name="sort_order_composer">Composer</string>
+    <string name="composer">Composer</string>
+    <string name="next_song">Next Song</string>
+    <string name="last_song">Last song</string>
 
 </resources>

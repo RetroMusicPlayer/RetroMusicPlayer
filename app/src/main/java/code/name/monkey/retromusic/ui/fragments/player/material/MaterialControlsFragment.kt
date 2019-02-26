@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
-import kotlinx.android.synthetic.main.player_time.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -114,6 +113,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         }
         text.setTextColor(colorFinal)
         ViewUtil.setProgressDrawable(progressSlider, ColorUtil.stripAlpha(colorFinal), true)
+
         volumeFragment.setTintable(colorFinal)
 
         updatePlayPauseColor()

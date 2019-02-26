@@ -81,6 +81,7 @@ object Constants {
     val CAST_SERVER_PORT = 8080
 
     const val BASE_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
+
     @JvmField
     val BASE_PROJECTION = arrayOf(BaseColumns._ID, // 0
             MediaStore.Audio.AudioColumns.TITLE, // 1
@@ -92,7 +93,8 @@ object Constants {
             MediaStore.Audio.AudioColumns.ALBUM_ID, // 7
             MediaStore.Audio.AudioColumns.ALBUM, // 8
             MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
-            MediaStore.Audio.AudioColumns.ARTIST)// 10
+            MediaStore.Audio.AudioColumns.ARTIST,// 10
+            MediaStore.Audio.AudioColumns.COMPOSER)// 11
     const val NUMBER_OF_TOP_TRACKS = 99
 
 

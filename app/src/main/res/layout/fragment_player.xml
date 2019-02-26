@@ -36,9 +36,11 @@
                 <include layout="@layout/status_bar" />
             </FrameLayout>
 
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
+            <FrameLayout
+                android:id="@+id/playerAlbumCoverContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
 
                 <fragment
                     android:id="@+id/playerAlbumCoverFragment"
@@ -46,11 +48,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_album_cover" />
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+            </FrameLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <fragment
@@ -62,7 +64,6 @@
             </FrameLayout>
 
             <FrameLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0">

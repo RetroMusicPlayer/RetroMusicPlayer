@@ -51,6 +51,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         yearText.addTextChangedListener(this)
         trackNumberText.addTextChangedListener(this)
         lyricsText.addTextChangedListener(this)
+        songComposerText.addTextChangedListener(this)
     }
 
     private fun fillViewsWithFileTags() {
@@ -62,6 +63,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         yearText.setText(songYear)
         trackNumberText.setText(trackNumber)
         lyricsText.setText(lyrics)
+        songComposerText.setText(composer)
     }
 
     override fun loadCurrentImage() {
@@ -90,6 +92,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         fieldKeyValueMap[FieldKey.TRACK] = trackNumberText.text.toString()
         fieldKeyValueMap[FieldKey.LYRICS] = lyricsText.text.toString()
         fieldKeyValueMap[FieldKey.ALBUM_ARTIST] = albumArtistText.text.toString()
+        fieldKeyValueMap[FieldKey.COMPOSER] = songComposerText.text.toString()
         writeValuesToFiles(fieldKeyValueMap, null)
     }
 

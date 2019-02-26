@@ -57,10 +57,10 @@ object SongLoader {
         val albumName = cursor.getString(8)
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
+        val composer = cursor.getString(11)
 
-        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName
-                ?: "",
-                artistId, artistName)
+        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId,
+                albumName ?: "", artistId, artistName, composer ?: "")
     }
 
     @JvmOverloads

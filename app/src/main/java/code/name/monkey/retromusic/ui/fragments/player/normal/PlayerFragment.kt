@@ -76,18 +76,19 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         }
 
 
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) {
-            val display = activity?.windowManager?.defaultDisplay
-            val outMetrics = DisplayMetrics()
-            display?.getMetrics(outMetrics)
+        val display = activity?.windowManager?.defaultDisplay
+        val outMetrics = DisplayMetrics()
+        display?.getMetrics(outMetrics)
 
-            val density = resources.displayMetrics.density
-            val dpHeight = outMetrics.heightPixels / density
-            val dpWidth = outMetrics.widthPixels / density
+        val density = resources.displayMetrics.density
+        val dpHeight = outMetrics.heightPixels / density
+        val dpWidth = outMetrics.widthPixels / density
 
-            playerAlbumCoverContainer?.layoutParams?.width = RetroUtil.convertDpToPixel(dpWidth - 20, context!!).toInt()
-        }
+        playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()
+    }
 
+    private fun getCutOff(): Int {
+        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) 20 else 0
     }
 
     override fun toggleFavorite(song: Song) {

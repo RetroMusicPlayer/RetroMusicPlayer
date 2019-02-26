@@ -1,7 +1,5 @@
 package code.name.monkey.retromusic.glide;
 
-import androidx.annotation.NonNull;
-
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
@@ -10,11 +8,11 @@ import com.bumptech.glide.annotation.GlideOption;
 import com.bumptech.glide.annotation.GlideType;
 import com.bumptech.glide.load.Key;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
 
+import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;

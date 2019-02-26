@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
@@ -55,6 +54,14 @@ public class NavigationUtil {
         //noinspection unchecked
         ActivityCompat.startActivity(activity, intent,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+    }
+
+    public static void goToArtist(@NonNull Activity activity, int i) {
+        Intent intent = new Intent(activity, ArtistDetailActivity.class);
+        intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, i);
+        //noinspection unchecked
+        ActivityCompat.startActivity(activity, intent,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, null).toBundle());
     }
 
     public static void goToPlaylistNew(@NonNull Activity activity, Playlist playlist) {

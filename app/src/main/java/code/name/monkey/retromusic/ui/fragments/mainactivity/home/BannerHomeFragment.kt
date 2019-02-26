@@ -173,7 +173,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun setupToolbar() {
         toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorSecondary(context!!))
         mainActivity.title = null
-        mainActivity.setSupportActionBar(toolbar)
         toolbar.setBackgroundColor(Color.TRANSPARENT)
     }
 

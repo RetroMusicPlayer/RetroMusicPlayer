@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="16dp"
+        android:padding="12dp"
         app:srcCompat="@drawable/ic_volume_down_white_24dp" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="16dp"
+        android:padding="12dp"
         app:srcCompat="@drawable/ic_volume_up_white_24dp" />
 </LinearLayout>

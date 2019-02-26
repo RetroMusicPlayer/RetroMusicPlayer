@@ -192,7 +192,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
             NowPlayingScreen.MATERIAL -> MaterialFragment()
             NowPlayingScreen.COLOR -> ColorFragment()
-            NowPlayingScreen.CLASSIC -> ClassicPlayerFragment()
+            //NowPlayingScreen.CLASSIC -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()
@@ -260,7 +260,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
             } else if (currentNowPlayingScreen == NowPlayingScreen.FULL || currentNowPlayingScreen == NowPlayingScreen.CARD ||
-                    currentNowPlayingScreen == NowPlayingScreen.FIT || currentNowPlayingScreen == NowPlayingScreen.CLASSIC ||
+                    currentNowPlayingScreen == NowPlayingScreen.FIT || /*currentNowPlayingScreen == NowPlayingScreen.CLASSIC ||*/
                     currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)

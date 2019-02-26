@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
-import kotlinx.android.synthetic.main.player_time.*
 
 class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
