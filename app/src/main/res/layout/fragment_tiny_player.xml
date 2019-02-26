@@ -8,23 +8,20 @@
     android:clickable="true"
     android:focusable="true">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+    <fragment
+        android:id="@+id/playerAlbumCoverFragment"
+        android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_player_album_cover" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:rotation="0">
-
-        <fragment
-            android:id="@+id/player_album_cover_fragment"
-            android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_player_album_cover" />
-
-    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+        android:background="#90000000" />
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,25 +57,25 @@
                     android:padding="16dp">
 
                     <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/title"
-                        android:textStyle="bold"
+                        android:id="@+id/songTitle"
+                        style="@style/TextAppearance.MaterialComponents.Headline2"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:ellipsize="end"
                         android:freezesText="true"
                         android:singleLine="true"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+                        android:textStyle="bold"
                         app:textAllCaps="true"
                         tools:ignore="MissingPrefix"
                         tools:text="Song title" />
 
                     <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/text"
+                        android:id="@+id/songText"
+                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:ellipsize="end"
                         android:maxLines="2"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         tools:text=" Album name \nby Artist name" />
 
                 </LinearLayout>
@@ -90,11 +87,11 @@
                     android:orientation="vertical">
 
                     <fragment
-                        android:id="@+id/playback_controls_fragment"
-                        android:name="code.name.monkey.retromusic.ui.fragments.player.hmm.HmmPlaybackControlsFragment"
+                        android:id="@+id/playbackControlsFragment"
+                        android:name="code.name.monkey.retromusic.ui.fragments.player.tiny.TinyPlaybackControlsFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        tools:layout="@layout/fragment_hmm_controls_fragment" />
+                        tools:layout="@layout/fragment_tiny_controls_fragment" />
 
                     <FrameLayout
                         android:id="@+id/toolbar_container"
@@ -102,7 +99,7 @@
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/player_toolbar"
+                            android:id="@+id/playerToolbar"
                             style="@style/Toolbar"
                             app:navigationIcon="@drawable/ic_close_white_24dp" />
                     </FrameLayout>
@@ -116,13 +113,13 @@
                     android:orientation="horizontal">
 
                     <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/player_song_total_time"
-                        android:textStyle="bold"
+                        android:id="@+id/playerSongTotalTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:padding="16dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                        android:textStyle="bold"
                         tools:ignore="MissingPrefix" />
 
                 </LinearLayout>

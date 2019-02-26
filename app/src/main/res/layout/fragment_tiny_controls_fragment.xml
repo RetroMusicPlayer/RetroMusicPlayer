@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <ImageButton
-        android:id="@+id/player_repeat_button"
+        android:id="@+id/playerRepeatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
@@ -20,7 +20,7 @@
         android:contentDescription="TODO" />
 
     <ImageButton
-        android:id="@+id/player_shuffle_button"
+        android:id="@+id/playerShuffleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"

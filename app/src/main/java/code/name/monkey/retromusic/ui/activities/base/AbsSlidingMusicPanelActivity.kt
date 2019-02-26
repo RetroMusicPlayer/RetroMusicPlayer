@@ -19,11 +19,11 @@ import code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.ui.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.ui.fragments.player.cardblur.CardBlurFragment
-import code.name.monkey.retromusic.ui.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.ui.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.ui.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.full.FullPlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
@@ -192,7 +192,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
             NowPlayingScreen.MATERIAL -> MaterialFragment()
             NowPlayingScreen.COLOR -> ColorFragment()
-            //NowPlayingScreen.CLASSIC -> ClassicPlayerFragment()
+            NowPlayingScreen.TINY -> TinyPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()

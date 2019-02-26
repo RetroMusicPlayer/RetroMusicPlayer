@@ -171,9 +171,14 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun setupToolbar() {
-        toolbar.navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorSecondary(context!!))
         mainActivity.title = null
-        toolbar.setBackgroundColor(Color.TRANSPARENT)
+        toolbar.apply {
+            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorSecondary(context!!))
+            setBackgroundColor(Color.TRANSPARENT)
+            setNavigationOnClickListener {
+                NavigationUtil.goToSearch(activity)
+            }
+        }
     }
 
     override fun handleBackPress(): Boolean {
