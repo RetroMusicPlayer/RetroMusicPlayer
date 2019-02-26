@@ -29,6 +29,7 @@ public class StatusBarMarginFrameLayout extends FrameLayout {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             MarginLayoutParams lp = (MarginLayoutParams) getLayoutParams();
             lp.topMargin = insets.getSystemWindowInsetTop();
+            lp.bottomMargin = insets.getSystemWindowInsetBottom();
             setLayoutParams(lp);
         }
         return super.onApplyWindowInsets(insets);

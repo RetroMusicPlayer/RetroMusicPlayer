@@ -20,9 +20,8 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/sectionTitle"
-            android:text="@string/for_you"
             style="@style/SubTitleTextAppearance"
-            android:textStyle="bold" />
+            android:text="@string/for_you" />
 
     </LinearLayout>
 

@@ -21,8 +21,7 @@
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/sectionTitle"
             style="@style/SubTitleTextAppearance"
-            android:text="@string/for_you"
-             />
+            android:text="@string/for_you" />
 
     </LinearLayout>
 
