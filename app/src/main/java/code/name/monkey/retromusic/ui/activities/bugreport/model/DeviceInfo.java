@@ -27,6 +27,7 @@ public class DeviceInfo {
     private final String hardware = Build.HARDWARE;
     private final String baseTheme;
     private final String nowPlayingTheme;
+    private final boolean isAdaptive;
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private final String[] abis = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
@@ -55,6 +56,7 @@ public class DeviceInfo {
         }
         baseTheme = PreferenceUtil.getInstance().getBaseTheme();
         nowPlayingTheme = context.getString(PreferenceUtil.getInstance().getNowPlayingScreen().getTitleRes());
+        isAdaptive = PreferenceUtil.getInstance().getAdaptiveColor();
     }
 
     public String toMarkdown() {
@@ -97,6 +99,7 @@ public class DeviceInfo {
                 + "ABIs (32bit): " + Arrays.toString(abis32Bits) + "\n"
                 + "ABIs (64bit): " + Arrays.toString(abis64Bits) + "\n"
                 + "Base theme: " + baseTheme + "\n"
-                + "Now playing theme: " + nowPlayingTheme;
+                + "Now playing theme: " + nowPlayingTheme + "\n"
+                + "Adaptive: " + isAdaptive;
     }
 }
