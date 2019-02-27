@@ -107,7 +107,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
         lastPlaybackControlsColor = Color.WHITE
-        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_200)
+        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
 
         title.setTextColor(lastPlaybackControlsColor)
         text.setTextColor(lastDisabledPlaybackControlsColor)
