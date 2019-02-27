@@ -108,7 +108,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun setTintable(color: Int) {
-        TintHelper.setTintAuto(volumeSeekBar, color, true)
+        TintHelper.setTintAuto(volumeSeekBar, color, false)
     }
 
     fun removeThumb() {
