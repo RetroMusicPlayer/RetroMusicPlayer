@@ -105,7 +105,7 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         setProgressBarColor(lastPlaybackControlsColor, lastDisabledPlaybackControlsColor)
 
-        volumeFragment.setTintable(lastPlaybackControlsColor)
+        volumeFragment.setTintableColor(lastPlaybackControlsColor)
 
         songCurrentProgress.setTextColor(lastDisabledPlaybackControlsColor)
         songTotalTime.setTextColor(lastDisabledPlaybackControlsColor)
