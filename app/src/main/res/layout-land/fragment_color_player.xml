@@ -45,6 +45,7 @@
                         android:layout_height="match_parent"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="8dp"
+                        android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardUseCompatPadding="true">
 

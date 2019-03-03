@@ -13,7 +13,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/progress_container_height"
+        android:layout_height="@dimen/progress_slider_height"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:paddingStart="12dp"
@@ -49,6 +49,7 @@
 
         <SeekBar
             android:id="@+id/progressSlider"
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/songTotalTime"

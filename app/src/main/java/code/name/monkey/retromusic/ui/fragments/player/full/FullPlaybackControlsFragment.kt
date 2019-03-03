@@ -117,6 +117,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
             ThemeStore.accentColor(context!!)
         }
         text.setTextColor(colorFinal)
+
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 
         playPauseButton.backgroundTintList = ColorStateList.valueOf(colorFinal)
