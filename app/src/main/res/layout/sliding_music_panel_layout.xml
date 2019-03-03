@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContent"
@@ -11,6 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
+        sothree:layout_constraintBottom_toBottomOf="parent"
+        sothree:layout_constraintEnd_toEndOf="parent"
+        sothree:layout_constraintStart_toStartOf="parent"
+        sothree:layout_constraintTop_toTopOf="parent"
         sothree:umanoOverlay="false"
         sothree:umanoPanelHeight="0dp"
         sothree:umanoScrollableView="@+id/recycler_view"
@@ -45,7 +49,7 @@
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
         android:elevation="0dp"
@@ -55,6 +59,8 @@
         app:itemTextAppearanceInactive="@style/BottomSheetTextAppearance"
         app:itemTextColor="@drawable/bottom_navigation_item_colors"
         app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="@+id/slidingLayout"
+        app:layout_constraintEnd_toEndOf="@+id/slidingLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_main" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
