@@ -39,7 +39,7 @@ class ClearSmartPlaylistDialog : DialogFragment() {
                 if (activity == null) {
                     return@positiveButton
                 }
-                playlist.clear(activity)
+                playlist.clear(activity!!)
             }
             negativeButton { (android.R.string.cancel) }
         }

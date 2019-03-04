@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -148,7 +149,7 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
     }
 
     override fun getName(song: Song): String {
-        return song.title!!
+        return song.title
     }
 
     override fun onMultipleItemAction(menuItem: MenuItem,
@@ -158,13 +159,14 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
 
     override fun getSectionName(position: Int): String {
         if (!showSectionName) {
-            return "";
+            return ""
         }
         val sectionName: String? = when (PreferenceUtil.getInstance().songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
             SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
             SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
             SortOrder.SongSortOrder.SONG_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
+            SortOrder.SongSortOrder.COMPOSER -> dataSet[position].composer
             else -> {
                 return ""
             }

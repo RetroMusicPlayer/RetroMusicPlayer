@@ -374,7 +374,7 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
     }
 
     private var currentSongViewHolder: MediaEntryViewHolder? = null
-    var currentSong = Song.EMPTY_SONG!!
+    var currentSong = Song.emptySong
 
 }
 

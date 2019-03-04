@@ -70,23 +70,28 @@ public final class RetroGlideExtension {
                 .signature(createSignature(song));
     }
 
-    public static Key createSignature(Artist artist) {
+    @NonNull
+    public static Key createSignature(@NonNull Artist artist) {
         return ArtistSignatureUtil.getInstance().getArtistSignature(artist.getName());
     }
 
-    public static Key createSignature(Song song) {
-        return new MediaStoreSignature("", song.dateModified, 0);
+    @NonNull
+    public static Key createSignature(@NonNull Song song) {
+        return new MediaStoreSignature("", song.getDateModified(), 0);
     }
 
-    public static Object getArtistModel(Artist artist) {
+    @NonNull
+    public static Object getArtistModel(@NonNull Artist artist) {
         return getArtistModel(artist, CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext()).hasCustomArtistImage(artist), false);
     }
 
-    public static Object getArtistModel(Artist artist, boolean forceDownload) {
+    @NonNull
+    public static Object getArtistModel(@NonNull Artist artist, boolean forceDownload) {
         return getArtistModel(artist, CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext()).hasCustomArtistImage(artist), forceDownload);
     }
 
-    public static Object getArtistModel(Artist artist, boolean hasCustomImage, boolean forceDownload) {
+    @NonNull
+    public static Object getArtistModel(@NonNull Artist artist, boolean hasCustomImage, boolean forceDownload) {
         if (!hasCustomImage) {
             return new ArtistImage(artist.getName(), forceDownload);
         } else {
@@ -94,18 +99,21 @@ public final class RetroGlideExtension {
         }
     }
 
-    public static Object getSongModel(Song song) {
+    @NonNull
+    public static Object getSongModel(@NonNull Song song) {
         return getSongModel(song, PreferenceUtil.getInstance().ignoreMediaStoreArtwork());
     }
 
-    public static Object getSongModel(Song song, boolean ignoreMediaStore) {
+    @NonNull
+    public static Object getSongModel(@NonNull Song song, boolean ignoreMediaStore) {
         if (ignoreMediaStore) {
-            return new AudioFileCover(song.data);
+            return new AudioFileCover(song.getData());
         } else {
-            return MusicUtil.getMediaStoreAlbumCoverUri(song.albumId);
+            return MusicUtil.getMediaStoreAlbumCoverUri(song.getAlbumId());
         }
     }
 
+    @NonNull
     public static <TranscodeType> GenericTransitionOptions<TranscodeType> getDefaultTransition() {
         return new GenericTransitionOptions<TranscodeType>().transition(android.R.anim.fade_in);
     }

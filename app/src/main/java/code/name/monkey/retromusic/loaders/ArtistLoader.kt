@@ -18,10 +18,8 @@ import android.content.Context
 import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
-import java.util.*
 import kotlin.collections.ArrayList
 
 object ArtistLoader {

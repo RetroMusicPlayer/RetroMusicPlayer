@@ -26,6 +26,7 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
@@ -47,7 +48,7 @@ object MusicPlayerRemote {
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
-        } else Song.EMPTY_SONG
+        } else Song.emptySong
 
     /**
      * Async

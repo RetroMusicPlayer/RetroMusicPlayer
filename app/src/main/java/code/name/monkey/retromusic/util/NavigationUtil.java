@@ -19,6 +19,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -75,10 +76,10 @@ public class NavigationUtil {
         intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, i);
         //noinspection unchecked
         ActivityCompat.startActivity(activity, intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, null).toBundle());
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, (Pair<View, String>) null).toBundle());
     }
 
-    public static void goToPlaylistNew(@NonNull Activity activity, Playlist playlist) {
+    public static void goToPlaylistNew(@NonNull Activity activity, @NonNull Playlist playlist) {
         Intent intent = new Intent(activity, PlaylistDetailActivity.class);
         intent.putExtra(PlaylistDetailActivity.Companion.getEXTRA_PLAYLIST(), playlist);
         ActivityCompat.startActivity(activity, intent, null);

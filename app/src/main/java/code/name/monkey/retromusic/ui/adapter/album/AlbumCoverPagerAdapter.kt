@@ -111,7 +111,7 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         private fun loadAlbumCover() {
             GlideApp.with(context!!)
                     .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song))
+                    .load(RetroGlideExtension.getSongModel(song!!))
                     .transition(RetroGlideExtension.getDefaultTransition())
                     .songOptions(song)
                     .dontAnimate()
