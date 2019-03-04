@@ -22,14 +22,14 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
@@ -99,7 +99,7 @@ public class PlaylistsUtil {
         final StringBuilder selection = new StringBuilder();
         selection.append(MediaStore.Audio.Playlists._ID + " IN (");
         for (int i = 0; i < playlists.size(); i++) {
-            selection.append(playlists.get(i).id);
+            selection.append(playlists.get(i).getId());
             if (i < playlists.size() - 1) {
                 selection.append(",");
             }
@@ -120,9 +120,7 @@ public class PlaylistsUtil {
     public static void addToPlaylist(@NonNull final Context context, @NonNull final List<Song> songs, final int playlistId, final boolean showToastOnFinish) {
         final int size = songs.size();
         final ContentResolver resolver = context.getContentResolver();
-        final String[] projection = new String[]{
-                "max(" + MediaStore.Audio.Playlists.Members.PLAY_ORDER + ")",
-        };
+        final String[] projection = new String[]{"max(" + MediaStore.Audio.Playlists.Members.PLAY_ORDER + ")",};
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
         Cursor cursor = null;
         int base = 0;
@@ -153,7 +151,7 @@ public class PlaylistsUtil {
     }
 
     @NonNull
-    public static ContentValues[] makeInsertItems(@NonNull final List<Song> songs, final int offset, int len, final int base) {
+    private static ContentValues[] makeInsertItems(@NonNull final List<Song> songs, final int offset, int len, final int base) {
         if (offset + len > songs.size()) {
             len = songs.size() - offset;
         }
@@ -163,7 +161,7 @@ public class PlaylistsUtil {
         for (int i = 0; i < len; i++) {
             contentValues[i] = new ContentValues();
             contentValues[i].put(MediaStore.Audio.Playlists.Members.PLAY_ORDER, base + offset + i);
-            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).id);
+            contentValues[i].put(MediaStore.Audio.Playlists.Members.AUDIO_ID, songs.get(offset + i).getAlbumId());
         }
         return contentValues;
     }
@@ -172,7 +170,7 @@ public class PlaylistsUtil {
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String selection = MediaStore.Audio.Playlists.Members.AUDIO_ID + " =?";
-        String[] selectionArgs = new String[]{String.valueOf(song.id)};
+        String[] selectionArgs = new String[]{String.valueOf(song.getId())};
 
         try {
             context.getContentResolver().delete(uri, selection, selectionArgs);
@@ -181,12 +179,12 @@ public class PlaylistsUtil {
     }
 
     public static void removeFromPlaylist(@NonNull final Context context, @NonNull final List<PlaylistSong> songs) {
-        final int playlistId = songs.get(0).playlistId;
+        final int playlistId = songs.get(0).getPlaylistId();
         Uri uri = MediaStore.Audio.Playlists.Members.getContentUri(
                 "external", playlistId);
         String selectionArgs[] = new String[songs.size()];
         for (int i = 0; i < selectionArgs.length; i++) {
-            selectionArgs[i] = String.valueOf(songs.get(i).idInPlayList);
+            selectionArgs[i] = String.valueOf(songs.get(i).getIdInPlayList());
         }
         String selection = MediaStore.Audio.Playlists.Members._ID + " in (";
         //noinspection unused

@@ -50,6 +50,6 @@ class Album {
     }
 
     fun safeGetFirstSong(): Song {
-        return if (songs!!.isEmpty()) Song.EMPTY_SONG else songs[0]
+        return if (songs!!.isEmpty()) Song.emptySong else songs[0]
     }
 }

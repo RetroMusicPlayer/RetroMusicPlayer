@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.fragments.mainactivity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.contract.SongContract
@@ -14,7 +15,8 @@ import java.util.*
 
 class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(), SongContract.SongView {
 
-    private var presenter: SongPresenter? = null
+
+    private lateinit var presenter: SongPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_songs

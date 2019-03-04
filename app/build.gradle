@@ -93,7 +93,9 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
-
+    androidExtensions {
+        experimental = true
+    }
 
 }
 
@@ -119,7 +121,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation "androidx.fragment:fragment:$supportLibVersion"
-    implementation "androidx.appcompat:appcompat:1.0.2"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "androidx.recyclerview:recyclerview:$supportLibVersion"
     implementation "androidx.gridlayout:gridlayout:$supportLibVersion"
     implementation "androidx.cardview:cardview:$supportLibVersion"
@@ -129,48 +131,39 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v13:$supportLibVersion"
     implementation "androidx.legacy:legacy-preference-v14:$supportLibVersion"
     implementation "com.google.android.material:material:$supportLibVersion"
-    implementation "androidx.palette:palette-ktx:1.0.0"
-
-    implementation "com.squareup.retrofit2:retrofit:2.5.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.5.0"
-
+    implementation 'androidx.palette:palette-ktx:1.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation "com.afollestad.material-dialogs:core:$materialDialog"
     implementation 'com.afollestad.material-dialogs:input:2.0.0'
     implementation 'com.afollestad.material-dialogs:color:2.0.0'
     implementation 'com.afollestad:material-cab:0.1.12'
-
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
-
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
-
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.7'
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
-
     /*UI Library*/
     implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     /*Backend all*/
-    implementation project(':appthemehelper')
     implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     implementation 'com.github.jetradarmobile:android-snowfall:1.2.0'
     implementation 'com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.3'
-
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
+    implementation project(':appthemehelper')
 }
 repositories {
     mavenCentral()

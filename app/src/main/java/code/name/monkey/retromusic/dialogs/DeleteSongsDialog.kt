@@ -22,12 +22,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_delete.*
-import java.util.*
 
 class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
 
@@ -40,7 +40,7 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
         val content: CharSequence
         if (songs != null) {
             content = if (songs.size > 1) {
-               getString(R.string.delete_x_songs, songs.size)
+                getString(R.string.delete_x_songs, songs.size)
             } else {
                 getString(R.string.delete_song_x, songs[0].title)
             }

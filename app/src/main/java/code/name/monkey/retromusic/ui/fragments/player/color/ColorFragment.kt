@@ -258,7 +258,7 @@ class ColorFragment : AbsPlayerFragment() {
                 val data = MusicUtil.getLyrics(song)
                 return if (TextUtils.isEmpty(data)) {
                     null
-                } else Lyrics.parse(song, data)
+                } else Lyrics.parse(song, data!!)
             }
 
             override fun onPostExecute(l: Lyrics?) {

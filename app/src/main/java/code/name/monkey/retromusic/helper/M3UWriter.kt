@@ -15,19 +15,17 @@
 package code.name.monkey.retromusic.helper
 
 import android.content.Context
-
-import java.io.BufferedWriter
-import java.io.File
-import java.io.FileWriter
-import java.io.IOException
-import java.util.ArrayList
-
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
+import java.util.*
 
 class M3UWriter : M3UConstants {
     companion object {

@@ -24,10 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.model.Song;
 
 import java.util.ArrayList;
 
+import code.name.monkey.retromusic.model.Song;
 import io.reactivex.Observable;
 
 /**
@@ -39,7 +39,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "music_playback_state.db";
     public static final String PLAYING_QUEUE_TABLE_NAME = "playing_queue";
     public static final String ORIGINAL_PLAYING_QUEUE_TABLE_NAME = "original_playing_queue";
-    private static final int VERSION = 7;
+    private static final int VERSION = 10;
     @Nullable
     private static MusicPlaybackQueueStore sInstance = null;
 
@@ -111,7 +111,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
         builder.append(" STRING NOT NULL,");
 
         builder.append(AudioColumns.COMPOSER);
-        builder.append(" STRING NOT NULL);");
+        builder.append(" STRING);");
 
         db.execSQL(builder.toString());
     }
@@ -163,18 +163,18 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
                     Song song = queue.get(i);
                     ContentValues values = new ContentValues(4);
 
-                    values.put(BaseColumns._ID, song.id);
-                    values.put(AudioColumns.TITLE, song.title);
-                    values.put(AudioColumns.TRACK, song.trackNumber);
-                    values.put(AudioColumns.YEAR, song.year);
-                    values.put(AudioColumns.DURATION, song.duration);
-                    values.put(AudioColumns.DATA, song.data);
-                    values.put(AudioColumns.DATE_MODIFIED, song.dateModified);
-                    values.put(AudioColumns.ALBUM_ID, song.albumId);
-                    values.put(AudioColumns.ALBUM, song.albumName);
-                    values.put(AudioColumns.ARTIST_ID, song.artistId);
-                    values.put(AudioColumns.ARTIST, song.artistName);
-                    values.put(AudioColumns.COMPOSER, song.composer);
+                    values.put(BaseColumns._ID, song.getId());
+                    values.put(AudioColumns.TITLE, song.getTitle());
+                    values.put(AudioColumns.TRACK, song.getTrackNumber());
+                    values.put(AudioColumns.YEAR, song.getYear());
+                    values.put(AudioColumns.DURATION, song.getDuration());
+                    values.put(AudioColumns.DATA, song.getData());
+                    values.put(AudioColumns.DATE_MODIFIED, song.getDateModified());
+                    values.put(AudioColumns.ALBUM_ID, song.getAlbumId());
+                    values.put(AudioColumns.ALBUM, song.getAlbumName());
+                    values.put(AudioColumns.ARTIST_ID, song.getArtistId());
+                    values.put(AudioColumns.ARTIST, song.getArtistName());
+                    values.put(AudioColumns.COMPOSER, song.getComposer());
 
                     database.insert(tableName, null, values);
                 }

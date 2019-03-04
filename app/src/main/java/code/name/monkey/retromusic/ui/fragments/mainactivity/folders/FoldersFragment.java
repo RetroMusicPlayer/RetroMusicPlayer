@@ -48,6 +48,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
@@ -365,7 +366,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 File file1 = (File) extra;
                 int startIndex = -1;
                 for (int i = 0; i < songs.size(); i++) {
-                    if (file1.getPath().equals(songs.get(i).data)) { // path is already canonical here
+                    if (file1.getPath().equals(songs.get(i).getData())) { // path is already canonical here
                         startIndex = i;
                         break;
                     }

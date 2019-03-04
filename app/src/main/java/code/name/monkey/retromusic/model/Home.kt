@@ -12,23 +12,20 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.model;
+package code.name.monkey.retromusic.model
 
-import android.content.Context;
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.HomeSection
 
-import java.util.ArrayList;
+/**
+ * Created by hemanths on 3/4/19
+ */
 
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
-import kotlinx.android.parcel.Parcelize;
-
-@Parcelize
-public abstract class AbsCustomPlaylist extends Playlist {
-    public AbsCustomPlaylist(int id, @NonNull String name) {
-        super(id, name);
-    }
-
-    @NonNull
-    public abstract Observable<ArrayList<Song>> getSongs(@NonNull Context context);
-}
-
+class Home(@StringRes val title: Int,
+           @StringRes val subTitle: Int,
+           val arrayList: ArrayList<*>,
+           @HomeSection
+           val homeSection: Int,
+           @DrawableRes
+           val icon: Int)

@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.ui.fragments.player.full
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff

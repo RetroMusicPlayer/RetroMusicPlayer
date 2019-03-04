@@ -24,6 +24,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -132,7 +133,7 @@ class SongDetailDialog : RoundedBottomSheetDialogFragment() {
         private fun getFileSizeString(sizeInBytes: Long): String {
             val fileSizeInKB = sizeInBytes / 1024
             val fileSizeInMB = fileSizeInKB / 1024
-            return fileSizeInMB.toString() + " MB"
+            return "$fileSizeInMB MB"
         }
     }
 }

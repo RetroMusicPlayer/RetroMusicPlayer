@@ -11,24 +11,21 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.model
 
-package code.name.monkey.retromusic.model;
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-import android.content.Context;
 
-import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
-import kotlinx.android.parcel.Parcelize;
-
+/**
+ * @author Karim Abou Zeid (kabouzeid)
+ */
 @Parcelize
-public abstract class AbsCustomPlaylist extends Playlist {
-    public AbsCustomPlaylist(int id, @NonNull String name) {
-        super(id, name);
+open class Song(val id: Int, val title: String, val trackNumber: Int, val year: Int, val duration: Long, val data: String, val dateModified: Long, val albumId: Int, val albumName: String, val artistId: Int, val artistName: String, val composer: String?) : Parcelable {
+
+
+    companion object {
+        @JvmStatic
+        val emptySong = Song(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", "")
     }
-
-    @NonNull
-    public abstract Observable<ArrayList<Song>> getSongs(@NonNull Context context);
 }
-

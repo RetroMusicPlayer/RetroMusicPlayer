@@ -23,10 +23,10 @@ import android.view.ViewGroup
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.PlaylistSong
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
-import java.util.*
 
 class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
@@ -38,7 +38,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val songs = arguments!!.getParcelableArrayList<PlaylistSong>("songs")
+        val songs = arguments!!.getParcelableArrayList<Song>("songs")
         val title: Int
         val content: CharSequence
         if (songs!!.size > 1) {
@@ -56,7 +56,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             text = content
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener {
-                PlaylistsUtil.removeFromPlaylist(activity!!, songs)
+                PlaylistsUtil.removeFromPlaylist(activity!!, songs as ArrayList<PlaylistSong>)
                 dismiss()
             }
         }

@@ -64,7 +64,7 @@ object PlaylistSongsLoader {
         val year = cursor.getInt(3)
         val duration = cursor.getLong(4)
         val data = cursor.getString(5)
-        val dateModified = cursor.getInt(6)
+        val dateModified = cursor.getLong(6)
         val albumId = cursor.getInt(7)
         val albumName = cursor.getString(8)
         val artistId = cursor.getInt(9)

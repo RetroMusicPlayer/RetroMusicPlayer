@@ -21,13 +21,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_to_playlist.*
-import java.util.*
+
 
 class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
@@ -40,15 +41,14 @@ class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val songs = arguments!!.getParcelableArrayList<Song>("songs")
 
         actionAddPlaylist.setOnClickListener {
-            val songs = arguments!!.getParcelableArrayList<Song>("songs")
             CreatePlaylistDialog.create(songs!!).show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
             dismiss()
         }
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        val songs = arguments!!.getParcelableArrayList<Song>("songs")
         val playlists = PlaylistLoader.getAllPlaylists(activity!!).blockingFirst()
         val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog)
         recyclerView.apply {

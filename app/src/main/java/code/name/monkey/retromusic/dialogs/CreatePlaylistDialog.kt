@@ -22,11 +22,13 @@ import android.view.View
 import android.view.ViewGroup
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_playlist.*
+
 import java.util.*
 
 class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
@@ -40,6 +42,8 @@ class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val accentColor = ThemeStore.accentColor(Objects.requireNonNull<Context>(context))
+
+        val songs = arguments!!.getParcelableArrayList<Song>("songs")
 
         MaterialUtil.setTint(actionCreate, true)
         MaterialUtil.setTint(actionCancel, false)
@@ -59,8 +63,6 @@ class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
                 val playlistId = PlaylistsUtil
                         .createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
                 if (playlistId != -1 && activity != null) {
-
-                    val songs = arguments!!.getParcelableArrayList<Song>("songs")
                     if (songs != null) {
                         PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
                     }

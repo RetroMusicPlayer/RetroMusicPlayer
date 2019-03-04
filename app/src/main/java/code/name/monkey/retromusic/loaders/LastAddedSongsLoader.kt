@@ -17,15 +17,13 @@ package code.name.monkey.retromusic.loaders
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
-
-import java.util.ArrayList
-
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
 import io.reactivex.annotations.NonNull
+import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.

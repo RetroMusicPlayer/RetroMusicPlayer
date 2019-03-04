@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.ui.adapter.playlist
 
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -152,7 +151,6 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         for (playlist in playlists) {
             if (playlist is AbsCustomPlaylist) {
                 songs.addAll(playlist.getSongs(activity).blockingFirst())
-                //((AbsCustomPlaylist) playlist).getSongs(activity).subscribe(this::setSongs);
             } else {
                 songs
                         .addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id).blockingFirst())

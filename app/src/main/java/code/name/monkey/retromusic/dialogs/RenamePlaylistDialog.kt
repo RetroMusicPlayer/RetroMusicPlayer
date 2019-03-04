@@ -29,8 +29,7 @@ import kotlinx.android.synthetic.main.dialog_playlist.*
 
 class RenamePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater.inflate(R.layout.dialog_playlist, container, false)
     }
