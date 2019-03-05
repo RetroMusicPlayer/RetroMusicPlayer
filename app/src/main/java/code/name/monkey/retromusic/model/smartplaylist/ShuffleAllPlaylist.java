@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
+package code.name.monkey.retromusic.model.smartplaylist;
+
+import android.content.Context;
+import android.os.Parcel;
+import android.support.annotation.NonNull;
+
+import com.kabouzeid.gramophone.R;
+import com.kabouzeid.gramophone.loader.SongLoader;
+import com.kabouzeid.gramophone.model.Song;
+
+import java.util.ArrayList;
+
+public class ShuffleAllPlaylist extends AbsSmartPlaylist {
+
+    public ShuffleAllPlaylist(@NonNull Context context) {
+        super(context.getString(R.string.action_shuffle_all), R.drawable.ic_shuffle_white_24dp);
+    }
+
+    @NonNull
+    @Override
+    public ArrayList<Song> getSongs(@NonNull Context context) {
+        return SongLoader.getAllSongs(context);
+    }
+
+    @Override
+    public void clear(@NonNull Context context) {
+        // Shuffle all is not a real "Smart Playlist"
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected ShuffleAllPlaylist(Parcel in) {
+        super(in);
+    }
+
+    public static final Creator<ShuffleAllPlaylist> CREATOR = new Creator<ShuffleAllPlaylist>() {
+        public ShuffleAllPlaylist createFromParcel(Parcel source) {
+            return new ShuffleAllPlaylist(source);
+        }
+
+        public ShuffleAllPlaylist[] newArray(int size) {
+            return new ShuffleAllPlaylist[size];
+        }
+    };
+}
