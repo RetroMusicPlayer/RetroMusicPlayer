@@ -3,27 +3,19 @@ package code.name.monkey.appthemehelper.util
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
-import android.os.Build
-import androidx.annotation.ColorInt
 import android.view.View
 import android.view.ViewTreeObserver
+import androidx.annotation.ColorInt
 
 
 object ViewUtil {
 
     fun removeOnGlobalLayoutListener(v: View, listener: ViewTreeObserver.OnGlobalLayoutListener) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            v.viewTreeObserver.removeGlobalOnLayoutListener(listener)
-        } else {
-            v.viewTreeObserver.removeOnGlobalLayoutListener(listener)
-        }
+        v.viewTreeObserver.removeOnGlobalLayoutListener(listener)
     }
 
     fun setBackgroundCompat(view: View, drawable: Drawable?) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
-            view.background = drawable
-        else
-            view.setBackgroundDrawable(drawable)
+        view.background = drawable
     }
 
     fun setBackgroundTransition(view: View, newDrawable: Drawable): TransitionDrawable {

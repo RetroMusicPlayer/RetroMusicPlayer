@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.providers.interfaces
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import io.reactivex.Observable
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**

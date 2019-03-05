@@ -366,16 +366,16 @@ public class MusicUtil {
 
     public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
         if (isFavorite(context, song)) {
-            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).blockingFirst().getId());
+            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).blockingFirst().id);
         } else {
-            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).blockingFirst().getId(),
+            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).blockingFirst().id,
                     false);
         }
     }
 
     public static boolean isFavoritePlaylist(@NonNull final Context context,
                                              @NonNull final Playlist playlist) {
-        return playlist.getName() != null && playlist.getName().equals(context.getString(R.string.favorites));
+        return playlist.name != null && playlist.name.equals(context.getString(R.string.favorites));
     }
 
     private static Observable<Playlist> getFavoritesPlaylist(@NonNull final Context context) {
@@ -397,7 +397,7 @@ public class MusicUtil {
         //getFavoritesPlaylist(context).blockingFirst().id.subscribe(MusicUtil::setPlaylist);
         //return PlaylistsUtil.doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
         return PlaylistsUtil
-                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().getId(), song.getId());
+                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.getId());
     }
 
     public static boolean isArtistNameUnknown(@Nullable String artistName) {

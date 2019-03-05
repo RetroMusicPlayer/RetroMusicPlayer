@@ -16,24 +16,39 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
-import android.support.annotation.NonNull;
-
-import com.kabouzeid.gramophone.R;
-import com.kabouzeid.gramophone.loader.SongLoader;
-import com.kabouzeid.gramophone.model.Song;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.loaders.SongLoader;
+import code.name.monkey.retromusic.model.Song;
+import io.reactivex.Observable;
+
 public class ShuffleAllPlaylist extends AbsSmartPlaylist {
+
+    public static final Creator<ShuffleAllPlaylist> CREATOR = new Creator<ShuffleAllPlaylist>() {
+        public ShuffleAllPlaylist createFromParcel(Parcel source) {
+            return new ShuffleAllPlaylist(source);
+        }
+
+        public ShuffleAllPlaylist[] newArray(int size) {
+            return new ShuffleAllPlaylist[size];
+        }
+    };
 
     public ShuffleAllPlaylist(@NonNull Context context) {
         super(context.getString(R.string.action_shuffle_all), R.drawable.ic_shuffle_white_24dp);
     }
 
+    protected ShuffleAllPlaylist(Parcel in) {
+        super(in);
+    }
+
     @NonNull
     @Override
-    public ArrayList<Song> getSongs(@NonNull Context context) {
-        return SongLoader.getAllSongs(context);
+    public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
+        return SongLoader.INSTANCE.getAllSongs(context);
     }
 
     @Override
@@ -45,18 +60,4 @@ public class ShuffleAllPlaylist extends AbsSmartPlaylist {
     public int describeContents() {
         return 0;
     }
-
-    protected ShuffleAllPlaylist(Parcel in) {
-        super(in);
-    }
-
-    public static final Creator<ShuffleAllPlaylist> CREATOR = new Creator<ShuffleAllPlaylist>() {
-        public ShuffleAllPlaylist createFromParcel(Parcel source) {
-            return new ShuffleAllPlaylist(source);
-        }
-
-        public ShuffleAllPlaylist[] newArray(int size) {
-            return new ShuffleAllPlaylist[size];
-        }
-    };
 }

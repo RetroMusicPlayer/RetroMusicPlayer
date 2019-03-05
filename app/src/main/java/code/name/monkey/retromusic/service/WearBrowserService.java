@@ -277,8 +277,8 @@ public class WearBrowserService extends MediaBrowserService {
                                 int size = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, playlist).blockingFirst().size();
                                 String songCount = String.format("%d %s", size, size > 1 ? "Songs" : "Song");
                                 fillMediaItems(mediaItems,
-                                        Integer.toString(TYPE_PLAYLIST_ALL_SONGS) + Long.toString(playlist.getId()),
-                                        playlist.getName(),
+                                        Integer.toString(TYPE_PLAYLIST_ALL_SONGS) + Long.toString(playlist.id),
+                                        playlist.name,
                                         songCount,
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/ic_queue_music_white_24dp"),
                                         MediaBrowser.MediaItem.FLAG_BROWSABLE);

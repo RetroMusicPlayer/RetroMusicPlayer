@@ -212,7 +212,6 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
     }
 
     companion object {
-
-        val TAG = AlbumAdapter::class.java.simpleName!!
+        val TAG: String = AlbumAdapter::class.java.simpleName
     }
 }

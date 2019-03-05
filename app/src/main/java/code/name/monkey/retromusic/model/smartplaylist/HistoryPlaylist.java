@@ -16,44 +16,20 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
-import android.support.annotation.NonNull;
-
-import com.kabouzeid.gramophone.R;
-import com.kabouzeid.gramophone.loader.TopAndRecentlyPlayedTracksLoader;
-import com.kabouzeid.gramophone.model.Song;
-import com.kabouzeid.gramophone.provider.HistoryStore;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
+import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.providers.HistoryStore;
+import io.reactivex.Observable;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
 public class HistoryPlaylist extends AbsSmartPlaylist {
-
-    public HistoryPlaylist(@NonNull Context context) {
-        super(context.getString(R.string.history), R.drawable.ic_access_time_white_24dp);
-    }
-
-    @NonNull
-    @Override
-    public ArrayList<Song> getSongs(@NonNull Context context) {
-        return TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context);
-    }
-
-    @Override
-    public void clear(@NonNull Context context) {
-        HistoryStore.getInstance(context).clear();
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    protected HistoryPlaylist(Parcel in) {
-        super(in);
-    }
 
     public static final Creator<HistoryPlaylist> CREATOR = new Creator<HistoryPlaylist>() {
         public HistoryPlaylist createFromParcel(Parcel source) {
@@ -64,4 +40,28 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
             return new HistoryPlaylist[size];
         }
     };
+
+    public HistoryPlaylist(@NonNull Context context) {
+        super(context.getString(R.string.history), R.drawable.ic_access_time_white_24dp);
+    }
+
+    protected HistoryPlaylist(Parcel in) {
+        super(in);
+    }
+
+    @NonNull
+    @Override
+    public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
+        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getRecentlyPlayedTracks(context);
+    }
+
+    @Override
+    public void clear(@NonNull Context context) {
+        HistoryStore.getInstance(context).clear();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 }

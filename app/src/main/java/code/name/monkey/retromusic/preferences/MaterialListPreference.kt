@@ -38,12 +38,12 @@ class MaterialListPreference : ListPreference {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun getDialogLayoutResource(): Int {
-        return mLayoutRes;
+        return mLayoutRes
     }
 
-    override fun onGetDefaultValue(a: TypedArray, index: Int): Any {
+    override fun onGetDefaultValue(a: TypedArray, index: Int): String {
         // Default value from attribute. Fallback value is set to 0.
-        return a.getString(index)
+        return a.getString(index)!!
     }
 
     fun setCustomValue(any: Any) {

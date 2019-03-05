@@ -56,7 +56,9 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             text = content
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener {
-                PlaylistsUtil.removeFromPlaylist(activity!!, songs as ArrayList<PlaylistSong>)
+                val playlistSongs = ArrayList<PlaylistSong>()
+                playlistSongs.addAll(songs as ArrayList<PlaylistSong>)
+                PlaylistsUtil.removeFromPlaylist(activity!!, playlistSongs)
                 dismiss()
             }
         }

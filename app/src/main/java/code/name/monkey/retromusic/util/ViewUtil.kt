@@ -120,7 +120,7 @@ object ViewUtil {
         val top = v.top + ty
         val bottom = v.bottom + ty
 
-        return x >= left && x <= right && y >= top && y <= bottom
+        return x in left..right && y >= top && y <= bottom
     }
 
     fun setUpFastScrollRecyclerViewColor(context: Context,

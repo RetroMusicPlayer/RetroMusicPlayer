@@ -43,7 +43,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun onMediaStoreChanged() {
-        presenter!!.loadSongs()
+        presenter.loadSongs()
     }
 
     override fun loadGridSize(): Int {
@@ -99,7 +99,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun onDestroy() {
-        presenter!!.unsubscribe()
+        presenter.unsubscribe()
         super.onDestroy()
     }
 

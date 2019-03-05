@@ -99,7 +99,7 @@ public class PlaylistsUtil {
         final StringBuilder selection = new StringBuilder();
         selection.append(MediaStore.Audio.Playlists._ID + " IN (");
         for (int i = 0; i < playlists.size(); i++) {
-            selection.append(playlists.get(i).getId());
+            selection.append(playlists.get(i).id);
             if (i < playlists.size() - 1) {
                 selection.append(",");
             }

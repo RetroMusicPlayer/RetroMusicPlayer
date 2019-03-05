@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit
 
 class ArtistImage(val artistName: String, val skipOkHttpCache: Boolean)
 
-class ArtistImageFetcher(private val context: Context, private val lastFMRestClient: LastFMRestClient, private val okHttp: OkHttpClient, private val model: ArtistImage, width: Int, height: Int) : DataFetcher<InputStream> {
+class ArtistImageFetcher(private val context: Context, private val lastFMRestClient: LastFMRestClient, private val okHttp: OkHttpClient, private val model: ArtistImage) : DataFetcher<InputStream> {
     @Volatile
     private var isCancelled: Boolean = false
     private var call: Call<LastFmArtist>? = null
@@ -120,7 +120,7 @@ class ArtistImageFetcher(private val context: Context, private val lastFMRestCli
 class ArtistImageLoader(private val context: Context, private val lastFMClient: LastFMRestClient, private val okhttp: OkHttpClient) : ModelLoader<ArtistImage, InputStream> {
 
     override fun buildLoadData(model: ArtistImage, width: Int, height: Int, options: Options): ModelLoader.LoadData<InputStream>? {
-        return ModelLoader.LoadData(ObjectKey(model.artistName), ArtistImageFetcher(context, lastFMClient, okhttp, model, width, height))
+        return ModelLoader.LoadData(ObjectKey(model.artistName), ArtistImageFetcher(context, lastFMClient, okhttp, model))
     }
 
     override fun handles(model: ArtistImage): Boolean {

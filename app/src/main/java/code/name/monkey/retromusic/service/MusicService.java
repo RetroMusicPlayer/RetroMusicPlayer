@@ -422,7 +422,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                                 playlistSongs = ((AbsCustomPlaylist) playlist).getSongs(getApplicationContext()).blockingFirst();
                             } else {
                                 //noinspection unchecked
-                                playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(getApplicationContext(), playlist.getId()).blockingFirst();
+                                playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(getApplicationContext(), playlist.id).blockingFirst();
                             }
                             if (!playlistSongs.isEmpty()) {
                                 if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {

@@ -206,7 +206,7 @@ open class BugReportActivity : AbsThemeActivity() {
         val bugDescription = inputDescription!!.text!!.toString()
 
         val extraInfo = ExtraInfo()
-        onSaveExtraInfo(extraInfo)
+        onSaveExtraInfo()
 
         val report = Report(bugTitle, bugDescription, deviceInfo, extraInfo)
         val target = GithubTarget("h4h13", "RetroMusicPlayer")
@@ -214,7 +214,7 @@ open class BugReportActivity : AbsThemeActivity() {
         ReportIssueAsyncTask.report(this, report, target, login)
     }
 
-    private fun onSaveExtraInfo(extraInfo: ExtraInfo) {}
+    private fun onSaveExtraInfo() {}
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

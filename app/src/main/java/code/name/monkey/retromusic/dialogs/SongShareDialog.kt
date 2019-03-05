@@ -39,9 +39,9 @@ class SongShareDialog : RoundedBottomSheetDialogFragment() {
     @SuppressLint("StringFormatInvalid")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val song = arguments!!.getParcelable<Song>("song")
-        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        val song: Song = arguments!!.getParcelable("song") ?: return
 
+        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         audioText.apply {
             text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
             setTextColor(ThemeStore.textColorSecondary(context!!))

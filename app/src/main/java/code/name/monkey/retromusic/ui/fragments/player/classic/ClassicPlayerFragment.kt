@@ -153,7 +153,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
         playerToolbar.apply {
             inflateMenu(code.name.monkey.retromusic.R.menu.menu_player)
             setNavigationIcon(code.name.monkey.retromusic.R.drawable.ic_close_white_24dp)
-            setNavigationOnClickListener { v -> activity!!.onBackPressed() }
+            setNavigationOnClickListener { activity!!.onBackPressed() }
             setOnMenuItemClickListener(this@ClassicPlayerFragment)
         }
     }

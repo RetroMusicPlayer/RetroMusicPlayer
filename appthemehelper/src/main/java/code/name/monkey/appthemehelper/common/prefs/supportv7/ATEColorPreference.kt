@@ -19,19 +19,19 @@ class ATEColorPreference(context: Context, attrs: AttributeSet?, defStyleAttr: I
     private var border: Int = 0
 
     constructor(context: Context) : this(context, null, 0) {
-        init(context, null)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet) : this(context, attrs, 0) {
-        init(context, attrs)
+        init()
     }
 
     init {
-        init(context, attrs)
+        init()
 
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
+    private fun init() {
         layoutResource = R.layout.ate_preference_custom_support
         widgetLayoutResource = R.layout.ate_preference_color
         isPersistent = false

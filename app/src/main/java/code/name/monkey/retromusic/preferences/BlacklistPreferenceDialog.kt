@@ -21,6 +21,7 @@ import android.text.Html
 import android.util.AttributeSet
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.providers.BlacklistStore
 import com.afollestad.materialdialogs.MaterialDialog
@@ -60,9 +61,9 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         return MaterialDialog(context!!).show {
             title(code.name.monkey.retromusic.R.string.blacklist)
             positiveButton(android.R.string.ok) {
-                dismiss();
+                dismiss()
             }
-            neutralButton(code.name.monkey.retromusic.R.string.clear_action) {
+            neutralButton(text = getString(R.string.clear_action)) {
                 MaterialDialog(context).show {
                     title(code.name.monkey.retromusic.R.string.clear_blacklist)
                     message(code.name.monkey.retromusic.R.string.do_you_want_to_clear_the_blacklist)
@@ -73,7 +74,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                     negativeButton(android.R.string.cancel)
                 }
             }
-            negativeButton(code.name.monkey.retromusic.R.string.add_action) {
+            negativeButton(R.string.add_action) {
                 val dialog = BlacklistFolderChooserDialog.create()
                 dialog.setCallback(this@BlacklistPreferenceDialog)
                 dialog.show(childFragmentManager, "FOLDER_CHOOSER");

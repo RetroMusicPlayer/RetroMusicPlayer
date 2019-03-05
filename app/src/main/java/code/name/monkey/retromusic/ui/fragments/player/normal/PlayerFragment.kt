@@ -81,7 +81,6 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         display?.getMetrics(outMetrics)
 
         val density = resources.displayMetrics.density
-        val dpHeight = outMetrics.heightPixels / density
         val dpWidth = outMetrics.widthPixels / density
 
         playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()

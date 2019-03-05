@@ -16,8 +16,6 @@ import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.views.ATESwitch
 
-import java.lang.reflect.Field
-
 /**
  * @author Aidan Follestad (afollestad)
  */
@@ -26,23 +24,23 @@ class ATESwitchPreference : SwitchPreference {
     private var mSwitch: ATESwitch? = null
 
     constructor(context: Context) : super(context) {
-        init(context, null)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context, attrs)
+        init()
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context, attrs)
+        init()
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
+    private fun init() {
         layoutResource = R.layout.ate_preference_custom
         if (COMPAT_MODE) {
             widgetLayoutResource = R.layout.ate_preference_switch

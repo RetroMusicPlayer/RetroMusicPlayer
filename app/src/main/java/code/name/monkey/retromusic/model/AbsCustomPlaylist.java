@@ -12,14 +12,32 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.model
+package code.name.monkey.retromusic.model;
 
-import android.content.Context
-import io.reactivex.Observable
-import java.util.*
+import android.content.Context;
+import android.os.Parcel;
 
-abstract class AbsCustomPlaylist(id: Int, name: String) : Playlist(id, name) {
+import java.util.ArrayList;
 
-    abstract fun getSongs(context: Context): Observable<ArrayList<Song>>
+import androidx.annotation.NonNull;
+import io.reactivex.Observable;
+
+/**
+ * @author Karim Abou Zeid (kabouzeid)
+ */
+
+public abstract class AbsCustomPlaylist extends Playlist {
+    public AbsCustomPlaylist(int id, String name) {
+        super(id, name);
+    }
+
+    public AbsCustomPlaylist() {
+    }
+
+    public AbsCustomPlaylist(Parcel in) {
+        super(in);
+    }
+
+    @NonNull
+    public abstract Observable<ArrayList<Song>> getSongs(Context context);
 }
-

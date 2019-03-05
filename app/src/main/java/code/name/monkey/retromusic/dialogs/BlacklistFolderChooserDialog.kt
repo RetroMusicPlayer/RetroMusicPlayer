@@ -98,7 +98,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         return MaterialDialog(activity!!).show {
             title(text = parentFolder!!.absolutePath)
             listItems(items = contentsArray(), waitForPositiveButton = false) { dialog, index, text ->
-                onSelection(dialog, index, text)
+                onSelection(index)
             }
             noAutoDismiss()
             positiveButton(R.string.add_action) {
@@ -111,7 +111,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         }
     }
 
-    private fun onSelection(materialDialog: MaterialDialog, i: Int, s: String) {
+    private fun onSelection(i: Int) {
         if (canGoUp && i == 0) {
             parentFolder = parentFolder!!.parentFile
             if (parentFolder!!.absolutePath == "/storage/emulated") {
@@ -139,7 +139,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         dialog?.apply {
             setTitle(parentFolder!!.absolutePath)
             listItems(items = contentsArray()) { dialog, index, text ->
-                onSelection(dialog, index, text)
+                onSelection(index)
             }
         }
     }

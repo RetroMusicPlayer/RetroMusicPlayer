@@ -14,17 +14,14 @@
 
 package code.name.monkey.retromusic.helper.menu
 
+
 import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
-
-
-import java.util.ArrayList
-
-import code.name.monkey.retromusic.R
+import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
 import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
@@ -35,6 +32,7 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import java.util.*
 
 
 object PlaylistMenuHelper {
