@@ -35,7 +35,7 @@ import com.bumptech.glide.request.transition.Transition
 import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment() {
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

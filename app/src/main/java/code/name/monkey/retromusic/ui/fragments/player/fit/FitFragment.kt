@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_fit.*
 
 
 class FitFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

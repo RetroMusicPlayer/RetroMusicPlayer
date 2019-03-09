@@ -30,8 +30,8 @@ class MaterialButtonTextColor @JvmOverloads constructor(context: Context, attrs:
     init {
         setTextColor(MaterialValueHelper.getPrimaryTextColor(getContext(), ColorUtil.isColorLight(ThemeStore.primaryColor(getContext()))))
         iconTint = ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.iconColor))
-        iconPadding = RetroUtil.convertDpToPixel(16f, getContext()).toInt()
         rippleColor = ColorStateList.valueOf(ColorUtil.withAlpha(ThemeStore.accentColor(context), 0.4f))
-        minHeight = RetroUtil.convertDpToPixel(52f, context).toInt()
+        //minHeight = RetroUtil.convertDpToPixel(42f, context).toInt()
+        iconSize = RetroUtil.convertDpToPixel(20f, context).toInt()
     }
 }

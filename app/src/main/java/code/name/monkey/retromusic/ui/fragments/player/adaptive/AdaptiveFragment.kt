@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment
 import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
 class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

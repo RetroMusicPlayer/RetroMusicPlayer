@@ -55,7 +55,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
         }
     }
 
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

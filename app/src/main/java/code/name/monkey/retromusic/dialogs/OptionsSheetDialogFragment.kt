@@ -49,9 +49,8 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         get() {
             var message = getString(R.string.title_good_day)
             val c = Calendar.getInstance()
-            val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
 
-            when (timeOfDay) {
+            when (c.get(Calendar.HOUR_OF_DAY)) {
                 in 0..5 -> message = getString(R.string.title_good_night)
                 in 6..11 -> message = getString(R.string.title_good_morning)
                 in 12..15 -> message = getString(R.string.title_good_afternoon)

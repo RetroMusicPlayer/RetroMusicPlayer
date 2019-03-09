@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_full.*
 
 class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 
@@ -51,6 +51,8 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
         setUpSubFragments()
         setUpPlayerToolbar()
         setupArtist()
+
+        nextSong.isSelected = true
     }
 
     private fun setupArtist() {

@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_material.*
  * @author Hemanth S (h4h13).
  */
 class MaterialFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

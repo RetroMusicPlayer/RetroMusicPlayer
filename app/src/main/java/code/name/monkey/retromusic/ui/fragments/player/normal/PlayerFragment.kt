@@ -122,7 +122,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.inflateMenu(code.name.monkey.retromusic.R.menu.menu_player)
+        playerToolbar.inflateMenu(R.menu.menu_player)
         playerToolbar.setNavigationOnClickListener { activity!!.onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
 
@@ -138,7 +138,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         updateIsFavorite()
     }
 
-    override fun toolbarGet(): Toolbar {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 

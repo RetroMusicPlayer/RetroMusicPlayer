@@ -55,16 +55,18 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         return inflater.inflate(R.layout.fragment_full_player_controls, container, false)
     }
 
+    private lateinit var volumeFragment: VolumeFragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
 
-        val volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment?
-        volumeFragment!!.tintWhiteColor()
-
+        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
 
         songTotalTime.setTextColor(Color.WHITE)
         songCurrentProgress.setTextColor(Color.WHITE)
+
+        title.isSelected = true
     }
 
     override fun onResume() {
@@ -115,6 +117,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         } else {
             ThemeStore.accentColor(context!!)
         }
+        volumeFragment.setTintableColor(colorFinal)
         text.setTextColor(colorFinal)
 
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)

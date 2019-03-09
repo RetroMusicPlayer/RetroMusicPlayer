@@ -388,14 +388,6 @@ public class MusicUtil {
     }
 
     public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
-        /*return Observable.create(e -> getFavoritesPlaylist(context).subscribe(playlist1 -> {
-            boolean isBoolean = PlaylistsUtil.doPlaylistContains(context, playlist1.id, song.id);
-            e.onNext(isBoolean);
-            e.onComplete();
-        }));*/
-
-        //getFavoritesPlaylist(context).blockingFirst().id.subscribe(MusicUtil::setPlaylist);
-        //return PlaylistsUtil.doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
         return PlaylistsUtil
                 .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.getId());
     }

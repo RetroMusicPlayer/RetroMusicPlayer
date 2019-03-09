@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
@@ -61,6 +62,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
                 PlaylistsUtil.removeFromPlaylist(activity!!, playlistSongs)
                 dismiss()
             }
+            MaterialUtil.setTint(this)
         }
         bannerTitle.apply {
             setText(title)
@@ -70,6 +72,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
         actionCancel.apply {
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener { dismiss() }
+            MaterialUtil.setTint(this, false)
         }
     }
 

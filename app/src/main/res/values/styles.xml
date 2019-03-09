@@ -135,6 +135,14 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingTop">12dp</item>
+        <item name="iconSize">12dp</item>
+    </style>
+
+    <style name="OptionButtonsTextStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

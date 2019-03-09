@@ -146,7 +146,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         MusicUtil.toggleFavorite(activity!!, song)
     }
 
-    abstract fun toolbarGet(): Toolbar
+    abstract fun playerToolbar(): Toolbar
 
     abstract fun onShow()
 
@@ -179,11 +179,11 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
             override fun doInBackground(vararg params: Song): Boolean? {
                 val activity = activity
-                if (activity != null) {
-                    return MusicUtil.isFavorite(getActivity()!!, params[0])
+                return if (activity != null) {
+                    MusicUtil.isFavorite(activity, params[0])
                 } else {
                     cancel(false)
-                    return null
+                    null
                 }
             }
 
@@ -191,11 +191,12 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 val activity = activity
                 if (activity != null) {
                     val res = if (isFavorite!!)
-                        code.name.monkey.retromusic.R.drawable.ic_favorite_white_24dp
+                        R.drawable.ic_favorite_white_24dp
                     else
-                        code.name.monkey.retromusic.R.drawable.ic_favorite_border_white_24dp
+                        R.drawable.ic_favorite_border_white_24dp
                     val drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor())
-                    toolbarGet().menu.findItem(R.id.action_toggle_favorite)?.setIcon(drawable)?.title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
+                    if (playerToolbar().menu.findItem(R.id.action_toggle_favorite) != null)
+                        playerToolbar().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
                 }
             }
         }.execute(MusicPlayerRemote.currentSong)
