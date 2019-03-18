@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingBottom="16dp">
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/dialogTitle"
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/what_do_you_want_to_share"
-        android:textStyle="bold" />
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/what_do_you_want_to_share" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/audioText"

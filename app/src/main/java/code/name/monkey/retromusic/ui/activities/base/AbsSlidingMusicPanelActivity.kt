@@ -14,6 +14,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.ui.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen
+import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.ui.fragments.player.blur.BlurPlayerFragment
@@ -23,11 +24,12 @@ import code.name.monkey.retromusic.ui.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.ui.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.ui.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.full.FullPlayerFragment
-import code.name.monkey.retromusic.ui.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.ui.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.ui.fragments.player.simple.SimplePlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.slide.SlidePlayerFragment
+import code.name.monkey.retromusic.ui.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -83,7 +85,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     }
 
     fun setAntiDragView(antiDragView: View) {
-        slidingLayout.setAntiDragView(antiDragView);
+        slidingLayout.setAntiDragView(antiDragView)
     }
 
     private fun collapsePanel() {
@@ -180,19 +182,20 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
         currentNowPlayingScreen = PreferenceUtil.getInstance().nowPlayingScreen
 
         val fragment: Fragment = when (currentNowPlayingScreen) {
-            NowPlayingScreen.BLUR -> BlurPlayerFragment()
-            NowPlayingScreen.ADAPTIVE -> AdaptiveFragment()
-            NowPlayingScreen.NORMAL -> PlayerFragment()
-            NowPlayingScreen.CARD -> CardFragment()
-            NowPlayingScreen.BLUR_CARD -> CardBlurFragment()
-            NowPlayingScreen.FIT -> FitFragment()
-            NowPlayingScreen.FLAT -> FlatPlayerFragment()
-            NowPlayingScreen.FULL -> FullPlayerFragment()
-            NowPlayingScreen.PLAIN -> PlainPlayerFragment()
-            NowPlayingScreen.SIMPLE -> SimplePlayerFragment()
-            NowPlayingScreen.MATERIAL -> MaterialFragment()
-            NowPlayingScreen.COLOR -> ColorFragment()
-            NowPlayingScreen.TINY -> TinyPlayerFragment()
+            BLUR -> BlurPlayerFragment()
+            ADAPTIVE -> AdaptiveFragment()
+            NORMAL -> PlayerFragment()
+            CARD -> CardFragment()
+            BLUR_CARD -> CardBlurFragment()
+            FIT -> FitFragment()
+            FLAT -> FlatPlayerFragment()
+            FULL -> FullPlayerFragment()
+            PLAIN -> PlainPlayerFragment()
+            SIMPLE -> SimplePlayerFragment()
+            MATERIAL -> MaterialFragment()
+            COLOR -> ColorFragment()
+            TINY -> TinyPlayerFragment()
+            SLIDE -> SlidePlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()
@@ -256,15 +259,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
             if (PreferenceUtil.getInstance().adaptiveColor &&
-                    (currentNowPlayingScreen == NowPlayingScreen.NORMAL || currentNowPlayingScreen == NowPlayingScreen.FLAT)) {
+                    (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
-            } else if (currentNowPlayingScreen == NowPlayingScreen.FULL || currentNowPlayingScreen == NowPlayingScreen.CARD ||
-                    currentNowPlayingScreen == NowPlayingScreen.FIT || /*currentNowPlayingScreen == NowPlayingScreen.CLASSIC ||*/
-                    currentNowPlayingScreen == NowPlayingScreen.BLUR || currentNowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
+            } else if (currentNowPlayingScreen == FULL || (currentNowPlayingScreen == SLIDE) || currentNowPlayingScreen == CARD ||
+                    currentNowPlayingScreen == FIT || /*currentNowPlayingScreen == NowPlayingScreen.CLASSIC ||*/
+                    currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
-            } else if (currentNowPlayingScreen == NowPlayingScreen.COLOR) {
+            } else if (currentNowPlayingScreen == COLOR) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
@@ -303,6 +306,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             super.setTaskDescriptionColor(color)
         }
     }
+
 }
 /*import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator

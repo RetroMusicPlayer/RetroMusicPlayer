@@ -34,7 +34,7 @@ object MaterialUtil {
         val colorState = ColorStateList.valueOf(accentColor)
 
         if (background) {
-            textInputLayout.backgroundTintList = colorState
+            //textInputLayout.backgroundTintList = colorState
             textInputLayout.defaultHintTextColor = colorState
         } else {
             textInputLayout.boxStrokeColor = accentColor

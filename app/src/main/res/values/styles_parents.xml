@@ -44,6 +44,7 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
@@ -123,6 +124,7 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
+
     </style>
 
 

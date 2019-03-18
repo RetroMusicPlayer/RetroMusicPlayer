@@ -602,5 +602,6 @@
     <string name="composer">Composer</string>
     <string name="next_song">Next Song</string>
     <string name="last_song">Last song</string>
+    <string name="slide">Slide</string>
 
 </resources>

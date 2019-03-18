@@ -166,7 +166,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
             adapter = albumAdapter
         }
-        songAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song)
+        songAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song, false)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this.context)

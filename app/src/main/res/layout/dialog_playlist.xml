@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/bannerTitle"
-        style="@style/SubTitleTextAppearance"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/new_playlist_title" />
 
@@ -15,16 +18,15 @@
         android:id="@+id/actionNewPlaylistContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         app:boxBackgroundMode="outline"
         app:boxCollapsedPaddingTop="16dp"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/md_grey_700"
+        app:boxStrokeColor="?android:attr/textColorPrimary"
         app:boxStrokeWidth="1dp"
         app:hintEnabled="true">
 
@@ -35,8 +37,7 @@
             android:background="@null"
             android:hint="@string/playlist_name_empty"
             android:inputType="textPersonName|textCapWords|text"
-            android:padding="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:padding="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -44,26 +45,28 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center_vertical"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:text="@string/create_action"
-        app:backgroundTint="@color/md_pink_A400" />
+        app:backgroundTint="@color/md_pink_A400"
+        app:icon="@drawable/ic_playlist_add_white_24dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/actionCancel"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center_vertical"
         android:paddingTop="14dp"
         android:paddingBottom="14dp"
         android:text="@android:string/cancel"
+        app:icon="@drawable/ic_close_white_24dp"
         app:strokeWidth="2dp" />
 
 

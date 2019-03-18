@@ -111,7 +111,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        image!!.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+
         if (ColorUtil.isColorLight(ATHUtil.resolveColor(context, android.R.attr.windowBackground))) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
@@ -132,7 +132,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         } else {
             ThemeStore.accentColor(context!!)
         }
-
+        image.setColorFilter(colorFinal, PorterDuff.Mode.SRC_IN)
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
 

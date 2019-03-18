@@ -15,6 +15,8 @@ import java.io.InputStreamReader;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
@@ -52,7 +54,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         webView = findViewById(R.id.webView);
         title = findViewById(R.id.bannerTitle);
         toolbar = findViewById(R.id.toolbar);
-        appBarLayout= findViewById(R.id.appBarLayout);
+        appBarLayout = findViewById(R.id.appBarLayout);
 
 
         setStatusbarColorAuto();
@@ -65,7 +67,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setTitle(null);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         title.setTextColor(ThemeStore.Companion.textColorPrimary(this));
-ToolbarContentTintHelper.colorBackButton(toolbar,ThemeStore.Companion.textColorSecondary(this));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));
 
         try {
             // Load from phonograph-changelog.html in the assets folder
@@ -84,7 +86,7 @@ ToolbarContentTintHelper.colorBackButton(toolbar,ThemeStore.Companion.textColorS
                             .replace("{style-placeholder}",
                                     String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
                             .replace("{link-color}", colorToHex(ThemeStore.Companion.accentColor(this)))
-                            .replace("{link-color-active}",  colorToHex(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))))
+                            .replace("{link-color-active}", colorToHex(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))))
                     , "text/html", "UTF-8");
         } catch (Throwable e) {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");

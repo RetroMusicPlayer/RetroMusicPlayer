@@ -13,7 +13,8 @@ import java.util.*
 
 class SimpleSongAdapter(context: AppCompatActivity,
                         songs: ArrayList<Song>,
-                        @LayoutRes i: Int) : SongAdapter(context, songs, i, false, null) {
+                        @LayoutRes i: Int,
+                        val useNumbers: Boolean) : SongAdapter(context, songs, i, false, null) {
 
     private var textColor: Int = 0
 
@@ -36,7 +37,11 @@ class SimpleSongAdapter(context: AppCompatActivity,
         val fixedTrackNumber = MusicUtil.getFixedTrackNumber(dataSet[position].trackNumber)
 
         if (holder.imageText != null) {
-            holder.imageText!!.text = if (fixedTrackNumber > 0) fixedTrackNumber.toString() else "-"
+            if (useNumbers) {
+                holder.imageText!!.text = (position + 1).toString()
+            } else {
+                holder.imageText!!.text = if (fixedTrackNumber > 0) fixedTrackNumber.toString() else "-"
+            }
             holder.imageText!!.setTextColor(textColor)
         }
 

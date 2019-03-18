@@ -5,7 +5,7 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/toggle_home"
-        android:title="@string/home" />
+        android:title="@string/for_you" />
 
     <item
         android:id="@+id/action_song"

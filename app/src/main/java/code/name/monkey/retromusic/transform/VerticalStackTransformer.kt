@@ -12,21 +12,18 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.model
+package code.name.monkey.retromusic.transform
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.HomeSection
+import android.view.View
+import androidx.viewpager.widget.ViewPager
 
-/**
- * Created by hemanths on 3/4/19
- */
-
-class Home(val priority: Int,
-           @StringRes val title: Int,
-           @StringRes val subTitle: Int,
-           val arrayList: ArrayList<*>,
-           @HomeSection
-           val homeSection: Int,
-           @DrawableRes
-           val icon: Int)
+class VerticalStackTransformer : ViewPager.PageTransformer {
+    override fun transformPage(page: View, position: Float) {
+        if (position >= 0) {
+            page.scaleX = (0.9f - 0.05f * position)
+            page.scaleY = 0.9f
+            page.translationX = -page.width * position
+            page.translationY = -30 * position
+        }
+    }
+}

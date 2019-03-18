@@ -38,7 +38,7 @@ import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
-import code.name.monkey.retromusic.transform.StackTransformer;
+import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
@@ -727,7 +727,7 @@ public final class PreferenceUtil {
             case 5:
                 return new HingeTransformation();
             case 6:
-                return new StackTransformer();
+                return new VerticalStackTransformer();
         }
     }
 

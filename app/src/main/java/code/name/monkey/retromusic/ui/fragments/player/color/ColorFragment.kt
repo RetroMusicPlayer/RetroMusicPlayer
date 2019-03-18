@@ -305,12 +305,12 @@ class ColorFragment : AbsPlayerFragment() {
     }
 }
 
-private fun Palette.getContrastColor(background: Int): Int {
+fun Palette.getContrastColor(background: Int): Int {
 
     return 0
 }
 
-private fun Palette.getColor(): Int {
+fun Palette.getColor(): Int {
     return when {
         darkMutedSwatch != null -> darkMutedSwatch!!.rgb
         mutedSwatch != null -> mutedSwatch!!.rgb

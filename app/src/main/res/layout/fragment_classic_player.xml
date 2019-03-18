@@ -79,10 +79,7 @@
                         android:background="@android:color/transparent" />
 
                 </LinearLayout>
-
-
             </FrameLayout>
-
         </FrameLayout>
 
         <code.name.monkey.retromusic.views.StatusBarMarginFrameLayout
@@ -96,11 +93,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                sothree:cardCornerRadius="12dp"
                 android:layout_marginBottom="-8dp"
                 app:cardBackgroundColor="?cardBackgroundColor"
                 app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="false">
+                app:cardUseCompatPadding="false"
+                sothree:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

@@ -47,7 +47,7 @@ class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
         MaterialUtil.setTint(actionCreate, true)
         MaterialUtil.setTint(actionCancel, false)
-        MaterialUtil.setTint(actionNewPlaylistContainer, true)
+        MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
         actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
         actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))

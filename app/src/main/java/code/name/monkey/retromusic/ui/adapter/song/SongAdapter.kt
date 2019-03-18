@@ -38,7 +38,6 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
                                                  @param:LayoutRes protected var itemLayoutRes: Int, usePalette: Boolean, cabHolder: CabHolder?,
                                                  showSectionName: Boolean = true) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(activity, cabHolder, R.menu.menu_media_selection), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
     var dataSet: ArrayList<Song>
-        protected set
 
     protected var usePalette = false
     private var showSectionName = true

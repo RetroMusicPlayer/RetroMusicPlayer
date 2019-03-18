@@ -1,17 +1,16 @@
 package code.name.monkey.appthemehelper.common.views
 
 import android.content.Context
-import androidx.appcompat.widget.AppCompatEditText
 import android.util.AttributeSet
-
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
+import com.google.android.material.textfield.TextInputEditText
 
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATEEditText : AppCompatEditText {
+class ATEEditText : TextInputEditText {
 
     constructor(context: Context) : super(context) {
         init(context)

@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="8dp">
+    android:paddingBottom="16dp">
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/bannerTitle"
-        style="@style/SubTitleTextAppearance"
-        android:padding="12dp"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="@string/remove_song_from_playlist_title" />
 
     <com.google.android.material.button.MaterialButton
@@ -23,7 +25,8 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="@string/remove_action"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:icon="@drawable/ic_delete_white_24dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/actionCancel"
@@ -37,6 +40,7 @@
         android:paddingBottom="16dp"
         android:text="@android:string/cancel"
         android:textAllCaps="false"
+        app:icon="@drawable/ic_close_white_24dp"
         app:strokeWidth="2dp" />
 
 </LinearLayout>

@@ -6,21 +6,28 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:background="@drawable/material_design_outline"
+        android:backgroundTint="?dividerColor"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="6dp"
+        android:visibility="gone">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/sectionIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="14dp"
-            android:paddingEnd="0dp"
+            android:layout_marginEnd="12dp"
             app:srcCompat="@drawable/ic_person_white_24dp" />
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/sectionTitle"
             style="@style/SubTitleTextAppearance"
+            android:padding="0dp"
             android:text="@string/for_you" />
 
     </LinearLayout>
@@ -29,7 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="12dp">
 
         <LinearLayout
             android:id="@+id/history"

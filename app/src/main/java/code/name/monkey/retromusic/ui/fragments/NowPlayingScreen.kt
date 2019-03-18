@@ -21,6 +21,7 @@ enum class NowPlayingScreen constructor(@param:StringRes @field:StringRes
     NORMAL(R.string.normal, R.drawable.np_normal, 0),
     PLAIN(R.string.plain, R.drawable.np_plain, 3),
     TINY(R.string.tiny, R.drawable.np_tiny, 7),
-    SIMPLE(R.string.simple, R.drawable.np_simple, 8)
+    SIMPLE(R.string.simple, R.drawable.np_simple, 8),
+    SLIDE(R.string.slide, R.drawable.np_slide, 13)
 
 }

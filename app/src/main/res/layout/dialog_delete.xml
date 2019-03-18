@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="8dp">
+    android:paddingBottom="16dp">
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/dialogTitle"
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/remove_song_from_playlist_title"
-        android:textStyle="bold" />
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/remove_song_from_playlist_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/actionDelete"

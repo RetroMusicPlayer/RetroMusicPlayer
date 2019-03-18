@@ -211,8 +211,9 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     override fun showData(list: ArrayList<Home>) {
+        val finalList = list.sortedWith(compareBy { it.priority })
         recyclerView.apply {
-            val homeAdapter = HomeAdapter(mainActivity, list, displayMetrics)
+            val homeAdapter = HomeAdapter(mainActivity, finalList, displayMetrics)
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }

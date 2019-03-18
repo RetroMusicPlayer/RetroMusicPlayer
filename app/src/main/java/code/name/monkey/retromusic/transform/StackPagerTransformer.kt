@@ -21,7 +21,12 @@ class StackPagerTransformer : ViewPager.PageTransformer {
 
 
     override fun transformPage(view: View, position: Float) {
-        if (position <= 0f) {
+
+        if (position < -1f) {
+            view.translationX = view.width * position
+        }
+
+        if (position < 0f) {
             view.translationX = 0f
             view.scaleX = 1f
             view.scaleY = 1f

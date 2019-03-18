@@ -146,7 +146,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         setSupportActionBar(toolbar)
         title = null
         toolbar.setNavigationOnClickListener { onBackPressed() }
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
+        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
         clearQueue.setColor(ThemeStore.accentColor(this))
     }
 }

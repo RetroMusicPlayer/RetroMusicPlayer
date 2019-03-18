@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
 class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
     }
 
@@ -53,8 +52,10 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             title = R.string.remove_song_from_playlist_title
             content = Html.fromHtml(getString(R.string.remove_song_x_from_playlist, songs[0].title))
         }
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        bannerTitle.text = content;
         actionDelete.apply {
-            text = content
+            setText(title)
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener {
                 val playlistSongs = ArrayList<PlaylistSong>()
@@ -64,10 +65,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
             }
             MaterialUtil.setTint(this)
         }
-        bannerTitle.apply {
-            setText(title)
-            setTextColor(ThemeStore.textColorPrimary(context))
-        }
+
 
         actionCancel.apply {
             setTextColor(ThemeStore.textColorSecondary(context))

@@ -104,7 +104,8 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="TODO"
-                android:src="@drawable/promotional" />
+                android:src="@drawable/promotional"
+                android:visibility="gone" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -133,29 +134,22 @@
         app:icon="@drawable/ic_share_white_24dp" />
 
     <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionBugReport"
+        style="@style/OptionButtonsStyle"
+        android:text="@string/report_bug"
+        app:icon="@drawable/ic_bug_report_white_24dp" />
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+        android:id="@+id/actionAbout"
+        style="@style/OptionButtonsStyle"
+        android:text="@string/action_about"
+        app:icon="@drawable/ic_help_white_24dp" />
+
+    <code.name.monkey.retromusic.views.MaterialButtonTextColor
         android:id="@+id/actionRate"
         style="@style/OptionButtonsStyle"
         android:text="@string/rate_app"
         app:icon="@drawable/ic_star_white_24dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/actionBugReport"
-            style="@style/OptionButtonsTextStyle"
-            android:layout_weight="1"
-            android:text="@string/report_bug"
-            tools:textColor="@color/md_red_A400" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/actionAbout"
-            style="@style/OptionButtonsTextStyle"
-            android:layout_weight="1"
-            android:text="@string/action_about"
-            tools:textColor="@color/md_red_A400" />
-    </LinearLayout>
 </LinearLayout>

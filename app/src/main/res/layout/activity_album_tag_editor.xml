@@ -118,8 +118,7 @@
                     android:hint="@string/album"
                     android:inputType="text|textCapWords"
                     android:maxLines="1"
-                    android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -145,8 +144,7 @@
                     android:hint="@string/album_artist"
                     android:inputType="text|textCapWords"
                     android:maxLines="1"
-                    android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -172,8 +170,7 @@
                     android:hint="@string/genre"
                     android:inputType="text|textCapWords"
                     android:maxLines="1"
-                    android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -199,8 +196,7 @@
                     android:hint="@string/year"
                     android:inputType="text|number"
                     android:maxLines="1"
-                    android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:padding="16dp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 

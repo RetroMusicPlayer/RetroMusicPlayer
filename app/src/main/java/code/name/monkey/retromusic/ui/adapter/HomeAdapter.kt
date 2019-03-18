@@ -31,7 +31,7 @@ import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class HomeAdapter(private val activity: AppCompatActivity, private val homes: ArrayList<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val activity: AppCompatActivity, private val homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemViewType(position: Int): Int {

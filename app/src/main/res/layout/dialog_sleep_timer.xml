@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:paddingBottom="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,14 +13,11 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            style="@style/SubTitleTextAppearance"
-            android:padding="12dp"
-            android:text="@string/action_sleep_timer" />
-
-        <View
+            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?dividerColor" />
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/action_sleep_timer" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/timerDisplay"

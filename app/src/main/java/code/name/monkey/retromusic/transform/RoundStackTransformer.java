@@ -12,18 +12,19 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.transform
+package code.name.monkey.retromusic.transform;
 
-import android.view.View
-import androidx.viewpager.widget.ViewPager
+import android.view.View;
 
-class StackTransformer : ViewPager.PageTransformer {
-    override fun transformPage(page: View, position: Float) {
-        if (position >= 0) {
-            page.scaleX = (0.9f - 0.05f * position)
-            page.scaleY = 0.9f
-            page.translationX = -page.width * position
-            page.translationY = -30 * position
-        }
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
+
+/**
+ * Created by hemanths on 3/9/19
+ */
+public class RoundStackTransformer implements ViewPager.PageTransformer {
+    @Override
+    public void transformPage(@NonNull View page, float position) {
+
     }
 }

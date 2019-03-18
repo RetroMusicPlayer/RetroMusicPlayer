@@ -133,8 +133,8 @@
         <item name="iconTint">?iconColor</item>
         <item name="rippleColor">?iconColor</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingBottom">12dp</item>
-        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
         <item name="iconSize">12dp</item>
     </style>
 
@@ -147,5 +147,13 @@
 
     <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
+    </style>
+
+    <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">@color/text_field_background</item>
     </style>
 </resources>
