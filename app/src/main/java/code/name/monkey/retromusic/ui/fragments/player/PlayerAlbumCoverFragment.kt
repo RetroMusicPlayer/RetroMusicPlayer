@@ -4,9 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
+import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
+import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.ui.adapter.album.AlbumCoverPagerAdapter
@@ -17,6 +21,10 @@ import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
+
+
+
+
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
     private val colorReceiver = object : AlbumCoverPagerAdapter.AlbumCoverFragment.ColorReceiver {
@@ -28,7 +36,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     }
 
     fun removeSlideEffect() {
-        val transformer = ParallaxPagerTransformer(R.id.player_image)
+        val transformer = ParallaxPagerTransformer(code.name.monkey.retromusic.R.id.player_image)
         transformer.setSpeed(0.3f)
         viewPager.setPageTransformer(true, transformer)
 
@@ -36,11 +44,13 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_player_album_cover, container, false)
+        return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_player_album_cover, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         viewPager.addOnPageChangeListener(this)
         //noinspection ConstantConditions
         if (PreferenceUtil.getInstance().carouselEffect() &&
@@ -55,10 +65,13 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
             viewPager.offscreenPageLimit = 2
             viewPager.setPageTransformer(true, PreferenceUtil.getInstance().albumCoverTransform)
         }
+
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         viewPager.removeOnPageChangeListener(this)
     }
 
@@ -125,7 +138,11 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     }
 
+
+
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
+
+
     }
 }

@@ -1,25 +1,29 @@
 package code.name.monkey.retromusic.ui.activities
 
 import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
+import android.content.*
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.provider.MediaStore.Images.Media
+import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil
+import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
@@ -46,8 +50,10 @@ class UserInfoActivity : AbsBaseActivity() {
         setupToolbar()
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
-        nameContainer.boxStrokeColor = ThemeStore.accentColor(this)
-        name!!.setText(PreferenceUtil.getInstance().userName)
+        MaterialUtil.setTint(nameContainer, false)
+        MaterialUtil.setTint(bioContainer, false)
+        name.setText(PreferenceUtil.getInstance().userName)
+        bio.setText(PreferenceUtil.getInstance().userBio)
 
         if (!PreferenceUtil.getInstance().profileImage.isEmpty()) {
             loadImageFromStorage(PreferenceUtil.getInstance().profileImage)
@@ -57,7 +63,7 @@ class UserInfoActivity : AbsBaseActivity() {
         }
         userImage.setOnClickListener {
             MaterialDialog(this).show {
-                title(text = "Set a profile photo")
+                title(text = getString(R.string.set_photo))
                 listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
                     when (position) {
                         0 -> pickNewPhoto()
@@ -70,12 +76,19 @@ class UserInfoActivity : AbsBaseActivity() {
             showBannerOptions()
         }
         next.setOnClickListener {
-            val nameString = name!!.text!!.toString().trim { it <= ' ' }
+            val nameString = name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
                 Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val bioString = bio.text.toString().trim() { it <= ' ' }
+            if (TextUtils.isEmpty(bioString)) {
+                Toast.makeText(this, "Umm bio is empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+
+            }
             PreferenceUtil.getInstance().userName = nameString
+            PreferenceUtil.getInstance().userBio = bioString
             setResult(Activity.RESULT_OK)
             finish()
         }
@@ -102,7 +115,6 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun showBannerOptions() {
-
         MaterialDialog(this).show {
             title(R.string.select_banner_photo)
             listItems(items = listOf(getString(R.string.new_banner_photo), getString(R.string.remove_banner_photo)))
@@ -150,21 +162,60 @@ class UserInfoActivity : AbsBaseActivity() {
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null &&
-                data.data != null) {
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                PICK_IMAGE_REQUEST -> {
+                    val uri = data!!.data
+                    try {
+                        val bitmap = getResizedBitmap(getBitmap(contentResolver, uri), PROFILE_ICON_SIZE)
+                        val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
+                        PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
+                        loadImageFromStorage(profileImagePath)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+                CROP_IMAGE_REQUEST -> {
+                    val extras: Bundle = data?.extras!!
+                    val selectedBitmap: Bitmap = extras.getParcelable("data");
+                    val profileImagePath = saveToInternalStorage(selectedBitmap, USER_PROFILE)
+                    PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
+                    loadImageFromStorage(profileImagePath)
+                }
+                PICK_BANNER_REQUEST -> {
+                    val uri = data?.data
+                    try {
+                        val bitmap = getBitmap(contentResolver, uri)
+                        val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
+                        PreferenceUtil.getInstance().setBannerImagePath(profileImagePath)
+                        loadBannerFromStorage(profileImagePath)
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                }
+                CROP_BANNER_REQUEST -> {
+                    val extras: Bundle = data?.extras!!
+                    val selectedBitmap: Bitmap = extras.getParcelable("data");
+                    val profileImagePath = saveToInternalStorage(selectedBitmap, USER_BANNER)
+                    PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
+                    loadImageFromStorage(profileImagePath)
+                }
+            }
+        }
+        /*if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            val picturePath = data.data
+            performCrop(picturePath)
+        } else if (requestCode == CROP_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val uri = data.data
             try {
                 val bitmap = ImageUtil.getResizedBitmap(Media.getBitmap(contentResolver, uri), PROFILE_ICON_SIZE)
                 val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
                 PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
                 loadImageFromStorage(profileImagePath)
-
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-
-        }
-        if (requestCode == PICK_BANNER_REQUEST && resultCode == Activity.RESULT_OK && data != null &&
+        } else if (requestCode == PICK_BANNER_REQUEST && resultCode == Activity.RESULT_OK && data != null &&
                 data.data != null) {
             val uri = data.data
             try {
@@ -176,6 +227,80 @@ class UserInfoActivity : AbsBaseActivity() {
                 e.printStackTrace()
             }
 
+        }*/
+    }
+
+
+    private fun getImagePathFromUri(aUri: Uri?): String? {
+        var imagePath: String? = null
+        if (aUri == null) {
+            return imagePath
+        }
+        if (DocumentsContract.isDocumentUri(App.context, aUri)) {
+            val documentId = DocumentsContract.getDocumentId(aUri)
+            if ("com.android.providers.media.documents" == aUri.authority) {
+                val id = documentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                val selection = MediaStore.Images.Media._ID + "=" + id
+                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection)
+            } else if ("com.android.providers.downloads.documents" == aUri.authority) {
+                val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                        java.lang.Long.valueOf(documentId))
+                imagePath = getImagePath(contentUri, null)
+            }
+        } else if ("content".equals(aUri.scheme!!, ignoreCase = true)) {
+            imagePath = getImagePath(aUri, null)
+        } else if ("file".equals(aUri.scheme!!, ignoreCase = true)) {
+            imagePath = aUri.path
+        }
+        return imagePath
+    }
+
+    private fun getImagePath(aUri: Uri, aSelection: String?): String? {
+        var path: String? = null
+        val cursor = App.context.contentResolver.query(aUri, null, aSelection, null, null)
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+            }
+            cursor.close()
+        }
+        return path
+    }
+
+    private fun performBannerCrop(picturePath: Uri?) {
+        val photoUri = FileProvider.getUriForFile(this, "$packageName.provider", File(getImagePathFromUri(picturePath)))
+        try {
+
+            val cropIntent = Intent("com.android.camera.action.CROP")
+            cropIntent.setDataAndType(photoUri, "image/*")
+            cropIntent.putExtra("crop", "true")
+            cropIntent.putExtra("aspectX", 1)
+            cropIntent.putExtra("aspectY", 1)
+            cropIntent.putExtra("return-data", true)
+            cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivityForResult(cropIntent, CROP_BANNER_REQUEST)
+        } catch (anfe: ActivityNotFoundException) {
+            val errorMessage = "your device doesn't support the crop action!"
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun performCrop(imageUri: Uri) {
+        val photoUri = FileProvider.getUriForFile(this, "$packageName.provider", File(getImagePathFromUri(imageUri)))
+        try {
+            val cropIntent = Intent("com.android.camera.action.CROP")
+            cropIntent.setDataAndType(photoUri, "image/*")
+            cropIntent.putExtra("crop", "true")
+            cropIntent.putExtra("aspectX", 1)
+            cropIntent.putExtra("aspectY", 1)
+            cropIntent.putExtra("outputX", 280)
+            cropIntent.putExtra("outputY", 280)
+            cropIntent.putExtra("return-data", true)
+            cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            startActivityForResult(cropIntent, CROP_IMAGE_REQUEST)
+        } catch (anfe: ActivityNotFoundException) {
+            val errorMessage = "your device doesn't support the crop action!"
+            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -225,7 +350,17 @@ class UserInfoActivity : AbsBaseActivity() {
     companion object {
 
         private const val PICK_IMAGE_REQUEST = 9002
-        private const val PICK_BANNER_REQUEST = 9003
+        private const val CROP_IMAGE_REQUEST = 9003
+        private const val PICK_BANNER_REQUEST = 9004
+        private const val CROP_BANNER_REQUEST = 9005
         private const val PROFILE_ICON_SIZE = 400
+    }
+}
+
+fun Activity.pickImage(requestCode: Int) {
+    Intent(Intent.ACTION_GET_CONTENT).apply {
+        addCategory(Intent.CATEGORY_OPENABLE)
+        type = "image/*"
+        startActivityForResult(this, requestCode)
     }
 }

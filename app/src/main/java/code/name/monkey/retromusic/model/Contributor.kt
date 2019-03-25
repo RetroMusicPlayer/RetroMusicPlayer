@@ -14,4 +14,6 @@
 
 package code.name.monkey.retromusic.model
 
-class Contributor(val name: String, val summary: String, val link: String, val profileImage: String)
+import com.google.gson.annotations.SerializedName
+
+class Contributor(val name: String, val summary: String, val link: String, @SerializedName("profile_image") val profileImage: String)

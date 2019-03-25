@@ -1,9 +1,12 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -69,9 +72,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    clearQueue.setShowTitle(false)
+                    clearQueue.shrink(true)
                 } else if (dy < 0) {
-                    clearQueue.setShowTitle(true)
+                    clearQueue.extend(true)
                 }
             }
         })
@@ -146,7 +149,12 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         setSupportActionBar(toolbar)
         title = null
         toolbar.setNavigationOnClickListener { onBackPressed() }
+
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
-        clearQueue.setColor(ThemeStore.accentColor(this))
+        clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            clearQueue.setTextColor(this)
+            clearQueue.iconTint = this
+        }
     }
 }

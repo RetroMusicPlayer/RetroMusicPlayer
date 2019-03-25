@@ -26,10 +26,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginEnd="128dp"
-        android:layout_marginStart="128dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -100,20 +100,17 @@
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                app:boxBackgroundMode="outline"
-                app:boxCollapsedPaddingTop="16dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxStrokeColor="@color/md_grey_700"
-                app:boxStrokeWidth="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
@@ -122,7 +119,27 @@
                     android:background="@null"
                     android:hint="@string/my_name"
                     android:inputType="textPersonName|textCapWords|text"
-                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bioContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:boxBackgroundMode="filled"
+                app:hintEnabled="true">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/bio"
+                    android:inputType="textPersonName|textCapWords|text"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

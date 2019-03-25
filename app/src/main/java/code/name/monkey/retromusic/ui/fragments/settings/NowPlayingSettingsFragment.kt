@@ -3,10 +3,10 @@ package code.name.monkey.retromusic.ui.fragments.settings
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.PreferenceUtil.*
 
 /**
@@ -19,7 +19,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
         updateNowPlayingScreenSummary()
         updateAlbumCoverStyleSummary()
 
-        val carouselEffect = findPreference("carousel_effect") as TwoStatePreference
+        val carouselEffect: TwoStatePreference = findPreference("carousel_effect")!!
         carouselEffect.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean && !App.isProVersion) {
                 showProToastAndNavigate(activity!!.getString(R.string.pref_title_toggle_carousel_effect))
@@ -34,17 +34,19 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
     }
 
     private fun updateAlbumCoverStyleSummary() {
-        findPreference(ALBUM_COVER_STYLE).setSummary(getInstance().albumCoverStyle.titleRes)
+        val preference: Preference = findPreference(ALBUM_COVER_STYLE)!!
+        preference.setSummary(getInstance().albumCoverStyle.titleRes)
     }
 
     private fun updateNowPlayingScreenSummary() {
-        findPreference(NOW_PLAYING_SCREEN_ID).setSummary(getInstance().nowPlayingScreen.titleRes)
+        val preference: Preference = findPreference(NOW_PLAYING_SCREEN_ID)!!
+        preference.setSummary(getInstance().nowPlayingScreen.titleRes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getInstance().registerOnSharedPreferenceChangedListener(this)
-        val preference = findPreference("album_cover_transform")
+        val preference: Preference = findPreference("album_cover_transform")!!
         setSummary(preference)
     }
 

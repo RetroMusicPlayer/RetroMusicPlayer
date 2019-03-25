@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/support_development" />
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/support_development" />
 
         <LinearLayout
             android:id="@+id/appGithub"
@@ -273,6 +274,6 @@
 
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

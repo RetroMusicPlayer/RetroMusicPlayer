@@ -71,10 +71,11 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
         if (dialogFragment != null) {
             // The dialog was created (it was one of our custom Preferences), show the dialog for it
             dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(this.fragmentManager, "android.support.v7.preference.PreferenceFragment.DIALOG");
+            dialogFragment.show(this.fragmentManager!!, "android.support.v7.preference.PreferenceFragment.DIALOG");
         } else {
             // Dialog creation could not be handled here. Try with the super method.
             super.onDisplayPreferenceDialog(preference);
         }
+
     }
 }

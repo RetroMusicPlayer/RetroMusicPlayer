@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -43,6 +44,16 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     private fun setUpViews() {
         fillViewsWithFileTags()
+        MaterialUtil.setTint(songTextContainer)
+        MaterialUtil.setTint(composerContainer, false)
+        MaterialUtil.setTint(albumTextContainer, false)
+        MaterialUtil.setTint(artistContainer, false)
+        MaterialUtil.setTint(albumArtistContainer, false)
+        MaterialUtil.setTint(yearContainer, false)
+        MaterialUtil.setTint(genreContainer, false)
+        MaterialUtil.setTint(trackNumberContainer, false)
+        MaterialUtil.setTint(lyricsContainer, false)
+
         albumText.addTextChangedListener(this)
         songText.addTextChangedListener(this)
         albumText.addTextChangedListener(this)

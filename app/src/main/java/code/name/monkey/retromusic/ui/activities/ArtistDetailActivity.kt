@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -89,10 +91,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
             run {
                 if (scrollY > oldScrollY) {
-                    actionShuffleAll!!.setShowTitle(false)
+                    actionShuffleAll.shrink(true)
                 }
                 if (scrollY < oldScrollY) {
-                    actionShuffleAll!!.setShowTitle(true)
+                    actionShuffleAll.extend(true)
                 }
             }
         }
@@ -294,7 +296,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        actionShuffleAll.setColor(textColor)
+        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(textColor)
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(textColor))).apply {
+            actionShuffleAll.setTextColor(this)
+            actionShuffleAll.iconTint = this
+        }
 
         findViewById<View>(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this))
     }

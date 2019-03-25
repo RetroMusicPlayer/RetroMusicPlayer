@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.fragments.settings
 
 import android.os.Bundle
 import android.view.View
+import androidx.preference.Preference
 
 import code.name.monkey.retromusic.R
 
@@ -22,7 +23,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preference = findPreference("last_added_interval")
+        val preference: Preference = findPreference("last_added_interval")!!
         setSummary(preference)
     }
 }

@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.ui.activities.tageditor
 import android.app.Activity
 import android.app.SearchManager
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -12,12 +13,15 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -32,6 +36,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var paletteColorPrimary: Int = 0
     private var isInNoImageMode: Boolean = false
     private var songPaths: List<String>? = null
+    lateinit var saveFab: ExtendedFloatingActionButton
 
     protected val show: MaterialDialog
         get() = MaterialDialog(this@AbsTagEditorActivity).show {
@@ -169,7 +174,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(contentViewLayout)
 
-
+        saveFab = findViewById(R.id.saveTags)
         getIntentExtras()
 
         songPaths = getSongPaths()
@@ -206,9 +211,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private fun startImagePicker() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(
-                Intent.createChooser(intent, getString(R.string.pick_from_local_storage)),
-                REQUEST_CODE_SELECT_IMAGE)
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE)
     }
 
     protected abstract fun loadCurrentImage()
@@ -220,8 +223,11 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     protected abstract fun deleteImage()
 
     private fun setUpFab() {
-        saveFab.setColor(ThemeStore.accentColor(this))
-        saveFab.setShowTitle(true)
+        saveFab.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            saveFab.setTextColor(this)
+            saveFab.iconTint = this
+        }
         saveFab.apply {
             scaleX = 0f
             scaleY = 0f

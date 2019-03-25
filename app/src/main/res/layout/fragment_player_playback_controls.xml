@@ -9,10 +9,10 @@
     tools:ignore="MissingPrefix">
 
     <RelativeLayout
-        android:paddingEnd="12dp"
-        android:paddingStart="12dp"
         android:layout_width="match_parent"
-        android:layout_height="28dp">
+        android:layout_height="28dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
         <TextView
             android:id="@+id/songCurrentProgress"
@@ -61,8 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -88,7 +87,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"

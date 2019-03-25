@@ -15,7 +15,6 @@
 package code.name.monkey.retromusic.dialogs
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -62,7 +61,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
 
     override fun onDestroyView() {
         super.onDestroyView()
-        disposable.clear()
+        disposable.dispose()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -72,9 +71,11 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        text!!.setTextColor(ThemeStore.textColorSecondary(context!!))
-        titleWelcome!!.setTextColor(ThemeStore.textColorPrimary(context!!))
-        titleWelcome!!.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
+        text.setTextColor(ThemeStore.textColorSecondary(context!!))
+        text.text = PreferenceUtil.getInstance().userBio
+        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
+        titleWelcome.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
+
         loadImageFromStorage()
 
         actionSettings.setOnClickListener(this)
@@ -99,9 +100,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
-            R.id.actionFolders -> {
-                mainActivity.setCurrentFragment(FoldersFragment.newInstance(context), true)
-            }
+            R.id.actionFolders -> mainActivity.setCurrentFragment(FoldersFragment.newInstance(context), true)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
             R.id.actionAbout -> NavigationUtil.goToAbout(mainActivity)
             R.id.actionSleepTimer -> if (fragmentManager != null) {

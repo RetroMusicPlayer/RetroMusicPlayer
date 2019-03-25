@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -89,6 +90,12 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     private fun setUpViews() {
         fillViewsWithFileTags()
+
+        MaterialUtil.setTint(yearContainer, false)
+        MaterialUtil.setTint(genreContainer, false)
+        MaterialUtil.setTint(albumTitleContainer, false)
+        MaterialUtil.setTint(albumArtistContainer, false)
+
         albumText.addTextChangedListener(this)
         albumArtistText.addTextChangedListener(this)
         genreTitle.addTextChangedListener(this)

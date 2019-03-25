@@ -4,14 +4,10 @@
     tools:context=".DrawerActivity">
 
     <item
-        android:id="@+id/action_shuffle_all"
-        android:icon="@drawable/ic_shuffle_white_24dp"
-        android:title="@string/action_shuffle_all"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_grid_size"
-        android:title="@string/action_grid_size">
+        android:icon="@drawable/ic_grid_size_white_24dp"
+        android:title="@string/action_grid_size"
+        app:showAsAction="ifRoom">
         <menu>
             <group
                 android:id="@+id/group_grid_size"
@@ -47,25 +43,9 @@
 
     <item
         android:id="@+id/action_sort_order"
-        android:title="@string/action_sort_order">
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/action_sort_order"
+        app:showAsAction="ifRoom">
         <menu></menu>
     </item>
-
-    <item
-        android:id="@+id/action_sleep_timer"
-        android:orderInCategory="98"
-        android:title="@string/action_sleep_timer"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_equalizer"
-        android:orderInCategory="99"
-        android:title="@string/equalizer"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
 </menu>

@@ -3,10 +3,8 @@ package code.name.monkey.retromusic.ui.fragments.settings
 import android.os.Build
 import android.os.Bundle
 import androidx.preference.TwoStatePreference
-
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 /**
@@ -15,7 +13,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 class NotificationSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
-        val classicNotification = findPreference("classic_notification") as TwoStatePreference
+        val classicNotification: TwoStatePreference = findPreference("classic_notification")!!
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             classicNotification.isVisible = false
         } else {

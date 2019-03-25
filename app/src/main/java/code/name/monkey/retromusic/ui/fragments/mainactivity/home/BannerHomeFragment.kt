@@ -31,6 +31,7 @@ import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -38,6 +39,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
     override fun showEmpty() {
@@ -166,8 +168,20 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         contentContainerView.setBackgroundColor(ThemeStore.primaryColor(context!!))
 
         setupToolbar()
+        homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
+
         homePresenter.subscribe()
 
+        checkPadding()
+    }
+
+    private fun checkPadding() {
+        val marginSpan = when {
+            MusicPlayerRemote.playingQueue.isEmpty() -> RetroUtil.convertDpToPixel(52f, context).toInt()
+            else -> RetroUtil.convertDpToPixel(0f, context).toInt()
+        }
+
+        (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
     }
 
     private fun setupToolbar() {
@@ -210,10 +224,22 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     }
 
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        checkPadding()
+    }
+
+    override fun onQueueChanged() {
+        super.onQueueChanged()
+        checkPadding()
+    }
+
+    private lateinit var homeAdapter: HomeAdapter
+
     override fun showData(list: ArrayList<Home>) {
         val finalList = list.sortedWith(compareBy { it.priority })
+        homeAdapter.swapData(finalList)
         recyclerView.apply {
-            val homeAdapter = HomeAdapter(mainActivity, finalList, displayMetrics)
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }

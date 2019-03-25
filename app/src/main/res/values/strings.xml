@@ -603,5 +603,8 @@
     <string name="next_song">Next Song</string>
     <string name="last_song">Last song</string>
     <string name="slide">Slide</string>
+    <string name="save">Save</string>
+    <string name="pick_image_intent_text">Pick image</string>
+    <string name="set_photo">Set a profile photo</string>
 
 </resources>

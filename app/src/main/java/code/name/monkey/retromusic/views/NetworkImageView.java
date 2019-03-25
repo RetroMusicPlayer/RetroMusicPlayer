@@ -18,6 +18,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.GlideApp;
 
@@ -26,26 +29,26 @@ import code.name.monkey.retromusic.glide.GlideApp;
  */
 public class NetworkImageView extends CircularImageView {
 
-    public NetworkImageView(Context context) {
+    public NetworkImageView(@NonNull Context context) {
         super(context);
         init(context, null);
     }
 
-    public NetworkImageView(Context context, AttributeSet attrs) {
+    public NetworkImageView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public NetworkImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NetworkImageView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public void setImageUrl(String imageUrl) {
+    public void setImageUrl(@NonNull String imageUrl) {
         setImageUrl(getContext(), imageUrl);
     }
 
-    public void setImageUrl(Context context, String imageUrl) {
+    public void setImageUrl(@NonNull Context context, @NonNull String imageUrl) {
         GlideApp.with(context)
                 .load(imageUrl)
                 .error(R.drawable.ic_person_flat)

@@ -45,7 +45,7 @@ class SleepTimerDialog : RoundedBottomSheetDialogFragment() {
     private var seekArcProgress: Int = 0
     private lateinit var timerUpdater: TimerUpdater
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         timerUpdater.cancel()
     }

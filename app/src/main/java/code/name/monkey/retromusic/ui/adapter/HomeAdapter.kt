@@ -31,7 +31,7 @@ import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class HomeAdapter(private val activity: AppCompatActivity, private val homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeAdapter(private val activity: AppCompatActivity, private var homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemViewType(position: Int): Int {
@@ -79,6 +79,11 @@ class HomeAdapter(private val activity: AppCompatActivity, private val homes: Li
 
     override fun getItemCount(): Int {
         return homes.size
+    }
+
+    fun swapData(finalList: List<Home>) {
+        homes = finalList
+        notifyDataSetChanged()
     }
 
     companion object {

@@ -16,14 +16,13 @@ open class AbsMusicServiceFragment : Fragment(), MusicServiceEventListener {
     var playerActivity: AbsMusicServiceActivity? = null
         private set
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             playerActivity = context as AbsMusicServiceActivity?
         } catch (e: ClassCastException) {
-            throw RuntimeException(context!!.javaClass.simpleName + " must be an instance of " + AbsMusicServiceActivity::class.java.simpleName)
+            throw RuntimeException(context.javaClass.simpleName + " must be an instance of " + AbsMusicServiceActivity::class.java.simpleName)
         }
-
     }
 
     override fun onDetach() {

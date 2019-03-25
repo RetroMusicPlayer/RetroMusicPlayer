@@ -5,6 +5,7 @@ import android.graphics.Color.BLUE
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.*
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
@@ -25,7 +26,7 @@ import com.afollestad.materialdialogs.color.colorChooser
 class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
-        val primaryColorPref = findPreference("primary_color") as ATEColorPreference
+        val primaryColorPref: ATEColorPreference = findPreference("primary_color")!!
         primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == code.name.monkey.retromusic.R.style.Theme_RetroMusic_Color
         val primaryColor = ThemeStore.primaryColor(activity!!)
         primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
@@ -49,7 +50,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
-        val generalTheme = findPreference("general_theme")
+        val generalTheme: Preference = findPreference("general_theme")!!
         setSummary(generalTheme)
         generalTheme.setOnPreferenceChangeListener { _, newValue ->
             val theme = newValue as String
@@ -85,7 +86,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
-        val accentColorPref = findPreference("accent_color") as ATEColorPreference
+        val accentColorPref: ATEColorPreference = findPreference("accent_color")!!
         val accentColor = ThemeStore.accentColor(activity!!)
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
@@ -103,7 +104,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             return@setOnPreferenceClickListener true
         }
 
-        val colorAppShortcuts = findPreference("should_color_app_shortcuts") as TwoStatePreference
+        val colorAppShortcuts: TwoStatePreference = findPreference("should_color_app_shortcuts")!!
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
         } else {

@@ -50,7 +50,7 @@ class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         val playlists = PlaylistLoader.getAllPlaylists(activity!!).blockingFirst()
-        val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog)
+        val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog!!)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             itemAnimator = DefaultItemAnimator()

@@ -58,7 +58,7 @@ class ColorFragment : AbsPlayerFragment() {
 
     private var valueAnimator: ValueAnimator? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
-    private var lyrics: Lyrics? = null
+    private var lyricsColor: Lyrics? = null
 
     override fun onShow() {
         playbackControlsFragment!!.show()
@@ -250,7 +250,7 @@ class ColorFragment : AbsPlayerFragment() {
         updateLyricsAsyncTask = object : AsyncTask<Void?, Void?, Lyrics?>() {
             override fun onPreExecute() {
                 super.onPreExecute()
-                lyrics = null
+                lyricsColor = null
                 playerToolbar.menu.removeItem(R.id.action_show_lyrics)
             }
 
@@ -262,11 +262,11 @@ class ColorFragment : AbsPlayerFragment() {
             }
 
             override fun onPostExecute(l: Lyrics?) {
-                lyrics = l
-                if (lyrics == null) {
+                lyricsColor = l
+                if (lyricsColor == null) {
                     lyricsView.setText(R.string.no_lyrics_found)
                 } else {
-                    lyricsView.text = lyrics!!.text
+                    lyricsView.text = lyricsColor!!.text
                 }
             }
 

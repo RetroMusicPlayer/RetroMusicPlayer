@@ -113,7 +113,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
     private lateinit var wrappedAdapter: RecyclerView.Adapter<*>
     private lateinit var recyclerViewDragDropManager: RecyclerViewDragDropManager
 
-    private var lyrics: Lyrics? = null
+    private var lyricsClassic: Lyrics? = null
 
     private lateinit var impl: Impl
 
@@ -335,7 +335,7 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
                             return true
                         }
                         code.name.monkey.retromusic.R.id.action_share -> {
-                            SongShareDialog.create(song).show(fragment.fragmentManager, "SONG_SHARE_DIALOG")
+                            SongShareDialog.create(song).show(fragment.fragmentManager!!, "SONG_SHARE_DIALOG")
                             return true
                         }
                     }

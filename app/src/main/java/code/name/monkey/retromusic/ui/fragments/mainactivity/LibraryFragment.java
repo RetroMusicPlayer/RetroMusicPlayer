@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.fragments.mainactivity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,17 +34,12 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
-import code.name.monkey.retromusic.dialogs.SleepTimerDialog;
-import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
-import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.ui.activities.SettingsActivity;
 import code.name.monkey.retromusic.ui.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.ui.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.Compressor;
-import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
@@ -242,7 +236,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).getSubMenu());
 
         } else {
-            menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title);
+            menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title).setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.removeItem(R.id.action_grid_size);
         }
         Activity activity = getActivity();
@@ -387,22 +381,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
                 return true;
-            case R.id.action_shuffle_all:
-                MusicPlayerRemote.INSTANCE.openAndShuffleQueue(SongLoader.INSTANCE.getAllSongs(getContext())
-                        .blockingFirst(), true);
-                return true;
-
-            case R.id.action_equalizer:
-                NavigationUtil.openEqualizer(getActivity());
-                return true;
-            case R.id.action_sleep_timer:
-                if (getFragmentManager() != null) {
-                    new SleepTimerDialog().show(getFragmentManager(), TAG);
-                }
-                return true;
-            case R.id.action_settings:
-                startActivity(new Intent(getContext(), SettingsActivity.class));
-                break;
         }
         return super.onOptionsItemSelected(item);
     }

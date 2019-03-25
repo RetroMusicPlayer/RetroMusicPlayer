@@ -21,15 +21,16 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.io.File;
 import java.util.Objects;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.SortOrder;
@@ -38,8 +39,8 @@ import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
-import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
+import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 import code.name.monkey.retromusic.ui.activities.MainActivity;
 import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
@@ -61,6 +62,7 @@ public final class PreferenceUtil {
     public static final String GENERAL_THEME = "general_theme";
     public static final String CIRCULAR_ALBUM_ART = "circular_album_art";
     public static final String USER_NAME = "user_name";
+    public static final String USER_BIO = "user_bio";
     public static final String TOGGLE_FULL_SCREEN = "toggle_full_screen";
     public static final String TOGGLE_VOLUME = "toggle_volume";
     public static final String TOGGLE_TAB_TITLES = "toggle_tab_titles";
@@ -152,6 +154,14 @@ public final class PreferenceUtil {
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public String getUserBio() {
+        return mPreferences.getString(USER_BIO, "");
+    }
+
+    public void setUserBio(String bio) {
+        mPreferences.edit().putString(USER_BIO, bio).apply();
     }
 
     public int getFilterLength() {

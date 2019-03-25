@@ -17,9 +17,7 @@ package code.name.monkey.retromusic.model.lyrics;
 
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.model.Song;
-
 
 public class Lyrics {
     private static final ArrayList<Class<? extends Lyrics>> FORMATS = new ArrayList<>();
@@ -28,16 +26,12 @@ public class Lyrics {
         Lyrics.FORMATS.add(SynchronizedLyricsLRC.class);
     }
 
-    @NonNull
     public Song song;
-    @NonNull
     public String data;
-
     protected boolean parsed = false;
     protected boolean valid = false;
 
-    @NonNull
-    public static Lyrics parse(@NonNull Song song, @NonNull String data) {
+    public static Lyrics parse(Song song, String data) {
         for (Class<? extends Lyrics> format : Lyrics.FORMATS) {
             try {
                 Lyrics lyrics = format.newInstance().setData(song, data);
@@ -49,7 +43,7 @@ public class Lyrics {
         return new Lyrics().setData(song, data).parse(false);
     }
 
-    public static boolean isSynchronized(@NonNull String data) {
+    public static boolean isSynchronized(String data) {
         for (Class<? extends Lyrics> format : Lyrics.FORMATS) {
             try {
                 Lyrics lyrics = format.newInstance().setData(null, data);
@@ -61,13 +55,12 @@ public class Lyrics {
         return false;
     }
 
-    public Lyrics setData(@NonNull Song song, @NonNull String data) {
+    public Lyrics setData(Song song, String data) {
         this.song = song;
         this.data = data;
         return this;
     }
 
-    @NonNull
     public Lyrics parse(boolean check) {
         this.valid = true;
         this.parsed = true;
@@ -83,7 +76,6 @@ public class Lyrics {
         return this.valid;
     }
 
-    @NonNull
     public String getText() {
         return this.data.trim().replaceAll("(\r?\n){3,}", "\r\n\r\n");
     }

@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -59,7 +61,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
 
         setUpToolBar()
         setupRecyclerView()
-        actionShuffle.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(songAdapter!!.dataSet, true) }
+        actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(songAdapter!!.dataSet, true) }
     }
 
     private fun setUpToolBar() {
@@ -74,7 +76,11 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
             setSupportActionBar(this)
             ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@GenreDetailsActivity))
         }
-        actionShuffle.setColor(ThemeStore.accentColor(this@GenreDetailsActivity))
+        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            actionShuffleAll.setTextColor(this)
+            actionShuffleAll.iconTint = this
+        }
         title = null
     }
 
@@ -128,9 +134,9 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    actionShuffle.setShowTitle(false)
+                    actionShuffleAll.shrink(true)
                 } else if (dy < 0) {
-                    actionShuffle.setShowTitle(true)
+                    actionShuffleAll.extend(true)
                 }
             }
         })

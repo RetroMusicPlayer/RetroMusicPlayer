@@ -114,5 +114,42 @@
                     app:srcCompat="@drawable/default_artist_art" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/player_lyrics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:clipToPadding="false"
+            android:elevation="20dp"
+            android:padding="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/player_lyrics_line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:shadowColor="@color/md_black_1000"
+                android:shadowRadius="4"
+                android:textAlignment="center"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/player_lyrics_line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:shadowColor="@color/md_black_1000"
+                android:shadowRadius="4"
+                android:textAlignment="center"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22sp" />
+
+        </FrameLayout>
+
     </LinearLayout>
 </FrameLayout>

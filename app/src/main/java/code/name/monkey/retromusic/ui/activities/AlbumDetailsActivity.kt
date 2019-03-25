@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.activities
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Slide
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -91,10 +93,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
             run {
                 if (scrollY > oldScrollY) {
-                    actionShuffleAll!!.setShowTitle(false)
+                    actionShuffleAll.shrink(true)
                 }
                 if (scrollY < oldScrollY) {
-                    actionShuffleAll!!.setShowTitle(true)
+                    actionShuffleAll.extend(true)
                 }
             }
         }
@@ -109,7 +111,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     }
 
     private fun setupRecyclerView() {
-        simpleSongAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song,false)
+        simpleSongAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song, false)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@AlbumDetailsActivity)
             itemAnimator = DefaultItemAnimator()
@@ -255,7 +257,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         val themeColor = if (PreferenceUtil.getInstance().adaptiveColor) color else ThemeStore.accentColor(this)
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
-        actionShuffleAll.setColor(themeColor)
+
+        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(themeColor)
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(themeColor))).apply {
+            actionShuffleAll.setTextColor(this)
+            actionShuffleAll.iconTint = this
+        }
     }
 
 

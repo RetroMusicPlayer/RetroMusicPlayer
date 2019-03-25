@@ -18,10 +18,11 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.util.AttributeSet;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.google.android.material.textfield.TextInputLayout;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 
 /**
@@ -38,14 +39,9 @@ public class ATETextInputLayout extends TextInputLayout {
 
     public ATETextInputLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        setBoxBackgroundMode(BOX_BACKGROUND_OUTLINE);
-        setBoxStrokeColor(ThemeStore.Companion.textColorSecondary(context));
-        final float scale = context.getResources().getDisplayMetrics().density;
-        int border = (int) (8 * scale + 0.5f);
-        setBoxCornerRadii(border, border, border, border);
+        setBoxBackgroundMode(BOX_BACKGROUND_FILLED);
         setHintAnimationEnabled(true);
         setHintEnabled(true);
-
+        setBackgroundTintList(ColorStateList.valueOf(ThemeStore.Companion.accentColor(context)));
     }
 }

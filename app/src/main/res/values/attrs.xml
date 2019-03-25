@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CollapsingFAB">
-        <attr name="shuffleBackgroundColor" format="color" />
-        <attr name="showTitle" format="boolean" />
-        <attr name="setIcon" format="reference" />
-        <attr name="setText" format="string" />
-    </declare-styleable>
+
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
     <attr name="rectSelectorStrong" format="reference" />
@@ -57,5 +52,10 @@
     <declare-styleable name="ColorIconsImageView">
         <attr name="iconBackgroundColor" format="color" />
         <attr name="icon" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="OptionMenuItemView">
+        <attr name="optionTitle" format="reference" />
+        <attr name="optionIcon" format="reference" />
     </declare-styleable>
 </resources>

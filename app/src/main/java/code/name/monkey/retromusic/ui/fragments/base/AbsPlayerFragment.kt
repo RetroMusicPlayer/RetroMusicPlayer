@@ -8,39 +8,38 @@ import android.media.MediaMetadataRetriever
 import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
-
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.*
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.ui.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.ui.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import code.name.monkey.retromusic.views.FitSystemWindowsLayout
-
+import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
     var callbacks: Callbacks? = null
         private set
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
+    private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
+    private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
-
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             callbacks = context as Callbacks?
         } catch (e: ClassCastException) {
-            throw RuntimeException(context!!.javaClass.simpleName + " must implement " + Callbacks::class.java.simpleName)
+            throw RuntimeException(context.javaClass.simpleName + " must implement " + Callbacks::class.java.simpleName)
         }
 
     }
@@ -158,15 +157,20 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
 
     override fun onServiceConnected() {
         updateIsFavorite()
+        updateLyrics()
     }
 
     override fun onPlayingMetaChanged() {
         updateIsFavorite()
+        updateLyrics()
     }
 
     override fun onDestroyView() {
         if (updateIsFavoriteTask != null && !updateIsFavoriteTask!!.isCancelled) {
             updateIsFavoriteTask!!.cancel(true)
+        }
+        if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask!!.isCancelled) {
+            updateLyricsAsyncTask!!.cancel(true)
         }
         super.onDestroyView()
     }
@@ -202,16 +206,58 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         }.execute(MusicPlayerRemote.currentSong)
     }
 
+    @SuppressLint("StaticFieldLeak")
+    private fun updateLyrics() {
+        if (updateLyricsAsyncTask != null) updateLyricsAsyncTask!!.cancel(false)
+
+        updateLyricsAsyncTask = object : AsyncTask<Song, Void, Lyrics>() {
+            override fun onPreExecute() {
+                super.onPreExecute()
+                setLyrics(null)
+            }
+
+            override fun doInBackground(vararg params: Song): Lyrics? {
+                try {
+                    var data: String? = LyricUtil.getStringFromFile(params[0].title, params[0].artistName)
+                    return if (TextUtils.isEmpty(data)) {
+                        data = MusicUtil.getLyrics(params[0])
+                        return if (TextUtils.isEmpty(data)) {
+                            null
+                        } else {
+                            Lyrics.parse(params[0], data)
+                        }
+                    } else Lyrics.parse(params[0], data!!)
+                } catch (err: FileNotFoundException) {
+                    return null
+                }
+            }
+
+            override fun onPostExecute(l: Lyrics?) {
+                setLyrics(l)
+            }
+
+            override fun onCancelled(s: Lyrics?) {
+                onPostExecute(null)
+            }
+        }.execute(MusicPlayerRemote.currentSong)
+    }
+
+    open fun setLyrics(l: Lyrics?) {
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setBackgroundColor(ThemeStore.primaryColor(activity!!))
         if (PreferenceUtil.getInstance().fullScreenMode && view.findViewById<View>(R.id.status_bar) != null) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
+        playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playerAlbumCoverFragment?.setCallbacks(this)
     }
 
     fun setSafeArea(safeArea: View) {
-        val layout = safeArea.findViewById<FitSystemWindowsLayout>(code.name.monkey.retromusic.R.id.safeArea)
+        val layout = safeArea.findViewById<FitSystemWindowsLayout>(R.id.safeArea)
         if (layout != null) {
             layout.isFit = !PreferenceUtil.getInstance().fullScreenMode
         }
@@ -224,6 +270,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
 
     companion object {
         val TAG: String = AbsPlayerFragment::class.java.simpleName
+        const val VISIBILITY_ANIM_DURATION: Long = 300
     }
 
     protected fun getUpNextAndQueueTime(): String {

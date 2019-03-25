@@ -72,10 +72,9 @@ class GenreFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLa
 
     }
 
-
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu!!.removeItem(R.id.action_sort_order)
+        menu.removeItem(R.id.action_sort_order)
         menu.removeItem(R.id.action_grid_size)
         menu.removeItem(R.id.action_new_playlist)
     }

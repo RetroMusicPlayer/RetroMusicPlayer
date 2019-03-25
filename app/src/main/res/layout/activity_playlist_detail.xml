@@ -91,14 +91,13 @@
                 tools:visibility="visible" />
         </LinearLayout>
 
-        <code.name.monkey.retromusic.views.CollapsingFAB
-            android:id="@+id/actionShuffle"
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/actionShuffleAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:setIcon="@drawable/ic_shuffle_white_24dp"
-            app:setText="@string/action_shuffle_all"
-            app:showTitle="true" />
-
+            android:layout_margin="16dp"
+            android:text="@string/action_shuffle_all"
+            app:icon="@drawable/ic_clear_all_black_24dp" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

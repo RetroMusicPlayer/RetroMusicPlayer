@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/social" />
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+            style="@style/SubTitleTextAppearance"
+            android:text="@string/social" />
 
         <LinearLayout
             android:id="@+id/pinterestLink"
@@ -45,16 +46,16 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/pinterest_page"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:text="@string/pinterest_page" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:text="@string/pinterest_page_summary" />
             </LinearLayout>
         </LinearLayout>
@@ -88,16 +89,16 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/instagram_page"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:text="@string/instagram_page" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:text="@string/instagram_page_summary" />
             </LinearLayout>
         </LinearLayout>
@@ -130,16 +131,16 @@
                 android:paddingBottom="8dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/twitter_page"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:text="@string/twitter_page" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:text="@string/twitter_page_summary" />
             </LinearLayout>
         </LinearLayout>
@@ -172,15 +173,15 @@
                 android:paddingBottom="8dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/discord_page"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+                    android:text="@string/discord_page" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:alpha="0.85"
                     android:text="@string/discord_summary" />
             </LinearLayout>
@@ -214,15 +215,15 @@
                 android:paddingBottom="8dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/telegram_group"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:text="@string/telegram_group" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:alpha="0.85"
                     android:text="@string/telegram_group_summary" />
             </LinearLayout>
@@ -258,19 +259,18 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/google_plus"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                    android:text="@string/google_plus" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:alpha="0.85"
                     android:text="@string/google_plus_community" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>

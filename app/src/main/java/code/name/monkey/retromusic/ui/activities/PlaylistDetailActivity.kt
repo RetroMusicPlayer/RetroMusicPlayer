@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -31,7 +33,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-
+import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import java.util.*
 
@@ -102,13 +104,13 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    actionShuffle.setShowTitle(false)
+                    actionShuffleAll.shrink(true)
                 } else if (dy < 0) {
-                    actionShuffle.setShowTitle(true)
+                    actionShuffleAll.extend(true)
                 }
             }
         })
-        actionShuffle.setOnClickListener {
+        actionShuffleAll.setOnClickListener {
             if (adapter.dataSet.isEmpty()) {
                 return@setOnClickListener
             }
@@ -124,7 +126,12 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     private fun setUpToolBar() {
         bannerTitle.text = playlist!!.name
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
-        actionShuffle.setColor(ThemeStore.accentColor(this))
+
+        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            actionShuffleAll.setTextColor(this)
+            actionShuffleAll.iconTint = this
+        }
 
         val primaryColor = ThemeStore.primaryColor(this)
         toolbar!!.apply {

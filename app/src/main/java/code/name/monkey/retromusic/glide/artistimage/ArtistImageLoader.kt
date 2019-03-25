@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
 import android.text.TextUtils
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.LastFMUtil
@@ -58,7 +59,7 @@ class ArtistImageFetcher(private val context: Context, private val lastFMRestCli
 
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
         try {
-            if (!MusicUtil.isArtistNameUnknown(model.artistName) && RetroUtil.isAllowedToDownloadMetadata(context)) {
+            if (!MusicUtil.isArtistNameUnknown(model.artistName) && RetroUtil.isAllowedToDownloadMetadata(context) ) {
                 call = lastFMRestClient.apiService.getArtistInfo(model.artistName, null, if (model.skipOkHttpCache) "no-cache" else null)
                 call!!.enqueue(object : Callback<LastFmArtist> {
                     override fun onResponse(call: Call<LastFmArtist>, response: Response<LastFmArtist>) {

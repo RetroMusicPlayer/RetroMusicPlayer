@@ -69,21 +69,12 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         lastColor = color
         callbacks!!.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
 
         if (PreferenceUtil.getInstance().adaptiveColor) {
             colorize(color)
         }
 
-
-        val display = activity?.windowManager?.defaultDisplay
-        val outMetrics = DisplayMetrics()
-        display?.getMetrics(outMetrics)
-
-        val density = resources.displayMetrics.density
-        val dpWidth = outMetrics.widthPixels / density
-
-        playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()
     }
 
     private fun getCutOff(): Int {
@@ -105,7 +96,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_player, container, false)
+        return inflater.inflate(R.layout.fragment_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -113,12 +104,22 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         setUpSubFragments()
         setUpPlayerToolbar()
         snowfall.visibility = if (PreferenceUtil.getInstance().isSnowFall) View.VISIBLE else View.GONE
+
+
+        val display = activity?.windowManager?.defaultDisplay
+        val outMetrics = DisplayMetrics()
+        display?.getMetrics(outMetrics)
+
+        val density = resources.displayMetrics.density
+        val dpWidth = outMetrics.widthPixels / density
+
+        playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()
     }
 
+
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(code.name.monkey.retromusic.R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(code.name.monkey.retromusic.R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
-        playerAlbumCoverFragment.setCallbacks(this)
+        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
+
     }
 
     private fun setUpPlayerToolbar() {
@@ -126,7 +127,7 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         playerToolbar.setNavigationOnClickListener { activity!!.onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, code.name.monkey.retromusic.R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
     }
 
     override fun onServiceConnected() {
@@ -143,7 +144,6 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
     }
 
     companion object {
-
 
         fun newInstance(): PlayerFragment {
             return PlayerFragment()

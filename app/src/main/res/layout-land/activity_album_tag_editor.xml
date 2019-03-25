@@ -23,7 +23,6 @@
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             tools:ignore="UnusedAttribute">
 
-
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/bannerTitle"
                 style="@style/BigTitleTextAppearance"
@@ -36,13 +35,10 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <FrameLayout
+            <code.name.monkey.retromusic.views.HeightFitSquareLayout
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5">
+                android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/editorImage"
@@ -60,7 +56,7 @@
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
-            </FrameLayout>
+            </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/content"
@@ -76,21 +72,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="16dp">
 
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/albumTitleContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:boxBackgroundMode="outline"
-                        app:boxCollapsedPaddingTop="16dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="?android:attr/textColorPrimary"
-                        app:boxStrokeWidth="1dp"
+                        app:boxBackgroundMode="filled"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -100,9 +89,7 @@
                             android:background="@null"
                             android:hint="@string/album"
                             android:inputType="text|textCapWords"
-                            android:maxLines="1"
-                            android:padding="16dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -110,14 +97,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxBackgroundMode="outline"
-                        app:boxCollapsedPaddingTop="16dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="?android:attr/textColorPrimary"
-                        app:boxStrokeWidth="1dp"
+                        app:boxBackgroundMode="filled"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -127,9 +107,7 @@
                             android:background="@null"
                             android:hint="@string/album_artist"
                             android:inputType="text|textCapWords"
-                            android:maxLines="1"
-                            android:padding="16dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -137,14 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxBackgroundMode="outline"
-                        app:boxCollapsedPaddingTop="16dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="?android:attr/textColorPrimary"
-                        app:boxStrokeWidth="1dp"
+                        app:boxBackgroundMode="filled"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -154,9 +125,7 @@
                             android:background="@null"
                             android:hint="@string/genre"
                             android:inputType="text|textCapWords"
-                            android:maxLines="1"
-                            android:padding="16dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -164,14 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:boxBackgroundMode="outline"
-                        app:boxCollapsedPaddingTop="16dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeColor="?android:attr/textColorPrimary"
-                        app:boxStrokeWidth="1dp"
+                        app:boxBackgroundMode="filled"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -181,9 +143,7 @@
                             android:background="@null"
                             android:hint="@string/year"
                             android:inputType="text|number"
-                            android:maxLines="1"
-                            android:padding="16dp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                            android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -191,13 +151,14 @@
         </LinearLayout>
     </LinearLayout>
 
-    <code.name.monkey.retromusic.views.CollapsingFAB
-        android:id="@+id/saveFab"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/saveTags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:setIcon="@drawable/ic_save_white_24dp"
-        app:setText="Save"
-        app:showTitle="true"
-        app:shuffleBackgroundColor="@color/md_grey_200" />
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="@string/save"
+        app:icon="@drawable/ic_save_white_24dp"
+        app:iconGravity="textStart" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

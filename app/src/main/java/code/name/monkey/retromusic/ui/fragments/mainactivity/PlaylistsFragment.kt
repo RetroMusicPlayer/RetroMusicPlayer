@@ -77,11 +77,12 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
         adapter!!.swapDataSet(list)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu!!.removeItem(R.id.action_shuffle_all)
-        menu.removeItem(R.id.action_sort_order)
-        menu.removeItem(R.id.action_grid_size)
+        menu.apply {
+            removeItem(R.id.action_sort_order)
+            removeItem(R.id.action_grid_size)
+        }
     }
 
     companion object {
