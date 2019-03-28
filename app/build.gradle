@@ -155,7 +155,7 @@ dependencies {
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     /*Backend all*/
-    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
+    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.3-kmod'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
     implementation 'org.nanohttpd:nanohttpd:2.3.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -166,6 +166,4 @@ dependencies {
     implementation project(':appthemehelper')
     implementation project(':library')
 }
-repositories {
-    mavenCentral()
-}
+
