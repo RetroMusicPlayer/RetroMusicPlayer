@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -101,12 +102,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                app:boxBackgroundMode="filled"
-                app:hintEnabled="true">
+                app:hintAnimationEnabled="true">
 
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -115,19 +116,20 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="@string/my_name"
+                    tools:text="@string/song"
                     android:inputType="textPersonName|textCapWords|text"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bioContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:boxBackgroundMode="filled"
-                app:hintEnabled="true">
+                app:hintAnimationEnabled="true">
 
 
                 <com.google.android.material.textfield.TextInputEditText

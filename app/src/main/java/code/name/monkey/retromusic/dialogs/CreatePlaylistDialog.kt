@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.dialogs
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,28 +21,26 @@ import android.view.View
 import android.view.ViewGroup
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
-
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_playlist.*
 
-import java.util.*
 
 class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         return inflater.inflate(R.layout.dialog_playlist, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val accentColor = ThemeStore.accentColor(Objects.requireNonNull<Context>(context))
 
-        val songs = arguments!!.getParcelableArrayList<Song>("songs")
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+
+        val accentColor = ThemeStore.accentColor(context!!)
 
         MaterialUtil.setTint(actionCreate, true)
         MaterialUtil.setTint(actionCancel, false)
@@ -51,8 +48,9 @@ class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
         actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
         actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
 
+
+        val songs = arguments!!.getParcelableArrayList<Song>("songs")
 
         actionCancel.setOnClickListener { dismiss() }
         actionCreate.setOnClickListener {
@@ -60,8 +58,7 @@ class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
                 return@setOnClickListener
             }
             if (!actionNewPlaylist!!.text!!.toString().trim { it <= ' ' }.isEmpty()) {
-                val playlistId = PlaylistsUtil
-                        .createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
+                val playlistId = PlaylistsUtil.createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
                 if (playlistId != -1 && activity != null) {
                     if (songs != null) {
                         PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)

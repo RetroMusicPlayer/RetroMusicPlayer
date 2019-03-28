@@ -7,38 +7,48 @@
     android:paddingBottom="16dp">
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-        android:id="@+id/dialogTitle"
+        android:id="@+id/bannerTitle"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="@string/remove_song_from_playlist_title" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/actionDelete"
-        style="@style/Widget.MaterialComponents.Button"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="start|center_vertical"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:text="@string/remove_action"
-        android:textAllCaps="false" />
+        android:gravity="end"
+        android:orientation="horizontal">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/actionCancel"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="start|center_vertical"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:text="@android:string/cancel"
-        android:textAllCaps="false"
-        app:strokeWidth="2dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionCancel"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="12dp"
+            android:text="@android:string/cancel"
+            android:textAllCaps="false"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center_vertical"
+            android:paddingStart="24dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="12dp"
+            android:text="@string/remove_action"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

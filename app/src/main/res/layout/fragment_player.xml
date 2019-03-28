@@ -19,7 +19,7 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.StatusBarMarginFrameLayout
+    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
         android:id="@+id/safeArea"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,6 +30,13 @@
             android:orientation="vertical">
 
             <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/status_bar" />
+            </FrameLayout>
+
+            <code.name.monkey.retromusic.views.WidthFitSquareLayout
                 android:id="@+id/playerAlbumCoverContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +48,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_album_cover" />
-            </FrameLayout>
+            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -69,5 +76,5 @@
                     app:navigationIcon="@drawable/ic_close_white_24dp" />
             </FrameLayout>
         </LinearLayout>
-    </code.name.monkey.retromusic.views.StatusBarMarginFrameLayout>
+    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
 </FrameLayout>

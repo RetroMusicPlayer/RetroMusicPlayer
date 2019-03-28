@@ -48,8 +48,8 @@ class DeletePlaylistDialog : RoundedBottomSheetDialogFragment() {
         } else {
             Html.fromHtml(getString(R.string.delete_playlist_x, playlists[0].name))
         }
-        dialogTitle.text = content
-        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        bannerTitle.text = content
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
 
         actionDelete.apply {
             setText(R.string.action_delete)

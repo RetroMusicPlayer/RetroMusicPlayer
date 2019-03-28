@@ -6,15 +6,8 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <code.name.monkey.retromusic.views.LyricView
+    <com.lauzy.freedom.library.LrcView
         android:id="@+id/lyricsView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:fadeInFadeOut="true"
-        app:highlightColor="@color/md_white_1000"
-        app:hint="No Lyrics"
-        app:hintColor="@color/md_grey_400"
-        app:lineSpace="15dp"
-        app:textAlign="left"
-        app:textSize="18sp" />
+        android:layout_height="match_parent" />
 </LinearLayout>

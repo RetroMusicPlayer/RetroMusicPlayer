@@ -27,35 +27,33 @@ import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_remove_from_playlist.*
+import kotlinx.android.synthetic.main.dialog_delete.*
+
 
 class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_remove_from_playlist, container, false)
+        return inflater.inflate(R.layout.dialog_delete, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val songs = arguments!!.getParcelableArrayList<Song>("songs")
-        val title: Int
         val content: CharSequence
         if (songs!!.size > 1) {
-            title = R.string.remove_songs_from_playlist_title
             content = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(getString(R.string.remove_x_songs_from_playlist, songs.size), Html.FROM_HTML_MODE_LEGACY)
             } else {
                 Html.fromHtml(getString(R.string.remove_x_songs_from_playlist, songs.size))
             }
         } else {
-            title = R.string.remove_song_from_playlist_title
             content = Html.fromHtml(getString(R.string.remove_song_x_from_playlist, songs[0].title))
         }
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         bannerTitle.text = content;
         actionDelete.apply {
-            setText(title)
+            setIconResource(R.drawable.ic_delete_white_24dp)
+            setText(R.string.remove_action)
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener {
                 val playlistSongs = ArrayList<PlaylistSong>()
@@ -68,6 +66,7 @@ class RemoveFromPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
 
         actionCancel.apply {
+            setIconResource(R.drawable.ic_close_white_24dp)
             setTextColor(ThemeStore.textColorSecondary(context))
             setOnClickListener { dismiss() }
             MaterialUtil.setTint(this, false)

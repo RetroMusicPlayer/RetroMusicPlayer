@@ -219,19 +219,20 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                             })
                     return@map it.albums!!
                 }
-
+                .map { it.filter { albumSearch -> albumSearch.id != album.id } }
                 .subscribe {
-
-                    it.remove(album)
-                    if (!it.isEmpty()) {
-                        moreTitle.visibility = View.VISIBLE
-                        moreRecyclerView.visibility = View.VISIBLE
-                    } else {
+                    for (albumFinal in it) {
+                        if (albumFinal.id == album.id)
+                            println("$albumFinal -> $album")
+                    }
+                    if (it.isEmpty()) {
                         return@subscribe
                     }
+                    moreTitle.visibility = View.VISIBLE
+                    moreRecyclerView.visibility = View.VISIBLE
                     moreTitle.text = String.format("More from %s", album.artistName)
 
-                    val albumAdapter = HorizontalAlbumAdapter(this, it, false, null)
+                    val albumAdapter = HorizontalAlbumAdapter(this, it as ArrayList<Album>, false, null)
                     moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
                     moreRecyclerView.adapter = albumAdapter
 

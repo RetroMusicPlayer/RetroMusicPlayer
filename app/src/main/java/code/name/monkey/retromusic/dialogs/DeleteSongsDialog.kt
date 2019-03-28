@@ -34,7 +34,7 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
         //noinspection unchecked,ConstantConditions
         val songs = arguments!!.getParcelableArrayList<Song>("songs")
         val content: CharSequence
@@ -44,7 +44,7 @@ class DeleteSongsDialog : RoundedBottomSheetDialogFragment() {
             } else {
                 getString(R.string.delete_song_x, songs[0].title)
             }
-            dialogTitle.text = Html.fromHtml(content)
+            bannerTitle.text = Html.fromHtml(content)
         }
         actionDelete.apply {
             setOnClickListener {

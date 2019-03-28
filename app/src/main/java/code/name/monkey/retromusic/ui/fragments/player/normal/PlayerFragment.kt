@@ -106,14 +106,14 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         snowfall.visibility = if (PreferenceUtil.getInstance().isSnowFall) View.VISIBLE else View.GONE
 
 
-        val display = activity?.windowManager?.defaultDisplay
-        val outMetrics = DisplayMetrics()
-        display?.getMetrics(outMetrics)
+        //val display = activity?.windowManager?.defaultDisplay
+        //val outMetrics = DisplayMetrics()
+        //display?.getMetrics(outMetrics)
 
-        val density = resources.displayMetrics.density
-        val dpWidth = outMetrics.widthPixels / density
+        //val density = resources.displayMetrics.density
+        //val dpWidth = outMetrics.widthPixels / density
 
-        playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()
+        //playerAlbumCoverContainer?.layoutParams?.height = RetroUtil.convertDpToPixel((dpWidth - getCutOff()), context!!).toInt()
     }
 
 

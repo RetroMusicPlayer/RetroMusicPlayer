@@ -2,6 +2,7 @@ package code.name.monkey.appthemehelper.util
 
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -9,6 +10,7 @@ import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
+
 
 object MaterialUtil {
 
@@ -39,14 +41,19 @@ object MaterialUtil {
         val colorState = ColorStateList.valueOf(accentColor)
 
         if (background) {
-            //textInputLayout.backgroundTintList = colorState
+            textInputLayout.backgroundTintList = colorState
             textInputLayout.defaultHintTextColor = colorState
         } else {
             textInputLayout.boxStrokeColor = accentColor
             textInputLayout.defaultHintTextColor = colorState
             textInputLayout.isHintAnimationEnabled = true
+
+
+
         }
     }
+
+
 
     private fun setCursorPointerColor(view: EditText, @ColorInt color: Int) {
         try {

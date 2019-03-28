@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.ui.activities
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.AsyncTask
 import android.os.Bundle
 import android.text.InputType
@@ -12,6 +13,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -28,6 +31,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.lauzy.freedom.library.LrcHelper
+import com.lauzy.freedom.library.LrcView
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
 import kotlinx.android.synthetic.main.fragment_synced.*
@@ -37,15 +42,22 @@ import java.util.*
 
 class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
     override fun onPageScrollStateChanged(state: Int) {
-
+        when (state) {
+            ViewPager.SCROLL_STATE_IDLE ->
+                fab.show(true)
+            ViewPager.SCROLL_STATE_DRAGGING,
+            ViewPager.SCROLL_STATE_SETTLING ->
+                fab.hide(true)
+        }
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
     }
 
     override fun onPageSelected(position: Int) {
         PreferenceUtil.getInstance().lyricsOptions = position
+        if (position == 0) fab.text = "Sync lyrics"
+        else if (position == 1) fab.text = "Lyrics"
     }
 
     override fun onClick(v: View?) {
@@ -83,7 +95,11 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
 
-        TintHelper.setTintAuto(fab, ThemeStore.accentColor(this), true)
+        fab.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            fab.setTextColor(this)
+            fab.iconTint = this
+        }
         setupWakelock()
 
         viewPager.apply {
@@ -258,8 +274,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
                         offlineLyrics?.setText(R.string.no_lyrics_found)
                         return
                     }
-                    (activity as LyricsActivity).lyricsString = l.data
-                    offlineLyrics?.text = l.data
+                    (activity as LyricsActivity).lyricsString = l.text
+                    offlineLyrics?.text = l.text
                 }
 
                 override fun onCancelled(s: Lyrics?) {
@@ -302,11 +318,14 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         private fun setupLyricsView() {
             lyricsView.apply {
-                setOnPlayerClickListener { progress, _ -> MusicPlayerRemote.seekTo(progress.toInt()) }
-                setDefaultColor(ContextCompat.getColor(context, R.color.md_grey_400))
-                setHintColor(ThemeStore.textColorPrimary(context))
-                setHighLightColor(ThemeStore.textColorPrimary(context))
-                setTextSize(RetroUtil.convertDpToPixel(18f, context).toInt())
+                setCurrentPlayLineColor(ThemeStore.accentColor(context))
+                setIndicatorTextColor(ThemeStore.accentColor(context))
+                setCurrentIndicateLineTextColor(ThemeStore.textColorPrimary(context))
+                setOnPlayIndicatorLineListener(object : LrcView.OnPlayIndicatorLineListener {
+                    override fun onPlay(time: Long, content: String) {
+                        MusicPlayerRemote.seekTo(time.toInt())
+                    }
+                })
             }
         }
 
@@ -321,7 +340,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         override fun onUpdateProgressViews(progress: Int, total: Int) {
-            lyricsView.setCurrentTimeMillis(progress.toLong())
+            lyricsView.updateTime(progress.toLong())
         }
 
         private fun loadLRCLyrics() {
@@ -332,10 +351,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         private fun showLyricsLocal(file: File?) {
-            if (file == null) {
-                lyricsView.reset()
-            } else {
-                lyricsView.setLyricFile(file, "UTF-8")
+            if (file != null) {
+                lyricsView.setLrcData(LrcHelper.parseLrcFromFile(file))
             }
         }
     }

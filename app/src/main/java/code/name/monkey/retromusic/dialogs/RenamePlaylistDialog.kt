@@ -36,10 +36,14 @@ class RenamePlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val accentColor = ThemeStore.accentColor(context!!)
 
+        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+        bannerTitle.setText(R.string.rename_playlist_title)
 
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
+        val accentColor = ThemeStore.accentColor(context!!)
+        actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
+        actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
 
         actionNewPlaylist.apply {
             var playlistId: Long = 0
@@ -47,14 +51,10 @@ class RenamePlaylistDialog : RoundedBottomSheetDialogFragment() {
                 playlistId = arguments!!.getLong("playlist_id")
             }
             setText(PlaylistsUtil.getNameForPlaylist(activity!!, playlistId))
-            setHintTextColor(ColorStateList.valueOf(accentColor))
-            setTextColor(ThemeStore.textColorPrimary(context!!))
         }
 
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        bannerTitle.setText(R.string.rename_playlist_title)
         actionCancel.apply {
-            MaterialUtil.setTint(actionCancel, false)
+            MaterialUtil.setTint(this, false)
             setOnClickListener { dismiss() }
             icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
         }

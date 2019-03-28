@@ -107,7 +107,7 @@ class UserInfoActivity : AbsBaseActivity() {
         toolbar.apply {
             setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
             setBackgroundColor(primaryColor)
-            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.accentColor(this@UserInfoActivity))
+            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@UserInfoActivity))
             setSupportActionBar(this)
         }
         appBarLayout.setBackgroundColor(primaryColor)

@@ -69,12 +69,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/songTextContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:boxBackgroundMode="outline"
-                app:hintEnabled="true">
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <code.name.monkey.appthemehelper.common.views.ATEEditText
                     android:id="@+id/songText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,10 +85,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/albumTextContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
                 <code.name.monkey.appthemehelper.common.views.ATEEditText
@@ -103,10 +102,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/artistContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -123,10 +122,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/albumArtistContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
 
@@ -144,10 +143,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/composerContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -170,11 +169,11 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/genreContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    app:boxBackgroundMode="filled"
                     app:hintEnabled="true">
 
 
@@ -192,12 +191,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/yearContainer"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    app:boxBackgroundMode="filled"
                     app:hintEnabled="true">
 
 
@@ -216,10 +215,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/trackNumberContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
 
@@ -237,10 +236,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/lyricsContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:boxBackgroundMode="filled"
                 app:hintEnabled="true">
 
 

@@ -19,7 +19,8 @@
             android:persistent="false"
             android:summary="@string/primary_color_desc"
             android:title="@string/primary_color"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"
