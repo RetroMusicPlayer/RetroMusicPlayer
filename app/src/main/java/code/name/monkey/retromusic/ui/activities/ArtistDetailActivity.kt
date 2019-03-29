@@ -51,7 +51,7 @@ import kotlin.collections.ArrayList
 class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContract.ArtistsDetailsView {
 
     private var biography: Spanned? = null
-    private var artist: Artist? = null
+    private lateinit var artist: Artist
     private var lastFMRestClient: LastFMRestClient? = null
     private var artistDetailsPresenter: ArtistDetailsPresenter? = null
     private lateinit var songAdapter: SimpleSongAdapter

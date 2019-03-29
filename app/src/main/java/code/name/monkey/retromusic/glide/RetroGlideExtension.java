@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.glide;
 
+import androidx.annotation.NonNull;
+
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.RequestBuilder;
@@ -26,7 +28,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.signature.MediaStoreSignature;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
@@ -44,13 +45,14 @@ public final class RetroGlideExtension {
     private RetroGlideExtension() {
     }
 
+    @NonNull
     @GlideType(BitmapPaletteWrapper.class)
-    public static void asBitmapPalette(RequestBuilder<BitmapPaletteWrapper> requestBuilder) {
+    public static void asBitmapPalette(@NonNull RequestBuilder<BitmapPaletteWrapper> requestBuilder) {
     }
 
     @NonNull
     @GlideOption
-    public static RequestOptions artistOptions(@NonNull RequestOptions requestOptions, Artist artist) {
+    public static RequestOptions artistOptions(@NonNull RequestOptions requestOptions, @NonNull Artist artist) {
         return requestOptions
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .error(R.drawable.default_artist_art)
@@ -62,7 +64,7 @@ public final class RetroGlideExtension {
 
     @GlideOption
     @NonNull
-    public static RequestOptions songOptions(@NonNull RequestOptions requestOptions, Song song) {
+    public static RequestOptions songOptions(@NonNull RequestOptions requestOptions, @NonNull Song song) {
         return requestOptions
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.default_album_art)

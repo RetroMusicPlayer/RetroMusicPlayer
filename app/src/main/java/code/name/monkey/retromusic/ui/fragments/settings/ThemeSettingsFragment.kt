@@ -95,7 +95,11 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 title(code.name.monkey.retromusic.R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
-                    ThemeStore.editTheme(context).accentColor(color).commit()
+                    var colorFinal = Color.BLACK;
+                    if (!ColorUtil.isColorSaturated(color)) {
+                        colorFinal = color;
+                    }
+                    ThemeStore.editTheme(context).accentColor(colorFinal).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(context).updateDynamicShortcuts()
                     activity!!.recreate()

@@ -64,7 +64,7 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         lateinit var albumCover: ImageView
         private var isColorReady: Boolean = false
         private var color: Int = 0
-        private var song: Song? = null
+        private lateinit var song: Song
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
 
@@ -85,7 +85,7 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             if (arguments != null) {
-                song = arguments!!.getParcelable(SONG_ARG)
+                song = arguments!!.getParcelable(SONG_ARG)!!
             }
         }
 
