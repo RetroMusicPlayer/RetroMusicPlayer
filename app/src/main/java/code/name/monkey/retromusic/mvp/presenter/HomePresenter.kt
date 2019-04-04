@@ -38,7 +38,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     private val hashSet: HashSet<Home> = HashSet()
 
     override fun homeSections() {
-        loadSuggestions()
         loadRecentArtists()
         loadRecentAlbums()
         loadTopArtists()
@@ -53,17 +52,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     override fun unsubscribe() {
         disposable.dispose()
-    }
-
-    private fun loadSuggestions() {
-        disposable += repository.suggestionSongs
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(5, R.string.suggestion_songs, 0, it, SUGGESTIONS, R.drawable.ic_audiotrack_black_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
     }
 
     private fun loadRecentArtists() {

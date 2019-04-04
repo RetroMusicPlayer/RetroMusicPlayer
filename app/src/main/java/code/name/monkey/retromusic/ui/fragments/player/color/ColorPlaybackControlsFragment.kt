@@ -20,7 +20,6 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
@@ -31,7 +30,6 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +53,6 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun updateSong() {
@@ -105,7 +101,7 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         setProgressBarColor(lastPlaybackControlsColor, lastDisabledPlaybackControlsColor)
 
-        volumeFragment.setTintableColor(lastPlaybackControlsColor)
+        volumeFragment?.setTintableColor(lastPlaybackControlsColor)
 
         songCurrentProgress.setTextColor(lastDisabledPlaybackControlsColor)
         songTotalTime.setTextColor(lastDisabledPlaybackControlsColor)

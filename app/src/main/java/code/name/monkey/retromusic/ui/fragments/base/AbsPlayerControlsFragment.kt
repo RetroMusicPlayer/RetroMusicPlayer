@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
+import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.volume_controls.*
+
 
 /**
  * Created by hemanths on 24/09/17.
@@ -56,11 +58,19 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
         hideVolumeIfAvailable()
     }
 
+    protected var volumeFragment: VolumeFragment? = null
+
     private fun hideVolumeIfAvailable() {
-        volumeFragmentContainer?.visibility = if (PreferenceUtil.getInstance().volumeToggle) View.VISIBLE else View.GONE
+        if (PreferenceUtil.getInstance().volumeToggle) {
+            childFragmentManager.beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
+            childFragmentManager.executePendingTransactions()
+
+            volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+        }
     }
 
     companion object {
         const val SLIDER_ANIMATION_TIME: Long = 400
+        const val VOLUME_FRAGMENT: String = "volume_fragment"
     }
 }

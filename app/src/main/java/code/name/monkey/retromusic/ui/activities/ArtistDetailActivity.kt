@@ -276,7 +276,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private fun loadArtistImage() {
         GlideApp.with(this)
                 .asBitmapPalette()
-                .load(RetroGlideExtension.getArtistModel(artist!!, forceDownload))
+                .load(RetroGlideExtension.getArtistModel(artist, forceDownload))
                 .transition(RetroGlideExtension.getDefaultTransition())
                 .artistOptions(artist)
                 .dontAnimate()

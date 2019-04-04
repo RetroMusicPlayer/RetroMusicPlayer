@@ -16,25 +16,28 @@ package code.name.monkey.retromusic.views;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 public class StatusBarView extends View {
 
 
-    public StatusBarView(Context context) {
+    public StatusBarView(@NonNull Context context) {
         super(context);
     }
 
-    public StatusBarView(Context context, AttributeSet attrs) {
+    public StatusBarView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public StatusBarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StatusBarView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public static int getStatusBarHeight(Resources r) {
+    public static int getStatusBarHeight(@NonNull Resources r) {
         int result = 0;
         int resourceId = r.getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -45,7 +48,6 @@ public class StatusBarView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(
-                MeasureSpec.getSize(widthMeasureSpec), getStatusBarHeight(getResources()));
+        setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec), getStatusBarHeight(getResources()));
     }
-} 
+}

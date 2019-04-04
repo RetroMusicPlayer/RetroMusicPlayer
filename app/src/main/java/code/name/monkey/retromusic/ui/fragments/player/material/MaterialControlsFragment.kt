@@ -33,7 +33,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var volumeFragment: VolumeFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +48,6 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun updateSong() {
@@ -114,7 +112,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         text.setTextColor(colorFinal)
         ViewUtil.setProgressDrawable(progressSlider, ColorUtil.stripAlpha(colorFinal), true)
 
-        volumeFragment.setTintable(colorFinal)
+        volumeFragment?.setTintable(colorFinal)
 
         updatePlayPauseColor()
         updatePrevNextColor()

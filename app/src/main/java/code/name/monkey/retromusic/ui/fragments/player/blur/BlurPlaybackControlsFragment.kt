@@ -34,7 +34,6 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
-    private lateinit var volumeFragment: VolumeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,6 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
 
-
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()
@@ -61,8 +59,6 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             showBonceAnimation()
         }
 
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
-        volumeFragment.tintWhiteColor()
     }
 
     private fun updateSong() {
@@ -119,6 +115,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
+        volumeFragment?.tintWhiteColor()
     }
 
     private fun setFabColor(i: Int) {

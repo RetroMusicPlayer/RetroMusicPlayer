@@ -147,6 +147,9 @@ class SongFileAdapter(private val activity: AppCompatActivity, private var dataS
                     }
                 }
             }
+            if (imageTextContainer != null) {
+                imageTextContainer?.cardElevation = 0f
+            }
         }
 
         override fun onClick(v: View?) {

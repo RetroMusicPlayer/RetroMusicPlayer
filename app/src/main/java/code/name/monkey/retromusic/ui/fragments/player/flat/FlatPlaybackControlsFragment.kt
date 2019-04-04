@@ -33,7 +33,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var volumeFragment: VolumeFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +48,6 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     override fun onResume() {
@@ -109,7 +107,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         }
 
         updateTextColors(colorFinal)
-        volumeFragment.setTintable(colorFinal)
+        volumeFragment?.setTintable(colorFinal)
 
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 

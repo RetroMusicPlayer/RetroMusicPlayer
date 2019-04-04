@@ -6,14 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_weight="0"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    tools:showIn="@layout/fragment_player_playback_controls">
+    android:paddingEnd="8dp" >
 
-    <fragment
+   <!-- <fragment
         android:id="@+id/volumeFragment"
         android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        tools:layout="@layout/fragment_volume" />
+        tools:layout="@layout/fragment_volume" />-->
 </FrameLayout>

@@ -42,7 +42,10 @@ import java.util.concurrent.TimeUnit
 
 class ArtistImage(val artistName: String, val skipOkHttpCache: Boolean)
 
-class ArtistImageFetcher(private val context: Context, private val lastFMRestClient: LastFMRestClient, private val okHttp: OkHttpClient, private val model: ArtistImage) : DataFetcher<InputStream> {
+class ArtistImageFetcher(private val context: Context,
+                         private val lastFMRestClient: LastFMRestClient,
+                         private val okHttp: OkHttpClient,
+                         private val model: ArtistImage) : DataFetcher<InputStream> {
     @Volatile
     private var isCancelled: Boolean = false
     private var call: Call<LastFmArtist>? = null
@@ -54,7 +57,7 @@ class ArtistImageFetcher(private val context: Context, private val lastFMRestCli
     }
 
     override fun getDataSource(): DataSource {
-        return DataSource.MEMORY_CACHE
+        return DataSource.LOCAL
     }
 
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {

@@ -2,17 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="code.name.monkey.retromusic">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.android.vending.BILLING" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -123,40 +112,29 @@
             android:theme="@style/ErrorHandlingTheme" />
         <activity android:name=".ui.activities.WhatsNewActivity" />
         <activity android:name=".ui.activities.bugreport.BugReportActivity" />
-        <activity android:name=".ui.activities.LockScreenActivity" />
+        <activity
+            android:name=".ui.activities.LockScreenActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true" />
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <service
-            android:name=".service.MusicService"
-            android:enabled="true" />
-
-        <service
-            android:name=".service.WearBrowserService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
-            </intent-filter>
-        </service>
-
-        <receiver android:name=".service.MediaButtonIntentReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
-
-
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
+
         <meta-data
             android:name="com.lge.support.SPLIT_WINDOW"
             android:value="true" />
+
         <meta-data
             android:name="code.name.monkey.retromusic.glide.RetroMusicGlideModule"
             android:value="GlideModule" />
+
+
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule" />
@@ -174,12 +152,18 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <receiver android:name=".service.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".appwidgets.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".appwidgets.AppWidgetBig"
             android:exported="false"
@@ -192,6 +176,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_big_info" />
         </receiver>
+
         <receiver
             android:name=".appwidgets.AppWidgetClassic"
             android:exported="false"
@@ -241,6 +226,29 @@
                 android:resource="@xml/app_widget_card_info" />
         </receiver>
 
+        <service
+            android:name=".service.MusicService"
+            android:enabled="true" />
+        <service
+            android:name=".service.WearBrowserService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
 
     </application>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

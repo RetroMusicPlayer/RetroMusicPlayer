@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.fragments.VolumeFragment
 import code.name.monkey.retromusic.ui.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -55,13 +54,10 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         return inflater.inflate(R.layout.fragment_full_player_controls, container, false)
     }
 
-    private lateinit var volumeFragment: VolumeFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
 
         songTotalTime.setTextColor(Color.WHITE)
         songCurrentProgress.setTextColor(Color.WHITE)
@@ -117,7 +113,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         } else {
             ThemeStore.accentColor(context!!)
         }
-        volumeFragment.setTintableColor(colorFinal)
+        volumeFragment?.setTintableColor(colorFinal)
         text.setTextColor(colorFinal)
 
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)

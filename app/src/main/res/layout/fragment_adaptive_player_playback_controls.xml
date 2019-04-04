@@ -137,7 +137,6 @@
             android:id="@+id/playPauseButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:layout_above="@id/title_container"
             android:layout_centerInParent="true"
             android:background="@drawable/color_circle_gradient"
             android:elevation="4dp"
@@ -150,17 +149,10 @@
         android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:paddingStart="8dp"
         android:paddingEnd="8dp">
 
-        <fragment
-            android:id="@+id/volumeFragment"
-            android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            tools:layout="@layout/fragment_volume" />
     </FrameLayout>
 
 </LinearLayout>

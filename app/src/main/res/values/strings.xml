@@ -607,5 +607,6 @@
     <string name="pick_image_intent_text">Pick image</string>
     <string name="set_photo">Set a profile photo</string>
     <string name="edit">Edit</string>
+    <string name="swipe_to_unlock">Swipe to unlock</string>
 
 </resources>

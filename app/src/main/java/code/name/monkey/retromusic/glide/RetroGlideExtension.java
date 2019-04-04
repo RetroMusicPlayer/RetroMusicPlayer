@@ -54,7 +54,7 @@ public final class RetroGlideExtension {
     @GlideOption
     public static RequestOptions artistOptions(@NonNull RequestOptions requestOptions, @NonNull Artist artist) {
         return requestOptions
-                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .error(R.drawable.default_artist_art)
                 .placeholder(R.drawable.default_artist_art)
                 .priority(Priority.LOW)

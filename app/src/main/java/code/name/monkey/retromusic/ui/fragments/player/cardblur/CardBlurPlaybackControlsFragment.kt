@@ -32,7 +32,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var volumeFragment: VolumeFragment
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +49,6 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-        setupVolumeControls()
-
     }
 
     override fun setDark(color: Int) {
@@ -63,6 +61,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateProgressTextColor()
 
         ViewUtil.setProgressDrawable(progressSlider, Color.WHITE, true)
+        volumeFragment?.tintWhiteColor()
     }
 
 
@@ -81,10 +80,6 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         }
     }
 
-    private fun setupVolumeControls() {
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
-        volumeFragment.tintWhiteColor()
-    }
 
     private fun updateProgressTextColor() {
         val color = MaterialValueHelper.getPrimaryTextColor(context, false)

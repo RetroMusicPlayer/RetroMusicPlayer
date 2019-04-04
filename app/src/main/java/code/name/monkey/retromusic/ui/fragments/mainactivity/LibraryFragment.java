@@ -13,12 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.afollestad.materialcab.MaterialCab;
-import com.google.android.material.appbar.AppBarLayout;
-
-import java.io.File;
-import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -27,6 +21,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.appbar.AppBarLayout;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+import java.util.Objects;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -64,6 +67,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private ImageView userImage;
     private CompositeDisposable disposable;
 
+    @NonNull
     public static Fragment newInstance(int tab) {
         Bundle args = new Bundle();
         args.putInt(CURRENT_TAB_ID, tab);
@@ -72,6 +76,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return fragment;
     }
 
+    @NonNull
     public static Fragment newInstance() {
         return new LibraryFragment();
     }
@@ -218,7 +223,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NotNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_main, menu);
 

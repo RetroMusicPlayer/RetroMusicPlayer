@@ -1,5 +1,8 @@
 package code.name.monkey.retromusic.ui.activities
 
+import android.app.KeyguardManager
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -14,19 +17,23 @@ import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.ui.fragments.player.lockscreen.LockScreenPlayerControlsFragment
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
+import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
 import kotlinx.android.synthetic.main.activity_album.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
-    private var mFragment: LockScreenPlayerControlsFragment? = null
+    private var fragment: LockScreenPlayerControlsFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
-                or WindowManager.LayoutParams.FLAG_FULLSCREEN
-                or WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
+        }
         setDrawUnderStatusBar()
         setContentView(R.layout.activity_lock_screen_old_style)
 
@@ -37,12 +44,32 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         setLightNavigationBar(true)
 
         val config = SlidrConfig.Builder()
+                .listener(object : SlidrListener {
+                    override fun onSlideStateChanged(state: Int) {
+
+                    }
+
+                    override fun onSlideChange(percent: Float) {
+
+                    }
+
+                    override fun onSlideOpened() {
+
+                    }
+
+                    override fun onSlideClosed() {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+                            keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
+                        }
+                    }
+                })
                 .position(SlidrPosition.BOTTOM)
                 .build()
 
         Slidr.attach(this, config)
 
-        mFragment = supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
+        fragment = supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
 
         findViewById<View>(R.id.slide).apply {
             translationY = 100f
@@ -77,7 +104,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
-                        mFragment!!.setDark(color)
+                        fragment!!.setDark(color)
                     }
                 })
     }

@@ -34,7 +34,7 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var volumeFragment: VolumeFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +50,6 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
 
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
@@ -118,7 +116,8 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         } else {
             ThemeStore.accentColor(context!!)
         }
-        volumeFragment.setTintable(colorFinal)
+
+        volumeFragment?.setTintable(colorFinal)
 
         setFabColor(colorFinal)
         updateRepeatState()

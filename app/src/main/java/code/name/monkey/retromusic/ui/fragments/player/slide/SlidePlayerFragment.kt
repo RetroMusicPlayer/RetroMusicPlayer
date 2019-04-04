@@ -132,7 +132,7 @@ class SlidePlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.C
         songAdapter.swapDataSet(MusicPlayerRemote.playingQueue)
     }
 
-    private lateinit var volumeFragment: VolumeFragment
+
 
 
     private fun updatePlayPauseDrawableState() {
@@ -204,7 +204,6 @@ class SlidePlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.C
         }
 
 
-        volumeFragment.setTintable(colorFinal)
         text.setTextColor(colorFinal)
         playerQueueSubHeader.setTextColor(colorFinal)
         TintHelper.setTintAuto(playPauseButton, lastPlaybackControlsColor, false)
@@ -230,8 +229,6 @@ class SlidePlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.C
         setUpShuffleButton()
         setUpProgressSlider()
         setUpRecyclerView()
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
-        volumeFragmentToggle.visibility = if (PreferenceUtil.getInstance().volumeToggle) View.VISIBLE else View.GONE
     }
 
     private lateinit var songAdapter: SimpleSongAdapter

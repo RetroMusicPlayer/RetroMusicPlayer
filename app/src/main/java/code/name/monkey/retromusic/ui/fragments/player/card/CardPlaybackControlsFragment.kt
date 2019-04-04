@@ -31,7 +31,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
-    private lateinit var volumeFragment: VolumeFragment
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +57,6 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation(playPauseButton)
         }
-
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun setupControls() {
@@ -136,7 +134,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
 
-        volumeFragment.setTintable(colorFinal)
+        volumeFragment?.setTintable(colorFinal)
 
     }
 

@@ -59,7 +59,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
         }
 
-        volumeFragment.setTintableColor(lastPlaybackControlsColor)
+        //volumeFragment?.setTintableColor(lastPlaybackControlsColor)
 
         updateRepeatState();
         updateShuffleState();
@@ -74,7 +74,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
-    private lateinit var volumeFragment: VolumeFragment
+
 
     override fun onCreateView(@NonNull inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_classic_player_playback_controls, container, false)
@@ -91,7 +91,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         setUpMusicControllers()
         updateProgressTextColor()
 
-        volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
+        //volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragment) as VolumeFragment
     }
 
     private fun setUpMusicControllers() {
