@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
+                    app:fontFamily="@font/circular_std_medium"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
@@ -90,6 +91,7 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/general_settings_title"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
@@ -136,6 +138,7 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/now_playing"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
@@ -181,6 +184,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_audio"
+                    app:fontFamily="@font/circular_std_medium"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -224,6 +228,7 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/personalize"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
@@ -252,7 +257,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:padding="10dp"
-                app:iconBackgroundColor="@color/md_orange_A400"
+                app:iconBackgroundColor="@color/md_deep_orange_A400"
                 app:srcCompat="@drawable/ic_image_white_24dp" />
 
             <LinearLayout
@@ -268,6 +273,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_images"
+                    app:fontFamily="@font/circular_std_medium"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -310,6 +316,7 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/notification"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
@@ -339,7 +346,7 @@
                 android:layout_marginStart="16dp"
                 android:padding="10dp"
                 app:iconBackgroundColor="@color/md_indigo_A400"
-                app:srcCompat="@drawable/ic_settings_white_24dp" />
+                app:srcCompat="@drawable/ic_testing_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -354,10 +361,63 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
+                    app:fontFamily="@font/circular_std_medium"
                     android:singleLine="true"
                     android:text="@string/others"
                     android:textSize="@dimen/ate_default_textsize_subheading" />
 
+                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="4"
+                    android:text="@string/other_settings_summary"
+                    android:textSize="@dimen/ate_default_textsize_body" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/aboutSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="72dp"
+            android:background="?rectSelector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <code.name.monkey.retromusic.views.ColorIconsImageView
+                android:id="@+id/about_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="10dp"
+                app:iconBackgroundColor="@color/md_light_green_A400"
+                app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:fadingEdge="horizontal"
+                    app:fontFamily="@font/circular_std_medium"
+                    android:singleLine="true"
+                    android:text="@string/action_about"
+                    android:textSize="@dimen/ate_default_textsize_subheading" />
+
+                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:maxLines="4"
+                    android:text="@string/about_settings_summary"
+                    android:textSize="@dimen/ate_default_textsize_body" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

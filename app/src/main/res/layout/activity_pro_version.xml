@@ -41,9 +41,9 @@
                     app:layout_collapseMode="pin"
                     tools:ignore="UnusedAttribute">
 
-                    <TextView
+                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/bannerTitle"
-                        style="@style/BigTitleTextAppearance"
+                        style="@style/BigTitleTextAppearanceToolbar"
                         android:text="@string/buy_retro_music_pro" />
 
                 </androidx.appcompat.widget.Toolbar>

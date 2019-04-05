@@ -38,9 +38,9 @@
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:title="">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/settingsTitle"
-                style="@style/BigTitleTextAppearance"
+                style="@style/BigTitleTextAppearanceToolbar"
                 android:text="@string/action_settings" />
 
         </androidx.appcompat.widget.Toolbar>

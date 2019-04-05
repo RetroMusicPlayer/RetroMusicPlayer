@@ -25,9 +25,9 @@
                 app:title=""
                 tools:ignore="UnusedAttribute">
 
-                <TextView
+                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearance"
+                    style="@style/BigTitleTextAppearanceToolbar"
                     android:text="@string/support_development" />
 
             </androidx.appcompat.widget.Toolbar>

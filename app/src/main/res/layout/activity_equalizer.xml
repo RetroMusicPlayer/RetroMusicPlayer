@@ -35,7 +35,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/equalizer"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    style="@style/BigTitleTextAppearanceToolbar"
                     tools:ignore="MissingPrefix" />
 
                 <androidx.appcompat.widget.SwitchCompat
@@ -43,8 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:layout_marginEnd="16dp"  />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -5,11 +5,12 @@
   android:padding="8dp"
   android:orientation="vertical">
 
+  <include layout="@layout/card_credit"/>
+
   <include layout="@layout/card_retro_info"/>
 
   <include layout="@layout/card_social"/>
 
   <include layout="@layout/card_other"/>
 
-  <include layout="@layout/card_credit"/>
 </LinearLayout>

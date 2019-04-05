@@ -36,6 +36,7 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
+                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
                 android:text="@string/changelog" />
 
@@ -65,6 +66,7 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
+                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
                 android:text="@string/pref_title_open_source_licences" />
 
@@ -93,6 +95,7 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
+                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
                 android:text="@string/version" />
 
@@ -104,5 +107,16 @@
                 android:alpha="0.85"
                 android:text="0.0.0" />
         </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/madeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/made_with_love"
+            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

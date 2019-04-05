@@ -70,7 +70,7 @@
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/bannerTitle"
-                        style="@style/BigTitleTextAppearance"
+                        style="@style/BigTitleTextAppearanceToolbar"
                         android:text="@string/action_tag_editor" />
 
                 </androidx.appcompat.widget.Toolbar>

@@ -19,7 +19,7 @@
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
+                style="@style/BigTitleTextAppearanceToolbar"
                 android:text="@string/profile" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -108,7 +108,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:boxBackgroundMode="filled"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:hintEnabled="true">
 
 
@@ -129,7 +129,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                app:boxBackgroundMode="filled"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:hintEnabled="true">
 
 
@@ -145,13 +145,15 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/next"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:elevation="8dp"
+        android:gravity="center"
+        app:iconGravity="textStart"
         android:padding="16dp"
-        app:srcCompat="@drawable/ate_check" />
+        android:text="@string/save"
+        app:icon="@drawable/ic_save_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

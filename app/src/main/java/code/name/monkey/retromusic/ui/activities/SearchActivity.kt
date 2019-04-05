@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.activities
 
 import android.app.Activity
 import android.app.SearchManager
+import android.app.Service
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.speech.RecognizerIntent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView.BufferType
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.mvp.contract.SearchContract
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
@@ -57,6 +60,16 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
         searchContainer.setCardBackgroundColor(ColorStateList.valueOf(ColorUtil.darkenColor(ThemeStore.primaryColor(this))))
 
+        keyboardPopup.setOnClickListener {
+            val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.showSoftInput(searchView,0)
+        }
+
+        keyboardPopup.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            keyboardPopup.setTextColor(this)
+            keyboardPopup.iconTint = this
+        }
     }
 
     private fun setupRecyclerView() {
@@ -71,6 +84,16 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
             layoutManager = LinearLayoutManager(this@SearchActivity)
             adapter = searchAdapter
         }
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    keyboardPopup.shrink(true)
+                } else if (dy < 0) {
+                    keyboardPopup.extend(true)
+                }
+            }
+        })
     }
 
     private fun setupSearchView() {
@@ -101,6 +124,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
     private fun setUpToolBar() {
         title = null
+        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
     }
 
 

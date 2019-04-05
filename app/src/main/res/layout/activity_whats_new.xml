@@ -20,9 +20,9 @@
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:title="">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
+                style="@style/BigTitleTextAppearanceToolbar"
                 android:text="@string/whats_new" />
 
         </androidx.appcompat.widget.Toolbar>

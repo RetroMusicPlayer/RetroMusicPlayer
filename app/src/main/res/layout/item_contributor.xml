@@ -33,6 +33,7 @@
             android:id="@+id/title"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
+            app:fontFamily="@font/circular_std_medium"
             android:layout_height="wrap_content" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView

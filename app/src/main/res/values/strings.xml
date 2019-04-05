@@ -612,5 +612,7 @@
     <string name="synced_lyrics">Synced lyrics</string>
     <string name="dialog_title_set_ringtone">Set ringtone</string>
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
+    <string name="about_settings_summary">Team, social links</string>
+    <string name="other_settings_summary">Advanced testing features</string>
 
 </resources>

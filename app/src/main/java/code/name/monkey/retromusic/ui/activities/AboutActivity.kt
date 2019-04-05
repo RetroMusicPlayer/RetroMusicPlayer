@@ -73,6 +73,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         appVersion.text = getAppVersion()
 
         setUpView()
+
     }
 
 

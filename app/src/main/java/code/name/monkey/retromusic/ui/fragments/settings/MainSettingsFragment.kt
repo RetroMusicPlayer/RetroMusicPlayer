@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -34,6 +33,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             R.id.imageSettings -> inflateFragment(ImageSettingFragment(), R.string.pref_header_images)
             R.id.notificationSettings -> inflateFragment(NotificationSettingsFragment(), R.string.notification)
             R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)
+            R.id.aboutSettings -> NavigationUtil.goToAbout(activity!!)
         }
     }
 
@@ -54,6 +54,36 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         imageSettings.setOnClickListener(this)
         notificationSettings.setOnClickListener(this)
         otherSettings.setOnClickListener(this)
+        aboutSettings.setOnClickListener(this)
+
+        text.setTextColor(ThemeStore.textColorSecondary(context!!))
+        text.text = PreferenceUtil.getInstance().userBio
+        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
+        titleWelcome.text = String.format("%s %s!", getTimeOfTheDay(), PreferenceUtil.getInstance().userName)
+        loadImageFromStorage()
+        userInfoContainer.setOnClickListener { NavigationUtil.goToUserInfo(activity!!) }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        disposable.clear()
+    }
+
+    private val disposable = CompositeDisposable()
+    private fun loadImageFromStorage() {
+
+        disposable.add(Compressor(context!!)
+                .setMaxHeight(300)
+                .setMaxWidth(300)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(
+                        File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ userImage.setImageBitmap(it) }, {
+                    userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                }))
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {

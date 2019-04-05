@@ -21,7 +21,7 @@
 
             <TextView
                 android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
+                style="@style/BigTitleTextAppearanceToolbar"
                 android:text="@string/action_about" />
 
         </androidx.appcompat.widget.Toolbar>

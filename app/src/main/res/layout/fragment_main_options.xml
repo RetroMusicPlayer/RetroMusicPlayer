@@ -160,16 +160,6 @@
         app:optionTitle="@string/report_bug" />
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        app:optionIcon="@drawable/ic_help_white_24dp"
-        app:optionTitle="@string/action_about" />
-
-    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionRate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

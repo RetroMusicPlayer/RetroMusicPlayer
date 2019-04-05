@@ -48,6 +48,7 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
+                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:text="@string/pinterest_page" />
 
@@ -92,6 +93,7 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/instagram_page" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -133,6 +135,7 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
+                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:text="@string/twitter_page" />
 
@@ -175,6 +178,7 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
+                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:text="@string/discord_page" />
 
@@ -218,6 +222,7 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/telegram_group" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -262,6 +267,7 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/google_plus" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView

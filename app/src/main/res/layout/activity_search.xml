@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <FrameLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:id="@+id/appBarLayout"
         android:layout_height="wrap_content">
-
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="25dp"
                 app:cardElevation="0dp">
 
@@ -45,7 +42,7 @@
                     android:background="@null"
                     android:hint="@string/action_search"
                     android:inputType="text|textAutoComplete"
-                    android:padding="12dp">
+                    android:padding="14dp">
 
                     <requestFocus />
                 </code.name.monkey.appthemehelper.common.views.ATEEditText>
@@ -61,32 +58,41 @@
                 android:padding="14dp"
                 app:srcCompat="@drawable/ic_mic_white_24dp" />
         </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
+    <FrameLayout
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@android:id/empty"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="48dp"
+            android:paddingBottom="48dp"
+            android:text="@string/no_results"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="16sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@android:id/empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="48dp"
-                android:paddingBottom="48dp"
-                android:text="@string/no_results"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="16sp"
-                android:visibility="gone"
-                tools:visibility="visible" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbars="vertical"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </FrameLayout>
-    </LinearLayout>
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    </FrameLayout>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/keyboardPopup"
+            android:text="Keyboard"
+            android:layout_margin="16dp"
+            android:layout_gravity="bottom|end"
+            app:icon="@drawable/ic_keyboard_white_24dp"
+            android:layout_height="wrap_content"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

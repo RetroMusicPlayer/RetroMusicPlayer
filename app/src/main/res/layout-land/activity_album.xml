@@ -83,7 +83,6 @@
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
                             android:marqueeRepeatLimit="marquee_forever"
-                            android:paddingTop="4dp"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             tools:ignore="MissingPrefix"

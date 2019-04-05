@@ -79,7 +79,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         loadImageFromStorage()
 
         actionSettings.setOnClickListener(this)
-        actionAbout.setOnClickListener(this)
+
         actionSleepTimer.setOnClickListener(this)
         userInfoContainer.setOnClickListener(this)
         actionEqualizer.setOnClickListener(this)
@@ -102,7 +102,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         when (view.id) {
             R.id.actionFolders -> mainActivity.setCurrentFragment(FoldersFragment.newInstance(context), true)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
-            R.id.actionAbout -> NavigationUtil.goToAbout(mainActivity)
+
             R.id.actionSleepTimer -> if (fragmentManager != null) {
                 SleepTimerDialog().show(fragmentManager!!, TAG)
             }

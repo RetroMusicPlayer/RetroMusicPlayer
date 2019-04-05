@@ -55,5 +55,7 @@
 
 
     <color name="md_teal_A400">#1DE9B6</color>
-    <color name="md_orange_A400">#FF3D00</color>
+    <color name="md_deep_orange_A400">#FF3D00</color>
+    <color name="md_orange_A400">#FF9100</color>
+    <color name="md_light_green_A400">#76FF03</color>
 </resources>

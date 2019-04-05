@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.ui.activities
 
 import android.app.Activity
 import android.content.*
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -13,9 +14,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -92,7 +91,11 @@ class UserInfoActivity : AbsBaseActivity() {
             setResult(Activity.RESULT_OK)
             finish()
         }
-        TintHelper.setTintAuto(next, ThemeStore.accentColor(this), true)
+        next.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
+            next.setTextColor(this)
+            next.iconTint = this
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

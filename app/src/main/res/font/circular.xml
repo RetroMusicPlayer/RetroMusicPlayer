@@ -5,6 +5,11 @@
         android:fontStyle="normal"
         android:fontWeight="400" />
     <font
+        android:font="@font/circular_std_medium"
+        android:fontStyle="normal"
+        android:fontWeight="700" />
+
+    <font
         android:font="@font/circular_std_black"
         android:fontWeight="900" />
 
