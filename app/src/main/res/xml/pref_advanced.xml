@@ -23,6 +23,7 @@
             android:defaultValue="30"
             android:key="filter_song"
             android:max="60"
+            app:showSeekBarValue="true"
             android:title="@string/pref_filter_song_title"
             app:iconSpaceReserved="false" />
 

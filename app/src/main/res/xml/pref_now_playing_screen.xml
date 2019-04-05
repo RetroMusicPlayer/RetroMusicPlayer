@@ -31,6 +31,7 @@
         android:defaultValue="12"
         android:key="new_blur_amount"
         android:max="25"
+        app:showSeekBarValue="true"
         android:summary="@string/pref_blur_amount_summary"
         android:title="@string/pref_blur_amount_title"
         app:iconSpaceReserved="false" />
