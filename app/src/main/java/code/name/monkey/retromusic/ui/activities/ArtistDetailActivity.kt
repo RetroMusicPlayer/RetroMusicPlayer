@@ -73,8 +73,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         setDrawUnderStatusBar()
         setupWindowTransitions()
         super.onCreate(savedInstanceState)
-
-
+        collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
         toggleBottomNavigationView(true)
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -126,9 +125,9 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private fun setupToolbarMarginHeight() {
         val primaryColor = ThemeStore.primaryColor(this)
         TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
-        if (collapsingToolbar != null) {
-            collapsingToolbar!!.setContentScrimColor(primaryColor)
-            collapsingToolbar!!.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
+        if (collapsingToolbarLayout != null) {
+            collapsingToolbarLayout!!.setContentScrimColor(primaryColor)
+            collapsingToolbarLayout!!.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
         }
 
         toolbar!!.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)

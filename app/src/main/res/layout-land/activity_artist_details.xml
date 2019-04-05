@@ -42,10 +42,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/status_bar_padding" />
-
                 <LinearLayout
                     android:id="@+id/background"
                     android:layout_width="match_parent"
@@ -88,6 +84,10 @@
                     <include layout="@layout/activity_artist_content" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/status_bar_padding" />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
@@ -96,6 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:background="@drawable/shadow_down_strong" />
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/actionShuffleAll"
         android:layout_width="wrap_content"
