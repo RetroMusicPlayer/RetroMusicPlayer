@@ -119,7 +119,11 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 return true
             }
             R.id.action_set_as_ringtone -> {
-                MusicUtil.setRingtone(activity!!, song.id)
+                if (RingtoneManager.requiresDialog(activity!!)) {
+                    RingtoneManager.getDialog(activity!!)
+                }
+                val ringtoneManager = RingtoneManager(activity!!)
+                ringtoneManager.setRingtone(song)
                 return true
             }
             R.id.action_settings -> {

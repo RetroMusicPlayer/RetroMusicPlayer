@@ -460,8 +460,6 @@
 
     <string name="support_development">Support development</string>
 
-    <string name="synced_lyrics">Synced lyrics</string>
-
     <string name="system_equalizer">System Equalizer</string>
 
     <!-- Message displayed when tag editing fails -->
@@ -608,5 +606,11 @@
     <string name="set_photo">Set a profile photo</string>
     <string name="edit">Edit</string>
     <string name="swipe_to_unlock">Swipe to unlock</string>
+    <string name="add_lyrics">Add lyrics</string>
+    <string name="paste_lyrics_here">Paste lyrics here</string>
+    <string name="add_time_framed_lryics">Add time frame lyrics</string>
+    <string name="synced_lyrics">Synced lyrics</string>
+    <string name="dialog_title_set_ringtone">Set ringtone</string>
+    <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
 
 </resources>

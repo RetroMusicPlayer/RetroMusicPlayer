@@ -32,7 +32,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 313
+        versionCode 314
         versionName '3.1.400'
 
         multiDexEnabled true
@@ -130,7 +130,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0-alpha04'
     implementation "androidx.legacy:legacy-support-v13:1.0.0"
     implementation "androidx.legacy:legacy-preference-v14:1.0.0"
-    implementation 'com.google.android.material:material:1.1.0-alpha04'
+    implementation 'com.google.android.material:material:1.1.0-alpha05'
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'

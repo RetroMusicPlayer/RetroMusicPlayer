@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.ui.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.ui.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.RingtoneManager
 
 
 object SongMenuHelper {
@@ -40,7 +41,11 @@ object SongMenuHelper {
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
         when (menuItemId) {
             R.id.action_set_as_ringtone -> {
-                MusicUtil.setRingtone(activity, song.id)
+                if (RingtoneManager.requiresDialog(activity)) {
+                    RingtoneManager.getDialog(activity)
+                }
+                val ringtoneManager = RingtoneManager(activity)
+                ringtoneManager.setRingtone(song)
                 return true
             }
             R.id.action_share -> {

@@ -76,7 +76,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupWindowTransition()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-
+        collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 

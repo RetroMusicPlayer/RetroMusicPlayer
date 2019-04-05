@@ -54,12 +54,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         imageSettings.setOnClickListener(this)
         notificationSettings.setOnClickListener(this)
         otherSettings.setOnClickListener(this)
-
-        text.setTextColor(ThemeStore.textColorSecondary(context!!));
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!));
-        titleWelcome.text = String.format("%s %s!", getTimeOfTheDay(), PreferenceUtil.getInstance().userName);
-        loadImageFromStorage();
-        userInfoContainer.setOnClickListener { NavigationUtil.goToUserInfo(activity!!) }
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
@@ -81,28 +75,5 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             in 20..23 -> message = getString(R.string.title_good_night)
         }
         return message
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.clear()
-    }
-
-    private val disposable = CompositeDisposable()
-
-    private fun loadImageFromStorage() {
-
-        disposable.add(Compressor(context!!)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(
-                        File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userImage.setImageBitmap(it) }, {
-                    userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
-                }))
     }
 }

@@ -56,8 +56,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
     override fun onPageSelected(position: Int) {
         PreferenceUtil.getInstance().lyricsOptions = position
-        if (position == 0) fab.text = "Sync lyrics"
-        else if (position == 1) fab.text = "Lyrics"
+        if (position == 0) fab.text = getString(R.string.synced_lyrics)
+        else if (position == 1) fab.text = getString(R.string.lyrics)
     }
 
     override fun onClick(v: View?) {
@@ -151,16 +151,23 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         MaterialDialog(this).show {
-            title(text = "Add lyrics")
-            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
-            message(text = "Add time frame lyrics")
-            negativeButton(text = "Delete") { LyricUtil.deleteLrcFile(song.title, song.artistName) }
-            input(hint = "Paste lyrics here",
+            title(R.string.add_time_framed_lryics)
+            negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
+            input(hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
                 LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
             }
-            positiveButton(android.R.string.ok)
+            positiveButton(android.R.string.ok) {
+                updateSong()
+            }
+        }
+    }
+
+    private fun updateSong() {
+        val page = supportFragmentManager.findFragmentByTag("android:switcher:" + R.id.viewPager + ":" + viewPager.currentItem)
+        if (viewPager.currentItem == 0 && page != null) {
+            (page as BaseLyricsFragment).upDateSong()
         }
     }
 
@@ -172,23 +179,24 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         MaterialDialog(this).show {
-            title(text = "Add lyrics")
-            neutralButton(text = "Search") { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
-            negativeButton(text = "Delete") { LyricUtil.deleteLrcFile(song.title, song.artistName) }
-            input(hint = "Paste lyrics here",
+            title(R.string.add_lyrics)
+            negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
+            input(hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
                 WriteTagsAsyncTask(this@LyricsActivity).execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null))
             }
-            positiveButton(android.R.string.ok)
+            positiveButton(android.R.string.ok) {
+                updateSong()
+            }
         }
     }
 
     private fun getSongPaths(song: Song): ArrayList<String> {
         val paths = ArrayList<String>(1)
-        paths.add(song.data!!)
+        paths.add(song.data)
         return paths
     }
 
@@ -318,9 +326,11 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         private fun setupLyricsView() {
             lyricsView.apply {
+                val context = activity!!
                 setCurrentPlayLineColor(ThemeStore.accentColor(context))
                 setIndicatorTextColor(ThemeStore.accentColor(context))
                 setCurrentIndicateLineTextColor(ThemeStore.textColorPrimary(context))
+                setNoLrcTextColor(ThemeStore.textColorPrimary(context))
                 setOnPlayIndicatorLineListener(object : LrcView.OnPlayIndicatorLineListener {
                     override fun onPlay(time: Long, content: String) {
                         MusicPlayerRemote.seekTo(time.toInt())
