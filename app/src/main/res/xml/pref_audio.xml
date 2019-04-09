@@ -5,6 +5,7 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"
         android:key="audio_ducking"
+        app:enableCopying="true"
         app:iconSpaceReserved="false"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking" />

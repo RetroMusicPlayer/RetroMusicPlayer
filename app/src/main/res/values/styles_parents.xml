@@ -82,7 +82,7 @@
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+
         <item name="md_corner_radius">12dp</item>
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>

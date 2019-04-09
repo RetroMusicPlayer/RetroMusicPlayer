@@ -27,7 +27,7 @@
         android:title="@string/pref_title_toggle_carousel_effect"
         app:iconSpaceReserved="false" />
 
-    <SeekBarPreference
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
         android:defaultValue="12"
         android:key="new_blur_amount"
         android:max="25"

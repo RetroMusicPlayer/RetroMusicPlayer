@@ -27,7 +27,7 @@ import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
 
 class MaterialListPreference : ListPreference {
-    private val mLayoutRes = code.name.monkey.retromusic.R.layout.ate_preference_list
+    private val mLayoutRes = R.layout.ate_preference_list
 
     constructor(context: Context) : super(context)
 

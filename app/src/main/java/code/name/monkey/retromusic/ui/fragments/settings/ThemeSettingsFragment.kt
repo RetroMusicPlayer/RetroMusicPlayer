@@ -92,14 +92,14 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
         accentColorPref.setOnPreferenceClickListener {
             MaterialDialog(activity!!).show {
-                title(code.name.monkey.retromusic.R.string.accent_color)
+                title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
-                    var colorFinal = Color.BLACK;
+                    /*var colorFinal = Color.BLACK;
                     if (!ColorUtil.isColorSaturated(color)) {
-                        colorFinal = color;
-                    }
-                    ThemeStore.editTheme(context).accentColor(colorFinal).commit()
+                        colorFinal = color
+                    }*/
+                    ThemeStore.editTheme(context).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(context).updateDynamicShortcuts()
                     activity!!.recreate()

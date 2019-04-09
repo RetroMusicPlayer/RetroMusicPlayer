@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.util.Log
 import android.view.MenuItem
@@ -25,8 +24,6 @@ import code.name.monkey.retromusic.ui.fragments.mainactivity.LibraryFragment
 import code.name.monkey.retromusic.ui.fragments.mainactivity.home.BannerHomeFragment
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.callbacks.onDismiss
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 
@@ -282,6 +279,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             R.id.action_playlist,
             R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false)
             R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false)
+            else -> {
+                setCurrentFragment(BannerHomeFragment.newInstance(), false)
+            }
         }
     }
 

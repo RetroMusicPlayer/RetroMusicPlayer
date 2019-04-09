@@ -3,10 +3,12 @@ package code.name.monkey.retromusic.ui.activities
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
 import android.view.*
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -39,6 +41,7 @@ import kotlinx.android.synthetic.main.fragment_synced.*
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
 import java.util.*
+import kotlin.collections.ArrayList
 
 class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
     override fun onPageScrollStateChanged(state: Int) {
@@ -209,26 +212,28 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     }
 
     class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> SyncedLyricsFragment()
-                1 -> OfflineLyricsFragment()
-                else -> SyncedLyricsFragment()
+        class Tabs(@StringRes val title: Int,
+                   val fragment: Fragment)
+
+        private var tabs = ArrayList<Tabs>()
+
+        init {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+                tabs.add(Tabs(R.string.synced_lyrics, SyncedLyricsFragment()))
             }
+            tabs.add(Tabs(R.string.normal_lyrics, OfflineLyricsFragment()))
+        }
+
+        override fun getItem(position: Int): Fragment {
+            return tabs[position].fragment
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return when (position) {
-                0 -> App.context.getString(R.string.synced_lyrics)
-                1 -> App.context.getString(R.string.normal_lyrics)
-                else -> {
-                    App.context.getString(R.string.synced_lyrics)
-                }
-            }
+            return App.context.getString(tabs[position].title)
         }
 
         override fun getCount(): Int {
-            return 2
+            return tabs.size
         }
 
     }

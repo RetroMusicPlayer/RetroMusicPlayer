@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Advanced">
 
-
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="keep_screen_on"
-            android:summary="@string/pref_keep_screen_on_summary"
-            android:title="@string/pref_keep_screen_on_title"
-            app:iconSpaceReserved="false" />
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
+            android:defaultValue="30"
+            android:key="filter_song"
+            android:max="60"
+            android:title="@string/pref_filter_song_title"
+            app:enableCopying="true"
+            app:iconSpaceReserved="false"
+            app:showSeekBarValue="true" />
 
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -17,20 +18,22 @@
             android:key="pause_on_zero_volume"
             android:summary="@string/pref_keep_pause_on_zero_volume_summary"
             android:title="@string/pref_keep_pause_on_zero_volume_title"
+            app:enableCopying="true"
             app:iconSpaceReserved="false" />
 
-        <SeekBarPreference
-            android:defaultValue="30"
-            android:key="filter_song"
-            android:max="60"
-            app:showSeekBarValue="true"
-            android:title="@string/pref_filter_song_title"
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="keep_screen_on"
+            android:summary="@string/pref_keep_screen_on_summary"
+            android:title="@string/pref_keep_screen_on_title"
+            app:enableCopying="true"
             app:iconSpaceReserved="false" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="snow_fall_effect"
             android:title="@string/pref_snow_fall_title"
+            app:enableCopying="true"
             app:iconSpaceReserved="false" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>

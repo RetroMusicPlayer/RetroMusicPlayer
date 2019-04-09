@@ -7,7 +7,7 @@
         android:id="@+id/action_grid_size"
         android:icon="@drawable/ic_grid_size_white_24dp"
         android:title="@string/action_grid_size"
-        app:showAsAction="ifRoom|withText">
+        app:showAsAction="ifRoom">
         <menu>
             <group
                 android:id="@+id/group_grid_size"

@@ -1,8 +1,10 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.SeekBar
+import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SeekBarPreference
 import code.name.monkey.appthemehelper.R
@@ -33,6 +35,6 @@ class ATESeekBarPreference : SeekBarPreference {
     override fun onBindViewHolder(view: PreferenceViewHolder) {
         super.onBindViewHolder(view)
         val seekBar = view.findViewById(R.id.seekbar) as SeekBar
-        TintHelper.setTintAuto(seekBar, ThemeStore.accentColor(context), true)
+        TintHelper.setTintAuto(seekBar, ThemeStore.accentColor(context), false)
     }
 }
