@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Малък албум</string>
     <string name="accent_color">Акцентен цвят</string>
     <string name="accent_color_desc">Акцентен цвят на темата, по подразбиране изумруден</string>
     <string name="action_about">Системни</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Разбъркай</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Разбъркай</string>
     <string name="app_shortcut_top_tracks_short">Любими песни</string>
     <string name="app_widget_big_name">Retro music - Голям</string>
     <string name="app_widget_card_name">Retro music - Карта</string>
     <string name="app_widget_classic_name">Retro music - Класически</string>
     <string name="app_widget_small_name">Retro music - Малък</string>
+    <string name="app_widget_text_name">Retro Music - Текст</string>
     <string name="artist">Изпълнител</string>
     <string name="artists">Изпълнители</string>
     <string name="audio_focus_denied">Аудио фокус отказан.</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Имайте предвид, че тази настройка може да повлияе на батерията.</string>
     <string name="pref_blur_amount_title">Количество на замъгленост</string>
     <string name="pref_blur_amount_summary">Количество на замъгленост при темите, колкото по-ниско, толкова по-бързо</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Отмени</string>
     <string name="card">Карта</string>
     <string name="card_color_style">Оцветена карта</string>
@@ -273,6 +276,7 @@
     <string name="pref_title_genre_toggle">Покажи раздел за жанрове</string>
     <string name="pref_title_home_artist_grid_style">Начална мрежа на изпълнители</string>
     <string name="pref_title_album_cover_transform">Стил на корица на албуми на екрана с песен</string>
+    <string name="pref_album_detail_style">Стил на детайли на албума</string>
     <string name="cascading">Каскаден</string>
     <string name="primary_color">Основен цвят</string>
     <string name="primary_color_desc">Основният цвят на темата, по подразбиране сиво-син, засега работи с тъмни цветове</string>
@@ -330,7 +334,6 @@
     <string name="speech_prompt">Търсене в библиотеката</string>
     <string name="summary_user_info">Покажи името ти на началния екран</string>
     <string name="support_development">Подкрепа на разработката</string>
-    <string name="synced_lyrics">Синхронизиран текст</string>
     <string name="system_equalizer">Системен усилвател</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -389,4 +392,46 @@
     <string name="labeled">С етикет</string>
     <string name="unlabeled">Без етикет</string>
     <string name="selected">Избран</string>
+    <string name="depth">Дълбочина</string>
+    <string name="vertical_flip">Вертикално завъртане</string>
+    <string name="hinge">Панта</string>
+    <string name="horizontal_flip">Хоризонтално завъртане</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Паузирай когато музиката е на нула и пусни при увеличаване на звука. Внимание, че при увеличаване на звука музиката започва дори и извън приложението.</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Паузирай на нула</string>
+    <string name="whats_new">Какво е ново?</string>
+    <string name="suggestion_songs">Предложения</string>
+    <string name="fit">Побери</string>
+    <string name="pref_now_playing_screen_title">Натисни или плъзни</string>
+    <string name="pref_now_playing_screen_summary">Натисни за или плъзни за без прозрачна навигация на екрана с песен</string>
+    <string name="clear_playing_queue">Изчисти опашката</string>
+    <string name="buy_pro">Купи Retro Music Pro</string>
+    <string name="share_app">Сподели приложението</string>
+    <string name="report_bug">Докладвай нередности</string>
+    <string name="bug_report_use_account">Изпрати чрез GitHub акаунт</string>
+    <string name="login">Влез</string>
+    <string name="bug_report_manual">Изпрати ръчно</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Ще бъдете препратени към сайта на тракера.</string>
+    <string name="bug_report_issue">Проблем</string>
+    <string name="title">Заглавие</string>
+    <string name="description">Описание</string>
+    <string name="username">Потребителско име</string>
+    <string name="password">Парола</string>
+    <string name="device_info">Информация за устройството</string>
+    <string name="report_an_issue">Докладвай проблем</string>
+    <string name="bug_report_no_username">Моля, въведете валидно GitHub име</string>
+    <string name="bug_report_no_password">Моля, въведете валидна GitHub парола</string>
+    <string name="bug_report_no_title">Моля, въведете заглавие за проблема</string>
+    <string name="bug_report_no_description">Моля, въведете описание на проблема</string>
+    <string name="bug_report_uploading">Качване на доклада в GitHub...</string>
+    <string name="bug_report_failed">Неуспешно изпращане на доклада</string>
+    <string name="bug_report_failed_wrong_credentials">Грешно име или парола</string>
+    <string name="bug_report_failed_invalid_token">Невалиден тоукън за достъп. Моля, свържете се с разработчика на приложението.</string>
+    <string name="bug_report_failed_issues_not_available">Моля, свържете се с разработчика на приложението.</string>
+    <string name="bug_report_failed_unknown">Грешка. Моля, свържете се с разработчика на приложението.</string>
+    <string name="copied_device_info_to_clipboard">Копирана информация за устройството в клипборда.</string>
+    <string name="your_account_data_is_only_used_for_authentication">Данните на акаунта Ви се използват единствено за автентификация.</string>
+    <string name="pref_snow_fall_title">Ефект на валящ сняг</string>
+    <string name="pref_title_blacklist">Черен списък</string>
+    <string name="pref_summary_blacklist">Съдържанието на блокиратите папки е скрито от библиотеката Ви.</string>
+    <string name="synced_lyrics">Синхронизиран текст</string>
 </resources>

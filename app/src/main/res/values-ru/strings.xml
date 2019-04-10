@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Маленький альбом</string>
     <string name="accent_color">Основной цвет</string>
-    <string name="accent_color_desc">По умолчанию, основной цвет зеленовато-голубоватый.</string>
+    <string name="accent_color_desc">Основной цвет, по умолчанию зеленовато-голубой.</string>
     <string name="action_about">О программe</string>
     <string name="action_add_to_favorites">В избранное</string>
     <string name="action_add_to_playing_queue">"Добавить в очередь "</string>
@@ -37,7 +38,7 @@
     <string name="action_settings">"Настройки"</string>
     <string name="action_share">Поделиться</string>
     <string name="action_shuffle_all">Случайный порядок для всех песен</string>
-    <string name="action_shuffle_playlist">Случайный плейлист</string>
+    <string name="action_shuffle_playlist">Перемешать плейлист</string>
     <string name="action_sleep_timer">Таймер сна</string>
     <string name="action_sort_order">Сортировка</string>
     <string name="action_tag_editor">Редактор тегов</string>
@@ -58,20 +59,21 @@
     <string name="app_shortcut_last_added_long">Последние добавленные</string>
     <string name="app_shortcut_last_added_short">Последние добавленные</string>
     <string name="app_shortcut_shuffle_all_long">Перемешать все</string>
-    <string name="app_shortcut_shuffle_all_short">Перемешать</string>
     <string name="app_shortcut_top_tracks_long">Мои любимые треки</string>
+    <string name="app_shortcut_shuffle_all_short">Перемешать</string>
     <string name="app_shortcut_top_tracks_short">Любимые треки</string>
     <string name="app_widget_big_name">Retro music - Крупный</string>
     <string name="app_widget_card_name">Retro music - Карточка</string>
     <string name="app_widget_classic_name">Retro music - Классический</string>
     <string name="app_widget_small_name">Retro music - Маленький</string>
+    <string name="app_widget_text_name">Retro music - Текст</string>
     <string name="artist">Исполнитель</string>
     <string name="artists">Исполнители</string>
     <string name="audio_focus_denied">Фокус на аудио отключен.</string>
     <string name="audio_settings_summary">Отрегулировать настройки звука и эквалайзера</string>
     <string name="bass_boost">Усиление баса</string>
     <string name="biography">Биография</string>
-    <string name="black_theme_name">Только черный</string>
+    <string name="black_theme_name">Черный</string>
     <string name="blacklist">Черный список</string>
     <string name="blur">Размытие</string>
     <string name="blur_card">Размытая карточка</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Имейте в виду, что включение этой функции может повлиять на заряд батареи</string>
     <string name="pref_blur_amount_title">Размытие</string>
     <string name="pref_blur_amount_summary">Количество размытия, применяемое для размытых тем, чем ниже эта опция, тем быстрее работает приложение</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Отменить</string>
     <string name="card">Карточка</string>
     <string name="card_color_style">Цветная карточка</string>
@@ -104,7 +107,7 @@
     <string name="created_playlist_x">Создан плейлист %1$s.</string>
     <string name="credit_title">Участники и помощники</string>
     <string name="currently_listening_to_x_by_x">Сейчас играет %1$s от %2$s.</string>
-    <string name="dark_theme_name">Типа черный</string>
+    <string name="dark_theme_name">Темный</string>
     <string name="default_hint">Нет текста</string>
     <string name="delete_playlist_title">Удалить плейлист</string>
     <string name="delete_playlist_x"><![CDATA[Удалить плейлист <b>%1$s</b>?]]></string>
@@ -131,7 +134,7 @@
     <string name="for_you">Для вас</string>
     <string name="full">Полный</string>
     <string name="general_settings_summary">Изменить тему и цвета приложения</string>
-    <string name="general_settings_title">Смотри и чувствуй</string>
+    <string name="general_settings_title">Внешний вид плеера</string>
     <string name="genre">Жанр</string>
     <string name="genres">Жанры</string>
     <string name="git_hub_summary">Развивай проект на GitHub</string>
@@ -161,7 +164,7 @@
     <string name="lets_play_something">Давайте послушаем немного музыки</string>
     <string name="library">Библиотека</string>
     <string name="licenses">Лицензии</string>
-    <string name="light_theme_name">Чисто белый</string>
+    <string name="light_theme_name">Белый</string>
     <string name="listing_files">Список файлов</string>
     <string name="loading_products">Загрузка товаров...</string>
     <string name="lyrics">Текст</string>
@@ -229,7 +232,7 @@
     <string name="pref_summary_ignore_media_store_artwork">Может повысить качество обложки альбома, но приведет к более медленной загрузки изображения. Включите это только в том случае, если у вас есть картинки с низким разрешением</string>
     <string name="pref_summary_lock_screen">Используйте экран блокировки Retro Music</string>
     <string name="pref_summary_open_source_licences">Сведения о лицензии для программного обеспечения с открытым исходным кодом</string>
-    <string name="pref_summary_round_corners">Закруглить края в приложении</string>
+    <string name="pref_summary_round_corners">Закруглить углы в приложении</string>
     <string name="pref_summary_tab_titles">Включить заголовки для вкладок нижней панели навигации</string>
     <string name="pref_summary_toggle_full_screen">Полноэкранный режим</string>
     <string name="pref_summary_toggle_headset">Начать воспроизведение музыки сразу после подключения наушников</string>
@@ -241,7 +244,7 @@
     <string name="pref_title_album_art_on_lockscreen">Показать обложку альбома</string>
     <string name="pref_title_tab_text_mode">Название кнопок</string>
     <string name="pref_title_album_grid_style">Сетка альбомов</string>
-    <string name="pref_title_app_shortcuts">Цветные шорткаты</string>
+    <string name="pref_title_app_shortcuts">Цветные ярлыки</string>
     <string name="pref_title_artist_grid_style">Сетка исполнителей</string>
     <string name="pref_title_audio_ducking">Уменьшить громкость при потере фокуса</string>
     <string name="pref_title_auto_download_artist_images">Автозагрузка изображений исполнителя</string>
@@ -258,7 +261,7 @@
     <string name="pref_title_navigation_bar">Цветная панель навигации</string>
     <string name="pref_title_now_playing_screen_appearance">Тема экрана текущего воспроизведение</string>
     <string name="pref_title_open_source_licences">Лицензии с открытым кодом</string>
-    <string name="pref_title_round_corners">Угловые края</string>
+    <string name="pref_title_round_corners">Круглые углы</string>
     <string name="pref_title_toggle_carousel_effect">Эффект карусели</string>
     <string name="pref_title_toggle_dominant_color">Главный цвет</string>
     <string name="pref_title_toggle_full_screen">Полноэкранное приложение</string>
@@ -272,6 +275,7 @@
     <string name="pref_title_genre_toggle">Показать вкладку жанра</string>
     <string name="pref_title_home_artist_grid_style">Сетка исполнителя на Главной странице</string>
     <string name="pref_title_album_cover_transform">Стиль обложки экрана текущего воспроизведение</string>
+    <string name="pref_album_detail_style">Стиль деталей альбома</string>
     <string name="cascading">Каскадный</string>
     <string name="primary_color">Основной цвет</string>
     <string name="primary_color_desc">Основной цвет темы, по умолчанию - синий, теперь работает с темными цветами</string>
@@ -329,7 +333,6 @@
     <string name="speech_prompt">Поиск в вашей библиотеке</string>
     <string name="summary_user_info">Просто покажите свое имя на главном экране</string>
     <string name="support_development">Поддержать разработку</string>
-    <string name="synced_lyrics">Синхронизированный текст</string>
     <string name="system_equalizer">Системный эквалайзер</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -388,4 +391,47 @@
     <string name="labeled">Помечено</string>
     <string name="unlabeled">Не помечено</string>
     <string name="selected">Выбрано</string>
+    <string name="depth">Глубина</string>
+    <string name="vertical_flip">Вертикальная ориентация</string>
+    <string name="hinge">Петля</string>
+    <string name="horizontal_flip">Горизонтальная ориентация</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Автоматически ставит музыку на паузу при уменьшении громкости до нуля и играет после увеличения громкости. Предупреждение, когда вы увеличиваете громкость не в приложении, то Retro Music также начнёт воспроизведение</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Пауза при нулевой громкости</string>
+    <string name="whats_new">Список нововведений</string>
+    <string name="suggestion_songs">Предложения</string>
+    <string name="fit">Соответствие</string>
+    <string name="pref_now_playing_screen_title">Нажмите или Проведите</string>
+    <string name="pref_now_playing_screen_summary">Нажмите, чтобы открыть экран воспроизведения с прозрачной навигации или проведите чтобы открыть без прозрачной навигации</string>
+    <string name="clear_playing_queue">Очистить очередь</string>
+    <string name="buy_pro">Купить Retro Music Pro</string>
+    <string name="share_app">Поделиться приложением</string>
+    <string name="report_bug">Сообщить об ошибке</string>
+    <string name="bug_report_use_account">Отправить с помощью учетной записи GitHub</string>
+    <string name="login">Войти</string>
+    <string name="bug_report_manual">Отправить вручную</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Вы будете перенаправлены на сайт системы отслеживания ошибок.</string>
+    <string name="bug_report_issue">Ощибка</string>
+    <string name="title">Название</string>
+    <string name="description">Описание</string>
+    <string name="username">Имя пользователя</string>
+    <string name="password">Пароль</string>
+    <string name="device_info">Информация об устройстве</string>
+    <string name="report_an_issue">Сообщить о проблеме</string>
+    <string name="bug_report_no_username">Пожалуйста, введите корректно ваше имя пользователя GitHub</string>
+    <string name="bug_report_no_password">Пожалуйста, введите ваш корректный пароль GitHub</string>
+    <string name="bug_report_no_title">Пожалуйста, введите название отчета о проблеме</string>
+    <string name="bug_report_no_description">Пожалуйста, введите описание проблемы</string>
+    <string name="bug_report_uploading">Загрузка отчета на GitHub…</string>
+    <string name="bug_report_failed">Невозможно отправить отчет</string>
+    <string name="bug_report_failed_wrong_credentials">Неверное имя пользователя или пароль</string>
+    <string name="bug_report_failed_invalid_token">Недопустимый ключ доступа. Пожалуйста, свяжитесь с разработчиком приложения.</string>
+    <string name="bug_report_failed_issues_not_available">Проблемы не активны в выбранном хранилище. Пожалуйста, свяжитесь с разработчиком приложения.</string>
+    <string name="bug_report_failed_unknown">Произошла непредвиденная ошибка. Пожалуйста, свяжитесь с разработчиком приложения.</string>
+    <string name="copied_device_info_to_clipboard">Скопировать информацию об устройстве в буфер обмена.</string>
+    <string name="your_account_data_is_only_used_for_authentication">Данные вашей учетной записи используются только для аутентификации.</string>
+    <string name="pref_snow_fall_title">Эффект снегопада</string>
+    <string name="pref_title_blacklist">Черный список</string>
+    <string name="pref_summary_blacklist">Содержимое черного списка скрыто из вашей библиотеки.</string>
+    <string name="edit">Изменить</string>
+    <string name="synced_lyrics">Синхронизированный текст</string>
 </resources>
