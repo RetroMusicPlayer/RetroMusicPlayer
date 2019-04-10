@@ -58,7 +58,7 @@
     <!-- App Shortcuts -->
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
-    <string name="app_shortcut_shuffle_all_long">@string/wszystko_losowo</string>
+    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
     <string name="app_shortcut_shuffle_all_short">Losowo</string>
     <string name="app_shortcut_top_tracks_short">Najczęściej odtwarzane utwory</string>

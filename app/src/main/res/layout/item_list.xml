@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                app:fontFamily="@font/circular_std_book"
+                app:fontFamily="@font/circular_std_medium"
                 android:textSize="16sp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -89,7 +89,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                app:fontFamily="@font/circular_std_book"
                 android:ellipsize="end"
                 android:maxLines="1"  />
         </LinearLayout>
