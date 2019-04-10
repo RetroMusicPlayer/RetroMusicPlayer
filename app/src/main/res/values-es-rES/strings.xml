@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Album pequeño</string>
     <string name="accent_color">Color de énfasis</string>
-    <string name="accent_color_desc">Album</string>
-    <string name="action_about">Sobre nosotros</string>
+    <string name="accent_color_desc">El color de énfasis es aqua por defecto</string>
+    <string name="action_about">Acerca de</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
     <string name="action_add_to_playing_queue">Añadir a cola de reproducción</string>
     <string name="action_add_to_playlist">Añadir a lista de reproducción</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Mezclar</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Mezclar</string>
     <string name="app_shortcut_top_tracks_short">Top canciones</string>
     <string name="app_widget_big_name">Retro music - Grande</string>
     <string name="app_widget_card_name">Retro music  - Tarjeta</string>
     <string name="app_widget_classic_name">Retro music - Clásico</string>
     <string name="app_widget_small_name">Retro music - Pequeño</string>
+    <string name="app_widget_text_name">Retro Music -Text</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
     <string name="audio_focus_denied">Enfoque de audio denegado.</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Activar esta función puede afectar a la duración de la batería</string>
     <string name="pref_blur_amount_title">Cantidad de desenfoque</string>
     <string name="pref_blur_amount_summary">Cantidad de desenfoque aplicado para los temas con desenfoque, más bajo es más rápido</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Tarjeta</string>
     <string name="card_color_style">Tarjeta coloreada</string>
@@ -271,7 +274,8 @@
     <string name="pref_title_home_banner">Portada de inicio</string>
     <string name="pref_title_genre_toggle">Mostrar géneros</string>
     <string name="pref_title_home_artist_grid_style">Cuadrícula de inicio de artistas</string>
-    <string name="pref_title_album_cover_transform">Estilo de la portada del álbum en la pantalla de reproducción</string>
+    <string name="pref_title_album_cover_transform">Estilo de la caratula en reproducción</string>
+    <string name="pref_album_detail_style">Estilo de la información del álbum</string>
     <string name="cascading">En cascada</string>
     <string name="primary_color">Color primario</string>
     <string name="primary_color_desc">El color de tema primario, azul grisáceo por defecto, por ahora funciona con colores oscuros</string>
@@ -329,7 +333,6 @@
     <string name="speech_prompt">Buscar en tu biblioteca</string>
     <string name="summary_user_info">Solo mostrar tu nombre en la pantalla de inicio</string>
     <string name="support_development">Apoyar desarrollo</string>
-    <string name="synced_lyrics">Letra sincronizada</string>
     <string name="system_equalizer">Ecualizador del sistema</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -387,4 +390,47 @@
     <string name="labeled">Con etiquetas</string>
     <string name="unlabeled">Sin etiquetas</string>
     <string name="selected">Seleccionado</string>
+    <string name="depth">Profundidad</string>
+    <string name="vertical_flip">Giro vertical</string>
+    <string name="hinge">Bisagra</string>
+    <string name="horizontal_flip">Giro Horizontal</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pausar la reproducción cuando se esta en silencio y reproducir cuando se aumenta el volumen. ¡Cuidado! Cuando se aumenta el volumen se empezara la reproducción aunque se este fuera de la app.</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pausar en silencio</string>
+    <string name="whats_new">Novedades</string>
+    <string name="suggestion_songs">Sugerencias</string>
+    <string name="fit">Fit</string>
+    <string name="pref_now_playing_screen_title">Toca o desliza</string>
+    <string name="pref_now_playing_screen_summary">Toca para abrir con o desliza sin la barra de navegación transparente de la pantalla de reproducción</string>
+    <string name="clear_playing_queue">Limpiar cola de reproducción</string>
+    <string name="buy_pro">Compra Retro Music Pro</string>
+    <string name="share_app">Comparte la app</string>
+    <string name="report_bug">Reporta problemas</string>
+    <string name="bug_report_use_account">Envía usando la cuenta de GitHub</string>
+    <string name="login">Iniciar Sección</string>
+    <string name="bug_report_manual">Enviar manualmente</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Sera redirigido al sitio web para reportar problemas.</string>
+    <string name="bug_report_issue">Problemas</string>
+    <string name="title">Titulo</string>
+    <string name="description">Descripción</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="device_info">Información del dispositivo</string>
+    <string name="report_an_issue">Reporta un problema</string>
+    <string name="bug_report_no_username">Por favor, entra tu usuario de GitHub Valido</string>
+    <string name="bug_report_no_password">Por favor, entra tu contraseña de GitHub Valido</string>
+    <string name="bug_report_no_title">Por favor, escribe el titulo del problema</string>
+    <string name="bug_report_no_description">Por favor, describe el problema</string>
+    <string name="bug_report_uploading">Enviando el reporte a GitHub...</string>
+    <string name="bug_report_failed">Es imposible enviar el reporte</string>
+    <string name="bug_report_failed_wrong_credentials">Usuario o contraseña incorrecta</string>
+    <string name="bug_report_failed_invalid_token">Token de acceso invalido. Por favor, contacta con el desarrollador de la app.</string>
+    <string name="bug_report_failed_issues_not_available">El problema no esta habilitado para el repositorio seleccionado. Por favor, contacta col el desarrollador de la app.</string>
+    <string name="bug_report_failed_unknown">Un error inesperado a ocurrido. Por favor, contacta col el desarrollador de la app.</string>
+    <string name="copied_device_info_to_clipboard">Información del dispositivo copiado al porta-papeles.</string>
+    <string name="your_account_data_is_only_used_for_authentication">La información de tu cuenta es solo para autenticar tu identidad.</string>
+    <string name="pref_snow_fall_title">Efecto de nevada</string>
+    <string name="pref_title_blacklist">Lista negra</string>
+    <string name="pref_summary_blacklist">Las carpetas en la lista negra, serán ocultado de tu librería.</string>
+    <string name="edit">Editar</string>
+    <string name="synced_lyrics">Letra sincronizada</string>
 </resources>

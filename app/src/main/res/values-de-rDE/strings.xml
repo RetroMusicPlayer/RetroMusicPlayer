@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Kleines Album</string>
     <string name="accent_color">Akzentfarbe</string>
     <string name="accent_color_desc">Die Akzentfarbe, standardmäßig auf Grün gestellt</string>
     <string name="action_about">Über</string>
@@ -23,7 +24,7 @@
     <string name="action_play_next">Als nächstes abspielen</string>
     <string name="action_play_pause">Abspielen/Pausieren</string>
     <string name="action_previous">Vorheriger</string>
-    <string name="action_remove_from_favorites">Von Favoriten entfernen</string>
+    <string name="action_remove_from_favorites">Aus Favoriten entfernen</string>
     <string name="action_remove_from_playing_queue">Von Warteschlange entfernen</string>
     <string name="action_remove_from_playlist">Von Wiedergabeliste entfernen</string>
     <string name="action_rename">Umbenennen</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Shufflen</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Shufflen</string>
     <string name="app_shortcut_top_tracks_short">Top Songs</string>
     <string name="app_widget_big_name">Retro Music - Groß</string>
     <string name="app_widget_card_name">Retro Music - Karte</string>
     <string name="app_widget_classic_name">Retro Music - Klassisch</string>
     <string name="app_widget_small_name">Retro Music - Klein</string>
+    <string name="app_widget_text_name">Retro Music - Text</string>
     <string name="artist">Interpret</string>
     <string name="artists">Interpreten</string>
     <string name="audio_focus_denied">Audiofokus nicht möglich.</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Beachte, dass diese Funktion sich auf die Akkulaufzeit auswirkt.</string>
     <string name="pref_blur_amount_title">Unschärfe</string>
     <string name="pref_blur_amount_summary">Geringere Unschärfe benötigt weniger Rechenleistung.</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Abbrechen</string>
     <string name="card">Karte</string>
     <string name="card_color_style">Karte (Farbe)</string>
@@ -89,7 +92,7 @@
     <string name="changelog">Änderungen</string>
     <string name="changelog_summary">Änderungsprotokoll im Telegram-Channel</string>
     <string name="clear_action">Leeren</string>
-    <string name="clear_blacklist">Schwarze Liste leeren</string>
+    <string name="clear_blacklist">Leeren</string>
     <string name="clear_playlist_title">Wiedergabeliste leeren</string>
     <string name="clear_playlist_x"><![CDATA[Die Wiedergabeliste <b>%1$s</b> leeren? Dies kann nicht r\u00fcckg\u00e4ngig gemacht werden!]]></string>
     <string name="close_notification">Schließen</string>
@@ -272,6 +275,7 @@
     <string name="pref_title_genre_toggle">Genre-Tab anzeigen</string>
     <string name="pref_title_home_artist_grid_style">Künstlerbilder auf der Startseite</string>
     <string name="pref_title_album_cover_transform">Stil des Album-Covers</string>
+    <string name="pref_album_detail_style">Style der Albumdetails</string>
     <string name="cascading">Kaskadierend</string>
     <string name="primary_color">Primärfarbe</string>
     <string name="primary_color_desc">Die Primärfarbe, standardmäßig blau/grau, funktioniert nun auch mit dunklen Farben</string>
@@ -329,7 +333,6 @@
     <string name="speech_prompt">Durchsuche deine Bibliothek</string>
     <string name="summary_user_info">Zeige deinen Namen auf dem Startbildschirm</string>
     <string name="support_development">Unterstütze die Entwicklung</string>
-    <string name="synced_lyrics">Synchronisierter Songtext</string>
     <string name="system_equalizer">System-Equalizer</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -387,4 +390,47 @@
     <string name="labeled">Beschriftet</string>
     <string name="unlabeled">Unbeschriftet</string>
     <string name="selected">Ausgewähltes beschriftet</string>
+    <string name="depth">Tiefe</string>
+    <string name="vertical_flip">Vertikale Drehung</string>
+    <string name="hinge">Scharnier</string>
+    <string name="horizontal_flip">Horizontale Drehung</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Die Musik pausieren, wenn die Lautstärke auf 0 gestellt wird. Achtung! Wenn die Lautstärke wieder erhöht wird, wird die Musik weiter abgespielt.</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Bei Stummstellung pausieren</string>
+    <string name="whats_new">Neuigkeiten</string>
+    <string name="suggestion_songs">Für dich</string>
+    <string name="fit">Anpassen</string>
+    <string name="pref_now_playing_screen_title">Wischgesten</string>
+    <string name="pref_now_playing_screen_summary">Tippen oder wischen, um den Abspielbildschirm zu öffnen. Ist Wischen aktiv, kann die Navigationsleiste nicht transparent sein.</string>
+    <string name="clear_playing_queue">Leeren</string>
+    <string name="buy_pro">Retro Music Pro kaufen</string>
+    <string name="share_app">App teilen</string>
+    <string name="report_bug">Einen Fehler melden</string>
+    <string name="bug_report_use_account">Via GitHub senden</string>
+    <string name="login">Login</string>
+    <string name="bug_report_manual">Manuell senden</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Du wirst auf die Issue Tracker-Seite weitergeleitet.</string>
+    <string name="bug_report_issue">Problem</string>
+    <string name="title">Titel</string>
+    <string name="description">Beschreibung</string>
+    <string name="username">Nutzername</string>
+    <string name="password">Passwort</string>
+    <string name="device_info">Geräteinfo</string>
+    <string name="report_an_issue">Fehler melden</string>
+    <string name="bug_report_no_username">Bitte nutze einen gültigen GitHub-Nutzernamen</string>
+    <string name="bug_report_no_password">Bitte nutze das korrekte GitHub-Passwort</string>
+    <string name="bug_report_no_title">Bitte gebe einen Titel ein</string>
+    <string name="bug_report_no_description">Bitte gebe eine Beschreibung ein</string>
+    <string name="bug_report_uploading">Meldung zu GitHub hochladen...</string>
+    <string name="bug_report_failed">Fehler beim Melden</string>
+    <string name="bug_report_failed_wrong_credentials">Falscher Nutzername oder Passwort</string>
+    <string name="bug_report_failed_invalid_token">Ungültiger Token. Bitte kontaktiere den Entwickler.</string>
+    <string name="bug_report_failed_issues_not_available">Für diese Repository sind Fehlermeldungen nicht aktiviert. Bitte den Entwickler kontaktieren.</string>
+    <string name="bug_report_failed_unknown">Ein unerwarteter Fehler ist aufgetreten. Bitte kontaktiere den Entwickler.</string>
+    <string name="copied_device_info_to_clipboard">Geräteinformationen wurden kopiert</string>
+    <string name="your_account_data_is_only_used_for_authentication">Deine Accountdaten werden ausschließlich zur Authentifizierung genutzt</string>
+    <string name="pref_snow_fall_title">Schneefall-Effekt</string>
+    <string name="pref_title_blacklist">Schwarze Liste</string>
+    <string name="pref_summary_blacklist">Die Musik in Ordnern von der schwarzen Liste wird nicht angezeigt.</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="synced_lyrics">Synchronisierter Songtext</string>
 </resources>
