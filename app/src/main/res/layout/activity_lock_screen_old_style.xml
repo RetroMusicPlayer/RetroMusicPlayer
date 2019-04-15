@@ -31,8 +31,6 @@
     </LinearLayout>
 
 
-
-
     <code.name.monkey.retromusic.views.WidthFitSquareLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +53,7 @@
                 android:scaleType="centerCrop" />
         </com.google.android.material.card.MaterialCardView>
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+
     <TextView
         android:id="@+id/slide"
         android:layout_width="match_parent"

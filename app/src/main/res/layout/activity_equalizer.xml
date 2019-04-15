@@ -8,58 +8,45 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:elevation="0dp">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout xmlns:tools="http://schemas.android.com/tools"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:layout_collapseMode="pin"
+            app:title=""
+            tools:ignore="UnusedAttribute">
 
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/bannerTitle"
+                style="@style/BigTitleTextAppearanceToolbar"
+                android:text="@string/equalizer" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/equalizerSwitch"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            app:titleEnabled="false">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
-
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/bannerTitle"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/equalizer"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    tools:ignore="MissingPrefix" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/equalizerSwitch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="16dp"  />
-
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            android:background="@color/md_red_A400"
+            android:fontFamily="@font/circular_std_medium"
+            android:padding="16dp"
+            android:text="@string/on" />
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,19 +55,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:padding="16dp"
-                    android:text="Select preset"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-                <Spinner
-                    android:id="@+id/presets"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@android:color/transparent" />
+                    android:padding="16dp"
+                    android:text="@string/select_preset" />
+
+                <Spinner
+                    android:id="@+id/presets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -91,12 +78,12 @@
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/bassBoost"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:padding="16dp"
-                    android:text="@string/bass_boost"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:text="@string/bass_boost" />
 
                 <SeekBar
                     android:id="@+id/bassBoostStrength"
@@ -120,12 +107,12 @@
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     android:id="@+id/virtualizer"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:padding="16dp"
-                    android:text="@string/virtualizer"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:text="@string/virtualizer" />
 
                 <SeekBar
                     android:id="@+id/virtualizerStrength"

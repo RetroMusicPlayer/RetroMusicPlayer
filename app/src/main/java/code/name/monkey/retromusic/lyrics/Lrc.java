@@ -12,33 +12,33 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.util.schedulers;
-
-import androidx.annotation.NonNull;
-
-import io.reactivex.Scheduler;
-import io.reactivex.schedulers.Schedulers;
+package code.name.monkey.retromusic.lyrics;
 
 /**
- * Created by hemanths on 12/08/17.
+ * Desc : 歌词实体
+ * Author : Lauzy
+ * Date : 2017/10/13
+ * Blog : http://www.jianshu.com/u/e76853f863a9
+ * Email : freedompaladin@gmail.com
  */
+public class Lrc {
+    private long time;
+    private String text;
 
-public class ImmediateScheduler implements BaseSchedulerProvider {
-    @NonNull
-    @Override
-    public Scheduler computation() {
-        return Schedulers.trampoline();
+    public long getTime() {
+        return time;
     }
 
-    @NonNull
-    @Override
-    public Scheduler io() {
-        return Schedulers.trampoline();
+    public void setTime(long time) {
+        this.time = time;
     }
 
-    @NonNull
-    @Override
-    public Scheduler ui() {
-        return Schedulers.trampoline();
+    public String getText() {
+        return text;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
 }

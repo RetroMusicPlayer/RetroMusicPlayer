@@ -41,7 +41,6 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layout = LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
-            SUGGESTIONS -> SuggestionViewHolder(LayoutInflater.from(activity).inflate(R.layout.section_item_collage, parent, false))
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
             GENRES -> GenreViewHolder(layout)
             PLAYLISTS -> PlaylistViewHolder(layout)
@@ -54,10 +53,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val home = homes[position]
         when (getItemViewType(position)) {
-            SUGGESTIONS -> {
-                val viewHolder = holder as SuggestionViewHolder
-                viewHolder.bindView(home)
-            }
+
             RECENT_ALBUMS, TOP_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
                 viewHolder.bindView(home)
@@ -88,17 +84,16 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
 
     companion object {
 
-        @IntDef(SUGGESTIONS, RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, GENRES, PLAYLISTS)
+        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, GENRES, PLAYLISTS)
         @Retention(AnnotationRetention.SOURCE)
         annotation class HomeSection
 
-        const val SUGGESTIONS = 0
-        const val RECENT_ALBUMS = 1
-        const val TOP_ALBUMS = 2
-        const val RECENT_ARTISTS = 3
-        const val TOP_ARTISTS = 4
-        const val GENRES = 5
-        const val PLAYLISTS = 6
+        const val RECENT_ALBUMS = 0
+        const val TOP_ALBUMS = 1
+        const val RECENT_ARTISTS = 2
+        const val TOP_ARTISTS = 3
+        const val GENRES = 4
+        const val PLAYLISTS = 5
 
     }
 

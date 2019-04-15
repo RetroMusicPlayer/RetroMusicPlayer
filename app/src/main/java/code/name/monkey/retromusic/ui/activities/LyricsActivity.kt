@@ -22,6 +22,8 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
+import code.name.monkey.retromusic.lyrics.LrcHelper
+import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.ui.activities.base.AbsMusicServiceActivity
@@ -33,8 +35,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
-import com.lauzy.freedom.library.LrcHelper
-import com.lauzy.freedom.library.LrcView
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
 import kotlinx.android.synthetic.main.fragment_synced.*

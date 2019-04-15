@@ -22,7 +22,6 @@ import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.GENRES
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.PLAYLISTS
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.RECENT_ALBUMS
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.RECENT_ARTISTS
-import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.SUGGESTIONS
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.TOP_ALBUMS
 import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.TOP_ARTISTS
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -80,7 +79,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
         disposable += repository.topAlbums
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
+                    if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
                     view.showEmpty()
@@ -91,7 +90,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
         disposable += repository.topArtists
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
+                    if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
                     view.showEmpty()

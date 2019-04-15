@@ -6,7 +6,7 @@
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.lauzy.freedom.library.LrcView
+    <code.name.monkey.retromusic.lyrics.LrcView
         android:id="@+id/lyricsView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

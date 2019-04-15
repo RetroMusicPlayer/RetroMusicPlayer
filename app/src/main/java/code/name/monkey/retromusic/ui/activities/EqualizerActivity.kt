@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter
 import android.widget.SeekBar
 import android.widget.TextView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -24,17 +26,7 @@ import kotlinx.android.synthetic.main.activity_equalizer.*
 
 class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedListener {
 
-
-    /*private val mListener = { buttonView, isChecked ->
-        when (buttonView.getId()) {
-            R.id.equalizerSwitch -> {
-                EqualizerHelper.instance!!.equalizer.enabled = isChecked
-                TransitionManager.beginDelayedTransition(content)
-                content.visibility = if (isChecked) View.VISIBLE else View.GONE
-            }
-        }
-    }*/
-    private val mSeekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
+    private val seekBarChangeListener = object : SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
             if (fromUser) {
                 if (seekBar === bassBoostStrength) {
@@ -58,13 +50,11 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
         }
     }
 
-
-    private var mPresetsNamesAdapter: ArrayAdapter<String>? = null
+    private var presetsNamesAdapter: ArrayAdapter<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_equalizer)
-
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -74,7 +64,10 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
         setupToolbar()
 
         equalizerSwitch.isChecked = EqualizerHelper.instance!!.equalizer.enabled
-        TintHelper.setTintAuto(equalizerSwitch, ThemeStore.accentColor(this), false)
+        equalizerSwitch.setBackgroundColor(ThemeStore.accentColor(this))
+        val widgetColor = MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))
+        equalizerSwitch.setTextColor(widgetColor)
+        TintHelper.setTintAuto(equalizerSwitch, widgetColor, false)
         equalizerSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
             when (buttonView.id) {
                 R.id.equalizerSwitch -> {
@@ -85,17 +78,17 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
             }
         }
 
-        mPresetsNamesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
-        presets.adapter = mPresetsNamesAdapter
+        presetsNamesAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1)
+        presets.adapter = presetsNamesAdapter
         presets.onItemSelectedListener = this
 
         bassBoostStrength.progress = EqualizerHelper.instance!!.bassBoostStrength
         ViewUtil.setProgressDrawable(bassBoostStrength, ThemeStore.accentColor(this))
-        bassBoostStrength.setOnSeekBarChangeListener(mSeekBarChangeListener)
+        bassBoostStrength.setOnSeekBarChangeListener(seekBarChangeListener)
 
         virtualizerStrength.progress = EqualizerHelper.instance!!.virtualizerStrength
         ViewUtil.setProgressDrawable(virtualizerStrength, ThemeStore.accentColor(this))
-        virtualizerStrength.setOnSeekBarChangeListener(mSeekBarChangeListener)
+        virtualizerStrength.setOnSeekBarChangeListener(seekBarChangeListener)
 
         setupUI()
         addPresets()
@@ -124,12 +117,12 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
     }
 
     private fun addPresets() {
-        mPresetsNamesAdapter!!.clear()
-        mPresetsNamesAdapter!!.add("Custom")
+        presetsNamesAdapter!!.clear()
+        presetsNamesAdapter!!.add("Custom")
         for (j in 0 until EqualizerHelper.instance!!.equalizer.numberOfPresets) {
-            mPresetsNamesAdapter!!
+            presetsNamesAdapter!!
                     .add(EqualizerHelper.instance!!.equalizer.getPresetName(j.toShort()))
-            mPresetsNamesAdapter!!.notifyDataSetChanged()
+            presetsNamesAdapter!!.notifyDataSetChanged()
         }
         presets.setSelection(EqualizerHelper.instance!!.equalizer.currentPreset.toInt() + 1)
     }

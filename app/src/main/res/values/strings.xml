@@ -614,5 +614,7 @@
     <string name="dialog_message_set_ringtone">Allow Retro Music to modify audio settings</string>
     <string name="about_settings_summary">Team, social links</string>
     <string name="other_settings_summary">Advanced testing features</string>
+    <string name="on">On</string>
+    <string name="select_preset">Select preset</string>
 
 </resources>
