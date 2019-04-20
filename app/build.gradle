@@ -120,13 +120,13 @@ static def getDate() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.fragment:fragment:1.1.0-alpha05'
+    implementation 'androidx.fragment:fragment:1.1.0-alpha06'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha04'
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.palette:palette:1.0.0"
-    implementation 'androidx.annotation:annotation:1.1.0-alpha02'
+    implementation 'androidx.annotation:annotation:1.1.0-beta01'
     implementation 'androidx.preference:preference:1.1.0-alpha04'
     implementation "androidx.legacy:legacy-support-v13:1.0.0"
     implementation "androidx.legacy:legacy-preference-v14:1.0.0"
