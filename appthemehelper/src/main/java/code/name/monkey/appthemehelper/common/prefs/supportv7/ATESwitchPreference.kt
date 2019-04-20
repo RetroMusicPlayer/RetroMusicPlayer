@@ -30,7 +30,6 @@ class ATESwitchPreference : CheckBoxPreference {
     }
 
     private fun init() {
-        layoutResource = R.layout.ate_preference_custom_support
         widgetLayoutResource = R.layout.ate_preference_switch_support
     }
 }

@@ -1,11 +1,11 @@
 package code.name.monkey.appthemehelper.common.views
 
 import android.content.Context
-import androidx.appcompat.widget.SwitchCompat
 import android.util.AttributeSet
 import android.view.View
-
+import androidx.appcompat.widget.SwitchCompat
 import code.name.monkey.appthemehelper.ATH
+import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
 
 
@@ -27,6 +27,9 @@ class ATESwitch : SwitchCompat {
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
+        setThumbResource(R.drawable.toggle_switch)
+        setTrackResource(R.drawable.ate_track)
+        background = null
         ATH.setTint(this, ThemeStore.accentColor(context))
     }
 

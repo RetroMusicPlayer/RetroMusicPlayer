@@ -10,7 +10,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:background="@color/md_black_1000">
 
         <LinearLayout
             android:id="@+id/userInfoContainer"
@@ -42,11 +43,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
-                    app:fontFamily="@font/circular_std_medium"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:id="@+id/text"
@@ -91,9 +92,9 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
-                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/general_settings_title"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -138,9 +139,9 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
-                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/now_playing"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -184,8 +185,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_audio"
-                    app:fontFamily="@font/circular_std_medium"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -228,9 +229,9 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
-                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/personalize"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -273,8 +274,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_images"
-                    app:fontFamily="@font/circular_std_medium"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -316,9 +317,9 @@
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
-                    app:fontFamily="@font/circular_std_medium"
                     android:text="@string/notification"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -334,9 +335,9 @@
             android:id="@+id/otherSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="72dp"
             android:background="?rectSelector"
             android:gravity="center_vertical"
+            android:minHeight="72dp"
             android:orientation="horizontal">
 
             <code.name.monkey.retromusic.views.ColorIconsImageView
@@ -361,10 +362,10 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    app:fontFamily="@font/circular_std_medium"
                     android:singleLine="true"
                     android:text="@string/others"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -375,13 +376,14 @@
                     android:textSize="@dimen/ate_default_textsize_body" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/aboutSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="72dp"
             android:background="?rectSelector"
             android:gravity="center_vertical"
+            android:minHeight="72dp"
             android:orientation="horizontal">
 
             <code.name.monkey.retromusic.views.ColorIconsImageView
@@ -406,10 +408,10 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    app:fontFamily="@font/circular_std_medium"
                     android:singleLine="true"
                     android:text="@string/action_about"
-                    android:textSize="@dimen/ate_default_textsize_subheading" />
+                    android:textSize="@dimen/ate_default_textsize_subheading"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"

@@ -25,7 +25,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
                 showProToastAndNavigate(activity!!.getString(R.string.pref_title_toggle_carousel_effect))
                 return@setOnPreferenceChangeListener false
             }
-            true
+            return@setOnPreferenceChangeListener true
         }
     }
 
