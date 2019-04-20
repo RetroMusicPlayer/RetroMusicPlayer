@@ -14,30 +14,9 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_settings.*
 
 
-class SettingsActivity : AbsBaseActivity(), /*ColorChooserDialog.ColorCallback,*/ SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private val fragmentManager = supportFragmentManager
-
-   /* override fun onColorSelection(dialog: ColorChooserDialog, @ColorInt selectedColor: Int) {
-        when (dialog.title) {
-            R.string.primary_color -> {
-                val theme = if (ColorUtil.isColorLight(selectedColor))
-                    PreferenceUtil.getThemeResFromPrefValue("light")
-                else
-                    PreferenceUtil.getThemeResFromPrefValue("dark")
-
-                ThemeStore.editTheme(this).activityTheme(theme).primaryColor(selectedColor).commit()
-            }
-            R.string.accent_color -> ThemeStore.editTheme(this).accentColor(selectedColor).commit()
-        }
-        if (VersionUtils.hasNougatMR())
-            DynamicShortcutManager(this).updateDynamicShortcuts()
-        recreate()
-    }
-
-    override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
-
-    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
