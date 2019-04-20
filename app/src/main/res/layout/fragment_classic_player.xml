@@ -42,7 +42,7 @@
 
                     <fragment
                         android:id="@+id/playerAlbumCoverFragment"
-                        class="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+                        class="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -50,7 +50,7 @@
 
                 <fragment
                     android:id="@+id/playbackControlsFragment"
-                    class="code.name.monkey.retromusic.ui.fragments.player.classic.ClassicPlayerPlaybackControlsFragment"
+                    class="code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/albumCoverContainer" />

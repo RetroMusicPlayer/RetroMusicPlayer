@@ -25,7 +25,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist
+import code.name.monkey.retromusic.adapter.playlist.AddToPlaylist
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_to_playlist.*
 

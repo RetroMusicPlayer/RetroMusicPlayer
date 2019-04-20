@@ -29,7 +29,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.activities.SearchActivity
+import code.name.monkey.retromusic.activities.SearchActivity
 
 
 class AppShortcutLauncherActivity : Activity() {

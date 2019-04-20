@@ -256,7 +256,7 @@
 
                 <fragment
                     android:id="@+id/volumeFragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
+                    android:name="code.name.monkey.retromusic.fragments.VolumeFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

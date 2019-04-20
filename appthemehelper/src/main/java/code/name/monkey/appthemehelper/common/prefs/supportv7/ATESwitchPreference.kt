@@ -3,9 +3,8 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
-import androidx.preference.CheckBoxPreference
 import android.util.AttributeSet
-
+import androidx.preference.CheckBoxPreference
 import code.name.monkey.appthemehelper.R
 
 /**

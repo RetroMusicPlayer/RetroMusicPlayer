@@ -37,8 +37,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.RetroUtil;
 
 /**

@@ -26,9 +26,9 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.ui.activities.MainActivity
-import code.name.monkey.retromusic.ui.activities.bugreport.BugReportActivity
-import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment
+import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil

@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import code.name.monkey.retromusic.ui.adapter.HomeAdapter.Companion.HomeSection
+import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.HomeSection
 
 /**
  * Created by hemanths on 3/4/19

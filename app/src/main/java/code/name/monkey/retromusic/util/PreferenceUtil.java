@@ -41,10 +41,10 @@ import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
-import code.name.monkey.retromusic.ui.activities.MainActivity;
-import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
-import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
-import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment;
+import code.name.monkey.retromusic.activities.MainActivity;
+import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
+import code.name.monkey.retromusic.fragments.NowPlayingScreen;
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 
 public final class PreferenceUtil {
 

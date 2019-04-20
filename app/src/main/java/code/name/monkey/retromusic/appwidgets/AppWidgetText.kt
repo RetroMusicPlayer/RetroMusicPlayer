@@ -27,7 +27,7 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.activities.MainActivity
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.RetroUtil
 
 class AppWidgetText : BaseAppWidget() {

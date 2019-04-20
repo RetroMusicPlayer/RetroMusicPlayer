@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
-        android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_player_album_cover" />
@@ -88,7 +88,7 @@
 
                     <fragment
                         android:id="@+id/playbackControlsFragment"
-                        android:name="code.name.monkey.retromusic.ui.fragments.player.tiny.TinyPlaybackControlsFragment"
+                        android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:layout="@layout/fragment_tiny_controls_fragment" />

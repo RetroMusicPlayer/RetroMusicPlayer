@@ -17,7 +17,7 @@ package code.name.monkey.retromusic.helper
 import android.content.Intent
 import androidx.core.app.ActivityCompat
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.ui.activities.bugreport.ErrorHandlerActivity
+import code.name.monkey.retromusic.activities.bugreport.ErrorHandlerActivity
 
 class TopExceptionHandler() : Thread.UncaughtExceptionHandler {
     private val defaultUEH: Thread.UncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()

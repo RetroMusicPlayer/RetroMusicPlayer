@@ -18,7 +18,7 @@ import android.os.Bundle
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
-import code.name.monkey.retromusic.ui.activities.ArtistDetailActivity
+import code.name.monkey.retromusic.activities.ArtistDetailActivity
 
 
 /**
