@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.ui.activities
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Paint
 import android.os.AsyncTask
 import android.os.Bundle
@@ -21,10 +20,8 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.Constants.PAYPAL_ME_URL
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity
-import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.views.IconImageView
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
