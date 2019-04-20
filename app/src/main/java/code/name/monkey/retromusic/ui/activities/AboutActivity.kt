@@ -17,7 +17,6 @@ import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
 import code.name.monkey.retromusic.Constants.DISCORD_LINK
 import code.name.monkey.retromusic.Constants.FAQ_LINK
 import code.name.monkey.retromusic.Constants.GITHUB_PROJECT
-import code.name.monkey.retromusic.Constants.GOOGLE_PLUS_COMMUNITY
 import code.name.monkey.retromusic.Constants.PINTEREST
 import code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY
 import code.name.monkey.retromusic.Constants.TELEGRAM_CHANGE_LOG
@@ -105,7 +104,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         faqLink.setOnClickListener(this)
         telegramLink.setOnClickListener(this)
         appRate.setOnClickListener(this)
-        googlePlus.setOnClickListener(this)
         appTranslation.setOnClickListener(this)
         appShare.setOnClickListener(this)
         donateLink.setOnClickListener(this)
@@ -123,7 +121,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.telegramLink -> openUrl(APP_TELEGRAM_LINK)
             R.id.discordLink -> openUrl(DISCORD_LINK)
             R.id.appGithub -> openUrl(GITHUB_PROJECT)
-            R.id.googlePlus -> openUrl(GOOGLE_PLUS_COMMUNITY)
             R.id.appTranslation -> openUrl(TRANSLATE)
             R.id.appRate -> openUrl(RATE_ON_GOOGLE_PLAY)
             R.id.appShare -> shareApp()

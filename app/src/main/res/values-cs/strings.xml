@@ -127,8 +127,6 @@
     <string name="notification">Upozornění</string>
     <string name="now_playing_queue">Aktuální fronta</string>
     <string name="only_on_wifi">Pouze přes Wifi</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me nám umožňuje posílat peníze za několik vteřin. PayPal bere 3% z daru. Standardní poplatek je 0.30$ <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Povolení přístupu k externímu úložišti bylo zamítnuto.</string>
     <string name="permissions_denied">Oprávnění byla odepřena.</string>
     <string name="pick_from_local_storage">Vyberte z místního úložiště</string>

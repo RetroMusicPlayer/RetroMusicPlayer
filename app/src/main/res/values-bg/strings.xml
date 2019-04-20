@@ -199,8 +199,6 @@
     <string name="only_on_wifi">Само през Wi-Fi</string>
     <string name="others">Други</string>
     <string name="past_three_months">Последните 3 месеца</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me is an easy way to donate me money. In case you only linked a debit or a credit card the fee in the U.S. is 2.9% of the donation + $0.30 USD. Otherwise, there is no fee.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Достъп до вътрешната памет отказан.</string>
     <string name="permissions_denied">Достъп отказан.</string>
     <string name="personalize">Персонализирай.</string>

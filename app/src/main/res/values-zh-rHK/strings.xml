@@ -198,8 +198,6 @@
     <string name="only_on_wifi">僅透過Wi-Fi</string>
     <string name="others">其他</string>
     <string name="past_three_months">在3個月內</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">Paypal.me是捐款給我們最簡單的方法。若如果您是使用信用卡或轉賬卡進行捐款，在美國境內則會收取捐款中的 2.9% 的費用，再另加 US$0.30 ，否則不收取任何費用。 <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">更多資料</a></string>
     <string name="permission_external_storage_denied">存取外置儲存空間權限被拒。</string>
     <string name="permissions_denied">存取權限被拒。</string>
     <string name="personalize">個人化</string>

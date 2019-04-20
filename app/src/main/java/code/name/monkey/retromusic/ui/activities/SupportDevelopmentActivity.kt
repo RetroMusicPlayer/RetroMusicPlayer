@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.annotation.UiThread
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -75,9 +74,6 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
         TintHelper.setTint(progress, ThemeStore.accentColor(this))
         donation.setTextColor(ThemeStore.accentColor(this))
-        donate.setOnClickListener {
-            RetroUtil.openUrl(this, PAYPAL_ME_URL)
-        }
     }
 
     private fun setupToolbar() {
@@ -91,7 +87,6 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         setSupportActionBar(toolbar)
         title = null
 
-        donate.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 

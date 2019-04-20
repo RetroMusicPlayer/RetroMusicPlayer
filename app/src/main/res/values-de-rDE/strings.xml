@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Nur über WLAN</string>
     <string name="others">Anderes</string>
     <string name="past_three_months">Vergangene 3 Monate</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me ist eine einfache Möglichkeit, Geld zu spenden. Es werden lediglich geringe Gebühren für den Währungswechsel erhoben. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Hier mehr.</a></string>
     <string name="permission_external_storage_denied">Zugriff auf externen Speicher wurde verweigert.</string>
     <string name="permissions_denied">Zugriff verweigert.</string>
     <string name="personalize">Personalisieren</string>

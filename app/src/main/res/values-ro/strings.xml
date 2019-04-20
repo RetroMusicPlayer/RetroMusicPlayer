@@ -166,8 +166,6 @@
     <string name="only_on_wifi">Doar pe Wi-Fi</string>
     <string name="others">Altele</string>
     <string name="past_three_months">Ultimele 3 luni</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me permite sa donezi bani mai usor. Folosind cardul tau de credit, PayPal ia 3% din donatie plus suma de 0.30$ in Statele Unite, iar in caz contrar nu exista taxe. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Accesul la stocarea externă este respinsă.</string>
     <string name="permissions_denied">Permisiunile au fost respinse.</string>
     <string name="personalize">Personalizare</string>

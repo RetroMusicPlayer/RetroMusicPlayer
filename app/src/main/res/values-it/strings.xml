@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Solo tramite Wi-fi</string>
     <string name="others">Altro</string>
     <string name="past_three_months">Ultimi 3 mesi</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me è un modo semplice per donarmi denaro. Se hai collegato solo una carta di credito o di debito, la commissione negli Stati Uniti è pari al 2,9% della donazione + 0,30$. In caso contrario, non ci sono costi. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Altro</a></string>
     <string name="permission_external_storage_denied">Autorizzazione ad accedere all\'archiviazione esterna negata.</string>
     <string name="permissions_denied">Autorizzazione negata.</string>
     <string name="personalize">Personalizza</string>

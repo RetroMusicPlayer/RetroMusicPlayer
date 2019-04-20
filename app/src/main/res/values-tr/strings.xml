@@ -199,8 +199,6 @@ bağış yapabilirsin</string>
     <string name="only_on_wifi">Sadece Wi-Fi ile</string>
     <string name="others">Diğerleri</string>
     <string name="past_three_months">Son 3 ay</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me bana para bağışlamanın kolay bir yoludur. Sadece bir banka kartını veya bir kredi kartını bağlamanız durumunda, ABD\'deki ücret bağışın% 2,9\'u + 0,30 ABD dolarıdır. Aksi takdirde, herhangi bir ücret alınmaz. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690"> daha fazla </a></string>
     <string name="permission_external_storage_denied">Depolama izni reddedildi.</string>
     <string name="permissions_denied">İzinler reddedildi</string>
     <string name="personalize">Kişiselleştirin</string>

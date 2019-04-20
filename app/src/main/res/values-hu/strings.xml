@@ -195,8 +195,6 @@
     <string name="only_on_wifi">Csak Wi-Fi-n</string>
     <string name="others">Egyéb</string>
     <string name="past_three_months">3 hónapnál túl</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">A PayPal.me egy egyszerű módja annak, hogy pénzt adjon nekünk. Abban az esetben, ha csak terhelési vagy hitelkártyát vehet fel, az Egyesült Államokban az összeg az adomány 2.9% -a, plusz $ 0.30 USD, ellenkező esetben nincs díj.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">több</a></string>
     <string name="permission_external_storage_denied">A külső tárolási hozzáférés engedélyezése tiltva.</string>
     <string name="permissions_denied">Engedélyek megtagadva.</string>
     <string name="personalize">Megszemélyesít</string>

@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Tylko przez Wi-Fi</string>
     <string name="others">Inne ustawienia</string>
     <string name="past_three_months">Przez 3 miesiące</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me jest prostą metodą dotacji. Jeżeli podłączyłeś kartę kredytową lub debetową opłata w Stanach wynosi 2.9% dotacji plus 0.30$, w innym wypadku opłata nie następuje. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">więcej</a></string>
     <string name="permission_external_storage_denied">Odmowa dostępu do pamięci zewnętrznej.</string>
     <string name="permissions_denied">Odmowa dostępu.</string>
     <string name="personalize">Personalizuj</string>

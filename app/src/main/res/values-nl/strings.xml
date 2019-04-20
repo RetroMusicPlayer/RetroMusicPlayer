@@ -133,8 +133,6 @@
     <string name="now_playing_queue">Nu afspeel wachtrij</string>
     <string name="only_on_wifi">Alleen Wi-Fi</string>
     <string name="past_three_months">Laatste 3 maanden</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me is een makkelijke manier om geld aan ons te doneren. Voor het geval je een creditcard gelinkt hebt, dan komt er nog 2,9% bij in de US + $0.30 USD, anders is er niets extra\'s. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">meer</a></string>
     <string name="permission_external_storage_denied">Permissie voor toegang tot extern opslag is afgewezen</string>
     <string name="permissions_denied">Permissies afgewezen</string>
     <string name="pick_from_local_storage">Kies van local storage</string>

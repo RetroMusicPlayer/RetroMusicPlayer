@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Wi-Fi-arekin bakarrik</string>
     <string name="others">Bestelako</string>
     <string name="past_three_months">Azken 3 hilabeteak</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me dirua emateko modu erraz bat da. Debituzko edo kredituzko txartel bat loturik izanez gero, kuota AEBn dohaintzaren 2.9% + $0.30 USD da. Bestela, ez dago kuotarik.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">gehiago</a></string>
     <string name="permission_external_storage_denied">Kanpoko biltegiratzera sarbidea ukatua</string>
     <string name="permissions_denied">Baimenak ukatuak izan dira</string>
     <string name="personalize">Pertsonalizatu</string>

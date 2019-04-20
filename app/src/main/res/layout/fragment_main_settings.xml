@@ -391,7 +391,7 @@
                 android:layout_marginStart="16dp"
                 android:padding="10dp"
                 app:iconBackgroundColor="@color/md_light_green_A400"
-                app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+                app:srcCompat="@drawable/ic_info_outline_white_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

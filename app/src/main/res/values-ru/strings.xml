@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Только по Wi-Fi</string>
     <string name="others">Другое</string>
     <string name="past_three_months">Последние 3 месяца</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me - это простой способ пожертвовать мне деньги. Если у вас привязаны только дебетовая или кредитная карта, то плата в США составит 2,9% от пожертвования + 0,30 доллара. В противном случае плата не взимается.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">подробнее</a></string>
     <string name="permission_external_storage_denied">Разрешение для доступа у внешнему хранилищу не получено.</string>
     <string name="permissions_denied">Разрешения не получены.</string>
     <string name="personalize">Персонализировать</string>

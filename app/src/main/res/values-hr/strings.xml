@@ -199,8 +199,6 @@
     <string name="only_on_wifi">Samo na Wi-Fi-u</string>
     <string name="others">Ostalo</string>
     <string name="past_three_months">Prošla 3 mjeseca</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me je jednostavan način da nam donirate  novac. U slučaju da ste povezali samo debitnu ili kreditnu karticu, provizija u SAD-u je 2.9% donacije + $0.30. Inače nema provizije.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">više</a></string>
     <string name="permission_external_storage_denied">Dopuštenje za pristup eksternoj memoriji odbijeno.</string>
     <string name="permissions_denied">Dopuštenja odbijena.</string>
     <string name="personalize">Prilagodba</string>

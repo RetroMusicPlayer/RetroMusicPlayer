@@ -153,8 +153,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="now_playing_queue">再生中のキュー</string>
     <string name="only_on_wifi">Wi-Fiでのみ</string>
     <string name="past_three_months">3ヶ月前</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.meを使えば簡単に私達にお金を寄付することができます。クレジットカード又はデビットカードを用いた場合、手数料は寄付額の2.9%と固定額の0.3ドル(約34円)がかかります。<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">詳細</a></string>
     <string name="permission_external_storage_denied">外部ストレージへのアクセスが拒否されました</string>
     <string name="permissions_denied">パーミッションが拒否されました</string>
     <string name="pick_from_local_storage">ローカルストレージから選択</string>

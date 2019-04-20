@@ -199,8 +199,6 @@
     <string name="only_on_wifi">Solo con Wi-Fi</string>
     <string name="others">Otro</string>
     <string name="past_three_months">Más de 3 meses</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me es una forma fácil de donar dinero. En caso de que solo tenga vinculado una tarjeta débito o crédito, la tarifa en los EE.UU. Es del 2.9% de la donación más $ 0.30 USD. De lo contrario, no hay tarifa. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Más </a></string>
     <string name="permission_external_storage_denied">Permiso de acceso al almacenamiento externo denegado.</string>
     <string name="permissions_denied">Permiso denegado.</string>
     <string name="personalize">Personalizar</string>

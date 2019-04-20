@@ -199,8 +199,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="only_on_wifi">Apenas com Wi-Fi</string>
     <string name="others">Outro</string>
     <string name="past_three_months">Últimos 3 meses</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me é uma maneira fácil de me doar dinheiro. Caso você tenha vinculado apenas um cartão de débito ou de crédito a taxa nos EUA é de 2,9% da doação + US $0,30, caso contrário, não há taxa.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">mais</a></string>
     <string name="permission_external_storage_denied">Permissão para acessar o armazenamento externo negada</string>
     <string name="permissions_denied">Permissões negadas</string>
     <string name="personalize">Personalizar</string>

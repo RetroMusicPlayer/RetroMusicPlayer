@@ -198,8 +198,6 @@
     <string name="only_on_wifi">Uniquement via Wi-Fi</string>
     <string name="others">Autre</string>
     <string name="past_three_months">3 derniers mois</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me est un moyen facile de nous faire un don. Si vous avez uniquement lié une carte de débit ou une carte de crédit dans les USA, les frais s\'élèveront 2,9 % du montant plus 0,30 $, dans tous les autres cas aucun frais ne s\'appliquera. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Plus d\'informations.</a></string>
     <string name="permission_external_storage_denied">La permission pour accéder au stockage externe a été refusée.</string>
     <string name="permissions_denied">Permission refusée.</string>
     <string name="personalize">Personnaliser</string>
