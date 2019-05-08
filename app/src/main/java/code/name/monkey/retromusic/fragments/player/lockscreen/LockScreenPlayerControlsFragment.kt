@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.fragments.player.lockscreen
 
 import android.animation.ObjectAnimator
@@ -26,7 +40,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_lock_screen_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
-import kotlinx.android.synthetic.main.player_time.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -121,13 +134,6 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         text!!.setTextColor(color)
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, isDark), false)
         TintHelper.setTintAuto(playPauseButton, color, true)
-    }
-
-    fun setProgressBarColor(progressBar: SeekBar?, newColor: Int) {
-        TintHelper.setTintAuto(progressBar!!, newColor, false)
-        //LayerDrawable ld = (LayerDrawable) progressBar.getProgressDrawable();
-        //ClipDrawable clipDrawable = (ClipDrawable) ld.findDrawableByLayerId(android.R.id.progress);
-        //clipDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN);
     }
 
     private fun setUpPlayPauseFab() {
