@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -48,8 +49,9 @@ import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
-
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.adapter.SongFileAdapter;
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
@@ -60,8 +62,6 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.adapter.SongFileAdapter;
-import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
@@ -245,7 +245,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         });
 
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(),
+                ColorUtil.INSTANCE.darkenColor(primaryColor)));
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
     }
 
@@ -347,7 +348,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                 BreadCrumbLayout.Crumb crumb = getActiveCrumb();
                 if (crumb != null) {
                     //noinspection Convert2MethodRef
-                    new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths)).execute(new ListPathsAsyncTask.LoadingInfo(crumb.getFile(), AUDIO_FILE_FILTER));
+                    new ListPathsAsyncTask(getActivity(), paths -> scanPaths(paths)).execute(new ListPathsAsyncTask.LoadingInfo(crumb.getFile(),
+                            AUDIO_FILE_FILTER));
                 }
                 return true;
         }
@@ -454,7 +456,9 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     case R.id.action_details:
                     case R.id.action_set_as_ringtone:
                     case R.id.action_delete_from_device:
-                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(getActivity(), songs.get(0), itemId)).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER, getFileComparator()));
+                        new ListSongsAsyncTask(getActivity(), null, (songs, extra) -> SongMenuHelper.INSTANCE.handleMenuClick(getActivity(),
+                                songs.get(0), itemId)).execute(new ListSongsAsyncTask.LoadingInfo(toList(file), AUDIO_FILE_FILTER,
+                                getFileComparator()));
                         return true;
                     case R.id.action_scan:
                         new ListPathsAsyncTask(getActivity(), this::scanPaths).execute(new ListPathsAsyncTask.LoadingInfo(file, AUDIO_FILE_FILTER));
@@ -739,13 +743,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            View view= LayoutInflater.from(context).inflate(R.layout.progress_bar,null);
-            ProgressBar progressBar= view.findViewById(R.id.progressBar);
-            ViewUtil.INSTANCE.setProgressDrawable(progressBar,ThemeStore.Companion.accentColor(context));
+            View view = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
+            ProgressBar progressBar = view.findViewById(R.id.progressBar);
+            ViewUtil.INSTANCE.setProgressDrawable(progressBar, ThemeStore.Companion.accentColor(context));
 
-            MaterialDialog materialDialog= new MaterialDialog(context);
-            materialDialog.setContentView(R.layout.progress_bar);
-            materialDialog.title(R.string.listing_files,"");
+            MaterialDialog materialDialog = new MaterialDialog(context, new BottomSheet());
+            materialDialog.setContentView(view);
+            materialDialog.title(R.string.listing_files, "");
             return materialDialog;
 
         }
