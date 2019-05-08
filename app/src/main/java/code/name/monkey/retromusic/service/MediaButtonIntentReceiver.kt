@@ -19,14 +19,13 @@ import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Handler
 import android.os.Message
 import android.os.PowerManager
 import android.os.PowerManager.WakeLock
 import android.util.Log
 import android.view.KeyEvent
-
+import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.Constants.ACTION_PAUSE
 import code.name.monkey.retromusic.Constants.ACTION_PLAY
@@ -34,6 +33,7 @@ import code.name.monkey.retromusic.Constants.ACTION_REWIND
 import code.name.monkey.retromusic.Constants.ACTION_SKIP
 import code.name.monkey.retromusic.Constants.ACTION_STOP
 import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
+
 
 /**
  * Used to control headset playback.
@@ -152,10 +152,16 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
         private fun startService(context: Context, command: String?) {
             val intent = Intent(context, MusicService::class.java)
             intent.action = command
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
+            try {
+                // IMPORTANT NOTE: (kind of a hack)
+                // on Android O and above the following crashes when the app is not running
+                // there is no good way to check whether the app is running so we catch the exception
+                // we do not always want to use startForegroundService() because then one gets an ANR
+                // if no notification is displayed via startForeground()
+                // according to Play analytics this happens a lot, I suppose for example if command = PAUSE
                 context.startService(intent)
+            } catch (ignored: IllegalStateException) {
+                ContextCompat.startForegroundService(context, intent)
             }
         }
 
