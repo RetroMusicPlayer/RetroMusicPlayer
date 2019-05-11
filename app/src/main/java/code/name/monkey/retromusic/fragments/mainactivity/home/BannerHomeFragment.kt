@@ -2,20 +2,21 @@ package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
@@ -26,13 +27,15 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
-import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.Request
+import com.bumptech.glide.request.target.SizeReadyCallback
+import com.bumptech.glide.request.target.Target
+import com.bumptech.glide.request.transition.Transition
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -107,23 +110,58 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun loadImageFromStorage(imageView: ImageView) {
-        disposable.add(Compressor(context!!)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it != null) {
-                        imageView.setImageBitmap(it)
-                    } else {
-                        imageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+        GlideApp.with(mainActivity)
+                .asDrawable()
+                .placeholder(R.drawable.ic_person_flat)
+                .fallback(R.drawable.ic_person_flat)
+                .load(File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
+                .into(object : Target<Drawable> {
+                    override fun onLoadStarted(placeholder: Drawable?) {
+                        imageView.setImageDrawable(placeholder)
                     }
-                }) {
-                    imageView.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        imageView.setImageDrawable(errorDrawable)
+                    }
+
+                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
+                        imageView.setImageDrawable(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+
+                    }
+
+                    override fun getSize(cb: SizeReadyCallback) {
+                        cb.onSizeReady(32, 32)
+                    }
+
+                    override fun removeCallback(cb: SizeReadyCallback) {
+
+                    }
+
+                    override fun setRequest(request: Request?) {
+
+                    }
+
+                    override fun getRequest(): Request? {
+                        return null
+                    }
+
+                    override fun onStart() {
+
+                    }
+
+                    override fun onStop() {
+
+                    }
+
+                    override fun onDestroy() {
+
+                    }
                 })
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -177,8 +215,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun checkPadding() {
         val marginSpan = when {
-            MusicPlayerRemote.playingQueue.isEmpty() -> RetroUtil.convertDpToPixel(52f, context).toInt()
-            else -> RetroUtil.convertDpToPixel(0f, context).toInt()
+            MusicPlayerRemote.playingQueue.isEmpty() -> RetroUtil.convertDpToPixel(52f, context!!).toInt()
+            else -> RetroUtil.convertDpToPixel(0f, context!!).toInt()
         }
 
         (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
@@ -187,12 +225,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun setupToolbar() {
         mainActivity.title = null
         toolbar.apply {
-            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_search_white_24dp), ThemeStore.textColorSecondary(context!!))
-            setBackgroundColor(Color.TRANSPARENT)
+            setBackgroundColor(if (PreferenceUtil.getInstance().isHomeBanner) Color.TRANSPARENT else ThemeStore.primaryColor(context))
             setNavigationOnClickListener {
                 NavigationUtil.goToSearch(activity)
             }
         }
+        mainActivity.setSupportActionBar(toolbar)
     }
 
     override fun handleBackPress(): Boolean {
@@ -243,6 +281,27 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_search, menu)
+
+        val activity = activity ?: return
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(activity, toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val activity = activity ?: return
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(activity, toolbar)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_search) {
+            NavigationUtil.goToSearch(mainActivity)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {

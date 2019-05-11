@@ -26,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -46,18 +47,19 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
-import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.List;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import java.lang.reflect.Method;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Collections;
+import java.util.List;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
@@ -113,19 +115,19 @@ public class RetroUtil {
         return (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     }
 
-    public static float convertDpToPixel(float dp, Context context) {
+    public static float convertDpToPixel(float dp, @NonNull Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-    public static float convertPixelsToDp(float px, Context context) {
+    public static float convertPixelsToDp(float px, @NonNull Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-    public static void openUrl(Activity context, String str) {
+    public static void openUrl(@NonNull Activity context, @NonNull String str) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.setData(Uri.parse(str));
         intent.setFlags(268435456);
@@ -197,7 +199,8 @@ public class RetroUtil {
                         ThemeStore.Companion.accentColor(App.Companion.getInstance()));
     }
 
-    public static Bitmap createBitmap(Drawable drawable, float sizeMultiplier) {
+    @NonNull
+    public static Bitmap createBitmap(@NonNull Drawable drawable, float sizeMultiplier) {
         Bitmap bitmap = Bitmap.createBitmap((int) (drawable.getIntrinsicWidth() * sizeMultiplier),
                 (int) (drawable.getIntrinsicHeight() * sizeMultiplier), Bitmap.Config.ARGB_8888);
         Canvas c = new Canvas(bitmap);
@@ -206,12 +209,13 @@ public class RetroUtil {
         return bitmap;
     }
 
+    @Nullable
     public static Drawable getTintedVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
                                                    @Nullable Resources.Theme theme, @ColorInt int color) {
         return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color);
     }
 
-    public static boolean isAllowedToDownloadMetadata(final Context context) {
+    public static boolean isAllowedToDownloadMetadata(final @NonNull Context context) {
         switch (PreferenceUtil.getInstance().autoDownloadImagesPolicy()) {
             case "always":
                 return true;
@@ -420,5 +424,12 @@ public class RetroUtil {
         int id = resources
                 .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
         return id > 0;
+    }
+
+    @NonNull
+    public static Drawable resize(@NonNull Context context, @NonNull Drawable image) {
+        Bitmap b = ((BitmapDrawable) image).getBitmap();
+        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 50, 50, false);
+        return new BitmapDrawable(context.getResources(), bitmapResized);
     }
 }

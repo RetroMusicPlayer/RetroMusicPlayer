@@ -1,7 +1,8 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,45 +12,45 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.afollestad.materialcab.MaterialCab;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.appbar.AppBarLayout;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
-import java.util.Objects;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.DrawableUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
+import code.name.monkey.retromusic.glide.GlideApp;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
-import code.name.monkey.retromusic.util.Compressor;
-import code.name.monkey.retromusic.util.ImageUtil;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
@@ -66,6 +67,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private FragmentManager fragmentManager;
     private ImageView userImage;
     private CompositeDisposable disposable;
+    private TextView bannerTitle;
 
     @NonNull
     public static Fragment newInstance(int tab) {
@@ -94,6 +96,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         contentContainer = view.findViewById(R.id.fragmentContainer);
+        bannerTitle = view.findViewById(R.id.bannerTitle);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
         userImage = view.findViewById(R.id.userImage);
@@ -103,21 +106,75 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return view;
     }
 
+
+
     private void loadImageFromStorage() {
-        disposable.add(new Compressor(Objects.requireNonNull(getContext()))
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(bitmap -> userImage.setImageBitmap(bitmap),
-                        throwable -> userImage.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_person_flat))));
+        GlideApp.with(getMainActivity())
+                .asDrawable()
+                .placeholder(R.drawable.ic_person_flat)
+                .fallback(R.drawable.ic_person_flat)
+                .load(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                .into(new Target<Drawable>() {
+                    @Override
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                        userImage.setImageDrawable(placeholder);
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        userImage.setImageDrawable(errorDrawable);
+                    }
+
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        userImage.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+
+                    @Override
+                    public void getSize(@NonNull SizeReadyCallback cb) {
+                        cb.onSizeReady(32, 32);
+                    }
+
+                    @Override
+                    public void removeCallback(@NonNull SizeReadyCallback cb) {
+
+                    }
+
+                    @Override
+                    public void setRequest(@Nullable Request request) {
+
+                    }
+
+                    @Nullable
+                    @Override
+                    public Request getRequest() {
+                        return null;
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onStop() {
+
+                    }
+
+                    @Override
+                    public void onDestroy() {
+
+                    }
+                });
     }
 
     public void setTitle(@StringRes int name) {
-        toolbar.setTitle(getString(name));
+        bannerTitle.setText(getString(name));
     }
 
     public void addOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
@@ -167,9 +224,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void setupToolbar() {
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
+        bannerTitle.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
 
         toolbar.setBackgroundColor(primaryColor);
-        toolbar.setLogo( R.drawable.ic_person_flat);
         toolbar.setNavigationIcon(null);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
@@ -252,7 +309,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         Activity activity = getActivity();
         if (activity == null) {
@@ -367,7 +424,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //if (pager == null) return false;
@@ -383,6 +439,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_search:
+                NavigationUtil.goToSearch(getMainActivity());
+                break;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
                 return true;

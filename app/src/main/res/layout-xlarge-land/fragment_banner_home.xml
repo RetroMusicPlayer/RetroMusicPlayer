@@ -61,27 +61,28 @@
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
-                        android:layout_gravity="center_vertical"
                         app:layout_collapseMode="pin"
-                        app:layout_scrollFlags="scroll|enterAlways"
                         tools:ignore="UnusedAttribute">
-
-                        <TextView
-                            android:id="@+id/bannerTitle"
-                            style="@style/BigTitleTextAppearanceToolbar"
-                            android:shadowColor="@color/md_black_1000"
-                            android:shadowRadius="2"
-                            android:text="@string/app_name"
-                            android:textColor="@color/md_white_1000"
-                            tools:ignore="MissingPrefix" />
 
                         <code.name.monkey.retromusic.views.CircularImageView
                             android:id="@+id/userImage"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="16dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="14dp"
+                            android:layout_weight="0"
                             app:civ_border="false" />
+
+                        <TextView
+                            android:id="@+id/bannerTitle"
+                            style="@style/BigTitleTextAppearanceToolbar"
+                            android:layout_gravity="start|center_vertical"
+                            android:paddingStart="14dp"
+                            android:paddingEnd="0dp"
+                            android:text="@string/library"
+                            android:textColor="@color/md_white_1000"
+                            tools:ignore="MissingPrefix" />
+
                     </androidx.appcompat.widget.Toolbar>
                 </LinearLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
