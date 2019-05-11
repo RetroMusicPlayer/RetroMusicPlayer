@@ -32,6 +32,7 @@ import java.util.Objects;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.DrawableUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -42,6 +43,7 @@ import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.util.Compressor;
+import code.name.monkey.retromusic.util.ImageUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
@@ -167,7 +169,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
-
+        toolbar.setLogo( R.drawable.ic_person_flat);
         toolbar.setNavigationIcon(null);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
