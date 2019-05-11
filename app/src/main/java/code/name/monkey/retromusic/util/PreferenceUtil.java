@@ -33,6 +33,10 @@ import java.util.Objects;
 
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.activities.MainActivity;
+import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
+import code.name.monkey.retromusic.fragments.NowPlayingScreen;
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
@@ -41,10 +45,6 @@ import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
-import code.name.monkey.retromusic.activities.MainActivity;
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
-import code.name.monkey.retromusic.fragments.NowPlayingScreen;
-import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 
 public final class PreferenceUtil {
 
@@ -651,9 +651,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_HEADSET, false);
     }
 
-    public boolean tabTitles() {
-        return mPreferences.getBoolean(TOGGLE_TAB_TITLES, true);
-    }
 
     public boolean isDominantColor() {
         return mPreferences.getBoolean(DOMINANT_COLOR, false);
@@ -755,6 +752,10 @@ public final class PreferenceUtil {
             case 3:
                 return LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
         }
+    }
+
+    public boolean tabTitles() {
+        return getTabTitleMode() != LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
     }
 
     @LayoutRes

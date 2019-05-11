@@ -66,15 +66,15 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
         return MaterialDialog(activity!!, BottomSheet())
                 .show {
-            title(text = materialListPreference.title.toString())
-            positiveButton(R.string.set)
-            listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
-                materialListPreference.callChangeListener(entriesValues!![index])
-                materialListPreference.setCustomValue(entriesValues[index])
-                materialListPreference.summary = entries!![index]
-                dismiss()
-            }
-        }
+                    title(text = materialListPreference.title.toString())
+                    positiveButton(R.string.set)
+                    listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
+                        materialListPreference.callChangeListener(entriesValues!![index])
+                        materialListPreference.setCustomValue(entriesValues[index])
+                        materialListPreference.summary = entries!![index]
+                        dismiss()
+                    }
+                }
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {

@@ -7,6 +7,7 @@
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
+        <item name="md_color_button_text">@color/md_white_1000</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -52,6 +53,8 @@
         <item name="colorPrimary">@color/md_deep_purple_A400</item>
         <item name="android:colorPrimary">?colorPrimary</item>
         <item name="android:windowBackground">?colorPrimary</item>
+
+        <item name="md_color_button_text">@color/md_white_1000</item>
     </style>
 
 
@@ -88,6 +91,7 @@
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
+        <item name="md_color_button_text">@color/md_black_1000</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>

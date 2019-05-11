@@ -3,16 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:elevation="0dp"
-        app:elevation="0dp"
         android:id="@+id/appBarLayout"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="25dp"
                 app:cardElevation="0dp">
 
@@ -42,7 +42,7 @@
                     android:background="@null"
                     android:hint="@string/action_search"
                     android:inputType="text|textAutoComplete"
-                    android:padding="14dp">
+                    android:padding="12dp">
 
                     <requestFocus />
                 </code.name.monkey.appthemehelper.common.views.ATEEditText>
@@ -61,9 +61,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@android:id/empty"
@@ -87,12 +87,13 @@
             android:scrollbars="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </FrameLayout>
+
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:layout_width="wrap_content"
-            android:id="@+id/keyboardPopup"
-            android:text="Keyboard"
-            android:layout_margin="16dp"
-            android:layout_gravity="bottom|end"
-            app:icon="@drawable/ic_keyboard_white_24dp"
-            android:layout_height="wrap_content"/>
+        android:id="@+id/keyboardPopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:text="Keyboard"
+        app:icon="@drawable/ic_keyboard_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
