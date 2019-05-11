@@ -148,10 +148,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
-
         android:gravity="center"
-        app:iconGravity="textStart"
-        android:padding="16dp"
         android:text="@string/save"
-        app:icon="@drawable/ic_save_white_24dp" />
+        app:icon="@drawable/ic_save_white_24dp"
+        app:iconGravity="textStart" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
