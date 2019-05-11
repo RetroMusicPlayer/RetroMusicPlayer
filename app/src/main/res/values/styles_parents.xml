@@ -44,6 +44,7 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
+        <item name="android:textColorPrimary">@color/md_white_1000</item>
 
     </style>
 
@@ -125,6 +126,7 @@
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
 
+        <item name="android:textColorPrimary">@color/md_grey_900</item>
     </style>
 
 

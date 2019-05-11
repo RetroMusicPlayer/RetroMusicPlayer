@@ -614,5 +614,6 @@
     <string name="on">On</string>
     <string name="select_preset">Select preset</string>
     <string name="upgrade_to_premium">Upgrade to premium</string>
+    <string name="action_new_playlist">New playlist</string>
 
 </resources>

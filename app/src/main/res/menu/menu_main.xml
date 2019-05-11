@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DrawerActivity">
 
+
     <item
         android:id="@+id/action_grid_size"
         android:icon="@drawable/ic_grid_size_white_24dp"
@@ -48,4 +49,9 @@
         app:showAsAction="ifRoom">
         <menu></menu>
     </item>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/action_search"
+        app:showAsAction="always" />
 </menu>

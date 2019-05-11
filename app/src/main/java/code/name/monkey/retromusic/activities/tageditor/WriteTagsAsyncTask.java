@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
@@ -134,7 +135,7 @@ public class WriteTagsAsyncTask extends
 
     @Override
     protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialDialog(context)
+        return new MaterialDialog(context, new BottomSheet())
                 .title(R.string.saving_changes, "")
                 .cancelable(false);
     }

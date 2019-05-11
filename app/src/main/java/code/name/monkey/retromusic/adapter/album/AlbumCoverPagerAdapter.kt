@@ -10,13 +10,14 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.LyricsActivity
+import code.name.monkey.retromusic.fragments.AlbumCoverStyle
+import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.activities.LyricsActivity
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
@@ -90,8 +91,11 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            val layout = layout
-            val view = inflater.inflate(layout, container, false)
+            var finalLayout = layout
+            if (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.CLASSIC) {
+                finalLayout = R.layout.fragment_album_full_cover
+            }
+            val view = inflater.inflate(finalLayout, container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener { startActivity(Intent(context, LyricsActivity::class.java)) }
             return view

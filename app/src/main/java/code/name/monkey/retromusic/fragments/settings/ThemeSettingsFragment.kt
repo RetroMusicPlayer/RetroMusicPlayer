@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.fragments.settings
 
 import android.graphics.Color
@@ -16,6 +30,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.colorChooser
 
 
@@ -27,11 +42,11 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
         val primaryColorPref: ATEColorPreference = findPreference("primary_color")!!
-        primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == code.name.monkey.retromusic.R.style.Theme_RetroMusic_Color
+        primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
         val primaryColor = ThemeStore.primaryColor(activity!!)
         primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
         primaryColorPref.setOnPreferenceClickListener {
-            MaterialDialog(activity!!).show {
+            MaterialDialog(activity!!, BottomSheet()).show {
                 title(code.name.monkey.retromusic.R.string.primary_color)
                 positiveButton(R.string.set)
                 colorChooser(initialSelection = BLUE, allowCustomArgb = true, colors = PRIMARY_COLORS, subColors = PRIMARY_COLORS_SUB) { _, color ->
@@ -69,8 +84,8 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             when (theme) {
                 "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
                 "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
-                "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, code.name.monkey.retromusic.R.color.md_grey_900)).commit()
-                "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, code.name.monkey.retromusic.R.color.md_blue_grey_800)).commit()
+                "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
+                "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
             }
 
             ThemeStore.editTheme(activity!!)
@@ -91,7 +106,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            MaterialDialog(activity!!).show {
+            MaterialDialog(activity!!, BottomSheet()).show {
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->

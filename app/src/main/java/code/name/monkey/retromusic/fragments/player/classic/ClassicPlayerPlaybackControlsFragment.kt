@@ -30,7 +30,6 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         playerPlayPauseFab.animate()
                 .scaleX(1f)
                 .scaleY(1f)
-                .rotation(360f)
                 .setInterpolator(DecelerateInterpolator())
                 .start()
     }
@@ -50,19 +49,19 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     fun setDark(dark: Boolean) {
         if (dark) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(getActivity(), true);
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(getActivity(), true);
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(getActivity(), false);
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
         //volumeFragment?.setTintableColor(lastPlaybackControlsColor)
 
-        updateRepeatState();
-        updateShuffleState();
-        updatePrevNextColor();
-        updateProgressTextColor();
+        updateRepeatState()
+        updateShuffleState()
+        updatePrevNextColor()
+        updateProgressTextColor()
     }
 
     private var playerFabPlayPauseDrawable: PlayPauseDrawable? = null

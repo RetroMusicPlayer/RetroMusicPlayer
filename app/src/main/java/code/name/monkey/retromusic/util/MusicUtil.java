@@ -29,10 +29,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
-
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 
@@ -43,6 +39,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
@@ -99,22 +98,15 @@ public class MusicUtil {
      * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
      */
     public static String buildInfoString(@NonNull final String string1, @NonNull final String string2) {
-        // Skip empty strings
-        if (string1.isEmpty()) {
-            return string2;
+        if (TextUtils.isEmpty(string1)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string2) ? "" : string2;
         }
-        if (string2.isEmpty()) {
-            return string1;
+        if (TextUtils.isEmpty(string2)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string1;
         }
-
-        final String separator = "  •  ";
-
-        final StringBuilder builder = new StringBuilder();
-        builder.append(string1);
-        builder.append(separator);
-        builder.append(string2);
-
-        return builder.toString();
+        return string1 + "  •  " + string2;
     }
 
     @NonNull

@@ -23,6 +23,7 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import code.name.monkey.retromusic.R
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
 
@@ -63,7 +64,8 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(activity!!, BottomSheet())
+                .show {
             title(text = materialListPreference.title.toString())
             positiveButton(R.string.set)
             listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->

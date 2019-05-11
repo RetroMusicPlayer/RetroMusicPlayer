@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
@@ -83,9 +84,10 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         viewPager.currentItem = PreferenceUtil.getInstance().nowPlayingScreen.ordinal
 
 
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(activity!!, BottomSheet()).show {
             title(R.string.pref_title_album_cover_style)
             positiveButton(R.string.set) {
+
                 val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {
                     val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."

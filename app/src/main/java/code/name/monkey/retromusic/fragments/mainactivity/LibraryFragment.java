@@ -11,7 +11,6 @@ import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,11 +36,11 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
+import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
+import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
-import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.util.Compressor;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
@@ -59,7 +58,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
-    private TextView bannerTitle;
     private View contentContainer;
 
     private MaterialCab cab;
@@ -94,7 +92,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         contentContainer = view.findViewById(R.id.fragmentContainer);
-        bannerTitle = view.findViewById(R.id.bannerTitle);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
         userImage = view.findViewById(R.id.userImage);
@@ -118,14 +115,14 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
     public void setTitle(@StringRes int name) {
-        bannerTitle.setText(getString(name));
+        toolbar.setTitle(getString(name));
     }
 
-    public void addOnAppBarOffsetChangedListener(AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+    public void addOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
         appBarLayout.addOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    public void removeOnAppBarOffsetChangedListener(AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+    public void removeOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
         appBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
@@ -166,18 +163,19 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        bannerTitle.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
-
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
 
         toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(R.drawable.ic_search_white_24dp);
+
+        toolbar.setNavigationIcon(null);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
         getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
+
+
     }
 
     private Fragment getCurrentFragment() {
