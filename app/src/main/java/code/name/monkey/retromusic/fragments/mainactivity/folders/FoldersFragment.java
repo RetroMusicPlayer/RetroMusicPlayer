@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +31,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -53,6 +59,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
+import code.name.monkey.retromusic.glide.GlideApp;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
@@ -68,6 +75,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
+
+import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
         MainActivityFragmentCallbacks,
@@ -93,6 +102,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private BreadCrumbLayout breadCrumbs;
 
     private AppBarLayout appBarLayout;
+
+    private ImageView userImage;
 
     private FastScrollRecyclerView recyclerView;
 
@@ -149,8 +160,76 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+    private void loadImageFromStorage() {
+        GlideApp.with(getMainActivity())
+                .asDrawable()
+                .placeholder(R.drawable.ic_person_flat)
+                .fallback(R.drawable.ic_person_flat)
+                .load(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                .into(new Target<Drawable>() {
+                    @Override
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                        userImage.setImageDrawable(placeholder);
+                    }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        userImage.setImageDrawable(errorDrawable);
+                    }
+
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        userImage.setImageDrawable(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+
+                    @Override
+                    public void getSize(@NonNull SizeReadyCallback cb) {
+                        cb.onSizeReady(32, 32);
+                    }
+
+                    @Override
+                    public void removeCallback(@NonNull SizeReadyCallback cb) {
+
+                    }
+
+                    @Nullable
+                    @Override
+                    public Request getRequest() {
+                        return null;
+                    }
+
+                    @Override
+                    public void setRequest(@Nullable Request request) {
+
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onStop() {
+
+                    }
+
+                    @Override
+                    public void onDestroy() {
+
+                    }
+                });
+    }
+
+
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
+        userImage = view.findViewById(R.id.userImage);
+        userImage.setOnClickListener(v -> showMainMenu());
         recyclerView = view.findViewById(R.id.recyclerView);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
@@ -209,8 +288,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+    @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_folder, container, false);
         initViews(view);
@@ -224,17 +305,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         setUpBreadCrumbs();
         setUpRecyclerView();
         setUpAdapter();
-
+        loadImageFromStorage();
     }
 
     private void setUpAppbarColor() {
         title.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
 
-        //noinspection ConstantConditions
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
-
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp);
-        //noinspection ConstantConditions
 
         getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);

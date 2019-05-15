@@ -11,7 +11,10 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
+
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/md_red_A400" />
-    <corners android:radius="56dp" />
+    <corners
+        android:bottomRightRadius="25dp"
+        android:topRightRadius="25dp" />
+    <solid android:color="@color/md_deep_orange_A400" />
 </shape>

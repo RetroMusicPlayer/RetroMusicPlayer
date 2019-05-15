@@ -12,6 +12,10 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.fragments.mainactivity.LibraryFragment
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment
+import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SearchQueryHelper
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
@@ -19,9 +23,6 @@ import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.fragments.mainactivity.LibraryFragment
-import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.disposables.CompositeDisposable
@@ -66,10 +67,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             true
         }
 
-        //setUpDrawerLayout()
-
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance().lastPage);
+            selectedFragment(PreferenceUtil.getInstance().lastPage)
         } else {
             restoreCurrentFragment();
         }
@@ -272,13 +271,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }*/
     }
 
-    private fun selectedFragment(itemId: Int) {
+    fun selectedFragment(itemId: Int) {
         when (itemId) {
             R.id.action_album,
             R.id.action_artist,
             R.id.action_playlist,
             R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false)
             R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false)
+            R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), false)
             else -> {
                 setCurrentFragment(BannerHomeFragment.newInstance(), false)
             }

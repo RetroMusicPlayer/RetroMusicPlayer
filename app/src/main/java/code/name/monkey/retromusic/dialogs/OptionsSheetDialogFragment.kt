@@ -28,7 +28,6 @@ import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
-import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -81,6 +80,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         actionSettings.setOnClickListener(this)
 
         actionSleepTimer.setOnClickListener(this)
+        actionLibrary.setOnClickListener(this)
         userInfoContainer.setOnClickListener(this)
         actionEqualizer.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
@@ -100,7 +100,8 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
-            R.id.actionFolders -> mainActivity.setCurrentFragment(FoldersFragment.newInstance(context), true)
+            R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
+            R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
 
             R.id.actionSleepTimer -> if (fragmentManager != null) {

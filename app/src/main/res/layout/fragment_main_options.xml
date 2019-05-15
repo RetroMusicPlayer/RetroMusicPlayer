@@ -97,6 +97,16 @@
     </com.google.android.material.card.MaterialCardView>
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_library_music_white_24dp"
+        app:optionTitle="@string/library" />
+
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionFolders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

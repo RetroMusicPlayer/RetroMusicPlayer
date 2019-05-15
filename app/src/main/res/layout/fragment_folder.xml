@@ -42,6 +42,15 @@
                     app:layout_collapseMode="pin"
                     tools:ignore="UnusedAttribute">
 
+                    <code.name.monkey.retromusic.views.CircularImageView
+                        android:id="@+id/userImage"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="0"
+                        app:civ_border="false" />
+
                     <TextView
                         android:id="@+id/bannerTitle"
                         style="@style/BigTitleTextAppearanceToolbar"

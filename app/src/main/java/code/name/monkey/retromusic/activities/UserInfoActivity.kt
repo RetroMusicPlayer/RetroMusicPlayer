@@ -14,7 +14,10 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -24,6 +27,7 @@ import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -60,7 +64,7 @@ class UserInfoActivity : AbsBaseActivity() {
             loadBannerFromStorage(PreferenceUtil.getInstance().bannerImage)
         }
         userImage.setOnClickListener {
-            MaterialDialog(this).show {
+            MaterialDialog(this, BottomSheet()).show {
                 title(text = getString(R.string.set_photo))
                 listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
                     when (position) {
@@ -117,7 +121,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun showBannerOptions() {
-        MaterialDialog(this).show {
+        MaterialDialog(this, BottomSheet()).show {
             title(R.string.select_banner_photo)
             listItems(items = listOf(getString(R.string.new_banner_photo), getString(R.string.remove_banner_photo)))
             { _, position, _ ->
