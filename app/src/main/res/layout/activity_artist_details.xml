@@ -105,6 +105,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/action_shuffle_all"
-        app:icon="@drawable/ic_clear_all_black_24dp" />
+        app:icon="@drawable/ic_shuffle_white_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
