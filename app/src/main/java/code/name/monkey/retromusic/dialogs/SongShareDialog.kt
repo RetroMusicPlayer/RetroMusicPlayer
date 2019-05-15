@@ -14,58 +14,81 @@
 
 package code.name.monkey.retromusic.dialogs
 
-import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.MaterialUtil
-
+import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_file_share.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.listItems
 
 
-class SongShareDialog : RoundedBottomSheetDialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_file_share, container, false)
-    }
+class SongShareDialog : DialogFragment() {
+    /* override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+         return inflater.inflate(R.layout.dialog_file_share, container, false)
+     }
 
-    @SuppressLint("StringFormatInvalid")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val song: Song = arguments!!.getParcelable("song") ?: return
+     @SuppressLint("StringFormatInvalid")
+     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
+         val song: Song = arguments!!.getParcelable("song") ?: return
 
-        dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        audioText.apply {
-            text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
-            setTextColor(ThemeStore.textColorSecondary(context!!))
-            setOnClickListener {
-                val currentlyListening = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
-                activity!!.startActivity(Intent.createChooser(Intent().setAction(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_TEXT, currentlyListening)
-                        .setType("text/plain"), null))
-                dismiss()
-            }
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_text_fields_black_24dp)
-            MaterialUtil.setTint(this)
-        }
+         dialogTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
+         audioText.apply {
+             text = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
+             setTextColor(ThemeStore.textColorSecondary(context!!))
+             setOnClickListener {
+                 val currentlyListening = getString(code.name.monkey.retromusic.R.string.currently_listening_to_x_by_x, song.title, song.artistName)
+                 activity!!.startActivity(Intent.createChooser(Intent().setAction(Intent.ACTION_SEND)
+                         .putExtra(Intent.EXTRA_TEXT, currentlyListening)
+                         .setType("text/plain"), null))
+                 dismiss()
+             }
+             icon = ContextCompat.getDrawable(context, code.name.monkey.retromusic.R.drawable.ic_text_fields_black_24dp)
+             MaterialUtil.setTint(this)
+         }
 
-        audioFile.apply {
-            setTextColor(ThemeStore.textColorSecondary(context!!))
-            setOnClickListener {
-                activity!!.startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, context), null))
-                dismiss()
-            }
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_share_white_24dp)
-            MaterialUtil.setTint(this, false)
-        }
+         audioFile.apply {
+             setTextColor(ThemeStore.textColorSecondary(context!!))
+             setOnClickListener {
+                 activity!!.startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, context), null))
+                 dismiss()
+             }
+             icon = ContextCompat.getDrawable(context, code.name.monkey.retromusic.R.drawable.ic_share_white_24dp)
+             MaterialUtil.setTint(this, false)
+         }
 
+     }*/
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val song: Song = arguments!!.getParcelable("song")
+        val currentlyListening: String = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
+
+        return MaterialDialog(activity!!, BottomSheet())
+                .title(R.string.what_do_you_want_to_share)
+                .show {
+                    listItems(items = listOf(getString(code.name.monkey.retromusic.R.string.the_audio_file), "\u201C" + currentlyListening + "\u201D")) { dialog, index, text ->
+                        when (index) {
+                            0 -> {
+                                startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, context), null))
+                            }
+                            1 -> {
+                                activity!!.startActivity(
+                                        Intent.createChooser(
+                                                Intent()
+                                                        .setAction(Intent.ACTION_SEND)
+                                                        .putExtra(Intent.EXTRA_TEXT, currentlyListening)
+                                                        .setType("text/plain"),
+                                                null
+                                        )
+                                )
+                            }
+                        }
+                    }
+                }
     }
 
     companion object {

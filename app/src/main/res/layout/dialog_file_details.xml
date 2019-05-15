@@ -7,17 +7,6 @@
     tools:ignore="NewApi,RtlSymmetry">
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        android:id="@+id/title"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/action_details"
-        android:textStyle="bold"
-        tools:ignore="MissingPrefix" />
-
-
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/filePath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -150,7 +150,8 @@
     <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
     <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
     <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
-
+    <string name="delete_song_title">Delete song</string>
+    <string name="delete_songs_title">Delete songs</string>
     <string name="deleted_x_songs">Deleted %1$d songs.</string>
 
     <string name="discord_page">Discord</string>

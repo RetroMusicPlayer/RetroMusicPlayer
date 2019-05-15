@@ -4,23 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="16dp">
+    android:padding="16dp">
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        android:id="@+id/bannerTitle"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/new_playlist_title" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/actionNewPlaylistContainer"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         app:hintEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -32,39 +23,4 @@
             android:inputType="textPersonName|textCapWords|text"
             android:padding="16dp" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/actionCancel"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:paddingStart="24dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="12dp"
-            android:text="@android:string/cancel"
-            app:icon="@drawable/ic_close_white_24dp"
-            app:strokeWidth="2dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/actionCreate"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:paddingStart="24dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="24dp"
-            android:paddingBottom="12dp"
-            android:text="@string/create_action"
-            app:backgroundTint="@color/md_pink_A400"
-            app:icon="@drawable/ic_playlist_add_white_24dp" />
-    </LinearLayout>
 </LinearLayout>

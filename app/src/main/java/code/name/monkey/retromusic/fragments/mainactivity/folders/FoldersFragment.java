@@ -18,6 +18,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
@@ -36,13 +44,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -744,14 +745,20 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         @Override
         protected Dialog createDialog(@NonNull Context context) {
             View view = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
+            view.setBackgroundColor(ThemeStore.Companion.primaryColor(context));
             ProgressBar progressBar = view.findViewById(R.id.progressBar);
-            ViewUtil.INSTANCE.setProgressDrawable(progressBar, ThemeStore.Companion.accentColor(context));
+            TintHelper.setTintAuto(progressBar, ThemeStore.Companion.accentColor(context), false);
 
             MaterialDialog materialDialog = new MaterialDialog(context, new BottomSheet());
             materialDialog.setContentView(view);
             materialDialog.title(R.string.listing_files, "");
+            materialDialog.setOnCancelListener(dialog -> cancel(false));
+            materialDialog.setOnDismissListener(dialog -> cancel(false));
+            materialDialog.negativeButton(android.R.string.cancel, "", materialDialog1 -> {
+                cancel(false);
+                return null;
+            });
             return materialDialog;
-
         }
     }
 }

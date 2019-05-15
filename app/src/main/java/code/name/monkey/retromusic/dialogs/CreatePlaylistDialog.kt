@@ -14,63 +14,105 @@
 
 package code.name.monkey.retromusic.dialogs
 
-import android.content.res.ColorStateList
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.provider.MediaStore
+import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.R.layout
+import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_playlist.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.getActionButton
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
-class CreatePlaylistDialog : RoundedBottomSheetDialogFragment() {
+class CreatePlaylistDialog : DialogFragment() {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_playlist, container, false)
-    }
+    /* override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+         return inflater.inflate(R.layout.dialog_playlist, container, false)
+     }*/
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+         super.onViewCreated(view, savedInstanceState)
 
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
 
-        val accentColor = ThemeStore.accentColor(context!!)
+         val accentColor = ThemeStore.accentColor(context!!)
 
-        MaterialUtil.setTint(actionCreate, true)
-        MaterialUtil.setTint(actionCancel, false)
+         MaterialUtil.setTint(actionCreate, true)
+         MaterialUtil.setTint(actionCancel, false)
+         MaterialUtil.setTint(actionNewPlaylistContainer, false)
+
+         actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
+         actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
+
+
+         val songs = arguments!!.getParcelableArrayList<Song>("songs")
+
+         actionCancel.setOnClickListener { dismiss() }
+         actionCreate.setOnClickListener {
+             if (activity == null) {
+                 return@setOnClickListener
+             }
+             if (!actionNewPlaylist!!.text!!.toString().trim { it <= ' ' }.isEmpty()) {
+                 val playlistId = PlaylistsUtil.createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
+                 if (playlistId != -1 && activity != null) {
+                     if (songs != null) {
+                         PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
+                     }
+                 }
+             }
+             dismiss()
+         }
+     }*/
+    private lateinit var playlistView: TextInputEditText
+    private lateinit var actionNewPlaylistContainer: TextInputLayout
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val materialDialog = MaterialDialog(activity!!, BottomSheet())
+                .show {
+                    title(string.new_playlist_title)
+                    customView(layout.dialog_playlist)
+                    negativeButton(android.R.string.cancel)
+                    positiveButton(string.create_action) {
+                        if (activity == null) {
+                            return@positiveButton
+                        }
+                        val songs = arguments!!.getParcelableArrayList<Song>("songs")
+
+                        if (playlistView.text!!.toString().trim { it <= ' ' }.isNotEmpty()) {
+                            val playlistId = PlaylistsUtil.createPlaylist(activity!!, playlistView.text!!.toString())
+                            if (playlistId != -1 && activity != null) {
+                                PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
+                            }
+                        }
+                    }
+                    getActionButton(WhichButton.POSITIVE).updateTextColor(ThemeStore.accentColor(context))
+                }
+
+        val dialogView = materialDialog.getCustomView()
+        playlistView = dialogView.findViewById(R.id.actionNewPlaylist)
+        actionNewPlaylistContainer = dialogView.findViewById(R.id.actionNewPlaylistContainer)
+
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
-        actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
-        actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
-
-
-        val songs = arguments!!.getParcelableArrayList<Song>("songs")
-
-        actionCancel.setOnClickListener { dismiss() }
-        actionCreate.setOnClickListener {
-            if (activity == null) {
-                return@setOnClickListener
-            }
-            if (!actionNewPlaylist!!.text!!.toString().trim { it <= ' ' }.isEmpty()) {
-                val playlistId = PlaylistsUtil.createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
-                if (playlistId != -1 && activity != null) {
-                    if (songs != null) {
-                        PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
-                    }
-                }
-            }
-            dismiss()
-        }
+        val playlistId = arguments!!.getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
+        playlistView.setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
+        return materialDialog
     }
 
     companion object {
-
+        private const val SONGS = "songs"
         @JvmOverloads
         fun create(song: Song? = null): CreatePlaylistDialog {
             val list = ArrayList<Song>()
