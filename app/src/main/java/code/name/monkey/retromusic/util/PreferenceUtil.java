@@ -57,6 +57,7 @@ public final class PreferenceUtil {
     public static final String GAPLESS_PLAYBACK = "gapless_playback";
     public static final String ALBUM_ART_ON_LOCKSCREEN = "album_art_on_lockscreen";
     public static final String BLURRED_ALBUM_ART = "blurred_album_art";
+    public static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
     public static final String TOGGLE_HEADSET = "toggle_headset";
     public static final String DOMINANT_COLOR = "dominant_color";
     public static final String GENERAL_THEME = "general_theme";
@@ -155,6 +156,17 @@ public final class PreferenceUtil {
                 return R.style.Theme_RetroMusic;
         }
     }
+
+    public void setSleepTimerFinishMusic(final boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(SLEEP_TIMER_FINISH_SONG, value);
+        editor.apply();
+    }
+
+    public boolean getSleepTimerFinishMusic() {
+        return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
+    }
+
 
     public String getUserBio() {
         return mPreferences.getString(USER_BIO, "");

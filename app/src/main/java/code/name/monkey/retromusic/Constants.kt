@@ -43,6 +43,8 @@ object Constants {
     @JvmField
     val ACTION_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.quitservice"
     @JvmField
+    val ACTION_PENDING_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.pendingquitservice"
+    @JvmField
     val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
     @JvmField
     val INTENT_EXTRA_SHUFFLE_MODE = "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"

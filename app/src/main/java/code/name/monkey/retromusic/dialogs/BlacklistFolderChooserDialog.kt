@@ -24,6 +24,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
 import java.util.*
@@ -95,9 +96,9 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         checkIfCanGoUp()
         parentContents = listFiles()
 
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(activity!!, BottomSheet()).show {
             title(text = parentFolder!!.absolutePath)
-            listItems(items = contentsArray(), waitForPositiveButton = false) { dialog, index, text ->
+            listItems(items = contentsArray(), waitForPositiveButton = false) { _, index, _ ->
                 onSelection(index)
             }
             noAutoDismiss()
@@ -138,7 +139,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
         dialog?.apply {
             setTitle(parentFolder!!.absolutePath)
-            listItems(items = contentsArray()) { dialog, index, text ->
+            listItems(items = contentsArray()) { _, index, _ ->
                 onSelection(index)
             }
         }

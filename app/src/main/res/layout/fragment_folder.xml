@@ -45,6 +45,9 @@
                     <TextView
                         android:id="@+id/bannerTitle"
                         style="@style/BigTitleTextAppearanceToolbar"
+                        android:layout_gravity="start|center_vertical"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="8dp"
                         android:text="@string/folders"
                         tools:ignore="MissingPrefix" />
 

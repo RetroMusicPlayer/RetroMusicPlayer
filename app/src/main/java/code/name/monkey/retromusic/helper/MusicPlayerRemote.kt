@@ -38,7 +38,7 @@ import java.util.*
 
 
 object MusicPlayerRemote {
-    val TAG = MusicPlayerRemote::class.java.simpleName
+    val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
 

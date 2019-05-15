@@ -49,6 +49,9 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.request.transition.Transition;
 
 import java.lang.ref.WeakReference;
@@ -56,8 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.appwidgets.AppWidgetBig;
 import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
@@ -87,6 +88,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
 import static code.name.monkey.retromusic.Constants.ACTION_PAUSE;
+import static code.name.monkey.retromusic.Constants.ACTION_PENDING_QUIT;
 import static code.name.monkey.retromusic.Constants.ACTION_PLAY;
 import static code.name.monkey.retromusic.Constants.ACTION_PLAY_PLAYLIST;
 import static code.name.monkey.retromusic.Constants.ACTION_QUIT;
@@ -176,6 +178,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         }
     };
+    public boolean pendingQuit = false;
     private Playback playback;
     private ArrayList<Song> playingQueue = new ArrayList<>();
     private ArrayList<Song> originalPlayingQueue = new ArrayList<>();
@@ -448,7 +451,12 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                         break;
                     case ACTION_STOP:
                     case ACTION_QUIT:
-                        return quit();
+                        pendingQuit = false;
+                        quit();
+                        break;
+                    case ACTION_PENDING_QUIT:
+                        pendingQuit = true;
+                        break;
                 }
             }
         }
@@ -1178,6 +1186,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         return playback.getAudioSessionId();
     }
 
+    @NonNull
     public MediaSessionCompat getMediaSession() {
         return mediaSession;
     }
@@ -1193,7 +1202,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
             case PreferenceUtil.GAPLESS_PLAYBACK:
                 if (sharedPreferences.getBoolean(key, false)) {
@@ -1251,10 +1260,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         @Override
         public void handleMessage(@NonNull Message msg) {
             final MusicService service = mService.get();
-            switch (msg.what) {
-                case SAVE_QUEUES:
-                    service.saveQueuesImpl();
-                    break;
+            if (msg.what == SAVE_QUEUES) {
+                service.saveQueuesImpl();
             }
         }
     }
@@ -1317,9 +1324,16 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                     break;
 
                 case TRACK_ENDED:
-                    if (service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
+                    // if there is a timer finished, don't continue
+                    if (service.pendingQuit ||
+                            service.getRepeatMode() == REPEAT_MODE_NONE && service.isLastTrack()) {
                         service.notifyChange(PLAY_STATE_CHANGED);
                         service.seek(0);
+                        if (service.pendingQuit) {
+                            service.pendingQuit = false;
+                            service.quit();
+                            break;
+                        }
                     } else {
                         service.playNextSong(false);
                     }
