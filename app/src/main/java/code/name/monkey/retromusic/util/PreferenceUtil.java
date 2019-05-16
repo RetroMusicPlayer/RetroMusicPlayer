@@ -21,16 +21,15 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.io.File;
 import java.util.Objects;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.MainActivity;
@@ -151,10 +150,16 @@ public final class PreferenceUtil {
                 return R.style.Theme_RetroMusic_Black;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
+            case "daynight":
+                return R.style.Theme_RetroMusic_DayNight;
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public boolean getSleepTimerFinishMusic() {
+        return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
     }
 
     public void setSleepTimerFinishMusic(final boolean value) {
@@ -162,11 +167,6 @@ public final class PreferenceUtil {
         editor.putBoolean(SLEEP_TIMER_FINISH_SONG, value);
         editor.apply();
     }
-
-    public boolean getSleepTimerFinishMusic() {
-        return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
-    }
-
 
     public String getUserBio() {
         return mPreferences.getString(USER_BIO, "");
