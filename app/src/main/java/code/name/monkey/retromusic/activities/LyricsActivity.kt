@@ -16,24 +16,27 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
+import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcHelper
 import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
-import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.input.getInputLayout
 import com.afollestad.materialdialogs.input.input
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
@@ -153,7 +156,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             e.printStackTrace()
         }
 
-        MaterialDialog(this).show {
+        val materialDialog = MaterialDialog(this, BottomSheet()).show {
             title(R.string.add_time_framed_lryics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
             input(hint = getString(R.string.paste_lyrics_here),
@@ -165,6 +168,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
                 updateSong()
             }
         }
+        MaterialUtil.setTint(materialDialog.getInputLayout(), false)
     }
 
     private fun updateSong() {
@@ -181,7 +185,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             lyricsString!!
         }
 
-        MaterialDialog(this).show {
+        val materialDialog = MaterialDialog(this, BottomSheet()).show {
             title(R.string.add_lyrics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
             input(hint = getString(R.string.paste_lyrics_here),
@@ -195,6 +199,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
                 updateSong()
             }
         }
+        MaterialUtil.setTint(materialDialog.getInputLayout(), false)
     }
 
     private fun getSongPaths(song: Song): ArrayList<String> {

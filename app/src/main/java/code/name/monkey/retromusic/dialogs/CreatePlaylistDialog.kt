@@ -38,43 +38,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class CreatePlaylistDialog : DialogFragment() {
 
-
-    /* override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-         return inflater.inflate(R.layout.dialog_playlist, container, false)
-     }*/
-
-    /* override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-         super.onViewCreated(view, savedInstanceState)
-
-
-         val accentColor = ThemeStore.accentColor(context!!)
-
-         MaterialUtil.setTint(actionCreate, true)
-         MaterialUtil.setTint(actionCancel, false)
-         MaterialUtil.setTint(actionNewPlaylistContainer, false)
-
-         actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
-         actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
-
-
-         val songs = arguments!!.getParcelableArrayList<Song>("songs")
-
-         actionCancel.setOnClickListener { dismiss() }
-         actionCreate.setOnClickListener {
-             if (activity == null) {
-                 return@setOnClickListener
-             }
-             if (!actionNewPlaylist!!.text!!.toString().trim { it <= ' ' }.isEmpty()) {
-                 val playlistId = PlaylistsUtil.createPlaylist(activity!!, actionNewPlaylist!!.text!!.toString())
-                 if (playlistId != -1 && activity != null) {
-                     if (songs != null) {
-                         PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
-                     }
-                 }
-             }
-             dismiss()
-         }
-     }*/
     private lateinit var playlistView: TextInputEditText
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 

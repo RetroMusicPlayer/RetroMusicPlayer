@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:paddingStart="0dp"
-        android:paddingEnd="14dp">
+        android:paddingEnd="8dp">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/mini_player_image"

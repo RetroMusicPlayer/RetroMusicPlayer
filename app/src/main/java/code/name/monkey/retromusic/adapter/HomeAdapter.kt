@@ -18,7 +18,6 @@ import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.IconImageView
-import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 
 
 class HomeAdapter(private val activity: AppCompatActivity, private var homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -87,7 +86,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
 
     }
 
-    private inner class AlbumViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             recyclerView.apply {
                 adapter = AlbumFullWidthAdapter(activity, home.arrayList as ArrayList<Album>, displayMetrics)
@@ -95,14 +94,9 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             title.text = activity.getString(home.title)
             icon.setImageResource(home.icon)
         }
-
-        private val recyclerView: MetalRecyclerViewPager = view.findViewById(R.id.recyclerView)
-        private val title: TextView = view.findViewById(R.id.sectionTitle)
-        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
-
     }
 
-    private inner class ArtistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
@@ -112,13 +106,9 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             title.text = activity.getString(home.title)
             icon.setImageResource(home.icon)
         }
-
-        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        private val title: TextView = view.findViewById(R.id.sectionTitle)
-        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
     }
 
-    private inner class GenreViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class GenreViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             recyclerView.apply {
                 val genreAdapter = GenreAdapter(activity, home.arrayList as ArrayList<Genre>, R.layout.item_list)
@@ -129,14 +119,9 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             title.text = activity.getString(home.title)
             icon.setImageResource(home.icon)
         }
-
-        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        private val title: TextView = view.findViewById(R.id.sectionTitle)
-        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
-
     }
 
-    private inner class PlaylistViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist).blockingFirst()
             recyclerView.apply {
@@ -148,9 +133,11 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             title.text = activity.getString(home.title)
             icon.setImageResource(home.icon)
         }
+    }
 
-        private val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        private val title: TextView = view.findViewById(R.id.sectionTitle)
-        private val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
+    private open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+        val title: TextView = itemView.findViewById(R.id.sectionTitle)
+        val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
     }
 }

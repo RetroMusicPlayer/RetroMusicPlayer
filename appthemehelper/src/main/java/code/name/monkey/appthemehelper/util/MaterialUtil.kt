@@ -2,7 +2,6 @@ package code.name.monkey.appthemehelper.util
 
 import android.content.res.ColorStateList
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -47,12 +46,8 @@ object MaterialUtil {
             textInputLayout.boxStrokeColor = accentColor
             textInputLayout.defaultHintTextColor = colorState
             textInputLayout.isHintAnimationEnabled = true
-
-
-
         }
     }
-
 
 
     private fun setCursorPointerColor(view: EditText, @ColorInt color: Int) {
