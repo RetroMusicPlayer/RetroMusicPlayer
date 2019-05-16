@@ -25,7 +25,7 @@
             android:layout_marginEnd="12dp"
             app:srcCompat="@drawable/ic_person_white_24dp" />
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/sectionTitle"
             style="@style/SubTitleTextAppearance"
             android:padding="0dp"
