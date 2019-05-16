@@ -66,7 +66,7 @@ public class LastFMRestClient {
     private static Interceptor createCacheControlInterceptor() {
         return chain -> {
             Request modifiedRequest = chain.request().newBuilder()
-                    .addHeader("Cache-Control", String.format("max-age=31536000, max-stale=31536000"))
+                    .addHeader("Cache-Control", "max-age=31536000, max-stale=31536000")
                     .build();
             return chain.proceed(modifiedRequest);
         };
