@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.providers.BlacklistStore
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
 import java.util.*
@@ -58,13 +59,13 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         val blacklistFolderChooserDialog = childFragmentManager.findFragmentByTag("FOLDER_CHOOSER") as BlacklistFolderChooserDialog?
         blacklistFolderChooserDialog?.setCallback(this)
         refreshBlacklistData()
-        return MaterialDialog(context!!).show {
+        return MaterialDialog(context!!, BottomSheet()).sstathow {
             title(code.name.monkey.retromusic.R.string.blacklist)
             positiveButton(android.R.string.ok) {
                 dismiss()
             }
             neutralButton(text = getString(R.string.clear_action)) {
-                MaterialDialog(context).show {
+                MaterialDialog(context, BottomSheet()).show {
                     title(code.name.monkey.retromusic.R.string.clear_blacklist)
                     message(code.name.monkey.retromusic.R.string.do_you_want_to_clear_the_blacklist)
                     positiveButton(code.name.monkey.retromusic.R.string.clear_action) {
@@ -80,7 +81,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 dialog.show(childFragmentManager, "FOLDER_CHOOSER");
             }
             listItems(items = paths) { dialog, index, text ->
-                MaterialDialog(context).show {
+                MaterialDialog(context, BottomSheet()).show {
                     title(code.name.monkey.retromusic.R.string.remove_from_blacklist)
                     message(text = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.do_you_want_to_remove_from_the_blacklist, text)))
                     positiveButton(code.name.monkey.retromusic.R.string.remove_action) {
@@ -98,8 +99,8 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
 
     private fun refreshBlacklistData() {
         this.paths = BlacklistStore.getInstance(context!!).paths
-        val dialog: MaterialDialog? = dialog as MaterialDialog?
-        dialog?.listItems(items = paths)
+        val dialog = dialog as MaterialDialog
+        dialog.listItems(items = paths)
     }
 
     override fun onFolderSelection(dialog: BlacklistFolderChooserDialog, folder: File) {
