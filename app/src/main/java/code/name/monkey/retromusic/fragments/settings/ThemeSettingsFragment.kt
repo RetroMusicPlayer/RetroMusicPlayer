@@ -23,6 +23,7 @@ import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.*
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
@@ -85,6 +86,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
                 "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
                 "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
+                "daynight" -> {
+                    val color = ATHUtil.resolveColor(context!!, android.R.attr.colorPrimary)
+                    ThemeStore.editTheme(context!!).primaryColor(color).commit()
+                }
                 "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
             }
 

@@ -619,4 +619,6 @@
     <string name="action_new_playlist">New playlist</string>
     <string name="finish_last_song">Finish last song</string>
 
+    <string name="image_gradient">Gradient image</string>
+    <string name="stack">Stack</string>
 </resources>

@@ -45,7 +45,6 @@
         <item>@string/dark_theme_name</item>
         <item>@string/black_theme_name</item>
         <item>@string/color_theme_name</item>
-        <item>@string/day_night_theme_name</item>
     </string-array>
 
     <string-array name="pref_grid_style_list_titles">
@@ -98,7 +97,6 @@
         <item>dark</item>
         <item>black</item>
         <item>color</item>
-        <item>daynight</item>
     </string-array>
 
     <array name="pref_auto_download_images_values">
@@ -203,6 +201,4 @@
         <item>1</item>
     </string-array>
 
-    <string name="image_gradient">Gradient image</string>
-    <string name="stack">Stack</string>
 </resources>

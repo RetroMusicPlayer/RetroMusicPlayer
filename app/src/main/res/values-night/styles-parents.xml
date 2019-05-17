@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.RetroMusic.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="md_corner_radius">12dp</item>
+        <item name="md_corner_radius">16dp</item>
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
@@ -28,9 +28,7 @@
         <!-- just in case-->
         <item name="android:windowBackground">@color/md_grey_900</item>
         <item name="colorAccent">@android:color/white</item>
-
-        <item name="colorPrimary">@android:color/black</item>
-        <item name="android:colorPrimary">@android:color/black</item>
+        <item name="colorPrimary">@color/md_grey_900</item>
 
         <!-- necessary to find the overflow button later in the layout-->
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
