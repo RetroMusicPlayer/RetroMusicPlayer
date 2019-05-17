@@ -117,15 +117,15 @@ object ColorUtil {
 
     @ColorInt
     fun getReadableText(@ColorInt textColor: Int, @ColorInt backgroundColor: Int, difference: Int): Int {
-        var textColor = textColor
+        var textColorFinal = textColor
         val isLight = isColorLight(backgroundColor)
         var i = 0
-        while (getDifference(textColor, backgroundColor) < difference && i < 100) {
-            textColor = getMixedColor(textColor, if (isLight) Color.BLACK else Color.WHITE)
+        while (getDifference(textColorFinal, backgroundColor) < difference && i < 100) {
+            textColorFinal = getMixedColor(textColorFinal, if (isLight) Color.BLACK else Color.WHITE)
             i++
         }
 
-        return textColor
+        return textColorFinal
     }
 
     @ColorInt

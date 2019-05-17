@@ -3,7 +3,6 @@ package code.name.monkey.appthemehelper.common.views
 import android.content.Context
 import androidx.appcompat.widget.AppCompatTextView
 
-import android.text.Layout
 import android.util.AttributeSet
 
 import code.name.monkey.appthemehelper.ThemeStore
@@ -15,18 +14,18 @@ import code.name.monkey.appthemehelper.ThemeStore
 class ATEPrimaryTextView : AppCompatTextView {
 
     constructor(context: Context) : super(context) {
-        init(context, null)
+        init(context)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init(context)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context, attrs)
+        init(context)
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
+    private fun init(context: Context) {
         setTextColor(ThemeStore.textColorPrimary(context))
     }
 }

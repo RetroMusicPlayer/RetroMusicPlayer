@@ -4,7 +4,6 @@
     <corners
         android:topLeftRadius="12dp"
         android:topRightRadius="12dp" />
-    <solid
-        android:color="?attr/cardBackgroundColor" />
+    <solid android:color="?attr/cardBackgroundColor" />
 
 </shape>
