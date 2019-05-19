@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -29,8 +28,8 @@ import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
-import code.name.monkey.retromusic.fragments.player.slide.SlidePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
@@ -264,7 +263,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
             } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD ||
-                    currentNowPlayingScreen == FIT || /*currentNowPlayingScreen == NowPlayingScreen.CLASSIC ||*/
+                    currentNowPlayingScreen == FIT || currentNowPlayingScreen == CLASSIC ||
                     currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)

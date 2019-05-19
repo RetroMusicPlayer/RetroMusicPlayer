@@ -3,7 +3,6 @@
 
     <style name="Theme.RetroMusic.DayNight" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-
         <item name="md_corner_radius">16dp</item>
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>

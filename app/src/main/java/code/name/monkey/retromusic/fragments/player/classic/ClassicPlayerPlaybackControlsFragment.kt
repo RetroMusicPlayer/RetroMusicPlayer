@@ -7,39 +7,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import androidx.annotation.NonNull
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.views.PlayPauseDrawable
 import kotlinx.android.synthetic.main.fragment_classic_player_playback_controls.*
 
 
 class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     public override fun show() {
-        playerPlayPauseFab.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .setInterpolator(DecelerateInterpolator())
-                .start()
+
     }
 
     public override fun hide() {
-        if (playerPlayPauseFab != null) {
-            playerPlayPauseFab.scaleX = 0f
-            playerPlayPauseFab.scaleY = 0f
-            playerPlayPauseFab.rotation = 0f
-        }
+
     }
 
 
@@ -56,7 +46,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
-        //volumeFragment?.setTintableColor(lastPlaybackControlsColor)
+        volumeFragment?.setTintableColor(ColorUtil.stripAlpha(lastPlaybackControlsColor))
 
         updateRepeatState()
         updateShuffleState()
@@ -64,7 +54,6 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateProgressTextColor()
     }
 
-    private var playerFabPlayPauseDrawable: PlayPauseDrawable? = null
 
     private var lastPlaybackControlsColor = 0
     private var lastDisabledPlaybackControlsColor = 0
@@ -72,8 +61,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
 
-
-    override fun onCreateView(@NonNull inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_classic_player_playback_controls, container, false)
     }
 
@@ -105,13 +93,18 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         playerSongCurrentProgress.setTextColor(color)
     }
 
+    private fun updatePlayPauseDrawableState() {
+        if (MusicPlayerRemote.isPlaying) {
+            playerPlayPauseFab.setImageResource(R.drawable.ic_pause_white_24dp)
+        } else {
+            playerPlayPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+        }
+    }
+
     private fun setUpPlayPauseFab() {
         val fabColor = Color.WHITE
         TintHelper.setTintAuto(playerPlayPauseFab, fabColor, true)
 
-        playerFabPlayPauseDrawable = PlayPauseDrawable(activity!!)
-
-        playerPlayPauseFab.setImageDrawable(playerFabPlayPauseDrawable) // Note: set the drawable AFTER TintHelper.setTintAuto() was called
         playerPlayPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN)
         playerPlayPauseFab.setOnClickListener(PlayPauseButtonOnClickHandler())
         playerPlayPauseFab.post {
@@ -204,13 +197,13 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onServiceConnected() {
-        updatePlayPauseDrawableState(false)
+        updatePlayPauseDrawableState( )
         updateRepeatState()
         updateShuffleState()
     }
 
     override fun onPlayStateChanged() {
-        updatePlayPauseDrawableState(true)
+        updatePlayPauseDrawableState( )
     }
 
     override fun onRepeatModeChanged() {
@@ -220,13 +213,4 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onShuffleModeChanged() {
         updateShuffleState()
     }
-
-    fun updatePlayPauseDrawableState(animate: Boolean) {
-        if (MusicPlayerRemote.isPlaying) {
-            playerFabPlayPauseDrawable?.setPause(animate)
-        } else {
-            playerFabPlayPauseDrawable?.setPlay(animate)
-        }
-    }
-
 }

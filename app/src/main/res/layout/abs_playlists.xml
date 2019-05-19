@@ -59,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                app:fontFamily="@font/circular"
                 android:paddingTop="8dp"
                 android:text="@string/history" />
 
