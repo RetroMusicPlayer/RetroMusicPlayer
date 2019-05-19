@@ -51,8 +51,8 @@ public class NetworkImageView extends CircularImageView {
     public void setImageUrl(@NonNull Context context, @NonNull String imageUrl) {
         GlideApp.with(context)
                 .load(imageUrl)
-                .error(R.drawable.ic_person_flat)
-                .placeholder(R.drawable.ic_person_flat)
+                .error(R.drawable.ic_account_white_24dp)
+                .placeholder(R.drawable.ic_account_white_24dp)
                 .into(this);
     }
 

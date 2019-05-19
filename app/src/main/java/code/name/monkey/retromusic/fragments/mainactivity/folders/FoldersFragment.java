@@ -160,72 +160,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
-    private void loadImageFromStorage() {
-        GlideApp.with(getMainActivity())
-                .asDrawable()
-                .placeholder(R.drawable.ic_person_flat)
-                .fallback(R.drawable.ic_person_flat)
-                .load(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
-                .into(new Target<Drawable>() {
-                    @Override
-                    public void onLoadStarted(@Nullable Drawable placeholder) {
-                        userImage.setImageDrawable(placeholder);
-                    }
-
-                    @Override
-                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                        userImage.setImageDrawable(errorDrawable);
-                    }
-
-                    @Override
-                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                        userImage.setImageDrawable(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-
-                    @Override
-                    public void getSize(@NonNull SizeReadyCallback cb) {
-                        cb.onSizeReady(32, 32);
-                    }
-
-                    @Override
-                    public void removeCallback(@NonNull SizeReadyCallback cb) {
-
-                    }
-
-                    @Nullable
-                    @Override
-                    public Request getRequest() {
-                        return null;
-                    }
-
-                    @Override
-                    public void setRequest(@Nullable Request request) {
-
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onStop() {
-
-                    }
-
-                    @Override
-                    public void onDestroy() {
-
-                    }
-                });
-    }
-
-
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
         userImage = view.findViewById(R.id.userImage);
@@ -305,7 +239,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         setUpBreadCrumbs();
         setUpRecyclerView();
         setUpAdapter();
-        loadImageFromStorage();
     }
 
     private void setUpAppbarColor() {

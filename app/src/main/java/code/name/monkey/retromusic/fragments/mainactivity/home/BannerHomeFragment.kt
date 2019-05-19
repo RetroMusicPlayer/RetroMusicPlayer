@@ -109,61 +109,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
     }
 
-    private fun loadImageFromStorage(imageView: ImageView) {
-        GlideApp.with(mainActivity)
-                .asDrawable()
-                .placeholder(R.drawable.ic_person_flat)
-                .fallback(R.drawable.ic_person_flat)
-                .load(File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
-                .into(object : Target<Drawable> {
-                    override fun onLoadStarted(placeholder: Drawable?) {
-                        imageView.setImageDrawable(placeholder)
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        imageView.setImageDrawable(errorDrawable)
-                    }
-
-                    override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
-                        imageView.setImageDrawable(resource)
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-
-                    }
-
-                    override fun getSize(cb: SizeReadyCallback) {
-                        cb.onSizeReady(32, 32)
-                    }
-
-                    override fun removeCallback(cb: SizeReadyCallback) {
-
-                    }
-
-                    override fun setRequest(request: Request?) {
-
-                    }
-
-                    override fun getRequest(): Request? {
-                        return null
-                    }
-
-                    override fun onStart() {
-
-                    }
-
-                    override fun onStop() {
-
-                    }
-
-                    override fun onDestroy() {
-
-                    }
-                })
-
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homePresenter = HomePresenter(this)
@@ -240,7 +185,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onResume() {
         super.onResume()
         disposable = CompositeDisposable()
-        loadImageFromStorage(userImage)
         getTimeOfTheDay()
     }
 

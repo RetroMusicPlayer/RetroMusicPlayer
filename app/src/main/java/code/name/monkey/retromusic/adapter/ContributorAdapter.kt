@@ -40,8 +40,8 @@ class ContributorAdapter(private var contributors: List<Contributor>) : Recycler
             text.text = contributor.summary
             GlideApp.with(image.context)
                     .load(contributor.profileImage)
-                    .error(R.drawable.ic_person_flat)
-                    .placeholder(R.drawable.ic_person_flat)
+                    .error(R.drawable.ic_account_white_24dp)
+                    .placeholder(R.drawable.ic_account_white_24dp)
                     .into(image)
         }
     }

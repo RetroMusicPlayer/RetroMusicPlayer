@@ -1,8 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,15 +21,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.afollestad.materialcab.MaterialCab;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.appbar.AppBarLayout;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
@@ -42,17 +34,13 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
-import code.name.monkey.retromusic.glide.GlideApp;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.util.NavigationUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import io.reactivex.disposables.CompositeDisposable;
-
-import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
 
@@ -101,78 +89,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbar = view.findViewById(R.id.toolbar);
         userImage = view.findViewById(R.id.userImage);
         userImage.setOnClickListener(v -> showMainMenu());
-
-        loadImageFromStorage();
         return view;
     }
-
-
-
-    private void loadImageFromStorage() {
-        GlideApp.with(getMainActivity())
-                .asDrawable()
-                .placeholder(R.drawable.ic_person_flat)
-                .fallback(R.drawable.ic_person_flat)
-                .load(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
-                .into(new Target<Drawable>() {
-                    @Override
-                    public void onLoadStarted(@Nullable Drawable placeholder) {
-                        userImage.setImageDrawable(placeholder);
-                    }
-
-                    @Override
-                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                        userImage.setImageDrawable(errorDrawable);
-                    }
-
-                    @Override
-                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                        userImage.setImageDrawable(resource);
-                    }
-
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-
-                    }
-
-                    @Override
-                    public void getSize(@NonNull SizeReadyCallback cb) {
-                        cb.onSizeReady(32, 32);
-                    }
-
-                    @Override
-                    public void removeCallback(@NonNull SizeReadyCallback cb) {
-
-                    }
-
-                    @Override
-                    public void setRequest(@Nullable Request request) {
-
-                    }
-
-                    @Nullable
-                    @Override
-                    public Request getRequest() {
-                        return null;
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onStop() {
-
-                    }
-
-                    @Override
-                    public void onDestroy() {
-
-                    }
-                });
-    }
-
+    
     public void setTitle(@StringRes int name) {
         bannerTitle.setText(getString(name));
     }

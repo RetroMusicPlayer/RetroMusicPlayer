@@ -145,7 +145,7 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ userImage!!.setImageBitmap(it) }, {
                     userImage!!.setImageDrawable(ContextCompat
-                            .getDrawable(context!!, R.drawable.ic_person_flat))
+                            .getDrawable(context!!, R.drawable.ic_account_white_24dp))
                 }, {
 
                 }))
