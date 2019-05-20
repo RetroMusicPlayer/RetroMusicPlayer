@@ -15,10 +15,14 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.EqualizerHelper
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.helper.EqualizerHelper
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.activity_equalizer.*
+import kotlinx.android.synthetic.main.activity_equalizer.appBarLayout
+import kotlinx.android.synthetic.main.activity_equalizer.toolbar
+import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -103,17 +107,9 @@ class EqualizerActivity : AbsMusicServiceActivity(), AdapterView.OnItemSelectedL
     }
 
     private fun setupToolbar() {
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         val primaryColor = ThemeStore.primaryColor(this)
         appBarLayout.setBackgroundColor(primaryColor)
-        toolbar.apply {
-            setBackgroundColor(primaryColor)
-            setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-            setNavigationOnClickListener { onBackPressed() }
-            setSupportActionBar(this)
-            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(context))
-        }
-        title = null
+        applyToolbar(toolbar)
     }
 
     private fun addPresets() {

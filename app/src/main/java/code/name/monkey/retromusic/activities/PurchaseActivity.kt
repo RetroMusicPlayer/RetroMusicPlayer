@@ -8,11 +8,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 import kotlinx.android.synthetic.main.activity_pro_version.*
@@ -39,12 +39,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         toolbar.setBackgroundColor(primaryColor)
         appBarLayout.setBackgroundColor(primaryColor)
 
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
-        setSupportActionBar(toolbar)
-        title = null
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(this))
+        applyToolbar(toolbar)
 
         restoreButton.isEnabled = false
         purchaseButton.isEnabled = false

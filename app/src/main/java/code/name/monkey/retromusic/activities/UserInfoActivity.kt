@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -51,7 +52,6 @@ class UserInfoActivity : AbsBaseActivity() {
 
         setupToolbar()
 
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         MaterialUtil.setTint(nameContainer, false)
         MaterialUtil.setTint(bioContainer, false)
         name.setText(PreferenceUtil.getInstance().userName)
@@ -110,14 +110,8 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun setupToolbar() {
         val primaryColor = ThemeStore.primaryColor(this)
-        toolbar.apply {
-            setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-            setBackgroundColor(primaryColor)
-            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@UserInfoActivity))
-            setSupportActionBar(this)
-        }
+        applyToolbar(toolbar)
         appBarLayout.setBackgroundColor(primaryColor)
-        title = null
     }
 
     private fun showBannerOptions() {

@@ -11,7 +11,6 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -24,15 +23,7 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="">
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/settingsTitle"
-                style="@style/BigTitleTextAppearanceToolbar"
-                android:text="@string/action_settings" />
-
-        </androidx.appcompat.widget.Toolbar>
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

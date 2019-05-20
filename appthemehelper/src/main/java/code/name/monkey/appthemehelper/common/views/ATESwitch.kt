@@ -1,10 +1,10 @@
 package code.name.monkey.appthemehelper.common.views
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.SwitchCompat
-import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
 
@@ -30,7 +30,12 @@ class ATESwitch : SwitchCompat {
         setThumbResource(R.drawable.toggle_switch)
         setTrackResource(R.drawable.ate_track)
         background = null
-        ATH.setTint(this, ThemeStore.accentColor(context))
+
+        val sl = ColorStateList(arrayOf(intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
+                intArrayOf(ThemeStore.textColorSecondary(context), ThemeStore.accentColor(context)))
+
+        thumbTintList = sl
+        trackTintList = sl
     }
 
     override fun isShown(): Boolean {

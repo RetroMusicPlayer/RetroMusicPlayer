@@ -88,7 +88,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
         toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
         setSupportActionBar(toolbar)
-        title = null
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 

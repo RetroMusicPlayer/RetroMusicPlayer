@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
@@ -48,9 +49,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/pinterest_page" />
+                    android:text="@string/pinterest_page"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -93,8 +94,8 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fontFamily="@font/circular_std_medium"
-                    android:text="@string/instagram_page" />
+                    android:text="@string/instagram_page"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -135,9 +136,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/twitter_page" />
+                    android:text="@string/twitter_page"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -178,9 +179,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/discord_page" />
+                    android:text="@string/discord_page"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -222,8 +223,8 @@
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:fontFamily="@font/circular_std_medium"
-                    android:text="@string/telegram_group" />
+                    android:text="@string/telegram_group"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"

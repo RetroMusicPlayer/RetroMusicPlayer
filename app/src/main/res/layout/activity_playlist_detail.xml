@@ -45,14 +45,8 @@
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:layout_collapseMode="pin"
-                        app:title=""
-                        tools:ignore="UnusedAttribute">
+                        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/bannerTitle"
-                            style="@style/BigTitleTextAppearanceToolbar" />
-
-                    </androidx.appcompat.widget.Toolbar>
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

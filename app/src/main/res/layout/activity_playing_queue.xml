@@ -25,15 +25,8 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    android:text="@string/queue" />
-
-            </androidx.appcompat.widget.Toolbar>
+                app:title="@string/queue"
+                tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <TextView

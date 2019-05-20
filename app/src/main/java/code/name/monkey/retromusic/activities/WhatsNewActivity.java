@@ -63,7 +63,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
         appBarLayout.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
         setSupportActionBar(toolbar);
-        setTitle(null);
+
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         title.setTextColor(ThemeStore.Companion.textColorPrimary(this));
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));

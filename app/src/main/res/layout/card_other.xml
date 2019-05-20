@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
@@ -36,9 +37,9 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
-                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
-                android:text="@string/changelog" />
+                android:text="@string/changelog"
+                app:fontFamily="@font/circular_std_medium" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 style="@style/TextAppearance.MaterialComponents.Body2"
@@ -66,9 +67,9 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
-                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
-                android:text="@string/pref_title_open_source_licences" />
+                android:text="@string/pref_title_open_source_licences"
+                app:fontFamily="@font/circular_std_medium" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 style="@style/TextAppearance.MaterialComponents.Body2"
@@ -95,9 +96,9 @@
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
-                app:fontFamily="@font/circular_std_medium"
                 android:layout_height="wrap_content"
-                android:text="@string/version" />
+                android:text="@string/version"
+                app:fontFamily="@font/circular_std_medium" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/appVersion"
@@ -107,6 +108,7 @@
                 android:alpha="0.85"
                 android:text="0.0.0" />
         </LinearLayout>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/madeText"
             android:layout_width="wrap_content"

@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
@@ -139,18 +139,12 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupToolbar() {
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         playerQueueSubHeader.text = upNextAndQueueTime
         playerQueueSubHeader.setTextColor(ThemeStore.accentColor(this))
 
+        applyToolbar(toolbar)
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp)
-        setSupportActionBar(toolbar)
-        title = null
-        toolbar.setNavigationOnClickListener { onBackPressed() }
 
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
         clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
             clearQueue.setTextColor(this)

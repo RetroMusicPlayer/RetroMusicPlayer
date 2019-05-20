@@ -22,15 +22,9 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
+                app:title="@string/support_development"
+                tools:ignore="UnusedAttribute" />
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    android:text="@string/support_development" />
-
-            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <View

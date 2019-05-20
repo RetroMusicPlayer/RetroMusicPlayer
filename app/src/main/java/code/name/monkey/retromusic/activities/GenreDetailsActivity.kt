@@ -14,6 +14,9 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
@@ -21,12 +24,15 @@ import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.contract.GenreDetailsContract
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
+import kotlinx.android.synthetic.main.activity_playing_queue.*
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
+import kotlinx.android.synthetic.main.activity_playlist_detail.appBarLayout
+import kotlinx.android.synthetic.main.activity_playlist_detail.empty
+import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
+import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
 import java.util.*
 
 /**
@@ -65,23 +71,15 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
     }
 
     private fun setUpToolBar() {
-        bannerTitle!!.text = genre!!.name
-        bannerTitle!!.setTextColor(ThemeStore.textColorPrimary(this))
-
         val primaryColor = ThemeStore.primaryColor(this)
         appBarLayout.setBackgroundColor(primaryColor)
-        toolbar.apply {
-            setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-            setBackgroundColor(primaryColor)
-            setSupportActionBar(this)
-            ToolbarContentTintHelper.colorBackButton(this, ThemeStore.textColorSecondary(this@GenreDetailsActivity))
-        }
+        applyToolbar(toolbar)
         actionShuffleAll.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
             actionShuffleAll.setTextColor(this)
             actionShuffleAll.iconTint = this
         }
-        title = null
+        title = genre!!.name
     }
 
     override fun onResume() {

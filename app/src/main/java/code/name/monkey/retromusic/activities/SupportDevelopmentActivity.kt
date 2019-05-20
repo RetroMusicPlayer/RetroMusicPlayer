@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.views.IconImageView
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
@@ -31,7 +31,6 @@ import java.lang.ref.WeakReference
 import java.util.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
-
 
     companion object {
         val TAG: String = SupportDevelopmentActivity::class.java.simpleName
@@ -59,8 +58,6 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donation)
 
-
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
@@ -74,17 +71,9 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     private fun setupToolbar() {
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
         val primaryColor = ThemeStore.primaryColor(this)
         appBarLayout.setBackgroundColor(primaryColor)
-        toolbar.setBackgroundColor(primaryColor)
-
-        toolbar.setNavigationOnClickListener { onBackPressed() }
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        setSupportActionBar(toolbar)
-        title = null
-
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
+        applyToolbar(toolbar)
     }
 
     override fun onBillingInitialized() {

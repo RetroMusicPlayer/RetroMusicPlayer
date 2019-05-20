@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
@@ -49,10 +50,10 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/circular"
-                    android:text="@string/git_hub" />
+                    android:text="@string/git_hub"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -95,9 +96,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/translate" />
+                    android:text="@string/translate"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -140,9 +141,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/rate_app" />
+                    android:text="@string/rate_app"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -185,9 +186,9 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
-                    android:text="@string/donate" />
+                    android:text="@string/donate"
+                    app:fontFamily="@font/circular_std_medium" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     style="@style/TextAppearance.MaterialComponents.Body2"
@@ -232,10 +233,10 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:text="@string/action_share"
-                    android:textColor="@color/md_white_1000" />
+                    android:textColor="@color/md_white_1000"
+                    app:fontFamily="@font/circular_std_medium" />
 
             </LinearLayout>
         </LinearLayout>
@@ -273,10 +274,10 @@
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
-                    app:fontFamily="@font/circular_std_medium"
                     android:layout_height="wrap_content"
                     android:text="@string/faq"
-                    android:textColor="@color/md_white_1000" />
+                    android:textColor="@color/md_white_1000"
+                    app:fontFamily="@font/circular_std_medium" />
 
             </LinearLayout>
         </LinearLayout>

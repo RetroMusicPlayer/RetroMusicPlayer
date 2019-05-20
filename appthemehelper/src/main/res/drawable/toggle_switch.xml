@@ -18,7 +18,7 @@
             <solid android:color="@color/md_white_1000" />
             <corners android:radius="10dp" />
             <size android:width="20dp" android:height="20dp" />
-            <stroke android:width="6dp" android:color="#0000ffff" />
+            <stroke android:width="8dp" android:color="#0000ffff" />
         </shape>
     </item>
 </selector>

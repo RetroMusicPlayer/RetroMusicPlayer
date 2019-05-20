@@ -14,15 +14,9 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
-            app:title=""
-            tools:ignore="UnusedAttribute">
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:title="@string/equalizer" />
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearanceToolbar"
-                android:text="@string/equalizer" />
-
-        </androidx.appcompat.widget.Toolbar>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/equalizerSwitch"
