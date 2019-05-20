@@ -50,8 +50,8 @@
                     android:id="@+id/bannerTitle"
                     style="@style/BigTitleTextAppearanceToolbar"
                     android:layout_gravity="start|center_vertical"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="0dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="8dp"
                     android:text="@string/library"
                     android:textColor="@color/md_white_1000"
                     tools:ignore="MissingPrefix" />
