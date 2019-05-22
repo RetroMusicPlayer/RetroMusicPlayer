@@ -22,9 +22,9 @@ import code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY
 import code.name.monkey.retromusic.Constants.TELEGRAM_CHANGE_LOG
 import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
+import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
@@ -154,13 +154,11 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun shareApp() {
-        val shareIntent = ShareCompat.IntentBuilder.from(this)
-                .setType("songText/plain")
+        ShareCompat.IntentBuilder.from(this)
+                .setType("text/plain")
+                .setChooserTitle(R.string.share_app)
                 .setText(String.format(getString(R.string.app_share), packageName))
-                .intent
-        if (shareIntent.resolveActivity(packageManager) != null) {
-            startActivity(Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
-        }
+                .startChooser()
     }
 
     private fun loadContributors() {
