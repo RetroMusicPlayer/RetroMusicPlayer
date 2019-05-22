@@ -49,11 +49,12 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+
+
         toggleBottomNavigationView(true)
 
         playlist = intent.extras!!.getParcelable(EXTRA_PLAYLIST)
