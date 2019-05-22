@@ -5,16 +5,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
+import java.nio.charset.StandardCharsets;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class WhatsNewActivity extends AbsBaseActivity {
     WebView webView;
-    TextView title;
     Toolbar toolbar;
     AppBarLayout appBarLayout;
 
@@ -51,7 +50,6 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setContentView(R.layout.activity_whats_new);
 
         webView = findViewById(R.id.webView);
-        title = findViewById(R.id.bannerTitle);
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
 
@@ -65,14 +63,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        title.setTextColor(ThemeStore.Companion.textColorPrimary(this));
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));
 
         try {
             // Load from phonograph-changelog.html in the assets folder
             StringBuilder buf = new StringBuilder();
             InputStream json = getAssets().open("retro-changelog.html");
-            BufferedReader in = new BufferedReader(new InputStreamReader(json, "UTF-8"));
+            BufferedReader in = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8));
             String str;
             while ((str = in.readLine()) != null)
                 buf.append(str);

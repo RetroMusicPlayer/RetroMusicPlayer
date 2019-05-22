@@ -21,15 +21,16 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.io.File;
 import java.util.Objects;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.MainActivity;
@@ -277,7 +278,7 @@ public final class PreferenceUtil {
 
 
     public final int getLastPage() {
-        return mPreferences.getInt(LAST_PAGE, R.id.action_home);
+        return mPreferences.getInt(LAST_PAGE, R.id.action_song);
     }
 
     public void setLastPage(final int value) {
