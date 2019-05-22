@@ -49,24 +49,22 @@ public class WhatsNewActivity extends AbsBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_new);
 
-        webView = findViewById(R.id.webView);
-        toolbar = findViewById(R.id.toolbar);
-        appBarLayout = findViewById(R.id.appBarLayout);
-
-
         setStatusbarColorAuto();
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
 
+        webView = findViewById(R.id.webView);
+        toolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appBarLayout);
+
         toolbar.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
         appBarLayout.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));
 
         try {
-            // Load from phonograph-changelog.html in the assets folder
             StringBuilder buf = new StringBuilder();
             InputStream json = getAssets().open("retro-changelog.html");
             BufferedReader in = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8));

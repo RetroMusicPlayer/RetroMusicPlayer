@@ -135,7 +135,7 @@ object MusicPlayerRemote {
         var cursor: Cursor? = null
         try {
             cursor = context.contentResolver.query(uri, projection, null, null, null)
-            cursor.use { it ->
+            cursor.use {
                 if (it.moveToFirst()) {
                     val columnIndex = it.getColumnIndexOrThrow(column)
                     return it.getString(columnIndex)
@@ -405,7 +405,7 @@ object MusicPlayerRemote {
                     )).blockingFirst()
                 }
             }
-            if (songs != null && !songs.isEmpty()) {
+            if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
                 //TODO the file is not listed in the media store

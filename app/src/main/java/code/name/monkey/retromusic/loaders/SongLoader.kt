@@ -89,7 +89,7 @@ object SongLoader {
 
         // Blacklist
         val paths = BlacklistStore.getInstance(context).paths
-        if (!paths.isEmpty()) {
+        if (paths.isNotEmpty()) {
             selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
             selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
         }

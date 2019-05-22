@@ -90,7 +90,7 @@ public class UserImageView extends CircularImageView implements SharedPreference
 
                     @Override
                     public void getSize(@NonNull SizeReadyCallback cb) {
-                        cb.onSizeReady(32, 32);
+                        cb.onSizeReady(96, 96);
                     }
 
                     @Override

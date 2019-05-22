@@ -17,7 +17,6 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
@@ -132,7 +131,7 @@ class UserInfoActivity : AbsBaseActivity() {
         if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
             val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             pickImageIntent.type = "image/*"
-            pickImageIntent.putExtra("crop", "true")
+            //pickImageIntent.putExtra("crop", "true")
             pickImageIntent.putExtra("outputX", 1290)
             pickImageIntent.putExtra("outputY", 720)
             pickImageIntent.putExtra("aspectX", 16)
@@ -162,10 +161,10 @@ class UserInfoActivity : AbsBaseActivity() {
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 PICK_IMAGE_REQUEST -> {
-                    val uri = data!!.data
+                    val uri = data.data
                     try {
                         val bitmap = getResizedBitmap(getBitmap(contentResolver, uri), PROFILE_ICON_SIZE)
                         val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
@@ -176,14 +175,14 @@ class UserInfoActivity : AbsBaseActivity() {
                     }
                 }
                 CROP_IMAGE_REQUEST -> {
-                    val extras: Bundle = data?.extras!!
-                    val selectedBitmap: Bitmap = extras.getParcelable("data");
+                    val extras: Bundle = data.extras!!
+                    val selectedBitmap: Bitmap = extras.getParcelable("data")
                     val profileImagePath = saveToInternalStorage(selectedBitmap, USER_PROFILE)
                     PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
                     loadImageFromStorage(profileImagePath)
                 }
                 PICK_BANNER_REQUEST -> {
-                    val uri = data?.data
+                    val uri = data.data
                     try {
                         val bitmap = getBitmap(contentResolver, uri)
                         val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
@@ -194,40 +193,14 @@ class UserInfoActivity : AbsBaseActivity() {
                     }
                 }
                 CROP_BANNER_REQUEST -> {
-                    val extras: Bundle = data?.extras!!
-                    val selectedBitmap: Bitmap = extras.getParcelable("data");
+                    val extras: Bundle = data.extras!!
+                    val selectedBitmap: Bitmap = extras.getParcelable("data")
                     val profileImagePath = saveToInternalStorage(selectedBitmap, USER_BANNER)
                     PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
                     loadImageFromStorage(profileImagePath)
                 }
             }
         }
-        /*if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val picturePath = data.data
-            performCrop(picturePath)
-        } else if (requestCode == CROP_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-            val uri = data.data
-            try {
-                val bitmap = ImageUtil.getResizedBitmap(Media.getBitmap(contentResolver, uri), PROFILE_ICON_SIZE)
-                val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
-                PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
-                loadImageFromStorage(profileImagePath)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-        } else if (requestCode == PICK_BANNER_REQUEST && resultCode == Activity.RESULT_OK && data != null &&
-                data.data != null) {
-            val uri = data.data
-            try {
-                val bitmap = Media.getBitmap(contentResolver, uri)
-                val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
-                PreferenceUtil.getInstance().setBannerImagePath(profileImagePath)
-                loadBannerFromStorage(profileImagePath)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-        }*/
     }
 
 
