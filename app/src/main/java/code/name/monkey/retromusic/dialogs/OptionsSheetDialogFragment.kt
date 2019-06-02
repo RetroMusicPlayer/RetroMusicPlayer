@@ -14,54 +14,26 @@
 
 package code.name.monkey.retromusic.dialogs
 
+import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
-import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import kotlinx.android.synthetic.main.fragment_main_options.*
-import java.io.File
-import java.util.*
 
-class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnClickListener {
-
-    private val disposable = CompositeDisposable()
-
-    private val timeOfTheDay: String
-        get() {
-            var message = getString(R.string.title_good_day)
-            val c = Calendar.getInstance()
-
-            when (c.get(Calendar.HOUR_OF_DAY)) {
-                in 0..5 -> message = getString(R.string.title_good_night)
-                in 6..11 -> message = getString(R.string.title_good_morning)
-                in 12..15 -> message = getString(R.string.title_good_afternoon)
-                in 16..19 -> message = getString(R.string.title_good_evening)
-                in 20..23 -> message = getString(R.string.title_good_night)
-            }
-            return message
-        }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.dispose()
-    }
+class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main_options, container, false)
@@ -70,18 +42,9 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        text.setTextColor(ThemeStore.textColorSecondary(context!!))
-        text.text = PreferenceUtil.getInstance().userBio
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
-        titleWelcome.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
-
-        loadImageFromStorage()
-
         actionSettings.setOnClickListener(this)
-
         actionSleepTimer.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
-        userInfoContainer.setOnClickListener(this)
         actionEqualizer.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
         actionRate.setOnClickListener(this)
@@ -103,11 +66,9 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
             R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
-
             R.id.actionSleepTimer -> if (fragmentManager != null) {
                 SleepTimerDialog().show(fragmentManager!!, TAG)
             }
-            R.id.userInfoContainer -> NavigationUtil.goToUserInfo(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
             R.id.actionShare -> shareApp()
             R.id.actionBugReport -> prepareBugReport()
@@ -132,23 +93,11 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
         }
     }
 
-    private fun loadImageFromStorage() {
+    override fun getDialog(): Dialog? {
+        return MaterialDialog(activity!!, BottomSheet())
+                .show {
 
-        disposable.add(Compressor(context!!)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(
-                        File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userImage!!.setImageBitmap(it) }, {
-                    userImage!!.setImageDrawable(ContextCompat
-                            .getDrawable(context!!, R.drawable.ic_account_white_24dp))
-                }, {
-
-                }))
+                }
     }
 
     companion object {

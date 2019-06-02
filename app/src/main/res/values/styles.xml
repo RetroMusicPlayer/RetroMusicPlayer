@@ -41,8 +41,6 @@
 
 
     <style name="ToolbarTextAppearance">
-        <item name="android:textStyle">bold</item>
-        <item name="android:fontFamily">@font/circular</item>
     </style>
 
     <style name="ToolbarSubTitleTextAppearance">

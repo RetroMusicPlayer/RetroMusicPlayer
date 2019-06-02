@@ -7,59 +7,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-    <LinearLayout
-        android:id="@+id/userInfoContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <code.name.monkey.retromusic.views.CircularImageView
-            android:id="@+id/userImage"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:layout_weight="0"
-            app:civ_border="false" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/titleWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="0dp"
-                android:textSize="18sp" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.75"
-                android:ellipsize="end"
-                android:text="@string/lets_play_something" />
-
-        </LinearLayout>
-
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/actionSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?roundSelector"
-            android:gravity="center_vertical"
-            android:padding="12dp"
-            android:textAllCaps="false"
-            app:srcCompat="@drawable/ic_settings_white_24dp" />
-    </LinearLayout>
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/buyProContainer"
         android:layout_width="match_parent"
@@ -115,6 +62,16 @@
         android:focusable="true"
         app:optionIcon="@drawable/ic_folder_white_24dp"
         app:optionTitle="@string/folders" />
+
+    <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_settings_white_24dp"
+        app:optionTitle="@string/action_settings" />
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionEqualizer"

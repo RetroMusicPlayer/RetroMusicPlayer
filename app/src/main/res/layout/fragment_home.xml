@@ -27,31 +27,9 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
+                app:title="@string/app_name"
                 app:layout_collapseMode="pin"
-                tools:ignore="UnusedAttribute">
-
-                <code.name.monkey.retromusic.views.UserImageView
-                    android:id="@+id/userImage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="14dp"
-                    android:layout_weight="0"
-                    android:background="@android:color/transparent"
-                    app:civ_border="false"
-                    app:civ_border_width="0dp"
-                    app:civ_shadow="false" />
-
-                <TextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    android:layout_gravity="start|center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/app_name"
-                    tools:ignore="MissingPrefix" />
-
-            </androidx.appcompat.widget.Toolbar>
+                tools:ignore="UnusedAttribute" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
