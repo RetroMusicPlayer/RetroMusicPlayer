@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,9 +51,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private MaterialCab cab;
     private FragmentManager fragmentManager;
-    private ImageView userImage;
     private CompositeDisposable disposable;
-    private TextView bannerTitle;
+
 
     @NonNull
     public static Fragment newInstance(int tab) {
@@ -84,16 +81,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         contentContainer = view.findViewById(R.id.fragmentContainer);
-        bannerTitle = view.findViewById(R.id.bannerTitle);
+
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
-        userImage = view.findViewById(R.id.userImage);
-        userImage.setOnClickListener(v -> showMainMenu());
+
         return view;
     }
-    
+
     public void setTitle(@StringRes int name) {
-        bannerTitle.setText(getString(name));
+        toolbar.setTitle(getString(name));
     }
 
     public void addOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
@@ -143,16 +139,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void setupToolbar() {
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        bannerTitle.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
-
+        toolbar.setOnClickListener(v -> {
+            showMainMenu();
+        });
         toolbar.setBackgroundColor(primaryColor);
         toolbar.setNavigationIcon(null);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
-        getMainActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
-
 
     }
 

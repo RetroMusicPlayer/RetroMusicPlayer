@@ -14,60 +14,6 @@
         tools:background="@color/md_black_1000">
 
         <LinearLayout
-            android:id="@+id/userInfoContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
-
-            <code.name.monkey.retromusic.views.UserImageView
-                android:id="@+id/userImage"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="16dp"
-                android:layout_weight="0"
-                android:background="@android:color/transparent"
-                app:civ_border="false"
-                app:civ_border_width="0dp"
-                app:civ_shadow="false" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingEnd="12dp"
-                android:paddingBottom="8dp">
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/titleWelcome"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/general_settings_title"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
-
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/lets_play_something"
-                    android:textSize="@dimen/ate_default_textsize_body"
-                    tools:text="Summary" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/generalSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
