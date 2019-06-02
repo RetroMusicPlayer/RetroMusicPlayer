@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_scan"
-        android:icon="@drawable/ic_scanner_white_24dp"
-        android:title="@string/scan_media"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/action_go_to_start_directory"
         android:icon="@drawable/ic_bookmark_music_white_24dp"
         android:title="@string/action_go_to_start_directory"
