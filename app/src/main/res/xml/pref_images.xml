@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        app:enableCopying="true"
         android:defaultValue="true"
-        app:iconSpaceReserved="false"
         android:key="ignore_media_store_artwork"
         android:summary="@string/pref_summary_ignore_media_store_artwork"
         android:title="@string/pref_title_ignore_media_store_artwork" />
 
     <code.name.monkey.retromusic.preferences.MaterialListPreference
+        app:enableCopying="true"
         android:defaultValue="only_wifi"
-        app:iconSpaceReserved="false"
         android:entries="@array/pref_auto_download_images_titles"
         android:entryValues="@array/pref_auto_download_images_values"
         android:key="auto_download_images_policy"

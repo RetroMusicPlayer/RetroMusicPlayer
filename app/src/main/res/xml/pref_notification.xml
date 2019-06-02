@@ -4,15 +4,15 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"
-        app:iconSpaceReserved="false"
         android:key="colored_notification"
         android:summary="@string/pref_summary_colored_notification"
-        android:title="@string/pref_title_colored_notification" />
+        android:title="@string/pref_title_colored_notification"
+        app:enableCopying="true" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
-        app:iconSpaceReserved="false"
         android:key="classic_notification"
         android:summary="@string/pref_summary_classic_notification"
-        android:title="@string/pref_title_classic_notification" />
+        android:title="@string/pref_title_classic_notification"
+        app:enableCopying="true" />
 </androidx.preference.PreferenceScreen>

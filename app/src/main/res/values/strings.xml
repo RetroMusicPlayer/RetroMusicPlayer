@@ -621,4 +621,5 @@
 
     <string name="image_gradient">Gradient image</string>
     <string name="stack">Stack</string>
+    <string name="grid_style_label"><![CDATA[Grids & Style]]></string>
 </resources>
