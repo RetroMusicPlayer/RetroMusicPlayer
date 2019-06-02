@@ -26,6 +26,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
 
 class RemoveFromPlaylistDialog : DialogFragment() {
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val songs = arguments!!.getParcelableArrayList<PlaylistSong>("songs")
 
@@ -40,16 +41,17 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         }
 
 
-        return MaterialDialog(activity!!, BottomSheet()).show {
-            title(title)
-            message(text = content)
-            negativeButton(android.R.string.cancel)
-            positiveButton(R.string.remove_action) {
-                if (activity == null)
-                    return@positiveButton
-                PlaylistsUtil.removeFromPlaylist(activity!!, songs as MutableList<PlaylistSong>)
-            }
-        }
+        return MaterialDialog(activity!!, BottomSheet())
+                .show {
+                    title(title)
+                    message(text = content)
+                    negativeButton(android.R.string.cancel)
+                    positiveButton(R.string.remove_action) {
+                        if (activity == null)
+                            return@positiveButton
+                        PlaylistsUtil.removeFromPlaylist(activity!!, songs as MutableList<PlaylistSong>)
+                    }
+                }
 
     }
 

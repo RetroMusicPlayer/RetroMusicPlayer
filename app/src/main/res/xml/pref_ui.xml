@@ -45,13 +45,6 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
-        android:key="toggle_home_banner"
-        android:summary="@string/pref_summary_home_banner"
-        android:title="@string/pref_title_home_banner"
-        app:iconSpaceReserved="false" />
-
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
         android:key="toggle_genre"
         android:summary="@string/pref_summary_genre_toggle"
         android:title="@string/pref_title_genre_toggle"

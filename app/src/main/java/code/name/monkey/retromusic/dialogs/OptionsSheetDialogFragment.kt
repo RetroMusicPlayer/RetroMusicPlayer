@@ -19,7 +19,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
@@ -31,34 +31,9 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import kotlinx.android.synthetic.main.fragment_main_options.*
+import com.afollestad.materialdialogs.customview.customView
 
 class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main_options, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        actionSettings.setOnClickListener(this)
-        actionSleepTimer.setOnClickListener(this)
-        actionLibrary.setOnClickListener(this)
-        actionEqualizer.setOnClickListener(this)
-        actionFolders.setOnClickListener(this)
-        actionRate.setOnClickListener(this)
-        actionShare.setOnClickListener(this)
-        actionBugReport.setOnClickListener(this)
-        buyProContainer.apply {
-            setCardBackgroundColor(ThemeStore.accentColor(context!!))
-            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
-            setOnClickListener {
-                NavigationUtil.goToProVersion(context)
-            }
-        }
-    }
-
 
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
@@ -93,10 +68,48 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         }
     }
 
-    override fun getDialog(): Dialog? {
+    private lateinit var actionSettings: View
+    private lateinit var actionSleepTimer: View
+    private lateinit var actionLibrary: View
+    private lateinit var actionEqualizer: View
+    private lateinit var actionFolders: View
+    private lateinit var actionRate: View
+    private lateinit var actionShare: View
+    private lateinit var actionBugReport: View
+    private lateinit var buyProContainer: CardView
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
+        actionSettings = layout.findViewById(R.id.actionSettings)
+        actionSleepTimer = layout.findViewById(R.id.actionSleepTimer)
+        actionLibrary = layout.findViewById(R.id.actionLibrary)
+        actionEqualizer = layout.findViewById(R.id.actionEqualizer)
+        actionFolders = layout.findViewById(R.id.actionFolders)
+        actionRate = layout.findViewById(R.id.actionRate)
+        actionShare = layout.findViewById(R.id.actionShare)
+        actionBugReport = layout.findViewById(R.id.actionBugReport)
+        buyProContainer = layout.findViewById(R.id.buyProContainer)
+
+        actionSettings.setOnClickListener(this)
+        actionSleepTimer.setOnClickListener(this)
+        actionLibrary.setOnClickListener(this)
+        actionEqualizer.setOnClickListener(this)
+        actionFolders.setOnClickListener(this)
+        actionRate.setOnClickListener(this)
+        actionShare.setOnClickListener(this)
+        actionBugReport.setOnClickListener(this)
+
+        buyProContainer.apply {
+            setCardBackgroundColor(ThemeStore.accentColor(context!!))
+            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+            setOnClickListener {
+                NavigationUtil.goToProVersion(context)
+            }
+        }
+
         return MaterialDialog(activity!!, BottomSheet())
                 .show {
-
+                    customView(view = layout, scrollable = true)
                 }
     }
 
