@@ -36,13 +36,6 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
             activity!!.recreate()
             return@setOnPreferenceChangeListener true
         }
-
-
-        val toggleFullScreen: TwoStatePreference = findPreference("toggle_full_screen")!!
-        toggleFullScreen.setOnPreferenceChangeListener { _, _ ->
-            activity!!.recreate()
-            true
-        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

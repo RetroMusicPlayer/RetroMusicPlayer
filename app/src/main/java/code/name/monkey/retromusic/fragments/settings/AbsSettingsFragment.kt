@@ -75,8 +75,7 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
             dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key);
         }
         if (preference is MaterialListPreference) {
-            val entries = preference.entries
-
+            preference.entries
             dialogFragment = MaterialListPreferenceDialog.newInstance(preference)
         }
         if (preference is BlacklistPreference) {

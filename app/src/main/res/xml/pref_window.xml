@@ -5,6 +5,7 @@
         android:title="@string/window"
         app:enableCopying="true"
         app:iconSpaceReserved="true">
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="corner_window"

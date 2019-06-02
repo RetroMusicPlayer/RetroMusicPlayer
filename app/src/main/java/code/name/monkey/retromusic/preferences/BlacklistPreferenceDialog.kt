@@ -16,11 +16,13 @@ package code.name.monkey.retromusic.preferences
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Html
 import android.util.AttributeSet
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
+import androidx.preference.DialogPreference
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -30,7 +32,7 @@ import com.afollestad.materialdialogs.list.listItems
 import java.io.File
 import java.util.*
 
-class BlacklistPreference : ATEDialogPreference {
+class BlacklistPreference : DialogPreference {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -38,6 +40,10 @@ class BlacklistPreference : ATEDialogPreference {
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+
+    init {
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+    }
 }
 
 class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog.FolderCallback {

@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<!-- drawable/music_note_off.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@color/md_white_1000"
+        android:pathData="M12,3V8.68L15,11.68V6H19V3H12M5.28,4.5L4,5.77L10.26,12.03C7.89,12.15 6,14.1 6,16.5C6,19 8,21 10.5,21C12.9,21 14.85,19.11 14.97,16.74L19.68,21.45L20.96,20.18L15,14.22L12,11.22L5.28,4.5Z" />
+</vector>
