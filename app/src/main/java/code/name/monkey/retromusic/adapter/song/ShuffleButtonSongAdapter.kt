@@ -22,7 +22,7 @@ class ShuffleButtonSongAdapter(activity: AppCompatActivity,
     }
 
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
-        if (holder.itemViewType == AbsOffsetSongAdapter.OFFSET_ITEM) {
+        if (holder.itemViewType == OFFSET_ITEM) {
             val accentColor = ThemeStore.accentColor(activity.applicationContext)
             if (holder.title != null) {
                 holder.title!!.text = activity.resources.getString(R.string.action_shuffle_all)
@@ -54,7 +54,7 @@ class ShuffleButtonSongAdapter(activity: AppCompatActivity,
     inner class ViewHolder(itemView: View) : AbsOffsetSongAdapter.ViewHolder(itemView) {
 
         override fun onClick(v: View?) {
-            if (itemViewType == AbsOffsetSongAdapter.OFFSET_ITEM) {
+            if (itemViewType == OFFSET_ITEM) {
                 MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 return
             }

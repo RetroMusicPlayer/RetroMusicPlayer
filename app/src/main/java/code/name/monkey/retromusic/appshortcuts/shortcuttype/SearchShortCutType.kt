@@ -27,7 +27,7 @@ class SearchShortCutType(context: Context) : BaseShortcutType(context) {
     companion object {
 
         val id: String
-            get() = BaseShortcutType.ID_PREFIX + "search"
+            get() = ID_PREFIX + "search"
     }
 
     override val shortcutInfo: ShortcutInfo

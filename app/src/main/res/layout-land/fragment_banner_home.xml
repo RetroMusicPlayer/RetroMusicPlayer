@@ -62,7 +62,7 @@
                         app:layout_collapseMode="pin"
                         tools:ignore="UnusedAttribute">
 
-                        <code.name.monkey.retromusic.views.UserImageView
+                        <code.name.monkey.retromusic.views.CircularImageView
                             android:id="@+id/userImage"
                             android:layout_width="32dp"
                             android:layout_height="32dp"

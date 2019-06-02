@@ -32,7 +32,6 @@ open class PlaylistSongAdapter(activity: AppCompatActivity, dataSet: ArrayList<S
                 holder.title!!.setTextColor(textColor)
             }
 
-
             if (holder.text != null) {
                 holder.text!!.visibility = View.GONE
             }

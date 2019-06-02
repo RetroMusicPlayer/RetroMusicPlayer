@@ -12,6 +12,8 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.dialogs.ClearSmartPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
@@ -23,8 +25,6 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
-import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import java.util.*
@@ -61,17 +61,6 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        /* if (getItemViewType(position) == SMART_PLAYLIST) {
-      if (holder.viewList != null) {
-        holder.viewList.get(0).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new HistoryPlaylist(activity)));
-        holder.viewList.get(1).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new LastAddedPlaylist(activity)));
-        holder.viewList.get(2).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new MyTopTracksPlaylist(activity)));
-      }
-      return;
-    }*/
         val playlist = dataSet[position]
         val songs = getSongs(playlist)
         holder.itemView.isActivated = isChecked(playlist)

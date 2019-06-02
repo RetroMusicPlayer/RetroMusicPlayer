@@ -23,6 +23,10 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.adapter.album.AlbumAdapter
+import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
+import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -34,10 +38,6 @@ import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.adapter.album.AlbumAdapter
-import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
-import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.util.*
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
@@ -180,7 +180,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist!!, data!!.data!!)
+                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist, data!!.data!!)
             }
             else -> if (resultCode == Activity.RESULT_OK) {
                 reload()
@@ -208,10 +208,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun getArtist(): Artist {
-        if (artist == null) {
-            artist = Artist()
-        }
-        return this.artist!!
+        return this.artist
     }
 
     private fun setArtist(artist: Artist) {

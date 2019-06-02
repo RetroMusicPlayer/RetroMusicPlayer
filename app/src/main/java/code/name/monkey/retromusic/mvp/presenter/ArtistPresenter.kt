@@ -19,6 +19,10 @@ import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.contract.ArtistContract
 import java.util.*
 
+/**
+ * Created by hemanths on 16/08/17.
+ */
+
 class ArtistPresenter(private val mView: ArtistContract.ArtistView) : Presenter(), ArtistContract.Presenter {
 
     override fun subscribe() {

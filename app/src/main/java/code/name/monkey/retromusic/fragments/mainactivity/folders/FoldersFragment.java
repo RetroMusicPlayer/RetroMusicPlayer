@@ -728,10 +728,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             super(context);
         }
 
-        public ListingFilesDialogAsyncTask(Context context, int showDelay) {
-            super(context, showDelay);
-        }
-
         @Override
         protected Dialog createDialog(@NonNull Context context) {
             View view = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
