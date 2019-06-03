@@ -25,7 +25,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_banner_home.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
     override fun showEmpty() {
@@ -111,9 +111,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun setupToolbar() {
         toolbar.apply {
             setBackgroundColor(if (PreferenceUtil.getInstance().isHomeBanner) Color.TRANSPARENT else ThemeStore.primaryColor(context))
-            setNavigationOnClickListener {
-                NavigationUtil.goToSearch(activity)
-            }
+            setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener { showMainMenu() }
         }
         mainActivity.setSupportActionBar(toolbar)

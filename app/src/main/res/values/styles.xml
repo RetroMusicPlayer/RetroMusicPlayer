@@ -28,7 +28,7 @@
 
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?actionBarSize</item>
+        <item name="android:layout_height">50dp</item>
         <item name="popupTheme">?toolbarPopupTheme</item>
         <item name="android:transitionName" tools:ignore="NewApi">toolbar</item>
         <item name="android:titleTextAppearance">@style/ToolbarTextAppearance</item>
@@ -41,6 +41,9 @@
 
 
     <style name="ToolbarTextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/circular</item>
     </style>
 
     <style name="ToolbarSubTitleTextAppearance">

@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,8 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -90,7 +88,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private BreadCrumbLayout breadCrumbs;
 
     private AppBarLayout appBarLayout;
-
 
     private FastScrollRecyclerView recyclerView;
 
@@ -232,6 +229,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(primaryColor);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             showMainMenu();
         });
@@ -328,10 +326,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                //noinspection ConstantConditions
-                getActivity().onBackPressed();
-                break;
             case R.id.action_go_to_start_directory:
                 setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance().getStartDirectory())), true);
                 return true;
@@ -469,8 +463,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void checkIsEmpty() {
         if (empty != null) {
-            empty
-                    .setVisibility(adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+            empty.setVisibility(adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -730,21 +723,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            View view = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
-            view.setBackgroundColor(ThemeStore.Companion.primaryColor(context));
-            ProgressBar progressBar = view.findViewById(R.id.progressBar);
-            TintHelper.setTintAuto(progressBar, ThemeStore.Companion.accentColor(context), false);
-
-            MaterialDialog materialDialog = new MaterialDialog(context, new BottomSheet());
-            materialDialog.setContentView(view);
-            materialDialog.title(R.string.listing_files, "");
-            materialDialog.setOnCancelListener(dialog -> cancel(false));
-            materialDialog.setOnDismissListener(dialog -> cancel(false));
-            materialDialog.negativeButton(android.R.string.cancel, "", materialDialog1 -> {
-                cancel(false);
-                return null;
-            });
-            return materialDialog;
+            ProgressDialog dialog = new ProgressDialog(context);
+            dialog.setIndeterminate(true);
+            dialog.setTitle(R.string.listing_files);
+            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            dialog.setOnCancelListener(dialog1 -> cancel(false));
+            dialog.setOnDismissListener(dialog1 -> cancel(false));
+            return dialog;
         }
     }
 }

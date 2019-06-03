@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.fragments.mainactivity.LibraryFragment
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
@@ -122,7 +123,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    fun setCurrentFragment(fragment: Fragment, b: Boolean) {
+    private fun setCurrentFragment(fragment: Fragment, b: Boolean) {
         val trans = supportFragmentManager.beginTransaction()
         trans.replace(R.id.fragment_container, fragment, null)
         if (b) {
@@ -294,8 +295,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            NavigationUtil.goToSearch(this);
-            return true
+            OptionsSheetDialogFragment.newInstance().show(supportFragmentManager, "Main_Menu")
         }
         return super.onOptionsItemSelected(item)
     }

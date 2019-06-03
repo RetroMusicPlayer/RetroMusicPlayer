@@ -50,7 +50,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
 
         }
-        dismiss()
+        materialDialog?.dismiss()
     }
 
     private fun prepareBugReport() {
@@ -77,6 +77,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     private lateinit var actionShare: View
     private lateinit var actionBugReport: View
     private lateinit var buyProContainer: CardView
+    private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
@@ -106,11 +107,11 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
                 NavigationUtil.goToProVersion(context)
             }
         }
-
-        return MaterialDialog(activity!!, BottomSheet())
+        materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
                     customView(view = layout, scrollable = true)
                 }
+        return materialDialog;
     }
 
     companion object {

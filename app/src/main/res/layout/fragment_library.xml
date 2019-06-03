@@ -29,22 +29,30 @@
             android:elevation="0dp"
             app:elevation="0dp">
 
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar"
-                    app:layout_collapseMode="pin"
-                    tools:ignore="UnusedAttribute" />
-
-                <ViewStub
-                    android:id="@+id/cab_stub"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar"
+                        app:titleMarginStart="0dp"
+                        tools:ignore="UnusedAttribute" />
+
+                    <ViewStub
+                        android:id="@+id/cab_stub"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

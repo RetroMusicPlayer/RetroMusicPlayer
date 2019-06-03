@@ -139,11 +139,11 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void setupToolbar() {
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
+        toolbar.setBackgroundColor(primaryColor);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             showMainMenu();
         });
-        toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationIcon(null);
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
