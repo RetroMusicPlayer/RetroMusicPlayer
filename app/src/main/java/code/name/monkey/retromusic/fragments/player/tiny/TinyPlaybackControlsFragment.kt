@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import kotlinx.android.synthetic.main.fragment_tiny_controls_fragment.*
 
 class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {

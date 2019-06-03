@@ -1,6 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
-import android.graphics.Color
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -21,11 +23,19 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
+import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_home.*
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_banner_home.*
+import kotlinx.android.synthetic.main.fragment_home.recyclerView
+import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
     override fun showEmpty() {
@@ -42,7 +52,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_home, viewGroup, false)
+        return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
     }
 
     private val displayMetrics: DisplayMetrics
@@ -110,7 +120,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun setupToolbar() {
         toolbar.apply {
-            setBackgroundColor(if (PreferenceUtil.getInstance().isHomeBanner) Color.TRANSPARENT else ThemeStore.primaryColor(context))
+            setBackgroundColor(ThemeStore.primaryColor(context))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener { showMainMenu() }
         }
@@ -124,6 +134,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onResume() {
         super.onResume()
         disposable = CompositeDisposable()
+        getTimeOfTheDay()
     }
 
     override fun onDestroyView() {
@@ -184,6 +195,44 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToSearch(mainActivity)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getTimeOfTheDay() {
+        val c = Calendar.getInstance()
+        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
+
+        var images = arrayOf<String>()
+        when (timeOfDay) {
+            in 0..5 -> images = resources.getStringArray(R.array.night)
+            in 6..11 -> images = resources.getStringArray(R.array.morning)
+            in 12..15 -> images = resources.getStringArray(R.array.after_noon)
+            in 16..19 -> images = resources.getStringArray(R.array.evening)
+            in 20..23 -> images = resources.getStringArray(R.array.night)
+        }
+
+        val day = images[Random().nextInt(images.size)]
+        loadTimeImage(day)
+    }
+
+
+    private fun loadTimeImage(day: String) {
+        if (bannerImage != null) {
+            if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+                GlideApp.with(activity!!)
+                        .load(day)
+                        .placeholder(R.drawable.material_design_default)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(bannerImage!!)
+            } else {
+                disposable.add(Compressor(context!!)
+                        .setQuality(100)
+                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { bannerImage!!.setImageBitmap(it) })
+            }
+        }
     }
 
     companion object {

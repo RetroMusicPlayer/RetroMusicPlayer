@@ -102,6 +102,7 @@ open class AlbumLoader {
 
         private fun getSongLoaderSortOrder(): String {
             return PreferenceUtil.getInstance().albumSortOrder + ", " +
+                    //PreferenceUtil.getInstance().getAlbumSongSortOrder() + "," +
                     PreferenceUtil.getInstance().albumDetailSongSortOrder
         }
     }

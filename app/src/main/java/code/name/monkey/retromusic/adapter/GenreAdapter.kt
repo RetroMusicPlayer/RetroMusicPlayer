@@ -25,11 +25,11 @@ class GenreAdapter(private val mActivity: Activity, dataSet: ArrayList<Genre>, p
         this.dataSet = dataSet
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenreAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(mActivity).inflate(mItemLayoutRes, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: GenreAdapter.ViewHolder, position: Int) {
         val genre = dataSet[position]
         if (holder.title != null) {
             holder.title!!.text = genre.name

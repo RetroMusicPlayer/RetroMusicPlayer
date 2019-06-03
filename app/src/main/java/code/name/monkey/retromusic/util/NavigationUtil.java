@@ -26,8 +26,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.helper.MusicPlayerRemote;
+import code.name.monkey.retromusic.model.Genre;
+import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.activities.ArtistDetailActivity;
@@ -41,10 +43,8 @@ import code.name.monkey.retromusic.activities.PurchaseActivity;
 import code.name.monkey.retromusic.activities.SearchActivity;
 import code.name.monkey.retromusic.activities.SettingsActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
+import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
-import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import code.name.monkey.retromusic.model.Genre;
-import code.name.monkey.retromusic.model.Playlist;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
@@ -136,6 +136,10 @@ public class NavigationUtil {
 
     public static void goToAbout(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, AboutActivity.class), null);
+    }
+
+    public static void goToUserInfo(@NonNull Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class), null);
     }
 
     public static void goToOpenSource(@NonNull Activity activity) {

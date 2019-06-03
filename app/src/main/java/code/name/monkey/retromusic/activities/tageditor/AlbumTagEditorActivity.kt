@@ -198,7 +198,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         val songs = AlbumLoader.getAlbum(this, id).blockingFirst().songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {
-            paths.add(song.data)
+            paths.add(song.data!!)
         }
         return paths
     }

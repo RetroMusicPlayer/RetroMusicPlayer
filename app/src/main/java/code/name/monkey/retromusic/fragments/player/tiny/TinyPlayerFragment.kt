@@ -14,13 +14,13 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.fragments.MiniPlayerFragment
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.fragments.MiniPlayerFragment
+import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_tiny_player.*

@@ -148,7 +148,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
         getMainActivity().setSupportActionBar(toolbar);
-
     }
 
     private Fragment getCurrentFragment() {

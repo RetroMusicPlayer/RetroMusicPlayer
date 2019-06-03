@@ -216,7 +216,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         return baseUrl
     }
 
-    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         class Tabs(@StringRes val title: Int,
                    val fragment: Fragment)
 

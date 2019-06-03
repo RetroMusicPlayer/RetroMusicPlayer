@@ -113,6 +113,10 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 
+    fun removeThumb() {
+        volumeSeekBar.thumb = null
+    }
+
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
         if (PreferenceUtil.getInstance().pauseOnZeroVolume())
             if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
@@ -125,6 +129,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     fun setTintableColor(color: Int) {
         volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        //TintHelper.setTintAuto(volumeSeekBar, color, false)
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 

@@ -721,6 +721,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             super(context);
         }
 
+        public ListingFilesDialogAsyncTask(Context context, int showDelay) {
+            super(context, showDelay);
+        }
+
         @Override
         protected Dialog createDialog(@NonNull Context context) {
             ProgressDialog dialog = new ProgressDialog(context);

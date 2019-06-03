@@ -37,6 +37,45 @@ import com.google.android.material.textfield.TextInputLayout
 
 class RenamePlaylistDialog : DialogFragment() {
 
+    /*override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.dialog_playlist, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        MaterialUtil.setTint(actionNewPlaylistContainer, false)
+        val accentColor = ThemeStore.accentColor(context!!)
+        actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
+        actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
+
+        actionNewPlaylist.apply {
+            var playlistId: Long = 0
+            if (arguments != null) {
+                playlistId = arguments!!.getLong("playlist_id")
+            }
+            setText(PlaylistsUtil.getNameForPlaylist(activity!!, playlistId))
+        }
+
+        actionCancel.apply {
+            MaterialUtil.setTint(this, false)
+            setOnClickListener { dismiss() }
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
+        }
+
+        actionCreate.apply {
+            setText(R.string.action_rename)
+            setOnClickListener {
+                if (actionNewPlaylist.toString().trim { it <= ' ' } != "") {
+                    val playlistId = arguments!!.getLong("playlist_id")
+                    PlaylistsUtil.renamePlaylist(context!!, playlistId, actionNewPlaylist.text!!.toString())
+                }
+            }
+            MaterialUtil.setTint(this)
+            icon = ContextCompat.getDrawable(context, R.drawable.ic_edit_white_24dp)
+        }
+    }*/
     private lateinit var playlistView: TextInputEditText
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 

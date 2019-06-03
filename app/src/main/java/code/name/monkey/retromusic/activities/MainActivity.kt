@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.activities
 import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -85,12 +84,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     private fun checkShowChangelog() {
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
-            val currentVersion = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                pInfo.longVersionCode.toInt()// avoid huge version numbers and you will be ok
-            } else {
-                //noinspection deprecation
-                pInfo.versionCode
-            }
+            val currentVersion = pInfo.versionCode
             if (currentVersion != PreferenceUtil.getInstance().lastChangelogVersion) {
                 startActivityForResult(Intent(this, WhatsNewActivity::class.java), APP_INTRO_REQUEST)
             }

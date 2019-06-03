@@ -95,6 +95,8 @@
         <item name="android:fontFamily">@font/circular</item>
         <item name="android:textColorPrimary">@color/md_white_1000</item>
 
+        <item name="windowActionBar">false</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
@@ -103,6 +105,8 @@
         <item name="android:windowBackground">?colorPrimary</item>
 
         <item name="md_color_button_text">@color/md_white_1000</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
 
@@ -128,6 +132,8 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -176,6 +182,8 @@
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="android:textColorPrimary">@color/md_grey_900</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
 

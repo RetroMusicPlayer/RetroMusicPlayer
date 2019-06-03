@@ -24,7 +24,7 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
                                    private val onMoveItemListener: OnMoveItemListener?) : PlaylistSongAdapter(activity, dataSet, itemLayoutRes, usePalette, cabHolder), DraggableItemAdapter<OrderablePlaylistSongAdapter.ViewHolder> {
 
     init {
-        setMultiSelectMenuRes(R.menu.menu_playlists_songs_selection)
+        setMultiSelectMenuRes(code.name.monkey.retromusic.R.menu.menu_playlists_songs_selection)
     }
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
@@ -92,7 +92,7 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
         private var mDragStateFlags: Int = 0
 
         override var songMenuRes: Int
-            get() = R.menu.menu_item_playlist_song
+            get() = code.name.monkey.retromusic.R.menu.menu_item_playlist_song
             set(value) {
                 super.songMenuRes = value
             }
@@ -109,7 +109,7 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
-                R.id.action_remove_from_playlist -> {
+                code.name.monkey.retromusic.R.id.action_remove_from_playlist -> {
                     RemoveFromPlaylistDialog.create(song as PlaylistSong).show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                     return true
                 }

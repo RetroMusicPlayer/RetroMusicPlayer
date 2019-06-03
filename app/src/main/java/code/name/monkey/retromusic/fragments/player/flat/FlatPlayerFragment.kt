@@ -101,6 +101,8 @@ class FlatPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
         callbacks!!.onPaletteColorChanged()
 
         val isLight = ColorUtil.isColorLight(color)
+
+        //TransitionManager.beginDelayedTransition(mToolbar);
         val iconColor = if (PreferenceUtil.getInstance().adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
         else
