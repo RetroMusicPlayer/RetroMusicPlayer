@@ -19,8 +19,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 
@@ -47,20 +45,8 @@ class ColorIconsImageView : AppCompatImageView {
 
     private fun setIconBackgroundColor(color: Int) {
         setBackgroundResource(R.drawable.color_circle_gradient)
-
-        val alpha = if (ATHUtil.isWindowBackgroundDark(context)) {
-            1.0f
-        } else {
-            0.12f
-        }
-        val filterColor = if (ATHUtil.isWindowBackgroundDark(context)) {
-            ThemeStore.primaryColor(context)
-        } else {
-           color
-        }
-
-        backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, alpha))
-        imageTintList = ColorStateList.valueOf(filterColor)
+        backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
+        imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.75f))
         requestLayout()
         invalidate()
     }

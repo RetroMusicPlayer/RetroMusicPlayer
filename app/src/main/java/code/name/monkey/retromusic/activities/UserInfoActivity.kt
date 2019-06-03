@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media.getBitmap
-import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -77,7 +76,7 @@ class UserInfoActivity : AbsBaseActivity() {
             showBannerOptions()
         }
         next.setOnClickListener {
-            val nameString = name.text.toString().trim { it <= ' ' }
+            /*val nameString = name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
                 Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -89,7 +88,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
             }
             PreferenceUtil.getInstance().userName = nameString
-            PreferenceUtil.getInstance().userBio = bioString
+            PreferenceUtil.getInstance().userBio = bioString*/
             setResult(Activity.RESULT_OK)
             finish()
         }
@@ -193,11 +192,12 @@ class UserInfoActivity : AbsBaseActivity() {
                     }
                 }
                 CROP_BANNER_REQUEST -> {
-                    val extras: Bundle = data.extras!!
-                    val selectedBitmap: Bitmap = extras.getParcelable("data")
-                    val profileImagePath = saveToInternalStorage(selectedBitmap, USER_BANNER)
-                    PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
-                    loadImageFromStorage(profileImagePath)
+                    val selectedBitmap: Bitmap? = data.extras?.getParcelable("date")
+                    val profileImagePath = selectedBitmap?.let { saveToInternalStorage(it, USER_BANNER) }
+                    profileImagePath?.let {
+                        PreferenceUtil.getInstance().saveProfileImage(it)
+                        loadImageFromStorage(it)
+                    }
                 }
             }
         }

@@ -78,7 +78,7 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
-        return MaterialDialog(activity!!, BottomSheet())
+        materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
                     title(text = materialListPreference.title.toString())
                     positiveButton(R.string.set)
@@ -89,11 +89,14 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
                         dismiss()
                     }
                 }
+        return materialDialog
     }
+
+    private lateinit var materialDialog: MaterialDialog
 
     override fun onDialogClosed(positiveResult: Boolean) {
         if (positiveResult) {
-            dismiss()
+            materialDialog.dismiss()
         }
     }
 

@@ -89,7 +89,8 @@
                 android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="8dp">
 
                 <include layout="@layout/abs_playlists" />
 

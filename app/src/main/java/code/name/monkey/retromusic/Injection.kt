@@ -28,8 +28,4 @@ object Injection {
     fun provideSchedulerProvider(): BaseSchedulerProvider {
         return SchedulerProvider.getInstance()
     }
-
-    fun provideKuGouApiService(): KuGouApiService {
-        return KogouClient().apiService
-    }
 }

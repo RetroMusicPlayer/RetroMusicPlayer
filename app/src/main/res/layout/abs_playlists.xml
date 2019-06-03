@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="16dp"
-                app:iconBackgroundColor="@color/md_blue_A700"
+                app:iconBackgroundColor="@color/md_blue_500"
                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="16dp"
-                app:iconBackgroundColor="@color/md_red_A700"
+                app:iconBackgroundColor="@color/md_red_500"
                 app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="16dp"
-                app:iconBackgroundColor="@color/md_deep_purple_A700"
+                app:iconBackgroundColor="@color/md_deep_purple_500"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="16dp"
-                app:iconBackgroundColor="@color/md_green_A700"
+                app:iconBackgroundColor="@color/md_green_500"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView

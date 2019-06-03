@@ -72,7 +72,9 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = view.findViewById(R.id.toolbar)
-
+        bannerImage?.setOnClickListener {
+            NavigationUtil.goToUserInfo(activity!!)
+        }
         if (!PreferenceUtil.getInstance().isHomeBanner)
             setStatusbarColorAuto(view)
 
