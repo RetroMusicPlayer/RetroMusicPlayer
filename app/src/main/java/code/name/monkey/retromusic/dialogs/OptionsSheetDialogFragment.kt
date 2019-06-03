@@ -50,7 +50,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
 
         }
-        materialDialog?.dismiss()
+        materialDialog.dismiss()
     }
 
     private fun prepareBugReport() {
@@ -58,14 +58,11 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun shareApp() {
-        val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                .setType("songText/plain")
+        ShareCompat.IntentBuilder.from(activity)
+                .setType("text/plain")
+                .setChooserTitle(R.string.action_share)
                 .setText(String.format(getString(R.string.app_share), activity!!.packageName))
-                .intent
-        if (shareIntent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(
-                    Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
-        }
+                .startChooser()
     }
 
     private lateinit var actionSettings: View
@@ -111,7 +108,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
                 .show {
                     customView(view = layout, scrollable = true)
                 }
-        return materialDialog;
+        return materialDialog
     }
 
     companion object {

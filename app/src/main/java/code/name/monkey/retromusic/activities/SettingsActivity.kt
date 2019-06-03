@@ -42,7 +42,7 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
         toolbar.apply {
             setBackgroundColor(ThemeStore.primaryColor(context))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondargit context))
+            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
         }
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
 
