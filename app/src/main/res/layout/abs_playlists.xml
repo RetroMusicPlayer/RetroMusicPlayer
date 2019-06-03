@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="12dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="12dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
+                android:padding="16dp"
                 app:iconBackgroundColor="@color/md_blue_A700"
                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
@@ -59,9 +59,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                app:fontFamily="@font/circular"
                 android:paddingTop="8dp"
-                android:text="@string/history" />
+                android:text="@string/history"
+                app:fontFamily="@font/circular" />
 
         </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
+                android:padding="16dp"
                 app:iconBackgroundColor="@color/md_red_A700"
                 app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
+                android:padding="16dp"
                 app:iconBackgroundColor="@color/md_deep_purple_A700"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
+                android:padding="16dp"
                 app:iconBackgroundColor="@color/md_green_A700"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 

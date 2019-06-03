@@ -548,7 +548,7 @@
     <string name="vertical_flip">Vertical flip</string>
     <string name="hinge">Hinge</string>
     <string name="horizontal_flip">Horizontal flip</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Pause playing on zero and plays after raise volume. Warning when you increase the volume it starts playing even your outside the app</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
     <string name="whats_new">What\'s New</string>
 

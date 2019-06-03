@@ -69,7 +69,7 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.getInstance().albumCoverStyle.ordinal
 
-        return MaterialDialog(activity!!, BottomSheet()).show {
+        return MaterialDialog(activity!!).show {
             title(R.string.pref_title_album_cover_style)
             positiveButton(R.string.set) {
                 val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]

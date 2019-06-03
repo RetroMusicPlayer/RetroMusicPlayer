@@ -84,10 +84,9 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         viewPager.currentItem = PreferenceUtil.getInstance().nowPlayingScreen.ordinal
 
 
-        return MaterialDialog(activity!!, BottomSheet()).show {
+        return MaterialDialog(activity!!).show {
             title(R.string.pref_title_album_cover_style)
             positiveButton(R.string.set) {
-
                 val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {
                     val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
