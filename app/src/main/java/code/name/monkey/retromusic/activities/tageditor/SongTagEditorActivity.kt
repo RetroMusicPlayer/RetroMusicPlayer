@@ -29,7 +29,6 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
             setSupportActionBar(toolbar)
         }
         title = null
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(this))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     private fun setUpViews() {
         fillViewsWithFileTags()
-        MaterialUtil.setTint(songTextContainer,false)
+        MaterialUtil.setTint(songTextContainer, false)
         MaterialUtil.setTint(composerContainer, false)
         MaterialUtil.setTint(albumTextContainer, false)
         MaterialUtil.setTint(artistContainer, false)

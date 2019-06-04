@@ -21,14 +21,8 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            tools:ignore="UnusedAttribute">
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearanceToolbar"
-                android:text="@string/action_tag_editor" />
-
-        </androidx.appcompat.widget.Toolbar>
+            app:title="@string/action_tag_editor"
+            tools:ignore="UnusedAttribute" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,9 +71,9 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/albumTitleContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -94,10 +88,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/albumArtistContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -112,10 +106,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/genreContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -130,10 +124,10 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/yearContainer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         app:hintEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
