@@ -136,13 +136,13 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         }
 
         appBarLayout?.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
+            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                 val color: Int = when (state) {
-                    AppBarStateChangeListener.State.COLLAPSED -> {
+                    State.COLLAPSED -> {
                         setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
                         ThemeStore.primaryColor(appBarLayout.context)
                     }
-                    AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
+                    State.EXPANDED, State.IDLE -> {
                         setLightStatusbar(false)
                         Color.TRANSPARENT
                     }

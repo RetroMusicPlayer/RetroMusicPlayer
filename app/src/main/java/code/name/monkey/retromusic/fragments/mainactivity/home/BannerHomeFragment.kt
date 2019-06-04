@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
@@ -10,6 +11,7 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
@@ -151,11 +153,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun setupToolbar() {
+        toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
         toolbar.apply {
-            setBackgroundColor(RetroUtil.toolbarColor(mainActivity))
+            setBackgroundColor(ColorUtil.withAlpha(RetroUtil.toolbarColor(mainActivity), 0.85f))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
-
                 val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
                 NavigationUtil.goToSearch(activity!!, pairImageView)
             }
