@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.activities
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -11,13 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Genre
@@ -27,12 +23,7 @@ import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
-import kotlinx.android.synthetic.main.activity_playing_queue.*
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
-import kotlinx.android.synthetic.main.activity_playlist_detail.appBarLayout
-import kotlinx.android.synthetic.main.activity_playlist_detail.empty
-import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
-import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
 import java.util.*
 
 /**
@@ -67,18 +58,14 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
 
         setUpToolBar()
         setupRecyclerView()
-        actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(songAdapter!!.dataSet, true) }
+
     }
 
     private fun setUpToolBar() {
         val primaryColor = ThemeStore.primaryColor(this)
         appBarLayout.setBackgroundColor(primaryColor)
         applyToolbar(toolbar)
-        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
-            actionShuffleAll.setTextColor(this)
-            actionShuffleAll.iconTint = this
-        }
+
         title = genre!!.name
     }
 
@@ -128,16 +115,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), GenreDetailsContrac
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this@GenreDetailsActivity)
             adapter = songAdapter
-        }.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    actionShuffleAll.shrink(true)
-                } else if (dy < 0) {
-                    actionShuffleAll.extend(true)
-                }
-            }
-        })
+        }
         songAdapter!!.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()

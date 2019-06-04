@@ -94,14 +94,4 @@
             <include layout="@layout/activity_artist_content" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/actionShuffleAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/action_shuffle_all"
-        app:icon="@drawable/ic_clear_all_black_24dp" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

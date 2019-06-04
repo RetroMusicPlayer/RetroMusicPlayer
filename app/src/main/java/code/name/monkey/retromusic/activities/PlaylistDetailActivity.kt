@@ -1,7 +1,5 @@
 package code.name.monkey.retromusic.activities
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,15 +7,12 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.loaders.PlaylistLoader
@@ -53,7 +48,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-
 
         toggleBottomNavigationView(true)
 
@@ -100,22 +94,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
                 checkIsEmpty()
             }
         })
-        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (dy > 0) {
-                    actionShuffleAll.shrink(true)
-                } else if (dy < 0) {
-                    actionShuffleAll.extend(true)
-                }
-            }
-        })
-        actionShuffleAll.setOnClickListener {
-            if (adapter.dataSet.isEmpty()) {
-                return@setOnClickListener
-            }
-            MusicPlayerRemote.openAndShuffleQueue(adapter.dataSet, true)
-        }
     }
 
     override fun onResume() {
@@ -124,13 +102,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     private fun setUpToolBar() {
-
-        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
-            actionShuffleAll.setTextColor(this)
-            actionShuffleAll.iconTint = this
-        }
-
         applyToolbar(toolbar)
         title = playlist!!.name
     }
