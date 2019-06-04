@@ -60,12 +60,8 @@
         android:id="@+id/action_sort_order"
         android:icon="@drawable/ic_sort_white_24dp"
         android:title="@string/action_sort_order"
-        app:showAsAction="ifRoom">
+        app:showAsAction="never">
         <menu></menu>
     </item>
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_white_24dp"
-        android:title="@string/action_search"
-        app:showAsAction="always" />
+
 </menu>
