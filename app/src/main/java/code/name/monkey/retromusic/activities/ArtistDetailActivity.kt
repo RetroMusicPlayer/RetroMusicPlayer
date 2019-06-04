@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -13,7 +14,6 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +23,10 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.adapter.album.AlbumAdapter
+import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
+import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
@@ -34,10 +38,6 @@ import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.adapter.album.AlbumAdapter
-import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
-import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.util.*
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
@@ -53,7 +53,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private var biography: Spanned? = null
     private lateinit var artist: Artist
     private var lastFMRestClient: LastFMRestClient? = null
-    private var artistDetailsPresenter: ArtistDetailsPresenter? = null
+    private lateinit var artistDetailsPresenter: ArtistDetailsPresenter
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: AlbumAdapter
     private var forceDownload: Boolean = false
@@ -63,7 +63,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
         window.enterTransition = slide
     }
-
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
@@ -85,17 +84,13 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         setUpViews()
 
         artistDetailsPresenter = ArtistDetailsPresenter(this, intent.extras!!)
-        artistDetailsPresenter!!.subscribe()
+        artistDetailsPresenter.subscribe()
 
-        contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
-            run {
-                if (scrollY > oldScrollY) {
-                    actionShuffleAll.shrink(true)
-                }
-                if (scrollY < oldScrollY) {
-                    actionShuffleAll.extend(true)
-                }
-            }
+        playAction.apply {
+            setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
+        }
+        shuffleAction.apply {
+            setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(artist.songs, true) }
         }
 
         biographyText.setOnClickListener {
@@ -105,7 +100,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                 biographyText.maxLines = 4
             }
         }
-        actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(getArtist().songs, true) }
     }
 
     private fun setUpViews() {
@@ -125,16 +119,15 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     private fun setupToolbarMarginHeight() {
         val primaryColor = ThemeStore.primaryColor(this)
         TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
-        if (collapsingToolbarLayout != null) {
-            collapsingToolbarLayout!!.setContentScrimColor(primaryColor)
-            collapsingToolbarLayout!!.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
+        collapsingToolbarLayout?.let {
+            it.setContentScrimColor(primaryColor)
+            it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
         }
 
-        toolbar!!.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
+        toolbar?.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
         setSupportActionBar(toolbar)
 
         supportActionBar!!.title = null
-
 
         if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
             val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
@@ -158,6 +151,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                 ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.context, toolbar, color)
             }
         })
+        setColors(ThemeStore.accentColor(this))
     }
 
     private fun setupRecyclerView() {
@@ -190,7 +184,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
     override fun onPause() {
         super.onPause()
-        artistDetailsPresenter!!.unsubscribe()
+        artistDetailsPresenter.unsubscribe()
     }
 
     override fun loading() {}
@@ -208,10 +202,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun getArtist(): Artist {
-        if (artist == null) {
-            artist = Artist()
-        }
-        return this.artist!!
+        return this.artist;
     }
 
     private fun setArtist(artist: Artist) {
@@ -283,6 +274,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        super.onLoadFailed(errorDrawable)
+                        setColors(defaultFooterColor)
+                    }
                 })
         forceDownload = false;
     }
@@ -295,10 +291,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(textColor)
+        playAction.backgroundTintList = ColorStateList.valueOf(textColor)
+        shuffleAction.backgroundTintList = ColorStateList.valueOf(textColor)
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(textColor))).apply {
-            actionShuffleAll.setTextColor(this)
-            actionShuffleAll.iconTint = this
+            playAction.setTextColor(this)
+            playAction.iconTint = this
+
+            shuffleAction.setTextColor(this)
+            shuffleAction.iconTint = this
         }
 
         findViewById<View>(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this))
@@ -356,8 +356,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun reload() {
-        artistDetailsPresenter!!.unsubscribe()
-        artistDetailsPresenter!!.subscribe()
+        artistDetailsPresenter.unsubscribe()
+        artistDetailsPresenter.subscribe()
     }
 
     companion object {

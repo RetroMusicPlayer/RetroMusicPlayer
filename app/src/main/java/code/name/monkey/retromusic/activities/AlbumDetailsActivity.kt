@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.util.Pair
-import androidx.core.widget.NestedScrollView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +19,11 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.AlbumTagEditorActivity
+import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
+import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.glide.GlideApp
@@ -32,11 +36,6 @@ import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.contract.AlbumDetailsContract
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
-import code.name.monkey.retromusic.activities.tageditor.AlbumTagEditorActivity
-import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
-import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -55,8 +54,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private var disposable = CompositeDisposable()
 
-    var album: Album? = null
-        private set
+    private lateinit var album: Album
 
     private val savedSortOrder: String
         get() = PreferenceUtil.getInstance().albumDetailSongSortOrder
@@ -80,7 +78,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 
-
         ActivityCompat.postponeEnterTransition(this)
 
         val albumId = intent.getIntExtra(EXTRA_ALBUM_ID, -1)
@@ -90,23 +87,16 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupRecyclerView()
         setupToolbarMarginHeight()
 
-        contentContainer.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
-            run {
-                if (scrollY > oldScrollY) {
-                    actionShuffleAll.shrink(true)
-                }
-                if (scrollY < oldScrollY) {
-                    actionShuffleAll.extend(true)
-                }
-            }
-        }
-
-        actionShuffleAll.setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album!!.songs!!, true) }
-
         artistImage = findViewById(R.id.artistImage)
         artistImage.setOnClickListener {
             val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
-            NavigationUtil.goToArtist(this, album!!.artistId, *artistPairs)
+            NavigationUtil.goToArtist(this, album.artistId, *artistPairs)
+        }
+        playAction.apply {
+            setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
+        }
+        shuffleAction.apply {
+            setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
         }
     }
 
@@ -144,13 +134,13 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         appBarLayout?.apply {
             addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-                override fun onStateChanged(appBarLayout: AppBarLayout, state: AppBarStateChangeListener.State) {
+                override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                     val color: Int = when (state) {
-                        AppBarStateChangeListener.State.COLLAPSED -> {
+                        State.COLLAPSED -> {
                             setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
                             ThemeStore.primaryColor(this@AlbumDetailsActivity)
                         }
-                        AppBarStateChangeListener.State.EXPANDED, AppBarStateChangeListener.State.IDLE -> {
+                        State.EXPANDED, State.IDLE -> {
                             setLightStatusbar(false)
                             Color.TRANSPARENT
                         }
@@ -242,9 +232,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     private fun loadAlbumCover() {
         GlideApp.with(this)
                 .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(album!!.safeGetFirstSong()))
+                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
                 .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(album!!.safeGetFirstSong())
+                .songOptions(album.safeGetFirstSong())
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(image as ImageView) {
                     override fun onColorReady(color: Int) {
@@ -259,10 +249,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
 
-        actionShuffleAll.backgroundTintList = ColorStateList.valueOf(themeColor)
+        playAction.backgroundTintList = ColorStateList.valueOf(themeColor)
+        shuffleAction.backgroundTintList = ColorStateList.valueOf(themeColor)
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(themeColor))).apply {
-            actionShuffleAll.setTextColor(this)
-            actionShuffleAll.iconTint = this
+            playAction.setTextColor(this)
+            playAction.iconTint = this
+
+            shuffleAction.setTextColor(this)
+            shuffleAction.iconTint = this
         }
     }
 
@@ -304,12 +298,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
             }
             R.id.action_tag_editor -> {
                 val intent = Intent(this, AlbumTagEditorActivity::class.java)
-                intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album!!.id)
+                intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
                 startActivityForResult(intent, TAG_EDITOR_REQUEST)
                 return true
             }
             R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(this, album!!.artistId)
+                NavigationUtil.goToArtist(this, album.artistId)
                 return true
             }
             /*Sort*/
