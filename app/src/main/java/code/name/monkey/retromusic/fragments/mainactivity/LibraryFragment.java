@@ -14,12 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,6 +50,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
     private View contentContainer;
+    private MaterialCardView toolbarContainer;
 
     private MaterialCab cab;
     private FragmentManager fragmentManager;
@@ -81,7 +84,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         contentContainer = view.findViewById(R.id.fragmentContainer);
-
+        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
 
@@ -142,7 +145,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbar.setBackgroundColor(primaryColor);
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
-            showMainMenu();
+            Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), pair);
         });
         appBarLayout.setBackgroundColor(primaryColor);
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
@@ -353,7 +357,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-                NavigationUtil.goToSearch(getMainActivity());
+                Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
+                NavigationUtil.goToSearch(getMainActivity(), pair);
                 break;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");

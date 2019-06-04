@@ -26,10 +26,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
+
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.helper.MusicPlayerRemote;
-import code.name.monkey.retromusic.model.Genre;
-import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.activities.ArtistDetailActivity;
@@ -45,6 +43,9 @@ import code.name.monkey.retromusic.activities.SettingsActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
+import code.name.monkey.retromusic.helper.MusicPlayerRemote;
+import code.name.monkey.retromusic.model.Genre;
+import code.name.monkey.retromusic.model.Playlist;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
@@ -146,19 +147,28 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, new Intent(activity, LicenseActivity.class), null);
     }
 
-    public static void goToSearch(Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class), null);
+    public static void goToSearch(@NonNull Activity activity,
+                                  @Nullable Pair... sharedElements) {
+        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
     }
 
-    public static void goToSupportDevelopment(Activity activity) {
+    public static void goToSearch(@NonNull Activity activity, boolean isMicOpen,
+                                  @Nullable Pair... sharedElements) {
+        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class)
+                        .putExtra(SearchActivity.EXTRA_SHOW_MIC, isMicOpen),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+    }
+
+    public static void goToSupportDevelopment(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, SupportDevelopmentActivity.class), null);
     }
 
-    public static void goToPlayStore(Activity activity) {
+    public static void goToPlayStore(@NonNull Activity activity) {
         openUrl(activity, RATE_ON_GOOGLE_PLAY);
     }
 
-    public static void gotoWhatNews(Activity activity) {
+    public static void gotoWhatNews(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, WhatsNewActivity.class), null);
     }
 }

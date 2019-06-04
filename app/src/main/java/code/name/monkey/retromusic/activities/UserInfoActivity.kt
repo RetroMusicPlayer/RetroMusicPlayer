@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.MediaStore.Images.Media.getBitmap
+import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -76,19 +77,19 @@ class UserInfoActivity : AbsBaseActivity() {
             showBannerOptions()
         }
         next.setOnClickListener {
-            /*val nameString = name.text.toString().trim { it <= ' ' }
+            val nameString = name.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(nameString)) {
                 Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val bioString = bio.text.toString().trim() { it <= ' ' }
+            /*val bioString = bio.text.toString().trim() { it <= ' ' }
             if (TextUtils.isEmpty(bioString)) {
                 Toast.makeText(this, "Umm bio is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
-            }
+            }*/
             PreferenceUtil.getInstance().userName = nameString
-            PreferenceUtil.getInstance().userBio = bioString*/
+            //PreferenceUtil.getInstance().userBio = bioString
             setResult(Activity.RESULT_OK)
             finish()
         }

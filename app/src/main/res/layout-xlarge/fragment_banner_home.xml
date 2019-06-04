@@ -58,6 +58,7 @@
                     </FrameLayout>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/toolbarContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="8dp"
@@ -68,7 +69,8 @@
                         <androidx.appcompat.widget.Toolbar
                             android:id="@+id/toolbar"
                             style="@style/Toolbar"
-                            app:title="@string/app_name"
+                            app:title="@string/search_hint"
+                            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
                             app:titleMarginStart="0dp"
                             tools:ignore="UnusedAttribute" />
                     </com.google.android.material.card.MaterialCardView>

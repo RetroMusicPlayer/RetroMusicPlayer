@@ -17,6 +17,6 @@
     <item
         android:id="@+id/action_search"
         app:showAsAction="always"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="@drawable/ic_mic_white_24dp"
         android:title="@string/action_search" />
 </menu>

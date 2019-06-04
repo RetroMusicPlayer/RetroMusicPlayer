@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
+import kotlinx.android.synthetic.main.fragment_main_settings.*
 
 class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
@@ -73,7 +74,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     private lateinit var actionRate: View
     private lateinit var actionShare: View
     private lateinit var actionBugReport: View
-    private lateinit var buyProContainer: CardView
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -86,7 +86,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionRate = layout.findViewById(R.id.actionRate)
         actionShare = layout.findViewById(R.id.actionShare)
         actionBugReport = layout.findViewById(R.id.actionBugReport)
-        buyProContainer = layout.findViewById(R.id.buyProContainer)
 
         actionSettings.setOnClickListener(this)
         actionSleepTimer.setOnClickListener(this)
@@ -97,13 +96,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionShare.setOnClickListener(this)
         actionBugReport.setOnClickListener(this)
 
-        buyProContainer.apply {
-            setCardBackgroundColor(ThemeStore.accentColor(context!!))
-            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
-            setOnClickListener {
-                NavigationUtil.goToProVersion(context)
-            }
-        }
         materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
                     customView(view = layout, scrollable = true)

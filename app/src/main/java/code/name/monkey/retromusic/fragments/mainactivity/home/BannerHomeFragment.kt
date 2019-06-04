@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
@@ -31,6 +34,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.fragment_home.recyclerView
 import java.io.File
@@ -53,6 +57,26 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
+    }
+
+    private fun loadImageFromStorage() {
+        disposable.add(Compressor(context!!)
+                .setMaxHeight(300)
+                .setMaxWidth(300)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().profileImage, Constants.USER_PROFILE))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it != null) {
+                        userImage.setImageBitmap(it)
+                    } else {
+                        userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                    }
+                }) {
+                    userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                })
     }
 
     private val displayMetrics: DisplayMetrics
@@ -109,6 +133,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homePresenter.subscribe()
 
         checkPadding()
+
+        userInfoContainer.setOnClickListener {
+            NavigationUtil.goToUserInfo(activity!!)
+        }
+        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
+        titleWelcome.text = String.format("%s", PreferenceUtil.getInstance().userName)
     }
 
     private fun checkPadding() {
@@ -124,7 +154,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         toolbar.apply {
             setBackgroundColor(ThemeStore.primaryColor(context))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
-            setOnClickListener { showMainMenu() }
+            setOnClickListener {
+
+                val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
+                NavigationUtil.goToSearch(activity!!, pairImageView)
+            }
         }
         mainActivity.setSupportActionBar(toolbar)
     }
@@ -194,7 +228,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            NavigationUtil.goToSearch(mainActivity)
+            val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
+            NavigationUtil.goToSearch(mainActivity, true, pairImageView)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -235,6 +270,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                         .subscribe { bannerImage!!.setImageBitmap(it) })
             }
         }
+        loadImageFromStorage()
     }
 
     companion object {

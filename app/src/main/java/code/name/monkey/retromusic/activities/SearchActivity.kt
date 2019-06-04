@@ -52,9 +52,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         setUpToolBar()
         setupSearchView()
 
-        if (intent.getBooleanExtra("mic_search", false)) {
+        if (intent.getBooleanExtra(EXTRA_SHOW_MIC, false)) {
             startMicSearch()
         }
+
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
 
@@ -215,9 +216,11 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
     }
 
     companion object {
-
         val TAG: String = SearchActivity::class.java.simpleName
+
+        const val EXTRA_SHOW_MIC = "extra_show_mic"
         const val QUERY: String = "query"
+
         private const val REQ_CODE_SPEECH_INPUT = 9002
     }
 }

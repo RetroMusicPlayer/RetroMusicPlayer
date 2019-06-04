@@ -69,8 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_margin="8dp"
-                        android:visibility="gone">
+                        android:layout_margin="8dp">
 
                         <code.name.monkey.retromusic.views.CircularImageView
                             android:id="@+id/userImage"
@@ -103,7 +102,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:visibility="gone"
                 app:hintAnimationEnabled="true">
 
 
@@ -111,7 +109,9 @@
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints="name"
                     android:hint="@string/my_name"
+                    android:importantForAutofill="yes"
                     android:inputType="textPersonName|textCapWords|text"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     tools:text="@string/song" />

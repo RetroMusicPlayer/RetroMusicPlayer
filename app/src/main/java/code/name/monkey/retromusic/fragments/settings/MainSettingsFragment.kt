@@ -20,6 +20,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.SettingsActivity
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -58,6 +62,22 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         notificationSettings.setOnClickListener(this)
         otherSettings.setOnClickListener(this)
         aboutSettings.setOnClickListener(this)
+
+        buyProContainer.apply {
+            setCardBackgroundColor(ThemeStore.accentColor(context!!))
+            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+            setOnClickListener {
+                NavigationUtil.goToProVersion(context)
+            }
+        }
+        buyPremium.setOnClickListener {
+            NavigationUtil.goToProVersion(context!!)
+        }
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.accentColor(context!!)))
+        text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
+        title.setTextColor(primaryColor)
+        text2.setTextColor(primaryColor)
+        text3.setTextColor(primaryColor)
 
     }
 

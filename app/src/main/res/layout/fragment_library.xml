@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="6dp"
+                android:id="@+id/toolbarContainer"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 

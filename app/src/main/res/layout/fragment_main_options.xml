@@ -7,42 +7,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/buyProContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/md_grey_400"
-        app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                style="@style/TextAppearance.MaterialComponents.Overline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/upgrade_to_premium"
-                android:textColor="@color/md_grey_200" />
-
-            <TextView
-                style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:text="@string/buy_pro"
-                android:textColor="@color/md_white_1000" />
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
     <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionLibrary"
         android:layout_width="match_parent"

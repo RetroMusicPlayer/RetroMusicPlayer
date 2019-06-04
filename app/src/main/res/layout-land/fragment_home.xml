@@ -25,12 +25,24 @@
             android:background="@android:color/transparent"
             android:elevation="0dp"
             app:elevation="0dp">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:title="@string/app_name"
-                app:layout_collapseMode="pin"
-                tools:ignore="UnusedAttribute" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toolbarContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:title="@string/search_hint"
+                    app:titleMarginStart="0dp"
+                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:ignore="UnusedAttribute" />
+            </com.google.android.material.card.MaterialCardView>
 
         </com.google.android.material.appbar.AppBarLayout>
 
