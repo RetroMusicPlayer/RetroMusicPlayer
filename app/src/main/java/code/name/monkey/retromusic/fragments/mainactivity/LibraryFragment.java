@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -142,7 +144,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void setupToolbar() {
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        toolbar.setBackgroundColor(primaryColor);
+        toolbar.setBackgroundColor(RetroUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));

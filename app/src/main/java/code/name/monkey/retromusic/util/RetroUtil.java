@@ -61,15 +61,26 @@ import java.util.Collections;
 import java.util.List;
 
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
+import code.name.monkey.retromusic.R;
 
 public class RetroUtil {
 
     private static final int[] TEMP_ARRAY = new int[1];
     private static final String SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar";
 
-    public static int calculateNoOfColumns(Context context) {
+    public static int toolbarColor(@NonNull Context context) {
+        int color = ThemeStore.Companion.primaryColor(context);
+        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
+            return ATHUtil.INSTANCE.resolveColor(context, R.attr.cardBackgroundColor);
+        } else {
+            return color;
+        }
+    }
+
+    public static int calculateNoOfColumns(@NonNull Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
         return (int) (dpWidth / 180);

@@ -59,7 +59,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
 
-        searchContainer.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
+        searchContainer.setCardBackgroundColor(RetroUtil.toolbarColor(this))
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager

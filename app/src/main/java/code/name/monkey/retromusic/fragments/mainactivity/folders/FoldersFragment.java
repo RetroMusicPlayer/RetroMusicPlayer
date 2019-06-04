@@ -63,6 +63,7 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
+import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
 
@@ -228,7 +229,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(primaryColor);
+        toolbar.setBackgroundColor(RetroUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             showMainMenu();

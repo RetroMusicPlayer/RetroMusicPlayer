@@ -152,7 +152,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun setupToolbar() {
         toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(context))
+            setBackgroundColor(RetroUtil.toolbarColor(mainActivity))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
 
