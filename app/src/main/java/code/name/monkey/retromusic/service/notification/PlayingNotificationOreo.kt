@@ -163,7 +163,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                     if (isPlaying)
                                         R.drawable.ic_pause_white_24dp
                                     else
-                                        R.drawable.ic_play_arrow_white_24dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
 
                             notificationLayout.setTextColor(R.id.title, primary)
                             notificationLayout.setTextColor(R.id.subtitle, secondary)

@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.fragments.settings
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,10 +23,13 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.SettingsActivity
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
 import kotlinx.android.synthetic.main.fragment_main_settings.*
 
@@ -64,8 +68,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         aboutSettings.setOnClickListener(this)
 
         buyProContainer.apply {
-            setCardBackgroundColor(ThemeStore.accentColor(context!!))
-            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
+            if (!App.isProVersion) show() else hide()
             setOnClickListener {
                 NavigationUtil.goToProVersion(context)
             }
@@ -73,11 +76,12 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         buyPremium.setOnClickListener {
             NavigationUtil.goToProVersion(context!!)
         }
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.accentColor(context!!)))
+        MaterialUtil.setTint(buyPremium)
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!)))
         text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
-        title.setTextColor(primaryColor)
+        //title.setTextColor(primaryColor)
         text2.setTextColor(primaryColor)
-        text3.setTextColor(primaryColor)
+        text3.imageTintList = ColorStateList.valueOf(primaryColor)
 
     }
 

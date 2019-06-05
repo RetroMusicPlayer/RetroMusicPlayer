@@ -39,7 +39,7 @@
         android:summary="@string/pref_summary_toggle_headset"
         android:title="@string/pref_title_toggle_toggle_headset"
         app:enableCopying="true"
-        app:icon="@drawable/ic_play_arrow_white_24dp" />
+        app:icon="@drawable/ic_play_arrow_white_32dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"

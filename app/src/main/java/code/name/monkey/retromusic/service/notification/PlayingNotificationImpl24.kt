@@ -52,7 +52,7 @@ class PlayingNotificationImpl24 : PlayingNotification() {
         val playButtonResId = if (isPlaying)
             R.drawable.ic_pause_white_24dp
         else
-            R.drawable.ic_play_arrow_white_24dp
+            R.drawable.ic_play_arrow_white_32dp
 
         val action = Intent(service, MainActivity::class.java)
         action.putExtra("expand", true)

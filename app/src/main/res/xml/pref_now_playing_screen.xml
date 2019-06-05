@@ -33,7 +33,7 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         app:defaultValue="false"
         app:enableCopying="true"
-        app:icon="@drawable/ic_play_arrow_white_24dp"
+        app:icon="@drawable/ic_play_arrow_white_32dp"
         app:key="toggle_add_controls"
         app:summary="@string/pref_summary_extra_controls"
         app:title="@string/pref_title_extra_controls" />

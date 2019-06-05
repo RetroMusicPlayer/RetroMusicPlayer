@@ -7,7 +7,8 @@
         android:key="colored_notification"
         android:summary="@string/pref_summary_colored_notification"
         android:title="@string/pref_title_colored_notification"
-        app:enableCopying="true" />
+        app:enableCopying="true"
+        app:icon="@drawable/ic_cellphone_lock_white_24dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"

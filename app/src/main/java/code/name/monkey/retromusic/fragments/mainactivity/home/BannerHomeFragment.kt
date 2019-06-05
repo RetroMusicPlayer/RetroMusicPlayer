@@ -152,10 +152,18 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
     }
 
+    private fun toolbarColor(): Int {
+        return if (PreferenceUtil.getInstance().isHomeBanner) {
+            toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
+            ColorUtil.withAlpha(RetroUtil.toolbarColor(mainActivity), 0.85f)
+        } else {
+            RetroUtil.toolbarColor(mainActivity)
+        }
+    }
+
     private fun setupToolbar() {
-        toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
         toolbar.apply {
-            setBackgroundColor(ColorUtil.withAlpha(RetroUtil.toolbarColor(mainActivity), 0.85f))
+            setBackgroundColor(toolbarColor())
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
                 val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))

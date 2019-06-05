@@ -171,7 +171,7 @@
             android:background="@drawable/color_circle_gradient"
             android:elevation="4dp"
             android:padding="16dp"
-            app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
+            app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
 
     </RelativeLayout>
 

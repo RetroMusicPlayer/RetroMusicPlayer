@@ -202,7 +202,7 @@
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/previousButton"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_play_arrow_white_24dp"
+                    app:srcCompat="@drawable/ic_play_arrow_white_32dp"
                     tools:layout_editor_absoluteY="0dp"
                     tools:tint="@color/md_black_1000" />
 

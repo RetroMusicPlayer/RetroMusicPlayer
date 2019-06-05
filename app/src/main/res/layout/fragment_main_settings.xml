@@ -17,83 +17,83 @@
             android:id="@+id/buyProContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/md_grey_400"
             app:cardCornerRadius="8dp"
             app:cardElevation="6dp"
             app:cardUseCompatPadding="true">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/titleContainer"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/text"
-                            style="@style/TextAppearance.MaterialComponents.Overline"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:paddingTop="16dp"
-                            android:paddingEnd="16dp"
-                            android:text="@string/upgrade_to_premium" />
-
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/title"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="16dp"
-                            android:paddingTop="8dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="8dp"
-                            android:text="@string/buy_pro"
-                            android:textColor="@color/md_white_1000" />
-
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/text2"
-                            style="@style/TextAppearance.MaterialComponents.Body1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:letterSpacing="0.1"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp"
-                            android:paddingBottom="8dp"
-                            android:text="@string/pro_summary"
-                            android:textColor="@color/md_white_1000" />
-                    </LinearLayout>
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/text3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        android:id="@+id/text3"
-                        style="@style/TextAppearance.MaterialComponents.Headline4"
+                        android:id="@+id/text"
+                        style="@style/TextAppearance.MaterialComponents.Overline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="16dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/upgrade_to_premium" />
+
+                    <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+                        android:id="@+id/title"
+                        style="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="0dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/buy_pro"
+                        android:textColor="@color/md_white_1000" />
+
+                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                        android:id="@+id/text2"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:paddingEnd="16dp"
-                        android:text="50%"
-                        android:textStyle="bold" />
+                        android:paddingStart="16dp"
+                        android:paddingEnd="0dp"
+                        android:text="@string/pro_summary"
+                        android:textColor="@color/md_white_1000" />
                 </LinearLayout>
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/text3"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    app:srcCompat="@drawable/promotional"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/titleContainer" />
+
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buyPremium"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:id="@+id/buyPremium"
-                    android:text="@string/premium" />
-            </LinearLayout>
-
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/premium"
+                    app:icon="@drawable/ic_diamond_stone_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titleContainer" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout

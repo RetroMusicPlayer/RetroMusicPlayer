@@ -74,7 +74,7 @@
             android:layout_weight="1"
             android:background="@drawable/widget_selector"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_play_arrow_white_24dp"
+            tools:src="@drawable/ic_play_arrow_white_32dp"
             tools:tint="@color/ate_secondary_text_dark" />
 
         <ImageButton

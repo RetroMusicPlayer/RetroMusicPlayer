@@ -96,8 +96,7 @@ object MusicPlayerRemote {
     val isServiceConnected: Boolean
         get() = musicService != null
 
-    fun bindToService(context: Context,
-                      callback: ServiceConnection): ServiceToken? {
+    fun bindToService(context: Context, callback: ServiceConnection): ServiceToken? {
 
         var realActivity: Activity? = (context as Activity).parent
         if (realActivity == null) {
@@ -105,6 +104,7 @@ object MusicPlayerRemote {
         }
 
         val contextWrapper = ContextWrapper(realActivity)
+
         contextWrapper.startService(Intent(contextWrapper, MusicService::class.java))
 
         val binder = ServiceBinder(callback)
@@ -129,24 +129,21 @@ object MusicPlayerRemote {
     }
 
     private fun getFilePathFromUri(context: Context, uri: Uri): String? {
-
+        var cursor: Cursor? = null
         val column = "_data"
         val projection = arrayOf(column)
-        var cursor: Cursor? = null
+
         try {
             cursor = context.contentResolver.query(uri, projection, null, null, null)
-            cursor.use {
-                if (it.moveToFirst()) {
-                    val columnIndex = it.getColumnIndexOrThrow(column)
-                    return it.getString(columnIndex)
-                }
+            if (cursor != null && cursor.moveToFirst()) {
+                val column_index = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(column_index)
             }
         } catch (e: Exception) {
             Log.e(TAG, e.message)
         } finally {
-            cursor!!.close()
+            cursor?.close()
         }
-
         return null
     }
 

@@ -29,7 +29,7 @@
             android:background="@drawable/color_circle_gradient"
             android:backgroundTint="@color/eighty_percent_black_overlay"
             android:padding="8dp"
-            app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
+            app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
     </com.google.android.material.card.MaterialCardView>
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
