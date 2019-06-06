@@ -36,22 +36,8 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-                tools:ignore="UnusedAttribute">
-
-
-                <TextView
-                    android:id="@+id/bannerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/action_tag_editor"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textStyle="bold"
-                    tools:ignore="MissingPrefix" />
-
-
-            </androidx.appcompat.widget.Toolbar>
+                app:title="@string/action_tag_editor"
+                tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

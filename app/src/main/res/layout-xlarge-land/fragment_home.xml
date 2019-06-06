@@ -27,36 +27,23 @@
             android:elevation="0dp"
             app:elevation="0dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:layout_collapseMode="pin"
-                tools:ignore="UnusedAttribute">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toolbarContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <code.name.monkey.retromusic.views.UserImageView
-                    android:id="@+id/userImage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="14dp"
-                    android:layout_weight="0"
-                    android:background="@android:color/transparent"
-                    app:civ_border="false"
-                    app:civ_border_width="0dp"
-                    app:civ_shadow="false" />
-
-                <TextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    android:layout_gravity="start|center_vertical"
-                    android:paddingStart="24dp"
-                    android:paddingEnd="8dp"
-                    android:text="@string/library"
-                    android:textColor="@color/md_white_1000"
-                    tools:ignore="MissingPrefix" />
-
-            </androidx.appcompat.widget.Toolbar>
-
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:title="@string/search_hint"
+                    app:titleMarginStart="0dp"
+                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:ignore="UnusedAttribute" />
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView

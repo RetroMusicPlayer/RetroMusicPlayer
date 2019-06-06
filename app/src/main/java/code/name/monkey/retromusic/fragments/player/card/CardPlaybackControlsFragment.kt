@@ -149,7 +149,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         if (MusicPlayerRemote.isPlaying) {
             playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
 

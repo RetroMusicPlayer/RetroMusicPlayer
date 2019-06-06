@@ -3,13 +3,12 @@ package code.name.monkey.retromusic.fragments.base
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 
 abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
 
@@ -50,6 +49,6 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
     }
 
     protected fun showMainMenu() {
-        OptionsSheetDialogFragment.newInstance().show(childFragmentManager, "Main Menu")
+        OptionsSheetDialogFragment.newInstance().show(childFragmentManager, "Main_Menu")
     }
 }

@@ -12,6 +12,8 @@ import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -21,13 +23,10 @@ import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-import java.util.*
 
 
 open class AlbumAdapter(protected val activity: AppCompatActivity,
@@ -200,7 +199,10 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             if (isInQuickSelectMode) {
                 toggleChecked(adapterPosition)
             } else {
-                val albumPairs = arrayOf<Pair<*, *>>(Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
+                val pairImageView = Pair.create<View, String>(image, activity.resources.getString(R.string.transition_album_art))
+                val pairs = ArrayList<Pair<View, String>>()
+                pairs.add(pairImageView)
+                val albumPairs: Array<Pair<View, String>> = pairs.toTypedArray()
                 NavigationUtil.goToAlbum(activity, dataSet[adapterPosition].id, *albumPairs)
             }
         }

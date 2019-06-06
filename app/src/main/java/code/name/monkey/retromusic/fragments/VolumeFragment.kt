@@ -79,7 +79,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         val audioManager = audioManager
         audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0)
         setPauseWhenZeroVolume(i < 1)
-        volumeDown!!.setImageResource(if (i == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
+        volumeDown?.setImageResource(if (i == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
 
     }
 
@@ -118,8 +118,8 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
-        if (PreferenceUtil.getInstance().pauseOnZeroVolume() && pauseWhenZeroVolume)
-            if (MusicPlayerRemote.isPlaying) {
+        if (PreferenceUtil.getInstance().pauseOnZeroVolume())
+            if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
                 MusicPlayerRemote.pauseSong()
             } else {
                 MusicPlayerRemote.resumePlaying()

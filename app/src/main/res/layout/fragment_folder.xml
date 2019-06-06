@@ -30,46 +30,33 @@
             android:elevation="0dp"
             app:elevation="0dp">
 
-            <FrameLayout
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar"
-                    android:layout_gravity="center_vertical"
-                    app:layout_collapseMode="pin"
-                    tools:ignore="UnusedAttribute">
-
-                    <code.name.monkey.retromusic.views.UserImageView
-                        android:id="@+id/userImage"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="14dp"
-                        android:layout_weight="0"
-                        android:background="@android:color/transparent"
-                        app:civ_border="false"
-                        app:civ_border_width="0dp"
-                        app:civ_shadow="false" />
-
-                    <TextView
-                        android:id="@+id/bannerTitle"
-                        style="@style/BigTitleTextAppearanceToolbar"
-                        android:layout_gravity="start|center_vertical"
-                        android:paddingStart="24dp"
-                        android:paddingEnd="8dp"
-                        android:text="@string/folders"
-                        tools:ignore="MissingPrefix" />
-
-                </androidx.appcompat.widget.Toolbar>
-
-                <ViewStub
-                    android:id="@+id/cab_stub"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
+                    android:layout_height="wrap_content"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar"
+                        android:layout_gravity="center_vertical"
+                        app:layout_collapseMode="pin"
+                        app:titleMarginStart="0dp"
+                        app:title="@string/folders"
+                        tools:ignore="UnusedAttribute" />
+
+                    <ViewStub
+                        android:id="@+id/cab_stub"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

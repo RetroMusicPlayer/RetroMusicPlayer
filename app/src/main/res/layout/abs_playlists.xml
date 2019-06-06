@@ -1,10 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="12dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="12dp">
+
+
+    <LinearLayout
+        android:id="@+id/userInfoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="10dp">
+
+        <code.name.monkey.retromusic.views.CircularImageView
+            android:id="@+id/userImage"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:civ_border="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp">
+
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.75"
+                android:ellipsize="end"
+                android:text="@string/welcome" />
+
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/titleWelcome"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                tools:text="@string/app_name" />
+        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -51,17 +96,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
-                app:iconBackgroundColor="@color/md_blue_A700"
+                android:padding="16dp"
+                app:iconBackgroundColor="@color/md_blue_500"
                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                app:fontFamily="@font/circular"
                 android:paddingTop="8dp"
-                android:text="@string/history" />
+                android:text="@string/history"
+                app:fontFamily="@font/circular" />
 
         </LinearLayout>
 
@@ -76,8 +121,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
-                app:iconBackgroundColor="@color/md_red_A700"
+                android:padding="16dp"
+                app:iconBackgroundColor="@color/md_red_500"
                 app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -100,8 +145,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
-                app:iconBackgroundColor="@color/md_deep_purple_A700"
+                android:padding="16dp"
+                app:iconBackgroundColor="@color/md_deep_purple_500"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -124,8 +169,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:padding="12dp"
-                app:iconBackgroundColor="@color/md_green_A700"
+                android:padding="16dp"
+                app:iconBackgroundColor="@color/md_green_500"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView

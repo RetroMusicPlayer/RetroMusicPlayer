@@ -82,14 +82,14 @@ class UserInfoActivity : AbsBaseActivity() {
                 Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val bioString = bio.text.toString().trim() { it <= ' ' }
+            /*val bioString = bio.text.toString().trim() { it <= ' ' }
             if (TextUtils.isEmpty(bioString)) {
                 Toast.makeText(this, "Umm bio is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
-            }
+            }*/
             PreferenceUtil.getInstance().userName = nameString
-            PreferenceUtil.getInstance().userBio = bioString
+            //PreferenceUtil.getInstance().userBio = bioString
             setResult(Activity.RESULT_OK)
             finish()
         }
@@ -128,7 +128,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun selectBannerImage() {
 
-        if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+        if (TextUtils.isEmpty(PreferenceUtil.getInstance().bannerImage)) {
             val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             pickImageIntent.type = "image/*"
             //pickImageIntent.putExtra("crop", "true")
@@ -138,8 +138,7 @@ class UserInfoActivity : AbsBaseActivity() {
             pickImageIntent.putExtra("aspectY", 9)
             pickImageIntent.putExtra("scale", true)
             //intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(pickImageIntent,
-                    "Select Picture"), PICK_BANNER_REQUEST)
+            startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_BANNER_REQUEST)
         } else {
             PreferenceUtil.getInstance().setBannerImagePath("")
             bannerImage.setImageResource(android.R.color.transparent)
@@ -193,11 +192,12 @@ class UserInfoActivity : AbsBaseActivity() {
                     }
                 }
                 CROP_BANNER_REQUEST -> {
-                    val extras: Bundle = data.extras!!
-                    val selectedBitmap: Bitmap = extras.getParcelable("data")
-                    val profileImagePath = saveToInternalStorage(selectedBitmap, USER_BANNER)
-                    PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
-                    loadImageFromStorage(profileImagePath)
+                    val selectedBitmap: Bitmap? = data.extras?.getParcelable("date")
+                    val profileImagePath = selectedBitmap?.let { saveToInternalStorage(it, USER_BANNER) }
+                    profileImagePath?.let {
+                        PreferenceUtil.getInstance().saveProfileImage(it)
+                        loadImageFromStorage(it)
+                    }
                 }
             }
         }

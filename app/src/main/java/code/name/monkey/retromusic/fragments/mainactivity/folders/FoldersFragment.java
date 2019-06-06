@@ -1,8 +1,8 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,10 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,12 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -59,7 +50,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
-import code.name.monkey.retromusic.glide.GlideApp;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
@@ -73,10 +63,9 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
+import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
-
-import static code.name.monkey.retromusic.Constants.USER_PROFILE;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
         MainActivityFragmentCallbacks,
@@ -95,15 +84,11 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private View coordinatorLayout, container, empty;
 
-    private TextView title;
-
     private Toolbar toolbar;
 
     private BreadCrumbLayout breadCrumbs;
 
     private AppBarLayout appBarLayout;
-
-    private ImageView userImage;
 
     private FastScrollRecyclerView recyclerView;
 
@@ -162,14 +147,12 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
-        userImage = view.findViewById(R.id.userImage);
-        userImage.setOnClickListener(v -> showMainMenu());
+
         recyclerView = view.findViewById(R.id.recyclerView);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
         toolbar = view.findViewById(R.id.toolbar);
         empty = view.findViewById(android.R.id.empty);
-        title = view.findViewById(R.id.bannerTitle);
         container = view.findViewById(R.id.container);
     }
 
@@ -242,19 +225,15 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        title.setTextColor(ThemeStore.Companion.textColorPrimary(getContext()));
-
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
-
-        getActivity().setTitle(null);
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(primaryColor);
-        toolbar.setNavigationOnClickListener(v -> {
-            getActivity().onBackPressed();
+        toolbar.setBackgroundColor(RetroUtil.toolbarColor(getMainActivity()));
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setOnClickListener(v -> {
+            showMainMenu();
         });
-
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(),
                 ColorUtil.INSTANCE.darkenColor(primaryColor)));
@@ -348,10 +327,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                //noinspection ConstantConditions
-                getActivity().onBackPressed();
-                break;
             case R.id.action_go_to_start_directory:
                 setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance().getStartDirectory())), true);
                 return true;
@@ -489,8 +464,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void checkIsEmpty() {
         if (empty != null) {
-            empty
-                    .setVisibility(adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+            empty.setVisibility(adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -754,21 +728,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            View view = LayoutInflater.from(context).inflate(R.layout.progress_bar, null);
-            view.setBackgroundColor(ThemeStore.Companion.primaryColor(context));
-            ProgressBar progressBar = view.findViewById(R.id.progressBar);
-            TintHelper.setTintAuto(progressBar, ThemeStore.Companion.accentColor(context), false);
-
-            MaterialDialog materialDialog = new MaterialDialog(context, new BottomSheet());
-            materialDialog.setContentView(view);
-            materialDialog.title(R.string.listing_files, "");
-            materialDialog.setOnCancelListener(dialog -> cancel(false));
-            materialDialog.setOnDismissListener(dialog -> cancel(false));
-            materialDialog.negativeButton(android.R.string.cancel, "", materialDialog1 -> {
-                cancel(false);
-                return null;
-            });
-            return materialDialog;
+            ProgressDialog dialog = new ProgressDialog(context);
+            dialog.setIndeterminate(true);
+            dialog.setTitle(R.string.listing_files);
+            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            dialog.setOnCancelListener(dialog1 -> cancel(false));
+            dialog.setOnDismissListener(dialog1 -> cancel(false));
+            return dialog;
         }
     }
 }

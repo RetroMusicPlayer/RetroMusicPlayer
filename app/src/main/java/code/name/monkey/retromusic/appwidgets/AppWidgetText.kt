@@ -36,7 +36,7 @@ class AppWidgetText : BaseAppWidget() {
 
         appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
 
         appWidgetView.setTextColor(R.id.title, ContextCompat.getColor(context, R.color.md_white_1000))
         appWidgetView.setTextColor(R.id.text, ContextCompat.getColor(context, R.color.md_white_1000))
@@ -94,7 +94,7 @@ class AppWidgetText : BaseAppWidget() {
         val playPauseRes = if (isPlaying)
             R.drawable.ic_pause_white_24dp
         else
-            R.drawable.ic_play_arrow_white_24dp
+            R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, playPauseRes, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))

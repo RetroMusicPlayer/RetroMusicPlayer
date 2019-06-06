@@ -57,7 +57,7 @@ class AppWidgetBig : BaseAppWidget() {
                 RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp,
                         MaterialValueHelper.getPrimaryTextColor(context, false))!!, 1f))
         appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(
-                RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_24dp,
+                RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_32dp,
                         MaterialValueHelper.getPrimaryTextColor(context, false))!!, 1f))
 
         linkButtons(context, appWidgetView)
@@ -84,7 +84,7 @@ class AppWidgetBig : BaseAppWidget() {
         }
 
         // Set correct drawable for pause state
-        val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_24dp
+        val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
                 RetroUtil.getTintedVectorDrawable(service, playPauseRes,
                         MaterialValueHelper.getPrimaryTextColor(service, false))!!, 1f))

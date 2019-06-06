@@ -14,88 +14,27 @@
 
 package code.name.monkey.retromusic.dialogs
 
+import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.core.app.ShareCompat
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
-import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_main_options.*
-import java.io.File
-import java.util.*
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.customview.customView
+import kotlinx.android.synthetic.main.fragment_main_settings.*
 
-class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnClickListener {
-
-    private val disposable = CompositeDisposable()
-
-    private val timeOfTheDay: String
-        get() {
-            var message = getString(R.string.title_good_day)
-            val c = Calendar.getInstance()
-
-            when (c.get(Calendar.HOUR_OF_DAY)) {
-                in 0..5 -> message = getString(R.string.title_good_night)
-                in 6..11 -> message = getString(R.string.title_good_morning)
-                in 12..15 -> message = getString(R.string.title_good_afternoon)
-                in 16..19 -> message = getString(R.string.title_good_evening)
-                in 20..23 -> message = getString(R.string.title_good_night)
-            }
-            return message
-        }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        disposable.dispose()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main_options, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        text.setTextColor(ThemeStore.textColorSecondary(context!!))
-        text.text = PreferenceUtil.getInstance().userBio
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
-        titleWelcome.text = String.format("%s %s!", timeOfTheDay, PreferenceUtil.getInstance().userName)
-
-        loadImageFromStorage()
-
-        actionSettings.setOnClickListener(this)
-
-        actionSleepTimer.setOnClickListener(this)
-        actionLibrary.setOnClickListener(this)
-        userInfoContainer.setOnClickListener(this)
-        actionEqualizer.setOnClickListener(this)
-        actionFolders.setOnClickListener(this)
-        actionRate.setOnClickListener(this)
-        actionShare.setOnClickListener(this)
-        actionBugReport.setOnClickListener(this)
-        buyProContainer.apply {
-            setCardBackgroundColor(ThemeStore.accentColor(context!!))
-            visibility = if (!App.isProVersion) View.VISIBLE else View.GONE
-            setOnClickListener {
-                NavigationUtil.goToProVersion(context)
-            }
-        }
-    }
-
+class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
@@ -103,18 +42,16 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
             R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
-
             R.id.actionSleepTimer -> if (fragmentManager != null) {
                 SleepTimerDialog().show(fragmentManager!!, TAG)
             }
-            R.id.userInfoContainer -> NavigationUtil.goToUserInfo(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
             R.id.actionShare -> shareApp()
             R.id.actionBugReport -> prepareBugReport()
             R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
 
         }
-        dismiss()
+        materialDialog.dismiss()
     }
 
     private fun prepareBugReport() {
@@ -122,33 +59,48 @@ class OptionsSheetDialogFragment : RoundedBottomSheetDialogFragment(), View.OnCl
     }
 
     private fun shareApp() {
-        val shareIntent = ShareCompat.IntentBuilder.from(activity)
-                .setType("songText/plain")
+        ShareCompat.IntentBuilder.from(activity)
+                .setType("text/plain")
+                .setChooserTitle(R.string.action_share)
                 .setText(String.format(getString(R.string.app_share), activity!!.packageName))
-                .intent
-        if (shareIntent.resolveActivity(activity!!.packageManager) != null) {
-            startActivity(
-                    Intent.createChooser(shareIntent, resources.getText(R.string.action_share)))
-        }
+                .startChooser()
     }
 
-    private fun loadImageFromStorage() {
+    private lateinit var actionSettings: View
+    private lateinit var actionSleepTimer: View
+    private lateinit var actionLibrary: View
+    private lateinit var actionEqualizer: View
+    private lateinit var actionFolders: View
+    private lateinit var actionRate: View
+    private lateinit var actionShare: View
+    private lateinit var actionBugReport: View
+    private lateinit var materialDialog: MaterialDialog
 
-        disposable.add(Compressor(context!!)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(
-                        File(PreferenceUtil.getInstance().profileImage, USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userImage!!.setImageBitmap(it) }, {
-                    userImage!!.setImageDrawable(ContextCompat
-                            .getDrawable(context!!, R.drawable.ic_account_white_24dp))
-                }, {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
+        actionSettings = layout.findViewById(R.id.actionSettings)
+        actionSleepTimer = layout.findViewById(R.id.actionSleepTimer)
+        actionLibrary = layout.findViewById(R.id.actionLibrary)
+        actionEqualizer = layout.findViewById(R.id.actionEqualizer)
+        actionFolders = layout.findViewById(R.id.actionFolders)
+        actionRate = layout.findViewById(R.id.actionRate)
+        actionShare = layout.findViewById(R.id.actionShare)
+        actionBugReport = layout.findViewById(R.id.actionBugReport)
 
-                }))
+        actionSettings.setOnClickListener(this)
+        actionSleepTimer.setOnClickListener(this)
+        actionLibrary.setOnClickListener(this)
+        actionEqualizer.setOnClickListener(this)
+        actionFolders.setOnClickListener(this)
+        actionRate.setOnClickListener(this)
+        actionShare.setOnClickListener(this)
+        actionBugReport.setOnClickListener(this)
+
+        materialDialog = MaterialDialog(activity!!, BottomSheet())
+                .show {
+                    customView(view = layout, scrollable = true)
+                }
+        return materialDialog
     }
 
     companion object {

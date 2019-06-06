@@ -1,10 +1,9 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
-import android.content.res.ColorStateList
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.SeekBarPreference
 import code.name.monkey.appthemehelper.R
@@ -29,7 +28,7 @@ class ATESeekBarPreference : SeekBarPreference {
     }
 
     private fun init() {
-
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 
     override fun onBindViewHolder(view: PreferenceViewHolder) {

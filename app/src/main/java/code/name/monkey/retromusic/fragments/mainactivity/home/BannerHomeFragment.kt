@@ -2,18 +2,19 @@ package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
-import android.widget.ImageView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
-import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -32,14 +33,12 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.Request
-import com.bumptech.glide.request.target.SizeReadyCallback
-import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
+import kotlinx.android.synthetic.main.fragment_home.recyclerView
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
@@ -56,11 +55,30 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var topPlayed: View
     private lateinit var actionShuffle: View
     private lateinit var history: View
-    private lateinit var userImage: ImageView
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
+    }
+
+    private fun loadImageFromStorage() {
+        disposable.add(Compressor(context!!)
+                .setMaxHeight(300)
+                .setMaxWidth(300)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().profileImage, Constants.USER_PROFILE))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it != null) {
+                        userImage.setImageBitmap(it)
+                    } else {
+                        userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                    }
+                }) {
+                    userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                })
     }
 
     private val displayMetrics: DisplayMetrics
@@ -71,44 +89,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             return metrics
         }
 
-    private fun getTimeOfTheDay() {
-        val c = Calendar.getInstance()
-        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
-
-        var images = arrayOf<String>()
-        when (timeOfDay) {
-            in 0..5 -> images = resources.getStringArray(R.array.night)
-            in 6..11 -> images = resources.getStringArray(R.array.morning)
-            in 12..15 -> images = resources.getStringArray(R.array.after_noon)
-            in 16..19 -> images = resources.getStringArray(R.array.evening)
-            in 20..23 -> images = resources.getStringArray(R.array.night)
-        }
-
-        val day = images[Random().nextInt(images.size)]
-        loadTimeImage(day)
-    }
-
-
-    private fun loadTimeImage(day: String) {
-        if (bannerImage != null) {
-            if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
-                GlideApp.with(activity!!)
-                        .load(day)
-                        .placeholder(R.drawable.material_design_default)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(bannerImage!!)
-            } else {
-                disposable.add(Compressor(context!!)
-                        .setQuality(100)
-                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { bannerImage!!.setImageBitmap(it) })
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homePresenter = HomePresenter(this)
@@ -118,7 +98,9 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         toolbar = view.findViewById(R.id.toolbar)
-
+        bannerImage?.setOnClickListener {
+            NavigationUtil.goToUserInfo(activity!!)
+        }
         if (!PreferenceUtil.getInstance().isHomeBanner)
             setStatusbarColorAuto(view)
 
@@ -142,9 +124,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToPlaylistNew(mainActivity, HistoryPlaylist(mainActivity))
         }
 
-        userImage = view.findViewById(R.id.userImage)
-        userImage.setOnClickListener { showMainMenu() }
-
         homePresenter = HomePresenter(this)
 
         contentContainerView = view.findViewById(R.id.contentContainer)
@@ -156,6 +135,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homePresenter.subscribe()
 
         checkPadding()
+
+        userInfoContainer.setOnClickListener {
+            NavigationUtil.goToUserInfo(activity!!)
+        }
+        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
+        titleWelcome.text = String.format("%s", PreferenceUtil.getInstance().userName)
     }
 
     private fun checkPadding() {
@@ -167,12 +152,22 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
     }
 
+    private fun toolbarColor(): Int {
+        return if (PreferenceUtil.getInstance().isHomeBanner) {
+            toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
+            ColorUtil.withAlpha(RetroUtil.toolbarColor(mainActivity), 0.85f)
+        } else {
+            RetroUtil.toolbarColor(mainActivity)
+        }
+    }
+
     private fun setupToolbar() {
-        mainActivity.title = null
         toolbar.apply {
-            setBackgroundColor(if (PreferenceUtil.getInstance().isHomeBanner) Color.TRANSPARENT else ThemeStore.primaryColor(context))
-            setNavigationOnClickListener {
-                NavigationUtil.goToSearch(activity)
+            setBackgroundColor(toolbarColor())
+            setNavigationIcon(R.drawable.ic_menu_white_24dp)
+            setOnClickListener {
+                val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
+                NavigationUtil.goToSearch(activity!!, pairImageView)
             }
         }
         mainActivity.setSupportActionBar(toolbar)
@@ -243,9 +238,49 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            NavigationUtil.goToSearch(mainActivity)
+            val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
+            NavigationUtil.goToSearch(mainActivity, true, pairImageView)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getTimeOfTheDay() {
+        val c = Calendar.getInstance()
+        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
+
+        var images = arrayOf<String>()
+        when (timeOfDay) {
+            in 0..5 -> images = resources.getStringArray(R.array.night)
+            in 6..11 -> images = resources.getStringArray(R.array.morning)
+            in 12..15 -> images = resources.getStringArray(R.array.after_noon)
+            in 16..19 -> images = resources.getStringArray(R.array.evening)
+            in 20..23 -> images = resources.getStringArray(R.array.night)
+        }
+
+        val day = images[Random().nextInt(images.size)]
+        loadTimeImage(day)
+    }
+
+
+    private fun loadTimeImage(day: String) {
+        if (bannerImage != null) {
+            if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+                GlideApp.with(activity!!)
+                        .load(day)
+                        .placeholder(R.drawable.material_design_default)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(bannerImage!!)
+            } else {
+                disposable.add(Compressor(context!!)
+                        .setQuality(100)
+                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe { bannerImage!!.setImageBitmap(it) })
+            }
+        }
+        loadImageFromStorage()
     }
 
     companion object {

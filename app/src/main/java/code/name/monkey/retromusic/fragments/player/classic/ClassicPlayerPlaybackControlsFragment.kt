@@ -97,7 +97,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         if (MusicPlayerRemote.isPlaying) {
             playerPlayPauseFab.setImageResource(R.drawable.ic_pause_white_24dp)
         } else {
-            playerPlayPauseFab.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            playerPlayPauseFab.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
 

@@ -1,12 +1,13 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
-import androidx.preference.Preference
-import androidx.preference.PreferenceViewHolder
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.View
-
+import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import code.name.monkey.appthemehelper.R
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.BorderCircleView
 
 /**
@@ -35,6 +36,9 @@ class ATEColorPreference(context: Context, attrs: AttributeSet?, defStyleAttr: I
         layoutResource = R.layout.ate_preference_custom_support
         widgetLayoutResource = R.layout.ate_preference_color
         isPersistent = false
+
+
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

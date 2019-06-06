@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.activities
 
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
@@ -43,6 +44,16 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
 
         clearQueue.setOnClickListener {
             MusicPlayerRemote.clearQueue()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

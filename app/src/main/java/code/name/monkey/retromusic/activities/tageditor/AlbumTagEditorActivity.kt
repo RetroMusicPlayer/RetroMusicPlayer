@@ -70,7 +70,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private val disposable = CompositeDisposable()
 
     private fun setupToolbar() {
-        bannerTitle.setTextColor(Color.WHITE)
         toolbar.setNavigationOnClickListener { onBackPressed() }
         ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this, toolbar, Color.TRANSPARENT)
         title = null

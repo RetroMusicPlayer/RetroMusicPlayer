@@ -65,26 +65,23 @@
         <item name="rectSelector">@drawable/rect_selector_dark</item>
         <item name="rectSelectorStrong">@drawable/rect_selector_strong_dark</item>
 
-        <item name="cardBackgroundColor">@color/md_grey_800</item>
+        <item name="cardBackgroundColor">@color/card_dark_color</item>
+        <item name="defaultFooterColor">@color/dark_color</item>
+        <item name="dividerColor">@color/dark_color</item>
 
-        <item name="defaultFooterColor">@color/md_grey_800</item>
-
-        <item name="dividerColor">@color/md_grey_800</item>
         <item name="iconColor">@color/ate_secondary_text_dark</item>
 
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 
         <!-- just in case-->
-        <item name="android:windowBackground">@color/md_grey_900</item>
+        <item name="android:windowBackground">@color/dark_color</item>
         <item name="colorAccent">@android:color/white</item>
-        <item name="colorPrimary">@color/md_grey_900</item>
+        <item name="colorPrimary">@color/dark_color</item>
 
         <!-- necessary to find the overflow button later in the layout-->
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
-        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowExitTransition">@transition/grid_exit</item>
@@ -95,6 +92,8 @@
         <item name="android:fontFamily">@font/circular</item>
         <item name="android:textColorPrimary">@color/md_white_1000</item>
 
+        <item name="windowActionBar">false</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
@@ -103,23 +102,21 @@
         <item name="android:windowBackground">?colorPrimary</item>
 
         <item name="md_color_button_text">@color/md_white_1000</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
 
     <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
 
-        <item name="dividerColor">#18FFFFFF</item>
+        <item name="dividerColor">@color/dark_color</item>
         <item name="defaultFooterColor">@color/md_grey_800</item>
         <item name="cardBackgroundColor">@color/md_grey_900</item>
-        <item name="md_background_color">@color/md_grey_900</item>
+        <item name="md_background_color">@color/card_black_color</item>
 
-        <item name="android:windowBackground">@color/md_black_1000</item>
-
-        <item name="colorPrimary">@android:color/black</item>
-        <item name="android:colorPrimary">@android:color/black</item>
-
-        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
-
+        <item name="android:windowBackground">@color/black_color</item>
+        <item name="colorPrimary">@color/black_color</item>
+        <item name="android:colorPrimary">@color/black_color</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowExitTransition">@transition/grid_exit</item>
@@ -128,6 +125,8 @@
         <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
         <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -165,8 +164,6 @@
 
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
-        <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
-
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowExitTransition">@transition/grid_exit</item>
         <item name="android:windowEnterTransition">@transition/grid_exit</item>
@@ -176,6 +173,8 @@
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="android:textColorPrimary">@color/md_grey_900</item>
+
+        <item name="windowActionBar">false</item>
     </style>
 
 

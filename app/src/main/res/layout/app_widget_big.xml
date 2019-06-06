@@ -41,7 +41,7 @@
       android:padding="22dp"
       android:background="@drawable/widget_selector_dark"
       tools:ignore="ContentDescription"
-      tools:src="@drawable/ic_play_arrow_white_24dp"
+      tools:src="@drawable/ic_play_arrow_white_32dp"
       tools:tint="@color/ate_primary_text_dark"/>
 
     <ImageButton

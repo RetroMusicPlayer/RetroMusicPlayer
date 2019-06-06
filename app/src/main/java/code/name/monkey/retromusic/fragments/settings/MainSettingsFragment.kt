@@ -14,27 +14,24 @@
 
 package code.name.monkey.retromusic.fragments.settings
 
-import android.graphics.Bitmap
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.retromusic.Constants.USER_PROFILE
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.SettingsActivity
-import code.name.monkey.retromusic.util.Compressor
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main_settings.*
-import java.io.File
-import java.util.*
 
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
@@ -70,30 +67,27 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         otherSettings.setOnClickListener(this)
         aboutSettings.setOnClickListener(this)
 
-        text.setTextColor(ThemeStore.textColorSecondary(context!!))
-        text.text = PreferenceUtil.getInstance().userBio
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
-        titleWelcome.text = String.format("%s %s!", getTimeOfTheDay(), PreferenceUtil.getInstance().userName)
-        userInfoContainer.setOnClickListener { NavigationUtil.goToUserInfo(activity!!) }
+        buyProContainer.apply {
+            if (!App.isProVersion) show() else hide()
+            setOnClickListener {
+                NavigationUtil.goToProVersion(context)
+            }
+        }
+        buyPremium.setOnClickListener {
+            NavigationUtil.goToProVersion(context!!)
+        }
+        MaterialUtil.setTint(buyPremium)
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!)))
+        text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
+        //title.setTextColor(primaryColor)
+        text2.setTextColor(primaryColor)
+        text3.imageTintList = ColorStateList.valueOf(primaryColor)
+
     }
+
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
         if (activity != null) {
             (activity as SettingsActivity).setupFragment(fragment, title)
         }
-    }
-
-    private fun getTimeOfTheDay(): String {
-        var message = getString(R.string.title_good_day)
-        val c = Calendar.getInstance()
-        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
-
-        when (timeOfDay) {
-            in 0..5 -> message = getString(R.string.title_good_night)
-            in 6..11 -> message = getString(R.string.title_good_morning)
-            in 12..15 -> message = getString(R.string.title_good_afternoon)
-            in 16..19 -> message = getString(R.string.title_good_evening)
-            in 20..23 -> message = getString(R.string.title_good_night)
-        }
-        return message
     }
 }

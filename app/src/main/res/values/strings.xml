@@ -244,7 +244,7 @@
 
     <string name="material">Material</string>
 
-    <string name="my_name">My Name</string>
+    <string name="my_name">Name</string>
     <string name="my_top_tracks">Most played</string>
 
     <string name="never">Never</string>
@@ -548,7 +548,7 @@
     <string name="vertical_flip">Vertical flip</string>
     <string name="hinge">Hinge</string>
     <string name="horizontal_flip">Horizontal flip</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Pause playing on zero and plays after raise volume. Warning when you increase the volume it starts playing even your outside the app</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pauses the song when the volume decreases to zero and starts playing back when the volume level rises. Also works outside the app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pause on zero</string>
     <string name="whats_new">What\'s New</string>
 
@@ -621,4 +621,9 @@
 
     <string name="image_gradient">Gradient image</string>
     <string name="stack">Stack</string>
+    <string name="grid_style_label"><![CDATA[Grids & Style]]></string>
+    <string name="welcome">Welcome,</string>
+    <string name="premium">Get Premium</string>
+    <string name="pro_summary">Now playing themes, Carousel effect, Color theme and more..</string>
+    <string name="action_play_all">Play all</string>
 </resources>

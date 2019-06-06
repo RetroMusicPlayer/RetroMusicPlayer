@@ -7,7 +7,7 @@
     <font
         android:font="@font/circular_std_medium"
         android:fontStyle="normal"
-        android:fontWeight="700" />
+        android:fontWeight="600" />
 
     <font
         android:font="@font/circular_std_black"
