@@ -66,7 +66,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     protected fun getPlaylistText(playlist: Playlist): String {
-        return playlist.getInfoString(activity)
+        return MusicUtil.getPlaylistInfoString(activity, getSongs(playlist))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -158,7 +158,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         return songs
     }
 
-    private fun getSongs(playlist: Playlist): ArrayList<Song>? {
+    private fun getSongs(playlist: Playlist): ArrayList<Song> {
         val songs = ArrayList<Song>()
         if (playlist is AbsSmartPlaylist) {
             songs.addAll(playlist.getSongs(activity).blockingFirst())
