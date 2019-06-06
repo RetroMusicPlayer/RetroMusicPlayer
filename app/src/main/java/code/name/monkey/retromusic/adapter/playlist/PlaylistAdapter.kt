@@ -29,6 +29,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import java.util.*
 
+
 class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayList<Playlist>,
                       @param:LayoutRes protected var itemLayoutRes: Int, cabHolder: CabHolder?) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(activity, cabHolder, R.menu.menu_playlists_selection) {
     var dataSet: ArrayList<Playlist>
@@ -60,6 +61,14 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         return ViewHolder(view)
     }
 
+    protected fun getPlaylistTitle(playlist: Playlist): String {
+        return playlist.name
+    }
+
+    protected fun getPlaylistText(playlist: Playlist): String {
+        return playlist.getInfoString(activity)
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val playlist = dataSet[position]
@@ -67,10 +76,10 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         holder.itemView.isActivated = isChecked(playlist)
 
         if (holder.title != null) {
-            holder.title!!.text = playlist.name
+            holder.title!!.text = getPlaylistTitle(playlist)
         }
         if (holder.text != null) {
-            holder.text!!.text = String.format(Locale.getDefault(), "%d Songs", songs!!.size)
+            holder.text!!.text = getPlaylistText(playlist)
         }
         if (holder.image != null) {
             holder.image!!.setImageDrawable(getIconRes(playlist))

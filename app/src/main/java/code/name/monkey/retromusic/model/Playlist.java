@@ -14,8 +14,16 @@
 
 package code.name.monkey.retromusic.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
+import code.name.monkey.retromusic.util.MusicUtil;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -32,6 +40,19 @@ public class Playlist implements Parcelable {
     public Playlist() {
         this.id = -1;
         this.name = "";
+    }
+
+    @NonNull
+    public String getInfoString(@NonNull Context context) {
+        int songCount = getSongs(context).size();
+        String songCountString = MusicUtil.getSongCountString(context, songCount);
+        return MusicUtil.buildInfoString(songCountString, "");
+    }
+
+    @NonNull
+    public ArrayList<Song> getSongs(Context context) {
+        // this default implementation covers static playlists
+        return PlaylistSongsLoader.INSTANCE.getPlaylistSongList(context, id).blockingFirst();
     }
 
     @Override

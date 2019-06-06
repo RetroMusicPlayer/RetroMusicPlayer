@@ -29,6 +29,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
+
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
 
@@ -39,14 +43,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
@@ -84,29 +86,17 @@ public class MusicUtil {
     }
 
     @NonNull
+    public static String getSongCountString(@NonNull final Context context, int songCount) {
+        final String songString = songCount == 1 ? context.getResources().getString(R.string.song) : context.getResources().getString(R.string.songs);
+        return songCount + " " + songString;
+    }
+
+    @NonNull
     public static String getSongInfoString(@NonNull Song song) {
         return MusicUtil.buildInfoString(
                 song.getArtistName(),
                 song.getAlbumName()
         );
-    }
-
-    /**
-     * Build a concatenated string from the provided arguments
-     * The intended purpose is to show extra annotations
-     * to a music library item.
-     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
-     */
-    public static String buildInfoString(@NonNull final String string1, @NonNull final String string2) {
-        if (TextUtils.isEmpty(string1)) {
-            //noinspection ConstantConditions
-            return TextUtils.isEmpty(string2) ? "" : string2;
-        }
-        if (TextUtils.isEmpty(string2)) {
-            //noinspection ConstantConditions
-            return TextUtils.isEmpty(string1) ? "" : string1;
-        }
-        return string1 + "  •  " + string2;
     }
 
     @NonNull
@@ -130,7 +120,7 @@ public class MusicUtil {
         return songCount + " " + songString;
     }
 
-    @NonNull
+    /*@NonNull
     public static String getPlaylistInfoString(@NonNull final Context context,
                                                @NonNull List<Song> songs) {
         final int songCount = songs.size();
@@ -143,6 +133,69 @@ public class MusicUtil {
         }
 
         return songCount + " " + songString + " • " + MusicUtil.getReadableDurationString(duration);
+    }*/
+
+    @NonNull
+    public static String getGenreInfoString(@NonNull final Context context, @NonNull final Genre genre) {
+        int songCount = genre.getSongCount();
+        return MusicUtil.getSongCountString(context, songCount);
+    }
+
+    @NonNull
+    public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
+        final long duration = getTotalDuration(context, songs);
+
+        return MusicUtil.buildInfoString(
+                MusicUtil.getSongCountString(context, songs.size()),
+                MusicUtil.getReadableDurationString(duration)
+        );
+    }
+
+
+    /**
+     * Build a concatenated string from the provided arguments
+     * The intended purpose is to show extra annotations
+     * to a music library item.
+     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
+     */
+    @NonNull
+    public static String buildInfoString(@Nullable final String string1, @Nullable final String string2) {
+        // Skip empty strings
+        if (TextUtils.isEmpty(string1)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string2) ? "" : string2;
+        }
+        if (TextUtils.isEmpty(string2)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string1;
+        }
+
+        return string1 + "  •  " + string2;
+    }
+
+    /**
+     * Build a concatenated string from the provided arguments
+     * The intended purpose is to show extra annotations
+     * to a music library item.
+     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
+     */
+    @NonNull
+    public static String buildInfoString(@Nullable final String string1, @Nullable final String string2, @NonNull final String string3) {
+        // Skip empty strings
+        if (TextUtils.isEmpty(string1)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string2) ? "" : string2;
+        }
+        if (TextUtils.isEmpty(string2)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string1;
+        }
+        if (TextUtils.isEmpty(string3)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string3;
+        }
+
+        return string1 + "  •  " + string2 + "  •  " + string3;
     }
 
     public static String getReadableDurationString(long songDurationMillis) {
