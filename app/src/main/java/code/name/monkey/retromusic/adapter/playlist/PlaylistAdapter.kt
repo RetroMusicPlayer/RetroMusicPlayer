@@ -61,17 +61,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        /* if (getItemViewType(position) == SMART_PLAYLIST) {
-      if (holder.viewList != null) {
-        holder.viewList.get(0).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new HistoryPlaylist(activity)));
-        holder.viewList.get(1).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new LastAddedPlaylist(activity)));
-        holder.viewList.get(2).setOnClickListener(
-            v -> NavigationUtil.goToPlaylistNew(activity, new MyTopTracksPlaylist(activity)));
-      }
-      return;
-    }*/
+
         val playlist = dataSet[position]
         val songs = getSongs(playlist)
         holder.itemView.isActivated = isChecked(playlist)

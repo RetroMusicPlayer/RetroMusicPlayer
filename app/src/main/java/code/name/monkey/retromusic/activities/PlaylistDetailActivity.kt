@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.activities
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -7,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
@@ -20,6 +22,7 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.contract.PlaylistSongsContract
+import code.name.monkey.retromusic.mvp.contract.PlaylistSongsContract.*
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
@@ -31,7 +34,7 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import java.util.*
 
-class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsContract.PlaylistSongsView {
+class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsView {
 
     private var playlist: Playlist? = null
     private var cab: MaterialCab? = null
@@ -44,10 +47,11 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
-        setStatusbarColorAuto()
+        setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
 
         toggleBottomNavigationView(true)
 

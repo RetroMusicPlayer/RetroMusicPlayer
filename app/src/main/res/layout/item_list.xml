@@ -81,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                app:fontFamily="@font/circular_std_medium"
                 android:textSize="16sp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView

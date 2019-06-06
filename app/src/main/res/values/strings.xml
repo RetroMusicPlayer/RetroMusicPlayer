@@ -625,4 +625,5 @@
     <string name="welcome">Welcome,</string>
     <string name="premium">Get Premium</string>
     <string name="pro_summary">Now playing themes, Carousel effect, Color theme and more..</string>
+    <string name="action_play_all">Play all</string>
 </resources>

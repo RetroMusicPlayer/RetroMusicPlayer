@@ -128,7 +128,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun selectBannerImage() {
 
-        if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+        if (TextUtils.isEmpty(PreferenceUtil.getInstance().bannerImage)) {
             val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             pickImageIntent.type = "image/*"
             //pickImageIntent.putExtra("crop", "true")
@@ -138,8 +138,7 @@ class UserInfoActivity : AbsBaseActivity() {
             pickImageIntent.putExtra("aspectY", 9)
             pickImageIntent.putExtra("scale", true)
             //intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(pickImageIntent,
-                    "Select Picture"), PICK_BANNER_REQUEST)
+            startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_BANNER_REQUEST)
         } else {
             PreferenceUtil.getInstance().setBannerImagePath("")
             bannerImage.setImageResource(android.R.color.transparent)

@@ -29,7 +29,7 @@
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:padding="10dp"
-        android:text="@string/action_play"
+        android:text="@string/action_play_all"
         android:textAllCaps="false"
         app:cornerRadius="6dp"
         app:icon="@drawable/ic_play_arrow_white_24dp"
