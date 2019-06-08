@@ -71,14 +71,6 @@ public class RetroUtil {
     private static final int[] TEMP_ARRAY = new int[1];
     private static final String SHOW_NAV_BAR_RES_NAME = "config_showNavigationBar";
 
-    public static int toolbarColor(@NonNull Context context) {
-        int color = ThemeStore.Companion.primaryColor(context);
-        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
-            return ATHUtil.INSTANCE.resolveColor(context, R.attr.cardBackgroundColor);
-        } else {
-            return color;
-        }
-    }
 
     public static int calculateNoOfColumns(@NonNull Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();

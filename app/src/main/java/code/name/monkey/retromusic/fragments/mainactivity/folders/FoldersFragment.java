@@ -229,7 +229,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(RetroUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             showMainMenu();

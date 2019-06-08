@@ -18,10 +18,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
@@ -40,7 +37,12 @@ import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.android.synthetic.main.activity_album_content.*
 import kotlinx.android.synthetic.main.activity_artist_content.*
+import kotlinx.android.synthetic.main.activity_artist_content.playAction
+import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
+import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
+import kotlinx.android.synthetic.main.activity_artist_content.songTitle
 import kotlinx.android.synthetic.main.activity_artist_details.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -291,17 +293,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        playAction.backgroundTintList = ColorStateList.valueOf(textColor)
-        shuffleAction.backgroundTintList = ColorStateList.valueOf(textColor)
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(textColor))).apply {
-            playAction.setTextColor(this)
-            playAction.iconTint = this
+        val buttonColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
 
-            shuffleAction.setTextColor(this)
-            shuffleAction.iconTint = this
-        }
-
-        findViewById<View>(R.id.root).setBackgroundColor(ThemeStore.primaryColor(this))
+        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
+        MaterialUtil.setTint(button = playAction, color = buttonColor)
     }
 
 

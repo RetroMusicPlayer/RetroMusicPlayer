@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Slide
@@ -14,10 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -245,19 +241,17 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance().adaptiveColor) color else ThemeStore.accentColor(this)
+        val themeColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        else ThemeStore.accentColor(this)
+
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
 
-        playAction.backgroundTintList = ColorStateList.valueOf(themeColor)
-        shuffleAction.backgroundTintList = ColorStateList.valueOf(themeColor)
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(themeColor))).apply {
-            playAction.setTextColor(this)
-            playAction.iconTint = this
+        val buttonColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
 
-            shuffleAction.setTextColor(this)
-            shuffleAction.iconTint = this
-        }
+        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
+        MaterialUtil.setTint(button = playAction, color = buttonColor)
     }
 
 

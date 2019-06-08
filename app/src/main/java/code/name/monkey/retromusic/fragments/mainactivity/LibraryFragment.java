@@ -144,7 +144,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void setupToolbar() {
         int primaryColor = ThemeStore.Companion.primaryColor(getContext());
         TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        toolbar.setBackgroundColor(RetroUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
