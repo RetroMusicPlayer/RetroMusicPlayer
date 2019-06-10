@@ -15,13 +15,9 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
-import android.text.TextUtils
-import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.deezer.Data
 import code.name.monkey.retromusic.deezer.DeezerApiService
 import code.name.monkey.retromusic.deezer.DeezerResponse
-import code.name.monkey.retromusic.rest.LastFMRestClient
-import code.name.monkey.retromusic.rest.model.LastFmArtist
-import code.name.monkey.retromusic.util.LastFMUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Priority
@@ -65,7 +61,8 @@ class ArtistImageFetcher(private val context: Context,
     override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
         try {
             if (!MusicUtil.isArtistNameUnknown(model.artistName) && RetroUtil.isAllowedToDownloadMetadata(context)) {
-                call = deezerApiService.getArtistImage(model.artistName)
+                val artists = model.artistName.split(",")
+                call = deezerApiService.getArtistImage(artists[0])
                 call?.enqueue(object : Callback<DeezerResponse> {
                     override fun onFailure(call: Call<DeezerResponse>, t: Throwable) {
                         callback.onLoadFailed(Exception(t))
@@ -78,8 +75,7 @@ class ArtistImageFetcher(private val context: Context,
                         }
                         try {
                             val deezerResponse: DeezerResponse? = response.body()
-                            println(deezerResponse)
-                            val url = deezerResponse?.data?.get(0)?.pictureXl
+                            val url = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
                             streamFetcher = OkHttpStreamFetcher(okHttp, GlideUrl(url))
                             streamFetcher?.loadData(priority, callback)
                         } catch (e: Exception) {
@@ -93,6 +89,17 @@ class ArtistImageFetcher(private val context: Context,
             callback.onLoadFailed(e)
         }
 
+    }
+
+    fun getHighestQuality(imageUrl: Data): String {
+        return when {
+            imageUrl.pictureXl.isNotEmpty() -> imageUrl.pictureXl
+            imageUrl.pictureBig.isNotEmpty() -> imageUrl.pictureBig
+            imageUrl.pictureMedium.isNotEmpty() -> imageUrl.pictureMedium
+            imageUrl.pictureSmall.isNotEmpty() -> imageUrl.pictureSmall
+            imageUrl.picture.isNotEmpty() -> imageUrl.picture
+            else -> ""
+        }
     }
 
     override fun cleanup() {
@@ -127,11 +134,12 @@ class ArtistImageLoader(private val context: Context,
     }
 
     class Factory(private val context: Context) : ModelLoaderFactory<ArtistImage, InputStream> {
-        private val deezerApiService: DeezerApiService = DeezerApiService.invoke(DeezerApiService.createDefaultOkHttpClient(context)
-                .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .readTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .writeTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .build())
+        private val deezerApiService: DeezerApiService =
+                DeezerApiService.invoke(DeezerApiService.createDefaultOkHttpClient(context)
+                        .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+                        .readTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+                        .writeTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
+                        .build())
         private val okHttp: OkHttpClient = OkHttpClient.Builder()
                 .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
