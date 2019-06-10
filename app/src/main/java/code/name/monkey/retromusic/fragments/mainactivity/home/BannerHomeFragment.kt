@@ -28,10 +28,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
-import code.name.monkey.retromusic.util.Compressor
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -155,9 +152,9 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun toolbarColor(): Int {
         return if (PreferenceUtil.getInstance().isHomeBanner) {
             toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
-            ColorUtil.withAlpha(RetroUtil.toolbarColor(mainActivity), 0.85f)
+            ColorUtil.withAlpha(RetroColorUtil.toolbarColor(mainActivity), 0.85f)
         } else {
-            RetroUtil.toolbarColor(mainActivity)
+            RetroColorUtil.toolbarColor(mainActivity)
         }
     }
 

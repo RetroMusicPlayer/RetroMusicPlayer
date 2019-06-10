@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,12 +29,23 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.retromusic.R;
 
 public class RetroColorUtil {
+    public static int toolbarColor(@NonNull Context context) {
+        int color = ThemeStore.Companion.primaryColor(context);
+        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
+            return ATHUtil.INSTANCE.resolveColor(context, R.attr.cardBackgroundColor);
+        } else {
+            return color;
+        }
+    }
 
     @Nullable
-    public static Palette generatePalette(Bitmap bitmap) {
+    public static Palette generatePalette(@Nullable Bitmap bitmap) {
         return bitmap == null ? null : Palette.from(bitmap).clearFilters().generate();
     }
 

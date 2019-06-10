@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
 import com.google.android.material.button.MaterialButton
 import java.util.*
 
@@ -37,7 +37,7 @@ open class PlaylistSongAdapter(activity: AppCompatActivity,
 
         if (holder.itemViewType == OFFSET_ITEM) {
 
-            val buttonColor = RetroUtil.toolbarColor(activity)
+            val buttonColor = RetroColorUtil.toolbarColor(activity)
             val textColor = MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(buttonColor))
             val viewHolder = holder as ViewHolder
 

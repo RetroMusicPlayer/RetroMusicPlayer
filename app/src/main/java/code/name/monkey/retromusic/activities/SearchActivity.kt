@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.mvp.contract.SearchContract
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
+import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
@@ -59,7 +60,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
 
-        searchContainer.setCardBackgroundColor(RetroUtil.toolbarColor(this))
+        searchContainer.setCardBackgroundColor(RetroColorUtil.toolbarColor(this))
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
