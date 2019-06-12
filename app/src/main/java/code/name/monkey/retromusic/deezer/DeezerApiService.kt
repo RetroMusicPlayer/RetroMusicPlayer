@@ -50,12 +50,7 @@ interface DeezerApiService {
             return Interceptor { chain ->
                 val modifiedRequest = chain.request().newBuilder()
                         .addHeader("Cache-Control",
-                                String.format(
-                                        Locale.getDefault(),
-                                        "max-age=%d, max-stale=%d",
-                                        31536000, 31536000
-                                )
-                        ).build()
+                                String.format(Locale.getDefault(), "max-age=31536000, max-stale=31536000")).build()
                 chain.proceed(modifiedRequest)
             }
         }
