@@ -39,14 +39,9 @@
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:layout_collapseMode="pin"
-                    tools:ignore="UnusedAttribute">
+                    app:title="@string/buy_retro_music_pro"
+                    tools:ignore="UnusedAttribute" />
 
-                    <TextView
-                        android:id="@+id/bannerTitle"
-                        style="@style/BigTitleTextAppearance"
-                        android:text="@string/buy_retro_music_pro" />
-
-                </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

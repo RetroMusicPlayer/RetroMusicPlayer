@@ -81,7 +81,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:textSize="16sp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -90,8 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2" />
+                android:maxLines="1"  />
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView

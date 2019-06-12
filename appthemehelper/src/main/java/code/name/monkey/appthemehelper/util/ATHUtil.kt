@@ -23,15 +23,6 @@ object ATHUtil {
         }
     }
 
-    fun isInClassPath(clsName: String): Boolean {
-        try {
-            return inClassPath(clsName) != null
-        } catch (t: Throwable) {
-            return false
-        }
-
-    }
-
     fun inClassPath(clsName: String): Class<*> {
         try {
             return Class.forName(clsName)

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.loaders
 
 import android.content.Context
@@ -15,21 +29,21 @@ import java.util.*
  */
 
 object PlaylistLoader {
-    fun makePlaylistCursor(context: Context, selection: String?, values: Array<String>?): Cursor? {
-        try {
-            return context.contentResolver.query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+    private fun makePlaylistCursor(context: Context, selection: String?, values: Array<String>?): Cursor? {
+        return try {
+            context.contentResolver.query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
                     arrayOf(
                             /* 0 */
                             BaseColumns._ID,
                             /* 1 */
                             PlaylistsColumns.NAME), selection, values, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER)
-        } catch (e: SecurityException) {
-            return null
-        }
 
+        } catch (e: SecurityException) {
+            null
+        }
     }
 
-    fun getPlaylist(cursor: Cursor?): Observable<Playlist> {
+    private fun getPlaylist(cursor: Cursor?): Observable<Playlist> {
         return Observable.create { e ->
             var playlist = Playlist()
 
@@ -69,7 +83,7 @@ object PlaylistLoader {
     }
 
 
-    fun getAllPlaylists(cursor: Cursor?): Observable<ArrayList<Playlist>> {
+    private fun getAllPlaylists(cursor: Cursor?): Observable<ArrayList<Playlist>> {
         return Observable.create { e ->
             val playlists = ArrayList<Playlist>()
 

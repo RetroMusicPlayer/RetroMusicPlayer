@@ -198,8 +198,6 @@ anda dapat berdonasi disini</string>
     <string name="only_on_wifi">Hanya melalui Wi-Fi</string>
     <string name="others">Lainnya</string>
     <string name="past_three_months">3 bulan lalu</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me adalah cara mudah untuk berdonasi kepada saya. Jika kamu hanya menghubungkan kartu debet atau kredit, pajak di AS adalah 2.9% dari donasi + $0.30 USD. Selain itu, tidak ada biaya.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">lebih lanjut</a></string>
     <string name="permission_external_storage_denied">Izin untuk mengakses penyimpanan eksternal ditolak.</string>
     <string name="permissions_denied">Izin ditolak.</string>
     <string name="personalize">Personalisasi</string>

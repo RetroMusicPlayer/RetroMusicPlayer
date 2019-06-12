@@ -45,14 +45,8 @@
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:layout_collapseMode="pin"
-                        app:title=""
-                        tools:ignore="UnusedAttribute">
+                        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
 
-                        <TextView
-                            android:id="@+id/bannerTitle"
-                            style="@style/BigTitleTextAppearance" />
-
-                    </androidx.appcompat.widget.Toolbar>
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -90,15 +84,5 @@
                 android:visibility="gone"
                 tools:visibility="visible" />
         </LinearLayout>
-
-        <code.name.monkey.retromusic.views.CollapsingFAB
-            android:id="@+id/actionShuffle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            app:setIcon="@drawable/ic_shuffle_white_24dp"
-            app:setText="@string/action_shuffle_all"
-            app:showTitle="true" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

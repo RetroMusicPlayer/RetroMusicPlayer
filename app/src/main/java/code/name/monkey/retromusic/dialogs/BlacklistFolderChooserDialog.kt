@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.dialogs
 
 import android.Manifest
@@ -10,14 +24,12 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * @author Aidan Follestad (afollestad), modified by Karim Abou Zeid
- */
 class BlacklistFolderChooserDialog : DialogFragment() {
 
     private val initialPath = Environment.getExternalStorageDirectory().absolutePath
@@ -84,10 +96,10 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         checkIfCanGoUp()
         parentContents = listFiles()
 
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(activity!!, BottomSheet()).show {
             title(text = parentFolder!!.absolutePath)
-            listItems(items = contentsArray(), waitForPositiveButton = false) { dialog, index, text ->
-                onSelection(dialog, index, text)
+            listItems(items = contentsArray(), waitForPositiveButton = false) { _, index, _ ->
+                onSelection(index)
             }
             noAutoDismiss()
             positiveButton(R.string.add_action) {
@@ -100,7 +112,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         }
     }
 
-    private fun onSelection(materialDialog: MaterialDialog, i: Int, s: String) {
+    private fun onSelection(i: Int) {
         if (canGoUp && i == 0) {
             parentFolder = parentFolder!!.parentFile
             if (parentFolder!!.absolutePath == "/storage/emulated") {
@@ -127,8 +139,8 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
         dialog?.apply {
             setTitle(parentFolder!!.absolutePath)
-            listItems(items = contentsArray()) { dialog, index, text ->
-                onSelection(dialog, index, text)
+            listItems(items = contentsArray()) { _, index, _ ->
+                onSelection(index)
             }
         }
     }

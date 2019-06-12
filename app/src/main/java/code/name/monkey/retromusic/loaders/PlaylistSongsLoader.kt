@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.loaders
 
 import android.content.Context
@@ -50,14 +64,15 @@ object PlaylistSongsLoader {
         val year = cursor.getInt(3)
         val duration = cursor.getLong(4)
         val data = cursor.getString(5)
-        val dateModified = cursor.getInt(6)
+        val dateModified = cursor.getLong(6)
         val albumId = cursor.getInt(7)
         val albumName = cursor.getString(8)
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
         val idInPlaylist = cursor.getInt(11)
+        val composer = cursor.getString(12)
 
-        return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist)
+        return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer)
     }
 
     private fun makePlaylistSongCursor(@NonNull context: Context, playlistId: Int): Cursor? {
@@ -75,7 +90,8 @@ object PlaylistSongsLoader {
                             AudioColumns.ALBUM, // 8
                             AudioColumns.ARTIST_ID, // 9
                             AudioColumns.ARTIST, // 10
-                            MediaStore.Audio.Playlists.Members._ID)// 11
+                            MediaStore.Audio.Playlists.Members._ID,//11
+                            AudioColumns.COMPOSER)// 12
                     , BASE_SELECTION, null,
                     MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER)
         } catch (e: SecurityException) {

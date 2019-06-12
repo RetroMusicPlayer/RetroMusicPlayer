@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.helper.menu
 
 import android.content.Intent
@@ -6,6 +20,7 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
@@ -13,10 +28,11 @@ import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.ui.activities.tageditor.AbsTagEditorActivity
-import code.name.monkey.retromusic.ui.activities.tageditor.SongTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.RingtoneManager
 
 
 object SongMenuHelper {
@@ -25,7 +41,11 @@ object SongMenuHelper {
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
         when (menuItemId) {
             R.id.action_set_as_ringtone -> {
-                MusicUtil.setRingtone(activity, song.id)
+                if (RingtoneManager.requiresDialog(activity)) {
+                    RingtoneManager.getDialog(activity)
+                }
+                val ringtoneManager = RingtoneManager(activity)
+                ringtoneManager.setRingtone(song)
                 return true
             }
             R.id.action_share -> {

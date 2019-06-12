@@ -1,18 +1,16 @@
 /*
-* Copyright (C) 2014 The CyanogenMod Project
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-* http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
 package code.name.monkey.retromusic.providers;
 
 import android.content.ContentValues;
@@ -26,10 +24,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import code.name.monkey.retromusic.loaders.SongLoader;
-import code.name.monkey.retromusic.model.Song;
 
 import java.util.ArrayList;
 
+import code.name.monkey.retromusic.model.Song;
 import io.reactivex.Observable;
 
 /**
@@ -41,7 +39,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "music_playback_state.db";
     public static final String PLAYING_QUEUE_TABLE_NAME = "playing_queue";
     public static final String ORIGINAL_PLAYING_QUEUE_TABLE_NAME = "original_playing_queue";
-    private static final int VERSION = 5;
+    private static final int VERSION = 10;
     @Nullable
     private static MusicPlaybackQueueStore sInstance = null;
 
@@ -50,7 +48,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
      *
      * @param context The {@link Context} to use
      */
-    public MusicPlaybackQueueStore(final Context context) {
+    public MusicPlaybackQueueStore(final @NonNull Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 
@@ -110,7 +108,10 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
         builder.append(" INT NOT NULL,");
 
         builder.append(AudioColumns.ARTIST);
-        builder.append(" STRING NOT NULL);");
+        builder.append(" STRING NOT NULL,");
+
+        builder.append(AudioColumns.COMPOSER);
+        builder.append(" STRING);");
 
         db.execSQL(builder.toString());
     }
@@ -162,17 +163,18 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
                     Song song = queue.get(i);
                     ContentValues values = new ContentValues(4);
 
-                    values.put(BaseColumns._ID, song.id);
-                    values.put(AudioColumns.TITLE, song.title);
-                    values.put(AudioColumns.TRACK, song.trackNumber);
-                    values.put(AudioColumns.YEAR, song.year);
-                    values.put(AudioColumns.DURATION, song.duration);
-                    values.put(AudioColumns.DATA, song.data);
-                    values.put(AudioColumns.DATE_MODIFIED, song.dateModified);
-                    values.put(AudioColumns.ALBUM_ID, song.albumId);
-                    values.put(AudioColumns.ALBUM, song.albumName);
-                    values.put(AudioColumns.ARTIST_ID, song.artistId);
-                    values.put(AudioColumns.ARTIST, song.artistName);
+                    values.put(BaseColumns._ID, song.getId());
+                    values.put(AudioColumns.TITLE, song.getTitle());
+                    values.put(AudioColumns.TRACK, song.getTrackNumber());
+                    values.put(AudioColumns.YEAR, song.getYear());
+                    values.put(AudioColumns.DURATION, song.getDuration());
+                    values.put(AudioColumns.DATA, song.getData());
+                    values.put(AudioColumns.DATE_MODIFIED, song.getDateModified());
+                    values.put(AudioColumns.ALBUM_ID, song.getAlbumId());
+                    values.put(AudioColumns.ALBUM, song.getAlbumName());
+                    values.put(AudioColumns.ARTIST_ID, song.getArtistId());
+                    values.put(AudioColumns.ARTIST, song.getArtistName());
+                    values.put(AudioColumns.COMPOSER, song.getComposer());
 
                     database.insert(tableName, null, values);
                 }

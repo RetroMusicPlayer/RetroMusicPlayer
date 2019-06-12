@@ -4,16 +4,17 @@
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"
-        app:iconSpaceReserved="false"
+        app:icon="@drawable/ic_image_white_24dp"
         android:key="ignore_media_store_artwork"
         android:summary="@string/pref_summary_ignore_media_store_artwork"
-        android:title="@string/pref_title_ignore_media_store_artwork" />
+        android:title="@string/pref_title_ignore_media_store_artwork"
+        app:enableCopying="true" />
 
     <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="only_wifi"
-        app:iconSpaceReserved="false"
         android:entries="@array/pref_auto_download_images_titles"
         android:entryValues="@array/pref_auto_download_images_values"
         android:key="auto_download_images_policy"
-        android:title="@string/pref_title_auto_download_artist_images" />
+        android:title="@string/pref_title_auto_download_artist_images"
+        app:enableCopying="true" />
 </androidx.preference.PreferenceScreen>

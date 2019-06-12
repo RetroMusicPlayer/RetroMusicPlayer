@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">"Portada Pequeña
+"</string>
     <string name="accent_color">Hello</string>
     <string name="accent_color_desc">El color de énfasis del tema, por defecto es verde azulado</string>
     <string name="action_about">Acerca de Retro Music Player</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
     <string name="action_add_to_playing_queue">Añadir a la cola de reproducción</string>
-    <string name="action_add_to_playlist">Añadir a lista...</string>
+    <string name="action_add_to_playlist">Spanish</string>
     <string name="action_clear_playing_queue">Borrar cola de reproducción</string>
     <string name="action_clear_playlist">Limpiar lista</string>
     <string name="action_delete">Eliminar</string>
@@ -58,13 +60,14 @@
     <string name="app_shortcut_last_added_long">Añadidas recientemente</string>
     <string name="app_shortcut_last_added_short">Recientes</string>
     <string name="app_shortcut_shuffle_all_long">Mezclar todo</string>
-    <string name="app_shortcut_shuffle_all_short">Aleatorio</string>
     <string name="app_shortcut_top_tracks_long">Más Reproducidas</string>
+    <string name="app_shortcut_shuffle_all_short">Aleatorio</string>
     <string name="app_shortcut_top_tracks_short">Hello</string>
     <string name="app_widget_big_name">Retro Music - Grande</string>
     <string name="app_widget_card_name">Retro Music - Tarjeta</string>
     <string name="app_widget_classic_name">Retro Music - Clásico</string>
     <string name="app_widget_small_name">Retro Music - Pequeño</string>
+    <string name="app_widget_text_name">Retro Music - Texto</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistas</string>
     <string name="audio_focus_denied">Enfoque de audio denegado</string>
@@ -79,6 +82,7 @@
     <string name="pref_keep_screen_on_summary">Tenga en cuenta que habilitar esta función puede afectar la duración de la batería</string>
     <string name="pref_blur_amount_title">Cantidad de desenfoque</string>
     <string name="pref_blur_amount_summary">Cantidad de desenfoque aplicado a los temas de desenfoque, más bajo es más rápido</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Tarjeta</string>
     <string name="card_color_style">Tarjeta coloreada</string>
@@ -195,8 +199,6 @@
     <string name="only_on_wifi">Solo con Wi-Fi</string>
     <string name="others">Otro</string>
     <string name="past_three_months">Últimos 3 meses</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me es una forma fácil de donarnos dinero. En caso que solo enlazaras una tarjeta de débito o crédito, la comisión en los EE.UU es el 2.9% de la donación más $0.30 USD. De lo contrario no hay comisión.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">más</a></string>
     <string name="permission_external_storage_denied">Permiso para acceder al almacenamiento externo denegado</string>
     <string name="permissions_denied">Permisos denegados</string>
     <string name="personalize">Personalizar</string>
@@ -272,6 +274,7 @@
     <string name="pref_title_genre_toggle">Mostrar pestaña de géneros</string>
     <string name="pref_title_home_artist_grid_style">Cuadrícula de artista en pantalla de inicio</string>
     <string name="pref_title_album_cover_transform">Estilo de portada del álbum en reproducción</string>
+    <string name="pref_album_detail_style">Estilo de detalle de álbum</string>
     <string name="cascading">En cascada</string>
     <string name="primary_color">Color principal</string>
     <string name="primary_color_desc">El color principal del tema -por defecto es azul grisáceo- temporalmente funciona con colores oscuros</string>
@@ -329,7 +332,6 @@
     <string name="speech_prompt">Busca en tu biblioteca</string>
     <string name="summary_user_info">Muestra tu nombre en la pantalla de inicio</string>
     <string name="support_development">Soporte de desarrollo</string>
-    <string name="synced_lyrics">Letras Sincronizadas</string>
     <string name="system_equalizer">Ecualizador del Sistema</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -387,4 +389,47 @@
     <string name="labeled">Etiquetado</string>
     <string name="unlabeled">No etiquetado</string>
     <string name="selected">Seleccionado</string>
+    <string name="depth">Profundidad</string>
+    <string name="vertical_flip">giro vertical</string>
+    <string name="hinge">Giro</string>
+    <string name="horizontal_flip">Giro horizontal</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pausa la reproducción en cero y la reproduce después de subir el volumen. Aviso: cuando subas el volumen, la música empezará a sonar incluso fuera de la aplicación</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pausar en cero</string>
+    <string name="whats_new">Lo Nuevo</string>
+    <string name="suggestion_songs">Recomendaciones</string>
+    <string name="fit">Ajustado</string>
+    <string name="pref_now_playing_screen_title">Hacer Clic o Deslizar</string>
+    <string name="pref_now_playing_screen_summary">Click para abrir con o sin navegación transparente de la pantalla de reproducción actual</string>
+    <string name="clear_playing_queue">Limpiar la cola</string>
+    <string name="buy_pro">Comprar Retro Music Pro</string>
+    <string name="share_app">Compartir app</string>
+    <string name="report_bug">Reportar un error</string>
+    <string name="bug_report_use_account">Enviar usando la cuenta de Github</string>
+    <string name="login">Inicio de sesión</string>
+    <string name="bug_report_manual">Enviar manualmente</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Serás redirigido al sitio web de seguimiento de problemas</string>
+    <string name="bug_report_issue">Problemas</string>
+    <string name="title">Título</string>
+    <string name="description">Descripción</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="device_info">Información del dispositivo</string>
+    <string name="report_an_issue">Reporta un problema</string>
+    <string name="bug_report_no_username">Por favor, introduce tu nombre de usuario de GitHub</string>
+    <string name="bug_report_no_password">Por favor, introduce tu contraseña de GitHub</string>
+    <string name="bug_report_no_title">Por favor, introduce un título para el problema</string>
+    <string name="bug_report_no_description">Por favor, escribe la descripción del problema</string>
+    <string name="bug_report_uploading">Subiendo reporte a GitHub...</string>
+    <string name="bug_report_failed">No se puede enviar el reporte</string>
+    <string name="bug_report_failed_wrong_credentials">Usuario o contraseña incorrectos</string>
+    <string name="bug_report_failed_invalid_token">Token de acceso inválido. Por favor, contacta con el desarrollador de la aplicación</string>
+    <string name="bug_report_failed_issues_not_available">Los problemas no están habilitados para el repositorio seleccionado. Por favor, contacta con el desarrollador de la aplicación</string>
+    <string name="bug_report_failed_unknown">Se ha producido un error inesperado. Por favor, contacta con el desarrollador de la aplicación</string>
+    <string name="copied_device_info_to_clipboard">Información del dispositivo copiada al portapapeles</string>
+    <string name="your_account_data_is_only_used_for_authentication">Los datos de tu cuenta sólo se utilizan para la autenticación</string>
+    <string name="pref_snow_fall_title">Efecto \"Snow Fall\"</string>
+    <string name="pref_title_blacklist">Lista Negra</string>
+    <string name="pref_summary_blacklist">El contenido de las carpetas de la lista negra se oculta de la biblioteca</string>
+    <string name="edit">Editar</string>
+    <string name="synced_lyrics">Letras Sincronizadas</string>
 </resources>

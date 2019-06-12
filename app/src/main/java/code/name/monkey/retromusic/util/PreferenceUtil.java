@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.util;
 
 import android.annotation.SuppressLint;
@@ -7,29 +21,30 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
 import android.preference.PreferenceManager;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StyleRes;
+import androidx.viewpager.widget.ViewPager;
+
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 
 import java.io.File;
 import java.util.Objects;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StyleRes;
-import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.activities.MainActivity;
+import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
+import code.name.monkey.retromusic.fragments.NowPlayingScreen;
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
 import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
-import code.name.monkey.retromusic.transform.StackTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
-import code.name.monkey.retromusic.ui.activities.MainActivity;
-import code.name.monkey.retromusic.ui.fragments.AlbumCoverStyle;
-import code.name.monkey.retromusic.ui.fragments.NowPlayingScreen;
-import code.name.monkey.retromusic.ui.fragments.mainactivity.folders.FoldersFragment;
+import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
 
@@ -42,11 +57,13 @@ public final class PreferenceUtil {
     public static final String GAPLESS_PLAYBACK = "gapless_playback";
     public static final String ALBUM_ART_ON_LOCKSCREEN = "album_art_on_lockscreen";
     public static final String BLURRED_ALBUM_ART = "blurred_album_art";
+    public static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
     public static final String TOGGLE_HEADSET = "toggle_headset";
     public static final String DOMINANT_COLOR = "dominant_color";
     public static final String GENERAL_THEME = "general_theme";
     public static final String CIRCULAR_ALBUM_ART = "circular_album_art";
     public static final String USER_NAME = "user_name";
+    public static final String USER_BIO = "user_bio";
     public static final String TOGGLE_FULL_SCREEN = "toggle_full_screen";
     public static final String TOGGLE_VOLUME = "toggle_volume";
     public static final String TOGGLE_TAB_TITLES = "toggle_tab_titles";
@@ -134,10 +151,30 @@ public final class PreferenceUtil {
                 return R.style.Theme_RetroMusic_Black;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
+            case "daynight":
+                return R.style.Theme_RetroMusic_DayNight;
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public boolean getSleepTimerFinishMusic() {
+        return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
+    }
+
+    public void setSleepTimerFinishMusic(final boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(SLEEP_TIMER_FINISH_SONG, value);
+        editor.apply();
+    }
+
+    public String getUserBio() {
+        return mPreferences.getString(USER_BIO, "");
+    }
+
+    public void setUserBio(String bio) {
+        mPreferences.edit().putString(USER_BIO, bio).apply();
     }
 
     public int getFilterLength() {
@@ -627,9 +664,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_HEADSET, false);
     }
 
-    public boolean tabTitles() {
-        return mPreferences.getBoolean(TOGGLE_TAB_TITLES, true);
-    }
 
     public boolean isDominantColor() {
         return mPreferences.getBoolean(DOMINANT_COLOR, false);
@@ -713,7 +747,7 @@ public final class PreferenceUtil {
             case 5:
                 return new HingeTransformation();
             case 6:
-                return new StackTransformer();
+                return new VerticalStackTransformer();
         }
     }
 
@@ -731,6 +765,10 @@ public final class PreferenceUtil {
             case 3:
                 return LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
         }
+    }
+
+    public boolean tabTitles() {
+        return getTabTitleMode() != LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
     }
 
     @LayoutRes

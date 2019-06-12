@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.service.notification
 
 import android.app.PendingIntent
@@ -22,7 +36,7 @@ import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.activities.MainActivity
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
@@ -149,7 +163,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                     if (isPlaying)
                                         R.drawable.ic_pause_white_24dp
                                     else
-                                        R.drawable.ic_play_arrow_white_24dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
 
                             notificationLayout.setTextColor(R.id.title, primary)
                             notificationLayout.setTextColor(R.id.subtitle, secondary)

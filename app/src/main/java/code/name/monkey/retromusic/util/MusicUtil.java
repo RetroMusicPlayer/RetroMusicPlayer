@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
@@ -11,10 +25,13 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
@@ -26,14 +43,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
@@ -57,10 +72,10 @@ public class MusicUtil {
     }
 
     @NonNull
-    public static Intent createShareSongFileIntent(@NonNull final Song song, Context context) {
+    public static Intent createShareSongFileIntent(@NonNull final Song song, @NonNull Context context) {
+        Uri file = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", new File(song.getData()));
         try {
-            return new Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM,
-                    FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName(), new File(song.data)))
+            return new Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM, file)
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     .setType("audio/*");
         } catch (IllegalArgumentException e) {
@@ -70,72 +85,18 @@ public class MusicUtil {
         }
     }
 
-    public static void setRingtone(@NonNull final Context context, final int id) {
-        final ContentResolver resolver = context.getContentResolver();
-        final Uri uri = getSongFileUri(id);
-        try {
-            final ContentValues values = new ContentValues(2);
-            values.put(MediaStore.Audio.AudioColumns.IS_RINGTONE, "1");
-            values.put(MediaStore.Audio.AudioColumns.IS_ALARM, "1");
-            resolver.update(uri, values, null, null);
-        } catch (@NonNull final UnsupportedOperationException ignored) {
-            return;
-        }
-
-        try {
-            Cursor cursor = resolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    new String[]{MediaStore.MediaColumns.TITLE},
-                    BaseColumns._ID + "=?",
-                    new String[]{String.valueOf(id)},
-                    null);
-            try {
-                if (cursor != null && cursor.getCount() == 1) {
-                    cursor.moveToFirst();
-                    Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString());
-                    final String message = context
-                            .getString(R.string.x_has_been_set_as_ringtone, cursor.getString(0));
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-                }
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-        } catch (SecurityException ignored) {
-        }
+    @NonNull
+    public static String getSongCountString(@NonNull final Context context, int songCount) {
+        final String songString = songCount == 1 ? context.getResources().getString(R.string.song) : context.getResources().getString(R.string.songs);
+        return songCount + " " + songString;
     }
 
     @NonNull
-    public static String getSongInfoString(@NonNull final Song song) {
+    public static String getSongInfoString(@NonNull Song song) {
         return MusicUtil.buildInfoString(
-                song.artistName,
-                song.albumName
+                song.getArtistName(),
+                song.getAlbumName()
         );
-    }
-
-    /**
-     * Build a concatenated string from the provided arguments
-     * The intended purpose is to show extra annotations
-     * to a music library item.
-     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
-     */
-    public static String buildInfoString(@NonNull final String string1, @NonNull final String string2) {
-        // Skip empty strings
-        if (string1.isEmpty()) {
-            return string2;
-        }
-        if (string2.isEmpty()) {
-            return string1;
-        }
-
-        final String separator = "  •  ";
-
-        final StringBuilder builder = new StringBuilder();
-        builder.append(string1);
-        builder.append(separator);
-        builder.append(string2);
-
-        return builder.toString();
     }
 
     @NonNull
@@ -159,7 +120,7 @@ public class MusicUtil {
         return songCount + " " + songString;
     }
 
-    @NonNull
+    /*@NonNull
     public static String getPlaylistInfoString(@NonNull final Context context,
                                                @NonNull List<Song> songs) {
         final int songCount = songs.size();
@@ -168,10 +129,73 @@ public class MusicUtil {
 
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
-            duration += songs.get(i).duration;
+            duration += songs.get(i).getDuration();
         }
 
         return songCount + " " + songString + " • " + MusicUtil.getReadableDurationString(duration);
+    }*/
+
+    @NonNull
+    public static String getGenreInfoString(@NonNull final Context context, @NonNull final Genre genre) {
+        int songCount = genre.getSongCount();
+        return MusicUtil.getSongCountString(context, songCount);
+    }
+
+    @NonNull
+    public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
+        final long duration = getTotalDuration(context, songs);
+
+        return MusicUtil.buildInfoString(
+                MusicUtil.getSongCountString(context, songs.size()),
+                MusicUtil.getReadableDurationString(duration)
+        );
+    }
+
+
+    /**
+     * Build a concatenated string from the provided arguments
+     * The intended purpose is to show extra annotations
+     * to a music library item.
+     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
+     */
+    @NonNull
+    public static String buildInfoString(@Nullable final String string1, @Nullable final String string2) {
+        // Skip empty strings
+        if (TextUtils.isEmpty(string1)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string2) ? "" : string2;
+        }
+        if (TextUtils.isEmpty(string2)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string1;
+        }
+
+        return string1 + "  •  " + string2;
+    }
+
+    /**
+     * Build a concatenated string from the provided arguments
+     * The intended purpose is to show extra annotations
+     * to a music library item.
+     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
+     */
+    @NonNull
+    public static String buildInfoString(@Nullable final String string1, @Nullable final String string2, @NonNull final String string3) {
+        // Skip empty strings
+        if (TextUtils.isEmpty(string1)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string2) ? "" : string2;
+        }
+        if (TextUtils.isEmpty(string2)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string1;
+        }
+        if (TextUtils.isEmpty(string3)) {
+            //noinspection ConstantConditions
+            return TextUtils.isEmpty(string1) ? "" : string3;
+        }
+
+        return string1 + "  •  " + string2 + "  •  " + string3;
     }
 
     public static String getReadableDurationString(long songDurationMillis) {
@@ -233,7 +257,7 @@ public class MusicUtil {
         final StringBuilder selection = new StringBuilder();
         selection.append(BaseColumns._ID + " IN (");
         for (int i = 0; i < songs.size(); i++) {
-            selection.append(songs.get(i).id);
+            selection.append(songs.get(i).getId());
             if (i < songs.size() - 1) {
                 selection.append(",");
             }
@@ -294,10 +318,10 @@ public class MusicUtil {
 
 
     @Nullable
-    public static String getLyrics(Song song) {
+    public static String getLyrics(@NonNull Song song) {
         String lyrics = null;
 
-        File file = new File(song.data);
+        File file = new File(song.getData());
 
         try {
             lyrics = AudioFileIO.read(file).getTagOrCreateDefault().getFirst(FieldKey.LYRICS);
@@ -312,7 +336,7 @@ public class MusicUtil {
             if (dir != null && dir.exists() && dir.isDirectory()) {
                 String format = ".*%s.*\\.(lrc|txt)";
                 String filename = Pattern.quote(FileUtil.stripExtension(file.getName()));
-                String songtitle = Pattern.quote(song.title);
+                String songtitle = Pattern.quote(song.getTitle());
 
                 final ArrayList<Pattern> patterns = new ArrayList<>();
                 patterns.add(Pattern.compile(String.format(format, filename),
@@ -352,12 +376,10 @@ public class MusicUtil {
 
     public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
         if (isFavorite(context, song)) {
-            PlaylistsUtil
-                    .removeFromPlaylist(context, song, getFavoritesPlaylist(context).blockingFirst().id);
+            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).blockingFirst().id);
         } else {
-            PlaylistsUtil
-                    .addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).blockingFirst().id,
-                            false);
+            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).blockingFirst().id,
+                    false);
         }
     }
 
@@ -376,16 +398,8 @@ public class MusicUtil {
     }
 
     public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
-        /*return Observable.create(e -> getFavoritesPlaylist(context).subscribe(playlist1 -> {
-            boolean isBoolean = PlaylistsUtil.doPlaylistContains(context, playlist1.id, song.id);
-            e.onNext(isBoolean);
-            e.onComplete();
-        }));*/
-
-        //getFavoritesPlaylist(context).blockingFirst().id.subscribe(MusicUtil::setPlaylist);
-        //return PlaylistsUtil.doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
         return PlaylistsUtil
-                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.id);
+                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.getId());
     }
 
     public static boolean isArtistNameUnknown(@Nullable String artistName) {
@@ -416,18 +430,19 @@ public class MusicUtil {
         return String.valueOf(musicMediaTitle.charAt(0)).toUpperCase();
     }
 
+    @NonNull
     public static Playlist getPlaylist() {
         return playlist;
     }
 
-    public static void setPlaylist(Playlist playlist) {
+    public static void setPlaylist(@NonNull Playlist playlist) {
         MusicUtil.playlist = playlist;
     }
 
     public static long getTotalDuration(@NonNull final Context context, @NonNull List<Song> songs) {
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
-            duration += songs.get(i).duration;
+            duration += songs.get(i).getDuration();
         }
         return duration;
     }

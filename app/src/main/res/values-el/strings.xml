@@ -147,8 +147,6 @@
     <string name="now_playing_queue">Ουρά \"Παίζει Τώρα\"</string>
     <string name="only_on_wifi">Μόνο από Wi-Fi</string>
     <string name="past_three_months">Τους περασμένους 3 μήνες</string>
-    <string name="paypal">Paypal.me</string>
-    <string name="paypal_summary">Το PayPal.me είναι ενας εύκολος τρόπος για δωρεές χρημάτων. Εάν έχετε συνδέσει debit ή πιστωτική, ο φόρος στις ΗΠΑ είναι το 2.9% της δωρεάς συν $0.30 USD, διαφορετικά δεν υπάρχει φόρος.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Η άδεια για προσπέλαση του external storage δεν παραχωρήθηκε.</string>
     <string name="permissions_denied">Οι άδειες δεν παραχωρήθηκαν.</string>
     <string name="pick_from_local_storage">Επιλογή από Χώρο Αποθήκευσης</string>

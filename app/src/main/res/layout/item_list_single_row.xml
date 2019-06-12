@@ -12,8 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|start"
-        android:layout_marginLeft="-8dp"
         android:layout_marginStart="-8dp"
+        android:layout_marginLeft="-8dp"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
         tools:ignore="ContentDescription" />
@@ -28,10 +28,10 @@
             android:id="@+id/image_container"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingEnd="0dp"
+            android:paddingStart="16dp"
             android:paddingLeft="16dp"
-            android:paddingRight="0dp"
-            android:paddingStart="16dp">
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp">
 
             <ImageView
                 android:id="@+id/image"
@@ -59,10 +59,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
@@ -88,8 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="72dp"
         android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
         android:background="?attr/dividerColor" />
 
 </FrameLayout>

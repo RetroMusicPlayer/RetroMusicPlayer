@@ -7,7 +7,8 @@
             android:key="blacklist"
             android:summary="@string/pref_summary_blacklist"
             android:title="@string/pref_title_blacklist"
-            app:iconSpaceReserved="false" />
+            app:enableCopying="true"
+            app:icon="@drawable/ic_music_note_off_white_24dp" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 

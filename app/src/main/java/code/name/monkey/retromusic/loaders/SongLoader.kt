@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.loaders
 
 import android.content.Context
@@ -57,10 +71,10 @@ object SongLoader {
         val albumName = cursor.getString(8)
         val artistId = cursor.getInt(9)
         val artistName = cursor.getString(10)
+        val composer = cursor.getString(11)
 
-        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName
-                ?: "",
-                artistId, artistName)
+        return Song(id, title, trackNumber, year, duration, data, dateModified, albumId,
+                albumName ?: "", artistId, artistName, composer ?: "")
     }
 
     @JvmOverloads
@@ -75,7 +89,7 @@ object SongLoader {
 
         // Blacklist
         val paths = BlacklistStore.getInstance(context).paths
-        if (!paths.isEmpty()) {
+        if (paths.isNotEmpty()) {
             selectionFinal = generateBlacklistSelection(selectionFinal, paths.size)
             selectionValuesFinal = addBlacklistSelectionValues(selectionValuesFinal, paths)
         }
@@ -120,7 +134,7 @@ object SongLoader {
             val song: Song = if (cursor != null && cursor.moveToFirst()) {
                 getSongFromCursorImpl(cursor)
             } else {
-                Song.EMPTY_SONG
+                Song.emptySong
             }
             cursor?.close()
             e.onNext(song)

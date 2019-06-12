@@ -5,12 +5,13 @@
     <code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
         android:key="now_playing_screen_id"
         android:title="@string/pref_title_now_playing_screen_appearance"
-        app:iconSpaceReserved="false" />
+        app:enableCopying="true"
+        app:icon="@drawable/ic_play_circle_filled_white_24dp" />
 
     <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
         android:key="album_cover_style_id"
         android:title="@string/pref_title_album_cover_style"
-        app:iconSpaceReserved="false" />
+        app:enableCopying="true" />
 
     <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"
@@ -18,35 +19,41 @@
         android:entryValues="@array/pref_album_cover_transform_values"
         android:key="album_cover_transform"
         android:title="@string/pref_title_album_cover_transform"
-        app:iconSpaceReserved="false" />
+        app:enableCopying="true" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
-        android:key="carousel_effect"
-        android:summary="@string/pref_summary_carousel_effect"
-        android:title="@string/pref_title_toggle_carousel_effect"
-        app:iconSpaceReserved="false" />
+        app:defaultValue="false"
+        app:enableCopying="true"
+        app:icon="@drawable/ic_view_carousel_black_24dp"
+        app:key="carousel_effect"
+        app:summary="@string/pref_summary_carousel_effect"
+        app:title="@string/pref_title_toggle_carousel_effect" />
 
-    <SeekBarPreference
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        app:defaultValue="false"
+        app:enableCopying="true"
+        app:icon="@drawable/ic_play_arrow_white_32dp"
+        app:key="toggle_add_controls"
+        app:summary="@string/pref_summary_extra_controls"
+        app:title="@string/pref_title_extra_controls" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        app:defaultValue="false"
+        app:enableCopying="true"
+        app:icon="@drawable/ic_volume_up_white_24dp"
+        app:key="toggle_volume"
+        app:summary="@string/pref_summary_toggle_volume"
+        app:title="@string/pref_title_toggle_volume" />
+
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
         android:defaultValue="12"
         android:key="new_blur_amount"
         android:max="25"
         android:summary="@string/pref_blur_amount_summary"
         android:title="@string/pref_blur_amount_title"
-        app:iconSpaceReserved="false" />
-
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
-        android:key="toggle_add_controls"
-        android:summary="@string/pref_summary_extra_controls"
-        android:title="@string/pref_title_extra_controls"
-        app:iconSpaceReserved="false" />
-
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        android:defaultValue="false"
-        android:key="toggle_volume"
-        android:summary="@string/pref_summary_toggle_volume"
-        android:title="@string/pref_title_toggle_volume"
-        app:iconSpaceReserved="false" />
+        app:enableCopying="true"
+        app:icon="@drawable/ic_blur_on_white_24dp"
+        app:showSeekBarValue="true" />
 
 </androidx.preference.PreferenceScreen>

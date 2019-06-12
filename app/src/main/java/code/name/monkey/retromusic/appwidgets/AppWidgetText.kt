@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.appwidgets
 
 import android.app.PendingIntent
@@ -13,7 +27,7 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.ui.activities.MainActivity
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.RetroUtil
 
 class AppWidgetText : BaseAppWidget() {
@@ -22,7 +36,7 @@ class AppWidgetText : BaseAppWidget() {
 
         appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_32dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
 
         appWidgetView.setTextColor(R.id.title, ContextCompat.getColor(context, R.color.md_white_1000))
         appWidgetView.setTextColor(R.id.text, ContextCompat.getColor(context, R.color.md_white_1000))
@@ -80,7 +94,7 @@ class AppWidgetText : BaseAppWidget() {
         val playPauseRes = if (isPlaying)
             R.drawable.ic_pause_white_24dp
         else
-            R.drawable.ic_play_arrow_white_24dp
+            R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, playPauseRes, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))
         appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000)), 1f))

@@ -100,7 +100,7 @@
 
                 <fragment
                     android:id="@+id/playbackControlsFragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.color.ColorPlaybackControlsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.color.ColorPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_player_playback_controls" />

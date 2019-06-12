@@ -186,8 +186,6 @@
     <string name="only_on_wifi">仅限Wi-Fi</string>
     <string name="others">其他</string>
     <string name="past_three_months">前三个月</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me是一种捐赠支持我的快捷方式。如果你只关联了一张借记卡或者一张信用卡，那么要支付捐赠款额的2.9%以及0.3美元作为手续费，其他情况下免手续费。<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">详情查看</a></string>
     <string name="permission_external_storage_denied">无权访问外部存储</string>
     <string name="permissions_denied">无权访问</string>
     <string name="personalize">个性化</string>

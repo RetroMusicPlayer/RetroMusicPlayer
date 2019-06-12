@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="CollapsingFAB">
-        <attr name="shuffleBackgroundColor" format="color" />
-        <attr name="showTitle" format="boolean" />
-        <attr name="setIcon" format="reference" />
-        <attr name="setText" format="string" />
-    </declare-styleable>
+
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
     <attr name="rectSelectorStrong" format="reference" />
@@ -29,21 +24,6 @@
         <attr name="url_link" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="LyricView">
-        <attr name="hint" format="string" />
-        <attr name="hintColor" format="color" />
-        <attr name="textColor" format="color" />
-        <attr name="highlightColor" format="color" />
-        <attr name="textSize" format="dimension" />
-        <attr name="maxLength" format="dimension" />
-        <attr name="fadeInFadeOut" format="boolean" />
-        <attr name="lineSpace" format="dimension" />
-        <attr name="textAlign">
-            <enum name="left" value="0" />
-            <enum name="center" value="1" />
-            <enum name="right" value="2" />
-        </attr>
-    </declare-styleable>
     <declare-styleable name="ContributorsView">
         <attr name="profile_url" format="string" />
         <attr name="profile_name" format="string" />
@@ -58,4 +38,32 @@
         <attr name="iconBackgroundColor" format="color" />
         <attr name="icon" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="OptionMenuItemView">
+        <attr name="optionTitle" format="reference" />
+        <attr name="optionIcon" format="reference" />
+    </declare-styleable>
+
+
+    <declare-styleable name="LrcView">
+        <attr name="lrcTextSize" format="dimension"/>
+        <attr name="lrcLineSpaceSize" format="dimension"/>
+        <attr name="lrcNormalTextColor" format="reference|color"/>
+        <attr name="lrcCurrentTextColor" format="reference|color"/>
+        <attr name="lrcTouchDelay" format="integer"/>
+        <attr name="noLrcTextSize" format="dimension"/>
+        <attr name="noLrcTextColor" format="reference|color"/>
+        <attr name="indicatorLineHeight" format="dimension"/>
+        <attr name="indicatorTextSize" format="dimension"/>
+        <attr name="indicatorTextColor" format="reference|color"/>
+        <attr name="currentIndicateLrcColor" format="reference|color"/>
+        <attr name="indicatorTouchDelay" format="integer"/>
+        <attr name="indicatorLineColor" format="reference|color"/>
+        <attr name="indicatorStartEndMargin" format="dimension"/>
+        <attr name="iconLineGap" format="dimension"/>
+        <attr name="playIconWidth" format="dimension"/>
+        <attr name="playIconHeight" format="dimension"/>
+        <attr name="playIcon" format="reference"/>
+    </declare-styleable>
+
 </resources>

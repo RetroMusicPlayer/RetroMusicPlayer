@@ -3,28 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="12dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:layout_margin="12dp"
+        android:background="@drawable/material_design_outline"
+        android:backgroundTint="?dividerColor"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="6dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="6dp">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/sectionIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="14dp"
-            android:paddingEnd="0dp"
-            app:srcCompat="@drawable/ic_album_white_24dp" />
+            android:layout_marginEnd="12dp"
+            app:srcCompat="@drawable/ic_person_white_24dp" />
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/sectionTitle"
             style="@style/SubTitleTextAppearance"
-            android:textStyle="bold" />
+            android:padding="0dp"
+            android:text="@string/for_you" />
 
     </LinearLayout>
-
 
     <code.name.monkey.retromusic.views.MetalRecyclerViewPager
         android:id="@+id/recyclerView"
@@ -32,10 +39,4 @@
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
         app:itemMargin="28dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="8dp"
-        android:background="?attr/dividerColor" />
 </LinearLayout>

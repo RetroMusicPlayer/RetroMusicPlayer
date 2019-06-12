@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Album piccolo</string>
     <string name="accent_color">Colore dominante</string>
     <string name="accent_color_desc">Il colore secondario del tema, verde di default</string>
     <string name="action_about">Informazioni</string>
     <string name="action_add_to_favorites">Aggiungi ai preferiti</string>
     <string name="action_add_to_playing_queue">Aggiungi alla coda</string>
-    <string name="action_add_to_playlist">Aggiungi alla playlist...</string>
+    <string name="action_add_to_playlist">Aggiungi alla playlist</string>
     <string name="action_clear_playing_queue">Cancella coda</string>
     <string name="action_clear_playlist">Svuota la playlist</string>
     <string name="action_delete">Cancella</string>
@@ -65,13 +66,14 @@
     <string name="app_widget_card_name">Retro Music - Card</string>
     <string name="app_widget_classic_name">Retro Music - Classico</string>
     <string name="app_widget_small_name">Retro Music - Piccolo</string>
+    <string name="app_widget_text_name">Retro music - Testo</string>
     <string name="artist">Artista</string>
     <string name="artists">Artisti</string>
     <string name="audio_focus_denied">Focalizzazione audio negata.</string>
     <string name="audio_settings_summary">Modifica le impostazioni audio e regola i controlli dell\'equalizzatore</string>
     <string name="bass_boost">Bass Boost</string>
     <string name="biography">Biografia</string>
-    <string name="black_theme_name">Nero</string>
+    <string name="black_theme_name">Solo nero</string>
     <string name="blacklist">Blacklist</string>
     <string name="blur">Sfocatura</string>
     <string name="blur_card">Card sfocata</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Ricorda che abilitando questa opzione la batteria potrebbe risentirne</string>
     <string name="pref_blur_amount_title">Quantità di sfocatura</string>
     <string name="pref_blur_amount_summary">Quantità di sfocatura applicata per i temi con sfocatura, minore è più veloce</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Annulla</string>
     <string name="card">Card</string>
     <string name="card_color_style">Card colorata</string>
@@ -145,7 +148,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
     <string name="history">Cronologia</string>
-    <string name="home">Casa</string>
+    <string name="home">Home</string>
     <string name="image_settings_summary">Modifica le impostazioni di download delle immagini</string>
     <string name="inserted_x_songs_into_playlist_x">Inseriti %1$d brani nella playlist %2$s.</string>
     <string name="instagram_page">Instagram</string>
@@ -195,8 +198,6 @@
     <string name="only_on_wifi">Solo tramite Wi-fi</string>
     <string name="others">Altro</string>
     <string name="past_three_months">Ultimi 3 mesi</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me è un modo semplice per donarmi denaro. Se hai collegato solo una carta di credito o di debito, la commissione negli Stati Uniti è pari al 2,9% della donazione + 0,30$. In caso contrario, non ci sono costi. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Altro</a></string>
     <string name="permission_external_storage_denied">Autorizzazione ad accedere all\'archiviazione esterna negata.</string>
     <string name="permissions_denied">Autorizzazione negata.</string>
     <string name="personalize">Personalizza</string>
@@ -272,6 +273,7 @@
     <string name="pref_title_genre_toggle">Mostra scheda Genere</string>
     <string name="pref_title_home_artist_grid_style">Griglia schermata artista</string>
     <string name="pref_title_album_cover_transform">Stile dell\'album in riproduzione</string>
+    <string name="pref_album_detail_style">Stile dettagli album</string>
     <string name="cascading">Cascata</string>
     <string name="primary_color">Colore primario</string>
     <string name="primary_color_desc">Il colore primario del tema, blu-grigio di default, per ora funziona con colori scuri</string>
@@ -329,7 +331,6 @@
     <string name="speech_prompt">Cerca nella tua raccolta</string>
     <string name="summary_user_info">Mostra il tuo nome nella schermata home</string>
     <string name="support_development">Sostieni lo sviluppo</string>
-    <string name="synced_lyrics">Testi sincronizzati</string>
     <string name="system_equalizer">Equalizzatore di sistema</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -379,7 +380,7 @@
     <string name="pref_title_album_cover_style">Tema copertina dell\'album</string>
     <string name="circular">Circolare</string>
     <string name="carousal">Baldoria</string>
-    <string name="now_playing_summary">Personalizza schermata riproduzione</string>
+    <string name="now_playing_summary">Personalizza la schermata riproduzione</string>
     <string name="full_card">Scheda intera</string>
     <string name="profile">Profilo</string>
     <string name="bio">Bio</string>
@@ -387,4 +388,47 @@
     <string name="labeled">Etichettato</string>
     <string name="unlabeled">Senza etichetta</string>
     <string name="selected">Selezionato</string>
+    <string name="depth">Profondità</string>
+    <string name="vertical_flip">Flip verticale</string>
+    <string name="hinge">Cerniera</string>
+    <string name="horizontal_flip">Flip orizzontale</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Mette in pausa la riproduzione a zero e riprende aumentando il volume. Attenzione: quando aumenti il volume la riproduzione inizia anche all\'esterno dell\'app</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pausa a zero</string>
+    <string name="whats_new">Novità</string>
+    <string name="suggestion_songs">Suggerimenti</string>
+    <string name="fit">Adatta</string>
+    <string name="pref_now_playing_screen_title">Premi o scorri</string>
+    <string name="pref_now_playing_screen_summary">Premi per aprire o scorri nella schermata di riproduzione</string>
+    <string name="clear_playing_queue">Cancella coda</string>
+    <string name="buy_pro">Acquista Retro Music Pro</string>
+    <string name="share_app">Condividi app</string>
+    <string name="report_bug">Segnala bug</string>
+    <string name="bug_report_use_account">Invia con l\'account GitHub</string>
+    <string name="login">Accedi</string>
+    <string name="bug_report_manual">Invia manualmente</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Verrai reindirizzato al sito web dei problemi.</string>
+    <string name="bug_report_issue">Problema</string>
+    <string name="title">Titolo</string>
+    <string name="description">Descrizione</string>
+    <string name="username">Nome utente</string>
+    <string name="password">Password</string>
+    <string name="device_info">Info dispositivo</string>
+    <string name="report_an_issue">Segnala un problema</string>
+    <string name="bug_report_no_username">Inserisci il tuo nome utente GitHub</string>
+    <string name="bug_report_no_password">Inserisci la tua password GitHub</string>
+    <string name="bug_report_no_title">Inserisci un titolo al problema</string>
+    <string name="bug_report_no_description">Inserisci una descrizione del problema</string>
+    <string name="bug_report_uploading">Caricando il rapporto su GitHub...</string>
+    <string name="bug_report_failed">Impossibile inviare il rapporto</string>
+    <string name="bug_report_failed_wrong_credentials">Nome utente o password errati</string>
+    <string name="bug_report_failed_invalid_token">Accesso fallito. Per favore contatta lo sviluppatore dell\'app.</string>
+    <string name="bug_report_failed_issues_not_available">I problemi non sono abilitati per la repository selezionata. Per favore contatta lo sviluppatore dell\'app.</string>
+    <string name="bug_report_failed_unknown">Si è verificato un errore inaspettato. Per favore contatta lo sviluppatore dell\'app.</string>
+    <string name="copied_device_info_to_clipboard">Info dispositivo copiate negli appunti.</string>
+    <string name="your_account_data_is_only_used_for_authentication">I dati del tuo account vengono utilizzati solo per l\'autenticazione.</string>
+    <string name="pref_snow_fall_title">Effetto neve</string>
+    <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_summary_blacklist">Il contenuto delle cartelle nella blacklist non compare nella raccolta.</string>
+    <string name="edit">Modifica</string>
+    <string name="synced_lyrics">Testi sincronizzati</string>
 </resources>

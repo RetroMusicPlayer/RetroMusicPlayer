@@ -42,7 +42,7 @@
 
                     <fragment
                         android:id="@+id/playerAlbumCoverFragment"
-                        class="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+                        class="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -50,7 +50,7 @@
 
                 <fragment
                     android:id="@+id/playbackControlsFragment"
-                    class="code.name.monkey.retromusic.ui.fragments.player.classic.ClassicPlayerPlaybackControlsFragment"
+                    class="code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/albumCoverContainer" />
@@ -79,17 +79,13 @@
                         android:background="@android:color/transparent" />
 
                 </LinearLayout>
-
-
             </FrameLayout>
-
         </FrameLayout>
 
         <code.name.monkey.retromusic.views.StatusBarMarginFrameLayout
             android:id="@+id/playerPanel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/status_bar_padding"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
@@ -97,11 +93,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                sothree:cardCornerRadius="12dp"
                 android:layout_marginBottom="-8dp"
                 app:cardBackgroundColor="?cardBackgroundColor"
                 app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="false">
+                app:cardUseCompatPadding="false"
+                sothree:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

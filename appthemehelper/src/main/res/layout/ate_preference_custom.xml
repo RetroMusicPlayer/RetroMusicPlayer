@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -40,8 +41,8 @@
             android:layout_alignParentLeft="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             tools:text="Title" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView

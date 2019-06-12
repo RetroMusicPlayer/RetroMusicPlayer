@@ -9,6 +9,14 @@
     android:paddingRight="10dip"
     android:paddingBottom="8dip">
 
+    <ImageView
+        android:id="@+id/custom_list_view_row_selected_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="40dip"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="TODO"
+        android:src="@drawable/ic_toggle_switch" />
+
     <LinearLayout
         android:layout_width="0dip"
         android:layout_height="fill_parent"
@@ -18,11 +26,11 @@
 
         <TextView
             android:id="@+id/custom_list_view_row_text_view"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="fill_parent"
             android:layout_height="22dip"
             android:gravity="center_vertical"
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/custom_list_view_row_subtext_view"
@@ -32,12 +40,4 @@
             android:textColor="#000000"
             android:textSize="12sp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/custom_list_view_row_selected_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="40dip"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/ic_toggle_switch"
-        android:contentDescription="TODO" />
 </TableRow>

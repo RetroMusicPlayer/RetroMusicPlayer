@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.helper
 
 import android.annotation.TargetApi
@@ -12,6 +26,7 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
@@ -23,7 +38,7 @@ import java.util.*
 
 
 object MusicPlayerRemote {
-    val TAG = MusicPlayerRemote::class.java.simpleName
+    val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
 
@@ -33,7 +48,7 @@ object MusicPlayerRemote {
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
-        } else Song.EMPTY_SONG
+        } else Song.emptySong
 
     /**
      * Async
@@ -81,8 +96,7 @@ object MusicPlayerRemote {
     val isServiceConnected: Boolean
         get() = musicService != null
 
-    fun bindToService(context: Context,
-                      callback: ServiceConnection): ServiceToken? {
+    fun bindToService(context: Context, callback: ServiceConnection): ServiceToken? {
 
         var realActivity: Activity? = (context as Activity).parent
         if (realActivity == null) {
@@ -90,6 +104,7 @@ object MusicPlayerRemote {
         }
 
         val contextWrapper = ContextWrapper(realActivity)
+
         contextWrapper.startService(Intent(contextWrapper, MusicService::class.java))
 
         val binder = ServiceBinder(callback)
@@ -114,24 +129,21 @@ object MusicPlayerRemote {
     }
 
     private fun getFilePathFromUri(context: Context, uri: Uri): String? {
-
+        var cursor: Cursor? = null
         val column = "_data"
         val projection = arrayOf(column)
-        var cursor: Cursor? = null
+
         try {
             cursor = context.contentResolver.query(uri, projection, null, null, null)
-            cursor.use { it ->
-                if (it.moveToFirst()) {
-                    val columnIndex = it.getColumnIndexOrThrow(column)
-                    return it.getString(columnIndex)
-                }
+            if (cursor != null && cursor.moveToFirst()) {
+                val column_index = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(column_index)
             }
         } catch (e: Exception) {
             Log.e(TAG, e.message)
         } finally {
-            cursor!!.close()
+            cursor?.close()
         }
-
         return null
     }
 
@@ -390,7 +402,7 @@ object MusicPlayerRemote {
                     )).blockingFirst()
                 }
             }
-            if (songs != null && !songs.isEmpty()) {
+            if (songs != null && songs.isNotEmpty()) {
                 openQueue(songs, 0, true)
             } else {
                 //TODO the file is not listed in the media store

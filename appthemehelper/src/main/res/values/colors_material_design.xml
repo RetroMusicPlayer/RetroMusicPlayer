@@ -21,6 +21,7 @@
     <!-- Deep Purple -->
     <color name="md_deep_purple_A400">#651FFF</color>
     <color name="md_deep_purple_500A12">#30673AB7</color>
+    <color name="md_deep_purple_500">#673AB7</color>
     <color name="md_deep_purple_A700">#6200EA</color>
 
     <!-- Indigo -->
@@ -36,6 +37,7 @@
 
     <color name="md_green_A200">#69F0AE</color>
     <color name="md_green_A700">#00C853</color>
+    <color name="md_green_500">#4CAF50</color>
     <color name="md_green_500A12">#304CAF50</color>
 
 
@@ -55,5 +57,7 @@
 
 
     <color name="md_teal_A400">#1DE9B6</color>
-    <color name="md_orange_A400">#FF3D00</color>
+    <color name="md_deep_orange_A400">#FF3D00</color>
+    <color name="md_orange_A400">#FF9100</color>
+    <color name="md_light_green_A400">#76FF03</color>
 </resources>

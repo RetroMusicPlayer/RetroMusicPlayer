@@ -1,29 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/userInfoContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical">
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="24dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="10dp">
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/sectionIcon"
-            android:layout_width="wrap_content"
+        <code.name.monkey.retromusic.views.CircularImageView
+            android:id="@+id/userImage"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            app:civ_border="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="14dp"
-            android:paddingEnd="0dp"
-            app:srcCompat="@drawable/ic_person_white_24dp" />
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            android:id="@+id/sectionTitle"
-            android:text="@string/for_you"
-            style="@style/SubTitleTextAppearance"
-            android:textStyle="bold" />
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.75"
+                android:ellipsize="end"
+                android:text="@string/welcome" />
 
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                android:id="@+id/titleWelcome"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                tools:text="@string/app_name" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

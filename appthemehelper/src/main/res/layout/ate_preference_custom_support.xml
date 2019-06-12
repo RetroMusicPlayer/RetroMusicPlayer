@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
-        android:layout_marginStart="@dimen/ate_preference_inset"
+        android:layout_marginStart="32dp"
         android:layout_marginLeft="@dimen/ate_preference_inset"
         android:layout_marginTop="12dip"
         android:layout_marginEnd="6dip"
@@ -35,6 +35,7 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@android:id/title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -42,7 +43,6 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             tools:text="Title" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView

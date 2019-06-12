@@ -195,8 +195,6 @@
     <string name="only_on_wifi">Chỉ khi dùng Wi-Fi</string>
     <string name="others">Khác</string>
     <string name="past_three_months">Mỗi tháng</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me là một cách dễ dàng để tặng tiền cho tôi. Trong trường hợp bạn chỉ liên kết thẻ ghi nợ hoặc thẻ tín dụng, phí ở Hoa Kỳ là 2,9% khoản đóng góp + 0,30 đô la Mỹ. Nếu không sẽ không mất phí. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">chi tiết</a></string>
     <string name="permission_external_storage_denied">Quyền truy cập bộ nhớ ngoài bị từ chối.</string>
     <string name="permissions_denied">Quyền đã bị từ chối.</string>
     <string name="personalize">Cá nhân hoá</string>

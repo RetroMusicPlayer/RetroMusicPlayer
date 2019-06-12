@@ -201,6 +201,4 @@
         <item>1</item>
     </string-array>
 
-    <string name="image_gradient">Gradient image</string>
-    <string name="stack">Stack</string>
 </resources>

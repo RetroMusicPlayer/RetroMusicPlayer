@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic
 
 import android.provider.BaseColumns
@@ -29,6 +43,8 @@ object Constants {
     @JvmField
     val ACTION_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.quitservice"
     @JvmField
+    val ACTION_PENDING_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.pendingquitservice"
+    @JvmField
     val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
     @JvmField
     val INTENT_EXTRA_SHUFFLE_MODE = "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
@@ -49,38 +65,22 @@ object Constants {
     val SHUFFLE_MODE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.shufflemodechanged"
     @JvmField
     val MEDIA_STORE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.mediastorechanged"
-    @JvmField
-    val RATE_ON_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    @JvmField
-    val PAYPAL_ME_URL = "https://www.paypal.me/h4h14"
-    @JvmField
-    val GOOGLE_PLUS_COMMUNITY = "https://plus.google.com/communities/110811566242871492162"
-    @JvmField
-    val TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534"
-    @JvmField
-    val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
-    @JvmField
-    val BASE_API_URL_KUGOU = "http://lyrics.kugou.com/"
-    @JvmField
-    val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
-    @JvmField
-    val USER_PROFILE = "profile.jpg"
-    @JvmField
-    val USER_BANNER = "banner.jpg"
-    @JvmField
-    val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
-    @JvmField
-    val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
-    @JvmField
-    val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
-    @JvmField
-    val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
-    @JvmField
-    val PINTEREST = "https://in.pinterest.com/retromusicapp/"
-    @JvmField
-    val CAST_SERVER_PORT = 8080
+    const val RATE_ON_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
+    const val PAYPAL_ME_URL = "https://www.paypal.me/h4h14"
+    const val TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534"
+    const val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
+    const val BASE_API_URL_KUGOU = "http://lyrics.kugou.com/"
+    const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
+    const val USER_PROFILE = "profile.jpg"
+    const val USER_BANNER = "banner.jpg"
+    const val APP_INSTAGRAM_LINK = "https://www.instagram.com/retromusicapp/"
+    const val APP_TELEGRAM_LINK = "https://t.me/retromusicapp/"
+    const val APP_TWITTER_LINK = "https://twitter.com/retromusicapp"
+    const val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
+    const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
 
     const val BASE_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
+
     @JvmField
     val BASE_PROJECTION = arrayOf(BaseColumns._ID, // 0
             MediaStore.Audio.AudioColumns.TITLE, // 1
@@ -92,7 +92,8 @@ object Constants {
             MediaStore.Audio.AudioColumns.ALBUM_ID, // 7
             MediaStore.Audio.AudioColumns.ALBUM, // 8
             MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
-            MediaStore.Audio.AudioColumns.ARTIST)// 10
+            MediaStore.Audio.AudioColumns.ARTIST,// 10
+            MediaStore.Audio.AudioColumns.COMPOSER)// 11
     const val NUMBER_OF_TOP_TRACKS = 99
 
 

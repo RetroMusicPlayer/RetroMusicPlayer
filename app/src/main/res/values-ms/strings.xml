@@ -151,8 +151,6 @@
     <string name="now_playing_queue">Kini memainkan baris gilir</string>
     <string name="only_on_wifi">Hanya dengan Wi-Fi</string>
     <string name="past_three_months">3 bulan lepas</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me ialah cara mudah untuk menyumbang kepada kami. Jika anda hanya dipautkan pada kad debit atau kredit, yuran di Amerika Syarikat adalah sebanyak 2.9% daripada sumbangan ditambah dengan AS$0.30 dan jika tidak, bayaran tidak dikenakan.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">lagi</a></string>
     <string name="permission_external_storage_denied">Keizinan untuk mencapai storan luar dinafikan.</string>
     <string name="permissions_denied">Keizinan ditolak.</string>
     <string name="pick_from_local_storage">Pilih daripada storan tempatan</string>

@@ -171,7 +171,7 @@
             android:background="@drawable/color_circle_gradient"
             android:elevation="4dp"
             android:padding="16dp"
-            app:srcCompat="@drawable/ic_play_arrow_white_24dp" />
+            app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
 
     </RelativeLayout>
 
@@ -183,7 +183,7 @@
 
         <fragment
             android:id="@+id/volume_fragment"
-            android:name="code.name.monkey.retromusic.ui.fragments.VolumeFragment"
+            android:name="code.name.monkey.retromusic.fragments.VolumeFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

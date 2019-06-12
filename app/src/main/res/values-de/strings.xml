@@ -141,8 +141,6 @@
     <string name="now_playing_queue">Aktuelle Wiedergabeliste</string>
     <string name="only_on_wifi">Nur über Wi-Fi</string>
     <string name="past_three_months">Letzte 3 Monate</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me ist eine einfache Möglichkeit uns Geld zu spenden. Falls du nur eine Debitkarte oder Kreditkarte verknüpft hast: in den USA beträgt die Gebühr 2.9% der Spende zzgl. $0.30 USD. Ansonsten gibt es keine weiteren Gebühren.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Berechtigung für den Zugriff auf externen Speicher verweigert.</string>
     <string name="permissions_denied">Berechtigung verweigert.</string>
     <string name="pick_from_local_storage">Vom lokalen Speicher wählen</string>

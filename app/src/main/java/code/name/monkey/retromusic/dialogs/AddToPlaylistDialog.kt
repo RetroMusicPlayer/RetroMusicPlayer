@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.dialogs
 
 import android.os.Bundle
@@ -7,17 +21,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
+
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.ui.adapter.playlist.AddToPlaylist
+import code.name.monkey.retromusic.adapter.playlist.AddToPlaylist
 import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_to_playlist.*
-import java.util.*
 
-/**
- * @author Karim Abou Zeid (kabouzeid), Aidan Follestad (afollestad)
- */
+
 class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
 
@@ -29,17 +41,16 @@ class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val songs = arguments!!.getParcelableArrayList<Song>("songs")
 
         actionAddPlaylist.setOnClickListener {
-            val songs = arguments!!.getParcelableArrayList<Song>("songs")
             CreatePlaylistDialog.create(songs!!).show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
             dismiss()
         }
 
         bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        val songs = arguments!!.getParcelableArrayList<Song>("songs")
         val playlists = PlaylistLoader.getAllPlaylists(activity!!).blockingFirst()
-        val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog)
+        val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog!!)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             itemAnimator = DefaultItemAnimator()

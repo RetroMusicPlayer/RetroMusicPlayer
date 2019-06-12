@@ -17,14 +17,9 @@
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@null">
+            app:title="@string/action_about" />
 
-            <TextView
-                android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
-                android:text="@string/action_about" />
 
-        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

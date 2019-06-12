@@ -25,15 +25,8 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
-
-                <TextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearance"
-                    android:text="@string/licenses" />
-
-            </androidx.appcompat.widget.Toolbar>
+                app:title="@string/licenses"
+                tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

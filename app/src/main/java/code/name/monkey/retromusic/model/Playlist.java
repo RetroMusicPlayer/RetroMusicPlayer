@@ -1,19 +1,31 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.model;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * @author Karim Abou Zeid (kabouzeid)
+ */
 public class Playlist implements Parcelable {
-    public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
-        public Playlist createFromParcel(Parcel source) {
-            return new Playlist(source);
-        }
-
-        public Playlist[] newArray(int size) {
-            return new Playlist[size];
-        }
-    };
     public final int id;
     public final String name;
 
@@ -25,11 +37,6 @@ public class Playlist implements Parcelable {
     public Playlist() {
         this.id = -1;
         this.name = "";
-    }
-
-    protected Playlist(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
     }
 
     @Override
@@ -59,6 +66,7 @@ public class Playlist implements Parcelable {
                 '}';
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -69,4 +77,21 @@ public class Playlist implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
     }
+
+    protected Playlist(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+    }
+
+    public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
+        public Playlist createFromParcel(Parcel source) {
+            return new Playlist(source);
+        }
+
+        public Playlist[] newArray(int size) {
+            return new Playlist[size];
+        }
+    };
+
+
 }

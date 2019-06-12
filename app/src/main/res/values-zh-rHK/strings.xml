@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">迷你專輯</string>
     <string name="accent_color">重色</string>
-    <string name="accent_color_desc">主題色調，預設為藍綠色。</string>
+    <string name="accent_color_desc">主題重色，預設為藍綠色</string>
     <string name="action_about">關於</string>
     <string name="action_add_to_favorites">加入至我的最愛</string>
     <string name="action_add_to_playing_queue">加入至播放列表</string>
-    <string name="action_add_to_playlist">加入至播放清單...</string>
+    <string name="action_add_to_playlist">加入至播放清單</string>
     <string name="action_clear_playing_queue">清除播放列表</string>
     <string name="action_clear_playlist">清除播放清單</string>
     <string name="action_delete">刪除</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_short">歌曲榜</string>
     <string name="app_widget_big_name">Retro Music - 大型模式</string>
     <string name="app_widget_card_name">Retro Music - 卡片模式</string>
     <string name="app_widget_classic_name">Retro Music - 經典模式</string>
     <string name="app_widget_small_name">Retro Music - 小型模式</string>
+    <string name="app_widget_text_name">Retro Music - 文字模式</string>
     <string name="artist">歌手</string>
     <string name="artists">歌手</string>
     <string name="audio_focus_denied">無法找到音頻焦點。</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">請記住當您啟用此選項後或會影響電池壽命</string>
     <string name="pref_blur_amount_title">模糊值</string>
     <string name="pref_blur_amount_summary">給模糊模式主題的值，每值愈低就愈快</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡片</string>
     <string name="card_color_style">彩色卡片</string>
@@ -195,8 +198,6 @@
     <string name="only_on_wifi">僅透過Wi-Fi</string>
     <string name="others">其他</string>
     <string name="past_three_months">在3個月內</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">Paypal.me是捐款給我們最簡單的方法。若如果您是使用信用卡或轉賬卡進行捐款，在美國境內則會收取捐款中的 2.9% 的費用，再另加 US$0.30 ，否則不收取任何費用。 <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">更多資料</a></string>
     <string name="permission_external_storage_denied">存取外置儲存空間權限被拒。</string>
     <string name="permissions_denied">存取權限被拒。</string>
     <string name="personalize">個人化</string>
@@ -241,7 +242,7 @@
     <string name="pref_title_album_art_on_lockscreen">顯示專輯圖片</string>
     <string name="pref_title_tab_text_mode">標題標籤模式</string>
     <string name="pref_title_album_grid_style">專輯網格</string>
-    <string name="pref_title_app_shortcuts">彩色程式捷徑</string>
+    <string name="pref_title_app_shortcuts">彩色化程式捷徑</string>
     <string name="pref_title_artist_grid_style">歌手網格</string>
     <string name="pref_title_audio_ducking">失去音頻焦點時降低音量</string>
     <string name="pref_title_auto_download_artist_images">自動下載歌手相片</string>
@@ -251,12 +252,12 @@
     <string name="pref_title_colored_app">自適應色彩</string>
     <string name="pref_title_colored_notification">彩色通知欄</string>
     <string name="pref_title_gapless_playback">無縫播放</string>
-    <string name="pref_title_general_theme">程式主題</string>
+    <string name="pref_title_general_theme">應用主題</string>
     <string name="pref_title_ignore_media_store_artwork">忽略音樂檔內含的專輯圖片</string>
     <string name="pref_title_last_added_interval">最近新增播放清單間隔</string>
     <string name="pref_title_lock_screen">全螢幕控制</string>
     <string name="pref_title_navigation_bar">彩色導航欄</string>
-    <string name="pref_title_now_playing_screen_appearance">現在播放主題</string>
+    <string name="pref_title_now_playing_screen_appearance">現在播放介面主題</string>
     <string name="pref_title_open_source_licences">開放源碼認證</string>
     <string name="pref_title_round_corners">螢幕圓角</string>
     <string name="pref_title_toggle_carousel_effect">轉盤效果</string>
@@ -271,7 +272,9 @@
     <string name="pref_title_home_banner">首頁橫幅</string>
     <string name="pref_title_genre_toggle">顯示類型標籤</string>
     <string name="pref_title_home_artist_grid_style">首頁歌手網格</string>
-    <string name="pref_title_album_cover_transform">現在播放專輯圖片風格</string>
+    <string name="pref_title_album_cover_transform">專輯圖片轉場</string>
+    <string name="pref_album_detail_style">專輯詳細樣式</string>
+    <string name="cascading">階層式</string>
     <string name="primary_color">原色</string>
     <string name="primary_color_desc">主原色預設為灰藍色，現在適用於深色色彩</string>
     <string name="purchase">購買</string>
@@ -328,7 +331,6 @@
     <string name="speech_prompt">搜尋媒體庫</string>
     <string name="summary_user_info">只會在首頁顯示您的名字</string>
     <string name="support_development">開發支援</string>
-    <string name="synced_lyrics">同步歌詞</string>
     <string name="system_equalizer">系統等化器</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -372,7 +374,7 @@
     <string name="bug_report_summary">發生未預期的錯誤。真抱歉您發現了這個bug，如果一直崩潰則請\"清除程式數據\"</string>
     <string name="error">錯誤</string>
     <string name="base_color_theme">基色主題</string>
-    <string name="now_playing_themes">9+ 現在播放主題</string>
+    <string name="now_playing_themes">9+ 現在播放介面主題</string>
     <string name="carousal_effect_on_now_playing_screen">在現在播放的轉盤效果</string>
     <string name="window_corner_edges">圓角</string>
     <string name="pref_title_album_cover_style">專輯圖片主題</string>
@@ -386,4 +388,47 @@
     <string name="labeled">已標記</string>
     <string name="unlabeled">未標記</string>
     <string name="selected">已選</string>
+    <string name="depth">深度式</string>
+    <string name="vertical_flip">垂直翻轉式</string>
+    <string name="hinge">鉸鏈式</string>
+    <string name="horizontal_flip">水平翻轉式</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">當無音量時暫停，提高音量時播放。請注意無論你是否開啟了程式，提高音量時便會立即播放音樂</string>
+    <string name="pref_keep_pause_on_zero_volume_title">無音量時暫停</string>
+    <string name="whats_new">最新動向</string>
+    <string name="suggestion_songs">建議</string>
+    <string name="fit">Fit</string>
+    <string name="pref_now_playing_screen_title">點擊或滑動</string>
+    <string name="pref_now_playing_screen_summary">點擊或滑動開啟無透明現在播放導航欄</string>
+    <string name="clear_playing_queue">清除列表</string>
+    <string name="buy_pro">購買Retro Music Pro</string>
+    <string name="share_app">分享程式</string>
+    <string name="report_bug">回報錯誤</string>
+    <string name="bug_report_use_account">使用Github帳戶傳送</string>
+    <string name="login">登入</string>
+    <string name="bug_report_manual">手動傳送</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將會轉到問題跟蹤網站。</string>
+    <string name="bug_report_issue">問題</string>
+    <string name="title">標題</string>
+    <string name="description">描述</string>
+    <string name="username">用戶名稱</string>
+    <string name="password">密碼</string>
+    <string name="device_info">裝置內容</string>
+    <string name="report_an_issue">回報問題</string>
+    <string name="bug_report_no_username">請輸入您的有效GitHub用戶名稱</string>
+    <string name="bug_report_no_password">請輸入您的有效GitHub密碼</string>
+    <string name="bug_report_no_title">請輸入問題標題</string>
+    <string name="bug_report_no_description">請輸入問題描述</string>
+    <string name="bug_report_uploading">正在上傳報告至GitHub...</string>
+    <string name="bug_report_failed">無法上傳報告</string>
+    <string name="bug_report_failed_wrong_credentials">用戶名稱或密碼錯誤</string>
+    <string name="bug_report_failed_invalid_token">存取金鑰無效。請與程式開發人員聯絡。</string>
+    <string name="bug_report_failed_issues_not_available">已選的版本庫(repo)並未針對此問題而啟用。請與程式開發人員聯絡。</string>
+    <string name="bug_report_failed_unknown">發生未預期的錯誤。請與程式開發人員聯絡。</string>
+    <string name="copied_device_info_to_clipboard">已複製裝置內容到剪貼簿</string>
+    <string name="your_account_data_is_only_used_for_authentication">您的帳戶只會用於認證用途。</string>
+    <string name="pref_snow_fall_title">雪花效果</string>
+    <string name="pref_title_blacklist">黑名單</string>
+    <string name="pref_summary_blacklist">列入黑名單的資料夾內的資料會在您的媒體庫隱藏。</string>
+    <string name="edit">編輯</string>
+    <string name="synced_lyrics">同步歌詞</string>
 </resources>

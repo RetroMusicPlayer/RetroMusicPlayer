@@ -166,8 +166,6 @@
     <string name="only_on_wifi">Wi-Fi에서만</string>
     <string name="others">기타</string>
     <string name="past_three_months">이전 3개월</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me로 간편하게 저희를 후원해주세요. 신용 카드를 사용하는 경우, 미국 기준으로 후원 금액의 2.9%와 $0.30가 별도로 청구됩니다. 그 외의 경우에는 수수료는 없습니다. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">외부 저장소 접근 권한이 거부되었습니다.</string>
     <string name="permissions_denied">권한이 거부되었습니다.</string>
     <string name="personalize">개인화</string>

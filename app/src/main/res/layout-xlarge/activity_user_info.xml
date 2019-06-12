@@ -15,21 +15,16 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp">
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:title="@string/profile" />
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
-                android:text="@string/profile" />
-
-        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
-        android:layout_marginEnd="128dp"
-        android:layout_marginStart="128dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -100,20 +95,17 @@
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                app:boxBackgroundMode="outline"
-                app:boxCollapsedPaddingTop="16dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxStrokeColor="@color/md_grey_700"
-                app:boxStrokeWidth="1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:hintEnabled="true">
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
@@ -122,19 +114,41 @@
                     android:background="@null"
                     android:hint="@string/my_name"
                     android:inputType="textPersonName|textCapWords|text"
-                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/bioContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:hintEnabled="true">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/bio"
+                    android:inputType="textPersonName|textCapWords|text"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/next"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom"
         android:layout_margin="16dp"
-        android:elevation="8dp"
+        android:gravity="center"
+        app:iconGravity="textStart"
         android:padding="16dp"
-        app:srcCompat="@drawable/ate_check" />
+        android:text="@string/save"
+        app:icon="@drawable/ic_save_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

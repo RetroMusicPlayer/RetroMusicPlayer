@@ -17,9 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import android.widget.TextView;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
@@ -39,6 +37,10 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.widget.ToolbarWidgetWrapper;
 import androidx.core.graphics.drawable.DrawableCompat;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.ThemeStore;
 
@@ -82,12 +84,14 @@ public final class ToolbarContentTintHelper {
         }
     }
 
-    public static void colorBackButton(Toolbar toolbar, @ColorInt int color) {
+    public static void colorBackButton(@NonNull Toolbar toolbar, @ColorInt int color) {
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);
             if (backButton instanceof ImageView) {
                 ((ImageView) backButton).getDrawable().setColorFilter(colorFilter);
+            } else if (backButton instanceof TextView) {
+               // ((TextView) backButton).setTextColor(color);
             }
         }
     }

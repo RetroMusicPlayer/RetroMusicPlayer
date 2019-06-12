@@ -129,8 +129,6 @@
     <string name="notification">通知</string>
     <string name="now_playing_queue">播放佇列</string>
     <string name="only_on_wifi">只在有 Wi-Fi 連接時</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">如果你是使用信用卡進行捐贈，PayPal.me 能在幾秒內匯款。PayPal.me 會收取 3% 的費用，而標準費用為 $0.30。<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">詳細資訊</a></string>
     <string name="permission_external_storage_denied">無法取得存取外部儲存空間的權限。</string>
     <string name="permissions_denied">存取被拒</string>
     <string name="pick_from_local_storage">從手機裡選擇（SD卡或記憶體）</string>

@@ -52,31 +52,23 @@
                 </FrameLayout>
 
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar"
-                    android:layout_gravity="center_vertical"
-                    app:layout_collapseMode="pin"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    tools:ignore="UnusedAttribute">
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/toolbarContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="6dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_scrollFlags="scroll|enterAlways">
 
-                    <TextView
-                        android:id="@+id/bannerTitle"
-                        style="@style/BigTitleTextAppearanceToolbar"
-                        android:shadowColor="@color/md_black_1000"
-                        android:shadowRadius="2"
-                        android:text="@string/app_name"
-                        android:textColor="@color/md_white_1000"
-                        tools:ignore="MissingPrefix" />
-
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/userImage"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="end|center_vertical"
-                        android:layout_marginEnd="16dp"
-                        app:civ_border="false" />
-                </androidx.appcompat.widget.Toolbar>
+                    <androidx.appcompat.widget.Toolbar
+                        android:id="@+id/toolbar"
+                        style="@style/Toolbar"
+                        app:title="@string/search_hint"
+                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        app:titleMarginStart="0dp"
+                        tools:ignore="UnusedAttribute" />
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -85,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:behavior_overlapTop="24dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -99,7 +91,8 @@
                 android:descendantFocusability="blocksDescendants"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="8dp">
 
                 <include layout="@layout/abs_playlists" />
 
@@ -108,6 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.core.widget.NestedScrollView>

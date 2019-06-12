@@ -5,13 +5,12 @@
             <solid android:color="?android:colorButtonNormal" />
         </shape>
     </item>
-
     <item android:id="@android:id/progress">
-        <scale android:scaleWidth="100%">
+        <clip>
             <shape>
                 <corners android:radius="8dp" />
                 <solid android:color="@color/md_black_1000" />
             </shape>
-        </scale>
+        </clip>
     </item>
 </layer-list>

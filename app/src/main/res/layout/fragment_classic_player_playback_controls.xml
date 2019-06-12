@@ -127,8 +127,7 @@
             android:id="@+id/playerPlayPauseFab"
             style="@style/Fab"
             android:layout_centerInParent="true"
-            app:elevation="4dp"
-            app:pressedTranslationZ="2dp" />
+            app:elevation="4dp" />
 
     </RelativeLayout>
 

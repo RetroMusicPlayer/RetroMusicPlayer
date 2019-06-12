@@ -24,36 +24,30 @@
             android:elevation="0dp"
             app:elevation="0dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                android:layout_gravity="center_vertical"
-                app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways"
-                tools:ignore="UnusedAttribute">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toolbarContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:cardUseCompatPadding="true"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearanceToolbar"
-                    android:text="@string/app_name"
-                    tools:ignore="MissingPrefix" />
-
-                <code.name.monkey.retromusic.views.CircularImageView
-                    android:id="@+id/userImage"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="16dp"
-                    app:civ_border="false" />
-            </androidx.appcompat.widget.Toolbar>
-
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:titleMarginStart="0dp"
+                    app:title="@string/search_hint"
+                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    tools:ignore="UnusedAttribute" />
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:id="@+id/contentContainer"

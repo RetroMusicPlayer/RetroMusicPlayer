@@ -8,55 +8,102 @@
     android:paddingTop="8dp"
     tools:ignore="MissingPrefix">
 
-    <SeekBar
-        android:id="@+id/progressSlider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxHeight="3dp"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:progressDrawable="@drawable/color_progress_seek"
-        tools:progress="20" />
-
-    <include layout="@layout/player_time" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:padding="16dp"
-            android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            tools:text="Title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="marquee"
             android:focusable="true"
             android:focusableInTouchMode="true"
+            android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Title" />
+
+        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_slider_height"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <TextView
+            android:id="@+id/songCurrentProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|left|end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        <SeekBar
+            android:id="@+id/progressSlider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
+            android:maxHeight="3dp"
+            android:progressDrawable="@drawable/color_progress_seek"
+            android:splitTrack="false"
+            tools:ignore="RtlHardcoded,UnusedAttribute"
+            tools:progress="20" />
+    </RelativeLayout>
 
     <include layout="@layout/media_button" />
 
-    <include layout="@layout/volume_controls" />
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
 </LinearLayout>

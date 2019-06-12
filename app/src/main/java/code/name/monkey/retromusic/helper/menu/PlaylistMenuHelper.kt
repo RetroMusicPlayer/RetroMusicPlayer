@@ -1,15 +1,27 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.helper.menu
+
 
 import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.widget.Toast
-
-import java.util.ArrayList
-
-import code.name.monkey.retromusic.R
+import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.App
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
 import code.name.monkey.retromusic.dialogs.RenamePlaylistDialog
@@ -20,6 +32,7 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import java.util.*
 
 
 object PlaylistMenuHelper {

@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
@@ -14,24 +28,24 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 
 import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.activities.AboutActivity;
+import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
+import code.name.monkey.retromusic.activities.ArtistDetailActivity;
+import code.name.monkey.retromusic.activities.EqualizerActivity;
+import code.name.monkey.retromusic.activities.GenreDetailsActivity;
+import code.name.monkey.retromusic.activities.LicenseActivity;
+import code.name.monkey.retromusic.activities.LyricsActivity;
+import code.name.monkey.retromusic.activities.PlayingQueueActivity;
+import code.name.monkey.retromusic.activities.PlaylistDetailActivity;
+import code.name.monkey.retromusic.activities.PurchaseActivity;
+import code.name.monkey.retromusic.activities.SearchActivity;
+import code.name.monkey.retromusic.activities.SettingsActivity;
+import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
+import code.name.monkey.retromusic.activities.UserInfoActivity;
+import code.name.monkey.retromusic.activities.WhatsNewActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
-import code.name.monkey.retromusic.ui.activities.AboutActivity;
-import code.name.monkey.retromusic.ui.activities.AlbumDetailsActivity;
-import code.name.monkey.retromusic.ui.activities.ArtistDetailActivity;
-import code.name.monkey.retromusic.ui.activities.EqualizerActivity;
-import code.name.monkey.retromusic.ui.activities.GenreDetailsActivity;
-import code.name.monkey.retromusic.ui.activities.LicenseActivity;
-import code.name.monkey.retromusic.ui.activities.LyricsActivity;
-import code.name.monkey.retromusic.ui.activities.PlayingQueueActivity;
-import code.name.monkey.retromusic.ui.activities.PlaylistDetailActivity;
-import code.name.monkey.retromusic.ui.activities.PurchaseActivity;
-import code.name.monkey.retromusic.ui.activities.SearchActivity;
-import code.name.monkey.retromusic.ui.activities.SettingsActivity;
-import code.name.monkey.retromusic.ui.activities.SupportDevelopmentActivity;
-import code.name.monkey.retromusic.ui.activities.UserInfoActivity;
-import code.name.monkey.retromusic.ui.activities.WhatsNewActivity;
 
 import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
@@ -57,7 +71,15 @@ public class NavigationUtil {
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
     }
 
-    public static void goToPlaylistNew(@NonNull Activity activity, Playlist playlist) {
+    public static void goToArtist(@NonNull Activity activity, int i) {
+        Intent intent = new Intent(activity, ArtistDetailActivity.class);
+        intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, i);
+        //noinspection unchecked
+        ActivityCompat.startActivity(activity, intent,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, null).toBundle());
+    }
+
+    public static void goToPlaylistNew(@NonNull Activity activity, @NonNull Playlist playlist) {
         Intent intent = new Intent(activity, PlaylistDetailActivity.class);
         intent.putExtra(PlaylistDetailActivity.Companion.getEXTRA_PLAYLIST(), playlist);
         ActivityCompat.startActivity(activity, intent, null);
@@ -125,19 +147,28 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, new Intent(activity, LicenseActivity.class), null);
     }
 
-    public static void goToSearch(Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class), null);
+    public static void goToSearch(@NonNull Activity activity,
+                                  @Nullable Pair... sharedElements) {
+        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
     }
 
-    public static void goToSupportDevelopment(Activity activity) {
+    public static void goToSearch(@NonNull Activity activity, boolean isMicOpen,
+                                  @Nullable Pair... sharedElements) {
+        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class)
+                        .putExtra(SearchActivity.EXTRA_SHOW_MIC, isMicOpen),
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+    }
+
+    public static void goToSupportDevelopment(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, SupportDevelopmentActivity.class), null);
     }
 
-    public static void goToPlayStore(Activity activity) {
+    public static void goToPlayStore(@NonNull Activity activity) {
         openUrl(activity, RATE_ON_GOOGLE_PLAY);
     }
 
-    public static void gotoWhatNews(Activity activity) {
+    public static void gotoWhatNews(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, WhatsNewActivity.class), null);
     }
 }

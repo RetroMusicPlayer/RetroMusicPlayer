@@ -37,12 +37,14 @@
             </FrameLayout>
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
+                android:id="@+id/playerAlbumCoverContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
 
                 <fragment
                     android:id="@+id/playerAlbumCoverFragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_album_cover" />
@@ -50,19 +52,18 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <fragment
                     android:id="@+id/playbackControlsFragment"
-                    android:name="code.name.monkey.retromusic.ui.fragments.player.normal.PlayerPlaybackControlsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:layout="@layout/fragment_player_playback_controls" />
             </FrameLayout>
 
             <FrameLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0">

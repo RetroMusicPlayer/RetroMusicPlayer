@@ -22,15 +22,9 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:title=""
-                tools:ignore="UnusedAttribute">
+                app:title="@string/support_development"
+                tools:ignore="UnusedAttribute" />
 
-                <TextView
-                    android:id="@+id/bannerTitle"
-                    style="@style/BigTitleTextAppearance"
-                    android:text="@string/support_development" />
-
-            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <View
@@ -42,7 +36,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,44 +85,6 @@
                 android:paddingEnd="6dp"
                 android:scrollbarStyle="outsideOverlay" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                        style="@style/SubTitleTextAppearance"
-                        android:text="@string/paypal"
-                        tools:ignore="MissingPrefix" />
-
-                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        style="@style/TextAppearance.MaterialComponents.Caption"
-                        android:paddingEnd="16dp"
-                        android:text="@string/paypal_summary"
-                        android:textColor="@color/md_white_1000" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/donate"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:layout_margin="8dp"
-                        android:text="@string/donate"
-                        android:textAllCaps="false" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

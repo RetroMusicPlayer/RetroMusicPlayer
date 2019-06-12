@@ -57,7 +57,6 @@
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/time"
-                style="@style/TextAppearance.MaterialComponents.Caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"

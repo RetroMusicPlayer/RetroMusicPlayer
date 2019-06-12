@@ -1,3 +1,17 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.views;
 
 import android.annotation.SuppressLint;
@@ -23,8 +37,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.VersionUtils;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.ui.activities.base.AbsBaseActivity;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.RetroUtil;
 
 /**
@@ -56,7 +69,7 @@ public class RoundedBottomSheetDialogFragment extends AppCompatDialogFragment {
 
     @NonNull
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public Dialog onCreateDialog(@NonNull Bundle savedInstanceState) {
         //noinspection ConstantConditions
         return new CustomWidthBottomSheetDialog(getContext(), getTheme());
     }

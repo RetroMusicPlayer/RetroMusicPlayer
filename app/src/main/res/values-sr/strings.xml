@@ -141,9 +141,6 @@
     <string name="now_playing_queue">Lista za trenutno pustanje</string>
     <string name="only_on_wifi">Samo kada je povezan na WiFi</string>
     <string name="past_three_months">Prosla 3 meseca</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me je jednostavan nacin da doniras novac. Ukoliko je sa nalogom povezana samo kreditna ili platna kartica, na donirani iznos se dodaje 2.9% (samo u SAD) plus $0.30 USD, u suprotnom ne postoji nikakva naknada.
-.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a></string>
     <string name="permission_external_storage_denied">Dozvola za pristup spoljasnjem skladistu je odbijena</string>
     <string name="permissions_denied">Dozvola odbijena.</string>
     <string name="pick_from_local_storage">Izaberi iz unutrasnjeg skladista</string>

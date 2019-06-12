@@ -1,75 +1,55 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.model;
 
-import android.os.Parcel;
+import org.jetbrains.annotations.NotNull;
 
+import kotlinx.android.parcel.Parcelize;
+
+/**
+ * Created by hemanths on 3/4/19
+ */
+@Parcelize
 public class PlaylistSong extends Song {
-    public static PlaylistSong EMPTY_PLAYLIST_SONG = new PlaylistSong(-1, "", -1, -1, -1, "", -1, -1, "", -1, "", -1, -1);
+    final int playlistId;
+    final int idInPlayList;
 
-    public final int playlistId;
-    public final int idInPlayList;
-
-    public PlaylistSong(int id, String title, int trackNumber, int year, long duration, String data, int dateModified, int albumId, String albumName, int artistId, String artistName, final int playlistId, final int idInPlayList) {
-        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName);
+    public PlaylistSong(int id,
+                        @NotNull String title,
+                        int trackNumber,
+                        int year,
+                        long duration,
+                        @NotNull String data,
+                        long dateModified,
+                        int albumId,
+                        @NotNull String albumName,
+                        int artistId,
+                        @NotNull String artistName,
+                        int playlistId,
+                        int idInPlayList,
+                        @NotNull String composer) {
+        super(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, composer);
         this.playlistId = playlistId;
         this.idInPlayList = idInPlayList;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        PlaylistSong that = (PlaylistSong) o;
-
-        if (playlistId != that.playlistId) return false;
-        return idInPlayList == that.idInPlayList;
-
+    public int getPlaylistId() {
+        return playlistId;
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + playlistId;
-        result = 31 * result + idInPlayList;
-        return result;
+    public int getIdInPlayList() {
+        return idInPlayList;
     }
-
-    @Override
-    public String toString() {
-        return super.toString() +
-                "PlaylistSong{" +
-                "playlistId=" + playlistId +
-                ", idInPlayList=" + idInPlayList +
-                '}';
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeInt(this.playlistId);
-        dest.writeInt(this.idInPlayList);
-    }
-
-    protected PlaylistSong(Parcel in) {
-        super(in);
-        this.playlistId = in.readInt();
-        this.idInPlayList = in.readInt();
-    }
-
-    public static final Creator<PlaylistSong> CREATOR = new Creator<PlaylistSong>() {
-        public PlaylistSong createFromParcel(Parcel source) {
-            return new PlaylistSong(source);
-        }
-
-        public PlaylistSong[] newArray(int size) {
-            return new PlaylistSong[size];
-        }
-    };
 }

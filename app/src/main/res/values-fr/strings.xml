@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Petit album</string>
     <string name="accent_color">Couleur d\'accentuation</string>
     <string name="accent_color_desc">La couleur d\'accentuation du thème, verte par défaut</string>
     <string name="action_about">À propos</string>
     <string name="action_add_to_favorites">Ajouter aux favoris</string>
     <string name="action_add_to_playing_queue">Ajouter à la file d\'attente</string>
-    <string name="action_add_to_playlist">Ajouter à la playlist…</string>
+    <string name="action_add_to_playlist">Ajouter à la playlist</string>
     <string name="action_clear_playing_queue">Vider la file d\'attente</string>
     <string name="action_clear_playlist">Vider la playlist</string>
     <string name="action_delete">Supprimer</string>
@@ -15,7 +16,7 @@
     <string name="action_go_to_artist">Aller à l\'artiste</string>
     <string name="action_go_to_genre">Aller au genre</string>
     <string name="action_go_to_start_directory">Aller au dossier de départ</string>
-    <string name="action_grant">Subvention</string>
+    <string name="action_grant">Accorder</string>
     <string name="action_grid_size">Taille de la grille</string>
     <string name="action_grid_size_land">Taille de la grille (paysage)</string>
     <string name="action_next">Suivant</string>
@@ -28,7 +29,7 @@
     <string name="action_remove_from_playlist">Supprimer de la liste de lecture</string>
     <string name="action_rename">Renommer</string>
     <string name="action_save_playing_queue">Enregistrer la file d\'attente</string>
-    <string name="action_scan">Actualiser</string>
+    <string name="action_scan">Scanner</string>
     <string name="action_scan_directory">Scanner le dossier</string>
     <string name="action_search">Rechercher</string>
     <string name="action_set">Démarrer</string>
@@ -37,15 +38,15 @@
     <string name="action_settings">"Paramètres"</string>
     <string name="action_share">Partager</string>
     <string name="action_shuffle_all">Tout aléatoire</string>
-    <string name="action_shuffle_playlist">Liste de lecture aléatoire</string>
+    <string name="action_shuffle_playlist">Playlist en lecture aléatoire</string>
     <string name="action_sleep_timer">Minuteur de sommeil</string>
     <string name="action_sort_order">Ordre de tri</string>
-    <string name="action_tag_editor">Éditeur de tag</string>
+    <string name="action_tag_editor">Éditeur de tag metadata</string>
     <string name="adaptive">Adaptatif</string>
     <string name="add_action">Ajouter</string>
     <string name="add_photo">Ajouter\nune photo</string>
-    <string name="add_playlist_title">"Ajouter à la liste de lecture"</string>
-    <string name="added_title_to_playing_queue">"1 musique à été ajoutée à la file d'attente."</string>
+    <string name="add_playlist_title">"Ajouter à playlist"</string>
+    <string name="added_title_to_playing_queue">"1 titre à été ajoutée à la file d'attente."</string>
     <string name="added_x_titles_to_playing_queue">%1$d titres ont été ajoutés à la file d\'attente.</string>
     <string name="album">Album</string>
     <string name="album_artist">Artiste de l\'album</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Aléatoire</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Aléatoire</string>
     <string name="app_shortcut_top_tracks_short">Pistes préférées</string>
     <string name="app_widget_big_name">Retro Music – Grand</string>
     <string name="app_widget_card_name">Retro Music – Carte</string>
     <string name="app_widget_classic_name">Retro Music – Classique</string>
     <string name="app_widget_small_name">Retro Music – Petit</string>
+    <string name="app_widget_text_name">Retro music - Texte</string>
     <string name="artist">Artiste</string>
     <string name="artists">Artistes</string>
     <string name="audio_focus_denied">Focus audio refusé.</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Veuillez garder en tête que l\'activation de cette fonctionnalité peut réduire la durée de vie de la batterie</string>
     <string name="pref_blur_amount_title">Quantité de flou</string>
     <string name="pref_blur_amount_summary">Quantité de flou appliqué aux thèmes flous, bas est plus rapide</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Annuler</string>
     <string name="card">Carte</string>
     <string name="card_color_style">Cartes colorées</string>
@@ -105,7 +108,7 @@
     <string name="credit_title">Membres et contributeurs</string>
     <string name="currently_listening_to_x_by_x">Vous écoutez actuellement %1$s par %2$s.</string>
     <string name="dark_theme_name">Plutôt Sombre</string>
-    <string name="default_hint">Pas de Paroles.</string>
+    <string name="default_hint">Pas de Paroles</string>
     <string name="delete_playlist_title">Supprimer la liste de lecture</string>
     <string name="delete_playlist_x"><![CDATA[Supprimer la liste <b>%1$s</b> ?]]></string>
     <string name="delete_playlists_title">Supprimer les listes de lecture</string>
@@ -157,7 +160,7 @@
     <string name="label_file_size">Taille</string>
     <string name="label_sampling_rate">Taux d’échantillonnage</string>
     <string name="label_track_length">Longueur</string>
-    <string name="last_added">dernier ajout</string>
+    <string name="last_added">Dernier ajout</string>
     <string name="lets_play_something">Jouons un peu de musique</string>
     <string name="library">Bibliothèque</string>
     <string name="licenses">Licences</string>
@@ -195,8 +198,6 @@
     <string name="only_on_wifi">Uniquement via Wi-Fi</string>
     <string name="others">Autre</string>
     <string name="past_three_months">3 derniers mois</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me est un moyen facile de nous faire un don. Si vous avez uniquement lié une carte de débit ou une carte de crédit dans les USA, les frais s\'élèveront 2,9 % du montant plus 0,30 $, dans tous les autres cas aucun frais ne s\'appliquera. <a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">Plus d\'informations.</a></string>
     <string name="permission_external_storage_denied">La permission pour accéder au stockage externe a été refusée.</string>
     <string name="permissions_denied">Permission refusée.</string>
     <string name="personalize">Personnaliser</string>
@@ -239,6 +240,7 @@
     <string name="pref_summary_genre_toggle">Activer/désactiver l\'onglet Genres</string>
     <string name="pref_summary_home_banner">Changer le style de la bannière sur l\'accueil</string>
     <string name="pref_title_album_art_on_lockscreen">Afficher la couverture de l\'album</string>
+    <string name="pref_title_tab_text_mode">Mode Titres onglets</string>
     <string name="pref_title_album_grid_style">Grille d\'albums</string>
     <string name="pref_title_app_shortcuts">Raccourcis d\'application colorés</string>
     <string name="pref_title_artist_grid_style">Grille d\'artistes</string>
@@ -270,7 +272,8 @@
     <string name="pref_title_home_banner">Bannière d\'accueil</string>
     <string name="pref_title_genre_toggle">Montrer l\'onglet Genres</string>
     <string name="pref_title_home_artist_grid_style">Disposition de la grille d\'artistes sur l\'accueil</string>
-    <string name="pref_title_album_cover_transform">Style de l\'image d\'album sur l\'écran de lecture</string>
+    <string name="pref_title_album_cover_transform">Style du balayage de l\'image d\'album</string>
+    <string name="pref_album_detail_style">Style du détail de l\'album</string>
     <string name="cascading">En cascade</string>
     <string name="primary_color">Couleur primaire</string>
     <string name="primary_color_desc">La couleur de thème primaire, par défaut bleu-gris, fonctionne maintenant avec les couleurs sombres</string>
@@ -328,7 +331,6 @@
     <string name="speech_prompt">Rechercher dans votre bibliothèque</string>
     <string name="summary_user_info">N\'afficher que votre nom sur l\'écran d\'accueil</string>
     <string name="support_development">Aider le développement</string>
-    <string name="synced_lyrics">Paroles synchronisées</string>
     <string name="system_equalizer">Égalisateur système</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -338,7 +340,7 @@
     <string name="this_month">Ce mois</string>
     <string name="this_week">Cette semaine</string>
     <string name="this_year">Cette année</string>
-    <string name="tiny">petit</string>
+    <string name="tiny">Petit</string>
     <string name="title_dashboard">Tableau de bord</string>
     <string name="title_good_afternoon">Bon après-midi</string>
     <string name="title_good_day">Bonne journée</string>
@@ -352,7 +354,7 @@
     <string name="track_hint">"Morceau (2 pour morceau 2, 3004 pour morceau 4 du CD 3)"</string>
     <string name="track_list">Numéro du morceau</string>
     <string name="translate">Traduction</string>
-    <string name="translate_community">Aidez-nous a traduire l\'application dans votre langue</string>
+    <string name="translate_community">Aidez-nous à traduire l\'application dans votre langue</string>
     <string name="twitter_page">Twitter</string>
     <string name="twitter_page_summary">Partager votre design avec Retro Music</string>
     <string name="unplayable_file">Impossible de lire ce morceau.</string>
@@ -387,5 +389,47 @@
     <string name="labeled">Étiqueté</string>
     <string name="unlabeled">Non étiqueté</string>
     <string name="selected">Sélectionné</string>
-
+    <string name="depth">Profondeur</string>
+    <string name="vertical_flip">Balayage vertical</string>
+    <string name="hinge">Charnière</string>
+    <string name="horizontal_flip">Balayage horizontal</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">La lecture se met en pause à zéro et se lance lorsque le volume augmente. Attention, lorsque vous augmentez le volume, la musique se lance même si vous êtes en dehors de l\'app.</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pause sur zéro</string>
+    <string name="whats_new">Quoi de neuf</string>
+    <string name="suggestion_songs">Suggestions</string>
+    <string name="fit">Adapter</string>
+    <string name="pref_now_playing_screen_title">Cliquez ou balayez</string>
+    <string name="pref_now_playing_screen_summary">Cliquez pour ouvrir avec ou glisser à sans navigation transparente de l\'écran de lecture</string>
+    <string name="clear_playing_queue">Vider la file d\'attente</string>
+    <string name="buy_pro">Acheter Retro Music Pro</string>
+    <string name="share_app">Partager l\'app</string>
+    <string name="report_bug">Signaler un bug</string>
+    <string name="bug_report_use_account">Envoyer en utilisant un compte GitHub</string>
+    <string name="login">Se connecter</string>
+    <string name="bug_report_manual">Envoyer manuellement</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
+    <string name="bug_report_issue">Problème</string>
+    <string name="title">Titre</string>
+    <string name="description">Description</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="device_info">Infos sur l\'appareil</string>
+    <string name="report_an_issue">Signaler un problème</string>
+    <string name="bug_report_no_username">Veuillez entrer votre nom d\'utilisateur GitHub valide</string>
+    <string name="bug_report_no_password">Veuillez entrer votre mot de passe GitHub valide</string>
+    <string name="bug_report_no_title">Veuillez entrer un titre pour le problème</string>
+    <string name="bug_report_no_description">Veuillez entrer une description du problème</string>
+    <string name="bug_report_uploading">Envoi du rapport de bug sur GitHub...</string>
+    <string name="bug_report_failed">Impossible d\'envoyer le rapport de bug</string>
+    <string name="bug_report_failed_wrong_credentials">Nom d\'utilisateur ou mot de passe invalide</string>
+    <string name="bug_report_failed_invalid_token">Jeton d\'accès invalide. Veuillez contacter le développeur de l\'application.</string>
+    <string name="bug_report_failed_issues_not_available">Les problèmes ne sont pas activés pour le dépôt sélectionné. Veuillez contacter le développeur de l\'application.</string>
+    <string name="bug_report_failed_unknown">Erreur inopinée. Veuillez contacter le développeur de l\'application.</string>
+    <string name="copied_device_info_to_clipboard">Informations sur l\'appareil copiées dans le presse-papier.</string>
+    <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
+    <string name="pref_snow_fall_title">Effet chute de neige</string>
+    <string name="pref_title_blacklist">Liste noire</string>
+    <string name="pref_summary_blacklist">Le contenu des dossiers en liste noire est masqué de votre bibliothèque.</string>
+    <string name="edit">Modifier</string>
+    <string name="synced_lyrics">Paroles synchronisées</string>
 </resources>

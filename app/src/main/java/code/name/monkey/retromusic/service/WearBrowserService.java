@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2015 Naman Dwivedi
+ * Copyright (c) 2019 Hemanth Savarala.
  *
  * Licensed under the GNU General Public License v3
  *
- * This is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
  *
  * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
@@ -241,9 +241,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> songList = SongLoader.INSTANCE.getAllSongs(mContext).blockingFirst();
                             for (Song song : songList) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.id),
-                                        song.title,
-                                        song.albumName,
+                                        String.valueOf(song.getId()),
+                                        song.getTitle(),
+                                        song.getAlbumName(),
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -253,9 +253,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> albumSongList = AlbumLoader.Companion.getAlbum(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
                             for (Song song : albumSongList) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.id),
-                                        song.title,
-                                        song.albumName,
+                                        String.valueOf(song.getId()),
+                                        song.getTitle(),
+                                        song.getAlbumName(),
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -264,9 +264,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> artistSongs = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
                             for (Song song : artistSongs) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.id),
-                                        song.title,
-                                        song.albumName,
+                                        String.valueOf(song.getId()),
+                                        song.getTitle(),
+                                        song.getAlbumName(),
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }
@@ -288,9 +288,9 @@ public class WearBrowserService extends MediaBrowserService {
                             List<Song> playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst();
                             for (Song song : playlistSongs) {
                                 fillMediaItems(mediaItems,
-                                        String.valueOf(song.id),
-                                        song.title,
-                                        song.albumName,
+                                        String.valueOf(song.getId()),
+                                        song.getTitle(),
+                                        song.getAlbumName(),
                                         Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_album_art"),
                                         MediaBrowser.MediaItem.FLAG_PLAYABLE);
                             }

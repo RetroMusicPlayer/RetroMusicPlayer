@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="small">Mali album</string>
     <string name="accent_color">Naglašena boja</string>
-    <string name="accent_color_desc">Naglašena boja teme, zadana je zelena</string>
+    <string name="accent_color_desc">Naglašena boja teme, zadana je plavo zelena</string>
     <string name="action_about">O aplikaciji</string>
     <string name="action_add_to_favorites">Dodaj u omiljene</string>
     <string name="action_add_to_playing_queue">Dodaj u red čekanja</string>
-    <string name="action_add_to_playlist">Dodaj na popis naslova...</string>
+    <string name="action_add_to_playlist">Dodaj na popis naslova</string>
     <string name="action_clear_playing_queue">Očisti red čekanja</string>
     <string name="action_clear_playlist">Očisti popis naslova</string>
     <string name="action_delete">Izbriši</string>
@@ -58,13 +59,14 @@
     <string name="app_shortcut_last_added_long">@string/last_added</string>
     <string name="app_shortcut_last_added_short">@string/last_added</string>
     <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_shuffle_all_short">Izmiješaj</string>
     <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
+    <string name="app_shortcut_shuffle_all_short">Izmiješaj</string>
     <string name="app_shortcut_top_tracks_short">Najslušanije pjesme</string>
     <string name="app_widget_big_name">Retro Music - Velik</string>
     <string name="app_widget_card_name">Retro Music - Kartica</string>
     <string name="app_widget_classic_name">Retro Music - Klasičan</string>
     <string name="app_widget_small_name">Retro Music - Malen</string>
+    <string name="app_widget_text_name">Retro Music - Tekst</string>
     <string name="artist">Izvođač</string>
     <string name="artists">Izvođači</string>
     <string name="audio_focus_denied">Fokus zvuka je odbijen.</string>
@@ -79,6 +81,7 @@
     <string name="pref_keep_screen_on_summary">Imajte na umu da omogućavanje ove značajke može utjecati na trajanje baterije</string>
     <string name="pref_blur_amount_title">Količina zamagljenja</string>
     <string name="pref_blur_amount_summary">Količina zamagljenja koja se primjenjuje na teme, manje je brže</string>
+    <string name="buy_retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Odustani</string>
     <string name="card">Kartica</string>
     <string name="card_color_style">Obojena kartica</string>
@@ -196,8 +199,6 @@
     <string name="only_on_wifi">Samo na Wi-Fi-u</string>
     <string name="others">Ostalo</string>
     <string name="past_three_months">Prošla 3 mjeseca</string>
-    <string name="paypal">PayPal.me</string>
-    <string name="paypal_summary">PayPal.me je jednostavan način da nam donirate  novac. U slučaju da ste povezali samo debitnu ili kreditnu karticu, provizija u SAD-u je 2.9% donacije + $0.30. Inače nema provizije.<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">više</a></string>
     <string name="permission_external_storage_denied">Dopuštenje za pristup eksternoj memoriji odbijeno.</string>
     <string name="permissions_denied">Dopuštenja odbijena.</string>
     <string name="personalize">Prilagodba</string>
@@ -272,7 +273,8 @@
     <string name="pref_title_home_banner">Naslovnica na početnoj stranici</string>
     <string name="pref_title_genre_toggle">Prikaži karticu žanra</string>
     <string name="pref_title_home_artist_grid_style">Rešetka izvođača na početnoj stranici</string>
-    <string name="pref_title_album_cover_transform">Način albuma na zaslonu za reprodukciju</string>
+    <string name="pref_title_album_cover_transform">Preskakanje omota albuma</string>
+    <string name="pref_album_detail_style">Stil detalja albuma</string>
     <string name="cascading">Kaskadno</string>
     <string name="primary_color">Primarna boja</string>
     <string name="primary_color_desc">Primarna boja teme, zadano je plavo-siva, zasad radi s tamnim bojama</string>
@@ -330,7 +332,6 @@
     <string name="speech_prompt">Pretraži svoju biblioteku</string>
     <string name="summary_user_info">Prikažite samo svoje ime na početnoj stranici</string>
     <string name="support_development">Podrži razvijanje</string>
-    <string name="synced_lyrics">Sinkroniziran tekst</string>
     <string name="system_equalizer">Sustavski ekvalizator</string>
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -380,7 +381,7 @@
     <string name="window_corner_edges">Zaobljeni kutovi</string>
     <string name="pref_title_album_cover_style">Teme omota albuma</string>
     <string name="circular">Kružno</string>
-    <string name="carousal">Ringišpil</string>
+    <string name="carousal">Vrtuljak</string>
     <string name="now_playing_summary">Prilagodite zaslon reprodukcije</string>
     <string name="full_card">Potpuna kartica</string>
     <string name="profile">Profil</string>
@@ -389,5 +390,47 @@
     <string name="labeled">Označeno</string>
     <string name="unlabeled">Neoznačeno</string>
     <string name="selected">Odabrano</string>
-
+    <string name="depth">Dubina</string>
+    <string name="vertical_flip">Vertikalni okret</string>
+    <string name="hinge">Šarka</string>
+    <string name="horizontal_flip">Horizontalni okret</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pauzirajte reprodukciju na nuli i započnite ju nakon podizanja glasnoće. Budite oprezni prilikom podizanja glasnoće jer se reprodukcija nastavlja čak i izvan aplikacije</string>
+    <string name="pref_keep_pause_on_zero_volume_title">Pauziraj na nuli</string>
+    <string name="whats_new">Što je novo</string>
+    <string name="suggestion_songs">Preporuke</string>
+    <string name="fit">Podesi</string>
+    <string name="pref_now_playing_screen_title">Klik ili klizanje</string>
+    <string name="pref_now_playing_screen_summary">Dodirnite za otvaranje ili klizanje bez prozirne navigacije zaslona za reprodukciju</string>
+    <string name="clear_playing_queue">Očisti red čekanja</string>
+    <string name="buy_pro">Kupi Retro Music Pro</string>
+    <string name="share_app">Podijeli aplikaciju</string>
+    <string name="report_bug">Prijavi pogrešku</string>
+    <string name="bug_report_use_account">Pošalji putem GitHub računa</string>
+    <string name="login">Prijava</string>
+    <string name="bug_report_manual">Pošalji ručno</string>
+    <string name="you_will_be_forwarded_to_the_issue_tracker_website">Biti će te preusmjereni na web stranicu za praćenje pogrešaka.</string>
+    <string name="bug_report_issue">Problem</string>
+    <string name="title">Naziv</string>
+    <string name="description">Opis</string>
+    <string name="username">Korisničko ime</string>
+    <string name="password">Lozinka</string>
+    <string name="device_info">Informacije o uređaju</string>
+    <string name="report_an_issue">Prijavi pogrešku</string>
+    <string name="bug_report_no_username">Molimo unesite vaše valjano GitHub korisničko ime</string>
+    <string name="bug_report_no_password">Molimo unesite vašu valjanu GitHub lozinku</string>
+    <string name="bug_report_no_title">Molimo unesite naslov problema</string>
+    <string name="bug_report_no_description">Molimo unesite opis problema</string>
+    <string name="bug_report_uploading">Učitavanje izvješća na GitHub...</string>
+    <string name="bug_report_failed">Nije moguće poslati izvješće</string>
+    <string name="bug_report_failed_wrong_credentials">Krivo korisničko ime ili lozinka</string>
+    <string name="bug_report_failed_invalid_token">Pristupni token nije valjan. Molimo kontaktirajte razvojnog programera aplikacije.</string>
+    <string name="bug_report_failed_issues_not_available">Problemi nisu omogućeni za odabrani repozitorij. Molimo kontaktirajte razvojnog programera aplikacije.</string>
+    <string name="bug_report_failed_unknown">Dogodila se neočekivana pogreška. Molimo kontaktirajte razvojnog programera aplikacije.</string>
+    <string name="copied_device_info_to_clipboard">Informacije o uređaju su kopirane u međuspremnik.</string>
+    <string name="your_account_data_is_only_used_for_authentication">Vaši podatci o računu su korišteni samo za autentikaciju.</string>
+    <string name="pref_snow_fall_title">Efekt padanja snijega</string>
+    <string name="pref_title_blacklist">Crni popis</string>
+    <string name="pref_summary_blacklist">Sadržaj mapa na crnom popisu će biti skriven iz vaše biblioteke.</string>
+    <string name="edit">Uredi</string>
+    <string name="synced_lyrics">Sinkroniziran tekst</string>
 </resources>

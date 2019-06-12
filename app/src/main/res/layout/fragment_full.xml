@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
 
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
-        android:name="code.name.monkey.retromusic.ui.fragments.player.PlayerAlbumCoverFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@layout/fragment_album_full_cover" />
@@ -16,7 +17,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#50000000" />
+        android:background="#90000000" />
 
     <code.name.monkey.retromusic.views.FitSystemWindowsLayout
         android:id="@+id/safeArea"
@@ -31,23 +32,124 @@
 
             <fragment
                 android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.ui.fragments.player.full.FullPlaybackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 tools:layout="@layout/fragment_full_player_controls" />
 
-            <FrameLayout
-                android:id="@+id/toolbar_container"
+
+        </LinearLayout>
+    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+
+    <LinearLayout
+        android:id="@+id/toolbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/status_bar" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/playerToolbar"
+            style="@style/Toolbar"
+            android:navigationIcon="@drawable/ic_close_white_24dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/playerToolbar"
-                    style="@style/Toolbar"
-                    android:navigationIcon="@drawable/ic_close_white_24dp" />
 
-            </FrameLayout>
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+                <TextView
+                    android:id="@+id/nextSongLabel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.75"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/next_song"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintEnd_toStartOf="@+id/artistImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/nextSong"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:gravity="center"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:singleLine="true"
+                    android:textColor="@color/md_white_1000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/artistImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/nextSongLabel"
+                    tools:text="@string/for_you" />
+
+                <code.name.monkey.retromusic.views.CircularImageView
+                    android:id="@+id/artistImage"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:elevation="10dp"
+                    app:civ_border="false"
+                    app:civ_shadow="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/default_artist_art" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:id="@+id/player_lyrics"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:clipToPadding="false"
+            android:elevation="20dp"
+            android:padding="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/player_lyrics_line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:shadowColor="@color/md_black_1000"
+                android:shadowRadius="4"
+                android:textAlignment="center"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/player_lyrics_line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:shadowColor="@color/md_black_1000"
+                android:shadowRadius="4"
+                android:textAlignment="center"
+                android:textColor="@color/md_white_1000"
+                android:textSize="22sp" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 </FrameLayout>

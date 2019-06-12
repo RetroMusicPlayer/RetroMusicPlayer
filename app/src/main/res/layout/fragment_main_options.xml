@@ -5,153 +5,85 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
     tools:ignore="MissingPrefix">
 
-    <LinearLayout
-        android:id="@+id/userInfoContainer"
+    <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionLibrary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="16dp">
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_library_music_white_24dp"
+        app:optionTitle="@string/library" />
 
-        <code.name.monkey.retromusic.views.CircularImageView
-            android:id="@+id/userImage"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_weight="0"
-            app:civ_border="false" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/titleWelcome"
-                style="@style/SubTitleTextAppearance"
-                android:padding="0dp" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.75"
-                android:ellipsize="end"
-                android:text="@string/lets_play_something" />
-
-        </LinearLayout>
-
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/actionSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?roundSelector"
-            android:gravity="center_vertical"
-            android:padding="12dp"
-            android:textAllCaps="false"
-            app:srcCompat="@drawable/ic_settings_white_24dp" />
-    </LinearLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/buyProContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/md_grey_400"
-        app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="8dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:textColor="@color/md_grey_200"
-                    style="@style/TextAppearance.MaterialComponents.Overline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="Upgrade to premium" />
-
-                <TextView
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:textColor="@color/md_white_1000"
-                    android:text="@string/buy_pro" />
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/promotional"
-                android:contentDescription="TODO" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionFolders"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/folders"
-        app:icon="@drawable/ic_folder_white_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_folder_white_24dp"
+        app:optionTitle="@string/folders" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_settings_white_24dp"
+        app:optionTitle="@string/action_settings" />
+
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionEqualizer"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/equalizer"
-        app:icon="@drawable/ic_equalizer_white_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_equalizer_white_24dp"
+        app:optionTitle="@string/equalizer" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionSleepTimer"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/action_sleep_timer"
-        app:icon="@drawable/ic_timer_white_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_timer_white_24dp"
+        app:optionTitle="@string/action_sleep_timer" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionShare"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/action_share"
-        app:icon="@drawable/ic_share_white_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_share_white_24dp"
+        app:optionTitle="@string/action_share" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionBugReport"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/report_bug"
-        app:icon="@drawable/ic_bug_report_white_24dp" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_bug_report_white_24dp"
+        app:optionTitle="@string/report_bug" />
 
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
-        android:id="@+id/actionAbout"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/action_about"
-        app:icon="@drawable/ic_help_white_24dp" />
-
-    <code.name.monkey.retromusic.views.MaterialButtonTextColor
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionRate"
-        style="@style/OptionButtonsStyle"
-        android:text="@string/rate_app"
-        app:icon="@drawable/ic_star_white_24dp" />
-
-
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        app:optionIcon="@drawable/ic_star_white_24dp"
+        app:optionTitle="@string/rate_app" />
 </LinearLayout>

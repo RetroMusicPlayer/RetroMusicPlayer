@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="code.name.monkey.retromusic.ui.activities.WhatsNewActivity">
+    tools:context=".activities.WhatsNewActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -18,22 +18,11 @@
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="">
+            app:title="@string/whats_new" />
 
-            <TextView
-                android:id="@+id/bannerTitle"
-                style="@style/BigTitleTextAppearance"
-                android:text="@string/whats_new" />
-
-        </androidx.appcompat.widget.Toolbar>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?dividerColor" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <WebView
+    <code.name.monkey.retromusic.views.LollipopFixedWebView
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -1,26 +1,27 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.transform
 
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.viewpager.widget.ViewPager
 
-/*******************************************************************
- * * * * *   * * * *   *     *       Created by OCN.Yang
- * *     *   *         * *   *       Time:2017/12/7 19:32.
- * *     *   *         *   * *       Email address:ocnyang@gmail.com
- * * * * *   * * * *   *     *.Yang  Web site:www.ocnyang.com
- */
-
 class CascadingPageTransformer : ViewPager.PageTransformer {
-    /**
-     * 偏移量
-     */
+
     private var mScaleOffset = 40
 
-
-    /**
-     * @param mScaleOffset 缩放偏移量 单位 px
-     */
     fun setScaleOffset(mScaleOffset: Int) {
         this.mScaleOffset = mScaleOffset
     }

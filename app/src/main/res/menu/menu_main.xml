@@ -1,17 +1,28 @@
+<!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DrawerActivity">
 
-    <item
-        android:id="@+id/action_shuffle_all"
-        android:icon="@drawable/ic_shuffle_white_24dp"
-        android:title="@string/action_shuffle_all"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_grid_size"
-        android:title="@string/action_grid_size">
+        android:icon="@drawable/ic_grid_size_white_24dp"
+        android:title="@string/action_grid_size"
+        app:showAsAction="never">
         <menu>
             <group
                 android:id="@+id/group_grid_size"
@@ -47,25 +58,10 @@
 
     <item
         android:id="@+id/action_sort_order"
-        android:title="@string/action_sort_order">
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/action_sort_order"
+        app:showAsAction="never">
         <menu></menu>
     </item>
 
-    <item
-        android:id="@+id/action_sleep_timer"
-        android:orderInCategory="98"
-        android:title="@string/action_sleep_timer"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_equalizer"
-        android:orderInCategory="99"
-        android:title="@string/equalizer"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
 </menu>

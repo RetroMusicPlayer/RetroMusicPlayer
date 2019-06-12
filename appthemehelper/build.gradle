@@ -22,20 +22,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    productFlavors {
-    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha05'
+    implementation 'com.google.android.material:material:1.1.0-alpha05'
+    implementation 'androidx.preference:preference:1.1.0-alpha05'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Used for the list preference classes
-    implementation "com.afollestad.material-dialogs:core:$materialDialog"
-    implementation "com.afollestad.material-dialogs:core:$materialDialog"
-    implementation 'com.afollestad.material-dialogs:input:2.0.0'
-    implementation 'com.afollestad.material-dialogs:color:2.0.0'
+    implementation 'com.afollestad.material-dialogs:core:3.0.0-alpha1'
+    implementation 'com.afollestad.material-dialogs:input:3.0.0-alpha1'
+    implementation 'com.afollestad.material-dialogs:color:3.0.0-alpha1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

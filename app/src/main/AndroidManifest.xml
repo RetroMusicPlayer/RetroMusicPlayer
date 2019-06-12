@@ -2,17 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="code.name.monkey.retromusic">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.android.vending.BILLING" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -23,7 +12,7 @@
         android:theme="@style/Theme.RetroMusic.Light"
         android:usesCleartextTraffic="false">
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -95,68 +84,57 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.AlbumDetailsActivity" />
-        <activity android:name=".ui.activities.ArtistDetailActivity" />
-        <activity android:name=".ui.activities.PlaylistDetailActivity" />
-        <activity android:name=".ui.activities.PlayingQueueActivity" />
-        <activity android:name=".ui.activities.AboutActivity" />
-        <activity android:name=".ui.activities.tageditor.AlbumTagEditorActivity" />
-        <activity android:name=".ui.activities.tageditor.SongTagEditorActivity" />
-        <activity android:name=".ui.activities.SettingsActivity" />
+        <activity android:name=".activities.AlbumDetailsActivity" />
+        <activity android:name=".activities.ArtistDetailActivity" />
+        <activity android:name=".activities.PlaylistDetailActivity" />
+        <activity android:name=".activities.PlayingQueueActivity" />
+        <activity android:name=".activities.AboutActivity" />
+        <activity android:name=".activities.tageditor.AlbumTagEditorActivity" />
+        <activity android:name=".activities.tageditor.SongTagEditorActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.LyricsActivity" />
+        <activity android:name=".activities.UserInfoActivity" />
+        <activity android:name=".activities.SupportDevelopmentActivity" />
+        <activity android:name=".activities.GenreDetailsActivity" />
+        <activity android:name=".activities.LicenseActivity" />
+        <activity android:name=".activities.PurchaseActivity" />
+        <activity android:name=".activities.EqualizerActivity" />
         <activity
-            android:name=".ui.activities.SearchActivity"
+            android:name=".activities.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity android:name=".ui.activities.LyricsActivity" />
-        <activity android:name=".ui.activities.UserInfoActivity" />
 
-        <activity android:name=".ui.activities.SupportDevelopmentActivity" />
-        <activity android:name=".ui.activities.GenreDetailsActivity" />
-        <activity android:name=".ui.activities.LicenseActivity" />
-        <activity android:name=".ui.activities.PurchaseActivity" />
-        <activity android:name=".ui.activities.EqualizerActivity" />
         <activity
-            android:name=".ui.activities.bugreport.ErrorHandlerActivity"
+            android:name=".activities.bugreport.ErrorHandlerActivity"
             android:immersive="true"
             android:label="@string/error"
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/ErrorHandlingTheme" />
-        <activity android:name=".ui.activities.WhatsNewActivity" />
-        <activity android:name=".ui.activities.bugreport.BugReportActivity" />
-        <activity android:name=".ui.activities.LockScreenActivity" />
+        <activity android:name=".activities.WhatsNewActivity" />
+        <activity android:name=".activities.bugreport.BugReportActivity" />
+        <activity
+            android:name=".activities.LockScreenActivity"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:showOnLockScreen="true" />
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <service
-            android:name=".service.MusicService"
-            android:enabled="true" />
-
-        <service
-            android:name=".service.WearBrowserService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.media.browse.MediaBrowserService" />
-            </intent-filter>
-        </service>
-
-        <receiver android:name=".service.MediaButtonIntentReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.MEDIA_BUTTON" />
-            </intent-filter>
-        </receiver>
-
-
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
+
         <meta-data
             android:name="com.lge.support.SPLIT_WINDOW"
             android:value="true" />
+
         <meta-data
             android:name="code.name.monkey.retromusic.glide.RetroMusicGlideModule"
             android:value="GlideModule" />
+
+
         <meta-data
             android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule"
             android:value="GlideModule" />
@@ -165,8 +143,8 @@
             android:value="code.name.monkey.retromusic.cast.CastOptionsProvider" />
 
         <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}"
+            android:name=".misc.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -174,12 +152,18 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
+        <receiver android:name=".service.MediaButtonIntentReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
         <receiver android:name=".appwidgets.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+
         <receiver
             android:name=".appwidgets.AppWidgetBig"
             android:exported="false"
@@ -192,6 +176,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_big_info" />
         </receiver>
+
         <receiver
             android:name=".appwidgets.AppWidgetClassic"
             android:exported="false"
@@ -241,6 +226,29 @@
                 android:resource="@xml/app_widget_card_info" />
         </receiver>
 
+        <service
+            android:name=".service.MusicService"
+            android:enabled="true" />
+        <service
+            android:name=".service.WearBrowserService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+
 
     </application>
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

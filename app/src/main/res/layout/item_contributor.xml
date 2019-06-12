@@ -12,12 +12,13 @@
     android:paddingEnd="12dp"
     tools:ignore="PrivateResource">
 
-    <code.name.monkey.retromusic.views.NetworkImageView
+    <code.name.monkey.retromusic.views.CircularImageView
         android:id="@+id/image"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:civ_border="false"
-        app:civ_shadow="false" />
+        app:civ_shadow="false"
+        app:srcCompat="@drawable/ic_person_flat" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,12 +31,14 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            app:fontFamily="@font/circular_std_medium"
+            android:layout_height="wrap_content" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
+            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="0.85" />

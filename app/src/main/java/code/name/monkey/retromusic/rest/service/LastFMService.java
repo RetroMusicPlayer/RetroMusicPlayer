@@ -1,5 +1,20 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.rest.service;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.rest.model.LastFmAlbum;
 import code.name.monkey.retromusic.rest.model.LastFmArtist;
@@ -17,12 +32,17 @@ public interface LastFMService {
     String BASE_QUERY_PARAMETERS = "?format=json&autocorrect=1&api_key=" + API_KEY;
     String METHOD_TRACK = "track.getInfo";
 
+    @NonNull
     @GET(BASE_QUERY_PARAMETERS + "&method=album.getinfo")
-    Observable<LastFmAlbum> getAlbumInfo(@Query("album") String albumName, @Query("artist") String artistName, @Nullable @Query("lang") String language);
+    Observable<LastFmAlbum> getAlbumInfo(@Query("album") @NonNull String albumName, @Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language);
 
+    @NonNull
     @GET("?api_key=" + API_KEY + "&format=json&autocorrect=1" + "&method=" + METHOD_TRACK)
-    Observable<LastFmTrack> getTrackInfo(@Query("artist") String artist, @Query("track") String track);
+    Observable<LastFmTrack> getTrackInfo(@Query("artist") @NonNull String artist, @Query("track") @NonNull String track);
 
+    @NonNull
     @GET(BASE_QUERY_PARAMETERS + "&method=artist.getinfo")
-    Call<LastFmArtist> getArtistInfo(@Query("artist") String artistName, @Nullable @Query("lang") String language, @Nullable @Header("Cache-Control") String cacheControl);
+    default Call<LastFmArtist> getArtistInfo(@Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language, @Nullable @Header("Cache-Control") String cacheControl) {
+        return null;
+    }
 }

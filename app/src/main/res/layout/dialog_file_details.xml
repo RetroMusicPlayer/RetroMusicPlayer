@@ -4,81 +4,69 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp"
     tools:ignore="NewApi,RtlSymmetry">
-
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="@string/action_details"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold"
-        tools:ignore="MissingPrefix" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/filePath"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/fileName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textColor="?android:attr/textColorPrimary"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/fileSize"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/fileFormat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/trackLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/bitrate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingEnd="16dp"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/samplingRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif"
+        android:paddingStart="16dp"
         android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceMedium"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
         android:textSize="16sp" />
 
 </LinearLayout>
