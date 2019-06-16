@@ -20,9 +20,6 @@ import android.provider.MediaStore
 object Constants {
 
     @JvmField
-    val DISCORD_LINK = "https://discord.gg/qTecXXn"
-
-    @JvmField
     val RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic"
     @JvmField
     val MUSIC_PACKAGE_NAME = "com.android.music"
@@ -66,10 +63,8 @@ object Constants {
     @JvmField
     val MEDIA_STORE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.mediastorechanged"
     const val RATE_ON_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
-    const val PAYPAL_ME_URL = "https://www.paypal.me/h4h14"
     const val TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534"
     const val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
-    const val BASE_API_URL_KUGOU = "http://lyrics.kugou.com/"
     const val TELEGRAM_CHANGE_LOG = "https://t.me/retromusiclog"
     const val USER_PROFILE = "profile.jpg"
     const val USER_BANNER = "banner.jpg"

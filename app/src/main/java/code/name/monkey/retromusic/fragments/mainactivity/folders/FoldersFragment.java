@@ -731,6 +731,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             ProgressDialog dialog = new ProgressDialog(context);
             dialog.setIndeterminate(true);
             dialog.setTitle(R.string.listing_files);
+            dialog.setCancelable(false);
             dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             dialog.setOnCancelListener(dialog1 -> cancel(false));
             dialog.setOnDismissListener(dialog1 -> cancel(false));

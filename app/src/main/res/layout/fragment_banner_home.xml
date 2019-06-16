@@ -65,8 +65,8 @@
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:title="@string/search_hint"
-                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         app:titleMarginStart="0dp"
+                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
                         tools:ignore="UnusedAttribute" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
@@ -84,25 +84,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="12dp">
 
-            <LinearLayout
-                android:id="@+id/contentContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical"
-                android:paddingTop="8dp">
-
-                <include layout="@layout/abs_playlists" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
-
-            </LinearLayout>
+            <include layout="@layout/home_content" />
         </com.google.android.material.card.MaterialCardView>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

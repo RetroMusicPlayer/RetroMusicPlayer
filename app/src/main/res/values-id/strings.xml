@@ -114,8 +114,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="delete_x_playlists"><![CDATA[Hapus <b>%1$d</b> daftar putar?]]></string>
     <string name="delete_x_songs"><![CDATA[Hapus <b>%1$d</b> lagu?]]></string>
     <string name="deleted_x_songs">Lagu %1$d dihapus</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Bergabung dengan server DIscord untuk mengetahui berita terbaru</string>
     <string name="do_you_want_to_clear_the_blacklist">Bersihkan daftar hitam?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Hapus <b>%1$s</b> dari
 Daftar hitam?]]></string>

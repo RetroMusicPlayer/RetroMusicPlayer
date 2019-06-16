@@ -155,9 +155,6 @@
     <string name="delete_songs_title">Delete songs</string>
     <string name="deleted_x_songs">Deleted %1$d songs.</string>
 
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Join the Discord server to keep up with the latest news</string>
-
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
 

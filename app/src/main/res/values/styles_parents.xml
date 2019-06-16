@@ -106,12 +106,11 @@
         <item name="windowActionBar">false</item>
     </style>
 
-
     <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
 
         <item name="dividerColor">@color/dark_color</item>
         <item name="defaultFooterColor">@color/md_grey_800</item>
-        <item name="cardBackgroundColor">@color/md_grey_900</item>
+        <item name="cardBackgroundColor">@color/black_color</item>
         <item name="md_background_color">@color/card_black_color</item>
 
         <item name="android:windowBackground">@color/black_color</item>

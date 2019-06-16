@@ -20,7 +20,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import code.name.monkey.appthemehelper.ThemeStore
 
-class ATEAccentTextView : AppCompatTextView {
+open class ATEAccentTextView : AppCompatTextView {
     constructor(context: Context) : super(context) {
         init(context)
     }

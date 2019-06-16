@@ -14,7 +14,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
-import code.name.monkey.retromusic.Constants.DISCORD_LINK
 import code.name.monkey.retromusic.Constants.FAQ_LINK
 import code.name.monkey.retromusic.Constants.GITHUB_PROJECT
 import code.name.monkey.retromusic.Constants.PINTEREST
@@ -118,7 +117,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.pinterestLink -> openUrl(PINTEREST)
             R.id.faqLink -> openUrl(FAQ_LINK)
             R.id.telegramLink -> openUrl(APP_TELEGRAM_LINK)
-            R.id.discordLink -> openUrl(DISCORD_LINK)
             R.id.appGithub -> openUrl(GITHUB_PROJECT)
             R.id.appTranslation -> openUrl(TRANSLATE)
             R.id.appRate -> openUrl(RATE_ON_GOOGLE_PLAY)

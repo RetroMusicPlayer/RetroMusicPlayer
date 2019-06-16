@@ -113,8 +113,6 @@
     <string name="delete_x_playlists"><![CDATA[Törli a <b>%1$d</b> lejátszási listát?]]></string>
     <string name="delete_x_songs"><![CDATA[Törli a <b>%1$d</b> zenét?]]></string>
     <string name="deleted_x_songs">Törölte a %1$d zenét.</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Csatlakozz a DIscord szerverre és ne maradj le az új hírekről</string>
     <string name="do_you_want_to_clear_the_blacklist">Szeretné törölni a feketelistát?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Szeretné eltávolítani a <b>%1$s</b> a feketelistáról?]]></string>
     <string name="donate">Támogatás</string>

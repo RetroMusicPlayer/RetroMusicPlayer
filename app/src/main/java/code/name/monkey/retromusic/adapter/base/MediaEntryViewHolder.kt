@@ -64,14 +64,10 @@ open class MediaEntryViewHolder(view: View) : RecyclerView.ViewHolder(view), Vie
         playSongs = view.findViewById(R.id.playSongs)
 
         view.setOnClickListener(this@MediaEntryViewHolder)
-        view.setOnLongClickListener(this)
+        view.setOnLongClickListener(this@MediaEntryViewHolder)
 
-        if (imageTextContainer != null) {
-            imageTextContainer!!.setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
-        }
-        if (imageContainerCard != null) {
-            imageContainerCard!!.setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
-        }
+        imageContainerCard?.setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
+
     }
 
     fun setImageTransitionName(transitionName: String) {

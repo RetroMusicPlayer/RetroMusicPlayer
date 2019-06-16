@@ -113,8 +113,6 @@
     <string name="delete_x_playlists"><![CDATA[删除播放列表 <b>%1$s</b> 吗？]]></string>
     <string name="delete_x_songs"><![CDATA[删除歌曲 <b>%1$s</b> 吗？]]></string>
     <string name="deleted_x_songs">已删除 %1$d 首歌曲</string>
-    <string name="discord_page">不谐和</string>
-    <string name="discord_summary">加入Discord服务器以了解最新消息</string>
     <string name="do_you_want_to_clear_the_blacklist">你想清除黑名单吗？</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[要从黑名单中删除 <b>%1$s</b> 吗？]]></string>
     <string name="donate">捐赠</string>

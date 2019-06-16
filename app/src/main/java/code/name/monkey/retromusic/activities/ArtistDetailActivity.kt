@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -37,12 +36,7 @@ import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_album_content.*
 import kotlinx.android.synthetic.main.activity_artist_content.*
-import kotlinx.android.synthetic.main.activity_artist_content.playAction
-import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
-import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
-import kotlinx.android.synthetic.main.activity_artist_content.songTitle
 import kotlinx.android.synthetic.main.activity_artist_details.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -242,12 +236,12 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                                 //TransitionManager.beginDelayedTransition(titleContainer);
                                 biographyText.visibility = View.VISIBLE
                                 biographyTitle.visibility = View.VISIBLE
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    biography = Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
+                                biography = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
                                 } else {
-                                    biography = Html.fromHtml(bioContent)
+                                    Html.fromHtml(bioContent)
                                 }
-                                biographyText!!.text = biography
+                                biographyText.text = biography
                             }
                         }
 

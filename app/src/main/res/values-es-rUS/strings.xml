@@ -117,8 +117,6 @@
     <string name="delete_x_playlists"><![CDATA[¿Eliminar <b>%1$d</b> listas?]]></string>
     <string name="delete_x_songs"><![CDATA[¿Eliminar <b>%1$d</b> canciones?]]></string>
     <string name="deleted_x_songs">Se eliminaron %1$d canciones</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Únete al servidor de Discord para mantenerte al día con las últimas noticias</string>
     <string name="do_you_want_to_clear_the_blacklist">¿Deseas limpiar la lista negra?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[¿Deseas eliminar <b>%1$s</b> de la lista negra?]]></string>
     <string name="donate">Donar</string>

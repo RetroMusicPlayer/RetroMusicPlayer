@@ -116,8 +116,6 @@
     <string name="delete_x_playlists"><![CDATA[Изтрий <b>%1$d</b> плейлисти?]]></string>
     <string name="delete_x_songs"><![CDATA[Изтрий <b>%1$d</b> песни?]]></string>
     <string name="deleted_x_songs">Изтрити %1$d песни.</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Присъедини се към Discord сървъра за актуални новини</string>
     <string name="do_you_want_to_clear_the_blacklist">Да се изчисти ли черният списък?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Да се премахне ли <b>%1$s</b> от черния списък?]]></string>
     <string name="donate">Дарения</string>

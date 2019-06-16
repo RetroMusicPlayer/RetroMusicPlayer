@@ -42,9 +42,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
             R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
-            R.id.actionSleepTimer -> if (fragmentManager != null) {
-                SleepTimerDialog().show(fragmentManager!!, TAG)
-            }
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
             R.id.actionShare -> shareApp()
             R.id.actionBugReport -> prepareBugReport()
@@ -67,7 +64,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private lateinit var actionSettings: View
-    private lateinit var actionSleepTimer: View
     private lateinit var actionLibrary: View
     private lateinit var actionEqualizer: View
     private lateinit var actionFolders: View
@@ -79,7 +75,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
-        actionSleepTimer = layout.findViewById(R.id.actionSleepTimer)
         actionLibrary = layout.findViewById(R.id.actionLibrary)
         actionEqualizer = layout.findViewById(R.id.actionEqualizer)
         actionFolders = layout.findViewById(R.id.actionFolders)
@@ -88,7 +83,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionBugReport = layout.findViewById(R.id.actionBugReport)
 
         actionSettings.setOnClickListener(this)
-        actionSleepTimer.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
         actionEqualizer.setOnClickListener(this)
         actionFolders.setOnClickListener(this)

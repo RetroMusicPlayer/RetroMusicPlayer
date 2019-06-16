@@ -9,7 +9,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATESecondaryTextView : AppCompatTextView {
+open class ATESecondaryTextView : AppCompatTextView {
 
     constructor(context: Context) : super(context) {
         init(context)

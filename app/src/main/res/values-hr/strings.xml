@@ -116,8 +116,6 @@
     <string name="delete_x_playlists"><![CDATA[Izbriši <b>%1$d</b> popisa naslova?]]></string>
     <string name="delete_x_songs"><![CDATA[Izbriši <b>%1$d</b> pjesama?]]></string>
     <string name="deleted_x_songs">Izbrisano je %1$d pjesama.</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">Pridružite se Discord serveru kako bi bili u toku sa novostima</string>
     <string name="do_you_want_to_clear_the_blacklist">Želite li očistiti crni popis?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Želite li ukloniti <b>%1$s</b> sa crnog popisa?]]></string>
     <string name="donate">Doniraj</string>

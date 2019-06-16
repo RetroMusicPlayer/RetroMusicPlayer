@@ -146,7 +146,7 @@ class SleepTimerDialog : DialogFragment() {
     }
 
 
-    private fun makeTimerPendingIntent(flag: Int): PendingIntent {
+    private fun makeTimerPendingIntent(flag: Int): PendingIntent? {
         return PendingIntent.getService(activity, 0, makeTimerIntent(), flag)
     }
 

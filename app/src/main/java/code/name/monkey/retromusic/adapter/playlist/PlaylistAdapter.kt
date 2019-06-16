@@ -203,7 +203,10 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
                 popupMenu.show()
             }
 
-            imageTextContainer?.cardElevation = 0f
+            imageTextContainer?.apply {
+                cardElevation = 0f
+                setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
+            }
         }
 
         override fun onClick(v: View?) {

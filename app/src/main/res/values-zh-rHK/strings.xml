@@ -116,8 +116,6 @@
     <string name="delete_x_playlists"><![CDATA[要移除<b>%1$d</b>個播放清單嗎?]]></string>
     <string name="delete_x_songs"><![CDATA[要移除<b>%1$d</b>個歌曲嗎?]]></string>
     <string name="deleted_x_songs">已刪除%1$d首歌曲。</string>
-    <string name="discord_page">Discord</string>
-    <string name="discord_summary">加入Discord伺服器來了解最新消息</string>
     <string name="do_you_want_to_clear_the_blacklist">要清除黑名單嗎?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[您想要將<b>%1$s</b>由黑名單移除嗎?]]></string>
     <string name="donate">捐款</string>
