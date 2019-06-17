@@ -19,6 +19,8 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.LyricsActivity
+import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -26,8 +28,6 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.activities.LyricsActivity
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -133,7 +133,8 @@ class ColorFragment : AbsPlayerFragment() {
 
     private fun updateSong() {
 
-        GlideApp.with(activity!!).asBitmapPalette()
+        GlideApp.with(activity!!)
+                .asBitmapPalette()
                 .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
                 .songOptions(MusicPlayerRemote.currentSong)
                 .transition(RetroGlideExtension.getDefaultTransition())
