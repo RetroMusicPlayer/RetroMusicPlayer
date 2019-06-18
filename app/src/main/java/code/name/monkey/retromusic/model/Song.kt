@@ -16,10 +16,6 @@ package code.name.monkey.retromusic.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-
-/**
- * @author Karim Abou Zeid (kabouzeid)
- */
 @Parcelize
 open class Song(val id: Int, val title: String, val trackNumber: Int, val year: Int, val duration: Long, val data: String, val dateModified: Long, val albumId: Int, val albumName: String, val artistId: Int, val artistName: String, val composer: String?) : Parcelable {
 
