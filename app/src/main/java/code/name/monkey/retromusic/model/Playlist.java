@@ -14,17 +14,10 @@
 
 package code.name.monkey.retromusic.model;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import org.jetbrains.annotations.NotNull;
-
-/**
- * @author Karim Abou Zeid (kabouzeid)
- */
 public class Playlist implements Parcelable {
     public final int id;
     public final String name;
