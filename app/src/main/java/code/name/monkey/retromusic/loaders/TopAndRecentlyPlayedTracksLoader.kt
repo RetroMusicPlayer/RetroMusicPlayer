@@ -87,11 +87,9 @@ object TopAndRecentlyPlayedTracksLoader {
         val songs = SongPlayCountStore.getInstance(context)
                 .getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
 
-        try {
-            return makeSortedCursor(context, songs,
-                    songs!!.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID))
-        } finally {
-            songs?.close()
+        songs.use { localSongs ->
+            return makeSortedCursor(context, localSongs,
+                    localSongs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID))
         }
     }
 

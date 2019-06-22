@@ -15,15 +15,15 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.model.Home
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.GENRES
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.PLAYLISTS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ALBUMS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ARTISTS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ALBUMS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ARTISTS
+import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.mvp.Presenter
+import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -55,7 +55,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadRecentArtists() {
         disposable += repository.recentArtists
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(0, R.string.recent_artists, 0, it, RECENT_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -66,7 +65,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadRecentAlbums() {
         disposable += repository.recentAlbums
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(1, R.string.recent_albums, 0, it, RECENT_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -77,7 +75,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadATopAlbums() {
         disposable += repository.topAlbums
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -88,7 +85,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadTopArtists() {
         disposable += repository.topArtists
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -99,7 +95,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadFavorite() {
         disposable += repository.favoritePlaylist
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(4, R.string.favorites, 0, it, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -110,7 +105,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
 
     private fun loadGenre() {
         disposable += repository.allGenres
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(6, R.string.genres, 0, it, GENRES, R.drawable.ic_guitar_acoustic_white_24dp))
                     view.showData(ArrayList(hashSet))

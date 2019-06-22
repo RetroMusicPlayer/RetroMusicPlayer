@@ -30,13 +30,14 @@
             app:elevation="0dp">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="6dp"
-                android:id="@+id/toolbarContainer"
+                app:strokeColor="@color/black_color"
                 app:cardUseCompatPadding="true"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:strokeWidth="1dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"

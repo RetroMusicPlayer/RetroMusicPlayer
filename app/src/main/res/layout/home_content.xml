@@ -17,7 +17,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contentContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -40,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:layout_width="96dp"
@@ -53,7 +53,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/empty"
-            android:textColor="?android:textColorSecondary"
-            tools:visibility="visible" />
+            android:textColor="?android:textColorSecondary" />
     </LinearLayout>
 </LinearLayout>

@@ -19,10 +19,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * This database tracks the number of play counts for an individual song.  This is used to drive

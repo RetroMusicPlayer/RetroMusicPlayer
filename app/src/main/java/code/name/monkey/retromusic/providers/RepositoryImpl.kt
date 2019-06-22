@@ -21,70 +21,110 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class RepositoryImpl(private val context: Context) : Repository {
     override val favoritePlaylist: Observable<ArrayList<Playlist>>
         get() = PlaylistLoader.getFavoritePlaylist(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
 
     override val allSongs: Observable<ArrayList<Song>>
         get() = SongLoader.getAllSongs(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val suggestionSongs: Observable<ArrayList<Song>>
         get() = SongLoader.suggestSongs(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val allAlbums: Observable<ArrayList<Album>>
         get() = AlbumLoader.getAllAlbums(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val recentAlbums: Observable<ArrayList<Album>>
         get() = LastAddedSongsLoader.getLastAddedAlbums(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val topAlbums: Observable<ArrayList<Album>>
         get() = TopAndRecentlyPlayedTracksLoader.getTopAlbums(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val allArtists: Observable<ArrayList<Artist>>
         get() = ArtistLoader.getAllArtists(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val recentArtists: Observable<ArrayList<Artist>>
         get() = LastAddedSongsLoader.getLastAddedArtists(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val topArtists: Observable<ArrayList<Artist>>
         get() = TopAndRecentlyPlayedTracksLoader.getTopArtists(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val allPlaylists: Observable<ArrayList<Playlist>>
         get() = PlaylistLoader.getAllPlaylists(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val homeList: Observable<ArrayList<Playlist>>
         get() = HomeLoader.getHomeLoader(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val allThings: Observable<ArrayList<AbsSmartPlaylist>>
         get() = HomeLoader.getRecentAndTopThings(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override val allGenres: Observable<ArrayList<Genre>>
         get() = GenreLoader.getAllGenres(context)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
 
     override fun getSong(id: Int): Observable<Song> {
         return SongLoader.getSong(context, id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getAlbum(albumId: Int): Observable<Album> {
         return AlbumLoader.getAlbum(context, albumId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getArtistById(artistId: Long): Observable<Artist> {
         return ArtistLoader.getArtist(context, artistId.toInt())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun search(query: String?): Observable<ArrayList<Any>> {
         return SearchLoader.searchAll(context, query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getPlaylistSongs(playlist: Playlist): Observable<ArrayList<Song>> {
         return PlaylistSongsLoader.getPlaylistSongList(context, playlist)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
     override fun getGenre(genreId: Int): Observable<ArrayList<Song>> {
         return GenreLoader.getSongs(context, genreId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 
 

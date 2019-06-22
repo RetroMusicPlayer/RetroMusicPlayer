@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -31,7 +32,7 @@ import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
@@ -42,16 +43,12 @@ import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
     override fun showEmpty() {
-
+        emptyContainer.show()
+        emptyText.setText(R.string.start_play_music)
     }
 
-    private lateinit var disposable: CompositeDisposable
+    private var disposable: Disposable? = null
     private lateinit var homePresenter: HomePresenter
-    private lateinit var contentContainerView: View
-    private lateinit var lastAdded: View
-    private lateinit var topPlayed: View
-    private lateinit var actionShuffle: View
-    private lateinit var history: View
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,7 +56,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun loadImageFromStorage() {
-        disposable.add(Compressor(context!!)
+        if (disposable != null) {
+            disposable?.dispose()
+        }
+        disposable = Compressor(context!!)
                 .setMaxHeight(300)
                 .setMaxWidth(300)
                 .setQuality(75)
@@ -75,7 +75,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                     }
                 }) {
                     userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
-                })
+                }
     }
 
     private val displayMetrics: DisplayMetrics
@@ -101,30 +101,25 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         if (!PreferenceUtil.getInstance().isHomeBanner)
             setStatusbarColorAuto(view)
 
-        lastAdded = view.findViewById(R.id.lastAdded)
         lastAdded.setOnClickListener {
             NavigationUtil.goToPlaylistNew(mainActivity, LastAddedPlaylist(mainActivity))
         }
 
-        topPlayed = view.findViewById(R.id.topPlayed)
         topPlayed.setOnClickListener {
             NavigationUtil.goToPlaylistNew(mainActivity, MyTopTracksPlaylist(mainActivity))
         }
 
-        actionShuffle = view.findViewById(R.id.actionShuffle)
         actionShuffle.setOnClickListener {
             MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(mainActivity).blockingFirst(), true)
         }
 
-        history = view.findViewById(R.id.history)
         history.setOnClickListener {
             NavigationUtil.goToPlaylistNew(mainActivity, HistoryPlaylist(mainActivity))
         }
 
         homePresenter = HomePresenter(this)
 
-        contentContainerView = view.findViewById(R.id.contentContainer)
-        contentContainerView.setBackgroundColor(ThemeStore.primaryColor(context!!))
+        contentContainer.setBackgroundColor(ThemeStore.primaryColor(context!!))
 
         setupToolbar()
         homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
@@ -176,13 +171,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onResume() {
         super.onResume()
-        disposable = CompositeDisposable()
         getTimeOfTheDay()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        disposable.dispose()
+        disposable?.dispose()
         homePresenter.unsubscribe()
     }
 
@@ -268,13 +262,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(bannerImage!!)
             } else {
-                disposable.add(Compressor(context!!)
+                disposable = Compressor(context!!)
                         .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
                         .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { bannerImage!!.setImageBitmap(it) })
+                        .subscribe { bannerImage?.setImageBitmap(it) }
             }
         }
         loadImageFromStorage()
