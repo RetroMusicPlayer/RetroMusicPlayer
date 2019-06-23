@@ -29,7 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="6dp"
+                app:cardElevation="0dp"
+                app:strokeColor="?dividerColor"
+                app:strokeWidth="1dp"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 
