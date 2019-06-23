@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.glide.GlideApp
@@ -201,15 +202,16 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var homeAdapter: HomeAdapter
 
     override fun showData(list: ArrayList<Home>) {
-        if (list.isEmpty()){
-            showEmptyView()
-            return
-        }
         val finalList = list.sortedWith(compareBy { it.priority })
         homeAdapter.swapData(finalList)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
+        }
+        if (list.isEmpty()) {
+            showEmptyView()
+        } else {
+            emptyContainer.hide()
         }
     }
 

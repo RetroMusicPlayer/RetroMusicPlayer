@@ -30,70 +30,77 @@
         </FrameLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fillViewport="true"
             android:overScrollMode="never">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <code.name.monkey.retromusic.views.CircularImageView
-                        android:id="@+id/artistImage"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="0"
-                        app:civ_border="false" />
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/albumTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                        <code.name.monkey.retromusic.views.CircularImageView
+                            android:id="@+id/artistImage"
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="0"
+                            app:civ_border="false" />
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            tools:ignore="MissingPrefix" />
+                            android:layout_gravity="bottom"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                            android:id="@+id/albumText"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            tools:ignore="MissingPrefix"
-                            tools:text="Title" />
+                            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                                android:id="@+id/albumTitle"
+                                style="@style/TextAppearance.MaterialComponents.Headline6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="2"
+                                tools:ignore="MissingPrefix" />
+
+                            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                                android:id="@+id/albumText"
+                                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:ellipsize="marquee"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:freezesText="true"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                tools:ignore="MissingPrefix"
+                                tools:text="Title" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
+                    <include layout="@layout/activity_album_content" />
                 </LinearLayout>
-
-                <include layout="@layout/activity_album_content" />
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

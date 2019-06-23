@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Slide
@@ -70,7 +71,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupWindowTransition()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
+        contentContainer?.setCardBackgroundColor( ColorStateList.valueOf(ThemeStore.primaryColor(this)))
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 
@@ -111,7 +112,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         supportActionBar!!.title = null
 
         val primaryColor = ThemeStore.primaryColor(this)
-        TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
+        //TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
 
         if (collapsingToolbarLayout != null) {
             collapsingToolbarLayout!!.apply {

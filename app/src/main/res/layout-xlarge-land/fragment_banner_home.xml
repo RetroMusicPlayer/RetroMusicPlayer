@@ -30,7 +30,7 @@
                 <FrameLayout
                     android:id="@+id/imageContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="228dp"
+                    android:layout_height="258dp"
                     app:layout_collapseMode="parallax">
 
                     <ImageView
@@ -63,6 +63,8 @@
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="6dp"
+                        android:layout_marginStart="128dp"
+                        android:layout_marginEnd="128dp"
                         app:cardUseCompatPadding="true"
                         app:layout_scrollFlags="scroll|enterAlways">
 

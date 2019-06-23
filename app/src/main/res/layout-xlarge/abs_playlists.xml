@@ -13,10 +13,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="24dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="10dp">
+        android:padding="24dp">
 
         <code.name.monkey.retromusic.views.CircularImageView
             android:id="@+id/userImage"

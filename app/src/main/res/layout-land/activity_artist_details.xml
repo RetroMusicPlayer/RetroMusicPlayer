@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
@@ -30,64 +31,71 @@
         </FrameLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:overScrollMode="never">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
                 <LinearLayout
-                    android:id="@+id/background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:orientation="vertical">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/artistTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            tools:ignore="MissingPrefix"
-                            tools:text="Title" />
+                            android:orientation="vertical"
+                            android:padding="16dp">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                            android:id="@+id/text"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
-                            tools:ignore="MissingPrefix"
-                            tools:text="Title" />
+                            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                                android:id="@+id/artistTitle"
+                                style="@style/TextAppearance.MaterialComponents.Headline6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:maxLines="2"
+                                tools:ignore="MissingPrefix"
+                                tools:text="Title" />
 
+                            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                                android:id="@+id/text"
+                                style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:ellipsize="marquee"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true"
+                                android:freezesText="true"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:scrollHorizontally="true"
+                                android:singleLine="true"
+                                tools:ignore="MissingPrefix"
+                                tools:text="Title" />
+
+                        </LinearLayout>
+
+                        <include layout="@layout/activity_artist_content" />
                     </LinearLayout>
 
-                    <include layout="@layout/activity_artist_content" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/status_bar_padding" />
+
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/status_bar_padding" />
-
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
