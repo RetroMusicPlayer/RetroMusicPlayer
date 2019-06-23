@@ -12,6 +12,8 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -21,8 +23,6 @@ import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.util.NavigationUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -66,11 +66,11 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
 
             lyricsLine1.alpha = 1f
             lyricsLine1.translationY = 0f
-            lyricsLine1.animate().alpha(0f).translationY(-h).duration =  VISIBILITY_ANIM_DURATION
+            lyricsLine1.animate().alpha(0f).translationY(-h).duration = VISIBILITY_ANIM_DURATION
 
             lyricsLine2.alpha = 0f
             lyricsLine2.translationY = h
-            lyricsLine2.animate().alpha(1f).translationY(0f).duration =  VISIBILITY_ANIM_DURATION
+            lyricsLine2.animate().alpha(1f).translationY(0f).duration = VISIBILITY_ANIM_DURATION
         }
     }
 
@@ -83,7 +83,7 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
     }
 
     private fun hideLyricsLayout() {
-        lyricsLayout.animate().alpha(0f).setDuration( VISIBILITY_ANIM_DURATION).withEndAction(Runnable {
+        lyricsLayout.animate().alpha(0f).setDuration(VISIBILITY_ANIM_DURATION).withEndAction(Runnable {
             if (!isLyricsLayoutBound()) return@Runnable
             lyricsLayout.visibility = View.GONE
             lyricsLine1.text = null
@@ -91,7 +91,7 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
         })
     }
 
-     override fun setLyrics(l: Lyrics?) {
+    override fun setLyrics(l: Lyrics?) {
         lyrics = l
 
         if (!isLyricsLayoutBound()) return
@@ -105,7 +105,7 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
         lyricsLine2.text = null
 
         lyricsLayout.visibility = View.VISIBLE
-        lyricsLayout.animate().alpha(1f).duration =  VISIBILITY_ANIM_DURATION
+        lyricsLayout.animate().alpha(1f).duration = VISIBILITY_ANIM_DURATION
     }
 
     override fun playerToolbar(): Toolbar {
@@ -119,7 +119,6 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
 
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
-            setNavigationIcon(R.drawable.ic_close_white_24dp)
             setNavigationOnClickListener { activity!!.onBackPressed() }
         }
     }

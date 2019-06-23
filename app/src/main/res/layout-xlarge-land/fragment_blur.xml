@@ -73,10 +73,10 @@
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
         android:layout_height="48dp"
-        android:navigationIcon="@drawable/ic_close_white_24dp"
+        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:navigationIcon="@drawable/ic_close_white_24dp" />
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
