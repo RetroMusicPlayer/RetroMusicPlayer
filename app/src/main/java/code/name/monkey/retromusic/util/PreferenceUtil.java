@@ -147,8 +147,6 @@ public final class PreferenceUtil {
                 return R.style.Theme_RetroMusic_Light;
             case "color":
                 return R.style.Theme_RetroMusic_Color;
-            case "acolor":
-                return R.style.Theme_RetroMusic_Black;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
             case "daynight":

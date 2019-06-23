@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.adapter
 
+import android.content.res.ColorStateList
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
@@ -17,7 +19,6 @@ import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.item_option_menu.view.*
 
 
 class HomeAdapter(private val activity: AppCompatActivity, private var homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -138,5 +139,9 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
     private open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val chip: Chip = itemView.findViewById(R.id.chipHead)
+
+        init {
+            chip.apply { chipBackgroundColor = ColorStateList.valueOf(ThemeStore.primaryColor(context)) }
+        }
     }
 }

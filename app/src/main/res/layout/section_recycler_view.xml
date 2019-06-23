@@ -8,14 +8,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.google.android.material.chip.Chip
+    <code.name.monkey.retromusic.views.RetroChip
         android:id="@+id/chipHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:fontFamily="@font/circular"
-        android:textColor="?android:textColorSecondary"
-        app:chipBackgroundColor="?colorPrimary"
         app:chipIconTint="?iconColor"
         app:chipStrokeColor="?dividerColor"
         app:chipStrokeWidth="1dp"
