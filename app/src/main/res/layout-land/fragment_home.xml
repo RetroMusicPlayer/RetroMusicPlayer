@@ -32,6 +32,8 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:strokeColor="?dividerColor"
