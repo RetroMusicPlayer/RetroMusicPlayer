@@ -4,7 +4,6 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,7 +16,8 @@ import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.views.IconImageView
+import com.google.android.material.chip.Chip
+import kotlinx.android.synthetic.main.item_option_menu.view.*
 
 
 class HomeAdapter(private val activity: AppCompatActivity, private var homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -91,8 +91,8 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             recyclerView.apply {
                 adapter = AlbumFullWidthAdapter(activity, home.arrayList as ArrayList<Album>, displayMetrics)
             }
-            title.text = activity.getString(home.title)
-            icon.setImageResource(home.icon)
+            chip.text = activity.getString(home.title)
+            chip.setChipIconResource(home.icon)
         }
     }
 
@@ -103,8 +103,8 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
                 val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
                 adapter = artistAdapter
             }
-            title.text = activity.getString(home.title)
-            icon.setImageResource(home.icon)
+            chip.text = activity.getString(home.title)
+            chip.setChipIconResource(home.icon)
         }
     }
 
@@ -116,8 +116,8 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
                 adapter = genreAdapter
 
             }
-            title.text = activity.getString(home.title)
-            icon.setImageResource(home.icon)
+            chip.text = activity.getString(home.title)
+            chip.setChipIconResource(home.icon)
         }
     }
 
@@ -130,14 +130,13 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
                 adapter = songAdapter
 
             }
-            title.text = activity.getString(home.title)
-            icon.setImageResource(home.icon)
+            chip.text = activity.getString(home.title)
+            chip.setChipIconResource(home.icon)
         }
     }
 
     private open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
-        val title: TextView = itemView.findViewById(R.id.sectionTitle)
-        val icon: IconImageView = itemView.findViewById(R.id.sectionIcon)
+        val chip: Chip = itemView.findViewById(R.id.chipHead)
     }
 }

@@ -67,7 +67,7 @@
 
         <item name="cardBackgroundColor">@color/card_dark_color</item>
         <item name="defaultFooterColor">@color/dark_color</item>
-        <item name="dividerColor">@color/dark_color</item>
+        <item name="dividerColor">@color/md_grey_800</item>
 
         <item name="iconColor">@color/ate_secondary_text_dark</item>
 
