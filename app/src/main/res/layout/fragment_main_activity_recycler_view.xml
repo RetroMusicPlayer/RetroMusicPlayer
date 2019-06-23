@@ -26,7 +26,7 @@
         <code.name.monkey.retromusic.views.IconImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
-            app:srcCompat="@drawable/ic_disc_full_black_24dp" />
+            app:srcCompat="@drawable/ic_music_note_off_white_24dp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/emptyText"

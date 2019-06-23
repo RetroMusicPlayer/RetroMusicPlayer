@@ -59,7 +59,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(0, R.string.recent_artists, 0, it, RECENT_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 
@@ -69,7 +69,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(1, R.string.recent_albums, 0, it, RECENT_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 
@@ -79,7 +79,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 
@@ -89,7 +89,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 
@@ -99,7 +99,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(4, R.string.favorites, 0, it, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 
@@ -109,7 +109,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
                     if (it.isNotEmpty()) hashSet.add(Home(6, R.string.genres, 0, it, GENRES, R.drawable.ic_guitar_acoustic_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
-                    view.showEmpty()
+                    view.showEmptyView()
                 })
     }
 }

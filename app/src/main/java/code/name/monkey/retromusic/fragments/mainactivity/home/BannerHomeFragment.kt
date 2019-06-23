@@ -42,10 +42,6 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
-    override fun showEmpty() {
-        emptyContainer.show()
-        emptyText.setText(R.string.start_play_music)
-    }
 
     private var disposable: Disposable? = null
     private lateinit var homePresenter: HomePresenter
@@ -185,7 +181,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     override fun showEmptyView() {
-
+        emptyContainer.show()
     }
 
     override fun completed() {
@@ -205,6 +201,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var homeAdapter: HomeAdapter
 
     override fun showData(list: ArrayList<Home>) {
+        if (list.isEmpty()){
+            showEmptyView()
+            return
+        }
         val finalList = list.sortedWith(compareBy { it.priority })
         homeAdapter.swapData(finalList)
         recyclerView.apply {

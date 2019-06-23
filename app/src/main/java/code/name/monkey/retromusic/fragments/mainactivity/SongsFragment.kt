@@ -83,7 +83,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         super.onResume()
         libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.songs)
         if (adapter!!.dataSet.isEmpty()) {
-            presenter!!.subscribe()
+            presenter.subscribe()
         }
     }
 
@@ -128,7 +128,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun setSortOrder(sortOrder: String) {
-        presenter!!.loadSongs()
+        presenter.loadSongs()
     }
 
     companion object {
