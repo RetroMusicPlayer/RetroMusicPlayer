@@ -19,9 +19,14 @@
             android:id="@+id/searchContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="6dp"
-            app:cardUseCompatPadding="true">
+            app:cardElevation="0dp"
+            app:cardUseCompatPadding="true"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:strokeColor="?dividerColor"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

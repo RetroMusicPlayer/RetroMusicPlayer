@@ -14,12 +14,12 @@
 
 package code.name.monkey.retromusic.fragments.settings
 
-import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
+
 
 /**
  * @author Hemanth S (h4h13).
@@ -27,27 +27,37 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 class NotificationSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
-        val classicNotification: TwoStatePreference = findPreference("classic_notification")!!
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            classicNotification.isVisible = false
+
+        val classicNotification: TwoStatePreference? = findPreference("classic_notification")
+        if (VERSION.SDK_INT < VERSION_CODES.N) {
+            classicNotification?.isVisible = false
         } else {
-            classicNotification.isChecked = PreferenceUtil.getInstance().classicNotification()
-            classicNotification.setOnPreferenceChangeListener { _, newValue ->
-                // Save preference
-                PreferenceUtil.getInstance().setClassicNotification(newValue as Boolean)
-
-                val service = MusicPlayerRemote.musicService
-                if (service != null) {
-                    service.initNotification()
-                    service.updateNotification()
+            classicNotification?.apply {
+                isChecked = PreferenceUtil.getInstance().classicNotification()
+                setOnPreferenceChangeListener { _, newValue ->
+                    // Save preference
+                    PreferenceUtil.getInstance().setClassicNotification(newValue as Boolean)
+                    invalidateSettings()
+                    true
                 }
+            }
+        }
 
-                true
+        val coloredNotification: TwoStatePreference? = findPreference("colored_notification")
+        if (VERSION.SDK_INT >= VERSION_CODES.O) {
+            coloredNotification?.isEnabled = PreferenceUtil.getInstance().classicNotification()
+        } else {
+            coloredNotification?.apply {
+                isChecked = PreferenceUtil.getInstance().coloredNotification()
+                setOnPreferenceChangeListener { _, newValue ->
+                    PreferenceUtil.getInstance().setColoredNotification(newValue as Boolean)
+                    true
+                }
             }
         }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.pref_notification)
+        addPreferencesFromResource(code.name.monkey.retromusic.R.xml.pref_notification)
     }
 }

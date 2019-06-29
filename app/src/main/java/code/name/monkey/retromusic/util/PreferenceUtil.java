@@ -304,6 +304,10 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(COLORED_NOTIFICATION, true);
     }
 
+    public final void setColoredNotification(boolean b) {
+        mPreferences.edit().putBoolean(COLORED_NOTIFICATION, b).apply();
+    }
+
     public final boolean classicNotification() {
         return mPreferences.getBoolean(CLASSIC_NOTIFICATION, false);
     }

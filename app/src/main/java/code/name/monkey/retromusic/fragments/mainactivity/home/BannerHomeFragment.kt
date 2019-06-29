@@ -33,7 +33,7 @@ import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
@@ -44,7 +44,7 @@ import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
 
-    private var disposable: Disposable? = null
+    private var disposable: CompositeDisposable = CompositeDisposable()
     private lateinit var homePresenter: HomePresenter
     private lateinit var toolbar: Toolbar
 
@@ -53,10 +53,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun loadImageFromStorage() {
-        if (disposable != null) {
-            disposable?.dispose()
-        }
-        disposable = Compressor(context!!)
+        disposable.add(Compressor(context!!)
                 .setMaxHeight(300)
                 .setMaxWidth(300)
                 .setQuality(75)
@@ -72,7 +69,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                     }
                 }) {
                     userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
-                }
+                })
     }
 
     private val displayMetrics: DisplayMetrics
@@ -173,7 +170,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onDestroyView() {
         super.onDestroyView()
-        disposable?.dispose()
+        disposable.dispose()
         homePresenter.unsubscribe()
     }
 
@@ -264,13 +261,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(bannerImage!!)
             } else {
-                disposable = Compressor(context!!)
+                disposable.add(Compressor(context!!)
                         .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
                         .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { bannerImage?.setImageBitmap(it) }
+                        .subscribe { bitmap -> bannerImage.setImageBitmap(bitmap) })
             }
         }
         loadImageFromStorage()
