@@ -1,0 +1,19 @@
+Device info:
+---
+<table>
+<tr><td>App version</td><td>3.1.900_0606</td></tr>
+<tr><td>App version code</td><td>10333</td></tr>
+<tr><td>Android build version</td><td>1905251415</td></tr>
+<tr><td>Android release version</td><td>9</td></tr>
+<tr><td>Android SDK version</td><td>28</td></tr>
+<tr><td>Android build ID</td><td>ONEPLUS A3003_16_190525</td></tr>
+<tr><td>Device brand</td><td>OnePlus</td></tr>
+<tr><td>Device manufacturer</td><td>OnePlus</td></tr>
+<tr><td>Device name</td><td>OnePlus3</td></tr>
+<tr><td>Device model</td><td>ONEPLUS A3003</td></tr>
+<tr><td>Device product name</td><td>OnePlus3</td></tr>
+<tr><td>Device hardware name</td><td>qcom</td></tr>
+<tr><td>ABIs</td><td>[arm64-v8a, armeabi-v7a, armeabi]</td></tr>
+<tr><td>ABIs (32bit)</td><td>[armeabi-v7a, armeabi]</td></tr>
+<tr><td>ABIs (64bit)</td><td>[arm64-v8a]</td></tr>
+</table>
