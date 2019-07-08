@@ -121,8 +121,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         if (PreferenceUtil.getInstance().pauseOnZeroVolume())
             if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
                 MusicPlayerRemote.pauseSong()
-            } else {
-                MusicPlayerRemote.resumePlaying()
             }
     }
 

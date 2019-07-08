@@ -203,7 +203,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun getArtist(): Artist {
-        return this.artist;
+        return this.artist
     }
 
     private fun setArtist(artist: Artist) {
@@ -332,7 +332,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             R.id.action_reset_artist_image -> {
                 Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating),
                         Toast.LENGTH_SHORT).show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist!!)
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
                 forceDownload = true
                 return true
             }
