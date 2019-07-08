@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_general">
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="dark"
             android:entries="@array/pref_general_theme_list_titles"
             android:entryValues="@array/pref_general_theme_list_values"

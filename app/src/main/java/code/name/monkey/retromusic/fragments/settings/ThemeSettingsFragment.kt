@@ -23,7 +23,6 @@ import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.*
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
@@ -42,68 +41,72 @@ import com.afollestad.materialdialogs.color.colorChooser
 class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
-        val primaryColorPref: ATEColorPreference = findPreference("primary_color")!!
-        primaryColorPref.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
-        val primaryColor = ThemeStore.primaryColor(activity!!)
-        primaryColorPref.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
-        primaryColorPref.setOnPreferenceClickListener {
-            MaterialDialog(activity!!, BottomSheet()).show {
-                title(code.name.monkey.retromusic.R.string.primary_color)
-                positiveButton(R.string.set)
-                colorChooser(initialSelection = BLUE, allowCustomArgb = true, colors = PRIMARY_COLORS, subColors = PRIMARY_COLORS_SUB) { _, color ->
-                    val theme = if (ColorUtil.isColorLight(color))
-                        PreferenceUtil.getThemeResFromPrefValue("light")
-                    else
-                        PreferenceUtil.getThemeResFromPrefValue("dark")
+        val primaryColorPref: ATEColorPreference? = findPreference("primary_color")
+        primaryColorPref?.let {
+            it.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
+            val primaryColor = ThemeStore.primaryColor(activity!!)
+            it.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
+            it.setOnPreferenceClickListener {
+                MaterialDialog(activity!!, BottomSheet()).show {
+                    title(R.string.primary_color)
+                    positiveButton(R.string.set)
+                    colorChooser(initialSelection = BLUE,
+                            allowCustomArgb = true,
+                            colors = PRIMARY_COLORS,
+                            subColors = PRIMARY_COLORS_SUB) { _, color ->
 
-                    ThemeStore.editTheme(context).activityTheme(theme).primaryColor(color).commit()
+                        val theme = if (ColorUtil.isColorLight(color))
+                            PreferenceUtil.getThemeResFromPrefValue("light")
+                        else
+                            PreferenceUtil.getThemeResFromPrefValue("dark")
 
-                    if (VersionUtils.hasNougatMR())
-                        DynamicShortcutManager(context).updateDynamicShortcuts()
-                    activity!!.recreate()
+                        ThemeStore.editTheme(context).activityTheme(theme).primaryColor(color).commit()
+
+                        if (VersionUtils.hasNougatMR())
+                            DynamicShortcutManager(context).updateDynamicShortcuts()
+                        activity!!.recreate()
+                    }
                 }
+                true
             }
-            true
         }
 
-        val generalTheme: Preference = findPreference("general_theme")!!
-        setSummary(generalTheme)
-        generalTheme.setOnPreferenceChangeListener { _, newValue ->
-            val theme = newValue as String
+        val generalTheme: Preference? = findPreference("general_theme")
 
-            if (theme == "color" && !App.isProVersion) {
-                primaryColorPref.isVisible = false
-                showProToastAndNavigate("Color theme")
-                return@setOnPreferenceChangeListener false
-            } else {
-                primaryColorPref.isVisible = true
-            }
-
-            setSummary(generalTheme, newValue)
-
-
-            when (theme) {
-                "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
-                "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
-                "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
-                "daynight" -> {
-                    val color = ATHUtil.resolveColor(context!!, android.R.attr.colorPrimary)
-                    ThemeStore.editTheme(context!!).primaryColor(color).commit()
+        generalTheme?.let {
+            setSummary(it)
+            it.setOnPreferenceChangeListener { _, newValue ->
+                val theme = newValue as String
+                println(newValue)
+                if (theme == "color" && !App.isProVersion) {
+                    showProToastAndNavigate("Color theme")
+                    return@setOnPreferenceChangeListener false
                 }
-                "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
-            }
 
-            ThemeStore.editTheme(activity!!)
-                    .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
-                    .commit()
+                if (theme == "color") {
+                    primaryColorPref?.isVisible = true
+                }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                activity!!.setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
-                DynamicShortcutManager(activity!!).updateDynamicShortcuts()
+                setSummary(generalTheme, newValue)
+
+                when (theme) {
+                    "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
+                    "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
+                    "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
+                    "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
+                }
+
+                ThemeStore.editTheme(activity!!)
+                        .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
+                        .commit()
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                    activity?.setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
+                    DynamicShortcutManager(activity!!).updateDynamicShortcuts()
+                }
+                activity?.recreate()
+                true
             }
-            activity!!.recreate()
-            //invalidateSettings();
-            true
         }
 
         val accentColorPref: ATEColorPreference = findPreference("accent_color")!!
