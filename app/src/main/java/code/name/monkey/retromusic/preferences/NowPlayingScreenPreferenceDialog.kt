@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.preferences
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -28,6 +29,7 @@ import androidx.preference.DialogPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
@@ -35,7 +37,6 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
@@ -53,6 +54,10 @@ class NowPlayingScreenPreference : DialogPreference {
 
     override fun getDialogLayoutResource(): Int {
         return mLayoutRes;
+    }
+
+    init {
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }
 
