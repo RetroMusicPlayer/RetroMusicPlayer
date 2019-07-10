@@ -1,18 +1,20 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.Activity
-import android.content.*
+import android.content.ContentUris
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
-import android.provider.MediaStore
+import android.provider.MediaStore.Images.Media
 import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
@@ -56,10 +58,10 @@ class UserInfoActivity : AbsBaseActivity() {
         name.setText(PreferenceUtil.getInstance().userName)
         bio.setText(PreferenceUtil.getInstance().userBio)
 
-        if (!PreferenceUtil.getInstance().profileImage.isEmpty()) {
+        if (PreferenceUtil.getInstance().profileImage.isNotEmpty()) {
             loadImageFromStorage(PreferenceUtil.getInstance().profileImage)
         }
-        if (!PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+        if (PreferenceUtil.getInstance().bannerImage.isNotEmpty()) {
             loadBannerFromStorage(PreferenceUtil.getInstance().bannerImage)
         }
         userImage.setOnClickListener {
@@ -129,7 +131,7 @@ class UserInfoActivity : AbsBaseActivity() {
     private fun selectBannerImage() {
 
         if (TextUtils.isEmpty(PreferenceUtil.getInstance().bannerImage)) {
-            val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val pickImageIntent = Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI)
             pickImageIntent.type = "image/*"
             //pickImageIntent.putExtra("crop", "true")
             pickImageIntent.putExtra("outputX", 1290)
@@ -147,7 +149,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
 
     private fun pickNewPhoto() {
-        val pickImageIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val pickImageIntent = Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI)
         pickImageIntent.type = "image/*"
         pickImageIntent.putExtra("crop", "true")
         pickImageIntent.putExtra("outputX", 512)
@@ -163,40 +165,28 @@ class UserInfoActivity : AbsBaseActivity() {
         if (resultCode == Activity.RESULT_OK && data != null) {
             when (requestCode) {
                 PICK_IMAGE_REQUEST -> {
-                    val uri = data.data
                     try {
-                        val bitmap = getResizedBitmap(getBitmap(contentResolver, uri), PROFILE_ICON_SIZE)
-                        val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
-                        PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
-                        loadImageFromStorage(profileImagePath)
+                        data.data?.let {
+                            val bitmap = getResizedBitmap(getBitmap(contentResolver, it), PROFILE_ICON_SIZE)
+                            val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
+                            PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
+                            loadImageFromStorage(profileImagePath)
+                        }
+
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
-                }
-                CROP_IMAGE_REQUEST -> {
-                    val extras: Bundle = data.extras!!
-                    val selectedBitmap: Bitmap = extras.getParcelable("data")
-                    val profileImagePath = saveToInternalStorage(selectedBitmap, USER_PROFILE)
-                    PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
-                    loadImageFromStorage(profileImagePath)
                 }
                 PICK_BANNER_REQUEST -> {
-                    val uri = data.data
                     try {
-                        val bitmap = getBitmap(contentResolver, uri)
-                        val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
-                        PreferenceUtil.getInstance().setBannerImagePath(profileImagePath)
-                        loadBannerFromStorage(profileImagePath)
+                        data.data?.let {
+                            val bitmap = getBitmap(contentResolver, it)
+                            val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
+                            PreferenceUtil.getInstance().setBannerImagePath(profileImagePath)
+                            loadBannerFromStorage(profileImagePath)
+                        }
                     } catch (e: IOException) {
                         e.printStackTrace()
-                    }
-                }
-                CROP_BANNER_REQUEST -> {
-                    val selectedBitmap: Bitmap? = data.extras?.getParcelable("date")
-                    val profileImagePath = selectedBitmap?.let { saveToInternalStorage(it, USER_BANNER) }
-                    profileImagePath?.let {
-                        PreferenceUtil.getInstance().saveProfileImage(it)
-                        loadImageFromStorage(it)
                     }
                 }
             }
@@ -213,8 +203,8 @@ class UserInfoActivity : AbsBaseActivity() {
             val documentId = DocumentsContract.getDocumentId(aUri)
             if ("com.android.providers.media.documents" == aUri.authority) {
                 val id = documentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-                val selection = MediaStore.Images.Media._ID + "=" + id
-                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection)
+                val selection = Media._ID + "=" + id
+                imagePath = getImagePath(Media.EXTERNAL_CONTENT_URI, selection)
             } else if ("com.android.providers.downloads.documents" == aUri.authority) {
                 val contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
                         java.lang.Long.valueOf(documentId))
@@ -233,48 +223,11 @@ class UserInfoActivity : AbsBaseActivity() {
         val cursor = App.context.contentResolver.query(aUri, null, aSelection, null, null)
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA))
+                path = cursor.getString(cursor.getColumnIndex(Media.DATA))
             }
             cursor.close()
         }
         return path
-    }
-
-    private fun performBannerCrop(picturePath: Uri?) {
-        val photoUri = FileProvider.getUriForFile(this, "$packageName.provider", File(getImagePathFromUri(picturePath)))
-        try {
-
-            val cropIntent = Intent("com.android.camera.action.CROP")
-            cropIntent.setDataAndType(photoUri, "image/*")
-            cropIntent.putExtra("crop", "true")
-            cropIntent.putExtra("aspectX", 1)
-            cropIntent.putExtra("aspectY", 1)
-            cropIntent.putExtra("return-data", true)
-            cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            startActivityForResult(cropIntent, CROP_BANNER_REQUEST)
-        } catch (anfe: ActivityNotFoundException) {
-            val errorMessage = "your device doesn't support the crop action!"
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun performCrop(imageUri: Uri) {
-        val photoUri = FileProvider.getUriForFile(this, "$packageName.provider", File(getImagePathFromUri(imageUri)))
-        try {
-            val cropIntent = Intent("com.android.camera.action.CROP")
-            cropIntent.setDataAndType(photoUri, "image/*")
-            cropIntent.putExtra("crop", "true")
-            cropIntent.putExtra("aspectX", 1)
-            cropIntent.putExtra("aspectY", 1)
-            cropIntent.putExtra("outputX", 280)
-            cropIntent.putExtra("outputY", 280)
-            cropIntent.putExtra("return-data", true)
-            cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            startActivityForResult(cropIntent, CROP_IMAGE_REQUEST)
-        } catch (anfe: ActivityNotFoundException) {
-            val errorMessage = "your device doesn't support the crop action!"
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
-        }
     }
 
     private fun loadBannerFromStorage(profileImagePath: String) {
@@ -323,9 +276,7 @@ class UserInfoActivity : AbsBaseActivity() {
     companion object {
 
         private const val PICK_IMAGE_REQUEST = 9002
-        private const val CROP_IMAGE_REQUEST = 9003
         private const val PICK_BANNER_REQUEST = 9004
-        private const val CROP_BANNER_REQUEST = 9005
         private const val PROFILE_ICON_SIZE = 400
     }
 }
