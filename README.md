@@ -17,7 +17,6 @@ Retro Music is an open source, local music player for Android.
 - Volume controls
 - Blacklist
 - Album artist support
-- Auto-download artist images from Last.fm
 
 #### Download
 
