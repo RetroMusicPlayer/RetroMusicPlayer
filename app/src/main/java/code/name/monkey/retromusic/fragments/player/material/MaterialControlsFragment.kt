@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -106,7 +107,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
             lastPlaybackControlsColor = color
             color
         } else {
-            ThemeStore.textColorSecondary(context!!)
+            ThemeStore.textColorSecondary(context!!).ripAlpha()
         }
         text.setTextColor(colorFinal)
         ViewUtil.setProgressDrawable(progressSlider, ColorUtil.stripAlpha(colorFinal), true)

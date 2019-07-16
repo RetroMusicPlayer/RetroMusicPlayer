@@ -51,11 +51,11 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        val TAG = MediaButtonIntentReceiver::class.java.simpleName
+        val TAG: String = MediaButtonIntentReceiver::class.java.simpleName
         private val DEBUG = BuildConfig.DEBUG
-        private val MSG_HEADSET_DOUBLE_CLICK_TIMEOUT = 2
+        private const val MSG_HEADSET_DOUBLE_CLICK_TIMEOUT = 2
 
-        private val DOUBLE_CLICK = 400
+        private const val DOUBLE_CLICK = 400
 
         private var wakeLock: WakeLock? = null
         private var mClickCounter = 0

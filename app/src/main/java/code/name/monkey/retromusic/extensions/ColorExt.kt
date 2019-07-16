@@ -12,33 +12,10 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.model;
+package code.name.monkey.retromusic.extensions
 
-import android.content.Context;
-import android.os.Parcel;
+import code.name.monkey.appthemehelper.util.ColorUtil
 
-import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-
-import io.reactivex.Observable;
-
-/**
- * @author Karim Abou Zeid (kabouzeid)
- */
-
-public abstract class AbsCustomPlaylist extends Playlist {
-    public AbsCustomPlaylist(int id, String name) {
-        super(id, name);
-    }
-
-    public AbsCustomPlaylist() {
-    }
-
-    public AbsCustomPlaylist(Parcel in) {
-        super(in);
-    }
-
-    @NonNull
-    public abstract Observable<ArrayList<Song>> getSongs(Context context);
+fun Int.ripAlpha(): Int {
+    return ColorUtil.stripAlpha(this)
 }

@@ -43,16 +43,13 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/songTotalTime"
             android:layout_toRightOf="@id/songCurrentProgress"
-            android:maxHeight="3dp"
-            android:progressDrawable="@drawable/color_progress_seek"
-            android:splitTrack="false"
             tools:ignore="RtlHardcoded,UnusedAttribute"
             tools:progress="20" />
     </RelativeLayout>
