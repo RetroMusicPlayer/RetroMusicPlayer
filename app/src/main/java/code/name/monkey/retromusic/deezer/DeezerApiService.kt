@@ -52,8 +52,7 @@ interface DeezerApiService {
                         .addHeader("Cache-Control",
                                 String.format(
                                         Locale.getDefault(),
-                                        "max-age=%d, max-stale=%d",
-                                        31536000, 31536000
+                                        "max-age=31536000, max-stale=31536000"
                                 )
                         ).build()
                 chain.proceed(modifiedRequest)
