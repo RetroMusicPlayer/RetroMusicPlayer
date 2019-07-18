@@ -43,9 +43,9 @@
     <string name="translate_community">帮助我们使这款播放器以您的语言呈现内容</string>
     <string name="copied_device_info_to_clipboard">将您的设备信息复制到剪贴板</string>
     <string name="action_add_to_favorites">添加到收藏夹</string>
-    <string name="action_add_to_playing_queue">添加到播放列表</string>
+    <string name="action_add_to_playing_queue">添加到播放队列</string>
     <string name="action_add_to_playlist">添加到播放列表</string>
-    <string name="action_clear_playing_queue">清空播放列表</string>
+    <string name="action_clear_playing_queue">清空播放队列</string>
     <string name="action_clear_playlist">清空播放列表</string>
     <string name="action_delete">删除</string>
     <string name="action_delete_from_device">从设备中移除</string>
@@ -63,10 +63,10 @@
     <string name="action_play_pause">播放/暂停</string>
     <string name="action_previous">上一首</string>
     <string name="action_remove_from_favorites">从收藏夹中移除</string>
-    <string name="action_remove_from_playing_queue">从播放列表中移除</string>
+    <string name="action_remove_from_playing_queue">从播放队列中移除</string>
     <string name="action_remove_from_playlist">从播放列表中移除</string>
     <string name="action_rename">重命名</string>
-    <string name="action_save_playing_queue">保存播放列表</string>
+    <string name="action_save_playing_queue">保存播放队列</string>
     <string name="action_scan">扫描</string>
     <string name="action_scan_directory">目录扫描</string>
     <string name="action_search">搜索</string>
@@ -84,8 +84,8 @@
     <string name="add_action">添加</string>
     <string name="add_photo">添加\n头像</string>
     <string name="add_playlist_title">"添加到播放列表"</string>
-    <string name="added_title_to_playing_queue">"已加入播放列表"</string>
-    <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放列表</string>
+    <string name="added_title_to_playing_queue">"已加入播放队列"</string>
+    <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列</string>
     <string name="album">专辑</string>
     <string name="album_artist">专辑艺术家</string>
     <string name="album_or_artist_empty">标题或歌手为空</string>
@@ -230,9 +230,9 @@
     <string name="sort_order_composer">以作曲家</string>
     <string name="up_next">接下来</string>
     <string name="the_audio_file">分享音频文件</string>
-    <string name="clear_playing_queue">清除列表</string>
+    <string name="clear_playing_queue">清除播放队列</string>
     <string name="normal">正常</string>
-    <string name="queue">播放列表</string>
+    <string name="queue">播放队列</string>
     <string name="normal_lyrics">一般歌词</string>
     <string name="normal_style">正常</string>
     <string name="edit">编辑</string>
@@ -243,7 +243,7 @@
     <string name="notification">通知烂</string>
     <string name="notification_settings_summary">自定义通知栏风格</string>
     <string name="now_playing">正在播放</string>
-    <string name="now_playing_queue">播放列表</string>
+    <string name="now_playing_queue">播放队列</string>
     <string name="only_on_wifi">仅限 Wi-Fi</string>
     <string name="others">其他</string>
     <string name="past_three_months">前三个月</string>
