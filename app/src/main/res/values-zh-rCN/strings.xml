@@ -8,13 +8,13 @@
     <string name="recent_albums">您最近播放过的专辑</string>
     <string name="recent_artists">您最近听过 TA 们的歌</string>
     <string name="small">小专辑</string>
-    <string name="welcome">您好，</string>
+    <string name="welcome">欢迎您，</string>
     <string name="top_albums">脱颖专辑</string>
-    <string name="expand_button_title">高级</string>
     <string name="top_artists">脱颖艺人</string>
     <string name="pref_title_blacklist">黑名单</string>
     <string name="accent_color">强调色</string>
-    <string name="accent_color_desc">主题强调色，默认为蓝绿色。</string>
+    <string name="pref_title_album_cover_style">封面主题</string>
+    <string name="accent_color_desc">主题强调色，默认为蓝绿。</string>
     <string name="profile">个人资料</string>
     <string name="action_about">关于</string>
     <string name="report_bug">反馈漏洞</string>
@@ -283,7 +283,7 @@
     <string name="songs">首歌曲</string>
     <string name="fit">适应</string>
     <string name="plain">简约</string>
-    <string name="personalize_settings_summary">自定义正在播放控件和 UI 控件</string>
+    <string name="personalize_settings_summary">自定义播放控件和 UI 控件</string>
     <string name="pick_from_local_storage">从本地选取</string>
     <string name="playing_notification_description">播放通知栏提供播放/暂停等操作</string>
     <string name="playing_notification_name">播放通知栏</string>
@@ -304,7 +304,7 @@
     <string name="pref_summary_classic_notification">使用经典通知栏设计</string>
     <string name="pref_summary_home_banner">切换主页横幅样式</string>
     <string name="grid_style_label"><![CDATA[方格与风格]]></string>
-    <string name="pref_summary_colored_app">背景色以及控件色跟随正在播放界面的专辑封面变化</string>
+    <string name="pref_summary_colored_app">背景色以及控件色跟随播放界面的专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_navigation_bar">将主调色应用于导航栏</string>
     <string name="pref_summary_colored_notification">"\u4fee\u6539\u901a\u77e5\u680f\u989c\u8272\u4e3a\u4e13\u8f91\u5c01\u9762\u7684\u4e3b\u8272\u8c03"</string>
@@ -353,7 +353,7 @@
     <string name="pref_title_extra_controls">额外控件</string>
     <string name="pref_title_home_banner">主页横幅</string>
     <string name="pref_title_genre_toggle">显示流派标签</string>
-    <string name="pref_title_album_cover_transform">正在播放的专辑封面风格</string>
+    <string name="pref_title_album_cover_transform">播放界面专辑封面风格</string>
     <string name="primary_color">主颜色</string>
     <string name="rate_app">评价这个应用</string>
     <string name="pref_keep_pause_on_zero_volume_title">静音时自动暂停</string>
@@ -386,6 +386,8 @@
     <string name="pref_title_home_artist_grid_style">主页艺术家展示形式</string>
     <string name="about_settings_summary">了解我们的团队，获取我们的社交账号以及联系方式</string>
     <string name="year">年</string>
+    <string name="keyboard">显示键盘</string>
+    <string name="hinge">Hinge</string>
     <string name="stack">堆叠</string>
     <string name="image_gradient">渐变图片</string>
     <string name="premium">成为高级会员</string>
@@ -399,12 +401,14 @@
     <string name="virtualizer">虚拟器</string>
     <string name="depth">深度</string>
     <string name="vertical_flip">垂直翻转</string>
+    <string name="cascading">传递</string>
     <string name="horizontal_flip">水平翻转</string>
     <string name="whats_new">来看看这次更新的亮点吧！</string>
     <string name="saved_playlist_to">已保存播放列表至 %s.</string>
     <string name="scanned_files">已扫描出 %1$d 个文件，总共有 %2$d 个</string>
     <string name="sleep_timer_canceled">睡眠定时器已取消</string>
     <string name="social">社交媒体</string>
+    <string name="hinge">合页</string>
     <string name="select_preset">选择一个预设</string>
     <string name="on">开启</string>
     <string name="shuffle">随机播放</string>
@@ -413,7 +417,7 @@
     <string name="dialog_title_set_ringtone">设置铃声</string>
     <string name="dialog_message_set_ringtone">请允许 Retro Music 更改音频设置</string>
     <string name="suggestion_songs">推荐</string>
-    <string name="twitter_page_summary">分享您自己独一无二的 Retro Music</string>
+    <string name="twitter_page_summary">分享出您独一无二的 Retro Music</string>
     <string name="start_play_music">来点音乐吧</string>
     <string name="share_app">分享应用到…</string>
     <string name="pro_summary">更多播放主题，轮播效果，色彩主题，等你解锁！</string>
