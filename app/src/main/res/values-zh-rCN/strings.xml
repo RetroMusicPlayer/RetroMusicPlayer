@@ -10,6 +10,7 @@
     <string name="small">小专辑</string>
     <string name="welcome">您好，</string>
     <string name="top_albums">脱颖专辑</string>
+    <string name="expand_button_title">高级</string>
     <string name="top_artists">脱颖艺人</string>
     <string name="pref_title_blacklist">黑名单</string>
     <string name="accent_color">强调色</string>
