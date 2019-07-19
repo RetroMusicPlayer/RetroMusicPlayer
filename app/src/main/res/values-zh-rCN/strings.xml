@@ -12,6 +12,8 @@
     <string name="top_albums">脱颖专辑</string>
     <string name="top_artists">脱颖艺人</string>
     <string name="pref_title_blacklist">黑名单</string>
+    <string name="set_artist_image">设置艺人图片</string>
+    <string name="reset_artist_image">重置艺人图片</string>
     <string name="accent_color">强调色</string>
     <string name="pref_title_album_cover_style">封面主题</string>
     <string name="accent_color_desc">主题强调色，默认为蓝绿。</string>
@@ -216,7 +218,7 @@
     <string name="lyrics">歌词</string>
     <string name="material">质感</string>
     <string name="my_name">我的名字</string>
-    <string name="my_top_tracks">播放最多</string>
+    <string name="my_top_tracks">我的最爱</string>
     <string name="never">从不</string>
     <string name="new_playlist_title">新建播放列表</string>
     <string name="new_start_directory">%s 是新的开始目录</string>
@@ -231,7 +233,7 @@
     <string name="no_results">暂时找不到结果</string>
     <string name="no_songs">还没有歌曲</string>
     <string name="Composer">作曲家</string>
-    <string name="track_hint">"音轨 (使用 2 来代表轨道 2，或者使用 3004 来代表 CD3 轨道 4)"</string>
+    <string name="track_hint">"曲目\n(填 2 代表第二曲，或者用 3004 代表 CD3 的第四曲)"</string>
     <string name="sort_order_composer">以作曲家</string>
     <string name="up_next">接下来</string>
     <string name="the_audio_file">分享音频文件</string>
@@ -270,7 +272,10 @@
     <string name="title_good_afternoon">下午好</string>
     <string name="title_good_day">祝您万事顺心</string>
     <string name="title_good_evening">晚上好</string>
+    <string name="track_list">专辑曲目号</string>
+    <string name="song_duration">歌曲时长</string>
     <string name="title_good_morning">早哇</string>
+    <string name="remove_cover">移除封面</string>
     <string name="title_good_night">晚安</string>
     <string name="title_user_info">请问您的名字是…</string>
     <string name="thank_you">感谢您！</string>
@@ -280,7 +285,7 @@
     <string name="save">保存</string>
     <string name="speech_prompt">使用语音搜索您的资料库</string>
     <string name="speech_not_supported">很抱歉，您的设备暂不支持语言输入！</string>
-    <string name="songs">首歌曲</string>
+    <string name="song">歌曲</string>
     <string name="fit">适应</string>
     <string name="plain">简约</string>
     <string name="personalize_settings_summary">自定义播放控件和 UI 控件</string>
@@ -322,7 +327,7 @@
     <string name="pref_summary_extra_controls">给迷你播放器添加额外控件</string>
     <string name="pref_summary_genre_toggle">切换流派标签</string>
     <string name="pref_title_album_art_on_lockscreen">显示专辑封面</string>
-    <string name="pref_title_tab_text_mode">标签标题模式</string>
+    <string name="pref_title_tab_text_mode">底栏文字显示</string>
     <string name="pref_title_album_grid_style">专辑方格</string>
     <string name="pref_title_app_shortcuts">彩色快捷方式</string>
     <string name="pref_title_artist_grid_style">艺术家方格</string>
@@ -364,9 +369,9 @@
     <string name="remove_song_from_playlist_title">从播放列表中删除歌曲</string>
     <string name="remove_songs_from_playlist_title">从播放列表中删除歌曲</string>
     <string name="rename_playlist_title">重命名播放列表</string>
-    <string name="labeled">已标记</string>
-    <string name="selected">已选择</string>
-    <string name="unlabeled">未标记</string>
+    <string name="labeled">始终显示</string>
+    <string name="selected">显示当前页的文字</string>
+    <string name="unlabeled">不显示</string>
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="saving_changes">保存修改</string>
