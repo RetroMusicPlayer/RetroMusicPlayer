@@ -149,7 +149,7 @@
     <string name="clear_playlist_x"><![CDATA[\u786e\u8ba4\u6e05\u9664\u64ad\u653e\u5217\u8868 <b>%1$s</b> \u5417\uff1f\u8bf7\u6ce8\u610f\uff0c\u6b64\u64cd\u4f5c\u4e0d\u53ef\u6062\u590d\uff01]]></string>
     <string name="close_notification">关闭</string>
     <string name="color">多彩</string>
-    <string name="color_theme_name">多彩</string>
+    <string name="color_theme_name">自定义</string>
     <string name="primary_color_desc">播放器的主色调，默认蓝灰色。使用深色效果更佳。</string>
     <string name="colors">更多颜色</string>
     <string name="could_not_create_playlist">\u4e0d\u80fd\u521b\u5efa\u64ad\u653e\u5217\u8868</string>
@@ -160,7 +160,7 @@
     <string name="created_playlist_x">已创建播放列表 %1$s</string>
     <string name="credit_title">开发团队和贡献者</string>
     <string name="currently_listening_to_x_by_x">当前通过 %2$s 收听 %1$s</string>
-    <string name="dark_theme_name">浅黑</string>
+    <string name="dark_theme_name">深空灰</string>
     <string name="default_hint">没有歌词</string>
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确认删除播放列表 <b>%1$s</b> 吗？]]></string>
@@ -184,7 +184,7 @@
     <string name="favorites">收藏夹</string>
     <string name="flat">扁平</string>
     <string name="folders">文件夹</string>
-    <string name="for_you">专属于你</string>
+    <string name="for_you">专属于您</string>
     <string name="full_card">卡片式全屏幕</string>
     <string name="full">全屏幕</string>
     <string name="general_settings_summary">更改应用的主题和颜色</string>
@@ -210,7 +210,7 @@
     <string name="lets_play_something">来点音乐吧！</string>
     <string name="library">资料库</string>
     <string name="licenses">许可</string>
-    <string name="light_theme_name">纯白</string>
+    <string name="light_theme_name">皓月白</string>
     <string name="listing_files">正在罗列出所有文件</string>
     <string name="loading_products">劳烦您稍等一下…（若始终无法加载，请尝试使用爬墙工具）</string>
     <string name="lyrics">歌词</string>
@@ -420,7 +420,7 @@
     <string name="clear_app_data">清除应用数据</string>
     <string name="error">错误</string>
     <string name="window">窗口</string>
-    <string name="now_playing_themes">9+ 种播放主题</string>
+    <string name="now_playing_themes">9 种以上播放主题</string>
     <string name="carousal_effect_on_now_playing_screen">在播放界面使用轮播效果</string>
     <string name="now_playing_summary">自定义播放界面</string>
 </resources>
