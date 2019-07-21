@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="app_shortcut_shuffle_all_short">随机播放</string>
     <string name="synced_lyrics">扫描到的歌词</string>
     <string name="songs">歌曲</string>
     <string name="action_play_all">全部播放</string>
@@ -224,7 +223,7 @@
     <string name="no_purchase_found">找不到支付记录</string>
     <string name="no_results">无结果</string>
     <string name="no_songs">无歌曲</string>
-    <string name="Composer">作曲家</string>
+    <string name="composer">作曲家</string>
     <string name="track_hint">"音轨 (使用 2 来代表轨道 2，或者使用 3004 来代表 CD3 轨道 4)"</string>
     <string name="sort_order_composer">作曲家</string>
     <string name="up_next">接下来</string>
