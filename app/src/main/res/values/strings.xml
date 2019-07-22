@@ -624,4 +624,5 @@
     <string name="pro_summary">Now playing themes, Carousel effect, Color theme and more..</string>
     <string name="action_play_all">Play all</string>
     <string name="start_play_music">Start playing music.</string>
+    <string name="keyboard">Keyboard</string>
 </resources>

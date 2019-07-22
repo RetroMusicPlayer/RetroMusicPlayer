@@ -16,7 +16,7 @@ import java.util.*
 
 class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistContract.PlaylistView {
 
-    private var presenter: PlaylistPresenter? = null
+    private lateinit var presenter: PlaylistPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_playlists
@@ -47,18 +47,18 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
         super.onResume()
         libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.playlists)
         if (adapter!!.dataSet.isEmpty()) {
-            presenter!!.subscribe()
+            presenter.subscribe()
         }
     }
 
     override fun onDestroy() {
-        presenter!!.unsubscribe()
+        presenter.unsubscribe()
         super.onDestroy()
     }
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        presenter!!.loadPlaylists()
+        presenter.loadPlaylists()
     }
 
     override fun loading() {

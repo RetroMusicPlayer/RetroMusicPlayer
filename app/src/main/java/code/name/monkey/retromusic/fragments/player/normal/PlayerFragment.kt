@@ -101,7 +101,6 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
-        snowfall.visibility = if (PreferenceUtil.getInstance().isSnowFall) View.VISIBLE else View.GONE
 
 
         //val display = activity?.windowManager?.defaultDisplay

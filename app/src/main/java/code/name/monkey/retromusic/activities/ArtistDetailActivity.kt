@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -17,7 +18,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
@@ -68,7 +72,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         setDrawUnderStatusBar()
         setupWindowTransitions()
         super.onCreate(savedInstanceState)
-        collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
+        //collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
+        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
         toggleBottomNavigationView(true)
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -114,7 +119,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
     private fun setupToolbarMarginHeight() {
         val primaryColor = ThemeStore.primaryColor(this)
-        TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
+
         collapsingToolbarLayout?.let {
             it.setContentScrimColor(primaryColor)
             it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
@@ -198,7 +203,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun getArtist(): Artist {
-        return this.artist;
+        return this.artist
     }
 
     private fun setArtist(artist: Artist) {
@@ -327,7 +332,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             R.id.action_reset_artist_image -> {
                 Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating),
                         Toast.LENGTH_SHORT).show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist!!)
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
                 forceDownload = true
                 return true
             }

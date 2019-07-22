@@ -12,11 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.jetradarmobile.snowfall.SnowfallView
-        android:id="@+id/snowfall"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <include layout="@layout/shadow_statusbar_toolbar" />
 
     <code.name.monkey.retromusic.views.FitSystemWindowsLayout
@@ -66,7 +61,8 @@
                     android:id="@+id/playerToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:navigationIcon="@drawable/ic_close_white_24dp" />
+                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
             </FrameLayout>
         </LinearLayout>
     </code.name.monkey.retromusic.views.FitSystemWindowsLayout>

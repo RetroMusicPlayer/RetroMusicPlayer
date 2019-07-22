@@ -92,8 +92,8 @@
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/playerToolbar"
                     style="@style/Toolbar"
-                    android:navigationIcon="@drawable/ic_close_white_24dp"
-                    app:navigationIcon="@drawable/ic_close_white_24dp" />
+                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
             </FrameLayout>
         </LinearLayout>
     </code.name.monkey.retromusic.views.FitSystemWindowsLayout>

@@ -16,16 +16,16 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.dialogs.SongShareDialog
+import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -151,8 +151,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
 
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
-            inflateMenu(code.name.monkey.retromusic.R.menu.menu_player)
-            setNavigationIcon(code.name.monkey.retromusic.R.drawable.ic_close_white_24dp)
+            inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { activity!!.onBackPressed() }
             setOnMenuItemClickListener(this@ClassicPlayerFragment)
         }

@@ -29,7 +29,6 @@ import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
-import android.media.session.MediaSession;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
@@ -86,6 +85,7 @@ import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import io.reactivex.schedulers.Schedulers;
 
 import static code.name.monkey.retromusic.Constants.ACTION_PAUSE;
 import static code.name.monkey.retromusic.Constants.ACTION_PENDING_QUIT;
@@ -142,6 +142,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
             | PlaybackStateCompat.ACTION_STOP
             | PlaybackStateCompat.ACTION_SEEK_TO;
     private final IBinder musicBind = new MusicBinder();
+    public boolean pendingQuit = false;
     private AppWidgetBig appWidgetBig = AppWidgetBig.Companion.getInstance();
     private AppWidgetClassic appWidgetClassic = AppWidgetClassic.Companion.getInstance();
     private AppWidgetSmall appWidgetSmall = AppWidgetSmall.Companion.getInstance();
@@ -178,7 +179,6 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         }
     };
-    public boolean pendingQuit = false;
     private Playback playback;
     private ArrayList<Song> playingQueue = new ArrayList<>();
     private ArrayList<Song> originalPlayingQueue = new ArrayList<>();
@@ -244,20 +244,18 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action != null) {
-                switch (action) {
-                    case Intent.ACTION_HEADSET_PLUG:
-                        int state = intent.getIntExtra("state", -1);
-                        switch (state) {
-                            case 0:
-                                Log.d(TAG, "Headset unplugged");
-                                pause();
-                                break;
-                            case 1:
-                                Log.d(TAG, "Headset plugged");
-                                play();
-                                break;
-                        }
-                        break;
+                if (Intent.ACTION_HEADSET_PLUG.equals(action)) {
+                    int state = intent.getIntExtra("state", -1);
+                    switch (state) {
+                        case 0:
+                            Log.d(TAG, "Headset unplugged");
+                            pause();
+                            break;
+                        case 1:
+                            Log.d(TAG, "Headset plugged");
+                            play();
+                            break;
+                    }
                 }
             }
         }
@@ -352,7 +350,10 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
 
-        mediaSession = new MediaSessionCompat(this, "RetroMusicPlayer", mediaButtonReceiverComponentName, mediaButtonReceiverPendingIntent);
+        mediaSession = new MediaSessionCompat(this,
+                "RetroMusicPlayer",
+                mediaButtonReceiverComponentName,
+                mediaButtonReceiverPendingIntent);
         mediaSession.setCallback(new MediaSessionCompat.Callback() {
             @Override
             public void onPlay() {
@@ -390,8 +391,9 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
             }
         });
 
-        mediaSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS
-                | MediaSession.FLAG_HANDLES_MEDIA_BUTTONS);
+        mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
+                | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS
+        );
 
         mediaSession.setMediaButtonReceiver(mediaButtonReceiverPendingIntent);
     }
@@ -417,31 +419,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                         play();
                         break;
                     case ACTION_PLAY_PLAYLIST:
-                        Playlist playlist = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST);
-                        int shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode());
-                        if (playlist != null) {
-                            ArrayList<Song> playlistSongs;
-                            if (playlist instanceof AbsCustomPlaylist) {
-                                playlistSongs = ((AbsCustomPlaylist) playlist).getSongs(getApplicationContext()).blockingFirst();
-                            } else {
-                                //noinspection unchecked
-                                playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(getApplicationContext(), playlist.id).blockingFirst();
-                            }
-                            if (!playlistSongs.isEmpty()) {
-                                if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
-                                    int startPosition;
-                                    startPosition = new Random().nextInt(playlistSongs.size());
-                                    openQueue(playlistSongs, startPosition, true);
-                                    setShuffleMode(shuffleMode);
-                                } else {
-                                    openQueue(playlistSongs, 0, true);
-                                }
-                            } else {
-                                Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
-                        }
+                        playFromPlaylist(intent);
                         break;
                     case ACTION_REWIND:
                         back(true);
@@ -464,6 +442,45 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         return START_STICKY;
     }
 
+    private void playFromPlaylist(Intent intent) {
+        Playlist playlist = intent.getParcelableExtra(INTENT_EXTRA_PLAYLIST);
+        int shuffleMode = intent.getIntExtra(INTENT_EXTRA_SHUFFLE_MODE, getShuffleMode());
+
+        if (playlist != null) {
+            if (playlist instanceof AbsCustomPlaylist) {
+                ((AbsCustomPlaylist) playlist).getSongs(getApplicationContext())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(songs -> {
+                            playSongs(shuffleMode, songs);
+                        }, throwable -> {
+                        });
+            } else {
+                PlaylistSongsLoader.INSTANCE.getPlaylistSongList(getApplicationContext(), playlist.id)
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(songs -> {
+                            playSongs(shuffleMode, songs);
+                        }, throwable -> {
+                        });
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void playSongs(int shuffleMode, ArrayList<Song> playlistSongs) {
+        if (!playlistSongs.isEmpty()) {
+            if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
+                int startPosition;
+                startPosition = new Random().nextInt(playlistSongs.size());
+                openQueue(playlistSongs, startPosition, true);
+                setShuffleMode(shuffleMode);
+            } else {
+                openQueue(playlistSongs, 0, true);
+            }
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     public void onDestroy() {

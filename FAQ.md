@@ -8,8 +8,7 @@ You can opt-in for the beta build by clicking on this link: https://play.google.
 - STEP 4: You have to copy or move the file into a location on the SD Card: whatever_sdcard/RetroMusic/lyrics/ and paste inside your ".lrc" file in there.
 
 #### Q: Why isn't the artist's image downloading?
-STEP 1: Settings -> Images -> Auto-download artist images -> Always
-STEP 2: Open the artists tab and wait some time for the images to download.
+Last.fm has disabled the download of artist's images for the time being, whether functionality for this will be restored in future is uncertain.
 
 #### Q: How do I change the theme?
 Settings -> Look and feel -> Select your theme.
@@ -34,9 +33,6 @@ Clear the app's cache and data.
 
 ##### Q: My app is crashing, how do i fix this? (Sorry, settings have changed internally) 
 Reinstalling the app should fix this issue. 
-
-##### Q: Artist images are not loading, why? 
-The Last.fm service has a limited number of requests of download data it can handle (artist images). If that request limit is exceeded, it will not download for some time.
 
 ##### Q: Why has all the text gone white/dissapeared? 
 Change the theme to Black or Dark and change it back to what you had before.

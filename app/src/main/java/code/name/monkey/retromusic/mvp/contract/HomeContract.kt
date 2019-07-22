@@ -20,12 +20,9 @@ import code.name.monkey.retromusic.mvp.BaseView
 
 interface HomeContract {
 
-    interface HomeView : BaseView<ArrayList<Home>> {
-        fun showEmpty()
-    }
+    interface HomeView : BaseView<ArrayList<Home>>
 
     interface HomePresenter : BasePresenter<HomeView> {
-
-        fun homeSections();
+        fun homeSections()
     }
 }

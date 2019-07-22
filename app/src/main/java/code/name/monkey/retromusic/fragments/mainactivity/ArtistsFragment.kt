@@ -12,7 +12,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
 class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(), ArtistContract.ArtistView {
-    private var presenter: ArtistPresenter? = null
+    private lateinit var presenter: ArtistPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_artists
@@ -37,7 +37,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     }
 
     override fun onMediaStoreChanged() {
-        presenter!!.loadArtists()
+        presenter.loadArtists()
     }
 
     override fun loadGridSize(): Int {
@@ -83,7 +83,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     }
 
     override fun setSortOrder(sortOrder: String) {
-        presenter!!.loadArtists()
+        presenter.loadArtists()
     }
 
 
@@ -103,13 +103,13 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         libraryFragment.setTitle(
                 if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.artists)
         if (adapter!!.dataSet.isEmpty()) {
-            presenter!!.subscribe()
+            presenter.subscribe()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter!!.unsubscribe()
+        presenter.unsubscribe()
     }
 
     override fun loading() {}

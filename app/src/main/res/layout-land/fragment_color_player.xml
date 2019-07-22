@@ -43,9 +43,9 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_margin="12dp"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="8dp"
-                        android:layout_margin="12dp"
                         app:cardPreventCornerOverlap="false"
                         app:cardUseCompatPadding="true">
 
@@ -119,8 +119,8 @@
                         <androidx.appcompat.widget.Toolbar
                             android:id="@+id/playerToolbar"
                             style="@style/Toolbar"
-                            android:navigationIcon="@drawable/ic_close_white_24dp"
-                            app:navigationIcon="@drawable/ic_close_white_24dp" />
+                            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>

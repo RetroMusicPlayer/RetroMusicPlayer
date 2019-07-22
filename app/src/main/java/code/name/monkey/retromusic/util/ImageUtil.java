@@ -220,7 +220,8 @@ public class ImageUtil {
         return inSampleSize;
     }
 
-    public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+    @NonNull
+    public static Bitmap getResizedBitmap(@NonNull Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
 

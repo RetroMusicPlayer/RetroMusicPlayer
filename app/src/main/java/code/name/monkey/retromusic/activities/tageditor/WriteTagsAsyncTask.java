@@ -133,6 +133,7 @@ public class WriteTagsAsyncTask extends
                         (Activity) context, toBeScanned) : null);
     }
 
+    @NonNull
     @Override
     protected Dialog createDialog(@NonNull Context context) {
         return new MaterialDialog(context, new BottomSheet())

@@ -30,13 +30,13 @@ import code.name.monkey.retromusic.Constants.ACTION_REWIND
 import code.name.monkey.retromusic.Constants.ACTION_SKIP
 import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
@@ -87,8 +87,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                 .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
         val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
 
-        val builder = NotificationCompat.Builder(service,
-                PlayingNotification.NOTIFICATION_CHANNEL_ID)
+        val builder = NotificationCompat.Builder(service, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentIntent(clickIntent)
                 .setDeleteIntent(deleteIntent)

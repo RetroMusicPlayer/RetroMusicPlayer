@@ -147,8 +147,6 @@ public final class PreferenceUtil {
                 return R.style.Theme_RetroMusic_Light;
             case "color":
                 return R.style.Theme_RetroMusic_Color;
-            case "acolor":
-                return R.style.Theme_RetroMusic_Black;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
             case "daynight":
@@ -304,6 +302,10 @@ public final class PreferenceUtil {
 
     public final boolean coloredNotification() {
         return mPreferences.getBoolean(COLORED_NOTIFICATION, true);
+    }
+
+    public final void setColoredNotification(boolean b) {
+        mPreferences.edit().putBoolean(COLORED_NOTIFICATION, b).apply();
     }
 
     public final boolean classicNotification() {

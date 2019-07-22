@@ -12,6 +12,7 @@ import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -109,7 +110,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun setTintable(color: Int) {
-
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 
@@ -121,15 +121,12 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         if (PreferenceUtil.getInstance().pauseOnZeroVolume())
             if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
                 MusicPlayerRemote.pauseSong()
-            } else {
-                MusicPlayerRemote.resumePlaying()
             }
     }
 
     fun setTintableColor(color: Int) {
         volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        //TintHelper.setTintAuto(volumeSeekBar, color, false)
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 

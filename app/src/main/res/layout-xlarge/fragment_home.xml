@@ -32,16 +32,20 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="6dp"
+                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
-                app:layout_scrollFlags="scroll|enterAlways">
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:strokeColor="?dividerColor"
+                app:strokeWidth="1dp">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
-                    app:titleMarginStart="0dp"
                     app:title="@string/search_hint"
+                    app:titleMarginStart="0dp"
                     app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     tools:ignore="UnusedAttribute" />
             </com.google.android.material.card.MaterialCardView>

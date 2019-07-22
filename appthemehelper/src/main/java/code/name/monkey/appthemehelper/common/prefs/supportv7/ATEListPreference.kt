@@ -1,9 +1,11 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.util.AttributeSet
 import androidx.preference.ListPreference
 import code.name.monkey.appthemehelper.R
+import code.name.monkey.appthemehelper.ThemeStore
 
 /**
  * @author Aidan Follestad (afollestad)
@@ -27,6 +29,7 @@ class ATEListPreference : ListPreference {
     }
 
     private fun init() {
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
         layoutResource = R.layout.ate_preference_custom_support
         if (summary == null || summary.toString().trim { it <= ' ' }.isEmpty())
             summary = "%s"

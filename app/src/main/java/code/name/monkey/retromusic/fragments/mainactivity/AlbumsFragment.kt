@@ -12,7 +12,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(), AlbumContract.AlbumView {
 
-    private var presenter: AlbumPresenter? = null
+    private lateinit var presenter: AlbumPresenter
 
 
     override val emptyMessage: Int
@@ -48,7 +48,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun setSortOrder(sortOrder: String) {
-        presenter!!.loadAlbums()
+        presenter.loadAlbums()
     }
 
     override fun loadSortOrder(): String {
@@ -87,7 +87,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun onMediaStoreChanged() {
-        presenter!!.loadAlbums()
+        presenter.loadAlbums()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,13 +113,13 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         libraryFragment.setTitle(
                 if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.albums)
         if (adapter!!.dataSet.isEmpty()) {
-            presenter!!.subscribe()
+            presenter.subscribe()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter!!.unsubscribe()
+        presenter.unsubscribe()
     }
 
     override fun loading() {}
@@ -136,7 +136,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
 
     companion object {
 
-        val TAG = AlbumsFragment::class.java.simpleName
+        val TAG: String = AlbumsFragment::class.java.simpleName
 
         fun newInstance(): AlbumsFragment {
             val args = Bundle()

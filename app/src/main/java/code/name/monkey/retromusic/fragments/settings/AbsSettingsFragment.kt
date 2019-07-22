@@ -33,16 +33,10 @@ import code.name.monkey.retromusic.util.NavigationUtil
  */
 
 abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
+
     internal fun showProToastAndNavigate(message: String) {
         Toast.makeText(context, "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
-
         NavigationUtil.goToProVersion(activity!!)
-    }
-
-    protected fun setSummary(preference: Preference) {
-        setSummary(preference, PreferenceManager
-                .getDefaultSharedPreferences(preference.context)
-                .getString(preference.key, "")!!)
     }
 
     internal fun setSummary(preference: Preference, value: Any) {
@@ -57,6 +51,12 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
 
     abstract fun invalidateSettings()
 
+    protected fun setSummary(preference: Preference) {
+        setSummary(preference, PreferenceManager
+                .getDefaultSharedPreferences(preference.context)
+                .getString(preference.key, "")!!)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
@@ -68,19 +68,18 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        var dialogFragment: DialogFragment? = null
-        if (preference is NowPlayingScreenPreference) {
-            dialogFragment = NowPlayingScreenPreferenceDialog.newInstance(preference.key);
-        } else if (preference is AlbumCoverStylePreference) {
-            dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key);
+        var dialogFragment: DialogFragment? = null// Dialog creation could not be handled here. Try with the super method.
+        // The dialog was created (it was one of our custom Preferences), show the dialog for it
+        when (preference) {
+            is NowPlayingScreenPreference -> dialogFragment = NowPlayingScreenPreferenceDialog.newInstance(preference.key)
+            is AlbumCoverStylePreference -> dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key)
+            is MaterialListPreference -> {
+                preference.entries
+                dialogFragment = MaterialListPreferenceDialog.newInstance(preference)
+            }
+            is BlacklistPreference -> dialogFragment = BlacklistPreferenceDialog.newInstance(preference.key)
         }
-        if (preference is MaterialListPreference) {
-            preference.entries
-            dialogFragment = MaterialListPreferenceDialog.newInstance(preference)
-        }
-        if (preference is BlacklistPreference) {
-            dialogFragment = BlacklistPreferenceDialog.newInstance(preference.key)
-        }
+
         if (dialogFragment != null) {
             // The dialog was created (it was one of our custom Preferences), show the dialog for it
             dialogFragment.setTargetFragment(this, 0);
@@ -89,6 +88,5 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
             // Dialog creation could not be handled here. Try with the super method.
             super.onDisplayPreferenceDialog(preference);
         }
-
     }
 }
