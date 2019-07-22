@@ -3,11 +3,11 @@ package code.name.monkey.retromusic.fragments.mainactivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.album.AlbumAdapter
+import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.contract.AlbumContract
 import code.name.monkey.retromusic.mvp.presenter.AlbumPresenter
-import code.name.monkey.retromusic.adapter.album.AlbumAdapter
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(), AlbumContract.AlbumView {
@@ -95,23 +95,9 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         presenter = AlbumPresenter(this)
     }
 
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        if (menuVisible) {
-
-            libraryFragment.setTitle(
-                    if (PreferenceUtil.getInstance().tabTitles())
-                        R.string.library
-                    else
-                        R.string.albums)
-        }
-    }
 
     override fun onResume() {
         super.onResume()
-
-        libraryFragment.setTitle(
-                if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.albums)
         if (adapter!!.dataSet.isEmpty()) {
             presenter.subscribe()
         }

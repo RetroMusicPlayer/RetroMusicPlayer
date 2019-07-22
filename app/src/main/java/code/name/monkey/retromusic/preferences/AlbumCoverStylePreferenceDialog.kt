@@ -33,7 +33,6 @@ import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
@@ -131,14 +130,8 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
     companion object {
         val TAG: String = AlbumCoverStylePreferenceDialog::class.java.simpleName
 
-        private const val EXTRA_KEY = "key"
-
-        fun newInstance(key: String): AlbumCoverStylePreferenceDialog {
-            val args = Bundle()
-            args.putString(EXTRA_KEY, key)
-            val fragment = AlbumCoverStylePreferenceDialog()
-            fragment.arguments = args
-            return fragment
+        fun newInstance(): AlbumCoverStylePreferenceDialog {
+            return AlbumCoverStylePreferenceDialog()
         }
     }
 }

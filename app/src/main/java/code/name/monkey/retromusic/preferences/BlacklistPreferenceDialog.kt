@@ -23,6 +23,7 @@ import android.util.AttributeSet
 import androidx.fragment.app.DialogFragment
 import androidx.preference.DialogPreference
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -32,7 +33,7 @@ import com.afollestad.materialdialogs.list.listItems
 import java.io.File
 import java.util.*
 
-class BlacklistPreference : DialogPreference {
+class BlacklistPreference : ATEDialogPreference {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

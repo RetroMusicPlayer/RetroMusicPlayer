@@ -37,28 +37,32 @@
             app:enableCopying="true"
             app:icon="@drawable/ic_home_white_24dp" />
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
-            android:defaultValue="0"
-            android:entries="@array/pref_tab_text_mode_titles"
-            android:entryValues="@array/pref_tab_text_mode_values"
-            android:key="tab_text_mode"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
-            android:title="@string/pref_title_tab_text_mode"
-            app:enableCopying="true" />
-
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="toggle_home_banner"
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="toggle_genre"
-            android:summary="@string/pref_summary_genre_toggle"
-            android:title="@string/pref_title_genre_toggle"
-            app:enableCopying="true"
-            app:icon="@drawable/ic_guitar_acoustic_white_24dp" />
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_library">
+
+            <code.name.monkey.retromusic.preferences.LibraryPreference
+                android:key="library_categories"
+                android:summary="@string/pref_summary_library_categories"
+                android:title="@string/library_categories"
+                app:enableCopying="true"
+                app:icon="@drawable/ic_library_music_white_24dp" />
+
+            <code.name.monkey.retromusic.preferences.MaterialListPreference
+                android:defaultValue="0"
+                android:entries="@array/pref_tab_text_mode_titles"
+                android:entryValues="@array/pref_tab_text_mode_values"
+                android:key="tab_text_mode"
+                android:negativeButtonText="@null"
+                android:positiveButtonText="@null"
+                android:title="@string/pref_title_tab_text_mode"
+                app:enableCopying="true" />
+        </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
+
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

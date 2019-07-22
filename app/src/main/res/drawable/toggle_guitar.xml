@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -12,8 +11,7 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_home_selected_white_24dp" android:state_checked="true" />
-    <item android:drawable="@drawable/ic_home_white_24dp" />
+    <item android:drawable="@drawable/ic_guitar_acoustic_white_24dp" android:state_checked="true" />
+    <item android:drawable="@drawable/ic_guitar_white_24dp" />
 </selector>

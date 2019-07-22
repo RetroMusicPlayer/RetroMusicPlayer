@@ -71,8 +71,9 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
         var dialogFragment: DialogFragment? = null// Dialog creation could not be handled here. Try with the super method.
         // The dialog was created (it was one of our custom Preferences), show the dialog for it
         when (preference) {
-            is NowPlayingScreenPreference -> dialogFragment = NowPlayingScreenPreferenceDialog.newInstance(preference.key)
-            is AlbumCoverStylePreference -> dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key)
+            is LibraryPreference -> dialogFragment = LibraryPreferenceDialog.newInstance()
+            is NowPlayingScreenPreference -> dialogFragment = NowPlayingScreenPreferenceDialog.newInstance( )
+            is AlbumCoverStylePreference -> dialogFragment = AlbumCoverStylePreferenceDialog.newInstance()
             is MaterialListPreference -> {
                 preference.entries
                 dialogFragment = MaterialListPreferenceDialog.newInstance(preference)

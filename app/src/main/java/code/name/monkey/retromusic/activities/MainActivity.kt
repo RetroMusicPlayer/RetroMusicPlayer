@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
@@ -62,11 +61,16 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
+        getBottomNavigationView().selectedItemId = PreferenceUtil.getInstance().lastPage
+
         getBottomNavigationView().setOnNavigationItemSelectedListener {
             PreferenceUtil.getInstance().lastPage = it.itemId
             selectedFragment(it.itemId)
+
             true
+
         }
+
 
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance().lastPage)
@@ -254,8 +258,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 key == PreferenceUtil.ALBUM_COVER_STYLE ||
                 key == PreferenceUtil.HOME_ARTIST_GRID_STYLE ||
                 key == PreferenceUtil.ALBUM_COVER_TRANSFORM ||
-                key == PreferenceUtil.TAB_TEXT_MODE)
+                key == PreferenceUtil.TAB_TEXT_MODE ||
+                key == PreferenceUtil.LIBRARY_CATEGORIES)
             postRecreate()
+
     }
 
     private fun showPromotionalOffer() {
@@ -277,6 +283,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             R.id.action_album,
             R.id.action_artist,
             R.id.action_playlist,
+            R.id.action_genre,
             R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false)
             R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false)
             R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), false)
@@ -296,8 +303,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     companion object {
         const val APP_INTRO_REQUEST = 2323
-        const val LIBRARY = 1
-        const val FOLDERS = 3
         const val HOME = 0
         private const val TAG = "MainActivity"
         private const val APP_USER_INFO_REQUEST = 9003

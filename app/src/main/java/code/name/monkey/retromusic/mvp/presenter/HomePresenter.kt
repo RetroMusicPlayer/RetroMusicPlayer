@@ -42,7 +42,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
         loadTopArtists()
         loadATopAlbums()
         loadFavorite()
-        if (PreferenceUtil.getInstance().isGenreShown) loadGenre()
     }
 
     override fun subscribe() {
@@ -97,16 +96,6 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
         disposable += repository.favoritePlaylist
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(4, R.string.favorites, 0, it, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmptyView()
-                })
-    }
-
-    private fun loadGenre() {
-        disposable += repository.allGenres
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(6, R.string.genres, 0, it, GENRES, R.drawable.ic_guitar_acoustic_white_24dp))
                     view.showData(ArrayList(hashSet))
                 }, {
                     view.showEmptyView()

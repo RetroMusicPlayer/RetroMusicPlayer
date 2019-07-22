@@ -58,6 +58,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                             @SuppressLint("ApplySharedPref")
                             override fun doInBackground(vararg params: Void): Void? {
                                 val dir = File(App.context.filesDir, FOLDER_NAME)
+                                println(dir.absolutePath)
                                 if (!dir.exists()) {
                                     if (!dir.mkdirs()) { // create the folder
                                         return null

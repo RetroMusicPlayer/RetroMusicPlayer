@@ -124,14 +124,10 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     companion object {
-        private const val EXTRA_KEY = "key"
 
-        fun newInstance(key: String): NowPlayingScreenPreferenceDialog {
-            val args = Bundle()
-            args.putString(EXTRA_KEY, key)
-            val fragment = NowPlayingScreenPreferenceDialog()
-            fragment.arguments = args
-            return fragment
+
+        fun newInstance(): NowPlayingScreenPreferenceDialog {
+            return NowPlayingScreenPreferenceDialog()
         }
     }
 }
