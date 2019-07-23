@@ -8,10 +8,59 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
+
+        <SeekBar
+            android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
+            android:maxHeight="3dp"
+            android:splitTrack="false"
+            android:thumb="@drawable/switch_thumb_material"
+            tools:ignore="RtlHardcoded,UnusedAttribute"
+            tools:progress="20" />
+
+        <TextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/songCurrentProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|left|end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -47,54 +96,6 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp">
-
-        <SeekBar
-            android:id="@+id/progressSlider"
-            style="@style/MusicProgressSlider"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/songTotalTime"
-            android:layout_toRightOf="@id/songCurrentProgress"
-            android:maxHeight="3dp"
-            android:progressDrawable="@drawable/color_progress_seek"
-            android:splitTrack="false"
-            android:thumb="@drawable/switch_thumb_material"
-            tools:ignore="RtlHardcoded,UnusedAttribute"
-            tools:progress="20" />
-
-        <TextView
-            android:id="@+id/songTotalTime"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center_vertical|right|end"
-            android:paddingRight="8dp"
-            android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
-
-        <TextView
-            android:id="@+id/songCurrentProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:fontFamily="sans-serif-medium"
-            android:gravity="center_vertical|left|end"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
-    </RelativeLayout>
 
     <include layout="@layout/media_button" />
 

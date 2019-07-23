@@ -20,7 +20,7 @@ import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
@@ -48,7 +48,12 @@ class LibraryPreference : ATEDialogPreference {
     }
 }
 
-class LibraryPreferenceDialog : DialogFragment() {
+class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
+
+    override fun onDialogClosed(positiveResult: Boolean) {
+
+    }
+
     lateinit var adapter: CategoryInfoAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -110,8 +115,12 @@ class LibraryPreferenceDialog : DialogFragment() {
 
     companion object {
 
-        fun newInstance(): LibraryPreferenceDialog {
-            return LibraryPreferenceDialog()
+        fun newInstance(key: String): LibraryPreferenceDialog {
+            val bundle = Bundle()
+            bundle.putString(ARG_KEY, key)
+            val fragment = LibraryPreferenceDialog()
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

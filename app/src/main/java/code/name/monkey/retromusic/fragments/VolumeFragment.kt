@@ -127,7 +127,8 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     fun setTintableColor(color: Int) {
         volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
+        TintHelper.setTint(volumeSeekBar, color, false)
+        //ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 
     companion object {

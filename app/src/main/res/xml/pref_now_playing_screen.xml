@@ -11,7 +11,8 @@
     <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
         android:key="album_cover_style_id"
         android:title="@string/pref_title_album_cover_style"
-        app:enableCopying="true" />
+        app:enableCopying="true"
+        app:icon="@drawable/ic_image_white_24dp" />
 
     <code.name.monkey.retromusic.preferences.MaterialListPreference
         android:defaultValue="0"

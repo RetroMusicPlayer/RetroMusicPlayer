@@ -22,7 +22,14 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.text
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.title
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 
 class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -99,7 +106,7 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         title!!.setTextColor(lastPlaybackControlsColor)
         text!!.setTextColor(lastDisabledPlaybackControlsColor)
 
-        TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor, false)
+        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor)
 
         volumeFragment?.setTintableColor(lastPlaybackControlsColor)
 

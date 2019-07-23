@@ -73,12 +73,25 @@ public class MusicUtil {
 
     @NonNull
     public static Intent createShareSongFileIntent(@NonNull final Song song, @NonNull Context context) {
-        Uri file = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", new File(song.getData()));
+        /*Uri file = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", new File(song.getData()));
         try {
             return new Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM, file)
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     .setType("audio/*");
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
+            return new Intent();
+        }*/
+
+        try {
+            return new Intent()
+                    .setAction(Intent.ACTION_SEND)
+                    .putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName(), new File(song.getData())))
+                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    .setType("audio/*");
+        } catch (IllegalArgumentException e) {
+            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
             e.printStackTrace();
             Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
             return new Intent();

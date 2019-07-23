@@ -265,9 +265,9 @@ class ColorFragment : AbsPlayerFragment() {
             override fun onPostExecute(l: Lyrics?) {
                 lyricsColor = l
                 if (lyricsColor == null) {
-                    lyricsView.setText(R.string.no_lyrics_found)
+                    lyricsView?.setText(R.string.no_lyrics_found)
                 } else {
-                    lyricsView.text = lyricsColor!!.text
+                    lyricsView?.text = lyricsColor!!.text
                 }
             }
 

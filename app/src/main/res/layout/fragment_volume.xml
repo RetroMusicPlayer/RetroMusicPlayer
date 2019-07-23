@@ -19,9 +19,11 @@
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:maxHeight="2dp"
         tools:progress="20" />
 
     <code.name.monkey.retromusic.views.IconImageView
