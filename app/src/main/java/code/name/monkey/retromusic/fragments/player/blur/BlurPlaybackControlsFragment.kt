@@ -108,6 +108,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         text.setTextColor(lastDisabledPlaybackControlsColor)
 
         setFabColor(lastPlaybackControlsColor)
+        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor)
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
 
@@ -120,11 +121,6 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     private fun setFabColor(i: Int) {
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(i)), false)
         TintHelper.setTintAuto(playPauseButton, i, true)
-        setProgressBarColor(i)
-    }
-
-    private fun setProgressBarColor(newColor: Int) {
-        ViewUtil.setProgressDrawable(progressSlider, newColor)
     }
 
     private fun setUpPlayPauseFab() {

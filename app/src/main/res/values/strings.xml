@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="you_have_to_select_at_least_one_category">You have to select at least one category.</string>
     <string name="small">Small album</string>
     <string name="accent_color">Accent color</string>
     <string name="accent_color_desc">The theme accent color, defaults to teal</string>
@@ -601,6 +602,7 @@
     <string name="pick_image_intent_text">Pick image</string>
     <string name="set_photo">Set a profile photo</string>
     <string name="edit">Edit</string>
+    <string name="pref_header_library">Library</string>
     <string name="swipe_to_unlock">Swipe to unlock</string>
     <string name="add_lyrics">Add lyrics</string>
     <string name="paste_lyrics_here">Paste lyrics here</string>
@@ -625,4 +627,7 @@
     <string name="action_play_all">Play all</string>
     <string name="start_play_music">Start playing music.</string>
     <string name="keyboard">Keyboard</string>
+    <string name="reset_action">Reset</string>
+    <string name="library_categories">Library categories</string>
+    <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
 </resources>

@@ -2,14 +2,13 @@ package code.name.monkey.retromusic.fragments.mainactivity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.contract.SongContract
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.mvp.contract.SongContract
+import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
@@ -81,20 +80,8 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun onResume() {
         super.onResume()
-        libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.songs)
         if (adapter!!.dataSet.isEmpty()) {
             presenter.subscribe()
-        }
-    }
-
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        if (menuVisible) {
-            libraryFragment.setTitle(
-                    if (PreferenceUtil.getInstance().tabTitles())
-                        R.string.library
-                    else
-                        R.string.songs)
         }
     }
 

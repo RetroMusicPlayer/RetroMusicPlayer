@@ -53,20 +53,7 @@ object ViewUtil {
         if (thumbTint) {
             progressSlider.thumbTintList = ColorStateList.valueOf(newColor)
         }
-
-        if (progressSlider.progressDrawable is LayerDrawable) {
-            val ld = progressSlider.progressDrawable as LayerDrawable?
-
-            if (ld != null) {
-                val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
-                clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-
-                val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-                clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
-            }
-        } else {
-            progressSlider.progressTintList = ColorStateList.valueOf(newColor)
-        }
+        progressSlider.progressTintList = ColorStateList.valueOf(newColor)
     }
 
     fun setProgressDrawable(progressSlider: ProgressBar, newColor: Int) {

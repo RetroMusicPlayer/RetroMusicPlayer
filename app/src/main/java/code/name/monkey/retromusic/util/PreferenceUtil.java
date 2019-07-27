@@ -27,8 +27,14 @@ import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import code.name.monkey.retromusic.App;
@@ -38,6 +44,7 @@ import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
+import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
@@ -47,7 +54,7 @@ import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
-
+    public static final String LIBRARY_CATEGORIES = "library_categories";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
     public static final String NOW_PLAYING_SCREEN_ID = "now_playing_screen_id";
@@ -811,5 +818,45 @@ public final class PreferenceUtil {
 
     public boolean isClickOrSave() {
         return mPreferences.getBoolean(NOW_PLAYING_SCREEN, false);
+    }
+
+    @NonNull
+    public List<CategoryInfo> getLibraryCategoryInfos() {
+        String data = mPreferences.getString(LIBRARY_CATEGORIES, null);
+        if (data != null) {
+            Gson gson = new Gson();
+            Type collectionType = new TypeToken<List<CategoryInfo>>() {
+            }.getType();
+
+            try {
+                return gson.fromJson(data, collectionType);
+            } catch (JsonSyntaxException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return getDefaultLibraryCategoryInfos();
+    }
+
+    public void setLibraryCategoryInfos(List<CategoryInfo> categories) {
+        Gson gson = new Gson();
+        Type collectionType = new TypeToken<List<CategoryInfo>>() {
+        }.getType();
+
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(LIBRARY_CATEGORIES, gson.toJson(categories, collectionType));
+        editor.apply();
+    }
+
+    @NonNull
+    public List<CategoryInfo> getDefaultLibraryCategoryInfos() {
+        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(6);
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.HOME, true));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.SONGS, true));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ALBUMS, true));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ARTISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, false));
+        return defaultCategoryInfos;
     }
 }

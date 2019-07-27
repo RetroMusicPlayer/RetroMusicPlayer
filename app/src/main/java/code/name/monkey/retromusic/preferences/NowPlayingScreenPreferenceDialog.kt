@@ -25,11 +25,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.preference.DialogPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
@@ -40,7 +40,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
-class NowPlayingScreenPreference : DialogPreference {
+class NowPlayingScreenPreference : ATEDialogPreference {
 
     constructor(context: Context) : super(context) {}
 
@@ -62,7 +62,9 @@ class NowPlayingScreenPreference : DialogPreference {
 }
 
 class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewPager.OnPageChangeListener {
+
     private var viewPagerPosition: Int = 0
+
     override fun onPageScrollStateChanged(state: Int) {
 
     }
@@ -124,13 +126,11 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     companion object {
-        private const val EXTRA_KEY = "key"
-
         fun newInstance(key: String): NowPlayingScreenPreferenceDialog {
-            val args = Bundle()
-            args.putString(EXTRA_KEY, key)
+            val bundle = Bundle()
+            bundle.putString(ARG_KEY, key)
             val fragment = NowPlayingScreenPreferenceDialog()
-            fragment.arguments = args
+            fragment.arguments = bundle
             return fragment
         }
     }

@@ -32,7 +32,6 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
         val layout = LayoutInflater.from(activity).inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
-            GENRES -> GenreViewHolder(layout)
             PLAYLISTS -> PlaylistViewHolder(layout)
             else -> {
                 AlbumViewHolder(LayoutInflater.from(activity).inflate(R.layout.metal_section_recycler_view, parent, false))
@@ -50,10 +49,6 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             }
             RECENT_ARTISTS, TOP_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(home)
-            }
-            GENRES -> {
-                val viewHolder = holder as GenreViewHolder
                 viewHolder.bindView(home)
             }
             PLAYLISTS -> {
@@ -108,20 +103,6 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
             chip.setChipIconResource(home.icon)
         }
     }
-
-    private inner class GenreViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(home: Home) {
-            recyclerView.apply {
-                val genreAdapter = GenreAdapter(activity, home.arrayList as ArrayList<Genre>, R.layout.item_list)
-                layoutManager = LinearLayoutManager(context)
-                adapter = genreAdapter
-
-            }
-            chip.text = activity.getString(home.title)
-            chip.setChipIconResource(home.icon)
-        }
-    }
-
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist).blockingFirst()

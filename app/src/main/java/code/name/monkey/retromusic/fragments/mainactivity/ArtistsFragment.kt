@@ -3,11 +3,11 @@ package code.name.monkey.retromusic.fragments.mainactivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
+import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.contract.ArtistContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistPresenter
-import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
@@ -86,22 +86,8 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         presenter.loadArtists()
     }
 
-
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        if (menuVisible) {
-            libraryFragment.setTitle(
-                    if (PreferenceUtil.getInstance().tabTitles())
-                        R.string.library
-                    else
-                        R.string.artists)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        libraryFragment.setTitle(
-                if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.artists)
         if (adapter!!.dataSet.isEmpty()) {
             presenter.subscribe()
         }

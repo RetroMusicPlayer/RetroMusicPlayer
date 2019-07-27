@@ -175,7 +175,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist!!, data!!.data!!)
+                data?.data?.let { CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist, it) }
             }
             else -> if (resultCode == Activity.RESULT_OK) {
                 reload()

@@ -15,7 +15,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -29,7 +29,7 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -43,8 +43,9 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -105,7 +106,7 @@
         android:layout_weight="1"
         tools:ignore="ContentDescription,UnusedAttribute">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/previousButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +120,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +134,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/repeatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,7 +147,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/shuffleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,11 +166,10 @@
             android:layout_height="56dp"
             android:layout_centerInParent="true" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playPauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_container"
             android:layout_centerInParent="true"
             android:background="?attr/roundSelector"
             app:srcCompat="@drawable/ic_pause_white_big"

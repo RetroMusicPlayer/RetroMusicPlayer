@@ -16,7 +16,7 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -30,7 +30,7 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -44,15 +44,13 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/songTotalTime"
             android:layout_toRightOf="@id/songCurrentProgress"
-            android:maxHeight="3dp"
-            android:progressDrawable="@drawable/color_progress_seek"
             android:splitTrack="false"
             android:thumb="@drawable/switch_square"
             tools:ignore="RtlHardcoded,UnusedAttribute"

@@ -5,12 +5,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
+import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.mvp.contract.PlaylistContract
 import code.name.monkey.retromusic.mvp.presenter.PlaylistPresenter
-import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
-import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
 
@@ -36,16 +35,8 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
                 R.layout.item_list, libraryFragment)
     }
 
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        if (menuVisible) {
-            libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.playlists)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.playlists)
         if (adapter!!.dataSet.isEmpty()) {
             presenter.subscribe()
         }

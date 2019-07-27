@@ -61,6 +61,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
         chooseFragmentForTheme()
         setupSlidingUpPanel()
+
+        updateTabs()
     }
 
     override fun onResume() {
@@ -307,4 +309,16 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
         }
     }
 
+
+      fun updateTabs() {
+        bottomNavigationView.menu.clear()
+        val currentTabs = PreferenceUtil.getInstance().libraryCategoryInfos
+        for (tab in currentTabs) {
+            if (tab.visible) {
+                val menu = tab.category;
+                bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes)
+                        .setIcon(menu.icon)
+            }
+        }
+    }
 }

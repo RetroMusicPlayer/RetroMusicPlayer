@@ -50,12 +50,13 @@
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:titleMarginStart="0dp"
+                        app:title="@string/library"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub
                         android:id="@+id/cab_stub"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="48dp" />
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>

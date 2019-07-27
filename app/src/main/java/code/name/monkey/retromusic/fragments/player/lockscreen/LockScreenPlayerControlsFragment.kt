@@ -30,12 +30,12 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -124,10 +124,10 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
             color
         } else {
-            ThemeStore.textColorSecondary(context!!).ripAlpha()
+            ThemeStore.textColorSecondary(context!!)
         }
         volumeFragment?.setTintable(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, ColorUtil.stripAlpha(colorFinal), true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal.ripAlpha(), true)
 
         updatePrevNextColor()
 

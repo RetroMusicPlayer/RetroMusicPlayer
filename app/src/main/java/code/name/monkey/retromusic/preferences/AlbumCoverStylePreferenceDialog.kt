@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.preferences
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -24,21 +25,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.preference.DialogPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
 
-class AlbumCoverStylePreference : DialogPreference {
+class AlbumCoverStylePreference : ATEDialogPreference {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -51,6 +52,10 @@ class AlbumCoverStylePreference : DialogPreference {
 
     override fun getDialogLayoutResource(): Int {
         return mLayoutRes;
+    }
+
+    init {
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }
 
@@ -131,13 +136,11 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
     companion object {
         val TAG: String = AlbumCoverStylePreferenceDialog::class.java.simpleName
 
-        private const val EXTRA_KEY = "key"
-
         fun newInstance(key: String): AlbumCoverStylePreferenceDialog {
-            val args = Bundle()
-            args.putString(EXTRA_KEY, key)
+            val bundle = Bundle()
+            bundle.putString(ARG_KEY, key)
             val fragment = AlbumCoverStylePreferenceDialog()
-            fragment.arguments = args
+            fragment.arguments = bundle
             return fragment
         }
     }

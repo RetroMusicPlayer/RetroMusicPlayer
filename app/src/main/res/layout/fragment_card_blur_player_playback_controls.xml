@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 tools:text="@string/pref_title_user_info" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -56,9 +56,10 @@
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="3dp"
+            android:maxHeight="2dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:progressDrawable="@drawable/color_progress_seek"
