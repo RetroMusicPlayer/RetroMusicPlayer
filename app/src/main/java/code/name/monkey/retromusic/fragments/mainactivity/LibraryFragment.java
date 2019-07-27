@@ -470,9 +470,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences,
                                           @NonNull String key) {
-        if (key.equals(PreferenceUtil.LIBRARY_CATEGORIES)){
-            Fragment fragment= getCurrentFragment();
 
-        }
     }
 }

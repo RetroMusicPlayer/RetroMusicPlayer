@@ -38,6 +38,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.ANCHORED
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState.COLLAPSED
 import kotlinx.android.synthetic.main.fragment_classic_player.*
 import kotlinx.android.synthetic.main.fragment_classic_player_playback_controls.*
+import kotlin.math.max
 
 
 class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks, SlidingUpPanelLayout.PanelSlideListener {
@@ -60,11 +61,11 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
     }
 
     override fun onShow() {
-        classicPlaybackControlsFragment.show()
+        controlsFragment.show()
     }
 
     override fun onHide() {
-        classicPlaybackControlsFragment.hide()
+        controlsFragment.hide()
         onBackPressed()
     }
 
@@ -87,7 +88,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
 
     override fun onColorChanged(color: Int) {
         animateColorChange(color)
-        classicPlaybackControlsFragment.setDark(ColorUtil.isColorLight(color))
+        controlsFragment.setDark(ColorUtil.isColorLight(color))
         callbacks?.onPaletteColorChanged()
     }
 
@@ -105,7 +106,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
 
     var lastColor: Int = 0
 
-    lateinit var classicPlaybackControlsFragment: ClassicPlayerPlaybackControlsFragment
+    lateinit var controlsFragment: ClassicPlayerPlaybackControlsFragment
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
     private lateinit var layoutManager: LinearLayoutManager
@@ -159,7 +160,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
 
 
     private fun setUpSubFragments() {
-        classicPlaybackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ClassicPlayerPlaybackControlsFragment
+        controlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ClassicPlayerPlaybackControlsFragment
         playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment?.setCallbacks(this)
 
@@ -267,10 +268,10 @@ abstract class BaseImpl(private val fragment: ClassicPlayerFragment) : Impl {
     fun createDefaultColorChangeAnimatorSet(color: Int): AnimatorSet {
         val backgroundAnimator: Animator
         backgroundAnimator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val x = (fragment.classicPlaybackControlsFragment.playerPlayPauseFab.x + (fragment.classicPlaybackControlsFragment.playerPlayPauseFab.width / 2).toFloat() + fragment.classicPlaybackControlsFragment.view!!.x).toInt()
-            val y = (fragment.classicPlaybackControlsFragment.playerPlayPauseFab.y + (fragment.classicPlaybackControlsFragment.playerPlayPauseFab.height / 2).toFloat() + fragment.classicPlaybackControlsFragment.view!!.y + fragment.classicPlaybackControlsFragment.playerProgressSlider.height.toFloat()).toInt()
-            val startRadius = Math.max(fragment.classicPlaybackControlsFragment.playerPlayPauseFab.width / 2, fragment.classicPlaybackControlsFragment.playerPlayPauseFab.height / 2).toFloat()
-            val endRadius = Math.max(fragment.colorBackground.width, fragment.colorBackground.height).toFloat()
+            val x = (fragment.controlsFragment.playerPlayPauseFab.x + (fragment.controlsFragment.playerPlayPauseFab.width / 2).toFloat() + fragment.controlsFragment.view!!.x).toInt()
+            val y = (fragment.controlsFragment.playerPlayPauseFab.y + (fragment.controlsFragment.playerPlayPauseFab.height / 2).toFloat() + fragment.controlsFragment.view!!.y + fragment.controlsFragment.playerProgressSlider.height.toFloat()).toInt()
+            val startRadius = max(fragment.controlsFragment.playerPlayPauseFab.width / 2, fragment.controlsFragment.playerPlayPauseFab.height / 2).toFloat()
+            val endRadius = max(fragment.colorBackground.width, fragment.colorBackground.height).toFloat()
             fragment.colorBackground.setBackgroundColor(color)
             ViewAnimationUtils.createCircularReveal(fragment.colorBackground, x, y, startRadius, endRadius)
         } else {
@@ -307,11 +308,14 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
             shortSeparator?.visibility = View.GONE
             image?.apply {
                 scaleType = ImageView.ScaleType.CENTER
-                setColorFilter(ATHUtil.resolveColor(fragment.activity!!, code.name.monkey.retromusic.R.attr.iconColor, ThemeStore.textColorSecondary(fragment.activity!!)), PorterDuff.Mode.SRC_IN)
-                setImageResource(code.name.monkey.retromusic.R.drawable.ic_equalizer_white_24dp)
-
+                setColorFilter(ATHUtil.resolveColor(fragment.activity!!, R.attr.iconColor, ThemeStore.textColorSecondary(fragment.activity!!)), PorterDuff.Mode.SRC_IN)
+                setImageResource(R.drawable.ic_equalizer_white_24dp)
             }
-            imageTextContainer?.cardElevation = 0f
+            imageTextContainer?.let {
+                it.cardElevation = 0f
+                it.setCardBackgroundColor(ThemeStore.primaryColor(fragment.activity!!))
+            }
+
             itemView.setOnClickListener {
                 // toggle the panel
                 if (fragment.playerSlidingLayout.panelState == COLLAPSED) {
@@ -325,15 +329,15 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
                     get() = currentSong
 
                 override val menuRes: Int
-                    get() = code.name.monkey.retromusic.R.menu.menu_item_playing_queue_song
+                    get() = R.menu.menu_item_playing_queue_song
 
                 override fun onMenuItemClick(item: MenuItem): Boolean {
                     when (item.itemId) {
-                        code.name.monkey.retromusic.R.id.action_remove_from_playing_queue -> {
+                        R.id.action_remove_from_playing_queue -> {
                             MusicPlayerRemote.removeFromQueue(MusicPlayerRemote.position)
                             return true
                         }
-                        code.name.monkey.retromusic.R.id.action_share -> {
+                        R.id.action_share -> {
                             SongShareDialog.create(song).show(fragment.fragmentManager!!, "SONG_SHARE_DIALOG")
                             return true
                         }
@@ -396,7 +400,7 @@ class LandscapeImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(frag
     }
 
     override fun setUpPanelAndAlbumCoverHeight() {
-        val panelHeight = fragment.playerSlidingLayout.height - fragment.classicPlaybackControlsFragment.view?.height!!
+        val panelHeight = fragment.playerSlidingLayout.height - fragment.controlsFragment.view?.height!!
         fragment.playerSlidingLayout.panelHeight = panelHeight
         (fragment.activity as AbsSlidingMusicPanelActivity).setAntiDragView(fragment.playerSlidingLayout.findViewById(R.id.playerPanel))
 
