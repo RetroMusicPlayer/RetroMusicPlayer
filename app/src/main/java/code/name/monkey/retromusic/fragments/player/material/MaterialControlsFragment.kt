@@ -108,9 +108,10 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
             color
         } else {
             ThemeStore.textColorSecondary(context!!)
-        }
+        }.ripAlpha()
+
         text.setTextColor(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal.ripAlpha(), true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 
         volumeFragment?.setTintable(colorFinal)
 

@@ -37,7 +37,7 @@
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             style="@style/MusicProgressSlider"
             android:layout_height="match_parent"

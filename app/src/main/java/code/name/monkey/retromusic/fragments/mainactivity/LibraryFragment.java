@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -40,11 +41,12 @@ import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.util.NavigationUtil;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
+public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks, SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String TAG = "LibraryFragment";
     private static final String CURRENT_TAB_ID = "current_tab_id";
@@ -77,6 +79,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public void onDestroyView() {
         super.onDestroyView();
         disposable.dispose();
+        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Nullable
@@ -89,7 +92,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbarContainer = view.findViewById(R.id.toolbarContainer);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
-
+        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
         return view;
     }
 
@@ -464,4 +467,12 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
 
+    @Override
+    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences,
+                                          @NonNull String key) {
+        if (key.equals(PreferenceUtil.LIBRARY_CATEGORIES)){
+            Fragment fragment= getCurrentFragment();
+
+        }
+    }
 }

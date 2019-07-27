@@ -68,7 +68,7 @@
                     android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_blur_playback_controls" />
+                    tools:layout="@layout/fragment_player_playback_controls" />
             </FrameLayout>
 
             <FrameLayout

@@ -10,13 +10,14 @@ import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ATH
+import code.name.monkey.appthemehelper.ATHActivity
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
-abstract class AbsThemeActivity : AbsCrashCollector(), Runnable {
+abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     private val handler = Handler()
 
