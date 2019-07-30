@@ -64,7 +64,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputManager.showSoftInput(searchView, 0)
+            inputManager.showSoftInput(searchView, InputMethodManager.SHOW_IMPLICIT)
         }
 
         keyboardPopup.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
