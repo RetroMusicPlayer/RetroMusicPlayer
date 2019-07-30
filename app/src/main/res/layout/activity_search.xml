@@ -41,7 +41,7 @@
                     app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp" />
 
 
-                <code.name.monkey.appthemehelper.common.views.ATEEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/searchView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:padding="12dp">
 
                     <requestFocus />
-                </code.name.monkey.appthemehelper.common.views.ATEEditText>
+                </com.google.android.material.textfield.TextInputEditText>
 
                 <code.name.monkey.retromusic.views.IconImageView
                     android:id="@+id/voiceSearch"

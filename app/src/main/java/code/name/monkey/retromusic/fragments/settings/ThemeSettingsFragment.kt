@@ -23,6 +23,7 @@ import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.*
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
@@ -41,12 +42,21 @@ import com.afollestad.materialdialogs.color.colorChooser
 class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
-        val primaryColorPref: ATEColorPreference? = findPreference("primary_color")
-        primaryColorPref?.let {
-            it.isVisible = PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color
-            val primaryColor = ThemeStore.primaryColor(activity!!)
-            it.setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
-            it.setOnPreferenceClickListener {
+
+        val categoryColor: ATEPreferenceCategory? = findPreference("category_color")
+        val primaryColorPref = ATEColorPreference(preferenceScreen.context)
+
+        val primaryColor = ThemeStore.primaryColor(activity!!)
+
+        primaryColorPref.apply {
+            key = "primary_color"
+            isPersistent = false
+            setSummary(R.string.primary_color_desc)
+            setTitle(R.string.primary_color)
+            isCopyingEnabled = true
+            setIcon(R.drawable.ic_colorize_white_24dp)
+            setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
+            setOnPreferenceClickListener {
                 MaterialDialog(activity!!, BottomSheet()).show {
                     title(R.string.primary_color)
                     positiveButton(R.string.set)
@@ -81,10 +91,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 if (theme == "color" && !App.isProVersion) {
                     showProToastAndNavigate("Color theme")
                     return@setOnPreferenceChangeListener false
-                }
-
-                if (theme == "color") {
-                    primaryColorPref?.isVisible = true
                 }
 
                 setSummary(generalTheme, newValue)
@@ -144,6 +150,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             }
         }
 
+        if (PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color && App.isProVersion) {
+            categoryColor?.addPreference(primaryColorPref)
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

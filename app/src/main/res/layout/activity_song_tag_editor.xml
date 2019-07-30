@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <code.name.monkey.appthemehelper.common.views.ATEEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/songText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 android:layout_marginTop="8dp"
                 app:hintEnabled="true">
 
-                <code.name.monkey.appthemehelper.common.views.ATEEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/albumText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -239,10 +239,7 @@
                     android:inputType="textMultiLine" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
-
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
