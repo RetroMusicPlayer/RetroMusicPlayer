@@ -24,6 +24,7 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
+import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.afollestad.materialdialogs.MaterialDialog
@@ -70,7 +71,7 @@ class CreatePlaylistDialog : DialogFragment() {
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
         val playlistId = arguments!!.getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
-        playlistView.setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
+        playlistView.appHandleColor().setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
         return materialDialog
     }
 

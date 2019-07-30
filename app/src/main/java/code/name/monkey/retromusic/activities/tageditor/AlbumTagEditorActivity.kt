@@ -18,6 +18,7 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -95,10 +96,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         MaterialUtil.setTint(albumTitleContainer, false)
         MaterialUtil.setTint(albumArtistContainer, false)
 
-        albumText.addTextChangedListener(this)
-        albumArtistText.addTextChangedListener(this)
-        genreTitle.addTextChangedListener(this)
-        yearTitle.addTextChangedListener(this)
+        albumText.appHandleColor().addTextChangedListener(this)
+        albumArtistText.appHandleColor().addTextChangedListener(this)
+        genreTitle.appHandleColor().addTextChangedListener(this)
+        yearTitle.appHandleColor().addTextChangedListener(this)
     }
 
     private fun fillViewsWithFileTags() {

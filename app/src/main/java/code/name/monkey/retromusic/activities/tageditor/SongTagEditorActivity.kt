@@ -9,6 +9,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.loaders.SongLoader
 import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
@@ -44,6 +45,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private fun setUpViews() {
         fillViewsWithFileTags()
         MaterialUtil.setTint(songTextContainer, false)
+
         MaterialUtil.setTint(composerContainer, false)
         MaterialUtil.setTint(albumTextContainer, false)
         MaterialUtil.setTint(artistContainer, false)
@@ -53,15 +55,14 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         MaterialUtil.setTint(trackNumberContainer, false)
         MaterialUtil.setTint(lyricsContainer, false)
 
-        albumText.addTextChangedListener(this)
-        songText.addTextChangedListener(this)
-        albumText.addTextChangedListener(this)
-        artistText.addTextChangedListener(this)
-        genreText.addTextChangedListener(this)
-        yearText.addTextChangedListener(this)
-        trackNumberText.addTextChangedListener(this)
-        lyricsText.addTextChangedListener(this)
-        songComposerText.addTextChangedListener(this)
+        songText.appHandleColor().addTextChangedListener(this)
+        albumText.appHandleColor().addTextChangedListener(this)
+        artistText.appHandleColor().addTextChangedListener(this)
+        genreText.appHandleColor().addTextChangedListener(this)
+        yearText.appHandleColor().addTextChangedListener(this)
+        trackNumberText.appHandleColor().addTextChangedListener(this)
+        lyricsText.appHandleColor().addTextChangedListener(this)
+        songComposerText.appHandleColor().addTextChangedListener(this)
     }
 
     private fun fillViewsWithFileTags() {
@@ -132,3 +133,5 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         val TAG: String = SongTagEditorActivity::class.java.simpleName
     }
 }
+
+

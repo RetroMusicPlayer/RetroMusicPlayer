@@ -24,6 +24,7 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
+import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
@@ -36,46 +37,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 
 class RenamePlaylistDialog : DialogFragment() {
-
-    /*override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_playlist, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        MaterialUtil.setTint(actionNewPlaylistContainer, false)
-        val accentColor = ThemeStore.accentColor(context!!)
-        actionNewPlaylist.setHintTextColor(ColorStateList.valueOf(accentColor))
-        actionNewPlaylist.setTextColor(ThemeStore.textColorPrimary(context!!))
-
-        actionNewPlaylist.apply {
-            var playlistId: Long = 0
-            if (arguments != null) {
-                playlistId = arguments!!.getLong("playlist_id")
-            }
-            setText(PlaylistsUtil.getNameForPlaylist(activity!!, playlistId))
-        }
-
-        actionCancel.apply {
-            MaterialUtil.setTint(this, false)
-            setOnClickListener { dismiss() }
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
-        }
-
-        actionCreate.apply {
-            setText(R.string.action_rename)
-            setOnClickListener {
-                if (actionNewPlaylist.toString().trim { it <= ' ' } != "") {
-                    val playlistId = arguments!!.getLong("playlist_id")
-                    PlaylistsUtil.renamePlaylist(context!!, playlistId, actionNewPlaylist.text!!.toString())
-                }
-            }
-            MaterialUtil.setTint(this)
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_edit_white_24dp)
-        }
-    }*/
     private lateinit var playlistView: TextInputEditText
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
@@ -101,7 +62,7 @@ class RenamePlaylistDialog : DialogFragment() {
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
         val playlistId = arguments!!.getLong(PLAYLIST_ID)
-        playlistView.setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
+        playlistView.appHandleColor().setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
         return materialDialog
     }
 
