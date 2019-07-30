@@ -12,19 +12,21 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
+import code.name.monkey.retromusic.util.PreferenceUtil
+import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 
 
@@ -42,7 +44,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(R.layout.fragment_player_playback_controls, container, false)
+        return inflater.inflate(R.layout.fragment_blur_player_playback_controls, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,13 +59,13 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation()
         }
-
+        text.isSelected = true
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
-        text.text = song.artistName
+        text.text = "${song.artistName} • ${song.albumName}"
     }
 
     override fun onResume() {
@@ -102,20 +104,28 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
         lastPlaybackControlsColor = Color.WHITE
-        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
+        lastDisabledPlaybackControlsColor = ContextCompat.getColor(requireContext(), R.color.md_grey_500)
 
         title.setTextColor(lastPlaybackControlsColor)
-        text.setTextColor(lastDisabledPlaybackControlsColor)
 
-        setFabColor(lastPlaybackControlsColor)
-        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor)
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
-        volumeFragment?.tintWhiteColor()
+
+
+        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+            color
+        } else {
+            ThemeStore.accentColor(requireContext())
+        }.ripAlpha()
+
+        text.setTextColor(colorFinal)
+        TintHelper.setTintAuto(progressSlider, colorFinal, false)
+        volumeFragment?.setTintable(colorFinal)
+        setFabColor(colorFinal)
     }
 
     private fun setFabColor(i: Int) {

@@ -35,7 +35,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.actionPlayingQueue -> NavigationUtil.goToPlayingQueue(activity!!)
+            R.id.actionPlayingQueue -> NavigationUtil.goToPlayingQueue(requireActivity())
             R.id.actionNext -> MusicPlayerRemote.playNextSong()
             R.id.actionPrevious -> MusicPlayerRemote.back()
         }
@@ -44,8 +44,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.setBackgroundColor(ThemeStore.primaryColor(context!!))
-        view.setOnTouchListener(FlingPlayBackController(context!!))
+        view.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
+        view.setOnTouchListener(FlingPlayBackController(requireContext()))
         //view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer()
 
@@ -66,7 +66,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     private fun setUpMiniPlayer() {
         setUpPlayPauseButton()
-        ViewUtil.setProgressDrawable(progressBar, ThemeStore.accentColor(context!!))
+        ViewUtil.setProgressDrawable(progressBar, ThemeStore.accentColor(requireContext()))
     }
 
     private fun setUpPlayPauseButton() {
@@ -78,10 +78,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         val song = MusicPlayerRemote.currentSong
         val title = SpannableString(song.title)
-        title.setSpan(ForegroundColorSpan(ThemeStore.textColorPrimary(context!!)), 0, title.length, 0)
+        title.setSpan(ForegroundColorSpan(ThemeStore.textColorPrimary(requireContext())), 0, title.length, 0)
 
         val text = SpannableString(song.artistName)
-        text.setSpan(ForegroundColorSpan(ThemeStore.textColorSecondary(context!!)), 0, text.length, 0)
+        text.setSpan(ForegroundColorSpan(ThemeStore.textColorSecondary(requireContext())), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)
 

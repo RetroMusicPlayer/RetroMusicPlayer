@@ -111,6 +111,8 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
     fun setTintable(color: Int) {
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
+        volumeDown.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN)
     }
 
     fun removeThumb() {
