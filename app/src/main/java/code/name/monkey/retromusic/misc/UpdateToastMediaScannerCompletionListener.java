@@ -18,7 +18,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Build;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -58,17 +57,7 @@ public class UpdateToastMediaScannerCompletionListener implements MediaScannerCo
                 }
                 String text = " " + String.format(scannedFiles, scanned, toBeScanned.length) + (failed > 0 ? " " + String.format(couldNotScanFiles, failed) : "");
                 toast.setText(text);
-                try {
-                    if (toast.getView().isShown()) {
-                        toast.cancel();
-                    }
-                    if (Build.VERSION.SDK_INT < 28 && toast.getView().isShown()) {
-                        toast.cancel();
-                    }
-                    toast.show();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                toast.show();
             });
         }
     }

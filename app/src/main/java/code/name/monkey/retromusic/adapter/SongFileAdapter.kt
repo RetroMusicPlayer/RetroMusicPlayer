@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.CabHolder
-import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -81,8 +82,12 @@ class SongFileAdapter(private val activity: AppCompatActivity, private var dataS
     private fun loadFileImage(file: File, holder: ViewHolder) {
         val iconColor = ATHUtil.resolveColor(activity, R.attr.iconColor)
         if (file.isDirectory) {
-            holder.image!!.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-            holder.image!!.setImageResource(R.drawable.ic_folder_white_24dp)
+            holder.image?.let {
+                it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
+                it.setImageResource(R.drawable.ic_folder_white_24dp)
+            }
+            holder.imageTextContainer?.setCardBackgroundColor(ThemeStore.primaryColor(activity))
+
         } else {
             val error = RetroUtil.getTintedVectorDrawable(activity, R.drawable.ic_file_music_white_24dp, iconColor)
             GlideApp.with(activity)
