@@ -54,16 +54,6 @@ class SongFileAdapter(private val activity: AppCompatActivity, private var dataS
 
         holder.itemView.isActivated = isChecked(file)
 
-        if (holder.adapterPosition == itemCount - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.VISIBLE
-            }
-        }
-
         if (holder.title != null) {
             holder.title!!.text = getFileTitle(file)
         }
