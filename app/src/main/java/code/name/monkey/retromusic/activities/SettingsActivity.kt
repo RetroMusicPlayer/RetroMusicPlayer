@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App.Companion.context
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
@@ -40,9 +41,10 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
         setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
+            setTitleTextColor( ThemeStore.accentColor(context))
             setBackgroundColor(ThemeStore.primaryColor(context))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
+            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(context))
         }
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
 

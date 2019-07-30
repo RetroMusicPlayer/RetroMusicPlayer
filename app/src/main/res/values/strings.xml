@@ -630,4 +630,6 @@
     <string name="reset_action">Reset</string>
     <string name="library_categories">Library categories</string>
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
+    <string name="pref_header_controls">Controls</string>
+    <string name="pref_header_album">Album style</string>
 </resources>

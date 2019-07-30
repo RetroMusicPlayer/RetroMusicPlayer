@@ -37,43 +37,4 @@
         app:optionIcon="@drawable/ic_settings_white_24dp"
         app:optionTitle="@string/action_settings" />
 
-    <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionEqualizer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        app:optionIcon="@drawable/ic_equalizer_white_24dp"
-        app:optionTitle="@string/equalizer" />
-
-    <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionShare"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        app:optionIcon="@drawable/ic_share_white_24dp"
-        app:optionTitle="@string/action_share" />
-
-    <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionBugReport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        app:optionIcon="@drawable/ic_bug_report_white_24dp"
-        app:optionTitle="@string/report_bug" />
-
-    <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionRate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
-        app:optionIcon="@drawable/ic_star_white_24dp"
-        app:optionTitle="@string/rate_app" />
 </LinearLayout>

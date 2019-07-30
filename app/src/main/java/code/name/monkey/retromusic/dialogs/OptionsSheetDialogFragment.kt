@@ -42,11 +42,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
             R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
-            R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
-            R.id.actionShare -> shareApp()
-            R.id.actionBugReport -> prepareBugReport()
-            R.id.actionEqualizer -> NavigationUtil.openEqualizer(mainActivity)
-
         }
         materialDialog.dismiss()
     }
@@ -65,30 +60,18 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
     private lateinit var actionSettings: View
     private lateinit var actionLibrary: View
-    private lateinit var actionEqualizer: View
     private lateinit var actionFolders: View
-    private lateinit var actionRate: View
-    private lateinit var actionShare: View
-    private lateinit var actionBugReport: View
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
         actionLibrary = layout.findViewById(R.id.actionLibrary)
-        actionEqualizer = layout.findViewById(R.id.actionEqualizer)
         actionFolders = layout.findViewById(R.id.actionFolders)
-        actionRate = layout.findViewById(R.id.actionRate)
-        actionShare = layout.findViewById(R.id.actionShare)
-        actionBugReport = layout.findViewById(R.id.actionBugReport)
 
         actionSettings.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
-        actionEqualizer.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
-        actionRate.setOnClickListener(this)
-        actionShare.setOnClickListener(this)
-        actionBugReport.setOnClickListener(this)
 
         materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {

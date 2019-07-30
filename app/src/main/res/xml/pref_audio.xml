@@ -17,18 +17,8 @@
         android:title="@string/pref_title_gapless_playback"
         app:enableCopying="true" />
 
-    <code.name.monkey.retromusic.preferences.MaterialListPreference
-        android:defaultValue="system"
-        android:entries="@array/pref_equalizer_types_titles"
-        android:entryValues="@array/pref_equalizer_types_values"
-        android:key="choose_equalizer"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="@string/pref_title_choose_equalizer"
-        app:enableCopying="true"
-        app:icon="@drawable/ic_equalizer_white_24dp" />
-
-    <Preference
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreference
+        app:icon="@drawable/ic_equalizer_white_24dp"
         android:key="equalizer"
         android:title="@string/equalizer"
         app:enableCopying="true" />

@@ -39,8 +39,6 @@ class AudioSettings : AbsSettingsFragment() {
             NavigationUtil.openEqualizer(activity!!)
             true
         }
-
-
     }
 
     private fun hasEqualizer(): Boolean {

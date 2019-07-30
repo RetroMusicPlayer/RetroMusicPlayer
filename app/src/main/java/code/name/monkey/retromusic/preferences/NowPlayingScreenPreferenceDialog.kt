@@ -57,7 +57,7 @@ class NowPlayingScreenPreference : ATEDialogPreference {
     }
 
     init {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
     }
 }
 

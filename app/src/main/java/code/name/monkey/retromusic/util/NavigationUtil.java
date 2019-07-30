@@ -31,7 +31,6 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.activities.ArtistDetailActivity;
-import code.name.monkey.retromusic.activities.EqualizerActivity;
 import code.name.monkey.retromusic.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;
 import code.name.monkey.retromusic.activities.LyricsActivity;
@@ -86,11 +85,7 @@ public class NavigationUtil {
     }
 
     public static void openEqualizer(@NonNull final Activity activity) {
-        if (PreferenceUtil.getInstance().getSelectedEqualizer().equals("system")) {
-            stockEqalizer(activity);
-        } else {
-            ActivityCompat.startActivity(activity, new Intent(activity, EqualizerActivity.class), null);
-        }
+        stockEqalizer(activity);
     }
 
     private static void stockEqalizer(@NonNull Activity activity) {

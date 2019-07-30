@@ -37,7 +37,7 @@ class MaterialListPreference : ListPreference {
     }
 
     private fun init(context: Context) {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {

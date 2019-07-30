@@ -98,7 +98,7 @@
         <activity android:name=".activities.GenreDetailsActivity" />
         <activity android:name=".activities.LicenseActivity" />
         <activity android:name=".activities.PurchaseActivity" />
-        <activity android:name=".activities.EqualizerActivity" />
+
         <activity
             android:name=".activities.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
