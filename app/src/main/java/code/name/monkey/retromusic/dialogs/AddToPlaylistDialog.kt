@@ -14,10 +14,12 @@
 
 package code.name.monkey.retromusic.dialogs
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
@@ -30,7 +32,13 @@ import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
 import kotlinx.android.synthetic.main.dialog_add_to_playlist.*
 
 
-class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
+class AddToPlaylistDialog : DialogFragment() {
+
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
+        return super.onCreateDialog(savedInstanceState)
+    }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

@@ -114,8 +114,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
     private lateinit var wrappedAdapter: RecyclerView.Adapter<*>
     private lateinit var recyclerViewDragDropManager: RecyclerViewDragDropManager
 
-    private var lyricsClassic: Lyrics? = null
-
     private lateinit var impl: Impl
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
