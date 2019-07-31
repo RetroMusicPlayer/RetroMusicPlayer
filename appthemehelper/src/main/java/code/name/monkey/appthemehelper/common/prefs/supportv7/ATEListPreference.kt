@@ -30,7 +30,7 @@ class ATEListPreference @JvmOverloads constructor(
 ) : ListPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
         layoutResource = R.layout.ate_preference_custom_support
         if (summary == null || summary.toString().trim { it <= ' ' }.isEmpty())
             summary = "%s"

@@ -33,6 +33,6 @@ class ATESwitchPreference : CheckBoxPreference {
 
     private fun init() {
         widgetLayoutResource = R.layout.ate_preference_switch_support
-        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }

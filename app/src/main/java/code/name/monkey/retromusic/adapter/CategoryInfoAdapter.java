@@ -123,7 +123,7 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
         ViewHolder(View view) {
             super(view);
             checkBox = view.findViewById(R.id.checkbox);
-            checkBox.setBackgroundTintList(ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
+            checkBox.setButtonTintList(ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
             title = view.findViewById(R.id.title);
             dragView = view.findViewById(R.id.drag_view);
         }

@@ -39,7 +39,7 @@ class ATEColorPreference @JvmOverloads constructor(
         widgetLayoutResource = R.layout.ate_preference_color
         isPersistent = false
 
-        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

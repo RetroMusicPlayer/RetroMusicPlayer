@@ -8,6 +8,7 @@
     android:paddingStart="72dp"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+    android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
     android:textColor="?android:textColorSecondary"
-    tools:ignore="RtlSymmetry" />
+    tools:ignore="RtlSymmetry"
+    tools:text="@string/app_name" />

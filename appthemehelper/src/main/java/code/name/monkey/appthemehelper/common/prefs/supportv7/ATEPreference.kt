@@ -30,6 +30,6 @@ class ATEPreference @JvmOverloads constructor(
 
     init {
         layoutResource = R.layout.ate_preference_custom_support
-        icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
+        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }

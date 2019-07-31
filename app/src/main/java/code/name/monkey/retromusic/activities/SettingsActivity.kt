@@ -41,10 +41,10 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
         setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
-            setTitleTextColor( ThemeStore.accentColor(context))
+            setTitleTextColor( ThemeStore.textColorPrimary(context))
             setBackgroundColor(ThemeStore.primaryColor(context))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.accentColor(context))
+            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
         }
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
 
