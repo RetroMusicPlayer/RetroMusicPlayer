@@ -44,12 +44,6 @@ class App : MultiDexApplication() {
         if (VersionUtils.hasNougatMR())
             DynamicShortcutManager(this).initDynamicShortcuts()
 
-
-        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFont(R.font.circular_std_book)
-                .build()
-        )
-
         // automatically restores purchases
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
                 object : BillingProcessor.IBillingHandler {

@@ -13,9 +13,6 @@
         android:id="@+id/actionLibrary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
         app:optionIcon="@drawable/ic_library_music_white_24dp"
         app:optionTitle="@string/library" />
 
@@ -23,9 +20,6 @@
         android:id="@+id/actionFolders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
         app:optionIcon="@drawable/ic_folder_white_24dp"
         app:optionTitle="@string/folders" />
 
@@ -33,10 +27,13 @@
         android:id="@+id/actionSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?rectSelector"
-        android:clickable="true"
-        android:focusable="true"
         app:optionIcon="@drawable/ic_settings_white_24dp"
         app:optionTitle="@string/action_settings" />
 
+    <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionRate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:optionIcon="@drawable/ic_star_white_24dp"
+        app:optionTitle="@string/rate_app" />
 </LinearLayout>
