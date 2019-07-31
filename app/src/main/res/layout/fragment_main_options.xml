@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingStart="0dp"
+    android:paddingEnd="16dp"
     tools:ignore="MissingPrefix">
 
     <code.name.monkey.retromusic.views.OptionMenuItemView

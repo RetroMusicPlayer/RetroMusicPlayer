@@ -56,6 +56,7 @@
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
         <item name="md_color_button_text">@color/md_white_1000</item>
+        <item name="md_background_color">@color/dark_color</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -111,7 +112,7 @@
         <item name="dividerColor">@color/dark_color</item>
         <item name="defaultFooterColor">@color/md_grey_800</item>
         <item name="cardBackgroundColor">@color/black_color</item>
-        <item name="md_background_color">@color/card_black_color</item>
+        <item name="md_background_color">@color/black_color</item>
 
         <item name="android:windowBackground">@color/black_color</item>
         <item name="colorPrimary">@color/black_color</item>

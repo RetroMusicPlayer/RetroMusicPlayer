@@ -32,7 +32,7 @@
         android:padding="14dp"
         app:srcCompat="@drawable/ic_folder_white_24dp" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

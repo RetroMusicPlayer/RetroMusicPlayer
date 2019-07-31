@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="4dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
                 android:textColor="?android:attr/textColorSecondary"
                 android:textSize="12sp"
                 android:textStyle="bold"

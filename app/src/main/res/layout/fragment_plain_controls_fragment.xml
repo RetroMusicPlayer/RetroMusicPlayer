@@ -21,7 +21,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -35,7 +35,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/songTotalTime"
-            android:progressDrawable="@drawable/color_progress_seek"
             android:layout_toRightOf="@id/songCurrentProgress"
             android:maxHeight="2dp"
+            android:progressDrawable="@drawable/color_progress_seek"
             android:splitTrack="false"
             tools:ignore="RtlHardcoded,UnusedAttribute"
             tools:progress="20" />

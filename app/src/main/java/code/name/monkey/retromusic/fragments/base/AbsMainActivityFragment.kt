@@ -48,7 +48,7 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
         }
     }
 
-    protected fun showMainMenu() {
-        OptionsSheetDialogFragment.newInstance().show(childFragmentManager, "Main_Menu")
+    protected fun showMainMenu(option: Int) {
+        OptionsSheetDialogFragment.newInstance(option).show(childFragmentManager, "Main_Menu")
     }
 }

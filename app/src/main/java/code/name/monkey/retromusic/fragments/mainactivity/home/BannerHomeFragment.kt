@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
@@ -155,8 +156,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                 val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
                 NavigationUtil.goToSearch(activity!!, pairImageView)
             }
+
         }
         mainActivity.setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener { v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY) }
     }
 
     override fun handleBackPress(): Boolean {

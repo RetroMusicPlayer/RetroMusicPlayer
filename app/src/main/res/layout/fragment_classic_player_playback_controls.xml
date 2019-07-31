@@ -12,7 +12,7 @@
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/playerSongCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -21,12 +21,12 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/playerSongTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -35,7 +35,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />

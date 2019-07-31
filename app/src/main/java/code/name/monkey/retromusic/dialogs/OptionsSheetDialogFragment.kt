@@ -15,24 +15,20 @@
 package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
-import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import androidx.cardview.widget.CardView
-import androidx.core.app.ShareCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.activities.bugreport.BugReportActivity
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.views.OptionMenuItemView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import kotlinx.android.synthetic.main.fragment_main_settings.*
 
 class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
@@ -46,21 +42,9 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         materialDialog.dismiss()
     }
 
-    private fun prepareBugReport() {
-        startActivity(Intent(activity, BugReportActivity::class.java))
-    }
-
-    private fun shareApp() {
-        ShareCompat.IntentBuilder.from(activity)
-                .setType("text/plain")
-                .setChooserTitle(R.string.action_share)
-                .setText(String.format(getString(R.string.app_share), activity!!.packageName))
-                .startChooser()
-    }
-
-    private lateinit var actionSettings: View
-    private lateinit var actionLibrary: View
-    private lateinit var actionFolders: View
+    private lateinit var actionSettings: OptionMenuItemView
+    private lateinit var actionLibrary: OptionMenuItemView
+    private lateinit var actionFolders: OptionMenuItemView
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -69,24 +53,39 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionLibrary = layout.findViewById(R.id.actionLibrary)
         actionFolders = layout.findViewById(R.id.actionFolders)
 
+
+        when (arguments?.getInt(WHICH_ONE)) {
+            LIBRARY -> actionLibrary.isSelected = true
+            FOLDER -> actionFolders.isSelected = true
+        }
+
         actionSettings.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
 
         materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
+                    icon(R.mipmap.ic_launcher_round)
+                    title(R.string.app_name)
                     customView(view = layout, scrollable = true)
                 }
         return materialDialog
     }
 
+
     companion object {
 
         private const val TAG: String = "MainOptionsBottomSheetD"
 
-        fun newInstance(selected_id: Int): OptionsSheetDialogFragment {
+        private const val WHICH_ONE = "which_one"
+        @JvmField
+        var LIBRARY: Int = 0
+        @JvmField
+        var FOLDER: Int = 1
+
+        fun newInstance(selectedId: Int): OptionsSheetDialogFragment {
             val bundle = Bundle()
-            bundle.putInt("selected_id", selected_id)
+            bundle.putInt(WHICH_ONE, selectedId)
             val fragment = OptionsSheetDialogFragment()
             fragment.arguments = bundle
             return fragment

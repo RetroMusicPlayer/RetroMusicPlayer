@@ -49,6 +49,7 @@ import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
@@ -231,8 +232,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
-        toolbar.setOnClickListener(v -> {
-            showMainMenu();
+        toolbar.setNavigationOnClickListener(v -> {
+            showMainMenu(OptionsSheetDialogFragment.FOLDER);
         });
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(),

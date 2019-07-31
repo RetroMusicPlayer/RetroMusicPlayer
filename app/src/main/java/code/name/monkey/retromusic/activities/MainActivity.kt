@@ -293,14 +293,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }
     }
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            OptionsSheetDialogFragment.newInstance().show(supportFragmentManager, "Main_Menu")
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     companion object {
         const val APP_INTRO_REQUEST = 2323
         const val HOME = 0
