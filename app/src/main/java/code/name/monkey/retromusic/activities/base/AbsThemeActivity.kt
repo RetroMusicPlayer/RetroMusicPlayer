@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.activities.base
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -13,12 +12,13 @@ import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ATHActivity
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
-import uk.co.chrisjenx.calligraphy.CalligraphyTypefaceSpan
 
 abstract class AbsThemeActivity : ATHActivity(), Runnable {
 

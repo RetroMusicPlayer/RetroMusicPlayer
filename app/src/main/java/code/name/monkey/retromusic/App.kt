@@ -22,7 +22,6 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
 
 class App : MultiDexApplication() {
