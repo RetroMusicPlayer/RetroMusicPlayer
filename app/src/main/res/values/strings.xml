@@ -632,4 +632,21 @@
     <string name="pref_summary_library_categories">Configure visibility and order of library categories.</string>
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_album">Album style</string>
+
+
+    <!-- SAF -->
+    <string name="saf_error_uri">Can\'t get SAF URI</string>
+    <string name="saf_write_failed">File write failed: %s</string>
+    <string name="saf_delete_failed">File delete failed: %s</string>
+    <string name="saf_pick_sdcard">SD card access required. Please pick root directory of SD card</string>
+    <string name="saf_pick_file">File access required. Pick %s</string>
+    <!-- SAF guide -->
+    <string name="saf_guide_slide1_title">%s needs SD card access</string>
+    <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
+    <string name="saf_guide_slide1_description">Open navigation drawer</string>
+    <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
+    <string name="saf_guide_slide2_description">You need to select your SD card root directory</string>
+    <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
+    <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
+    <string name="deleting_songs">Deleting songs</string>
 </resources>

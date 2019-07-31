@@ -15,14 +15,14 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
-import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.util.*
 import code.name.monkey.retromusic.views.FitSystemWindowsLayout
 import java.io.FileNotFoundException
@@ -57,20 +57,15 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 return true
             }
             R.id.action_share -> {
-                if (fragmentManager != null) {
-                    SongShareDialog.create(song).show(fragmentManager!!, "SHARE_SONG")
-                }
+                SongShareDialog.create(song).show(requireFragmentManager(), "SHARE_SONG")
                 return true
             }
             R.id.action_delete_from_device -> {
-                DeleteSongsDialog.create(song)
-                        .show(activity!!.supportFragmentManager, "DELETE_SONGS")
+                DeleteSongsDialog.create(song).show(requireFragmentManager(), "DELETE_SONGS")
                 return true
             }
             R.id.action_add_to_playlist -> {
-                if (fragmentManager != null) {
-                    AddToPlaylistDialog.create(song).show(fragmentManager!!, "ADD_PLAYLIST")
-                }
+                AddToPlaylistDialog.create(song).show(requireFragmentManager(), "ADD_PLAYLIST")
                 return true
             }
             R.id.action_clear_playing_queue -> {
@@ -79,7 +74,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
             }
             R.id.action_save_playing_queue -> {
                 CreatePlaylistDialog.create(MusicPlayerRemote.playingQueue)
-                        .show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
+                        .show(requireFragmentManager(), "ADD_TO_PLAYLIST")
                 return true
             }
             R.id.action_tag_editor -> {
@@ -89,45 +84,43 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 return true
             }
             R.id.action_details -> {
-                if (fragmentManager != null) {
-                    SongDetailDialog.create(song).show(fragmentManager!!, "SONG_DETAIL")
-                }
+                SongDetailDialog.create(song).show(requireFragmentManager(), "SONG_DETAIL")
                 return true
             }
             R.id.action_go_to_album -> {
-                NavigationUtil.goToAlbum(activity!!, song.albumId)
+                NavigationUtil.goToAlbum(requireActivity(), song.albumId)
                 return true
             }
             R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(activity!!, song.artistId)
+                NavigationUtil.goToArtist(requireActivity(), song.artistId)
                 return true
             }
             R.id.now_playing -> {
-                NavigationUtil.goToPlayingQueue(activity!!)
+                NavigationUtil.goToPlayingQueue(requireActivity())
                 return true
             }
             R.id.action_show_lyrics -> {
-                NavigationUtil.goToLyrics(activity!!)
+                NavigationUtil.goToLyrics(requireActivity())
                 return true
             }
             R.id.action_equalizer -> {
-                NavigationUtil.openEqualizer(activity!!)
+                NavigationUtil.openEqualizer(requireActivity())
                 return true
             }
             R.id.action_sleep_timer -> {
-                SleepTimerDialog().show(fragmentManager!!, TAG)
+                SleepTimerDialog().show(requireFragmentManager(), TAG)
                 return true
             }
             R.id.action_set_as_ringtone -> {
-                if (RingtoneManager.requiresDialog(activity!!)) {
-                    RingtoneManager.getDialog(activity!!)
+                if (RingtoneManager.requiresDialog(requireActivity())) {
+                    RingtoneManager.getDialog(requireActivity())
                 }
-                val ringtoneManager = RingtoneManager(activity!!)
+                val ringtoneManager = RingtoneManager(requireActivity())
                 ringtoneManager.setRingtone(song)
                 return true
             }
             R.id.action_settings -> {
-                NavigationUtil.goToSettings(activity!!)
+                NavigationUtil.goToSettings(requireActivity())
                 return true
             }
             R.id.action_go_to_genre -> {
@@ -146,7 +139,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
     }
 
     protected open fun toggleFavorite(song: Song) {
-        MusicUtil.toggleFavorite(activity!!, song)
+        MusicUtil.toggleFavorite(requireActivity(), song)
     }
 
     abstract fun playerToolbar(): Toolbar
@@ -252,7 +245,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.setBackgroundColor(ThemeStore.primaryColor(activity!!))
+        view.setBackgroundColor(ThemeStore.primaryColor(requireActivity()))
         if (PreferenceUtil.getInstance().fullScreenMode && view.findViewById<View>(R.id.status_bar) != null) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }

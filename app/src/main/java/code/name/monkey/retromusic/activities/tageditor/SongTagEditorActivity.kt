@@ -56,6 +56,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         songText.appHandleColor().addTextChangedListener(this)
         albumText.appHandleColor().addTextChangedListener(this)
+        albumArtistText.appHandleColor().addTextChangedListener(this)
         artistText.appHandleColor().addTextChangedListener(this)
         genreText.appHandleColor().addTextChangedListener(this)
         yearText.appHandleColor().addTextChangedListener(this)

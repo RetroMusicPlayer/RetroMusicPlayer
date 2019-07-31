@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 
 import androidx.annotation.LayoutRes;
@@ -87,6 +88,7 @@ public final class PreferenceUtil {
     public static final String ALBUM_COVER_STYLE = "album_cover_style_id";
     public static final String ALBUM_COVER_TRANSFORM = "album_cover_transform";
     public static final String TAB_TEXT_MODE = "tab_text_mode";
+    public static final String SAF_SDCARD_URI = "saf_sdcard_uri";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LAST_PAGE = "last_start_page";
     private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
@@ -281,7 +283,6 @@ public final class PreferenceUtil {
         return Integer.parseInt(mPreferences.getString(DEFAULT_START_PAGE, "-1"));
     }
 
-
     public final int getLastPage() {
         return mPreferences.getInt(LAST_PAGE, R.id.action_song);
     }
@@ -291,7 +292,6 @@ public final class PreferenceUtil {
         editor.putInt(LAST_PAGE, value);
         editor.apply();
     }
-
 
     public void setLastLyricsType(int group) {
         final SharedPreferences.Editor editor = mPreferences.edit();
@@ -387,7 +387,6 @@ public final class PreferenceUtil {
     public final boolean ignoreMediaStoreArtwork() {
         return mPreferences.getBoolean(IGNORE_MEDIA_STORE_ARTWORK, false);
     }
-
 
     public int getLastSleepTimerValue() {
         return mPreferences.getInt(LAST_SLEEP_TIMER_VALUE, 30);
@@ -673,7 +672,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_HEADSET, false);
     }
 
-
     public boolean isDominantColor() {
         return mPreferences.getBoolean(DOMINANT_COLOR, false);
     }
@@ -697,7 +695,6 @@ public final class PreferenceUtil {
     public void resetCircularAlbumArt() {
         mPreferences.edit().putBoolean(CIRCULAR_ALBUM_ART, false).apply();
     }
-
 
     public String getAlbumDetailsStyle() {
         return mPreferences.getString(ALBUM_DETAIL_STYLE, "0");
@@ -737,7 +734,6 @@ public final class PreferenceUtil {
     public boolean pauseOnZeroVolume() {
         return mPreferences.getBoolean(PAUSE_ON_ZERO_VOLUME, false);
     }
-
 
     public ViewPager.PageTransformer getAlbumCoverTransform() {
         int style = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_COVER_TRANSFORM, "0")));
@@ -858,5 +854,13 @@ public final class PreferenceUtil {
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, false));
         return defaultCategoryInfos;
+    }
+
+    public final String getSAFSDCardUri() {
+        return mPreferences.getString(SAF_SDCARD_URI, "");
+    }
+
+    public final void setSAFSDCardUri(Uri uri) {
+        mPreferences.edit().putString(SAF_SDCARD_URI, uri.toString()).apply();
     }
 }

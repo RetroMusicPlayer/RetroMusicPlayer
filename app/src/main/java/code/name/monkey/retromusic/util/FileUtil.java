@@ -57,7 +57,6 @@ public final class FileUtil {
         stream.close();
         return baos.toByteArray();
     }
-
     @NonNull
     public static Observable<ArrayList<Song>> matchFilesWithMediaStore(@NonNull Context context,
                                                                        @Nullable List<File> files) {
@@ -263,4 +262,6 @@ public final class FileUtil {
             return file.getAbsoluteFile();
         }
     }
+
+
 }

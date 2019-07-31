@@ -7,6 +7,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -16,9 +17,10 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.SAFUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -27,6 +29,8 @@ import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
+import java.util.*
+
 
 abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
@@ -38,9 +42,14 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var songPaths: List<String>? = null
     lateinit var saveFab: ExtendedFloatingActionButton
 
+    private var savedSongPaths: List<String>? = null
+    private val currentSongPath: String? = null
+    private var savedTags: Map<FieldKey, String>? = null
+    private var savedArtworkInfo: ArtworkInfo? = null
+
     protected val show: MaterialDialog
         get() = MaterialDialog(this@AbsTagEditorActivity).show {
-            title(R.string.update_image)
+            title(code.name.monkey.retromusic.R.string.update_image)
             listItems(items = items) { _, position, _ ->
                 when (position) {
                     0 -> getImageFromLastFM()
@@ -174,7 +183,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(contentViewLayout)
 
-        saveFab = findViewById(R.id.saveTags)
+        saveFab = findViewById(code.name.monkey.retromusic.R.id.saveTags)
         getIntentExtras()
 
         songPaths = getSongPaths()
@@ -204,14 +213,14 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     private fun setUpImageView() {
         loadCurrentImage()
-        items = listOf(getString(R.string.download_from_last_fm), getString(R.string.pick_from_local_storage), getString(R.string.web_search), getString(R.string.remove_cover))
+        items = listOf(getString(code.name.monkey.retromusic.R.string.download_from_last_fm), getString(code.name.monkey.retromusic.R.string.pick_from_local_storage), getString(code.name.monkey.retromusic.R.string.web_search), getString(code.name.monkey.retromusic.R.string.remove_cover))
         editorImage.setOnClickListener { show }
     }
 
     private fun startImagePicker() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE)
+        startActivityForResult(Intent.createChooser(intent, getString(code.name.monkey.retromusic.R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE)
     }
 
     protected abstract fun loadCurrentImage()
@@ -295,9 +304,19 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         saveFab.isEnabled = true
     }
 
+    private fun hideFab() {
+        saveFab.animate()
+                .setDuration(500)
+                .setInterpolator(OvershootInterpolator())
+                .scaleX(0.0f)
+                .scaleY(0.0f)
+                .start()
+        saveFab.isEnabled = false
+    }
+
     protected fun setImageBitmap(bitmap: Bitmap?, bgColor: Int) {
         if (bitmap == null) {
-            editorImage.setImageResource(R.drawable.default_album_art)
+            editorImage.setImageResource(code.name.monkey.retromusic.R.drawable.default_album_art)
         } else {
             editorImage.setImageBitmap(bitmap)
         }
@@ -312,16 +331,50 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
                                      artworkInfo: ArtworkInfo?) {
         RetroUtil.hideSoftKeyboard(this)
 
-        WriteTagsAsyncTask(this)
-                .execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(), fieldKeyValueMap, artworkInfo))
+        hideFab()
+
+        savedSongPaths = getSongPaths()
+        savedTags = fieldKeyValueMap
+        savedArtworkInfo = artworkInfo
+
+        if (!SAFUtil.isSAFRequired(savedSongPaths)) {
+            writeTags(savedSongPaths)
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (SAFUtil.isSDCardAccessGranted(this)) {
+                    writeTags(savedSongPaths)
+                } else {
+                    startActivityForResult(Intent(this, SAFGuideActivity::class.java), SAFGuideActivity.REQUEST_CODE_SAF_GUIDE)
+                }
+            }
+        }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun writeTags(paths: List<String>?) {
+        WriteTagsAsyncTask(this).execute(WriteTagsAsyncTask.LoadingInfo(paths, savedTags, savedArtworkInfo))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
+        super.onActivityResult(requestCode, resultCode, intent)
         when (requestCode) {
             REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                val selectedImage = data!!.data
-                loadImageFromFile(selectedImage)
+                intent?.data?.let {
+                    loadImageFromFile(it)
+                }
+            }
+            SAFGuideActivity.REQUEST_CODE_SAF_GUIDE -> {
+                SAFUtil.openTreePicker(this)
+            }
+            SAFUtil.REQUEST_SAF_PICK_TREE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    SAFUtil.saveTreeUri(this, intent)
+                    writeTags(savedSongPaths)
+                }
+            }
+            SAFUtil.REQUEST_SAF_PICK_FILE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    writeTags(Collections.singletonList(currentSongPath + SAFUtil.SEPARATOR + intent!!.dataString))
+                }
             }
         }
     }
@@ -335,7 +388,6 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
             Log.e(TAG, "Could not read audio file $path", e)
             AudioFile()
         }
-
     }
 
     class ArtworkInfo constructor(val albumId: Int, val artwork: Bitmap?)

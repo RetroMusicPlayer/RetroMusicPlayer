@@ -5,43 +5,43 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.CannotWriteException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.util.MusicUtil;
+import code.name.monkey.retromusic.util.SAFUtil;
 
 public class WriteTagsAsyncTask extends
         DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
 
-    private Context applicationContext;
+    private WeakReference<Activity> activity;
 
-    public WriteTagsAsyncTask(Context context) {
-        super(context);
-        applicationContext = context;
+    public WriteTagsAsyncTask(@NonNull Activity activity) {
+        super(activity);
+        this.activity = new WeakReference<>(activity);
     }
 
     @Override
@@ -68,6 +68,13 @@ public class WriteTagsAsyncTask extends
             for (String filePath : info.filePaths) {
                 publishProgress(++counter, info.filePaths.size());
                 try {
+                    Uri safUri = null;
+                    if (filePath.contains(SAFUtil.SEPARATOR)) {
+                        String[] fragments = filePath.split(SAFUtil.SEPARATOR);
+                        filePath = fragments[0];
+                        safUri = Uri.parse(fragments[1]);
+                    }
+
                     AudioFile audioFile = AudioFileIO.read(new File(filePath));
                     Tag tag = audioFile.getTagOrCreateAndSetDefault();
 
@@ -92,8 +99,10 @@ public class WriteTagsAsyncTask extends
                         }
                     }
 
-                    audioFile.commit();
-                } catch (@NonNull CannotReadException | IOException | CannotWriteException | TagException | ReadOnlyFileException | InvalidAudioFrameException e) {
+                    Activity activity = this.activity.get();
+                    SAFUtil.write(activity, audioFile, safUri);
+
+                } catch (@NonNull Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -107,7 +116,17 @@ public class WriteTagsAsyncTask extends
                 }
             }
 
-            return info.filePaths.toArray(new String[info.filePaths.size()]);
+            Collection<String> paths = info.filePaths;
+            if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+                paths = new ArrayList<>(info.filePaths.size());
+                for (String path : info.filePaths) {
+                    if (path.contains(SAFUtil.SEPARATOR))
+                        path = path.split(SAFUtil.SEPARATOR)[0];
+                    paths.add(path);
+                }
+            }
+
+            return paths.toArray(new String[paths.size()]);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -127,18 +146,20 @@ public class WriteTagsAsyncTask extends
     }
 
     private void scan(String[] toBeScanned) {
-        Context context = getContext();
-        MediaScannerConnection.scanFile(applicationContext, toBeScanned, null,
-                context instanceof Activity ? new UpdateToastMediaScannerCompletionListener(
-                        (Activity) context, toBeScanned) : null);
+        Activity activity = this.activity.get();
+        if (activity != null) {
+            MediaScannerConnection.scanFile(activity, toBeScanned, null, new UpdateToastMediaScannerCompletionListener(activity, toBeScanned));
+        }
     }
 
     @NonNull
     @Override
     protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialDialog(context, new BottomSheet())
-                .title(R.string.saving_changes, "")
-                .cancelable(false);
+        return new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.saving_changes)
+                .setCancelable(false)
+                .setView(R.layout.loading)
+                .create();
     }
 
     @Override

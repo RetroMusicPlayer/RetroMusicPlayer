@@ -19,13 +19,25 @@
 
 
     <!-- Deep Purple -->
+
     <color name="md_deep_purple_A400">#651FFF</color>
+    <color name="md_deep_purple_300">#9575CD</color>
+    <color name="md_deep_purple_400">#7E57C2</color>
+    <color name="md_deep_purple_600">#5E35B1</color>
+    <color name="md_deep_purple_700">#512DA8</color>
+    <color name="md_deep_purple_800">#4527A0</color>
     <color name="md_deep_purple_500A12">#30673AB7</color>
     <color name="md_deep_purple_500">#673AB7</color>
     <color name="md_deep_purple_A700">#6200EA</color>
 
     <!-- Indigo -->
     <color name="md_indigo_500">#3F51B5</color>
+    <color name="md_indigo_300">#7986CB</color>
+    <color name="md_indigo_400">#5C6BC0</color>
+    <color name="md_indigo_600">#3949AB</color>
+    <color name="md_indigo_700">#303F9F</color>
+    <color name="md_indigo_800">#283593</color>
+
 
     <!-- Blue -->
     <color name="md_blue_500">#2196F3</color>

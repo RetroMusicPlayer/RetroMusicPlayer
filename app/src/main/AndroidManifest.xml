@@ -121,6 +121,7 @@
             android:name=".appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".activities.saf.SAFGuideActivity" />
 
         <meta-data
             android:name="android.max_aspect"
