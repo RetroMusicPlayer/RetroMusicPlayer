@@ -355,6 +355,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                 mediaButtonReceiverComponentName,
                 mediaButtonReceiverPendingIntent);
         mediaSession.setCallback(new MediaSessionCompat.Callback() {
+
             @Override
             public void onPlay() {
                 play();

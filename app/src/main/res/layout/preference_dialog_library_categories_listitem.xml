@@ -28,7 +28,7 @@
     android:paddingRight="16dp"
     tools:gravity="start|center_vertical">
 
-    <code.name.monkey.appthemehelper.common.views.ATECheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkbox"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -37,7 +37,7 @@
         android:focusable="false"
         android:gravity="center_vertical" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

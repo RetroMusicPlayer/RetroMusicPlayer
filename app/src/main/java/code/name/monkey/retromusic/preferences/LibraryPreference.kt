@@ -35,13 +35,13 @@ import java.util.*
 
 
 class LibraryPreference : ATEDialogPreference {
-    constructor(context: Context) : super(context) {}
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {}
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     init {
         icon?.setColorFilter(ThemeStore.accentColor(context), PorterDuff.Mode.SRC_IN)
@@ -63,7 +63,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
         if (savedInstanceState != null) {
             categoryInfos = savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)
         } else {
-            categoryInfos = PreferenceUtil.getInstance().getLibraryCategoryInfos()
+            categoryInfos = PreferenceUtil.getInstance().libraryCategoryInfos
         }
         adapter = CategoryInfoAdapter(categoryInfos)
 
@@ -72,7 +72,6 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
         recyclerView.adapter = adapter
 
         adapter.attachToRecyclerView(recyclerView)
-
 
         return MaterialDialog(context!!, BottomSheet())
                 .title(code.name.monkey.retromusic.R.string.library_categories)
