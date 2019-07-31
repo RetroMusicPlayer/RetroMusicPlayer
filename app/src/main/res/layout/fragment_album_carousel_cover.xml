@@ -25,7 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/player_image"

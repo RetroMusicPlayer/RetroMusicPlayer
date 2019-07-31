@@ -54,7 +54,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
                         || (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.FIT))) {
             viewPager.clipToPadding = false
             viewPager.setPadding(40, 40, 40, 0)
-            viewPager.pageMargin = 16
+            viewPager.pageMargin = 0
             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
         } else {
             viewPager.offscreenPageLimit = 2

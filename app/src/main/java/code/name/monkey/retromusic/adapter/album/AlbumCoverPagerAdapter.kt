@@ -91,11 +91,10 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            var finalLayout = layout
-            if (PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.CLASSIC) {
-                finalLayout = R.layout.fragment_album_full_cover
-            } else if (PreferenceUtil.getInstance().carouselEffect()) {
-                finalLayout= R.layout.fragment_album_carousel_cover;
+            val finalLayout = when {
+                PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.CLASSIC -> R.layout.fragment_album_full_cover
+                PreferenceUtil.getInstance().carouselEffect() -> R.layout.fragment_album_carousel_cover
+                else -> layout
             }
             val view = inflater.inflate(finalLayout, container, false)
             albumCover = view.findViewById(R.id.player_image)

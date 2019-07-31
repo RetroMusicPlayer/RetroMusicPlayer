@@ -31,8 +31,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 343
-        versionName '3.2.200'
+        versionCode 344
+        versionName '3.2.203'
 
         multiDexEnabled true
 
@@ -52,14 +52,11 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "cast_app_id", "BA9C3F5E"
             signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix ' DEBUG (' + gitBranch() + ')'
-            resValue "string", "cast_app_id", "BA9C3F5E"
-
         }
     }
 

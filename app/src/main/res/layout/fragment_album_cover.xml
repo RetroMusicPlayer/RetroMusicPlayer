@@ -15,9 +15,9 @@
             android:id="@+id/player_album_art_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
-            app:cardUseCompatPadding="true">
+            android:layout_margin="16dp"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="8dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/player_image"
