@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.activities.base
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -16,6 +17,8 @@ import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
+import uk.co.chrisjenx.calligraphy.CalligraphyTypefaceSpan
 
 abstract class AbsThemeActivity : ATHActivity(), Runnable {
 

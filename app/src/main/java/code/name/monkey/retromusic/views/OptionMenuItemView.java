@@ -56,6 +56,9 @@ public class OptionMenuItemView extends FrameLayout {
         int accentColor = ThemeStore.Companion.accentColor(context);
         setBackground(ContextCompat.getDrawable(context, R.drawable.menu_item_background));
 
+        setClickable(true);
+        setFocusable(true);
+
         inflate(context, R.layout.item_option_menu, this);
 
         setBackgroundTintList(ColorStateList.valueOf(ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f)));

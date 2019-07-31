@@ -15,12 +15,10 @@
 package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -38,6 +36,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
             R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
+            R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
         }
         materialDialog.dismiss()
     }
@@ -45,11 +44,13 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     private lateinit var actionSettings: OptionMenuItemView
     private lateinit var actionLibrary: OptionMenuItemView
     private lateinit var actionFolders: OptionMenuItemView
+    private lateinit var actionRate: OptionMenuItemView
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
+        actionRate = layout.findViewById(R.id.actionRate)
         actionLibrary = layout.findViewById(R.id.actionLibrary)
         actionFolders = layout.findViewById(R.id.actionFolders)
 
@@ -60,8 +61,10 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         }
 
         actionSettings.setOnClickListener(this)
+        actionRate.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
+
 
         materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
@@ -72,10 +75,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         return materialDialog
     }
 
-
     companion object {
-
-        private const val TAG: String = "MainOptionsBottomSheetD"
 
         private const val WHICH_ONE = "which_one"
         @JvmField

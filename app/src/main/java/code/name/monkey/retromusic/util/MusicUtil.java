@@ -26,7 +26,6 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -263,64 +262,80 @@ public class MusicUtil {
     }
 
     public static void deleteTracks(@NonNull final Activity activity,
-                                    @NonNull final List<Song> songs) {
+                                    @NonNull final List<Song> songs,
+                                    @Nullable final List<Uri> safUris,
+                                    @Nullable final Runnable callback) {
         final String[] projection = new String[]{
                 BaseColumns._ID, MediaStore.MediaColumns.DATA
         };
-        final StringBuilder selection = new StringBuilder();
-        selection.append(BaseColumns._ID + " IN (");
-        for (int i = 0; i < songs.size(); i++) {
-            selection.append(songs.get(i).getId());
-            if (i < songs.size() - 1) {
+
+        // Split the query into multiple batches, and merge the resulting cursors
+        int batchStart = 0;
+        int batchEnd = 0;
+        final int batchSize = 1000000 / 10; // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID
+        final int songCount = songs.size();
+
+        while (batchEnd < songCount) {
+            batchStart = batchEnd;
+
+            final StringBuilder selection = new StringBuilder();
+            selection.append(BaseColumns._ID + " IN (");
+
+            for (int i = 0; (i < batchSize - 1) && (batchEnd < songCount - 1); i++, batchEnd++) {
+                selection.append(songs.get(batchEnd).getId());
                 selection.append(",");
             }
-        }
-        selection.append(")");
+            // The last element of a batch
+            selection.append(songs.get(batchEnd).getId());
+            batchEnd++;
+            selection.append(")");
 
-        try {
-            final Cursor cursor = activity.getContentResolver().query(
-                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
-                    null, null);
-            if (cursor != null) {
-                // Step 1: Remove selected tracks from the current playlist, as well
-                // as from the album art cache
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    final int id = cursor.getInt(0);
-                    Song song = SongLoader.INSTANCE.getSong(activity, id).blockingFirst();
-                    MusicPlayerRemote.INSTANCE.removeFromQueue(song);
-                    cursor.moveToNext();
-                }
+            try {
+                final Cursor cursor = activity.getContentResolver().query(
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
+                        null, null);
+                // TODO: At this point, there is no guarantee that the size of the cursor is the same as the size of the selection string.
+                // Despite that, the Step 3 assumes that the safUris elements are tracking closely the content of the cursor.
 
-                // Step 2: Remove selected tracks from the database
-                activity.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                        selection.toString(), null);
-
-                // Step 3: Remove files from card
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    final String name = cursor.getString(1);
-                    try { // File.delete can throw a security exception
-                        final File f = new File(name);
-                        if (!f.delete()) {
-                            // I'm not sure if we'd ever get here (deletion would
-                            // have to fail, but no exception thrown)
-                            Log.e("MusicUtils", "Failed to delete file " + name);
-                        }
+                if (cursor != null) {
+                    // Step 1: Remove selected tracks from the current playlist, as well
+                    // as from the album art cache
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        final int id = cursor.getInt(0);
+                        final Song song = SongLoader.INSTANCE.getSong(activity, id).blockingFirst();
+                        MusicPlayerRemote.INSTANCE.removeFromQueue(song);
                         cursor.moveToNext();
-                    } catch (@NonNull final SecurityException ex) {
-                        cursor.moveToNext();
-                    } catch (NullPointerException e) {
-                        Log.e("MusicUtils", "Failed to find file " + name);
                     }
+
+                    // Step 2: Remove selected tracks from the database
+                    activity.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                            selection.toString(), null);
+
+                    // Step 3: Remove files from card
+                    cursor.moveToFirst();
+                    int i = batchStart;
+                    while (!cursor.isAfterLast()) {
+                        final String name = cursor.getString(1);
+                        final Uri safUri = safUris == null || safUris.size() <= i ? null : safUris.get(i);
+                        SAFUtil.delete(activity, name, safUri);
+                        i++;
+                        cursor.moveToNext();
+                    }
+                    cursor.close();
                 }
-                cursor.close();
+            } catch (SecurityException ignored) {
             }
-            activity.getContentResolver().notifyChange(Uri.parse("content://media"), null);
-            Toast.makeText(activity, activity.getString(R.string.deleted_x_songs, songs.size()),
-                    Toast.LENGTH_SHORT).show();
-        } catch (SecurityException ignored) {
         }
+
+        activity.getContentResolver().notifyChange(Uri.parse("content://media"), null);
+
+        activity.runOnUiThread(() -> {
+            Toast.makeText(activity, activity.getString(R.string.deleted_x_songs, songCount), Toast.LENGTH_SHORT).show();
+            if (callback != null) {
+                callback.run();
+            }
+        });
     }
 
     public static void deleteAlbumArt(@NonNull Context context, int albumId) {

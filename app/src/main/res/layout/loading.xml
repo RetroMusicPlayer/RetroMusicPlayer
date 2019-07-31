@@ -11,12 +11,18 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_selected="true" >
-        <shape>
-            <corners android:bottomRightRadius="30dp" android:topRightRadius="30dp" />
-            <solid android:color="@color/md_red_400" />
-        </shape>
-    </item>
-    <item android:drawable="@android:color/transparent" android:state_selected="false" />
-</selector>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
+</LinearLayout>

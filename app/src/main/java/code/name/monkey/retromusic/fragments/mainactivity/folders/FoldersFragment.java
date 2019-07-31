@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
@@ -64,7 +64,6 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
-import code.name.monkey.retromusic.util.RetroUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
 
@@ -729,14 +728,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
         @Override
         protected Dialog createDialog(@NonNull Context context) {
-            ProgressDialog dialog = new ProgressDialog(context);
-            dialog.setIndeterminate(true);
-            dialog.setTitle(R.string.listing_files);
-            dialog.setCancelable(false);
-            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            dialog.setOnCancelListener(dialog1 -> cancel(false));
-            dialog.setOnDismissListener(dialog1 -> cancel(false));
-            return dialog;
+            return new MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.listing_files)
+                    .setCancelable(false)
+                    .setView(R.layout.loading)
+                    .setOnCancelListener(dialog -> cancel(false))
+                    .setOnDismissListener(dialog -> cancel(false))
+                    .create();
         }
     }
 }

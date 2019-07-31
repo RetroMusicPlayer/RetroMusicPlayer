@@ -26,8 +26,6 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
@@ -44,6 +42,13 @@ object MusicPlayerRemote {
 
     val isPlaying: Boolean
         get() = musicService != null && musicService!!.isPlaying
+
+    fun isPlaying(song: Song): Boolean {
+        return if (!isPlaying) {
+            false
+        } else song.id == currentSong.id
+    }
+
 
     val currentSong: Song
         get() = if (musicService != null) {
@@ -278,7 +283,7 @@ object MusicPlayerRemote {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(musicService, musicService!!.resources.getString(R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
+            Toast.makeText(musicService, musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
             return true
         }
         return false
@@ -291,7 +296,7 @@ object MusicPlayerRemote {
             } else {
                 openQueue(songs, 0, false)
             }
-            val toast = if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(R.string.added_x_titles_to_playing_queue, songs.size)
+            val toast = if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue, songs.size)
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
             return true
         }
@@ -307,7 +312,7 @@ object MusicPlayerRemote {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(musicService, musicService!!.resources.getString(R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
+            Toast.makeText(musicService, musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
             return true
         }
         return false
@@ -320,7 +325,7 @@ object MusicPlayerRemote {
             } else {
                 openQueue(songs, 0, false)
             }
-            val toast = if (songs.size == 1) musicService!!.resources.getString(R.string.added_title_to_playing_queue) else musicService!!.resources.getString(R.string.added_x_titles_to_playing_queue, songs.size)
+            val toast = if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue, songs.size)
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
             return true
         }

@@ -420,7 +420,8 @@
     <string name="hinge">合页</string>
     <string name="select_preset">选择一个预设</string>
     <string name="on">开启</string>
-    <string name="shuffle">随机播放</string> `
+    <string name="shuffle">随机播放</string>
+    `
     <string name="add_time_framed_lryics">加入带有时间轴的歌词</string>
     <string name="dialog_title_set_ringtone">设置铃声</string>
     <string name="dialog_message_set_ringtone">请允许 Retro Music 更改音频设置</string>
