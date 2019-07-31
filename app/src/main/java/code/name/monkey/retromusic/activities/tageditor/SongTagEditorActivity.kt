@@ -45,7 +45,6 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private fun setUpViews() {
         fillViewsWithFileTags()
         MaterialUtil.setTint(songTextContainer, false)
-
         MaterialUtil.setTint(composerContainer, false)
         MaterialUtil.setTint(albumTextContainer, false)
         MaterialUtil.setTint(artistContainer, false)

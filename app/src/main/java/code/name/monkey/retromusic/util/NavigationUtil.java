@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.activities.SettingsActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
+import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
@@ -165,5 +166,9 @@ public class NavigationUtil {
 
     public static void gotoWhatNews(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, WhatsNewActivity.class), null);
+    }
+
+    public static void bugReport(@NonNull Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, BugReportActivity.class), null);
     }
 }

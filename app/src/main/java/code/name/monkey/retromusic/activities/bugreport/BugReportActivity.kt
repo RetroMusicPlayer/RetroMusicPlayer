@@ -16,15 +16,16 @@ import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.misc.DialogAsyncTask
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.activities.bugreport.model.DeviceInfo
 import code.name.monkey.retromusic.activities.bugreport.model.Report
 import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
+import code.name.monkey.retromusic.misc.DialogAsyncTask
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -125,10 +126,10 @@ open class BugReportActivity : AbsThemeActivity() {
         TintHelper.setTintAuto(sendFab!!, accentColor, true)
         sendFab!!.setOnClickListener { reportIssue() }
 
-        TintHelper.setTintAuto(inputTitle!!, accentColor, false)
-        TintHelper.setTintAuto(inputDescription!!, accentColor, false)
-        TintHelper.setTintAuto(inputUsername!!, accentColor, false)
-        TintHelper.setTintAuto(inputPassword!!, accentColor, false)
+        MaterialUtil.setTint(inputLayoutTitle, false)
+        MaterialUtil.setTint(inputLayoutDescription, false)
+        MaterialUtil.setTint(inputLayoutUsername, false)
+        MaterialUtil.setTint(inputLayoutPassword, false)
     }
 
     private fun reportIssue() {

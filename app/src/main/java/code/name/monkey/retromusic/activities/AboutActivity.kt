@@ -71,7 +71,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         appVersion.text = getAppVersion()
 
         setUpView()
-
     }
 
 
@@ -110,6 +109,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         changelog.setOnClickListener(this)
         openSource.setOnClickListener(this)
         pinterestLink.setOnClickListener(this)
+        bugReportLink.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -126,6 +126,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.twitterLink -> openUrl(APP_TWITTER_LINK)
             R.id.changelog -> showChangeLogOptions()
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
+            R.id.bugReportLink -> NavigationUtil.bugReport(this)
         }
     }
 

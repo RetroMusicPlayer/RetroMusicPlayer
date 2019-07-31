@@ -62,5 +62,4 @@
             app:srcCompat="@drawable/ic_send_white_24dp" />
 
     </FrameLayout>
-
 </LinearLayout>
