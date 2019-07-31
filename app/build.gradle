@@ -3,24 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-static def gitBranch() {
-    def branch = 'GitHub'
-    try {
-        def gitcheck = 'command -v git >/dev/null 2>&1'.execute()
-        gitcheck.waitFor()
-        if (gitcheck.exitValue() == 0) {
-            def proc = 'git rev-parse --abbrev-ref HEAD'.execute()
-            proc.in.eachLine { line -> branch = line }
-            proc.err.eachLine { line -> println line }
-            proc.waitFor()
-        }
-    } catch (Exception e) {
-        // Do nothing
-        println e
-    }
-    branch
-}
-
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -56,7 +38,7 @@ android {
         }
         debug {
             applicationIdSuffix '.debug'
-            versionNameSuffix ' DEBUG (' + gitBranch() + ')'
+            versionNameSuffix ' DEBUG'
         }
     }
 
@@ -126,7 +108,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0-rc01'
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
-    implementation 'com.google.android.material:material:1.1.0-alpha08'
+    implementation 'com.google.android.material:material:1.1.0-alpha09'
 
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
