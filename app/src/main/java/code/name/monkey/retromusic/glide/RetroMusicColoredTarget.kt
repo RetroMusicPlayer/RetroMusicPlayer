@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.glide
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
-import androidx.palette.graphics.Palette
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTarget
@@ -44,16 +43,12 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
                                  glideAnimation: Transition<in BitmapPaletteWrapper>?) {
         super.onResourceReady(resource, glideAnimation)
 
-
         val defaultColor = defaultFooterColor
 
-        val primaryColor = getColor(resource.palette, defaultColor)
-        val dominantColor = getDominantColor(resource.bitmap, defaultColor)
-
         onColorReady(if (PreferenceUtil.getInstance().isDominantColor)
-            dominantColor
+            getDominantColor(resource.bitmap, defaultColor)
         else
-            primaryColor)
+            getColor(resource.palette, defaultColor))
     }
 
     abstract fun onColorReady(color: Int)
