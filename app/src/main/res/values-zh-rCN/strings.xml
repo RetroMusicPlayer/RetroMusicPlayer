@@ -455,7 +455,7 @@
     <string name="pref_header_advanced">高级</string>
     <string name="pref_header_blacklist">黑名单</string>
     
-    <string name="bug_report_summary">哦豁，好像有什么什么地方出了点 BUG…让您见笑了。如果播放器不断地卡退的话，请试试在设置中清除本应用数据，或者发送邮件向开发者反馈一下。</string>
+    <string name="bug_report_summary">哦豁，好像有什么地方出了点 BUG…让您见笑了。如果播放器不断地卡退的话，请试试在设置中清除本应用数据，或者发送邮件向开发者反馈一下。</string>
     
         <!-- SAF -->
     <string name="saf_error_uri">无法获得存储访问 URI</string>
