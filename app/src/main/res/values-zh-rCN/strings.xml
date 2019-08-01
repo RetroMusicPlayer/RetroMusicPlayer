@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="synced_lyrics">扫描到的歌词</string>
+    <string name="synced_lyrics">滚动歌词</string>
     <string name="songs">歌曲</string>
     <string name="action_play_all">全部播放</string>
     <string name="search_hint">搜索您的资料库…</string>
@@ -64,8 +64,8 @@
     <string name="action_grid_size_land">网格大小（横向）</string>
     <string name="action_next">下一首</string>
     <string name="action_play">播放</string>
-    <string name="action_play_next">播放下一首</string>
-    <string name="action_play_pause">播放/暂停</string>
+    <string name="action_play_next">下一首播放</string>
+    <string name="action_play_pause">播放 / 暂停</string>
     <string name="action_previous">上一首</string>
     <string name="action_remove_from_favorites">从收藏夹中移除</string>
     <string name="action_remove_from_playing_queue">从播放队列中移除</string>
@@ -74,6 +74,8 @@
     <string name="action_save_playing_queue">保存播放队列</string>
     <string name="action_scan">扫描</string>
     <string name="action_scan_directory">目录扫描</string>
+    <string name="x_has_been_set_as_ringtone">已设置 %1$s 作为您的铃声</string>
+    <string name="x_selected">已选择 %1$d 个</string>
     <string name="action_search">搜索</string>
     <string name="action_set">开始</string>
     <string name="action_set_as_ringtone">设置为铃声</string>
@@ -83,6 +85,7 @@
     <string name="action_shuffle_all">随机播放全部</string>
     <string name="action_shuffle_playlist">随机播放列表</string>
     <string name="action_sleep_timer">睡眠定时器</string>
+    <string name="carousal">Carousel</string>
     <string name="action_sort_order">排序</string>
     <string name="action_tag_editor">标签编辑器</string>
     <string name="adaptive">自适应</string>
@@ -152,7 +155,7 @@
     <string name="color">多彩</string>
     <string name="color_theme_name">自定义</string>
     <string name="primary_color_desc">播放器的主色调，默认蓝灰色。使用深色效果更佳。</string>
-    <string name="colors">更多颜色</string>
+    <string name="colors">色彩</string>
     <string name="could_not_create_playlist">\u4e0d\u80fd\u521b\u5efa\u64ad\u653e\u5217\u8868</string>
     <string name="could_not_download_album_cover">"\u65e0\u6cd5\u4e0b\u8f7d\u5339\u914d\u7684\u4e13\u8f91\u5c01\u9762"</string>
     <string name="could_not_restore_purchase">无法恢复购买</string>
@@ -191,7 +194,7 @@
     <string name="for_you">专属于您</string>
     <string name="full_card">卡片式全屏幕</string>
     <string name="full">全屏幕</string>
-    <string name="general_settings_summary">更改应用的主题和颜色</string>
+    <string name="general_settings_summary">更改应用的主题和色彩</string>
     <string name="general_settings_title">界面外观</string>
     <string name="genre">流派</string>
     <string name="genres">流派</string>
@@ -236,7 +239,7 @@
     <string name="no_results">无结果</string>
     <string name="no_songs">无歌曲</string>
     <string name="composer">作曲家</string>
-    <string name="track_hint">"音轨 (使用 2 来代表轨道 2，或者使用 3004 来代表 CD3 轨道 4)"</string>
+    <string name="track_hint">"曲目 (使用 2 来代表第二曲，或者使用 3004 来代表 CD3 的第四曲)"</string>
     <string name="sort_order_composer">作曲家</string>
 
     <string name="up_next">接下来</string>
@@ -244,7 +247,7 @@
     <string name="clear_playing_queue">清除播放队列</string>
     <string name="normal">正常</string>
     <string name="queue">播放队列</string>
-    <string name="normal_lyrics">一般歌词</string>
+    <string name="normal_lyrics">普通歌词</string>
     <string name="send_crash_log">发送崩溃日志</string>
     <string name="normal_style">正常</string>
     <string name="edit">编辑</string>
@@ -252,7 +255,7 @@
     <string name="paste_lyrics_here">将您的歌词粘贴在这里</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> 未在 MediaStore 中列出]]></string>
     <string name="nothing_to_scan">检索不到任何东西</string>
-    <string name="notification">通知烂</string>
+    <string name="notification">通知栏</string>
     <string name="notification_settings_summary">自定义通知栏风格</string>
     <string name="now_playing">正在播放</string>
     <string name="now_playing_queue">播放队列</string>
@@ -309,12 +312,12 @@
     <string name="pref_summary_album_art_on_lockscreen">将正在播放的歌曲的专辑封面设置为锁屏壁纸</string>
     <string name="pref_summary_audio_ducking">系统音响起或消息提醒时降低音量</string>
     <string name="pref_summary_blurred_album_art">在锁屏显示模糊化的专辑封面(可能会影响第三方应用或者小部件的正常运行)</string>
-    <string name="pref_summary_carousel_effect">在播放界面轮播专辑封面。需要注意，在卡片模式以及模糊卡片主题下无效</string>
+    <string name="pref_summary_carousel_effect">让播放界面的专辑封面两侧可以隐约看到上一首和下一首的封面。需要注意，在卡片模式以及模糊卡片模式下无效</string>
     <string name="pref_summary_classic_notification">使用经典通知栏设计</string>
     <string name="pref_summary_home_banner">在主页顶端显示您设置的背景图</string>
     <string name="grid_style_label"><![CDATA[界面样式 & 主题风格]]></string>
     <string name="pref_summary_colored_app">背景色以及控件色跟随播放界面的专辑封面变化</string>
-    <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
+    <string name="pref_summary_colored_app_shortcuts">将快捷方式色彩更改为强调色，每次色彩更改后需要切换一下该设置才能生效</string>
     <string name="pref_summary_colored_navigation_bar">将主调色应用于导航栏</string>
     <string name="pref_summary_colored_notification">"\u4fee\u6539\u901a\u77e5\u680f\u989c\u8272\u4e3a\u4e13\u8f91\u5c01\u9762\u7684\u4e3b\u8272\u8c03"</string>
     <string name="pref_summary_dominant_color">从专辑封面或艺术家图中选取主色调</string>
@@ -341,19 +344,19 @@
     <string name="pref_title_blurred_album_art">模糊专辑封面</string>
     <string name="pref_title_choose_equalizer">选择均衡器</string>
     <string name="pref_title_classic_notification">经典通知栏设计</string>
-    <string name="pref_title_colored_app">自适应颜色</string>
+    <string name="pref_title_colored_app">自适应色彩</string>
     <string name="pref_title_colored_notification">彩色通知栏</string>
     <string name="pref_title_gapless_playback">无间隙连续播放</string>
     <string name="pref_title_general_theme">应用主题</string>
     <string name="pref_title_ignore_media_store_artwork">忽略音乐商店提供的封面</string>
     <string name="pref_title_last_added_interval">您认为多久之内才算是最近添加的？</string>
     <string name="pref_title_lock_screen">全屏控件</string>
-    <string name="pref_title_navigation_bar">带颜色的导航栏</string>
+    <string name="pref_title_navigation_bar">彩色导航栏</string>
     <string name="pref_title_now_playing_screen_appearance">播放界面主题</string>
     <string name="pref_title_open_source_licences">开源许可</string>
     <string name="pref_title_round_corners">圆角</string>
-    <string name="pref_title_toggle_carousel_effect">轮播效果</string>
-    <string name="pref_title_toggle_dominant_color">主色调</string>
+    <string name="pref_title_toggle_carousel_effect">转盘效果</string>
+    <string name="pref_title_toggle_dominant_color">自适应主色调</string>
     <string name="pref_title_toggle_full_screen">全屏应用</string>
     <string name="pref_title_toggle_tab_titles">标签标题</string>
     <string name="pref_title_toggle_toggle_headset">自动播放</string>
@@ -363,8 +366,8 @@
     <string name="pref_title_extra_controls">额外控件</string>
     <string name="pref_title_home_banner">主页显示背景图</string>
     <string name="pref_title_genre_toggle">显示流派标签</string>
-    <string name="pref_title_album_cover_transform">播放界面专辑转换样式</string>
-    <string name="primary_color">主颜色</string>
+    <string name="pref_title_album_cover_transform">专辑转场样式</string>
+    <string name="primary_color">主色调</string>
     <string name="rate_app">评价这个应用</string>
     <string name="pref_keep_pause_on_zero_volume_title">静音时自动暂停</string>
     <string name="pref_keep_pause_on_zero_volume_summary">当媒体音量降低至 0 时，音乐将自动暂停，而当您把音量提高时，则将会自动开始播放。该选项在此应用外依然可用。</string>
@@ -377,8 +380,6 @@
     <string name="labeled">始终显示</string>
     <string name="selected">显示当前页的文字</string>
     <string name="unlabeled">不显示</string>
-    <!-- SAF -->
-    <!-- SAF guide -->
     <string name="saving_changes">保存修改</string>
     <string name="scan_media">扫描媒体</string>
     <!-- Message displayed when tag editing fails -->
@@ -395,7 +396,7 @@
     <string name="what_do_you_want_to_share">您希望分享什么？</string>
     <string name="pref_title_home_artist_grid_style">主页艺术家展示形式</string>
     <string name="about_settings_summary">了解我们的团队，获取我们的联系方式</string>
-    <string name="year">年</string>
+    <string name="year">年份</string>
     <string name="keyboard">显示键盘</string>
     <string name="stack">堆叠</string>
     <string name="image_gradient">渐变图片</string>
@@ -422,18 +423,55 @@
     <string name="on">开启</string>
     <string name="shuffle">随机播放</string>
     `
-    <string name="add_time_framed_lryics">加入带有时间轴的歌词</string>
+    <string name="add_time_framed_lryics">添加滚动歌词</string>
     <string name="dialog_title_set_ringtone">设置铃声</string>
     <string name="dialog_message_set_ringtone">请允许 Retro Music 更改音频设置</string>
     <string name="suggestion_songs">推荐</string>
     <string name="twitter_page_summary">分享出您独一无二的 Retro Music</string>
     <string name="start_play_music">来点音乐吧</string>
     <string name="share_app">分享应用到…</string>
-    <string name="pro_summary">更多播放界面主题，轮播效果，色彩主题，等你解锁！</string>
+    <string name="pro_summary">更多播放界面主题，转盘效果，色彩主题，等你解锁！</string>
     <string name="clear_app_data">清除应用数据</string>
     <string name="error">错误</string>
     <string name="window">窗口</string>
     <string name="now_playing_themes">9 种以上播放界面主题</string>
-    <string name="carousal_effect_on_now_playing_screen">在播放界面使用轮播效果</string>
+    <string name="carousal_effect_on_now_playing_screen">在播放界面使用转盘效果</string>
+    <string name="carousal">转盘</string>
     <string name="now_playing_summary">自定义播放界面</string>
+    
+    <string name="next_song">下一首</string>
+    <string name="last_song">上一首</string>
+    <string name="slide">轻滑</string>
+    <string name="pick_image_intent_text">选择图片</string>
+    <string name="swipe_to_unlock">轻滑以解锁</string>
+    
+    <string name="you_have_to_select_at_least_one_category">请至少选择一个分栏</string>
+    <string name="pref_header_library">资料库</string>
+    <string name="reset_action">重置</string>
+    <string name="library_categories">资料库分栏</string>
+    <string name="pref_summary_library_categories">调整底栏显示的资料库分栏</string>
+    <string name="pref_header_controls">控件选项</string>
+    <string name="pref_header_album">专辑风格</string>
+    <string name="pref_header_advanced">高级</string>
+    <string name="pref_header_blacklist">黑名单</string>
+    
+    <string name="bug_report_summary">哦豁，好像有什么什么地方出了点 BUG…让您见笑了。如果播放器不断地卡退的话，请试试在设置中清除本应用数据，或者发送邮件向开发者反馈一下。</string>
+    
+        <!-- SAF -->
+    <string name="saf_error_uri">无法获得存储访问 URI</string>
+    <string name="saf_write_failed">写入文件失败： %s</string>
+    <string name="saf_delete_failed">删除文件失败： %s</string>
+    <string name="saf_pick_sdcard">需要访问您的 SD 卡，请选择 SD 卡的根目录。</string>
+    <string name="saf_pick_file">需要访问文件，请选择 %s</string>
+    <!-- SAF guide -->
+    <string name="saf_guide_slide1_title">%s 需要访问 SD 卡</string>
+    <string name="saf_guide_slide1_description_before_o">在下拉列表菜单中，选择“显示 SD 卡”</string>
+    <string name="saf_guide_slide1_description">右划打开汉堡菜单</string>
+    <string name="saf_guide_slide2_title">在汉堡菜单里选择您的 SD 卡</string>
+    <string name="saf_guide_slide2_description">您需要选择您 SD 卡的根目录</string>
+    <string name="saf_guide_slide3_title">轻触屏幕底端的“选择”按钮</string>
+    <string name="saf_guide_slide3_description">请不要打开任何的子文件夹</string>
+    <string name="deleting_songs">正在删除歌曲</string>
+    
+    <string name="summary_user_info">在主页显示您的名字</string>
 </resources>
