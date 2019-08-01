@@ -18,7 +18,7 @@
         android:paddingEnd="8dp">
 
         <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/mini_player_image"
+            android:id="@+id/miniPlayerImage"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
@@ -41,7 +41,6 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true" />
-
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/actionPrevious"

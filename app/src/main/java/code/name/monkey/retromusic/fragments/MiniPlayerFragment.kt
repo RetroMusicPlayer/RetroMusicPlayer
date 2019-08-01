@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.AsyncTask
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -11,14 +12,12 @@ import android.view.*
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.fragment_mini_player.*
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
@@ -92,10 +91,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onServiceConnected() {
         updateSongTitle()
         updatePlayPauseDrawableState()
+        updateIsFavorite()
     }
 
     override fun onPlayingMetaChanged() {
         updateSongTitle()
+        updateIsFavorite()
     }
 
     override fun onPlayStateChanged() {
@@ -128,11 +129,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         }
     }
 
-    fun setColor(playerFragmentColor: Int) {
-        view!!.setBackgroundColor(playerFragmentColor)
-    }
-
-
     class FlingPlayBackController(context: Context) : View.OnTouchListener {
 
         private var flingPlayBackController: GestureDetector
@@ -160,5 +156,34 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             return flingPlayBackController.onTouchEvent(event)
         }
+    }
+
+    private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
+
+    @SuppressLint("StaticFieldLeak")
+    fun updateIsFavorite() {
+        if (updateIsFavoriteTask != null) {
+            updateIsFavoriteTask!!.cancel(false)
+        }
+        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
+            override fun doInBackground(vararg params: Song): Boolean? {
+                val activity = activity
+                return if (activity != null) {
+                    MusicUtil.isFavorite(requireActivity(), params[0])
+                } else {
+                    cancel(false)
+                    null
+                }
+            }
+
+            override fun onPostExecute(isFavorite: Boolean?) {
+                val res = if (isFavorite!!)
+                    R.drawable.ic_favorite_white_24dp
+                else
+                    R.drawable.ic_favorite_border_white_24dp
+                val drawable = RetroUtil.getTintedVectorDrawable(requireActivity(), res, ThemeStore.accentColor(requireActivity()))
+                miniPlayerImage.setImageDrawable(drawable)
+            }
+        }.execute(MusicPlayerRemote.currentSong)
     }
 }
