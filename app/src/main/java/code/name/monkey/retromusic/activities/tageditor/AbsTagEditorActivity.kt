@@ -17,13 +17,15 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -40,7 +42,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var paletteColorPrimary: Int = 0
     private var isInNoImageMode: Boolean = false
     private var songPaths: List<String>? = null
-    lateinit var saveFab: ExtendedFloatingActionButton
+    lateinit var saveFab: MaterialButton
 
     private var savedSongPaths: List<String>? = null
     private val currentSongPath: String? = null
@@ -183,7 +185,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(contentViewLayout)
 
-        saveFab = findViewById(code.name.monkey.retromusic.R.id.saveTags)
+        saveFab = findViewById( R.id.saveTags)
         getIntentExtras()
 
         songPaths = getSongPaths()

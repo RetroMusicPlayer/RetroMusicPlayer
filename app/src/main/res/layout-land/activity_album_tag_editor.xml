@@ -139,20 +139,29 @@
                             android:inputType="text|number"
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp" />
+                </LinearLayout>
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
     </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/saveTags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:gravity="center"
+        android:paddingStart="32dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="12dp"
         android:text="@string/save"
+        app:cornerRadius="25dp"
         app:icon="@drawable/ic_save_white_24dp"
-        app:iconGravity="textStart" />
+        app:iconGravity="textStart"
+        tools:backgroundTint="@color/md_red_400" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

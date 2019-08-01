@@ -21,7 +21,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.listItems
+import kotlinx.android.synthetic.main.activity_user_info.*
 
 
 class AddToPlaylistDialog : DialogFragment() {
@@ -31,21 +34,25 @@ class AddToPlaylistDialog : DialogFragment() {
     ): Dialog {
         val cntx = requireContext()
         val playlists = PlaylistLoader.getAllPlaylists(cntx).blockingFirst()
-        val playlistNames = arrayOfNulls<CharSequence>(playlists.size + 1)
-        playlistNames[0] = cntx.resources.getString(code.name.monkey.retromusic.R.string.action_new_playlist)
-        return MaterialAlertDialogBuilder(requireContext())
-                .setTitle(R.string.add_playlist_title)
-                .setItems(playlistNames) { dialog, which ->
-                    val songs = arguments!!.getParcelableArrayList<Song>("songs") ?: return@setItems
-                    if (which == 0) {
-                        dialog.dismiss()
-                        activity?.supportFragmentManager?.let { CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST") }
-                    } else {
-                        dialog.dismiss()
-                        PlaylistsUtil.addToPlaylist(cntx, songs, playlists[which - 1].id, true)
-                    }
+        val playlistNames: MutableList<String> = mutableListOf()
+        playlistNames.add(cntx.resources.getString(R.string.action_new_playlist))
+        for (p in playlists) {
+            playlistNames.add(p.name)
+        }
+
+        return MaterialDialog(requireContext(), BottomSheet()).show {
+            title(R.string.add_playlist_title)
+            listItems(items = playlistNames) { dialog, index, _ ->
+                val songs = arguments!!.getParcelableArrayList<Song>("songs") ?: return@listItems
+                if (index == 0) {
+                    dialog.dismiss()
+                    activity?.supportFragmentManager?.let { CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST") }
+                } else {
+                    dialog.dismiss()
+                    PlaylistsUtil.addToPlaylist(cntx, songs, playlists[index - 1].id, true)
                 }
-                .create()
+            }
+        }
     }
 
     companion object {

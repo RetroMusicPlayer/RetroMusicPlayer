@@ -42,7 +42,9 @@ class CreatePlaylistDialog : DialogFragment() {
     private lateinit var playlistView: TextInputEditText
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    override fun onCreateDialog(
+            savedInstanceState: Bundle?
+    ): Dialog {
         val materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .show {
                     title(string.new_playlist_title)
@@ -52,12 +54,13 @@ class CreatePlaylistDialog : DialogFragment() {
                         if (activity == null) {
                             return@positiveButton
                         }
-                        val songs = arguments!!.getParcelableArrayList<Song>("songs")
+                        val songs = arguments?.getParcelableArrayList<Song>("songs")
+                                ?: return@positiveButton
 
-                        if (playlistView.text!!.toString().trim { it <= ' ' }.isNotEmpty()) {
-                            val playlistId = PlaylistsUtil.createPlaylist(activity!!, playlistView.text!!.toString())
+                        if (playlistView.text.toString().trim { it <= ' ' }.isNotEmpty()) {
+                            val playlistId = PlaylistsUtil.createPlaylist(requireContext(), playlistView.text.toString())
                             if (playlistId != -1 && activity != null) {
-                                PlaylistsUtil.addToPlaylist(activity!!, songs, playlistId, true)
+                                PlaylistsUtil.addToPlaylist(requireContext(), songs, playlistId, true)
                             }
                         }
                     }

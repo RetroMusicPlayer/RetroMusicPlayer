@@ -35,7 +35,6 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setNoImageMode()
         setUpViews()
         setupToolbar()
