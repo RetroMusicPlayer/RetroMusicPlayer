@@ -15,14 +15,13 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
-            android:text="@string/credit_title" />
-
+            android:text="@string/credit_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

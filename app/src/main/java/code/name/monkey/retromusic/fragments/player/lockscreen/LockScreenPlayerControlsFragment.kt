@@ -40,7 +40,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_lock_screen_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
+
 
 /**
  * @author Hemanth S (h4h13).
@@ -70,7 +70,6 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-
         title.text = song.title
         text.text = String.format("%s - %s", song.artistName, song.albumName)
 
@@ -112,29 +111,31 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
 
-        val colorBg = ATHUtil.resolveColor(context!!, android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(context!!, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(context!!, true)
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(context!!, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
             color
         } else {
-            ThemeStore.textColorSecondary(context!!)
-        }
+            ThemeStore.textColorSecondary(requireContext())
+        }.ripAlpha()
+
         volumeFragment?.setTintable(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal.ripAlpha(), true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 
         updatePrevNextColor()
 
-        val isDark = ColorUtil.isColorLight(color)
-        text!!.setTextColor(color)
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, isDark), false)
-        TintHelper.setTintAuto(playPauseButton, color, true)
+        val isDark = ColorUtil.isColorLight(colorFinal)
+        text.setTextColor(colorFinal)
+
+        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(requireContext(), isDark), false)
+        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
     }
 
     private fun setUpPlayPauseFab() {

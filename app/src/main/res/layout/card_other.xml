@@ -16,7 +16,8 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
-            android:text="@string/others" />
+            android:text="@string/others"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
 
         <LinearLayout

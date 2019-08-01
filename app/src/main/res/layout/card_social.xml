@@ -16,7 +16,8 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
-            android:text="@string/social" />
+            android:text="@string/social"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
 
         <LinearLayout
             android:id="@+id/pinterestLink"

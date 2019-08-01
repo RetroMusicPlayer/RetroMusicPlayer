@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.plain
 
 import android.animation.ObjectAnimator
-import android.content.res.ColorStateList
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,21 +17,16 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
 import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.*
-import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.progressSlider
-import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.songTotalTime
-import kotlinx.android.synthetic.main.media_button.*
 import kotlinx.android.synthetic.main.media_button.playPauseButton
 import kotlinx.android.synthetic.main.media_button.repeatButton
 import kotlinx.android.synthetic.main.media_button.shuffleButton

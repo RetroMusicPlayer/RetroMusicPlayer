@@ -96,15 +96,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="-8dp"
-                app:cardBackgroundColor="?cardBackgroundColor"
+                app:cardBackgroundColor="?colorPrimary"
                 app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="false"
                 sothree:cardCornerRadius="12dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?cardBackgroundColor">
+                    android:layout_height="wrap_content" >
 
                     <!--This is necessary for the drag sorting to work at the top-->
                     <View

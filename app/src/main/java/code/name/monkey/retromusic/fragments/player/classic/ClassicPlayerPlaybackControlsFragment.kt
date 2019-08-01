@@ -197,13 +197,13 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onServiceConnected() {
-        updatePlayPauseDrawableState( )
+        updatePlayPauseDrawableState()
         updateRepeatState()
         updateShuffleState()
     }
 
     override fun onPlayStateChanged() {
-        updatePlayPauseDrawableState( )
+        updatePlayPauseDrawableState()
     }
 
     override fun onRepeatModeChanged() {

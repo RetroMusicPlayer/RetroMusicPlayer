@@ -145,7 +145,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Call
         })
 
         // for some reason the xml attribute doesn't get applied here.
-        playingQueueCard.setCardBackgroundColor(ATHUtil.resolveColor(activity, code.name.monkey.retromusic.R.attr.cardBackgroundColor))
+        playingQueueCard.setCardBackgroundColor(ThemeStore.primaryColor(requireContext()))
     }
 
     private fun setUpPlayerToolbar() {

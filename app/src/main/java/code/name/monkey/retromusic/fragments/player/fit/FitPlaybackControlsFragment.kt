@@ -26,7 +26,6 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
 
 class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
 

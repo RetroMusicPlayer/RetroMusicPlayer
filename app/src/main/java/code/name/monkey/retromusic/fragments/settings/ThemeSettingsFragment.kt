@@ -46,7 +46,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val categoryColor: ATEPreferenceCategory? = findPreference("category_color")
         val primaryColorPref = ATEColorPreference(preferenceScreen.context)
 
-        val primaryColor = ThemeStore.primaryColor(activity!!)
+        val primaryColor = ThemeStore.primaryColor(requireContext())
 
         primaryColorPref.apply {
             key = "primary_color"
@@ -57,7 +57,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             setIcon(R.drawable.ic_colorize_white_24dp)
             setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
             setOnPreferenceClickListener {
-                MaterialDialog(activity!!, BottomSheet()).show {
+                MaterialDialog(requireContext(), BottomSheet()).show {
                     title(R.string.primary_color)
                     positiveButton(R.string.set)
                     colorChooser(initialSelection = BLUE,
@@ -74,7 +74,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
                         if (VersionUtils.hasNougatMR())
                             DynamicShortcutManager(context).updateDynamicShortcuts()
-                        activity!!.recreate()
+                        requireActivity().recreate()
                     }
                 }
                 true
@@ -96,19 +96,19 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 setSummary(generalTheme, newValue)
 
                 when (theme) {
-                    "light" -> ThemeStore.editTheme(context!!).primaryColor(Color.WHITE).commit()
-                    "black" -> ThemeStore.editTheme(context!!).primaryColor(Color.BLACK).commit()
-                    "dark" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_grey_900)).commit()
-                    "color" -> ThemeStore.editTheme(context!!).primaryColor(ContextCompat.getColor(context!!, R.color.md_blue_grey_800)).commit()
+                    "light" -> ThemeStore.editTheme(requireContext()).primaryColor(Color.WHITE).commit()
+                    "black" -> ThemeStore.editTheme(requireContext()).primaryColor(Color.BLACK).commit()
+                    "dark" -> ThemeStore.editTheme(requireContext()).primaryColor(ContextCompat.getColor(requireContext(), R.color.md_grey_900)).commit()
+                    "color" -> ThemeStore.editTheme(requireContext()).primaryColor(ContextCompat.getColor(requireContext(), R.color.md_blue_grey_800)).commit()
                 }
 
-                ThemeStore.editTheme(activity!!)
+                ThemeStore.editTheme(requireContext())
                         .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
                         .commit()
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                     activity?.setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
-                    DynamicShortcutManager(activity!!).updateDynamicShortcuts()
+                    DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
                 activity?.recreate()
                 true
@@ -116,11 +116,11 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         }
 
         val accentColorPref: ATEColorPreference = findPreference("accent_color")!!
-        val accentColor = ThemeStore.accentColor(activity!!)
+        val accentColor = ThemeStore.accentColor(requireContext())
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            MaterialDialog(activity!!, BottomSheet()).show {
+            MaterialDialog(requireContext(), BottomSheet()).show {
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
@@ -131,7 +131,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     ThemeStore.editTheme(context).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(context).updateDynamicShortcuts()
-                    activity!!.recreate()
+                    requireActivity().recreate()
                 }
             }
             return@setOnPreferenceClickListener true
@@ -145,7 +145,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
                 // Save preference
                 PreferenceUtil.getInstance().setColoredAppShortcuts(newValue as Boolean)
-                DynamicShortcutManager(activity!!).updateDynamicShortcuts()
+                DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }
         }

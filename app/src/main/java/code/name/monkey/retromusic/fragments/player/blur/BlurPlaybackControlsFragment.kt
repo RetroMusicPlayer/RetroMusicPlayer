@@ -27,8 +27,6 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
-
 
 class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -124,7 +122,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         text.setTextColor(colorFinal)
         TintHelper.setTintAuto(progressSlider, colorFinal, false)
-        volumeFragment?.setTintableColor(colorFinal)
+        volumeFragment?.setTintableColor(Color.WHITE)
         setFabColor(colorFinal)
     }
 

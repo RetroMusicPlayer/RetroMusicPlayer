@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
@@ -10,10 +10,14 @@
     tools:ignore="MissingPrefix">
 
     <RelativeLayout
+        android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_slider_height"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp">
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/songCurrentProgress"
@@ -59,12 +63,15 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@id/titleContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp">
+        app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -90,21 +97,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="4dp"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:paddingStart="12dp"
+            android:paddingTop="24dp"
             android:paddingEnd="12dp"
             android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/player_media_controller_container"
+        android:id="@+id/playerMediaControllerContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:ignore="ContentDescription,UnusedAttribute">
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        tools:ignore="ContentDescription,UnusedAttribute"
+        tools:showIn="@layout/fragment_player_playback_controls">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/previousButton"
@@ -177,5 +192,14 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/volume_controls" />
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:backgroundTint="@color/md_red_400"
+        tools:layout_height="52dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

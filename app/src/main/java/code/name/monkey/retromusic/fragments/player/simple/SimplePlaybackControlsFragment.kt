@@ -20,7 +20,6 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
-import kotlinx.android.synthetic.main.media_button.*
 
 /**
  * @author Hemanth S (h4h13).
