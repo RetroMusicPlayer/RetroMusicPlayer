@@ -38,52 +38,52 @@ object SearchQueryHelper {
 
         var songs = ArrayList<Song>()
         if (artistName != null && albumName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), albumName.toLowerCase(), titleName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), albumName.toLowerCase(), titleName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
         if (artistName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), titleName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), titleName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
         if (albumName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(albumName.toLowerCase(), titleName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(albumName.toLowerCase(), titleName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
         if (artistName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(artistName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(artistName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
         if (albumName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(albumName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(albumName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
         if (titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(titleName.toLowerCase()))).blockingFirst()
+            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(titleName.toLowerCase())))
         }
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(query.toLowerCase()))).blockingFirst()
+        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(query.toLowerCase())))
 
-        if (!songs.isEmpty()) {
+        if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(query.toLowerCase()))).blockingFirst()
-        if (!songs.isEmpty()) {
+        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(query.toLowerCase())))
+        if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(query.toLowerCase()))).blockingFirst()
-        return if (!songs.isEmpty()) {
+        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(query.toLowerCase())))
+        return if (songs.isNotEmpty()) {
             songs
         } else ArrayList()
     }

@@ -4,15 +4,10 @@ import android.Manifest
 import android.content.*
 import android.os.Bundle
 import android.os.IBinder
-import code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED
-import code.name.monkey.retromusic.Constants.META_CHANGED
-import code.name.monkey.retromusic.Constants.PLAY_STATE_CHANGED
-import code.name.monkey.retromusic.Constants.QUEUE_CHANGED
-import code.name.monkey.retromusic.Constants.REPEAT_MODE_CHANGED
-import code.name.monkey.retromusic.Constants.SHUFFLE_MODE_CHANGED
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
+import code.name.monkey.retromusic.service.MusicService.*
 import java.lang.ref.WeakReference
 import java.util.*
 

@@ -27,24 +27,29 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
 import java.util.*
 
+
 /**
  * Created by hemanths on 10/08/17.
  */
 
-
 object SongLoader {
+    fun getAllSongsFlowable(
+            context: Context
+    ): Observable<ArrayList<Song>> {
+        val cursor = makeSongCursor(context, null, null)
+        return getSongsFlowable(cursor)
+    }
 
-    fun getAllSongs(context: Context): Observable<ArrayList<Song>> {
+    fun getAllSongs(
+            context: Context
+    ): ArrayList<Song> {
         val cursor = makeSongCursor(context, null, null)
         return getSongs(cursor)
     }
 
-    fun getSongs(context: Context, query: String): Observable<ArrayList<Song>> {
-        val cursor = makeSongCursor(context, AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%"))
-        return getSongs(cursor)
-    }
-
-    fun getSongs(cursor: Cursor?): Observable<ArrayList<Song>> {
+    fun getSongsFlowable(
+            cursor: Cursor?
+    ): Observable<ArrayList<Song>> {
         return Observable.create { e ->
             val songs = ArrayList<Song>()
             if (cursor != null && cursor.moveToFirst()) {
@@ -59,7 +64,96 @@ object SongLoader {
         }
     }
 
-    private fun getSongFromCursorImpl(cursor: Cursor): Song {
+    fun getSongs(
+            cursor: Cursor?
+    ): ArrayList<Song> {
+        val songs = arrayListOf<Song>()
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                songs.add(getSongFromCursorImpl(cursor))
+            } while (cursor.moveToNext())
+        }
+
+        cursor?.close()
+        return songs
+    }
+
+    fun getSongsFlowable(
+            context: Context,
+            query: String
+    ): Observable<ArrayList<Song>> {
+        val cursor = makeSongCursor(context, AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%"))
+        return getSongsFlowable(cursor)
+    }
+
+    fun getSongs(
+            context: Context,
+            query: String
+    ): ArrayList<Song> {
+        val cursor = makeSongCursor(context, AudioColumns.TITLE + " LIKE ?", arrayOf("%$query%"))
+        return getSongs(cursor)
+    }
+
+
+    private fun getSongFlowable(
+            cursor: Cursor?
+    ): Observable<Song> {
+        return Observable.create { e ->
+            val song: Song = if (cursor != null && cursor.moveToFirst()) {
+                getSongFromCursorImpl(cursor)
+            } else {
+                Song.emptySong
+            }
+            cursor?.close()
+            e.onNext(song)
+            e.onComplete()
+        }
+    }
+
+    fun getSong(
+            cursor: Cursor?
+    ): Song {
+        val song: Song
+        if (cursor != null && cursor.moveToFirst()) {
+            song = getSongFromCursorImpl(cursor)
+        } else {
+            song = Song.emptySong
+        }
+        cursor?.close()
+        return song
+    }
+
+    fun getSongFlowable(
+            context: Context,
+            queryId: Int
+    ): Observable<Song> {
+        val cursor = makeSongCursor(context, AudioColumns._ID + "=?",
+                arrayOf(queryId.toString()))
+        return getSongFlowable(cursor)
+    }
+
+    fun getSong(context: Context, queryId: Int): Song {
+        val cursor = makeSongCursor(context, AudioColumns._ID + "=?", arrayOf(queryId.toString()))
+        return getSong(cursor)
+    }
+
+    fun suggestSongs(
+            context: Context
+    ): Observable<ArrayList<Song>> {
+        return SongLoader.getAllSongsFlowable(context)
+                .flatMap {
+                    val list = ArrayList<Song>()
+                    ShuffleHelper.makeShuffleList(it, -1)
+                    if (it.size >= 7) {
+                        list.addAll(it.subList(0, 7))
+                    }
+                    return@flatMap Observable.just(list)
+                }
+    }
+
+    private fun getSongFromCursorImpl(
+            cursor: Cursor
+    ): Song {
         val id = cursor.getInt(0)
         val title = cursor.getString(1)
         val trackNumber = cursor.getInt(2)
@@ -78,7 +172,12 @@ object SongLoader {
     }
 
     @JvmOverloads
-    fun makeSongCursor(context: Context, selection: String?, selectionValues: Array<String>?, sortOrder: String = PreferenceUtil.getInstance().songSortOrder): Cursor? {
+    fun makeSongCursor(
+            context: Context,
+            selection: String?,
+            selectionValues: Array<String>?,
+            sortOrder: String = PreferenceUtil.getInstance().songSortOrder
+    ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
         selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
@@ -103,7 +202,10 @@ object SongLoader {
 
     }
 
-    private fun generateBlacklistSelection(selection: String?, pathCount: Int): String {
+    private fun generateBlacklistSelection(
+            selection: String?,
+            pathCount: Int
+    ): String {
         val newSelection = StringBuilder(
                 if (selection != null && selection.trim { it <= ' ' } != "") "$selection AND " else "")
         newSelection.append(AudioColumns.DATA + " NOT LIKE ?")
@@ -113,8 +215,10 @@ object SongLoader {
         return newSelection.toString()
     }
 
-    private fun addBlacklistSelectionValues(selectionValues: Array<String>?,
-                                            paths: ArrayList<String>): Array<String>? {
+    private fun addBlacklistSelectionValues(
+            selectionValues: Array<String>?,
+            paths: ArrayList<String>
+    ): Array<String>? {
         var selectionValuesFinal = selectionValues
         if (selectionValuesFinal == null) {
             selectionValuesFinal = emptyArray()
@@ -127,36 +231,5 @@ object SongLoader {
             newSelectionValues[i] = paths[i - selectionValuesFinal.size] + "%"
         }
         return newSelectionValues
-    }
-
-    private fun getSong(cursor: Cursor?): Observable<Song> {
-        return Observable.create { e ->
-            val song: Song = if (cursor != null && cursor.moveToFirst()) {
-                getSongFromCursorImpl(cursor)
-            } else {
-                Song.emptySong
-            }
-            cursor?.close()
-            e.onNext(song)
-            e.onComplete()
-        }
-    }
-
-    fun getSong(context: Context, queryId: Int): Observable<Song> {
-        val cursor = makeSongCursor(context, AudioColumns._ID + "=?",
-                arrayOf(queryId.toString()))
-        return getSong(cursor)
-    }
-
-    fun suggestSongs(context: Context): Observable<ArrayList<Song>> {
-        return SongLoader.getAllSongs(context)
-                .flatMap {
-                    val list = ArrayList<Song>()
-                    ShuffleHelper.makeShuffleList(it, -1)
-                    if (it.size >= 7) {
-                        list.addAll(it.subList(0, 7))
-                    }
-                    return@flatMap Observable.just(list)
-                }
     }
 }

@@ -20,20 +20,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import code.name.monkey.retromusic.loaders.SongLoader;
-
 import java.util.ArrayList;
 
+import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Song;
 import io.reactivex.Observable;
 
 /**
  * @author Andrew Neal, modified for Phonograph by Karim Abou Zeid
- *         <p/>
- *         This keeps track of the music playback and history state of the playback service
+ * <p/>
+ * This keeps track of the music playback and history state of the playback service
  */
 public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "music_playback_state.db";
@@ -187,17 +187,34 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     }
 
     @NonNull
-    public Observable<ArrayList<Song>> getSavedPlayingQueue() {
+    public Observable<ArrayList<Song>> getSavedPlayingQueueFlowable() {
+        return getQueueFlowable(PLAYING_QUEUE_TABLE_NAME);
+    }
+
+    @NonNull
+    public Observable<ArrayList<Song>> getSavedOriginalPlayingQueueFlowable() {
+        return getQueueFlowable(ORIGINAL_PLAYING_QUEUE_TABLE_NAME);
+    }
+
+    @NonNull
+    public ArrayList<Song> getSavedPlayingQueue() {
         return getQueue(PLAYING_QUEUE_TABLE_NAME);
     }
 
     @NonNull
-    public Observable<ArrayList<Song>> getSavedOriginalPlayingQueue() {
+    public ArrayList<Song> getSavedOriginalPlayingQueue() {
         return getQueue(ORIGINAL_PLAYING_QUEUE_TABLE_NAME);
     }
 
     @NonNull
-    private Observable<ArrayList<Song>> getQueue(@NonNull final String tableName) {
+    private Observable<ArrayList<Song>> getQueueFlowable(@NonNull final String tableName) {
+        Cursor cursor = getReadableDatabase().query(tableName, null,
+                null, null, null, null, null);
+        return SongLoader.INSTANCE.getSongsFlowable(cursor);
+    }
+
+    @NonNull
+    private ArrayList<Song> getQueue(@NonNull final String tableName) {
         Cursor cursor = getReadableDatabase().query(tableName, null,
                 null, null, null, null, null);
         return SongLoader.INSTANCE.getSongs(cursor);

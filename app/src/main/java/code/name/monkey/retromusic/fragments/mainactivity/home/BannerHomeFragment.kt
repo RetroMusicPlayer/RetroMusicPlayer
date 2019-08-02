@@ -105,7 +105,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
 
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(mainActivity).blockingFirst(), true)
+            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(mainActivity) , true)
         }
 
         history.setOnClickListener {

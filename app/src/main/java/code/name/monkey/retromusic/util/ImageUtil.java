@@ -14,6 +14,8 @@
 
 package code.name.monkey.retromusic.util;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -21,12 +23,21 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
+import android.os.Build;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import code.name.monkey.appthemehelper.util.TintHelper;
 
 /**
  * Created on : June 18, 2016 Author     : zetbaitsu Name       : Zetra GitHub     :
@@ -55,6 +66,37 @@ public class ImageUtil {
             }
         }
         return true;
+    }
+
+    public static Bitmap createBitmap(Drawable drawable) {
+        return createBitmap(drawable, 1f);
+    }
+
+    public static Bitmap createBitmap(Drawable drawable, float sizeMultiplier) {
+        Bitmap bitmap = Bitmap.createBitmap((int) (drawable.getIntrinsicWidth() * sizeMultiplier), (int) (drawable.getIntrinsicHeight() * sizeMultiplier), Bitmap.Config.ARGB_8888);
+        Canvas c = new Canvas(bitmap);
+        drawable.setBounds(0, 0, c.getWidth(), c.getHeight());
+        drawable.draw(c);
+        return bitmap;
+    }
+
+    public static Drawable getTintedVectorDrawable(@NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme, @ColorInt int color) {
+        return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color);
+    }
+
+    public static Drawable getTintedVectorDrawable(@NonNull Context context, @DrawableRes int id, @ColorInt int color) {
+        return TintHelper.createTintedDrawable(getVectorDrawable(context.getResources(), id, context.getTheme()), color);
+    }
+
+    public static Drawable getVectorDrawable(@NonNull Context context, @DrawableRes int id) {
+        return getVectorDrawable(context.getResources(), id, context.getTheme());
+    }
+
+    public static Drawable getVectorDrawable(@NonNull Resources res, @DrawableRes int resId, @Nullable Resources.Theme theme) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            return res.getDrawable(resId, theme);
+        }
+        return VectorDrawableCompat.create(res, resId, theme);
     }
 
     /**

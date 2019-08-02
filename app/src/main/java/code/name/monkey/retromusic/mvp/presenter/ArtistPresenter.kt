@@ -38,9 +38,7 @@ class ArtistPresenter(private val mView: ArtistContract.ArtistView) : Presenter(
     }
 
     override fun loadArtists() {
-        disposable.add(repository.allArtists
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.allArtistsFlowable
                 .doOnSubscribe { mView.loading() }
                 .subscribe({ this.showList(it) },
                         { mView.showEmptyView() },

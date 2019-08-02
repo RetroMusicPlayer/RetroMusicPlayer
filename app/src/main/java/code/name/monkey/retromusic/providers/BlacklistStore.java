@@ -22,14 +22,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
+import androidx.annotation.NonNull;
+
 import java.io.File;
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-import static code.name.monkey.retromusic.Constants.MEDIA_STORE_CHANGED;
+import static code.name.monkey.retromusic.service.MusicService.MEDIA_STORE_CHANGED;
 
 public class BlacklistStore extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "blacklist.db";

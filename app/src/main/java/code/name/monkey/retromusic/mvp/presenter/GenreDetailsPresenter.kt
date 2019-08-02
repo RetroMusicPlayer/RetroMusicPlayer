@@ -36,9 +36,7 @@ class GenreDetailsPresenter(private val view: GenreDetailsContract.GenreDetailsV
     }
 
     override fun loadGenre(genreId: Int) {
-        disposable.add(repository.getGenre(genreId)
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.getGenreFlowable(genreId)
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showGenre(it) },
                         { view.showEmptyView() },

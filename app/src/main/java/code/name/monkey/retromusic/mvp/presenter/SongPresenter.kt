@@ -26,9 +26,7 @@ import java.util.*
 class SongPresenter(private val view: SongContract.SongView) : Presenter(), SongContract.Presenter {
 
     override fun loadSongs() {
-        disposable.add(repository.allSongs
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.allSongsFlowable
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showList(it) },
                         { view.showEmptyView() },

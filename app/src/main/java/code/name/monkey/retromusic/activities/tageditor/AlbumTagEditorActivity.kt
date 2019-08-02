@@ -195,7 +195,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     }
 
     override fun getSongPaths(): List<String> {
-        val songs = AlbumLoader.getAlbum(this, id).blockingFirst().songs
+        val songs = AlbumLoader.getAlbum(this, id).songs
         val paths = ArrayList<String>(songs!!.size)
         for (song in songs) {
             paths.add(song.data)

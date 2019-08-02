@@ -121,7 +121,9 @@
             android:name=".appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".activities.saf.SAFGuideActivity" />
+        <activity
+            android:name=".activities.saf.SAFGuideActivity"
+            android:theme="@style/Theme.Intro" />
 
         <meta-data
             android:name="android.max_aspect"
@@ -240,16 +242,23 @@
 
         <service
             android:name=".service.MusicService"
-            android:enabled="true" />
-        <service
-            android:name=".service.WearBrowserService"
-            android:exported="true">
+            android:enabled="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
 
-
+        <!-- Android Auto -->
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+        <meta-data
+            android:name="com.google.android.gms.car.application.theme"
+            android:resource="@style/CarTheme" />
+        <meta-data
+            android:name="com.google.android.gms.car.notification.SmallIcon"
+            android:resource="@drawable/ic_notification" />
     </application>
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />

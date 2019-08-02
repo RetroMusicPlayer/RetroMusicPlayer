@@ -108,7 +108,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override fun getSongPaths(): List<String> {
         val paths = ArrayList<String>(1)
-        paths.add(SongLoader.getSong(this, id).blockingFirst().data)
+        paths.add(SongLoader.getSong(this, id).data)
         return paths
     }
 

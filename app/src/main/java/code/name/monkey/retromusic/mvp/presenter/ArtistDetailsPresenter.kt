@@ -37,9 +37,7 @@ class ArtistDetailsPresenter(private val view: ArtistDetailContract.ArtistsDetai
     }
 
     override fun loadArtistById() {
-        disposable.add(repository.getArtistById(bundle.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID).toLong())
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.getArtistByIdFlowable(bundle.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID))
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showArtist(it) },
                         { view.showEmptyView() },

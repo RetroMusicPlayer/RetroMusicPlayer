@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
-import kotlinx.android.synthetic.main.activity_user_info.*
 
 
 class AddToPlaylistDialog : DialogFragment() {
@@ -33,7 +32,7 @@ class AddToPlaylistDialog : DialogFragment() {
             savedInstanceState: Bundle?
     ): Dialog {
         val cntx = requireContext()
-        val playlists = PlaylistLoader.getAllPlaylists(cntx).blockingFirst()
+        val playlists = PlaylistLoader.getAllPlaylists(cntx)
         val playlistNames: MutableList<String> = mutableListOf()
         playlistNames.add(cntx.resources.getString(R.string.action_new_playlist))
         for (p in playlists) {

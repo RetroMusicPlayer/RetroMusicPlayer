@@ -170,7 +170,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
     }
 
-    override fun showData(list: ArrayList<Any>) {
+    override fun showData(list: MutableList<Any>) {
         searchAdapter!!.swapDataSet(list)
     }
 

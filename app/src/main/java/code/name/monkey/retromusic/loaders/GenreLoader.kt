@@ -27,13 +27,27 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
 import java.util.*
 
+
 object GenreLoader {
 
-    fun getAllGenres(context: Context): Observable<ArrayList<Genre>> {
+    fun getAllGenresFlowable(context: Context): Observable<ArrayList<Genre>> {
+        return getGenresFromCursorFlowable(context, makeGenreCursor(context))
+    }
+
+    fun getAllGenres(context: Context): ArrayList<Genre> {
         return getGenresFromCursor(context, makeGenreCursor(context))
     }
 
-    fun getSongs(context: Context, genreId: Int): Observable<ArrayList<Song>> {
+    fun getSongsFlowable(context: Context, genreId: Int): Observable<ArrayList<Song>> {
+        // The genres table only stores songs that have a genre specified,
+        // so we need to get songs without a genre a different way.
+        return if (genreId == -1) {
+            getSongsWithNoGenreFlowable(context)
+        } else SongLoader.getSongsFlowable(makeGenreSongCursor(context, genreId))
+
+    }
+
+    fun getSongs(context: Context, genreId: Int): ArrayList<Song> {
         // The genres table only stores songs that have a genre specified,
         // so we need to get songs without a genre a different way.
         return if (genreId == -1) {
@@ -45,12 +59,18 @@ object GenreLoader {
     private fun getGenreFromCursor(context: Context, cursor: Cursor): Genre {
         val id = cursor.getInt(0)
         val name = cursor.getString(1)
-        val songCount = getSongs(context, id).blockingFirst().size
+        val songCount = getSongs(context, id).size
         return Genre(id, name, songCount)
 
     }
 
-    private fun getSongsWithNoGenre(context: Context): Observable<ArrayList<Song>> {
+    private fun getSongsWithNoGenreFlowable(context: Context): Observable<ArrayList<Song>> {
+        val selection = BaseColumns._ID + " NOT IN " +
+                "(SELECT " + Genres.Members.AUDIO_ID + " FROM audio_genres_map)"
+        return SongLoader.getSongsFlowable(SongLoader.makeSongCursor(context, selection, null))
+    }
+
+    private fun getSongsWithNoGenre(context: Context): ArrayList<Song> {
         val selection = BaseColumns._ID + " NOT IN " +
                 "(SELECT " + Genres.Members.AUDIO_ID + " FROM audio_genres_map)"
         return SongLoader.getSongs(SongLoader.makeSongCursor(context, selection, null))
@@ -92,7 +112,7 @@ object GenreLoader {
 
     }
 
-    private fun getGenresFromCursor(context: Context, cursor: Cursor?): Observable<ArrayList<Genre>> {
+    private fun getGenresFromCursorFlowable(context: Context, cursor: Cursor?): Observable<ArrayList<Genre>> {
         return Observable.create { e ->
             val genres = ArrayList<Genre>()
             if (cursor != null) {
@@ -118,6 +138,31 @@ object GenreLoader {
             e.onNext(genres)
             e.onComplete()
         }
+    }
+
+    private fun getGenresFromCursor(context: Context, cursor: Cursor?): ArrayList<Genre> {
+        val genres = arrayListOf<Genre>()
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    val genre = getGenreFromCursor(context, cursor)
+                    if (genre.songCount > 0) {
+                        genres.add(genre)
+                    } else {
+                        // try to remove the empty genre from the media store
+                        try {
+                            context.contentResolver.delete(Genres.EXTERNAL_CONTENT_URI, Genres._ID + " == " + genre.id, null)
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            // nothing we can do then
+                        }
+
+                    }
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        return genres
     }
 
 

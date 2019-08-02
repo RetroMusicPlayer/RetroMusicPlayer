@@ -650,4 +650,14 @@
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="deleting_songs">Deleting songs</string>
     <string name="hemanth_savarala">Hemanth Savarala</string>
+
+    <string name="albums_label">Albums</string>
+    <string name="artists_label">Artists</string>
+    <string name="playlists_label">Playlists</string>
+    <string name="history_label">History</string>
+    <string name="top_tracks_label">Top Tracks</string>
+    <string name="queue_label">Queue</string>
+    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+    <string name="action_toggle_favorite">Toggle favorite</string>
 </resources>

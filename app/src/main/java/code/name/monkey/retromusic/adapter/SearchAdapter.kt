@@ -23,7 +23,7 @@ import java.util.*
 
 class SearchAdapter(private val activity: AppCompatActivity, private var dataSet: List<Any>?) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    fun swapDataSet(dataSet: ArrayList<Any>) {
+    fun swapDataSet(dataSet: MutableList<Any>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
     }

@@ -17,9 +17,7 @@ package code.name.monkey.retromusic.appshortcuts
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import code.name.monkey.retromusic.Constants.ACTION_PLAY_PLAYLIST
-import code.name.monkey.retromusic.Constants.INTENT_EXTRA_PLAYLIST
-import code.name.monkey.retromusic.Constants.INTENT_EXTRA_SHUFFLE_MODE
+import code.name.monkey.retromusic.activities.SearchActivity
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.LastAddedShortcutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.SearchShortCutType
 import code.name.monkey.retromusic.appshortcuts.shortcuttype.ShuffleAllShortcutType
@@ -29,7 +27,7 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.ShuffleAllPlaylist
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.activities.SearchActivity
+import code.name.monkey.retromusic.service.MusicService.*
 
 
 class AppShortcutLauncherActivity : Activity() {

@@ -161,7 +161,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             // Playlist renamed
             val playlistName = PlaylistsUtil.getNameForPlaylist(this, playlist!!.id.toLong())
             if (playlistName != playlist!!.name) {
-                playlist = PlaylistLoader.getPlaylist(this, playlist!!.id).blockingFirst()
+                playlist = PlaylistLoader.getPlaylist(this, playlist!!.id)
                 setToolbarTitle(playlist!!.name)
             }
         }

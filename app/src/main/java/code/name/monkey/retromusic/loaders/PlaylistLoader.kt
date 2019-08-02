@@ -19,31 +19,20 @@ import android.database.Cursor
 import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.PlaylistsColumns
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Playlist
 import io.reactivex.Observable
 import java.util.*
+
 
 /**
  * Created by hemanths on 16/08/17.
  */
 
 object PlaylistLoader {
-    private fun makePlaylistCursor(context: Context, selection: String?, values: Array<String>?): Cursor? {
-        return try {
-            context.contentResolver.query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
-                    arrayOf(
-                            /* 0 */
-                            BaseColumns._ID,
-                            /* 1 */
-                            PlaylistsColumns.NAME), selection, values, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER)
 
-        } catch (e: SecurityException) {
-            null
-        }
-    }
-
-    private fun getPlaylist(cursor: Cursor?): Observable<Playlist> {
+    private fun getPlaylistFlowable(
+            cursor: Cursor?
+    ): Observable<Playlist> {
         return Observable.create { e ->
             var playlist = Playlist()
 
@@ -55,11 +44,35 @@ object PlaylistLoader {
             e.onNext(playlist)
             e.onComplete()
         }
-
-
     }
 
-    fun getPlaylist(context: Context, playlistName: String): Observable<Playlist> {
+    fun getPlaylist(
+            cursor: Cursor?
+    ): Playlist {
+        var playlist = Playlist()
+
+        if (cursor != null && cursor.moveToFirst()) {
+            playlist = getPlaylistFromCursorImpl(cursor)
+        }
+        cursor?.close()
+        return playlist
+    }
+
+    fun getPlaylistFlowable(
+            context: Context,
+            playlistName: String
+    ): Observable<Playlist> {
+        return getPlaylistFlowable(makePlaylistCursor(
+                context,
+                PlaylistsColumns.NAME + "=?",
+                arrayOf(playlistName)
+        ))
+    }
+
+    fun getPlaylist(
+            context: Context,
+            playlistName: String
+    ): Playlist {
         return getPlaylist(makePlaylistCursor(
                 context,
                 PlaylistsColumns.NAME + "=?",
@@ -67,23 +80,31 @@ object PlaylistLoader {
         ))
     }
 
-    fun getPlaylist(context: Context, playlistId: Int): Observable<Playlist> {
-        return getPlaylist(makePlaylistCursor(
+    fun getPlaylistFlowable(
+            context: Context,
+            playlistId: Int
+    ): Observable<Playlist> {
+        return getPlaylistFlowable(makePlaylistCursor(
                 context,
                 BaseColumns._ID + "=?",
                 arrayOf(playlistId.toString())
         ))
     }
 
-    private fun getPlaylistFromCursorImpl(cursor: Cursor): Playlist {
-
-        val id = cursor.getInt(0)
-        val name = cursor.getString(1)
-        return Playlist(id, name)
+    fun getAllPlaylistsFlowoable(
+            context: Context
+    ): Observable<ArrayList<Playlist>> {
+        return getAllPlaylistsFlowable(makePlaylistCursor(context, null, null))
     }
 
+    fun getFavoritePlaylistFlowable(context: Context): Observable<ArrayList<Playlist>> {
+        return getAllPlaylistsFlowable(makePlaylistCursor(
+                context,
+                PlaylistsColumns.NAME + "=?",
+                arrayOf(context.getString(code.name.monkey.retromusic.R.string.favorites))))
+    }
 
-    private fun getAllPlaylists(cursor: Cursor?): Observable<ArrayList<Playlist>> {
+    private fun getAllPlaylistsFlowable(cursor: Cursor?): Observable<ArrayList<Playlist>> {
         return Observable.create { e ->
             val playlists = ArrayList<Playlist>()
 
@@ -99,15 +120,27 @@ object PlaylistLoader {
         }
     }
 
-    fun getAllPlaylists(context: Context): Observable<ArrayList<Playlist>> {
+    fun getAllPlaylists(context: Context): ArrayList<Playlist> {
         return getAllPlaylists(makePlaylistCursor(context, null, null))
     }
 
-    fun getFavoritePlaylist(context: Context): Observable<ArrayList<Playlist>> {
+    fun getFavoritePlaylist(context: Context): ArrayList<Playlist> {
         return getAllPlaylists(makePlaylistCursor(
                 context,
                 PlaylistsColumns.NAME + "=?",
-                arrayOf(context.getString(R.string.favorites))))
+                arrayOf(context.getString(code.name.monkey.retromusic.R.string.favorites))))
+    }
+
+    fun getAllPlaylists(cursor: Cursor?): ArrayList<Playlist> {
+        val playlists = ArrayList<Playlist>()
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                playlists.add(getPlaylistFromCursorImpl(cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor?.close()
+        return playlists
     }
 
     fun deletePlaylists(context: Context, playlistId: Long) {
@@ -118,4 +151,42 @@ object PlaylistLoader {
         localStringBuilder.append(")")
         context.contentResolver.delete(localUri, localStringBuilder.toString(), null)
     }
+
+    private fun makePlaylistCursor(
+            context: Context,
+            selection: String?,
+            values: Array<String>?
+    ): Cursor? {
+        try {
+            return context.contentResolver.query(
+                    MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+                    arrayOf(BaseColumns._ID, /* 0 */
+                            PlaylistsColumns.NAME), /* 1 */
+                    selection,
+                    values,
+                    MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER)
+        } catch (e: SecurityException) {
+            return null
+        }
+    }
+
+    fun getPlaylist(
+            context: Context,
+            playlistId: Int
+    ): Playlist {
+        return getPlaylist(makePlaylistCursor(
+                context,
+                BaseColumns._ID + "=?",
+                arrayOf(playlistId.toString())
+        ))
+    }
+
+    private fun getPlaylistFromCursorImpl(
+            cursor: Cursor
+    ): Playlist {
+        val id = cursor.getInt(0)
+        val name = cursor.getString(1)
+        return Playlist(id, name)
+    }
+
 }

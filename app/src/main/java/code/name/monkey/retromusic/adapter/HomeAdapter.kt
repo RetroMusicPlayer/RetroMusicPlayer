@@ -105,7 +105,7 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
     }
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
-            val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist).blockingFirst()
+            val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist)
             recyclerView.apply {
                 val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
                 layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)

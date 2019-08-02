@@ -24,7 +24,7 @@ import java.util.*
  */
 
 interface SearchContract {
-    interface SearchView : BaseView<ArrayList<Any>>
+    interface SearchView : BaseView<MutableList<Any>>
 
     interface SearchPresenter : BasePresenter<SearchView> {
         fun search(query: String?)

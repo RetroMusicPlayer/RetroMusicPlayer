@@ -12,13 +12,11 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.helper
+package code.name.monkey.retromusic.helper;
 
-interface M3UConstants {
-    companion object {
-        val EXTENSION = "m3u"
-        val HEADER = "#EXTM3U"
-        val ENTRY = "#EXTINF:"
-        val DURATION_SEPARATOR = ","
-    }
+public interface M3UConstants {
+    String EXTENSION = "m3u";
+    String HEADER = "#EXTM3U";
+    String ENTRY = "#EXTINF:";
+    String DURATION_SEPARATOR = ",";
 }

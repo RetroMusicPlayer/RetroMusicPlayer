@@ -35,9 +35,7 @@ class PlaylistPresenter(private val view: PlaylistContract.PlaylistView) : Prese
     }
 
     override fun loadPlaylists() {
-        disposable.add(repository.allPlaylists
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.allPlaylistsFlowable
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showList(it) },
                         { view.showEmptyView() },

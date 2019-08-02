@@ -19,6 +19,8 @@ import android.os.Parcel;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
@@ -40,5 +42,8 @@ public abstract class AbsCustomPlaylist extends Playlist {
     }
 
     @NonNull
-    public abstract Observable<ArrayList<Song>> getSongs(Context context);
+    public abstract Observable<ArrayList<Song>> getSongsFlowable(@NotNull Context context);
+
+    @NonNull
+    public abstract ArrayList<Song> getSongs(@NotNull Context context);
 }

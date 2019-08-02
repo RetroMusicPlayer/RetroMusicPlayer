@@ -15,9 +15,7 @@
 package code.name.monkey.retromusic.providers.interfaces
 
 import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import io.reactivex.Observable
-import kotlin.collections.ArrayList
 
 /**
  * Created by hemanths on 11/08/17.
@@ -25,42 +23,68 @@ import kotlin.collections.ArrayList
 
 interface Repository {
 
-    val allSongs: Observable<ArrayList<Song>>
+    val allSongsFlowable: Observable<ArrayList<Song>>
 
-    val suggestionSongs: Observable<ArrayList<Song>>
+    fun allSongs(): ArrayList<Song>
 
-    val allAlbums: Observable<ArrayList<Album>>
+    val suggestionSongsFlowable: Observable<ArrayList<Song>>
 
-    val recentAlbums: Observable<ArrayList<Album>>
+    val allAlbumsFlowable: Observable<ArrayList<Album>>
 
-    val topAlbums: Observable<ArrayList<Album>>
+    fun allAlbums(): ArrayList<Album>
 
-    val allArtists: Observable<ArrayList<Artist>>
+    val recentAlbumsFlowable: Observable<ArrayList<Album>>
 
-    val recentArtists: Observable<ArrayList<Artist>>
+    fun recentAlbums(): ArrayList<Album>
 
-    val topArtists: Observable<ArrayList<Artist>>
+    val topAlbumsFlowable: Observable<ArrayList<Album>>
 
-    val allPlaylists: Observable<ArrayList<Playlist>>
+    fun topAlbums(): ArrayList<Album>
 
-    val homeList: Observable<ArrayList<Playlist>>
+    val allArtistsFlowable: Observable<ArrayList<Artist>>
 
-    val allThings: Observable<ArrayList<AbsSmartPlaylist>>
+    fun allArtists(): ArrayList<Artist>
 
-    val allGenres: Observable<ArrayList<Genre>>
+    val recentArtistsFlowable: Observable<ArrayList<Artist>>
 
-    fun getSong(id: Int): Observable<Song>
+    fun recentArtists(): ArrayList<Artist>
 
-    fun getAlbum(albumId: Int): Observable<Album>
+    val topArtistsFlowable: Observable<ArrayList<Artist>>
 
-    fun getArtistById(artistId: Long): Observable<Artist>
+    fun topArtists(): ArrayList<Artist>
 
-    fun search(query: String?): Observable<ArrayList<Any>>
+    val allPlaylistsFlowable: Observable<ArrayList<Playlist>>
 
-    fun getPlaylistSongs(playlist: Playlist): Observable<ArrayList<Song>>
+    fun allPlaylists(): ArrayList<Playlist>
 
-    fun getGenre(genreId: Int): Observable<ArrayList<Song>>
+    val allGenresFlowable: Observable<ArrayList<Genre>>
 
-    val favoritePlaylist: Observable<ArrayList<Playlist>>
+    fun allGenres(): ArrayList<Genre>
+
+    fun getSongFlowable(id: Int): Observable<Song>
+
+    fun getSong(id: Int): Song
+
+    fun getAlbumFlowable(albumId: Int): Observable<Album>
+
+    fun getAlbum(albumId: Int): Album
+
+    fun getArtistByIdFlowable(artistId: Int): Observable<Artist>
+
+    fun getArtistById(artistId: Long): Artist
+
+    fun search(query: String?): MutableList<Any>
+
+    fun getPlaylistSongsFlowable(playlist: Playlist): Observable<ArrayList<Song>>
+
+    fun getPlaylistSongs(playlist: Playlist): ArrayList<Song>
+
+    fun getGenreFlowable(genreId: Int): Observable<ArrayList<Song>>
+
+    fun getGenre(genreId: Int): ArrayList<Song>
+
+    val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
+
+    val favoritePlaylist: ArrayList<Playlist>
 
 }

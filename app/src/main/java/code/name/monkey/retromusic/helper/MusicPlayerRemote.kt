@@ -30,7 +30,6 @@ import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.schedulers.Schedulers
 import java.io.File
 import java.util.*
 
@@ -366,6 +365,7 @@ object MusicPlayerRemote {
 
     fun playFromUri(uri: Uri) {
         if (musicService != null) {
+
             var songs: ArrayList<Song>? = null
             if (uri.scheme != null && uri.authority != null) {
                 if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
@@ -376,23 +376,18 @@ object MusicPlayerRemote {
                         songId = uri.lastPathSegment
                     }
                     if (songId != null) {
-                        /* songs = SongLoader.getSongs(SongLoader.makeSongCursor(
-                                musicService,
-                                MediaStore.Audio.AudioColumns._ID + "=?",
-                                new String[]{songId}
-                        ));*/
                         songs = SongLoader.getSongs(SongLoader.makeSongCursor(
                                 musicService!!,
                                 MediaStore.Audio.AudioColumns._ID + "=?",
-                                arrayOf(songId)))
-                                .subscribeOn(Schedulers.io()).blockingFirst()
+                                arrayOf(songId)
+                        ))
                     }
                 }
             }
             if (songs == null) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile = File(Environment.getExternalStorageDirectory(), uri.path!!.split(":".toRegex(), 2).toTypedArray()[1])
+                    songFile = File(Environment.getExternalStorageDirectory(), uri.path?.split(":".toRegex(), 2)?.get(1))
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(musicService!!, uri)
@@ -403,8 +398,11 @@ object MusicPlayerRemote {
                     songFile = File(uri.path)
                 }
                 if (songFile != null) {
-                    songs = SongLoader.getSongs(SongLoader.makeSongCursor(musicService!!, MediaStore.Audio.AudioColumns.DATA + "=?", arrayOf(songFile.absolutePath)
-                    )).blockingFirst()
+                    songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                            musicService!!,
+                            MediaStore.Audio.AudioColumns.DATA + "=?",
+                            arrayOf(songFile.absolutePath)
+                    ))
                 }
             }
             if (songs != null && songs.isNotEmpty()) {

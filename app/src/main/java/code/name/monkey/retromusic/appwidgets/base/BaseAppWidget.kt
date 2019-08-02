@@ -29,10 +29,10 @@ import android.text.TextUtils
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.service.MusicService.*
 
 abstract class BaseAppWidget : AppWidgetProvider() {
 
@@ -42,8 +42,8 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager,
                           appWidgetIds: IntArray) {
         defaultAppWidget(context, appWidgetIds)
-        val updateIntent = Intent(Constants.APP_WIDGET_UPDATE)
-        updateIntent.putExtra(Constants.EXTRA_APP_WIDGET_NAME, NAME)
+        val updateIntent = Intent(APP_WIDGET_UPDATE)
+        updateIntent.putExtra(EXTRA_APP_WIDGET_NAME, NAME)
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
         updateIntent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY)
         context.sendBroadcast(updateIntent)
@@ -54,7 +54,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
      */
     fun notifyChange(service: MusicService, what: String) {
         if (hasInstances(service)) {
-            if (Constants.META_CHANGED == what || Constants.PLAY_STATE_CHANGED == what) {
+            if (META_CHANGED == what || PLAY_STATE_CHANGED == what) {
                 performUpdate(service, null)
             }
         }

@@ -61,10 +61,8 @@ import java.util.Collections;
 import java.util.List;
 
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
-import code.name.monkey.retromusic.R;
 
 public class RetroUtil {
 
@@ -176,6 +174,7 @@ public class RetroUtil {
         }
     }
 
+    @Nullable
     public static Drawable getVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
                                              @Nullable Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -184,11 +183,11 @@ public class RetroUtil {
         return VectorDrawableCompat.create(res, resId, theme);
     }
 
+    @Nullable
     public static Drawable getTintedVectorDrawable(@NonNull Context context, @DrawableRes int id,
                                                    @ColorInt int color) {
-        return TintHelper
-                .createTintedDrawable(getVectorDrawable(context.getResources(), id, context.getTheme()),
-                        color);
+        return TintHelper.createTintedDrawable(
+                getVectorDrawable(context.getResources(), id, context.getTheme()), color);
     }
 
     public static Drawable getTintedDrawable(@NonNull Context context, @DrawableRes int id,

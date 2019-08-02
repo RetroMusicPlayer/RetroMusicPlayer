@@ -149,10 +149,9 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         val songs = ArrayList<Song>()
         for (playlist in playlists) {
             if (playlist is AbsCustomPlaylist) {
-                songs.addAll(playlist.getSongs(activity).blockingFirst())
+                songs.addAll(playlist.getSongs(activity))
             } else {
-                songs
-                        .addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id).blockingFirst())
+                songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
             }
         }
         return songs
@@ -161,9 +160,9 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     private fun getSongs(playlist: Playlist): ArrayList<Song> {
         val songs = ArrayList<Song>()
         if (playlist is AbsSmartPlaylist) {
-            songs.addAll(playlist.getSongs(activity).blockingFirst())
+            songs.addAll(playlist.getSongs(activity))
         } else {
-            songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id).blockingFirst())
+            songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
         }
         return songs
     }

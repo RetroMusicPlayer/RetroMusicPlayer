@@ -35,9 +35,7 @@ class GenrePresenter(
     }
 
     override fun loadGenre() {
-        disposable.add(repository.allGenres
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.allGenresFlowable
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showList(it) },
                         { view.showEmptyView() },

@@ -28,10 +28,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.Constants.ACTION_QUIT
-import code.name.monkey.retromusic.Constants.ACTION_REWIND
-import code.name.monkey.retromusic.Constants.ACTION_SKIP
-import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget.Companion.createBitmap
@@ -40,6 +36,7 @@ import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil

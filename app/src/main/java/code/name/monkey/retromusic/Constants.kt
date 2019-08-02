@@ -19,49 +19,6 @@ import android.provider.MediaStore
 
 object Constants {
 
-    @JvmField
-    val RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic"
-    @JvmField
-    val MUSIC_PACKAGE_NAME = "com.android.music"
-    @JvmField
-    val ACTION_TOGGLE_PAUSE = "$RETRO_MUSIC_PACKAGE_NAME.togglepause"
-    @JvmField
-    val ACTION_PLAY = "$RETRO_MUSIC_PACKAGE_NAME.play"
-    @JvmField
-    val ACTION_PLAY_PLAYLIST = "$RETRO_MUSIC_PACKAGE_NAME.play.playlist"
-    @JvmField
-    val ACTION_PAUSE = "$RETRO_MUSIC_PACKAGE_NAME.pause"
-    @JvmField
-    val ACTION_STOP = "$RETRO_MUSIC_PACKAGE_NAME.stop"
-    @JvmField
-    val ACTION_SKIP = "$RETRO_MUSIC_PACKAGE_NAME.skip"
-    @JvmField
-    val ACTION_REWIND = "$RETRO_MUSIC_PACKAGE_NAME.rewind"
-    @JvmField
-    val ACTION_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.quitservice"
-    @JvmField
-    val ACTION_PENDING_QUIT = "$RETRO_MUSIC_PACKAGE_NAME.pendingquitservice"
-    @JvmField
-    val INTENT_EXTRA_PLAYLIST = RETRO_MUSIC_PACKAGE_NAME + "intentextra.playlist"
-    @JvmField
-    val INTENT_EXTRA_SHUFFLE_MODE = "$RETRO_MUSIC_PACKAGE_NAME.intentextra.shufflemode"
-    @JvmField
-    val APP_WIDGET_UPDATE = "$RETRO_MUSIC_PACKAGE_NAME.appwidgetupdate"
-    @JvmField
-    val EXTRA_APP_WIDGET_NAME = RETRO_MUSIC_PACKAGE_NAME + "app_widget_name"
-
-    @JvmField
-    val META_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.metachanged"
-    @JvmField
-    val QUEUE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.queuechanged"
-    @JvmField
-    val PLAY_STATE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.playstatechanged"
-    @JvmField
-    val REPEAT_MODE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.repeatmodechanged"
-    @JvmField
-    val SHUFFLE_MODE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.shufflemodechanged"
-    @JvmField
-    val MEDIA_STORE_CHANGED = "$RETRO_MUSIC_PACKAGE_NAME.mediastorechanged"
     const val RATE_ON_GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=code.name.monkey.retromusic"
     const val TRANSLATE = "http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534"
     const val GITHUB_PROJECT = "https://github.com/h4h13/RetroMusicPlayer"
@@ -76,7 +33,6 @@ object Constants {
 
     const val BASE_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
-    @JvmField
     val BASE_PROJECTION = arrayOf(BaseColumns._ID, // 0
             MediaStore.Audio.AudioColumns.TITLE, // 1
             MediaStore.Audio.AudioColumns.TRACK, // 2

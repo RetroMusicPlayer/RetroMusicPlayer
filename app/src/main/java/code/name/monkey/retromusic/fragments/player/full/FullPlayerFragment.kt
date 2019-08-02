@@ -213,7 +213,7 @@ class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
     private val compositeDisposable = CompositeDisposable()
 
     private fun updateArtistImage() {
-        compositeDisposable.addAll(ArtistLoader.getArtist(context!!, MusicPlayerRemote.currentSong.artistId)
+        compositeDisposable.addAll(ArtistLoader.getArtistFlowable(context!!, MusicPlayerRemote.currentSong.artistId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

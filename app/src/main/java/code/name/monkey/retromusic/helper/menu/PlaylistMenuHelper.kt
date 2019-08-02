@@ -77,20 +77,18 @@ object PlaylistMenuHelper {
 
     private fun getPlaylistSongs(activity: Activity,
                                  playlist: Playlist): ArrayList<Song> {
-        val songs: ArrayList<Song>
-        if (playlist is AbsCustomPlaylist) {
-            songs = playlist.getSongs(activity).blockingFirst()
+        return if (playlist is AbsCustomPlaylist) {
+            playlist.getSongs(activity)
         } else {
-            songs = PlaylistSongsLoader.getPlaylistSongList(activity, playlist).blockingFirst()
+            PlaylistSongsLoader.getPlaylistSongList(activity, playlist)
         }
-        return songs
     }
 
     private class SavePlaylistAsyncTask internal constructor(context: Context) : WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {
             return String.format(App.instance.applicationContext.getString(R.string
-                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.instance.applicationContext, params[0]).blockingFirst())
+                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.instance.applicationContext, params[0]))
         }
 
         override fun onPostExecute(string: String) {

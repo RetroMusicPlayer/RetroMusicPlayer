@@ -18,7 +18,6 @@ import android.app.AlarmManager
 import android.app.Dialog
 import android.app.PendingIntent
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -29,10 +28,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
+import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -153,8 +153,8 @@ class SleepTimerDialog : DialogFragment() {
     private fun makeTimerIntent(): Intent {
         val intent = Intent(activity, MusicService::class.java)
         return if (shouldFinishLastSong.isChecked) {
-            intent.setAction(Constants.ACTION_PENDING_QUIT)
-        } else intent.setAction(Constants.ACTION_QUIT)
+            intent.setAction(ACTION_PENDING_QUIT)
+        } else intent.setAction(ACTION_QUIT)
     }
 
 

@@ -25,10 +25,6 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.Constants.ACTION_QUIT
-import code.name.monkey.retromusic.Constants.ACTION_REWIND
-import code.name.monkey.retromusic.Constants.ACTION_SKIP
-import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.glide.GlideApp
@@ -37,6 +33,7 @@ import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
@@ -155,14 +152,14 @@ class PlayingNotificationOreo : PlayingNotification() {
                             val primary = MaterialValueHelper.getPrimaryTextColor(service, dark)
                             val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
 
-                            val close = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_close_white_24dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val close = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_close_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
                             val playPause = createBitmap(RetroUtil.getTintedVectorDrawable(service,
                                     if (isPlaying)
                                         R.drawable.ic_pause_white_24dp
                                     else
-                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, PlayingNotification.NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
 
                             notificationLayout.setTextColor(R.id.title, primary)
                             notificationLayout.setTextColor(R.id.subtitle, secondary)

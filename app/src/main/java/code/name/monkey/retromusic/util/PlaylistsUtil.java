@@ -38,7 +38,6 @@ import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
 import code.name.monkey.retromusic.model.Song;
-import io.reactivex.Observable;
 
 import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
 
@@ -262,7 +261,9 @@ public class PlaylistsUtil {
         return "";
     }
 
-    public static Observable<File> savePlaylist(Context context, Playlist playlist) throws IOException {
+    @Nullable
+    public static File savePlaylist(@NonNull Context context,
+                                    @NonNull Playlist playlist) throws IOException {
         return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 

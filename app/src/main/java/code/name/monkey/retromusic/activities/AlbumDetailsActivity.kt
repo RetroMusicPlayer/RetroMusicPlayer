@@ -77,6 +77,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         ActivityCompat.postponeEnterTransition(this)
 
+
+        artistImage = findViewById(R.id.artistImage)
+
         val albumId = intent.getIntExtra(EXTRA_ALBUM_ID, -1)
         albumDetailsPresenter = AlbumDetailsPresenter(this, albumId)
         albumDetailsPresenter.subscribe()
@@ -84,7 +87,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupRecyclerView()
         setupToolbarMarginHeight()
 
-        artistImage = findViewById(R.id.artistImage)
         artistImage.setOnClickListener {
             val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
             NavigationUtil.goToArtist(this, album.artistId, *artistPairs)
@@ -189,9 +191,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     private lateinit var artistImage: ImageView
 
     private fun loadMoreFrom(album: Album) {
-        disposable.add(ArtistLoader.getArtist(this, album.artistId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        disposable.add(ArtistLoader.getArtistFlowable(this, album.artistId)
                 .map {
                     GlideApp.with(this@AlbumDetailsActivity)
                             .asBitmapPalette()

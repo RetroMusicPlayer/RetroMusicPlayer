@@ -51,7 +51,6 @@ import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
-import io.reactivex.Observable;
 
 
 public class MusicUtil {
@@ -303,7 +302,7 @@ public class MusicUtil {
                     cursor.moveToFirst();
                     while (!cursor.isAfterLast()) {
                         final int id = cursor.getInt(0);
-                        final Song song = SongLoader.INSTANCE.getSong(activity, id).blockingFirst();
+                        final Song song = SongLoader.INSTANCE.getSong(activity, id);
                         MusicPlayerRemote.INSTANCE.removeFromQueue(song);
                         cursor.moveToNext();
                     }
@@ -404,9 +403,9 @@ public class MusicUtil {
 
     public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
         if (isFavorite(context, song)) {
-            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).blockingFirst().id);
+            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).id);
         } else {
-            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).blockingFirst().id,
+            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).id,
                     false);
         }
     }
@@ -416,18 +415,18 @@ public class MusicUtil {
         return playlist.name != null && playlist.name.equals(context.getString(R.string.favorites));
     }
 
-    private static Observable<Playlist> getFavoritesPlaylist(@NonNull final Context context) {
+    private static Playlist getFavoritesPlaylist(@NonNull final Context context) {
         return PlaylistLoader.INSTANCE.getPlaylist(context, context.getString(R.string.favorites));
     }
 
-    private static Observable<Playlist> getOrCreateFavoritesPlaylist(@NonNull final Context context) {
+    private static Playlist getOrCreateFavoritesPlaylist(@NonNull final Context context) {
         return PlaylistLoader.INSTANCE.getPlaylist(context,
                 PlaylistsUtil.createPlaylist(context, context.getString(R.string.favorites)));
     }
 
     public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
         return PlaylistsUtil
-                .doPlaylistContains(context, getFavoritesPlaylist(context).blockingFirst().id, song.getId());
+                .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.getId());
     }
 
     public static boolean isArtistNameUnknown(@Nullable String artistName) {
@@ -473,6 +472,15 @@ public class MusicUtil {
             duration += songs.get(i).getDuration();
         }
         return duration;
+    }
+
+    public static int indexOfSongInList(List<Song> songs, int songId) {
+        for (int i = 0; i < songs.size(); i++) {
+            if (songs.get(i).getId() == songId) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @NonNull

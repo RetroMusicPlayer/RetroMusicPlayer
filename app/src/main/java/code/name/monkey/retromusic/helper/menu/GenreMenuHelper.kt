@@ -51,6 +51,6 @@ object GenreMenuHelper {
     }
 
     private fun getGenreSongs(activity: Activity, genre: Genre): ArrayList<Song> {
-        return GenreLoader.getSongs(activity, genre.id).blockingFirst()
+        return GenreLoader.getSongs(activity, genre.id)
     }
 }

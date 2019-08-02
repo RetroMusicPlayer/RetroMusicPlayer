@@ -34,9 +34,7 @@ class AlbumDetailsPresenter(private val view: AlbumDetailsContract.AlbumDetailsV
     }
 
     override fun loadAlbumSongs(albumId: Int) {
-        disposable.add(repository.getAlbum(albumId)
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
+        disposable.add(repository.getAlbumFlowable(albumId)
                 .doOnSubscribe { view.loading() }
                 .subscribe({ this.showAlbum(it) },
                         { view.showEmptyView() },

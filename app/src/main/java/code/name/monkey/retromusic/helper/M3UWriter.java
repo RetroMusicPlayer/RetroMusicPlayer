@@ -16,47 +16,43 @@ package code.name.monkey.retromusic.helper;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
-import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
-import io.reactivex.Observable;
 
 public class M3UWriter implements M3UConstants {
 
-    public static Observable<File> write(Context context, File dir, Playlist playlist) throws IOException {
+    @Nullable
+    public static File write(@NonNull Context context,
+                             @NonNull File dir,
+                             @NonNull Playlist playlist) throws IOException {
         if (!dir.exists()) //noinspection ResultOfMethodCallIgnored
             dir.mkdirs();
-        File file = new File(dir, playlist.name.concat("." + M3UConstants.Companion.getEXTENSION()));
+        File file = new File(dir, playlist.name.concat("." + EXTENSION));
 
-        ArrayList<? extends Song> songs;
-        if (playlist instanceof AbsCustomPlaylist) {
-            songs = ((AbsCustomPlaylist) playlist).getSongs(context).blockingFirst();
-        } else {
-            songs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(context, playlist.id).blockingFirst();
-        }
-
+        ArrayList<Song> songs = playlist.getSongs(context);
 
         if (songs.size() > 0) {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-            bw.write(M3UConstants.Companion.getHEADER());
+            bw.write(HEADER);
             for (Song song : songs) {
                 bw.newLine();
-                bw.write(M3UConstants.Companion.getENTRY() + song.getDuration() + M3UConstants.Companion.getDURATION_SEPARATOR() + song.getArtistName() + " - " + song.getTitle());
+                bw.write(ENTRY + song.getDuration() + DURATION_SEPARATOR + song.getArtistName() + " - " + song.getTitle());
                 bw.newLine();
                 bw.write(song.getData());
             }
 
             bw.close();
         }
-
-        return Observable.just(file);
+        return file;
     }
 }

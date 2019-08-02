@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.Observable
-import kotlin.collections.ArrayList
+
 
 object ArtistLoader {
     private fun getSongLoaderSortOrder(): String {
@@ -30,36 +30,32 @@ object ArtistLoader {
                 PreferenceUtil.getInstance().artistDetailSongSortOrder
     }
 
-    fun getArtist(context: Context, artistId: Int): Observable<Artist> {
+    fun getAllArtistsFlowable(
+            context: Context
+    ): Observable<ArrayList<Artist>> {
         return Observable.create { e ->
-            SongLoader.getSongs(SongLoader.makeSongCursor(context, AudioColumns.ARTIST_ID + "=?",
-                    arrayOf(artistId.toString()),
-                    getSongLoaderSortOrder()))
-                    .subscribe { songs ->
-                        val artist = Artist(AlbumLoader.splitIntoAlbums(songs))
-                        e.onNext(artist)
-                        e.onComplete()
-                    }
+            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
+                    context, null, null,
+                    getSongLoaderSortOrder())
+            ).subscribe { songs ->
+                e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
+                e.onComplete()
+            }
         }
     }
 
-    fun getAllArtists(context: Context): Observable<ArrayList<Artist>> {
-        return Observable.create { e ->
-            SongLoader
-                    .getSongs(SongLoader.makeSongCursor(
-                            context, null, null,
-                            getSongLoaderSortOrder())
-                    ).subscribe { songs ->
-                        e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
-                        e.onComplete()
-                    }
-        }
-
+    fun getAllArtists(context: Context): ArrayList<Artist> {
+        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                context,
+                null, null,
+                getSongLoaderSortOrder())
+        )
+        return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
 
-    fun getArtists(context: Context, query: String): Observable<ArrayList<Artist>> {
+    fun getArtistsFlowable(context: Context, query: String): Observable<ArrayList<Artist>> {
         return Observable.create { e ->
-            SongLoader.getSongs(SongLoader.makeSongCursor(
+            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
                     context,
                     AudioColumns.ARTIST + " LIKE ?",
                     arrayOf("%$query%"),
@@ -69,6 +65,16 @@ object ArtistLoader {
                 e.onComplete()
             }
         }
+    }
+
+    fun getArtists(context: Context, query: String): ArrayList<Artist> {
+        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                context,
+                AudioColumns.ARTIST + " LIKE ?",
+                arrayOf("%$query%"),
+                getSongLoaderSortOrder())
+        )
+        return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
 
     fun splitIntoArtists(albums: ArrayList<Album>?): ArrayList<Artist> {
@@ -83,7 +89,7 @@ object ArtistLoader {
 
     private fun getOrCreateArtist(artists: ArrayList<Artist>, artistId: Int): Artist {
         for (artist in artists) {
-            if (!artist.albums!!.isEmpty() && !artist.albums[0].songs!!.isEmpty() && artist.albums[0].songs!![0].artistId == artistId) {
+            if (artist.albums!!.isNotEmpty() && artist.albums[0].songs!!.isNotEmpty() && artist.albums[0].songs!![0].artistId == artistId) {
                 return artist
             }
         }
@@ -105,5 +111,28 @@ object ArtistLoader {
                 e.onComplete()
             }
         }
+    }
+
+    fun getArtistFlowable(context: Context, artistId: Int): Observable<Artist> {
+        return Observable.create { e ->
+            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(context, AudioColumns.ARTIST_ID + "=?",
+                    arrayOf(artistId.toString()),
+                    getSongLoaderSortOrder()))
+                    .subscribe { songs ->
+                        val artist = Artist(AlbumLoader.splitIntoAlbums(songs))
+                        e.onNext(artist)
+                        e.onComplete()
+                    }
+        }
+    }
+
+    fun getArtist(context: Context, artistId: Int): Artist {
+        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                context,
+                AudioColumns.ARTIST_ID + "=?",
+                arrayOf(artistId.toString()),
+                getSongLoaderSortOrder())
+        )
+        return Artist(AlbumLoader.splitIntoAlbums(songs))
     }
 }

@@ -20,6 +20,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,12 +37,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.loaders.SortedCursor;
 import code.name.monkey.retromusic.model.Song;
-import io.reactivex.Observable;
 
 
 public final class FileUtil {
@@ -57,9 +57,10 @@ public final class FileUtil {
         stream.close();
         return baos.toByteArray();
     }
+
     @NonNull
-    public static Observable<ArrayList<Song>> matchFilesWithMediaStore(@NonNull Context context,
-                                                                       @Nullable List<File> files) {
+    public static ArrayList<Song> matchFilesWithMediaStore(@NonNull Context context,
+                                                           @Nullable List<File> files) {
         return SongLoader.INSTANCE.getSongs(makeSongCursor(context, files));
     }
 

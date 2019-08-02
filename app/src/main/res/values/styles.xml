@@ -150,4 +150,12 @@
     <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxBackgroundColor">@color/text_field_background</item>
     </style>
+
+    <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- App bg, drawer right side, notification icon badge, overview "now playing" icon -->
+        <item name="colorPrimaryDark">@color/md_deep_purple_500</item>
+
+        <!-- Spinner, progress bar, FAB -->
+        <item name="colorAccent">@color/md_deep_orange_A400</item>
+    </style>
 </resources>

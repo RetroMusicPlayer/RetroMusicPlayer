@@ -6,14 +6,12 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.fragments.mainactivity.LibraryFragment
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment
 import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
@@ -121,7 +119,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    private fun setCurrentFragment(fragment: Fragment, b: Boolean) {
+    private fun setCurrentFragment(fragment: Fragment, b: Boolean = false) {
         val trans = supportFragmentManager.beginTransaction()
         trans.replace(R.id.fragment_container, fragment, null)
         if (b) {
@@ -162,7 +160,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val id = parseIdFromIntent(intent, "playlistId", "playlist").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                val songs = ArrayList(PlaylistSongsLoader.getPlaylistSongList(this, id).blockingFirst())
+                val songs = ArrayList(PlaylistSongsLoader.getPlaylistSongList(this, id))
                 MusicPlayerRemote.openQueue(songs, position, true)
                 handled = true
             }
@@ -170,14 +168,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val id = parseIdFromIntent(intent, "albumId", "album").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                MusicPlayerRemote.openQueue(AlbumLoader.getAlbum(this, id).blockingFirst().songs!!, position, true)
+                MusicPlayerRemote.openQueue(AlbumLoader.getAlbum(this, id).songs!!, position, true)
                 handled = true
             }
         } else if (MediaStore.Audio.Artists.CONTENT_TYPE == mimeType) {
             val id = parseIdFromIntent(intent, "artistId", "artist").toInt()
             if (id >= 0) {
                 val position = intent.getIntExtra("position", 0)
-                MusicPlayerRemote.openQueue(ArtistLoader.getArtist(this, id).blockingFirst().songs, position, true)
+                MusicPlayerRemote.openQueue(ArtistLoader.getArtist(this, id).songs, position, true)
                 handled = true
             }
         }

@@ -53,7 +53,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     }
 
     private fun loadRecentArtists() {
-        disposable += repository.recentArtists
+        disposable += repository.recentArtistsFlowable
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(0, R.string.recent_artists, 0, it, RECENT_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -63,7 +63,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     }
 
     private fun loadRecentAlbums() {
-        disposable += repository.recentAlbums
+        disposable += repository.recentAlbumsFlowable
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(1, R.string.recent_albums, 0, it, RECENT_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -73,7 +73,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     }
 
     private fun loadATopAlbums() {
-        disposable += repository.topAlbums
+        disposable += repository.topAlbumsFlowable
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -83,7 +83,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     }
 
     private fun loadTopArtists() {
-        disposable += repository.topArtists
+        disposable += repository.topArtistsFlowable
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
                     view.showData(ArrayList(hashSet))
@@ -93,7 +93,7 @@ class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), Home
     }
 
     private fun loadFavorite() {
-        disposable += repository.favoritePlaylist
+        disposable += repository.favoritePlaylistFlowable
                 .subscribe({
                     if (it.isNotEmpty()) hashSet.add(Home(4, R.string.favorites, 0, it, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
                     view.showData(ArrayList(hashSet))

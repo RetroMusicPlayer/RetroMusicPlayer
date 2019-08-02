@@ -572,7 +572,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     return null;
                 }
 
-                return FileUtil.matchFilesWithMediaStore(context, files).blockingFirst();
+                return FileUtil.matchFilesWithMediaStore(context, files);
             } catch (Exception e) {
                 e.printStackTrace();
                 cancel(false);
