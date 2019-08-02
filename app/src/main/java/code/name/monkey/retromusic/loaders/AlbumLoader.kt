@@ -32,20 +32,25 @@ object AlbumLoader {
     fun getAllAlbumsFlowable(
             context: Context
     ): Observable<ArrayList<Album>> {
-        val songs = SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
-                context, null, null,
-                getSongLoaderSortOrder())
+        val songs = SongLoader.getSongsFlowable(
+                SongLoader.makeSongCursor(
+                        context, null, null,
+                        getSongLoaderSortOrder())
         )
 
         return splitIntoAlbumsFlowable(songs)
     }
 
-    fun getAlbumsFlowable(context: Context, query: String): Observable<ArrayList<Album>> {
-        val songs = SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
-                context,
-                AudioColumns.ALBUM + " LIKE ?",
-                arrayOf("%$query%"),
-                getSongLoaderSortOrder())
+    fun getAlbumsFlowable(
+            context: Context,
+            query: String
+    ): Observable<ArrayList<Album>> {
+        val songs = SongLoader.getSongsFlowable(
+                SongLoader.makeSongCursor(
+                        context,
+                        AudioColumns.ALBUM + " LIKE ?",
+                        arrayOf("%$query%"),
+                        getSongLoaderSortOrder())
         )
         return splitIntoAlbumsFlowable(songs)
     }
@@ -68,7 +73,14 @@ object AlbumLoader {
             albumId: Int
     ): Observable<Album> {
         return Observable.create { e ->
-            val songs = SongLoader.getSongsFlowable(SongLoader.makeSongCursor(context, AudioColumns.ALBUM_ID + "=?", arrayOf(albumId.toString()), getSongLoaderSortOrder()))
+            val songs = SongLoader.getSongsFlowable(
+                    SongLoader.makeSongCursor(
+                            context,
+                            AudioColumns.ALBUM_ID + "=?",
+                            arrayOf(albumId.toString()),
+                            getSongLoaderSortOrder()
+                    )
+            )
             songs.subscribe { songs1 ->
                 e.onNext(Album(songs1))
                 e.onComplete()
@@ -114,9 +126,10 @@ object AlbumLoader {
     fun getAllAlbums(
             context: Context
     ): ArrayList<Album> {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
-                context, null, null,
-                getSongLoaderSortOrder())
+        val songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                        context, null, null,
+                        getSongLoaderSortOrder())
         )
 
         return splitIntoAlbums(songs)
@@ -178,7 +191,6 @@ object AlbumLoader {
 
     private fun getSongLoaderSortOrder(): String {
         return PreferenceUtil.getInstance().albumSortOrder + ", " +
-                //PreferenceUtil.getInstance().getAlbumSongSortOrder() + "," +
                 PreferenceUtil.getInstance().albumDetailSongSortOrder
     }
 }

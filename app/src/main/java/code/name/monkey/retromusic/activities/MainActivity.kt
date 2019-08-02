@@ -55,7 +55,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         return contentView
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(
+            savedInstanceState: Bundle?
+    ) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
@@ -64,11 +66,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         getBottomNavigationView().setOnNavigationItemSelectedListener {
             PreferenceUtil.getInstance().lastPage = it.itemId
             selectedFragment(it.itemId)
-
             true
-
         }
-
 
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance().lastPage)

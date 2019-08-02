@@ -57,9 +57,7 @@ public class AutoMusicProvider {
     private static final int PATH_SEGMENT_ID = 0;
     private static final int PATH_SEGMENT_TITLE = 1;
     private static final int PATH_SEGMENT_ARTIST = 2;
-    private static final int PATH_SEGMENT_ALBUM_ID = 3;
 
-    private WeakReference<MusicService> mMusicService;
 
     // Categorized caches for music data
     private ConcurrentMap<Integer, Uri> mMusicListByHistory;

@@ -24,8 +24,11 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class BottomNavigationBarTinted @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-        BottomNavigationView(context, attrs, defStyleAttr) {
+class BottomNavigationBarTinted @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
         labelVisibilityMode = PreferenceUtil.getInstance().tabTitleMode

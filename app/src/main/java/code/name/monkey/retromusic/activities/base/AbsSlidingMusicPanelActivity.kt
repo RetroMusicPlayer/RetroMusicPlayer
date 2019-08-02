@@ -169,7 +169,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             slidingLayout.panelHeight = 0
             collapsePanel()
         } else {
-            if (!MusicPlayerRemote.playingQueue.isEmpty()) {
+            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 slidingLayout.panelHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
             }
         }
