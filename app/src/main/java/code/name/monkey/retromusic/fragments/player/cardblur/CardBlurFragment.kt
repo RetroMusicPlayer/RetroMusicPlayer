@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import kotlinx.android.synthetic.main.fragment_card_blur_player.*
 
-class CardBlurFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class CardBlurFragment : AbsPlayerFragment()  {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }

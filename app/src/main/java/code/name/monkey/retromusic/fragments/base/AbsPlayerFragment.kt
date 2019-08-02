@@ -25,23 +25,30 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.*
 import code.name.monkey.retromusic.views.FitSystemWindowsLayout
+import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.Subject
 import java.io.FileNotFoundException
 
-abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItemClickListener, PaletteColorHolder, PlayerAlbumCoverFragment.Callbacks {
+abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
+        Toolbar.OnMenuItemClickListener,
+        PaletteColorHolder,
+        PlayerAlbumCoverFragment.Callbacks {
+
     var callbacks: Callbacks? = null
         private set
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
     private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
-    override fun onAttach(context: Context) {
+    override fun onAttach(
+            context: Context
+    ) {
         super.onAttach(context)
         try {
             callbacks = context as Callbacks?
         } catch (e: ClassCastException) {
             throw RuntimeException(context.javaClass.simpleName + " must implement " + Callbacks::class.java.simpleName)
         }
-
     }
 
     override fun onDetach() {
@@ -49,7 +56,9 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
         callbacks = null
     }
 
-    override fun onMenuItemClick(item: MenuItem): Boolean {
+    override fun onMenuItemClick(
+            item: MenuItem
+    ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
             R.id.action_toggle_favorite -> {
@@ -178,27 +187,20 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
             updateIsFavoriteTask!!.cancel(false)
         }
         updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean? {
-                val activity = activity
-                return if (activity != null) {
-                    MusicUtil.isFavorite(activity, params[0])
-                } else {
-                    cancel(false)
-                    null
-                }
+            override fun doInBackground(vararg params: Song): Boolean {
+                return MusicUtil.isFavorite(requireActivity(), params[0])
             }
 
-            override fun onPostExecute(isFavorite: Boolean?) {
-                val activity = activity
-                if (activity != null) {
-                    val res = if (isFavorite!!)
-                        R.drawable.ic_favorite_white_24dp
-                    else
-                        R.drawable.ic_favorite_border_white_24dp
-                    val drawable = RetroUtil.getTintedVectorDrawable(activity, res, toolbarIconColor())
-                    if (playerToolbar().menu.findItem(R.id.action_toggle_favorite) != null)
-                        playerToolbar().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
-                }
+            override fun onPostExecute(isFavorite: Boolean) {
+                val res = if (isFavorite)
+                    R.drawable.ic_favorite_white_24dp
+                else
+                    R.drawable.ic_favorite_border_white_24dp
+
+                val drawable = RetroUtil.getTintedVectorDrawable(requireContext(), res, toolbarIconColor())
+                if (playerToolbar().menu.findItem(R.id.action_toggle_favorite) != null)
+                    playerToolbar().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
+
             }
         }.execute(MusicPlayerRemote.currentSong)
     }
@@ -246,18 +248,12 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setBackgroundColor(ThemeStore.primaryColor(requireActivity()))
-        if (PreferenceUtil.getInstance().fullScreenMode && view.findViewById<View>(R.id.status_bar) != null) {
+        if (PreferenceUtil.getInstance().fullScreenMode &&
+                view.findViewById<View>(R.id.status_bar) != null) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
-        playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playerAlbumCoverFragment = requireFragmentManager().findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
         playerAlbumCoverFragment?.setCallbacks(this)
-    }
-
-    fun setSafeArea(safeArea: View) {
-        val layout = safeArea.findViewById<FitSystemWindowsLayout>(R.id.safeArea)
-        if (layout != null) {
-            layout.isFit = !PreferenceUtil.getInstance().fullScreenMode
-        }
     }
 
     interface Callbacks {
@@ -278,5 +274,4 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(), Toolbar.OnMenuItem
                 MusicUtil.getReadableDurationString(duration)
         )
     }
-
 }

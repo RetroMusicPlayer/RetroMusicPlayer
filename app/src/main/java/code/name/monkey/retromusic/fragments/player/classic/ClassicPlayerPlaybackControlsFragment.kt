@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -46,7 +47,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
-        volumeFragment?.setTintableColor(ColorUtil.stripAlpha(lastPlaybackControlsColor))
+        volumeFragment?.setTintableColor(lastPlaybackControlsColor.ripAlpha())
 
         updateRepeatState()
         updateShuffleState()

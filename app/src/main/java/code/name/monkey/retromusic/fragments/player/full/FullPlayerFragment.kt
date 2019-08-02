@@ -29,7 +29,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_full.*
 
-class FullPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks, MusicProgressViewUpdateHelper.Callback {
+class FullPlayerFragment : AbsPlayerFragment() , MusicProgressViewUpdateHelper.Callback {
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView

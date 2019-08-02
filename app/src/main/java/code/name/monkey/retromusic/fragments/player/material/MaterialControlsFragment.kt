@@ -24,6 +24,17 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.nextButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.previousButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.shuffleButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.text
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.title
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -111,7 +122,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         }.ripAlpha()
 
         text.setTextColor(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, false)
 
         volumeFragment?.setTintable(colorFinal)
 

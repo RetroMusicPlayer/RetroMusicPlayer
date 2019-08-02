@@ -62,15 +62,13 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
 
     private fun hideVolumeIfAvailable() {
         if (PreferenceUtil.getInstance().volumeToggle) {
-            childFragmentManager.beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
-            childFragmentManager.executePendingTransactions()
-
-            volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+            requireFragmentManager().beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
+            requireFragmentManager().executePendingTransactions()
+            volumeFragment = requireFragmentManager().findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 
     companion object {
         const val SLIDER_ANIMATION_TIME: Long = 400
-        const val VOLUME_FRAGMENT: String = "volume_fragment"
     }
 }

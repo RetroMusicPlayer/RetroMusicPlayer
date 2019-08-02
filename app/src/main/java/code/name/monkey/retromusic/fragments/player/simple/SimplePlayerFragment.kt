@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_simple_player.*
  * @author Hemanth S (h4h13).
  */
 
-class SimplePlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class SimplePlayerFragment : AbsPlayerFragment()  {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }

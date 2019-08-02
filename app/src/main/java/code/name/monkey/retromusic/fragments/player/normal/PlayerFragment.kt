@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
 
 
-class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class PlayerFragment : AbsPlayerFragment()  {
 
     private var lastColor: Int = 0
     override val paletteColor: Int
@@ -72,7 +72,6 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
         if (PreferenceUtil.getInstance().adaptiveColor) {
             colorize(color)
         }
-
     }
 
     private fun getCutOff(): Int {
@@ -116,7 +115,8 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
 
     private fun setUpSubFragments() {
         playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-
+        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
@@ -129,7 +129,6 @@ class PlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
 
     override fun onServiceConnected() {
         updateIsFavorite()
-
     }
 
     override fun onPlayingMetaChanged() {

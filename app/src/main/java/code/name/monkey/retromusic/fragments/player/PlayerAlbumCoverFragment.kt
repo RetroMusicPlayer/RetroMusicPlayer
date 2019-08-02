@@ -135,7 +135,5 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     companion object {
         val TAG: String = PlayerAlbumCoverFragment::class.java.simpleName
-
-
     }
 }

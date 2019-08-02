@@ -10,18 +10,22 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.DecelerateInterpolator
+import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.*
 import kotlinx.android.synthetic.main.fragment_mini_player.*
+import kotlin.math.abs
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         actionPlayingQueue.setOnClickListener(this)
         actionNext.setOnClickListener(this)
         actionPrevious.setOnClickListener(this)
+
     }
 
     private fun setUpMiniPlayer() {
@@ -91,12 +96,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onServiceConnected() {
         updateSongTitle()
         updatePlayPauseDrawableState()
-        updateIsFavorite()
+        //updateIsFavorite()
     }
 
     override fun onPlayingMetaChanged() {
         updateSongTitle()
-        updateIsFavorite()
+        //updateIsFavorite()
     }
 
     override fun onPlayStateChanged() {
@@ -113,12 +118,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper.stop()
     }
 
     protected fun updatePlayPauseDrawableState() {
@@ -138,7 +143,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
                     object : GestureDetector.SimpleOnGestureListener() {
                         override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float,
                                              velocityY: Float): Boolean {
-                            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                            if (abs(velocityX) > abs(velocityY)) {
                                 if (velocityX < 0) {
                                     MusicPlayerRemote.playNextSong()
                                     return true
@@ -158,6 +163,13 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         }
     }
 
+    fun toggleFavorite(song: Song) {
+        MusicUtil.toggleFavorite(requireActivity(), song)
+        if (song.id == MusicPlayerRemote.currentSong.id) {
+            //updateIsFavorite()
+        }
+    }
+
     private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
 
     @SuppressLint("StaticFieldLeak")
@@ -166,18 +178,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             updateIsFavoriteTask!!.cancel(false)
         }
         updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean? {
-                val activity = activity
-                return if (activity != null) {
-                    MusicUtil.isFavorite(requireActivity(), params[0])
-                } else {
-                    cancel(false)
-                    null
-                }
+            override fun doInBackground(vararg params: Song): Boolean {
+                return MusicUtil.isFavorite(requireActivity(), params[0])
             }
 
-            override fun onPostExecute(isFavorite: Boolean?) {
-                val res = if (isFavorite!!)
+            override fun onPostExecute(isFavorite: Boolean) {
+                val res = if (isFavorite)
                     R.drawable.ic_favorite_white_24dp
                 else
                     R.drawable.ic_favorite_border_white_24dp

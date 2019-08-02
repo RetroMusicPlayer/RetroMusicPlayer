@@ -159,7 +159,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         }
         mainActivity.setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY) }
+        toolbar.setNavigationOnClickListener { showMainMenu(OptionsSheetDialogFragment.LIBRARY) }
     }
 
     override fun handleBackPress(): Boolean {

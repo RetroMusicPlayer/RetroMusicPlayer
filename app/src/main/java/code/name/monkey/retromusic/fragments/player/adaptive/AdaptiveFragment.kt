@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
-class AdaptiveFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks, MusicProgressViewUpdateHelper.Callback {
+class AdaptiveFragment : AbsPlayerFragment(),  MusicProgressViewUpdateHelper.Callback {
 
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView

@@ -8,22 +8,23 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import kotlinx.android.synthetic.main.fragment_material.*
 
 /**
  * @author Hemanth S (h4h13).
  */
-class MaterialFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class MaterialFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 
     private var lastColor: Int = 0
+
     override val paletteColor: Int
         get() = lastColor
 

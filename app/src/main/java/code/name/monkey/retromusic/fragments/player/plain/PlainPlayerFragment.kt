@@ -14,7 +14,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import kotlinx.android.synthetic.main.fragment_plain_player.*
 
-class PlainPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class PlainPlayerFragment : AbsPlayerFragment()  {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
