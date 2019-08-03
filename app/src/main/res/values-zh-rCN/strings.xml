@@ -85,7 +85,7 @@
     <string name="action_shuffle_all">随机播放全部</string>
     <string name="action_shuffle_playlist">随机播放列表</string>
     <string name="action_sleep_timer">睡眠定时器</string>
-    <string name="carousal">Carousel</string>
+    <string name="carousal">转盘</string>
     <string name="action_sort_order">排序</string>
     <string name="action_tag_editor">标签编辑器</string>
     <string name="adaptive">自适应</string>
