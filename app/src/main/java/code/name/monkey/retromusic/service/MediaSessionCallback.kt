@@ -20,11 +20,12 @@ import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
 import code.name.monkey.retromusic.helper.ShuffleHelper
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore
-import code.name.monkey.retromusic.service.MusicService.TOGGLE_FAVORITE
+import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
 import java.util.*
 
@@ -125,16 +126,15 @@ class MediaSessionCallback(private val context: Context,
 
     override fun onCustomAction(action: String, extras: Bundle?) {
         when (action) {
-            /*  CYCLE_REPEAT -> {
-                  cycleRepeatMode()
-                  musicService.updateMediaSessionPlaybackState()
-              }
+            CYCLE_REPEAT -> {
+                cycleRepeatMode()
+                musicService.updateMediaSessionPlaybackState()
+            }
 
-              TOGGLE_SHUFFLE -> {
-                  musicService.toggleShuffle()
-                  musicService.updateMediaSessionPlaybackState()
-              }
-  */
+            TOGGLE_SHUFFLE -> {
+                musicService.toggleShuffle()
+                musicService.updateMediaSessionPlaybackState()
+            }
             TOGGLE_FAVORITE -> {
                 MusicUtil.toggleFavorite(context, MusicPlayerRemote.currentSong)
                 musicService.updateMediaSessionPlaybackState()

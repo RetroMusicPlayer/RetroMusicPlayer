@@ -153,13 +153,13 @@ class PlayingNotificationOreo : PlayingNotification() {
                             val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
 
                             val close = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_close_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
                             val playPause = createBitmap(RetroUtil.getTintedVectorDrawable(service,
                                     if (isPlaying)
-                                        R.drawable.ic_pause_white_24dp
+                                        R.drawable.ic_pause_white_48dp
                                     else
-                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                                        R.drawable.ic_play_arrow_white_48dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
 
                             notificationLayout.setTextColor(R.id.title, primary)
                             notificationLayout.setTextColor(R.id.subtitle, secondary)

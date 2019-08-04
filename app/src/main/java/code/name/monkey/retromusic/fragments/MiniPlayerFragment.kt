@@ -52,6 +52,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         //view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer()
 
+        miniPlayerImage.setOnClickListener {
+            toggleFavorite(MusicPlayerRemote.currentSong)
+        }
+
         if (RetroUtil.isTablet()) {
             actionNext.visibility = View.VISIBLE
             actionPrevious.visibility = View.VISIBLE
@@ -96,12 +100,12 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onServiceConnected() {
         updateSongTitle()
         updatePlayPauseDrawableState()
-        //updateIsFavorite()
+        updateIsFavorite()
     }
 
     override fun onPlayingMetaChanged() {
         updateSongTitle()
-        //updateIsFavorite()
+        updateIsFavorite()
     }
 
     override fun onPlayStateChanged() {
@@ -166,7 +170,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     fun toggleFavorite(song: Song) {
         MusicUtil.toggleFavorite(requireActivity(), song)
         if (song.id == MusicPlayerRemote.currentSong.id) {
-            //updateIsFavorite()
+            updateIsFavorite()
         }
     }
 
