@@ -211,6 +211,12 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         }
     };
     private PlayingNotification playingNotification;
+    private final BroadcastReceiver updateFavoriteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            updateNotification();
+        }
+    };
     private AudioManager audioManager;
     private MediaSessionCompat mediaSession;
     private PowerManager.WakeLock wakeLock;
@@ -324,6 +330,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         uiThreadHandler = new Handler();
 
         registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE));
+        registerReceiver(updateFavoriteReceiver, new IntentFilter(FAVORITE_STATE_CHANGED));
 
         initNotification();
 
@@ -698,13 +705,13 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         if (getRepeatMode() == REPEAT_MODE_THIS) {
             repeatIcon = R.drawable.ic_repeat_one_white_24dp;
         } else if (getRepeatMode() == REPEAT_MODE_ALL) {
-            repeatIcon = R.drawable.ic_repeat_white_24dp;
+            repeatIcon = R.drawable.ic_repeat_white_circle_24dp;
         }
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
                 .build());
 
-        final int shuffleIcon = getShuffleMode() == SHUFFLE_MODE_NONE ? R.drawable.ic_shuffle_white_24dp : R.drawable.ic_shuffle_white_24dp;
+        final int shuffleIcon = getShuffleMode() == SHUFFLE_MODE_NONE ? R.drawable.ic_shuffle_off_circled : R.drawable.ic_shuffle_on_circled;
         stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
                 TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
                 .build());
@@ -1189,6 +1196,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying);
                 break;
+            case FAVORITE_STATE_CHANGED:
             case META_CHANGED:
                 updateNotification();
                 updateMediaSessionMetaData();

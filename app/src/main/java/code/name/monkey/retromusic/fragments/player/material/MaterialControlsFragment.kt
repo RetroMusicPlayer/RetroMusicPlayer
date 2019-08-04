@@ -23,7 +23,6 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.nextButton
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.playPauseButton
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.previousButton
@@ -34,7 +33,6 @@ import kotlinx.android.synthetic.main.fragment_material_playback_controls.songCu
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.songTotalTime
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.text
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.title
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -140,7 +138,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_big);
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_64dp);
         } else {
             playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp);
         }

@@ -187,7 +187,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="?attr/roundSelector"
-            app:srcCompat="@drawable/ic_pause_white_big"
+            app:srcCompat="@drawable/ic_pause_white_64dp"
             tools:tint="@color/md_black_1000" />
 
     </RelativeLayout>

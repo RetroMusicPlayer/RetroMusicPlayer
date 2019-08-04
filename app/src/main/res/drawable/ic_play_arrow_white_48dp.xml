@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -14,13 +13,12 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
+    android:width="48dp"
+    android:height="48dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
 
     <path
         android:fillColor="@color/md_white_1000"
-        android:fillType="evenOdd"
-        android:pathData="M17 6H15V18H17V6ZM15 4H13V6V18V20H15H17H19V18V6V4H17H15ZM8 6H6V18H8V6ZM6 4H4V6V18V20H6H8H10V18V6V4H8H6Z" />
+        android:pathData="M8 6.82v10.36c0 0.79 0.87 1.27 1.54 0.84 l8.14-5.18c0.62-0.39 0.62 -1.29 0-1.69L9.54 5.98C8.87 5.55 8 6.03 8 6.82z" />
 </vector>

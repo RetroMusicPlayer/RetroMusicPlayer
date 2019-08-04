@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaDescriptionCompat;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
@@ -314,7 +315,9 @@ public class AutoMusicProvider {
         }
     }
 
-    public List<MediaBrowserCompat.MediaItem> getChildren(String mediaId, Resources resources) {
+    @Nullable
+    public List<MediaBrowserCompat.MediaItem> getChildren(@NonNull String mediaId,
+                                                          @NonNull Resources resources) {
         List<MediaBrowserCompat.MediaItem> mediaItems = new ArrayList<>();
 
         if (!AutoMediaIDHelper.isBrowseable(mediaId)) {
@@ -325,28 +328,33 @@ public class AutoMusicProvider {
             case AutoMediaIDHelper.MEDIA_ID_ROOT:
                 //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY, resources.getString(R.string.history_label), R.drawable.ic_access_time_white_24dp));
                 //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS, resources.getString(R.string.top_tracks_label), R.drawable.ic_trending_up_white_24dp));
-                //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST, resources.getString(R.string.playlists_label), R.drawable.ic_queue_music_white_24dp));
+
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM,
-                                resources.getString(R.string.albums_label),
-                                R.drawable.ic_album_white_24dp));
+                                resources.getString(R.string.albums_label)
+                        ));
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST,
-                                resources.getString(R.string.artists_label),
-                                R.drawable.ic_artist_white_24dp));
+                                resources.getString(R.string.artists_label)
+                        ));
+                mediaItems.add(
+                        createBrowsableMediaItem(
+                                AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST,
+                                resources.getString(R.string.playlists_label)
+                        ));
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE,
-                                resources.getString(R.string.genres_label),
-                                R.drawable.ic_guitar_acoustic_white_24dp));
-                mediaItems.add(
+                                resources.getString(R.string.genres_label)
+                        ));
+               /* mediaItems.add(
                         createPlayableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE,
                                 resources.getString(R.string.action_shuffle_all),
                                 R.drawable.ic_shuffle_white_24dp,
-                                ""));
+                                ""));*/
                 //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE, resources.getString(R.string.queue_label), R.drawable.ic_playlist_play_white_24dp));
                 break;
 
@@ -386,7 +394,6 @@ public class AutoMusicProvider {
                 break;
 
             case AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE:
-                // TODO: auto scroll to current track, indicate that it's playing
                 for (final Uri uri : getQueue()) {
                     mediaItems.add(createPlayableMediaItem(mediaId, uri, uri.getPathSegments().get(PATH_SEGMENT_TITLE), uri.getPathSegments().get(PATH_SEGMENT_ARTIST)));
                 }
@@ -396,7 +403,7 @@ public class AutoMusicProvider {
         return mediaItems;
     }
 
-    private MediaBrowserCompat.MediaItem createBrowsableMediaItem(String mediaId, String title, int iconDrawableId) {
+    private MediaBrowserCompat.MediaItem createBrowsableMediaItem(String mediaId, String title) {
         MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder();
         builder.setMediaId(mediaId)
                 .setTitle(title);

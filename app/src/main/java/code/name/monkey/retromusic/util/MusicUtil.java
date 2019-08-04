@@ -51,6 +51,7 @@ import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
+import code.name.monkey.retromusic.service.MusicService;
 
 
 public class MusicUtil {
@@ -408,6 +409,7 @@ public class MusicUtil {
             PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).id,
                     false);
         }
+        context.sendBroadcast(new Intent(MusicService.FAVORITE_STATE_CHANGED));
     }
 
     public static boolean isFavoritePlaylist(@NonNull final Context context,

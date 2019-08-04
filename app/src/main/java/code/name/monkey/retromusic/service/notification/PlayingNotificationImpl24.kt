@@ -24,6 +24,7 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
 import androidx.core.app.NotificationCompat
+import androidx.media.app.NotificationCompat.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.glide.GlideApp
@@ -48,9 +49,9 @@ class PlayingNotificationImpl24 : PlayingNotification() {
         val isPlaying = service.isPlaying
         val isFavorite = MusicUtil.isFavorite(service, song)
         val playButtonResId = if (isPlaying)
-            R.drawable.ic_pause_white_24dp
+            R.drawable.ic_pause_white_48dp
         else
-            R.drawable.ic_play_arrow_white_32dp
+            R.drawable.ic_play_arrow_white_48dp
 
         val favoriteResId = if (isFavorite)
             R.drawable.ic_favorite_white_24dp
@@ -114,12 +115,12 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                     retrievePlaybackAction(ACTION_QUIT))
 
                             val previousAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_previous_white_24dp,
+                                    R.drawable.ic_skip_previous_round_white_32dp,
                                     service.getString(R.string.action_previous),
                                     retrievePlaybackAction(ACTION_REWIND))
 
                             val nextAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_next_white_24dp,
+                                    R.drawable.ic_skip_next_round_white_32dp,
                                     service.getString(R.string.action_next),
                                     retrievePlaybackAction(ACTION_SKIP))
 
@@ -134,15 +135,16 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                     .setSubText(Html.fromHtml("<b>" + song.albumName + "</b>"))
                                     .setOngoing(isPlaying)
                                     .setShowWhen(false)
+                                    .addAction(toggleFavorite)
                                     .addAction(previousAction)
                                     .addAction(playPauseAction)
                                     .addAction(nextAction)
                                     .addAction(closeAction)
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                builder.setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                                builder.setStyle(MediaStyle()
                                         .setMediaSession(service.mediaSession.sessionToken)
-                                        .setShowActionsInCompactView(0, 1, 2, 3, 4))
+                                        .setShowActionsInCompactView( 1, 2, 3))
                                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance().coloredNotification()) {
                                     builder.color = color
