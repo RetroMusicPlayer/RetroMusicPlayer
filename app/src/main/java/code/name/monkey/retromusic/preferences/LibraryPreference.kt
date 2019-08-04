@@ -61,7 +61,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         val categoryInfos: List<CategoryInfo>
         if (savedInstanceState != null) {
-            categoryInfos = savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)
+            categoryInfos = savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
         } else {
             categoryInfos = PreferenceUtil.getInstance().libraryCategoryInfos
         }

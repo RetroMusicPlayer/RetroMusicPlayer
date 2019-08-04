@@ -30,14 +30,16 @@ class RemoveFromPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val songs = arguments!!.getParcelableArrayList<PlaylistSong>("songs")
 
-        val title: Int
-        val content: CharSequence
-        if (songs.size > 1) {
-            title = R.string.remove_songs_from_playlist_title
-            content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_x_songs_from_playlist, songs.size))
-        } else {
-            title = R.string.remove_song_from_playlist_title
-            content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_song_x_from_playlist, songs[0].title))
+        var title = 0
+        var content: CharSequence = ""
+        if (songs != null) {
+            if (songs.size > 1) {
+                title = R.string.remove_songs_from_playlist_title
+                content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_x_songs_from_playlist, songs.size))
+            } else {
+                title = R.string.remove_song_from_playlist_title
+                content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_song_x_from_playlist, songs[0].title))
+            }
         }
 
 

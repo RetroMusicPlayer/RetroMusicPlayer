@@ -64,8 +64,8 @@ class SongShareDialog : DialogFragment() {
      }*/
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val song: Song = arguments!!.getParcelable("song")
-        val currentlyListening: String = getString(R.string.currently_listening_to_x_by_x, song.title, song.artistName)
+        val song: Song? = arguments!!.getParcelable("song")
+        val currentlyListening: String = getString(R.string.currently_listening_to_x_by_x, song?.title, song?.artistName)
 
         return MaterialDialog(activity!!, BottomSheet())
                 .title(R.string.what_do_you_want_to_share)
@@ -73,7 +73,7 @@ class SongShareDialog : DialogFragment() {
                     listItems(items = listOf(getString(code.name.monkey.retromusic.R.string.the_audio_file), "\u201C" + currentlyListening + "\u201D")) { dialog, index, text ->
                         when (index) {
                             0 -> {
-                                startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, context), null))
+                                startActivity(Intent.createChooser(song?.let { MusicUtil.createShareSongFileIntent(it, context) }, null))
                             }
                             1 -> {
                                 activity!!.startActivity(

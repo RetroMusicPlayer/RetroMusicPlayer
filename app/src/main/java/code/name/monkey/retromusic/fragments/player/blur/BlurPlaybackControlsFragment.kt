@@ -117,13 +117,13 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(requireContext())
-        }.ripAlpha()
+            ThemeStore.textColorSecondary(requireContext())
+        }
 
         text.setTextColor(colorFinal)
-        TintHelper.setTintAuto(progressSlider, colorFinal, false)
+        TintHelper.setTintAuto(progressSlider, colorFinal.ripAlpha(), false)
         volumeFragment?.setTintableColor(Color.WHITE)
-        setFabColor(colorFinal)
+        setFabColor(colorFinal.ripAlpha())
     }
 
     private fun setFabColor(i: Int) {

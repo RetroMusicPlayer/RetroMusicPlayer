@@ -101,8 +101,9 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!).ripAlpha()
-        }
+            ThemeStore.accentColor(context!!)
+        }.ripAlpha()
+
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
