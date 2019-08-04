@@ -32,19 +32,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
-import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.AlbumLoader;
 import code.name.monkey.retromusic.loaders.ArtistLoader;
+import code.name.monkey.retromusic.loaders.GenreLoader;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
 import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.service.MusicService;
-import code.name.monkey.retromusic.util.ImageUtil;
 
 /**
  * Created by Beesham Sarendranauth (Beesham)
@@ -57,7 +57,10 @@ public class AutoMusicProvider {
     private static final int PATH_SEGMENT_ID = 0;
     private static final int PATH_SEGMENT_TITLE = 1;
     private static final int PATH_SEGMENT_ARTIST = 2;
+    private static final int PATH_SEGMENT_GENRE = 4;
+    private static final int PATH_SEGMENT_ALBUM_ID = 5;
 
+    private WeakReference<MusicService> mMusicService;
 
     // Categorized caches for music data
     private ConcurrentMap<Integer, Uri> mMusicListByHistory;
@@ -65,6 +68,7 @@ public class AutoMusicProvider {
     private ConcurrentMap<Integer, Uri> mMusicListByPlaylist;
     private ConcurrentMap<Integer, Uri> mMusicListByAlbum;
     private ConcurrentMap<Integer, Uri> mMusicListByArtist;
+    private ConcurrentMap<Integer, Uri> mMusicListByGenre;
 
     private Uri defaultAlbumArtUri;
 
@@ -79,10 +83,15 @@ public class AutoMusicProvider {
         mMusicListByPlaylist = new ConcurrentSkipListMap<>();
         mMusicListByAlbum = new ConcurrentSkipListMap<>();
         mMusicListByArtist = new ConcurrentSkipListMap<>();
+        mMusicListByGenre = new ConcurrentSkipListMap<>();
 
         defaultAlbumArtUri = Uri.parse("android.resource://" +
                 mContext.getPackageName() + "/drawable/" +
                 mContext.getResources().getResourceEntryName(R.drawable.default_album_art));
+    }
+
+    public void setMusicService(MusicService service) {
+        mMusicService = new WeakReference<>(service);
     }
 
     public Iterable<Uri> getHistory() {
@@ -120,6 +129,13 @@ public class AutoMusicProvider {
         return mMusicListByArtist.values();
     }
 
+    public Iterable<Uri> getGenres() {
+        if (mCurrentState != State.INITIALIZED) {
+            return Collections.emptyList();
+        }
+        return mMusicListByGenre.values();
+    }
+
     public Iterable<Uri> getQueue() {
         if (mCurrentState != State.INITIALIZED) {
             return Collections.emptyList();
@@ -128,8 +144,9 @@ public class AutoMusicProvider {
         // Re-built every time since the queue updates often
         ConcurrentMap<Integer, Uri> queueList = new ConcurrentSkipListMap<>();
 
-        if (mContext != null) {
-            final List<Song> songs = MusicPlaybackQueueStore.getInstance(mContext).getSavedOriginalPlayingQueue();
+        final MusicService service = mMusicService.get();
+        if (service != null) {
+            final List<Song> songs = MusicPlaybackQueueStore.getInstance(service).getSavedOriginalPlayingQueue();
             for (int i = 0; i < songs.size(); i++) {
                 final Song s = songs.get(i);
                 Uri.Builder topTracksData = Uri.parse(BASE_URI).buildUpon();
@@ -260,6 +277,21 @@ public class AutoMusicProvider {
         mMusicListByArtist = newMusicListByArtist;
     }
 
+    private synchronized void buildListsByGenre() {
+        ConcurrentMap<Integer, Uri> newMusicListByGenre = new ConcurrentSkipListMap<>();
+
+        final List<Genre> genres = GenreLoader.INSTANCE.getAllGenres(mContext);
+        for (int i = 0; i < genres.size(); i++) {
+            final Genre p = genres.get(i);
+            Uri.Builder playlistData = Uri.parse(BASE_URI).buildUpon();
+            playlistData.appendPath(String.valueOf(p.getId()))
+                    .appendPath(p.getName());
+            newMusicListByGenre.putIfAbsent(i, playlistData.build());
+        }
+
+        mMusicListByGenre = newMusicListByGenre;
+    }
+
     private synchronized void retrieveMedia() {
         try {
             if (mCurrentState == State.NON_INITIALIZED) {
@@ -270,6 +302,7 @@ public class AutoMusicProvider {
                 buildListsByPlaylist();
                 buildListsByAlbum();
                 buildListsByArtist();
+                buildListsByGenre();
                 mCurrentState = State.INITIALIZED;
             }
         } finally {
@@ -290,13 +323,31 @@ public class AutoMusicProvider {
 
         switch (mediaId) {
             case AutoMediaIDHelper.MEDIA_ID_ROOT:
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY, resources.getString(R.string.history_label), R.drawable.ic_access_time_white_24dp));
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS, resources.getString(R.string.top_tracks_label), R.drawable.ic_trending_up_white_24dp));
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST, resources.getString(R.string.playlists_label), R.drawable.ic_queue_music_white_24dp));
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM, resources.getString(R.string.albums_label), R.drawable.ic_album_white_24dp));
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST, resources.getString(R.string.artists_label), R.drawable.ic_artist_white_24dp));
-                mediaItems.add(createPlayableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE, resources.getString(R.string.action_shuffle_all), R.drawable.ic_shuffle_white_24dp, null));
-                mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE, resources.getString(R.string.queue_label), R.drawable.ic_playlist_play_white_24dp));
+                //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY, resources.getString(R.string.history_label), R.drawable.ic_access_time_white_24dp));
+                //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS, resources.getString(R.string.top_tracks_label), R.drawable.ic_trending_up_white_24dp));
+                //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST, resources.getString(R.string.playlists_label), R.drawable.ic_queue_music_white_24dp));
+                mediaItems.add(
+                        createBrowsableMediaItem(
+                                AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM,
+                                resources.getString(R.string.albums_label),
+                                R.drawable.ic_album_white_24dp));
+                mediaItems.add(
+                        createBrowsableMediaItem(
+                                AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST,
+                                resources.getString(R.string.artists_label),
+                                R.drawable.ic_artist_white_24dp));
+                mediaItems.add(
+                        createBrowsableMediaItem(
+                                AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE,
+                                resources.getString(R.string.genres_label),
+                                R.drawable.ic_guitar_acoustic_white_24dp));
+                mediaItems.add(
+                        createPlayableMediaItem(
+                                AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE,
+                                resources.getString(R.string.action_shuffle_all),
+                                R.drawable.ic_shuffle_white_24dp,
+                                ""));
+                //mediaItems.add(createBrowsableMediaItem(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE, resources.getString(R.string.queue_label), R.drawable.ic_playlist_play_white_24dp));
                 break;
 
             case AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY:
@@ -328,6 +379,11 @@ public class AutoMusicProvider {
                     mediaItems.add(createPlayableMediaItem(mediaId, uri, uri.getPathSegments().get(PATH_SEGMENT_ARTIST), null));
                 }
                 break;
+            case AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE:
+                for (final Uri uri : getGenres()) {
+                    mediaItems.add(createPlayableMediaItem(mediaId, uri, uri.getPathSegments().get(PATH_SEGMENT_TITLE), null));
+                }
+                break;
 
             case AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE:
                 // TODO: auto scroll to current track, indicate that it's playing
@@ -343,21 +399,25 @@ public class AutoMusicProvider {
     private MediaBrowserCompat.MediaItem createBrowsableMediaItem(String mediaId, String title, int iconDrawableId) {
         MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder();
         builder.setMediaId(mediaId)
-                .setTitle(title)
-                .setIconBitmap(ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(mContext, iconDrawableId, ThemeStore.Companion.textColorSecondary(mContext))));
+                .setTitle(title);
 
         return new MediaBrowserCompat.MediaItem(builder.build(),
                 MediaBrowserCompat.MediaItem.FLAG_BROWSABLE);
     }
 
-    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId, Uri musicSelection,
-                                                                 String title, @Nullable String subtitle) {
+    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId,
+                                                                 Uri musicSelection,
+                                                                 String title,
+                                                                 @Nullable String subtitle) {
         return createPlayableMediaItem(mediaId, musicSelection, title, subtitle, null, null);
     }
 
-    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId, Uri musicSelection,
-                                                                 String title, @Nullable String subtitle,
-                                                                 @Nullable Bitmap albumArt, @Nullable Resources resources) {
+    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId,
+                                                                 Uri musicSelection,
+                                                                 String title,
+                                                                 @Nullable String subtitle,
+                                                                 @Nullable Bitmap albumArt,
+                                                                 @Nullable Resources resources) {
         MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder();
         builder.setMediaId(AutoMediaIDHelper.createMediaID(musicSelection.getPathSegments().get(PATH_SEGMENT_ID), mediaId))
                 .setTitle(title);
@@ -378,12 +438,13 @@ public class AutoMusicProvider {
                 MediaBrowserCompat.MediaItem.FLAG_PLAYABLE);
     }
 
-    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId, String title, int iconDrawableId,
+    private MediaBrowserCompat.MediaItem createPlayableMediaItem(String mediaId,
+                                                                 String title,
+                                                                 int iconDrawableId,
                                                                  @Nullable String subtitle) {
         MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder()
                 .setMediaId(mediaId)
-                .setTitle(title)
-                .setIconBitmap(ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(mContext, iconDrawableId, ThemeStore.Companion.textColorSecondary(mContext))));
+                .setTitle(title);
 
         if (subtitle != null) {
             builder.setSubtitle(subtitle);

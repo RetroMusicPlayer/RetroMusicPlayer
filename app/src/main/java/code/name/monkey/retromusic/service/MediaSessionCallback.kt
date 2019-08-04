@@ -92,6 +92,10 @@ class MediaSessionCallback(private val context: Context,
                 songs.addAll(playlist.getSongs(context))
                 openQueue(songs, 0, true)
             }
+            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE -> {
+                songs.addAll(GenreLoader.getSongs(context, itemId))
+                openQueue(songs, 0, true)
+            }
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE -> {

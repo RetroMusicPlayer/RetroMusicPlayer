@@ -30,6 +30,7 @@ public class AutoMediaIDHelper {
     public static final String MEDIA_ID_MUSICS_BY_PLAYLIST = "__BY_PLAYLIST__";
     public static final String MEDIA_ID_MUSICS_BY_ALBUM = "__BY_ALBUM__";
     public static final String MEDIA_ID_MUSICS_BY_ARTIST = "__BY_ARTIST__";
+    public static final String MEDIA_ID_MUSICS_BY_GENRE = "__BY_GENRE__";
     public static final String MEDIA_ID_MUSICS_BY_SHUFFLE = "__BY_SHUFFLE__";
     public static final String MEDIA_ID_MUSICS_BY_QUEUE = "__BY_QUEUE__";
 

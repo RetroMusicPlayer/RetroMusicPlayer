@@ -337,8 +337,10 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
+
         mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
         mMusicProvider = new AutoMusicProvider(this);
+
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
 
         registerHeadsetEvents();
@@ -352,19 +354,26 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     private void setupMediaSession() {
-        ComponentName mediaButtonReceiverComponentName = new ComponentName(getApplicationContext(), MediaButtonIntentReceiver.class);
+        ComponentName mediaButtonReceiverComponentName = new ComponentName(
+                getApplicationContext(),
+                MediaButtonIntentReceiver.class);
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setComponent(mediaButtonReceiverComponentName);
 
 
-        PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
+        PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
+                getApplicationContext(),
+                0,
+                mediaButtonIntent,
+                0);
 
         mediaSession = new MediaSessionCompat(this,
                 "RetroMusicPlayer",
                 mediaButtonReceiverComponentName,
                 mediaButtonReceiverPendingIntent);
-        MediaSessionCallback mediasessionCallback = new MediaSessionCallback(getApplicationContext(), this);
+        MediaSessionCallback mediasessionCallback = new MediaSessionCallback(
+                getApplicationContext(), this);
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
                 | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS
         );
@@ -418,7 +427,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             }
         }
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private void playFromPlaylist(Intent intent) {
@@ -445,21 +454,6 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         }
     }
 
-    private void playSongs(int shuffleMode, ArrayList<Song> playlistSongs) {
-        if (!playlistSongs.isEmpty()) {
-            if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
-                int startPosition;
-                startPosition = new Random().nextInt(playlistSongs.size());
-                openQueue(playlistSongs, startPosition, true);
-                setShuffleMode(shuffleMode);
-            } else {
-                openQueue(playlistSongs, 0, true);
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
-        }
-    }
-
     @Override
     public void onDestroy() {
         unregisterReceiver(widgetIntentReceiver);
@@ -478,20 +472,28 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
 
-        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_MUSIC_SERVICE_DESTROYED"));
+        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        // For Android auto, need to call super, or onGetRoot won't be called.
+        if (intent != null && "android.media.browse.MediaBrowserService".equals(intent.getAction())) {
+            return super.onBind(intent);
+        }
         return musicBind;
     }
 
     @Nullable
     @Override
     public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
+
+        // Check origin to ensure we're not allowing any arbitrary app to browse app contents
         if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
+            // Request from an untrusted package: return an empty browser root
             return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
         }
+
         return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
     }
 
@@ -686,8 +688,31 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
                 .setState(isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
                         getSongProgressMillis(), 1);
 
+        setCustomAction(stateBuilder);
 
         mediaSession.setPlaybackState(stateBuilder.build());
+    }
+
+    private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
+        int repeatIcon = R.drawable.ic_repeat_white_24dp;  // REPEAT_MODE_NONE
+        if (getRepeatMode() == REPEAT_MODE_THIS) {
+            repeatIcon = R.drawable.ic_repeat_one_white_24dp;
+        } else if (getRepeatMode() == REPEAT_MODE_ALL) {
+            repeatIcon = R.drawable.ic_repeat_white_24dp;
+        }
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
+                .build());
+
+        final int shuffleIcon = getShuffleMode() == SHUFFLE_MODE_NONE ? R.drawable.ic_shuffle_white_24dp : R.drawable.ic_shuffle_white_24dp;
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
+                .build());
+
+        final int favoriteIcon = MusicUtil.isFavorite(getApplicationContext(), getCurrentSong()) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_border_white_24dp;
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)
+                .build());
     }
 
     private void updateMediaSessionMetaData() {

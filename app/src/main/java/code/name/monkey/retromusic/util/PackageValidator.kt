@@ -11,7 +11,9 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+
 package code.name.monkey.retromusic.util
+
 
 import android.Manifest.permission.BIND_NOTIFICATION_LISTENER_SERVICE
 import android.Manifest.permission.MEDIA_CONTENT_CONTROL
@@ -45,7 +47,10 @@ import java.security.NoSuchAlgorithmException
  *
  * For more information, see res/xml/allowed_media_browser_callers.xml.
  */
-class PackageValidator(context: Context, @XmlRes xmlResId: Int) {
+class PackageValidator(
+        context: Context,
+        @XmlRes xmlResId: Int
+) {
     private val context: Context
     private val packageManager: PackageManager
 
