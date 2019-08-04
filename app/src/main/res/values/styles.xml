@@ -152,10 +152,8 @@
     </style>
 
     <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- App bg, drawer right side, notification icon badge, overview "now playing" icon -->
-        <item name="colorPrimaryDark">@color/md_deep_purple_500</item>
-
-        <!-- Spinner, progress bar, FAB -->
-        <item name="colorAccent">@color/md_deep_orange_A400</item>
+        <item name="colorPrimaryDark">@color/md_deep_purple_700</item>
+        <item name="colorAccent">@color/md_deep_purple_A400</item>
+        <item name="colorPrimary">@color/md_deep_purple_500</item>
     </style>
 </resources>

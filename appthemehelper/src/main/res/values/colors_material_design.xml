@@ -29,6 +29,7 @@
     <color name="md_deep_purple_500A12">#30673AB7</color>
     <color name="md_deep_purple_500">#673AB7</color>
     <color name="md_deep_purple_A700">#6200EA</color>
+    <color name="md_deep_purple_A200">#7C4DFF</color>
 
     <!-- Indigo -->
     <color name="md_indigo_500">#3F51B5</color>

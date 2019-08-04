@@ -110,6 +110,8 @@
         <activity android:name=".activities.GenreDetailsActivity" />
         <activity android:name=".activities.LicenseActivity" />
         <activity android:name=".activities.PurchaseActivity" />
+        <activity android:name=".activities.WhatsNewActivity" />
+        <activity android:name=".activities.bugreport.BugReportActivity" />
 
         <activity
             android:name=".activities.SearchActivity"
@@ -122,22 +124,21 @@
             android:launchMode="singleInstance"
             android:screenOrientation="portrait"
             android:theme="@style/ErrorHandlingTheme" />
-        <activity android:name=".activities.WhatsNewActivity" />
-        <activity android:name=".activities.bugreport.BugReportActivity" />
+
         <activity
             android:name=".activities.LockScreenActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:showOnLockScreen="true" />
+
         <activity
             android:name=".appshortcuts.AppShortcutLauncherActivity"
             android:launchMode="singleInstance"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
         <activity
             android:name=".activities.saf.SAFGuideActivity"
             android:theme="@style/Theme.Intro" />
-
-
 
         <provider
             android:name=".misc.GenericFileProvider"
