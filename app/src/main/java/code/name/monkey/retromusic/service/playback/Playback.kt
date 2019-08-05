@@ -12,46 +12,44 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.service.playback;
-
-import androidx.annotation.Nullable;
+package code.name.monkey.retromusic.service.playback
 
 
-public interface Playback {
+interface Playback {
 
-    boolean setDataSource(String path);
+    val isInitialized: Boolean
 
-    void setNextDataSource(@Nullable String path);
+    val isPlaying: Boolean
 
-    void setCallbacks(PlaybackCallbacks callbacks);
+    val audioSessionId: Int
 
-    boolean isInitialized();
+    fun setDataSource(path: String): Boolean
 
-    boolean start();
+    fun setNextDataSource(path: String?)
 
-    void stop();
+    fun setCallbacks(callbacks: PlaybackCallbacks)
 
-    void release();
+    fun start(): Boolean
 
-    boolean pause();
+    fun stop()
 
-    boolean isPlaying();
+    fun release()
 
-    int duration();
+    fun pause(): Boolean
 
-    int position();
+    fun duration(): Int
 
-    int seek(int whereto);
+    fun position(): Int
 
-    boolean setVolume(float vol);
+    fun seek(whereto: Int): Int
 
-    boolean setAudioSessionId(int sessionId);
+    fun setVolume(vol: Float): Boolean
 
-    int getAudioSessionId();
+    fun setAudioSessionId(sessionId: Int): Boolean
 
     interface PlaybackCallbacks {
-        void onTrackWentToNext();
+        fun onTrackWentToNext()
 
-        void onTrackEnded();
+        fun onTrackEnded()
     }
 }

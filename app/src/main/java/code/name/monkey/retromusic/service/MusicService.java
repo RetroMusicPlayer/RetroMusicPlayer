@@ -1088,6 +1088,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             try {
                 int newPosition = playback.seek(millis);
                 throttledSeekHandler.notifySeek();
+                updateMediaSessionPlaybackState();
                 return newPosition;
             } catch (Exception e) {
                 return -1;

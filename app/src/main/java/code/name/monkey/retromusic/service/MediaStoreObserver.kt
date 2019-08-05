@@ -12,36 +12,32 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.service;
+package code.name.monkey.retromusic.service
 
-import android.database.ContentObserver;
-import android.os.Handler;
+import android.database.ContentObserver
+import android.os.Handler
 
-public class MediaStoreObserver extends ContentObserver implements Runnable {
-    // milliseconds to delay before calling refresh to aggregate events
-    private static final long REFRESH_DELAY = 500;
-    private final MusicService musicService;
-    private Handler mHandler;
+class MediaStoreObserver(
+        private val musicService: MusicService,
+        private val mHandler: Handler
+) : ContentObserver(mHandler), Runnable {
 
-    MediaStoreObserver(MusicService musicService, Handler handler) {
-        super(handler);
-        this.musicService = musicService;
-        mHandler = handler;
-    }
-
-    @Override
-    public void onChange(boolean selfChange) {
+    override fun onChange(selfChange: Boolean) {
         // if a change is detected, remove any scheduled callback
         // then post a new one. This is intended to prevent closely
         // spaced events from generating multiple refresh calls
-        mHandler.removeCallbacks(this);
-        mHandler.postDelayed(this, REFRESH_DELAY);
+        mHandler.removeCallbacks(this)
+        mHandler.postDelayed(this, REFRESH_DELAY)
     }
 
-    @Override
-    public void run() {
+    override fun run() {
         // actually call refresh when the delayed callback fires
         // do not send a sticky broadcast here
-        musicService.handleAndSendChangeInternal(MusicService.MEDIA_STORE_CHANGED);
+        musicService.handleAndSendChangeInternal(MusicService.MEDIA_STORE_CHANGED)
+    }
+
+    companion object {
+        // milliseconds to delay before calling refresh to aggregate events
+        private val REFRESH_DELAY: Long = 500
     }
 }
