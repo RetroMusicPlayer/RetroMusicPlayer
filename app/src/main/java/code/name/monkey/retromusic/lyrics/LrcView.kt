@@ -160,7 +160,7 @@ class LrcView @JvmOverloads constructor(context: Context, attrs: AttributeSet? =
         mIconWidth = typedArray.getDimension(R.styleable.LrcView_playIconWidth, dp2px(context, 20f).toFloat())
         mIconHeight = typedArray.getDimension(R.styleable.LrcView_playIconHeight, dp2px(context, 20f).toFloat())
         mPlayDrawable = typedArray.getDrawable(R.styleable.LrcView_playIcon)
-        mPlayDrawable = if (mPlayDrawable == null) ContextCompat.getDrawable(context, R.drawable.play_icon) else mPlayDrawable
+        mPlayDrawable = if (mPlayDrawable == null) ContextCompat.getDrawable(context, R.drawable.ic_play_arrow_white_24dp) else mPlayDrawable
         typedArray.recycle()
 
         setupConfigs(context)
