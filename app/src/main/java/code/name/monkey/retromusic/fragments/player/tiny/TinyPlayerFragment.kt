@@ -59,7 +59,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     override fun toolbarIconColor(): Int {
-        return MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(lastColor))
+        return ThemeStore.textColorSecondary(requireContext())
     }
 
     private var lastColor: Int = 0
@@ -67,18 +67,20 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         get() = lastColor
 
     override fun onColorChanged(color: Int) {
+
         val lastColor = if (PreferenceUtil.getInstance().adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!)
+            ThemeStore.accentColor(requireContext())
         }
         callbacks?.onPaletteColorChanged()
+
         tinyPlaybackControlsFragment.setDark(lastColor)
 
         TintHelper.setTintAuto(progressBar, lastColor, false)
 
-        val iconColor = MaterialValueHelper.getSecondaryTextColor(context, ColorUtil.isColorLight(lastColor))
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
+        val iconColor = ThemeStore.textColorSecondary(requireContext())
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
     }
 
     override fun onFavoriteToggled() {

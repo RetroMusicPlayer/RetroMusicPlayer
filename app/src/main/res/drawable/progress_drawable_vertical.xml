@@ -10,10 +10,8 @@
             android:clipOrientation="vertical"
             android:gravity="bottom">
             <shape>
-                <gradient
-                    android:angle="135"
-                    android:endColor="@color/md_blue_A200"
-                    android:startColor="@color/md_green_A700" />
+                <solid
+                    android:color="@color/md_deep_purple_A400" />
             </shape>
         </clip>
     </item>

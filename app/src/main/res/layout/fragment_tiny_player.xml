@@ -16,9 +16,10 @@
         tools:layout="@layout/fragment_player_album_cover" />
 
     <View
+        android:id="@+id/masked"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90000000" />
+        android:background="?colorPrimary" />
 
     <ProgressBar
         android:id="@+id/progressBar"

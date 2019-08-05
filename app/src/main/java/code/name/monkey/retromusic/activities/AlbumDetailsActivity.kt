@@ -14,7 +14,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -38,9 +41,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.appbar.AppBarLayout
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
 import java.util.*
@@ -71,12 +72,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         setupWindowTransition()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        contentContainer?.setCardBackgroundColor( ColorStateList.valueOf(ThemeStore.primaryColor(this)))
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 
-        ActivityCompat.postponeEnterTransition(this)
+        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
 
+        ActivityCompat.postponeEnterTransition(this)
 
         artistImage = findViewById(R.id.artistImage)
 
@@ -116,19 +117,19 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         val primaryColor = ThemeStore.primaryColor(this)
         //TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
 
-        if (collapsingToolbarLayout != null) {
-            collapsingToolbarLayout!!.apply {
-                setContentScrimColor(primaryColor)
-                setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
-            }
+
+        collapsingToolbarLayout?.let {
+            it.setContentScrimColor(primaryColor)
+            it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
         }
+
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
 
         if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
-            val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
+            val params = toolbar.layoutParams as ViewGroup.MarginLayoutParams
             params.topMargin = RetroUtil.getStatusBarHeight()
-            toolbar!!.layoutParams = params
+            toolbar.layoutParams = params
         }
 
         appBarLayout?.apply {
@@ -253,6 +254,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
+
+        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
     }
 
 

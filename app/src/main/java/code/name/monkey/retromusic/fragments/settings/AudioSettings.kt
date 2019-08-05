@@ -36,7 +36,7 @@ class AudioSettings : AbsSettingsFragment() {
             findPreference.isEnabled = true
         }
         findPreference.setOnPreferenceClickListener {
-            NavigationUtil.openEqualizer(activity!!)
+            NavigationUtil.openEqualizer(requireActivity())
             true
         }
     }
@@ -44,7 +44,7 @@ class AudioSettings : AbsSettingsFragment() {
     private fun hasEqualizer(): Boolean {
         val effects = Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL)
 
-        val pm = activity!!.packageManager
+        val pm = requireActivity().packageManager
         val ri = pm.resolveActivity(effects, 0)
         return ri != null
     }

@@ -70,7 +70,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                         else
                             PreferenceUtil.getThemeResFromPrefValue("dark")
 
-                        ThemeStore.editTheme(context).activityTheme(theme).primaryColor(color).commit()
+                        ThemeStore.editTheme(requireContext()).activityTheme(theme).primaryColor(color).commit()
 
                         if (VersionUtils.hasNougatMR())
                             DynamicShortcutManager(context).updateDynamicShortcuts()
@@ -107,10 +107,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                         .commit()
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                    activity?.setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
+                    requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
-                activity?.recreate()
+                requireActivity().recreate()
                 true
             }
         }
@@ -128,9 +128,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     if (!ColorUtil.isColorSaturated(color)) {
                         colorFinal = color
                     }*/
-                    ThemeStore.editTheme(context).accentColor(color).commit()
+                    ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
-                        DynamicShortcutManager(context).updateDynamicShortcuts()
+                        DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                     requireActivity().recreate()
                 }
             }

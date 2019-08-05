@@ -226,9 +226,12 @@ public final class ToolbarContentTintHelper {
     }
 
     @SuppressWarnings("unchecked")
-    public static void setToolbarContentColor(@NonNull Context context, Toolbar toolbar,
-                                              @Nullable Menu menu, final @ColorInt int toolbarContentColor,
-                                              final @ColorInt int titleTextColor, final @ColorInt int subtitleTextColor,
+    public static void setToolbarContentColor(@NonNull Context context,
+                                              Toolbar toolbar,
+                                              @Nullable Menu menu,
+                                              final @ColorInt int toolbarContentColor,
+                                              final @ColorInt int titleTextColor,
+                                              final @ColorInt int subtitleTextColor,
                                               final @ColorInt int menuWidgetColor) {
         if (toolbar == null) {
             return;

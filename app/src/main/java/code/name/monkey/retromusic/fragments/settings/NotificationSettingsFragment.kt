@@ -18,6 +18,7 @@ import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import androidx.preference.TwoStatePreference
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 
@@ -58,6 +59,6 @@ class NotificationSettingsFragment : AbsSettingsFragment() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(code.name.monkey.retromusic.R.xml.pref_notification)
+        addPreferencesFromResource(R.xml.pref_notification)
     }
 }

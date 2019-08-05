@@ -35,8 +35,8 @@ import code.name.monkey.retromusic.util.NavigationUtil
 abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
-        Toast.makeText(context, "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
-        NavigationUtil.goToProVersion(activity!!)
+        Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
+        NavigationUtil.goToProVersion(requireActivity())
     }
 
     internal fun setSummary(preference: Preference, value: Any) {
@@ -60,7 +60,7 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ThemeStore.primaryColor(context!!))
+        listView.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)

@@ -48,8 +48,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private val settingsIcons = arrayOf(R.id.general_settings_icon, R.id.audio_settings_icon, R.id.now_playing_settings_icon, R.id.personalize_settings_icon, R.id.image_settings_icon, R.id.notification_settings_icon, R.id.other_settings_icon)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main_settings, container, false)
@@ -74,20 +72,16 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             }
         }
         buyPremium.setOnClickListener {
-            NavigationUtil.goToProVersion(context!!)
+            NavigationUtil.goToProVersion(requireContext())
         }
         MaterialUtil.setTint(buyPremium)
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!)))
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(ThemeStore.primaryColor(requireContext())))
         text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
-        //title.setTextColor(primaryColor)
         text2.setTextColor(primaryColor)
         text3.imageTintList = ColorStateList.valueOf(primaryColor)
-
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
-        if (activity != null) {
-            (activity as SettingsActivity).setupFragment(fragment, title)
-        }
+        (requireActivity() as SettingsActivity).setupFragment(fragment, title)
     }
 }

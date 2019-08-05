@@ -256,7 +256,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
         playerAlbumCoverFragment?.setCallbacks(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            statusBarShadow.hide()
+            statusBarShadow?.hide()
     }
 
     interface Callbacks {
