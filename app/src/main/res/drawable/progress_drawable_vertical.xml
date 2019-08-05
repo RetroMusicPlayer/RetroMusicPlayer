@@ -5,13 +5,21 @@
             <solid android:color="@android:color/transparent" />
         </shape>
     </item>
+    <item android:id="@android:id/secondaryProgress">
+        <clip
+            android:clipOrientation="vertical"
+            android:gravity="bottom">
+            <shape>
+                <solid android:color="@color/md_red_400" />
+            </shape>
+        </clip>
+    </item>
     <item android:id="@android:id/progress">
         <clip
             android:clipOrientation="vertical"
             android:gravity="bottom">
             <shape>
-                <solid
-                    android:color="@color/md_deep_purple_A400" />
+                <solid android:color="@color/md_deep_purple_A400" />
             </shape>
         </clip>
     </item>

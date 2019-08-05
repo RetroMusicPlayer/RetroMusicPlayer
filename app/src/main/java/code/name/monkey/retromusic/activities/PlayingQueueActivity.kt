@@ -30,7 +30,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private val upNextAndQueueTime: String
         get() = resources.getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position))
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(
+            savedInstanceState: Bundle?
+    ) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playing_queue)
 

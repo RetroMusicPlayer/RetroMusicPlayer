@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -28,8 +29,13 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
 
-        lastPlaybackControlsColor = ThemeStore.textColorPrimary(requireContext())
-        lastDisabledPlaybackControlsColor = ThemeStore.textColorSecondary(requireContext())
+        if (ColorUtil.isColorLight(color)) {
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+        } else {
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+        }
 
         updateRepeatState();
         updateShuffleState();

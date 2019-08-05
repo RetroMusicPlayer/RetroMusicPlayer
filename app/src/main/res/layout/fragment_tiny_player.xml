@@ -28,6 +28,7 @@
         android:layout_height="match_parent"
         android:max="100"
         android:progress="80"
+        android:secondaryProgress="100"
         android:progressDrawable="@drawable/progress_drawable_vertical" />
 
     <code.name.monkey.retromusic.views.FitSystemWindowsLayout

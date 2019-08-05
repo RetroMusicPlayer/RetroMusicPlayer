@@ -260,6 +260,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             super.setTaskDescriptionColor(paletteColor)
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
+
+
             if (PreferenceUtil.getInstance().adaptiveColor &&
                     (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
                 super.setLightNavigationBar(true)
@@ -269,7 +271,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
                     currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
-            } else if (currentNowPlayingScreen == COLOR) {
+            } else if (currentNowPlayingScreen == COLOR || currentNowPlayingScreen == TINY) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
@@ -310,7 +312,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     }
 
 
-      fun updateTabs() {
+    private fun updateTabs() {
         bottomNavigationView.menu.clear()
         val currentTabs = PreferenceUtil.getInstance().libraryCategoryInfos
         for (tab in currentTabs) {

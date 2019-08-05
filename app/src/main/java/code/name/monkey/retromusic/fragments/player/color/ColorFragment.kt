@@ -169,47 +169,6 @@ class ColorFragment : AbsPlayerFragment() {
                         setColors(backgroundColor, textColor)
                     }
                 })
-
-        /*SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(activity!!)
-                .generatePalette(activity).build().dontAnimate()
-                .into(object : RetroMusicColoredTarget(playerImage) {
-                    override fun onColorReady(color: Int) {
-                        //setColors(color);
-                    }
-
-                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                        super.onLoadFailed(e, errorDrawable)
-
-                        val backgroundColor = defaultFooterColor
-                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor))
-                            MaterialValueHelper.getPrimaryTextColor(context, true)
-                        else
-                            MaterialValueHelper.getPrimaryTextColor(context, false)
-
-                        setColors(backgroundColor, textColor)
-                    }
-
-                    override fun onResourceReady(resource: BitmapPaletteWrapper,
-                                                 glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
-                        super.onResourceReady(resource, glideAnimation)
-                        *//* MediaNotificationProcessor processor = new MediaNotificationProcessor(getContext(),
-                getContext());
-            Palette.Builder builder = MediaNotificationProcessor
-                .generatePalette(resource.getBitmap());
-
-            int backgroundColor = processor.getBackgroundColor(builder);
-            int textColor = processor.getTextColor(builder);*//*
-
-                        val palette = resource.palette
-                        val swatch = RetroColorUtil.getSwatch(palette)
-
-                        val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = swatch.rgb
-
-                        setColors(backgroundColor, textColor)
-                    }
-                })*/
     }
 
     private fun setColors(backgroundColor: Int, textColor: Int) {

@@ -60,12 +60,14 @@ object ViewUtil {
 
         val ld = progressSlider.progressDrawable as LayerDrawable
 
-        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
-        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        val progress = ld.findDrawableByLayerId(android.R.id.progress)
+        progress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
-        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
+        val background = ld.findDrawableByLayerId(android.R.id.background)
+        background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
 
+        val secondaryProgress = ld.findDrawableByLayerId(android.R.id.secondaryProgress)
+        secondaryProgress.setColorFilter(ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN)
     }
 
     private fun createColorAnimator(target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {

@@ -89,32 +89,35 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         toolbar = view.findViewById(R.id.toolbar)
+
         bannerImage?.setOnClickListener {
-            NavigationUtil.goToUserInfo(activity!!)
+            NavigationUtil.goToUserInfo(requireActivity())
         }
         if (!PreferenceUtil.getInstance().isHomeBanner)
             setStatusbarColorAuto(view)
 
         lastAdded.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(mainActivity, LastAddedPlaylist(mainActivity))
+            NavigationUtil.goToPlaylistNew(requireActivity(), LastAddedPlaylist(requireActivity()))
         }
 
         topPlayed.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(mainActivity, MyTopTracksPlaylist(mainActivity))
+            NavigationUtil.goToPlaylistNew(requireActivity(), MyTopTracksPlaylist(requireActivity()))
         }
 
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(mainActivity) , true)
+            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(requireActivity()) , true)
         }
 
         history.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(mainActivity, HistoryPlaylist(mainActivity))
+            NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
         homePresenter = HomePresenter(this)
 
-        contentContainer.setBackgroundColor(ThemeStore.primaryColor(context!!))
+        contentContainer.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
 
         setupToolbar()
         homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
@@ -124,16 +127,16 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         checkPadding()
 
         userInfoContainer.setOnClickListener {
-            NavigationUtil.goToUserInfo(activity!!)
+            NavigationUtil.goToUserInfo(requireActivity())
         }
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(context!!))
+        titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance().userName)
     }
 
     private fun checkPadding() {
         val marginSpan = when {
             MusicPlayerRemote.playingQueue.isEmpty() -> RetroUtil.convertDpToPixel(52f, context!!).toInt()
-            else -> RetroUtil.convertDpToPixel(0f, context!!).toInt()
+            else -> RetroUtil.convertDpToPixel(0f, requireContext()).toInt()
         }
 
         (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
@@ -154,7 +157,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
                 val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
-                NavigationUtil.goToSearch(activity!!, pairImageView)
+                NavigationUtil.goToSearch(requireActivity(), pairImageView)
             }
 
         }
@@ -219,20 +222,18 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_search, menu)
 
-        val activity = activity ?: return
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(activity, toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        val activity = activity ?: return
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(activity, toolbar)
+        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
             val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
-            NavigationUtil.goToSearch(mainActivity, true, pairImageView)
+            NavigationUtil.goToSearch(requireActivity(), true, pairImageView)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -258,13 +259,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun loadTimeImage(day: String) {
         if (bannerImage != null) {
             if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
-                GlideApp.with(activity!!)
+                GlideApp.with(requireActivity())
                         .load(day)
                         .placeholder(R.drawable.material_design_default)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(bannerImage!!)
             } else {
-                disposable.add(Compressor(context!!)
+                disposable.add(Compressor(requireActivity())
                         .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
                         .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))

@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,13 +47,13 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:strokeColor="?dividerColor"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways"
-                app:strokeColor="?dividerColor"
                 app:strokeWidth="1dp">
 
                 <FrameLayout
@@ -49,9 +63,8 @@
                     <androidx.appcompat.widget.Toolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
-                        app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
-                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        app:title="@string/library"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub

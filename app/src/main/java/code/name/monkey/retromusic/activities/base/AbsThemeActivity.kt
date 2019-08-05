@@ -77,11 +77,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     fun setDrawUnderStatusBar() {
-        if (VersionUtils.hasLollipop()) {
-            RetroUtil.setAllowDrawUnderStatusBar(window)
-        } else if (VersionUtils.hasKitKat()) {
-            RetroUtil.setStatusBarTranslucent(window)
-        }
+        RetroUtil.setAllowDrawUnderStatusBar(window)
     }
 
     fun setDrawUnderNavigationBar() {
@@ -95,19 +91,17 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
      * @param color the new statusbar color (will be shifted down on Lollipop and above)
      */
     fun setStatusbarColor(color: Int) {
-        if (VersionUtils.hasKitKat()) {
-            val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
-            if (statusBar != null) {
-                when {
-                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                    VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
-                    else -> statusBar.setBackgroundColor(color)
-                }
-            } else {
-                when {
-                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                    else -> window.statusBarColor = ColorUtil.darkenColor(color)
-                }
+        val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
+        if (statusBar != null) {
+            when {
+                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
+                else -> statusBar.setBackgroundColor(color)
+            }
+        } else {
+            when {
+                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                else -> window.statusBarColor = ColorUtil.darkenColor(color)
             }
         }
         setLightStatusbarAuto(color)

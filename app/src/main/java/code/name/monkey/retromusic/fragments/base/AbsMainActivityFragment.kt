@@ -40,7 +40,6 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
 
     fun setStatusbarColorAuto(view: View) {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-
         if (VersionUtils.hasMarshmallow()) {
             setStatusbarColor(view, ThemeStore.primaryColor(context!!))
         } else {
