@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadataRetriever
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -18,15 +19,14 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.*
-import code.name.monkey.retromusic.views.FitSystemWindowsLayout
-import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
+import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
@@ -254,6 +254,9 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
         }
         playerAlbumCoverFragment = requireFragmentManager().findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
         playerAlbumCoverFragment?.setCallbacks(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            statusBarShadow.hide()
     }
 
     interface Callbacks {
