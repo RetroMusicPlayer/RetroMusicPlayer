@@ -141,7 +141,7 @@ dependencies {
 
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
-    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
+    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.3-kmod3'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
