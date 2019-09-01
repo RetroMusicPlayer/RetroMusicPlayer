@@ -39,5 +39,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
+
+        setOnApplyWindowInsetsListener(null)
     }
 }

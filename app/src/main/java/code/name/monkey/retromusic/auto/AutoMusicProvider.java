@@ -33,6 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ConcurrentSkipListMap;
 
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.AlbumLoader;
 import code.name.monkey.retromusic.loaders.ArtistLoader;
@@ -46,6 +47,7 @@ import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.service.MusicService;
+import code.name.monkey.retromusic.util.ImageUtil;
 
 /**
  * Created by Beesham Sarendranauth (Beesham)
@@ -332,22 +334,26 @@ public class AutoMusicProvider {
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM,
-                                resources.getString(R.string.albums_label)
+                                resources.getString(R.string.albums_label),
+                                R.drawable.ic_album_white_24dp
                         ));
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST,
-                                resources.getString(R.string.artists_label)
+                                resources.getString(R.string.artists_label),
+                                R.drawable.ic_artist_white_24dp
                         ));
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST,
-                                resources.getString(R.string.playlists_label)
+                                resources.getString(R.string.playlists_label),
+                                R.drawable.ic_queue_music_white_24dp
                         ));
                 mediaItems.add(
                         createBrowsableMediaItem(
                                 AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE,
-                                resources.getString(R.string.genres_label)
+                                resources.getString(R.string.genres_label),
+                                R.drawable.ic_guitar_white_24dp
                         ));
                /* mediaItems.add(
                         createPlayableMediaItem(
@@ -403,10 +409,13 @@ public class AutoMusicProvider {
         return mediaItems;
     }
 
-    private MediaBrowserCompat.MediaItem createBrowsableMediaItem(String mediaId, String title) {
+    private MediaBrowserCompat.MediaItem createBrowsableMediaItem(String mediaId,
+                                                                  String title,
+                                                                  int iconDrawableId) {
         MediaDescriptionCompat.Builder builder = new MediaDescriptionCompat.Builder();
         builder.setMediaId(mediaId)
-                .setTitle(title);
+                .setTitle(title)
+                .setIconBitmap(ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(mContext, iconDrawableId, ThemeStore.Companion.textColorSecondary(mContext))));
 
         return new MediaBrowserCompat.MediaItem(builder.build(),
                 MediaBrowserCompat.MediaItem.FLAG_BROWSABLE);

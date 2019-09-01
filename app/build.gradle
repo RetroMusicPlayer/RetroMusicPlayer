@@ -13,8 +13,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 358
-        versionName '3.3.200-beta-1'
+        versionCode 360
+        versionName '3.3.200'
 
         multiDexEnabled true
 
@@ -98,22 +98,22 @@ static def getDate() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.fragment:fragment:1.2.0-alpha01'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha02'
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta02'
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.palette:palette:1.0.0"
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.preference:preference:1.1.0-rc01'
     implementation 'androidx.palette:palette-ktx:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
 
     implementation 'com.google.android.material:material:1.1.0-alpha09'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.1'
 
     implementation 'com.afollestad.material-dialogs:core:3.0.0-alpha1'
     implementation 'com.afollestad.material-dialogs:input:3.0.0-alpha1'
@@ -144,7 +144,7 @@ dependencies {
     implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
-    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
 
