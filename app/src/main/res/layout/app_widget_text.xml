@@ -29,7 +29,7 @@
             android:shadowColor="@color/md_black_1000"
             android:shadowRadius="8"
             android:text="@string/normal_lyrics"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textAppearance="@style/TextViewHeadline6"
             android:textColor="@color/md_white_1000" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:shadowColor="@color/md_grey_800"
             android:shadowRadius="6"
             android:text="@string/normal_lyrics"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textAppearance="@style/TextViewBody2"
             android:textColor="@color/md_white_1000" />
     </LinearLayout>
 

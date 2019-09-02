@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#AA000000"
-            android:columnCount="2"
-            android:gravity="top"
-            android:rowCount="3">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#AA000000"
+    android:columnCount="2"
+    android:gravity="top"
+    android:rowCount="3">
 
     <ImageView
         android:id="@+id/image"
         android:layout_width="@dimen/app_widget_small_image_size"
         android:layout_height="@dimen/app_widget_small_image_size"
         android:scaleType="centerInside"
-        tools:ignore="ContentDescription"/>
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:id="@+id/media_actions"
@@ -31,7 +31,7 @@
             android:background="@drawable/widget_selector"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_skip_previous_white_24dp"
-            tools:tint="@color/ate_secondary_text_dark"/>
+            tools:tint="@color/ate_secondary_text_dark" />
 
         <ImageButton
             android:id="@+id/button_toggle_play_pause"
@@ -41,7 +41,7 @@
             android:background="@drawable/widget_selector"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_play_arrow_white_32dp"
-            tools:tint="@color/ate_secondary_text_dark"/>
+            tools:tint="@color/ate_secondary_text_dark" />
 
         <ImageButton
             android:id="@+id/button_next"
@@ -51,7 +51,7 @@
             android:background="@drawable/widget_selector"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_skip_next_white_24dp"
-            tools:tint="@color/ate_secondary_text_dark"/>
+            tools:tint="@color/ate_secondary_text_dark" />
 
     </LinearLayout>
 
@@ -62,7 +62,7 @@
         android:layout_columnSpan="2"
         android:layout_gravity="fill_horizontal"
         android:background="@color/md_white_1000"
-        tools:ignore="Orientation"/>
+        tools:ignore="Orientation" />
 
     <LinearLayout
         android:id="@+id/media_titles"
@@ -80,9 +80,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="@style/TextViewBody2"
             android:textColor="@color/ate_primary_text_dark"
-            tools:text="Title"/>
+            tools:text="Title" />
 
         <TextView
             android:id="@+id/text_separator"
@@ -92,10 +92,10 @@
             android:paddingLeft="4dp"
             android:paddingRight="4dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextViewBody1"
             android:textColor="@color/ate_secondary_text_dark"
             tools:ignore="HardcodedText"
-            tools:text="•"/>
+            tools:text="•" />
 
         <TextView
             android:id="@+id/text"
@@ -103,9 +103,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextViewBody1"
             android:textColor="@color/ate_secondary_text_dark"
-            tools:text="Text"/>
+            tools:text="Text" />
 
     </LinearLayout>
 
