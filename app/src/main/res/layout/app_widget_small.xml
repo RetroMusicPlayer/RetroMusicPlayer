@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AA000000"
+    android:background="@drawable/card"
     android:columnCount="2"
     android:gravity="top"
     android:rowCount="3">
@@ -13,7 +13,8 @@
         android:layout_width="@dimen/app_widget_small_image_size"
         android:layout_height="@dimen/app_widget_small_image_size"
         android:scaleType="centerInside"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/default_album_art" />
 
     <LinearLayout
         android:id="@+id/media_actions"
@@ -28,30 +29,30 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/app_widget_small_button_height"
             android:layout_weight="1"
-            android:background="@drawable/widget_selector"
+            android:background="@drawable/widget_selector_light"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_skip_previous_white_24dp"
-            tools:tint="@color/ate_secondary_text_dark" />
+            tools:tint="@color/ate_secondary_text_light" />
 
         <ImageButton
             android:id="@+id/button_toggle_play_pause"
             android:layout_width="0dp"
             android:layout_height="@dimen/app_widget_small_button_height"
             android:layout_weight="1"
-            android:background="@drawable/widget_selector"
+            android:background="@drawable/widget_selector_light"
             tools:ignore="ContentDescription"
-            tools:src="@drawable/ic_play_arrow_white_32dp"
-            tools:tint="@color/ate_secondary_text_dark" />
+            tools:src="@drawable/ic_play_arrow_white_24dp"
+            tools:tint="@color/ate_secondary_text_light" />
 
         <ImageButton
             android:id="@+id/button_next"
             android:layout_width="0dp"
             android:layout_height="@dimen/app_widget_small_button_height"
             android:layout_weight="1"
-            android:background="@drawable/widget_selector"
+            android:background="@drawable/widget_selector_light"
             tools:ignore="ContentDescription"
             tools:src="@drawable/ic_skip_next_white_24dp"
-            tools:tint="@color/ate_secondary_text_dark" />
+            tools:tint="@color/ate_secondary_text_light" />
 
     </LinearLayout>
 
@@ -81,7 +82,7 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody2"
-            android:textColor="@color/ate_primary_text_dark"
+            android:textColor="@color/ate_primary_text_light"
             tools:text="Title" />
 
         <TextView
@@ -93,7 +94,7 @@
             android:paddingRight="4dp"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody1"
-            android:textColor="@color/ate_secondary_text_dark"
+            android:textColor="@color/ate_secondary_text_light"
             tools:ignore="HardcodedText"
             tools:text="•" />
 
@@ -104,7 +105,7 @@
             android:gravity="center_vertical"
             android:singleLine="true"
             android:textAppearance="@style/TextViewBody1"
-            android:textColor="@color/ate_secondary_text_dark"
+            android:textColor="@color/ate_secondary_text_light"
             tools:text="Text" />
 
     </LinearLayout>
