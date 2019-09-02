@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -27,12 +27,12 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -40,7 +40,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,17 +87,17 @@
             android:textStyle="bold"
             tools:text="Title" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:background="@color/md_red_500"
             android:ellipsize="end"
             android:fontFeatureSettings="smcp"
             android:letterSpacing="0.2"
             android:maxLines="1"
             android:padding="4dp"
-            android:layout_marginTop="24dp"
             android:textAllCaps="true"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"

@@ -14,56 +14,51 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/container"
+            android:layout_width="400dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/container"
-                android:layout_width="400dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <fragment
-                        android:id="@+id/playerAlbumCoverFragment"
-                        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        tools:layout="@layout/fragment_player_album_cover" />
-                </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+            <code.name.monkey.retromusic.views.WidthFitSquareLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <fragment
-                    android:id="@+id/playbackControlsFragment"
-                    android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
+                    android:id="@+id/playerAlbumCoverFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_player_playback_controls" />
-            </LinearLayout>
+                    tools:layout="@layout/fragment_player_album_cover" />
+            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <FrameLayout
+            <fragment
+                android:id="@+id/playbackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_player_playback_controls" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                android:id="@+id/playerToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/playerToolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </FrameLayout>
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -30,7 +30,7 @@
         android:id="@+id/playerContent"
         android:layout_width="400dp"
         android:layout_height="0dp"
-        android:layout_above="@id/toolbar_container"
+        android:layout_above="@id/playerToolbar"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -69,7 +69,7 @@
     </LinearLayout>
 
 
-    <androidx.appcompat.widget.Toolbar
+    <code.name.monkey.appthemehelper.common.views.ATEToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
         android:layout_height="48dp"

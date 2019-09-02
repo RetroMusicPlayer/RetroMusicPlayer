@@ -36,4 +36,14 @@
         <attr name="ateKey_prefCategory_textColor" format="string" />
     </declare-styleable>
 
+    <attr name="lineHeightHint" format="dimension" />
+
+    <declare-styleable name="BaselineGridTextView">
+        <attr name="lineHeightMultiplierHint" format="float" />
+        <attr name="lineHeightHint" />
+        <attr name="maxLinesByHeight" format="boolean" />
+        <attr name="android:textAppearance" />
+        <attr name="android:fontFamily" />
+    </declare-styleable>
+
 </resources>

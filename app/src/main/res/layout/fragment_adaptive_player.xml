@@ -9,107 +9,101 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/status_bar" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                android:id="@+id/playerToolbar"
+                style="@style/Toolbar"
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
+                app:titleMargin="0dp"
+                app:titleMarginStart="0dp"
+                app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
+
+        </FrameLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1">
 
-            <FrameLayout
+            <fragment
+                android:id="@+id/playerAlbumCoverFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/status_bar" />
-            </FrameLayout>
+                android:layout_height="match_parent" />
 
             <FrameLayout
-                android:id="@+id/toolbar_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/playerToolbar"
-                    style="@style/Toolbar"
-                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
-                    app:titleMargin="0dp"
-                    app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-            </FrameLayout>
-
-            <FrameLayout
+                android:id="@+id/player_lyrics"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:alpha="0"
+                android:clipToPadding="false"
+                android:elevation="20dp"
+                android:padding="16dp"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-                <fragment
-                    android:id="@+id/playerAlbumCoverFragment"
-                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+                <TextView
+                    android:id="@+id/player_lyrics_line1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:shadowColor="@color/md_black_1000"
+                    android:shadowRadius="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="22sp"
+                    android:visibility="gone" />
 
-                <FrameLayout
-                    android:id="@+id/player_lyrics"
+                <TextView
+                    android:id="@+id/player_lyrics_line2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alpha="0"
-                    android:clipToPadding="false"
-                    android:elevation="20dp"
-                    android:padding="16dp"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <TextView
-                        android:id="@+id/player_lyrics_line1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:shadowColor="@color/md_black_1000"
-                        android:shadowRadius="4"
-                        android:textAlignment="center"
-                        android:textColor="@color/md_white_1000"
-                        android:textSize="22sp"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/player_lyrics_line2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:shadowColor="@color/md_black_1000"
-                        android:shadowRadius="4"
-                        android:textAlignment="center"
-                        android:textColor="@color/md_white_1000"
-                        android:textSize="22sp" />
-
-                </FrameLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:shadowColor="@color/md_black_1000"
+                    android:shadowRadius="4"
+                    android:textAlignment="center"
+                    android:textColor="@color/md_white_1000"
+                    android:textSize="22sp" />
 
             </FrameLayout>
 
-            <FrameLayout
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <fragment
+                android:id="@+id/playbackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_adaptive_player_playback_controls" />
+        </FrameLayout>
+    </LinearLayout>
 
-                <fragment
-                    android:id="@+id/playbackControlsFragment"
-                    android:name="code.name.monkey.retromusic.fragments.player.adaptive.AdaptivePlaybackControlsFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_adaptive_player_playback_controls" />
-            </FrameLayout>
-        </LinearLayout>
-
-
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
 </FrameLayout>

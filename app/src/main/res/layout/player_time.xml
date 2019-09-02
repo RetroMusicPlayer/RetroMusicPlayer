@@ -10,28 +10,26 @@
     tools:showIn="@layout/fragment_player_playback_controls">
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/songCurrentProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textAppearance="@style/TextViewOverline"
         android:textStyle="bold"
         tools:text="22.00" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/songTotalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-        android:textColor="?android:attr/textColorSecondary"
+        android:textAppearance="@style/TextViewOverline"
         android:textStyle="bold"
         tools:text="22.00" />
 </LinearLayout>

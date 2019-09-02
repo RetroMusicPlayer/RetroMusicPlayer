@@ -61,4 +61,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="mini_player_height_expanded">104dp</dimen>
     <dimen name="progress_slider_height">30dp</dimen>
     <dimen name="triple_and_half_margin">56dp</dimen>
+    <dimen name="four_dp">4dp</dimen>
 </resources>

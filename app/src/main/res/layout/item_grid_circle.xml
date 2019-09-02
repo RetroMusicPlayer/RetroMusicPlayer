@@ -42,26 +42,21 @@
             android:paddingEnd="4dp"
             android:paddingBottom="8dp">
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="center"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold" />
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:paddingTop="4dp"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textSize="12sp" />
-
+                android:textAppearance="@style/TextViewBody2" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

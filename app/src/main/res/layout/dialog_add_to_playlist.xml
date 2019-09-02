@@ -14,12 +14,12 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/bannerTitle"
-            style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="16dp"
-            android:text="@string/add_playlist_title" />
+            android:text="@string/add_playlist_title"
+            android:textAppearance="@style/TextViewHeadline6" />
 
         <code.name.monkey.retromusic.views.IconImageView
             android:id="@+id/actionAddPlaylist"

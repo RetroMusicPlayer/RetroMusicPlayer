@@ -21,7 +21,7 @@
             app:titleEnabled="false">
 
 
-            <androidx.appcompat.widget.Toolbar
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
@@ -51,14 +51,13 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@android:id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="sans-serif-light"
         android:text="@string/empty"
-        android:textColor="?android:textColorSecondary"
+        android:textAppearance="@style/TextViewNormal"
         android:visibility="gone" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -68,6 +67,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/clear_playing_queue"
+        android:textAppearance="@style/TextViewHeadline6"
         app:icon="@drawable/ic_clear_all_black_24dp" />
 
 

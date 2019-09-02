@@ -27,8 +27,6 @@ open class MediaEntryViewHolder(view: View) : RecyclerView.ViewHolder(view), Vie
     var imageContainer: ViewGroup? = null
     var imageContainerCard: CardView? = null
     var menu: View? = null
-    var separator: View? = null
-    var shortSeparator: View? = null
     var dragView: View? = null
     var paletteColorContainer: View? = null
     var time: TextView? = null
@@ -53,8 +51,6 @@ open class MediaEntryViewHolder(view: View) : RecyclerView.ViewHolder(view), Vie
         menu = view.findViewById(R.id.menu)
         dragView = view.findViewById(R.id.drag_view)
 
-        separator = view.findViewById(R.id.separator)
-        shortSeparator = view.findViewById(R.id.short_separator)
         paletteColorContainer = view.findViewById(R.id.palette_color_container)
 
         time = view.findViewById(R.id.time);

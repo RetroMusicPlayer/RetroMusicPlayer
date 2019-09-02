@@ -18,13 +18,13 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/image_text"
-            style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="36dp"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif"
+            android:fontFeatureSettings="onum"
             android:gravity="center"
             android:maxLines="1"
-            android:minHeight="40dp" />
+            android:minHeight="40dp"
+            android:textAppearance="@style/TextViewNormal" />
     </FrameLayout>
 
 
@@ -48,11 +48,11 @@
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxLines="1"
+                android:textAppearance="@style/TextViewBody1"
                 tools:text="Song title" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -60,7 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:fontFeatureSettings="onum"
                 android:padding="4dp"
+                android:textAppearance="@style/TextViewNormal"
                 tools:text="22:00" />
         </LinearLayout>
     </FrameLayout>
@@ -70,7 +72,6 @@
         style="@style/OverFlowButton"
         android:layout_margin="0dp"
         android:layout_weight="0"
-        android:background="@null"
         android:rotation="90"
         tools:visibility="visible" />
 </LinearLayout>

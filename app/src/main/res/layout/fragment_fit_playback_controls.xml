@@ -21,7 +21,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -33,7 +33,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -55,7 +55,7 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,11 +70,11 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextViewSubtitle1"
             android:textColor="?android:attr/textColorPrimary"
             tools:text="Title" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,7 +85,7 @@
             android:maxLines="1"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textAppearance="@style/TextViewNormal" />
     </LinearLayout>
 
     <include layout="@layout/media_button" />

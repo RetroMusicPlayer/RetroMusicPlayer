@@ -27,12 +27,12 @@
 
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="10dp"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textAppearance="@style/TextViewNormal" />
 </LinearLayout>

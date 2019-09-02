@@ -40,12 +40,17 @@ import com.afollestad.materialdialogs.color.colorChooser
  */
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
+    private var materialDialog: MaterialDialog? = null
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        materialDialog?.dismiss()
+    }
 
     override fun invalidateSettings() {
 
         val categoryColor: ATEPreferenceCategory? = findPreference("category_color")
         val primaryColorPref = ATEColorPreference(preferenceScreen.context)
-
         val primaryColor = ThemeStore.primaryColor(requireContext())
 
         primaryColorPref.apply {
@@ -57,7 +62,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             setIcon(R.drawable.ic_colorize_white_24dp)
             setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
             setOnPreferenceClickListener {
-                MaterialDialog(requireContext(), BottomSheet()).show {
+                materialDialog = MaterialDialog(requireContext(), BottomSheet()).show {
                     title(R.string.primary_color)
                     positiveButton(R.string.set)
                     colorChooser(initialSelection = BLUE,
@@ -120,7 +125,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            MaterialDialog(requireContext(), BottomSheet()).show {
+            materialDialog = MaterialDialog(requireContext(), BottomSheet()).show {
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->

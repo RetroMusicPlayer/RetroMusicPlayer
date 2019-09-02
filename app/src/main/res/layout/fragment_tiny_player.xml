@@ -28,105 +28,101 @@
         android:layout_height="match_parent"
         android:max="100"
         android:progress="80"
-        android:secondaryProgress="100"
-        android:progressDrawable="@drawable/progress_drawable_vertical" />
+        android:progressDrawable="@drawable/progress_drawable_vertical"
+        android:secondaryProgress="100" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include layout="@layout/status_bar" />
+        </FrameLayout>
 
-                <include layout="@layout/status_bar" />
-            </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
-                <LinearLayout
+                <code.name.monkey.retromusic.views.VerticalTextView
+                    android:id="@+id/songTitle"
+                    style="@style/TextAppearance.MaterialComponents.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
+                    android:ellipsize="end"
+                    android:freezesText="true"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    app:textAllCaps="true"
+                    tools:ignore="MissingPrefix"
+                    tools:text="Song title" />
 
-                    <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/songTitle"
-                        style="@style/TextAppearance.MaterialComponents.Headline2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:ellipsize="end"
-                        android:freezesText="true"
-                        android:singleLine="true"
-                        android:textStyle="bold"
-                        app:textAllCaps="true"
-                        tools:ignore="MissingPrefix"
-                        tools:text="Song title" />
+                <code.name.monkey.retromusic.views.VerticalTextView
+                    android:id="@+id/songText"
+                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    tools:text=" Album name \nby Artist name" />
 
-                    <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/songText"
-                        style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:ellipsize="end"
-                        android:maxLines="2"
-                        tools:text=" Album name \nby Artist name" />
+            </LinearLayout>
 
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <fragment
+                    android:id="@+id/playbackControlsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:orientation="vertical">
+                    tools:layout="@layout/fragment_tiny_controls_fragment" />
 
-                    <fragment
-                        android:id="@+id/playbackControlsFragment"
-                        android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout="@layout/fragment_tiny_controls_fragment" />
+                <FrameLayout
+                    android:id="@+id/toolbar_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <FrameLayout
-                        android:id="@+id/toolbar_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                        android:id="@+id/playerToolbar"
+                        style="@style/Toolbar"
+                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                </FrameLayout>
+            </LinearLayout>
 
-                        <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/playerToolbar"
-                            style="@style/Toolbar"
-                            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-                    </FrameLayout>
-                </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <code.name.monkey.retromusic.views.VerticalTextView
+                    android:id="@+id/playerSongTotalTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:padding="16dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                    android:textStyle="bold"
+                    tools:ignore="MissingPrefix" />
 
-                    <code.name.monkey.retromusic.views.VerticalTextView
-                        android:id="@+id/playerSongTotalTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:padding="16dp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-                        android:textStyle="bold"
-                        tools:ignore="MissingPrefix" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
 
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
 </FrameLayout>

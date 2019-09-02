@@ -31,16 +31,15 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
-            app:fontFamily="@font/circular_std_medium"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewSubtitle1" />
 
         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
-            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.85" />
+            android:alpha="0.85"
+            android:textAppearance="@style/TextViewBody2" />
     </LinearLayout>
 </LinearLayout>

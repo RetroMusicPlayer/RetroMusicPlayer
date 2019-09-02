@@ -49,7 +49,8 @@
                     android:background="@null"
                     android:hint="@string/action_search"
                     android:inputType="text|textAutoComplete"
-                    android:padding="12dp">
+                    android:padding="12dp"
+                    android:textAppearance="@style/TextViewSubtitle1">
 
                     <requestFocus />
                 </com.google.android.material.textfield.TextInputEditText>
@@ -71,7 +72,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@android:id/empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,8 +80,7 @@
             android:paddingTop="48dp"
             android:paddingBottom="48dp"
             android:text="@string/no_results"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="16sp"
+            android:textAppearance="@style/TextViewHeadline6"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -101,5 +101,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:text="@string/keyboard"
+        android:textAppearance="@style/TextViewHeadline6"
         app:icon="@drawable/ic_keyboard_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

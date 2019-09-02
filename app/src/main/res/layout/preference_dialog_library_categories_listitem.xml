@@ -37,7 +37,7 @@
         android:focusable="false"
         android:gravity="center_vertical" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -50,6 +50,7 @@
         android:paddingTop="@dimen/md_listitem_vertical_margin_choice"
         android:paddingBottom="@dimen/md_listitem_vertical_margin_choice"
         android:singleLine="true"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="@dimen/md_listitem_textsize"
         tools:text="Item" />
 

@@ -30,7 +30,7 @@
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
-        android:textSize="12sp"
+        android:textAppearance="@style/TextViewNormal"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 </LinearLayout>

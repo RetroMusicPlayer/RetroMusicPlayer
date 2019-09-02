@@ -6,16 +6,16 @@
     android:fadingEdge="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <TextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/offlineLyrics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:lineSpacingExtra="3dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="128dp"
         android:text="@string/no_lyrics_found"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+        android:textAppearance="@style/TextViewBody1" />
 </ScrollView>

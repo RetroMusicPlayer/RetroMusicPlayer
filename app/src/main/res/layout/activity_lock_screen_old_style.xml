@@ -50,7 +50,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="TODO"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
+
         </com.google.android.material.card.MaterialCardView>
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 

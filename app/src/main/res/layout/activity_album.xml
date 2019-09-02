@@ -38,7 +38,7 @@
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <androidx.appcompat.widget.Toolbar
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin" />
@@ -87,15 +87,14 @@
 
                         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                             android:id="@+id/albumTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
+                            android:textAppearance="@style/TextViewHeadline6"
                             tools:ignore="MissingPrefix" />
 
                         <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                             android:id="@+id/albumText"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -106,6 +105,7 @@
                             android:marqueeRepeatLimit="marquee_forever"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
+                            android:textAppearance="@style/TextViewSubtitle2"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 

@@ -17,7 +17,7 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <androidx.appcompat.widget.Toolbar
+        <code.name.monkey.appthemehelper.common.views.ATEToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"

@@ -69,7 +69,7 @@
                 app:iconBackgroundColor="@color/md_blue_A700"
                 app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -95,7 +95,7 @@
                 app:iconBackgroundColor="@color/md_red_A700"
                 app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -121,7 +121,7 @@
                 app:iconBackgroundColor="@color/md_deep_purple_A700"
                 app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -147,7 +147,7 @@
                 app:iconBackgroundColor="@color/md_green_A700"
                 app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -156,11 +156,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="12dp"
-        android:background="?attr/dividerColor" />
 </LinearLayout>

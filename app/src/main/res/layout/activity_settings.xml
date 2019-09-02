@@ -20,12 +20,12 @@
         app:elevation="0dp">
 
 
-        <androidx.appcompat.widget.Toolbar
+        <code.name.monkey.appthemehelper.common.views.ATEToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            tools:title="@string/app_name" />
+            tools:title="@string/action_settings" />
 
     </com.google.android.material.appbar.AppBarLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

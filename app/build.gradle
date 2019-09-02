@@ -4,12 +4,12 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
 
-        renderscriptTargetApi 28 //must match target sdk and build tools
+        renderscriptTargetApi 29 //must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
@@ -67,6 +67,7 @@ android {
         sourceCompatibility '1.8'
         targetCompatibility '1.8'
     }
+    buildToolsVersion = '29.0.1'
 
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
@@ -100,14 +101,14 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.fragment:fragment:1.2.0-alpha02'
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta02'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.palette:palette:1.0.0"
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.preference:preference:1.1.0-rc01'
     implementation 'androidx.palette:palette-ktx:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation 'com.google.android.material:material:1.1.0-alpha09'
 
@@ -141,11 +142,11 @@ dependencies {
 
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
     implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
-    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
+    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.3-kmod'
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
-    implementation 'com.r0adkll:slidableactivity:2.0.6'
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
 
     implementation project(':appthemehelper')

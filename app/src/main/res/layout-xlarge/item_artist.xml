@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="156dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -15,18 +14,16 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:civ_border="false"
-            />
+            app:civ_border="false" />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:paddingTop="12dp"
+        android:textAppearance="@style/TextViewNormal" />
 </LinearLayout>

@@ -22,7 +22,7 @@
             android:paddingTop="24dp"
             android:paddingRight="16dp"
             android:text="@string/device_info"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/TextViewOverline" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/airTextDeviceInfo"

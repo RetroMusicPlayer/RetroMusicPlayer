@@ -68,9 +68,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
         if (holder.text != null) {
             holder.text!!.visibility = View.GONE
         }
-        if (holder.shortSeparator != null) {
-            holder.shortSeparator!!.visibility = View.GONE
-        }
+
         loadArtistImage(artist, holder)
     }
 

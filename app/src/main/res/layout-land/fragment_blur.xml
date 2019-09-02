@@ -27,70 +27,62 @@
 
     <include layout="@layout/shadow_statusbar_toolbar" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/status_bar" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <FrameLayout
+            <code.name.monkey.retromusic.views.HeightFitSquareLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal">
 
-                <include layout="@layout/status_bar" />
-            </FrameLayout>
+                <fragment
+                    android:id="@+id/playerAlbumCoverFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:layout="@layout/fragment_player_album_cover" />
+            </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <code.name.monkey.retromusic.views.HeightFitSquareLayout
+                <fragment
+                    android:id="@+id/playbackControlsFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlaybackControlsFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_weight="1" />
 
-                    <fragment
-                        android:id="@+id/playerAlbumCoverFragment"
-                        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:layout="@layout/fragment_player_album_cover" />
-                </code.name.monkey.retromusic.views.HeightFitSquareLayout>
-
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    tools:background="@color/md_red_A700">
 
-                    <fragment
-                        android:id="@+id/playbackControlsFragment"
-                        android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlaybackControlsFragment"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        tools:background="@color/md_red_A700">
-
-                        <androidx.appcompat.widget.Toolbar
-                            android:id="@+id/playerToolbar"
-                            style="@style/Toolbar"
-                            android:layout_height="48dp"
-                            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-                    </FrameLayout>
-                </LinearLayout>
+                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                        android:id="@+id/playerToolbar"
+                        style="@style/Toolbar"
+                        android:layout_height="48dp"
+                        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
-
-
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+    </LinearLayout>
 </FrameLayout>

@@ -7,10 +7,10 @@
 
     <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
         android:id="@+id/timerDisplay"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textAppearance="@style/TextViewHeadline6" />
 
 
     <androidx.appcompat.widget.AppCompatSeekBar
@@ -24,12 +24,12 @@
         android:thumb="@drawable/switch_thumb_material"
         tools:progress="20" />
 
-    <CheckBox
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/shouldFinishLastSong"
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/finish_last_song" />
+        android:text="@string/finish_last_song"
+        android:textAppearance="@style/TextViewSubtitle1" />
 
 </LinearLayout>

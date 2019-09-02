@@ -16,11 +16,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="72dp"
         android:layout_gravity="bottom"
         android:background="@drawable/shadow_up" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,6 +28,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:padding="12dp"
+        android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="@color/md_white_1000" />
 
 </code.name.monkey.retromusic.views.WidthFitSquareLayout>

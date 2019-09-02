@@ -43,7 +43,7 @@
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,6 +53,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:paddingBottom="8dp"
+        android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="@color/md_white_1000"
         tools:text="@string/appbar_scrolling_view_behavior" />
 

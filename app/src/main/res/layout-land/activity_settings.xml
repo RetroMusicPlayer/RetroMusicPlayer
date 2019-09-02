@@ -31,7 +31,7 @@
         app:elevation="0dp">
 
 
-        <androidx.appcompat.widget.Toolbar
+        <code.name.monkey.appthemehelper.common.views.ATEToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"

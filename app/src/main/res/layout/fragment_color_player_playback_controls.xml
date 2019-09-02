@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -27,12 +27,11 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?android:textColorSecondary"
+            android:textAppearance="@style/TextViewOverline"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -41,8 +40,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?android:textColorSecondary"
+            android:textAppearance="@style/TextViewOverline"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -71,9 +69,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -87,12 +84,11 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="@style/TextViewSubtitle1"
             tools:text="Title" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
-            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -101,7 +97,8 @@
             android:maxLines="1"
             android:paddingStart="24dp"
             android:paddingTop="24dp"
-            android:paddingEnd="24dp" />
+            android:paddingEnd="24dp"
+            android:textAppearance="@style/TextViewBody2" />
     </LinearLayout>
 
     <RelativeLayout

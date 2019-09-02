@@ -55,7 +55,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -69,7 +69,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -86,7 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,10 +101,10 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textAppearance="@style/TextViewHeadline6"
             tools:text="@string/bug_report_summary" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textAppearance="@style/TextViewNormal"
             tools:text="@string/bug_report_summary" />
     </LinearLayout>
 

@@ -39,8 +39,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/toolbarContainer"
@@ -59,12 +58,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.Toolbar
+                    <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
-                        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub

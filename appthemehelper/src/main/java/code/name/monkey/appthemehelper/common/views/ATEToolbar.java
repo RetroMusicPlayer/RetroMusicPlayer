@@ -12,21 +12,26 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.appthemehelper.common.views
+package code.name.monkey.appthemehelper.common.views;
 
-import android.content.Context
-import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
-import code.name.monkey.appthemehelper.ThemeStore
-import com.google.android.material.textview.MaterialTextView
+import android.content.Context;
+import android.util.AttributeSet;
 
-class ATEPrimaryTextView @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
-) : MaterialTextView(context, attrs, defStyleAttr) {
+import com.google.android.material.appbar.MaterialToolbar;
 
-    init {
-        setTextColor(ThemeStore.textColorPrimary(context))
+/**
+ * Created by hemanths on 2019-09-02.
+ */
+public class ATEToolbar extends MaterialToolbar {
+    public ATEToolbar(Context context) {
+        super(context);
+    }
+
+    public ATEToolbar(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public ATEToolbar(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 }

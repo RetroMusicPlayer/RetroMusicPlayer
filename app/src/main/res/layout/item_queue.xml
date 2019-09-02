@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|start"
-            android:visibility="gone"
             android:padding="8dp"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
             tools:ignore="ContentDescription"
             tools:visibility="visible" />
@@ -32,16 +32,16 @@
             android:layout_height="match_parent"
             android:layout_weight="0">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/image_text"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:fontFamily="sans-serif"
+                android:fontFeatureSettings="onum"
                 android:gravity="center"
                 android:maxLines="1"
                 android:minWidth="36dp"
                 android:minHeight="40dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textAppearance="@style/TextViewSubtitle1"
                 android:visibility="gone"
                 tools:text="1"
                 tools:visibility="visible" />
@@ -60,25 +60,23 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                 android:id="@+id/title"
-                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textAppearance="@style/TextViewHeadline6"
+                android:textSize="16sp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/text"
-                style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="?android:attr/textColorSecondary" />
+                android:textAppearance="@style/TextViewNormal" />
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView
@@ -88,13 +86,4 @@
             android:layout_weight="0" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/short_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="72dp"
-        android:background="?attr/dividerColor"
-        android:visibility="gone" />
 </FrameLayout>

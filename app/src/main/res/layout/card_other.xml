@@ -17,8 +17,7 @@
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/others"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
-
+            android:textAppearance="@style/TextViewOverline" />
 
         <LinearLayout
             android:id="@+id/changelog"
@@ -36,18 +35,17 @@
 
 
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/changelog"
-                app:fontFamily="@font/circular_std_medium" />
+                android:textAppearance="@style/TextViewSubtitle1" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.85"
-                android:text="@string/changelog_summary" />
+                android:text="@string/changelog_summary"
+                android:textAppearance="@style/TextViewBody2" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,20 +62,18 @@
             android:paddingBottom="8dp"
             tools:ignore="PrivateResource">
 
-
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pref_title_open_source_licences"
-                app:fontFamily="@font/circular_std_medium" />
+                android:textAppearance="@style/TextViewSubtitle1" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.85"
-                android:text="@string/pref_summary_open_source_licences" />
+                android:text="@string/pref_summary_open_source_licences"
+                android:textAppearance="@style/TextViewBody2" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,24 +89,22 @@
             android:paddingBottom="8dp"
             tools:ignore="PrivateResource">
 
-
             <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/version"
-                app:fontFamily="@font/circular_std_medium" />
+                android:textAppearance="@style/TextViewSubtitle1" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/appVersion"
-                style="@style/TextAppearance.MaterialComponents.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.85"
-                android:text="0.0.0" />
+                android:text="0.0.0"
+                android:textAppearance="@style/TextViewBody2" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/madeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,8 +112,6 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/made_with_love"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp" />
+            android:textAppearance="@style/TextViewBody1" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

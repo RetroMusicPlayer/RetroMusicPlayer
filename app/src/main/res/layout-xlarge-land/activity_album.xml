@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
 
-            <androidx.appcompat.widget.Toolbar
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>

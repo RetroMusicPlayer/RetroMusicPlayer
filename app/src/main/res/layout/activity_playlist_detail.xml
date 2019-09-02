@@ -41,9 +41,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp" />
 
-                    <androidx.appcompat.widget.Toolbar
+                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
+                        app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                         app:layout_collapseMode="pin"
                         app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
 
@@ -74,13 +75,13 @@
                 android:layout_height="96dp"
                 app:srcCompat="@drawable/ic_disc_full_black_24dp" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@+id/emptyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/playlist_empty_text"
-                android:textColor="?android:textColorSecondary"
+                android:textAppearance="@style/TextViewNormal"
                 android:visibility="gone"
                 tools:visibility="visible" />
         </LinearLayout>

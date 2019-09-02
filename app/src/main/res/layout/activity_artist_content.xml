@@ -6,44 +6,52 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/playAction"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
             android:padding="10dp"
-            android:text="@string/action_play"
+            android:text="@string/action_play_all"
             android:textAllCaps="false"
+            android:textAppearance="@style/TextViewNormal"
             app:cornerRadius="6dp"
             app:icon="@drawable/ic_play_arrow_white_24dp"
             app:iconGravity="textStart"
+            app:layout_constraintEnd_toStartOf="@+id/shuffleAction"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:backgroundTint="@color/md_grey_900" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/shuffleAction"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="4dp"
             android:layout_marginEnd="4dp"
-            android:layout_weight="1"
             android:padding="10dp"
             android:text="@string/shuffle"
             android:textAllCaps="false"
+            android:textAppearance="@style/TextViewNormal"
             app:cornerRadius="6dp"
             app:icon="@drawable/ic_shuffle_white_24dp"
             app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="@+id/playAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/playAction"
+            app:layout_constraintTop_toTopOf="@+id/playAction"
             tools:backgroundTint="@color/md_grey_900" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/biographyTitle"

@@ -48,16 +48,17 @@
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical"
-                    android:scaleType="centerCrop"  />
+                    android:scaleType="centerCrop" />
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/image_text"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:fontFeatureSettings="onum"
                     android:gravity="center"
                     android:maxLines="1"
                     android:minHeight="40dp"
+                    android:textAppearance="@style/TextViewSubtitle2"
                     android:visibility="gone"
                     tools:text="1"
                     tools:visibility="visible" />
@@ -81,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:textAppearance="@style/TextViewHeadline6"
                 android:textSize="16sp" />
 
             <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
@@ -89,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
-                android:maxLines="1"  />
+                android:maxLines="1"
+                android:textAppearance="@style/TextViewNormal" />
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView
@@ -99,21 +102,4 @@
             android:layout_weight="0" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="?attr/dividerColor"
-        android:visibility="gone" />
-
-    <View
-        android:id="@+id/short_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="72dp"
-        android:background="?attr/dividerColor"
-        android:visibility="gone" />
 </FrameLayout>

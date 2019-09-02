@@ -17,7 +17,7 @@
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/support_development"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline" />
+            android:textAppearance="@style/TextViewOverline" />
 
         <LinearLayout
             android:id="@+id/appGithub"
@@ -47,21 +47,19 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/circular"
                     android:text="@string/git_hub"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
-                    android:text="@string/git_hub_summary" />
+                    android:text="@string/git_hub_summary"
+                    android:textAppearance="@style/TextViewBody2" />
             </LinearLayout>
         </LinearLayout>
 
@@ -93,20 +91,18 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/translate"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
-                    android:text="@string/translate_community" />
+                    android:text="@string/translate_community"
+                    android:textAppearance="@style/TextViewBody2" />
             </LinearLayout>
         </LinearLayout>
 
@@ -140,14 +136,13 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/rate_app"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textAppearance="@style/TextViewBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
@@ -185,14 +180,13 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/donate"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textAppearance="@style/TextViewBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
@@ -229,14 +223,13 @@
                 android:paddingBottom="8dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/report_bug"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Body2"
+                    android:textAppearance="@style/TextViewBody2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:alpha="0.85"
@@ -276,12 +269,11 @@
 
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/action_share"
-                    android:textColor="@color/md_white_1000"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textColor="@color/md_white_1000" />
 
             </LinearLayout>
         </LinearLayout>
@@ -317,12 +309,11 @@
                 android:paddingBottom="8dp">
 
                 <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/faq"
-                    android:textColor="@color/md_white_1000"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textColor="@color/md_white_1000" />
 
             </LinearLayout>
         </LinearLayout>

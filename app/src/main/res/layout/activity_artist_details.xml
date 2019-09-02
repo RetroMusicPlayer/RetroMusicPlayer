@@ -39,7 +39,7 @@
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <androidx.appcompat.widget.Toolbar
+            <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin" />

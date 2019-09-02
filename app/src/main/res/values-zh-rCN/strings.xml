@@ -436,7 +436,6 @@
     <string name="window">窗口</string>
     <string name="now_playing_themes">9 种以上播放界面主题</string>
     <string name="carousal_effect_on_now_playing_screen">在播放界面使用转盘效果</string>
-    <string name="carousal">转盘</string>
     <string name="now_playing_summary">自定义播放界面</string>
     
     <string name="next_song">下一首</string>

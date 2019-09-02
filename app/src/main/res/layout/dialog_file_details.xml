@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
@@ -21,6 +22,7 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
@@ -30,6 +32,7 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
@@ -39,6 +42,7 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
@@ -57,6 +61,7 @@
         android:paddingStart="16dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
@@ -67,6 +72,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:paddingBottom="16dp"
+        android:textAppearance="@style/TextViewNormal"
         android:textSize="16sp" />
 
 </LinearLayout>

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:background="@color/md_black_1000">
+        tools:background="@color/md_grey_500">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/buyProContainer"
@@ -38,17 +38,16 @@
 
                     <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
                         android:id="@+id/text"
-                        style="@style/TextAppearance.MaterialComponents.Overline"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingTop="16dp"
                         android:paddingEnd="0dp"
-                        android:text="@string/upgrade_to_premium" />
+                        android:text="@string/upgrade_to_premium"
+                        android:textAppearance="@style/TextViewOverline" />
 
                     <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
                         android:id="@+id/title"
-                        style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
@@ -56,16 +55,17 @@
                         android:paddingEnd="0dp"
                         android:paddingBottom="8dp"
                         android:text="@string/buy_pro"
+                        android:textAppearance="@style/TextViewHeadline6"
                         android:textColor="@color/md_white_1000" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <code.name.monkey.appthemehelper.common.views.BaselineGridTextView
                         android:id="@+id/text2"
-                        style="@style/TextAppearance.MaterialComponents.Body1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="0dp"
                         android:text="@string/pro_summary"
+                        android:textAppearance="@style/TextViewBody1"
                         android:textColor="@color/md_white_1000" />
                 </LinearLayout>
 
@@ -75,10 +75,10 @@
                     android:layout_height="72dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
-                    app:srcCompat="@drawable/promotional"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/titleContainer" />
+                    app:layout_constraintTop_toTopOf="@id/titleContainer"
+                    app:srcCompat="@drawable/promotional" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buyPremium"
@@ -89,6 +89,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/premium"
+                    android:textAppearance="@style/TextViewNormal"
                     app:icon="@drawable/ic_diamond_stone_white_24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +128,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/general_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body"
+                    android:textAppearance="@style/TextViewNormal"
                     tools:text="Summary" />
             </LinearLayout>
 
@@ -174,8 +174,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/now_playing"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -183,7 +182,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/now_playing_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
 
         </LinearLayout>
@@ -219,8 +218,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_audio"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -228,7 +226,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/audio_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
 
         </LinearLayout>
@@ -264,8 +262,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/personalize"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -273,7 +270,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/personalize_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
         </LinearLayout>
 
@@ -308,8 +305,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_images"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -317,7 +313,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/image_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
         </LinearLayout>
 
@@ -352,8 +348,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/notification"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -361,7 +356,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/notification_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
         </LinearLayout>
 
@@ -398,8 +393,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/others"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
@@ -407,7 +401,7 @@
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
                     android:text="@string/other_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
         </LinearLayout>
 
@@ -444,16 +438,14 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/action_about"
-                    android:textSize="@dimen/ate_default_textsize_subheading"
-                    app:fontFamily="@font/circular_std_medium" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
                 <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:maxLines="4"
                     android:text="@string/about_settings_summary"
-                    android:textSize="@dimen/ate_default_textsize_body" />
+                    android:textAppearance="@style/TextViewNormal" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

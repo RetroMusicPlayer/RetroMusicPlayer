@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-
     <RelativeLayout
         android:id="@+id/progressContainer"
         android:layout_width="match_parent"
@@ -43,7 +42,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
@@ -57,7 +56,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />

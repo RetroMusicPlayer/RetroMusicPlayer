@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,10 +9,12 @@
 
     <code.name.monkey.retromusic.views.RetroChip
         android:id="@+id/chipHead"
+        style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
-        android:fontFamily="@font/circular"
+        android:textAppearance="@style/ChipFont"
+        android:textColor="?android:textColorSecondary"
         app:chipIconTint="?iconColor"
         app:chipStrokeColor="?dividerColor"
         app:chipStrokeWidth="1dp"

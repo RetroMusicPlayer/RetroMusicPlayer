@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.player.material
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +8,12 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import kotlinx.android.synthetic.main.fragment_material.*
-import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -47,15 +44,15 @@ class MaterialFragment : AbsPlayerFragment() {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context!!, R.attr.iconColor)
+        return ATHUtil.resolveColor(requireContext(), R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
         playbackControlsFragment.setDark(color)
         lastColor = color
-        callbacks!!.onPaletteColorChanged()
+        callbacks?.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context!!, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.iconColor), requireActivity())
     }
 
     override fun toggleFavorite(song: Song) {
@@ -90,9 +87,9 @@ class MaterialFragment : AbsPlayerFragment() {
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@MaterialFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
         }
     }
 

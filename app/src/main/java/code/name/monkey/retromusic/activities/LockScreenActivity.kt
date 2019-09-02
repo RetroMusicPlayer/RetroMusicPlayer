@@ -9,12 +9,12 @@ import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
@@ -57,11 +57,13 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
                     }
 
-                    override fun onSlideClosed() {
+                    override fun onSlideClosed(): Boolean {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
                             keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
                         }
+                        finish()
+                        return true
                     }
                 })
                 .position(SlidrPosition.BOTTOM)

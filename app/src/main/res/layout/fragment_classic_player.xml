@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/status_bar_padding" />
 
-                    <androidx.appcompat.widget.Toolbar
+                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
                         android:background="@android:color/transparent"

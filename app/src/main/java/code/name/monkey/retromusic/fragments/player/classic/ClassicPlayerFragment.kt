@@ -302,8 +302,6 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
         currentSongViewHolder = MediaEntryViewHolder(fragment.view?.findViewById(R.id.currentSong)!!)
 
         currentSongViewHolder?.apply {
-            separator?.visibility = View.VISIBLE
-            shortSeparator?.visibility = View.GONE
             image?.apply {
                 scaleType = ImageView.ScaleType.CENTER
                 setColorFilter(ATHUtil.resolveColor(fragment.activity!!, R.attr.iconColor, ThemeStore.textColorSecondary(fragment.activity!!)), PorterDuff.Mode.SRC_IN)

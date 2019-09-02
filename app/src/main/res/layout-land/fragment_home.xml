@@ -53,12 +53,12 @@
                 app:strokeColor="?dividerColor"
                 app:strokeWidth="1dp">
 
-                <androidx.appcompat.widget.Toolbar
+                <code.name.monkey.appthemehelper.common.views.ATEToolbar
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:title="@string/search_hint"
                     app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                     tools:ignore="UnusedAttribute" />
             </com.google.android.material.card.MaterialCardView>
 

@@ -41,20 +41,20 @@
         android:layout_gravity="center"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:visibility="visible"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <code.name.monkey.retromusic.views.IconImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
             app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/start_play_music"
-            android:textColor="?android:textColorSecondary" />
+            android:textAppearance="@style/TextViewNormal" />
     </LinearLayout>
 </LinearLayout>

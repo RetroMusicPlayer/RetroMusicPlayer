@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -81,12 +80,12 @@
                         app:cardUseCompatPadding="true"
                         app:layout_scrollFlags="scroll|enterAlways">
 
-                        <androidx.appcompat.widget.Toolbar
+                        <code.name.monkey.appthemehelper.common.views.ATEToolbar
                             android:id="@+id/toolbar"
                             style="@style/Toolbar"
                             app:title="@string/search_hint"
                             app:titleMarginStart="0dp"
-                            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                            app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                             tools:ignore="UnusedAttribute" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>

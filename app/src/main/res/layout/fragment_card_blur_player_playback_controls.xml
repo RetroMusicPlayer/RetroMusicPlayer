@@ -15,39 +15,6 @@
         android:orientation="vertical"
         tools:ignore="MissingPrefix">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:freezesText="true"
-                android:gravity="center"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                tools:text="@string/pref_title_user_info" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:alpha="0.5"
-                android:gravity="center_horizontal"
-                android:maxLines="1"
-                tools:text="@string/action_share" />
-
-        </LinearLayout>
-
         <include layout="@layout/volume_controls" />
 
         <include layout="@layout/media_button" />

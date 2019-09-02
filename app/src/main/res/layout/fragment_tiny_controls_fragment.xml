@@ -8,7 +8,6 @@
     android:gravity="end"
     android:orientation="vertical">
 
-
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"

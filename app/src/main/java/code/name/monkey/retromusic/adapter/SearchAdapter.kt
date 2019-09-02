@@ -82,12 +82,6 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
         init {
             itemView.setOnLongClickListener(null)
 
-            if (itemViewType != HEADER) {
-                if (separator != null) {
-                    separator!!.visibility = View.GONE
-                }
-            }
-
             if (menu != null) {
                 if (itemViewType == SONG) {
                     menu!!.visibility = View.VISIBLE

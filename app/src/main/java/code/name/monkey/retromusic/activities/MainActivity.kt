@@ -48,11 +48,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun createContentView(): View {
-        @SuppressLint("InflateParams")
-        val contentView = layoutInflater.inflate(R.layout.activity_main_drawer_layout, null)
-        val drawerContent = contentView.findViewById<ViewGroup>(R.id.drawer_content_container)
-        drawerContent.addView(wrapSlidingMusicPanel(R.layout.activity_main_content))
-        return contentView
+        return wrapSlidingMusicPanel(R.layout.activity_main_content)
     }
 
     override fun onCreate(

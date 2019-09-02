@@ -28,13 +28,13 @@
             android:layout_height="96dp"
             app:srcCompat="@drawable/ic_music_note_off_white_24dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
             android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/empty"
-            android:textColor="?android:textColorSecondary"
+            android:textAppearance="@style/TextViewNormal"
             tools:visibility="visible" />
     </LinearLayout>
 </FrameLayout>

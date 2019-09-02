@@ -47,11 +47,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.Toolbar
+                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
                         app:title="@string/folders"
                         app:titleMarginStart="0dp"
+                        app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub
@@ -77,14 +78,13 @@
                 android:layoutAnimation="@anim/layout_animation_fall_down"
                 android:scrollbars="none" />
 
-            <TextView
+            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
                 android:id="@android:id/empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/empty"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/empty_text_size" />
+                android:textAppearance="@style/TextViewNormal" />
 
         </FrameLayout>
 
