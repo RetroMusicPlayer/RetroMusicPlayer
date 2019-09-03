@@ -44,7 +44,6 @@
         <item>@string/light_theme_name</item>
         <item>@string/dark_theme_name</item>
         <item>@string/black_theme_name</item>
-        <item>@string/color_theme_name</item>
     </string-array>
 
     <string-array name="pref_grid_style_list_titles">
@@ -96,7 +95,6 @@
         <item>light</item>
         <item>dark</item>
         <item>black</item>
-        <item>color</item>
     </string-array>
 
     <array name="pref_auto_download_images_values">

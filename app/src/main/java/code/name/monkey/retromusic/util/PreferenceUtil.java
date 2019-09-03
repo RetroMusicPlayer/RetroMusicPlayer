@@ -150,16 +150,12 @@ public final class PreferenceUtil {
     }
 
     @StyleRes
-    public static int getThemeResFromPrefValue(String themePrefValue) {
+    public static int getThemeResFromPrefValue(@NonNull String themePrefValue) {
         switch (themePrefValue) {
             case "light":
                 return R.style.Theme_RetroMusic_Light;
-            case "color":
-                return R.style.Theme_RetroMusic_Color;
             case "black":
                 return R.style.Theme_RetroMusic_Black;
-            case "daynight":
-                return R.style.Theme_RetroMusic_DayNight;
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;

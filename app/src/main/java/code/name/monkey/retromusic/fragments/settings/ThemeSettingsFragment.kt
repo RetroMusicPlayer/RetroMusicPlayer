@@ -15,15 +15,15 @@
 package code.name.monkey.retromusic.fragments.settings
 
 import android.graphics.Color
-import android.graphics.Color.BLUE
 import android.os.Build
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.appthemehelper.*
+import code.name.monkey.appthemehelper.ACCENT_COLORS
+import code.name.monkey.appthemehelper.ACCENT_COLORS_SUB
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
-import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.App
@@ -49,45 +49,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
 
-        val categoryColor: ATEPreferenceCategory? = findPreference("category_color")
-        val primaryColorPref = ATEColorPreference(preferenceScreen.context)
-        val primaryColor = ThemeStore.primaryColor(requireContext())
-
-        primaryColorPref.apply {
-            key = "primary_color"
-            isPersistent = false
-            setSummary(R.string.primary_color_desc)
-            setTitle(R.string.primary_color)
-            isCopyingEnabled = true
-            setIcon(R.drawable.ic_colorize_white_24dp)
-            setColor(primaryColor, ColorUtil.darkenColor(primaryColor))
-            setOnPreferenceClickListener {
-                materialDialog = MaterialDialog(requireContext(), BottomSheet()).show {
-                    title(R.string.primary_color)
-                    positiveButton(R.string.set)
-                    colorChooser(initialSelection = BLUE,
-                            allowCustomArgb = true,
-                            colors = PRIMARY_COLORS,
-                            subColors = PRIMARY_COLORS_SUB) { _, color ->
-
-                        val theme = if (ColorUtil.isColorLight(color))
-                            PreferenceUtil.getThemeResFromPrefValue("light")
-                        else
-                            PreferenceUtil.getThemeResFromPrefValue("dark")
-
-                        ThemeStore.editTheme(requireContext()).activityTheme(theme).primaryColor(color).commit()
-
-                        if (VersionUtils.hasNougatMR())
-                            DynamicShortcutManager(context).updateDynamicShortcuts()
-                        requireActivity().recreate()
-                    }
-                }
-                true
-            }
-        }
-
         val generalTheme: Preference? = findPreference("general_theme")
-
         generalTheme?.let {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
@@ -100,16 +62,19 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
                 setSummary(generalTheme, newValue)
 
-                when (theme) {
-                    "light" -> ThemeStore.editTheme(requireContext()).primaryColor(Color.WHITE).commit()
-                    "black" -> ThemeStore.editTheme(requireContext()).primaryColor(Color.BLACK).commit()
-                    "dark" -> ThemeStore.editTheme(requireContext()).primaryColor(ContextCompat.getColor(requireContext(), R.color.md_grey_900)).commit()
-                    "color" -> ThemeStore.editTheme(requireContext()).primaryColor(ContextCompat.getColor(requireContext(), R.color.md_blue_grey_800)).commit()
+                val color = when (theme) {
+                    "light" -> Color.WHITE
+                    "black" -> Color.BLACK
+                    "dark" -> ContextCompat.getColor(requireContext(), R.color.md_grey_900)
+                    else -> Color.WHITE
                 }
 
                 ThemeStore.editTheme(requireContext())
                         .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
+                        .primaryColor(color)
                         .commit()
+
+                ThemeStore.markChanged(requireContext())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                     requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
@@ -129,10 +94,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
-                    /*var colorFinal = Color.BLACK;
-                    if (!ColorUtil.isColorSaturated(color)) {
-                        colorFinal = color
-                    }*/
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
@@ -153,10 +114,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }
-        }
-
-        if (PreferenceUtil.getInstance().generalTheme == R.style.Theme_RetroMusic_Color && App.isProVersion) {
-            categoryColor?.addPreference(primaryColorPref)
         }
     }
 

@@ -27,14 +27,21 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    private val upNextAndQueueTime: String
-        get() = resources.getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position))
+
+    protected fun getUpNextAndQueueTime(): String {
+        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
+
+        return MusicUtil.buildInfoString(
+                resources.getString(R.string.up_next),
+                MusicUtil.getReadableDurationString(duration)
+        )
+    }
 
     override fun onCreate(
             savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_playing_queue)
+        setContentView(code.name.monkey.retromusic.R.layout.activity_playing_queue)
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -67,7 +74,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
                 this,
                 MusicPlayerRemote.playingQueue,
                 MusicPlayerRemote.position,
-                R.layout.item_queue)
+                code.name.monkey.retromusic.R.layout.item_queue)
         wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(playingQueueAdapter!!)
 
         linearLayoutManager = LinearLayoutManager(this)
@@ -107,7 +114,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         updateCurrentSong()
     }
 
-    private fun updateCurrentSong() {}
+    private fun updateCurrentSong() {
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
+    }
 
     override fun onPlayingMetaChanged() {
         updateQueuePosition()
@@ -116,6 +125,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private fun updateQueuePosition() {
         playingQueueAdapter!!.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
@@ -141,8 +151,6 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             recyclerViewDragDropManager = null
         }
 
-
-
         if (wrappedAdapter != null) {
             WrapperAdapterUtils.releaseAll(wrappedAdapter)
             wrappedAdapter = null
@@ -152,7 +160,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupToolbar() {
-        playerQueueSubHeader.text = upNextAndQueueTime
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
         playerQueueSubHeader.setTextColor(ThemeStore.accentColor(this))
 
         applyToolbar(toolbar)
