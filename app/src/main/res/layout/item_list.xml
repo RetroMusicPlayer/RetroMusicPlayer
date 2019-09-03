@@ -92,7 +92,8 @@
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewNormal" />
+                android:textAppearance="@style/TextViewNormal"
+                app:lineHeightHint="18sp" />
         </LinearLayout>
 
         <code.name.monkey.retromusic.views.IconImageView

@@ -14,6 +14,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
@@ -30,9 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:padding="14dp"
-        app:srcCompat="@drawable/ic_folder_white_24dp" />
+        tools:srcCompat="@drawable/ic_folder_white_24dp" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

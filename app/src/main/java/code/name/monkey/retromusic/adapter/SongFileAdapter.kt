@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -27,7 +26,12 @@ import java.text.DecimalFormat
 import java.util.*
 
 
-class SongFileAdapter(private val activity: AppCompatActivity, private var dataSet: List<File>?, @param:LayoutRes private val itemLayoutRes: Int, private val callbacks: Callbacks?, cabHolder: CabHolder?) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+class SongFileAdapter(
+        private val activity: AppCompatActivity,
+        private var dataSet: List<File>?,
+        private val itemLayoutRes: Int,
+        private val callbacks: Callbacks?,
+        cabHolder: CabHolder?) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     init {
         this.setHasStableIds(true)

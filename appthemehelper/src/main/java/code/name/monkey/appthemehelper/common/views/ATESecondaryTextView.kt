@@ -23,7 +23,7 @@ class ATESecondaryTextView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : MaterialTextView(context, attrs, defStyleAttr) {
+) : BaselineGridTextView(context, attrs, defStyleAttr) {
 
     init {
         setTextColor(ThemeStore.textColorSecondary(context))
