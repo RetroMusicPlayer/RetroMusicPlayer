@@ -22,9 +22,9 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
  * @author Hemanth S (h4h13).
  */
 
-abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
+abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
         Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
@@ -67,7 +67,7 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
         invalidateSettings()
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference) {
+    /*override fun onDisplayPreferenceDialog(preference: Preference) {
         var dialogFragment: DialogFragment? = null// Dialog creation could not be handled here. Try with the super method.
         // The dialog was created (it was one of our custom Preferences), show the dialog for it
         when (preference) {
@@ -88,6 +88,19 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
         } else {
             // Dialog creation could not be handled here. Try with the super method.
             super.onDisplayPreferenceDialog(preference);
+        }
+    }*/
+    override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {
+        return when (preference) {
+            is LibraryPreference -> LibraryPreferenceDialog.newInstance(preference.key)
+            is NowPlayingScreenPreference -> NowPlayingScreenPreferenceDialog.newInstance(preference.key)
+            is AlbumCoverStylePreference -> AlbumCoverStylePreferenceDialog.newInstance(preference.key)
+            is MaterialListPreference -> {
+                preference.entries
+                MaterialListPreferenceDialog.newInstance(preference)
+            }
+            is BlacklistPreference -> BlacklistPreferenceDialog.newInstance()
+            else -> super.onCreatePreferenceDialog(preference)
         }
     }
 }

@@ -37,7 +37,7 @@ import code.name.monkey.retromusic.R;
 public class RetroColorUtil {
     public static int toolbarColor(@NonNull Context context) {
         int color = ThemeStore.Companion.primaryColor(context);
-        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context) && PreferenceUtil.getInstance().getGeneralTheme() != R.style.Theme_RetroMusic_Color) {
+        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
             return ATHUtil.INSTANCE.resolveColor(context, R.attr.cardBackgroundColor);
         } else {
             return color;

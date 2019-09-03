@@ -51,17 +51,6 @@
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Color" parent="@style/Theme.RetroMusic.Base">
-        <item name="colorPrimary">@color/md_deep_purple_A400</item>
-        <item name="android:colorPrimary">?colorPrimary</item>
-        <item name="android:windowBackground">?colorPrimary</item>
-
-        <item name="md_color_button_text">@color/md_white_1000</item>
-
-        <item name="windowActionBar">false</item>
-
-    </style>
-
     <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
 
         <item name="dividerColor">@color/dark_color</item>
