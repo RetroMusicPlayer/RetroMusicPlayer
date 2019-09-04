@@ -16,11 +16,12 @@ package code.name.monkey.retromusic.rest;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import code.name.monkey.retromusic.rest.service.LastFMService;
 import okhttp3.Cache;
 import okhttp3.Call;
@@ -43,7 +44,7 @@ public class LastFMRestClient {
         this(createDefaultOkHttpClientBuilder(context).build());
     }
 
-    public LastFMRestClient(@NonNull Call.Factory client) {
+    private LastFMRestClient(@NonNull Call.Factory client) {
         Retrofit restAdapter = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .callFactory(client)
@@ -72,7 +73,8 @@ public class LastFMRestClient {
         };
     }
 
-    public static OkHttpClient.Builder createDefaultOkHttpClientBuilder(Context context) {
+    @NonNull
+    private static OkHttpClient.Builder createDefaultOkHttpClientBuilder(@NonNull Context context) {
         return new OkHttpClient.Builder()
                 .connectionPool(new ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
                 .retryOnConnectionFailure(true)
@@ -83,6 +85,7 @@ public class LastFMRestClient {
                 .addInterceptor(createCacheControlInterceptor());
     }
 
+    @NonNull
     public LastFMService getApiService() {
         return apiService;
     }

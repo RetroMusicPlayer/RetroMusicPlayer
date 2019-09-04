@@ -16,9 +16,9 @@ package code.name.monkey.retromusic.rest.service;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import code.name.monkey.retromusic.rest.model.LastFmAlbum;
 import code.name.monkey.retromusic.rest.model.LastFmArtist;
-import code.name.monkey.retromusic.rest.model.LastFmTrack;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -37,12 +37,11 @@ public interface LastFMService {
     Observable<LastFmAlbum> getAlbumInfo(@Query("album") @NonNull String albumName, @Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language);
 
     @NonNull
-    @GET("?api_key=" + API_KEY + "&format=json&autocorrect=1" + "&method=" + METHOD_TRACK)
-    Observable<LastFmTrack> getTrackInfo(@Query("artist") @NonNull String artist, @Query("track") @NonNull String track);
+    @GET(BASE_QUERY_PARAMETERS + "&method=artist.getinfo")
+    Call<LastFmArtist> getArtistInfo(@Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language, @Nullable @Header("Cache-Control") String cacheControl);
 
     @NonNull
     @GET(BASE_QUERY_PARAMETERS + "&method=artist.getinfo")
-    default Call<LastFmArtist> getArtistInfo(@Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language, @Nullable @Header("Cache-Control") String cacheControl) {
-        return null;
-    }
+    Observable<LastFmArtist> getArtistInfoFloable(@Query("artist") @NonNull String artistName, @Nullable @Query("lang") String language, @Nullable @Header("Cache-Control") String cacheControl);
+
 }

@@ -16,28 +16,22 @@ package code.name.monkey.retromusic.fragments.mainactivity
 
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.mvp.contract.GenreContract
-import code.name.monkey.retromusic.mvp.presenter.GenrePresenter
+import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
+import code.name.monkey.retromusic.mvp.presenter.GenresView
+import javax.inject.Inject
 
 
-class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenreContract.GenreView {
-    override fun loading() {
-
-    }
-
-    override fun showData(list: ArrayList<Genre>) {
-        adapter?.swapDataSet(list)
+class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenresView {
+    override fun genres(genres: ArrayList<Genre>) {
+        adapter?.swapDataSet(genres)
     }
 
     override fun showEmptyView() {
-
-    }
-
-    override fun completed() {
 
     }
 
@@ -53,28 +47,31 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     override val emptyMessage: Int
         get() = R.string.no_genres
 
-    private lateinit var presenter: GenrePresenter
+
+    @Inject
+    lateinit var genresPresenter: GenresPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        presenter = GenrePresenter(this)
+        App.musicComponent.inject(this)
+        genresPresenter.attachView(this)
     }
 
     override fun onResume() {
         super.onResume()
         if (adapter!!.dataSet.isEmpty()) {
-            presenter.subscribe()
+            genresPresenter.loadGenres()
         }
     }
 
-    override fun onDestroy() {
-        presenter.unsubscribe()
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        genresPresenter.detachView()
     }
 
     override fun onMediaStoreChanged() {
-        presenter.loadGenre()
+        genresPresenter.loadGenres()
     }
 
     companion object {

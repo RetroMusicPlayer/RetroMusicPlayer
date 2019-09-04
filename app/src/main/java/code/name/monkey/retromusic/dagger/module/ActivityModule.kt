@@ -12,22 +12,21 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp.contract
+package code.name.monkey.retromusic.dagger.module
 
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.BasePresenter
-import code.name.monkey.retromusic.mvp.BaseView
+import android.app.Activity
 
-import java.util.ArrayList
+import dagger.Module
+import dagger.Provides
 
 /**
- * Created by hemanths on 19/08/17.
+ * Created by hemanths on 2019-09-04.
  */
+@Module
+class ActivityModule(private val activity: Activity) {
 
-interface PlaylistContract {
-    interface PlaylistView : BaseView<ArrayList<Playlist>>
-
-    interface Presenter : BasePresenter<PlaylistView> {
-        fun loadPlaylists()
+    @Provides
+    fun provideActivity(): Activity {
+        return activity
     }
 }

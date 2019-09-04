@@ -12,22 +12,20 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp.contract
+package code.name.monkey.retromusic.dagger.module
 
-
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.BasePresenter
-import code.name.monkey.retromusic.mvp.BaseView
-
+import code.name.monkey.retromusic.mvp.presenter.SongPresenter
+import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
+import dagger.Module
+import dagger.Provides
 
 /**
- * Created by hemanths on 20/08/17.
+ * Created by hemanths on 2019-09-04.
  */
-
-interface ArtistDetailContract {
-    interface ArtistsDetailsView : BaseView<Artist>
-
-    interface Presenter : BasePresenter<ArtistsDetailsView> {
-        fun loadArtistById()
+@Module
+class SongModule {
+    @Provides
+    fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
+        return presenter
     }
 }

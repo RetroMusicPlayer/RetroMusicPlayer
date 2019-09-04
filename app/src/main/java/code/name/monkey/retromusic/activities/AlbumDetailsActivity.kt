@@ -18,6 +18,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
@@ -26,6 +27,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -34,8 +36,9 @@ import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
 import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.mvp.contract.AlbumDetailsContract
+import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
+import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -45,10 +48,10 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
 import java.util.*
+import javax.inject.Inject
 
-class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContract.AlbumDetailsView {
+class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
-    private lateinit var albumDetailsPresenter: AlbumDetailsPresenter
     private lateinit var simpleSongAdapter: SimpleSongAdapter
     private var disposable = CompositeDisposable()
 
@@ -67,6 +70,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         window.enterTransition = slide
     }
 
+    @Inject
+    lateinit var albumDetailsPresenter: AlbumDetailsPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         setupWindowTransition()
@@ -81,10 +87,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
 
         artistImage = findViewById(R.id.artistImage)
 
-        val albumId = intent.getIntExtra(EXTRA_ALBUM_ID, -1)
-        albumDetailsPresenter = AlbumDetailsPresenter(this, albumId)
-        albumDetailsPresenter.subscribe()
-
         setupRecyclerView()
         setupToolbarMarginHeight()
 
@@ -97,6 +99,15 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         }
         shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
+        }
+
+        App.musicComponent.inject(this)
+        albumDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
+            albumDetailsPresenter.loadAlbum(intent.extras!!.getInt(EXTRA_ALBUM_ID))
+        } else {
+            finish()
         }
     }
 
@@ -151,42 +162,31 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        albumDetailsPresenter.unsubscribe()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         disposable.dispose()
+        albumDetailsPresenter.detachView()
     }
 
-    override fun loading() {
-
-    }
-
-    override fun showEmptyView() {
-
-    }
-
-    override fun completed() {
+    override fun complete() {
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun showData(list: Album) {
-        if (list.songs!!.isEmpty()) {
+    override fun album(album: Album) {
+
+        if (album.songs!!.isEmpty()) {
             finish()
             return
         }
-        this.album = list
+        this.album = album
 
-        albumTitle.text = list.title
-        albumText.text = String.format("%s • %s • %s", list.artistName, MusicUtil.getYearString(list.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, list.songs)))
+        albumTitle.text = album.title
+        albumText.text = String.format("%s • %s • %s", album.artistName, MusicUtil.getYearString(album.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
 
         loadAlbumCover()
-        loadMoreFrom(list)
+        simpleSongAdapter.swapDataSet(album.songs)
 
-        simpleSongAdapter.swapDataSet(list.songs)
+        albumDetailsPresenter.loadMore(album.artistId)
     }
 
     private lateinit var artistImage: ImageView
@@ -194,17 +194,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     private fun loadMoreFrom(album: Album) {
         disposable.add(ArtistLoader.getArtistFlowable(this, album.artistId)
                 .map {
-                    GlideApp.with(this@AlbumDetailsActivity)
-                            .asBitmapPalette()
-                            .load(RetroGlideExtension.getArtistModel(it))
-                            .transition(RetroGlideExtension.getDefaultTransition())
-                            .artistOptions(it)
-                            .dontAnimate()
-                            .into(object : RetroMusicColoredTarget(artistImage) {
-                                override fun onColorReady(color: Int) {
 
-                                }
-                            })
                     return@map it.albums!!
                 }
                 .map { it.filter { albumSearch -> albumSearch.id != album.id } }
@@ -227,6 +217,30 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                 })
     }
 
+    override fun moreAlbums(albums: ArrayList<Album>) {
+        moreTitle.show()
+        moreRecyclerView.show()
+        moreTitle.text = String.format("More from %s", album.artistName)
+
+        val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
+        moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
+        moreRecyclerView.adapter = albumAdapter
+    }
+
+    override fun loadArtistImage(artist: Artist) {
+        GlideApp.with(this@AlbumDetailsActivity)
+                .asBitmapPalette()
+                .load(RetroGlideExtension.getArtistModel(artist))
+                .transition(RetroGlideExtension.getDefaultTransition())
+                .artistOptions(artist)
+                .dontAnimate()
+                .into(object : RetroMusicColoredTarget(artistImage) {
+                    override fun onColorReady(color: Int) {
+
+                    }
+                })
+    }
+
     private fun loadAlbumCover() {
         GlideApp.with(this)
                 .asBitmapPalette()
@@ -238,7 +252,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
-
                 })
     }
 
@@ -337,7 +350,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsContrac
     }
 
     private fun reload() {
-        albumDetailsPresenter.subscribe()
+        albumDetailsPresenter.loadAlbum(intent.extras!!.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID))
     }
 
     companion object {

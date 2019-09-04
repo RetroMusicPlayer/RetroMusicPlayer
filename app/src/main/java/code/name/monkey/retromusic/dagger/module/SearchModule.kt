@@ -12,22 +12,22 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp.contract
+package code.name.monkey.retromusic.dagger.module
 
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.mvp.BasePresenter
-import code.name.monkey.retromusic.mvp.BaseView
-
-import java.util.ArrayList
+import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
+import code.name.monkey.retromusic.mvp.presenter.SearchPresenter.SearchPresenterImpl
+import dagger.Module
+import dagger.Provides
 
 /**
- * @author Hemanth S (h4h13).
+ * Created by hemanths on 2019-09-04.
  */
+@Module
+class SearchModule {
 
-interface GenreContract {
-    interface GenreView : BaseView<ArrayList<Genre>>
-
-    interface Presenter : BasePresenter<GenreView> {
-        fun loadGenre()
+    @Provides
+    fun providesSearchPresenter(presenter: SearchPresenterImpl): SearchPresenter {
+        return presenter
     }
+
 }

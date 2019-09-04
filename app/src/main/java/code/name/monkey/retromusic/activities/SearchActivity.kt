@@ -21,19 +21,22 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.SearchAdapter
-import code.name.monkey.retromusic.mvp.contract.SearchContract
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
+import code.name.monkey.retromusic.mvp.presenter.SearchView
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
+import javax.inject.Inject
 
-class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchContract.SearchView, TextWatcher {
+class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
+    @Inject
+    lateinit var searchPresenter: SearchPresenter
 
-    private lateinit var searchPresenter: SearchPresenter
     private var searchAdapter: SearchAdapter? = null
     private var query: String? = null
 
@@ -42,7 +45,9 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        searchPresenter = SearchPresenter(this)
+        App.musicComponent.inject(this)
+
+        searchPresenter.attachView(this)
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
@@ -105,13 +110,12 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
 
     override fun onResume() {
         super.onResume()
-        searchPresenter.subscribe()
         searchPresenter.search(query)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        searchPresenter.unsubscribe()
+        searchPresenter.detachView()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -158,16 +162,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, SearchCon
         }
     }
 
-    override fun loading() {
-
-    }
-
     override fun showEmptyView() {
         searchAdapter!!.swapDataSet(ArrayList())
-    }
-
-    override fun completed() {
-
     }
 
     override fun showData(list: MutableList<Any>) {

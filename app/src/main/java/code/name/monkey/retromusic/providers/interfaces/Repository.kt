@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.providers.interfaces
 
 import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.rest.model.LastFmArtist
 import io.reactivex.Observable
 
 /**
@@ -87,4 +88,7 @@ interface Repository {
 
     val favoritePlaylist: ArrayList<Playlist>
 
+    fun artistInfoFloable(name: String,
+                          lang: String?,
+                          cache: String?): Observable<LastFmArtist>
 }

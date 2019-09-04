@@ -15,30 +15,45 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.PlaylistSongsContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
 /**
  * Created by hemanths on 20/08/17.
  */
+interface PlaylistSongsView : BaseView {
+    fun songs(songs: ArrayList<Song>)
+}
 
-class PlaylistSongsPresenter(private val view: PlaylistSongsContract.PlaylistSongsView,
-                             private val mPlaylist: Playlist) : Presenter(), PlaylistSongsContract.Presenter {
+interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
+    fun loadPlaylistSongs(playlist: Playlist)
 
+    class PlaylistSongsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<PlaylistSongsView>(), PlaylistSongsPresenter {
 
-    override fun subscribe() {
-        loadSongs(mPlaylist)
-    }
+        private var disposable: Disposable? = null
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+        override fun loadPlaylistSongs(playlist: Playlist) {
+            disposable = repository.getPlaylistSongsFlowable(playlist)
+                    .subscribe {
+                        view.songs(it)
+                    }
+        }
 
-    override fun loadSongs(playlist: Playlist) {
-        disposable.add(repository.getPlaylistSongsFlowable(playlist)
-                .doOnSubscribe { view.loading() }
-                .subscribe({ songs -> view.showData(songs) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
+        override fun detachView() {
+            super.detachView()
+            disposable?.dispose()
+        }
+
+        override fun attachView(view: PlaylistSongsView) {
+            super.attachView(view)
+        }
+
     }
 }

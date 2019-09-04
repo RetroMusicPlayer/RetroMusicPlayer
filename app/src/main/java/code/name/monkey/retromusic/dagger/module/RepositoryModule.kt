@@ -12,21 +12,23 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp.contract
+package code.name.monkey.retromusic.dagger.module
 
-import code.name.monkey.retromusic.mvp.BasePresenter
-import code.name.monkey.retromusic.mvp.BaseView
-import java.util.*
+import android.content.Context
 
+import code.name.monkey.retromusic.providers.RepositoryImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import dagger.Module
+import dagger.Provides
 
 /**
- * Created by hemanths on 20/08/17.
+ * Created by hemanths on 2019-09-04.
  */
+@Module(includes = [AppModule::class])
+class RepositoryModule {
 
-interface SearchContract {
-    interface SearchView : BaseView<MutableList<Any>>
-
-    interface SearchPresenter : BasePresenter<SearchView> {
-        fun search(query: String?)
+    @Provides
+    fun providesRepository(context: Context): Repository {
+        return RepositoryImpl(context)
     }
 }
