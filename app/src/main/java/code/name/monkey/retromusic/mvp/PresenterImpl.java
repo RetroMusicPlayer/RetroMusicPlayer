@@ -12,24 +12,19 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp.contract
-
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.BasePresenter
-import code.name.monkey.retromusic.mvp.BaseView
-
-import java.util.ArrayList
-
+package code.name.monkey.retromusic.mvp;
 
 /**
- * Created by hemanths on 20/08/17.
+ * Created by hemanths on 2019-09-04.
  */
+public abstract class PresenterImpl<T> {
+    protected T view;
 
-interface PlaylistSongsContract {
-    interface PlaylistSongsView : BaseView<ArrayList<Song>>
+    public void attachView(T view) {
+        this.view = view;
+    }
 
-    interface Presenter : BasePresenter<PlaylistSongsView> {
-        fun loadSongs(playlist: Playlist)
+    public void detachView() {
+        view = null;
     }
 }

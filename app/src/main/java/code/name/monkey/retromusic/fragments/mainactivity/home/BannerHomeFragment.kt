@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
@@ -29,8 +30,8 @@ import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
-import code.name.monkey.retromusic.mvp.contract.HomeContract
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
+import code.name.monkey.retromusic.mvp.presenter.HomeView
 import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -41,12 +42,29 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 import java.io.File
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeContract.HomeView {
+class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
+
+    override fun sections(sections: ArrayList<Home>) {
+        val finalList = sections.sortedWith(compareBy { it.priority })
+        homeAdapter.swapData(finalList)
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
+        }
+        if (sections.isEmpty()) {
+            showEmptyView()
+        } else {
+            emptyContainer.hide()
+        }
+    }
+
+    @Inject
+    lateinit var homePresenter: HomePresenter
 
     private var disposable: CompositeDisposable = CompositeDisposable()
-    private lateinit var homePresenter: HomePresenter
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -83,7 +101,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homePresenter = HomePresenter(this)
+        App.musicComponent.inject(this)
+        homePresenter.attachView(this)
     }
 
 
@@ -108,21 +127,17 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
 
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(requireActivity()) , true)
+            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(requireActivity()), true)
         }
 
         history.setOnClickListener {
             NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
-        homePresenter = HomePresenter(this)
-
         contentContainer.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
 
         setupToolbar()
         homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
-
-        homePresenter.subscribe()
 
         checkPadding()
 
@@ -131,6 +146,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance().userName)
+
+        homePresenter.loadSections()
     }
 
     private fun checkPadding() {
@@ -177,19 +194,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onDestroyView() {
         super.onDestroyView()
         disposable.dispose()
-        homePresenter.unsubscribe()
-    }
-
-    override fun loading() {
-
+        homePresenter.detachView()
     }
 
     override fun showEmptyView() {
         emptyContainer.show()
-    }
-
-    override fun completed() {
-
     }
 
     override fun onServiceConnected() {
@@ -203,20 +212,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private lateinit var homeAdapter: HomeAdapter
-
-    override fun showData(list: ArrayList<Home>) {
-        val finalList = list.sortedWith(compareBy { it.priority })
-        homeAdapter.swapData(finalList)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(mainActivity)
-            adapter = homeAdapter
-        }
-        if (list.isEmpty()) {
-            showEmptyView()
-        } else {
-            emptyContainer.hide()
-        }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

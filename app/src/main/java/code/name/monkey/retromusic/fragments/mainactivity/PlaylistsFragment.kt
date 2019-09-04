@@ -4,26 +4,28 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.contract.PlaylistContract
-import code.name.monkey.retromusic.mvp.presenter.PlaylistPresenter
-import java.util.*
+import code.name.monkey.retromusic.mvp.presenter.PlaylistView
+import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
+import javax.inject.Inject
 
 
-class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistContract.PlaylistView {
+class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView {
 
-    private lateinit var presenter: PlaylistPresenter
+    @Inject
+    lateinit var playlistsPresenter: PlaylistsPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_playlists
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        presenter = PlaylistPresenter(this)
+        App.musicComponent.inject(this)
+        playlistsPresenter.attachView(this)
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
@@ -38,33 +40,25 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
     override fun onResume() {
         super.onResume()
         if (adapter!!.dataSet.isEmpty()) {
-            presenter.subscribe()
+            playlistsPresenter.playlists()
         }
     }
 
-    override fun onDestroy() {
-        presenter.unsubscribe()
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        playlistsPresenter.detachView()
     }
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        presenter.loadPlaylists()
-    }
-
-    override fun loading() {
-
+        playlistsPresenter.playlists()
     }
 
     override fun showEmptyView() {
         adapter!!.swapDataSet(ArrayList())
     }
 
-    override fun completed() {
-
-    }
-
-    override fun showData(list: ArrayList<Playlist>) {
+    override fun playlists(list: ArrayList<Playlist>) {
         adapter!!.swapDataSet(list)
     }
 

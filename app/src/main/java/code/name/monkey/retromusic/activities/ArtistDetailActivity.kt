@@ -22,6 +22,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
@@ -34,26 +35,23 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
+import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContract.ArtistsDetailsView {
+class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     private var biography: Spanned? = null
     private lateinit var artist: Artist
     private var lastFMRestClient: LastFMRestClient? = null
-    private lateinit var artistDetailsPresenter: ArtistDetailsPresenter
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: AlbumAdapter
     private var forceDownload: Boolean = false
@@ -68,11 +66,13 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
     }
 
+    @Inject
+    lateinit var artistDetailsPresenter: ArtistDetailsPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         setupWindowTransitions()
         super.onCreate(savedInstanceState)
-        //collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
         contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
         toggleBottomNavigationView(true)
         setNavigationbarColorAuto()
@@ -80,12 +80,19 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
 
         ActivityCompat.postponeEnterTransition(this)
 
+
+        App.musicComponent.inject(this)
+        artistDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
+        } else {
+            finish()
+        }
+
         lastFMRestClient = LastFMRestClient(this)
 
         setUpViews()
-
-        artistDetailsPresenter = ArtistDetailsPresenter(this, intent.extras!!)
-        artistDetailsPresenter.subscribe()
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -110,10 +117,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun setupContainerHeight() {
-        if (imageContainer != null) {
-            val params = imageContainer!!.layoutParams
+        imageContainer?.let {
+            val params = it.layoutParams
             params.width = DensityUtil.getScreenHeight(this) / 2
-            imageContainer!!.layoutParams = params
+            it.layoutParams = params
         }
     }
 
@@ -128,7 +135,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         toolbar?.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
         setSupportActionBar(toolbar)
 
-        supportActionBar!!.title = null
+        supportActionBar?.title = null
 
         if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
             val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
@@ -183,23 +190,16 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        artistDetailsPresenter.unsubscribe()
-    }
-
-    override fun loading() {}
-
     override fun showEmptyView() {
 
     }
 
-    override fun completed() {
+    override fun complete() {
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun showData(list: Artist) {
-        setArtist(list)
+    override fun artist(artist: Artist) {
+        setArtist(artist)
     }
 
     private fun getArtist(): Artist {
@@ -214,11 +214,12 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         loadArtistImage()
 
         if (RetroUtil.isAllowedToDownloadMetadata(this)) {
-            loadBiography()
+            loadBiography(artist.name)
         }
         artistTitle.text = artist.name
         text.text = String.format("%s • %s", MusicUtil.getArtistInfoString(this, artist), MusicUtil
                 .getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs)))
+
         //val songs = artist.songs.sortedWith(compareBy { it.title }) as ArrayList<Song>
         songAdapter.swapDataSet(artist.songs)
 
@@ -226,43 +227,35 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         albumAdapter.swapDataSet(artist.albums!!)
     }
 
-    private fun loadBiography(lang: String? = Locale.getDefault().language) {
+    private fun loadBiography(name: String,
+                              lang: String? = Locale.getDefault().language) {
         biography = null
-
-        lastFMRestClient!!.apiService
-                .getArtistInfo(getArtist().name, lang, null)
-                .enqueue(object : Callback<LastFmArtist> {
-                    override fun onResponse(call: Call<LastFmArtist>,
-                                            response: Response<LastFmArtist>) {
-                        val lastFmArtist = response.body()
-                        if (lastFmArtist != null && lastFmArtist.artist != null) {
-                            val bioContent = lastFmArtist.artist.bio.content
-                            if (bioContent != null && !bioContent.trim { it <= ' ' }.isEmpty()) {
-                                //TransitionManager.beginDelayedTransition(titleContainer);
-                                biographyText.visibility = View.VISIBLE
-                                biographyTitle.visibility = View.VISIBLE
-                                biography = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
-                                } else {
-                                    Html.fromHtml(bioContent)
-                                }
-                                biographyText.text = biography
-                            }
-                        }
-
-                        // If the "lang" parameter is set and no biography is given, retry with default language
-                        if (biography == null && lang != null) {
-                            loadBiography(null)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<LastFmArtist>, t: Throwable) {
-                        t.printStackTrace()
-                        biography = null
-                    }
-                })
+        this.lang = lang
+        artistDetailsPresenter.loadBiography(name, lang, null)
     }
 
+    override fun artistInfo(lastFmArtist: LastFmArtist?) {
+        if (lastFmArtist != null && lastFmArtist.artist != null) {
+            val bioContent = lastFmArtist.artist.bio.content
+            if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
+                biographyText.visibility = View.VISIBLE
+                biographyTitle.visibility = View.VISIBLE
+                biography = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    Html.fromHtml(bioContent)
+                }
+                biographyText.text = biography
+            }
+        }
+
+        // If the "lang" parameter is set and no biography is given, retry with default language
+        if (biography == null && lang != null) {
+            loadBiography(getArtist().name, null)
+        }
+    }
+
+    private var lang: String? = null
 
     private fun loadArtistImage() {
         GlideApp.with(this)
@@ -281,7 +274,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                         setColors(defaultFooterColor)
                     }
                 })
-        forceDownload = false;
+        forceDownload = false
     }
 
     private fun setColors(color: Int) {
@@ -351,8 +344,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun reload() {
-        artistDetailsPresenter.unsubscribe()
-        artistDetailsPresenter.subscribe()
+        artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
     }
 
     companion object {

@@ -75,7 +75,9 @@ android {
     androidExtensions {
         experimental = true
     }
-
+    kapt {
+        generateStubs = true
+    }
 }
 
 def getProperties(String fileName) {
@@ -149,6 +151,9 @@ dependencies {
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
+
+    implementation 'com.google.dagger:dagger:2.23.1'
+    kapt 'com.google.dagger:dagger-compiler:2.23.1'
 
     implementation project(':appthemehelper')
 }
