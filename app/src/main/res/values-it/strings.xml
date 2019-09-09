@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
+    <string name="you_have_to_select_at_least_one_category">Seleziona almeno una categoria.</string>
     <string name="small">Album piccolo</string>
     <string name="accent_color">Colore dominante</string>
-    <string name="accent_color_desc">Il colore secondario del tema, verde di default</string>
+    <string name="accent_color_desc">Il colore di accento del tema, verde acqua è il predefinito</string>
     <string name="action_about">Informazioni</string>
     <string name="action_add_to_favorites">Aggiungi ai preferiti</string>
     <string name="action_add_to_playing_queue">Aggiungi alla coda</string>
     <string name="action_add_to_playlist">Aggiungi alla playlist</string>
     <string name="action_clear_playing_queue">Cancella coda</string>
     <string name="action_clear_playlist">Svuota la playlist</string>
-    <string name="action_delete">Cancella</string>
+    <string name="action_delete">Rimuovi</string>
     <string name="action_delete_from_device">Cancella dal dispositivo</string>
     <string name="action_details">Dettagli</string>
     <string name="action_go_to_album">Vai all\'album</string>
     <string name="action_go_to_artist">Vai all\'artista</string>
     <string name="action_go_to_genre">Vai al genere</string>
-    <string name="action_go_to_start_directory">Vai alla directory iniziale</string>
+    <string name="action_go_to_start_directory">Torna al percorso iniziale</string>
     <string name="action_grant">Concedi</string>
     <string name="action_grid_size">Dimensione griglia</string>
     <string name="action_grid_size_land">Dimensione griglia (orizzontale)</string>
@@ -32,9 +33,10 @@
     <string name="action_scan">Scansiona</string>
     <string name="action_scan_directory">Scansiona cartella</string>
     <string name="action_search">Cerca</string>
+    <string name="set">Imposta</string>
     <string name="action_set">Inizia</string>
     <string name="action_set_as_ringtone">Imposta come suoneria</string>
-    <string name="action_set_as_start_directory">Imposta come cartella iniziale</string>
+    <string name="action_set_as_start_directory">Imposta come percorso iniziale</string>
     <string name="action_settings">"Impostazioni"</string>
     <string name="action_share">Condividi</string>
     <string name="action_shuffle_all">Riproduzione casuale</string>
@@ -54,12 +56,8 @@
     <string name="albums">Album</string>
     <!-- Android Auto -->
     <string name="always">Sempre</string>
-    <string name="app_share">Hey, dai un\'occhiata a questo lettore musicale figo a: https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">Hey,  dai un\'occhiata a questo bel lettore musicale a:</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_last_added_long">@string/last_added</string>
-    <string name="app_shortcut_last_added_short">@string/last_added</string>
-    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
     <string name="app_shortcut_shuffle_all_short">Casuale</string>
     <string name="app_shortcut_top_tracks_short">Tracce migliori</string>
     <string name="app_widget_big_name">Retro music - Grande</string>
@@ -98,6 +96,7 @@
     <string name="close_notification">Chiudi</string>
     <string name="color">Colore</string>
     <string name="color_theme_name">Colore</string>
+    <string name="day_night_theme_name">Chiaro Scuro (alpha)</string>
     <string name="colors">Colori</string>
     <string name="could_not_create_playlist">Impossibile creare la playlist.</string>
     <string name="could_not_download_album_cover">"Impossibile scaricare una copertina di album corrispondente."</string>
@@ -115,6 +114,8 @@
     <string name="delete_song_x"><![CDATA[Eliminare il brano <b>%1$s</b>?]]></string>
     <string name="delete_x_playlists"><![CDATA[Elimina <b>%1$d</b> playlist?]]></string>
     <string name="delete_x_songs"><![CDATA[Eliminare <b>%1$d</b> brani?]]></string>
+    <string name="delete_song_title">Elimina canzone</string>
+    <string name="delete_songs_title">Elimina brani</string>
     <string name="deleted_x_songs">Eliminati %1$d brani</string>
     <string name="do_you_want_to_clear_the_blacklist">Vuoi cancellare la blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Vuoi rimuovere <b>%1$s</b> dalla blacklist?]]></string>
@@ -158,7 +159,7 @@
     <string name="label_file_size">Dimensione</string>
     <string name="label_sampling_rate">Frequenza di campionamento</string>
     <string name="label_track_length">Lunghezza</string>
-    <string name="last_added">Ultimo aggiunto</string>
+    <string name="last_added">Ultimi aggiunti</string>
     <string name="lets_play_something">Suoniamo un po\' di musica</string>
     <string name="library">Raccolta</string>
     <string name="licenses">Licenze</string>
@@ -270,7 +271,7 @@
     <string name="pref_title_home_banner">Home banner</string>
     <string name="pref_title_genre_toggle">Mostra scheda Genere</string>
     <string name="pref_title_home_artist_grid_style">Griglia schermata artista</string>
-    <string name="pref_title_album_cover_transform">Stile dell\'album in riproduzione</string>
+    <string name="pref_title_album_cover_transform">Modalità cambio copertina dell\'album</string>
     <string name="pref_album_detail_style">Stile dettagli album</string>
     <string name="cascading">Cascata</string>
     <string name="primary_color">Colore primario</string>
@@ -369,7 +370,7 @@
     <string name="year">Anno</string>
     <string name="made_with_love">Made with ❤️ in India</string>
     <string name="clear_app_data">Cancella i dati dell\'app</string>
-    <string name="bug_report_summary">Si è verificato un errore imprevisto, mi dispiace. Se continua a bloccarsi \"Cancella i dati\" dell\'app</string>
+    <string name="bug_report_summary">Si è verificato un errore imprevisto. Mi dispiace, se continua a bloccarsi \"Cancella i dati\" dell\'app o inviami un\'email</string>
     <string name="error">Errore</string>
     <string name="base_color_theme">Colore base del tema</string>
     <string name="now_playing_themes">Più di 9 schermate di riproduzione</string>
@@ -377,7 +378,7 @@
     <string name="window_corner_edges">Angoli arrotondati</string>
     <string name="pref_title_album_cover_style">Tema copertina dell\'album</string>
     <string name="circular">Circolare</string>
-    <string name="carousal">Baldoria</string>
+    <string name="carousal">Carosello</string>
     <string name="now_playing_summary">Personalizza la schermata riproduzione</string>
     <string name="full_card">Scheda intera</string>
     <string name="profile">Profilo</string>
@@ -427,6 +428,49 @@
     <string name="pref_snow_fall_title">Effetto neve</string>
     <string name="pref_title_blacklist">Blacklist</string>
     <string name="pref_summary_blacklist">Il contenuto delle cartelle nella blacklist non compare nella raccolta.</string>
+    <string name="send_crash_log">Invia registro errori</string>
+    <string name="pinterest_page">Pinterest</string>
+    <string name="pinterest_page_summary">Segui la pagina Pinterest per ispirazioni sul design di Retro Music</string>
+    <string name="pref_filter_song_title">Filtro durata brano</string>
+    <string name="md_error_label">Errore</string>
+    <string name="md_storage_perm_error">Errore di autorizzazione</string>
+    <string name="classic">Classico</string>
+    <string name="sort_order_composer">Compositore</string>
+    <string name="composer">Compositore</string>
+    <string name="next_song">Brano successivo</string>
+    <string name="last_song">Ultimo brano</string>
+    <string name="slide">Scorri</string>
+    <string name="save">Salva</string>
+    <string name="pick_image_intent_text">Scegli immagine</string>
+    <string name="set_photo">Imposta una foto profilo</string>
     <string name="edit">Modifica</string>
+    <string name="pref_header_library">Raccolta</string>
+    <string name="swipe_to_unlock">Scorri per sbloccare</string>
+    <string name="add_lyrics">Aggiungi testi</string>
+    <string name="paste_lyrics_here">Incolla i testi qui</string>
+    <string name="add_time_framed_lryics">Aggiungi testi sincronizzati</string>
     <string name="synced_lyrics">Testi sincronizzati</string>
+    <string name="dialog_title_set_ringtone">Imposta suoneria</string>
+    <string name="dialog_message_set_ringtone">Consenti a Retro Music di modificare le impostazioni audio</string>
+    <string name="about_settings_summary">Team e pagine social</string>
+    <string name="other_settings_summary">Funzionalità avanzate</string>
+    <string name="on">Acceso</string>
+    <string name="select_preset">Seleziona preimpostato</string>
+    <string name="upgrade_to_premium">Passa a premium</string>
+    <string name="action_new_playlist">Nuova playlist</string>
+    <string name="finish_last_song">Termina ultimo brano</string>
+    <string name="image_gradient">Immagine sfumata</string>
+    <string name="stack">Pila</string>
+    <string name="grid_style_label"><![CDATA[Griglie e stile]]></string>
+    <string name="welcome">Benvenuto.</string>
+    <string name="premium">Ottieni premium</string>
+    <string name="pro_summary">Temi in riproduzione, effetto scorrimento e molto altro...</string>
+    <string name="action_play_all">Riproduci tutti</string>
+    <string name="start_play_music">Inizia a riprodurre musica.</string>
+    <string name="keyboard">Tastiera</string>
+    <string name="reset_action">Ripristina</string>
+    <string name="library_categories">Categorie della raccolta</string>
+    <string name="pref_summary_library_categories">Configura la visibilità e l\'ordine delle categorie</string>
+    <string name="pref_header_controls">Controlli</string>
+    <string name="pref_header_album">Stile album</string>
 </resources>

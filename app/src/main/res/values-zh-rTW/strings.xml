@@ -45,12 +45,8 @@
     <string name="album_or_artist_empty">專輯名稱或演出者欄是空的。</string>
     <string name="albums">專輯</string>
     <string name="always">永遠</string>
-    <string name="app_shortcut_last_added_long">@string/last_added</string>
-    <string name="app_shortcut_last_added_short">@string/last_added</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
     <string name="app_shortcut_shuffle_all_short">隨機播放</string>
-    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
     <string name="app_shortcut_top_tracks_short">最佳單曲</string>
     <string name="app_widget_big_name">Retro music - 大型</string>
     <string name="app_widget_classic_name">Retro music - 經典</string>

@@ -49,8 +49,6 @@
     <string name="albums">एल्बम</string>
     <string name="always">हमेशा</string>
     <string name="app_share">इस बढ़िया म्यूजिक प्लेयर को यहां देखें:https://play.google.com/store/apps/details?id=%s</string>
-    <string name="app_shortcut_last_added_long">जोड़ा गया</string>
-    <string name="app_shortcut_last_added_short">जोड़ा गया</string>
     <string name="app_shortcut_shuffle_all_short">शफ़ल</string>
     <string name="app_shortcut_top_tracks_short">टॉप गीत</string>
     <string name="app_widget_big_name">रेट्रो म्यूजिक - बिग</string>

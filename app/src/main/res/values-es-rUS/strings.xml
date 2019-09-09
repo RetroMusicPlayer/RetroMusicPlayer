@@ -57,10 +57,6 @@
     <string name="always">Siempre</string>
     <string name="app_share">Echa un vistazo a este reproductor de música en: https://play.google.com/store/apps/details?id=%s</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_last_added_long">Añadidas recientemente</string>
-    <string name="app_shortcut_last_added_short">Recientes</string>
-    <string name="app_shortcut_shuffle_all_long">Mezclar todo</string>
-    <string name="app_shortcut_top_tracks_long">Más Reproducidas</string>
     <string name="app_shortcut_shuffle_all_short">Aleatorio</string>
     <string name="app_shortcut_top_tracks_short">Hello</string>
     <string name="app_widget_big_name">Retro Music - Grande</string>

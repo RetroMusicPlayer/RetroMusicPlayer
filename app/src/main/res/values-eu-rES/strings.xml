@@ -56,10 +56,6 @@
     <string name="always">Beti</string>
     <string name="app_share">Begiratu musika erreproduzitzaile hau: https://play.google.com/store/apps/details?id=%s</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_last_added_long">@string/last_added</string>
-    <string name="app_shortcut_last_added_short">@string/last_added</string>
-    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
     <string name="app_shortcut_shuffle_all_short">Nahastu</string>
     <string name="app_shortcut_top_tracks_short">Pista onenak</string>
     <string name="app_widget_big_name">Retro music - Handia</string>
