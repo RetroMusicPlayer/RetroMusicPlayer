@@ -25,7 +25,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(PreferenceUtil.getInstance().generalTheme)
+        setTheme(PreferenceUtil.getInstance(this).generalTheme)
         hideStatusBar()
         super.onCreate(savedInstanceState)
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
@@ -37,7 +37,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     private fun toggleScreenOn() {
-        if (PreferenceUtil.getInstance().isScreenOnEnabled) {
+        if (PreferenceUtil.getInstance(this).isScreenOnEnabled) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -56,7 +56,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     fun hideStatusBar() {
-        hideStatusBar(PreferenceUtil.getInstance().fullScreenMode)
+        hideStatusBar(PreferenceUtil.getInstance(this).fullScreenMode)
     }
 
     private fun hideStatusBar(fullscreen: Boolean) {
@@ -68,7 +68,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
 
     private fun changeBackgroundShape() {
-        var background: Drawable? = if (PreferenceUtil.getInstance().isRoundCorners)
+        var background: Drawable? = if (PreferenceUtil.getInstance(this).isRoundCorners)
             ContextCompat.getDrawable(this, R.drawable.round_window)
         else
             ContextCompat.getDrawable(this, R.drawable.square_window)
@@ -168,7 +168,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-        if (PreferenceUtil.getInstance().fullScreenMode) {
+        if (PreferenceUtil.getInstance(this).fullScreenMode) {
             window.decorView.systemUiVisibility = flags
         }
     }

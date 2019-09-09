@@ -150,7 +150,7 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
         if (!showSectionName) {
             return ""
         }
-        val sectionName: String? = when (PreferenceUtil.getInstance().songSortOrder) {
+        val sectionName: String? = when (PreferenceUtil.getInstance(activity).songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
             SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
             SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName

@@ -81,7 +81,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         ActivityCompat.postponeEnterTransition(this)
 
 
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         artistDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
@@ -137,7 +137,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
         supportActionBar?.title = null
 
-        if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
+        if (toolbar != null && !PreferenceUtil.getInstance(this).fullScreenMode) {
             val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
             params.topMargin = RetroUtil.getStatusBarHeight()
             toolbar!!.layoutParams = params
@@ -279,13 +279,13 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     private fun setColors(color: Int) {
 
-        val textColor = if (PreferenceUtil.getInstance().adaptiveColor) color else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color else ThemeStore.accentColor(this)
 
         albumTitle.setTextColor(textColor)
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        val buttonColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)

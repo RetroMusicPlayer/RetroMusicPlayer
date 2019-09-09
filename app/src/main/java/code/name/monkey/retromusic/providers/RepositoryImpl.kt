@@ -26,6 +26,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class RepositoryImpl(private val context: Context) : Repository {
+
     override fun artistInfoFloable(
             name: String,
             lang: String?,
@@ -187,18 +188,5 @@ class RepositoryImpl(private val context: Context) : Repository {
     override fun getGenre(genreId: Int): ArrayList<Song> {
         return GenreLoader.getSongs(context, genreId)
 
-    }
-
-
-    companion object {
-        private var INSTANCE: RepositoryImpl? = null
-
-        val instance: RepositoryImpl
-            @Synchronized get() {
-                if (INSTANCE == null) {
-                    INSTANCE = RepositoryImpl(App.instance)
-                }
-                return INSTANCE!!
-            }
     }
 }

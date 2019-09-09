@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -16,13 +15,19 @@ import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
-import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.chip.Chip
 
 
-class HomeAdapter(private val activity: AppCompatActivity, private var homes: List<Home>, private val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class HomeAdapter(
+        private val activity: AppCompatActivity,
+        private var homes: List<Home>,
+        private val displayMetrics: DisplayMetrics
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return homes[position].homeSection
@@ -96,13 +101,14 @@ class HomeAdapter(private val activity: AppCompatActivity, private var homes: Li
         fun bindView(home: Home) {
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>, PreferenceUtil.getInstance().getHomeGridStyle(context!!), false, null)
+                val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>, PreferenceUtil.getInstance(activity).getHomeGridStyle(context!!), false, null)
                 adapter = artistAdapter
             }
             chip.text = activity.getString(home.title)
             chip.setChipIconResource(home.icon)
         }
     }
+
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(home: Home) {
             val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist)

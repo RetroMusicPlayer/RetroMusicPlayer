@@ -54,7 +54,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         genresPresenter.attachView(this)
     }
 

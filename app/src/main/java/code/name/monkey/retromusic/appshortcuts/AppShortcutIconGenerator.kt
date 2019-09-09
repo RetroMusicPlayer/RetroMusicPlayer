@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.util.RetroUtil
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 object AppShortcutIconGenerator {
     fun generateThemedIcon(context: Context, iconId: Int): Icon {
-        return if (PreferenceUtil.getInstance().coloredAppShortcuts()) {
+        return if (PreferenceUtil.getInstance(context).coloredAppShortcuts()) {
             generateUserThemedIcon(context, iconId)
         } else {
             generateDefaultThemedIcon(context, iconId)

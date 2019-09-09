@@ -18,7 +18,6 @@ import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
-import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import io.reactivex.disposables.Disposable
 import java.util.*

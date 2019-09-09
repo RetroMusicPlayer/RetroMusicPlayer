@@ -45,7 +45,7 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
 
         val defaultColor = defaultFooterColor
 
-        onColorReady(if (PreferenceUtil.getInstance().isDominantColor)
+        onColorReady(if (PreferenceUtil.getInstance(getView().context).isDominantColor)
             getDominantColor(resource.bitmap, defaultColor)
         else
             getColor(resource.palette, defaultColor))

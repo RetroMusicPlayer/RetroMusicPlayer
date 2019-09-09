@@ -29,7 +29,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class AudioSettings : AbsSettingsFragment() {
     override fun invalidateSettings() {
         val findPreference: Preference = findPreference("equalizer")!!
-        if (!hasEqualizer() && PreferenceUtil.getInstance().selectedEqualizer != "retro") {
+        if (!hasEqualizer() && PreferenceUtil.getInstance(requireContext()).selectedEqualizer != "retro") {
             findPreference.isEnabled = false
             findPreference.summary = resources.getString(R.string.no_equalizer)
         } else {

@@ -80,7 +80,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public void onDestroyView() {
         super.onDestroyView();
         disposable.dispose();
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(requireActivity()).unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Nullable
@@ -93,7 +93,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbarContainer = view.findViewById(R.id.toolbarContainer);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbar = view.findViewById(R.id.toolbar);
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(requireActivity()).registerOnSharedPreferenceChangedListener(this);
         return view;
     }
 

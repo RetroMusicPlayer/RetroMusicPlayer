@@ -68,7 +68,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(if (PreferenceUtil.getInstance().isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
+        return inflater.inflate(if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
     }
 
     private fun loadImageFromStorage() {
@@ -77,17 +77,17 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                 .setMaxWidth(300)
                 .setQuality(75)
                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().profileImage, Constants.USER_PROFILE))
+                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     if (it != null) {
                         userImage.setImageBitmap(it)
                     } else {
-                        userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                        userImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_person_flat))
                     }
                 }) {
-                    userImage.setImageDrawable(ContextCompat.getDrawable(context!!, R.drawable.ic_person_flat))
+                    userImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_person_flat))
                 })
     }
 
@@ -101,7 +101,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         homePresenter.attachView(this)
     }
 
@@ -115,7 +115,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         bannerImage?.setOnClickListener {
             NavigationUtil.goToUserInfo(requireActivity())
         }
-        if (!PreferenceUtil.getInstance().isHomeBanner)
+        if (!PreferenceUtil.getInstance(requireContext()).isHomeBanner)
             setStatusbarColorAuto(view)
 
         lastAdded.setOnClickListener {
@@ -145,7 +145,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToUserInfo(requireActivity())
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
-        titleWelcome.text = String.format("%s", PreferenceUtil.getInstance().userName)
+        titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         homePresenter.loadSections()
     }
@@ -160,7 +160,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun toolbarColor(): Int {
-        return if (PreferenceUtil.getInstance().isHomeBanner) {
+        return if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) {
             toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
             ColorUtil.withAlpha(RetroColorUtil.toolbarColor(mainActivity), 0.85f)
         } else {
@@ -253,7 +253,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun loadTimeImage(day: String) {
         if (bannerImage != null) {
-            if (PreferenceUtil.getInstance().bannerImage.isEmpty()) {
+            if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
                 GlideApp.with(requireActivity())
                         .load(day)
                         .placeholder(R.drawable.material_design_default)
@@ -263,7 +263,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                 disposable.add(Compressor(requireActivity())
                         .setQuality(100)
                         .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance().bannerImage, USER_BANNER))
+                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { bitmap -> bannerImage.setImageBitmap(bitmap) })

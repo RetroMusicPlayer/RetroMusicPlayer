@@ -25,7 +25,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         artistsPresenter.attachView(this)
     }
 
@@ -52,7 +52,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         var itemLayoutRes = itemLayoutRes
         notifyLayoutResChanged(itemLayoutRes)
         if (itemLayoutRes != R.layout.item_list) {
-            itemLayoutRes = PreferenceUtil.getInstance().getArtistGridStyle(requireContext())
+            itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getArtistGridStyle(requireContext())
         }
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return ArtistAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, loadUsePalette(), libraryFragment)
@@ -60,27 +60,27 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance().getArtistGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getArtistGridSize(activity!!)
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.getInstance().setArtistGridSize(gridColumns)
+        PreferenceUtil.getInstance(requireContext()).setArtistGridSize(gridColumns)
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance().getArtistGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getArtistGridSizeLand(activity!!)
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.getInstance().setArtistGridSizeLand(gridColumns)
+        PreferenceUtil.getInstance(requireContext()).setArtistGridSizeLand(gridColumns)
     }
 
     override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance().setArtistColoredFooters(usePalette)
+        PreferenceUtil.getInstance(requireContext()).setArtistColoredFooters(usePalette)
     }
 
     public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance().artistColoredFooters()
+        return PreferenceUtil.getInstance(requireContext()).artistColoredFooters()
     }
 
     override fun setUsePalette(usePalette: Boolean) {
@@ -94,11 +94,11 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.getInstance().artistSortOrder
+        return PreferenceUtil.getInstance(requireContext()).artistSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.getInstance().artistSortOrder = sortOrder
+        PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
     }
 
     override fun onDestroyView() {

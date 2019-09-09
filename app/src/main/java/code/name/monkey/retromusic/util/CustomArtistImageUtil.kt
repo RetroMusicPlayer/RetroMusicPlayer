@@ -44,7 +44,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
     }
 
     fun setCustomArtistImage(artist: Artist, uri: Uri) {
-        GlideApp.with(App.context)
+        GlideApp.with(App.getContext())
                 .asBitmap()
                 .load(uri)
                 .apply(RequestOptions()
@@ -57,7 +57,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                         object : AsyncTask<Void, Void, Void>() {
                             @SuppressLint("ApplySharedPref")
                             override fun doInBackground(vararg params: Void): Void? {
-                                val dir = File(App.context.filesDir, FOLDER_NAME)
+                                val dir = File(App.getContext().filesDir, FOLDER_NAME)
                                 println(dir.absolutePath)
                                 if (!dir.exists()) {
                                     if (!dir.mkdirs()) { // create the folder
@@ -72,13 +72,13 @@ class CustomArtistImageUtil private constructor(context: Context) {
                                     succesful = ImageUtil.resizeBitmap(resource, 2048).compress(Bitmap.CompressFormat.JPEG, 100, os)
                                     os.close()
                                 } catch (e: IOException) {
-                                    Toast.makeText(App.context, e.toString(), Toast.LENGTH_LONG).show()
+                                    Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
                                 }
 
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit()
                                     ArtistSignatureUtil.getInstance().updateArtistSignature(artist.name)
-                                    App.context.contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                                    App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
                                 }
                                 return null
                             }
@@ -93,7 +93,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
             override fun doInBackground(vararg params: Void): Void? {
                 mPreferences.edit().putBoolean(getFileName(artist), false).commit()
                 ArtistSignatureUtil.getInstance().updateArtistSignature(artist.name)
-                App.context.contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
 
                 val file = getFile(artist)
                 if (!file.exists()) {
@@ -133,7 +133,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
 
         @JvmStatic
         fun getFile(artist: Artist): File {
-            val dir = File(App.context.filesDir, FOLDER_NAME)
+            val dir = File(App.getContext().filesDir, FOLDER_NAME)
             return File(dir, getFileName(artist))
         }
     }

@@ -25,7 +25,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
 
         songPresenter.attachView(this)
     }
@@ -55,27 +55,27 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance().getSongGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getSongGridSize(activity!!)
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.getInstance().setSongGridSize(gridColumns)
+        PreferenceUtil.getInstance(requireContext()).setSongGridSize(gridColumns)
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance().getSongGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getSongGridSizeLand(activity!!)
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.getInstance().setSongGridSizeLand(gridColumns)
+        PreferenceUtil.getInstance(requireContext()).setSongGridSizeLand(gridColumns)
     }
 
     public override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance().setSongColoredFooters(usePalette)
+        PreferenceUtil.getInstance(requireContext()).setSongColoredFooters(usePalette)
     }
 
     public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance().songColoredFooters()
+        return PreferenceUtil.getInstance(requireContext()).songColoredFooters()
     }
 
     public override fun setUsePalette(usePalette: Boolean) {
@@ -104,11 +104,11 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.getInstance().songSortOrder
+        return PreferenceUtil.getInstance(requireContext()).songSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.getInstance().songSortOrder = sortOrder
+        PreferenceUtil.getInstance(requireContext()).songSortOrder = sortOrder
     }
 
     override fun setSortOrder(sortOrder: String) {

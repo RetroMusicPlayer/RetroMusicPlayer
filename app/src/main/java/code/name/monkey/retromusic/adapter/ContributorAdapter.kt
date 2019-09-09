@@ -12,10 +12,28 @@ import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.RetroUtil.openUrl
 import code.name.monkey.retromusic.views.CircularImageView
 
-class ContributorAdapter(private var contributors: List<Contributor>) : RecyclerView.Adapter<ContributorAdapter.ViewHolder>() {
+class ContributorAdapter(
+        private var contributors: List<Contributor>
+) : RecyclerView.Adapter<ContributorAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_contributor, parent, false))
+        return if (viewType == HEADER) {
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_contributor_header, parent, false))
+        } else
+            ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_contributor, parent, false))
+    }
+
+    companion object {
+        const val HEADER: Int = 0
+        const val ITEM: Int = 1
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) {
+            HEADER
+        } else {
+            ITEM
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

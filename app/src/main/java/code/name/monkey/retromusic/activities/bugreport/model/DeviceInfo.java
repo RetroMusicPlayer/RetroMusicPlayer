@@ -54,9 +54,9 @@ public class DeviceInfo {
             versionCode = -1;
             versionName = null;
         }
-        baseTheme = PreferenceUtil.getInstance().getBaseTheme();
-        nowPlayingTheme = context.getString(PreferenceUtil.getInstance().getNowPlayingScreen().getTitleRes());
-        isAdaptive = PreferenceUtil.getInstance().getAdaptiveColor();
+        baseTheme = PreferenceUtil.getInstance(context).getBaseTheme();
+        nowPlayingTheme = context.getString(PreferenceUtil.getInstance(context).getNowPlayingScreen().getTitleRes());
+        isAdaptive = PreferenceUtil.getInstance(context).getAdaptiveColor();
     }
 
     public String toMarkdown() {

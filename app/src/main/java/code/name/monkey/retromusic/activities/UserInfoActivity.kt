@@ -55,14 +55,14 @@ class UserInfoActivity : AbsBaseActivity() {
 
         MaterialUtil.setTint(nameContainer, false)
         MaterialUtil.setTint(bioContainer, false)
-        name.setText(PreferenceUtil.getInstance().userName)
-        bio.setText(PreferenceUtil.getInstance().userBio)
+        name.setText(PreferenceUtil.getInstance(this).userName)
+        bio.setText(PreferenceUtil.getInstance(this).userBio)
 
-        if (PreferenceUtil.getInstance().profileImage.isNotEmpty()) {
-            loadImageFromStorage(PreferenceUtil.getInstance().profileImage)
+        if (PreferenceUtil.getInstance(this).profileImage.isNotEmpty()) {
+            loadImageFromStorage(PreferenceUtil.getInstance(this).profileImage)
         }
-        if (PreferenceUtil.getInstance().bannerImage.isNotEmpty()) {
-            loadBannerFromStorage(PreferenceUtil.getInstance().bannerImage)
+        if (PreferenceUtil.getInstance(this).bannerImage.isNotEmpty()) {
+            loadBannerFromStorage(PreferenceUtil.getInstance(this).bannerImage)
         }
         userImage.setOnClickListener {
             MaterialDialog(this, BottomSheet()).show {
@@ -70,7 +70,7 @@ class UserInfoActivity : AbsBaseActivity() {
                 listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
                     when (position) {
                         0 -> pickNewPhoto()
-                        1 -> PreferenceUtil.getInstance().saveProfileImage("")
+                        1 -> PreferenceUtil.getInstance(this@UserInfoActivity).saveProfileImage("")
                     }
                 }
             }
@@ -90,7 +90,7 @@ class UserInfoActivity : AbsBaseActivity() {
                 return@setOnClickListener
 
             }*/
-            PreferenceUtil.getInstance().userName = nameString
+            PreferenceUtil.getInstance(this).userName = nameString
             //PreferenceUtil.getInstance().userBio = bioString
             setResult(Activity.RESULT_OK)
             finish()
@@ -122,7 +122,7 @@ class UserInfoActivity : AbsBaseActivity() {
             { _, position, _ ->
                 when (position) {
                     0 -> selectBannerImage()
-                    1 -> PreferenceUtil.getInstance().setBannerImagePath("")
+                    1 -> PreferenceUtil.getInstance(this@UserInfoActivity).setBannerImagePath("")
                 }
             }
         }
@@ -130,7 +130,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun selectBannerImage() {
 
-        if (TextUtils.isEmpty(PreferenceUtil.getInstance().bannerImage)) {
+        if (TextUtils.isEmpty(PreferenceUtil.getInstance(this).bannerImage)) {
             val pickImageIntent = Intent(Intent.ACTION_PICK, Media.EXTERNAL_CONTENT_URI)
             pickImageIntent.type = "image/*"
             //pickImageIntent.putExtra("crop", "true")
@@ -142,7 +142,7 @@ class UserInfoActivity : AbsBaseActivity() {
             //intent.setAction(Intent.ACTION_GET_CONTENT);
             startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_BANNER_REQUEST)
         } else {
-            PreferenceUtil.getInstance().setBannerImagePath("")
+            PreferenceUtil.getInstance(this).setBannerImagePath("")
             bannerImage.setImageResource(android.R.color.transparent)
         }
     }
@@ -169,7 +169,7 @@ class UserInfoActivity : AbsBaseActivity() {
                         data.data?.let {
                             val bitmap = getResizedBitmap(getBitmap(contentResolver, it), PROFILE_ICON_SIZE)
                             val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
-                            PreferenceUtil.getInstance().saveProfileImage(profileImagePath)
+                            PreferenceUtil.getInstance(this).saveProfileImage(profileImagePath)
                             loadImageFromStorage(profileImagePath)
                         }
 
@@ -182,7 +182,7 @@ class UserInfoActivity : AbsBaseActivity() {
                         data.data?.let {
                             val bitmap = getBitmap(contentResolver, it)
                             val profileImagePath = saveToInternalStorage(bitmap, USER_BANNER)
-                            PreferenceUtil.getInstance().setBannerImagePath(profileImagePath)
+                            PreferenceUtil.getInstance(this).setBannerImagePath(profileImagePath)
                             loadBannerFromStorage(profileImagePath)
                         }
                     } catch (e: IOException) {
@@ -199,7 +199,7 @@ class UserInfoActivity : AbsBaseActivity() {
         if (aUri == null) {
             return imagePath
         }
-        if (DocumentsContract.isDocumentUri(App.context, aUri)) {
+        if (DocumentsContract.isDocumentUri(App.getContext(), aUri)) {
             val documentId = DocumentsContract.getDocumentId(aUri)
             if ("com.android.providers.media.documents" == aUri.authority) {
                 val id = documentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
@@ -220,7 +220,7 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun getImagePath(aUri: Uri, aSelection: String?): String? {
         var path: String? = null
-        val cursor = App.context.contentResolver.query(aUri, null, aSelection, null, null)
+        val cursor = App.getContext().contentResolver.query(aUri, null, aSelection, null, null)
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 path = cursor.getString(cursor.getColumnIndex(Media.DATA))

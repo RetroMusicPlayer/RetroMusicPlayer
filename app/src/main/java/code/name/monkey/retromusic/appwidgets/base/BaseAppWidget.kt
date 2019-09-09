@@ -97,7 +97,7 @@ abstract class BaseAppWidget : AppWidgetProvider() {
 
     protected fun getAlbumArtDrawable(resources: Resources, bitmap: Bitmap?): Drawable {
         return if (bitmap == null) {
-            ContextCompat.getDrawable(App.context, R.drawable.default_album_art)!!
+            ContextCompat.getDrawable(App.getContext(), R.drawable.default_album_art)!!
         } else {
             BitmapDrawable(resources, bitmap)
         }

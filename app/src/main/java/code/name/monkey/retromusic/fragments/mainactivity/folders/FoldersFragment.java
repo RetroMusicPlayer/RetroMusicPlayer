@@ -109,7 +109,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.getInstance().getStartDirectory());
+        return newInstance(PreferenceUtil.getInstance(context).getStartDirectory());
     }
 
     public static FoldersFragment newInstance(File directory) {
@@ -328,7 +328,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_go_to_start_directory:
-                setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance().getStartDirectory())), true);
+                setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance(requireContext()).getStartDirectory())), true);
                 return true;
             case R.id.action_scan:
                 BreadCrumbLayout.Crumb crumb = getActiveCrumb();
@@ -415,7 +415,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                 getFileComparator()));
                         return true;
                     case R.id.action_set_as_start_directory:
-                        PreferenceUtil.getInstance().setStartDirectory(file);
+                        PreferenceUtil.getInstance(requireContext()).setStartDirectory(file);
                         Toast.makeText(getActivity(),
                                 String.format(getString(R.string.new_start_directory), file.getPath()),
                                 Toast.LENGTH_SHORT).show();

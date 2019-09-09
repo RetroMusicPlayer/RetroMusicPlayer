@@ -61,7 +61,7 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     protected var volumeFragment: VolumeFragment? = null
 
     private fun hideVolumeIfAvailable() {
-        if (PreferenceUtil.getInstance().volumeToggle) {
+        if (PreferenceUtil.getInstance(requireContext()).volumeToggle) {
             requireFragmentManager().beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             requireFragmentManager().executePendingTransactions()
             volumeFragment = requireFragmentManager().findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?

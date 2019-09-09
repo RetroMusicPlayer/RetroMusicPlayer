@@ -112,7 +112,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             lastPlaybackControlsColor = color
             color
         } else {

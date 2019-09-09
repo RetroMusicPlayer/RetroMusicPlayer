@@ -31,7 +31,8 @@ class SongFileAdapter(
         private var dataSet: List<File>?,
         private val itemLayoutRes: Int,
         private val callbacks: Callbacks?,
-        cabHolder: CabHolder?) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+        cabHolder: CabHolder?
+) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     init {
         this.setHasStableIds(true)

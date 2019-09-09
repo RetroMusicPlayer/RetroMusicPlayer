@@ -54,14 +54,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 val theme = newValue as String
-                println(newValue)
-                if (theme == "color" && !App.isProVersion) {
-                    showProToastAndNavigate("Color theme")
-                    return@setOnPreferenceChangeListener false
-                }
-
                 setSummary(generalTheme, newValue)
-
                 val color = when (theme) {
                     "light" -> Color.WHITE
                     "black" -> Color.BLACK
@@ -107,10 +100,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
         } else {
-            colorAppShortcuts.isChecked = PreferenceUtil.getInstance().coloredAppShortcuts()
+            colorAppShortcuts.isChecked = PreferenceUtil.getInstance(requireContext()).coloredAppShortcuts()
             colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
                 // Save preference
-                PreferenceUtil.getInstance().setColoredAppShortcuts(newValue as Boolean)
+                PreferenceUtil.getInstance(requireContext()).setColoredAppShortcuts(newValue as Boolean)
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }

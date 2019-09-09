@@ -8,6 +8,7 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -15,13 +16,15 @@ import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import java.util.*
 
 
-class SearchAdapter(private val activity: AppCompatActivity, private var dataSet: List<Any>?) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(
+        private val activity: AppCompatActivity,
+        private var dataSet: List<Any>?
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     fun swapDataSet(dataSet: MutableList<Any>) {
         this.dataSet = dataSet

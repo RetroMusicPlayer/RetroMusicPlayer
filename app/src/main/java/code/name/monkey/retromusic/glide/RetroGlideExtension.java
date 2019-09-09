@@ -103,7 +103,7 @@ public final class RetroGlideExtension {
 
     @NonNull
     public static Object getSongModel(@NonNull Song song) {
-        return getSongModel(song, PreferenceUtil.getInstance().ignoreMediaStoreArtwork());
+        return getSongModel(song, PreferenceUtil.getInstance(App.Companion.getContext()).ignoreMediaStoreArtwork());
     }
 
     @NonNull

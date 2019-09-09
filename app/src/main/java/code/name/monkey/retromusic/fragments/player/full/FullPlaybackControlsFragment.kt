@@ -109,7 +109,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
             ThemeStore.accentColor(context!!).ripAlpha()

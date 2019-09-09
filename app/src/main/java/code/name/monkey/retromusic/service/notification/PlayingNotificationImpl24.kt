@@ -84,7 +84,7 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                     .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
                         override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
                             update(resource.bitmap, when {
-                                PreferenceUtil.getInstance().isDominantColor -> RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
+                                PreferenceUtil.getInstance(service).isDominantColor -> RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
                                 else -> RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
                             })
                         }
@@ -146,7 +146,7 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                         .setMediaSession(service.mediaSession.sessionToken)
                                         .setShowActionsInCompactView( 1, 2, 3))
                                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance().coloredNotification()) {
+                                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance(service).coloredNotification()) {
                                     builder.color = color
                                 }
                             }

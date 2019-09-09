@@ -35,7 +35,7 @@ object AlbumLoader {
         val songs = SongLoader.getSongsFlowable(
                 SongLoader.makeSongCursor(
                         context, null, null,
-                        getSongLoaderSortOrder())
+                        getSongLoaderSortOrder(context))
         )
 
         return splitIntoAlbumsFlowable(songs)
@@ -50,7 +50,7 @@ object AlbumLoader {
                         context,
                         AudioColumns.ALBUM + " LIKE ?",
                         arrayOf("%$query%"),
-                        getSongLoaderSortOrder())
+                        getSongLoaderSortOrder(context))
         )
         return splitIntoAlbumsFlowable(songs)
     }
@@ -63,7 +63,7 @@ object AlbumLoader {
                 context,
                 AudioColumns.ALBUM + " LIKE ?",
                 arrayOf("%$query%"),
-                getSongLoaderSortOrder())
+                getSongLoaderSortOrder(context))
         )
         return splitIntoAlbums(songs)
     }
@@ -78,7 +78,7 @@ object AlbumLoader {
                             context,
                             AudioColumns.ALBUM_ID + "=?",
                             arrayOf(albumId.toString()),
-                            getSongLoaderSortOrder()
+                            getSongLoaderSortOrder(context)
                     )
             )
             songs.subscribe { songs1 ->
@@ -97,7 +97,7 @@ object AlbumLoader {
                         context,
                         AudioColumns.ALBUM_ID + "=?",
                         arrayOf(albumId.toString()),
-                        getSongLoaderSortOrder()))
+                        getSongLoaderSortOrder(context)))
         val album = Album(songs)
         sortSongsByTrackNumber(album)
         return album
@@ -129,7 +129,7 @@ object AlbumLoader {
         val songs = SongLoader.getSongs(
                 SongLoader.makeSongCursor(
                         context, null, null,
-                        getSongLoaderSortOrder())
+                        getSongLoaderSortOrder(context))
         )
 
         return splitIntoAlbums(songs)
@@ -189,8 +189,8 @@ object AlbumLoader {
         album.songs?.sortWith(Comparator { o1, o2 -> o1.trackNumber - o2.trackNumber })
     }
 
-    private fun getSongLoaderSortOrder(): String {
-        return PreferenceUtil.getInstance().albumSortOrder + ", " +
-                PreferenceUtil.getInstance().albumDetailSongSortOrder
+    private fun getSongLoaderSortOrder(context: Context): String {
+        return PreferenceUtil.getInstance(context).albumSortOrder + ", " +
+                PreferenceUtil.getInstance(context).albumDetailSongSortOrder
     }
 }

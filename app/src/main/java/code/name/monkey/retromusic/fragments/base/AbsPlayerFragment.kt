@@ -248,7 +248,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setBackgroundColor(ThemeStore.primaryColor(requireActivity()))
-        if (PreferenceUtil.getInstance().fullScreenMode &&
+        if (PreferenceUtil.getInstance(requireContext()).fullScreenMode &&
                 view.findViewById<View>(R.id.status_bar) != null) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }

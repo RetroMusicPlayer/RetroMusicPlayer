@@ -37,7 +37,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             int currentVersion = pInfo.versionCode;
-            PreferenceUtil.getInstance().setLastChangeLogVersion(currentVersion);
+            PreferenceUtil.getInstance(context).setLastChangeLogVersion(currentVersion);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

@@ -34,7 +34,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
             R.id.actionFolders -> mainActivity.selectedFragment(R.id.action_folder)
-            R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance().lastPage)
+            R.id.actionLibrary -> mainActivity.selectedFragment(PreferenceUtil.getInstance(requireContext()).lastPage)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
         }

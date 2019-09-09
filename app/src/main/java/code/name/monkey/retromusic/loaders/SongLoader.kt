@@ -176,7 +176,7 @@ object SongLoader {
             context: Context,
             selection: String?,
             selectionValues: Array<String>?,
-            sortOrder: String = PreferenceUtil.getInstance().songSortOrder
+            sortOrder: String = PreferenceUtil.getInstance(context).songSortOrder
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
@@ -195,7 +195,7 @@ object SongLoader {
 
         try {
             return context.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    baseProjection, selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance().filterLength * 1000), selectionValuesFinal, sortOrder)
+                    baseProjection, selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance(context).filterLength * 1000), selectionValuesFinal, sortOrder)
         } catch (e: SecurityException) {
             return null
         }

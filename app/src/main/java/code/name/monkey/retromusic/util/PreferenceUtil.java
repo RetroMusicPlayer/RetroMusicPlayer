@@ -142,7 +142,8 @@ public final class PreferenceUtil {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static PreferenceUtil getInstance() {
+    @NonNull
+    public static PreferenceUtil getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new PreferenceUtil(App.Companion.getContext());
         }

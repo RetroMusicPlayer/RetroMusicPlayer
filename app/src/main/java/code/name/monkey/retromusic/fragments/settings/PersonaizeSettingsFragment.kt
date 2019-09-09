@@ -29,7 +29,7 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
     override fun invalidateSettings() {
         val cornerWindow: TwoStatePreference = findPreference("corner_window")!!
         cornerWindow.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue as Boolean && !App.isProVersion) {
+            if (newValue as Boolean && !App.isProVersion()) {
                 showProToastAndNavigate(activity!!.getString(R.string.pref_title_round_corners))
                 return@setOnPreferenceChangeListener false
             }
@@ -51,7 +51,7 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
 
         var preference: Preference? = findPreference("album_grid_style")
         setSummary(preference!!)
@@ -65,7 +65,7 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     override fun onDestroyView() {
         super.onDestroyView()
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {

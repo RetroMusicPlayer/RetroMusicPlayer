@@ -58,7 +58,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     private lateinit var album: Album
 
     private val savedSortOrder: String
-        get() = PreferenceUtil.getInstance().albumDetailSongSortOrder
+        get() = PreferenceUtil.getInstance(this).albumDetailSongSortOrder
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_album)
@@ -101,7 +101,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
         }
 
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         albumDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
@@ -137,7 +137,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
         toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
 
-        if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
+        if (toolbar != null && !PreferenceUtil.getInstance(this).fullScreenMode) {
             val params = toolbar.layoutParams as ViewGroup.MarginLayoutParams
             params.topMargin = RetroUtil.getStatusBarHeight()
             toolbar.layoutParams = params
@@ -256,13 +256,13 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ThemeStore.accentColor(this)
 
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
 
-        val buttonColor = if (PreferenceUtil.getInstance().adaptiveColor) color
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
@@ -340,7 +340,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     private fun setSaveSortOrder(sortOrder: String?) {
-        PreferenceUtil.getInstance().albumDetailSongSortOrder = sortOrder
+        PreferenceUtil.getInstance(this).albumDetailSongSortOrder = sortOrder
         reload()
     }
 

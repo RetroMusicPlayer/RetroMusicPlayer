@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -37,15 +36,10 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -197,8 +191,8 @@ public class RetroUtil {
 
     public static Drawable getTintedDrawable(@DrawableRes int id) {
         return TintHelper
-                .createTintedDrawable(ContextCompat.getDrawable(App.Companion.getInstance(), id),
-                        ThemeStore.Companion.accentColor(App.Companion.getInstance()));
+                .createTintedDrawable(ContextCompat.getDrawable(App.Companion.getContext(), id),
+                        ThemeStore.Companion.accentColor(App.Companion.getContext()));
     }
 
     @NonNull
@@ -218,7 +212,7 @@ public class RetroUtil {
     }
 
     public static boolean isAllowedToDownloadMetadata(final @NonNull Context context) {
-        switch (PreferenceUtil.getInstance().autoDownloadImagesPolicy()) {
+        switch (PreferenceUtil.getInstance(context).autoDownloadImagesPolicy()) {
             case "always":
                 return true;
             case "only_wifi":
@@ -291,10 +285,6 @@ public class RetroUtil {
         }
     }
 
-    public static void statusBarHeight(View statusBar) {
-        statusBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
-    }
-
     public static int getStatusBarHeight() {
         int result = 0;
         int resourceId = App.Companion.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -320,118 +310,5 @@ public class RetroUtil {
     public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
         window.getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
-
-    public static int getSoftButtonsBarSizePort(Activity activity) {
-        // getRealMetrics is only available with API 17 and +
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int usableHeight = metrics.heightPixels;
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight)
-            return realHeight - usableHeight;
-        else
-            return 0;
-    }
-
-    public static int getNavigationBarHeight(Activity activity) {
-       /* int result = 0;
-        int resourceId = App.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = App.getContext().getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;*/
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int usableHeight = metrics.heightPixels;
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight)
-            if (PreferenceUtil.getInstance().getFullScreenMode()) {
-                return 0;
-            } else
-                return realHeight - usableHeight;
-        else
-            return 0;
-    }
-
-    public static int getNavBarHeight(Context c) {
-        int result = 0;
-        boolean hasMenuKey = ViewConfiguration.get(c).hasPermanentMenuKey();
-        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-
-        if (!hasMenuKey && !hasBackKey) {
-            //The device has a navigation bar
-            Resources resources = c.getResources();
-
-            int orientation = resources.getConfiguration().orientation;
-            int resourceId;
-            if (isTablet(c)) {
-                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-            } else {
-                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_width", "dimen", "android");
-            }
-
-            if (resourceId > 0) {
-                return resources.getDimensionPixelSize(resourceId);
-            }
-        }
-        return result;
-    }
-
-
-    private static boolean isTablet(Context c) {
-        return (c.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
-    private static boolean hasNavBar(Resources resources) {
-        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0)
-            return resources.getBoolean(id);
-        else
-            return false;
-    }
-
-    public static int getNavigationBarHeight(Resources resources) {
-        if (!hasNavBar(resources))
-            return 0;
-
-        int orientation = resources.getConfiguration().orientation;
-
-        //Only phone between 0-599 has navigationbar can move
-        boolean isSmartphone = resources.getConfiguration().smallestScreenWidthDp < 600;
-        if (isSmartphone && Configuration.ORIENTATION_LANDSCAPE == orientation)
-            return 0;
-
-        int id = resources
-                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (id > 0)
-            return resources.getDimensionPixelSize(id);
-
-        return 0;
-    }
-
-    public static boolean checkNavigationBarHeight() {
-        Resources resources = App.Companion.getContext().getResources();
-        int orientation = resources.getConfiguration().orientation;
-        if (!hasNavBar(resources)) {
-            return false;
-        }
-        boolean isSmartPhone = resources.getConfiguration().smallestScreenWidthDp < 600;
-        if (isSmartPhone && Configuration.ORIENTATION_LANDSCAPE == orientation)
-            return false;
-        int id = resources
-                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        return id > 0;
-    }
-
-    @NonNull
-    public static Drawable resize(@NonNull Context context, @NonNull Drawable image) {
-        Bitmap b = ((BitmapDrawable) image).getBitmap();
-        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 50, 50, false);
-        return new BitmapDrawable(context.getResources(), bitmapResized);
     }
 }

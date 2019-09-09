@@ -71,7 +71,7 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
 
         private val layout: Int
             get() {
-                return when (PreferenceUtil.getInstance().albumCoverStyle) {
+                return when (PreferenceUtil.getInstance(activity).albumCoverStyle) {
                     AlbumCoverStyle.NORMAL -> R.layout.fragment_album_cover
                     AlbumCoverStyle.FLAT -> R.layout.fragment_album_flat_cover
                     AlbumCoverStyle.CIRCLE -> R.layout.fragment_album_circle_cover
@@ -92,8 +92,8 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val finalLayout = when {
-                PreferenceUtil.getInstance().nowPlayingScreen == NowPlayingScreen.CLASSIC -> R.layout.fragment_album_full_cover
-                PreferenceUtil.getInstance().carouselEffect() -> R.layout.fragment_album_carousel_cover
+                PreferenceUtil.getInstance(activity).nowPlayingScreen == NowPlayingScreen.CLASSIC -> R.layout.fragment_album_full_cover
+                PreferenceUtil.getInstance(activity).carouselEffect() -> R.layout.fragment_album_carousel_cover
                 else -> layout
             }
             val view = inflater.inflate(finalLayout, container, false)

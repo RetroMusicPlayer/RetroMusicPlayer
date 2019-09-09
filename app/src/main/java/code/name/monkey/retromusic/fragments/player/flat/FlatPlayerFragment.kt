@@ -89,7 +89,7 @@ class FlatPlayerFragment : AbsPlayerFragment()  {
 
     override fun toolbarIconColor(): Int {
         val isLight = ColorUtil.isColorLight(paletteColor)
-        return if (PreferenceUtil.getInstance().adaptiveColor)
+        return if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(context, isLight)
         else
             ATHUtil.resolveColor(context, R.attr.iconColor)
@@ -103,12 +103,12 @@ class FlatPlayerFragment : AbsPlayerFragment()  {
         val isLight = ColorUtil.isColorLight(color)
 
         //TransitionManager.beginDelayedTransition(mToolbar);
-        val iconColor = if (PreferenceUtil.getInstance().adaptiveColor)
+        val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
         else
             ATHUtil.resolveColor(context!!, R.attr.iconColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
-        if (PreferenceUtil.getInstance().adaptiveColor) {
+        if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }
     }

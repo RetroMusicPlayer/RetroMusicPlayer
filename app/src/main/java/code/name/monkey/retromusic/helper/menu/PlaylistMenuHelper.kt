@@ -87,8 +87,8 @@ object PlaylistMenuHelper {
     private class SavePlaylistAsyncTask internal constructor(context: Context) : WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {
-            return String.format(App.instance.applicationContext.getString(R.string
-                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.instance.applicationContext, params[0]))
+            return String.format(App.getContext().getString(R.string
+                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.getContext(), params[0]))
         }
 
         override fun onPostExecute(string: String) {

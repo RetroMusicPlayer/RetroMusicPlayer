@@ -341,7 +341,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         getContentResolver().registerContentObserver(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
 
@@ -477,7 +477,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         quit();
         releaseResources();
         getContentResolver().unregisterContentObserver(mediaStoreObserver);
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
 
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
@@ -676,7 +676,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     public void initNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PreferenceUtil.getInstance().classicNotification()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PreferenceUtil.getInstance(this).classicNotification()) {
             playingNotification = new PlayingNotificationImpl24();
         } else {
             playingNotification = new PlayingNotificationOreo();
@@ -745,14 +745,14 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
         }
 
-        if (PreferenceUtil.getInstance().albumArtOnLockscreen()) {
+        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
             GlideRequest request = GlideApp.with(MusicService.this)
                     .asBitmap()
                     .load(RetroGlideExtension.getSongModel(song))
                     .transition(RetroGlideExtension.getDefaultTransition())
                     .songOptions(song);
-            if (PreferenceUtil.getInstance().blurredAlbumArt()) {
+            if (PreferenceUtil.getInstance(this).blurredAlbumArt()) {
                 request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
             runOnUiThread(new Runnable() {
@@ -1271,7 +1271,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     private void registerHeadsetEvents() {
-        if (!headsetReceiverRegistered && PreferenceUtil.getInstance().getHeadsetPlugged()) {
+        if (!headsetReceiverRegistered && PreferenceUtil.getInstance(this).getHeadsetPlugged()) {
             registerReceiver(headsetReceiver, headsetReceiverIntentFilter);
             headsetReceiverRegistered = true;
         }

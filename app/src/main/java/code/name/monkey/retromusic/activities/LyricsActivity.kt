@@ -61,7 +61,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     }
 
     override fun onPageSelected(position: Int) {
-        PreferenceUtil.getInstance().lyricsOptions = position
+        PreferenceUtil.getInstance(this).lyricsOptions = position
         if (position == 0) fab.text = getString(R.string.synced_lyrics)
         else if (position == 1) fab.text = getString(R.string.lyrics)
     }
@@ -110,7 +110,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         viewPager.apply {
             adapter = PagerAdapter(supportFragmentManager)
-            currentItem = PreferenceUtil.getInstance().lyricsOptions
+            currentItem = PreferenceUtil.getInstance(this@LyricsActivity).lyricsOptions
             addOnPageChangeListener(this@LyricsActivity)
         }
 
@@ -234,7 +234,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return App.context.getString(tabs[position].title)
+            return App.getContext().getString(tabs[position].title)
         }
 
         override fun getCount(): Int {

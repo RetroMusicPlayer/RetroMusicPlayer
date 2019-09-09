@@ -127,7 +127,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                 notificationLayoutBig.setImageViewResource(R.id.largeIcon, R.drawable.default_album_art)
                             }
 
-                            if (!PreferenceUtil.getInstance().coloredNotification()) {
+                            if (!PreferenceUtil.getInstance(service).coloredNotification()) {
                                 bgColorFinal = Color.WHITE
                             }
                             setBackgroundColor(bgColorFinal)

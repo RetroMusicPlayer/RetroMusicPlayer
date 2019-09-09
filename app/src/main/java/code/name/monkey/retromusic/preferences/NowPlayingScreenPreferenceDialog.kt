@@ -88,7 +88,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         viewPager.adapter = NowPlayingScreenAdapter(activity!!)
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtil.getInstance().nowPlayingScreen.ordinal
+        viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
 
 
         return MaterialDialog(activity!!).show {
@@ -100,7 +100,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(activity!!)
                 } else {
-                    PreferenceUtil.getInstance().nowPlayingScreen = nowPlayingScreen
+                    PreferenceUtil.getInstance(requireContext()).nowPlayingScreen = nowPlayingScreen
                 }
             }
             negativeButton(android.R.string.cancel)
@@ -110,8 +110,8 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
 
     private fun isNowPlayingThemes(nowPlayingScreen: NowPlayingScreen): Boolean {
         if (nowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
-            PreferenceUtil.getInstance().resetCarouselEffect()
-            PreferenceUtil.getInstance().resetCircularAlbumArt()
+            PreferenceUtil.getInstance(requireContext()).resetCarouselEffect()
+            PreferenceUtil.getInstance(requireContext()).resetCircularAlbumArt()
         }
 
         return (nowPlayingScreen == NowPlayingScreen.FULL ||
@@ -122,7 +122,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
                 nowPlayingScreen == NowPlayingScreen.SIMPLE ||
                 nowPlayingScreen == NowPlayingScreen.BLUR_CARD ||
                 nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
-                && !App.isProVersion
+                && !App.isProVersion()
     }
 
     companion object {

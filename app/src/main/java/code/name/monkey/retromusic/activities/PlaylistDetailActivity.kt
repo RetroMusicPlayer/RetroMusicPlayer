@@ -64,7 +64,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             finish()
         }
 
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
 
         playlistSongsPresenter.attachView(this)
 

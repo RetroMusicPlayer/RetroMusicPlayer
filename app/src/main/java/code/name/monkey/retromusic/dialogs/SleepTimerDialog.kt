@@ -60,14 +60,14 @@ class SleepTimerDialog : DialogFragment() {
         materialDialog = MaterialDialog(activity!!, BottomSheet())
                 .title(R.string.action_sleep_timer)
                 .positiveButton(R.string.action_set) {
-                    PreferenceUtil.getInstance().sleepTimerFinishMusic = shouldFinishLastSong.isChecked
+                    PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic = shouldFinishLastSong.isChecked
 
                     val minutes = seekArcProgress
 
                     val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
 
                     val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
-                    PreferenceUtil.getInstance().setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
+                    PreferenceUtil.getInstance(requireContext()).setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
                     val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
                     am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
 
@@ -109,11 +109,11 @@ class SleepTimerDialog : DialogFragment() {
         timerDisplay = materialDialog.getCustomView().findViewById(R.id.timerDisplay)
 
 
-        val finishMusic = PreferenceUtil.getInstance().sleepTimerFinishMusic
+        val finishMusic = PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic
         shouldFinishLastSong.isChecked = finishMusic
 
 
-        seekArcProgress = PreferenceUtil.getInstance().lastSleepTimerValue
+        seekArcProgress = PreferenceUtil.getInstance(requireContext()).lastSleepTimerValue
         updateTimeDisplayTime()
         seekBar.progress = seekArcProgress
 
@@ -134,7 +134,7 @@ class SleepTimerDialog : DialogFragment() {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                PreferenceUtil.getInstance().lastSleepTimerValue = seekArcProgress
+                PreferenceUtil.getInstance(requireContext()).lastSleepTimerValue = seekArcProgress
             }
         })
 
@@ -167,7 +167,7 @@ class SleepTimerDialog : DialogFragment() {
         }
     }
 
-    private inner class TimerUpdater internal constructor() : CountDownTimer(PreferenceUtil.getInstance().nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(), 1000) {
+    private inner class TimerUpdater internal constructor() : CountDownTimer(PreferenceUtil.getInstance(requireContext()).nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(), 1000) {
 
         override fun onTick(millisUntilFinished: Long) {
             materialDialog.getActionButton(WhichButton.NEGATIVE).text =

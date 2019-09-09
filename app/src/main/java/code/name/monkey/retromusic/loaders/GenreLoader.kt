@@ -105,7 +105,7 @@ object GenreLoader {
         try {
             return context.contentResolver.query(
                     Genres.Members.getContentUri("external", genreId.toLong()),
-                    baseProjection, BASE_SELECTION, null, PreferenceUtil.getInstance().songSortOrder)
+                    baseProjection, BASE_SELECTION, null, PreferenceUtil.getInstance(context).songSortOrder)
         } catch (e: SecurityException) {
             return null
         }
@@ -172,7 +172,7 @@ object GenreLoader {
         try {
             return context.contentResolver.query(
                     Genres.EXTERNAL_CONTENT_URI,
-                    projection, null, null, PreferenceUtil.getInstance().genreSortOrder)
+                    projection, null, null, PreferenceUtil.getInstance(context).genreSortOrder)
         } catch (e: SecurityException) {
             return null
         }

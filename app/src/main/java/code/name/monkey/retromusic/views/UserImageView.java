@@ -62,7 +62,7 @@ public class UserImageView extends CircularImageView implements SharedPreference
                 .asDrawable()
                 .placeholder(R.drawable.ic_account_white_24dp)
                 .fallback(R.drawable.ic_account_white_24dp)
-                .load(new File(PreferenceUtil.getInstance().getProfileImage(), USER_PROFILE))
+                .load(new File(PreferenceUtil.getInstance(context).getProfileImage(), USER_PROFILE))
                 .into(new Target<Drawable>() {
                     @Override
                     public void onLoadStarted(@Nullable Drawable placeholder) {

@@ -65,7 +65,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setUpToolBar()
         setupRecyclerView()
 
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         genreDetailsPresenter.attachView(this)
 
     }

@@ -63,7 +63,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
         if (savedInstanceState != null) {
             categoryInfos = savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
         } else {
-            categoryInfos = PreferenceUtil.getInstance().libraryCategoryInfos
+            categoryInfos = PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos
         }
         adapter = CategoryInfoAdapter(categoryInfos)
 
@@ -84,7 +84,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
                     dismiss()
                 }
                 .neutralButton(code.name.monkey.retromusic.R.string.reset_action) {
-                    adapter.categoryInfos = PreferenceUtil.getInstance().defaultLibraryCategoryInfos
+                    adapter.categoryInfos = PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
                 }
                 .noAutoDismiss()
     }
@@ -100,7 +100,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
             Toast.makeText(context, "Not more than 5 items", Toast.LENGTH_SHORT).show()
             return
         }
-        PreferenceUtil.getInstance().libraryCategoryInfos = categories
+        PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos = categories
     }
 
     private fun getSelected(categories: List<CategoryInfo>): Int {

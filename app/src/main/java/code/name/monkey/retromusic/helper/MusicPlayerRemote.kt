@@ -209,7 +209,7 @@ object MusicPlayerRemote {
     fun openQueue(queue: ArrayList<Song>, startPosition: Int, startPlaying: Boolean) {
         if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
             musicService!!.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.getInstance().isShuffleModeOn)
+            if (PreferenceUtil.getInstance(musicService).isShuffleModeOn)
                 setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }

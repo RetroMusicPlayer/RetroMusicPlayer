@@ -113,7 +113,7 @@ class PlayingNotificationImpl : PlayingNotification() {
                             bigNotificationImageSize) {
                         override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
                             update(resource.bitmap,
-                                    if (PreferenceUtil.getInstance().isDominantColor)
+                                    if (PreferenceUtil.getInstance(service).isDominantColor)
                                         RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
                                     else
                                         RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT))
@@ -135,7 +135,7 @@ class PlayingNotificationImpl : PlayingNotification() {
                                         .setImageViewResource(R.id.image, R.drawable.default_album_art)
                             }
 
-                            if (!PreferenceUtil.getInstance().coloredNotification()) {
+                            if (!PreferenceUtil.getInstance(service).coloredNotification()) {
                                 bgColorFinal = Color.WHITE
                             }
                             setBackgroundColor(bgColorFinal)

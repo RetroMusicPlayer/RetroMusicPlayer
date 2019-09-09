@@ -67,7 +67,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
     override fun onResume() {
         super.onResume()
-        if (currentNowPlayingScreen != PreferenceUtil.getInstance().nowPlayingScreen) {
+        if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).nowPlayingScreen) {
             postRecreate()
         }
     }
@@ -181,7 +181,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     }
 
     private fun chooseFragmentForTheme() {
-        currentNowPlayingScreen = PreferenceUtil.getInstance().nowPlayingScreen
+        currentNowPlayingScreen = PreferenceUtil.getInstance(this).nowPlayingScreen
 
         val fragment: Fragment = when (currentNowPlayingScreen) {
             BLUR -> BlurPlayerFragment()
@@ -262,7 +262,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             val isColorLight = ColorUtil.isColorLight(paletteColor)
 
 
-            if (PreferenceUtil.getInstance().adaptiveColor &&
+            if (PreferenceUtil.getInstance(this).adaptiveColor &&
                     (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
@@ -314,7 +314,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
     private fun updateTabs() {
         bottomNavigationView.menu.clear()
-        val currentTabs = PreferenceUtil.getInstance().libraryCategoryInfos
+        val currentTabs = PreferenceUtil.getInstance(this).libraryCategoryInfos
         for (tab in currentTabs) {
             if (tab.visible) {
                 val menu = tab.category;

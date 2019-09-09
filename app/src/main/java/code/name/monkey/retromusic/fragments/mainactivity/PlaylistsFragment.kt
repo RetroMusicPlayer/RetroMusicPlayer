@@ -24,7 +24,7 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
         playlistsPresenter.attachView(this)
     }
 
@@ -58,8 +58,8 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
         adapter!!.swapDataSet(ArrayList())
     }
 
-    override fun playlists(list: ArrayList<Playlist>) {
-        adapter!!.swapDataSet(list)
+    override fun playlists(playlists: ArrayList<Playlist>) {
+        adapter!!.swapDataSet(playlists)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

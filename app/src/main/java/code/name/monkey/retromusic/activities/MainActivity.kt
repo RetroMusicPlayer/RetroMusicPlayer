@@ -1,13 +1,11 @@
 package code.name.monkey.retromusic.activities
 
-import android.annotation.SuppressLint
 import android.content.*
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
@@ -37,7 +35,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action != null && action == Intent.ACTION_SCREEN_OFF) {
-                if (PreferenceUtil.getInstance().lockScreen && MusicPlayerRemote.isPlaying) {
+                if (PreferenceUtil.getInstance(this@MainActivity).lockScreen && MusicPlayerRemote.isPlaying) {
                     val activity = Intent(context, LockScreenActivity::class.java)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -57,16 +55,16 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
-        getBottomNavigationView().selectedItemId = PreferenceUtil.getInstance().lastPage
+        getBottomNavigationView().selectedItemId = PreferenceUtil.getInstance(this).lastPage
 
         getBottomNavigationView().setOnNavigationItemSelectedListener {
-            PreferenceUtil.getInstance().lastPage = it.itemId
+            PreferenceUtil.getInstance(this).lastPage = it.itemId
             selectedFragment(it.itemId)
             true
         }
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance().lastPage)
+            selectedFragment(PreferenceUtil.getInstance(this).lastPage)
         } else {
             restoreCurrentFragment();
         }
@@ -82,7 +80,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
             val currentVersion = pInfo.versionCode
-            if (currentVersion != PreferenceUtil.getInstance().lastChangelogVersion) {
+            if (currentVersion != PreferenceUtil.getInstance(this).lastChangelogVersion) {
                 startActivityForResult(Intent(this, WhatsNewActivity::class.java), APP_INTRO_REQUEST)
             }
         } catch (e: PackageManager.NameNotFoundException) {
@@ -97,7 +95,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         screenOnOff.addAction(Intent.ACTION_SCREEN_OFF)
         registerReceiver(broadcastReceiver, screenOnOff)
 
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this)
 
         if (intent.hasExtra("expand")) {
             if (intent.getBooleanExtra("expand", false)) {
@@ -111,7 +109,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         super.onDestroy()
         disposable.clear()
         unregisterReceiver(broadcastReceiver)
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this)
     }
 
     private fun setCurrentFragment(fragment: Fragment, b: Boolean = false) {

@@ -69,7 +69,7 @@ class PlayerFragment : AbsPlayerFragment()  {
 
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
 
-        if (PreferenceUtil.getInstance().adaptiveColor) {
+        if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }
     }

@@ -72,13 +72,13 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
         viewPager.adapter = AlbumCoverStyleAdapter(activity!!)
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtil.getInstance().albumCoverStyle.ordinal
+        viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).albumCoverStyle.ordinal
 
         return MaterialDialog(activity!!).show {
             title(R.string.pref_title_album_cover_style)
             positiveButton(R.string.set) {
                 val nowPlayingScreen = AlbumCoverStyle.values()[viewPagerPosition]
-                PreferenceUtil.getInstance().albumCoverStyle = nowPlayingScreen
+                PreferenceUtil.getInstance(requireContext()).albumCoverStyle = nowPlayingScreen
             }
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)

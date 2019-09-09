@@ -35,7 +35,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
         val carouselEffect: TwoStatePreference = findPreference("carousel_effect")!!
         carouselEffect.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue as Boolean && !App.isProVersion) {
+            if (newValue as Boolean && !App.isProVersion()) {
                 showProToastAndNavigate(activity!!.getString(R.string.pref_title_toggle_carousel_effect))
                 return@setOnPreferenceChangeListener false
             }
@@ -49,24 +49,24 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     private fun updateAlbumCoverStyleSummary() {
         val preference: Preference = findPreference(ALBUM_COVER_STYLE)!!
-        preference.setSummary(getInstance().albumCoverStyle.titleRes)
+        preference.setSummary(getInstance(requireContext()).albumCoverStyle.titleRes)
     }
 
     private fun updateNowPlayingScreenSummary() {
         val preference: Preference = findPreference(NOW_PLAYING_SCREEN_ID)!!
-        preference.setSummary(getInstance().nowPlayingScreen.titleRes)
+        preference.setSummary(getInstance(requireContext()).nowPlayingScreen.titleRes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getInstance().registerOnSharedPreferenceChangedListener(this)
+        getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
         val preference: Preference = findPreference("album_cover_transform")!!
         setSummary(preference)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        getInstance().unregisterOnSharedPreferenceChangedListener(this)
+        getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {

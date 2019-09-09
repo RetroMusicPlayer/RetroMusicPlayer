@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic
 
-import android.content.Context
 import android.widget.Toast
 import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
@@ -25,6 +24,7 @@ import code.name.monkey.retromusic.dagger.MusicComponent
 import code.name.monkey.retromusic.dagger.module.AppModule
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
+import com.google.android.play.core.missingsplits.MissingSplitsManagerFactory
 
 
 class App : MultiDexApplication() {
@@ -32,10 +32,11 @@ class App : MultiDexApplication() {
     lateinit var billingProcessor: BillingProcessor
 
     override fun onCreate() {
+        if (MissingSplitsManagerFactory.create(this).disableAppIfMissingRequiredSplits()) {
+            return
+        }
         super.onCreate()
         instance = this
-
-
         musicComponent = DaggerMusicComponent.builder()
                 .appModule(AppModule(this))
                 .build()
@@ -72,19 +73,25 @@ class App : MultiDexApplication() {
     }
 
     companion object {
+        private var instance: App? = null
 
+        fun getContext(): App {
+            return instance!!
+        }
+
+        fun isProVersion(): Boolean {
+            return BuildConfig.DEBUG || instance?.billingProcessor!!.isPurchased(PRO_VERSION_PRODUCT_ID)
+        }
 
         lateinit var musicComponent: MusicComponent
 
         const val PRO_VERSION_PRODUCT_ID = "pro_version"
 
-        lateinit var instance: App
-            private set
 
-        val context: Context
-            get() = instance.applicationContext
+        /*val context: Context
+            get() = (instance as App).applicationContext*/
 
-        val isProVersion: Boolean
-            get() = BuildConfig.DEBUG || instance.billingProcessor.isPurchased(PRO_VERSION_PRODUCT_ID)
+        /*val isProVersion: Boolean
+            get() = BuildConfig.DEBUG || instance.billingProcessor.isPurchased(PRO_VERSION_PRODUCT_ID)*/
     }
 }

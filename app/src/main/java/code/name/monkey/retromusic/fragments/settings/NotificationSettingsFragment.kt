@@ -34,10 +34,10 @@ class NotificationSettingsFragment : AbsSettingsFragment() {
             classicNotification?.isVisible = false
         } else {
             classicNotification?.apply {
-                isChecked = PreferenceUtil.getInstance().classicNotification()
+                isChecked = PreferenceUtil.getInstance(requireContext()).classicNotification()
                 setOnPreferenceChangeListener { _, newValue ->
                     // Save preference
-                    PreferenceUtil.getInstance().setClassicNotification(newValue as Boolean)
+                    PreferenceUtil.getInstance(requireContext()).setClassicNotification(newValue as Boolean)
                     invalidateSettings()
                     true
                 }
@@ -46,12 +46,12 @@ class NotificationSettingsFragment : AbsSettingsFragment() {
 
         val coloredNotification: TwoStatePreference? = findPreference("colored_notification")
         if (VERSION.SDK_INT >= VERSION_CODES.O) {
-            coloredNotification?.isEnabled = PreferenceUtil.getInstance().classicNotification()
+            coloredNotification?.isEnabled = PreferenceUtil.getInstance(requireContext()).classicNotification()
         } else {
             coloredNotification?.apply {
-                isChecked = PreferenceUtil.getInstance().coloredNotification()
+                isChecked = PreferenceUtil.getInstance(requireContext()).coloredNotification()
                 setOnPreferenceChangeListener { _, newValue ->
-                    PreferenceUtil.getInstance().setColoredNotification(newValue as Boolean)
+                    PreferenceUtil.getInstance(requireContext()).setColoredNotification(newValue as Boolean)
                     true
                 }
             }

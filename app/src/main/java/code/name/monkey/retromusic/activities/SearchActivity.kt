@@ -45,7 +45,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
-        App.musicComponent.inject(this)
+        App.musicComponent?.inject(this)
 
         searchPresenter.attachView(this)
 
