@@ -25,7 +25,7 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
             tools:ignore="ContentDescription" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@+id/miniPlayerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
