@@ -35,7 +35,8 @@
                     android:id="@+id/playerAlbumCoverFragment"
                     class="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    tools:layout="@layout/fragment_album_full_cover" />
             </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
             <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -47,14 +46,15 @@
                     android:layout_height="258dp"
                     app:layout_collapseMode="parallax">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/bannerImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         app:layout_collapseMode="parallax"
                         tools:background="@color/md_red_400"
-                        tools:ignore="ContentDescription" />
+                        tools:ignore="ContentDescription"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[9]" />
                 </FrameLayout>
 
                 <LinearLayout
@@ -75,10 +75,10 @@
                         android:id="@+id/toolbarContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="6dp"
                         android:layout_marginStart="128dp"
                         android:layout_marginEnd="128dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="6dp"
                         app:cardUseCompatPadding="true"
                         app:layout_scrollFlags="scroll|enterAlways">
 

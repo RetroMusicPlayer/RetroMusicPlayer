@@ -41,7 +41,7 @@
                     android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_player_album_cover" />
+                    tools:layout="@layout/fragment_album_cover" />
             </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
             <LinearLayout

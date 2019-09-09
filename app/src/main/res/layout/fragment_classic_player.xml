@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -44,7 +45,8 @@
                         android:id="@+id/playerAlbumCoverFragment"
                         class="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        tools:layout="@layout/fragment_album_full_cover" />
 
                 </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -103,7 +105,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
 
                     <!--This is necessary for the drag sorting to work at the top-->
                     <View

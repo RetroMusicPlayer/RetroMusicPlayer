@@ -49,7 +49,8 @@
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_album_cover" />
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
         <FrameLayout
@@ -69,8 +70,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
-            tools:background="@color/md_red_A700">
+            android:layout_weight="0">
 
             <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/playerToolbar"

@@ -52,7 +52,8 @@
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_album_full_card_cover" />
 
             <FrameLayout
                 android:id="@+id/player_lyrics"

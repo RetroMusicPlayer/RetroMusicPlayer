@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:ignore="ContentDescription,UnusedAttribute" />
+            tools:ignore="ContentDescription,UnusedAttribute"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[6]" />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-
 </FrameLayout>

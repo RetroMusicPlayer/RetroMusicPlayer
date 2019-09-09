@@ -48,7 +48,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription,UnusedAttribute" />
+                    tools:ignore="ContentDescription,UnusedAttribute"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[10]" />
 
                 <ScrollView
                     android:id="@+id/lyricsContainer"

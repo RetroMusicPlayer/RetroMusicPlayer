@@ -16,15 +16,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            app:cardElevation="6dp"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="6dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/player_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:ignore="ContentDescription,UnusedAttribute" />
+                tools:ignore="ContentDescription,UnusedAttribute"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
         </com.google.android.material.card.MaterialCardView>
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>

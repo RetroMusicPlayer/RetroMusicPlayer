@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-
             <code.name.monkey.appthemehelper.common.views.ATEToolbar
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"

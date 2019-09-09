@@ -45,14 +45,15 @@
                     android:layout_height="182dp"
                     app:layout_collapseMode="pin">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/bannerImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         app:layout_collapseMode="parallax"
                         tools:background="@color/md_red_400"
-                        tools:ignore="ContentDescription" />
+                        tools:ignore="ContentDescription"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[9]" />
                 </FrameLayout>
 
                 <LinearLayout
