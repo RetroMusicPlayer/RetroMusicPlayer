@@ -12,22 +12,15 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.dagger.module
-
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+package code.name.monkey.retromusic.glide.audiocover;
 
 /**
- * Created by hemanths on 2019-09-04.
+ * @author Karim Abou Zeid (kabouzeid)
  */
-@Module
-class SongModule {
-    @Provides
-    @Singleton
-    fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
-        return presenter
+public class AudioFileCover {
+    public final String filePath;
+
+    public AudioFileCover(String filePath) {
+        this.filePath = filePath;
     }
 }

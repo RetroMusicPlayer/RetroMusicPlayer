@@ -84,7 +84,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                     title(code.name.monkey.retromusic.R.string.remove_from_blacklist)
                     message(text = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.do_you_want_to_remove_from_the_blacklist, text)))
                     positiveButton(code.name.monkey.retromusic.R.string.remove_action) {
-                        BlacklistStore.getInstance(context).removePath(File(text))
+                        BlacklistStore.getInstance(context).removePath(File(text.toString()))
                         refreshBlacklistData()
                     }
                     negativeButton(android.R.string.cancel)

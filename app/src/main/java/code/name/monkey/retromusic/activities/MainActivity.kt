@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities
 
 import android.content.*
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -83,7 +82,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             if (currentVersion != PreferenceUtil.getInstance(this).lastChangelogVersion) {
                 startActivityForResult(Intent(this, WhatsNewActivity::class.java), APP_INTRO_REQUEST)
             }
-        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
         }
 
@@ -112,16 +111,13 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    private fun setCurrentFragment(fragment: Fragment, b: Boolean = false) {
-        val trans = supportFragmentManager.beginTransaction()
-        trans.replace(R.id.fragment_container, fragment, null)
-        if (b) {
-            trans.addToBackStack(null)
+    private fun setCurrentFragment(fragment: Fragment, tag: String) {
+        println("setCurrentFragment -> $tag -> ${supportFragmentManager.findFragmentById(R.id.fragment_container)?.tag}")
+        if (tag != supportFragmentManager.findFragmentById(R.id.fragment_container)?.tag) {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, tag).commit()
+            currentFragment = fragment as MainActivityFragmentCallbacks
         }
-        trans.commit()
-        currentFragment = fragment as MainActivityFragmentCallbacks
     }
-
 
     private fun restoreCurrentFragment() {
         currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MainActivityFragmentCallbacks
@@ -275,11 +271,11 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             R.id.action_artist,
             R.id.action_playlist,
             R.id.action_genre,
-            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false)
-            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false)
-            R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), false)
+            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), itemId.toString())
+            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
+            R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG)
             else -> {
-                setCurrentFragment(BannerHomeFragment.newInstance(), false)
+                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             }
         }
     }

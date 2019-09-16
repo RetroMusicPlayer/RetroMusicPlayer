@@ -23,17 +23,17 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.widget.Toast
 import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
 import code.name.monkey.retromusic.model.Artist
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.transition.Transition
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+
 
 class CustomArtistImageUtil private constructor(context: Context) {
 
@@ -44,21 +44,23 @@ class CustomArtistImageUtil private constructor(context: Context) {
     }
 
     fun setCustomArtistImage(artist: Artist, uri: Uri) {
-        GlideApp.with(App.getContext())
-                .asBitmap()
+        Glide.with(App.getContext())
                 .load(uri)
-                .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                )
-                .into(object : RetroSimpleTarget<Bitmap>() {
+                .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(object : SimpleTarget<Bitmap>() {
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        super.onLoadFailed(e, errorDrawable)
+                        e!!.printStackTrace()
+                        Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
+                    }
 
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
                         object : AsyncTask<Void, Void, Void>() {
                             @SuppressLint("ApplySharedPref")
                             override fun doInBackground(vararg params: Void): Void? {
                                 val dir = File(App.getContext().filesDir, FOLDER_NAME)
-                                println(dir.absolutePath)
                                 if (!dir.exists()) {
                                     if (!dir.mkdirs()) { // create the folder
                                         return null
@@ -77,8 +79,8 @@ class CustomArtistImageUtil private constructor(context: Context) {
 
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit()
-                                    ArtistSignatureUtil.getInstance().updateArtistSignature(artist.name)
-                                    App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                                    ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
+                                    App.getContext().getContentResolver().notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
                                 }
                                 return null
                             }
@@ -92,7 +94,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
             @SuppressLint("ApplySharedPref")
             override fun doInBackground(vararg params: Void): Void? {
                 mPreferences.edit().putBoolean(getFileName(artist), false).commit()
-                ArtistSignatureUtil.getInstance().updateArtistSignature(artist.name)
+                ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
                 App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
 
                 val file = getFile(artist)

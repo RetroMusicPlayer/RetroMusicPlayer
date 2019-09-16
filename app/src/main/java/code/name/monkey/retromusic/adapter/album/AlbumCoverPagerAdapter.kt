@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.adapter.album
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,16 +8,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.LyricsActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.bumptech.glide.Glide
 import java.util.*
 
 
@@ -72,14 +70,14 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         private val layout: Int
             get() {
                 return when (PreferenceUtil.getInstance(activity).albumCoverStyle) {
-                    AlbumCoverStyle.NORMAL -> R.layout.fragment_album_cover
-                    AlbumCoverStyle.FLAT -> R.layout.fragment_album_flat_cover
-                    AlbumCoverStyle.CIRCLE -> R.layout.fragment_album_circle_cover
-                    AlbumCoverStyle.CARD -> R.layout.fragment_album_card_cover
-                    AlbumCoverStyle.MATERIAL -> R.layout.fragment_album_material_cover
-                    AlbumCoverStyle.FULL -> R.layout.fragment_album_full_cover
-                    AlbumCoverStyle.FULL_CARD -> R.layout.fragment_album_full_card_cover
-                    else -> R.layout.fragment_album_cover
+                    AlbumCoverStyle.NORMAL -> code.name.monkey.retromusic.R.layout.fragment_album_cover
+                    AlbumCoverStyle.FLAT -> code.name.monkey.retromusic.R.layout.fragment_album_flat_cover
+                    AlbumCoverStyle.CIRCLE -> code.name.monkey.retromusic.R.layout.fragment_album_circle_cover
+                    AlbumCoverStyle.CARD -> code.name.monkey.retromusic.R.layout.fragment_album_card_cover
+                    AlbumCoverStyle.MATERIAL -> code.name.monkey.retromusic.R.layout.fragment_album_material_cover
+                    AlbumCoverStyle.FULL -> code.name.monkey.retromusic.R.layout.fragment_album_full_cover
+                    AlbumCoverStyle.FULL_CARD -> code.name.monkey.retromusic.R.layout.fragment_album_full_card_cover
+                    else -> code.name.monkey.retromusic.R.layout.fragment_album_cover
                 }
             }
 
@@ -92,12 +90,12 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val finalLayout = when {
-                PreferenceUtil.getInstance(activity).nowPlayingScreen == NowPlayingScreen.CLASSIC -> R.layout.fragment_album_full_cover
-                PreferenceUtil.getInstance(activity).carouselEffect() -> R.layout.fragment_album_carousel_cover
+                PreferenceUtil.getInstance(activity).nowPlayingScreen == NowPlayingScreen.CLASSIC -> code.name.monkey.retromusic.R.layout.fragment_album_full_cover
+                PreferenceUtil.getInstance(activity).carouselEffect() -> code.name.monkey.retromusic.R.layout.fragment_album_carousel_cover
                 else -> layout
             }
             val view = inflater.inflate(finalLayout, container, false)
-            albumCover = view.findViewById(R.id.player_image)
+            albumCover = view.findViewById(code.name.monkey.retromusic.R.id.player_image)
             albumCover.setOnClickListener { startActivity(Intent(context, LyricsActivity::class.java)) }
             return view
         }
@@ -114,20 +112,12 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
         }
 
         private fun loadAlbumCover() {
-            GlideApp.with(context!!)
-                    .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song!!))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song)
-                    .dontAnimate()
+            SongGlideRequest.Builder.from(Glide.with(requireContext()), song)
+                    .checkIgnoreMediaStore(activity)
+                    .generatePalette(activity).build()
                     .into(object : RetroMusicColoredTarget(albumCover) {
                         override fun onColorReady(color: Int) {
                             setColor(color)
-                        }
-
-                        override fun onLoadFailed(errorDrawable: Drawable?) {
-                            super.onLoadFailed(errorDrawable)
-                            setColor(defaultFooterColor)
                         }
                     })
         }

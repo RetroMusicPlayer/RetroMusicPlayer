@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -19,8 +20,7 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.rest.LastFMRestClient
@@ -30,10 +30,10 @@ import code.name.monkey.retromusic.util.LastFMUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
-import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.transition.Transition
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -46,23 +46,54 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override val contentViewLayout: Int
         get() = R.layout.activity_album_tag_editor
 
-    override fun loadImageFromFile(selectedFile: Uri?) {
-        GlideApp.with(this).`as`(BitmapPaletteWrapper::class.java)
-                .load(selectedFile)
-                .transition(GenericTransitionOptions<BitmapPaletteWrapper>().transition(android.R.anim.fade_in))
-                .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true))
-                .into(object : RetroSimpleTarget<BitmapPaletteWrapper>() {
-                    override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
-                        RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
-                        albumArtBitmap = ImageUtil.resizeBitmap(resource.bitmap, 2048)
-                        setImageBitmap(albumArtBitmap, RetroColorUtil.getColor(resource.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
+    override fun loadImageFromFile(selectedFileUri: Uri?) {
+
+        Glide.with(this@AlbumTagEditorActivity)
+                .load(selectedFileUri)
+                .asBitmap()
+                .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(object : SimpleTarget<BitmapPaletteWrapper>() {
+                    override fun onResourceReady(resource: BitmapPaletteWrapper?, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
+                        RetroColorUtil.getColor(resource?.palette, Color.TRANSPARENT);
+                        albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                        setImageBitmap(albumArtBitmap, RetroColorUtil.getColor(resource?.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
                         deleteAlbumArt = false
                         dataChanged()
                         setResult(Activity.RESULT_OK)
                     }
+
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        super.onLoadFailed(e, errorDrawable)
+                        Toast.makeText(this@AlbumTagEditorActivity, e.toString(), Toast.LENGTH_LONG).show()
+                    }
                 })
+
+        /*Glide.with(AlbumTagEditorActivity.this)
+                .load(selectedFileUri)
+                .asBitmap()
+                .transcode(new BitmapPaletteTranscoder(AlbumTagEditorActivity.this), BitmapPaletteWrapper.class)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(new SimpleTarget<BitmapPaletteWrapper>() {
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        super.onLoadFailed(e, errorDrawable);
+                        e.printStackTrace();
+                        Toast.makeText(AlbumTagEditorActivity.this, e.toString(), Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onResourceReady(BitmapPaletteWrapper resource, GlideAnimation<? super BitmapPaletteWrapper> glideAnimation) {
+                        PhonographColorUtil.getColor(resource.getPalette(), Color.TRANSPARENT);
+                        albumArtBitmap = ImageUtil.resizeBitmap(resource.getBitmap(), 2048);
+                        setImageBitmap(albumArtBitmap, PhonographColorUtil.getColor(resource.getPalette(), ATHUtil.resolveColor(AlbumTagEditorActivity.this, R.attr.defaultFooterColor)));
+                        deleteAlbumArt = false;
+                        dataChanged();
+                        setResult(RESULT_OK);
+                    }
+                });*/
     }
 
     private var albumArtBitmap: Bitmap? = null
@@ -141,22 +172,26 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
             val url = LastFMUtil.getLargestAlbumImageUrl(lastFmAlbum.album.image)
 
             if (!TextUtils.isEmpty(url) && url.trim { it <= ' ' }.isNotEmpty()) {
-                GlideApp.with(this)
-                        .`as`(BitmapPaletteWrapper::class.java)
-                        .load(url)
-                        .apply(RequestOptions()
-                                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                                .error(R.drawable.default_album_art))
-                        .into(object : RetroSimpleTarget<BitmapPaletteWrapper>() {
-                            override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
-                                albumArtBitmap = ImageUtil.resizeBitmap(resource.bitmap, 2048)
-                                setImageBitmap(albumArtBitmap, getColor(resource.palette,
-                                        ContextCompat.getColor(this@AlbumTagEditorActivity, R.color.md_grey_500)))
-                                deleteAlbumArt = false
-                                dataChanged()
-                                setResult(Activity.RESULT_OK)
-                            }
-                        })
+                Glide.with(this@AlbumTagEditorActivity)
+                                .load(url)
+                                .asBitmap()
+                                .transcode(  BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
+                                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                                .error(R.drawable.default_album_art)
+                                .into( object: SimpleTarget<BitmapPaletteWrapper>() {
+                                    override fun onLoadFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+                                        super.onLoadFailed(e, errorDrawable)
+                                        Toast.makeText(this@AlbumTagEditorActivity, e.toString(), Toast.LENGTH_LONG).show()
+                                    }
+
+                                    override fun onResourceReady(resource: BitmapPaletteWrapper?, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
+                                        albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                                        setImageBitmap(albumArtBitmap, RetroColorUtil.getColor(resource?.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
+                                        deleteAlbumArt = false
+                                        dataChanged()
+                                        setResult(RESULT_OK)
+                                    }
+                                });
                 return
             }
             if (lastFmAlbum.album.tags.tag.size > 0) {

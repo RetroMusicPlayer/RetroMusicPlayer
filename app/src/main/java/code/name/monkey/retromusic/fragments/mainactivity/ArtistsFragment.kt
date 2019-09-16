@@ -25,7 +25,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent?.inject(this)
+        App.musicComponent.inject(this)
         artistsPresenter.attachView(this)
     }
 
@@ -34,6 +34,11 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         if (adapter!!.dataSet.isEmpty()) {
             artistsPresenter.loadArtists()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        artistsPresenter.detachView()
     }
 
     override fun onMediaStoreChanged() {
@@ -101,17 +106,13 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        artistsPresenter.detachView()
-    }
 
     override fun showEmptyView() {
         adapter?.swapDataSet(ArrayList())
     }
 
     companion object {
-
+        @JvmField
         val TAG = ArtistsFragment::class.java.simpleName
 
         fun newInstance(): ArtistsFragment {

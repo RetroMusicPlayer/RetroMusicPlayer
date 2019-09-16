@@ -12,22 +12,25 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.dagger.module
+package code.name.monkey.retromusic.glide.palette;
 
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import android.graphics.Bitmap;
+import androidx.palette.graphics.Palette;
 
-/**
- * Created by hemanths on 2019-09-04.
- */
-@Module
-class SongModule {
-    @Provides
-    @Singleton
-    fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
-        return presenter
+public class BitmapPaletteWrapper {
+    private final Bitmap mBitmap;
+    private final Palette mPalette;
+
+    public BitmapPaletteWrapper(Bitmap bitmap, Palette palette) {
+        mBitmap = bitmap;
+        mPalette = palette;
+    }
+
+    public Bitmap getBitmap() {
+        return mBitmap;
+    }
+
+    public Palette getPalette() {
+        return mPalette;
     }
 }

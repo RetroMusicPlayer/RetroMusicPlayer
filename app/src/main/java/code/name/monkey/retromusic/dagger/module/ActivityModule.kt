@@ -18,6 +18,7 @@ import android.app.Activity
 
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -26,6 +27,7 @@ import dagger.Provides
 class ActivityModule(private val activity: Activity) {
 
     @Provides
+    @Singleton
     fun provideActivity(): Activity {
         return activity
     }

@@ -11,10 +11,11 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
@@ -98,15 +99,13 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
     private fun updateSongs() {
         val song = MusicPlayerRemote.currentSong
-        GlideApp.with(this)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(song))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(song)
+        SongGlideRequest.Builder.from(Glide.with(this), song)
+                .checkIgnoreMediaStore(this)
+                .generatePalette(this).build()
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
-                        fragment!!.setDark(color)
+                        fragment?.setDark(color)
                     }
                 })
     }

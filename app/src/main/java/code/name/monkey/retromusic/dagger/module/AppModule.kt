@@ -18,6 +18,7 @@ import android.content.Context
 
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -26,6 +27,7 @@ import dagger.Provides
 class AppModule(private val context: Context) {
 
     @Provides
+    @Singleton
     fun provideContext(): Context {
         return context
     }

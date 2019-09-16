@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenresPresenter.GenresPresenterImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -28,12 +29,14 @@ import dagger.Provides
 class GenreModule {
 
     @Provides
+    @Singleton
     fun providesGenresPresenter(presenter: GenresPresenterImpl): GenresPresenter {
         return presenter
     }
 
 
     @Provides
+    @Singleton
     fun providesGenreDetailsPresenter(presenter: GenreDetailsPresenterImpl): GenreDetailsPresenter {
         return presenter
     }

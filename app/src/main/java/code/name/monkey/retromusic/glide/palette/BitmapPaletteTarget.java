@@ -12,22 +12,19 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.dagger.module
+package code.name.monkey.retromusic.glide.palette;
 
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import android.widget.ImageView;
 
-/**
- * Created by hemanths on 2019-09-04.
- */
-@Module
-class SongModule {
-    @Provides
-    @Singleton
-    fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
-        return presenter
+import com.bumptech.glide.request.target.ImageViewTarget;
+
+public class BitmapPaletteTarget extends ImageViewTarget<BitmapPaletteWrapper> {
+    public BitmapPaletteTarget(ImageView view) {
+        super(view);
+    }
+
+    @Override
+    protected void setResource(BitmapPaletteWrapper bitmapPaletteWrapper) {
+        view.setImageBitmap(bitmapPaletteWrapper.getBitmap());
     }
 }

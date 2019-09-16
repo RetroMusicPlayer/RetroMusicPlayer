@@ -28,9 +28,9 @@ import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
 import code.name.monkey.retromusic.loaders.ArtistLoader
@@ -43,6 +43,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album.*
@@ -228,11 +229,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     override fun loadArtistImage(artist: Artist) {
-        GlideApp.with(this@AlbumDetailsActivity)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getArtistModel(artist))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .artistOptions(artist)
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+                .generatePalette(this).build()
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(artistImage) {
                     override fun onColorReady(color: Int) {
@@ -242,13 +240,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     private fun loadAlbumCover() {
-        GlideApp.with(this)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(album.safeGetFirstSong())
+        SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
+                .checkIgnoreMediaStore(this)
+                .generatePalette(this).build()
                 .dontAnimate()
-                .into(object : RetroMusicColoredTarget(image as ImageView) {
+                .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }

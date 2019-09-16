@@ -15,28 +15,200 @@
 package code.name.monkey.retromusic.glide.artistimage
 
 import android.content.Context
-import code.name.monkey.retromusic.deezer.Data
-import code.name.monkey.retromusic.deezer.DeezerApiService
-import code.name.monkey.retromusic.deezer.DeezerResponse
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.media.MediaMetadataRetriever
+import code.name.monkey.retromusic.glide.audiocover.AudioFileCoverUtils
+import code.name.monkey.retromusic.util.ImageUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority
-import com.bumptech.glide.integration.okhttp3.OkHttpStreamFetcher
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.Options
 import com.bumptech.glide.load.data.DataFetcher
-import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.GenericLoaderFactory
 import com.bumptech.glide.load.model.ModelLoader
 import com.bumptech.glide.load.model.ModelLoaderFactory
-import com.bumptech.glide.load.model.MultiModelLoaderFactory
-import com.bumptech.glide.signature.ObjectKey
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.bumptech.glide.load.model.stream.StreamModelLoader
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.io.InputStream
-import java.util.concurrent.TimeUnit
 
+
+class AlbumCover(
+        var year: Int,
+        var filePath: String?)
+
+class ArtistImage(val artistName: String, // filePath to get the image of the artist
+                  val albumCovers: List<AlbumCover>
+) {
+
+    fun toIdString(): String {
+        val id = StringBuilder(artistName)
+        for (albumCover in albumCovers) {
+            id.append(albumCover.year).append(albumCover.filePath)
+        }
+        return id.toString()
+    }
+}
+
+
+class ArtistImageFetcher(
+        val artistImage: ArtistImage,
+        val ignoreMediaStore: Boolean
+) : DataFetcher<InputStream> {
+    private var stream: InputStream? = null
+
+    override fun cleanup() {
+        if (stream != null) {
+            try {
+                stream?.close()
+            } catch (ignore: IOException) {
+                // can't do much about it
+            }
+
+        }
+    }
+
+    override fun cancel() {
+
+    }
+
+    override fun loadData(priority: Priority?): InputStream {
+        println("MOSAIC load data for" + artistImage.artistName)
+        stream = getMosaic(artistImage.albumCovers)?.let {
+            it
+        }
+        return stream as InputStream
+    }
+
+    private fun getMosaic(albumCovers: List<AlbumCover>): InputStream? {
+        val retriever = MediaMetadataRetriever()
+        val artistBitMapSize = 512
+        val images = HashMap<InputStream, Int>()
+        var result: InputStream? = null
+        var streams = ArrayList<InputStream>()
+        try {
+            for (albumCover in albumCovers) {
+                var picture: ByteArray? = null
+                if (!ignoreMediaStore) {
+                    retriever.setDataSource(albumCover.filePath)
+                    picture = retriever.embeddedPicture
+                }
+                val stream: InputStream? = if (picture != null) {
+                    ByteArrayInputStream(picture)
+                } else {
+                    AudioFileCoverUtils.fallback(albumCover.filePath)
+                }
+                if (stream != null) {
+                    images[stream] = albumCover.year
+                }
+                val nbImages = images.size
+                if (nbImages > 3) {
+                    streams = ArrayList(images.keys)
+
+                    var divisor = 1
+                    var i = 1
+                    while (i < nbImages && Math.pow(i.toDouble(), 2.0) <= nbImages) {
+                        divisor = i
+                        ++i
+                    }
+                    divisor += 1
+                    var nbTiles = Math.pow(divisor.toDouble(), 2.0)
+
+                    if (nbImages < nbTiles) {
+                        divisor -= 1;
+                        nbTiles = Math.pow(divisor.toDouble(), 2.0)
+                    }
+
+                    val resize = (artistBitMapSize / divisor) + 1
+
+                    val bitmap = Bitmap.createBitmap(artistBitMapSize, artistBitMapSize, Bitmap.Config.RGB_565)
+                    val canvas = Canvas(bitmap)
+
+                    var x = 0F
+                    var y = 0F
+
+                    var j = 0
+                    while (j < streams.size && j < nbTiles) {
+                        val tempBitmap = ImageUtil.resize(streams[j], resize, resize)
+                        canvas.drawBitmap(tempBitmap, x, y, null)
+                        x += resize
+
+                        if (x >= artistBitMapSize) {
+                            x = 0F
+                            y += resize
+                        }
+                        ++j
+                    }
+
+                    val bos = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 0, bos)
+                    result = ByteArrayInputStream(bos.toByteArray())
+
+                } else if (nbImages > 0) {
+                    var maxEntryYear: Map.Entry<InputStream, Int>? = null
+                    for (entry in images.entries) {
+                        if (maxEntryYear == null || entry.value
+                                        .compareTo(maxEntryYear.value) > 0) {
+                            maxEntryYear = entry
+                        }
+
+                    }
+                    result = if (maxEntryYear != null) {
+                        maxEntryYear.key
+                    } else {
+                        images.entries
+                                .iterator()
+                                .next()
+                                .key
+                    }
+                }
+            }
+        } finally {
+            retriever.release()
+            try {
+                for (stream in streams) {
+                    stream.close()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+
+        }
+        return result
+
+    }
+
+    override fun getId(): String {
+        println("MOSAIC get id for" + artistImage.artistName)
+        // never return NULL here!
+        // this id is used to determine whether the image is already cached
+        // we use the artist name as well as the album years + file paths
+        return artistImage.toIdString() + "ignoremediastore:" + ignoreMediaStore
+    }
+
+}
+
+class ArtistImageLoader(
+        private val context: Context
+) : StreamModelLoader<ArtistImage> {
+
+    override fun getResourceFetcher(model: ArtistImage, width: Int, height: Int): DataFetcher<InputStream> {
+
+        return ArtistImageFetcher(model, PreferenceUtil.getInstance(context).ignoreMediaStoreArtwork())
+    }
+
+    class Factory : ModelLoaderFactory<ArtistImage, InputStream> {
+
+        override fun build(context: Context, factories: GenericLoaderFactory): ModelLoader<ArtistImage, InputStream> {
+            return ArtistImageLoader(context)
+        }
+
+        override fun teardown() {
+
+        }
+    }
+}
+/*
 
 class ArtistImage(val artistName: String, val skipOkHttpCache: Boolean)
 
@@ -158,4 +330,4 @@ class ArtistImageLoader(private val context: Context,
         // we need these very low values to make sure our artist image loading calls doesn't block the image loading queue
         private const val TIMEOUT = 700
     }
-}
+}*/

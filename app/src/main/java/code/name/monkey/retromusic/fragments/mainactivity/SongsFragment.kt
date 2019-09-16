@@ -25,8 +25,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent?.inject(this)
-
+        App.musicComponent.inject(this)
         songPresenter.attachView(this)
     }
 
@@ -116,6 +115,9 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     companion object {
+
+        @JvmField
+        var TAG: String = SongsFragment::class.java.simpleName
 
         fun newInstance(): SongsFragment {
             val args = Bundle()

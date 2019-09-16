@@ -19,10 +19,12 @@ import code.name.monkey.retromusic.dagger.module.*
 import code.name.monkey.retromusic.fragments.mainactivity.*
 import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
 import dagger.Component
+import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
  */
+@Singleton
 @Component(modules = [
     RepositoryModule::class,
     AlbumModule::class,

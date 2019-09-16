@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.RetroUtil.openUrl
 import code.name.monkey.retromusic.views.CircularImageView
+import com.bumptech.glide.Glide
 
 class ContributorAdapter(
         private var contributors: List<Contributor>
@@ -56,7 +56,7 @@ class ContributorAdapter(
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name
             text.text = contributor.summary
-            GlideApp.with(image.context)
+            Glide.with(image.context)
                     .load(contributor.profileImage)
                     .error(R.drawable.ic_account_white_24dp)
                     .placeholder(R.drawable.ic_account_white_24dp)

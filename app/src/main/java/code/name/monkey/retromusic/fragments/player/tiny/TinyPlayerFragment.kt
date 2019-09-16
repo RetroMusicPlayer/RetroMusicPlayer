@@ -77,7 +77,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
             ThemeStore.accentColor(requireContext())
         }
 
-        if (ColorUtil.isColorLight(color)) {
+        if (ColorUtil.isColorLight(colorFinal)) {
             textColorPrimary = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             textColorPrimaryDisabled = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
         } else {

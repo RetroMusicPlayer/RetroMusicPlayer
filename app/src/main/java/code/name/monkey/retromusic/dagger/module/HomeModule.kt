@@ -18,6 +18,7 @@ import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter.HomePresenterImpl
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -26,6 +27,7 @@ import dagger.Provides
 class HomeModule {
 
     @Provides
+    @Singleton
     fun providesHomePresenter(presenter: HomePresenterImpl): HomePresenter {
         return presenter
     }

@@ -183,9 +183,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void selectedFragment(Fragment fragment) {
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         fragmentTransaction
-                .replace(R.id.fragmentContainer, fragment, TAG)
+                .replace(R.id.fragmentContainer, fragment, LibraryFragment.TAG)
                 .commit();
     }
 

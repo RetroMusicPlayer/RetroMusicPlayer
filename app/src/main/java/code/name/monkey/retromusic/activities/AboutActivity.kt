@@ -23,7 +23,6 @@ import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.afollestad.materialdialogs.MaterialDialog

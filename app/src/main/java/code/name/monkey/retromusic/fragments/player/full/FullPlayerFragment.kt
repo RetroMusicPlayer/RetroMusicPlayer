@@ -14,8 +14,7 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -24,12 +23,13 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
+import com.bumptech.glide.Glide
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_full.*
 
-class FullPlayerFragment : AbsPlayerFragment() , MusicProgressViewUpdateHelper.Callback {
+class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
     private lateinit var lyricsLine2: TextView
@@ -217,13 +217,9 @@ class FullPlayerFragment : AbsPlayerFragment() , MusicProgressViewUpdateHelper.C
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    GlideApp.with(activity!!)
-                            .asBitmapPalette()
-                            .load(RetroGlideExtension.getArtistModel(it))
-                            .transition(RetroGlideExtension.getDefaultTransition())
-                            .artistOptions(it)
-                            .dontAnimate()
-                            .into(object : RetroMusicColoredTarget(artistImage) {
+                    ArtistGlideRequest.Builder.from(Glide.with(requireContext()), it)
+                            .generatePalette(requireContext())
+                            .build().into(object : RetroMusicColoredTarget(artistImage) {
                                 override fun onColorReady(color: Int) {
 
                                 }
@@ -238,7 +234,6 @@ class FullPlayerFragment : AbsPlayerFragment() , MusicProgressViewUpdateHelper.C
 
     private fun updateLabel() {
         (MusicPlayerRemote.playingQueue.size - 1).apply {
-            println("Log Position $this ${MusicPlayerRemote.position}")
             if (this == (MusicPlayerRemote.position)) {
                 nextSongLabel.setText(R.string.last_song)
                 nextSong.hide()

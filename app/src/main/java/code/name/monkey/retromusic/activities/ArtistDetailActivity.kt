@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -29,8 +28,7 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
@@ -40,6 +38,7 @@ import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
@@ -81,7 +80,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         ActivityCompat.postponeEnterTransition(this)
 
 
-        App.musicComponent?.inject(this)
+        App.musicComponent.inject(this)
         artistDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
@@ -108,6 +107,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
                 biographyText.maxLines = 4
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        artistDetailsPresenter.detachView()
     }
 
     private fun setUpViews() {
@@ -258,23 +262,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     private var lang: String? = null
 
     private fun loadArtistImage() {
-        GlideApp.with(this)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getArtistModel(artist, forceDownload))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .artistOptions(artist)
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+                .generatePalette(this).build()
                 .dontAnimate()
                 .into(object : RetroMusicColoredTarget(artistImage) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        setColors(defaultFooterColor)
-                    }
                 })
-        forceDownload = false
     }
 
     private fun setColors(color: Int) {

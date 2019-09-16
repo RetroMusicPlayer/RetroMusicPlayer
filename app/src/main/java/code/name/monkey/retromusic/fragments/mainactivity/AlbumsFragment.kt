@@ -13,6 +13,26 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
 open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(), AlbumsView {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.musicComponent.inject(this)
+        albumsPresenter.attachView(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (adapter!!.dataSet.isEmpty()) {
+            albumsPresenter.loadAlbums()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        albumsPresenter.detachView()
+    }
+
+
     override fun albums(albums: java.util.ArrayList<Album>) {
         adapter?.swapDataSet(albums)
     }
@@ -86,20 +106,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         PreferenceUtil.getInstance(requireContext()).setAlbumColoredFooters(usePalette)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        App.musicComponent?.inject(this)
-        albumsPresenter.attachView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
-            albumsPresenter.loadAlbums()
-        }
-    }
-
     override fun onMediaStoreChanged() {
         albumsPresenter.loadAlbums()
     }
@@ -108,19 +114,14 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         albumsPresenter.loadAlbums()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        albumsPresenter.detachView()
-    }
-
 
     override fun showEmptyView() {
         adapter?.swapDataSet(ArrayList())
     }
 
     companion object {
-
-        val TAG: String = AlbumsFragment::class.java.simpleName
+        @JvmField
+        var TAG: String = AlbumsFragment::class.java.simpleName
 
         fun newInstance(): AlbumsFragment {
             val args = Bundle()

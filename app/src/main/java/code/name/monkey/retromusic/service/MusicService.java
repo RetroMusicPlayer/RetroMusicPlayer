@@ -51,7 +51,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.media.MediaBrowserServiceCompat;
 
-import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.BitmapRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,10 +69,7 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
 import code.name.monkey.retromusic.auto.AutoMusicProvider;
 import code.name.monkey.retromusic.glide.BlurTransformation;
-import code.name.monkey.retromusic.glide.GlideApp;
-import code.name.monkey.retromusic.glide.GlideRequest;
-import code.name.monkey.retromusic.glide.RetroGlideExtension;
-import code.name.monkey.retromusic.glide.RetroSimpleTarget;
+import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
@@ -747,27 +747,25 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
 
         if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
-            GlideRequest request = GlideApp.with(MusicService.this)
-                    .asBitmap()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song);
+            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
+                    .checkIgnoreMediaStore(MusicService.this)
+                    .asBitmap().build();
             if (PreferenceUtil.getInstance(this).blurredAlbumArt()) {
                 request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    request.into(new RetroSimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
+                    request.into(new SimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
                         @Override
-                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                            super.onLoadFailed(errorDrawable);
+                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
                             mediaSession.setMetadata(metaData.build());
                         }
 
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> glideAnimation) {
-                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
+                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                            super.onLoadFailed(e, errorDrawable);
                             mediaSession.setMetadata(metaData.build());
                         }
                     });

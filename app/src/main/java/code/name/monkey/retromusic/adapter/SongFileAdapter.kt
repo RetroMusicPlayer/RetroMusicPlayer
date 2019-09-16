@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.adapter
 
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -9,16 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.MediaStoreSignature
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.io.File
@@ -32,7 +28,7 @@ class SongFileAdapter(
         private val itemLayoutRes: Int,
         private val callbacks: Callbacks?,
         cabHolder: CabHolder?
-) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     init {
         this.setHasStableIds(true)
@@ -85,25 +81,24 @@ class SongFileAdapter(
     }
 
     private fun loadFileImage(file: File, holder: ViewHolder) {
-        val iconColor = ATHUtil.resolveColor(activity, R.attr.iconColor)
+        val iconColor = ATHUtil.resolveColor(activity, code.name.monkey.retromusic.R.attr.iconColor)
         if (file.isDirectory) {
             holder.image?.let {
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-                it.setImageResource(R.drawable.ic_folder_white_24dp)
+                it.setImageResource(code.name.monkey.retromusic.R.drawable.ic_folder_white_24dp)
             }
             holder.imageTextContainer?.setCardBackgroundColor(ThemeStore.primaryColor(activity))
 
         } else {
-            val error = RetroUtil.getTintedVectorDrawable(activity, R.drawable.ic_file_music_white_24dp, iconColor)
-            GlideApp.with(activity)
+            val error = RetroUtil.getTintedVectorDrawable(activity, code.name.monkey.retromusic.R.drawable.ic_file_music_white_24dp, iconColor)
+            Glide.with(activity)
                     .load(AudioFileCover(file.path))
-                    .transition(GenericTransitionOptions.with<Drawable>(android.R.anim.fade_in))
-                    .apply(RequestOptions()
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .error(error)
-                            .placeholder(error)
-                            .signature(MediaStoreSignature("", file.lastModified(), 0)))
-                    .into(holder.image!!)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .error(error)
+                    .placeholder(error)
+                    .animate(android.R.anim.fade_in)
+                    .signature(MediaStoreSignature("", file.lastModified(), 0))
+                    .into(holder.image)
         }
     }
 

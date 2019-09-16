@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 import java.util.*
 import javax.inject.Inject
 
@@ -49,16 +49,16 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
         override fun loadBiography(name: String,
                                    lang: String?,
                                    cache: String?) {
-            disposable = repository.artistInfoFloable(name, lang, cache)
+            disposable += repository.artistInfoFloable(name, lang, cache)
                     .subscribe {
                         view.artistInfo(it)
                     }
         }
 
-        private var disposable: Disposable? = null
+        private var disposable = CompositeDisposable()
 
         override fun loadArtist(artistId: Int) {
-            disposable = repository.getArtistByIdFlowable(artistId)
+            disposable += repository.getArtistByIdFlowable(artistId)
                     .doOnComplete {
                         view.complete()
                     }
@@ -67,6 +67,10 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
                     }
         }
 
+        override fun detachView() {
+            super.detachView()
+            disposable.dispose()
+        }
 
         private fun showArtist(artist: Artist) {
             view.artist(artist)

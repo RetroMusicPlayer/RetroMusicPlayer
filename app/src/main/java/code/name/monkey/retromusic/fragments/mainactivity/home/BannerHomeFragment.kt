@@ -22,7 +22,6 @@ import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -33,6 +32,7 @@ import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
 import code.name.monkey.retromusic.util.*
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -101,14 +101,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent?.inject(this)
-        homePresenter.attachView(this)
+        App.musicComponent.inject(this)
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         toolbar = view.findViewById(R.id.toolbar)
 
@@ -146,7 +145,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
-
+        homePresenter.attachView(this)
         homePresenter.loadSections()
     }
 
@@ -254,7 +253,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun loadTimeImage(day: String) {
         if (bannerImage != null) {
             if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
-                GlideApp.with(requireActivity())
+                Glide.with(requireActivity())
                         .load(day)
                         .placeholder(R.drawable.material_design_default)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -277,10 +276,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         const val TAG: String = "BannerHomeFragment"
 
         fun newInstance(): BannerHomeFragment {
-            val args = Bundle()
-            val fragment = BannerHomeFragment()
-            fragment.arguments = args
-            return fragment
+            return BannerHomeFragment()
         }
     }
 }

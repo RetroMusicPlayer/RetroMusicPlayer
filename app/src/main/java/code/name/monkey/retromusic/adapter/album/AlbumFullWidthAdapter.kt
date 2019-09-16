@@ -22,13 +22,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.Pair
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
+import com.bumptech.glide.Glide
 
 class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet: ArrayList<Album>, metrics: DisplayMetrics) :
         MetalRecyclerViewPager.MetalAdapter<AlbumFullWidthAdapter.FullMetalViewHolder>(metrics) {
@@ -67,12 +67,9 @@ class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet:
         if (holder.image == null) {
             return
         }
-        GlideApp.with(activity)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(album.safeGetFirstSong())
-                .dontAnimate()
+        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                .checkIgnoreMediaStore(activity)
+                .generatePalette(activity).build()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
                     override fun onColorReady(color: Int) {
 

@@ -24,19 +24,20 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
+
 
 class AppWidgetClassic : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -92,40 +93,35 @@ class AppWidgetClassic : BaseAppWidget() {
         val appContext = service.applicationContext
         service.runOnUiThread {
             if (target != null) {
-                GlideApp.with(appContext).clear(target)
+                Glide.clear(target)
             }
-            GlideApp.with(appContext)
-                    .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song)
-                    .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
+            target = SongGlideRequest.Builder.from(Glide.with(service), song)
+                    .checkIgnoreMediaStore(service)
+                    .generatePalette(service).build()
+                    .centerCrop()
+                    .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
                             val palette = resource.palette
-                            update(resource.bitmap, palette.getVibrantColor(palette.getMutedColor(MaterialValueHelper.getSecondaryTextColor(appContext, true))))
+                            update(resource.bitmap, palette.getVibrantColor(palette.getMutedColor(MaterialValueHelper.getSecondaryTextColor(service, true))))
                         }
 
-                        override fun onLoadFailed(errorDrawable: Drawable?) {
-                            super.onLoadFailed(errorDrawable)
-                            update(null, MaterialValueHelper.getSecondaryTextColor(appContext, true))
+                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                            super.onLoadFailed(e, errorDrawable)
+                            update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
                         }
+
 
                         private fun update(bitmap: Bitmap?, color: Int) {
                             // Set correct drawable for pause state
-                            val playPauseRes = if (isPlaying)
-                                R.drawable.ic_pause_white_24dp
-                            else
-                                R.drawable.ic_play_arrow_white_32dp
-                            appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause,
-                                    createBitmap(RetroUtil.getTintedVectorDrawable(service, playPauseRes, color)!!, 1f))
+                            val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_24dp
+                            appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(service, playPauseRes, color)))
 
                             // Set prev/next button drawables
-                            appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, color)!!, 1f))
-                            appWidgetView.setImageViewBitmap(R.id.button_prev, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, color)!!, 1f))
+                            appWidgetView.setImageViewBitmap(R.id.button_next, ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, color)))
+                            appWidgetView.setImageViewBitmap(R.id.button_prev, ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, color)))
 
                             val image = getAlbumArtDrawable(service.resources, bitmap)
-                            val roundedBitmap = BaseAppWidget.createRoundedBitmap(image, imageSize, imageSize,
-                                    cardRadius, 0f, cardRadius, 0f)
+                            val roundedBitmap = createRoundedBitmap(image, imageSize, imageSize, cardRadius, 0F, cardRadius, 0F)
                             appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 
                             pushUpdate(appContext, appWidgetIds, appWidgetView)
@@ -150,15 +146,15 @@ class AppWidgetClassic : BaseAppWidget() {
         views.setOnClickPendingIntent(R.id.media_titles, pendingIntent)
 
         // Previous track
-        pendingIntent = buildPendingIntent(context,  ACTION_REWIND, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_REWIND, serviceName)
         views.setOnClickPendingIntent(R.id.button_prev, pendingIntent)
 
         // Play and pause
-        pendingIntent = buildPendingIntent(context,  ACTION_TOGGLE_PAUSE, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_TOGGLE_PAUSE, serviceName)
         views.setOnClickPendingIntent(R.id.button_toggle_play_pause, pendingIntent)
 
         // Next track
-        pendingIntent = buildPendingIntent(context,  ACTION_SKIP, serviceName)
+        pendingIntent = buildPendingIntent(context, ACTION_SKIP, serviceName)
         views.setOnClickPendingIntent(R.id.button_next, pendingIntent)
     }
 

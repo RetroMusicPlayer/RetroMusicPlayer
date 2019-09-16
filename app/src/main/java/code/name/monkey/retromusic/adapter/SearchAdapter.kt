@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Album
@@ -18,6 +18,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
+import com.bumptech.glide.Glide
 import java.util.*
 
 
@@ -44,35 +45,28 @@ class SearchAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ALBUM -> {
-                val album = dataSet!![position] as Album
-                holder.title!!.text = album.title
-                holder.text!!.text = album.artistName
-                GlideApp.with(activity)
-                        .asDrawable()
-                        .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-                        .transition(RetroGlideExtension.getDefaultTransition())
-                        .songOptions(album.safeGetFirstSong())
-                        .into(holder.image!!)
+                val album = dataSet?.get(position) as Album
+                holder.title?.text = album.title
+                holder.text?.text = album.artistName
+                SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                        .checkIgnoreMediaStore(activity).build()
+                        .into(holder.image)
             }
             ARTIST -> {
-                val artist = dataSet!![position] as Artist
-                holder.title!!.text = artist.name
-                holder.text!!.text = MusicUtil.getArtistInfoString(activity, artist)
-                GlideApp.with(activity)
-                        .asBitmap()
-                        .load(RetroGlideExtension.getArtistModel(artist))
-                        .transition(RetroGlideExtension.getDefaultTransition())
-                        .artistOptions(artist)
-                        .into(holder.image!!)
+                val artist = dataSet?.get(position) as Artist
+                holder.title?.text = artist.name
+                holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
+                ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
+                        .build().into(holder.image);
             }
             SONG -> {
-                val song = dataSet!![position] as Song
-                holder.title!!.text = song.title
-                holder.text!!.text = song.albumName
+                val song = dataSet?.get(position) as Song
+                holder.title?.text = song.title
+                holder.text?.text = song.albumName
             }
             else -> {
-                holder.title!!.text = dataSet!![position].toString()
-                holder.title!!.setTextColor(ThemeStore.accentColor(activity))
+                holder.title?.text = dataSet?.get(position).toString()
+                holder.title?.setTextColor(ThemeStore.accentColor(activity))
             }
         }
     }

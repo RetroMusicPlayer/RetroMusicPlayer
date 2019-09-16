@@ -36,6 +36,7 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import code.name.monkey.appthemehelper.util.TintHelper;
 
@@ -276,5 +277,11 @@ public class ImageUtil {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    public static Bitmap resize(InputStream stream, int scaledWidth, int scaledHeight) {
+        final Bitmap bitmap = BitmapFactory.decodeStream(stream);
+        return Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, true);
+
     }
 }
