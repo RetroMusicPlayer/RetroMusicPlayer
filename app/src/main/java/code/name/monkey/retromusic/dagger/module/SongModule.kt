@@ -18,7 +18,6 @@ import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -26,7 +25,6 @@ import javax.inject.Singleton
 @Module
 class SongModule {
     @Provides
-    @Singleton
     fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
         return presenter
     }

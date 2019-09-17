@@ -15,12 +15,10 @@
 package code.name.monkey.retromusic.dagger.module
 
 import android.content.Context
-
 import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 /**
  * Created by hemanths on 2019-09-04.
@@ -29,7 +27,6 @@ import javax.inject.Singleton
 class RepositoryModule {
 
     @Provides
-    @Singleton
     fun providesRepository(context: Context): Repository {
         return RepositoryImpl(context)
     }
