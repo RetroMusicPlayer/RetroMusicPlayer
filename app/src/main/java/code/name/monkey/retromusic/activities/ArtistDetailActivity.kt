@@ -79,16 +79,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
         ActivityCompat.postponeEnterTransition(this)
 
-
-        App.musicComponent.inject(this)
-        artistDetailsPresenter.attachView(this)
-
-        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
-            artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
-        } else {
-            finish()
-        }
-
         lastFMRestClient = LastFMRestClient(this)
 
         setUpViews()
@@ -106,6 +96,15 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
             } else {
                 biographyText.maxLines = 4
             }
+        }
+
+        App.musicComponent.inject(this)
+        artistDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
+        } else {
+            finish()
         }
     }
 
@@ -203,14 +202,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     }
 
     override fun artist(artist: Artist) {
-        setArtist(artist)
-    }
-
-    private fun getArtist(): Artist {
-        return this.artist
-    }
-
-    private fun setArtist(artist: Artist) {
         if (artist.songCount <= 0) {
             finish()
         }
@@ -224,10 +215,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         text.text = String.format("%s • %s", MusicUtil.getArtistInfoString(this, artist), MusicUtil
                 .getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs)))
 
-        //val songs = artist.songs.sortedWith(compareBy { it.title }) as ArrayList<Song>
         songAdapter.swapDataSet(artist.songs)
-
-        //val albums = artist.albums?.sortedWith(compareBy { it.artistName }) as ArrayList<Album>
         albumAdapter.swapDataSet(artist.albums!!)
     }
 
@@ -255,7 +243,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
         // If the "lang" parameter is set and no biography is given, retry with default language
         if (biography == null && lang != null) {
-            loadBiography(getArtist().name, null)
+            loadBiography(artist.name, null)
         }
     }
 
@@ -293,7 +281,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     }
 
     private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
-        val songs = getArtist().songs
+        val songs = artist.songs
         when (item.itemId) {
             android.R.id.home -> {
                 super.onBackPressed()

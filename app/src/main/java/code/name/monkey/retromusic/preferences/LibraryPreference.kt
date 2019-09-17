@@ -28,6 +28,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreferenc
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -73,8 +74,9 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         adapter.attachToRecyclerView(recyclerView)
 
-        return MaterialDialog(context!!, BottomSheet())
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .title(code.name.monkey.retromusic.R.string.library_categories)
+                .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 .customView(view = view)
                 .positiveButton(android.R.string.ok) {
                     updateCategories(adapter.categoryInfos)

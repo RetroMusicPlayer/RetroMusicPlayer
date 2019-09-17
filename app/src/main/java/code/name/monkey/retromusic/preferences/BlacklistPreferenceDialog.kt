@@ -26,6 +26,8 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreferenc
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.providers.BlacklistStore
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
@@ -58,15 +60,17 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         val blacklistFolderChooserDialog = childFragmentManager.findFragmentByTag("FOLDER_CHOOSER") as BlacklistFolderChooserDialog?
         blacklistFolderChooserDialog?.setCallback(this)
         refreshBlacklistData()
-        return MaterialDialog(context!!, BottomSheet()).show {
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(code.name.monkey.retromusic.R.string.blacklist)
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             positiveButton(android.R.string.ok) {
                 dismiss()
             }
             neutralButton(text = getString(R.string.clear_action)) {
-                MaterialDialog(context, BottomSheet()).show {
+                MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                     title(code.name.monkey.retromusic.R.string.clear_blacklist)
                     message(code.name.monkey.retromusic.R.string.do_you_want_to_clear_the_blacklist)
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     positiveButton(code.name.monkey.retromusic.R.string.clear_action) {
                         BlacklistStore.getInstance(context).clear()
                         refreshBlacklistData()
@@ -80,7 +84,8 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 dialog.show(childFragmentManager, "FOLDER_CHOOSER");
             }
             listItems(items = paths, waitForPositiveButton = false) { _, _, text ->
-                MaterialDialog(context, BottomSheet()).show {
+                MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     title(code.name.monkey.retromusic.R.string.remove_from_blacklist)
                     message(text = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.do_you_want_to_remove_from_the_blacklist, text)))
                     positiveButton(code.name.monkey.retromusic.R.string.remove_action) {

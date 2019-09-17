@@ -26,7 +26,6 @@ import java.io.InputStream
 
 class RetroMusicGlideModule : GlideModule {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-
     }
 
     override fun registerComponents(context: Context, glide: Glide) {

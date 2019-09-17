@@ -54,7 +54,6 @@
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
             android:maxLines="4"
-            android:textAppearance="@style/TextViewBody2"
             tools:text="I have one solution for you.you can change font size for specific preference by managing layout file." />
 
     </RelativeLayout>

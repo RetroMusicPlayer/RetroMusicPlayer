@@ -26,6 +26,8 @@ import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
 import com.afollestad.materialdialogs.actions.getActionButton
@@ -41,8 +43,9 @@ class RenamePlaylistDialog : DialogFragment() {
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val materialDialog = MaterialDialog(activity!!, BottomSheet())
+        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     title(string.rename_playlist_title)
                     customView(layout.dialog_playlist)
                     negativeButton(android.R.string.cancel)

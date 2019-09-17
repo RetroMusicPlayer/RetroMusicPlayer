@@ -95,9 +95,9 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    keyboardPopup.shrink(true)
+                    keyboardPopup.shrink()
                 } else if (dy < 0) {
-                    keyboardPopup.extend(true)
+                    keyboardPopup.extend()
                 }
             }
         })

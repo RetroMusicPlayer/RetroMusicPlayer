@@ -24,6 +24,8 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
@@ -78,9 +80,10 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
-        materialDialog = MaterialDialog(requireContext(), BottomSheet())
+        materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .title(text = materialListPreference.title.toString())
                 .positiveButton(R.string.set)
+                .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 .listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
                     materialListPreference.callChangeListener(entriesValues!![index])
                     materialListPreference.setCustomValue(entriesValues[index])

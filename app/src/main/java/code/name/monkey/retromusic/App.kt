@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.dagger.MusicComponent
 import code.name.monkey.retromusic.dagger.module.AppModule
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import com.google.android.play.core.missingsplits.MissingSplitsManagerFactory
 
 
 class App : MultiDexApplication() {
@@ -32,9 +31,9 @@ class App : MultiDexApplication() {
     lateinit var billingProcessor: BillingProcessor
 
     override fun onCreate() {
-        if (MissingSplitsManagerFactory.create(this).disableAppIfMissingRequiredSplits()) {
+       /* if (MissingSplitsManagerFactory.create(this).disableAppIfMissingRequiredSplits()) {
             return
-        }
+        }*/
         super.onCreate()
         instance = this
         musicComponent = DaggerMusicComponent.builder()

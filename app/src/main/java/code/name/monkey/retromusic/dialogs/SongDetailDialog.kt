@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.dialogs
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -31,6 +30,8 @@ import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -53,15 +54,16 @@ inline fun ViewGroup.forEach(action: (View) -> Unit) {
 class SongDetailDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val context: Activity = activity!!
+        val context: Context = requireContext()
         val song = arguments!!.getParcelable<Song>("song")
 
-        val materialDialog = MaterialDialog(context, BottomSheet())
+        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
                     customView(layout.dialog_file_details,
                             scrollable = true)
                     positiveButton(android.R.string.ok)
                     title(string.action_details)
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 }
         val dialogView = materialDialog.getCustomView()
 

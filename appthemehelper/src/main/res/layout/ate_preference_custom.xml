@@ -34,7 +34,6 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
             android:id="@android:id/title"
-            style="@style/TextViewSubtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -53,7 +52,6 @@
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
             android:maxLines="4"
-            android:textAppearance="@style/TextViewBody2"
             tools:text="Summary" />
 
     </RelativeLayout>

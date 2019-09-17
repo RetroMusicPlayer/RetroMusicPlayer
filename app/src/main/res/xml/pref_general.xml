@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_general">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_general">
         <code.name.monkey.retromusic.preferences.MaterialListPreference
             android:defaultValue="dark"
             android:entries="@array/pref_general_theme_list_titles"
             android:entryValues="@array/pref_general_theme_list_values"
             android:key="general_theme"
-            android:negativeButtonText="@null"
-            android:positiveButtonText="@null"
             android:title="@string/pref_title_general_theme"
             app:enableCopying="true"
             app:icon="@drawable/ic_color_lens_white_24dp" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
         android:key="category_color"
         android:title="@string/colors">
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference

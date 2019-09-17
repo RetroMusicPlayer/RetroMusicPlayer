@@ -50,10 +50,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
             ViewPager.SCROLL_STATE_IDLE ->
-                fab.show(true)
+                fab.show( )
             ViewPager.SCROLL_STATE_DRAGGING,
             ViewPager.SCROLL_STATE_SETTLING ->
-                fab.hide(true)
+                fab.hide( )
         }
     }
 

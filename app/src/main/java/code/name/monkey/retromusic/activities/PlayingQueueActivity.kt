@@ -92,9 +92,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    clearQueue.shrink(true)
+                    clearQueue.shrink( )
                 } else if (dy < 0) {
-                    clearQueue.extend(true)
+                    clearQueue.extend( )
                 }
             }
         })

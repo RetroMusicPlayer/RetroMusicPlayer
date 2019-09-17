@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.activities
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
@@ -11,11 +10,10 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_settings.*
 
 
-class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : AbsBaseActivity() {
 
     private val fragmentManager = supportFragmentManager
 
@@ -25,7 +23,6 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
 
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
-
         setLightNavigationBar(true)
 
         setupToolbar()
@@ -83,23 +80,6 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
         }
         return super.onOptionsItemSelected(item)
     }
-
-    public override fun onPause() {
-        super.onPause()
-        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this)
-    }
-
-    public override fun onResume() {
-        super.onResume()
-        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == PreferenceUtil.PROFILE_IMAGE_PATH) {
-            recreate()
-        }
-    }
-
 
     companion object {
         const val TAG: String = "SettingsActivity"

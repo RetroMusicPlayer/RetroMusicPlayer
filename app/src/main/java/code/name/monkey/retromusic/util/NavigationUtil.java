@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -60,6 +61,12 @@ public class NavigationUtil {
         //noinspection unchecked
         ActivityCompat.startActivity(activity, intent,
                 ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+    }
+
+    public static void goToAlbumOptions(@NonNull Activity activity, int albumId, @NonNull ActivityOptions activityOptions) {
+        Intent intent = new Intent(activity, AlbumDetailsActivity.class);
+        intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, albumId);
+        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
     }
 
     public static void goToArtist(@NonNull Activity activity, int i,

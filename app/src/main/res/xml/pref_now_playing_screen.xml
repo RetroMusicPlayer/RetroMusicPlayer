@@ -8,7 +8,9 @@
         app:enableCopying="true"
         app:icon="@drawable/ic_play_circle_filled_white_24dp" />
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_album">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_album">
         <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
             android:key="album_cover_style_id"
             android:title="@string/pref_title_album_cover_style"
@@ -32,7 +34,9 @@
             app:title="@string/pref_title_toggle_carousel_effect" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_controls">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_controls">
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             app:defaultValue="false"
             app:enableCopying="true"
@@ -42,13 +46,13 @@
             app:title="@string/pref_title_extra_controls" />
 
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-        app:defaultValue="false"
-        app:enableCopying="true"
-        app:icon="@drawable/ic_volume_up_white_24dp"
-        app:key="toggle_volume"
-        app:summary="@string/pref_summary_toggle_volume"
-        app:title="@string/pref_title_toggle_volume" />
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            app:defaultValue="false"
+            app:enableCopying="true"
+            app:icon="@drawable/ic_volume_up_white_24dp"
+            app:key="toggle_volume"
+            app:summary="@string/pref_summary_toggle_volume"
+            app:title="@string/pref_title_toggle_volume" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference

@@ -124,13 +124,11 @@
             android:immersive="true"
             android:label="@string/error"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait"
             android:theme="@style/ErrorHandlingTheme" />
 
         <activity
             android:name=".activities.LockScreenActivity"
             android:noHistory="true"
-            android:screenOrientation="portrait"
             android:showOnLockScreen="true" />
 
         <activity
@@ -241,6 +239,7 @@
         <service
             android:name=".service.MusicService"
             android:enabled="true"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.media.browse.MediaBrowserService" />

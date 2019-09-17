@@ -33,7 +33,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
-import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -78,6 +77,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         setDrawUnderStatusBar()
         setupWindowTransition()
         super.onCreate(savedInstanceState)
+        App.musicComponent.inject(this)
         toggleBottomNavigationView(true)
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
@@ -102,7 +102,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
         }
 
-        App.musicComponent?.inject(this)
+
         albumDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
@@ -186,37 +186,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
-
         albumDetailsPresenter.loadMore(album.artistId)
     }
 
     private lateinit var artistImage: ImageView
-
-    private fun loadMoreFrom(album: Album) {
-        disposable.add(ArtistLoader.getArtistFlowable(this, album.artistId)
-                .map {
-
-                    return@map it.albums!!
-                }
-                .map { it.filter { albumSearch -> albumSearch.id != album.id } }
-                .subscribe {
-                    for (albumFinal in it) {
-                        if (albumFinal.id == album.id)
-                            println("$albumFinal -> $album")
-                    }
-                    if (it.isEmpty()) {
-                        return@subscribe
-                    }
-                    moreTitle.visibility = View.VISIBLE
-                    moreRecyclerView.visibility = View.VISIBLE
-                    moreTitle.text = String.format("More from %s", album.artistName)
-
-                    val albumAdapter = HorizontalAlbumAdapter(this, it as ArrayList<Album>, false, null)
-                    moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
-                    moreRecyclerView.adapter = albumAdapter
-
-                })
-    }
 
     override fun moreAlbums(albums: ArrayList<Album>) {
         moreTitle.show()
@@ -237,6 +210,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
                     }
                 })
+
     }
 
     private fun loadAlbumCover() {

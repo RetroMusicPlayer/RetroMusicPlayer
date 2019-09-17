@@ -26,10 +26,10 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.colorChooser
@@ -40,15 +40,7 @@ import com.afollestad.materialdialogs.color.colorChooser
  */
 
 class ThemeSettingsFragment : AbsSettingsFragment() {
-    private var materialDialog: MaterialDialog? = null
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        materialDialog?.dismiss()
-    }
-
     override fun invalidateSettings() {
-
         val generalTheme: Preference? = findPreference("general_theme")
         generalTheme?.let {
             setSummary(it)
@@ -83,7 +75,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            materialDialog = MaterialDialog(requireContext(), BottomSheet()).show {
+            MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->

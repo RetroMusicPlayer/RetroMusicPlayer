@@ -49,7 +49,6 @@ object MusicPlayerRemote {
         } else song.id == currentSong.id
     }
 
-
     val currentSong: Song
         get() = if (musicService != null) {
             musicService!!.currentSong
@@ -219,7 +218,7 @@ object MusicPlayerRemote {
      */
     fun openAndShuffleQueue(queue: ArrayList<Song>, startPlaying: Boolean) {
         var startPosition = 0
-        if (!queue.isEmpty()) {
+        if (queue.isNotEmpty()) {
             startPosition = Random().nextInt(queue.size)
         }
 

@@ -56,6 +56,7 @@ import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
     public static final String LIBRARY_CATEGORIES = "library_categories";
+    public static final String DIALOG_CORNER = "dialog_corner";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
     public static final String NOW_PLAYING_SCREEN_ID = "now_playing_screen_id";
@@ -183,6 +184,10 @@ public final class PreferenceUtil {
 
     public int getFilterLength() {
         return mPreferences.getInt(FILTER_SONG, 20);
+    }
+
+    public float getDialogCorner() {
+        return mPreferences.getInt(DIALOG_CORNER, 16);
     }
 
     public boolean isSnowFall() {

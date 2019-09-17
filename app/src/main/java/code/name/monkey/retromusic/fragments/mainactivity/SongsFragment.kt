@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -26,6 +27,10 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.musicComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         songPresenter.attachView(this)
     }
 

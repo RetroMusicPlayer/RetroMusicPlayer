@@ -13,8 +13,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 366
-        versionName '3.4.000-beta05'
+        versionCode 367
+        versionName '3.4.000-beta10'
 
         multiDexEnabled true
 
@@ -102,9 +102,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.fragment:fragment:1.2.0-alpha02'
+    implementation 'androidx.fragment:fragment:1.2.0-alpha03'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta03'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.palette:palette:1.0.0"
@@ -113,8 +113,8 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
-    implementation 'com.google.android.material:material:1.1.0-alpha09'
-    implementation 'com.google.android.play:core:1.6.1'
+    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    implementation 'com.google.android.play:core:1.6.3'
 
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
@@ -158,6 +158,5 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.23.1'
 
     implementation project(':appthemehelper')
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
 }
 

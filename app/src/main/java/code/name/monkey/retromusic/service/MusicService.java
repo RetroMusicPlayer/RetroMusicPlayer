@@ -88,7 +88,8 @@ import code.name.monkey.retromusic.util.RetroUtil;
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
-public class MusicService extends MediaBrowserServiceCompat implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
+public class MusicService extends MediaBrowserServiceCompat implements
+        SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
     public static final String TAG = MusicService.class.getSimpleName();
 
     public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";

@@ -91,7 +91,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
 
 
-        return MaterialDialog(activity!!).show {
+        return MaterialDialog(requireContext()).show {
             title(R.string.pref_title_album_cover_style)
             positiveButton(R.string.set) {
                 val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
@@ -103,6 +103,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
                     PreferenceUtil.getInstance(requireContext()).nowPlayingScreen = nowPlayingScreen
                 }
             }
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)
         }

@@ -45,7 +45,11 @@
         <item>@string/dark_theme_name</item>
         <item>@string/black_theme_name</item>
     </string-array>
-
+    <string-array name="pref_general_theme_list_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>black</item>
+    </string-array>
     <string-array name="pref_grid_style_list_titles">
         <item>@string/normal_style</item>
         <item>@string/card_style</item>
@@ -91,11 +95,6 @@
         <item>@layout/item_album_card</item>
     </array>
 
-    <string-array name="pref_general_theme_list_values">
-        <item>light</item>
-        <item>dark</item>
-        <item>black</item>
-    </string-array>
 
     <array name="pref_auto_download_images_values">
         <item>always</item>

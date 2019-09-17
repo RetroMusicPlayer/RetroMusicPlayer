@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.OptionMenuItemView
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
@@ -66,11 +67,12 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionFolders.setOnClickListener(this)
 
 
-        materialDialog = MaterialDialog(activity!!, BottomSheet())
+        materialDialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
                     icon(R.mipmap.ic_launcher_round)
                     title(R.string.app_name)
                     customView(view = layout, scrollable = true)
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 }
         return materialDialog
     }

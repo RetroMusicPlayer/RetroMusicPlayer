@@ -42,9 +42,9 @@ interface SongPresenter : Presenter<SongView> {
 
         override fun loadSongs() {
             disposable = repository.allSongsFlowable
-                    .subscribe {
-                        view.songs(it)
-                    }
+                    .subscribe({
+                        view?.songs(it)
+                    }, { t -> print(t) })
         }
 
         override fun detachView() {
