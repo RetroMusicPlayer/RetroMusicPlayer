@@ -1,10 +1,10 @@
 package code.name.monkey.retromusic.adapter
 
+import android.app.ActivityOptions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
 import java.util.*
-
+import android.util.Pair as UtilPair
 
 class SearchAdapter(
         private val activity: AppCompatActivity,
@@ -106,8 +106,16 @@ class SearchAdapter(
         override fun onClick(v: View?) {
             val item = dataSet!![adapterPosition]
             when (itemViewType) {
-                ALBUM -> NavigationUtil.goToAlbum(activity, (item as Album).id, Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
-                ARTIST -> NavigationUtil.goToArtist(activity, (item as Artist).id, Pair.create(image, activity.resources.getString(R.string.transition_artist_image)))
+                ALBUM -> {
+                    val options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                            UtilPair.create(image, activity.getString(R.string.transition_album_art)))
+                    NavigationUtil.goToAlbumOptions(activity, (item as Album).id, options)
+                }
+                ARTIST -> {
+                    val options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                            UtilPair.create(image, activity.getString(R.string.transition_artist_image)))
+                    NavigationUtil.goToArtistOptions(activity, (item as Artist).id, options)
+                }
                 SONG -> {
                     val playList = ArrayList<Song>()
                     playList.add(item as Song)
@@ -119,9 +127,9 @@ class SearchAdapter(
 
     companion object {
 
-        private val HEADER = 0
-        private val ALBUM = 1
-        private val ARTIST = 2
-        private val SONG = 3
+        private const val HEADER = 0
+        private const val ALBUM = 1
+        private const val ARTIST = 2
+        private const val SONG = 3
     }
 }

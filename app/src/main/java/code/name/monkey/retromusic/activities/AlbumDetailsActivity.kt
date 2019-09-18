@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.activities
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -9,7 +10,6 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.core.app.ActivityCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,6 +49,7 @@ import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
 import java.util.*
 import javax.inject.Inject
+import android.util.Pair as UtilPair
 
 class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
@@ -92,8 +93,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         setupToolbarMarginHeight()
 
         artistImage.setOnClickListener {
-            val artistPairs = arrayOf<Pair<*, *>>(Pair.create(image, resources.getString(R.string.transition_artist_image)))
-            NavigationUtil.goToArtist(this, album.artistId, *artistPairs)
+            val artistPairs = ActivityOptions.makeSceneTransitionAnimation(this, UtilPair.create(artistImage, getString(R.string.transition_artist_image)))
+            NavigationUtil.goToArtistOptions(this, album.artistId, artistPairs)
         }
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
@@ -281,10 +282,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
                 val intent = Intent(this, AlbumTagEditorActivity::class.java)
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
                 startActivityForResult(intent, TAG_EDITOR_REQUEST)
-                return true
-            }
-            R.id.action_go_to_artist -> {
-                NavigationUtil.goToArtist(this, album.artistId)
                 return true
             }
             /*Sort*/

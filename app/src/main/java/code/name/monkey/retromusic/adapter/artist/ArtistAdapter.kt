@@ -1,17 +1,17 @@
 package code.name.monkey.retromusic.adapter.artist
 
+import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
@@ -138,9 +138,8 @@ class ArtistAdapter(val activity: AppCompatActivity,
             if (isInQuickSelectMode) {
                 toggleChecked(adapterPosition)
             } else {
-                val artistPairs = arrayOf<Pair<*, *>>(Pair.create<ImageView, String>(image,
-                        activity.resources.getString(code.name.monkey.retromusic.R.string.transition_artist_image)))
-                NavigationUtil.goToArtist(activity, dataSet[adapterPosition].id, *artistPairs)
+                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_artist_image))
+                NavigationUtil.goToArtistOptions(activity, dataSet[adapterPosition].id, activityOptions)
             }
         }
 

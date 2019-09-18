@@ -145,7 +145,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     private fun setupArtist() {
         artistImage.setOnClickListener {
-            NavigationUtil.goToArtist(activity!!, MusicPlayerRemote.currentSong.artistId)
+            NavigationUtil.goToArtist(requireActivity(), MusicPlayerRemote.currentSong.artistId)
         }
     }
 

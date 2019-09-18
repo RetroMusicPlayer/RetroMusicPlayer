@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
+import android.app.ActivityOptions
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -7,7 +8,6 @@ import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
@@ -172,8 +172,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             setBackgroundColor(toolbarColor())
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
-                val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
-                NavigationUtil.goToSearch(requireActivity(), pairImageView)
+                val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))
+                NavigationUtil.goToSearch(requireActivity(), options)
             }
 
         }
@@ -226,8 +226,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            val pairImageView = Pair.create<View, String>(toolbarContainer, resources.getString(R.string.transition_toolbar))
-            NavigationUtil.goToSearch(requireActivity(), true, pairImageView)
+            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))
+            NavigationUtil.goToSearch(requireActivity(), true, options)
         }
         return super.onOptionsItemSelected(item)
     }

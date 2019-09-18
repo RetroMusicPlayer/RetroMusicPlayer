@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.adapter.album
 
+import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -8,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -182,11 +183,8 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             if (isInQuickSelectMode) {
                 toggleChecked(adapterPosition)
             } else {
-                val pairImageView = Pair.create<View, String>(image, activity.resources.getString(code.name.monkey.retromusic.R.string.transition_album_art))
-                val pairs = ArrayList<Pair<View, String>>()
-                pairs.add(pairImageView)
-                val albumPairs: Array<Pair<View, String>> = pairs.toTypedArray()
-                NavigationUtil.goToAlbum(activity, dataSet[adapterPosition].id, *albumPairs)
+                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
+                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
             }
         }
 

@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -155,8 +155,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
-            Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
-            NavigationUtil.goToSearch(getMainActivity(), pair);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), options);
         });
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
                 getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
@@ -366,8 +366,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-                Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
-                NavigationUtil.goToSearch(getMainActivity(), pair);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+                NavigationUtil.goToSearch(getMainActivity(), options);
                 break;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");

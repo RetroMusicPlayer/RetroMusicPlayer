@@ -1,11 +1,11 @@
 package code.name.monkey.retromusic.adapter.song
 
+import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.view.MenuItem
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -76,8 +76,8 @@ open class PlaylistSongAdapter(activity: AppCompatActivity,
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             if (item.itemId == R.id.action_go_to_album) {
-                val albumPairs = arrayOf<Pair<*, *>>(Pair.create(image, activity.getString(R.string.transition_album_art)))
-                NavigationUtil.goToAlbum(activity, dataSet[adapterPosition - 1].albumId, *albumPairs)
+                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
+                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition - 1].albumId, activityOptions)
                 return true
             }
             return super.onSongMenuItemClick(item)

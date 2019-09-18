@@ -41,11 +41,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_go_to_artist"
-        android:title="@string/action_go_to_artist"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_tag_editor"
         android:icon="@drawable/ic_edit_white_24dp"
         android:title="@string/action_tag_editor"
