@@ -17,7 +17,9 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat
+import android.text.TextUtils
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
@@ -35,7 +37,8 @@ import java.util.*
  */
 
 class MediaSessionCallback(private val context: Context,
-                           private val musicService: MusicService) : MediaSessionCompat.Callback() {
+                           private val musicService: MusicService
+) : MediaSessionCompat.Callback() {
 
     override fun onPlay() {
         super.onPlay()
@@ -101,12 +104,10 @@ class MediaSessionCallback(private val context: Context,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
             AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE -> {
                 val tracks: List<Song>
-                if (category.equals(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY)) {
-                    tracks = TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context)
-                } else if (category.equals(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS)) {
-                    tracks = TopAndRecentlyPlayedTracksLoader.getTopTracks(context)
-                } else {
-                    tracks = MusicPlaybackQueueStore.getInstance(context).savedOriginalPlayingQueue
+                tracks = when (category) {
+                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context)
+                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> TopAndRecentlyPlayedTracksLoader.getTopTracks(context)
+                    else -> MusicPlaybackQueueStore.getInstance(context).savedOriginalPlayingQueue
                 }
                 songs.addAll(tracks)
                 var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
@@ -122,6 +123,42 @@ class MediaSessionCallback(private val context: Context,
             }
         }
 
+    }
+
+    override fun onPlayFromSearch(query: String?, extras: Bundle?) {
+        print("query: $query -> extras: ${extras.toString()}")
+        if (TextUtils.isEmpty(query)) {
+            if (MusicPlayerRemote.playingQueue.isEmpty()) {
+                openQueue(SongLoader.getAllSongs(context), 0, true);
+            } else {
+                MusicPlayerRemote.resumePlaying()
+            }
+        } else {
+            handlePlayFromSearch(query, extras)
+
+        }
+    }
+
+    private fun handlePlayFromSearch(query: String?, extras: Bundle?) {
+        val mediaFocus: String? = extras?.getString(MediaStore.EXTRA_MEDIA_FOCUS)
+        println(mediaFocus)
+        when (mediaFocus) {
+            MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE -> {
+                extras.getString(MediaStore.EXTRA_MEDIA_ARTIST)?.let { artist ->
+                    println("Artist name $artist")
+                }
+            }
+            MediaStore.Audio.Albums.ENTRY_CONTENT_TYPE -> {
+                extras.getString(MediaStore.EXTRA_MEDIA_ALBUM)?.let { album ->
+                    println("Artist name $album")
+                }
+            }
+            MediaStore.Audio.Genres.ENTRY_CONTENT_TYPE -> {
+                extras.getString(MediaStore.EXTRA_MEDIA_GENRE)?.let { genre ->
+                    println("Artist name $genre")
+                }
+            }
+        }
     }
 
     override fun onCustomAction(action: String, extras: Bundle?) {

@@ -68,6 +68,7 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
 import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
 import code.name.monkey.retromusic.auto.AutoMusicProvider;
+import code.name.monkey.retromusic.auto.CarHelper;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
@@ -740,13 +741,15 @@ public class MusicService extends MediaBrowserServiceCompat implements
                 .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.getDuration())
                 .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, getPosition() + 1)
                 .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
-                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
+                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
+                .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
+        if (CarHelper.isCarUiMode(this)) {
+            mediaSession.setMetadata(metaData.build());
         }
 
-        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
+
+        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen() || CarHelper.isCarUiMode(this)) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
             final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
                     .checkIgnoreMediaStore(MusicService.this)
