@@ -66,6 +66,7 @@ public final class PreferenceUtil {
     public static final String GAPLESS_PLAYBACK = "gapless_playback";
     public static final String ALBUM_ART_ON_LOCKSCREEN = "album_art_on_lockscreen";
     public static final String BLURRED_ALBUM_ART = "blurred_album_art";
+    public static final String NEW_BLUR_AMOUNT = "new_blur_amount";
     public static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
     public static final String TOGGLE_HEADSET = "toggle_headset";
     public static final String DOMINANT_COLOR = "dominant_color";

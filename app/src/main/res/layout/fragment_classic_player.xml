@@ -17,6 +17,7 @@
         sothree:umanoFadeColor="#00000000"
         sothree:umanoOverlay="true"
         sothree:umanoPanelHeight="0dp"
+        sothree:umanoDragView="@id/playerPanel"
         sothree:umanoScrollableView="@+id/playerRecyclerView"
         sothree:umanoShadowHeight="0dp">
 

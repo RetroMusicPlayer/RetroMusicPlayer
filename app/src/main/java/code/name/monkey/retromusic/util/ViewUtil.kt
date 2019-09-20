@@ -32,8 +32,10 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.R
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 object ViewUtil {
@@ -115,11 +117,10 @@ object ViewUtil {
     fun setUpFastScrollRecyclerViewColor(context: Context,
                                          recyclerView: FastScrollRecyclerView, accentColor: Int) {
         recyclerView.setPopupBgColor(accentColor)
-        recyclerView.setPopupTextColor(
-                MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
+        recyclerView.setPopupTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
         recyclerView.setThumbColor(accentColor)
         recyclerView.setTrackColor(Color.TRANSPARENT)
-        //recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));
+        recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));
     }
 
     fun convertDpToPixel(dp: Float, resources: Resources): Float {

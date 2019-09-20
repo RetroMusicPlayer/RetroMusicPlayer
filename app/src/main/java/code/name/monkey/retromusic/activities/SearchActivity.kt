@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.util.RetroUtil
 import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
     @Inject
@@ -44,9 +45,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-
-        App.musicComponent?.inject(this)
-
+        App.musicComponent.inject(this)
         searchPresenter.attachView(this)
 
         setStatusbarColorAuto()
@@ -163,11 +162,11 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
     }
 
     override fun showEmptyView() {
-        searchAdapter!!.swapDataSet(ArrayList())
+        searchAdapter?.swapDataSet(ArrayList())
     }
 
-    override fun showData(list: MutableList<Any>) {
-        searchAdapter!!.swapDataSet(list)
+    override fun showData(data: MutableList<Any>) {
+        searchAdapter?.swapDataSet(data)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -175,10 +174,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         when (requestCode) {
             REQ_CODE_SPEECH_INPUT -> {
                 if (resultCode == Activity.RESULT_OK && null != data) {
-
-                    val result = data
-                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    query = result[0]
+                    val result: ArrayList<String>? = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    query = result?.get(0)
                     searchView.setText(query, BufferType.EDITABLE)
                     searchPresenter.search(query!!)
                 }

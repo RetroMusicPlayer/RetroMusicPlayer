@@ -11,6 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        app:fastScrollPopupBackgroundSize="48dp"
+        app:fastScrollPopupTextSize="18sp"
+        app:fastScrollHorizontalThumbDrawable="@drawable/button_background"
         android:layoutAnimation="@anim/layout_animation_fall_down"
         android:scrollbars="none" />
 

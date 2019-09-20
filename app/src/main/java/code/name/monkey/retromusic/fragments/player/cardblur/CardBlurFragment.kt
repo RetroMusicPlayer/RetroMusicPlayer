@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.cardblur
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +18,11 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_card_blur_player.*
 
-class CardBlurFragment : AbsPlayerFragment() {
+class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -123,15 +125,15 @@ class CardBlurFragment : AbsPlayerFragment() {
     }
 
     private fun updateBlur() {
-        val activity = activity ?: return
-        val blurAmount = PreferenceManager.getDefaultSharedPreferences(context).getInt("new_blur_amount", 25)
+        val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                .getInt(PreferenceUtil.NEW_BLUR_AMOUNT, 25)
         colorBackground!!.clearColorFilter()
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
                 .checkIgnoreMediaStore(requireContext())
                 .generatePalette(requireContext()).build()
-                .transform(BlurTransformation.Builder(activity).blurRadius(blurAmount.toFloat()).build())
-                .centerCrop()
-                .override(320, 480)
+                .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
+                //.centerCrop()
+                //.override(320, 480)
                 .into(object : RetroMusicColoredTarget(colorBackground) {
                     override fun onColorReady(color: Int) {
                         if (color == defaultFooterColor) {
@@ -139,11 +141,25 @@ class CardBlurFragment : AbsPlayerFragment() {
                         }
                     }
                 })
+    }
 
+    override fun onResume() {
+        super.onResume()
+        PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        PreferenceManager.getDefaultSharedPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == PreferenceUtil.NEW_BLUR_AMOUNT) {
+            updateBlur()
+        }
     }
 
     companion object {
-
         fun newInstance(): PlayerFragment {
             return PlayerFragment()
         }

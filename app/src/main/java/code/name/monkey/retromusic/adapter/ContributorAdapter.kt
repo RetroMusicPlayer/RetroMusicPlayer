@@ -40,7 +40,7 @@ class ContributorAdapter(
         val contributor = contributors[position]
         holder.bindData(contributor)
         holder.itemView.setOnClickListener {
-            openUrl(it!!.context as Activity, contributors[position].link)
+            openUrl(it?.context as Activity, contributors[position].link)
         }
     }
 
@@ -56,10 +56,12 @@ class ContributorAdapter(
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name
             text.text = contributor.summary
+            println(contributor.profileImage)
             Glide.with(image.context)
                     .load(contributor.profileImage)
                     .error(R.drawable.ic_account_white_24dp)
                     .placeholder(R.drawable.ic_account_white_24dp)
+                    .dontAnimate()
                     .into(image)
         }
     }

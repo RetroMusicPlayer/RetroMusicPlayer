@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -135,7 +134,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(),   SlidingUpPanelLayout.PanelS
         setUpRecyclerView()
 
         playerSlidingLayout.addPanelSlideListener(this)
-        playerSlidingLayout.setAntiDragView(view.findViewById<View>(code.name.monkey.retromusic.R.id.draggableArea))
+        playerSlidingLayout.setAntiDragView(view.findViewById<View>(R.id.draggableArea))
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {

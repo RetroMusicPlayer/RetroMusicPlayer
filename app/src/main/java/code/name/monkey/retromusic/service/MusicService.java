@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.service;
 
 import android.app.PendingIntent;
+import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -30,7 +31,6 @@ import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -38,7 +38,6 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -49,7 +48,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.media.MediaBrowserServiceCompat;
 
 import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.Glide;
@@ -66,9 +64,6 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
-import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
-import code.name.monkey.retromusic.auto.AutoMusicProvider;
-import code.name.monkey.retromusic.auto.CarHelper;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
@@ -89,7 +84,7 @@ import code.name.monkey.retromusic.util.RetroUtil;
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
-public class MusicService extends MediaBrowserServiceCompat implements
+public class MusicService extends Service implements
         SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
     public static final String TAG = MusicService.class.getSimpleName();
 
@@ -281,7 +276,6 @@ public class MusicService extends MediaBrowserServiceCompat implements
         }
     };
     private PackageValidator mPackageValidator;
-    private AutoMusicProvider mMusicProvider;
 
     private static String getTrackUri(@NonNull Song song) {
         return MusicUtil.getSongFileUri(song.getId()).toString();
@@ -348,7 +342,7 @@ public class MusicService extends MediaBrowserServiceCompat implements
         restoreState();
 
         mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
-        mMusicProvider = new AutoMusicProvider(this);
+
 
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
 
@@ -389,7 +383,7 @@ public class MusicService extends MediaBrowserServiceCompat implements
         mediaSession.setCallback(mediasessionCallback);
         mediaSession.setActive(true);
         mediaSession.setMediaButtonReceiver(mediaButtonReceiverPendingIntent);
-        setSessionToken(mediaSession.getSessionToken());
+
     }
 
     @Override
@@ -487,37 +481,9 @@ public class MusicService extends MediaBrowserServiceCompat implements
 
     @Override
     public IBinder onBind(Intent intent) {
-        // For Android auto, need to call super, or onGetRoot won't be called.
-        if (intent != null && "android.media.browse.MediaBrowserService".equals(intent.getAction())) {
-            return super.onBind(intent);
-        }
         return musicBind;
     }
 
-    @Nullable
-    @Override
-    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
-
-        // Check origin to ensure we're not allowing any arbitrary app to browse app contents
-        if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
-            // Request from an untrusted package: return an empty browser root
-            return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
-        }
-
-        return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
-    }
-
-    @Override
-    public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowserCompat.MediaItem>> result) {
-        if (AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT.equals(parentId)) {
-            result.sendResult(new ArrayList<>());
-        } else if (mMusicProvider.isInitialized()) {
-            result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
-        } else {
-            result.detach();
-            mMusicProvider.retrieveMediaAsync(success -> result.sendResult(mMusicProvider.getChildren(parentId, getResources())));
-        }
-    }
 
     @Override
     public void onRebind(Intent intent) {
@@ -744,12 +710,8 @@ public class MusicService extends MediaBrowserServiceCompat implements
                 .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
                 .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
-        if (CarHelper.isCarUiMode(this)) {
-            mediaSession.setMetadata(metaData.build());
-        }
 
-
-        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen() || CarHelper.isCarUiMode(this)) {
+        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
             final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
                     .checkIgnoreMediaStore(MusicService.this)

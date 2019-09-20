@@ -17,16 +17,10 @@ package code.name.monkey.retromusic.service
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v4.media.session.MediaSessionCompat
-import android.text.TextUtils
-import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
-import code.name.monkey.retromusic.helper.ShuffleHelper
-import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
 import java.util.*
@@ -72,93 +66,6 @@ class MediaSessionCallback(private val context: Context,
 
     override fun onMediaButtonEvent(mediaButtonIntent: Intent): Boolean {
         return MediaButtonIntentReceiver.handleIntent(context, mediaButtonIntent)
-    }
-
-    override fun onPlayFromMediaId(mediaId: String?, extras: Bundle?) {
-        super.onPlayFromMediaId(mediaId, extras)
-
-        val musicId = mediaId?.let { AutoMediaIDHelper.extractMusicID(it) }
-        val itemId = musicId?.toInt() ?: -1
-        val songs = arrayListOf<Song>()
-        when (val category = mediaId?.let { AutoMediaIDHelper.extractCategory(it) }) {
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> {
-                val album = AlbumLoader.getAlbum(context, itemId)
-                album.songs?.let { songs.addAll(it) }
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST -> {
-                val artist = ArtistLoader.getArtist(context, itemId)
-                songs.addAll(artist.songs)
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST -> {
-                val playlist = PlaylistLoader.getPlaylist(context, itemId)
-                songs.addAll(playlist.getSongs(context))
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_GENRE -> {
-                songs.addAll(GenreLoader.getSongs(context, itemId))
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY,
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE -> {
-                val tracks: List<Song>
-                tracks = when (category) {
-                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY -> TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context)
-                    AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS -> TopAndRecentlyPlayedTracksLoader.getTopTracks(context)
-                    else -> MusicPlaybackQueueStore.getInstance(context).savedOriginalPlayingQueue
-                }
-                songs.addAll(tracks)
-                var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
-                if (songIndex == -1) {
-                    songIndex = 0
-                }
-                openQueue(songs, songIndex, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE -> {
-                val allSongs = SongLoader.getAllSongs(context)
-                ShuffleHelper.makeShuffleList(allSongs, -1)
-                openQueue(allSongs, 0, true)
-            }
-        }
-
-    }
-
-    override fun onPlayFromSearch(query: String?, extras: Bundle?) {
-        print("query: $query -> extras: ${extras.toString()}")
-        if (TextUtils.isEmpty(query)) {
-            if (MusicPlayerRemote.playingQueue.isEmpty()) {
-                openQueue(SongLoader.getAllSongs(context), 0, true);
-            } else {
-                MusicPlayerRemote.resumePlaying()
-            }
-        } else {
-            handlePlayFromSearch(query, extras)
-
-        }
-    }
-
-    private fun handlePlayFromSearch(query: String?, extras: Bundle?) {
-        val mediaFocus: String? = extras?.getString(MediaStore.EXTRA_MEDIA_FOCUS)
-        println(mediaFocus)
-        when (mediaFocus) {
-            MediaStore.Audio.Artists.ENTRY_CONTENT_TYPE -> {
-                extras.getString(MediaStore.EXTRA_MEDIA_ARTIST)?.let { artist ->
-                    println("Artist name $artist")
-                }
-            }
-            MediaStore.Audio.Albums.ENTRY_CONTENT_TYPE -> {
-                extras.getString(MediaStore.EXTRA_MEDIA_ALBUM)?.let { album ->
-                    println("Artist name $album")
-                }
-            }
-            MediaStore.Audio.Genres.ENTRY_CONTENT_TYPE -> {
-                extras.getString(MediaStore.EXTRA_MEDIA_GENRE)?.let { genre ->
-                    println("Artist name $genre")
-                }
-            }
-        }
     }
 
     override fun onCustomAction(action: String, extras: Bundle?) {
