@@ -45,6 +45,7 @@ import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
+import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
@@ -229,7 +230,7 @@ public final class PreferenceUtil {
 
     public final String getAlbumSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
+                .getString(ALBUM_SONG_SORT_ORDER, AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public final String getSongSortOrder() {
@@ -639,7 +640,7 @@ public final class PreferenceUtil {
 
     public String getAlbumDetailSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
+                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public void setAlbumDetailSongSortOrder(String sortOrder) {

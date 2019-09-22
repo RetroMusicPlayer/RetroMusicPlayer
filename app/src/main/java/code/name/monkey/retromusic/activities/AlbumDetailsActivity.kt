@@ -128,8 +128,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         supportActionBar!!.title = null
 
         val primaryColor = ThemeStore.primaryColor(this)
-        //TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
-
 
         collapsingToolbarLayout?.let {
             it.setContentScrimColor(primaryColor)
@@ -317,7 +315,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     private fun reload() {
-        albumDetailsPresenter.loadAlbum(intent.extras!!.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID))
+        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
+            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let { albumDetailsPresenter.loadAlbum(it) }
+        } else {
+            finish()
+        }
     }
 
     companion object {
