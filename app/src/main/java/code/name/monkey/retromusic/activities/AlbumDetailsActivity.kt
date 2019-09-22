@@ -107,7 +107,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         albumDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
-            albumDetailsPresenter.loadAlbum(intent.extras!!.getInt(EXTRA_ALBUM_ID))
+            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let { albumDetailsPresenter.loadAlbum(it) }
         } else {
             finish()
         }

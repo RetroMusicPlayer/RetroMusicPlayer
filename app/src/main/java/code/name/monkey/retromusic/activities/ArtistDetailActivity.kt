@@ -102,7 +102,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         artistDetailsPresenter.attachView(this)
 
         if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
-            artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
+            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
         } else {
             finish()
         }
@@ -327,7 +327,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     }
 
     private fun reload() {
-        artistDetailsPresenter.loadArtist(intent.extras!!.getInt(EXTRA_ARTIST_ID))
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
+        } else {
+            finish()
+        }
     }
 
     companion object {
