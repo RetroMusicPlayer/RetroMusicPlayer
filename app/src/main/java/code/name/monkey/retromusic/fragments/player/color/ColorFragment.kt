@@ -143,21 +143,24 @@ class ColorFragment : AbsPlayerFragment() {
 
                     }
 
-                    override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
+                    override fun onResourceReady(resource: BitmapPaletteWrapper?, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
                         super.onResourceReady(resource, glideAnimation)
-                        val background = resource.palette.getColor()
+                        resource?.let {
+                            val background = resource.palette.getColor()
 
 
-                        val palette = resource.palette
-                        val swatch = RetroColorUtil.getSwatch(palette)
+                            val palette = resource.palette
+                            val swatch = RetroColorUtil.getSwatch(palette)
 
-                        val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = swatch.rgb
+                            val textColor = RetroColorUtil.getTextColor(palette)
+                            val backgroundColor = swatch.rgb
 
-                        setColors(backgroundColor, textColor)
+                            setColors(backgroundColor, textColor)
+                        }
+
                     }
 
-                    override fun onLoadFailed(e: Exception, errorDrawable: Drawable?) {
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
                         super.onLoadFailed(e, errorDrawable)
                         val backgroundColor = defaultFooterColor
                         val textColor = if (ColorUtil.isColorLight(defaultFooterColor))

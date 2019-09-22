@@ -38,6 +38,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
+
 object ViewUtil {
 
     const val RETRO_MUSIC_ANIM_TIME = 1000
@@ -121,6 +122,7 @@ object ViewUtil {
         recyclerView.setThumbColor(accentColor)
         recyclerView.setTrackColor(Color.TRANSPARENT)
         recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));
+
     }
 
     fun convertDpToPixel(dp: Float, resources: Resources): Float {

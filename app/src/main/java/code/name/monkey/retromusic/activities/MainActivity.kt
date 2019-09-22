@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.transform.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
@@ -69,10 +70,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }
 
         checkShowChangelog()
-
-        /*if (!App.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
-            showPromotionalOffer()
-        }*/
+        AppRater.appLaunched(this);
     }
 
     private fun checkShowChangelog() {
