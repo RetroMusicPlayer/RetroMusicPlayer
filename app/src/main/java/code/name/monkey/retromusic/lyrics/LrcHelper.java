@@ -42,8 +42,8 @@ public class LrcHelper {
 
     private static final String CHARSET = "utf-8";
     //[03:56.00][03:18.00][02:06.00][01:07.00]原谅我这一生不羁放纵爱自由
-    private static final String LINE_REGEX = "((\\[\\d{2}:\\d{2}\\.\\d{2}])+)(.*)";
-    private static final String TIME_REGEX = "\\[(\\d{2}):(\\d{2})\\.(\\d{2})]";
+    private static final String LINE_REGEX = "((\\[\\d{2}:\\d{2}\\.\\d{2,3}])+)(.*)";
+    private static final String TIME_REGEX = "\\[(\\d{2}):(\\d{2})\\.(\\d{2,3})]";
 
     public static List<Lrc> parseLrcFromAssets(Context context, String fileName) {
         try {
@@ -127,8 +127,14 @@ public class LrcHelper {
             String mil = timeMatcher.group(3);
             Lrc lrc = new Lrc();
             if (content != null && content.length() != 0) {
-                lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
-                        + Long.parseLong(mil) * 10);
+                 if(Integer.parseInt(mil)< 100){
+             lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
+                        + Long.parseLong(mil) * 10);}
+                else{
+                    lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
+                            + Long.parseLong(mil)
+                    );
+                }
                 lrc.setText(content);
                 lrcs.add(lrc);
             }
