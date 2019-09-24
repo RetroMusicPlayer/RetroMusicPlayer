@@ -99,9 +99,14 @@ public class LyricUtil {
         }
     }
     public static String getLrcPath2(String title, String artist) {
-        int fileExtPos = title.lastIndexOf(".");
-        String x2 = title.substring(0, title.length() -4 ) + ".lrc";
-        Log.d("damn2",x2);
+        String x2;
+        if(title.endsWith(".flac")||title.endsWith(".mogg")||title.endsWith(".alac")||title.endsWith(".aiff")||title.endsWith(".webv")){
+            x2= title.substring(0, title.length() -5 ) + ".lrc";
+        }
+        else{
+                x2= title.substring(0, title.length() -4 ) + ".lrc";}
+
+
         return x2;
     }
 
