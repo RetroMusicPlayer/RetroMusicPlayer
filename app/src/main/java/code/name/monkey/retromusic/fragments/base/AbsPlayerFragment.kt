@@ -217,7 +217,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
 
             override fun doInBackground(vararg params: Song): Lyrics? {
                 try {
-                    var data: String? = LyricUtil.getStringFromFile(params[0].title, params[0].artistName)
+                    var data: String? = LyricUtil.getStringFromFile(params[0].data, params[0].artistName)
                     return if (TextUtils.isEmpty(data)) {
                         data = MusicUtil.getLyrics(params[0])
                         return if (TextUtils.isEmpty(data)) {
