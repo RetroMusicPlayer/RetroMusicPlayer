@@ -46,8 +46,8 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 val theme = newValue as String
-                setSummary(generalTheme, newValue)
-                val color = when (theme) {
+                setSummary(it, newValue)
+               /* val color = when (theme) {
                     "light" -> Color.WHITE
                     "black" -> Color.BLACK
                     "dark" -> ContextCompat.getColor(requireContext(), R.color.md_grey_900)
@@ -58,6 +58,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                         .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
                         .primaryColor(color)
                         .commit()
+                 */
 
                 ThemeStore.markChanged(requireContext())
 
