@@ -78,28 +78,18 @@ open class SongAdapter @JvmOverloads constructor(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val song = dataSet[position]
-
         val isChecked = isChecked(song)
         holder.itemView.isActivated = isChecked
-
-        if (holder.title != null) {
-            holder.title!!.text = getSongTitle(song)
-        }
-        if (holder.text != null) {
-            holder.text!!.text = getSongText(song)
-        }
+        holder.title?.text = getSongTitle(song)
+        holder.text?.text = getSongText(song)
         loadAlbumCover(song, holder)
     }
 
     private fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer!!.setBackgroundColor(color)
-            if (holder.title != null) {
-                holder.title!!.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
-            if (holder.text != null) {
-                holder.text!!.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
+            holder.paletteColorContainer?.setBackgroundColor(color)
+            holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
         }
     }
 

@@ -14,7 +14,8 @@
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             style="@style/SubTitleTextAppearance"
             android:text="@string/credit_title"
-            android:textAppearance="@style/TextViewOverline" />
+            android:textAppearance="@style/TextViewOverline"
+            android:textColor="?colorAccent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"

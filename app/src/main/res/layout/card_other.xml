@@ -32,18 +32,17 @@
             tools:ignore="PrivateResource">
 
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/changelog"
                 android:textAppearance="@style/TextViewSubtitle1" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.85"
                 android:text="@string/changelog_summary"
-                android:textAppearance="@style/TextViewBody2" />
+                app:lineHeightHint="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -60,18 +59,17 @@
             android:paddingBottom="8dp"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pref_title_open_source_licences"
                 android:textAppearance="@style/TextViewSubtitle1" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.85"
                 android:text="@string/pref_summary_open_source_licences"
-                android:textAppearance="@style/TextViewBody2" />
+                app:lineHeightHint="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -87,22 +85,21 @@
             android:paddingBottom="8dp"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/version"
                 android:textAppearance="@style/TextViewSubtitle1" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:id="@+id/appVersion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:alpha="0.85"
                 android:text="0.0.0"
-                android:textAppearance="@style/TextViewBody2" />
+                app:lineHeightHint="24sp" />
         </LinearLayout>
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/madeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

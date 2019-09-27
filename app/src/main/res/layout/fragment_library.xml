@@ -39,6 +39,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?colorSurface"
             app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
@@ -47,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
@@ -60,7 +62,12 @@
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
-                        style="@style/Toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:background="?colorSurface"
+                        app:contentInsetStart="0dp"
+                        app:popupTheme="?toolbarPopupTheme"
+                        app:contentInsetStartWithNavigation="0dp"
                         app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
                         app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
@@ -79,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/md_white_1000"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

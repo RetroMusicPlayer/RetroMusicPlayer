@@ -28,12 +28,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_pinterest_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,19 +45,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/pinterest_page"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/pinterest_page_summary"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -71,12 +70,12 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_instagram_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -88,18 +87,17 @@
                 android:paddingBottom="8dp">
 
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/instagram_page"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/instagram_page_summary"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -114,12 +112,12 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_twitter_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,18 +128,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/twitter_page"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/twitter_page_summary"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -156,12 +153,12 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_telegram_white"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -172,18 +169,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/telegram_group"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/telegram_group_summary"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 

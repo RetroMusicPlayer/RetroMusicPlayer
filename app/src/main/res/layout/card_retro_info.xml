@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="?colorSurface"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
@@ -28,13 +29,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_github_circle_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,19 +46,18 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/circular"
                     android:text="@string/git_hub"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/git_hub_summary"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -72,13 +72,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_flag_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -89,18 +89,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/translate"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
                     android:text="@string/translate_community"
-                    android:textAppearance="@style/TextViewBody2" />
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -115,13 +114,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_star_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -132,19 +131,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/rate_app"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    android:textAppearance="@style/TextViewBody2"
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/rate_on_google_play_summary" />
+                    android:text="@string/rate_on_google_play_summary"
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -159,13 +156,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_card_giftcard_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -177,18 +174,17 @@
                 android:paddingBottom="8dp">
 
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/donate"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    android:textAppearance="@style/TextViewBody2"
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/donate_summary" />
+                    android:text="@string/donate_summary"
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -203,13 +199,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_bug_report_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -220,18 +216,17 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/report_bug"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                    android:textAppearance="@style/TextViewBody2"
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.85"
-                    android:text="@string/bug_report_summary" />
+                    android:text="@string/bug_report_summary"
+                    app:lineHeightHint="24sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -247,13 +242,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_share_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -265,13 +260,11 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/action_share"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textColor="@color/md_white_1000" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
             </LinearLayout>
         </LinearLayout>
@@ -288,13 +281,13 @@
             android:orientation="horizontal"
             tools:ignore="PrivateResource">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/social_buttons"
                 android:padding="16dp"
                 app:srcCompat="@drawable/ic_help_white_24dp"
-                app:tint="@color/md_white_1000" />
+                app:tint="?colorOnSurface" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -306,12 +299,11 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="8dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/faq"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textColor="@color/md_white_1000" />
+                    android:textAppearance="@style/TextViewSubtitle1" />
 
             </LinearLayout>
         </LinearLayout>

@@ -9,7 +9,6 @@ import android.transition.Slide
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -85,7 +84,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
         contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
 
-        ActivityCompat.postponeEnterTransition(this)
+        postponeEnterTransition()
 
         artistImage = findViewById(R.id.artistImage)
 
@@ -169,7 +168,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     override fun complete() {
-        ActivityCompat.startPostponedEnterTransition(this)
+        scheduleStartPostponedTransition(image)
     }
 
     override fun album(album: Album) {
@@ -222,6 +221,16 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
                         setColors(color)
                     }
                 })
+    }
+
+    private fun scheduleStartPostponedTransition(image: ImageView) {
+        image.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                image.viewTreeObserver.removeOnPreDrawListener(this)
+                startPostponedEnterTransition();
+                return true;
+            }
+        })
     }
 
     private fun setColors(color: Int) {

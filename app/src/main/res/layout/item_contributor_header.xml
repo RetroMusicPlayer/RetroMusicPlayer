@@ -42,18 +42,17 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textAppearance="@style/TextViewHeadline5" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <code.name.monkey.retromusic.views.BaselineGridTextView
+            app:lineHeightHint="24sp"
             android:id="@+id/text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha="0.85"
-            android:textAppearance="@style/TextViewBody2" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

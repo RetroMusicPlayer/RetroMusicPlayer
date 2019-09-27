@@ -30,8 +30,6 @@ import java.util.Objects;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
-import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
@@ -54,7 +52,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
-    private View contentContainer;
     private MaterialCardView toolbarContainer;
 
     private MaterialCab cab;
@@ -89,9 +86,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
-        contentContainer = view.findViewById(R.id.fragmentContainer);
-        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         appBarLayout = view.findViewById(R.id.appBarLayout);
+        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         toolbar = view.findViewById(R.id.toolbar);
         PreferenceUtil.getInstance(requireActivity()).registerOnSharedPreferenceChangedListener(this);
         return view;
@@ -149,17 +145,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
-        TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        appBarLayout.setBackgroundColor(primaryColor);
-        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
+        //int primaryColor = ThemeStore.Companion.primaryColor(getContext());
+        //TintHelper.setTintAuto(contentContainer, primaryColor, true);
+        //appBarLayout.setBackgroundColor(primaryColor);
+        //toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
             NavigationUtil.goToSearch(getMainActivity(), options);
         });
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
-                getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
     }

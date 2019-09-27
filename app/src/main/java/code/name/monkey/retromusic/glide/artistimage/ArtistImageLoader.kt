@@ -64,6 +64,7 @@ class ArtistImageFetcher(
             } catch (ignore: IOException) {
                 // can't do much about it
             }
+
         }
     }
 

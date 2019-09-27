@@ -12,18 +12,19 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
-
+package code.name.monkey.retromusic.util
 
 import android.content.Context
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
-import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
-import io.reactivex.Observable
+import androidx.annotation.AttrRes
 
-object HomeLoader {
-
-
+object AttrsUtil {
+    @JvmOverloads
+    fun resolveColor(context: Context, @AttrRes attr: Int, fallback: Int = 0): Int {
+        val a = context.theme.obtainStyledAttributes(intArrayOf(attr))
+        try {
+            return a.getColor(0, fallback)
+        } finally {
+            a.recycle()
+        }
+    }
 }

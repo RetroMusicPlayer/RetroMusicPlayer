@@ -9,8 +9,6 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
@@ -60,16 +58,13 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
 
         loadContributors()
-        setUpToolbar()
-
+        setSupportActionBar(toolbar)
         appVersion.text = getAppVersion()
-
         setUpView()
     }
 
@@ -83,10 +78,9 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun setUpToolbar() {
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        setSupportActionBar(toolbar)
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
+        //appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        //toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
+        //ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 
     private fun openUrl(url: String) {

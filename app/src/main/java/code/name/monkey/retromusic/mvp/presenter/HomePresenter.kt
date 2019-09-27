@@ -20,15 +20,11 @@ import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ALBUMS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ARTISTS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ALBUMS
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ARTISTS
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Home
-import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
@@ -44,16 +40,20 @@ interface HomeView : BaseView {
 interface HomePresenter : Presenter<HomeView> {
     fun loadSections()
 
+
     class HomePresenterImpl @Inject constructor(
             private val repository: Repository
     ) : PresenterImpl<HomeView>(), HomePresenter {
+
+        val hashSet: HashSet<Home> = HashSet()
+
         override fun loadSections() {
-            /*loadRecentArtists()
+            loadRecentArtists()
             loadRecentAlbums()
             loadTopArtists()
             loadATopAlbums()
-            loadFavorite()*/
-            loadHomeSection()
+            loadFavorite()
+            //loadHomeSection()
         }
 
         private var disposable: CompositeDisposable = CompositeDisposable()
@@ -67,7 +67,7 @@ interface HomePresenter : Presenter<HomeView> {
             }
         }
 
-        /*private fun loadRecentArtists() {
+        private fun loadRecentArtists() {
             disposable += repository.recentArtistsFlowable
                     .subscribe {
                         if (it.isNotEmpty()) hashSet.add(
@@ -140,9 +140,9 @@ interface HomePresenter : Presenter<HomeView> {
                                 ))
                         showData(ArrayList(hashSet))
                     }
-        }*/
+        }
 
-        private fun loadHomeSection() {
+        /*private fun loadHomeSection() {
             val ob = listOf(repository.recentArtistsFlowable,
                     repository.recentAlbumsFlowable,
                     repository.topArtistsFlowable,
@@ -200,7 +200,7 @@ interface HomePresenter : Presenter<HomeView> {
             }.subscribe {
                 view.sections(ArrayList(it))
             }
-        }
+        }*/
     }
 }
 

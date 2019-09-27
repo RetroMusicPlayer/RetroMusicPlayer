@@ -1,7 +1,6 @@
 package code.name.monkey.appthemehelper.util
 
 import android.content.Context
-import android.content.res.TypedArray
 import androidx.annotation.AttrRes
 
 /**
@@ -10,7 +9,7 @@ import androidx.annotation.AttrRes
 object ATHUtil {
 
     fun isWindowBackgroundDark(context: Context): Boolean {
-        return !ColorUtil.isColorLight(ATHUtil.resolveColor(context, android.R.attr.windowBackground))
+        return !ColorUtil.isColorLight(resolveColor(context, android.R.attr.windowBackground))
     }
 
     @JvmOverloads

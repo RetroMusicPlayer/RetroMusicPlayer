@@ -33,20 +33,21 @@
             android:paddingStart="16dp"
             android:paddingEnd="0dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:alpha="0.75"
                 android:ellipsize="end"
-                android:text="@string/welcome" />
+                android:text="@string/welcome"
+                android:textColor="?colorOnBackground" />
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/titleWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="0dp"
                 android:textAppearance="@style/TextViewHeadline5"
+                android:textColor="?colorOnPrimary"
                 tools:text="@string/app_name" />
         </LinearLayout>
     </LinearLayout>

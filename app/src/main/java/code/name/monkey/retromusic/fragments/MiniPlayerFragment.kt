@@ -10,11 +10,9 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -46,8 +44,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
         //view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer()

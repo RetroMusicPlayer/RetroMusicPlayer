@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.appthemehelper.common.views;
+package code.name.monkey.retromusic.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,25 +21,11 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 
 import androidx.annotation.FontRes;
-import androidx.appcompat.widget.AppCompatTextView;
 
 import com.google.android.material.textview.MaterialTextView;
 
-import code.name.monkey.appthemehelper.R;
+import code.name.monkey.retromusic.R;
 
-
-/**
- * An extension to {@link AppCompatTextView} which aligns text to a 4dp baseline grid.
- * <p>
- * To achieve this we expose a {@code lineHeightHint} allowing you to specify the desired line
- * height (alternatively a {@code lineHeightMultiplierHint} to use a multiplier of the text size).
- * This line height will be adjusted to be a multiple of 4dp to ensure that baselines sit on
- * the grid.
- * <p>
- * We also adjust spacing above and below the text to ensure that the first line's baseline sits on
- * the grid (relative to the view's top) & that this view's height is a multiple of 4dp so that
- * subsequent views start on the grid.
- */
 public class BaselineGridTextView extends MaterialTextView {
 
     private final float FOUR_DIP;

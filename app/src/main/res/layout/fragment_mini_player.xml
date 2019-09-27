@@ -5,7 +5,7 @@
     android:id="@+id/mini_player_content"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@android:color/transparent"
+    android:background="?colorSurface"
     android:clickable="true"
     android:focusable="false"
     tools:ignore="UnusedAttribute">
@@ -17,7 +17,10 @@
         android:paddingStart="0dp"
         android:paddingEnd="8dp">
 
-        <code.name.monkey.retromusic.views.IconImageView
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:tint="?colorOnSurface"
+            tools:tint="?colorOnSurface"
             android:id="@+id/miniPlayerImage"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -27,7 +30,7 @@
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
             tools:ignore="ContentDescription" />
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/miniPlayerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,18 +44,21 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextViewNormal" />
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?colorOnSurface"
+            tools:text="Song name and details" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPrevious"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_previous_white_24dp" />
+            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+            app:tint="?colorOnSurface" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/miniPlayerPlayPauseButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -61,25 +67,31 @@
             android:padding="6dp"
             android:scaleType="center"
             app:srcCompat="@drawable/ic_pause_white_24dp"
+            app:tint="?colorOnSurface"
             tools:ignore="ContentDescription" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionNext"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_next_white_24dp" />
+            app:srcCompat="@drawable/ic_skip_next_white_24dp"
+            app:tint="?colorOnSurface"
+            tools:tint="?colorOnSurface" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPlayingQueue"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_playlist_play_white_24dp" />
+            app:srcCompat="@drawable/ic_playlist_play_white_24dp"
+            app:tint="?colorOnSurface"
+            tools:tint="?colorOnSurface" />
 
     </LinearLayout>
 
