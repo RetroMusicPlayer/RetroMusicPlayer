@@ -157,8 +157,9 @@ public final class PreferenceUtil {
         switch (themePrefValue) {
             case "light":
                 return R.style.Theme_RetroMusic_Light;
-            case "black":
-                return R.style.Theme_RetroMusic_Black;
+            /* Drop black theme as of now, you may want to add a toggle for that later
+               case "black":
+                return R.style.Theme_RetroMusic_Black;*/
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;
@@ -556,6 +557,10 @@ public final class PreferenceUtil {
 
     public int getGeneralTheme() {
         return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "dark"));
+    }
+
+    public String getGeneralThemeValue() {
+        return mPreferences.getString(GENERAL_THEME, "dark");
     }
 
     public void setGeneralTheme(String theme) {

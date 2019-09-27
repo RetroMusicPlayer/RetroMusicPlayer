@@ -19,13 +19,14 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.ThemeManager
 
 abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(PreferenceUtil.getInstance(this).generalTheme)
+        setTheme(ThemeManager.getThemeResValue(this))
         hideStatusBar()
         super.onCreate(savedInstanceState)
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
