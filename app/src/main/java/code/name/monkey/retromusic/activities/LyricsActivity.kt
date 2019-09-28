@@ -91,7 +91,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
 
         appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
         toolbar.apply {

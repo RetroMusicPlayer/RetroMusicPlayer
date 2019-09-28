@@ -30,6 +30,7 @@ import java.util.Objects;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
@@ -145,10 +146,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        //int primaryColor = ThemeStore.Companion.primaryColor(getContext());
-        //TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        //appBarLayout.setBackgroundColor(primaryColor);
-        //toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
@@ -156,6 +154,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         });
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSurface));
+        toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 
     private Fragment getCurrentFragment() {

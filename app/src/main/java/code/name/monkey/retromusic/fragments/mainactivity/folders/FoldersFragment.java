@@ -225,7 +225,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
+        int primaryColor = ThemeStore.Companion.primaryColor(requireContext());
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
@@ -234,8 +234,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         toolbar.setNavigationOnClickListener(v -> {
             showMainMenu(OptionsSheetDialogFragment.FOLDER);
         });
-        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(),
+        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(),
                 ColorUtil.INSTANCE.darkenColor(primaryColor)));
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
     }

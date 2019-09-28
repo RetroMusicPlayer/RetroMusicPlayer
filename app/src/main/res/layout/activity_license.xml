@@ -10,24 +10,17 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:elevation="0dp">
+        android:background="?colorPrimary"
+        app:liftOnScroll="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:titleEnabled="false">
+        <code.name.monkey.appthemehelper.common.views.ATEToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:title="@string/licenses"
+            tools:ignore="UnusedAttribute" />
 
-
-            <code.name.monkey.appthemehelper.common.views.ATEToolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:layout_collapseMode="pin"
-                app:title="@string/licenses"
-                tools:ignore="UnusedAttribute" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -19,7 +19,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,16 +32,17 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp">
 
-                <code.name.monkey.retromusic.views.IconImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/itemImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_github_circle_white_24dp" />
+                    app:srcCompat="@drawable/ic_github_circle_white_24dp"
+                    app:tint="?colorOnBackground" />
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +50,7 @@
                 android:textAppearance="@style/TextViewBody2"
                 tools:text="Title" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -49,7 +49,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         searchPresenter.attachView(this)
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 

@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="toolbar_margin_horizontal">42dp</dimen>
+    <dimen name="toolbar_height">52dp</dimen>
+    <dimen name="toolbar_margin_vertical">16dp</dimen>
+</resources>

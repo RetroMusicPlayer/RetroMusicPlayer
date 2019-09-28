@@ -140,7 +140,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         checkPadding()
 
-        userInfoContainer.setOnClickListener {
+        userImage.setOnClickListener {
             NavigationUtil.goToUserInfo(requireActivity())
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))

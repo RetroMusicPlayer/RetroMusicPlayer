@@ -35,7 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textAppearance="@style/TextViewSubtitle1" />
+            android:textAppearance="@style/TextViewSubtitle1"
+            tools:text="Genre name" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
@@ -43,7 +44,7 @@
             android:layout_height="wrap_content"
             android:fontFeatureSettings="onum"
             android:singleLine="true"
-            android:textColor="?android:textColorSecondary" />
+            tools:text="Genre details" />
     </LinearLayout>
 
 </FrameLayout>

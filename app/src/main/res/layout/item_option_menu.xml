@@ -25,15 +25,16 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:padding="14dp"
+        app:tint="?colorOnBackground"
         tools:srcCompat="@drawable/ic_folder_white_24dp" />
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

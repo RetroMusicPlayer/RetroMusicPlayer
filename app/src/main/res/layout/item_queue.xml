@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/drag_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -23,6 +23,7 @@
             android:padding="8dp"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+            app:tint="?colorOnBackground"
             tools:ignore="ContentDescription"
             tools:visibility="visible" />
 
@@ -60,30 +61,31 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextViewHeadline6"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="Song name" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewNormal" />
+                tools:text="Song details" />
         </LinearLayout>
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/menu"
             style="@style/OverFlowButton"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            app:tint="?colorOnBackground" />
 
     </LinearLayout>
 </FrameLayout>

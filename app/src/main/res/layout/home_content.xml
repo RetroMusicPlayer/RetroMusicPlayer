@@ -49,12 +49,13 @@
             android:layout_height="96dp"
             app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/start_play_music"
-            android:textAppearance="@style/TextViewNormal" />
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?colorOnBackground" />
     </LinearLayout>
 </LinearLayout>

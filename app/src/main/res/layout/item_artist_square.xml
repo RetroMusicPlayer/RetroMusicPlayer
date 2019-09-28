@@ -24,14 +24,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewNormal"
                 android:padding="8dp"
+                android:textAppearance="@style/TextViewNormal"
                 tools:text="@string/home" />
         </FrameLayout>
     </LinearLayout>

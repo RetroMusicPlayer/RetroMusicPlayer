@@ -86,11 +86,5 @@ class App : MultiDexApplication() {
 
         const val PRO_VERSION_PRODUCT_ID = "pro_version"
 
-
-        /*val context: Context
-            get() = (instance as App).applicationContext*/
-
-        /*val isProVersion: Boolean
-            get() = BuildConfig.DEBUG || instance.billingProcessor.isPurchased(PRO_VERSION_PRODUCT_ID)*/
     }
 }

@@ -49,6 +49,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
         actionRate = layout.findViewById(R.id.actionRate)

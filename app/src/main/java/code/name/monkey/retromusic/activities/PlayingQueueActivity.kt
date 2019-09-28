@@ -41,10 +41,10 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             savedInstanceState: Bundle?
     ) {
         super.onCreate(savedInstanceState)
-        setContentView(code.name.monkey.retromusic.R.layout.activity_playing_queue)
+        setContentView(R.layout.activity_playing_queue)
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
@@ -92,9 +92,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    clearQueue.shrink( )
+                    clearQueue.shrink()
                 } else if (dy < 0) {
-                    clearQueue.extend( )
+                    clearQueue.extend()
                 }
             }
         })

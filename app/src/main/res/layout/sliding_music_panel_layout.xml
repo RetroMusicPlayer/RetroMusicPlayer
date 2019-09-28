@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:background="?colorSurface"
         android:elevation="0dp"
         app:elevation="0dp"
         app:itemIconTint="@drawable/bottom_navigation_item_colors"
@@ -55,6 +56,7 @@
         app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearanceInactive"
         app:itemTextColor="@drawable/bottom_navigation_item_colors"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_main" />
+        app:menu="@menu/bottom_navigation_main"
+        tools:layout_height="56dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

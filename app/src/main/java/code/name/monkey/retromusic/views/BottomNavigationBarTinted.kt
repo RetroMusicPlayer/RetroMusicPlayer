@@ -32,7 +32,6 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 
     init {
         labelVisibilityMode = PreferenceUtil.getInstance(context).tabTitleMode
-        setBackgroundColor(ThemeStore.primaryColor(context))
         selectedItemId = PreferenceUtil.getInstance(context).lastPage
 
         val iconColor = ATHUtil.resolveColor(context, R.attr.iconColor)

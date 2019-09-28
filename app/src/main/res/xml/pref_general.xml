@@ -12,10 +12,16 @@
             android:title="@string/pref_title_general_theme"
             app:enableCopying="true"
             app:icon="@drawable/ic_color_lens_white_24dp" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:key="black_theme"
+            android:title="@string/black_theme_name"
+            app:enableCopying="true" />
+
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
-        android:layout="@layout/preference_category_title"
         android:key="category_color"
+        android:layout="@layout/preference_category_title"
         android:title="@string/colors">
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"

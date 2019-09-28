@@ -6,11 +6,10 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    tools:showIn="@layout/fragment_player_playback_controls">
+    android:paddingEnd="16dp">
 
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songCurrentProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +21,7 @@
         tools:text="22.00" />
 
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

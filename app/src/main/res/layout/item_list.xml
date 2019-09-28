@@ -12,13 +12,14 @@
     android:orientation="horizontal"
     tools:ignore="MissingPrefix">
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/drag_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical|start"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+        app:tint="?colorOnBackground"
         tools:ignore="ContentDescription"
         tools:visibility="visible" />
 
@@ -43,7 +44,8 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/image_text"
@@ -85,7 +87,6 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="@style/TextViewBody2"
@@ -93,10 +94,11 @@
             tools:text="Song artist name " />
     </LinearLayout>
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/menu"
         style="@style/OverFlowButton"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0" />
+        android:layout_weight="0"
+        app:tint="?colorOnBackground" />
 
 </LinearLayout>

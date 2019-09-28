@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -45,8 +44,10 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
@@ -54,9 +55,14 @@
                 app:strokeColor="?dividerColor"
                 app:strokeWidth="1dp">
 
-                <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:background="?colorSurface"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:popupTheme="?toolbarPopupTheme"
                     app:title="@string/search_hint"
                     app:titleMarginStart="0dp"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
@@ -67,8 +73,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="128dp"
-            android:layout_marginEnd="128dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/home_content" />

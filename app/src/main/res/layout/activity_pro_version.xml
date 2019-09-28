@@ -35,7 +35,7 @@
                 app:titleEnabled="false">
 
 
-                <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:layout_collapseMode="pin"
@@ -51,127 +51,130 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_format_color_fill" />
-
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/base_color_theme"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/md_white_1000" />
-                </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_format_color_fill"
+                            app:tint="?colorOnSurface" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="@string/base_color_theme"
+                            android:textAppearance="@style/TextViewSubtitle1" />
+                    </LinearLayout>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
-
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/now_playing_themes"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/md_white_1000" />
-                </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_theme_palette_white_24dp"
+                            app:tint="?colorOnSurface" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_view_carousel_black_24dp" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="@string/now_playing_themes"
+                            android:textAppearance="@style/TextViewSubtitle1" />
+                    </LinearLayout>
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/carousal_effect_on_now_playing_screen"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/md_white_1000" />
-                </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_view_carousel_black_24dp"
+                            app:tint="?colorOnSurface" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_rounded_corner" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="@string/carousal_effect_on_now_playing_screen"
+                            android:textAppearance="@style/TextViewSubtitle1" />
+                    </LinearLayout>
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/window_corner_edges"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/md_white_1000" />
-                </LinearLayout>
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_rounded_corner"
+                            app:tint="?colorOnSurface" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_favorite_white_24dp" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="@string/window_corner_edges"
+                            android:textAppearance="@style/TextViewSubtitle1" />
+                    </LinearLayout>
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:text="@string/support_development"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/md_white_1000" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            app:srcCompat="@drawable/ic_favorite_white_24dp"
+                            app:tint="?colorOnSurface" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:text="@string/support_development"
+                            android:textAppearance="@style/TextViewSubtitle1" />
+                    </LinearLayout>
+
+
                 </LinearLayout>
-
-
-            </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <LinearLayout
                 android:id="@+id/actions"
@@ -191,6 +194,7 @@
                     android:paddingBottom="14dp"
                     android:text="@string/restore"
                     android:textAllCaps="false"
+                    android:textColor="?colorOnBackground"
                     app:strokeWidth="2dp" />
 
 

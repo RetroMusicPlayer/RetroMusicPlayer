@@ -55,7 +55,7 @@
         android:paddingBottom="8dp"
         android:textAppearance="@style/TextViewSubtitle1"
         android:textColor="@color/md_white_1000"
-        tools:text="@string/appbar_scrolling_view_behavior" />
+        tools:text="@string/bug_report_summary" />
 
 
 </com.google.android.material.card.MaterialCardView>

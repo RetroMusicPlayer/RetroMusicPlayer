@@ -46,19 +46,14 @@
 
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
 
-        <item name="colorPrimary">@color/dark_color</item>
-        <item name="colorPrimaryVariant">@color/black_color</item>
+        <item name="colorPrimary">@color/darkColorPrimary</item>
+        <item name="colorPrimaryVariant">@color/darkColorPrimary</item>
         <item name="colorOnPrimary">@color/mi_text_color_primary_dark</item>
 
         <item name="colorAccent">@color/md_deep_purple_A200</item>
 
-
-        <item name="colorSecondary">@color/md_green_500</item>
-        <item name="colorOnSecondary">@color/mi_text_color_secondary_light</item>
-        <item name="colorSecondaryVariant">@color/md_green_A700</item>
-
-        <item name="android:colorBackground">@color/md_white_1000</item>
-        <item name="colorSurface">@color/dark_color</item>
+        <item name="android:colorBackground">@color/darkColorBackground</item>
+        <item name="colorSurface">@color/darkColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
         <item name="colorControlNormal">@color/mi_text_color_secondary_light</item>
@@ -83,8 +78,8 @@
 
         <item name="windowActionBar">false</item>
 
-        <item name="colorPrimary">@color/black_color</item>
-        <item name="colorPrimaryVariant">@color/black_color</item>
+        <item name="colorPrimary">@color/blackColorPrimary</item>
+        <item name="colorPrimaryVariant">@color/blackColorPrimary</item>
         <item name="colorOnPrimary">@color/mi_text_color_primary_dark</item>
 
         <item name="colorAccent">@color/md_deep_purple_A200</item>
@@ -93,8 +88,8 @@
         <item name="colorOnSecondary">@color/mi_text_color_secondary_light</item>
         <item name="colorSecondaryVariant">@color/md_green_A700</item>
 
-        <item name="android:colorBackground">@color/md_white_1000</item>
-        <item name="colorSurface">@android:color/black</item>
+        <item name="android:colorBackground">@color/blackColorBackground</item>
+        <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
         <item name="colorControlNormal">@color/mi_text_color_secondary_light</item>

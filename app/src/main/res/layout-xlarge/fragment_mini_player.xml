@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@android:color/transparent"
+    android:background="?colorSurface"
     android:clickable="true"
     android:focusable="false"
     android:transitionName="@string/transition_mini_player"

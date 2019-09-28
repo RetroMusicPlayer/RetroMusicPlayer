@@ -14,16 +14,15 @@
 
 package code.name.monkey.retromusic.fragments.settings
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.ACCENT_COLORS
 import code.name.monkey.appthemehelper.ACCENT_COLORS_SUB
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -46,19 +45,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             setSummary(it)
             it.setOnPreferenceChangeListener { _, newValue ->
                 val theme = newValue as String
-                setSummary(generalTheme, newValue)
-                val color = when (theme) {
-                    "light" -> Color.WHITE
-                    "black" -> Color.BLACK
-                    "dark" -> ContextCompat.getColor(requireContext(), R.color.md_grey_900)
-                    else -> Color.WHITE
-                }
-
-                ThemeStore.editTheme(requireContext())
-                        .activityTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
-                        .primaryColor(color)
-                        .commit()
-
+                setSummary(it, newValue)
                 ThemeStore.markChanged(requireContext())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
@@ -86,6 +73,17 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 }
             }
             return@setOnPreferenceClickListener true
+        }
+        val blackTheme: ATESwitchPreference? = findPreference("black_theme")
+        blackTheme?.setOnPreferenceChangeListener { _, _ ->
+            ThemeStore.markChanged(requireContext())
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+                requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue("black"))
+                DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
+            }
+            requireActivity().recreate()
+            true
         }
 
         val colorAppShortcuts: TwoStatePreference = findPreference("should_color_app_shortcuts")!!

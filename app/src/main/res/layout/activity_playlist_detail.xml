@@ -44,9 +44,9 @@
                     <code.name.monkey.appthemehelper.common.views.ATEToolbar
                         android:id="@+id/toolbar"
                         style="@style/Toolbar"
-                        app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                         app:layout_collapseMode="pin"
-                        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+                        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                        app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
                 </FrameLayout>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -70,18 +70,20 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                app:srcCompat="@drawable/ic_disc_full_black_24dp" />
+                app:srcCompat="@drawable/ic_disc_full_black_24dp"
+                app:tint="?colorOnBackground" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/emptyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/playlist_empty_text"
                 android:textAppearance="@style/TextViewNormal"
+                android:textColor="?colorOnBackground"
                 android:visibility="gone"
                 tools:visibility="visible" />
         </LinearLayout>

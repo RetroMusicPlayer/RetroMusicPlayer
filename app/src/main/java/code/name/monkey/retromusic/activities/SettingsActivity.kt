@@ -20,9 +20,8 @@ class SettingsActivity : AbsBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setLightNavigationBar(true)
 
         setupToolbar()

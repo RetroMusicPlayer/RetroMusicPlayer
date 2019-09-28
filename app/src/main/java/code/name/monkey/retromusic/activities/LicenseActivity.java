@@ -1,17 +1,27 @@
+/*
+ * Copyright (c) 2019 Hemanth Savarala.
+ *
+ * Licensed under the GNU General Public License v3
+ *
+ * This is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by
+ *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *
+ * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ */
+
 package code.name.monkey.retromusic.activities;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.appbar.AppBarLayout;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -19,57 +29,46 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 
 import static code.name.monkey.appthemehelper.util.ATHUtil.INSTANCE;
 
-public class WhatsNewActivity extends AbsBaseActivity {
-    WebView webView;
-    Toolbar toolbar;
-    AppBarLayout appBarLayout;
+/**
+ * Created by hemanths on 2019-09-27.
+ */
+public class LicenseActivity extends AbsBaseActivity {
 
-
-    private static void setChangelogRead(@NonNull Context context) {
-        try {
-            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            int currentVersion = pInfo.versionCode;
-            PreferenceUtil.getInstance(context).setLastChangeLogVersion(currentVersion);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
-    private static String colorToCSS(int color) {
+    private String colorToCSS(int color) {
         return String.format("rgb(%d, %d, %d)", Color.red(color), Color.green(color), Color.blue(color)); // on API 29, WebView doesn't load with hex colors
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_whats_new);
-
+        setContentView(R.layout.activity_license);
         setStatusbarColorAuto();
         setNavigationBarColorPrimary();
         setTaskDescriptionColorAuto();
+        setLightNavigationBar(true);
 
-        webView = findViewById(R.id.webView);
-        toolbar = findViewById(R.id.toolbar);
-        appBarLayout = findViewById(R.id.appBarLayout);
-
-        toolbar.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
-        appBarLayout.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
-        //setSupportActionBar(toolbar);
-
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));
-
+        ToolbarContentTintHelper.colorBackButton(findViewById(R.id.toolbar), ATHUtil.INSTANCE.resolveColor(this, R.attr.colorOnSurface));
+        WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();
-            InputStream json = getAssets().open("retro-changelog.html");
+            InputStream json = getAssets().open("index.html");
             BufferedReader in = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8));
             String str;
             while ((str = in.readLine()) != null)
@@ -78,7 +77,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorPrimary, Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.md_background_color, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()
                     .replace("{style-placeholder}",
@@ -90,6 +89,6 @@ public class WhatsNewActivity extends AbsBaseActivity {
         } catch (Throwable e) {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");
         }
-        setChangelogRead(this);
+
     }
 }

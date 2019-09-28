@@ -167,7 +167,10 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
+    <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+  <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
@@ -176,6 +179,10 @@
     </style>
 
     <style name="TextViewHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+
+    <style name="TextViewHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
         <item name="android:fontFamily">@font/circular</item>
     </style>
 

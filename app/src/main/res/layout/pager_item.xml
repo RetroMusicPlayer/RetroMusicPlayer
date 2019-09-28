@@ -32,7 +32,7 @@
             app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
     </com.google.android.material.card.MaterialCardView>
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,10 +43,11 @@
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnBackground"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

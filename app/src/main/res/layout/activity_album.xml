@@ -8,7 +8,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -29,7 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:transitionName="@string/transition_album_art" />
+                    android:transitionName="@string/transition_album_art"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
                 <View
                     android:layout_width="match_parent"
@@ -38,7 +40,7 @@
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <code.name.monkey.appthemehelper.common.views.ATEToolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin" />
@@ -85,29 +87,23 @@
                         android:paddingStart="16dp"
                         android:paddingEnd="0dp">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/albumTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textAppearance="@style/TextViewHeadline6"
-                            tools:ignore="MissingPrefix" />
+                            tools:ignore="MissingPrefix"
+                            tools:text="Album name" />
 
-                        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/albumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
                             android:singleLine="true"
                             android:textAppearance="@style/TextViewSubtitle2"
                             tools:ignore="MissingPrefix"
-                            tools:text="Title" />
+                            tools:text="Album details" />
 
                     </LinearLayout>
                 </LinearLayout>

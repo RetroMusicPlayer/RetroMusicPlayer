@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:transitionName="@string/transition_artist_image" />
+        android:transitionName="@string/transition_artist_image"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
                 android:id="@+id/imageContainer"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 app:layout_collapseMode="parallax" />
 
@@ -46,8 +47,7 @@
         android:layout_marginEnd="128dp"
         android:fillViewport="true"
         android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:background="@color/md_red_500">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/contentContainer"
@@ -68,18 +68,17 @@
                     android:orientation="vertical"
                     android:padding="24dp">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/artistTitle"
-                        style="@style/TextAppearance.MaterialComponents.Headline4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
+                        android:textAppearance="@style/TextViewHeadline4"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"
-                        style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -90,6 +89,7 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
+                        android:textAppearance="@style/TextViewHeadline6"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 

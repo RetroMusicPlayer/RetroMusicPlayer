@@ -30,7 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:transitionName="@string/transition_artist_image" />
+                    android:transitionName="@string/transition_artist_image"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
                 <View
                     android:layout_width="match_parent"
@@ -71,28 +72,20 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/artistTitle"
-                        style="@style/TextAppearance.MaterialComponents.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
+                        android:textAppearance="@style/TextViewHeadline6"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"
-                        style="@style/TextAppearance.MaterialComponents.Subtitle2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:ellipsize="marquee"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:freezesText="true"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:scrollHorizontally="true"
-                        android:singleLine="true"
+                        android:textAppearance="@style/TextViewSubtitle2"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
                 </LinearLayout>

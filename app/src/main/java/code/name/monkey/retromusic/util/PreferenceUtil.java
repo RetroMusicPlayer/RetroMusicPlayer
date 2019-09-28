@@ -57,6 +57,7 @@ import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
     public static final String LIBRARY_CATEGORIES = "library_categories";
+    public static final String BLACK_THEME = "black_theme";
     public static final String DIALOG_CORNER = "dialog_corner";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
@@ -141,6 +142,7 @@ public final class PreferenceUtil {
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
+
     private PreferenceUtil(@NonNull final Context context) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
@@ -158,8 +160,6 @@ public final class PreferenceUtil {
         switch (themePrefValue) {
             case "light":
                 return R.style.Theme_RetroMusic_Light;
-            case "black":
-                return R.style.Theme_RetroMusic_Black;
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;
@@ -174,6 +174,10 @@ public final class PreferenceUtil {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(SLEEP_TIMER_FINISH_SONG, value);
         editor.apply();
+    }
+
+    public boolean isBlackMode() {
+        return mPreferences.getBoolean(BLACK_THEME, false);
     }
 
     public String getUserBio() {
@@ -563,6 +567,13 @@ public final class PreferenceUtil {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(GENERAL_THEME, theme);
         editor.apply();
+    }
+
+    @NonNull
+    public String getGeneralThemeValue() {
+        if (isBlackMode()) return "black";
+        else
+            return mPreferences.getString(GENERAL_THEME, "dark");
     }
 
     public String getBaseTheme() {

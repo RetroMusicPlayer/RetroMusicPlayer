@@ -58,7 +58,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
         super.onCreate(savedInstanceState)
         setContentView(createContentView())
 
-
         chooseFragmentForTheme()
         setupSlidingUpPanel()
 

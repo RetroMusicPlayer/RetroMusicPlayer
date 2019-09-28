@@ -36,11 +36,11 @@ class LockScreenActivity : AbsMusicServiceActivity() {
                     WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
         }
         setDrawUnderStatusBar()
-        setContentView(R.layout.activity_lock_screen_old_style)
+        setContentView(R.layout.activity_lock_screen)
 
         hideStatusBar()
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 

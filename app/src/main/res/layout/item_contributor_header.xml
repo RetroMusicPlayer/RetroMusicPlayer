@@ -29,6 +29,7 @@
         android:layout_height="72dp"
         android:layout_margin="8dp"
         app:civ_border="false"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[20]"
         app:civ_shadow="false"
         app:srcCompat="@drawable/ic_person_flat" />
 
@@ -47,12 +48,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textAppearance="@style/TextViewHeadline5" />
+            android:textAppearance="@style/TextViewHeadline5"
+            tools:text="Name" />
 
         <code.name.monkey.retromusic.views.BaselineGridTextView
-            app:lineHeightHint="24sp"
             android:id="@+id/text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:lineHeightHint="24sp"
+            tools:text="role" />
     </LinearLayout>
 </LinearLayout>

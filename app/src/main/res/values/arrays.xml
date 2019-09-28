@@ -43,12 +43,12 @@
     <string-array name="pref_general_theme_list_titles">
         <item>@string/light_theme_name</item>
         <item>@string/dark_theme_name</item>
-        <item>@string/black_theme_name</item>
+        <item>@string/follow_system</item>
     </string-array>
     <string-array name="pref_general_theme_list_values">
         <item>light</item>
         <item>dark</item>
-        <item>black</item>
+        <item>auto</item>
     </string-array>
     <string-array name="pref_grid_style_list_titles">
         <item>@string/normal_style</item>
@@ -198,4 +198,5 @@
         <item>1</item>
     </string-array>
 
+    <string name="follow_system">Follow system</string>
 </resources>

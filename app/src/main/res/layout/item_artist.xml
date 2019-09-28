@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="112dp"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     android:orientation="vertical">
 
@@ -18,7 +19,8 @@
             app:civ_border="false" />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
+        tools:text="Name"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

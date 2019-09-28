@@ -66,7 +66,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance(this).lastPage)
         } else {
-            restoreCurrentFragment();
+            restoreCurrentFragment()
         }
 
         checkShowChangelog()
@@ -222,6 +222,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == PreferenceUtil.GENERAL_THEME ||
+                key==PreferenceUtil.BLACK_THEME||
                 key == PreferenceUtil.ADAPTIVE_COLOR_APP ||
                 key == PreferenceUtil.DOMINANT_COLOR ||
                 key == PreferenceUtil.USER_NAME ||

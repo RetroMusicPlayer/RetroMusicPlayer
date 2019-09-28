@@ -17,13 +17,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@android:id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="72dp"
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
+        android:textAppearance="@style/TextViewOverline"
         tools:text="@string/about_settings_summary" />
 </LinearLayout>

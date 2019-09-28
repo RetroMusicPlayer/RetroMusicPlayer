@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             app:titleEnabled="false">
 
-            <code.name.monkey.appthemehelper.common.views.ATEToolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
@@ -43,13 +43,13 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/donation"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/donation_header"
+                android:textAppearance="@style/TextViewSubtitle2"
                 android:textColor="?attr/colorAccent" />
 
             <LinearLayout
@@ -66,13 +66,13 @@
                     android:layout_height="wrap_content"
                     android:indeterminate="true" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.MaterialComponents.Caption"
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:paddingLeft="16dp"
                     android:text="@string/loading_products"
+                    android:textAppearance="@style/TextViewCaption"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
             </LinearLayout>
@@ -87,12 +87,4 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <Button
-        android:id="@+id/google_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="Google Pay"
-        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

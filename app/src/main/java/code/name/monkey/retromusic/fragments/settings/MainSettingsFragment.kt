@@ -44,7 +44,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             R.id.imageSettings -> inflateFragment(ImageSettingFragment(), R.string.pref_header_images)
             R.id.notificationSettings -> inflateFragment(NotificationSettingsFragment(), R.string.notification)
             R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)
-            R.id.aboutSettings -> NavigationUtil.goToAbout(activity!!)
+            R.id.aboutSettings -> NavigationUtil.goToAbout(requireActivity())
         }
     }
 
@@ -68,7 +68,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         buyProContainer.apply {
             if (!App.isProVersion()) show() else hide()
             setOnClickListener {
-                NavigationUtil.goToProVersion(context)
+                NavigationUtil.goToProVersion(requireContext())
             }
         }
         buyPremium.setOnClickListener {

@@ -10,8 +10,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:elevation="0dp">
+        app:liftOnScroll="true">
 
         <code.name.monkey.appthemehelper.common.views.ATEToolbar
             android:id="@+id/toolbar"
@@ -22,11 +21,18 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <code.name.monkey.retromusic.views.LollipopFixedWebView
-        android:id="@+id/webView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+        <code.name.monkey.retromusic.views.LollipopFixedWebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

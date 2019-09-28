@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@android:id/empty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

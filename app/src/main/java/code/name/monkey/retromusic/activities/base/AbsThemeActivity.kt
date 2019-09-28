@@ -19,13 +19,14 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.ThemeManager
 
 abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(PreferenceUtil.getInstance(this).generalTheme)
+        setTheme(ThemeManager.getThemeResValue(this))
         hideStatusBar()
         super.onCreate(savedInstanceState)
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
@@ -109,7 +110,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     fun setStatusbarColorAuto() {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-        setStatusbarColor(ThemeStore.primaryColor(this))
+        setStatusbarColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     open fun setTaskDescriptionColor(@ColorInt color: Int) {
@@ -117,7 +118,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     fun setTaskDescriptionColorAuto() {
-        setTaskDescriptionColor(ThemeStore.primaryColor(this))
+        setTaskDescriptionColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     open fun setNavigationbarColor(color: Int) {
@@ -128,8 +129,12 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
         }
     }
 
+    open fun setNavigationBarColorPrimary() {
+        ATH.setNavigationbarColor(this, ATHUtil.resolveColor(this, R.attr.colorPrimary))
+    }
+
     fun setNavigationbarColorAuto() {
-        setNavigationbarColor(ThemeStore.navigationBarColor(this))
+        setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
     }
 
     open fun setLightStatusbar(enabled: Boolean) {

@@ -29,7 +29,7 @@
                 tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/playerQueueSubHeader"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -37,7 +37,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="@string/up_next"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="@style/TextViewBody2" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

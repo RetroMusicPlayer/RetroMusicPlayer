@@ -100,6 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tab_height"
         android:layout_weight="0"
+        android:background="?colorSurface"
         android:elevation="6dp"
         android:paddingStart="60dp"
         android:paddingEnd="8dp" />

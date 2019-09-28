@@ -42,21 +42,22 @@
             android:paddingEnd="4dp"
             android:paddingBottom="8dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewSubtitle1"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="@string/bug_report_summary" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:singleLine="true"
-                android:textAppearance="@style/TextViewBody2" />
+                tools:text="@string/bug_report_summary" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

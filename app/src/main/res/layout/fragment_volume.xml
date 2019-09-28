@@ -8,14 +8,15 @@
     android:gravity="center_vertical"
     android:orientation="horizontal">
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
         android:padding="12dp"
-        app:srcCompat="@drawable/ic_volume_down_white_24dp" />
+        app:srcCompat="@drawable/ic_volume_down_white_24dp"
+        app:tint="?colorOnBackground" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
@@ -27,12 +28,14 @@
         android:progressDrawable="@drawable/color_progress_seek"
         tools:progress="20" />
 
-    <code.name.monkey.retromusic.views.IconImageView
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
         android:padding="12dp"
-        app:srcCompat="@drawable/ic_volume_up_white_24dp" />
+        app:srcCompat="@drawable/ic_volume_up_white_24dp"
+        app:tint="?colorOnBackground" />
 </LinearLayout>

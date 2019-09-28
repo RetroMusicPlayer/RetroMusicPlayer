@@ -31,7 +31,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
         setDrawUnderStatusBar()
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
