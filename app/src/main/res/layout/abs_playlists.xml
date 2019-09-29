@@ -66,7 +66,7 @@
             app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dp"
@@ -94,7 +94,7 @@
             app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dp"
@@ -123,7 +123,7 @@
             app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dp"
@@ -151,7 +151,7 @@
             app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingTop="8dp"
