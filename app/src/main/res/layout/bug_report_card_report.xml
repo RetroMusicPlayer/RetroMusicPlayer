@@ -64,7 +64,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/bug_report_issue"
-            android:textAppearance="@style/TextViewBody2"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,7 +108,7 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/login"
-            android:textAppearance="@style/TextViewBody2"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary" />
 
         <com.google.android.material.textfield.TextInputLayout
