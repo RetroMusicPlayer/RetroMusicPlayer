@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="112dp"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     android:orientation="vertical">
 
@@ -20,7 +20,6 @@
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
     <com.google.android.material.textview.MaterialTextView
-        tools:text="Name"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,5 +27,7 @@
         android:gravity="center"
         android:maxLines="1"
         android:paddingTop="12dp"
-        android:textAppearance="@style/TextViewNormal" />
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
+        tools:text="Name" />
 </LinearLayout>
