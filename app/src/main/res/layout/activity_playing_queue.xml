@@ -51,14 +51,16 @@
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@android:id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/empty"
         android:textAppearance="@style/TextViewNormal"
-        android:visibility="gone" />
+        android:textColor="?colorOnSecondary"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/clearQueue"

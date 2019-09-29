@@ -42,9 +42,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
-                app:layout_collapseMode="pin"
-                app:strokeColor="?dividerColor"
-                app:strokeWidth="1dp">
+                app:layout_collapseMode="pin">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -86,13 +84,14 @@
                 android:layoutAnimation="@anim/layout_animation_fall_down"
                 android:scrollbars="none" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@android:id/empty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/empty"
-                android:textAppearance="@style/TextViewNormal" />
+                android:textAppearance="@style/TextViewNormal"
+                android:textColor="?colorOnSecondary" />
 
         </FrameLayout>
 

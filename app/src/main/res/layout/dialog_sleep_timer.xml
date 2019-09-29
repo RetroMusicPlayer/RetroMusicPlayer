@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/timerDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

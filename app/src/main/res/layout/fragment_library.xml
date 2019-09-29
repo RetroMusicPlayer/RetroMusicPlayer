@@ -52,11 +52,8 @@
                 android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
-                app:layout_collapseMode="pin"
-                app:strokeColor="?dividerColor"
-                app:strokeWidth="1dp">
+                app:layout_collapseMode="pin">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -73,6 +70,7 @@
                         app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
                         app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
+                        app:titleTextColor="?colorOnSurface"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub

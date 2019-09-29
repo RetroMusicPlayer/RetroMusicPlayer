@@ -26,7 +26,6 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -59,7 +58,7 @@ class SongDetailDialog : DialogFragment() {
 
         val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
-                    customView(layout.dialog_file_details,
+                    customView(R.layout.dialog_file_details,
                             scrollable = true)
                     positiveButton(android.R.string.ok)
                     title(string.action_details)

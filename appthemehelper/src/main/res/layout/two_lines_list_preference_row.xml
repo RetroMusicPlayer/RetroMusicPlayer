@@ -31,7 +31,7 @@
             android:gravity="center_vertical"
             android:textColor="#000000" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/custom_list_view_row_subtext_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

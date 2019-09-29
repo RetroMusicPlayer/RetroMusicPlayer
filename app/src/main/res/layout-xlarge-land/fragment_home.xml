@@ -51,9 +51,7 @@
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:strokeColor="?dividerColor"
-                app:strokeWidth="1dp">
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"

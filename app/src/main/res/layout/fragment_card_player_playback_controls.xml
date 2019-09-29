@@ -14,7 +14,7 @@
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay">
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -22,11 +22,11 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextViewOverline"
+            android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -34,7 +34,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextViewOverline"
+            android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 

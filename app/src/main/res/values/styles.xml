@@ -40,7 +40,6 @@
     <style name="ToolbarTextAppearanceSearch" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
         <item name="android:textSize">16sp</item>
         <item name="android:fontFamily">@font/circular_std_book</item>
-        <item name="android:textColor">?colorOnSurface</item>
     </style>
 
     <style name="ToolbarTextAppearanceNormal">
