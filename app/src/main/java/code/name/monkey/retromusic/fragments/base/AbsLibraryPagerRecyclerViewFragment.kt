@@ -1,14 +1,11 @@
 package code.name.monkey.retromusic.fragments.base
 
-import android.graphics.Canvas
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
-import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -44,33 +41,6 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         }
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
-
-        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.Callback() {
-            override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
-                return -1
-            }
-
-            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                return false
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-
-            }
-
-            override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-                ViewCompat.animate(viewHolder.itemView)
-                        .scaleX(0.9f)
-                        .scaleY(0.9f)
-                        .start()
-            }
-
-            override fun onChildDrawOver(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-                super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-            }
-        })
-        itemTouchHelper.attachToRecyclerView(recyclerView())
     }
 
     private fun initAdapter() {
