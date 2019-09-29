@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
@@ -76,6 +77,15 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
                     cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 }
         return materialDialog
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        dialog?.window?.let {
+            (requireActivity() as MainActivity).setLightNavigationBar(true)
+        }
+
+        return super.onCreateView(inflater, container, savedInstanceState)
+
     }
 
     companion object {

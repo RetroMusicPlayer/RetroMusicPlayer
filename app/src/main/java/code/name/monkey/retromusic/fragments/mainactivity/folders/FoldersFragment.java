@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.MediaScannerConnection;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -62,6 +64,7 @@ import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListene
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
@@ -83,6 +86,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
 
     private View coordinatorLayout, container, empty;
+
+    private MaterialCardView toolbarContainer;
 
     private Toolbar toolbar;
 
@@ -238,6 +243,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(),
                 ColorUtil.INSTANCE.darkenColor(primaryColor)));
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
+        toolbar.setOnClickListener(v -> {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), options);
+        });
     }
 
     private void setUpBreadCrumbs() {

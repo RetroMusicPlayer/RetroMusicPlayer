@@ -45,7 +45,7 @@ interface HomePresenter : Presenter<HomeView> {
             private val repository: Repository
     ) : PresenterImpl<HomeView>(), HomePresenter {
 
-        val hashSet: HashSet<Home> = HashSet()
+        private val hashSet: HashSet<Home> = HashSet()
 
         override fun loadSections() {
             loadRecentArtists()

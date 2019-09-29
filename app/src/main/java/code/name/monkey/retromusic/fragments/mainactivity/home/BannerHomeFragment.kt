@@ -43,17 +43,21 @@ import kotlinx.android.synthetic.main.home_content.*
 import java.io.File
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
+    private lateinit var homeAdapter: HomeAdapter
+
+    @Inject
+    lateinit var homePresenter: HomePresenter
+
+    private var disposable: CompositeDisposable = CompositeDisposable()
+    private lateinit var toolbar: Toolbar
 
     override fun sections(sections: ArrayList<Home>) {
         val finalList = sections.sortedWith(compareBy { it.priority })
         homeAdapter.swapData(finalList)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(mainActivity)
-            adapter = homeAdapter
-        }
+
+
         if (sections.isEmpty()) {
             showEmptyView()
         } else {
@@ -61,11 +65,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
     }
 
-    @Inject
-    lateinit var homePresenter: HomePresenter
-
-    private var disposable: CompositeDisposable = CompositeDisposable()
-    private lateinit var toolbar: Toolbar
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
@@ -102,7 +101,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.musicComponent.inject(this)
-
     }
 
 
@@ -136,8 +134,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         contentContainer.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
 
         setupToolbar()
-        homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
-
         checkPadding()
 
         userImage.setOnClickListener {
@@ -145,8 +141,16 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
+
         homePresenter.attachView(this)
         homePresenter.loadSections()
+
+        homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
+
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(mainActivity)
+            adapter = homeAdapter
+        }
     }
 
     private fun checkPadding() {
@@ -210,7 +214,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         checkPadding()
     }
 
-    private lateinit var homeAdapter: HomeAdapter
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
