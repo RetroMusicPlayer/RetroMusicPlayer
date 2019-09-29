@@ -113,7 +113,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     }
 
     private fun setupRecyclerView() {
-        simpleSongAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song, false)
+        simpleSongAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@AlbumDetailsActivity)
             itemAnimator = DefaultItemAnimator()

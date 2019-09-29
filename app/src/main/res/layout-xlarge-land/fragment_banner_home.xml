@@ -85,7 +85,7 @@
                         app:layout_collapseMode="pin"
                         app:layout_scrollFlags="scroll|enterAlways">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                        <com.google.android.material.appbar.MaterialToolbar
                             android:id="@+id/toolbar"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/toolbar_height"

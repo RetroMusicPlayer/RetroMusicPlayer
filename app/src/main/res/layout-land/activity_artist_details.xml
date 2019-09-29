@@ -24,7 +24,7 @@
                 android:transitionName="@string/transition_album_art"
                 tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
-            <code.name.monkey.appthemehelper.common.views.ATEToolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar" />
 

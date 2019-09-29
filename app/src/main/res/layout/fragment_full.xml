@@ -50,7 +50,7 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <code.name.monkey.appthemehelper.common.views.ATEToolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/playerToolbar"
             style="@style/Toolbar"
             android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content">
 
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSongLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSong"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="0dp"
@@ -110,7 +110,7 @@
                     app:srcCompat="@drawable/default_artist_art" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </code.name.monkey.appthemehelper.common.views.ATEToolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <FrameLayout
             android:id="@+id/player_lyrics"

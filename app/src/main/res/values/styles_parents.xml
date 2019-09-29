@@ -49,6 +49,7 @@
         <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorPrimaryVariant">@color/darkColorPrimary</item>
         <item name="colorOnPrimary">@color/mi_text_color_primary_dark</item>
+        <item name="colorOnSecondary">@color/mi_text_color_secondary_dark</item>
 
         <item name="colorAccent">@color/md_deep_purple_A200</item>
 
@@ -85,7 +86,7 @@
         <item name="colorAccent">@color/md_deep_purple_A200</item>
 
         <item name="colorSecondary">@color/md_green_500</item>
-        <item name="colorOnSecondary">@color/mi_text_color_secondary_light</item>
+        <item name="colorOnSecondary">@color/mi_text_color_secondary_dark</item>
         <item name="colorSecondaryVariant">@color/md_green_A700</item>
 
         <item name="android:colorBackground">@color/blackColorBackground</item>

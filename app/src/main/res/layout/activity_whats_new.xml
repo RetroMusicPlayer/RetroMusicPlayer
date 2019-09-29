@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:liftOnScroll="true">
 
-        <code.name.monkey.appthemehelper.common.views.ATEToolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"

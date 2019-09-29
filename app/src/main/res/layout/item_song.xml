@@ -25,6 +25,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:minHeight="40dp"
+            android:textColor="?colorOnSecondary"
             android:textAppearance="@style/TextViewNormal" />
     </FrameLayout>
 
@@ -59,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:textColor="?colorOnSecondary"
                 android:fontFeatureSettings="onum"
                 android:padding="4dp"
                 tools:text="22:00" />
@@ -71,6 +73,6 @@
         android:layout_margin="0dp"
         android:layout_weight="0"
         android:rotation="90"
-        app:tint="?colorOnBackground"
+        app:tint="?colorOnSecondary"
         tools:visibility="visible" />
 </LinearLayout>

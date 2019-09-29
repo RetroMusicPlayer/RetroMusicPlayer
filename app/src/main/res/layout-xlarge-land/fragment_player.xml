@@ -15,22 +15,46 @@
     <include layout="@layout/shadow_statusbar_toolbar" />
 
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+        <FrameLayout
+            android:id="@+id/statusBarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include layout="@layout/status_bar" />
+        </FrameLayout>
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/playerToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusBarContainer"
+            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+
         <LinearLayout
-            android:id="@+id/container"
-            android:layout_width="400dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:id="@+id/albumCoverContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playerToolbar">
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <fragment
                     android:id="@+id/playerAlbumCoverFragment"
@@ -40,25 +64,27 @@
                     tools:layout="@layout/fragment_album_cover" />
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <fragment
-                android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout="@layout/fragment_player_playback_controls" />
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0">
-
-            <code.name.monkey.appthemehelper.common.views.ATEToolbar
-                android:id="@+id/playerToolbar"
+            <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-        </FrameLayout>
-    </LinearLayout>
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <fragment
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.normal.PlayerPlaybackControlsFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/albumCoverContainer"
+            tools:layout="@layout/fragment_player_playback_controls" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
