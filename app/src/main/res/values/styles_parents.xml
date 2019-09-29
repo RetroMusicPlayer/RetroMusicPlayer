@@ -57,7 +57,7 @@
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
-        <item name="colorControlNormal">@color/mi_text_color_secondary_light</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
@@ -93,7 +93,7 @@
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
-        <item name="colorControlNormal">@color/mi_text_color_secondary_light</item>
+        <item name="colorControlNormal">@color/md_white_1000</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
