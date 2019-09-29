@@ -35,9 +35,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/toolbarContainer"
@@ -50,6 +48,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
+                app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:strokeColor="?dividerColor"
                 app:strokeWidth="1dp">
@@ -73,8 +72,6 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginEnd="@dimen/horizontal_margin"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/home_content" />

@@ -77,6 +77,7 @@
                     app:cardCornerRadius="8dp"
                     app:cardElevation="0dp"
                     app:cardUseCompatPadding="true"
+                    app:layout_collapseMode="pin"
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:strokeColor="?dividerColor">
 

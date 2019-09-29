@@ -14,10 +14,10 @@
         android:clickable="false"
         android:focusable="true"
         android:gravity="bottom"
+        sothree:umanoDragView="@id/playerPanel"
         sothree:umanoFadeColor="#00000000"
         sothree:umanoOverlay="true"
         sothree:umanoPanelHeight="0dp"
-        sothree:umanoDragView="@id/playerPanel"
         sothree:umanoScrollableView="@+id/playerRecyclerView"
         sothree:umanoShadowHeight="0dp">
 
@@ -76,7 +76,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/status_bar_padding" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                    <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
                         android:background="@android:color/transparent"
@@ -127,7 +127,7 @@
                             android:id="@+id/currentSong"
                             layout="@layout/item_list" />
 
-                        <TextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/playerQueueSubHeader"
                             android:layout_width="match_parent"
                             android:layout_height="48dp"

@@ -15,7 +15,7 @@
 
         <include layout="@layout/status_bar" />
 
-        <code.name.monkey.appthemehelper.common.views.ATEToolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/playerToolbar"
             style="@style/Toolbar"
             android:background="@android:color/transparent"
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="-8dp"
-                        app:cardBackgroundColor="?cardBackgroundColor"
+                        app:cardBackgroundColor="?colorSurface"
                         app:cardElevation="@dimen/card_elevation"
                         app:cardUseCompatPadding="false"
                         sothree:cardCornerRadius="12dp">
@@ -106,7 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <TextView
+                                <com.google.android.material.textview.MaterialTextView
                                     android:id="@+id/playerQueueSubHeader"
                                     android:layout_width="match_parent"
                                     android:layout_height="48dp"

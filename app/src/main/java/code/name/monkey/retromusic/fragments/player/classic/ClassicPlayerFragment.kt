@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_classic_player_playback_controls.
 import kotlin.math.max
 
 
-class ClassicPlayerFragment : AbsPlayerFragment(),   SlidingUpPanelLayout.PanelSlideListener {
+class ClassicPlayerFragment : AbsPlayerFragment(), SlidingUpPanelLayout.PanelSlideListener {
     override fun onPanelSlide(p0: View?, p1: Float) {
 
     }

@@ -68,5 +68,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="item_song_height">52dp</dimen>
     <dimen name="button_padding_vertical">10dp</dimen>
     <dimen name="button_margin_horizontal">4dp</dimen>
-    <dimen name="horizontal_padding_home">0dp</dimen>
+    <dimen name="horizontal_padding_home">8dp</dimen>
 </resources>

@@ -81,6 +81,7 @@
                         app:cardCornerRadius="8dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true"
+                        app:layout_collapseMode="pin"
                         app:layout_scrollFlags="scroll|enterAlways">
 
                         <com.google.android.material.appbar.MaterialToolbar

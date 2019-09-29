@@ -152,7 +152,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
-
+        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         recyclerView = view.findViewById(R.id.recyclerView);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
