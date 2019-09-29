@@ -100,7 +100,7 @@ static def getDate() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-
+    implementation project(':appthemehelper')
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.fragment:fragment:1.2.0-alpha04'
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -157,6 +157,6 @@ dependencies {
     implementation 'com.google.dagger:dagger:2.23.1'
     kapt 'com.google.dagger:dagger-compiler:2.23.1'
 
-    implementation project(':appthemehelper')
+
 }
 

@@ -74,7 +74,7 @@
             android:gravity="center"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textAppearance="@style/TextViewOverline"
+
             android:textColor="?android:attr/textColorSecondary"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

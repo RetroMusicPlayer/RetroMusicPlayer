@@ -132,7 +132,9 @@
             android:paddingRight="8dp"
             android:singleLine="true"
             android:textAppearance="@style/TextViewHeadline6"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            android:textColor="?colorOnSecondary"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
@@ -144,7 +146,9 @@
             android:paddingLeft="8dp"
             android:singleLine="true"
             android:textAppearance="@style/TextViewHeadline6"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            android:textColor="?colorOnSecondary"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
     </RelativeLayout>
 
     <androidx.appcompat.widget.AppCompatImageButton
