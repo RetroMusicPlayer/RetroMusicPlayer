@@ -2,15 +2,15 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/buyProContainer"
@@ -37,7 +37,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                         android:text="@string/upgrade_to_premium"
                         android:textAppearance="@style/TextViewOverline" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -57,17 +57,16 @@
                         android:paddingBottom="8dp"
                         android:text="@string/buy_pro"
                         android:textAppearance="@style/TextViewHeadline6"
-                        android:textColor="@color/md_white_1000" />
+                        android:textColor="?colorOnSurface" />
 
-                    <code.name.monkey.retromusic.views.BaselineGridTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="16dp"
                         android:paddingEnd="0dp"
                         android:text="@string/pro_summary"
-                        android:textAppearance="@style/TextViewBody1"
-                        android:textColor="@color/md_white_1000" />
+                        android:textColor="?colorOnSurface" />
                 </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -123,7 +122,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -132,14 +131,12 @@
                     android:text="@string/general_settings_title"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/general_settings_summary"
-                    android:textAppearance="@style/TextViewNormal"
-                    tools:text="Summary" />
+                    android:text="@string/general_settings_summary" />
             </LinearLayout>
 
 
@@ -169,7 +166,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -178,13 +175,12 @@
                     android:text="@string/now_playing"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/now_playing_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/now_playing_summary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -213,7 +209,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -222,13 +218,12 @@
                     android:text="@string/pref_header_audio"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/audio_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/audio_settings_summary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -257,7 +252,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -266,13 +261,12 @@
                     android:text="@string/personalize"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/personalize_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/personalize_settings_summary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -300,7 +294,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -309,13 +303,12 @@
                     android:text="@string/pref_header_images"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/image_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/image_settings_summary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -343,7 +336,7 @@
                 android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -352,13 +345,12 @@
                     android:text="@string/notification"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/notification_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/notification_settings_summary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -388,7 +380,7 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -397,13 +389,12 @@
                     android:text="@string/others"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:maxLines="4"
-                    android:text="@string/other_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/other_settings_summary" />
             </LinearLayout>
         </LinearLayout>
 
@@ -433,7 +424,7 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -442,12 +433,11 @@
                     android:text="@string/action_about"
                     android:textAppearance="@style/TextViewSubtitle1" />
 
-                <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="@string/about_settings_summary"
-                    android:textAppearance="@style/TextViewNormal" />
+                    android:text="@string/about_settings_summary" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

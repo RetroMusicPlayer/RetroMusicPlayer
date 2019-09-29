@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import code.name.monkey.appthemehelper.ThemeStore;
@@ -36,7 +37,7 @@ import code.name.monkey.retromusic.R;
 public class OptionMenuItemView extends FrameLayout {
 
     TextView textView;
-    IconImageView iconImageView;
+    AppCompatImageView iconImageView;
 
     public OptionMenuItemView(@NonNull Context context) {
         this(context, null);

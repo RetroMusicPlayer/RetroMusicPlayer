@@ -77,7 +77,7 @@ public class LicenseActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.md_background_color, Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorPrimary, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()
                     .replace("{style-placeholder}",

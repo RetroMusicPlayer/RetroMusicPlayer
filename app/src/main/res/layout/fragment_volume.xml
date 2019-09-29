@@ -26,7 +26,8 @@
         android:layout_weight="1"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
-        tools:progress="20" />
+        tools:progress="20"
+        tools:progressTint="?colorControlNormal" />
 
 
     <androidx.appcompat.widget.AppCompatImageView

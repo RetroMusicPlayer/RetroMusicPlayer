@@ -53,7 +53,7 @@
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0"
         android:paddingStart="8dp"
         android:paddingEnd="8dp">
@@ -82,7 +82,7 @@
             android:scaleType="centerCrop" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="12dp"
@@ -92,23 +92,24 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/songTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewSubtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                tools:text="@tools:sample/lorem/random" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/songText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewBody1" />
+                tools:text="@tools:sample/lorem/random" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

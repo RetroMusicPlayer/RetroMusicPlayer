@@ -54,7 +54,7 @@
                     android:paddingEnd="16dp"
                     android:paddingBottom="16dp">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/playerTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
 
-                    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/playerText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0">
 
-                    <code.name.monkey.appthemehelper.common.views.ATEToolbar
+                    <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/playerToolbar"
                         style="@style/Toolbar"
                         android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"

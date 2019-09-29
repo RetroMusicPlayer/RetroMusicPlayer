@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
@@ -43,9 +43,9 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title" />
+            tools:text="@tools:sample/lorem/random" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
@@ -62,9 +62,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title" />
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:text="@tools:sample/lorem/random" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

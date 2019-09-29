@@ -62,7 +62,7 @@
             tools:progress="20" />
     </RelativeLayout>
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,9 +84,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer"
-        tools:text="Title" />
+        tools:text="@tools:sample/lorem/random" />
 
-    <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,7 +102,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:text="@tools:sample/lorem/random" />
 
 
     <RelativeLayout

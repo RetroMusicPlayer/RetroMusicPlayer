@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments.mainactivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -24,7 +25,11 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.musicComponent?.inject(this)
+        App.musicComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         playlistsPresenter.attachView(this)
     }
 

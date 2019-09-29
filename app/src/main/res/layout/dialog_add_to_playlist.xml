@@ -12,7 +12,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/bannerTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,14 +21,15 @@
             android:text="@string/add_playlist_title"
             android:textAppearance="@style/TextViewHeadline6" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionAddPlaylist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="16dp"
             android:text="@string/new_playlist_title"
-            app:srcCompat="@drawable/ic_playlist_add_white_24dp" />
+            app:srcCompat="@drawable/ic_playlist_add_white_24dp"
+            app:tint="?colorOnBackground" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
