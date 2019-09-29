@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="transition_album_art" translatable="false">album_art_transition</string>
+    <string name="transition_user_image" translatable="false">user_image_transition</string>
     <string name="transition_album_name" translatable="false">album_art_transition</string>
     <string name="transition_album_text" translatable="false">album_art_transition</string>
     <string name="transition_artist_image" translatable="false">artist_image_transition</string>

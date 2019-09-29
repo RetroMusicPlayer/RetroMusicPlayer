@@ -110,7 +110,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         toolbar = view.findViewById(R.id.toolbar)
 
         bannerImage?.setOnClickListener {
-            NavigationUtil.goToUserInfo(requireActivity())
+            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
+            NavigationUtil.goToUserInfo(requireActivity(), options)
         }
         if (!PreferenceUtil.getInstance(requireContext()).isHomeBanner)
             setStatusbarColorAuto(view)
@@ -137,7 +138,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         checkPadding()
 
         userImage.setOnClickListener {
-            NavigationUtil.goToUserInfo(requireActivity())
+            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
+            NavigationUtil.goToUserInfo(requireActivity(), options)
         }
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)

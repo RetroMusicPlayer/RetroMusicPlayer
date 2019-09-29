@@ -54,9 +54,7 @@ class UserInfoActivity : AbsBaseActivity() {
         setupToolbar()
 
         MaterialUtil.setTint(nameContainer, false)
-        MaterialUtil.setTint(bioContainer, false)
         name.setText(PreferenceUtil.getInstance(this).userName)
-        bio.setText(PreferenceUtil.getInstance(this).userBio)
 
         if (PreferenceUtil.getInstance(this).profileImage.isNotEmpty()) {
             loadImageFromStorage(PreferenceUtil.getInstance(this).profileImage)

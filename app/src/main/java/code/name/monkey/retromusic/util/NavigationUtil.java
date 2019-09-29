@@ -139,8 +139,10 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, new Intent(activity, AboutActivity.class), null);
     }
 
-    public static void goToUserInfo(@NonNull Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class), null);
+    public static void goToUserInfo(@NonNull Activity activity,
+                                    @NonNull ActivityOptions activityOptions) {
+        ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class),
+                activityOptions.toBundle());
     }
 
     public static void goToOpenSource(@NonNull Activity activity) {
