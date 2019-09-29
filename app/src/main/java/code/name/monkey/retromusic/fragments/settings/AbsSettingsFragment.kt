@@ -67,29 +67,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         invalidateSettings()
     }
 
-    /*override fun onDisplayPreferenceDialog(preference: Preference) {
-        var dialogFragment: DialogFragment? = null// Dialog creation could not be handled here. Try with the super method.
-        // The dialog was created (it was one of our custom Preferences), show the dialog for it
-        when (preference) {
-            is LibraryPreference -> dialogFragment = LibraryPreferenceDialog.newInstance(preference.key)
-            is NowPlayingScreenPreference -> dialogFragment = NowPlayingScreenPreferenceDialog.newInstance(preference.key)
-            is AlbumCoverStylePreference -> dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key)
-            is MaterialListPreference -> {
-                preference.entries
-                dialogFragment = MaterialListPreferenceDialog.newInstance(preference)
-            }
-            is BlacklistPreference -> dialogFragment = BlacklistPreferenceDialog.newInstance()
-        }
-
-        if (dialogFragment != null) {
-            // The dialog was created (it was one of our custom Preferences), show the dialog for it
-            dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(this.fragmentManager!!, "android.support.v7.preference.PreferenceFragment.DIALOG");
-        } else {
-            // Dialog creation could not be handled here. Try with the super method.
-            super.onDisplayPreferenceDialog(preference);
-        }
-    }*/
     override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {
         return when (preference) {
             is LibraryPreference -> LibraryPreferenceDialog.newInstance(preference.key)
