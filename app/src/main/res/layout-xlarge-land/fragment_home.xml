@@ -48,7 +48,6 @@
                 android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
                 android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
                 app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
