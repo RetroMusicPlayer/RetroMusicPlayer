@@ -217,15 +217,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).getSubMenu());
 
+        } else if (currentFragment instanceof GenresFragment) {
+            menu.removeItem(R.id.action_new_playlist);
+            menu.removeItem(R.id.action_grid_size);
+            menu.removeItem(R.id.action_sort_order);
         } else {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title).setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.removeItem(R.id.action_grid_size);
         }
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
     }
 
     @Override
