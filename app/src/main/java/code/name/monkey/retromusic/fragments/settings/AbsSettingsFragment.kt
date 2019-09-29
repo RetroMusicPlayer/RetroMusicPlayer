@@ -23,8 +23,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -60,7 +61,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
+        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)
@@ -73,7 +74,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
             is NowPlayingScreenPreference -> NowPlayingScreenPreferenceDialog.newInstance(preference.key)
             is AlbumCoverStylePreference -> AlbumCoverStylePreferenceDialog.newInstance(preference.key)
             is MaterialListPreference -> {
-                preference.entries
                 MaterialListPreferenceDialog.newInstance(preference)
             }
             is BlacklistPreference -> BlacklistPreferenceDialog.newInstance()

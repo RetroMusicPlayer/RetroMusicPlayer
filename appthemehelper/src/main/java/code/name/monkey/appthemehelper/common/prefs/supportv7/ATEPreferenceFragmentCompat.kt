@@ -27,17 +27,17 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEPrefere
  */
 abstract class ATEPreferenceFragmentCompat : PreferenceFragmentCompat() {
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        if (callbackFragment is PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback) {
-            (callbackFragment as PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback).onPreferenceDisplayDialog(this, preference)
+        if (callbackFragment is OnPreferenceDisplayDialogCallback) {
+            (callbackFragment as OnPreferenceDisplayDialogCallback).onPreferenceDisplayDialog(this, preference)
             return
         }
 
-        if (activity is PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback) {
-            (activity as PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback).onPreferenceDisplayDialog(this, preference)
+        if (activity is OnPreferenceDisplayDialogCallback) {
+            (activity as OnPreferenceDisplayDialogCallback).onPreferenceDisplayDialog(this, preference)
             return
         }
 
-        if (fragmentManager!!.findFragmentByTag("android.support.v7.preference.PreferenceFragment.DIALOG") == null) {
+        if (fragmentManager?.findFragmentByTag("android.support.v7.preference.PreferenceFragment.DIALOG") == null) {
             val dialogFragment = onCreatePreferenceDialog(preference)
 
             if (dialogFragment != null) {

@@ -792,7 +792,7 @@ public final class PreferenceUtil {
     }
 
     @LayoutRes
-    public int getHomeGridStyle(Context context) {
+    public int getHomeGridStyle(@NonNull Context context) {
         int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
         TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
         int layoutRes = typedArray.getResourceId(pos, -1);
