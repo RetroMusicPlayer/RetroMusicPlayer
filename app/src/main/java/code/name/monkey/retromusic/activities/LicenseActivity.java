@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -63,8 +64,9 @@ public class LicenseActivity extends AbsBaseActivity {
         setNavigationBarColorPrimary();
         setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
-
-        ToolbarContentTintHelper.colorBackButton(findViewById(R.id.toolbar), ATHUtil.INSTANCE.resolveColor(this, R.attr.colorOnSurface));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.INSTANCE.resolveColor(this, R.attr.colorOnSurface));
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();
