@@ -19,5 +19,5 @@
 
     <color name="blackColorPrimary">#000000</color>
     <color name="blackColorBackground">#000000</color>
-    <color name="blackColorSurface">#111111</color>
+    <color name="blackColorSurface">#000000</color>
 </resources>

@@ -58,7 +58,6 @@ interface HomePresenter : Presenter<HomeView> {
 
         private var disposable: CompositeDisposable = CompositeDisposable()
 
-
         private fun showData(sections: ArrayList<Home>) {
             if (sections.isEmpty()) {
                 view.showEmptyView()

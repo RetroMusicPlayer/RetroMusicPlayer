@@ -98,12 +98,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             return metrics
         }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -144,6 +138,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
+        App.musicComponent.inject(this)
         homePresenter.attachView(this)
         homePresenter.loadSections()
 
