@@ -11,6 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?colorPrimary"
         android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
@@ -24,7 +25,6 @@
             android:layout_marginBottom="@dimen/toolbar_margin_vertical"
             app:cardBackgroundColor="?colorSurface"
             app:cardCornerRadius="8dp"
-            app:cardElevation="0dp"
             app:cardUseCompatPadding="true"
             app:layout_scrollFlags="scroll|enterAlways">
 
@@ -37,7 +37,7 @@
                     android:id="@+id/back"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="14dp"
+                    android:padding="12dp"
                     app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
                     app:tint="?colorOnSurface" />
 
@@ -50,7 +50,6 @@
                     android:background="@null"
                     android:hint="@string/action_search"
                     android:inputType="text|textAutoComplete"
-                    android:padding="12dp"
                     android:textAppearance="@style/TextViewSubtitle1">
 
                     <requestFocus />
@@ -62,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:background="?roundSelector"
-                    android:padding="14dp"
+                    android:padding="12dp"
                     app:srcCompat="@drawable/ic_mic_white_24dp"
                     app:tint="?colorOnSurface"
                     tools:visibility="visible" />
