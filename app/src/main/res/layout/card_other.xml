@@ -7,15 +7,22 @@
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+            android:id="@+id/sb4"
             style="@style/SubTitleTextAppearance"
             android:text="@string/others"
-            android:textAppearance="@style/TextViewOverline" />
+            android:textAppearance="@style/TextViewOverline"
+            android:textColor="?colorAccent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/changelog"
@@ -29,6 +36,11 @@
             android:paddingTop="8dp"
             android:paddingEnd="12dp"
             android:paddingBottom="8dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sb4"
             tools:ignore="PrivateResource">
 
 
@@ -36,7 +48,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/changelog"
-                android:textAppearance="@style/TextViewSubtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold" />
 
             <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:layout_width="match_parent"
@@ -57,13 +70,19 @@
             android:paddingTop="8dp"
             android:paddingEnd="12dp"
             android:paddingBottom="8dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/changelog"
             tools:ignore="PrivateResource">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/pref_title_open_source_licences"
-                android:textAppearance="@style/TextViewSubtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold" />
 
             <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:layout_width="match_parent"
@@ -73,6 +92,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/rectSelector"
@@ -83,13 +103,19 @@
             android:paddingTop="8dp"
             android:paddingEnd="12dp"
             android:paddingBottom="8dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/openSource"
             tools:ignore="PrivateResource">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/version"
-                android:textAppearance="@style/TextViewSubtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold" />
 
             <code.name.monkey.retromusic.views.BaselineGridTextView
                 android:id="@+id/appVersion"
@@ -101,12 +127,17 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/madeText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/made_with_love"
-            android:textAppearance="@style/TextViewBody1" />
-    </LinearLayout>
+            android:textAppearance="@style/TextViewBody1"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/version" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

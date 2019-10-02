@@ -26,6 +26,7 @@
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
                 app:title="@string/queue"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                 tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

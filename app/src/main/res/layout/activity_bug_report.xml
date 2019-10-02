@@ -16,7 +16,8 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
-            app:title="@string/report_bug" />
+            app:title="@string/report_bug"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

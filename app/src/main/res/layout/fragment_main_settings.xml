@@ -57,7 +57,8 @@
                         android:paddingBottom="8dp"
                         android:text="@string/buy_pro"
                         android:textAppearance="@style/TextViewHeadline6"
-                        android:textColor="?colorOnSurface" />
+                        android:textColor="?colorOnSurface"
+                        android:textStyle="bold" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/text2"
@@ -129,7 +130,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -173,7 +175,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/now_playing"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -216,7 +219,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_audio"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -257,9 +261,10 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:singleLine="true"
                     android:text="@string/personalize"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -301,7 +306,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/pref_header_images"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -343,7 +349,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/notification"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -387,7 +394,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/others"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
@@ -431,7 +439,8 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/action_about"
-                    android:textAppearance="@style/TextViewSubtitle1" />
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"

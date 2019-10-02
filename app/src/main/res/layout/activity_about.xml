@@ -15,6 +15,7 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:title="@string/action_about" />
 

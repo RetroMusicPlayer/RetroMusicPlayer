@@ -15,7 +15,8 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
-            app:title="@string/profile" />
+            app:title="@string/profile"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

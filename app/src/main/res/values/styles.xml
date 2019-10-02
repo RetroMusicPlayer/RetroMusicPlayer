@@ -39,12 +39,13 @@
 
     <style name="ToolbarTextAppearanceSearch" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
         <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">@font/circular_std_book</item>
     </style>
 
-    <style name="ToolbarTextAppearanceNormal">
+    <style name="ToolbarTextAppearanceNormal" >
         <item name="android:textSize">20sp</item>
-        <item name="android:fontFamily">@font/circular_std_book</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ToolbarSubTitleTextAppearance">
@@ -208,11 +209,8 @@
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
-    <style name="ToolbarTitleFont">
-        <item name="android:fontFamily">@font/circular_std_black</item>
-    </style>
 
     <style name="ChipFont" parent="TextAppearance.MaterialComponents.Chip">
-        <item name="android:fontFamily">@font/circular_std_book</item>
+        <item name="android:fontFamily">@font/circular</item>
     </style>
 </resources>

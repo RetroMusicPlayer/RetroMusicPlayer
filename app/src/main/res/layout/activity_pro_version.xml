@@ -40,6 +40,7 @@
                     style="@style/Toolbar"
                     app:layout_collapseMode="pin"
                     app:title="@string/buy_retro_music_pro"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                     tools:ignore="UnusedAttribute" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -15,7 +15,8 @@
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@string/equalizer" />
+            app:title="@string/equalizer"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
 
         <androidx.appcompat.widget.SwitchCompat
