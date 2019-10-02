@@ -106,6 +106,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textAppearance="@style/TextViewHeadline4"
+                            android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Album name" />
 
@@ -120,6 +121,7 @@
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
                             android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingTop="4dp"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
                             tools:ignore="MissingPrefix"

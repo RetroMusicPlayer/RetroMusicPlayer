@@ -67,11 +67,13 @@
                                 android:layout_height="wrap_content"
                                 android:maxLines="2"
                                 android:textAppearance="@style/TextViewHeadline6"
+                                android:textStyle="bold"
                                 tools:ignore="MissingPrefix"
                                 tools:text="Title" />
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/text"
+                                android:paddingTop="4dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="@style/TextViewSubtitle2"

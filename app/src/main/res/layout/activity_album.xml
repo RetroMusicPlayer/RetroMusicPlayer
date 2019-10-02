@@ -77,7 +77,8 @@
                         android:layout_height="52dp"
                         android:layout_weight="0"
                         app:civ_border="false"
-                        app:civ_shadow="false" />
+                        app:civ_shadow="false"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -93,6 +94,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textAppearance="@style/TextViewHeadline6"
+                            android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Album name" />
 
@@ -101,6 +103,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true"
+                            android:paddingTop="4dp"
                             android:textAppearance="@style/TextViewSubtitle2"
                             tools:ignore="MissingPrefix"
                             tools:text="Album details" />

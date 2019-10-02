@@ -104,6 +104,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="2"
                             android:textAppearance="@style/TextViewHeadline3"
+                            android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Album name" />
 
@@ -111,6 +112,7 @@
                             android:id="@+id/albumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingTop="4dp"
                             android:textAppearance="@style/TextViewHeadline6"
                             tools:ignore="MissingPrefix"
                             tools:text="Album details" />
