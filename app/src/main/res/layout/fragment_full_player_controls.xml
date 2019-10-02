@@ -25,7 +25,6 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -34,6 +33,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:singleLine="true"
+            android:textAppearance="@style/TextViewSubtitle1"
             android:textColor="@color/md_white_1000"
             app:layout_constraintEnd_toStartOf="@+id/songFavourite"
             app:layout_constraintStart_toEndOf="@+id/playerMenu"
@@ -49,6 +49,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:paddingStart="8dp"
+            android:paddingTop="12dp"
             android:paddingEnd="8dp"
             android:textColor="@color/md_white_1000"
             app:layout_constraintBottom_toBottomOf="parent"

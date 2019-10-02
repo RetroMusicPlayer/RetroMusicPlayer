@@ -65,7 +65,7 @@
                         android:marqueeRepeatLimit="marquee_forever"
                         android:scrollHorizontally="true"
                         android:singleLine="true"
-                        android:textSize="24sp"
+                        android:textAppearance="@style/TextViewHeadline5"
                         android:textStyle="bold"
                         tools:ignore="MissingPrefix"
                         tools:text="Title" />
@@ -76,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
+                        android:paddingTop="8dp"
                         tools:text="Text" />
                 </LinearLayout>
 

@@ -40,7 +40,7 @@
                 android:marqueeRepeatLimit="marquee_forever"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
-                android:textSize="22sp"
+                android:textAppearance="@style/TextViewHeadline5"
                 android:textStyle="bold"
                 tools:ignore="MissingPrefix"
                 tools:text="Title" />
@@ -50,6 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:paddingTop="8dp"
                 android:maxLines="1"
                 android:textColor="?colorOnBackground"
                 tools:text="Text" />

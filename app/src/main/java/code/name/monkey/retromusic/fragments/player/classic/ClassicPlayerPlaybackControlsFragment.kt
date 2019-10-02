@@ -53,6 +53,11 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
         updatePrevNextColor()
         updateProgressTextColor()
+
+        val fabColor = Color.WHITE
+        TintHelper.setTintAuto(playerPlayPauseFab, fabColor, true)
+        TintHelper.setTintAuto(playerPlayPauseFab, MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(fabColor)), false)
+
     }
 
 
@@ -63,7 +68,7 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(code.name.monkey.retromusic.R.layout.fragment_classic_player_playback_controls, container, false)
+        return inflater.inflate(R.layout.fragment_classic_player_playback_controls, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,10 +108,6 @@ class ClassicPlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setUpPlayPauseFab() {
-        val fabColor = Color.WHITE
-        TintHelper.setTintAuto(playerPlayPauseFab, fabColor, true)
-
-        playerPlayPauseFab.setColorFilter(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(fabColor)), PorterDuff.Mode.SRC_IN)
         playerPlayPauseFab.setOnClickListener(PlayPauseButtonOnClickHandler())
         playerPlayPauseFab.post {
             if (playerPlayPauseFab != null) {
