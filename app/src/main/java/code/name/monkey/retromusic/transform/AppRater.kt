@@ -48,7 +48,6 @@ object AppRater {
 
         // Increment launch counter
         val launchCount = prefs.getLong(LAUNCH_COUNT, 0) + 1
-        print("LAUNCH COUNT: $launchCount")
         editor.putLong(LAUNCH_COUNT, launchCount)
 
         // Get date of first launch
@@ -77,6 +76,8 @@ object AppRater {
                     message(text = "If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
                     positiveButton(R.string.app_name) {
                         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")))
+                        editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
+                        editor.commit()
                         dismiss()
                     }
                     negativeButton(text = "Later") {
