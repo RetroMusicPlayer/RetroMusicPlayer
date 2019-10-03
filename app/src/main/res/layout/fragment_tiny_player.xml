@@ -46,35 +46,40 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:elevation="10dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:gravity="start"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
                 <code.name.monkey.retromusic.views.VerticalTextView
                     android:id="@+id/songTitle"
-                    style="@style/TextAppearance.MaterialComponents.Headline2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
                     android:freezesText="true"
+                    android:gravity="start"
+                    android:rotation="0"
                     android:singleLine="true"
+                    android:textAppearance="@style/TextViewHeadline3"
                     android:textStyle="bold"
-                    app:textAllCaps="true"
                     tools:ignore="MissingPrefix"
                     tools:text="Song title" />
 
                 <code.name.monkey.retromusic.views.VerticalTextView
                     android:id="@+id/songText"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
+                    android:gravity="start"
                     android:maxLines="2"
-                    tools:text=" Album name \nby Artist name" />
+                    android:rotation="0"
+                    android:textAppearance="@style/TextViewHeadline6"
+                    tools:text=" Album name \nby - Artist name" />
 
             </LinearLayout>
 
@@ -117,7 +122,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:padding="16dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+                    android:textAppearance="@style/TextViewHeadline3"
                     android:textStyle="bold"
                     tools:ignore="MissingPrefix" />
 

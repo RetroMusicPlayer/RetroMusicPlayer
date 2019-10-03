@@ -26,6 +26,7 @@
         android:singleLine="true"
         android:textAppearance="@style/TextViewHeadline3"
         android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

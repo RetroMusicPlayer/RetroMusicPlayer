@@ -78,6 +78,7 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textAppearance="@style/TextViewSubtitle1"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

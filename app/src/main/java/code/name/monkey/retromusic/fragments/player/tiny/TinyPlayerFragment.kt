@@ -126,7 +126,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         songTitle.text = song.title
-        songText.text = String.format("%s \nby -%s", song.albumName, song.artistName)
+        songText.text = String.format("%s \nby - %s", song.albumName, song.artistName)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

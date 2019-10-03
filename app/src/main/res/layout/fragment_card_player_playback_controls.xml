@@ -96,6 +96,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold"
                 tools:text="@tools:sample/lorem/random" />
 
             <com.google.android.material.textview.MaterialTextView

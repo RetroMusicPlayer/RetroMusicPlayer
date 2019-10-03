@@ -20,15 +20,13 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
-import com.google.android.material.textview.MaterialTextView;
 
-public class VerticalTextView extends MaterialTextView {
+public class VerticalTextView extends AppCompatTextView {
     final boolean topDown;
 
-    public VerticalTextView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public VerticalTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         final int gravity = getGravity();
         if (Gravity.isVertical(gravity) && (gravity & Gravity.VERTICAL_GRAVITY_MASK) == Gravity.BOTTOM) {
@@ -36,16 +34,17 @@ public class VerticalTextView extends MaterialTextView {
             topDown = false;
         } else
             topDown = true;
+
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(heightMeasureSpec, widthMeasureSpec);
         setMeasuredDimension(getMeasuredHeight(), getMeasuredWidth());
     }
 
     @Override
-    protected void onDraw(@NonNull Canvas canvas) {
+    protected void onDraw(Canvas canvas) {
         TextPaint textPaint = getPaint();
         textPaint.setColor(getCurrentTextColor());
         textPaint.drawableState = getDrawableState();

@@ -73,6 +73,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewSubtitle1"
+            android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.textview.MaterialTextView
