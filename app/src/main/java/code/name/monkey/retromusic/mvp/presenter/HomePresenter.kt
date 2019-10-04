@@ -72,7 +72,7 @@ interface HomePresenter : Presenter<HomeView> {
                         if (it.isNotEmpty()) hashSet.add(
                                 Home(0,
                                         R.string.recent_artists,
-                                        0,
+                                        R.string.recent_added_artists,
                                         it,
                                         RECENT_ARTISTS,
                                         R.drawable.ic_artist_white_24dp
@@ -87,7 +87,7 @@ interface HomePresenter : Presenter<HomeView> {
                         if (it.isNotEmpty()) hashSet.add(
                                 Home(1,
                                         R.string.recent_albums,
-                                        0,
+                                        R.string.recent_added_albums,
                                         it,
                                         RECENT_ALBUMS,
                                         R.drawable.ic_album_white_24dp
@@ -102,7 +102,7 @@ interface HomePresenter : Presenter<HomeView> {
                         if (it.isNotEmpty()) hashSet.add(
                                 Home(2,
                                         R.string.top_artists,
-                                        0,
+                                        R.string.most_played_artists,
                                         it,
                                         TOP_ARTISTS,
                                         R.drawable.ic_artist_white_24dp
@@ -117,7 +117,7 @@ interface HomePresenter : Presenter<HomeView> {
                         if (it.isNotEmpty()) hashSet.add(
                                 Home(3,
                                         R.string.top_albums,
-                                        0,
+                                        R.string.most_played_albums,
                                         it,
                                         TOP_ALBUMS,
                                         R.drawable.ic_album_white_24dp
@@ -132,7 +132,7 @@ interface HomePresenter : Presenter<HomeView> {
                         if (it.isNotEmpty()) hashSet.add(
                                 Home(4,
                                         R.string.favorites,
-                                        0,
+                                        R.string.favorites_songs,
                                         it,
                                         PLAYLISTS,
                                         R.drawable.ic_favorite_white_24dp

@@ -89,7 +89,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textAppearance="@style/TextViewBody2"
             android:textColor="?colorOnBackground"
             tools:text="Song artist name " />
     </LinearLayout>

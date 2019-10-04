@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.adapter
 
-import android.content.res.ColorStateList
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
@@ -20,7 +18,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.google.android.material.chip.Chip
+import com.google.android.material.textview.MaterialTextView
 
 
 class HomeAdapter(
@@ -92,8 +90,8 @@ class HomeAdapter(
             recyclerView.apply {
                 adapter = AlbumFullWidthAdapter(activity, home.arrayList as ArrayList<Album>, displayMetrics)
             }
-            chip.text = activity.getString(home.title)
-            chip.setChipIconResource(home.icon)
+            title.text = activity.getString(home.title)
+            text.text = activity.getString(home.subTitle)
         }
     }
 
@@ -104,8 +102,9 @@ class HomeAdapter(
                 val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>, PreferenceUtil.getInstance(activity).getHomeGridStyle(context!!), false, null)
                 adapter = artistAdapter
             }
-            chip.text = activity.getString(home.title)
-            chip.setChipIconResource(home.icon)
+
+            title.text = activity.getString(home.title)
+            text.text = activity.getString(home.subTitle)
         }
     }
 
@@ -118,17 +117,14 @@ class HomeAdapter(
                 adapter = songAdapter
 
             }
-            chip.text = activity.getString(home.title)
-            chip.setChipIconResource(home.icon)
+            title.text = activity.getString(home.title)
+            text.text = activity.getString(home.subTitle)
         }
     }
 
     private open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
-        val chip: Chip = itemView.findViewById(R.id.chipHead)
-
-        init {
-            chip.apply { chipBackgroundColor = ColorStateList.valueOf(ThemeStore.primaryColor(context)) }
-        }
+        val title: MaterialTextView = itemView.findViewById(R.id.title)
+        val text: MaterialTextView = itemView.findViewById(R.id.text)
     }
 }
