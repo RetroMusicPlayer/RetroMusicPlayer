@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
@@ -63,7 +64,7 @@ class UserInfoActivity : AbsBaseActivity() {
             loadBannerFromStorage(PreferenceUtil.getInstance(this).bannerImage)
         }
         userImage.setOnClickListener {
-            MaterialDialog(this, BottomSheet()).show {
+            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 title(text = getString(R.string.set_photo))
                 listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
                     when (position) {
@@ -114,7 +115,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun showBannerOptions() {
-        MaterialDialog(this, BottomSheet()).show {
+        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(R.string.select_banner_photo)
             listItems(items = listOf(getString(R.string.new_banner_photo), getString(R.string.remove_banner_photo)))
             { _, position, _ ->

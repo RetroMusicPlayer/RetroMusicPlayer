@@ -41,6 +41,7 @@
         android:padding="0dp"
         android:textAppearance="@style/TextViewHeadline5"
         android:textColor="?colorOnPrimary"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/userImage"
         app:layout_constraintStart_toEndOf="@+id/userImage"
         app:layout_constraintTop_toBottomOf="@+id/text"

@@ -11,6 +11,9 @@
         android:id="@+id/titleContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +54,8 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_keyboard_arrow_right_white_24dp"
-            app:tint="@color/ate_primary_text_light" />
+            app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
+            app:tint="?colorOnPrimary" />
     </LinearLayout>
 
     <code.name.monkey.retromusic.views.MetalRecyclerViewPager
