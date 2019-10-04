@@ -658,4 +658,5 @@
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="pref_dialog_corner_title">Dialog corner</string>
+    <string name="peak">Peak</string>
 </resources>

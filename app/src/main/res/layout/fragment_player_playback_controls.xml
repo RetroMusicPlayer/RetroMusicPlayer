@@ -78,7 +78,7 @@
         android:paddingEnd="16dp"
         android:scrollHorizontally="true"
         android:singleLine="true"
-        android:textAppearance="@style/TextViewSubtitle1"
+        android:textAppearance="@style/TextViewHeadline6"
         android:textColor="?android:attr/textColorPrimary"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"

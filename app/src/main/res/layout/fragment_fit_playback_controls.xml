@@ -72,7 +72,7 @@
             android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextViewSubtitle1"
+            android:textAppearance="@style/TextViewHeadline6"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
 

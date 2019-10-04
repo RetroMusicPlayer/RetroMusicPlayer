@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/progressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_slider_height"
+        android:layout_marginTop="16dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songCurrentProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|left|end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="?colorOnSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="?colorOnSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
+
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
+            android:maxHeight="3dp"
+            android:progressDrawable="@drawable/color_progress_seek"
+            android:splitTrack="false"
+            tools:ignore="RtlHardcoded,UnusedAttribute"
+            tools:progress="20" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/playPauseButton"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_centerVertical="true"
+        android:background="?attr/roundSelector"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toStartOf="@+id/nextButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/previousButton"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        app:srcCompat="@drawable/ic_pause_white_24dp"
+        tools:tint="@color/md_black_1000" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/previousButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="?attr/roundSelector"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/repeatButton"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+        tools:ignore="MissingPrefix"
+        tools:tint="@color/md_black_1000" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="?attr/roundSelector"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
+        app:layout_constraintEnd_toStartOf="@+id/shuffleButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/playPauseButton"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        app:srcCompat="@drawable/ic_skip_next_white_24dp"
+        tools:ignore="MissingPrefix"
+        tools:tint="@color/md_black_1000" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/repeatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="?attr/roundSelector"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        app:srcCompat="@drawable/ic_repeat_white_24dp"
+        tools:ignore="MissingPrefix"
+        tools:tint="@color/md_black_1000" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/shuffleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:background="?attr/roundSelector"
+        android:padding="16dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        app:srcCompat="@drawable/ic_shuffle_white_24dp"
+        tools:ignore="MissingPrefix"
+        tools:tint="@color/md_black_1000" />
+
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playPauseButton"
+        tools:backgroundTint="@color/md_red_400"
+        tools:layout_height="52dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

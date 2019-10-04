@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
+import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
@@ -136,14 +137,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
                 .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
                         slidingLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                        if (panelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                            onPanelSlide(slidingLayout, 1f)
-                            onPanelExpanded()
-                        } else if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                            onPanelCollapsed()
-                        } else {
-                            playerFragment!!.onHide()
+                        if (currentNowPlayingScreen != PEAK) {
+                            val params = slidingPanel.layoutParams as ViewGroup.LayoutParams
+                            params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                            slidingPanel.layoutParams = params
+                        }
+                        when (panelState) {
+                            SlidingUpPanelLayout.PanelState.EXPANDED -> {
+                                onPanelSlide(slidingLayout, 1f)
+                                onPanelExpanded()
+                            }
+                            SlidingUpPanelLayout.PanelState.COLLAPSED -> onPanelCollapsed()
+                            else -> playerFragment!!.onHide()
                         }
                     }
                 })
@@ -197,6 +202,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             COLOR -> ColorFragment()
             TINY -> TinyPlayerFragment()
             CLASSIC -> ClassicPlayerFragment()
+            PEAK -> PeakPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()

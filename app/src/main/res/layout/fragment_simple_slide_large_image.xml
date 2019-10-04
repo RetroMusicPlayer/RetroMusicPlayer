@@ -24,15 +24,16 @@
     android:padding="@dimen/mi_baseline">
 
     <androidx.appcompat.widget.AppCompatImageView
-        tools:srcCompat="@tools:sample/backgrounds/scenic[4]"
         android:id="@id/mi_image"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/mi_baseline"
         android:layout_weight="1"
         android:gravity="center"
+        android:scaleType="center"
         app:layout_parallaxFactor="0.75"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[4]" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@id/mi_title"

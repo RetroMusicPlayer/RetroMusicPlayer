@@ -95,7 +95,7 @@
                 android:layout_marginBottom="2dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textAppearance="@style/TextViewSubtitle1"
+                android:textAppearance="@style/TextViewHeadline6"
                 android:textStyle="bold"
                 tools:text="@tools:sample/lorem/random" />
 
