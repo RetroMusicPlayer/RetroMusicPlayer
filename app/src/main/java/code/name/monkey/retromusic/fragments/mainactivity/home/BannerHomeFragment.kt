@@ -151,11 +151,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun checkPadding() {
-        val marginSpan = when {
-            MusicPlayerRemote.playingQueue.isEmpty() -> RetroUtil.convertDpToPixel(52f, context!!).toInt()
-            else -> RetroUtil.convertDpToPixel(0f, requireContext()).toInt()
-        }
-
+        val marginSpan = DensityUtil.dip2px(requireContext(), 52f)
         (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
     }
 

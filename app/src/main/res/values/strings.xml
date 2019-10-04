@@ -659,4 +659,9 @@
     <string name="action_toggle_favorite">Toggle favorite</string>
     <string name="pref_dialog_corner_title">Dialog corner</string>
     <string name="peak">Peak</string>
+    <string name="recent_added_artists">Recently added artists</string>
+    <string name="recent_added_albums">Recently added albums</string>
+    <string name="most_played_artists">Most played artists</string>
+    <string name="most_played_albums">Most played albums</string>
+    <string name="favorites_songs">You\'re  most favorites songs</string>
 </resources>

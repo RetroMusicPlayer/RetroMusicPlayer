@@ -9,7 +9,6 @@ import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.google.android.material.appbar.AppBarLayout
@@ -64,10 +63,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
     }
 
     private fun checkForPadding() {
-        val height = if (MusicPlayerRemote.playingQueue.isEmpty())
-            DensityUtil.dip2px(context!!, 52f)
-        else
-            0
+        val height = DensityUtil.dip2px(requireContext(), 52f)
         recyclerView.setPadding(0, 0, 0, (height * 2.3).toInt())
     }
 
