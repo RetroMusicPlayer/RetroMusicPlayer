@@ -144,7 +144,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), SlidingUpPanelLayout.PanelSli
         })
 
         // for some reason the xml attribute doesn't get applied here.
-        playingQueueCard.setCardBackgroundColor(ThemeStore.primaryColor(requireContext()))
+        playingQueueCard.setCardBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
     }
 
     private fun setUpPlayerToolbar() {
@@ -308,7 +308,7 @@ class PortraitImpl(private val fragment: ClassicPlayerFragment) : BaseImpl(fragm
             }
             imageTextContainer?.let {
                 it.cardElevation = 0f
-                it.setCardBackgroundColor(ThemeStore.primaryColor(fragment.activity!!))
+                it.setCardBackgroundColor(ATHUtil.resolveColor(fragment.requireContext(), R.attr.colorPrimary))
             }
 
             itemView.setOnClickListener {

@@ -12,8 +12,6 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -106,7 +104,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this, toolbar, Color.TRANSPARENT)
         title = null
         setSupportActionBar(toolbar)
-        TintHelper.setTintAuto(content, ThemeStore.primaryColor(this), true)
+        TintHelper.setTintAuto(content, ATHUtil.resolveColor(this, R.attr.colorPrimary), true)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -173,25 +171,25 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
             if (!TextUtils.isEmpty(url) && url.trim { it <= ' ' }.isNotEmpty()) {
                 Glide.with(this@AlbumTagEditorActivity)
-                                .load(url)
-                                .asBitmap()
-                                .transcode(  BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
-                                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                                .error(R.drawable.default_album_art)
-                                .into( object: SimpleTarget<BitmapPaletteWrapper>() {
-                                    override fun onLoadFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
-                                        super.onLoadFailed(e, errorDrawable)
-                                        Toast.makeText(this@AlbumTagEditorActivity, e.toString(), Toast.LENGTH_LONG).show()
-                                    }
+                        .load(url)
+                        .asBitmap()
+                        .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .error(R.drawable.default_album_art)
+                        .into(object : SimpleTarget<BitmapPaletteWrapper>() {
+                            override fun onLoadFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+                                super.onLoadFailed(e, errorDrawable)
+                                Toast.makeText(this@AlbumTagEditorActivity, e.toString(), Toast.LENGTH_LONG).show()
+                            }
 
-                                    override fun onResourceReady(resource: BitmapPaletteWrapper?, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
-                                        albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-                                        setImageBitmap(albumArtBitmap, RetroColorUtil.getColor(resource?.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
-                                        deleteAlbumArt = false
-                                        dataChanged()
-                                        setResult(RESULT_OK)
-                                    }
-                                });
+                            override fun onResourceReady(resource: BitmapPaletteWrapper?, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
+                                albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
+                                setImageBitmap(albumArtBitmap, RetroColorUtil.getColor(resource?.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
+                                deleteAlbumArt = false
+                                dataChanged()
+                                setResult(RESULT_OK)
+                            }
+                        });
                 return
             }
             if (lastFmAlbum.album.tags.tag.size > 0) {

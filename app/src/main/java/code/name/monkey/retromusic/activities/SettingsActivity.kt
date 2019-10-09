@@ -5,7 +5,7 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
@@ -36,12 +36,12 @@ class SettingsActivity : AbsBaseActivity() {
         setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
-            setTitleTextColor(ThemeStore.textColorPrimary(context))
-            setBackgroundColor(ThemeStore.primaryColor(context))
+            setTitleTextColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorOnPrimary))
+            setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
+            ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorOnSecondary))
         }
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
 
     }
 

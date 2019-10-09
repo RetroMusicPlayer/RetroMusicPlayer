@@ -26,9 +26,6 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
@@ -193,7 +190,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
                 .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(Objects.requireNonNull(getActivity()))))
+                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary)))
                 .start(callback);
         return cab;
     }

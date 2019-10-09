@@ -6,8 +6,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
@@ -30,7 +30,7 @@ class SongFileAdapter(
         private val itemLayoutRes: Int,
         private val callbacks: Callbacks?,
         cabHolder: CabHolder?
-) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     init {
         this.setHasStableIds(true)
@@ -83,16 +83,16 @@ class SongFileAdapter(
     }
 
     private fun loadFileImage(file: File, holder: ViewHolder) {
-        val iconColor = ATHUtil.resolveColor(activity, code.name.monkey.retromusic.R.attr.iconColor)
+        val iconColor = ATHUtil.resolveColor(activity, R.attr.iconColor)
         if (file.isDirectory) {
             holder.image?.let {
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-                it.setImageResource(code.name.monkey.retromusic.R.drawable.ic_folder_white_24dp)
+                it.setImageResource(R.drawable.ic_folder_white_24dp)
             }
-            holder.imageTextContainer?.setCardBackgroundColor(ThemeStore.primaryColor(activity))
+            holder.imageTextContainer?.setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorPrimary))
 
         } else {
-            val error = RetroUtil.getTintedVectorDrawable(activity, code.name.monkey.retromusic.R.drawable.ic_file_music_white_24dp, iconColor)
+            val error = RetroUtil.getTintedVectorDrawable(activity, R.drawable.ic_file_music_white_24dp, iconColor)
             Glide.with(activity)
                     .load(AudioFileCover(file.path))
                     .diskCacheStrategy(DiskCacheStrategy.NONE)

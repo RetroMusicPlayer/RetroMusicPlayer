@@ -82,7 +82,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         setLightNavigationBar(true)
         setNavigationbarColorAuto()
 
-        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
+        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         postponeEnterTransition()
 
@@ -124,10 +124,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
     private fun setupToolbarMarginHeight() {
         setSupportActionBar(toolbar)
-        supportActionBar!!.title = null
-
-        val primaryColor = ThemeStore.primaryColor(this)
-
+        supportActionBar?.title = null
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         collapsingToolbarLayout?.let {
             it.setContentScrimColor(primaryColor)
             it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
@@ -147,8 +145,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
                 override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                     val color: Int = when (state) {
                         State.COLLAPSED -> {
-                            setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this@AlbumDetailsActivity)))
-                            ThemeStore.primaryColor(this@AlbumDetailsActivity)
+                            setLightStatusbar(ColorUtil.isColorLight(primaryColor))
+                            primaryColor
                         }
                         State.EXPANDED, State.IDLE -> {
                             setLightStatusbar(false)

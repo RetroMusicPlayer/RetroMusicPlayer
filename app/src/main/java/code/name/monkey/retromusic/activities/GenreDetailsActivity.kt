@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -53,7 +54,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
         toggleBottomNavigationView(true)
 
         if (intent.extras != null) {
@@ -65,13 +66,13 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setUpToolBar()
         setupRecyclerView()
 
-        App.musicComponent?.inject(this)
+        App.musicComponent.inject(this)
         genreDetailsPresenter.attachView(this)
 
     }
 
     private fun setUpToolBar() {
-        val primaryColor = ThemeStore.primaryColor(this)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         appBarLayout.setBackgroundColor(primaryColor)
         applyToolbar(toolbar)
         title = genre.name
@@ -132,7 +133,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         cab = MaterialCab(this, R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor(this)))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
                 .start(callback)
         return cab!!
     }

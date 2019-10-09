@@ -71,7 +71,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     private fun setupToolbar() {
-        val primaryColor = ThemeStore.primaryColor(this)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         appBarLayout.setBackgroundColor(primaryColor)
         applyToolbar(toolbar)
     }

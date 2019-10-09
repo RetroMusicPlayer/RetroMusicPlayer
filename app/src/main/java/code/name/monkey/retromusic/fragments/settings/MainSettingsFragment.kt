@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -75,7 +75,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             NavigationUtil.goToProVersion(requireContext())
         }
         MaterialUtil.setTint(buyPremium)
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(ThemeStore.primaryColor(requireContext())))
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)))
         text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
         text2.setTextColor(primaryColor)
         text3.imageTintList = ColorStateList.valueOf(primaryColor)

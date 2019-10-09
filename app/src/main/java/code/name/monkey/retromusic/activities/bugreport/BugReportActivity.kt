@@ -16,6 +16,7 @@ import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
@@ -74,7 +75,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
     private fun initViews() {
         val accentColor = ThemeStore.accentColor(this)
-        val primaryColor = ThemeStore.primaryColor(this)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         toolbar!!.setBackgroundColor(primaryColor)
         setSupportActionBar(toolbar)
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -310,7 +310,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
             } else {
-                super.setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+                super.setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
                 super.setLightNavigationBar(true)
             }
         }

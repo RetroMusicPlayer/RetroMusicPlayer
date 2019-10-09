@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -60,12 +61,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
 
-        toolbar.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
-        appBarLayout.setBackgroundColor(ThemeStore.Companion.primaryColor(this));
+        int primaryColor = INSTANCE.resolveColor(this, R.attr.colorPrimary);
+        toolbar.setBackgroundColor(primaryColor);
+        appBarLayout.setBackgroundColor(primaryColor);
         //setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.Companion.textColorSecondary(this));
+        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.INSTANCE.resolveColor(this, R.attr.colorOnSecondary));
 
         try {
             StringBuilder buf = new StringBuilder();

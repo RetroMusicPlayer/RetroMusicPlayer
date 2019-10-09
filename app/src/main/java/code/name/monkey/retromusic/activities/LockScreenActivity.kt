@@ -7,11 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.core.view.ViewCompat
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
-
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -84,7 +83,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
                     .start()
         }
 
-        findViewById<View>(R.id.root_layout).setBackgroundColor(ThemeStore.primaryColor(this))
+        findViewById<View>(R.id.root_layout).setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     override fun onPlayingMetaChanged() {

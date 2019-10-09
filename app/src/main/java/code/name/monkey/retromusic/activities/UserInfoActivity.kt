@@ -16,6 +16,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -109,7 +110,7 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun setupToolbar() {
-        val primaryColor = ThemeStore.primaryColor(this)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         applyToolbar(toolbar)
         appBarLayout.setBackgroundColor(primaryColor)
     }

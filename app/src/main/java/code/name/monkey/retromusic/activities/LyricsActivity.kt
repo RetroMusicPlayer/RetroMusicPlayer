@@ -15,10 +15,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -51,10 +48,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
             ViewPager.SCROLL_STATE_IDLE ->
-                fab.show( )
+                fab.show()
             ViewPager.SCROLL_STATE_DRAGGING,
             ViewPager.SCROLL_STATE_SETTLING ->
-                fab.hide( )
+                fab.hide()
         }
     }
 
@@ -94,9 +91,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         setTaskDescriptionColorAuto()
         setNavigationBarColorPrimary()
 
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
+        appBarLayout.setBackgroundColor(primaryColor)
         toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(this@LyricsActivity))
+            setBackgroundColor(primaryColor)
             navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
             setSupportActionBar(toolbar)
         }

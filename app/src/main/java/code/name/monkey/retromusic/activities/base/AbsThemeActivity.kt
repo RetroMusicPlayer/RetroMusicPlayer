@@ -73,7 +73,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
             ContextCompat.getDrawable(this, R.drawable.round_window)
         else
             ContextCompat.getDrawable(this, R.drawable.square_window)
-        background = TintHelper.createTintedDrawable(background, ThemeStore.primaryColor(this))
+        background = TintHelper.createTintedDrawable(background, ATHUtil.resolveColor(this, R.attr.colorPrimary))
         window.setBackgroundDrawable(background)
     }
 

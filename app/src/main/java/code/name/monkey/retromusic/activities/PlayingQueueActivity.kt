@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -164,7 +165,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         playerQueueSubHeader.setTextColor(ThemeStore.accentColor(this))
 
         applyToolbar(toolbar)
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
 
         clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {

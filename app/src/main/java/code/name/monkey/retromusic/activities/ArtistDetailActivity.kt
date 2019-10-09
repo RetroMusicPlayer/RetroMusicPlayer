@@ -72,7 +72,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         setDrawUnderStatusBar()
         setupWindowTransitions()
         super.onCreate(savedInstanceState)
-        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ThemeStore.primaryColor(this)))
+        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
         toggleBottomNavigationView(true)
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
@@ -128,8 +128,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     }
 
     private fun setupToolbarMarginHeight() {
-        val primaryColor = ThemeStore.primaryColor(this)
-
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         collapsingToolbarLayout?.let {
             it.setContentScrimColor(primaryColor)
             it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
@@ -150,8 +149,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
             override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
                 val color: Int = when (state) {
                     State.COLLAPSED -> {
-                        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
-                        ThemeStore.primaryColor(appBarLayout.context)
+                        setLightStatusbar(ColorUtil.isColorLight(primaryColor))
+                        primaryColor
                     }
                     State.EXPANDED, State.IDLE -> {
                         setLightStatusbar(false)

@@ -8,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -54,7 +55,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         toggleBottomNavigationView(true)
 
@@ -143,7 +144,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
                 .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.primaryColor(this)))
+                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
                 .start(callback)
         return cab!!
     }

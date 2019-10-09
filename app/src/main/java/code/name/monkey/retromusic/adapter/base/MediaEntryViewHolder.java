@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 
-import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
 
 public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
@@ -94,7 +94,7 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
         playSongs = itemView.findViewById(R.id.playSongs);
 
         if (imageContainerCard != null) {
-            imageContainerCard.setCardBackgroundColor(ThemeStore.Companion.primaryColor(itemView.getContext()));
+            imageContainerCard.setCardBackgroundColor(ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorPrimary));
         }
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);

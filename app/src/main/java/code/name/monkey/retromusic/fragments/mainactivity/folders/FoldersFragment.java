@@ -230,7 +230,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        int primaryColor = ThemeStore.Companion.primaryColor(requireContext());
+        int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary);
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
@@ -309,7 +309,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(getActivity())))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary)))
                 .start(callback);
         return cab;
     }

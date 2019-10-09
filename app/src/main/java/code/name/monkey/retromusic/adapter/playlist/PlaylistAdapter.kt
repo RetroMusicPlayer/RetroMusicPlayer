@@ -195,7 +195,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
 
             imageTextContainer?.apply {
                 cardElevation = 0f
-                setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
+                setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorPrimary))
             }
         }
 

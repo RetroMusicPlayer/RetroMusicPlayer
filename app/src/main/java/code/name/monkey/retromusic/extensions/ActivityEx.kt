@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.extensions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 
@@ -25,7 +26,7 @@ fun AppCompatActivity.applyToolbar(toolbar: Toolbar) {
         setNavigationOnClickListener { onBackPressed() }
         setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
         ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this@applyToolbar))
-        setBackgroundColor(ThemeStore.primaryColor(this@applyToolbar))
+        setBackgroundColor(ATHUtil.resolveColor(this@applyToolbar, R.attr.colorPrimary))
     }
     setSupportActionBar(toolbar)
 }

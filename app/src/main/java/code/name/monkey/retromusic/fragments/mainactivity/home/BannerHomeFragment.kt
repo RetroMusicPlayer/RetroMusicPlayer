@@ -9,8 +9,8 @@ import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
@@ -127,7 +127,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
-        contentContainer.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
+        contentContainer.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
 
         setupToolbar()
         checkPadding()
@@ -136,7 +136,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        titleWelcome.setTextColor(ThemeStore.textColorPrimary(requireContext()))
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         App.musicComponent.inject(this)

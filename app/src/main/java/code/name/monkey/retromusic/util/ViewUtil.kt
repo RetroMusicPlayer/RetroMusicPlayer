@@ -31,7 +31,6 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -67,7 +66,8 @@ object ViewUtil {
         progress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
         val background = ld.findDrawableByLayerId(android.R.id.background)
-        background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
+        val primaryColor = ATHUtil.resolveColor(progressSlider.context, R.attr.colorPrimary);
+        background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(primaryColor)), PorterDuff.Mode.SRC_IN)
 
         val secondaryProgress = ld.findDrawableByLayerId(android.R.id.secondaryProgress)
         secondaryProgress.setColorFilter(ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN)
