@@ -28,8 +28,6 @@ import com.afollestad.materialdialogs.actions.getActionButton
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
 object AppRater {
-    private const val APP_TITLE = "Retro music"// App Name
-    private const val APP_PNAME = "code.name.monkey.retromusic"// Package Name
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name
     private const val APP_RATING = "app_rating"// Package Name
     private const val LAUNCH_COUNT = "launch_count"// Package Name
@@ -91,10 +89,4 @@ object AppRater {
                     getActionButton(WhichButton.POSITIVE).updateTextColor(Color.RED)
                 }
     }
-}
-
-
-fun MaterialDialog.colorButtons(): MaterialDialog {
-    getActionButton(WhichButton.NEGATIVE).updateTextColor(Color.RED)
-    return this
 }
