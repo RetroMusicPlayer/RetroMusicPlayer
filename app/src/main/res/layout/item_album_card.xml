@@ -27,7 +27,7 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
-        android:paddingStart="8dp"
+        android:paddingStart="12dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"

@@ -32,7 +32,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
                     @LayoutRes var itemLayoutRes: Int,
                     var usePalette: Boolean,
                     cabHolder: CabHolder?
-) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     fun swapDataSet(dataSet: ArrayList<Artist>) {
         this.dataSet = dataSet
@@ -67,10 +67,11 @@ class ArtistAdapter(val activity: AppCompatActivity,
     }
 
     fun setColors(color: Int, holder: ViewHolder) {
-        holder.paletteColorContainer?.let {
-            it.setBackgroundColor(color)
+        if (holder.paletteColorContainer != null) {
+            holder.paletteColorContainer?.setBackgroundColor(color)
             holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
         }
+
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
     }
 
@@ -87,10 +88,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
                     }
 
                     override fun onColorReady(color: Int) {
-                        if (usePalette)
-                            setColors(color, holder)
-                        else
-                            setColors(defaultFooterColor, holder)
+                        setColors(color, holder)
                     }
                 })
     }

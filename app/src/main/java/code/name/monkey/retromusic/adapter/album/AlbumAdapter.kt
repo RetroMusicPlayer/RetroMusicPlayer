@@ -97,12 +97,13 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
     }
 
     protected open fun setColors(color: Int, holder: ViewHolder) {
-        holder.paletteColorContainer?.let {
-            it.setBackgroundColor(color)
+        if (holder.paletteColorContainer != null) {
             holder.title?.setTextColor(
                     MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
             holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.paletteColorContainer?.setBackgroundColor(color)
         }
+
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
     }
 
@@ -121,10 +122,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
                     }
 
                     override fun onColorReady(color: Int) {
-                        if (usePalette)
-                            setColors(color, holder)
-                        else
-                            setColors(defaultFooterColor, holder)
+                        setColors(color, holder)
                     }
                 })
     }

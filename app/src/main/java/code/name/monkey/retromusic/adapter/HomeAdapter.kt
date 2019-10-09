@@ -99,7 +99,8 @@ class HomeAdapter(
         fun bindView(home: Home) {
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>, PreferenceUtil.getInstance(activity).getHomeGridStyle(context!!), false, null)
+                val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>,
+                        PreferenceUtil.getInstance(activity).getHomeGridStyle(activity), false, null)
                 adapter = artistAdapter
             }
 

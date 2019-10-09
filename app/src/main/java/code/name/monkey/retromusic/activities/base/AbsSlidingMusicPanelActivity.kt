@@ -88,8 +88,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         updateTabs()
 
         bottomSheetBehavior = BottomSheetBehavior.from(slidingPanel)
-        bottomSheetBehavior.bottomSheetCallback = bottomSheetCallbackList
-
     }
 
     override fun onResume() {
@@ -97,6 +95,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).nowPlayingScreen) {
             postRecreate()
         }
+        bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
 
         if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
             setMiniPlayerAlphaProgress(1f)
@@ -105,6 +104,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
     override fun onDestroy() {
         super.onDestroy()
+        bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallbackList)
         if (navigationBarColorAnimator != null) navigationBarColorAnimator!!.cancel() // just in case
     }
 
