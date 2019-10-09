@@ -60,7 +60,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         if (sections.isEmpty()) {
             showEmptyView()
-            shortcuts.visibility = View.GONE
         } else {
             emptyContainer.hide()
         }

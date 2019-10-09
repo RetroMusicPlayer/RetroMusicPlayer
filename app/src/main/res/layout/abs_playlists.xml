@@ -17,7 +17,7 @@
         app:civ_border="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+        tools:srcCompat="@tools:sample/avatars" />
 
 
     <com.google.android.material.textview.MaterialTextView
@@ -199,7 +199,6 @@
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/shortcuts"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="history,lastAdded,topPlayed,actionShuffle" />
