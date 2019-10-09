@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contentContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -28,34 +28,40 @@
 
     <include layout="@layout/abs_playlists" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/emptyContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone"
-        tools:visibility="visible">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:visibility="gone" />
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/emptyText"
+        <LinearLayout
+            android:id="@+id/emptyContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/start_play_music"
-            android:textAppearance="@style/TextViewNormal"
-            android:textColor="?colorOnBackground" />
-    </LinearLayout>
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/start_play_music"
+                android:textAppearance="@style/TextViewNormal"
+                android:textColor="?colorOnBackground" />
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

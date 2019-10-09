@@ -60,11 +60,11 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
     }
 
     override fun showEmptyView() {
-        adapter!!.swapDataSet(ArrayList())
+        adapter?.swapDataSet(ArrayList())
     }
 
     override fun playlists(playlists: ArrayList<Playlist>) {
-        adapter!!.swapDataSet(playlists)
+        adapter?.swapDataSet(playlists)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -77,7 +77,7 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
 
     companion object {
         @JvmField
-        val TAG = PlaylistsFragment::class.java.simpleName
+        val TAG: String = PlaylistsFragment::class.java.simpleName
 
         fun newInstance(): PlaylistsFragment {
             val args = Bundle()

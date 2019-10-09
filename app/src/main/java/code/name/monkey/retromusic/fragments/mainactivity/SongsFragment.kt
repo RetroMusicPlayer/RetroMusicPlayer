@@ -83,12 +83,12 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     public override fun setUsePalette(usePalette: Boolean) {
-        adapter!!.usePalette(usePalette)
+        adapter?.usePalette(usePalette)
     }
 
     override fun setGridSize(gridSize: Int) {
-        layoutManager!!.spanCount = gridSize
-        adapter!!.notifyDataSetChanged()
+        layoutManager?.spanCount = gridSize
+        adapter?.notifyDataSetChanged()
     }
 
     override fun onResume() {
@@ -104,7 +104,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun showEmptyView() {
-        adapter!!.swapDataSet(ArrayList())
+        adapter?.swapDataSet(ArrayList())
     }
 
     override fun loadSortOrder(): String {

@@ -196,4 +196,11 @@
             tools:text="Hemanth savarala" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/shortcuts"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="history,lastAdded,topPlayed,actionShuffle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

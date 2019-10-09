@@ -117,7 +117,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     companion object {
         @JvmField
-        val TAG = ArtistsFragment::class.java.simpleName
+        val TAG: String = ArtistsFragment::class.java.simpleName
 
         fun newInstance(): ArtistsFragment {
 
