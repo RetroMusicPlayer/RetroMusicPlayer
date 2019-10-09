@@ -40,7 +40,7 @@ open class SongAdapter @JvmOverloads constructor(
         usePalette: Boolean,
         cabHolder: CabHolder?,
         showSectionName: Boolean = true
-) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
+) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(activity, cabHolder, R.menu.menu_media_selection), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
     var dataSet: ArrayList<Song>
 
     protected var usePalette = false

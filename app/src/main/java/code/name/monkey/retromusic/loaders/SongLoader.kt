@@ -18,8 +18,8 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
-import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.Constants.BASE_SELECTION
+import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.helper.ShuffleHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -170,6 +170,7 @@ object SongLoader {
         return Song(id, title, trackNumber, year, duration, data, dateModified, albumId,
                 albumName ?: "", artistId, artistName, composer ?: "")
     }
+
 
     @JvmOverloads
     fun makeSongCursor(

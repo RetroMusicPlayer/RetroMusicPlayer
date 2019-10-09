@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingStart="@dimen/horizontal_padding_home"
-    android:paddingEnd="@dimen/horizontal_padding_home"
     android:paddingBottom="12dp">
 
 

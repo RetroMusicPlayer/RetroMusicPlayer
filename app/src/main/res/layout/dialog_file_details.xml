@@ -13,6 +13,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -23,6 +24,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -33,6 +35,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -43,6 +46,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -53,6 +57,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -63,6 +68,7 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -74,6 +80,7 @@
         android:paddingEnd="16dp"
         android:paddingBottom="16dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnPrimary"
         android:textSize="16sp" />
 
 </LinearLayout>

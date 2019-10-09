@@ -23,9 +23,9 @@ object HorizontalAdapterHelper {
 
     const val LAYOUT_RES = R.layout.item_image
 
-    const val TYPE_FIRST = 1
-    const val TYPE_MIDDLE = 2
-    const val TYPE_LAST = 3
+    private const val TYPE_FIRST = 1
+    private const val TYPE_MIDDLE = 2
+    private const val TYPE_LAST = 3
 
     fun applyMarginToLayoutParams(context: Context,
                                   layoutParams: ViewGroup.MarginLayoutParams, viewType: Int) {
@@ -39,12 +39,10 @@ object HorizontalAdapterHelper {
     }
 
     fun getItemViewtype(position: Int, itemCount: Int): Int {
-        return if (position == 0) {
-            TYPE_FIRST
-        } else if (position == itemCount - 1) {
-            TYPE_LAST
-        } else {
-            TYPE_MIDDLE
+        return when (position) {
+            0 -> TYPE_FIRST
+            itemCount - 1 -> TYPE_LAST
+            else -> TYPE_MIDDLE
         }
     }
 }

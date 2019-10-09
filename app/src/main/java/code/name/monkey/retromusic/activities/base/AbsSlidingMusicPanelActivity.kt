@@ -19,7 +19,6 @@ import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
-import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
@@ -177,14 +176,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                             params.height = ViewGroup.LayoutParams.MATCH_PARENT
                             slidingPanel.layoutParams = params
                         }
-                        /* when (panelState) {
-                             SlidingUpPanelLayout.PanelState.EXPANDED -> {
-                                 onPanelSlide(slidingLayout, 1f)
-                                 onPanelExpanded()
-                             }
-                             SlidingUpPanelLayout.PanelState.COLLAPSED -> onPanelCollapsed()
-                             else -> playerFragment!!.onHide()
-                         }*/
+                        when (panelState) {
+                            BottomSheetBehavior.STATE_EXPANDED -> {
+                                //  onPanelSlide(slidingLayout, 1f)
+                                onPanelExpanded()
+                            }
+                            BottomSheetBehavior.STATE_COLLAPSED -> onPanelCollapsed()
+                            else -> playerFragment!!.onHide()
+                        }
                     }
                 })
     }
@@ -237,7 +236,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             MATERIAL -> MaterialFragment()
             COLOR -> ColorFragment()
             TINY -> TinyPlayerFragment()
-            CLASSIC -> ClassicPlayerFragment()
             PEAK -> PeakPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
@@ -304,8 +302,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
             } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD ||
-                    currentNowPlayingScreen == FIT || currentNowPlayingScreen == CLASSIC ||
-                    currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
+                    currentNowPlayingScreen == FIT || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
             } else if (currentNowPlayingScreen == COLOR || currentNowPlayingScreen == TINY) {
@@ -354,7 +351,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         val currentTabs = PreferenceUtil.getInstance(this).libraryCategoryInfos
         for (tab in currentTabs) {
             if (tab.visible) {
-                val menu = tab.category;
+                val menu = tab.category
                 bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes)
                         .setIcon(menu.icon)
             }

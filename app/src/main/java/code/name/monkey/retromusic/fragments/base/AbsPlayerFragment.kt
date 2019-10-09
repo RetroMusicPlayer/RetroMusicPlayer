@@ -128,10 +128,6 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 ringtoneManager.setRingtone(song)
                 return true
             }
-            R.id.action_settings -> {
-                NavigationUtil.goToSettings(requireActivity())
-                return true
-            }
             R.id.action_go_to_genre -> {
                 val retriever = MediaMetadataRetriever()
                 val trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id.toLong())

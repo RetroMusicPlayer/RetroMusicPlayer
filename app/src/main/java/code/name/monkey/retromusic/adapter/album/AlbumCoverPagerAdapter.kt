@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import code.name.monkey.retromusic.activities.LyricsActivity
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
-import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
@@ -90,7 +89,6 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
 
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             val finalLayout = when {
-                PreferenceUtil.getInstance(activity).nowPlayingScreen == NowPlayingScreen.CLASSIC -> code.name.monkey.retromusic.R.layout.fragment_album_full_cover
                 PreferenceUtil.getInstance(activity).carouselEffect() -> code.name.monkey.retromusic.R.layout.fragment_album_carousel_cover
                 else -> layout
             }
