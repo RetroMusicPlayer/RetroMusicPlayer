@@ -64,17 +64,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             when (newState) {
-                BottomSheetBehavior.STATE_HIDDEN -> {
-                }
                 BottomSheetBehavior.STATE_EXPANDED -> {
                     onPanelExpanded()
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     onPanelCollapsed()
-                }
-                BottomSheetBehavior.STATE_DRAGGING -> {
-                }
-                BottomSheetBehavior.STATE_SETTLING -> {
                 }
                 else -> {
 
@@ -132,7 +126,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
-        print("Sliding $progress")
         if (miniPlayerFragment?.view == null) return
         val alpha = 1 - progress
         miniPlayerFragment?.view?.alpha = alpha
@@ -178,7 +171,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                         }
                         when (panelState) {
                             BottomSheetBehavior.STATE_EXPANDED -> {
-                                //  onPanelSlide(slidingLayout, 1f)
+
                                 onPanelExpanded()
                             }
                             BottomSheetBehavior.STATE_COLLAPSED -> onPanelCollapsed()
@@ -278,17 +271,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         }
         return false
     }
-
-
-    /*override fun onPanelStateChanged(panel: View, previousState: SlidingUpPanelLayout.PanelState, newState: SlidingUpPanelLayout.PanelState) {
-        when (newState) {
-            SlidingUpPanelLayout.PanelState.COLLAPSED -> onPanelCollapsed()
-            SlidingUpPanelLayout.PanelState.EXPANDED -> onPanelExpanded()
-            SlidingUpPanelLayout.PanelState.ANCHORED -> collapsePanel() // this fixes a bug where the panel would get stuck for some reason
-            else -> {
-            }
-        }
-    }*/
 
     override fun onPaletteColorChanged() {
         if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
