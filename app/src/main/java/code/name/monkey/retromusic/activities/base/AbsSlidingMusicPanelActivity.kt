@@ -97,6 +97,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).nowPlayingScreen) {
             postRecreate()
         }
+
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            setMiniPlayerAlphaProgress(1f)
+        }
     }
 
     override fun onDestroy() {
@@ -200,7 +204,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                bottomNavigationView.elevation = 0f
+                slidingPanel.cardElevation = DensityUtil.dip2px(this, 10f).toFloat()
+                bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
                 bottomSheetBehavior.isHideable = false
                 bottomSheetBehavior.peekHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
             }
