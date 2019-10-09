@@ -53,7 +53,7 @@
                 app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="8dp"
                 app:cardUseCompatPadding="true"
-                app:layout_collapseMode="pin">
+                app:layout_scrollFlags="scroll|enterAlways">
 
                 <FrameLayout
                     android:layout_width="match_parent"
