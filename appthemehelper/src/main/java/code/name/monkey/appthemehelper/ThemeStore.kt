@@ -4,14 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import androidx.annotation.AttrRes
-import androidx.annotation.CheckResult
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
-
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 
@@ -211,7 +206,8 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         @ColorInt
         fun accentColor(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_ACCENT_COLOR, ATHUtil.resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238")))
+            val color = prefs(context).getInt(ThemeStorePrefKeys.KEY_ACCENT_COLOR, ATHUtil.resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238")))
+            return if (ATHUtil.isWindowBackgroundDark(context)) ColorUtil.desaturateColor(color, 0.4f) else color
         }
 
         @CheckResult

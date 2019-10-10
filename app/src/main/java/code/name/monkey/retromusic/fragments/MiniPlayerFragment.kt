@@ -45,12 +45,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
-        //view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer()
-
-        miniPlayerImage.setOnClickListener {
-            //toggleFavorite(MusicPlayerRemote.currentSong)
-        }
 
         if (RetroUtil.isTablet()) {
             actionNext.visibility = View.VISIBLE

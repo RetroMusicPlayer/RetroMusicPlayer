@@ -22,6 +22,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.RetroColorUtil
 
 
 class ColorIconsImageView : AppCompatImageView {
@@ -49,7 +50,7 @@ class ColorIconsImageView : AppCompatImageView {
     private fun setIconBackgroundColor(color: Int) {
         setBackgroundResource(R.drawable.color_circle_gradient)
         if (ATHUtil.isWindowBackgroundDark(context)) {
-            val desaturatedColor = desaturateColor(color, 0.4f)
+            val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)
             backgroundTintList = ColorStateList.valueOf(desaturatedColor)
             imageTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorPrimary))
         } else {
@@ -60,12 +61,5 @@ class ColorIconsImageView : AppCompatImageView {
         invalidate()
     }
 
-    private fun desaturateColor(color: Int, ratio: Float): Int {
-        val hsv = FloatArray(3)
-        Color.colorToHSV(color, hsv)
 
-        hsv[1] = hsv[1] / 1 * ratio + 0.2f * (1.0f - ratio)
-
-        return Color.HSVToColor(hsv)
-    }
 }
