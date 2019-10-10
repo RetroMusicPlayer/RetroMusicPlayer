@@ -14,6 +14,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
 open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(), AlbumsView {
+    @Inject
+    lateinit var albumsPresenter: AlbumsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +39,9 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         albumsPresenter.detachView()
     }
 
-
     override fun albums(albums: java.util.ArrayList<Album>) {
         adapter?.swapDataSet(albums)
     }
-
-    @Inject
-    lateinit var albumsPresenter: AlbumsPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_albums

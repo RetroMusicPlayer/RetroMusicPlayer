@@ -23,6 +23,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
 
+
 class ColorIconsImageView : AppCompatImageView {
 
     constructor(context: Context) : super(context) {
@@ -40,14 +41,16 @@ class ColorIconsImageView : AppCompatImageView {
     private fun init(context: Context, attrs: AttributeSet?) {
         // Load the styled attributes and set their properties
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.ColorIconsImageView, 0, 0)
-        setIconBackgroundColor(attributes.getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED))
+        val color = attributes.getColor(R.styleable.ColorIconsImageView_iconBackgroundColor, Color.RED);
+        setIconBackgroundColor(color)
         attributes.recycle()
     }
 
     private fun setIconBackgroundColor(color: Int) {
         setBackgroundResource(R.drawable.color_circle_gradient)
         if (ATHUtil.isWindowBackgroundDark(context)) {
-            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.72f))
+            val desaturatedColor = desaturateColor(color, 0.4f)
+            backgroundTintList = ColorStateList.valueOf(desaturatedColor)
             imageTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorPrimary))
         } else {
             backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
@@ -55,5 +58,14 @@ class ColorIconsImageView : AppCompatImageView {
         }
         requestLayout()
         invalidate()
+    }
+
+    private fun desaturateColor(color: Int, ratio: Float): Int {
+        val hsv = FloatArray(3)
+        Color.colorToHSV(color, hsv)
+
+        hsv[1] = hsv[1] / 1 * ratio + 0.2f * (1.0f - ratio)
+
+        return Color.HSVToColor(hsv)
     }
 }

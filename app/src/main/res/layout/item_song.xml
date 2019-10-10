@@ -73,6 +73,7 @@
         android:layout_margin="0dp"
         android:layout_weight="0"
         android:rotation="90"
+        android:layout_gravity="center"
         app:tint="?colorOnSecondary"
         tools:visibility="visible" />
 </LinearLayout>

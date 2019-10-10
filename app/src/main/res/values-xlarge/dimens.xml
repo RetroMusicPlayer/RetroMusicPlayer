@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="toolbar_margin_horizontal">128dp</dimen>
+    <dimen name="toolbar_margin_horizontal">64dp</dimen>
     <dimen name="toolbar_height">64dp</dimen>
     <dimen name="toolbar_margin_vertical">16dp</dimen>
     <dimen name="item_song_height">64dp</dimen>

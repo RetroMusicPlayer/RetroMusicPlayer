@@ -36,6 +36,7 @@
     </declare-styleable>
     <declare-styleable name="ColorIconsImageView">
         <attr name="iconBackgroundColor" format="color" />
+        <attr name="colorIconColor" format="color" />
         <attr name="icon" format="reference" />
     </declare-styleable>
 
