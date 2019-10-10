@@ -10,7 +10,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
@@ -31,7 +30,10 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.Compressor
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -127,7 +129,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
 
         setupToolbar()
-        checkPadding()
 
         userImage.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
@@ -145,11 +146,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-    }
-
-    private fun checkPadding() {
-        val marginSpan = DensityUtil.dip2px(requireContext(), 52f)
-        (recyclerView.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = (marginSpan * 2.3f).toInt()
     }
 
     private fun toolbarColor(): Int {
@@ -193,17 +189,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun showEmptyView() {
         emptyContainer.show()
     }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        checkPadding()
-    }
-
-    override fun onQueueChanged() {
-        super.onQueueChanged()
-        checkPadding()
-    }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)

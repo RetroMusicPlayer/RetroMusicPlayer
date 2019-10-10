@@ -75,7 +75,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
                 this,
                 MusicPlayerRemote.playingQueue,
                 MusicPlayerRemote.position,
-                code.name.monkey.retromusic.R.layout.item_queue)
+                R.layout.item_queue)
         wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(playingQueueAdapter!!)
 
         linearLayoutManager = LinearLayoutManager(this)

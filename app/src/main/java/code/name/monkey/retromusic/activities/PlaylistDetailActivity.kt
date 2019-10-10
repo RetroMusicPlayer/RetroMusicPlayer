@@ -65,7 +65,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             finish()
         }
 
-        App.musicComponent?.inject(this)
+        App.musicComponent.inject(this)
 
         playlistSongsPresenter.attachView(this)
 
@@ -82,7 +82,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         recyclerView.layoutManager = LinearLayoutManager(this)
         if (playlist is AbsCustomPlaylist) {
             adapter = PlaylistSongAdapter(this, ArrayList(), R.layout.item_list, false, this)
-            recyclerView!!.adapter = adapter
+            recyclerView.adapter = adapter
         } else {
             recyclerViewDragDropManager = RecyclerViewDragDropManager()
             val animator = RefactoredDefaultItemAnimator()
@@ -101,7 +101,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             recyclerView.adapter = wrappedAdapter
             recyclerView.itemAnimator = animator
 
-            recyclerViewDragDropManager!!.attachRecyclerView(recyclerView!!)
+            recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
         }
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
@@ -183,6 +183,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     private fun checkIsEmpty() {
+
         empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
         emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
     }

@@ -69,4 +69,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="button_padding_vertical">10dp</dimen>
     <dimen name="button_margin_horizontal">4dp</dimen>
     <dimen name="horizontal_padding_home">8dp</dimen>
+    <dimen name="home_icon_padding">14dp</dimen>
 </resources>
