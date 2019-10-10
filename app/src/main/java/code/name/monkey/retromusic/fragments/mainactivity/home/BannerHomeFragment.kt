@@ -126,8 +126,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
-        contentContainer.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
-
         setupToolbar()
         checkPadding()
 

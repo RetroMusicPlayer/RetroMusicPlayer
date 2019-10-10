@@ -74,9 +74,9 @@
                         android:id="@+id/toolbarContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="58dp"
+                        android:layout_marginStart="@dimen/toolbar_margin_horizontal"
                         android:layout_marginTop="@dimen/toolbar_margin_vertical"
-                        android:layout_marginEnd="58dp"
+                        android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
                         android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="6dp"
@@ -105,8 +105,8 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="64dp"
+            android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+            android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
             android:elevation="@dimen/card_elevation"
             app:behavior_overlapTop="72dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
