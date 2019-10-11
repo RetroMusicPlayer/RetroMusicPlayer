@@ -114,7 +114,8 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="12dp">
+                app:cardElevation="8dp"
+                app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
                 <include layout="@layout/home_content" />
             </com.google.android.material.card.MaterialCardView>

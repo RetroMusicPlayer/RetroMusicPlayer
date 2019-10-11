@@ -51,29 +51,4 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
                 RetroColorUtil.getColor(it.palette, defaultColor))
         }
     }
-
-    /* protected val defaultFooterColor: Int
-         get() = ATHUtil.resolveColor(getView().context, R.attr.defaultFooterColor)
-
-     protected val albumArtistFooterColor: Int
-         get() = ATHUtil.resolveColor(getView().context, R.attr.cardBackgroundColor)
-
-     override fun onLoadFailed(e: Exception, errorDrawable: Drawable?) {
-         super.onLoadFailed(e, errorDrawable)
-         onColorReady(defaultFooterColor)
-     }
-
-     override fun onResourceReady(resource: BitmapPaletteWrapper,
-                                  glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
-         super.onResourceReady(resource, glideAnimation)
-
-         val defaultColor = defaultFooterColor
-
-         onColorReady(if (PreferenceUtil.getInstance(getView().context).isDominantColor)
-             getDominantColor(resource.bitmap, defaultColor)
-         else
-             getColor(resource.palette, defaultColor))
-     }
-
-     abstract fun onColorReady(color: Int)*/
 }

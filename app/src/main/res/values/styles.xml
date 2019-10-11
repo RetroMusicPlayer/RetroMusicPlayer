@@ -217,4 +217,17 @@
     <style name="ChipFont" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:fontFamily">@font/circular</item>
     </style>
+
+    <style name="TopCornerCardView">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+    </style>
+
+    <style name="ToolbarCornerCardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>

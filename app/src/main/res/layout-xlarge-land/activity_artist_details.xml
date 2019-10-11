@@ -55,8 +55,9 @@
             android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            app:cardElevation="8dp"
+            android:layout_marginTop="6dp"
+            app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"

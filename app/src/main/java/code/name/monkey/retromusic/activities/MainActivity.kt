@@ -64,7 +64,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance(this).lastPage)
+            setMusicChooser(PreferenceUtil.getInstance(this).lastMusicChooser)
         } else {
             restoreCurrentFragment()
         }
@@ -222,7 +222,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == PreferenceUtil.GENERAL_THEME ||
-                key==PreferenceUtil.BLACK_THEME||
+                key == PreferenceUtil.BLACK_THEME ||
                 key == PreferenceUtil.ADAPTIVE_COLOR_APP ||
                 key == PreferenceUtil.DOMINANT_COLOR ||
                 key == PreferenceUtil.USER_NAME ||
@@ -264,7 +264,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }*/
     }
 
-    fun selectedFragment(itemId: Int) {
+    private fun selectedFragment(itemId: Int) {
         when (itemId) {
             R.id.action_album,
             R.id.action_artist,
@@ -272,16 +272,25 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             R.id.action_genre,
             R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), itemId.toString())
             R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
-            R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG)
             else -> {
                 setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             }
         }
     }
 
+    fun setMusicChooser(key: Int) {
+        PreferenceUtil.getInstance(this).lastMusicChooser = key
+        when (key) {
+            FOLDER -> setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG)
+            else -> selectedFragment(PreferenceUtil.getInstance(this).lastPage)
+        }
+    }
+
     companion object {
         const val APP_INTRO_REQUEST = 2323
         const val HOME = 0
+        const val FOLDER = 1
+        const val LIBRARY = 2
         private const val TAG = "MainActivity"
         private const val APP_USER_INFO_REQUEST = 9003
         private const val REQUEST_CODE_THEME = 9002

@@ -111,8 +111,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/toolbar_margin_horizontal"
                 android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
-                app:cardBackgroundColor="?colorPrimary"
-                app:cardCornerRadius="12dp">
+                app:cardElevation="8dp"
+                app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
                 <include layout="@layout/home_content" />
             </com.google.android.material.card.MaterialCardView>
