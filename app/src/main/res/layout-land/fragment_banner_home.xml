@@ -115,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardElevation="8dp"
+                app:cardBackgroundColor="?colorPrimary"
                 app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
                 <include layout="@layout/home_content" />

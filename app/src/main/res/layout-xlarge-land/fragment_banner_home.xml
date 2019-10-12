@@ -111,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/toolbar_margin_horizontal"
                 android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                app:cardBackgroundColor="?colorPrimary"
                 app:cardElevation="8dp"
                 app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
