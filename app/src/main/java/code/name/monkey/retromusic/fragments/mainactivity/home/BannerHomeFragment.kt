@@ -28,8 +28,8 @@ import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
-import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
+import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -48,17 +48,14 @@ import javax.inject.Inject
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
     private lateinit var homeAdapter: HomeAdapter
-
     @Inject
-    lateinit var homePresenter: HomePresenter
+    lateinit var repository: Repository
 
     private var disposable: CompositeDisposable = CompositeDisposable()
     private lateinit var toolbar: Toolbar
 
     override fun sections(sections: ArrayList<Home>) {
         val finalList = sections.sortedWith(compareBy { it.priority })
-        homeAdapter.swapData(finalList)
-
 
         if (sections.isEmpty()) {
             showEmptyView()
@@ -66,7 +63,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             emptyContainer.hide()
         }
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
@@ -137,10 +133,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         App.musicComponent.inject(this)
-        homePresenter.attachView(this)
-        homePresenter.loadSections()
-
-        homeAdapter = HomeAdapter(mainActivity, ArrayList(), displayMetrics)
+        homeAdapter = HomeAdapter(mainActivity, displayMetrics, repository)
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
@@ -183,7 +176,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onDestroyView() {
         super.onDestroyView()
         disposable.dispose()
-        homePresenter.detachView()
     }
 
     override fun showEmptyView() {

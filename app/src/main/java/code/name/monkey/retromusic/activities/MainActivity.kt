@@ -244,6 +244,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 key == PreferenceUtil.ALBUM_COVER_STYLE ||
                 key == PreferenceUtil.HOME_ARTIST_GRID_STYLE ||
                 key == PreferenceUtil.ALBUM_COVER_TRANSFORM ||
+                key == PreferenceUtil.DESATURATED_COLOR ||
                 key == PreferenceUtil.TAB_TEXT_MODE ||
                 key == PreferenceUtil.LIBRARY_CATEGORIES)
             postRecreate()
