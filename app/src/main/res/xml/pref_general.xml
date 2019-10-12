@@ -23,6 +23,7 @@
         android:key="category_color"
         android:layout="@layout/preference_category_title"
         android:title="@string/colors">
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"
             android:persistent="false"
@@ -30,6 +31,13 @@
             android:title="@string/accent_color"
             app:enableCopying="true"
             app:icon="@drawable/ic_colorize_white_24dp" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:defaultValue="false"
+            android:key="desaturated_color"
+            android:summary="As per Material Design guide lines in dark mode colors should be desaturated"
+            android:title="Desaturated color"
+            app:enableCopying="true" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"

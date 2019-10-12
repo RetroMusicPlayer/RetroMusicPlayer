@@ -59,6 +59,7 @@ import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
     public static final String LIBRARY_CATEGORIES = "library_categories";
+    public static final String DESATURATED_COLOR = "desaturated_color";
     public static final String BLACK_THEME = "black_theme";
     public static final String DIALOG_CORNER = "dialog_corner";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -179,6 +180,16 @@ public final class PreferenceUtil {
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public boolean desaturatedColor() {
+        return mPreferences.getBoolean(DESATURATED_COLOR, false);
+    }
+
+    public void setDesaturatedColor(boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(DESATURATED_COLOR, value);
+        editor.apply();
     }
 
     public boolean getSleepTimerFinishMusic() {

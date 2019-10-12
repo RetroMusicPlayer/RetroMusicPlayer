@@ -86,6 +86,16 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
+        val desaturatedColor: ATESwitchPreference? = findPreference(PreferenceUtil.DESATURATED_COLOR)
+        desaturatedColor?.setOnPreferenceChangeListener { _, value ->
+            val desaturated = value as Boolean
+            ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated).apply()
+            PreferenceUtil.getInstance(requireContext()).setDesaturatedColor(desaturated)
+            requireActivity().recreate()
+            true
+        }
+
+
         val colorAppShortcuts: TwoStatePreference = findPreference("should_color_app_shortcuts")!!
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
