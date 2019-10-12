@@ -15,20 +15,27 @@ import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.textview.MaterialTextView
 
 
 class HomeAdapter(
         private val activity: AppCompatActivity,
-        private var homes: List<Home>,
-        private val displayMetrics: DisplayMetrics
+        private val displayMetrics: DisplayMetrics,
+        private val repository: Repository
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
-        return homes[position].homeSection
+        return when (position) {
+            0 -> TOP_ARTISTS
+            1 -> TOP_ALBUMS
+            2 -> RECENT_ARTISTS
+            3 -> RECENT_ALBUMS
+            4 -> PLAYLISTS
+            else -> -1
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,87 +50,92 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val home = homes[position]
+        println(getItemViewType(position))
         when (getItemViewType(position)) {
-
-            RECENT_ALBUMS, TOP_ALBUMS -> {
+            RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(home)
+                viewHolder.bindView(repository.recentAlbums(), R.string.recent_albums, R.string.recent_added_albums)
             }
-            RECENT_ARTISTS, TOP_ARTISTS -> {
+            TOP_ALBUMS -> {
+                val viewHolder = holder as AlbumViewHolder
+
+                viewHolder.bindView(repository.topAlbums(), R.string.top_albums, R.string.most_played_albums)
+            }
+            RECENT_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(home)
+                viewHolder.bindView(repository.recentArtists(), R.string.recent_artists, R.string.recent_added_artists)
+            }
+            TOP_ARTISTS -> {
+                val viewHolder = holder as ArtistViewHolder
+
+                viewHolder.bindView(repository.recentArtists(), R.string.top_artists, R.string.most_played_artists)
             }
             PLAYLISTS -> {
                 val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(home)
+                viewHolder.bindView(repository.favoritePlaylist, R.string.favorites, R.string.favorites_songs)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return homes.size
-    }
-
-    fun swapData(finalList: List<Home>) {
-        homes = finalList
-        notifyDataSetChanged()
+        return 5
     }
 
     companion object {
 
-        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, GENRES, PLAYLISTS)
+        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, PLAYLISTS)
         @Retention(AnnotationRetention.SOURCE)
         annotation class HomeSection
 
-        const val RECENT_ALBUMS = 0
+        const val RECENT_ALBUMS = 3
         const val TOP_ALBUMS = 1
         const val RECENT_ARTISTS = 2
-        const val TOP_ARTISTS = 3
-        const val GENRES = 4
-        const val PLAYLISTS = 5
+        const val TOP_ARTISTS = 0
+        const val PLAYLISTS = 4
 
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(home: Home) {
+        fun bindView(list: ArrayList<Album>, titleRes: Int, subtitleRes: Int) {
             recyclerView.apply {
-                adapter = AlbumFullWidthAdapter(activity, home.arrayList as ArrayList<Album>, displayMetrics)
+                adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
             }
-            title.text = activity.getString(home.title)
-            text.text = activity.getString(home.subTitle)
+            title.text = activity.getString(titleRes)
+            text.text = activity.getString(subtitleRes)
         }
     }
 
-    private inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(home: Home) {
+    inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
+        fun bindView(list: ArrayList<Artist>, titleRes: Int, subtitleRes: Int) {
             recyclerView.apply {
                 layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                val artistAdapter = ArtistAdapter(activity, home.arrayList as ArrayList<Artist>,
+                val artistAdapter = ArtistAdapter(activity, list,
                         PreferenceUtil.getInstance(activity).getHomeGridStyle(activity), false, null)
                 adapter = artistAdapter
             }
 
-            title.text = activity.getString(home.title)
-            text.text = activity.getString(home.subTitle)
+            title.text = activity.getString(titleRes)
+            text.text = activity.getString(subtitleRes)
         }
     }
 
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(home: Home) {
-            val songs = PlaylistSongsLoader.getPlaylistSongList(activity, home.arrayList[0] as Playlist)
-            recyclerView.apply {
-                val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
-                layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                adapter = songAdapter
+        fun bindView(arrayList: ArrayList<Playlist>, titleRes: Int, subtitleRes: Int) {
+            if (arrayList.isNotEmpty()) {
+                val songs = PlaylistSongsLoader.getPlaylistSongList(activity, arrayList[0])
+                recyclerView.apply {
+                    val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
+                    layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                    adapter = songAdapter
 
+                }
+                title.text = activity.getString(titleRes)
+                text.text = activity.getString(subtitleRes)
             }
-            title.text = activity.getString(home.title)
-            text.text = activity.getString(home.subTitle)
         }
     }
 
-    private open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
         val title: MaterialTextView = itemView.findViewById(R.id.title)
         val text: MaterialTextView = itemView.findViewById(R.id.text)
