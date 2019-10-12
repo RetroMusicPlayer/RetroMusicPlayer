@@ -41,19 +41,12 @@ interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
 
         override fun loadPlaylistSongs(playlist: Playlist) {
             disposable = repository.getPlaylistSongsFlowable(playlist)
-                    .subscribe {
-                        view.songs(it)
-                    }
+                    .subscribe({ view?.songs(it) }, { t -> println(t) })
         }
 
         override fun detachView() {
             super.detachView()
             disposable?.dispose()
         }
-
-        override fun attachView(view: PlaylistSongsView) {
-            super.attachView(view)
-        }
-
     }
 }

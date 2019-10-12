@@ -50,30 +50,30 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
         override fun loadMore(artistId: Int) {
             disposable += repository.getArtistByIdFlowable(artistId)
                     .map {
-                        view.loadArtistImage(it)
+                        view?.loadArtistImage(it)
                         return@map it.albums
                     }
                     .map {
                         it.filter { filterAlbum -> album.id != filterAlbum.id }
                     }
-                    .subscribe {
+                    .subscribe({
                         if (it.isEmpty()) {
                             return@subscribe
                         }
-                        view.moreAlbums(ArrayList(it))
-                    }
+                        view?.moreAlbums(ArrayList(it))
+                    }, { t -> println(t) })
         }
 
 
         override fun loadAlbum(albumId: Int) {
             disposable += repository.getAlbumFlowable(albumId)
                     .doOnComplete {
-                        view.complete()
+                        view?.complete()
                     }
-                    .subscribe {
+                    .subscribe({
                         album = it
-                        view.album(it)
-                    }
+                        view?.album(it)
+                    }, { t -> println(t) })
         }
 
         override fun detachView() {

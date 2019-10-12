@@ -50,8 +50,8 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         playlistsPresenter.detachView()
+        super.onDestroyView()
     }
 
     override fun onMediaStoreChanged() {

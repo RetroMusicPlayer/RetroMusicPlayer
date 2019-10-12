@@ -43,15 +43,7 @@ interface PlaylistsPresenter : Presenter<PlaylistView> {
 
         override fun playlists() {
             disposable = repository.allPlaylistsFlowable
-                    .subscribe { this.showList(it) }
-        }
-
-        private fun showList(arrayList: ArrayList<Playlist>) {
-            if (arrayList.isEmpty()) {
-                view.showEmptyView()
-            } else {
-                view.playlists(arrayList)
-            }
+                    .subscribe({ view?.playlists(it) }, { t -> println(t) })
         }
     }
 }

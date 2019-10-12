@@ -42,16 +42,17 @@ interface AlbumsPresenter : Presenter<AlbumsView> {
         private var disposable: Disposable? = null
 
         private fun showList(albums: ArrayList<Album>) {
-            if (albums.isNotEmpty()) view.albums(albums) else view.showEmptyView()
+            view?.albums(albums)
         }
 
         override fun detachView() {
             super.detachView()
             disposable?.dispose()
         }
+
         override fun loadAlbums() {
             disposable = repository.allAlbumsFlowable
-                    .subscribe { this.showList(it) }
+                    .subscribe({ view?.albums(it) }, { t -> println(t) })
         }
     }
 }

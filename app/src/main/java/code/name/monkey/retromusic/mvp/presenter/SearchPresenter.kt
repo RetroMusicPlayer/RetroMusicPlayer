@@ -46,7 +46,7 @@ interface SearchPresenter : Presenter<SearchView> {
         }
 
         override fun search(query: String?) {
-            view.showData(repository.search(query))
+            view?.showData(repository.search(query))
         }
     }
 }

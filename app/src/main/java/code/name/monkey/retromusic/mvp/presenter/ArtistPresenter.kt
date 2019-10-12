@@ -14,14 +14,12 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.helper.SearchQueryHelper.songs
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 interface ArtistsView : BaseView {
@@ -38,13 +36,6 @@ interface ArtistsPresenter : Presenter<ArtistsView> {
 
         private var disposable: Disposable? = null
 
-        private fun showList(artists: ArrayList<Artist>) {
-            if (songs.isNotEmpty())
-                view.artists(artists)
-            else
-                view.showEmptyView()
-        }
-
         override fun detachView() {
             super.detachView()
             disposable?.dispose()
@@ -52,11 +43,7 @@ interface ArtistsPresenter : Presenter<ArtistsView> {
 
         override fun loadArtists() {
             disposable = repository.allArtistsFlowable
-                    .subscribe({
-                        view.artists(it)
-                    }, {
-                        println(it)
-                    })
+                    .subscribe({ view?.artists(it) }, { t -> println(t) })
         }
     }
 }

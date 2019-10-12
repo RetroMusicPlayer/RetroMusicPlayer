@@ -48,18 +48,7 @@ interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
 
         override fun loadGenreSongs(genreId: Int) {
             disposable = repository.getGenreFlowable(genreId)
-                    .subscribe {
-                        showGenre(it)
-                    }
-
-        }
-
-        private fun showGenre(songs: ArrayList<Song>) {
-            if (songs.isNotEmpty()) {
-                view.songs(songs)
-            } else {
-                view.showEmptyView()
-            }
+                    .subscribe({ view?.songs(it) }, { t -> println(t) })
         }
     }
 }

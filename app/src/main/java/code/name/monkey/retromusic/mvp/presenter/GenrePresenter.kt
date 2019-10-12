@@ -41,15 +41,7 @@ interface GenresPresenter : Presenter<GenresView> {
 
         override fun loadGenres() {
             disposable = repository.allGenresFlowable
-                    .subscribe { this.showList(it) }
-        }
-
-        private fun showList(genres: ArrayList<Genre>) {
-            if (genres.isNotEmpty()) {
-                view.genres(genres)
-            } else {
-                view.showEmptyView()
-            }
+                    .subscribe({ view.genres(it) }, { t -> println(t) })
         }
     }
 }
