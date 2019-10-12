@@ -12,6 +12,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
@@ -97,25 +98,32 @@ class HomeAdapter(
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(list: ArrayList<Album>, titleRes: Int, subtitleRes: Int) {
-            recyclerView.apply {
-                adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
+            if (list.isNotEmpty()) {
+                recyclerView.apply {
+                    show()
+                    adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
+                }
+                titleContainer . show ()
+                title.text = activity.getString(titleRes)
+                text.text = activity.getString(subtitleRes)
             }
-            title.text = activity.getString(titleRes)
-            text.text = activity.getString(subtitleRes)
         }
     }
 
     inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(list: ArrayList<Artist>, titleRes: Int, subtitleRes: Int) {
-            recyclerView.apply {
-                layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                val artistAdapter = ArtistAdapter(activity, list,
-                        PreferenceUtil.getInstance(activity).getHomeGridStyle(activity), false, null)
-                adapter = artistAdapter
+            if (list.isNotEmpty()) {
+                recyclerView.apply {
+                    show()
+                    layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                    val artistAdapter = ArtistAdapter(activity, list,
+                            PreferenceUtil.getInstance(activity).getHomeGridStyle(activity), false, null)
+                    adapter = artistAdapter
+                }
+                titleContainer.show()
+                title.text = activity.getString(titleRes)
+                text.text = activity.getString(subtitleRes)
             }
-
-            title.text = activity.getString(titleRes)
-            text.text = activity.getString(subtitleRes)
         }
     }
 
@@ -123,20 +131,25 @@ class HomeAdapter(
         fun bindView(arrayList: ArrayList<Playlist>, titleRes: Int, subtitleRes: Int) {
             if (arrayList.isNotEmpty()) {
                 val songs = PlaylistSongsLoader.getPlaylistSongList(activity, arrayList[0])
-                recyclerView.apply {
-                    val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
-                    layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
-                    adapter = songAdapter
+                if (songs.isNotEmpty()) {
+                    recyclerView.apply {
+                        show()
+                        val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, false, null)
+                        layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                        adapter = songAdapter
 
+                    }
+                    titleContainer.show()
+                    title.text = activity.getString(titleRes)
+                    text.text = activity.getString(subtitleRes)
                 }
-                title.text = activity.getString(titleRes)
-                text.text = activity.getString(subtitleRes)
             }
         }
     }
 
     open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
+        val titleContainer: View = itemView.findViewById(R.id.titleContainer)
         val title: MaterialTextView = itemView.findViewById(R.id.title)
         val text: MaterialTextView = itemView.findViewById(R.id.text)
     }
