@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -67,7 +66,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         //setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.INSTANCE.resolveColor(this, R.attr.colorOnSecondary));
+        ToolbarContentTintHelper.colorBackButton(toolbar);
 
         try {
             StringBuilder buf = new StringBuilder();

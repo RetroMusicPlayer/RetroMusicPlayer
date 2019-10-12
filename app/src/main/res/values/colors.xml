@@ -13,6 +13,7 @@
     <color name="pitch_black">#000000</color>
 
     <color name="lightColorPrimary">#FFFFFF</color>
+    <color name="lightColorOnPrimary">#202020</color>
     <color name="lightColorSecondary">#FEFEFE</color>
     <color name="lightColorBackground">#FFFFFF</color>
     <color name="lightColorSurface">#FEFEFE</color>

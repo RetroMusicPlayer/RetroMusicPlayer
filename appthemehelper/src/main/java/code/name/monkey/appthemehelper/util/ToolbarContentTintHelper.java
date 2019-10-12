@@ -84,14 +84,15 @@ public final class ToolbarContentTintHelper {
         }
     }
 
-    public static void colorBackButton(@NonNull Toolbar toolbar, @ColorInt int color) {
+    public static void colorBackButton(@NonNull Toolbar toolbar) {
+        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), R.attr.colorOnPrimary);
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);
             if (backButton instanceof ImageView) {
                 ((ImageView) backButton).getDrawable().setColorFilter(colorFilter);
             } else if (backButton instanceof TextView) {
-               // ((TextView) backButton).setTextColor(color);
+                // ((TextView) backButton).setTextColor(color);
             }
         }
     }

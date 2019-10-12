@@ -130,6 +130,7 @@
                     android:fadingEdge="horizontal"
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
+                    android:textColor="?colorOnPrimary"
                     android:textAppearance="@style/TextViewSubtitle1"
                     android:textStyle="bold" />
 
