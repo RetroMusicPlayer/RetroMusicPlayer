@@ -15,10 +15,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -34,6 +31,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.input.getInputLayout
@@ -50,10 +48,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
             ViewPager.SCROLL_STATE_IDLE ->
-                fab.show(true)
+                fab.show()
             ViewPager.SCROLL_STATE_DRAGGING,
             ViewPager.SCROLL_STATE_SETTLING ->
-                fab.hide(true)
+                fab.hide()
         }
     }
 
@@ -61,7 +59,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     }
 
     override fun onPageSelected(position: Int) {
-        PreferenceUtil.getInstance().lyricsOptions = position
+        PreferenceUtil.getInstance(this).lyricsOptions = position
         if (position == 0) fab.text = getString(R.string.synced_lyrics)
         else if (position == 1) fab.text = getString(R.string.lyrics)
     }
@@ -91,11 +89,12 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
 
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
+        appBarLayout.setBackgroundColor(primaryColor)
         toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(this@LyricsActivity))
+            setBackgroundColor(primaryColor)
             navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
             setSupportActionBar(toolbar)
         }
@@ -110,7 +109,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         viewPager.apply {
             adapter = PagerAdapter(supportFragmentManager)
-            currentItem = PreferenceUtil.getInstance().lyricsOptions
+            currentItem = PreferenceUtil.getInstance(this@LyricsActivity).lyricsOptions
             addOnPageChangeListener(this@LyricsActivity)
         }
 
@@ -156,7 +155,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet()).show {
+        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(R.string.add_time_framed_lryics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
             input(hint = getString(R.string.paste_lyrics_here),
@@ -185,7 +184,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             lyricsString!!
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet()).show {
+        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(R.string.add_lyrics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
             input(hint = getString(R.string.paste_lyrics_here),
@@ -234,7 +233,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return App.context.getString(tabs[position].title)
+            return App.getContext().getString(tabs[position].title)
         }
 
         override fun getCount(): Int {

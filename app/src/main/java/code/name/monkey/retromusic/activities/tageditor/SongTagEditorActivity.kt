@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
@@ -22,9 +23,9 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         get() = R.layout.activity_song_tag_editor
 
     private fun setupToolbar() {
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
         toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(context))
+            setBackgroundColor(ATHUtil.resolveColor(this@SongTagEditorActivity, R.attr.colorPrimary))
             navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorPrimary(context))
             setNavigationOnClickListener { onBackPressed() }
             setSupportActionBar(toolbar)

@@ -36,4 +36,6 @@
         <attr name="ateKey_prefCategory_textColor" format="string" />
     </declare-styleable>
 
+
+
 </resources>

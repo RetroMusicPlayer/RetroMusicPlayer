@@ -110,7 +110,7 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
             ThemeStore.accentColor(context!!).ripAlpha()

@@ -37,9 +37,9 @@
         android:focusable="false"
         android:gravity="center_vertical" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:ellipsize="end"
@@ -50,10 +50,12 @@
         android:paddingTop="@dimen/md_listitem_vertical_margin_choice"
         android:paddingBottom="@dimen/md_listitem_vertical_margin_choice"
         android:singleLine="true"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?colorOnSurface"
         android:textSize="@dimen/md_listitem_textsize"
         tools:text="Item" />
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/drag_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -61,9 +63,9 @@
         android:clickable="false"
         android:focusable="false"
         android:minHeight="@dimen/md_listitem_height"
-        android:tint="?attr/iconColor"
         android:tintMode="src_in"
         app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+        app:tint="?colorOnSecondary"
         tools:ignore="ContentDescription" />
 
 </LinearLayout>

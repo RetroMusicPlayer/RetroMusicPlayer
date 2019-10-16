@@ -14,12 +14,7 @@ open class ATHActivity : AppCompatActivity() {
 
     private var updateTime: Long = -1
 
-    private val themeRes: Int
-        @StyleRes
-        get() = ThemeStore.activityTheme(this)
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(themeRes)
         super.onCreate(savedInstanceState)
         updateTime = System.currentTimeMillis()
     }

@@ -21,7 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -44,11 +44,9 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             R.id.imageSettings -> inflateFragment(ImageSettingFragment(), R.string.pref_header_images)
             R.id.notificationSettings -> inflateFragment(NotificationSettingsFragment(), R.string.notification)
             R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)
-            R.id.aboutSettings -> NavigationUtil.goToAbout(activity!!)
+            R.id.aboutSettings -> NavigationUtil.goToAbout(requireActivity())
         }
     }
-
-    private val settingsIcons = arrayOf(R.id.general_settings_icon, R.id.audio_settings_icon, R.id.now_playing_settings_icon, R.id.personalize_settings_icon, R.id.image_settings_icon, R.id.notification_settings_icon, R.id.other_settings_icon)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -68,26 +66,22 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         aboutSettings.setOnClickListener(this)
 
         buyProContainer.apply {
-            if (!App.isProVersion) show() else hide()
+            if (!App.isProVersion()) show() else hide()
             setOnClickListener {
-                NavigationUtil.goToProVersion(context)
+                NavigationUtil.goToProVersion(requireContext())
             }
         }
         buyPremium.setOnClickListener {
-            NavigationUtil.goToProVersion(context!!)
+            NavigationUtil.goToProVersion(requireContext())
         }
         MaterialUtil.setTint(buyPremium)
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(ThemeStore.primaryColor(context!!)))
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)))
         text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
-        //title.setTextColor(primaryColor)
         text2.setTextColor(primaryColor)
         text3.imageTintList = ColorStateList.valueOf(primaryColor)
-
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
-        if (activity != null) {
-            (activity as SettingsActivity).setupFragment(fragment, title)
-        }
+        (requireActivity() as SettingsActivity).setupFragment(fragment, title)
     }
 }

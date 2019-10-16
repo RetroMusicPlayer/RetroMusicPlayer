@@ -10,27 +10,16 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="0dp"
-        app:elevation="0dp">
+        app:liftOnScroll="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:titleEnabled="false">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:layout_collapseMode="pin"
+            app:title="@string/support_development"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
+            tools:ignore="UnusedAttribute" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:layout_collapseMode="pin"
-                app:title="@string/support_development"
-                tools:ignore="UnusedAttribute" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?dividerColor" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -43,21 +32,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/donation"
-                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:text="@string/donation_header"
+                android:textAppearance="@style/TextViewSubtitle2"
                 android:textColor="?attr/colorAccent" />
 
             <LinearLayout
                 android:id="@+id/progressContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="end|center_vertical"
-                android:orientation="horizontal"
+                android:gravity="center"
+                android:orientation="vertical"
                 android:padding="12dp">
 
                 <ProgressBar
@@ -66,13 +55,13 @@
                     android:layout_height="wrap_content"
                     android:indeterminate="true" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/TextAppearance.MaterialComponents.Caption"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:paddingLeft="16dp"
                     android:text="@string/loading_products"
+                    android:textAppearance="@style/TextViewCaption"
                     tools:ignore="RtlHardcoded,RtlSymmetry" />
 
             </LinearLayout>
@@ -87,12 +76,4 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <Button
-        android:id="@+id/google_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="Google Pay"
-        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

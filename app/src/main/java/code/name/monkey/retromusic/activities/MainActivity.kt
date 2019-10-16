@@ -1,13 +1,10 @@
 package code.name.monkey.retromusic.activities
 
-import android.annotation.SuppressLint
 import android.content.*
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import code.name.monkey.retromusic.R
@@ -22,6 +19,7 @@ import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.transform.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.disposables.CompositeDisposable
 import java.util.*
@@ -37,7 +35,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action != null && action == Intent.ACTION_SCREEN_OFF) {
-                if (PreferenceUtil.getInstance().lockScreen && MusicPlayerRemote.isPlaying) {
+                if (PreferenceUtil.getInstance(this@MainActivity).lockScreen && MusicPlayerRemote.isPlaying) {
                     val activity = Intent(context, LockScreenActivity::class.java)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -48,11 +46,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun createContentView(): View {
-        @SuppressLint("InflateParams")
-        val contentView = layoutInflater.inflate(R.layout.activity_main_drawer_layout, null)
-        val drawerContent = contentView.findViewById<ViewGroup>(R.id.drawer_content_container)
-        drawerContent.addView(wrapSlidingMusicPanel(R.layout.activity_main_content))
-        return contentView
+        return wrapSlidingMusicPanel(R.layout.activity_main_content)
     }
 
     override fun onCreate(
@@ -61,35 +55,32 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
 
-        getBottomNavigationView().selectedItemId = PreferenceUtil.getInstance().lastPage
+        getBottomNavigationView().selectedItemId = PreferenceUtil.getInstance(this).lastPage
 
         getBottomNavigationView().setOnNavigationItemSelectedListener {
-            PreferenceUtil.getInstance().lastPage = it.itemId
+            PreferenceUtil.getInstance(this).lastPage = it.itemId
             selectedFragment(it.itemId)
             true
         }
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance().lastPage)
+            setMusicChooser(PreferenceUtil.getInstance(this).lastMusicChooser)
         } else {
-            restoreCurrentFragment();
+            restoreCurrentFragment()
         }
 
         checkShowChangelog()
-
-        /*if (!App.isProVersion && !PreferenceManager.getDefaultSharedPreferences(this).getBoolean("shown", false)) {
-            showPromotionalOffer()
-        }*/
+        AppRater.appLaunched(this);
     }
 
     private fun checkShowChangelog() {
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
             val currentVersion = pInfo.versionCode
-            if (currentVersion != PreferenceUtil.getInstance().lastChangelogVersion) {
+            if (currentVersion != PreferenceUtil.getInstance(this).lastChangelogVersion) {
                 startActivityForResult(Intent(this, WhatsNewActivity::class.java), APP_INTRO_REQUEST)
             }
-        } catch (e: PackageManager.NameNotFoundException) {
+        } catch (e: Throwable) {
             e.printStackTrace()
         }
 
@@ -101,7 +92,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         screenOnOff.addAction(Intent.ACTION_SCREEN_OFF)
         registerReceiver(broadcastReceiver, screenOnOff)
 
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this)
 
         if (intent.hasExtra("expand")) {
             if (intent.getBooleanExtra("expand", false)) {
@@ -115,19 +106,16 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         super.onDestroy()
         disposable.clear()
         unregisterReceiver(broadcastReceiver)
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this)
     }
 
-    private fun setCurrentFragment(fragment: Fragment, b: Boolean = false) {
-        val trans = supportFragmentManager.beginTransaction()
-        trans.replace(R.id.fragment_container, fragment, null)
-        if (b) {
-            trans.addToBackStack(null)
+    private fun setCurrentFragment(fragment: Fragment, tag: String) {
+        println("setCurrentFragment -> $tag -> ${supportFragmentManager.findFragmentById(R.id.fragment_container)?.tag}")
+        if (tag != supportFragmentManager.findFragmentById(R.id.fragment_container)?.tag) {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment, tag).commit()
+            currentFragment = fragment as MainActivityFragmentCallbacks
         }
-        trans.commit()
-        currentFragment = fragment as MainActivityFragmentCallbacks
     }
-
 
     private fun restoreCurrentFragment() {
         currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MainActivityFragmentCallbacks
@@ -141,7 +129,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         val uri = intent.data
         val mimeType = intent.type
         var handled = false
-
+        println("uri -> $uri")
         if (intent.action != null && intent.action == MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
             val songs = SearchQueryHelper.getSongs(this, intent.extras!!)
             if (MusicPlayerRemote.shuffleMode == MusicService.SHUFFLE_MODE_SHUFFLE) {
@@ -234,6 +222,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if (key == PreferenceUtil.GENERAL_THEME ||
+                key == PreferenceUtil.BLACK_THEME ||
                 key == PreferenceUtil.ADAPTIVE_COLOR_APP ||
                 key == PreferenceUtil.DOMINANT_COLOR ||
                 key == PreferenceUtil.USER_NAME ||
@@ -255,6 +244,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 key == PreferenceUtil.ALBUM_COVER_STYLE ||
                 key == PreferenceUtil.HOME_ARTIST_GRID_STYLE ||
                 key == PreferenceUtil.ALBUM_COVER_TRANSFORM ||
+                key == PreferenceUtil.DESATURATED_COLOR ||
                 key == PreferenceUtil.TAB_TEXT_MODE ||
                 key == PreferenceUtil.LIBRARY_CATEGORIES)
             postRecreate()
@@ -275,24 +265,33 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         }*/
     }
 
-    fun selectedFragment(itemId: Int) {
+    private fun selectedFragment(itemId: Int) {
         when (itemId) {
             R.id.action_album,
             R.id.action_artist,
             R.id.action_playlist,
             R.id.action_genre,
-            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), false)
-            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), false)
-            R.id.action_folder -> setCurrentFragment(FoldersFragment.newInstance(this), false)
+            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), itemId.toString())
+            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             else -> {
-                setCurrentFragment(BannerHomeFragment.newInstance(), false)
+                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             }
+        }
+    }
+
+    fun setMusicChooser(key: Int) {
+        PreferenceUtil.getInstance(this).lastMusicChooser = key
+        when (key) {
+            FOLDER -> setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG)
+            else -> selectedFragment(PreferenceUtil.getInstance(this).lastPage)
         }
     }
 
     companion object {
         const val APP_INTRO_REQUEST = 2323
         const val HOME = 0
+        const val FOLDER = 1
+        const val LIBRARY = 2
         private const val TAG = "MainActivity"
         private const val APP_USER_INFO_REQUEST = 9003
         private const val REQUEST_CODE_THEME = 9002

@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.adapter.album
 
+import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -8,15 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
@@ -26,6 +25,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 
@@ -33,7 +33,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
                         dataSet: ArrayList<Album>,
                         @param:LayoutRes protected var itemLayoutRes: Int,
                         usePalette: Boolean,
-                        cabHolder: CabHolder?) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+                        cabHolder: CabHolder?) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
     var dataSet: ArrayList<Album>
         protected set
 
@@ -84,16 +84,6 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
         val isChecked = isChecked(album)
         holder.itemView.isActivated = isChecked
 
-        if (holder.adapterPosition == itemCount - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        }
-
         if (holder.title != null) {
             holder.title!!.text = getAlbumTitle(album)
         }
@@ -108,17 +98,13 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
 
     protected open fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer!!.setBackgroundColor(color)
-            if (holder.title != null) {
-                holder.title!!.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
-            if (holder.text != null) {
-                holder.text!!.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
+            holder.title?.setTextColor(
+                    MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.paletteColorContainer?.setBackgroundColor(color)
         }
-        if (holder.mask != null) {
-            holder.mask!!.backgroundTintList = ColorStateList.valueOf(color)
-        }
+
+        holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
     }
 
     protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
@@ -126,21 +112,17 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             return
         }
 
-        GlideApp.with(activity)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(album.safeGetFirstSong())
-                .dontAnimate()
+        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                .checkIgnoreMediaStore(activity)
+                .generatePalette(activity).build()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onColorReady(color: Int) {
-                        setColors(color, holder)
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        super.onLoadCleared(placeholder)
+                        setColors(defaultFooterColor, holder)
                     }
 
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        setColors(defaultFooterColor, holder)
+                    override fun onColorReady(color: Int) {
+                        setColors(color, holder)
                     }
                 })
     }
@@ -176,7 +158,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
 
     override fun getSectionName(position: Int): String {
         var sectionName: String? = null
-        when (PreferenceUtil.getInstance().albumSortOrder) {
+        when (PreferenceUtil.getInstance(activity).albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName = dataSet[position].title
             SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].artistName
             SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
@@ -188,7 +170,7 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
+            setImageTransitionName(activity.getString(code.name.monkey.retromusic.R.string.transition_album_art))
             if (menu != null) {
                 menu!!.visibility = View.GONE
             }
@@ -199,11 +181,8 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
             if (isInQuickSelectMode) {
                 toggleChecked(adapterPosition)
             } else {
-                val pairImageView = Pair.create<View, String>(image, activity.resources.getString(R.string.transition_album_art))
-                val pairs = ArrayList<Pair<View, String>>()
-                pairs.add(pairImageView)
-                val albumPairs: Array<Pair<View, String>> = pairs.toTypedArray()
-                NavigationUtil.goToAlbum(activity, dataSet[adapterPosition].id, *albumPairs)
+                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
+                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
             }
         }
 

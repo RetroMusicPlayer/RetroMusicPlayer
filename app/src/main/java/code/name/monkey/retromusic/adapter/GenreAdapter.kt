@@ -15,7 +15,11 @@ import java.util.*
  * @author Hemanth S (h4h13).
  */
 
-class GenreAdapter(private val mActivity: Activity, dataSet: ArrayList<Genre>, private val mItemLayoutRes: Int) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+class GenreAdapter(
+        private val mActivity: Activity,
+        dataSet: ArrayList<Genre>,
+        private val mItemLayoutRes: Int
+) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
     var dataSet = ArrayList<Genre>()
         private set
 

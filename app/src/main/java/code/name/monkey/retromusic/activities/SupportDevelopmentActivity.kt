@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,6 @@ import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.extensions.applyToolbar
-import code.name.monkey.retromusic.views.IconImageView
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
@@ -59,7 +59,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         setContentView(R.layout.activity_donation)
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
@@ -71,7 +71,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     private fun setupToolbar() {
-        val primaryColor = ThemeStore.primaryColor(this)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
         appBarLayout.setBackgroundColor(primaryColor)
         applyToolbar(toolbar)
     }
@@ -161,7 +161,10 @@ private class SkuDetailsLoadAsyncTask internal constructor(supportDevelopmentAct
     }
 }
 
-class SkuDetailsAdapter(private var donationsDialog: SupportDevelopmentActivity, objects: List<SkuDetails>) : RecyclerView.Adapter<SkuDetailsAdapter.ViewHolder>() {
+class SkuDetailsAdapter(
+        private var donationsDialog: SupportDevelopmentActivity,
+        objects: List<SkuDetails>
+) : RecyclerView.Adapter<SkuDetailsAdapter.ViewHolder>() {
     private var skuDetailsList: List<SkuDetails> = ArrayList()
 
     init {
@@ -218,7 +221,7 @@ class SkuDetailsAdapter(private var donationsDialog: SupportDevelopmentActivity,
         var title: TextView = view.findViewById(R.id.itemTitle)
         var text: TextView = view.findViewById(R.id.itemText)
         var price: TextView = view.findViewById(R.id.itemPrice)
-        var image: IconImageView = view.findViewById(R.id.itemImage)
+        var image: AppCompatImageView = view.findViewById(R.id.itemImage)
     }
 
     companion object {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,113 +7,97 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?rectSelector"
+    android:gravity="center_vertical"
     android:minHeight="64dp"
+    android:orientation="horizontal"
     tools:ignore="MissingPrefix">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/drag_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|start"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+        app:tint="?colorOnBackground"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:paddingLeft="16dp"
+        android:paddingEnd="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/image_text_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:cardCornerRadius="6dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/image_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFeatureSettings="onum"
+                android:gravity="center"
+                android:maxLines="1"
+                android:minHeight="40dp"
+                android:textAppearance="@style/TextViewSubtitle2"
+                android:visibility="gone"
+                tools:text="1"
+                tools:visibility="visible" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
     <LinearLayout
+        android:id="@+id/title_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:layout_weight="1.0"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/drag_view"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical|start"
-            android:visibility="gone"
-            app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
-            tools:ignore="ContentDescription"
-            tools:visibility="visible" />
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAppearance="@style/TextViewSubtitle1"
+            android:textColor="?colorOnPrimary"
+            tools:text="Song name" />
 
-        <FrameLayout
-            android:id="@+id/image_container"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:paddingLeft="16dp"
-            android:paddingEnd="0dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/image_text_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                app:cardCornerRadius="6dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:scaleType="centerCrop"  />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/image_text"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:minHeight="40dp"
-                    android:visibility="gone"
-                    tools:text="1"
-                    tools:visibility="visible" />
-            </com.google.android.material.card.MaterialCardView>
-        </FrameLayout>
-
-        <LinearLayout
-            android:id="@+id/title_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1.0"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="16sp" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:ellipsize="end"
-                android:maxLines="1"  />
-        </LinearLayout>
-
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/menu"
-            style="@style/OverFlowButton"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0" />
-
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?colorOnBackground"
+            tools:text="Song artist name " />
     </LinearLayout>
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:background="?attr/dividerColor"
-        android:visibility="gone" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/menu"
+        style="@style/OverFlowButton"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        app:tint="?colorOnBackground" />
 
-    <View
-        android:id="@+id/short_separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="72dp"
-        android:background="?attr/dividerColor"
-        android:visibility="gone" />
-</FrameLayout>
+</LinearLayout>

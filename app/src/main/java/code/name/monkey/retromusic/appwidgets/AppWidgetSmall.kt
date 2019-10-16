@@ -27,15 +27,15 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.RetroUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 
 class AppWidgetSmall : BaseAppWidget() {
     private var target: Target<BitmapPaletteWrapper>? = null // for cancellation
@@ -96,23 +96,21 @@ class AppWidgetSmall : BaseAppWidget() {
         val appContext = service.applicationContext
         service.runOnUiThread {
             if (target != null) {
-                GlideApp.with(appContext).clear(target);
+                Glide.clear(target)
             }
-            target = GlideApp.with(appContext)
-                    .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song)
-                    .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
+            target = SongGlideRequest.Builder.from(Glide.with(service), song)
+                    .checkIgnoreMediaStore(service)
+                    .generatePalette(service).build()
+                    .centerCrop()
+                    .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
                             val palette = resource.palette
-                            update(resource.bitmap, palette.getVibrantColor(palette
-                                    .getMutedColor(MaterialValueHelper.getSecondaryTextColor(appContext, true))))
+                            update(resource.bitmap, palette.getVibrantColor(palette.getMutedColor(MaterialValueHelper.getSecondaryTextColor(service, true))))
                         }
 
-                        override fun onLoadFailed(errorDrawable: Drawable?) {
-                            super.onLoadFailed(errorDrawable)
-                            update(null, MaterialValueHelper.getSecondaryTextColor(appContext, true))
+                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                            super.onLoadFailed(e, errorDrawable)
+                            update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
                         }
 
                         private fun update(bitmap: Bitmap?, color: Int) {
@@ -121,14 +119,14 @@ class AppWidgetSmall : BaseAppWidget() {
                                 R.drawable.ic_pause_white_24dp
                             else
                                 R.drawable.ic_play_arrow_white_32dp
-                            appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(service, playPauseRes, color)!!, 1f))
+                            appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, createBitmap(RetroUtil.getTintedVectorDrawable(service, playPauseRes, color)!!, 1f))
 
                             // Set prev/next button drawables
-                            appWidgetView.setImageViewBitmap(R.id.button_next, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, color)!!, 1f))
-                            appWidgetView.setImageViewBitmap(R.id.button_prev, BaseAppWidget.Companion.createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, color)!!, 1f))
+                            appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, color)!!, 1f))
+                            appWidgetView.setImageViewBitmap(R.id.button_prev, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, color)!!, 1f))
 
                             val image = getAlbumArtDrawable(service.resources, bitmap)
-                            val roundedBitmap = BaseAppWidget.createRoundedBitmap(image, imageSize, imageSize, cardRadius, 0f, 0f, 0f)
+                            val roundedBitmap = createRoundedBitmap(image, imageSize, imageSize, cardRadius, 0f, 0f, 0f)
                             appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 
                             pushUpdate(appContext, appWidgetIds, appWidgetView)

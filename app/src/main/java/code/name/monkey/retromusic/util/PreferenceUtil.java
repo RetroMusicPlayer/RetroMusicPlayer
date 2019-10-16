@@ -19,6 +19,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
@@ -45,6 +47,7 @@ import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
+import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
@@ -56,6 +59,9 @@ import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
     public static final String LIBRARY_CATEGORIES = "library_categories";
+    public static final String DESATURATED_COLOR = "desaturated_color";
+    public static final String BLACK_THEME = "black_theme";
+    public static final String DIALOG_CORNER = "dialog_corner";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
     public static final String NOW_PLAYING_SCREEN_ID = "now_playing_screen_id";
@@ -65,6 +71,7 @@ public final class PreferenceUtil {
     public static final String GAPLESS_PLAYBACK = "gapless_playback";
     public static final String ALBUM_ART_ON_LOCKSCREEN = "album_art_on_lockscreen";
     public static final String BLURRED_ALBUM_ART = "blurred_album_art";
+    public static final String NEW_BLUR_AMOUNT = "new_blur_amount";
     public static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
     public static final String TOGGLE_HEADSET = "toggle_headset";
     public static final String DOMINANT_COLOR = "dominant_color";
@@ -142,7 +149,22 @@ public final class PreferenceUtil {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static PreferenceUtil getInstance() {
+    public static boolean isAllowedToDownloadMetadata(final Context context) {
+        switch (getInstance(context).autoDownloadImagesPolicy()) {
+            case "always":
+                return true;
+            case "only_wifi":
+                final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+                return netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting();
+            case "never":
+            default:
+                return false;
+        }
+    }
+
+    @NonNull
+    public static PreferenceUtil getInstance(Context context) {
         if (sInstance == null) {
             sInstance = new PreferenceUtil(App.Companion.getContext());
         }
@@ -150,20 +172,24 @@ public final class PreferenceUtil {
     }
 
     @StyleRes
-    public static int getThemeResFromPrefValue(String themePrefValue) {
+    public static int getThemeResFromPrefValue(@NonNull String themePrefValue) {
         switch (themePrefValue) {
             case "light":
                 return R.style.Theme_RetroMusic_Light;
-            case "color":
-                return R.style.Theme_RetroMusic_Color;
-            case "black":
-                return R.style.Theme_RetroMusic_Black;
-            case "daynight":
-                return R.style.Theme_RetroMusic_DayNight;
             case "dark":
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public boolean desaturatedColor() {
+        return mPreferences.getBoolean(DESATURATED_COLOR, false);
+    }
+
+    public void setDesaturatedColor(boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(DESATURATED_COLOR, value);
+        editor.apply();
     }
 
     public boolean getSleepTimerFinishMusic() {
@@ -176,6 +202,10 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
+    public boolean isBlackMode() {
+        return mPreferences.getBoolean(BLACK_THEME, false);
+    }
+
     public String getUserBio() {
         return mPreferences.getString(USER_BIO, "");
     }
@@ -186,6 +216,10 @@ public final class PreferenceUtil {
 
     public int getFilterLength() {
         return mPreferences.getInt(FILTER_SONG, 20);
+    }
+
+    public float getDialogCorner() {
+        return mPreferences.getInt(DIALOG_CORNER, 16);
     }
 
     public boolean isSnowFall() {
@@ -226,7 +260,7 @@ public final class PreferenceUtil {
 
     public final String getAlbumSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
+                .getString(ALBUM_SONG_SORT_ORDER, AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public final String getSongSortOrder() {
@@ -561,6 +595,13 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
+    @NonNull
+    public String getGeneralThemeValue() {
+        if (isBlackMode()) return "black";
+        else
+            return mPreferences.getString(GENERAL_THEME, "dark");
+    }
+
     public String getBaseTheme() {
         return mPreferences.getString(GENERAL_THEME, "dark");
     }
@@ -636,7 +677,7 @@ public final class PreferenceUtil {
 
     public String getAlbumDetailSongSortOrder() {
         return mPreferences
-                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
+                .getString(ALBUM_DETAIL_SONG_SORT_ORDER, AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
     public void setAlbumDetailSongSortOrder(String sortOrder) {
@@ -777,7 +818,7 @@ public final class PreferenceUtil {
     }
 
     @LayoutRes
-    public int getHomeGridStyle(Context context) {
+    public int getHomeGridStyle(@NonNull Context context) {
         int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
         TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
         int layoutRes = typedArray.getResourceId(pos, -1);

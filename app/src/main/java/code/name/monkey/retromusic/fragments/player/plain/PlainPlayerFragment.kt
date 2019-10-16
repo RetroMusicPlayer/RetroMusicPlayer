@@ -8,14 +8,15 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import kotlinx.android.synthetic.main.fragment_plain_player.*
 
-class PlainPlayerFragment : AbsPlayerFragment()  {
-    override fun playerToolbar(): Toolbar {
+class PlainPlayerFragment : AbsPlayerFragment() {
+    override fun playerToolbar(): Toolbar
+    {
         return playerToolbar
     }
 

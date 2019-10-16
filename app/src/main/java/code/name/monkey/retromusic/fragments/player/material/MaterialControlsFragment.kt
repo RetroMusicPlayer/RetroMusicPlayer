@@ -24,17 +24,6 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.nextButton
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.playPauseButton
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.previousButton
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.progressSlider
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.repeatButton
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.shuffleButton
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.songTotalTime
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.text
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.title
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -102,29 +91,29 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(context, android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(context, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(context, true)
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(context, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         updateRepeatState()
         updateShuffleState()
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             lastPlaybackControlsColor = color
             color
         } else {
-            ThemeStore.textColorSecondary(context!!)
-        }.ripAlpha()
+            ThemeStore.textColorSecondary(requireContext())
+        }
 
         text.setTextColor(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, false)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal.ripAlpha(), true)
 
-        volumeFragment?.setTintable(colorFinal)
+        volumeFragment?.setTintable(colorFinal.ripAlpha())
 
         updatePlayPauseColor()
         updatePrevNextColor()
@@ -140,7 +129,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_big);
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_64dp)
         } else {
             playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp);
         }

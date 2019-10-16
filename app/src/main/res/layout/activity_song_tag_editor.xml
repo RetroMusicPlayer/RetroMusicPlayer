@@ -32,11 +32,12 @@
                     android:visibility="gone" />
             </FrameLayout>
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                 app:title="@string/action_tag_editor"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                 tools:ignore="UnusedAttribute" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

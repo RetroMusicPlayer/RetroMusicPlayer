@@ -18,9 +18,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/contentContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -28,33 +27,50 @@
 
     <include layout="@layout/abs_playlists" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/emptyContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        tools:visibility="visible"
-        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:visibility="gone" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/emptyText"
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="112dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/emptyContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/start_play_music"
-            android:textColor="?android:textColorSecondary" />
-    </LinearLayout>
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <code.name.monkey.retromusic.views.IconImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                app:srcCompat="@drawable/ic_play_arrow_white_64dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emptyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/start_play_music"
+                android:textAppearance="@style/TextViewNormal"
+                android:textColor="?colorOnBackground" />
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

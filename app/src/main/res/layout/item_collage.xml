@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -64,7 +65,8 @@
                         android:id="@+id/image_2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[18]" />
                 </com.google.android.material.card.MaterialCardView>
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -82,7 +84,8 @@
                         android:id="@+id/image_3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[19]" />
                 </com.google.android.material.card.MaterialCardView>
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
         </LinearLayout>
@@ -107,7 +110,8 @@
                         android:id="@+id/image_4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
                 </com.google.android.material.card.MaterialCardView>
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
         </FrameLayout>
@@ -133,7 +137,8 @@
                     android:id="@+id/image_5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[21]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -152,7 +157,8 @@
                     android:id="@+id/image_6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[22]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -171,7 +177,8 @@
                     android:id="@+id/image_7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[23]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -194,7 +201,8 @@
                     android:id="@+id/image_8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[24]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -213,7 +221,8 @@
                     android:id="@+id/image_9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[25]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
     </LinearLayout>

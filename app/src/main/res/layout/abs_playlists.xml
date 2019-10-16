@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,179 +8,199 @@
     android:paddingBottom="12dp">
 
 
-    <LinearLayout
-        android:id="@+id/userInfoContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="24dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="24dp"
-        android:paddingBottom="10dp">
+    <code.name.monkey.retromusic.views.CircularImageView
+        android:id="@+id/userImage"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:civ_border="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
 
-        <code.name.monkey.retromusic.views.CircularImageView
-            android:id="@+id/userImage"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            app:civ_border="false" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp">
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.75"
-                android:ellipsize="end"
-                android:text="@string/welcome" />
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/titleWelcome"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="0dp"
-                tools:text="@string/app_name" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/material_design_outline"
-        android:backgroundTint="?dividerColor"
-        android:gravity="center_vertical"
-        android:paddingStart="12dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="6dp"
-        android:visibility="gone">
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:text="@string/welcome"
+        android:textColor="?colorOnBackground"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toTopOf="@+id/userImage" />
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/sectionIcon"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/titleWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:padding="0dp"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textColor="?colorOnPrimary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/userImage"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        tools:text="@string/app_name" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintEnd_toStartOf="@+id/lastAdded"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleWelcome">
+
+        <code.name.monkey.retromusic.views.ColorIconsImageView
+            android:id="@+id/v1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            app:srcCompat="@drawable/ic_person_white_24dp" />
+            android:layout_gravity="center"
+            android:padding="@dimen/home_icon_padding"
+            app:iconBackgroundColor="@color/md_blue_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_access_time_white_24dp" />
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-            android:id="@+id/sectionTitle"
-            style="@style/SubTitleTextAppearance"
-            android:padding="0dp"
-            android:text="@string/for_you" />
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="@string/history"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1"
+            tools:text="Hemanth savarala kumar dai" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lastAdded"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:paddingTop="12dp">
+        app:layout_constraintEnd_toStartOf="@+id/topPlayed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/history"
+        app:layout_constraintTop_toTopOf="@+id/history">
 
-        <LinearLayout
-            android:id="@+id/history"
-            android:layout_width="match_parent"
+        <code.name.monkey.retromusic.views.ColorIconsImageView
+            android:id="@+id/v2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:padding="@dimen/home_icon_padding"
+            app:iconBackgroundColor="@color/md_red_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_library_add_white_24dp" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                app:iconBackgroundColor="@color/md_blue_500"
-                app:srcCompat="@drawable/ic_access_time_white_24dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:text="@string/history"
-                app:fontFamily="@font/circular" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lastAdded"
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/materialTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="@string/last_added"
+            android:textColor="?colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v2"
+            tools:text="Hemanth savarala" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                app:iconBackgroundColor="@color/md_red_500"
-                app:srcCompat="@drawable/ic_library_add_white_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:text="@string/last_added" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topPlayed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/actionShuffle"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/lastAdded"
+        app:layout_constraintTop_toTopOf="@+id/lastAdded">
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/topPlayed"
-            android:layout_width="match_parent"
+        <code.name.monkey.retromusic.views.ColorIconsImageView
+            android:id="@+id/v3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:padding="@dimen/home_icon_padding"
+            app:iconBackgroundColor="@color/md_deep_purple_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_trending_up_white_24dp" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                app:iconBackgroundColor="@color/md_deep_purple_500"
-                app:srcCompat="@drawable/ic_trending_up_white_24dp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:text="@string/my_top_tracks" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/actionShuffle"
-            android:layout_width="match_parent"
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="@string/my_top_tracks"
+            android:textColor="?colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v3"
+            tools:text="Hemanth savarala" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                app:iconBackgroundColor="@color/md_green_500"
-                app:srcCompat="@drawable/ic_shuffle_white_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="8dp"
-                android:text="@string/shuffle" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/actionShuffle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/topPlayed"
+        app:layout_constraintTop_toTopOf="@+id/topPlayed">
 
-        </LinearLayout>
-    </LinearLayout>
+        <code.name.monkey.retromusic.views.ColorIconsImageView
+            android:id="@+id/v4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/home_icon_padding"
+            app:iconBackgroundColor="@color/md_green_500"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
-</LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:text="@string/shuffle"
+            android:textColor="?colorOnSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v4"
+            tools:text="Hemanth savarala" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/shortcuts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="history,lastAdded,topPlayed,actionShuffle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

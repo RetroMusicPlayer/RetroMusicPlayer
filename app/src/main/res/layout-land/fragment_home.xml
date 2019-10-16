@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,31 +33,36 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp">
+            android:background="?colorPrimary"
+            app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
                 app:cardUseCompatPadding="true"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:strokeColor="?dividerColor"
-                app:strokeWidth="1dp">
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:background="?colorSurface"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:popupTheme="?toolbarPopupTheme"
                     app:title="@string/search_hint"
                     app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                     tools:ignore="UnusedAttribute" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -53,13 +71,11 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginEnd="@dimen/horizontal_margin"
+            android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+            android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <include layout="@layout/home_content" />
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
-
-

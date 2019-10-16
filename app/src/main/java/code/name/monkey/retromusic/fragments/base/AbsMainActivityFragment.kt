@@ -3,7 +3,7 @@ package code.name.monkey.retromusic.fragments.base
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
@@ -39,12 +39,12 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
     }
 
     fun setStatusbarColorAuto(view: View) {
+        val colorPrimary = ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-
         if (VersionUtils.hasMarshmallow()) {
-            setStatusbarColor(view, ThemeStore.primaryColor(context!!))
+            setStatusbarColor(view, colorPrimary)
         } else {
-            setStatusbarColor(view, ColorUtil.darkenColor(ThemeStore.primaryColor(context!!)))
+            setStatusbarColor(view, ColorUtil.darkenColor(colorPrimary))
         }
     }
 

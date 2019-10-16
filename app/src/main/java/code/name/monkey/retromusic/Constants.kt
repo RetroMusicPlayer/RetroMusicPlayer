@@ -33,7 +33,7 @@ object Constants {
 
     const val BASE_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
-    val BASE_PROJECTION = arrayOf(BaseColumns._ID, // 0
+    val baseProjection = arrayOf(BaseColumns._ID, // 0
             MediaStore.Audio.AudioColumns.TITLE, // 1
             MediaStore.Audio.AudioColumns.TRACK, // 2
             MediaStore.Audio.AudioColumns.YEAR, // 3

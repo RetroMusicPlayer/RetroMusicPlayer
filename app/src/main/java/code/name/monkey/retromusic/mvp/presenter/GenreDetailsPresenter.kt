@@ -15,39 +15,40 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.GenreDetailsContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
 import java.util.*
+import javax.inject.Inject
 
 
 /**
  * Created by hemanths on 20/08/17.
  */
 
-class GenreDetailsPresenter(private val view: GenreDetailsContract.GenreDetailsView,
-                            private val genreId: Int) : Presenter(), GenreDetailsContract.Presenter {
+interface GenreDetailsView : BaseView {
+    fun songs(songs: ArrayList<Song>)
+}
 
-    override fun subscribe() {
-        loadGenre(genreId)
-    }
+interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
+    fun loadGenreSongs(genreId: Int)
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    class GenreDetailsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<GenreDetailsView>(), GenreDetailsPresenter {
 
-    override fun loadGenre(genreId: Int) {
-        disposable.add(repository.getGenreFlowable(genreId)
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showGenre(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+        override fun detachView() {
+            super.detachView()
+            disposable?.dispose()
+        }
 
-    private fun showGenre(songs: ArrayList<Song>?) {
-        if (songs != null) {
-            view.showData(songs)
-        } else {
-            view.showEmptyView()
+        private var disposable: Disposable? = null
+
+        override fun loadGenreSongs(genreId: Int) {
+            disposable = repository.getGenreFlowable(genreId)
+                    .subscribe({ view?.songs(it) }, { t -> println(t) })
         }
     }
 }

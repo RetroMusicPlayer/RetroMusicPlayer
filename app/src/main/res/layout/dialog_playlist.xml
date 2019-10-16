@@ -21,6 +21,7 @@
             android:background="@null"
             android:hint="@string/playlist_name_empty"
             android:inputType="textPersonName|textCapWords|text"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:textAppearance="@style/TextViewNormal" />
     </com.google.android.material.textfield.TextInputLayout>
 </LinearLayout>

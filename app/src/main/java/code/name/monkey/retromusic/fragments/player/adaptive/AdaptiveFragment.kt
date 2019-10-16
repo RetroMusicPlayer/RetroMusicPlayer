@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
-class AdaptiveFragment : AbsPlayerFragment(),  MusicProgressViewUpdateHelper.Callback {
+class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
 
     private lateinit var lyricsLayout: FrameLayout
     private lateinit var lyricsLine1: TextView
@@ -139,11 +139,10 @@ class AdaptiveFragment : AbsPlayerFragment(),  MusicProgressViewUpdateHelper.Cal
     }
 
     private fun setUpPlayerToolbar() {
-        ATHUtil.resolveColor(context, R.attr.iconColor)
-        val primaryColor = ThemeStore.primaryColor(context!!)
+        val primaryColor = ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, activity)
             setTitleTextColor(primaryColor)
             setSubtitleTextColor(ThemeStore.textColorSecondary(context!!))

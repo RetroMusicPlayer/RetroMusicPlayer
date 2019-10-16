@@ -15,38 +15,33 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.GenreContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author Hemanth S (h4h13).
  */
+interface GenresView : BaseView {
+    fun genres(genres: ArrayList<Genre>)
+}
 
-class GenrePresenter(
-        private val view: GenreContract.GenreView) : Presenter(), GenreContract.Presenter {
+interface GenresPresenter : Presenter<GenresView> {
+    fun loadGenres()
 
-    override fun subscribe() {
-        loadGenre()
-    }
+    class GenresPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<GenresView>(), GenresPresenter {
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+        private var disposable: Disposable? = null
 
-    override fun loadGenre() {
-        disposable.add(repository.allGenresFlowable
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
-
-    private fun showList(genres: ArrayList<Genre>) {
-        if (genres.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(genres)
+        override fun loadGenres() {
+            disposable = repository.allGenresFlowable
+                    .subscribe({ view.genres(it) }, { t -> println(t) })
         }
     }
 }

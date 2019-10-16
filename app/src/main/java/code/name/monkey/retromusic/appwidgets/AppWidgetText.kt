@@ -22,7 +22,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.content.ContextCompat
-import code.name.monkey.retromusic.App.Companion.context
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
 import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
@@ -95,9 +95,9 @@ class AppWidgetText : BaseAppWidget() {
             R.drawable.ic_pause_white_24dp
         else
             R.drawable.ic_play_arrow_white_32dp
-        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, createBitmap(RetroUtil.getTintedVectorDrawable(context, playPauseRes, ContextCompat.getColor(context, R.color.md_white_1000))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_prev, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(context, R.color.md_white_1000))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, createBitmap(RetroUtil.getTintedVectorDrawable(App.getContext(), playPauseRes, ContextCompat.getColor(App.getContext(), R.color.md_white_1000))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(App.getContext(), R.drawable.ic_skip_next_white_24dp, ContextCompat.getColor(App.getContext(), R.color.md_white_1000))!!, 1f))
+        appWidgetView.setImageViewBitmap(R.id.button_prev, createBitmap(RetroUtil.getTintedVectorDrawable(App.getContext(), R.drawable.ic_skip_previous_white_24dp, ContextCompat.getColor(App.getContext(), R.color.md_white_1000))!!, 1f))
 
 
 

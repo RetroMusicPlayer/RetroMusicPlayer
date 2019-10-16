@@ -23,6 +23,8 @@ import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
@@ -51,7 +53,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
             results[0] = ".."
         }
         for (i in parentContents!!.indices) {
-            results[if (canGoUp) i + 1 else i] = parentContents!![i].name!!
+            results[if (canGoUp) i + 1 else i] = parentContents!![i].name
         }
 
         val data = ArrayList<String>()
@@ -79,8 +81,8 @@ class BlacklistFolderChooserDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         var savedInstanceStateFinal = savedInstanceState
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                ActivityCompat.checkSelfPermission(activity!!, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            return MaterialDialog(activity!!).show {
+                ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            return MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 title(R.string.md_error_label)
                 message(R.string.md_storage_perm_error)
                 positiveButton(android.R.string.ok)
@@ -96,8 +98,9 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         checkIfCanGoUp()
         parentContents = listFiles()
 
-        return MaterialDialog(activity!!, BottomSheet()).show {
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(text = parentFolder!!.absolutePath)
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             listItems(items = contentsArray(), waitForPositiveButton = false) { _, index, _ ->
                 onSelection(index)
             }

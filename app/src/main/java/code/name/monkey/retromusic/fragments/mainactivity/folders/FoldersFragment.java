@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
 import android.media.MediaScannerConnection;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -62,6 +64,7 @@ import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListene
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.FileUtil;
+import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ViewUtil;
@@ -83,6 +86,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
 
     private View coordinatorLayout, container, empty;
+
+    private MaterialCardView toolbarContainer;
 
     private Toolbar toolbar;
 
@@ -109,7 +114,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.getInstance().getStartDirectory());
+        return newInstance(PreferenceUtil.getInstance(context).getStartDirectory());
     }
 
     public static FoldersFragment newInstance(File directory) {
@@ -147,7 +152,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
-
+        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         recyclerView = view.findViewById(R.id.recyclerView);
         appBarLayout = view.findViewById(R.id.appBarLayout);
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
@@ -225,7 +230,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
+        int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary);
         getMainActivity().setSupportActionBar(toolbar);
         TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
@@ -234,10 +239,14 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         toolbar.setNavigationOnClickListener(v -> {
             showMainMenu(OptionsSheetDialogFragment.FOLDER);
         });
-        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(getActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(getActivity(),
+        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(),
                 ColorUtil.INSTANCE.darkenColor(primaryColor)));
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
+        toolbar.setOnClickListener(v -> {
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), options);
+        });
     }
 
     private void setUpBreadCrumbs() {
@@ -300,7 +309,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(getActivity())))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary)))
                 .start(callback);
         return cab;
     }
@@ -328,7 +337,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_go_to_start_directory:
-                setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance().getStartDirectory())), true);
+                setCrumb(new BreadCrumbLayout.Crumb(tryGetCanonicalFile(PreferenceUtil.getInstance(requireContext()).getStartDirectory())), true);
                 return true;
             case R.id.action_scan:
                 BreadCrumbLayout.Crumb crumb = getActiveCrumb();
@@ -415,7 +424,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                 getFileComparator()));
                         return true;
                     case R.id.action_set_as_start_directory:
-                        PreferenceUtil.getInstance().setStartDirectory(file);
+                        PreferenceUtil.getInstance(requireContext()).setStartDirectory(file);
                         Toast.makeText(getActivity(),
                                 String.format(getString(R.string.new_start_directory), file.getPath()),
                                 Toast.LENGTH_SHORT).show();

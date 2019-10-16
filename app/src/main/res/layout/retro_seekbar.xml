@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/hurtz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +17,14 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/minus_db"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:padding="8dp" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:thumb="@drawable/switch_thumb_material"
             tools:progress="20" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/plus_db"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

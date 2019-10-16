@@ -16,19 +16,19 @@
 package code.name.monkey.retromusic.adapter.album
 
 import android.app.Activity
+import android.app.ActivityOptions
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.util.Pair
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
+import com.bumptech.glide.Glide
 
 class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet: ArrayList<Album>, metrics: DisplayMetrics) :
         MetalRecyclerViewPager.MetalAdapter<AlbumFullWidthAdapter.FullMetalViewHolder>(metrics) {
@@ -67,12 +67,9 @@ class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet:
         if (holder.image == null) {
             return
         }
-        GlideApp.with(activity)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(album.safeGetFirstSong())
-                .dontAnimate()
+        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                .checkIgnoreMediaStore(activity)
+                .generatePalette(activity).build()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
                     override fun onColorReady(color: Int) {
 
@@ -87,8 +84,8 @@ class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet:
     inner class FullMetalViewHolder(itemView: View) : MetalRecyclerViewPager.MetalViewHolder(itemView) {
 
         override fun onClick(v: View?) {
-            val albumPairs = arrayOf<Pair<*, *>>(Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
-            NavigationUtil.goToAlbum(activity, dataSet[adapterPosition].id, *albumPairs)
+            val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
+            NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
         }
     }
 }

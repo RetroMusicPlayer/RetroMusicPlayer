@@ -1,33 +1,36 @@
 package code.name.monkey.retromusic.adapter
 
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.util.RetroUtil
-import com.bumptech.glide.GenericTransitionOptions
+import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.signature.MediaStoreSignature
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.io.File
 import java.text.DecimalFormat
 import java.util.*
+import kotlin.math.log10
+import kotlin.math.pow
 
 
-class SongFileAdapter(private val activity: AppCompatActivity, private var dataSet: List<File>?, @param:LayoutRes private val itemLayoutRes: Int, private val callbacks: Callbacks?, cabHolder: CabHolder?) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
+class SongFileAdapter(
+        private val activity: AppCompatActivity,
+        private var dataSet: List<File>?,
+        private val itemLayoutRes: Int,
+        private val callbacks: Callbacks?,
+        cabHolder: CabHolder?
+) : AbsMultiSelectAdapter<SongFileAdapter.ViewHolder, File>(activity, cabHolder, R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
 
     init {
         this.setHasStableIds(true)
@@ -86,19 +89,18 @@ class SongFileAdapter(private val activity: AppCompatActivity, private var dataS
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
                 it.setImageResource(R.drawable.ic_folder_white_24dp)
             }
-            holder.imageTextContainer?.setCardBackgroundColor(ThemeStore.primaryColor(activity))
+            holder.imageTextContainer?.setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorPrimary))
 
         } else {
             val error = RetroUtil.getTintedVectorDrawable(activity, R.drawable.ic_file_music_white_24dp, iconColor)
-            GlideApp.with(activity)
+            Glide.with(activity)
                     .load(AudioFileCover(file.path))
-                    .transition(GenericTransitionOptions.with<Drawable>(android.R.anim.fade_in))
-                    .apply(RequestOptions()
-                            .diskCacheStrategy(DiskCacheStrategy.NONE)
-                            .error(error)
-                            .placeholder(error)
-                            .signature(MediaStoreSignature("", file.lastModified(), 0)))
-                    .into(holder.image!!)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .error(error)
+                    .placeholder(error)
+                    .animate(android.R.anim.fade_in)
+                    .signature(MediaStoreSignature("", file.lastModified(), 0))
+                    .into(holder.image)
         }
     }
 
@@ -174,10 +176,10 @@ class SongFileAdapter(private val activity: AppCompatActivity, private var dataS
         private const val FOLDER = 1
 
         fun readableFileSize(size: Long): String {
-            if (size <= 0) return size.toString() + " B"
+            if (size <= 0) return "$size B"
             val units = arrayOf("B", "KB", "MB", "GB", "TB")
-            val digitGroups = (Math.log10(size.toDouble()) / Math.log10(1024.0)).toInt()
-            return DecimalFormat("#,##0.##").format(size / Math.pow(1024.0, digitGroups.toDouble())) + " " + units[digitGroups]
+            val digitGroups = (log10(size.toDouble()) / log10(1024.0)).toInt()
+            return DecimalFormat("#,##0.##").format(size / 1024.0.pow(digitGroups.toDouble())) + " " + units[digitGroups]
         }
     }
 }

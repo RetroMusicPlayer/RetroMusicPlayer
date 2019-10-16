@@ -44,15 +44,15 @@ class MaterialFragment : AbsPlayerFragment() {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context!!, R.attr.iconColor)
+        return ATHUtil.resolveColor(requireContext(), R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
         playbackControlsFragment.setDark(color)
         lastColor = color
-        callbacks!!.onPaletteColorChanged()
+        callbacks?.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context!!, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.iconColor), requireActivity())
     }
 
     override fun toggleFavorite(song: Song) {
@@ -75,6 +75,7 @@ class MaterialFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
+
     }
 
     private fun setUpSubFragments() {
@@ -86,9 +87,9 @@ class MaterialFragment : AbsPlayerFragment() {
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@MaterialFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
         }
     }
 

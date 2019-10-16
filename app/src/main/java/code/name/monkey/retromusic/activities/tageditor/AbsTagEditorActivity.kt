@@ -14,6 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -25,7 +26,6 @@ import code.name.monkey.retromusic.util.SAFUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -289,7 +289,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         editorImage.visibility = View.GONE
         editorImage.isEnabled = false
 
-        setColors(intent.getIntExtra(EXTRA_PALETTE, ThemeStore.primaryColor(this)))
+        setColors(intent.getIntExtra(EXTRA_PALETTE, ATHUtil.resolveColor(this, R.attr.colorPrimary)))
     }
 
     protected fun dataChanged() {

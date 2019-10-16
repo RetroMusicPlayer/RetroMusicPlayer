@@ -23,11 +23,11 @@ import io.reactivex.Observable
 
 
 object ArtistLoader {
-    private fun getSongLoaderSortOrder(): String {
-        return PreferenceUtil.getInstance().artistSortOrder + ", " +
-                PreferenceUtil.getInstance().artistAlbumSortOrder + ", " +
-                PreferenceUtil.getInstance().albumDetailSongSortOrder + ", " +
-                PreferenceUtil.getInstance().artistDetailSongSortOrder
+    private fun getSongLoaderSortOrder(context: Context): String {
+        return PreferenceUtil.getInstance(context).artistSortOrder + ", " +
+                PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " +
+                PreferenceUtil.getInstance(context).albumDetailSongSortOrder + ", " +
+                PreferenceUtil.getInstance(context).artistDetailSongSortOrder
     }
 
     fun getAllArtistsFlowable(
@@ -36,7 +36,7 @@ object ArtistLoader {
         return Observable.create { e ->
             SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
                     context, null, null,
-                    getSongLoaderSortOrder())
+                    getSongLoaderSortOrder(context))
             ).subscribe { songs ->
                 e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
                 e.onComplete()
@@ -48,7 +48,7 @@ object ArtistLoader {
         val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
                 context,
                 null, null,
-                getSongLoaderSortOrder())
+                getSongLoaderSortOrder(context))
         )
         return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
@@ -59,7 +59,7 @@ object ArtistLoader {
                     context,
                     AudioColumns.ARTIST + " LIKE ?",
                     arrayOf("%$query%"),
-                    getSongLoaderSortOrder())
+                    getSongLoaderSortOrder(context))
             ).subscribe { songs ->
                 e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
                 e.onComplete()
@@ -72,7 +72,7 @@ object ArtistLoader {
                 context,
                 AudioColumns.ARTIST + " LIKE ?",
                 arrayOf("%$query%"),
-                getSongLoaderSortOrder())
+                getSongLoaderSortOrder(context))
         )
         return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
@@ -117,7 +117,7 @@ object ArtistLoader {
         return Observable.create { e ->
             SongLoader.getSongsFlowable(SongLoader.makeSongCursor(context, AudioColumns.ARTIST_ID + "=?",
                     arrayOf(artistId.toString()),
-                    getSongLoaderSortOrder()))
+                    getSongLoaderSortOrder(context)))
                     .subscribe { songs ->
                         val artist = Artist(AlbumLoader.splitIntoAlbums(songs))
                         e.onNext(artist)
@@ -131,7 +131,7 @@ object ArtistLoader {
                 context,
                 AudioColumns.ARTIST_ID + "=?",
                 arrayOf(artistId.toString()),
-                getSongLoaderSortOrder())
+                getSongLoaderSortOrder(context))
         )
         return Artist(AlbumLoader.splitIntoAlbums(songs))
     }

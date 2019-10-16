@@ -14,41 +14,62 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import android.os.Bundle
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
-import code.name.monkey.retromusic.activities.ArtistDetailActivity
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import code.name.monkey.retromusic.rest.model.LastFmArtist
+import io.reactivex.disposables.CompositeDisposable
+import java.util.*
+import javax.inject.Inject
 
 
 /**
  * Created by hemanths on 20/08/17.
  */
+interface ArtistDetailsView : BaseView {
+    fun artist(artist: Artist)
+    fun artistInfo(lastFmArtist: LastFmArtist?)
+    fun complete()
+}
 
-class ArtistDetailsPresenter(private val view: ArtistDetailContract.ArtistsDetailsView,
-                             private val bundle: Bundle) : Presenter(), ArtistDetailContract.Presenter {
+interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
 
-    override fun subscribe() {
-        loadArtistById()
-    }
+    fun loadArtist(artistId: Int)
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun loadBiography(name: String,
+                      lang: String? = Locale.getDefault().language,
+                      cache: String?)
 
-    override fun loadArtistById() {
-        disposable.add(repository.getArtistByIdFlowable(bundle.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID))
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showArtist(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+    class ArtistDetailsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter {
 
-    private fun showArtist(album: Artist?) {
-        if (album != null) {
-            view.showData(album)
-        } else {
-            view.showEmptyView()
+        override fun loadBiography(name: String,
+                                   lang: String?,
+                                   cache: String?) {
+            disposable += repository.artistInfoFloable(name, lang, cache)
+                    .subscribe {
+                        view?.artistInfo(it)
+                    }
+        }
+
+        private var disposable = CompositeDisposable()
+
+        override fun loadArtist(artistId: Int) {
+            disposable += repository.getArtistByIdFlowable(artistId)
+                    .doOnComplete {
+                        view?.complete()
+                    }
+                    .subscribe({
+                        view?.artist(it)
+                    }, { t -> println(t) })
+        }
+
+        override fun detachView() {
+            super.detachView()
+            disposable.dispose()
         }
     }
 }

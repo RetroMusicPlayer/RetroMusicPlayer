@@ -110,7 +110,7 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
      * @return whether the palette option should be available for the current item layout or not
      */
     fun canUsePalette(): Boolean {
-        return itemLayoutRes == R.layout.item_color
+        return itemLayoutRes == R.layout.item_card_color
     }
 
     protected fun notifyLayoutResChanged(@LayoutRes res: Int) {

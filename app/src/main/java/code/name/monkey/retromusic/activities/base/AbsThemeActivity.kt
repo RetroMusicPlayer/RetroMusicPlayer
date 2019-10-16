@@ -19,13 +19,14 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.ThemeManager
 
 abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(PreferenceUtil.getInstance().generalTheme)
+        setTheme(ThemeManager.getThemeResValue(this))
         hideStatusBar()
         super.onCreate(savedInstanceState)
         //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
@@ -37,7 +38,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     private fun toggleScreenOn() {
-        if (PreferenceUtil.getInstance().isScreenOnEnabled) {
+        if (PreferenceUtil.getInstance(this).isScreenOnEnabled) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -56,7 +57,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     fun hideStatusBar() {
-        hideStatusBar(PreferenceUtil.getInstance().fullScreenMode)
+        hideStatusBar(PreferenceUtil.getInstance(this).fullScreenMode)
     }
 
     private fun hideStatusBar(fullscreen: Boolean) {
@@ -68,20 +69,16 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
 
     private fun changeBackgroundShape() {
-        var background: Drawable? = if (PreferenceUtil.getInstance().isRoundCorners)
+        var background: Drawable? = if (PreferenceUtil.getInstance(this).isRoundCorners)
             ContextCompat.getDrawable(this, R.drawable.round_window)
         else
             ContextCompat.getDrawable(this, R.drawable.square_window)
-        background = TintHelper.createTintedDrawable(background, ThemeStore.primaryColor(this))
+        background = TintHelper.createTintedDrawable(background, ATHUtil.resolveColor(this, R.attr.colorPrimary))
         window.setBackgroundDrawable(background)
     }
 
     fun setDrawUnderStatusBar() {
-        if (VersionUtils.hasLollipop()) {
-            RetroUtil.setAllowDrawUnderStatusBar(window)
-        } else if (VersionUtils.hasKitKat()) {
-            RetroUtil.setStatusBarTranslucent(window)
-        }
+        RetroUtil.setAllowDrawUnderStatusBar(window)
     }
 
     fun setDrawUnderNavigationBar() {
@@ -95,19 +92,17 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
      * @param color the new statusbar color (will be shifted down on Lollipop and above)
      */
     fun setStatusbarColor(color: Int) {
-        if (VersionUtils.hasKitKat()) {
-            val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
-            if (statusBar != null) {
-                when {
-                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                    VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
-                    else -> statusBar.setBackgroundColor(color)
-                }
-            } else {
-                when {
-                    VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                    else -> window.statusBarColor = ColorUtil.darkenColor(color)
-                }
+        val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
+        if (statusBar != null) {
+            when {
+                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
+                else -> statusBar.setBackgroundColor(color)
+            }
+        } else {
+            when {
+                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                else -> window.statusBarColor = ColorUtil.darkenColor(color)
             }
         }
         setLightStatusbarAuto(color)
@@ -115,7 +110,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
 
     fun setStatusbarColorAuto() {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-        setStatusbarColor(ThemeStore.primaryColor(this))
+        setStatusbarColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     open fun setTaskDescriptionColor(@ColorInt color: Int) {
@@ -123,7 +118,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
     }
 
     fun setTaskDescriptionColorAuto() {
-        setTaskDescriptionColor(ThemeStore.primaryColor(this))
+        setTaskDescriptionColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     open fun setNavigationbarColor(color: Int) {
@@ -134,8 +129,12 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
         }
     }
 
+    open fun setNavigationBarColorPrimary() {
+        ATH.setNavigationbarColor(this, ATHUtil.resolveColor(this, R.attr.colorPrimary))
+    }
+
     fun setNavigationbarColorAuto() {
-        setNavigationbarColor(ThemeStore.navigationBarColor(this))
+        setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSecondary))
     }
 
     open fun setLightStatusbar(enabled: Boolean) {
@@ -174,7 +173,7 @@ abstract class AbsThemeActivity : ATHActivity(), Runnable {
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-        if (PreferenceUtil.getInstance().fullScreenMode) {
+        if (PreferenceUtil.getInstance(this).fullScreenMode) {
             window.decorView.systemUiVisibility = flags
         }
     }

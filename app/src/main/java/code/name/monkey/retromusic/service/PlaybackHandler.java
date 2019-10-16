@@ -51,7 +51,7 @@ class PlaybackHandler extends Handler {
 
         switch (msg.what) {
             case MusicService.DUCK:
-                if (PreferenceUtil.getInstance().audioDucking()) {
+                if (PreferenceUtil.getInstance(service).audioDucking()) {
                     currentDuckVolume -= .05f;
                     if (currentDuckVolume > .2f) {
                         sendEmptyMessageDelayed(DUCK, 10);
@@ -65,7 +65,7 @@ class PlaybackHandler extends Handler {
                 break;
 
             case MusicService.UNDUCK:
-                if (PreferenceUtil.getInstance().audioDucking()) {
+                if (PreferenceUtil.getInstance(service).audioDucking()) {
                     currentDuckVolume += .03f;
                     if (currentDuckVolume < 1f) {
                         sendEmptyMessageDelayed(MusicService.UNDUCK, 10);

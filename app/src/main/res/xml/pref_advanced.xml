@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="Advanced">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="Advanced">
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
             android:defaultValue="30"
@@ -27,6 +29,15 @@
             android:title="@string/pref_keep_screen_on_title"
             app:enableCopying="true"
             app:icon="@drawable/ic_settings_brigntness_white_24dp" />
+
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
+            android:defaultValue="16"
+            android:key="dialog_corner"
+            android:max="50"
+            android:title="@string/pref_dialog_corner_title"
+            app:enableCopying="true"
+            app:icon="@drawable/ic_rounded_corner"
+            app:showSeekBarValue="true" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

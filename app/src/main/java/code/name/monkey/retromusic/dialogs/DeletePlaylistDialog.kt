@@ -22,6 +22,8 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import java.util.*
@@ -42,8 +44,9 @@ class DeletePlaylistDialog : DialogFragment() {
             content = Html.fromHtml(getString(string.delete_playlist_x, playlists[0].name))
         }
 
-        return MaterialDialog(activity!!, BottomSheet())
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     title(title)
                     message(text = content)
                     negativeButton(android.R.string.cancel)

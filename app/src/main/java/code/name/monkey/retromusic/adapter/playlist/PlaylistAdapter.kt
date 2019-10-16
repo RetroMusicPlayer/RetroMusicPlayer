@@ -84,15 +84,6 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
         if (holder.image != null) {
             holder.image!!.setImageDrawable(getIconRes(playlist))
         }
-        if (holder.adapterPosition == itemCount - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        } else {
-            if (holder.shortSeparator != null && dataSet[position] !is AbsSmartPlaylist) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        }
     }
 
     private fun getIconRes(playlist: Playlist): Drawable {
@@ -204,7 +195,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
 
             imageTextContainer?.apply {
                 cardElevation = 0f
-                setCardBackgroundColor(ThemeStore.primaryColor(itemView.context))
+                setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorPrimary))
             }
         }
 

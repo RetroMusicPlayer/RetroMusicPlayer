@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import kotlinx.android.synthetic.main.fragment_tiny_controls_fragment.*
 
 class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -28,12 +28,13 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
+
         if (ColorUtil.isColorLight(color)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(getActivity(), true);
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(getActivity(), true);
+            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(getActivity(), false);
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(getActivity(), false);
+            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         updateRepeatState();
@@ -94,4 +95,16 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
         }
     }
 
+    override fun onServiceConnected() {
+        updateRepeatState()
+        updateShuffleState()
+    }
+
+    override fun onRepeatModeChanged() {
+        updateRepeatState()
+    }
+
+    override fun onShuffleModeChanged() {
+        updateShuffleState()
+    }
 }

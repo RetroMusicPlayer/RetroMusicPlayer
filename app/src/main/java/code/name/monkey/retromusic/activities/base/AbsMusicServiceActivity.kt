@@ -67,6 +67,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
             filter.addAction(META_CHANGED)
             filter.addAction(QUEUE_CHANGED)
             filter.addAction(MEDIA_STORE_CHANGED)
+            filter.addAction(FAVORITE_STATE_CHANGED)
 
             registerReceiver(musicStateReceiver, filter)
 
@@ -146,6 +147,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
             val activity = reference.get()
             if (activity != null && action != null) {
                 when (action) {
+                    FAVORITE_STATE_CHANGED,
                     META_CHANGED -> activity.onPlayingMetaChanged()
                     QUEUE_CHANGED -> activity.onQueueChanged()
                     PLAY_STATE_CHANGED -> activity.onPlayStateChanged()

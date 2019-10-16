@@ -22,6 +22,7 @@ import android.view.Gravity;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+
 public class VerticalTextView extends AppCompatTextView {
     final boolean topDown;
 
@@ -33,6 +34,7 @@ public class VerticalTextView extends AppCompatTextView {
             topDown = false;
         } else
             topDown = true;
+
     }
 
     @Override

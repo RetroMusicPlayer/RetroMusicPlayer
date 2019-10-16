@@ -15,33 +15,35 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.ArtistContract
-import java.util.*
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
+import javax.inject.Inject
 
-class ArtistPresenter(private val mView: ArtistContract.ArtistView) : Presenter(), ArtistContract.Presenter {
+interface ArtistsView : BaseView {
+    fun artists(artists: ArrayList<Artist>)
+}
 
-    override fun subscribe() {
-        loadArtists()
-    }
+interface ArtistsPresenter : Presenter<ArtistsView> {
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun loadArtists()
 
-    private fun showList(songs: ArrayList<Artist>) {
-        if (songs.isEmpty()) {
-            mView.showEmptyView()
-        } else {
-            mView.showData(songs)
+    class ArtistsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<ArtistsView>(), ArtistsPresenter {
+
+        private var disposable: Disposable? = null
+
+        override fun detachView() {
+            super.detachView()
+            disposable?.dispose()
         }
-    }
 
-    override fun loadArtists() {
-        disposable.add(repository.allArtistsFlowable
-                .doOnSubscribe { mView.loading() }
-                .subscribe({ this.showList(it) },
-                        { mView.showEmptyView() },
-                        { mView.completed() }))
+        override fun loadArtists() {
+            disposable = repository.allArtistsFlowable
+                    .subscribe({ view?.artists(it) }, { t -> println(t) })
+        }
     }
 }

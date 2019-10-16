@@ -10,12 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@string/equalizer" />
+            app:title="@string/equalizer"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
 
         <androidx.appcompat.widget.SwitchCompat
@@ -48,15 +49,15 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="16dp"
-                    android:text="@string/select_preset" />
+                    android:text="@string/select_preset"
+                    android:textAppearance="@style/TextViewSubtitle2" />
 
-                <Spinner
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/presets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,16 +71,16 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/bassBoost"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:padding="16dp"
-                    android:text="@string/bass_boost" />
+                    android:text="@string/bass_boost"
+                    android:textAppearance="@style/TextViewSubtitle2" />
 
-                <SeekBar
+                <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/bassBoostStrength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -99,16 +100,16 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/virtualizer"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:padding="16dp"
-                    android:text="@string/virtualizer" />
+                    android:text="@string/virtualizer"
+                    android:textAppearance="@style/TextViewSubtitle2" />
 
-                <SeekBar
+                <androidx.appcompat.widget.AppCompatSeekBar
                     android:id="@+id/virtualizerStrength"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,11 +131,12 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:text="*Warning: It's alpha version. We don't recommend to use Equalizer, We believe without using Equalizer songs has better sound quality." />
+                android:text="*Warning: It's alpha version. We don't recommend to use Equalizer, We believe without using Equalizer songs has better sound quality."
+                app:lineHeightHint="24sp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

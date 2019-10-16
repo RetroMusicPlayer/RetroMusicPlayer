@@ -5,8 +5,26 @@
     <color name="app_shortcut_default_foreground">#607d8b</color>
     <color name="app_shortcut_default_background">#f5f5f5</color>
     <color name="md_indigo_A400">#3D5AFE</color>
-    <color name="dark_color">#202124</color>
+    <color name="dark_color">#212121</color>
+    <color name="dark_grey">#121212</color>
     <color name="card_dark_color">#2C2D30</color>
     <color name="black_color">#121212</color>
     <color name="card_black_color">#1E1E1E</color>
+    <color name="pitch_black">#000000</color>
+
+    <color name="lightColorPrimary">#FFFFFF</color>
+    <color name="lightColorOnPrimary">#202020</color>
+    <color name="lightColorSecondary">#FEFEFE</color>
+    <color name="lightColorBackground">#FFFFFF</color>
+    <color name="lightColorSurface">#FEFEFE</color>
+
+    <color name="darkColorPrimary">#121212</color>
+    <color name="darkColorSecondary">#181818</color>
+    <color name="darkColorBackground">#333333</color>
+    <color name="darkColorSurface">#1F1F1F</color>
+
+    <color name="blackColorPrimary">#000000</color>
+    <color name="blackColorSecondary">#000000</color>
+    <color name="blackColorBackground">#000000</color>
+    <color name="blackColorSurface">#121212</color>
 </resources>

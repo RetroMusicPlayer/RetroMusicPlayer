@@ -9,7 +9,6 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
@@ -23,10 +22,12 @@ import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
-import code.name.monkey.retromusic.glide.GlideApp
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -61,16 +62,14 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setLightNavigationBar(true)
 
         loadContributors()
-        setUpToolbar()
-
+        setSupportActionBar(toolbar)
+        ToolbarContentTintHelper.colorBackButton(toolbar )
         appVersion.text = getAppVersion()
-
         setUpView()
     }
 
@@ -81,13 +80,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun setUpToolbar() {
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        setSupportActionBar(toolbar)
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 
     private fun openUrl(url: String) {
@@ -133,15 +125,17 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun showChangeLogOptions() {
-        MaterialDialog(this).show {
-            listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
-                if (position == 0) {
-                    openUrl(TELEGRAM_CHANGE_LOG)
-                } else {
-                    NavigationUtil.gotoWhatNews(this@AboutActivity)
+        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT))
+                .show {
+                    cornerRadius(PreferenceUtil.getInstance(this@AboutActivity).dialogCorner)
+                    listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
+                        if (position == 0) {
+                            openUrl(TELEGRAM_CHANGE_LOG)
+                        } else {
+                            NavigationUtil.gotoWhatNews(this@AboutActivity)
+                        }
+                    }
                 }
-            }
-        }
     }
 
     private fun getAppVersion(): String {

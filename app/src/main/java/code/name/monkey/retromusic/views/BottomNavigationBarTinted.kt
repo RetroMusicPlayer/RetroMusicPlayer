@@ -31,13 +31,14 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
-        labelVisibilityMode = PreferenceUtil.getInstance().tabTitleMode
-        setBackgroundColor(ThemeStore.primaryColor(context))
-        selectedItemId = PreferenceUtil.getInstance().lastPage
+        labelVisibilityMode = PreferenceUtil.getInstance(context).tabTitleMode
+        selectedItemId = PreferenceUtil.getInstance(context).lastPage
 
         val iconColor = ATHUtil.resolveColor(context, R.attr.iconColor)
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
+
+        setOnApplyWindowInsetsListener(null)
     }
 }

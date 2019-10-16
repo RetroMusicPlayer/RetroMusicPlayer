@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.service;
 
 import android.app.PendingIntent;
+import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -30,7 +31,6 @@ import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -38,7 +38,6 @@ import android.os.PowerManager;
 import android.os.Process;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.support.v4.media.MediaBrowserCompat;
 import android.support.v4.media.MediaMetadataCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -49,9 +48,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.media.MediaBrowserServiceCompat;
 
-import com.bumptech.glide.request.transition.Transition;
+import com.bumptech.glide.BitmapRequestBuilder;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,13 +64,8 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
-import code.name.monkey.retromusic.auto.AutoMediaIDHelper;
-import code.name.monkey.retromusic.auto.AutoMusicProvider;
 import code.name.monkey.retromusic.glide.BlurTransformation;
-import code.name.monkey.retromusic.glide.GlideApp;
-import code.name.monkey.retromusic.glide.GlideRequest;
-import code.name.monkey.retromusic.glide.RetroGlideExtension;
-import code.name.monkey.retromusic.glide.RetroSimpleTarget;
+import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
@@ -88,7 +84,8 @@ import code.name.monkey.retromusic.util.RetroUtil;
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
  */
-public class MusicService extends MediaBrowserServiceCompat implements SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
+public class MusicService extends Service implements
+        SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
     public static final String TAG = MusicService.class.getSimpleName();
 
     public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";
@@ -211,6 +208,12 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         }
     };
     private PlayingNotification playingNotification;
+    private final BroadcastReceiver updateFavoriteReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            updateNotification();
+        }
+    };
     private AudioManager audioManager;
     private MediaSessionCompat mediaSession;
     private PowerManager.WakeLock wakeLock;
@@ -273,7 +276,6 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         }
     };
     private PackageValidator mPackageValidator;
-    private AutoMusicProvider mMusicProvider;
 
     private static String getTrackUri(@NonNull Song song) {
         return MusicUtil.getSongFileUri(song.getId()).toString();
@@ -324,6 +326,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         uiThreadHandler = new Handler();
 
         registerReceiver(widgetIntentReceiver, new IntentFilter(APP_WIDGET_UPDATE));
+        registerReceiver(updateFavoriteReceiver, new IntentFilter(FAVORITE_STATE_CHANGED));
 
         initNotification();
 
@@ -334,11 +337,13 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         getContentResolver().registerContentObserver(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
+
         mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
-        mMusicProvider = new AutoMusicProvider(this);
+
+
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
 
         registerHeadsetEvents();
@@ -352,26 +357,33 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     private void setupMediaSession() {
-        ComponentName mediaButtonReceiverComponentName = new ComponentName(getApplicationContext(), MediaButtonIntentReceiver.class);
+        ComponentName mediaButtonReceiverComponentName = new ComponentName(
+                getApplicationContext(),
+                MediaButtonIntentReceiver.class);
 
         Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
         mediaButtonIntent.setComponent(mediaButtonReceiverComponentName);
 
 
-        PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
+        PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(
+                getApplicationContext(),
+                0,
+                mediaButtonIntent,
+                0);
 
         mediaSession = new MediaSessionCompat(this,
                 "RetroMusicPlayer",
                 mediaButtonReceiverComponentName,
                 mediaButtonReceiverPendingIntent);
-        MediaSessionCallback mediasessionCallback = new MediaSessionCallback(getApplicationContext(), this);
+        MediaSessionCallback mediasessionCallback = new MediaSessionCallback(
+                getApplicationContext(), this);
         mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS
                 | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS
         );
         mediaSession.setCallback(mediasessionCallback);
         mediaSession.setActive(true);
         mediaSession.setMediaButtonReceiver(mediaButtonReceiverPendingIntent);
-        setSessionToken(mediaSession.getSessionToken());
+
     }
 
     @Override
@@ -418,7 +430,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             }
         }
 
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private void playFromPlaylist(Intent intent) {
@@ -445,24 +457,10 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         }
     }
 
-    private void playSongs(int shuffleMode, ArrayList<Song> playlistSongs) {
-        if (!playlistSongs.isEmpty()) {
-            if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
-                int startPosition;
-                startPosition = new Random().nextInt(playlistSongs.size());
-                openQueue(playlistSongs, startPosition, true);
-                setShuffleMode(shuffleMode);
-            } else {
-                openQueue(playlistSongs, 0, true);
-            }
-        } else {
-            Toast.makeText(getApplicationContext(), R.string.playlist_is_empty, Toast.LENGTH_LONG).show();
-        }
-    }
-
     @Override
     public void onDestroy() {
         unregisterReceiver(widgetIntentReceiver);
+        unregisterReceiver(updateFavoriteReceiver);
         if (becomingNoisyReceiverRegistered) {
             unregisterReceiver(becomingNoisyReceiver);
             becomingNoisyReceiverRegistered = false;
@@ -475,10 +473,10 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         quit();
         releaseResources();
         getContentResolver().unregisterContentObserver(mediaStoreObserver);
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
 
-        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_MUSIC_SERVICE_DESTROYED"));
+        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
     }
 
     @Override
@@ -486,26 +484,6 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
         return musicBind;
     }
 
-    @Nullable
-    @Override
-    public BrowserRoot onGetRoot(@NonNull String clientPackageName, int clientUid, @Nullable Bundle rootHints) {
-        if (!mPackageValidator.isKnownCaller(clientPackageName, clientUid)) {
-            return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT, null);
-        }
-        return new BrowserRoot(AutoMediaIDHelper.MEDIA_ID_ROOT, null);
-    }
-
-    @Override
-    public void onLoadChildren(@NonNull String parentId, @NonNull Result<List<MediaBrowserCompat.MediaItem>> result) {
-        if (AutoMediaIDHelper.MEDIA_ID_EMPTY_ROOT.equals(parentId)) {
-            result.sendResult(new ArrayList<>());
-        } else if (mMusicProvider.isInitialized()) {
-            result.sendResult(mMusicProvider.getChildren(parentId, getResources()));
-        } else {
-            result.detach();
-            mMusicProvider.retrieveMediaAsync(success -> result.sendResult(mMusicProvider.getChildren(parentId, getResources())));
-        }
-    }
 
     @Override
     public void onRebind(Intent intent) {
@@ -666,7 +644,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     public void initNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PreferenceUtil.getInstance().classicNotification()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PreferenceUtil.getInstance(this).classicNotification()) {
             playingNotification = new PlayingNotificationImpl24();
         } else {
             playingNotification = new PlayingNotificationOreo();
@@ -686,8 +664,31 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
                 .setState(isPlaying() ? PlaybackStateCompat.STATE_PLAYING : PlaybackStateCompat.STATE_PAUSED,
                         getSongProgressMillis(), 1);
 
+        setCustomAction(stateBuilder);
 
         mediaSession.setPlaybackState(stateBuilder.build());
+    }
+
+    private void setCustomAction(PlaybackStateCompat.Builder stateBuilder) {
+        int repeatIcon = R.drawable.ic_repeat_white_24dp;  // REPEAT_MODE_NONE
+        if (getRepeatMode() == REPEAT_MODE_THIS) {
+            repeatIcon = R.drawable.ic_repeat_one_white_24dp;
+        } else if (getRepeatMode() == REPEAT_MODE_ALL) {
+            repeatIcon = R.drawable.ic_repeat_white_circle_24dp;
+        }
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                CYCLE_REPEAT, getString(R.string.action_cycle_repeat), repeatIcon)
+                .build());
+
+        final int shuffleIcon = getShuffleMode() == SHUFFLE_MODE_NONE ? R.drawable.ic_shuffle_off_circled : R.drawable.ic_shuffle_on_circled;
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                TOGGLE_SHUFFLE, getString(R.string.action_toggle_shuffle), shuffleIcon)
+                .build());
+
+        final int favoriteIcon = MusicUtil.isFavorite(getApplicationContext(), getCurrentSong()) ? R.drawable.ic_favorite_white_24dp : R.drawable.ic_favorite_border_white_24dp;
+        stateBuilder.addCustomAction(new PlaybackStateCompat.CustomAction.Builder(
+                TOGGLE_FAVORITE, getString(R.string.action_toggle_favorite), favoriteIcon)
+                .build());
     }
 
     private void updateMediaSessionMetaData() {
@@ -706,35 +707,31 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
                 .putLong(MediaMetadataCompat.METADATA_KEY_DURATION, song.getDuration())
                 .putLong(MediaMetadataCompat.METADATA_KEY_TRACK_NUMBER, getPosition() + 1)
                 .putLong(MediaMetadataCompat.METADATA_KEY_YEAR, song.getYear())
-                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null);
+                .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
+                .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            metaData.putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
-        }
 
-        if (PreferenceUtil.getInstance().albumArtOnLockscreen()) {
+        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
-            GlideRequest request = GlideApp.with(MusicService.this)
-                    .asBitmap()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song);
-            if (PreferenceUtil.getInstance().blurredAlbumArt()) {
+            final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder.from(Glide.with(MusicService.this), song)
+                    .checkIgnoreMediaStore(MusicService.this)
+                    .asBitmap().build();
+            if (PreferenceUtil.getInstance(this).blurredAlbumArt()) {
                 request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    request.into(new RetroSimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
+                    request.into(new SimpleTarget<Bitmap>(screenSize.x, screenSize.y) {
                         @Override
-                        public void onLoadFailed(@Nullable Drawable errorDrawable) {
-                            super.onLoadFailed(errorDrawable);
+                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
                             mediaSession.setMetadata(metaData.build());
                         }
 
                         @Override
-                        public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> glideAnimation) {
-                            metaData.putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, copy(resource));
+                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                            super.onLoadFailed(e, errorDrawable);
                             mediaSession.setMetadata(metaData.build());
                         }
                     });
@@ -1055,6 +1052,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
             try {
                 int newPosition = playback.seek(millis);
                 throttledSeekHandler.notifySeek();
+                updateMediaSessionPlaybackState();
                 return newPosition;
             } catch (Exception e) {
                 return -1;
@@ -1164,6 +1162,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
                 }
                 songPlayCountHelper.notifyPlayStateChanged(isPlaying);
                 break;
+            case FAVORITE_STATE_CHANGED:
             case META_CHANGED:
                 updateNotification();
                 updateMediaSessionMetaData();
@@ -1236,7 +1235,7 @@ public class MusicService extends MediaBrowserServiceCompat implements SharedPre
     }
 
     private void registerHeadsetEvents() {
-        if (!headsetReceiverRegistered && PreferenceUtil.getInstance().getHeadsetPlugged()) {
+        if (!headsetReceiverRegistered && PreferenceUtil.getInstance(this).getHeadsetPlugged()) {
             registerReceiver(headsetReceiver, headsetReceiverIntentFilter);
             headsetReceiverRegistered = true;
         }

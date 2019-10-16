@@ -16,14 +16,14 @@ package code.name.monkey.appthemehelper.common.views
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
 import code.name.monkey.appthemehelper.ThemeStore
+import com.google.android.material.textview.MaterialTextView
 
 class ATESecondaryTextView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : AppCompatTextView(context, attrs, defStyleAttr) {
+) : MaterialTextView(context, attrs, defStyleAttr) {
 
     init {
         setTextColor(ThemeStore.textColorSecondary(context))

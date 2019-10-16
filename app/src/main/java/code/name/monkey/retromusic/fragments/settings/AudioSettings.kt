@@ -29,14 +29,14 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 class AudioSettings : AbsSettingsFragment() {
     override fun invalidateSettings() {
         val findPreference: Preference = findPreference("equalizer")!!
-        if (!hasEqualizer() && PreferenceUtil.getInstance().selectedEqualizer != "retro") {
+        if (!hasEqualizer() && PreferenceUtil.getInstance(requireContext()).selectedEqualizer != "retro") {
             findPreference.isEnabled = false
             findPreference.summary = resources.getString(R.string.no_equalizer)
         } else {
             findPreference.isEnabled = true
         }
         findPreference.setOnPreferenceClickListener {
-            NavigationUtil.openEqualizer(activity!!)
+            NavigationUtil.openEqualizer(requireActivity())
             true
         }
     }
@@ -44,7 +44,7 @@ class AudioSettings : AbsSettingsFragment() {
     private fun hasEqualizer(): Boolean {
         val effects = Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL)
 
-        val pm = activity!!.packageManager
+        val pm = requireActivity().packageManager
         val ri = pm.resolveActivity(effects, 0)
         return ri != null
     }

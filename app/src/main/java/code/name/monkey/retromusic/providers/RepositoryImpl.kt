@@ -19,11 +19,24 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
+import code.name.monkey.retromusic.rest.LastFMRestClient
+import code.name.monkey.retromusic.rest.model.LastFmArtist
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class RepositoryImpl(private val context: Context) : Repository {
+
+    override fun artistInfoFloable(
+            name: String,
+            lang: String?,
+            cache: String?
+    ): Observable<LastFmArtist> {
+        return LastFMRestClient(context).apiService.getArtistInfoFloable(name, lang, cache)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun search(query: String?): MutableList<Any> {
         return SearchLoader.searchAll(context, query)
     }
@@ -175,18 +188,5 @@ class RepositoryImpl(private val context: Context) : Repository {
     override fun getGenre(genreId: Int): ArrayList<Song> {
         return GenreLoader.getSongs(context, genreId)
 
-    }
-
-
-    companion object {
-        private var INSTANCE: RepositoryImpl? = null
-
-        val instance: RepositoryImpl
-            @Synchronized get() {
-                if (INSTANCE == null) {
-                    INSTANCE = RepositoryImpl(App.instance)
-                }
-                return INSTANCE!!
-            }
     }
 }

@@ -26,17 +26,17 @@
                 app:cardElevation="4dp"
                 app:cardUseCompatPadding="true">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[18]" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -46,22 +46,23 @@
             android:paddingEnd="4dp"
             android:paddingBottom="8dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold"
+                tools:text="@string/bug_report_summary" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorSecondary"
-                android:textSize="12sp" />
+                android:textAppearance="@style/TextViewBody2"
+                tools:text="@string/bug_report_summary" />
 
         </LinearLayout>
     </LinearLayout>

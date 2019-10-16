@@ -1,42 +1,46 @@
 package code.name.monkey.retromusic.adapter.song
 
+import android.app.ActivityOptions
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
+import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import java.util.*
+
 
 /**
  * Created by hemanths on 13/08/17.
  */
 
-open class SongAdapter @JvmOverloads constructor(protected val activity: AppCompatActivity, dataSet: ArrayList<Song>,
-                                                 @param:LayoutRes protected var itemLayoutRes: Int, usePalette: Boolean, cabHolder: CabHolder?,
-                                                 showSectionName: Boolean = true) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(activity, cabHolder, R.menu.menu_media_selection), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
+open class SongAdapter @JvmOverloads constructor(
+        protected val activity: AppCompatActivity,
+        dataSet: ArrayList<Song>,
+        protected var itemLayoutRes: Int,
+        usePalette: Boolean,
+        cabHolder: CabHolder?,
+        showSectionName: Boolean = true
+) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(activity, cabHolder, R.menu.menu_media_selection), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
     var dataSet: ArrayList<Song>
 
     protected var usePalette = false
@@ -74,40 +78,18 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val song = dataSet[position]
-
         val isChecked = isChecked(song)
         holder.itemView.isActivated = isChecked
-
-        if (holder.adapterPosition == itemCount - 1) {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        } else {
-            if (holder.shortSeparator != null) {
-                holder.shortSeparator!!.visibility = View.GONE
-            }
-        }
-
-        if (holder.title != null) {
-            holder.title!!.text = getSongTitle(song)
-        }
-        if (holder.text != null) {
-            holder.text!!.text = getSongText(song)
-        }
-
+        holder.title?.text = getSongTitle(song)
+        holder.text?.text = getSongText(song)
         loadAlbumCover(song, holder)
-
     }
 
     private fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer!!.setBackgroundColor(color)
-            if (holder.title != null) {
-                holder.title!!.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
-            if (holder.text != null) {
-                holder.text!!.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
-            }
+            holder.paletteColorContainer?.setBackgroundColor(color)
+            holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
         }
     }
 
@@ -115,18 +97,20 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
         if (holder.image == null) {
             return
         }
-        GlideApp.with(activity).asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(song))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .songOptions(song)
+        SongGlideRequest.Builder.from(Glide.with(activity), song)
+                .checkIgnoreMediaStore(activity)
+                .generatePalette(activity).build()
                 .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onColorReady(color: Int) {
-                        setColors(color, holder)
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        super.onLoadCleared(placeholder)
+                        setColors(defaultFooterColor, holder)
                     }
 
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        setColors(defaultFooterColor, holder)
+                    override fun onColorReady(color: Int) {
+                        if (usePalette)
+                            setColors(color, holder)
+                        else
+                            setColors(defaultFooterColor, holder)
                     }
                 })
     }
@@ -160,7 +144,7 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
         if (!showSectionName) {
             return ""
         }
-        val sectionName: String? = when (PreferenceUtil.getInstance().songSortOrder) {
+        val sectionName: String? = when (PreferenceUtil.getInstance(activity).songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
             SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
             SortOrder.SongSortOrder.SONG_ARTIST -> dataSet[position].artistName
@@ -170,41 +154,35 @@ open class SongAdapter @JvmOverloads constructor(protected val activity: AppComp
                 return ""
             }
         }
-
         return MusicUtil.getSectionName(sectionName)
     }
 
     open inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
-
         protected open var songMenuRes = SongMenuHelper.MENU_RES
-
         protected open val song: Song
             get() = dataSet[adapterPosition]
 
         init {
             setImageTransitionName(activity.getString(R.string.transition_album_art))
-            if (menu != null) {
-                menu!!.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
-                    override val song: Song
-                        get() = this@ViewHolder.song
+            menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
+                override val song: Song
+                    get() = this@ViewHolder.song
 
-                    override val menuRes: Int
-                        get() = songMenuRes
+                override val menuRes: Int
+                    get() = songMenuRes
 
-                    override fun onMenuItemClick(item: MenuItem): Boolean {
-                        return onSongMenuItemClick(item) || super.onMenuItemClick(item)
-                    }
-                })
-            }
+                override fun onMenuItemClick(item: MenuItem): Boolean {
+                    return onSongMenuItemClick(item) || super.onMenuItemClick(item)
+                }
+            })
         }
 
         protected open fun onSongMenuItemClick(item: MenuItem): Boolean {
             if (image != null && image!!.visibility == View.VISIBLE) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
-                        val albumPairs = arrayOf<Pair<*, *>>(Pair.create(imageContainer,
-                                activity.resources.getString(R.string.transition_album_art)))
-                        NavigationUtil.goToAlbum(activity, song.albumId, *albumPairs)
+                        val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
+                        NavigationUtil.goToAlbumOptions(activity, song.albumId, options)
                         return true
                     }
                 }

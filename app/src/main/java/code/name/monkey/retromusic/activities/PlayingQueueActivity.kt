@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -27,15 +28,24 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    private val upNextAndQueueTime: String
-        get() = resources.getString(R.string.up_next) + "  •  " + MusicUtil.getReadableDurationString(MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position))
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    protected fun getUpNextAndQueueTime(): String {
+        val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
+
+        return MusicUtil.buildInfoString(
+                resources.getString(R.string.up_next),
+                MusicUtil.getReadableDurationString(duration)
+        )
+    }
+
+    override fun onCreate(
+            savedInstanceState: Bundle?
+    ) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playing_queue)
 
         setStatusbarColorAuto()
-        setNavigationbarColorAuto()
+        setNavigationBarColorPrimary()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
@@ -83,9 +93,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    clearQueue.shrink(true)
+                    clearQueue.shrink()
                 } else if (dy < 0) {
-                    clearQueue.extend(true)
+                    clearQueue.extend()
                 }
             }
         })
@@ -105,7 +115,9 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         updateCurrentSong()
     }
 
-    private fun updateCurrentSong() {}
+    private fun updateCurrentSong() {
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
+    }
 
     override fun onPlayingMetaChanged() {
         updateQueuePosition()
@@ -114,6 +126,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private fun updateQueuePosition() {
         playingQueueAdapter!!.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
@@ -139,8 +152,6 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             recyclerViewDragDropManager = null
         }
 
-
-
         if (wrappedAdapter != null) {
             WrapperAdapterUtils.releaseAll(wrappedAdapter)
             wrappedAdapter = null
@@ -150,11 +161,11 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupToolbar() {
-        playerQueueSubHeader.text = upNextAndQueueTime
+        playerQueueSubHeader.text = getUpNextAndQueueTime()
         playerQueueSubHeader.setTextColor(ThemeStore.accentColor(this))
 
         applyToolbar(toolbar)
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
+        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
 
         clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {

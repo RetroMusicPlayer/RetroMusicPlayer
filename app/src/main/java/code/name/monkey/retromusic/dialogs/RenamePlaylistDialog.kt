@@ -19,16 +19,15 @@ import android.os.Bundle
 import android.provider.MediaStore.Audio.Playlists.Members.PLAYLIST_ID
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.util.PlaylistsUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.WhichButton
-import com.afollestad.materialdialogs.actions.getActionButton
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -41,8 +40,9 @@ class RenamePlaylistDialog : DialogFragment() {
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val materialDialog = MaterialDialog(activity!!, BottomSheet())
+        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
                 .show {
+                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     title(string.rename_playlist_title)
                     customView(layout.dialog_playlist)
                     negativeButton(android.R.string.cancel)
@@ -52,7 +52,6 @@ class RenamePlaylistDialog : DialogFragment() {
                             PlaylistsUtil.renamePlaylist(context, playlistId, playlistView.text!!.toString())
                         }
                     }
-                    getActionButton(WhichButton.POSITIVE).updateTextColor(ThemeStore.accentColor(context))
                 }
 
         val dialogView = materialDialog.getCustomView()

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/player_album_art_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:ignore="ContentDescription,UnusedAttribute" />
+            tools:ignore="ContentDescription,UnusedAttribute"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[2]" />
 
         <View
             android:layout_width="match_parent"

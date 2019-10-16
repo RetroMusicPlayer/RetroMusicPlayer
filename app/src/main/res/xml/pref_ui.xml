@@ -2,7 +2,9 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory app:title="@string/grid_style_label">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        app:title="@string/grid_style_label">
         <code.name.monkey.retromusic.preferences.MaterialListPreference
             android:defaultValue="0"
             android:entries="@array/pref_grid_style_list_titles"
@@ -43,7 +45,9 @@
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_library">
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+            android:layout="@layout/preference_category_title"
+            android:title="@string/pref_header_library">
 
             <code.name.monkey.retromusic.preferences.LibraryPreference
                 android:key="library_categories"

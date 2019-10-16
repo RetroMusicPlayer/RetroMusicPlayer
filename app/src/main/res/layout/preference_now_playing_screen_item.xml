@@ -5,16 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:ignore="ContentDescription">
-    
-    <TextView
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:padding="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textColor="?android:textColorSecondary"
+        android:textAppearance="@style/TextViewHeadline6"
         tools:text="Card layout" />
 
 

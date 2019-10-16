@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,24 +7,66 @@
     android:orientation="vertical"
     android:paddingBottom="12dp">
 
-    <code.name.monkey.retromusic.views.RetroChip
-        android:id="@+id/chipHead"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/titleContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:fontFamily="@font/circular"
-        android:textColor="?android:textColorSecondary"
-        app:chipIconTint="?iconColor"
-        app:chipStrokeColor="?dividerColor"
-        app:chipStrokeWidth="1dp"
-        app:iconStartPadding="8dp"
-        tools:chipIcon="@drawable/ic_person_white_24dp"
-        tools:text="@string/for_you" />
+        android:background="?rectSelector"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextViewHeadline6"
+                android:textStyle="bold"
+                tools:text="@tools:sample/full_names" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextViewCaption"
+                tools:text="@tools:sample/full_names" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:padding="16dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_arrow_forward_white_24dp"
+            app:tint="?colorOnPrimary" />
+    </LinearLayout>
 
     <code.name.monkey.retromusic.views.MetalRecyclerViewPager
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
-        app:itemMargin="28dp" />
-</LinearLayout>
+        android:visibility="gone"
+        app:itemMargin="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

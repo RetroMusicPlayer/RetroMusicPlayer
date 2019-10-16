@@ -1,7 +1,9 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory android:title="@string/pref_header_playlists">
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
+        android:layout="@layout/preference_category_title"
+        android:title="@string/pref_header_playlists">
 
         <code.name.monkey.retromusic.preferences.MaterialListPreference
             android:defaultValue="this_month"

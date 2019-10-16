@@ -50,12 +50,8 @@
     <!-- Android Auto -->
     <string name="always">Sentiasa</string>
     <string name="app_share">Hai. Cuba lihat pemain muzik hebat ini di: https://play.google.com/store/apps/details?id=%s</string>
-    <string name="app_shortcut_last_added_long">\@string/last_added</string>
-    <string name="app_shortcut_last_added_short">\@string/last_added</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_shuffle_all_long">\@string/action_shuffle_all</string>
     <string name="app_shortcut_shuffle_all_short">Kocok</string>
-    <string name="app_shortcut_top_tracks_long">\@string/my_top_tracks</string>
     <string name="app_shortcut_top_tracks_short">Runut teratas</string>
     <string name="app_widget_big_name">Retro Music - Besar</string>
     <string name="app_widget_card_name">Retro Music - Kad</string>

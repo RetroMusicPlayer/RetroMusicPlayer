@@ -19,12 +19,12 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textAppearance="@style/TextViewBody2"
                 android:textStyle="bold"
                 tools:ignore="MissingPrefix" />
 
@@ -32,29 +32,29 @@
                 android:layout_width="36dp"
                 android:layout_height="36dp">
 
-                <code.name.monkey.retromusic.views.IconImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/itemImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_github_circle_white_24dp" />
+                    app:srcCompat="@drawable/ic_github_circle_white_24dp"
+                    app:tint="?colorOnBackground" />
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textAppearance="@style/TextViewBody2"
                 tools:text="Title" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="?android:textColorSecondary"
+                android:textAppearance="@style/TextViewBody1"
                 tools:text="description" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

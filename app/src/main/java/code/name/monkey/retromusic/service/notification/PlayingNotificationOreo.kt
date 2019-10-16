@@ -27,9 +27,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
@@ -38,8 +36,10 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 
 /**
  * @author Hemanth S (h4h13).
@@ -99,22 +99,21 @@ class PlayingNotificationOreo : PlayingNotification() {
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
         service.runOnUiThread {
             if (target != null) {
-                GlideApp.with(service).clear(target);
+                Glide.clear(target)
             }
-            target = GlideApp.with(service)
-                    .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song)
-                    .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
+            target = SongGlideRequest.Builder.from(Glide.with(service), song)
+                    .checkIgnoreMediaStore(service)
+                    .generatePalette(service).build()
+                    .centerCrop()
+                    .into(object : SimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
+                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
                             val mediaNotificationProcessor = MediaNotificationProcessor(service, service) { i, _ -> update(resource.bitmap, i) }
                             mediaNotificationProcessor.processNotification(resource.bitmap)
                         }
 
-                        override fun onLoadFailed(errorDrawable: Drawable?) {
-                            super.onLoadFailed(errorDrawable)
-                            update(null, Color.WHITE)
+                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                            super.onLoadFailed(e, errorDrawable)
+                            update(null, Color.TRANSPARENT)
                         }
 
                         private fun update(bitmap: Bitmap?, bgColor: Int) {
@@ -127,7 +126,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                                 notificationLayoutBig.setImageViewResource(R.id.largeIcon, R.drawable.default_album_art)
                             }
 
-                            if (!PreferenceUtil.getInstance().coloredNotification()) {
+                            if (!PreferenceUtil.getInstance(service).coloredNotification()) {
                                 bgColorFinal = Color.WHITE
                             }
                             setBackgroundColor(bgColorFinal)
@@ -153,13 +152,13 @@ class PlayingNotificationOreo : PlayingNotification() {
                             val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
 
                             val close = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_close_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
                             val playPause = createBitmap(RetroUtil.getTintedVectorDrawable(service,
                                     if (isPlaying)
-                                        R.drawable.ic_pause_white_24dp
+                                        R.drawable.ic_pause_white_48dp
                                     else
-                                        R.drawable.ic_play_arrow_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                                        R.drawable.ic_play_arrow_white_48dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
 
                             notificationLayout.setTextColor(R.id.title, primary)
                             notificationLayout.setTextColor(R.id.subtitle, secondary)

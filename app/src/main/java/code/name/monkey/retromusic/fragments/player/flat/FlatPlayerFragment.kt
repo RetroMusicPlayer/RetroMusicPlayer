@@ -13,16 +13,16 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_flat_player.*
 
-class FlatPlayerFragment : AbsPlayerFragment()  {
+class FlatPlayerFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -89,7 +89,7 @@ class FlatPlayerFragment : AbsPlayerFragment()  {
 
     override fun toolbarIconColor(): Int {
         val isLight = ColorUtil.isColorLight(paletteColor)
-        return if (PreferenceUtil.getInstance().adaptiveColor)
+        return if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(context, isLight)
         else
             ATHUtil.resolveColor(context, R.attr.iconColor)
@@ -103,12 +103,12 @@ class FlatPlayerFragment : AbsPlayerFragment()  {
         val isLight = ColorUtil.isColorLight(color)
 
         //TransitionManager.beginDelayedTransition(mToolbar);
-        val iconColor = if (PreferenceUtil.getInstance().adaptiveColor)
+        val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
         else
             ATHUtil.resolveColor(context!!, R.attr.iconColor)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
-        if (PreferenceUtil.getInstance().adaptiveColor) {
+        if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }
     }

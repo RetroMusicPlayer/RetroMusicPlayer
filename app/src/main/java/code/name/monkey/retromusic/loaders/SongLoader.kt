@@ -18,8 +18,8 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
-import code.name.monkey.retromusic.Constants.BASE_PROJECTION
 import code.name.monkey.retromusic.Constants.BASE_SELECTION
+import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.helper.ShuffleHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
@@ -171,12 +171,13 @@ object SongLoader {
                 albumName ?: "", artistId, artistName, composer ?: "")
     }
 
+
     @JvmOverloads
     fun makeSongCursor(
             context: Context,
             selection: String?,
             selectionValues: Array<String>?,
-            sortOrder: String = PreferenceUtil.getInstance().songSortOrder
+            sortOrder: String = PreferenceUtil.getInstance(context).songSortOrder
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
@@ -195,7 +196,7 @@ object SongLoader {
 
         try {
             return context.contentResolver.query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    BASE_PROJECTION, selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance().filterLength * 1000), selectionValuesFinal, sortOrder)
+                    baseProjection, selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance(context).filterLength * 1000), selectionValuesFinal, sortOrder)
         } catch (e: SecurityException) {
             return null
         }

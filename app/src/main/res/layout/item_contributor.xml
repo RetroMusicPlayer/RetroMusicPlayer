@@ -1,4 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -18,7 +31,8 @@
         android:layout_height="40dp"
         app:civ_border="false"
         app:civ_shadow="false"
-        app:srcCompat="@drawable/ic_person_flat" />
+        app:srcCompat="@drawable/ic_person_flat"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,18 +43,19 @@
         android:paddingEnd="16dp"
         android:paddingBottom="8dp">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="match_parent"
-            app:fontFamily="@font/circular_std_medium"
-            android:layout_height="wrap_content" />
-
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-            android:id="@+id/text"
-            style="@style/TextAppearance.MaterialComponents.Body2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.85" />
+            android:textAppearance="@style/TextViewSubtitle1"
+            android:textStyle="bold"
+            tools:text="Name" />
+
+        <code.name.monkey.retromusic.views.BaselineGridTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:lineHeightHint="24sp"
+            tools:text="Role" />
     </LinearLayout>
 </LinearLayout>

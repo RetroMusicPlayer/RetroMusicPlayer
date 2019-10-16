@@ -10,11 +10,9 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.view.*
 import android.view.animation.DecelerateInterpolator
-import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
-import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -46,10 +44,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.setBackgroundColor(ThemeStore.primaryColor(requireContext()))
         view.setOnTouchListener(FlingPlayBackController(requireContext()))
-        //view.setOnClickListener(v -> NavigationUtil.gotoNowPlayingActivity(getContext()));
         setUpMiniPlayer()
 
         if (RetroUtil.isTablet()) {
@@ -57,9 +52,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious.visibility = View.VISIBLE
             actionPlayingQueue.visibility = View.VISIBLE
         } else {
-            actionNext.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
-            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.GONE else View.VISIBLE
-            actionPrevious.visibility = if (PreferenceUtil.getInstance().isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.GONE else View.VISIBLE
+            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
         }
 
         actionPlayingQueue.setOnClickListener(this)
@@ -166,7 +161,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     fun toggleFavorite(song: Song) {
         MusicUtil.toggleFavorite(requireActivity(), song)
         if (song.id == MusicPlayerRemote.currentSong.id) {
-            //updateIsFavorite()
+            updateIsFavorite()
         }
     }
 

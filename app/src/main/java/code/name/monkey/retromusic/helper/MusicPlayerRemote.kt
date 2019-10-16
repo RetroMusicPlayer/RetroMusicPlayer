@@ -26,6 +26,7 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
@@ -47,7 +48,6 @@ object MusicPlayerRemote {
             false
         } else song.id == currentSong.id
     }
-
 
     val currentSong: Song
         get() = if (musicService != null) {
@@ -108,9 +108,12 @@ object MusicPlayerRemote {
         }
 
         val contextWrapper = ContextWrapper(realActivity)
-
-        contextWrapper.startService(Intent(contextWrapper, MusicService::class.java))
-
+        val intent = Intent(contextWrapper, MusicService::class.java)
+        try {
+            contextWrapper.startService(intent)
+        } catch (ignored: IllegalStateException) {
+            ContextCompat.startForegroundService(context, intent)
+        }
         val binder = ServiceBinder(callback)
 
         if (contextWrapper.bindService(Intent().setClass(contextWrapper, MusicService::class.java), binder, Context.BIND_AUTO_CREATE)) {
@@ -140,8 +143,8 @@ object MusicPlayerRemote {
         try {
             cursor = context.contentResolver.query(uri, projection, null, null, null)
             if (cursor != null && cursor.moveToFirst()) {
-                val column_index = cursor.getColumnIndexOrThrow(column)
-                return cursor.getString(column_index)
+                val columnIndex = cursor.getColumnIndexOrThrow(column)
+                return cursor.getString(columnIndex)
             }
         } catch (e: Exception) {
             Log.e(TAG, e.message)
@@ -205,7 +208,7 @@ object MusicPlayerRemote {
     fun openQueue(queue: ArrayList<Song>, startPosition: Int, startPlaying: Boolean) {
         if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
             musicService!!.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.getInstance().isShuffleModeOn)
+            if (PreferenceUtil.getInstance(musicService).isShuffleModeOn)
                 setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }
@@ -215,7 +218,7 @@ object MusicPlayerRemote {
      */
     fun openAndShuffleQueue(queue: ArrayList<Song>, startPlaying: Boolean) {
         var startPosition = 0
-        if (!queue.isEmpty()) {
+        if (queue.isNotEmpty()) {
             startPosition = Random().nextInt(queue.size)
         }
 

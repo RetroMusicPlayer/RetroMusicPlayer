@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaMetadataRetriever
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -13,20 +14,19 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.*
-import code.name.monkey.retromusic.views.FitSystemWindowsLayout
-import io.reactivex.subjects.PublishSubject
-import io.reactivex.subjects.Subject
+import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
@@ -109,7 +109,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_show_lyrics -> {
-                NavigationUtil.goToLyrics(requireActivity())
+                NavigationUtil.goToLyrics(requireActivity(), null)
                 return true
             }
             R.id.action_equalizer -> {
@@ -126,10 +126,6 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 }
                 val ringtoneManager = RingtoneManager(requireActivity())
                 ringtoneManager.setRingtone(song)
-                return true
-            }
-            R.id.action_settings -> {
-                NavigationUtil.goToSettings(requireActivity())
                 return true
             }
             R.id.action_go_to_genre -> {
@@ -247,13 +243,16 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.setBackgroundColor(ThemeStore.primaryColor(requireActivity()))
-        if (PreferenceUtil.getInstance().fullScreenMode &&
+        view.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSecondary))
+        if (PreferenceUtil.getInstance(requireContext()).fullScreenMode &&
                 view.findViewById<View>(R.id.status_bar) != null) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
-        playerAlbumCoverFragment = requireFragmentManager().findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
         playerAlbumCoverFragment?.setCallbacks(this)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            statusBarShadow?.hide()
     }
 
     interface Callbacks {

@@ -16,36 +16,40 @@ package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.SongContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Created by hemanths on 10/08/17.
  */
+interface SongView {
+    fun songs(songs: ArrayList<Song>)
 
-class SongPresenter(private val view: SongContract.SongView) : Presenter(), SongContract.Presenter {
+    fun showEmptyView()
+}
 
-    override fun loadSongs() {
-        disposable.add(repository.allSongsFlowable
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+interface SongPresenter : Presenter<SongView> {
+    fun loadSongs()
 
-    override fun subscribe() {
-        loadSongs()
-    }
+    class SongPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<SongView>(), SongPresenter {
 
-    private fun showList(songs: ArrayList<Song>) {
-        if (songs.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(songs)
+        private var disposable: Disposable? = null
+
+        override fun loadSongs() {
+            disposable = repository.allSongsFlowable
+                    .subscribe({ view?.songs(it) }, { t -> print(t) })
+        }
+
+        override fun detachView() {
+            super.detachView()
+            disposable?.dispose()
         }
     }
-
-    override fun unsubscribe() {
-        disposable.clear()
-    }
 }
+
+

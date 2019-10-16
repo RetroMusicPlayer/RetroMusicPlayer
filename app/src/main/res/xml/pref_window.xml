@@ -2,9 +2,8 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
-        android:title="@string/window"
-        app:enableCopying="true"
-        app:iconSpaceReserved="true">
+        android:layout="@layout/preference_category_title"
+        android:title="@string/window" >
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"

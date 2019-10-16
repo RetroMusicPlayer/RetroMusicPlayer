@@ -30,22 +30,21 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:textAppearance="@style/TextViewSubtitle1"
+            tools:text="Genre name" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFeatureSettings="onum"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?android:textColorSecondary" />
+            tools:text="Genre details" />
     </LinearLayout>
 
 </FrameLayout>

@@ -21,20 +21,23 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="96dp"
             android:layout_height="96dp"
-            app:srcCompat="@drawable/ic_music_note_off_white_24dp" />
+            app:srcCompat="@drawable/ic_music_note_off_white_24dp"
+            app:tint="?colorOnSurface" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/emptyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/empty"
-            android:textColor="?android:textColorSecondary"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?colorOnSecondary"
             tools:visibility="visible" />
     </LinearLayout>
 </FrameLayout>

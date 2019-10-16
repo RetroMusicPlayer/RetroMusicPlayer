@@ -22,9 +22,10 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
-                android:transitionName="@string/transition_album_art" />
+                android:transitionName="@string/transition_album_art"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-            <androidx.appcompat.widget.Toolbar
+            <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar" />
         </FrameLayout>
@@ -40,8 +41,9 @@
                 android:id="@+id/contentContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
+                android:layout_marginTop="6dp"
+                app:cardElevation="8dp"
+                app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -60,7 +62,8 @@
                             android:layout_height="52dp"
                             android:layout_marginStart="8dp"
                             android:layout_weight="0"
-                            app:civ_border="false" />
+                            app:civ_border="false"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -70,17 +73,18 @@
                             android:orientation="vertical"
                             android:padding="16dp">
 
-                            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/albumTitle"
-                                style="@style/TextAppearance.MaterialComponents.Headline6"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:maxLines="2"
-                                tools:ignore="MissingPrefix" />
+                                android:textAppearance="@style/TextViewHeadline6"
+                                android:textStyle="bold"
+                                tools:ignore="MissingPrefix"
+                                tools:text="Album name" />
 
-                            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                            <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/albumText"
-                                style="@style/TextAppearance.MaterialComponents.Subtitle2"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -89,10 +93,12 @@
                                 android:focusableInTouchMode="true"
                                 android:freezesText="true"
                                 android:marqueeRepeatLimit="marquee_forever"
+                                android:paddingTop="4dp"
                                 android:scrollHorizontally="true"
                                 android:singleLine="true"
+                                android:textAppearance="@style/TextViewHeadline6"
                                 tools:ignore="MissingPrefix"
-                                tools:text="Title" />
+                                tools:text="Album details name" />
 
                         </LinearLayout>
 

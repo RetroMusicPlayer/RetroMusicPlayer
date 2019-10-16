@@ -19,9 +19,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -34,73 +32,83 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
+                app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:strokeColor="?dividerColor"
-                app:strokeWidth="1dp">
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        style="@style/Toolbar"
-                        app:title="@string/folders"
-                        app:titleMarginStart="0dp"
-                        tools:ignore="UnusedAttribute" />
-
-                    <ViewStub
-                        android:id="@+id/cab_stub"
+                    <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="48dp" />
-                </FrameLayout>
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.appbar.MaterialToolbar
+                            android:id="@+id/toolbar"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/toolbar_height"
+                            android:background="?colorSurface"
+                            app:contentInsetStart="0dp"
+                            app:contentInsetStartWithNavigation="0dp"
+                            app:popupTheme="?toolbarPopupTheme"
+                            app:title="@string/search_hint"
+                            app:titleMarginStart="0dp"
+                            app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
+                            tools:ignore="UnusedAttribute" />
+
+                        <ViewStub
+                            android:id="@+id/cab_stub"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp" />
+                    </FrameLayout>
+
+                    <code.name.monkey.retromusic.views.BreadCrumbLayout
+                        android:id="@+id/breadCrumbs"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/tab_height"
+                        android:background="?colorSecondary"
+                        android:paddingStart="60dp"
+                        android:paddingEnd="8dp"
+                        app:layout_collapseMode="pin" />
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-                android:id="@+id/recyclerView"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:layoutAnimation="@anim/layout_animation_fall_down"
-                android:scrollbars="none" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@android:id/empty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/empty"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/empty_text_size" />
+                <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:layoutAnimation="@anim/layout_animation_fall_down"
+                    android:scrollbars="none" />
 
-        </FrameLayout>
-
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@android:id/empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="24dp"
+                    android:text="@string/empty"
+                    android:textAppearance="@style/TextViewNormal"
+                    android:textColor="?colorOnSecondary" />
+            </FrameLayout>
+        </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?dividerColor" />
-
-    <code.name.monkey.retromusic.views.BreadCrumbLayout
-        android:id="@+id/breadCrumbs"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tab_height"
-        android:layout_weight="0"
-        android:elevation="6dp"
-        android:paddingStart="60dp"
-        android:paddingEnd="8dp" />
 </LinearLayout>

@@ -66,10 +66,6 @@
 
     <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
     <!-- App Shortcuts -->
-    <string name="app_shortcut_last_added_long">@string/last_added</string>
-    <string name="app_shortcut_last_added_short">@string/last_added</string>
-    <string name="app_shortcut_shuffle_all_long">@string/action_shuffle_all</string>
-    <string name="app_shortcut_top_tracks_long">@string/my_top_tracks</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
     <string name="app_widget_big_name">Retro music - Big</string>
@@ -191,6 +187,7 @@
     <string name="genre">Genre</string>
 
     <string name="genres">Genres</string>
+    <string name="genres_label">Genres</string>
 
     <string name="git_hub_summary">Fork the project on GitHub</string>
 
@@ -660,4 +657,11 @@
     <string name="action_cycle_repeat">Cycle repeat mode</string>
     <string name="action_toggle_shuffle">Toggle shuffle mode</string>
     <string name="action_toggle_favorite">Toggle favorite</string>
+    <string name="pref_dialog_corner_title">Dialog corner</string>
+    <string name="peak">Peak</string>
+    <string name="recent_added_artists">Recently added artists</string>
+    <string name="recent_added_albums">Recently added albums</string>
+    <string name="most_played_artists">Most played artists</string>
+    <string name="most_played_albums">Most played albums</string>
+    <string name="favorites_songs">You\'re  most favorites songs</string>
 </resources>

@@ -23,34 +23,36 @@
     android:orientation="vertical"
     android:padding="@dimen/mi_baseline">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@id/mi_image"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/mi_baseline"
         android:layout_weight="1"
         android:gravity="center"
+        android:scaleType="center"
         app:layout_parallaxFactor="0.75"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[4]" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@id/mi_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mi_baseline"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textAppearance="@style/TextViewHeadline5"
         tools:ignore="UnusedAttribute"
         tools:text="Lorem ipsum" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@id/mi_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mi_baseline"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:textAppearance="@style/TextViewSubtitle1"
         tools:text="Lorem ipsum dolor sit amet, consectetur, adipisci velit, …" />
 
 </com.heinrichreimersoftware.materialintro.view.parallax.ParallaxLinearLayout>

@@ -18,13 +18,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
-import code.name.monkey.retromusic.auto.AutoMediaIDHelper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.ShuffleHelper
-import code.name.monkey.retromusic.loaders.*
+import code.name.monkey.retromusic.helper.MusicPlayerRemote.cycleRepeatMode
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore
-import code.name.monkey.retromusic.service.MusicService.TOGGLE_FAVORITE
+import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
 import java.util.*
 
@@ -34,7 +31,8 @@ import java.util.*
  */
 
 class MediaSessionCallback(private val context: Context,
-                           private val musicService: MusicService) : MediaSessionCompat.Callback() {
+                           private val musicService: MusicService
+) : MediaSessionCompat.Callback() {
 
     override fun onPlay() {
         super.onPlay()
@@ -70,67 +68,17 @@ class MediaSessionCallback(private val context: Context,
         return MediaButtonIntentReceiver.handleIntent(context, mediaButtonIntent)
     }
 
-    override fun onPlayFromMediaId(mediaId: String?, extras: Bundle?) {
-        super.onPlayFromMediaId(mediaId, extras)
-
-        val musicId = mediaId?.let { AutoMediaIDHelper.extractMusicID(it) }
-        val itemId = musicId?.toInt() ?: -1
-        val songs = arrayListOf<Song>()
-        when (val category = mediaId?.let { AutoMediaIDHelper.extractCategory(it) }) {
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ALBUM -> {
-                val album = AlbumLoader.getAlbum(context, itemId)
-                album.songs?.let { songs.addAll(it) }
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_ARTIST -> {
-                val artist = ArtistLoader.getArtist(context, itemId)
-                songs.addAll(artist.songs)
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_PLAYLIST -> {
-                val playlist = PlaylistLoader.getPlaylist(context, itemId)
-                songs.addAll(playlist.getSongs(context))
-                openQueue(songs, 0, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY,
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS,
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_QUEUE -> {
-                val tracks: List<Song>
-                if (category.equals(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_HISTORY)) {
-                    tracks = TopAndRecentlyPlayedTracksLoader.getRecentlyPlayedTracks(context)
-                } else if (category.equals(AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_TOP_TRACKS)) {
-                    tracks = TopAndRecentlyPlayedTracksLoader.getTopTracks(context)
-                } else {
-                    tracks = MusicPlaybackQueueStore.getInstance(context).savedOriginalPlayingQueue
-                }
-                songs.addAll(tracks)
-                var songIndex = MusicUtil.indexOfSongInList(tracks, itemId)
-                if (songIndex == -1) {
-                    songIndex = 0
-                }
-                openQueue(songs, songIndex, true)
-            }
-            AutoMediaIDHelper.MEDIA_ID_MUSICS_BY_SHUFFLE -> {
-                val allSongs = SongLoader.getAllSongs(context)
-                ShuffleHelper.makeShuffleList(allSongs, -1)
-                openQueue(allSongs, 0, true)
-            }
-        }
-
-    }
-
     override fun onCustomAction(action: String, extras: Bundle?) {
         when (action) {
-            /*  CYCLE_REPEAT -> {
-                  cycleRepeatMode()
-                  musicService.updateMediaSessionPlaybackState()
-              }
+            CYCLE_REPEAT -> {
+                cycleRepeatMode()
+                musicService.updateMediaSessionPlaybackState()
+            }
 
-              TOGGLE_SHUFFLE -> {
-                  musicService.toggleShuffle()
-                  musicService.updateMediaSessionPlaybackState()
-              }
-  */
+            TOGGLE_SHUFFLE -> {
+                musicService.toggleShuffle()
+                musicService.updateMediaSessionPlaybackState()
+            }
             TOGGLE_FAVORITE -> {
                 MusicUtil.toggleFavorite(context, MusicPlayerRemote.currentSong)
                 musicService.updateMediaSessionPlaybackState()

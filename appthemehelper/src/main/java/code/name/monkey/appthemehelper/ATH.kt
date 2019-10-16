@@ -6,14 +6,12 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.view.View
-
+import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
-
-import android.view.View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

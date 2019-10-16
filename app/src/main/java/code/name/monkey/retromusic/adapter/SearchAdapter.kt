@@ -1,27 +1,31 @@
 package code.name.monkey.retromusic.adapter
 
+import android.app.ActivityOptions
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
+import com.bumptech.glide.Glide
 import java.util.*
+import android.util.Pair as UtilPair
 
-
-class SearchAdapter(private val activity: AppCompatActivity, private var dataSet: List<Any>?) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
+class SearchAdapter(
+        private val activity: AppCompatActivity,
+        private var dataSet: List<Any>?
+) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     fun swapDataSet(dataSet: MutableList<Any>) {
         this.dataSet = dataSet
@@ -41,35 +45,28 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ALBUM -> {
-                val album = dataSet!![position] as Album
-                holder.title!!.text = album.title
-                holder.text!!.text = album.artistName
-                GlideApp.with(activity)
-                        .asDrawable()
-                        .load(RetroGlideExtension.getSongModel(album.safeGetFirstSong()))
-                        .transition(RetroGlideExtension.getDefaultTransition())
-                        .songOptions(album.safeGetFirstSong())
-                        .into(holder.image!!)
+                val album = dataSet?.get(position) as Album
+                holder.title?.text = album.title
+                holder.text?.text = album.artistName
+                SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                        .checkIgnoreMediaStore(activity).build()
+                        .into(holder.image)
             }
             ARTIST -> {
-                val artist = dataSet!![position] as Artist
-                holder.title!!.text = artist.name
-                holder.text!!.text = MusicUtil.getArtistInfoString(activity, artist)
-                GlideApp.with(activity)
-                        .asBitmap()
-                        .load(RetroGlideExtension.getArtistModel(artist))
-                        .transition(RetroGlideExtension.getDefaultTransition())
-                        .artistOptions(artist)
-                        .into(holder.image!!)
+                val artist = dataSet?.get(position) as Artist
+                holder.title?.text = artist.name
+                holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
+                ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
+                        .build().into(holder.image);
             }
             SONG -> {
-                val song = dataSet!![position] as Song
-                holder.title!!.text = song.title
-                holder.text!!.text = song.albumName
+                val song = dataSet?.get(position) as Song
+                holder.title?.text = song.title
+                holder.text?.text = song.albumName
             }
             else -> {
-                holder.title!!.text = dataSet!![position].toString()
-                holder.title!!.setTextColor(ThemeStore.accentColor(activity))
+                holder.title?.text = dataSet?.get(position).toString()
+                holder.title?.setTextColor(ThemeStore.accentColor(activity))
             }
         }
     }
@@ -81,12 +78,6 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
     inner class ViewHolder(itemView: View, itemViewType: Int) : MediaEntryViewHolder(itemView) {
         init {
             itemView.setOnLongClickListener(null)
-
-            if (itemViewType != HEADER) {
-                if (separator != null) {
-                    separator!!.visibility = View.GONE
-                }
-            }
 
             if (menu != null) {
                 if (itemViewType == SONG) {
@@ -115,8 +106,16 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
         override fun onClick(v: View?) {
             val item = dataSet!![adapterPosition]
             when (itemViewType) {
-                ALBUM -> NavigationUtil.goToAlbum(activity, (item as Album).id, Pair.create(image, activity.resources.getString(R.string.transition_album_art)))
-                ARTIST -> NavigationUtil.goToArtist(activity, (item as Artist).id, Pair.create(image, activity.resources.getString(R.string.transition_artist_image)))
+                ALBUM -> {
+                    val options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                            UtilPair.create(image, activity.getString(R.string.transition_album_art)))
+                    NavigationUtil.goToAlbumOptions(activity, (item as Album).id, options)
+                }
+                ARTIST -> {
+                    val options = ActivityOptions.makeSceneTransitionAnimation(activity,
+                            UtilPair.create(image, activity.getString(R.string.transition_artist_image)))
+                    NavigationUtil.goToArtistOptions(activity, (item as Artist).id, options)
+                }
                 SONG -> {
                     val playList = ArrayList<Song>()
                     playList.add(item as Song)
@@ -128,9 +127,9 @@ class SearchAdapter(private val activity: AppCompatActivity, private var dataSet
 
     companion object {
 
-        private val HEADER = 0
-        private val ALBUM = 1
-        private val ARTIST = 2
-        private val SONG = 3
+        private const val HEADER = 0
+        private const val ALBUM = 1
+        private const val ARTIST = 2
+        private const val SONG = 3
     }
 }

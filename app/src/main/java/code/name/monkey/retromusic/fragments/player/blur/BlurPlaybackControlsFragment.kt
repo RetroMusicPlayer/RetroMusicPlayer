@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
 
 class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -113,17 +112,11 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
         updatePrevNextColor()
 
+        text.setTextColor(lastDisabledPlaybackControlsColor)
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
-            color
-        } else {
-            ThemeStore.accentColor(requireContext())
-        }.ripAlpha()
-
-        text.setTextColor(colorFinal)
-        TintHelper.setTintAuto(progressSlider, colorFinal, false)
-        volumeFragment?.setTintableColor(Color.WHITE)
-        setFabColor(colorFinal)
+        TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor , false)
+        volumeFragment?.setTintableColor(lastPlaybackControlsColor)
+        setFabColor(lastPlaybackControlsColor)
     }
 
     private fun setFabColor(i: Int) {

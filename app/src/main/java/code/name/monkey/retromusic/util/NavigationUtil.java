@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.util;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -23,9 +24,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
+
+import org.jetbrains.annotations.NotNull;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
@@ -53,30 +55,33 @@ import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
 
 public class NavigationUtil {
 
-    public static void goToAlbum(@NonNull Activity activity, int i,
-                                 @Nullable Pair... sharedElements) {
+    public static void goToAlbum(@NonNull Activity activity, int albumId) {
         Intent intent = new Intent(activity, AlbumDetailsActivity.class);
-        intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, i);
-        //noinspection unchecked
-        ActivityCompat.startActivity(activity, intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+        intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, albumId);
+        ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public static void goToArtist(@NonNull Activity activity, int i,
-                                  @Nullable Pair... sharedElements) {
+    public static void goToAlbumOptions(@NonNull Activity activity,
+                                        int albumId,
+                                        @NonNull ActivityOptions activityOptions) {
+        Intent intent = new Intent(activity, AlbumDetailsActivity.class);
+        intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, albumId);
+        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
+    }
+
+    public static void goToArtistOptions(@NotNull AppCompatActivity activity,
+                                         int artistId,
+                                         @NonNull ActivityOptions options) {
+
         Intent intent = new Intent(activity, ArtistDetailActivity.class);
-        intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, i);
-        //noinspection unchecked
-        ActivityCompat.startActivity(activity, intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+        intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, artistId);
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     public static void goToArtist(@NonNull Activity activity, int i) {
         Intent intent = new Intent(activity, ArtistDetailActivity.class);
         intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, i);
-        //noinspection unchecked
-        ActivityCompat.startActivity(activity, intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, null).toBundle());
+        ActivityCompat.startActivity(activity, intent, null);
     }
 
     public static void goToPlaylistNew(@NonNull Activity activity, @NonNull Playlist playlist) {
@@ -112,9 +117,10 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public static void goToLyrics(@NonNull Activity activity) {
+    public static void goToLyrics(@NonNull Activity activity,
+                                  @Nullable ActivityOptions activityOptions) {
         Intent intent = new Intent(activity, LyricsActivity.class);
-        ActivityCompat.startActivity(activity, intent, null);
+        ActivityCompat.startActivity(activity, intent, activityOptions != null ? activityOptions.toBundle() : null);
     }
 
     public static void goToGenre(@NonNull Activity activity, @NonNull Genre genre) {
@@ -135,8 +141,10 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, new Intent(activity, AboutActivity.class), null);
     }
 
-    public static void goToUserInfo(@NonNull Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class), null);
+    public static void goToUserInfo(@NonNull Activity activity,
+                                    @NonNull ActivityOptions activityOptions) {
+        ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class),
+                activityOptions.toBundle());
     }
 
     public static void goToOpenSource(@NonNull Activity activity) {
@@ -144,16 +152,16 @@ public class NavigationUtil {
     }
 
     public static void goToSearch(@NonNull Activity activity,
-                                  @Nullable Pair... sharedElements) {
+                                  @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+                activityOptions.toBundle());
     }
 
     public static void goToSearch(@NonNull Activity activity, boolean isMicOpen,
-                                  @Nullable Pair... sharedElements) {
+                                  @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class)
                         .putExtra(SearchActivity.EXTRA_SHOW_MIC, isMicOpen),
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedElements).toBundle());
+                activityOptions.toBundle());
     }
 
     public static void goToSupportDevelopment(@NonNull Activity activity) {
@@ -171,4 +179,6 @@ public class NavigationUtil {
     public static void bugReport(@NonNull Activity activity) {
         ActivityCompat.startActivity(activity, new Intent(activity, BugReportActivity.class), null);
     }
+
+
 }

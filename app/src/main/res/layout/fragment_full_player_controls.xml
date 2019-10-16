@@ -23,9 +23,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more_vert_white_24dp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
@@ -34,13 +33,15 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
             android:textColor="@color/md_white_1000"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/songFavourite"
             app:layout_constraintStart_toEndOf="@+id/playerMenu"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/for_you" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -49,6 +50,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:paddingStart="8dp"
+            android:paddingTop="12dp"
             android:paddingEnd="8dp"
             android:textColor="@color/md_white_1000"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,32 +82,32 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:fontFamily="sans-serif-medium"
+            android:fontFeatureSettings="onum"
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="@color/md_white_1000"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:00" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:fontFamily="sans-serif-medium"
+            android:fontFeatureSettings="onum"
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="@color/md_white_1000"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:00" />

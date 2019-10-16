@@ -32,19 +32,19 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
                 android:text="@string/bug_report_use_account"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
                 android:text="@string/your_account_data_is_only_used_for_authentication"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+                android:textAppearance="@style/TextViewCaption" />
         </LinearLayout>
 
     </FrameLayout>
@@ -58,13 +58,13 @@
         android:paddingEnd="16dp"
         android:paddingRight="16dp">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/bug_report_issue"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -102,13 +102,13 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
             android:text="@string/login"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="@style/TextViewOverline"
             android:textColor="?android:textColorSecondary" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -171,19 +171,19 @@
             android:paddingTop="8dp"
             android:paddingBottom="8dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
                 android:text="@string/bug_report_manual"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+                android:textAppearance="@style/TextViewSubtitle1" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:lineSpacingExtra="8dp"
                 android:text="@string/you_will_be_forwarded_to_the_issue_tracker_website"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
+                android:textAppearance="@style/TextViewCaption" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

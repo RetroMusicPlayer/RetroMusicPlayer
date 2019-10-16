@@ -24,18 +24,17 @@
         android:orientation="vertical"
         android:padding="0dip">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/custom_list_view_row_text_view"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
-            android:layout_width="fill_parent"
-            android:layout_height="22dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="#000000" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/custom_list_view_row_subtext_view"
-            android:layout_width="fill_parent"
-            android:layout_height="18dip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:textColor="#000000"
             android:textSize="12sp" />

@@ -24,6 +24,8 @@ import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
@@ -74,22 +76,33 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val materialListPreference = preference as MaterialListPreference
-        position = materialListPreference.findIndexOfValue(materialListPreference.value)
-
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
-        materialDialog = MaterialDialog(activity!!, BottomSheet())
-                .show {
-                    title(text = materialListPreference.title.toString())
-                    positiveButton(R.string.set)
-                    listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
-                        materialListPreference.callChangeListener(entriesValues!![index])
-                        materialListPreference.setCustomValue(entriesValues[index])
-                        materialListPreference.summary = entries!![index]
-                        dismiss()
+        val position: Int = arguments?.getInt(EXTRA_POSITION) ?: 0
+        materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+                .title(text = materialListPreference.title.toString())
+                .positiveButton(R.string.set)
+                .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+                .listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
+                    entriesValues?.let {
+                        materialListPreference.callChangeListener(it[index])
+                        materialListPreference.setCustomValue(it[index])
                     }
+                    entries?.let {
+                        materialListPreference.summary = it[index]
+                        val value = materialListPreference.entryValues[index].toString()
+                        if (materialListPreference.callChangeListener(value)) {
+                            materialListPreference.value = value
+                        }
+                    }
+                    dismiss()
                 }
         return materialDialog
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        materialDialog.dismiss()
     }
 
     private lateinit var materialDialog: MaterialDialog
@@ -101,18 +114,22 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
     }
 
     companion object {
-        var position = 0
+
         private const val EXTRA_KEY = "key"
         private const val EXTRA_TITLE = "title"
+        private const val EXTRA_POSITION = "position"
         private const val EXTRA_ENTRIES = "extra_entries"
         private const val EXTRA_ENTRIES_VALUES = "extra_entries_values"
 
         fun newInstance(listPreference: ListPreference): MaterialListPreferenceDialog {
             val entries = listPreference.entries.toList() as ArrayList<String>
             val entriesValues = listPreference.entryValues.toList() as ArrayList<String>
+            println("List value: ${listPreference.value}")
+            val position = listPreference.findIndexOfValue(listPreference.value)
             val args = Bundle()
-            args.putString(EXTRA_KEY, listPreference.key)
+            args.putString(ARG_KEY, listPreference.key)
             args.putString(EXTRA_TITLE, listPreference.title.toString())
+            args.putInt(EXTRA_POSITION, position)
             args.putStringArrayList(EXTRA_ENTRIES, entries)
             args.putStringArrayList(EXTRA_ENTRIES_VALUES, entriesValues)
             val fragment = MaterialListPreferenceDialog()

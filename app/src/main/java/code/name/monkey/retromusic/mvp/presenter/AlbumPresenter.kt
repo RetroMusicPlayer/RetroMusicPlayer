@@ -15,34 +15,44 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.AlbumContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.Disposable
 import java.util.*
+import javax.inject.Inject
 
 
 /**
  * Created by hemanths on 12/08/17.
  */
+interface AlbumsView : BaseView {
+    fun albums(albums: ArrayList<Album>)
+}
 
-class AlbumPresenter(private val view: AlbumContract.AlbumView) : Presenter(), AlbumContract.Presenter {
+interface AlbumsPresenter : Presenter<AlbumsView> {
 
-    override fun subscribe() {
-        loadAlbums()
-    }
+    fun loadAlbums()
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    class AlbumsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<AlbumsView>(), AlbumsPresenter {
 
-    private fun showList(albums: ArrayList<Album>) {
-        view.showData(albums)
-    }
+        private var disposable: Disposable? = null
 
-    override fun loadAlbums() {
-        disposable.add(repository.allAlbumsFlowable
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
+        private fun showList(albums: ArrayList<Album>) {
+            view?.albums(albums)
+        }
+
+        override fun detachView() {
+            super.detachView()
+            disposable?.dispose()
+        }
+
+        override fun loadAlbums() {
+            disposable = repository.allAlbumsFlowable
+                    .subscribe({ view?.albums(it) }, { t -> println(t) })
+        }
     }
 }

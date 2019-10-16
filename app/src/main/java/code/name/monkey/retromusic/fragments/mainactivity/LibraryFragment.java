@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,12 +26,8 @@ import com.google.android.material.card.MaterialCardView;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
-import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
@@ -54,7 +50,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     private Toolbar toolbar;
     private AppBarLayout appBarLayout;
-    private View contentContainer;
     private MaterialCardView toolbarContainer;
 
     private MaterialCab cab;
@@ -80,7 +75,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public void onDestroyView() {
         super.onDestroyView();
         disposable.dispose();
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(requireActivity()).unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Nullable
@@ -89,11 +84,10 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
-        contentContainer = view.findViewById(R.id.fragmentContainer);
-        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         appBarLayout = view.findViewById(R.id.appBarLayout);
+        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         toolbar = view.findViewById(R.id.toolbar);
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtil.getInstance(requireActivity()).registerOnSharedPreferenceChangedListener(this);
         return view;
     }
 
@@ -149,19 +143,16 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        int primaryColor = ThemeStore.Companion.primaryColor(getContext());
-        TintHelper.setTintAuto(contentContainer, primaryColor, true);
-        appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
-            Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
-            NavigationUtil.goToSearch(getMainActivity(), pair);
+            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), options);
         });
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) ->
-                getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
+        ToolbarContentTintHelper.colorBackButton(toolbar );
+        toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 
     private Fragment getCurrentFragment() {
@@ -183,9 +174,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private void selectedFragment(Fragment fragment) {
         fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
         fragmentTransaction
-                .replace(R.id.fragmentContainer, fragment, TAG)
+                .replace(R.id.fragmentContainer, fragment, LibraryFragment.TAG)
                 .commit();
     }
 
@@ -200,7 +190,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
                 .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ThemeStore.Companion.primaryColor(Objects.requireNonNull(getActivity()))))
+                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary)))
                 .start(callback);
         return cab;
     }
@@ -224,15 +214,15 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).getSubMenu());
 
+        } else if (currentFragment instanceof GenresFragment) {
+            menu.removeItem(R.id.action_new_playlist);
+            menu.removeItem(R.id.action_grid_size);
+            menu.removeItem(R.id.action_sort_order);
         } else {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title).setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.removeItem(R.id.action_grid_size);
         }
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
     }
 
     @Override
@@ -367,8 +357,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-                Pair<View, String> pair = new Pair<>(toolbarContainer, getString(R.string.transition_toolbar));
-                NavigationUtil.goToSearch(getMainActivity(), pair);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
+                NavigationUtil.goToSearch(getMainActivity(), options);
                 break;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");

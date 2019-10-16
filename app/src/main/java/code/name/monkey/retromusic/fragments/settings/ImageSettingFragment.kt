@@ -40,7 +40,7 @@ class ImageSettingFragment : AbsSettingsFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preference: Preference = findPreference("auto_download_images_policy")!!
-        setSummary(preference)
+        val preference: Preference? = findPreference("auto_download_images_policy")
+        preference?.let { setSummary(it) }
     }
 }

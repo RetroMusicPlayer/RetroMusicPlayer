@@ -45,7 +45,7 @@ class TopExceptionHandler() : Thread.UncaughtExceptionHandler {
             }
         }
         report += "-------------------------------\n\n"
-        ActivityCompat.startActivity(App.context, Intent(App.context, ErrorHandlerActivity::class.java)
+        ActivityCompat.startActivity(App.getContext(), Intent(App.getContext(), ErrorHandlerActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra("error", report), null)
         defaultUEH.uncaughtException(t, e)
