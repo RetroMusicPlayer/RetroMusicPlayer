@@ -150,7 +150,7 @@ open class BugReportActivity : AbsThemeActivity() {
     private fun copyDeviceInfoToClipBoard() {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo?.toMarkdown())
-        clipboard.primaryClip = clip
+        clipboard.setPrimaryClip(clip)
         Toast.makeText(this@BugReportActivity, R.string.copied_device_info_to_clipboard, Toast.LENGTH_LONG).show()
     }
 
