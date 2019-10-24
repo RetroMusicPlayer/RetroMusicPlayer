@@ -47,6 +47,7 @@
     <string name="action_grid_size_land">Розмір сітки (горизонтальної)</string>
     <string name="action_next">Наступний</string>
     <string name="action_play">Відтворити</string>
+    <string name="action_play_all">Відтворити все</string>
     <string name="action_play_next">Відтворити наступним</string>
     <string name="action_play_pause">Відтворення/Пауза</string>
     <string name="action_previous">Попередній</string>
@@ -388,6 +389,7 @@
     <string name="select_all">Вибрати все</string>
     <string name="select_banner_photo">Вибрати фото банера</string>
     <string name="selected">Вибрано</string>
+    <string name="set">Встановити</string>
     <string name="set_artist_image">Встановити зображення виконавця</string>
     <string name="share_app">Поділитись додатком</string>
     <string name="shuffle">Перемішати</string>
