@@ -1,10 +1,8 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.Activity
-import android.app.SearchManager
 import android.app.Service
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -77,6 +75,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
             keyboardPopup.setTextColor(this)
             keyboardPopup.iconTint = this
         }
+        if (savedInstanceState != null) {
+            query = savedInstanceState.getString(QUERY);
+        }
+
     }
 
     private fun setupRecyclerView() {
@@ -104,13 +106,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
     }
 
     private fun setupSearchView() {
-        getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView.addTextChangedListener(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        searchPresenter.search(query)
     }
 
     override fun onDestroy() {
@@ -123,11 +119,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         outState.putString(QUERY, query)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        searchPresenter.search(savedInstanceState.getString(QUERY, ""))
-    }
-
     private fun setUpToolBar() {
         title = null
         appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
@@ -135,14 +126,14 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
 
     private fun search(query: String) {
-        this.query = query.trim { it <= ' ' }
+        this.query = query
         voiceSearch.visibility = if (query.isNotEmpty()) View.GONE else View.VISIBLE
         searchPresenter.search(query)
     }
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        searchPresenter.search(query!!)
+        query?.let { search(it) }
     }
 
     override fun onQueryTextSubmit(query: String): Boolean {

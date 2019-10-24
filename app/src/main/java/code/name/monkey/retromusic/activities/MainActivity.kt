@@ -129,7 +129,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
         val uri = intent.data
         val mimeType = intent.type
         var handled = false
-        println("uri -> $uri")
         if (intent.action != null && intent.action == MediaStore.INTENT_ACTION_MEDIA_PLAY_FROM_SEARCH) {
             val songs = SearchQueryHelper.getSongs(this, intent.extras!!)
             if (MusicPlayerRemote.shuffleMode == MusicService.SHUFFLE_MODE_SHUFFLE) {

@@ -16,27 +16,21 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.textview.MaterialTextView
 
 
 class HomeAdapter(
         private val activity: AppCompatActivity,
-        private val displayMetrics: DisplayMetrics,
-        private val repository: Repository
+        private val displayMetrics: DisplayMetrics
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var list = ArrayList<Home>()
+
     override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            0 -> TOP_ARTISTS
-            1 -> TOP_ALBUMS
-            2 -> RECENT_ARTISTS
-            3 -> RECENT_ALBUMS
-            4 -> PLAYLISTS
-            else -> -1
-        }
+        return list[position].homeSection
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,35 +45,39 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        println(getItemViewType(position))
+        println("ViewType ${getItemViewType(position)}")
         when (getItemViewType(position)) {
             RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(repository.recentAlbums(), R.string.recent_albums, R.string.recent_added_albums)
+                viewHolder.bindView(list[position].arrayList.toAlbums(), R.string.recent_albums, R.string.recent_added_albums)
             }
             TOP_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-
-                viewHolder.bindView(repository.topAlbums(), R.string.top_albums, R.string.most_played_albums)
+                viewHolder.bindView(list[position].arrayList.toAlbums(), R.string.top_albums, R.string.most_played_albums)
             }
             RECENT_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(repository.recentArtists(), R.string.recent_artists, R.string.recent_added_artists)
+                viewHolder.bindView(list[position].arrayList.toArtists(), R.string.recent_artists, R.string.recent_added_artists)
             }
             TOP_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
 
-                viewHolder.bindView(repository.recentArtists(), R.string.top_artists, R.string.most_played_artists)
+                viewHolder.bindView(list[position].arrayList.toArtists(), R.string.top_artists, R.string.most_played_artists)
             }
             PLAYLISTS -> {
                 val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(repository.favoritePlaylist, R.string.favorites, R.string.favorites_songs)
+                viewHolder.bindView(list[position].arrayList as ArrayList<Playlist>, R.string.favorites, R.string.favorites_songs)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return list.size
+    }
+
+    fun swapData(sections: ArrayList<Home>) {
+        list = sections
+        notifyDataSetChanged()
     }
 
     companion object {
@@ -103,11 +101,13 @@ class HomeAdapter(
                     show()
                     adapter = AlbumFullWidthAdapter(activity, list, displayMetrics)
                 }
-                titleContainer . show ()
+                titleContainer.show()
                 title.text = activity.getString(titleRes)
                 text.text = activity.getString(subtitleRes)
             }
         }
+
+
     }
 
     inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
@@ -154,3 +154,20 @@ class HomeAdapter(
         val text: MaterialTextView = itemView.findViewById(R.id.text)
     }
 }
+
+private fun <E> ArrayList<E>.toAlbums(): ArrayList<Album> {
+    val arrayList = ArrayList<Album>()
+    for (x in this) {
+        arrayList.add(x as Album)
+    }
+    return arrayList;
+}
+
+private fun <E> ArrayList<E>.toArtists(): ArrayList<Artist> {
+    val arrayList = ArrayList<Artist>()
+    for (x in this) {
+        arrayList.add(x as Artist)
+    }
+    return arrayList;
+}
+
