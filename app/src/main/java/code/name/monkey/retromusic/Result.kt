@@ -12,19 +12,13 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp
-
-import androidx.annotation.CallSuper
+package code.name.monkey.retromusic
 
 /**
- * Created by hemanths on 16/08/17.
+ * Created by hemanths on 2019-10-23.
  */
 
-
-interface Presenter<T> {
-    @CallSuper
-    fun attachView(view: T)
-
-    @CallSuper
-    fun detachView()
+sealed class Result<out T : Any> {
+    class Success<out T : Any>(val data: T) : Result<T>()
+    class Error(val exception: Throwable) : Result<Nothing>()
 }

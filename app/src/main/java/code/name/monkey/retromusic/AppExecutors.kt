@@ -12,19 +12,16 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.mvp
+package code.name.monkey.retromusic
 
-import androidx.annotation.CallSuper
+import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.CoroutineContext
 
 /**
- * Created by hemanths on 16/08/17.
+ * Created by hemanths on 2019-10-23.
  */
 
-
-interface Presenter<T> {
-    @CallSuper
-    fun attachView(view: T)
-
-    @CallSuper
-    fun detachView()
-}
+class AppExecutors constructor(
+        val ioContext: CoroutineContext = Dispatchers.IO,
+        val uiContext: CoroutineContext = Dispatchers.Main
+)

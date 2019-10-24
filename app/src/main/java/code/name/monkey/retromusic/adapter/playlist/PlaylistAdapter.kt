@@ -215,9 +215,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     companion object {
-
         val TAG: String = PlaylistAdapter::class.java.simpleName
-
         private const val SMART_PLAYLIST = 0
         private const val DEFAULT_PLAYLIST = 1
     }
