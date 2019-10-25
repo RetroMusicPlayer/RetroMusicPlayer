@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsView
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -50,6 +51,9 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
+        App.musicComponent.inject(this)
+
+        playlistSongsPresenter.attachView(this)
 
         setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
@@ -64,10 +68,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         } else {
             finish()
         }
-
-        App.musicComponent.inject(this)
-
-        playlistSongsPresenter.attachView(this)
 
         setUpToolBar()
         setUpRecyclerView()
@@ -160,14 +160,12 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-
         if (playlist !is AbsCustomPlaylist) {
             // Playlist deleted
             if (!PlaylistsUtil.doesPlaylistExist(this, playlist.id)) {
                 finish()
                 return
             }
-
             // Playlist renamed
             val playlistName = PlaylistsUtil.getNameForPlaylist(this, playlist.id.toLong())
             if (playlistName != playlist.name) {
@@ -182,8 +180,13 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         supportActionBar!!.title = title
     }
 
-    private fun checkIsEmpty() {
+    private fun checkForPadding() {
+        val height = DensityUtil.dip2px(this, 52f)
+        recyclerView.setPadding(0, 0, 0, (height ))
+    }
 
+    private fun checkIsEmpty() {
+        checkForPadding()
         empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
         emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
     }

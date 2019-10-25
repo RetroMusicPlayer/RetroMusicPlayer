@@ -19,7 +19,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
-import java.util.*
 import android.util.Pair as UtilPair
 
 class SearchAdapter(
@@ -57,7 +56,7 @@ class SearchAdapter(
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
                 ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
-                        .build().into(holder.image);
+                        .build().into(holder.image)
             }
             SONG -> {
                 val song = dataSet?.get(position) as Song
@@ -79,16 +78,14 @@ class SearchAdapter(
         init {
             itemView.setOnLongClickListener(null)
 
-            if (menu != null) {
-                if (itemViewType == SONG) {
-                    menu!!.visibility = View.VISIBLE
-                    menu!!.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
-                        override val song: Song
-                            get() = dataSet!![adapterPosition] as Song
-                    })
-                } else {
-                    menu!!.visibility = View.GONE
-                }
+            if (itemViewType == SONG) {
+                menu?.visibility = View.VISIBLE
+                menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
+                    override val song: Song
+                        get() = dataSet!![adapterPosition] as Song
+                })
+            } else {
+                menu?.visibility = View.GONE
             }
 
             when (itemViewType) {
@@ -126,7 +123,6 @@ class SearchAdapter(
     }
 
     companion object {
-
         private const val HEADER = 0
         private const val ALBUM = 1
         private const val ARTIST = 2

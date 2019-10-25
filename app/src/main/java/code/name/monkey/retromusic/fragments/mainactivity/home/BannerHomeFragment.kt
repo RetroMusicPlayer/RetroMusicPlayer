@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.app.ActivityOptions
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
@@ -18,7 +17,6 @@ import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
-import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -28,8 +26,8 @@ import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
+import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
-import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -49,19 +47,14 @@ import javax.inject.Inject
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
     private lateinit var homeAdapter: HomeAdapter
     @Inject
-    lateinit var repository: Repository
+    lateinit var homePresenter: HomePresenter
 
     private var disposable: CompositeDisposable = CompositeDisposable()
     private lateinit var toolbar: Toolbar
 
     override fun sections(sections: ArrayList<Home>) {
-        val finalList = sections.sortedWith(compareBy { it.priority })
-
-        if (sections.isEmpty()) {
-            showEmptyView()
-        } else {
-            emptyContainer.hide()
-        }
+        println(sections.size)
+        homeAdapter.swapData(sections)
     }
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -133,17 +126,18 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         App.musicComponent.inject(this)
-        homeAdapter = HomeAdapter(mainActivity, displayMetrics, repository)
+        homeAdapter = HomeAdapter(mainActivity, displayMetrics)
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
+        homePresenter.attachView(this)
+        homePresenter.loadSections()
     }
 
     private fun toolbarColor(): Int {
         return if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) {
-            toolbarContainer.setBackgroundColor(Color.TRANSPARENT)
             ColorUtil.withAlpha(RetroColorUtil.toolbarColor(mainActivity), 0.85f)
         } else {
             RetroColorUtil.toolbarColor(mainActivity)
@@ -176,6 +170,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onDestroyView() {
         super.onDestroyView()
         disposable.dispose()
+        homePresenter.detachView()
     }
 
     override fun showEmptyView() {

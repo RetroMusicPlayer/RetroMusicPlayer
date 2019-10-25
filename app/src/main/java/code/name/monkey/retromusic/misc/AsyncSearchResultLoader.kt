@@ -12,35 +12,39 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.loaders
+package code.name.monkey.retromusic.misc
 
 import android.content.Context
+import android.text.TextUtils
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.loaders.AlbumLoader
+import code.name.monkey.retromusic.loaders.ArtistLoader
+import code.name.monkey.retromusic.loaders.SongLoader
+import java.util.*
 
+internal class AsyncSearchResultLoader(context: Context, private val query: String) : WrappedAsyncTaskLoader<List<Any>>(context) {
 
-object SearchLoader {
-    fun searchAll(context: Context, query: String?): MutableList<Any> {
-        val results = mutableListOf<Any>()
-        query?.let {
-            val songs = SongLoader.getSongs(context, it)
-            if (songs.isNotEmpty()) {
+    override fun loadInBackground(): List<Any>? {
+        val results = ArrayList<Any>()
+        if (!TextUtils.isEmpty(query)) {
+            val songs = SongLoader.getSongs(context, query.trim { it <= ' ' })
+            if (!songs.isEmpty()) {
                 results.add(context.resources.getString(R.string.songs))
                 results.addAll(songs)
             }
 
-            val artists = ArtistLoader.getArtists(context, it)
-            if (artists.isNotEmpty()) {
+            val artists = ArtistLoader.getArtists(context, query.trim { it <= ' ' })
+            if (!artists.isEmpty()) {
                 results.add(context.resources.getString(R.string.artists))
                 results.addAll(artists)
             }
 
-            val albums = AlbumLoader.getAlbums(context, it)
-            if (albums.isNotEmpty()) {
+            val albums = AlbumLoader.getAlbums(context, query.trim { it <= ' ' })
+            if (!albums.isEmpty()) {
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
         }
         return results
-
     }
 }
