@@ -66,14 +66,20 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper.stop()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_peak_control_player, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+            view: View,
+            savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
     }
 
     override fun show() {
@@ -137,6 +143,14 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         setUpProgressSlider()
     }
 
+    private fun setUpShuffleButton() {
+        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
+    }
+
+    private fun setUpRepeatButton() {
+        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
+    }
+
     override fun setUpProgressSlider() {
         progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
@@ -165,9 +179,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
-    private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
@@ -176,9 +187,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         }
     }
 
-    private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
 
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {

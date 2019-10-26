@@ -66,7 +66,7 @@ class HomeAdapter(
             }
             PLAYLISTS -> {
                 val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(list[position].arrayList as ArrayList<Playlist>, R.string.favorites, R.string.favorites_songs)
+                viewHolder.bindView(list[position].arrayList.toPlaylist(), R.string.favorites, R.string.favorites_songs)
             }
         }
     }
@@ -167,6 +167,14 @@ private fun <E> ArrayList<E>.toArtists(): ArrayList<Artist> {
     val arrayList = ArrayList<Artist>()
     for (x in this) {
         arrayList.add(x as Artist)
+    }
+    return arrayList;
+}
+
+private fun <E> ArrayList<E>.toPlaylist(): ArrayList<Playlist> {
+    val arrayList = ArrayList<Playlist>()
+    for (x in this) {
+        arrayList.add(x as Playlist)
     }
     return arrayList;
 }

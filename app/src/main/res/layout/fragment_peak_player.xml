@@ -61,7 +61,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:freezesText="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:textAppearance="@style/TextViewSubtitle1"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?colorOnSecondary"
@@ -83,7 +91,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="@tools:sample/lorem" />
+        tools:text="@tools:sample/lorem/random" />
 
     <FrameLayout
         android:id="@+id/playbackControlsFragmentContainer"

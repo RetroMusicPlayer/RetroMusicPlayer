@@ -48,7 +48,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpPlayerToolbar()
         setUpSubFragments()
-
+        title.isSelected = true
         playerImage.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(requireActivity(), it, getString(R.string.transition_lyrics))
             NavigationUtil.goToLyrics(requireActivity(), options)

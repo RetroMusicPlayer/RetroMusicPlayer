@@ -57,21 +57,25 @@
                 android:padding="16dp">
 
                 <code.name.monkey.retromusic.views.VerticalTextView
-                    android:id="@+id/songTitle"
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:ellipsize="end"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:freezesText="true"
                     android:gravity="start"
+                    android:marqueeRepeatLimit="marquee_forever"
                     android:rotation="0"
+                    android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:textAppearance="@style/TextViewHeadline3"
                     android:textStyle="bold"
                     tools:ignore="MissingPrefix"
-                    tools:text="Song title" />
+                    tools:text="@tools:sample/lorem/random" />
 
                 <code.name.monkey.retromusic.views.VerticalTextView
-                    android:id="@+id/songText"
+                    android:id="@+id/text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:ellipsize="end"
@@ -79,7 +83,7 @@
                     android:maxLines="2"
                     android:rotation="0"
                     android:textAppearance="@style/TextViewHeadline6"
-                    tools:text=" Album name \nby - Artist name" />
+                    tools:text="@tools:sample/lorem/random" />
 
             </LinearLayout>
 

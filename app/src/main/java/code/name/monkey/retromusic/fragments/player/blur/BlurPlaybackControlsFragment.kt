@@ -12,12 +12,10 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -38,9 +36,10 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
+    override fun onCreateView(inflater: LayoutInflater,
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_blur_player_playback_controls, container, false)
     }
 
@@ -56,6 +55,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation()
         }
+        title.isSelected = true
         text.isSelected = true
     }
 
@@ -114,7 +114,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         text.setTextColor(lastDisabledPlaybackControlsColor)
 
-        TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor , false)
+        TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor, false)
         volumeFragment?.setTintableColor(lastPlaybackControlsColor)
         setFabColor(lastPlaybackControlsColor)
     }
