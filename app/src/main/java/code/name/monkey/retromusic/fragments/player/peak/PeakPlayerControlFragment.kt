@@ -128,12 +128,12 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updatePlayPauseDrawableState() {
-        when {
-            MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
-            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+        if (MusicPlayerRemote.isPlaying) {
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+        } else {
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
-
 
     private fun setUpMusicControllers() {
         setUpPlayPauseFab()
@@ -144,11 +144,17 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
+        shuffleButton.setOnClickListener {
+            println("shuffleButton Click")
+            MusicPlayerRemote.toggleShuffleMode()
+        }
     }
 
     private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
+        repeatButton.setOnClickListener {
+            println("repeatButton Click")
+            MusicPlayerRemote.cycleRepeatMode()
+        }
     }
 
     override fun setUpProgressSlider() {
@@ -213,5 +219,13 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         updatePlayPauseDrawableState()
+    }
+
+    override fun onRepeatModeChanged() {
+        updateRepeatState()
+    }
+
+    override fun onShuffleModeChanged() {
+        updateShuffleState()
     }
 }

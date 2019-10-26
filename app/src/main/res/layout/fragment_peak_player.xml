@@ -65,7 +65,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:freezesText="true"
-        android:gravity="center"
         android:marqueeRepeatLimit="marquee_forever"
         android:scrollHorizontally="true"
         android:singleLine="true"
@@ -75,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
         app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="@tools:sample/lorem" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
