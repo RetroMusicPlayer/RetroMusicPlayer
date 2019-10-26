@@ -58,12 +58,13 @@
                         android:layout_height="228dp"
                         android:background="@color/twenty_percent_black_overlay" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="?roundSelector"
                         android:padding="16dp"
+                        app:tint="@color/md_white_1000"
                         app:srcCompat="@drawable/ic_add_photo_white_24dp" />
 
                     <FrameLayout
