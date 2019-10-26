@@ -51,7 +51,7 @@
         android:paddingBottom="@dimen/md_listitem_vertical_margin_choice"
         android:singleLine="true"
         android:textAppearance="@style/TextViewNormal"
-        android:textColor="?colorOnSurface"
+        android:textColor="?colorOnPrimary"
         android:textSize="@dimen/md_listitem_textsize"
         tools:text="Item" />
 
