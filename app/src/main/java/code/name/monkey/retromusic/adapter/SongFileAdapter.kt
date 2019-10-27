@@ -55,12 +55,8 @@ class SongFileAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, index: Int) {
         val file = dataSet!![index]
-
         holder.itemView.isActivated = isChecked(file)
-
-        if (holder.title != null) {
-            holder.title!!.text = getFileTitle(file)
-        }
+        holder.title?.text = getFileTitle(file)
         if (holder.text != null) {
             if (holder.itemViewType == FILE) {
                 holder.text!!.text = getFileText(file)
