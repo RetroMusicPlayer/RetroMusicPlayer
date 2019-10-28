@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.fragments.player.peak
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,8 +49,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         setUpSubFragments()
         title.isSelected = true
         playerImage.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(requireActivity(), it, getString(R.string.transition_lyrics))
-            NavigationUtil.goToLyrics(requireActivity(), options)
+            NavigationUtil.goToLyrics(requireActivity())
         }
     }
 

@@ -23,7 +23,6 @@ import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -117,10 +116,9 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public static void goToLyrics(@NonNull Activity activity,
-                                  @Nullable ActivityOptions activityOptions) {
+    public static void goToLyrics(@NonNull Activity activity) {
         Intent intent = new Intent(activity, LyricsActivity.class);
-        ActivityCompat.startActivity(activity, intent, activityOptions != null ? activityOptions.toBundle() : null);
+        ActivityCompat.startActivity(activity, intent, null);
     }
 
     public static void goToGenre(@NonNull Activity activity, @NonNull Genre genre) {
