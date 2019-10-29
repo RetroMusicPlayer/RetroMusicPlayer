@@ -9,8 +9,16 @@
     <FrameLayout
         android:id="@+id/mainContentFrame"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/dimBackground"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:background="?colorOnSecondary"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/slidingPanel"
