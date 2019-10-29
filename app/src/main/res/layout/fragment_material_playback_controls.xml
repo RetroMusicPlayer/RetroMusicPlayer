@@ -62,29 +62,36 @@
             tools:progress="20" />
     </RelativeLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/titleContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:freezesText="true"
-        android:gravity="center"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textAppearance="@style/TextViewHeadline6"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -101,7 +108,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 
     <RelativeLayout

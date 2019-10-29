@@ -48,8 +48,6 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-        title.isSelected = true
-        text.isSelected = true
         playPauseButton.setOnClickListener {
             if (MusicPlayerRemote.isPlaying) {
                 MusicPlayerRemote.pauseSong()
@@ -58,6 +56,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             }
             showBonceAnimation(playPauseButton)
         }
+        title.isSelected = true
     }
 
     override fun setDark(color: Int) {
