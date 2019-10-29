@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Bu özelliği etkinleştirmenin pil ömrünü etkileyebileceğini unutmayın.</string>
     <string name="pref_blur_amount_title">Bulanıklık tutarı</string>
     <string name="pref_blur_amount_summary">Bulanıklık içeren arayüzler için bulanıklık tutarı, ne kadar azsa o kadar hızlı.</string>
-    <string name="buy_retro_music_pro">Retro Müzik Premium</string>
+    <string name="retro_music_pro">Retro Müzik Premium</string>
     <string name="cancel_current_timer">İptal et</string>
     <string name="card">Kart</string>
     <string name="card_color_style">Renkli Kart</string>
@@ -400,7 +400,6 @@
     <string name="pref_now_playing_screen_title">Tıkla veya Kaydır</string>
     <string name="pref_now_playing_screen_summary">Çalmakta olan ekrana şeffaf gezinme olmadan açmak veya kaydırmak için tıklayın</string>
     <string name="clear_playing_queue">Kuyruğu temizle</string>
-    <string name="buy_pro">Retro Müzik Premium\'u satın al</string>
     <string name="share_app">Uygulamayı paylaş</string>
     <string name="report_bug">Hata bildir</string>
     <string name="bug_report_use_account">GitHub hesabını kullanarak gönder</string>

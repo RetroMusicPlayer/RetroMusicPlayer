@@ -13,7 +13,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 384
+        versionCode 385
         versionName '3.4.500'
 
         multiDexEnabled true

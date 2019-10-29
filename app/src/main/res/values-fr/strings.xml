@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Veuillez garder en tête que l\'activation de cette fonctionnalité peut réduire la durée de vie de la batterie</string>
     <string name="pref_blur_amount_title">Quantité de flou</string>
     <string name="pref_blur_amount_summary">Quantité de flou appliqué aux thèmes flous, bas est plus rapide</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Annuler</string>
     <string name="card">Carte</string>
     <string name="card_color_style">Cartes colorées</string>
@@ -400,7 +400,6 @@
     <string name="pref_now_playing_screen_title">Cliquez ou balayez</string>
     <string name="pref_now_playing_screen_summary">Cliquez pour ouvrir avec ou glisser à sans navigation transparente de l\'écran de lecture</string>
     <string name="clear_playing_queue">Vider la file d\'attente</string>
-    <string name="buy_pro">Acheter Retro Music Pro</string>
     <string name="share_app">Partager l\'app</string>
     <string name="report_bug">Signaler un bug</string>
     <string name="bug_report_use_account">Envoyer en utilisant un compte GitHub</string>

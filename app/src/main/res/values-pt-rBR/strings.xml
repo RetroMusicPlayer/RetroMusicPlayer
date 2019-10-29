@@ -80,7 +80,7 @@
     <string name="pref_keep_screen_on_summary">Tenha em mente que ativar este recurso pode afetar a duração da bateria</string>
     <string name="pref_blur_amount_title">Quantidade de desfoque</string>
     <string name="pref_blur_amount_summary">Quantidade de desfoque aplicada a temas de desfoque, menor é mais rápido</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Cancelar</string>
     <string name="card">Cartão</string>
     <string name="card_color_style">Cartão colorido</string>
@@ -400,7 +400,6 @@
     <string name="pref_now_playing_screen_title">Clique ou deslize</string>
     <string name="pref_now_playing_screen_summary">Clique para abrir ou deslizar sem a navegação transparente da tela que está sendo reproduzida agora</string>
     <string name="clear_playing_queue">Limpar fila</string>
-    <string name="buy_pro">Comprar Retro Music Pro</string>
     <string name="share_app">Compartilhar o aplicativo</string>
     <string name="report_bug">Reportar erro</string>
     <string name="bug_report_use_account">Enviar usando uma conta do GitHub</string>

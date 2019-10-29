@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Ricorda che abilitando questa opzione la batteria potrebbe risentirne</string>
     <string name="pref_blur_amount_title">Quantità di sfocatura</string>
     <string name="pref_blur_amount_summary">Quantità di sfocatura applicata per i temi con sfocatura, minore è più veloce</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Annulla</string>
     <string name="card">Card</string>
     <string name="card_color_style">Card colorata</string>
@@ -399,7 +399,6 @@
     <string name="pref_now_playing_screen_title">Premi o scorri</string>
     <string name="pref_now_playing_screen_summary">Premi per aprire o scorri nella schermata di riproduzione</string>
     <string name="clear_playing_queue">Cancella coda</string>
-    <string name="buy_pro">Acquista Retro Music Pro</string>
     <string name="share_app">Condividi app</string>
     <string name="report_bug">Segnala bug</string>
     <string name="bug_report_use_account">Invia con l\'account GitHub</string>

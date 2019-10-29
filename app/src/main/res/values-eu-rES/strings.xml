@@ -77,7 +77,7 @@
     <string name="pref_keep_screen_on_summary">Gogoan izan eginbide hau aktibatzeak eragina izan dezakeela bateriaren iraupenean</string>
     <string name="pref_blur_amount_title">Lausotze maila</string>
     <string name="pref_blur_amount_summary">Gai lausoetan ezarritako lausotze maila, baxuagoa azkarragoa da</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Ezeztatu</string>
     <string name="card">Txartela</string>
     <string name="card_color_style">Txartel koloreztatua</string>
@@ -394,7 +394,6 @@
     <string name="pref_now_playing_screen_title">Klikatu edo irristatu</string>
     <string name="pref_now_playing_screen_summary">Orain erreproduzitzen pantailaren nabigazio gardena irekitzeko klikatu, irristatu gardentasunik gabeko nabigaziorako</string>
     <string name="clear_playing_queue">Ilara garbitu</string>
-    <string name="buy_pro">Retro Music Pro erosi</string>
     <string name="share_app">Partekatu aplikazioa</string>
     <string name="report_bug">Eman akatsen berri</string>
     <string name="bug_report_use_account">GitHub kontua erabiliz bidali</string>

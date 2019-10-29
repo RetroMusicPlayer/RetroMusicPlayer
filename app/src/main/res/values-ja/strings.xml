@@ -78,7 +78,7 @@
     <string name="pref_keep_screen_on_summary">この機能をオンにすると、バッテリー寿命に影響する可能性があります</string>
     <string name="pref_blur_amount_title">ぼかしの強さ</string>
     <string name="pref_blur_amount_summary">ブラーを使用するテーマを使用した際のブラーの強さを設定します。低いほど処理が早くなります</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">キャンセル</string>
     <string name="card">カード</string>
     <string name="card_color_style">色付きのカード</string>
@@ -397,7 +397,6 @@
     <string name="pref_now_playing_screen_title">クリックもしくはスライド</string>
     <string name="pref_now_playing_screen_summary">現在再生中の画面に移動せずに、クリックまたはスライドして開く</string>
     <string name="clear_playing_queue">キューを削除</string>
-    <string name="buy_pro">Retro Music Pro を購入</string>
     <string name="share_app">アプリを共有する</string>
     <string name="report_bug">不具合を報告する</string>
     <string name="bug_report_use_account">GitHubアカウントを使って送信</string>
