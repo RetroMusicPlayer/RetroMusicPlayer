@@ -6,29 +6,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/titleContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ellipsize="marquee"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:freezesText="true"
-        android:gravity="center"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:textAppearance="@style/TextViewHeadline6"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/text"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -42,7 +48,7 @@
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody2"
         app:layout_constraintBottom_toTopOf="@+id/songCurrentProgress"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:layout_editor_absoluteX="16dp"
         tools:text="@tools:sample/lorem/random" />
 

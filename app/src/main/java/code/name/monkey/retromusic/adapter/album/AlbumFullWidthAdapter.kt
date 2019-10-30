@@ -40,18 +40,10 @@ class AlbumFullWidthAdapter(private val activity: Activity, private val dataSet:
     override fun onBindViewHolder(holder: FullMetalViewHolder, position: Int) {
         // don't forget about calling supper.onBindViewHolder!
         super.onBindViewHolder(holder, position)
-
         val album = dataSet[position]
-
-        if (holder.title != null) {
-            holder.title!!.text = getAlbumTitle(album)
-        }
-        if (holder.text != null) {
-            holder.text!!.text = getAlbumText(album)
-        }
-        if (holder.playSongs != null) {
-            holder.playSongs!!.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
-        }
+        holder.title?.text = getAlbumTitle(album)
+        holder.text?.text = getAlbumText(album)
+        holder.playSongs?.setOnClickListener { album.songs?.let { songs -> MusicPlayerRemote.openQueue(songs, 0, true) } }
         loadAlbumCover(album, holder)
     }
 

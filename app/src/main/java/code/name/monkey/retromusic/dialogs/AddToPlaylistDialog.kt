@@ -33,10 +33,9 @@ class AddToPlaylistDialog : DialogFragment() {
     override fun onCreateDialog(
             savedInstanceState: Bundle?
     ): Dialog {
-        val cntx = requireContext()
-        val playlists = PlaylistLoader.getAllPlaylists(cntx)
+        val playlists = PlaylistLoader.getAllPlaylists(requireContext())
         val playlistNames: MutableList<String> = mutableListOf()
-        playlistNames.add(cntx.resources.getString(R.string.action_new_playlist))
+        playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (p in playlists) {
             playlistNames.add(p.name)
         }
@@ -51,7 +50,7 @@ class AddToPlaylistDialog : DialogFragment() {
                     activity?.supportFragmentManager?.let { CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST") }
                 } else {
                     dialog.dismiss()
-                    PlaylistsUtil.addToPlaylist(cntx, songs, playlists[index - 1].id, true)
+                    PlaylistsUtil.addToPlaylist(requireContext(), songs, playlists[index - 1].id, true)
                 }
             }
         }

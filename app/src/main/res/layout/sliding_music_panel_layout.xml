@@ -6,21 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/slidingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        sothree:umanoOverlay="false"
-        sothree:umanoPanelHeight="0dp"
-        sothree:umanoScrollableView="@+id/recycler_view"
-        sothree:umanoShadowHeight="0dp">-->
-
     <FrameLayout
         android:id="@+id/mainContentFrame"
         android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:id="@+id/dimBackground"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:background="?colorOnSecondary"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/slidingPanel"
@@ -46,9 +44,7 @@
             android:layout_height="48dp"
             tools:layout="@layout/fragment_mini_player" />
 
-
     </com.google.android.material.card.MaterialCardView>
-    <!-- </com.sothree.slidinguppanel.SlidingUpPanelLayout>-->
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"

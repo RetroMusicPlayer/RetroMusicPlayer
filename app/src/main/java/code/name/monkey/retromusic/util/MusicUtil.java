@@ -47,7 +47,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Artist;
-import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
@@ -72,17 +71,6 @@ public class MusicUtil {
 
     @NonNull
     public static Intent createShareSongFileIntent(@NonNull final Song song, @NonNull Context context) {
-        /*Uri file = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", new File(song.getData()));
-        try {
-            return new Intent().setAction(Intent.ACTION_SEND).putExtra(Intent.EXTRA_STREAM, file)
-                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    .setType("audio/*");
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
-            return new Intent();
-        }*/
-
         try {
             return new Intent()
                     .setAction(Intent.ACTION_SEND)
@@ -124,36 +112,6 @@ public class MusicUtil {
     }
 
     @NonNull
-    public static String getArtistInfoStringSmall(@NonNull final Context context,
-                                                  @NonNull final Artist artist) {
-        int songCount = artist.getSongCount();
-        String songString = songCount == 1 ? context.getResources().getString(R.string.song)
-                : context.getResources().getString(R.string.songs);
-        return songCount + " " + songString;
-    }
-
-    /*@NonNull
-    public static String getPlaylistInfoString(@NonNull final Context context,
-                                               @NonNull List<Song> songs) {
-        final int songCount = songs.size();
-        final String songString = songCount == 1 ? context.getResources().getString(R.string.song)
-                : context.getResources().getString(R.string.songs);
-
-        long duration = 0;
-        for (int i = 0; i < songs.size(); i++) {
-            duration += songs.get(i).getDuration();
-        }
-
-        return songCount + " " + songString + " • " + MusicUtil.getReadableDurationString(duration);
-    }*/
-
-    @NonNull
-    public static String getGenreInfoString(@NonNull final Context context, @NonNull final Genre genre) {
-        int songCount = genre.getSongCount();
-        return MusicUtil.getSongCountString(context, songCount);
-    }
-
-    @NonNull
     public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
         final long duration = getTotalDuration(context, songs);
 
@@ -183,31 +141,6 @@ public class MusicUtil {
         }
 
         return string1 + "  •  " + string2;
-    }
-
-    /**
-     * Build a concatenated string from the provided arguments
-     * The intended purpose is to show extra annotations
-     * to a music library item.
-     * Ex: for a given album --> buildInfoString(album.artist, album.songCount)
-     */
-    @NonNull
-    public static String buildInfoString(@Nullable final String string1, @Nullable final String string2, @NonNull final String string3) {
-        // Skip empty strings
-        if (TextUtils.isEmpty(string1)) {
-            //noinspection ConstantConditions
-            return TextUtils.isEmpty(string2) ? "" : string2;
-        }
-        if (TextUtils.isEmpty(string2)) {
-            //noinspection ConstantConditions
-            return TextUtils.isEmpty(string1) ? "" : string1;
-        }
-        if (TextUtils.isEmpty(string3)) {
-            //noinspection ConstantConditions
-            return TextUtils.isEmpty(string1) ? "" : string3;
-        }
-
-        return string1 + "  •  " + string2 + "  •  " + string3;
     }
 
     public static String getReadableDurationString(long songDurationMillis) {

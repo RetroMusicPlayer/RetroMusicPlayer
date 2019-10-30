@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.transform
+package code.name.monkey.retromusic.util
 
 import android.content.Context
 import android.content.Intent
@@ -20,7 +20,6 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.Uri
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
@@ -58,7 +57,7 @@ object AppRater {
         // Wait at least n days before opening
         if (launchCount >= LAUNCHES_UNTIL_PROMPT) {
             if (System.currentTimeMillis() >= dateFirstLaunch + DAYS_UNTIL_PROMPT * 24 * 60 * 60 * 1000) {
-            showRateDialog(context, editor)
+                showRateDialog(context, editor)
             }
         }
 

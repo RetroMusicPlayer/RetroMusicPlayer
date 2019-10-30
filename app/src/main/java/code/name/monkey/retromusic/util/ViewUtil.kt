@@ -28,41 +28,18 @@ import android.view.View
 import android.view.animation.PathInterpolator
 import android.widget.ProgressBar
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
-import com.google.android.material.card.MaterialCardView
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 
 object ViewUtil {
 
     const val RETRO_MUSIC_ANIM_TIME = 1000
-    fun cardViewTopCorners(cardView: MaterialCardView) {
-
-        val radius = PreferenceUtil.getInstance(cardView.context).dialogCorner
-        (cardView.background as? MaterialShapeDrawable).let {
-            it?.shapeAppearanceModel?.apply {
-                toBuilder()
-                        .setTopLeftCorner(CornerFamily.CUT, 10f)
-                        .build()
-            }
-        }
-    }
-
-    fun createTextColorTransition(v: TextView, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "textColor", startColor, endColor)
-    }
-
-    fun createBackgroundColorTransition(v: View, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "backgroundColor", startColor, endColor)
-    }
 
     fun setProgressDrawable(progressSlider: SeekBar, newColor: Int, thumbTint: Boolean = false) {
 
@@ -101,21 +78,6 @@ object ViewUtil {
         }
         animator.duration = RETRO_MUSIC_ANIM_TIME.toLong()
         return animator
-    }
-
-    fun setStatusBarHeight(context: Context, statusBar: View) {
-        val lp = statusBar.layoutParams
-        lp.height = getStatusBarHeight(context)
-        statusBar.requestLayout()
-    }
-
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = context.resources.getDimensionPixelSize(resourceId)
-        }
-        return result
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {

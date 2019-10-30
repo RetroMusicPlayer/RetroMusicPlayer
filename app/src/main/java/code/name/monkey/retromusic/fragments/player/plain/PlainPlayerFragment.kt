@@ -15,8 +15,7 @@ import code.name.monkey.retromusic.model.Song
 import kotlinx.android.synthetic.main.fragment_plain_player.*
 
 class PlainPlayerFragment : AbsPlayerFragment() {
-    override fun playerToolbar(): Toolbar
-    {
+    override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 
@@ -33,8 +32,8 @@ class PlainPlayerFragment : AbsPlayerFragment() {
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        playerTitle.text = song.title
-        playerText.text = song.artistName
+        title.text = song.title
+        text.text = song.artistName
     }
 
     override fun onServiceConnected() {
@@ -50,7 +49,7 @@ class PlainPlayerFragment : AbsPlayerFragment() {
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@PlainPlayerFragment)
             ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
         }
@@ -60,6 +59,8 @@ class PlainPlayerFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
+        title.isSelected = true
+        text.isSelected = true
     }
 
     private fun setUpSubFragments() {
@@ -82,14 +83,14 @@ class PlainPlayerFragment : AbsPlayerFragment() {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context!!, R.attr.iconColor)
+        return ATHUtil.resolveColor(requireContext(), R.attr.iconColor)
     }
 
     override fun onColorChanged(color: Int) {
         plainPlaybackControlsFragment.setDark(color)
         lastColor = color
         callbacks!!.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar!!, ATHUtil.resolveColor(context!!, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.iconColor), activity)
     }
 
     override fun onFavoriteToggled() {

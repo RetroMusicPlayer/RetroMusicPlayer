@@ -109,7 +109,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_show_lyrics -> {
-                NavigationUtil.goToLyrics(requireActivity(), null)
+                NavigationUtil.goToLyrics(requireActivity())
                 return true
             }
             R.id.action_equalizer -> {

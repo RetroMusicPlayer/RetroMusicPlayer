@@ -92,7 +92,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
 
 
         return MaterialDialog(requireContext()).show {
-            title(R.string.pref_title_album_cover_style)
+            title(R.string.pref_title_now_playing_screen_appearance)
             positiveButton(R.string.set) {
                 val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {

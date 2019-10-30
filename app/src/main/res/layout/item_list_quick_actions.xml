@@ -14,7 +14,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -35,8 +34,7 @@
         android:textAppearance="@style/TextViewNormal"
         app:cornerRadius="6dp"
         app:icon="@drawable/ic_play_arrow_white_24dp"
-        app:iconGravity="textStart"
-        tools:backgroundTint="@color/md_grey_900" />
+        app:iconGravity="textStart" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
@@ -52,7 +50,6 @@
         android:textAppearance="@style/TextViewNormal"
         app:cornerRadius="6dp"
         app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="textStart"
-        tools:backgroundTint="@color/md_grey_900" />
+        app:iconGravity="textStart" />
 
 </LinearLayout>

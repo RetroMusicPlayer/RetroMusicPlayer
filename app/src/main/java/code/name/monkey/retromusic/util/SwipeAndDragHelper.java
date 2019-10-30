@@ -15,6 +15,8 @@
 package code.name.monkey.retromusic.util;
 
 import android.graphics.Canvas;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 
@@ -22,7 +24,7 @@ public class SwipeAndDragHelper extends ItemTouchHelper.Callback {
 
     private ActionCompletionContract contract;
 
-    public SwipeAndDragHelper(ActionCompletionContract contract) {
+    public SwipeAndDragHelper(@NonNull ActionCompletionContract contract) {
         this.contract = contract;
     }
 
