@@ -48,9 +48,9 @@
 
             <ImageView
                 android:id="@+id/smallIcon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="16dp"
                 tools:src="@drawable/ic_audiotrack_black_24dp"
                 tools:tint="@color/md_black_1000" />
 
@@ -67,8 +67,8 @@
 
             <ImageView
                 android:id="@+id/arrow"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
                 android:layout_marginStart="2dp"
                 android:scaleType="centerInside"
                 android:src="@drawable/ic_keyboard_arrow_up_24dp"
@@ -103,31 +103,41 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="0dp">
 
             <ImageView
                 android:id="@+id/action_prev"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                tools:src="@drawable/ic_skip_previous_round_white_32dp"
+                tools:tint="?colorOnPrimary" />
 
             <ImageView
                 android:id="@+id/action_play_pause"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                tools:src="@drawable/ic_pause_white_48dp"
+                tools:tint="?colorOnPrimary" />
 
             <ImageView
                 android:id="@+id/action_next"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                tools:src="@drawable/ic_skip_next_round_white_32dp"
+                tools:tint="?colorOnPrimary" />
 
             <ImageView
                 android:id="@+id/action_quit"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                tools:src="@drawable/ic_close_white_24dp"
+                tools:tint="?colorOnPrimary" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

@@ -123,7 +123,7 @@
             android:layout_height="38dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_skip_previous_round_white_32dp"
-            android:tint="?colorOnPrimary" />
+            tools:tint="?colorOnPrimary" />
 
         <ImageView
             android:id="@+id/action_play_pause"
@@ -131,7 +131,7 @@
             android:layout_height="38dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_pause_white_24dp"
-            android:tint="?colorOnPrimary" />
+            tools:tint="?colorOnPrimary" />
 
         <ImageView
             android:id="@+id/action_next"
@@ -139,7 +139,7 @@
             android:layout_height="38dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_skip_next_round_white_32dp"
-            android:tint="?colorOnPrimary" />
+            tools:tint="?colorOnPrimary" />
 
         <ImageView
             android:id="@+id/action_quit"
