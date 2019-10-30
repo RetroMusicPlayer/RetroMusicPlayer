@@ -178,4 +178,3 @@ private fun <E> ArrayList<E>.toPlaylist(): ArrayList<Playlist> {
     }
     return arrayList;
 }
-
