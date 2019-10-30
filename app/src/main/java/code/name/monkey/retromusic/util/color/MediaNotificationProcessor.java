@@ -20,6 +20,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.palette.graphics.Palette;
 
@@ -57,7 +58,6 @@ public class MediaNotificationProcessor {
     private static final float BLACK_MAX_LIGHTNESS = 0.08f;
     private static final float WHITE_MIN_LIGHTNESS = 0.90f;
     private static final int RESIZE_BITMAP_AREA = 150 * 150;
-    private final ImageGradientColorizer mColorizer;
     private final Context mContext;
     /**
      * The context of the notification. This is the app context of the package posting the
@@ -70,16 +70,14 @@ public class MediaNotificationProcessor {
     private onColorThing onColorThing;
 
     public MediaNotificationProcessor(Context context, Context packageContext, onColorThing thing) {
-        this(context, packageContext, new ImageGradientColorizer());
+        this(context, packageContext);
         onColorThing = thing;
     }
 
     @VisibleForTesting
-    MediaNotificationProcessor(Context context, Context packageContext,
-                               ImageGradientColorizer colorizer) {
+    MediaNotificationProcessor(Context context, Context packageContext) {
         mContext = context;
         mPackageContext = packageContext;
-        mColorizer = colorizer;
     }
 
     /**
@@ -292,228 +290,4 @@ public class MediaNotificationProcessor {
     public interface onColorThing {
         void bothColor(int i, int i2);
     }
-
-    /**
-     * The fraction below which we select the vibrant instead of the light/dark vibrant color
-     *//*
-    private static final float POPULATION_FRACTION_FOR_MORE_VIBRANT = 1.0f;
-    *//**
-     * Minimum saturation that a muted color must have if there exists if deciding between two colors
-     *//*
-    private static final float MIN_SATURATION_WHEN_DECIDING = 0.19f;
-    *//**
-     * Minimum fraction that any color must have to be picked up as a text color
-     *//*
-    private static final double MINIMUM_IMAGE_FRACTION = 0.002;
-    *//**
-     * The population fraction to select the dominant color as the text color over a the colored
-     * ones.
-     *//*
-    private static final float POPULATION_FRACTION_FOR_DOMINANT = 0.01f;
-    *//**
-     * The population fraction to select a white or black color as the background over a color.
-     *//*
-    private static final float POPULATION_FRACTION_FOR_WHITE_OR_BLACK = 2.5f;
-
-    private static final float BLACK_MAX_LIGHTNESS = 0.08f;
-    private static final float WHITE_MIN_LIGHTNESS = 0.90f;
-    private static final int RESIZE_BITMAP_AREA = 150 * 150;
-    private static float[] mFilteredBackgroundHsl = null;
-    private final ImageGradientColorizer mColorizer;
-    private final Context mContext;
-    *//**
-     * The context of the notification. This is the app context of the package posting the
-     * notification.
-     *//*
-    private final Context mPackageContext;
-    private static Palette.Filter mBlackWhiteFilter = (rgb, hsl) -> !isWhiteOrBlack(hsl);
-    private boolean mIsLowPriority;
-
-    public MediaNotificationProcessor(Context context, Context packageContext) {
-        this(context, packageContext, new ImageGradientColorizer());
-    }
-
-    @VisibleForTesting
-    MediaNotificationProcessor(Context context, Context packageContext,
-                               ImageGradientColorizer colorizer) {
-        mContext = context;
-        mPackageContext = packageContext;
-        mColorizer = colorizer;
-    }
-
-    @Nullable
-    public static Palette.Builder generatePalette(Bitmap bitmap) {
-        return bitmap == null ? null : Palette.from(bitmap).clearFilters().resizeBitmapArea(RESIZE_BITMAP_AREA);
-    }
-
-    public static int getBackgroundColor(Palette.Builder builder) {
-        return findBackgroundColorAndFilter(builder.generate());
-    }
-
-    public static int getTextColor(Palette.Builder builder) {
-        int backgroundColor = 0;
-        if (mFilteredBackgroundHsl != null) {
-            builder.addFilter((rgb, hsl) -> {
-                // at least 10 degrees hue difference
-                float diff = Math.abs(hsl[0] - mFilteredBackgroundHsl[0]);
-                return diff > 10 && diff < 350;
-            });
-        }
-        builder.addFilter(mBlackWhiteFilter);
-        Palette palette = builder.generate();
-        return selectForegroundColor(backgroundColor, palette);
-    }
-
-    private static int selectForegroundColor(int backgroundColor, Palette palette) {
-        if (ColorUtil.isColorLight(backgroundColor)) {
-            return selectForegroundColorForSwatches(palette.getDarkVibrantSwatch(),
-                    palette.getVibrantSwatch(),
-                    palette.getDarkMutedSwatch(),
-                    palette.getMutedSwatch(),
-                    palette.getDominantSwatch(),
-                    Color.BLACK);
-        } else {
-            return selectForegroundColorForSwatches(palette.getLightVibrantSwatch(),
-                    palette.getVibrantSwatch(),
-                    palette.getLightMutedSwatch(),
-                    palette.getMutedSwatch(),
-                    palette.getDominantSwatch(),
-                    Color.WHITE);
-        }
-    }
-
-    private static int selectForegroundColorForSwatches(Palette.Swatch moreVibrant,
-                                                        Palette.Swatch vibrant, Palette.Swatch moreMutedSwatch, Palette.Swatch mutedSwatch,
-                                                        Palette.Swatch dominantSwatch, int fallbackColor) {
-        Palette.Swatch coloredCandidate = selectVibrantCandidate(moreVibrant, vibrant);
-        if (coloredCandidate == null) {
-            coloredCandidate = selectMutedCandidate(mutedSwatch, moreMutedSwatch);
-        }
-        if (coloredCandidate != null) {
-            if (dominantSwatch == coloredCandidate) {
-                return coloredCandidate.getRgb();
-            } else if ((float) coloredCandidate.getPopulation() / dominantSwatch.getPopulation()
-                    < POPULATION_FRACTION_FOR_DOMINANT
-                    && dominantSwatch.getHsl()[1] > MIN_SATURATION_WHEN_DECIDING) {
-                return dominantSwatch.getRgb();
-            } else {
-                return coloredCandidate.getRgb();
-            }
-        } else if (hasEnoughPopulation(dominantSwatch)) {
-            return dominantSwatch.getRgb();
-        } else {
-            return fallbackColor;
-        }
-    }
-
-    private static Palette.Swatch selectMutedCandidate(Palette.Swatch first,
-                                                       Palette.Swatch second) {
-        boolean firstValid = hasEnoughPopulation(first);
-        boolean secondValid = hasEnoughPopulation(second);
-        if (firstValid && secondValid) {
-            float firstSaturation = first.getHsl()[1];
-            float secondSaturation = second.getHsl()[1];
-            float populationFraction = first.getPopulation() / (float) second.getPopulation();
-            if (firstSaturation * populationFraction > secondSaturation) {
-                return first;
-            } else {
-                return second;
-            }
-        } else if (firstValid) {
-            return first;
-        } else if (secondValid) {
-            return second;
-        }
-        return null;
-    }
-
-    private static Palette.Swatch selectVibrantCandidate(Palette.Swatch first,
-                                                         Palette.Swatch second) {
-        boolean firstValid = hasEnoughPopulation(first);
-        boolean secondValid = hasEnoughPopulation(second);
-        if (firstValid && secondValid) {
-            int firstPopulation = first.getPopulation();
-            int secondPopulation = second.getPopulation();
-            if (firstPopulation / (float) secondPopulation
-                    < POPULATION_FRACTION_FOR_MORE_VIBRANT) {
-                return second;
-            } else {
-                return first;
-            }
-        } else if (firstValid) {
-            return first;
-        } else if (secondValid) {
-            return second;
-        }
-        return null;
-    }
-
-    private static boolean hasEnoughPopulation(Palette.Swatch swatch) {
-        // We want a fraction that is at least 1% of the image
-        return swatch != null
-                && (swatch.getPopulation() / (float) RESIZE_BITMAP_AREA > MINIMUM_IMAGE_FRACTION);
-    }
-
-    public static int findBackgroundColorAndFilter(Palette palette) {
-        // by default we use the dominant palette
-        Palette.Swatch dominantSwatch = palette.getDominantSwatch();
-        if (dominantSwatch == null) {
-            // We're not filtering on white or black
-            mFilteredBackgroundHsl = null;
-            return Color.WHITE;
-        }
-        if (!isWhiteOrBlack(dominantSwatch.getHsl())) {
-            mFilteredBackgroundHsl = dominantSwatch.getHsl();
-            return dominantSwatch.getRgb();
-        }
-        // Oh well, we selected black or white. Lets look at the second color!
-        List<Swatch> swatches = palette.getSwatches();
-        float highestNonWhitePopulation = -1;
-        Palette.Swatch second = null;
-        for (Palette.Swatch swatch : swatches) {
-            if (swatch != dominantSwatch
-                    && swatch.getPopulation() > highestNonWhitePopulation
-                    && !isWhiteOrBlack(swatch.getHsl())) {
-                second = swatch;
-                highestNonWhitePopulation = swatch.getPopulation();
-            }
-        }
-        if (second == null) {
-            // We're not filtering on white or black
-            mFilteredBackgroundHsl = null;
-            return dominantSwatch.getRgb();
-        }
-        if (dominantSwatch.getPopulation() / highestNonWhitePopulation
-                > POPULATION_FRACTION_FOR_WHITE_OR_BLACK) {
-            // The dominant swatch is very dominant, lets take it!
-            // We're not filtering on white or black
-            mFilteredBackgroundHsl = null;
-            return dominantSwatch.getRgb();
-        } else {
-            mFilteredBackgroundHsl = second.getHsl();
-            return second.getRgb();
-        }
-    }
-
-    private static boolean isWhiteOrBlack(float[] hsl) {
-        return isBlack(hsl) || isWhite(hsl);
-    }
-
-    *//**
-     * @return true if the color represents a color which is close to black.
-     *//*
-    private static boolean isBlack(float[] hslColor) {
-        return hslColor[2] <= BLACK_MAX_LIGHTNESS;
-    }
-
-    *//**
-     * @return true if the color represents a color which is close to white.
-     *//*
-    private static boolean isWhite(float[] hslColor) {
-        return hslColor[2] >= WHITE_MIN_LIGHTNESS;
-    }
-
-    public void setIsLowPriority(boolean isLowPriority) {
-        mIsLowPriority = isLowPriority;
-    }*/
 }

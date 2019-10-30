@@ -77,7 +77,6 @@ import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl2
 import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.PackageValidator;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
@@ -275,7 +274,6 @@ public class MusicService extends Service implements
             }
         }
     };
-    private PackageValidator mPackageValidator;
 
     private static String getTrackUri(@NonNull Song song) {
         return MusicUtil.getSongFileUri(song.getId()).toString();
@@ -340,9 +338,6 @@ public class MusicService extends Service implements
         PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
-
-        mPackageValidator = new PackageValidator(this, R.xml.allowed_media_browser_callers);
-
 
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
 

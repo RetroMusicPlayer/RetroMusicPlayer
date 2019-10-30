@@ -5,8 +5,6 @@ import android.graphics.PorterDuff
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import androidx.annotation.ColorInt
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -20,23 +18,18 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableI
 import java.util.*
 
 
-class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapter.ViewHolder> {
+class PlayingQueueAdapter(activity: AppCompatActivity,
+                          dataSet: ArrayList<Song>,
+                          private var current: Int,
+                          itemLayoutRes: Int) : SongAdapter(
+        activity,
+        dataSet,
+        itemLayoutRes,
+        false,
+        null
+), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder> {
 
-    private var current: Int = 0
     private var color = -1
-
-    constructor(activity: AppCompatActivity, dataSet: ArrayList<Song>, current: Int,
-                @LayoutRes itemLayoutRes: Int) : super(activity, dataSet, itemLayoutRes, false, null) {
-        this.current = current
-    }
-
-    constructor(activity: AppCompatActivity,
-                dataSet: ArrayList<Song>, current: Int,
-                @LayoutRes itemLayoutRes: Int,
-                @ColorInt color: Int) : super(activity, dataSet, itemLayoutRes, false, null) {
-        this.current = current
-        this.color = color
-    }
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
         return ViewHolder(view)
@@ -44,12 +37,8 @@ class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapte
 
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
         super.onBindViewHolder(holder, position)
-        if (holder.imageText != null) {
-            holder.imageText!!.text = (position - current).toString()
-        }
-        if (holder.time != null) {
-            holder.time!!.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
-        }
+        holder.imageText?.text = (position - current).toString()
+        holder.time?.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
         if (holder.itemViewType == HISTORY || holder.itemViewType == CURRENT) {
             setAlpha(holder, 0.5f)
         }
@@ -66,15 +55,10 @@ class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapte
                 holder.title!!.setTextColor(color)
             }
         }
-        if (holder.text != null) {
-            holder.text!!.setTextColor(white)
-        }
-        if (holder.time != null) {
-            holder.time!!.setTextColor(white)
-        }
-        if (holder.imageText != null) {
-            holder.imageText!!.setTextColor(white)
-        }
+
+        holder.text?.setTextColor(white)
+        holder.time?.setTextColor(white)
+        holder.imageText?.setTextColor(white)
         if (holder.menu != null) {
             (holder.menu as ImageView).setColorFilter(white, PorterDuff.Mode.SRC_IN)
         }
@@ -111,21 +95,11 @@ class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapte
     }
 
     private fun setAlpha(holder: SongAdapter.ViewHolder, alpha: Float) {
-        if (holder.image != null) {
-            holder.image!!.alpha = alpha
-        }
-        if (holder.title != null) {
-            holder.title!!.alpha = alpha
-        }
-        if (holder.text != null) {
-            holder.text!!.alpha = alpha
-        }
-        if (holder.imageText != null) {
-            holder.imageText!!.alpha = alpha
-        }
-        if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer!!.alpha = alpha
-        }
+        holder.image?.alpha = alpha
+        holder.title?.alpha = alpha
+        holder.text?.alpha = alpha
+        holder.imageText?.alpha = alpha
+        holder.paletteColorContainer?.alpha = alpha
     }
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
@@ -164,12 +138,8 @@ class PlayingQueueAdapter : SongAdapter, DraggableItemAdapter<PlayingQueueAdapte
             }
 
         init {
-            if (imageText != null) {
-                imageText!!.visibility = View.VISIBLE
-            }
-            if (dragView != null) {
-                dragView!!.visibility = View.VISIBLE
-            }
+            imageText?.visibility = View.VISIBLE
+            dragView?.visibility = View.VISIBLE
         }
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {

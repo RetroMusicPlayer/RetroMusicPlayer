@@ -26,7 +26,7 @@ exemptMilestones: false
 exemptAssignees: false
 
 # Label to use when marking as stale
-staleLabel: stale
+staleLabel: won'tfix
 
 # Comment to post when marking as stale. Set to `false` to disable
 markComment: >
@@ -58,4 +58,8 @@ limitPerRun: 30
 
 # issues:
 #   exemptLabels:
+<<<<<<< HEAD
 #     - confirmed
+=======
+#     - confirmed
+>>>>>>> pr/7

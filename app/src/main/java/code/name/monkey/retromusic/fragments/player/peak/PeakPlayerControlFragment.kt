@@ -66,14 +66,20 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper.stop()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_peak_control_player, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+            view: View,
+            savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
-
     }
 
     override fun show() {
@@ -122,12 +128,12 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updatePlayPauseDrawableState() {
-        when {
-            MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
-            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+        if (MusicPlayerRemote.isPlaying) {
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+        } else {
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
         }
     }
-
 
     private fun setUpMusicControllers() {
         setUpPlayPauseFab()
@@ -135,6 +141,20 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         setUpRepeatButton()
         setUpShuffleButton()
         setUpProgressSlider()
+    }
+
+    private fun setUpShuffleButton() {
+        shuffleButton.setOnClickListener {
+            println("shuffleButton Click")
+            MusicPlayerRemote.toggleShuffleMode()
+        }
+    }
+
+    private fun setUpRepeatButton() {
+        repeatButton.setOnClickListener {
+            println("repeatButton Click")
+            MusicPlayerRemote.cycleRepeatMode()
+        }
     }
 
     override fun setUpProgressSlider() {
@@ -165,9 +185,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
-    private fun setUpShuffleButton() {
-        shuffleButton.setOnClickListener { MusicPlayerRemote.toggleShuffleMode() }
-    }
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
@@ -176,9 +193,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         }
     }
 
-    private fun setUpRepeatButton() {
-        repeatButton.setOnClickListener { MusicPlayerRemote.cycleRepeatMode() }
-    }
 
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
@@ -205,5 +219,13 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         updatePlayPauseDrawableState()
+    }
+
+    override fun onRepeatModeChanged() {
+        updateRepeatState()
+    }
+
+    override fun onShuffleModeChanged() {
+        updateShuffleState()
     }
 }

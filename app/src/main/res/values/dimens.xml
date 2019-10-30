@@ -18,7 +18,7 @@
 
     <dimen name="empty_text_size">20sp</dimen>
 
-    <dimen name="notification_big_image_size">134dp</dimen>
+    <dimen name="notification_big_image_size">112dp</dimen>
 
     <!-- MUST BE THE RESULT OF WIDTH PLUS INSET-->
 

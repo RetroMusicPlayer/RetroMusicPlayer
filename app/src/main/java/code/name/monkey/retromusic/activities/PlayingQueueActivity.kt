@@ -14,6 +14,7 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
@@ -21,7 +22,7 @@ import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 
-class PlayingQueueActivity : AbsMusicServiceActivity() {
+open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
@@ -29,7 +30,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     private lateinit var linearLayoutManager: LinearLayoutManager
 
 
-    protected fun getUpNextAndQueueTime(): String {
+    private fun getUpNextAndQueueTime(): String {
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
 
         return MusicUtil.buildInfoString(
@@ -55,6 +56,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         clearQueue.setOnClickListener {
             MusicPlayerRemote.clearQueue()
         }
+        checkForPadding()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -76,7 +78,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
                 MusicPlayerRemote.playingQueue,
                 MusicPlayerRemote.position,
                 R.layout.item_queue)
-        wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(playingQueueAdapter!!)
+        wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(playingQueueAdapter!!)
 
         linearLayoutManager = LinearLayoutManager(this)
 
@@ -84,7 +86,7 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
             layoutManager = linearLayoutManager
             adapter = wrappedAdapter
             itemAnimator = animator
-            recyclerViewDragDropManager!!.attachRecyclerView(this)
+            recyclerViewDragDropManager?.attachRecyclerView(this)
         }
 
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
@@ -101,11 +103,17 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
         })
     }
 
+    private fun checkForPadding() {
+        val height = DensityUtil.dip2px(this, 102f)
+        recyclerView.setPadding(0, 0, 0, (height))
+    }
+
     override fun onQueueChanged() {
         if (MusicPlayerRemote.playingQueue.isEmpty()) {
             finish()
             return
         }
+        checkForPadding()
         updateQueue()
         updateCurrentSong()
     }
@@ -124,13 +132,13 @@ class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateQueuePosition() {
-        playingQueueAdapter!!.setCurrent(MusicPlayerRemote.position)
+        playingQueueAdapter?.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
         playerQueueSubHeader.text = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
-        playingQueueAdapter!!.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
+        playingQueueAdapter?.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
         resetToCurrentPosition()
     }
 

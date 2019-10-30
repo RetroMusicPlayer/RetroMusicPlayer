@@ -59,20 +59,15 @@ interface Repository {
 
     val recentAlbumsFlowable: Observable<ArrayList<Album>>
 
-
     val topAlbumsFlowable: Observable<ArrayList<Album>>
-
 
     val allArtistsFlowable: Observable<ArrayList<Artist>>
 
     val recentArtistsFlowable: Observable<ArrayList<Artist>>
 
-
     val topArtistsFlowable: Observable<ArrayList<Artist>>
 
-
     val allPlaylistsFlowable: Observable<ArrayList<Playlist>>
-
 
     val allGenresFlowable: Observable<ArrayList<Genre>>
 

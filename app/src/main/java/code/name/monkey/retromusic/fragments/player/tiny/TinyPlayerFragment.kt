@@ -93,8 +93,8 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
         ViewUtil.setProgressDrawable(progressBar, colorFinal)
 
-        songTitle.setTextColor(textColorPrimary)
-        songText.setTextColor(textColorPrimaryDisabled)
+        title.setTextColor(textColorPrimary)
+        text.setTextColor(textColorPrimaryDisabled)
 
         playerSongTotalTime.setTextColor(textColorPrimary)
 
@@ -125,8 +125,8 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
-        songTitle.text = song.title
-        songText.text = String.format("%s \nby - %s", song.albumName, song.artistName)
+        title.text = song.title
+        text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -135,7 +135,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        title.isSelected = true
         progressBar.setOnClickListener(PlayPauseButtonOnClickHandler())
         progressBar.setOnTouchListener(MiniPlayerFragment.FlingPlayBackController(activity!!))
 

@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.adapter.album
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -96,8 +95,8 @@ class AlbumCoverPagerAdapter(fm: FragmentManager, private val dataSet: ArrayList
             val view = inflater.inflate(finalLayout, container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
-                val options = ActivityOptions.makeSceneTransitionAnimation(requireActivity(), it, getString(R.string.transition_lyrics))
-                NavigationUtil.goToLyrics(requireActivity(), options)
+
+                NavigationUtil.goToLyrics(requireActivity())
             }
             return view
         }

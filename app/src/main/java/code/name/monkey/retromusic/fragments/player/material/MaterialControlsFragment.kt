@@ -48,6 +48,8 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+        title.isSelected = true
+        text.isSelected = true
     }
 
     private fun updateSong() {

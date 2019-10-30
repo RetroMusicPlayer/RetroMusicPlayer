@@ -27,8 +27,8 @@
                 android:scaleType="centerCrop"
                 app:civ_border="false"
                 app:civ_shadow="false"
-                tools:background="@color/md_red_400"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
