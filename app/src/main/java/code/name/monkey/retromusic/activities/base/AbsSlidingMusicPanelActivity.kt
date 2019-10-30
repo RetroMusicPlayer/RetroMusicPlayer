@@ -128,10 +128,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         return slidingMusicPanelLayout
     }
 
-    fun setAntiDragView(antiDragView: View) {
-        //slidingLayout.setAntiDragView(antiDragView)
-    }
-
     private fun collapsePanel() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
