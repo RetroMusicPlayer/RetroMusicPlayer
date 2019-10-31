@@ -23,14 +23,6 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/foregroundImage"
-            android:layout_width="96dp"
-            android:layout_height="match_parent"
-            android:layout_alignStart="@id/largeIcon"
-            android:src="@drawable/background_image"
-            tools:tint="?colorPrimary" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -60,7 +52,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
             tools:text="@string/app_name" />
 
         <ImageView
@@ -84,8 +76,8 @@
         android:layout_toStartOf="@id/actions"
         android:orientation="vertical"
         android:paddingStart="12dp"
-        android:paddingBottom="4dp"
-        android:paddingEnd="12dp">
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp">
 
         <TextView
             android:id="@+id/title"

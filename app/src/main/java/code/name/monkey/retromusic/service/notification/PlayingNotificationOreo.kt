@@ -139,12 +139,8 @@ class PlayingNotificationOreo : PlayingNotification() {
                         }
 
                         private fun setBackgroundColor(color: Int) {
-
                             notificationLayout.setInt(R.id.image, "setBackgroundColor", color)
                             notificationLayoutBig.setInt(R.id.image, "setBackgroundColor", color)
-
-                            notificationLayout.setInt(R.id.foregroundImage, "setColorFilter", color)
-                            notificationLayoutBig.setInt(R.id.foregroundImage, "setColorFilter", color)
                         }
 
                         private fun setNotificationContent(dark: Boolean) {
