@@ -7,7 +7,7 @@
     <string name="action_about">Acerca de Retro Music Player</string>
     <string name="action_add_to_favorites">Añadir a favoritos</string>
     <string name="action_add_to_playing_queue">Añadir a la cola de reproducción</string>
-    <string name="action_add_to_playlist">Spanish</string>
+    <string name="action_add_to_playlist">Añadir a la lista de reproducción</string>
     <string name="action_clear_playing_queue">Borrar cola de reproducción</string>
     <string name="action_clear_playlist">Limpiar lista</string>
     <string name="action_delete">Eliminar</string>
