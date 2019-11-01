@@ -21,6 +21,7 @@
     <string name="action_grant">Grant</string>
     <string name="action_grid_size">Grid size</string>
     <string name="action_grid_size_land">Grid size (land)</string>
+    <string name="action_new_playlist">New playlist</string>
     <string name="action_next">Next</string>
     <string name="action_play">Play</string>
     <string name="action_play_next">Play next</string>
@@ -45,6 +46,8 @@
     <string name="action_sleep_timer">Sleep timer</string>
     <string name="action_sort_order">Sort order</string>
     <string name="action_tag_editor">Tag editor</string>
+    <string name="action_toggle_favorite">Toggle favorites</string>
+    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
 
     <string name="adaptive">Adaptive</string>
 
@@ -52,12 +55,13 @@
     <string name="add_photo">Add \nphoto</string>
     <string name="add_playlist_title">"Add to playlist"</string>
 
-    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue."</string>
-    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue.</string>
+    <string name="added_title_to_playing_queue">"Added 1 title to the playing queue"</string>
+    <string name="added_x_titles_to_playing_queue">Added %1$d titles to the playing queue</string>
 
     <string name="album">Album</string>
     <string name="album_artist">Album artist</string>
-    <string name="album_or_artist_empty">The title or artist is empty.</string>
+    <string name="album_desc">Album desc.</string>
+    <string name="album_or_artist_empty">The title or artist is empty</string>
 
     <string name="albums">Albums</string>
     <!-- Android Auto -->
@@ -68,6 +72,7 @@
     <!-- App Shortcuts -->
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
+    <string name="app_summary">A hybrid app between Material Design and iOS in mind</string>
     <string name="app_widget_big_name">Retro music - Big</string>
     <string name="app_widget_card_name">Retro music - Card</string>
     <string name="app_widget_classic_name">Retro music - Classic</string>
@@ -79,12 +84,15 @@
     <string name="artists">Artists</string>
 
 
-    <string name="audio_focus_denied">Audio focus denied.</string>
+    <string name="at_least_one_category_must_be_enabled">At least one category must be enabled</string>
+
+    <string name="audio_focus_denied">Audio focus denied</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
 
     <string name="bass_boost">Bass Boost</string>
 
     <string name="biography">Biography</string>
+    <string name="biography_unavailable">Couldn\u2019t find the artists biography</string>
 
     <string name="black_theme_name">Just Black</string>
 
@@ -97,7 +105,7 @@
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="buy_retromusic_pro">Buy Retro Music Pro</string>
 
     <string name="cancel_current_timer">Cancel</string>
 
@@ -125,22 +133,24 @@
 
     <string name="colors">Colors</string>
 
-    <string name="could_not_create_playlist">Couldn\u2019t create playlist.</string>
-    <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
-    <string name="could_not_restore_purchase">Could not restore purchase.</string>
-    <string name="could_not_scan_files">Could not scan %d files.</string>
+    <string name="could_not_create_playlist">Couldn\u2019t create playlist</string>
+    <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover"</string>
+    <string name="could_not_restore_purchase">Couldn\u2019t restore purchase</string>
+    <string name="could_not_scan_files">Couldn\u2019t scan %d files</string>
 
     <string name="create_action">Create</string>
 
-    <string name="created_playlist_x">Created playlist %1$s.</string>
+    <string name="created_playlist_x">Created playlist %1$s</string>
 
-    <string name="credit_title">Members and contributors </string>
+    <string name="credit_title">Members and contributors</string>
 
-    <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s.</string>
+    <string name="currently_listening_to_x_by_x">Currently listening to %1$s by %2$s</string>
 
     <string name="dark_theme_name">Kinda Dark</string>
 
-    <string name="default_hint">No Lyrics</string>
+    <string name="date">Date</string>
+
+    <string name="default_hint">No lyrics</string>
 
     <string name="delete_playlist_title">Delete playlist</string>
     <string name="delete_playlist_x"><![CDATA[Delete the playlist <b>%1$s</b>?]]></string>
@@ -148,16 +158,14 @@
     <string name="delete_song_x"><![CDATA[Delete the song <b>%1$s</b>?]]></string>
     <string name="delete_x_playlists"><![CDATA[Delete <b>%1$d</b> playlists?]]></string>
     <string name="delete_x_songs"><![CDATA[Delete <b>%1$d</b> songs?]]></string>
-    <string name="delete_song_title">Delete song</string>
-    <string name="delete_songs_title">Delete songs</string>
-    <string name="deleted_x_songs">Deleted %1$d songs.</string>
+
+    <string name="deleted_x_songs">Deleted %1$d songs</string>
 
     <string name="do_you_want_to_clear_the_blacklist">Do you want to clear the blacklist?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Do you want to remove <b>%1$s</b> from the blacklist?]]></string>
 
     <string name="donate">Donate</string>
-    <string name="donate_summary">If you think I deserve to get paid for my work, you can leave some
-    money here</string>
+    <string name="donate_summary">If you think I deserve to get paid for my work, you can leave me a few dollars here</string>
 
     <string name="donation_header">Buy me a:</string>
 
@@ -168,6 +176,15 @@
     <string name="empty">Empty</string>
 
     <string name="equalizer">Equalizer</string>
+
+    <string name="error_loading_lyrics_from_network">Error loading from network</string>
+
+    <string name="experimental">Experimental</string>
+
+    <string name="facebook_page">Facebook</string>
+    <string name="facebook_page_summary">Help us grow faster by sharing our Facebook page</string>
+
+    <string name="failed_to_save_playlist">Failed to save playlist (%s)</string>
 
     <string name="faq">FAQ</string>
 
@@ -208,7 +225,7 @@
 
     <string name="image_settings_summary">Change artist image download settings</string>
 
-    <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s.</string>
+    <string name="inserted_x_songs_into_playlist_x">Inserted %1$d songs into the playlist %2$s</string>
 
     <string name="instagram_page">Instagram</string>
     <string name="instagram_page_summary">Share your Retro Music setup to showcase on Instagram</string>
@@ -220,6 +237,8 @@
     <string name="label_file_size">Size</string>
     <string name="label_sampling_rate">Sampling rate</string>
     <string name="label_track_length">Length</string>
+
+    <string name="language_contributors">Translators</string>
 
     <string name="last_added">Last added</string>
 
@@ -233,13 +252,19 @@
 
     <string name="listing_files">Listing files</string>
 
-    <string name="loading_products">Loading products…</string>
+    <string name="loading">Loading</string>
+    <string name="loading_products">Loading products</string>
 
     <string name="lyrics">Lyrics</string>
 
     <string name="material">Material</string>
 
-    <string name="my_name">Name</string>
+    <string name="media_route_menu_title">Cast device</string>
+
+    <string name="more">More</string>
+
+    <string name="my_name">My Name</string>
+    <string name="my_playlists">My playlist</string>
     <string name="my_top_tracks">Most played</string>
 
     <string name="never">Never</string>
@@ -247,16 +272,16 @@
     <string name="new_banner_photo">New banner photo</string>
     <string name="new_playlist_title">New playlist</string>
     <string name="new_profile_photo">New profile photo</string>
-    <string name="new_start_directory">%s is the new start directory.</string>
+    <string name="new_start_directory">%s is the new start directory</string>
 
     <string name="no_albums">No albums</string>
     <string name="no_artists">No artists</string>
-    <string name="no_audio_ID">"Play a song first, then try again."</string>
+    <string name="no_audio_ID">"Play a song first, then try again"</string>
     <string name="no_equalizer">No equalizer found</string>
     <string name="no_genres">No genres</string>
     <string name="no_lyrics_found">No lyrics found</string>
     <string name="no_playlists">No playlists</string>
-    <string name="no_purchase_found">No purchase found.</string>
+    <string name="no_purchase_found">No purchase found</string>
     <string name="no_results">No results</string>
     <string name="no_songs">No songs</string>
 
@@ -264,9 +289,9 @@
     <string name="normal_lyrics">Normal lyrics</string>
     <string name="normal_style">Normal</string>
 
-    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
+    <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store]]></string>
 
-    <string name="nothing_to_scan">Nothing to scan.</string>
+    <string name="nothing_to_scan">Nothing to scan</string>
 
     <string name="notification">Notification</string>
     <string name="notification_settings_summary">Customize the notification style</string>
@@ -280,10 +305,16 @@
 
     <string name="past_three_months">Past 3 months</string>
 
+    <string name="patreon_page">Patreon</string>
+    <string name="patreon_page_summary">Support us on Patreon</string>
 
-    <string name="permission_external_storage_denied">Permission to access external storage denied.</string>
+    <string name="paypal">PayPal.me</string>
+    <string name="paypal_summary">PayPal.me is an easy way to donate us money. In case you only linked a debit or credit card, the fee in the U.S. is 2.9% of the donation plus 0.30 USD, otherwise there is no fee<a href="https://www.paypal.com/us/selfhelp/article/What-are-the-fees-for-PayPal-accounts-FAQ690">more</a>
+    </string>
 
-    <string name="permissions_denied">Permissions denied.</string>
+    <string name="permission_external_storage_denied">Permission to access external storage denied</string>
+
+    <string name="permissions_denied">Permissions denied</string>
 
     <string name="personalize">Personalize</string>
     <string name="personalize_settings_summary">Customize your now playing and UI controls</string>
@@ -306,7 +337,9 @@
     <string name="pref_header_images">Images</string>
     <string name="pref_header_lockscreen">Lockscreen</string>
     <string name="pref_header_playlists">Playlists</string>
-    <string name="pref_only_lollipop">"Only available on Lollipop."</string>
+    <string name="pref_only_lollipop">"Only available on Lollipop"</string>
+    <string name="pref_only_nougat_mr1">"Only available on Nougat 7.1"</string>
+    <string name="pref_summary_about">People who helped the project</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
