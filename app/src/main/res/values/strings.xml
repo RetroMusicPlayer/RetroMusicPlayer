@@ -105,7 +105,7 @@
     <string name="pref_blur_amount_title">Blur amount</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
 
-    <string name="buy_retromusic_pro">Buy Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
 
     <string name="cancel_current_timer">Cancel</string>
 
@@ -585,7 +585,6 @@
     <string name="pref_now_playing_screen_title">Click or Slide</string>
     <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
     <string name="clear_playing_queue">Clear queue</string>
-    <string name="buy_pro">Buy Retro Music Pro</string>
     <string name="share_app">Share app</string>
     <string name="report_bug">Report bug</string>
 
@@ -697,4 +696,5 @@
     <string name="most_played_artists">Most played artists</string>
     <string name="most_played_albums">Most played albums</string>
     <string name="favorites_songs">You\'re  most favorites songs</string>
+    <string name="buy_now">Buy now</string>
 </resources>

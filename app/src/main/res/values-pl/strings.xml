@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">Ta opcja może mieć wpływ na zużycie baterii</string>
     <string name="pref_blur_amount_title">Wartość rozmycia</string>
     <string name="pref_blur_amount_summary">Ilość rozmycia dla motywów, mniejsza ilość jest szybsza</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Anuluj</string>
     <string name="card">Karta</string>
     <string name="card_color_style">Kolorowa Karta</string>
@@ -398,7 +398,6 @@
     <string name="pref_now_playing_screen_title">Kliknij albo przesuń</string>
     <string name="pref_now_playing_screen_summary">Kliknij aby otworzyć z lub przesunąć do przezroczystej nawigacji ekranu teraz odtwarzane</string>
     <string name="clear_playing_queue">Wyczyść kolejkę</string>
-    <string name="buy_pro">Kup Retro Music Pro</string>
     <string name="share_app">Udostępnij aplikację</string>
     <string name="report_bug">Zgłoś błąd</string>
     <string name="bug_report_use_account">Wyślij przez konto GitHub</string>

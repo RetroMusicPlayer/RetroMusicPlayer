@@ -39,7 +39,7 @@
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:layout_collapseMode="pin"
-                    app:title="@string/buy_retro_music_pro"
+                    app:title="@string/retro_music_pro"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                     tools:ignore="UnusedAttribute" />
 
@@ -56,34 +56,17 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardUseCompatPadding="true">
+                android:layout_margin="4dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="true"
+                app:strokeColor="?dividerColor"
+                app:strokeWidth="1.5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:padding="16dp"
-                            app:srcCompat="@drawable/ic_format_color_fill"
-                            app:tint="?colorOnSurface" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="16dp"
-                            android:text="@string/base_color_theme"
-                            android:textAppearance="@style/TextViewSubtitle1" />
-                    </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="match_parent"

@@ -79,7 +79,7 @@
     <string name="pref_keep_screen_on_summary">請記住當您啟用此選項後或會影響電池壽命</string>
     <string name="pref_blur_amount_title">模糊值</string>
     <string name="pref_blur_amount_summary">給模糊模式主題的值，每值愈低就愈快</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">取消</string>
     <string name="card">卡片</string>
     <string name="card_color_style">彩色卡片</string>
@@ -399,7 +399,6 @@
     <string name="pref_now_playing_screen_title">點擊或滑動</string>
     <string name="pref_now_playing_screen_summary">點擊或滑動開啟無透明現在播放導航欄</string>
     <string name="clear_playing_queue">清除列表</string>
-    <string name="buy_pro">購買Retro Music Pro</string>
     <string name="share_app">分享程式</string>
     <string name="report_bug">回報錯誤</string>
     <string name="bug_report_use_account">使用Github帳戶傳送</string>

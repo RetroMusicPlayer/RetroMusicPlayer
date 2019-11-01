@@ -78,7 +78,7 @@
     <string name="pref_keep_screen_on_summary">Lưu ý rằng việc bật tính năng này có thể ảnh hưởng đến tuổi thọ pin</string>
     <string name="pref_blur_amount_title">Độ mờ</string>
     <string name="pref_blur_amount_summary">Độ mờ được áp dụng cho các chủ đề mờ, thấp hơn là nhanh hơn</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Hủy</string>
     <string name="card">Thẻ</string>
     <string name="card_color_style">Thẻ màu</string>
@@ -396,7 +396,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_now_playing_screen_title">Nhấp hoặc Trượt</string>
     <string name="pref_now_playing_screen_summary">Nhấp hoặc trượt để mở mà không cần điều hướng của màn hình đang phát</string>
     <string name="clear_playing_queue">Xóa hàng đợi</string>
-    <string name="buy_pro">Mua Retro Music Pro</string>
     <string name="share_app">Chia sẽ ứng dụng</string>
     <string name="report_bug">Báo cáo lỗi</string>
     <string name="bug_report_use_account">"Gửi bằng tài khoản GitHub "</string>

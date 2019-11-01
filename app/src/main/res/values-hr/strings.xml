@@ -77,7 +77,7 @@
     <string name="pref_keep_screen_on_summary">Imajte na umu da omogućavanje ove značajke može utjecati na trajanje baterije</string>
     <string name="pref_blur_amount_title">Količina zamagljenja</string>
     <string name="pref_blur_amount_summary">Količina zamagljenja koja se primjenjuje na teme, manje je brže</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Odustani</string>
     <string name="card">Kartica</string>
     <string name="card_color_style">Obojena kartica</string>
@@ -396,7 +396,6 @@
     <string name="pref_now_playing_screen_title">Klik ili klizanje</string>
     <string name="pref_now_playing_screen_summary">Dodirnite za otvaranje ili klizanje bez prozirne navigacije zaslona za reprodukciju</string>
     <string name="clear_playing_queue">Očisti red čekanja</string>
-    <string name="buy_pro">Kupi Retro Music Pro</string>
     <string name="share_app">Podijeli aplikaciju</string>
     <string name="report_bug">Prijavi pogrešku</string>
     <string name="bug_report_use_account">Pošalji putem GitHub računa</string>

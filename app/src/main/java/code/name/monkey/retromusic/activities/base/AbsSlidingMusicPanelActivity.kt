@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent
@@ -95,6 +96,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         updateTabs()
 
         bottomSheetBehavior = BottomSheetBehavior.from(slidingPanel)
+
+        val themeColor = ATHUtil.resolveColor(this, R.attr.colorPrimary, Color.GRAY)
+        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
     }
 
     override fun onResume() {
@@ -122,10 +126,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
         layoutInflater.inflate(resId, contentContainer)
         return slidingMusicPanelLayout
-    }
-
-    fun setAntiDragView(antiDragView: View) {
-        //slidingLayout.setAntiDragView(antiDragView)
     }
 
     private fun collapsePanel() {

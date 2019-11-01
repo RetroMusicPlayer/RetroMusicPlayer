@@ -80,7 +80,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_keep_screen_on_summary">Membiarkan fitur ini aktif mungkin akan berpengaruh pada daya baterai</string>
     <string name="pref_blur_amount_title">Tingkat blur</string>
     <string name="pref_blur_amount_summary">Tingkat blur diaplikasikan pada tema blur, lebih rendah membuat lebih cepat</string>
-    <string name="buy_retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">Retro Music Pro</string>
     <string name="cancel_current_timer">Batalkan</string>
     <string name="card">Kartu</string>
     <string name="card_color_style">Kartu Berwarna</string>
@@ -402,7 +402,6 @@ tetap bermasalah, \"Hapus data Aplikasi\"</string>
     <string name="pref_now_playing_screen_title">Klik atau geser</string>
     <string name="pref_now_playing_screen_summary">Klik atau geser untuk membuka layar sedang diputar</string>
     <string name="clear_playing_queue">Hapus antrian</string>
-    <string name="buy_pro">Beli Retro Music Pro</string>
     <string name="share_app">Bagikan Apl</string>
     <string name="report_bug">Laporkan bug</string>
     <string name="bug_report_use_account">Kirim menggunakan akun GitHub</string>
