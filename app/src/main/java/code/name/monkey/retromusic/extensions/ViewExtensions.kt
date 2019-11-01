@@ -36,6 +36,10 @@ fun View.hide() {
     visibility = View.GONE
 }
 
+fun View.hidden() {
+    visibility = View.INVISIBLE
+}
+
 fun View.showOrHide(show: Boolean) = if (show) show() else hide()
 
 fun EditText.appHandleColor(): EditText {
