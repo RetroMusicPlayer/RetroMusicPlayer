@@ -47,7 +47,6 @@ import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
@@ -63,6 +62,7 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
@@ -85,7 +85,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final String CRUMBS = "crumbs";
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
 
-    private View coordinatorLayout, container, empty;
+    private View coordinatorLayout, empty;
 
     private MaterialCardView toolbarContainer;
 
@@ -158,7 +158,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
         toolbar = view.findViewById(R.id.toolbar);
         empty = view.findViewById(android.R.id.empty);
-        container = view.findViewById(R.id.container);
     }
 
     private void setCrumb(BreadCrumbLayout.Crumb crumb, boolean addToHistory) {
@@ -232,7 +231,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private void setUpAppbarColor() {
         int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary);
         getMainActivity().setSupportActionBar(toolbar);
-        TintHelper.setTintAuto(container, primaryColor, true);
         appBarLayout.setBackgroundColor(primaryColor);
         toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
@@ -467,8 +465,9 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        container.setPadding(container.getPaddingLeft(), container.getPaddingTop(),
-                container.getPaddingRight(), this.appBarLayout.getTotalScrollRange() + verticalOffset);
+        recyclerView.setPadding(recyclerView.getPaddingLeft(), recyclerView.getPaddingTop(),
+                recyclerView.getPaddingRight(), DensityUtil.dip2px(requireContext(), 52f) +
+                        this.appBarLayout.getTotalScrollRange() + verticalOffset);
     }
 
     private void checkIsEmpty() {
