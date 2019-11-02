@@ -57,9 +57,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious.visibility = View.VISIBLE
             actionPlayingQueue.visibility = View.VISIBLE
         } else {
-            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
-            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.GONE else View.VISIBLE
-            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.GONE else View.VISIBLE
+            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
         }
 
         actionPlayingQueue.setOnClickListener(this)
@@ -109,16 +109,18 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     }
 
     private fun updateButtons() {
-        if (MusicPlayerRemote.playingQueue.fistElement()) {
-            actionPrevious.hide()
-        } else {
-            actionPrevious.show()
-        }
+        if (PreferenceUtil.getInstance(requireContext()).isExtraControls) {
+            if (MusicPlayerRemote.playingQueue.fistElement()) {
+                actionPrevious.hide()
+            } else {
+                actionPrevious.show()
+            }
 
-        if (MusicPlayerRemote.playingQueue.lastElement()) {
-            actionNext.hide()
-        } else {
-            actionNext.show()
+            if (MusicPlayerRemote.playingQueue.lastElement()) {
+                actionNext.hide()
+            } else {
+                actionNext.show()
+            }
         }
     }
 

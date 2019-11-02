@@ -291,7 +291,7 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(INITIALIZED_BLACKLIST, false);
     }
 
-    public boolean isExtraMiniExtraControls() {
+    public boolean isExtraControls() {
         return mPreferences.getBoolean(TOGGLE_ADD_CONTROLS, false);
     }
 
