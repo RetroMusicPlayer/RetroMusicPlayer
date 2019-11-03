@@ -5,9 +5,15 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.fistElement
+import code.name.monkey.retromusic.extensions.hidden
+import code.name.monkey.retromusic.extensions.lastElement
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
+import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
 
 /**
@@ -70,5 +76,29 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
 
     companion object {
         const val SLIDER_ANIMATION_TIME: Long = 400
+    }
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        updateButtons()
+    }
+
+    override fun onPlayingMetaChanged() {
+        super.onPlayingMetaChanged()
+        updateButtons()
+    }
+
+    private fun updateButtons() {
+        if (MusicPlayerRemote.playingQueue.fistElement()) {
+            previousButton?.hidden()
+        } else {
+            previousButton?.show()
+        }
+
+        if (MusicPlayerRemote.playingQueue.lastElement()) {
+            nextButton?.hidden()
+        } else {
+            nextButton?.show()
+        }
     }
 }

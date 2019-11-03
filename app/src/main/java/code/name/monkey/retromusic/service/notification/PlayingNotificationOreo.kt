@@ -23,6 +23,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -113,7 +114,7 @@ class PlayingNotificationOreo : PlayingNotification() {
 
                         override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
                             super.onLoadFailed(e, errorDrawable)
-                            update(null, Color.TRANSPARENT)
+                            update(null, ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE))
                         }
 
                         private fun update(bitmap: Bitmap?, bgColor: Int) {
@@ -127,7 +128,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                             }
 
                             if (!PreferenceUtil.getInstance(service).coloredNotification()) {
-                                bgColorFinal = Color.WHITE
+                                bgColorFinal = ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE)
                             }
                             setBackgroundColor(bgColorFinal)
                             setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
@@ -139,12 +140,8 @@ class PlayingNotificationOreo : PlayingNotification() {
                         }
 
                         private fun setBackgroundColor(color: Int) {
-
                             notificationLayout.setInt(R.id.image, "setBackgroundColor", color)
                             notificationLayoutBig.setInt(R.id.image, "setBackgroundColor", color)
-
-                            notificationLayout.setInt(R.id.foregroundImage, "setColorFilter", color)
-                            notificationLayoutBig.setInt(R.id.foregroundImage, "setColorFilter", color)
                         }
 
                         private fun setNotificationContent(dark: Boolean) {

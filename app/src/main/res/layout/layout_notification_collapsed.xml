@@ -23,14 +23,6 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
 
-        <ImageView
-            android:id="@+id/foregroundImage"
-            android:layout_width="96dp"
-            android:layout_height="match_parent"
-            android:layout_alignStart="@id/largeIcon"
-            android:src="@drawable/background_image"
-            tools:tint="?colorPrimary" />
-
     </RelativeLayout>
 
     <LinearLayout
@@ -46,8 +38,8 @@
 
         <ImageView
             android:id="@+id/smallIcon"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_marginStart="8dp"
             tools:src="@drawable/ic_audiotrack_black_24dp"
             tools:tint="@color/md_black_1000" />
@@ -60,13 +52,13 @@
             android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
             tools:text="@string/app_name" />
 
         <ImageView
             android:id="@+id/arrow"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_marginStart="2dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
@@ -84,8 +76,8 @@
         android:layout_toStartOf="@id/actions"
         android:orientation="vertical"
         android:paddingStart="12dp"
-        android:paddingBottom="4dp"
-        android:paddingEnd="12dp">
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/title"

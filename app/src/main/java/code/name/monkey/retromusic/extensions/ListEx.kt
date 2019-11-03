@@ -12,16 +12,21 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic
+package code.name.monkey.retromusic.extensions
 
-import kotlinx.coroutines.Dispatchers
-import kotlin.coroutines.CoroutineContext
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 
 /**
- * Created by hemanths on 2019-10-23.
+ * Created by hemanths on 2019-11-01.
  */
 
-class AppExecutors constructor(
-        val ioContext: CoroutineContext = Dispatchers.IO,
-        val uiContext: CoroutineContext = Dispatchers.Main
-)
+
+fun ArrayList<Song>.lastElement(): Boolean {
+    println("${this.size} ${this.indexOf(MusicPlayerRemote.currentSong)}")
+    return this.size - 1 == this.indexOf(MusicPlayerRemote.currentSong)
+}
+
+fun ArrayList<Song>.fistElement(): Boolean {
+    return 0 == this.indexOf(MusicPlayerRemote.currentSong)
+}
