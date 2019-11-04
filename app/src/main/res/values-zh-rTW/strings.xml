@@ -335,4 +335,5 @@
     <string name="x_selected">已選取 %1$d 個</string>
 
     <string name="year">年份</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

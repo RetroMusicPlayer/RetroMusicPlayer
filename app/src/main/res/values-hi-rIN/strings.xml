@@ -109,4 +109,5 @@
     <string name="clear_action">साफ़</string>
 
     <string name="home">Ghar</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

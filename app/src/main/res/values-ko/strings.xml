@@ -490,4 +490,5 @@
     <string name="x_selected">%1$d개 항목 선택됨</string>
 
     <string name="year">연도</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

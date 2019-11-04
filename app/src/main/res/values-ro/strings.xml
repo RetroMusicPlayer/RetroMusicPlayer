@@ -490,4 +490,5 @@
     <string name="x_selected">%1$d selectat</string>
 
     <string name="year">Anul</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

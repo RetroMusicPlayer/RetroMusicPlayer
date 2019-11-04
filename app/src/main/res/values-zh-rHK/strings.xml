@@ -775,4 +775,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">您將會轉到問題跟蹤網站。</string>
 
     <string name="your_account_data_is_only_used_for_authentication">您的帳戶只會用於認證用途。</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

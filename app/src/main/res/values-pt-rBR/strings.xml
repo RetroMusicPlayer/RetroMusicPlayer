@@ -776,4 +776,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Você será encaminhado para o website do rastreador de problemas.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Os dados da sua conta são usados ​​apenas para autenticação.</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

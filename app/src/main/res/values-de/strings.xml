@@ -397,4 +397,5 @@
     <string name="x_selected">%1$d ausgewählt</string>
 
     <string name="year">Jahr</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

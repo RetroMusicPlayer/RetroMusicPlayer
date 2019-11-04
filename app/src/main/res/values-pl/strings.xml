@@ -774,4 +774,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Będziesz przekierowany do strony ze zgłoszeniami.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Informacje o twoim koncie są używane tylko do autoryzacji.</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

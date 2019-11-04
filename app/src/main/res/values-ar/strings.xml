@@ -467,4 +467,5 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_summary_library_categories">تكوين وعرض وترتيب فئات المكتبة.</string>
     <string name="pref_header_controls">التحكم</string>
     <string name="pref_header_album">شكل الأسلوب</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

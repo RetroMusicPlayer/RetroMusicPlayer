@@ -626,4 +626,5 @@
     <string name="x_selected">%1$d kiválasztása</string>
 
     <string name="year">Év</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

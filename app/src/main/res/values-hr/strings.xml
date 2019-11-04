@@ -699,4 +699,5 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Biti će te preusmjereni na web stranicu za praćenje pogrešaka.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Vaši podatci o računu su korišteni samo za autentikaciju.</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

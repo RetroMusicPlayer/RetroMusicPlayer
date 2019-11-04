@@ -430,4 +430,5 @@
     <string name="x_selected">Selektovano %1$d</string>
 
     <string name="year">Godina</string>
+    <string name="label_more_from">More from %s</string>
 </resources>
