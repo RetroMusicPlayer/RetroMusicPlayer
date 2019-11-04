@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Enregistrer la file d\'attente</string>
 
     <string name="action_scan">Scanner</string>
-    <string name="action_scan_directory">Scanner le dossier</string>
 
     <string name="action_search">Rechercher</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Vous écoutez actuellement %1$s par %2$s.</string>
 
     <string name="dark_theme_name">Plutôt Sombre</string>
-
-    <string name="day_night_theme_name">De Nuit par jour(alpha)</string>
 
     <string name="default_hint">Pas de Paroles</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">Personnaliser l\'écran de lecture</string>
     <string name="now_playing_themes">9+ thèmes d\'écran de lecture en cours</string>
 
-    <string name="on">Sur</string>
-
     <string name="only_on_wifi">Uniquement via Wi-Fi</string>
 
     <string name="other_settings_summary">Fonctions de test avancées</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">Cliquez pour ouvrir avec ou glisser à sans navigation transparente de l\'écran de lecture</string>
     <string name="pref_now_playing_screen_title">Cliquez ou balayez</string>
-
-    <string name="pref_only_lollipop">"Seulement disponible sur Lollipop."</string>
 
     <string name="pref_snow_fall_title">Effet chute de neige</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Mode aléatoire</string>
     <string name="pref_title_toggle_volume">Contrôles de volume</string>
     <string name="pref_title_user_info">Informations utilisateur</string>
-
-    <string name="premium">Obtenir La Prime</string>
 
     <string name="primary_color">Couleur primaire</string>
     <string name="primary_color_desc">La couleur de thème primaire, par défaut bleu-gris, fonctionne maintenant avec les couleurs sombres</string>
@@ -637,8 +628,6 @@
     <string name="select_all">Tout sélectionner</string>
 
     <string name="select_banner_photo">Choisir la bannière photo</string>
-
-    <string name="select_preset">Sélection préréglage</string>
 
     <string name="selected">Sélectionné</string>
 
@@ -754,8 +743,6 @@
     <string name="update_image">Mettre à jour l\'image</string>
 
     <string name="updating">Mise à jour...</string>
-
-    <string name="upgrade_to_premium">Mise à niveau vers premium</string>
 
     <string name="username">Nom d\'utilisateur</string>
 

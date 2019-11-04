@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Zapisz kolejkę</string>
 
     <string name="action_scan">Skanuj</string>
-    <string name="action_scan_directory">Przeszukaj katalog</string>
 
     <string name="action_search">Szukaj</string>
 
@@ -418,8 +417,6 @@
     <string name="now_playing_summary">Dostosuj panel aktualnie odtwarzanych</string>
     <string name="now_playing_themes">9+ motywów Teraz odtwarzane</string>
 
-    <string name="on">Włącz</string>
-
     <string name="only_on_wifi">Tylko przez Wi-Fi</string>
 
     <string name="other_settings_summary">Zaawansowane funkcje eksperymentalne</string>
@@ -484,7 +481,6 @@
     <string name="pref_now_playing_screen_summary">Kliknij aby otworzyć z lub przesunąć do przezroczystej nawigacji ekranu teraz odtwarzane</string>
     <string name="pref_now_playing_screen_title">Kliknij albo przesuń</string>
 
-    <string name="pref_only_lollipop">"Dostępne tylko na Androidzie Lolipop"</string>
 
     <string name="pref_snow_fall_title">Efekt spadającego śniegu</string>
 
@@ -550,8 +546,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Tryb losowy</string>
     <string name="pref_title_toggle_volume">Sterowanie głośnością</string>
     <string name="pref_title_user_info">Informacje użytkownika</string>
-
-    <string name="premium">Kup Premium</string>
 
     <string name="primary_color">Kolor podstawowy</string>
     <string name="primary_color_desc">Główny kolor motywu, domyślnie niebieski, działa teraz z ciemnymi kolorami</string>
@@ -633,8 +627,6 @@
     <string name="select_all">Zaznacz wszystko</string>
 
     <string name="select_banner_photo">Wybierz zdjęcie banera</string>
-
-    <string name="select_preset">Wybierz zdefiniowane</string>
 
     <string name="selected">Zaznaczone</string>
 
@@ -750,8 +742,6 @@
     <string name="update_image">Zaktualizuj obrazek</string>
 
     <string name="updating">Aktualizowanie...</string>
-
-    <string name="upgrade_to_premium">Sięgnij po wersję Premium</string>
 
     <string name="username">Nazwa użytkownika</string>
 

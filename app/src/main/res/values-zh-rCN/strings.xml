@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="about_settings_summary">团队，社交链接</string>
 
     <string name="accent_color">主题色</string>
@@ -46,7 +46,6 @@
     <string name="action_save_playing_queue">保存播放队列</string>
 
     <string name="action_scan">扫描</string>
-    <string name="action_scan_directory">目录扫描</string>
 
     <string name="action_search">搜索</string>
 
@@ -73,7 +72,7 @@
 
     <string name="add_lyrics">添加歌词</string>
 
-    <string name="add_photo">添加\n头像</string>
+    <string name="add_photo" tools:keep="@string/add_photo">添加\n头像</string>
 
     <string name="add_playlist_title">"添加到播放列表"</string>
 
@@ -116,9 +115,9 @@
 
     <string name="auto">自动</string>
 
-    <string name="base_color_theme">基础颜色主题</string>
+    <string name="base_color_theme" tools:keep="@string/base_color_theme">基础颜色主题</string>
 
-    <string name="bass_boost">低音增强</string>
+    <string name="bass_boost" tools:keep="@string/bass_boost">低音增强</string>
 
     <string name="bio">个性签名</string>
 
@@ -144,7 +143,7 @@
     <string name="bug_report_no_title">请输入问题标题</string>
     <string name="bug_report_no_username">请输入您有效的 GitHub 用户名</string>
     <string name="bug_report_summary">出错了，如一直崩溃请尝试清除应用数据或发送邮件给开发者</string>
-    <string name="bug_report_uploading">提交此报告</string>
+    <string name="bug_report_uploading" tools:keep="@string/bug_report_uploading">提交此报告</string>
     <string name="bug_report_use_account">使用 GitHub 帐户发送</string>
 
     <string name="cancel_current_timer">取消</string>
@@ -157,13 +156,13 @@
 
     <string name="card_style">卡片</string>
 
-    <string name="carousal">圆盘传送带</string>
+    <string name="carousal" tools:keep="@string/carousal">圆盘传送带</string>
 
     <string name="carousal_effect_on_now_playing_screen">在播放界面使用轮播效果</string>
 
     <string name="cascading">层叠</string>
 
-    <string name="cast">投射</string>
+    <string name="cast" tools:keep="@string/cast">投射</string>
 
     <string name="changelog">更新日志</string>
 
@@ -171,7 +170,7 @@
 
     <string name="circular">圆形</string>
 
-    <string name="classic">古典</string>
+    <string name="classic" tools:keep="@string/classic">古典</string>
 
     <string name="clear_action">清空</string>
 
@@ -188,7 +187,7 @@
 
     <string name="color">颜色</string>
 
-    <string name="color_theme_name">颜色</string>
+    <string name="color_theme_name" tools:keep="@string/color_theme_name">颜色</string>
 
     <string name="colors">更多颜色</string>
 
@@ -211,7 +210,7 @@
 
     <string name="dark_theme_name">暗夜黑</string>
 
-    <string name="default_hint">暂无歌词</string>
+    <string name="default_hint" tools:keep="@string/default_hint">暂无歌词</string>
 
     <string name="delete_playlist_title">删除播放列表</string>
     <string name="delete_playlist_x"><![CDATA[确认删除播放列表 <b>%1$s</b> 吗？]]></string>
@@ -247,7 +246,7 @@
 
     <string name="edit">编辑</string>
 
-    <string name="edit_cover">编辑专辑封面</string>
+    <string name="edit_cover" tools:keep="@string/edit_cover">编辑专辑封面</string>
 
     <string name="empty">空空如也</string>
 
@@ -280,7 +279,7 @@
 
     <string name="git_hub_summary">在GitHub上克隆项目</string>
 
-    <string name="google_plus_community">加入Google+社区获得帮助或者更新信息</string>
+    <string name="google_plus_community" tools:keep="@string/google_plus_community">加入Google+社区获得帮助或者更新信息</string>
 
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
@@ -325,7 +324,7 @@
 
     <string name="last_song">最后一首</string>
 
-    <string name="lets_play_something">来点音乐吧！</string>
+    <string name="lets_play_something" tools:keep="@string/lets_play_something">来点音乐吧！</string>
 
     <string name="library">音乐库</string>
 
@@ -426,7 +425,7 @@
 
     <string name="pick_from_local_storage">从本地选取</string>
 
-    <string name="pick_image_intent_text">选择图片</string>
+    <string name="pick_image_intent_text" tools:keep="@string/pick_image_intent_text">选择图片</string>
 
     <string name="pinterest_page">Pinterest</string>
     <string name="pinterest_page_summary">在 Pintrest 页面关注 Retro Music 的设计灵感</string>
@@ -444,7 +443,7 @@
 
     <string name="playlists">播放列表</string>
 
-    <string name="pref_album_detail_style">专辑详细风格</string>
+    <string name="pref_album_detail_style" tools:keep="@string/pref_album_detail_style">专辑详细风格</string>
 
     <string name="pref_blur_amount_summary">应用于模糊主题，数值越低加载越快</string>
     <string name="pref_blur_amount_title">模糊值</string>
@@ -462,12 +461,11 @@
     <string name="pref_keep_screen_on_summary">请注意，启用此功能可能会降低电池续航时间</string>
     <string name="pref_keep_screen_on_title">保持屏幕常亮</string>
 
-    <string name="pref_now_playing_screen_summary">点击打开或者滑动到非正在播放界面的透明导航栏</string>
-    <string name="pref_now_playing_screen_title">单击或划动</string>
+    <string name="pref_now_playing_screen_summary" tools:keep="@string/pref_now_playing_screen_summary">点击打开或者滑动到非正在播放界面的透明导航栏</string>
+    <string name="pref_now_playing_screen_title" tools:keep="@string/pref_now_playing_screen_title">单击或划动</string>
 
-    <string name="pref_only_lollipop">"仅在Android 5.x(Lollipop)上可用"</string>
 
-    <string name="pref_snow_fall_title">降雪效果</string>
+    <string name="pref_snow_fall_title" tools:keep="@string/pref_snow_fall_title">降雪效果</string>
 
     <string name="pref_summary_album_art_on_lockscreen">将正在播放的歌曲专辑封面设置为锁屏壁纸</string>
     <string name="pref_summary_audio_ducking">系统音响起或消息提醒时降低音量</string>
@@ -479,19 +477,19 @@
     <string name="pref_summary_classic_notification">使用经典通知栏设计</string>
     <string name="pref_summary_colored_app">背景色以及控件色跟随正在播放界面的专辑封面变化</string>
     <string name="pref_summary_colored_app_shortcuts">将快捷方式颜色更改为强调色，每次颜色更改后需要切换一下该设置才能生效</string>
-    <string name="pref_summary_colored_navigation_bar">修改导航栏颜色为主调色</string>
+    <string name="pref_summary_colored_navigation_bar" tools:keep="@string/pref_summary_colored_navigation_bar">修改导航栏颜色为主调色</string>
     <string name="pref_summary_colored_notification">"\u4ee5\u5c01\u9762\u7684\u4e3b\u8272\u8c03\u914d\u7f6e\u901a\u77e5\u680f\u989c\u8272"</string>
     <string name="pref_summary_dominant_color">从专辑封面或艺术家图中选取主色调</string>
     <string name="pref_summary_extra_controls">给迷你播放器添加额外控件</string>
     <string name="pref_summary_gapless_playback">"在一些设备上可能会播放异常"</string>
-    <string name="pref_summary_genre_toggle">切换流派标签</string>
+    <string name="pref_summary_genre_toggle" tools:keep="@string/pref_summary_genre_toggle">切换流派标签</string>
     <string name="pref_summary_home_banner">切换主页横幅样式</string>
     <string name="pref_summary_ignore_media_store_artwork">可以提高封面质量，但加载时间较慢
 （建议只在不满意图片分辨率过低时开启）</string>
     <string name="pref_summary_lock_screen">使用Retro Music的自定义锁屏</string>
     <string name="pref_summary_open_source_licences">开源许可详情</string>
     <string name="pref_summary_round_corners">使应用边角圆滑</string>
-    <string name="pref_summary_tab_titles">切换底部导航栏的标签标题</string>
+    <string name="pref_summary_tab_titles" tools:keep="@string/pref_summary_tab_titles">切换底部导航栏的标签标题</string>
     <string name="pref_summary_toggle_full_screen">沉浸式</string>
     <string name="pref_summary_toggle_headset">检测到耳机后自动播放</string>
     <string name="pref_summary_toggle_shuffle">播放新列表时关闭随机播放</string>
@@ -507,20 +505,20 @@
     <string name="pref_title_auto_download_artist_images">自动下载艺术家图片</string>
     <string name="pref_title_blacklist">黑名单</string>
     <string name="pref_title_blurred_album_art">模糊专辑封面</string>
-    <string name="pref_title_choose_equalizer">选择均衡器</string>
+    <string name="pref_title_choose_equalizer" tools:keep="@string/pref_title_choose_equalizer">选择均衡器</string>
     <string name="pref_title_classic_notification">经典通知栏设计</string>
     <string name="pref_title_colored_app">自适应颜色</string>
     <string name="pref_title_colored_notification">带颜色的通知栏</string>
     <string name="pref_title_extra_controls">额外控件</string>
     <string name="pref_title_gapless_playback">无间隙连续播放</string>
     <string name="pref_title_general_theme">应用主题</string>
-    <string name="pref_title_genre_toggle">显示流派标签</string>
+    <string name="pref_title_genre_toggle" tools:keep="@string/pref_title_genre_toggle">显示流派标签</string>
     <string name="pref_title_home_artist_grid_style">主页艺术家网格</string>
     <string name="pref_title_home_banner">主页横幅</string>
     <string name="pref_title_ignore_media_store_artwork">忽略多媒体商店封面</string>
     <string name="pref_title_last_added_interval">上次添加播放列表到现在的间隔</string>
     <string name="pref_title_lock_screen">全屏控件</string>
-    <string name="pref_title_navigation_bar">带颜色的导航栏</string>
+    <string name="pref_title_navigation_bar" tools:keep="@string/pref_title_navigation_bar">带颜色的导航栏</string>
     <string name="pref_title_now_playing_screen_appearance">播放主题</string>
     <string name="pref_title_open_source_licences">开源许可</string>
     <string name="pref_title_round_corners">边角</string>
@@ -528,20 +526,20 @@
     <string name="pref_title_toggle_carousel_effect">轮播效果</string>
     <string name="pref_title_toggle_dominant_color">主色调</string>
     <string name="pref_title_toggle_full_screen">全屏应用</string>
-    <string name="pref_title_toggle_tab_titles">标签标题</string>
+    <string name="pref_title_toggle_tab_titles" tools:keep="@string/pref_title_toggle_tab_titles">标签标题</string>
     <string name="pref_title_toggle_toggle_headset">音频播放</string>
     <string name="pref_title_toggle_toggle_shuffle">随机播放</string>
     <string name="pref_title_toggle_volume">音量控件</string>
-    <string name="pref_title_user_info">用户信息</string>
+    <string name="pref_title_user_info" tools:keep="@string/pref_title_user_info">用户信息</string>
 
-    <string name="primary_color">主颜色</string>
-    <string name="primary_color_desc">默认蓝灰色为主要颜色，目前使用深色</string>
+    <string name="primary_color" tools:keep="@string/primary_color">主颜色</string>
+    <string name="primary_color_desc" tools:keep="@string/primary_color_desc">默认蓝灰色为主要颜色，目前使用深色</string>
 
     <string name="profile">个人概况</string>
 
     <string name="purchase">购买</string>
 
-    <string name="purchase_summary">*购买前请先考虑，不要征询退款。</string>
+    <string name="purchase_summary" tools:keep="@string/purchase_summary">*购买前请先考虑，不要征询退款。</string>
 
     <string name="queue">队列</string>
 
@@ -585,7 +583,7 @@
 
     <string name="restoring_purchase">恢复购买中 ...</string>
 
-    <string name="retro_equalizer">Retro Music 均衡器</string>
+    <string name="retro_equalizer" tools:keep="@string/retro_equalizer">Retro Music 均衡器</string>
 
     <string name="retro_music_pro">Retro Music高级版</string>
 
@@ -630,9 +628,9 @@
     <string name="sleep_timer_canceled">睡眠定时已取消</string>
     <string name="sleep_timer_set">睡眠定时器设置为%d分钟。</string>
 
-    <string name="slide">滑动</string>
+    <string name="slide" tools:keep="@string/slide">滑动</string>
 
-    <string name="small">小专辑</string>
+    <string name="small" tools:keep="@string/small">小专辑</string>
 
     <string name="social">社交</string>
 
@@ -655,9 +653,9 @@
 
     <string name="speech_prompt">搜索媒体库</string>
 
-    <string name="suggestion_songs">建议</string>
+    <string name="suggestion_songs" tools:keep="@string/suggestion_songs">建议</string>
 
-    <string name="summary_user_info">仅仅在主页上显示你的名字</string>
+    <string name="summary_user_info" tools:keep="@string/summary_user_info">仅仅在主页上显示你的名字</string>
 
     <string name="support_development">支持开发者</string>
 
@@ -665,7 +663,7 @@
 
     <string name="synced_lyrics">滚动歌词</string>
 
-    <string name="system_equalizer">系统均衡器</string>
+    <string name="system_equalizer" tools:keep="@string/system_equalizer">系统均衡器</string>
 
     <!-- Message displayed when tag editing fails -->
     <string name="telegram_group">Telegram</string>
@@ -685,15 +683,15 @@
 
     <string name="title">标题</string>
 
-    <string name="title_dashboard">仪表盘</string>
+    <string name="title_dashboard" tools:keep="@string/title_dashboard">仪表盘</string>
 
-    <string name="title_good_afternoon">下午好</string>
-    <string name="title_good_day">美好的一天</string>
-    <string name="title_good_evening">傍晚好</string>
-    <string name="title_good_morning">早上好</string>
-    <string name="title_good_night">晚上好</string>
+    <string name="title_good_afternoon" tools:keep="@string/title_good_afternoon">下午好</string>
+    <string name="title_good_day" tools:keep="@string/title_good_day">美好的一天</string>
+    <string name="title_good_evening" tools:keep="@string/title_good_evening">傍晚好</string>
+    <string name="title_good_morning" tools:keep="@string/title_good_morning">早上好</string>
+    <string name="title_good_night" tools:keep="@string/title_good_night">晚上好</string>
 
-    <string name="title_user_info">你的名字是什么</string>
+    <string name="title_user_info" tools:keep="@string/title_user_info">你的名字是什么</string>
 
     <string name="today">今日</string>
 
@@ -728,7 +726,7 @@
 
     <string name="vertical_flip">垂直滚动</string>
 
-    <string name="virtualizer">虚拟器</string>
+    <string name="virtualizer" tools:keep="@string/virtualizer">虚拟器</string>
 
     <string name="web_search">网络搜索</string>
 

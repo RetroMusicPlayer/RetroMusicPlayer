@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Oynatma kuyruğunu kaydet</string>
 
     <string name="action_scan">Tara</string>
-    <string name="action_scan_directory">Tarama rehberi</string>
 
     <string name="action_search">Ara</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Şu anda %2$s şarkıcısından %1$s dinleniyor.</string>
 
     <string name="dark_theme_name">Koyu</string>
-
-    <string name="day_night_theme_name">Gündüz Gece (alpha)</string>
 
     <string name="default_hint">Şarkı sözü yok</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">Şimdi oynatılıyor ekranını özelleştirin</string>
     <string name="now_playing_themes">9+ şimdi oynatılıyor temaları</string>
 
-    <string name="on">Açık</string>
-
     <string name="only_on_wifi">Sadece Wi-Fi ile</string>
 
     <string name="other_settings_summary">Gelişmiş test özellikleri</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">Çalmakta olan ekrana şeffaf gezinme olmadan açmak veya kaydırmak için tıklayın</string>
     <string name="pref_now_playing_screen_title">Tıkla veya Kaydır</string>
-
-    <string name="pref_only_lollipop">"Sadece Lollipop'da kullanılabilir."</string>
 
     <string name="pref_snow_fall_title">Kar yağışı efekti</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Karıştır modu</string>
     <string name="pref_title_toggle_volume">Ses kontrolleri</string>
     <string name="pref_title_user_info">Kullanıcı bilgisi</string>
-
-    <string name="premium">Premium\'u al</string>
 
     <string name="primary_color">Ana renk</string>
     <string name="primary_color_desc">Ana tema rengi, varsayılanı mavi griye, şimdilik koyu renklerle çalışıyor</string>
@@ -637,8 +628,6 @@
     <string name="select_all">Hepsini seç</string>
 
     <string name="select_banner_photo">Afiş fotoğrafını seçin</string>
-
-    <string name="select_preset">Ön ayar seç</string>
 
     <string name="selected">Seçilmiş</string>
 
@@ -755,8 +744,6 @@
     <string name="update_image">Resmi güncelle</string>
 
     <string name="updating">Güncelleniyor ...</string>
-
-    <string name="upgrade_to_premium">Premium\'a yükselt</string>
 
     <string name="username">Kullanıcı Adı</string>
 

@@ -44,7 +44,6 @@
     <string name="action_save_playing_queue">Spremi red reproduciranja</string>
 
     <string name="action_scan">Skeniraj</string>
-    <string name="action_scan_directory">Skeniraj direktorij</string>
 
     <string name="action_search">Traži</string>
 
@@ -433,8 +432,6 @@
 
     <string name="pref_now_playing_screen_summary">Dodirnite za otvaranje ili klizanje bez prozirne navigacije zaslona za reprodukciju</string>
     <string name="pref_now_playing_screen_title">Klik ili klizanje</string>
-
-    <string name="pref_only_lollipop">"Dostupno samo na Lollipop-u."</string>
 
     <string name="pref_snow_fall_title">Efekt padanja snijega</string>
 

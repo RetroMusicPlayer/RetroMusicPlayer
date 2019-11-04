@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">儲存播放清單</string>
 
     <string name="action_scan">掃描</string>
-    <string name="action_scan_directory">掃描資料夾</string>
 
     <string name="action_search">搜尋</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">我在聽由 %2$s 唱的 %1$s</string>
 
     <string name="dark_theme_name">暗黑</string>
-
-    <string name="day_night_theme_name">夜間模式(Alpha)</string>
 
     <string name="default_hint">沒有歌詞</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">個人化現在播放界面</string>
     <string name="now_playing_themes">9+ 現在播放介面主題</string>
 
-    <string name="on">開啟</string>
-
     <string name="only_on_wifi">僅透過Wi-Fi</string>
 
     <string name="other_settings_summary">進階測試功能</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">點擊或滑動開啟無透明現在播放導航欄</string>
     <string name="pref_now_playing_screen_title">點擊或滑動</string>
-
-    <string name="pref_only_lollipop">"只適合於Lollipop。"</string>
 
     <string name="pref_snow_fall_title">雪花效果</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">隨機模式</string>
     <string name="pref_title_toggle_volume">音量控制</string>
     <string name="pref_title_user_info">使用者資料</string>
-
-    <string name="premium">獲得Premium</string>
 
     <string name="primary_color">原色</string>
     <string name="primary_color_desc">主原色預設為灰藍色，現在適用於深色色彩</string>
@@ -637,8 +628,6 @@
     <string name="select_all">選擇全部</string>
 
     <string name="select_banner_photo">選擇橫幅圖片</string>
-
-    <string name="select_preset">選擇預定設置</string>
 
     <string name="selected">已選</string>
 
@@ -754,8 +743,6 @@
     <string name="update_image">更新圖片</string>
 
     <string name="updating">更新中...</string>
-
-    <string name="upgrade_to_premium">升級至Premium</string>
 
     <string name="username">用戶名稱</string>
 

@@ -204,8 +204,6 @@
     <string name="pref_header_images">Gambar</string>
     <string name="pref_header_lockscreen">Layarkunci</string>
 
-    <string name="pref_only_lollipop">"Hanya tersedia pada Lollipop."</string>
-
     <string name="pref_summary_album_art_on_lockscreen">Menggunakan gambar album sebagai latar layarkunci.</string>
     <string name="pref_summary_audio_ducking">Pemberitahuan, navigasi, dll.</string>
     <string name="pref_summary_blurred_album_art">Kaburkan gambar album pada layarkunci. Dapat menyebabkan masalah pada apl pihak ketiga dan widget.</string>

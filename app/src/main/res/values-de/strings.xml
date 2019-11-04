@@ -269,8 +269,6 @@
     <string name="pref_header_lockscreen">Sperrbildschirm</string>
     <string name="pref_header_playlists">Playlist</string>
 
-    <string name="pref_only_lollipop">"Nur unter Android Lollipop verfügbar."</string>
-
     <string name="pref_summary_album_art_on_lockscreen">Aktuelles Album-Cover als Sperrbildschrim verwenden.</string>
     <string name="pref_summary_audio_ducking">Benachrichtigungen, Benachrichtigung etc.</string>
     <string name="pref_summary_blurred_album_art">Verunschärft das Album-Cover des Sperrbildschirm. Kann Probleme mit anderen Apps und Widgets verursachen.</string>

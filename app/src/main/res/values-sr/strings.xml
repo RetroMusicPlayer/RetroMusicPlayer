@@ -276,8 +276,6 @@
     <string name="pref_header_lockscreen">Zakljucan ekran</string>
     <string name="pref_header_playlists">Plejliste</string>
 
-    <string name="pref_only_lollipop">"Dostupno samo na Android Lollipop-u"</string>
-
     <string name="pref_summary_album_art_on_lockscreen">Koristi omot albuma kao pozadinu kada se reprodukuje muzika</string>
     <string name="pref_summary_audio_ducking">Obavestenja, navigacija itd.</string>
     <string name="pref_summary_blurred_album_art">Zamuti omot albuma na zakljucanom ekranu. (moze izazvati probleme sa drugim aplikacijama i vidzetima)</string>

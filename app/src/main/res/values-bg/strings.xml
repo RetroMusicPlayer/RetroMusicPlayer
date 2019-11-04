@@ -44,7 +44,6 @@
     <string name="action_save_playing_queue">Запази опашката</string>
 
     <string name="action_scan">Сканирай</string>
-    <string name="action_scan_directory">Сканирай директория</string>
 
     <string name="action_search">Търси</string>
 
@@ -432,7 +431,6 @@
     <string name="pref_now_playing_screen_summary">Натисни за или плъзни за без прозрачна навигация на екрана с песен</string>
     <string name="pref_now_playing_screen_title">Натисни или плъзни</string>
 
-    <string name="pref_only_lollipop">"Наличен единствено в Lollipop."</string>
 
     <string name="pref_snow_fall_title">Ефект на валящ сняг</string>
 

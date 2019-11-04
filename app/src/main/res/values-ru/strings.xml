@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Сохранить очередь воспроизведения</string>
 
     <string name="action_scan">Сканировать</string>
-    <string name="action_scan_directory">Сканирование каталога</string>
 
     <string name="action_search">Поиск</string>
 
@@ -473,8 +472,6 @@
 
     <string name="pref_now_playing_screen_summary">Нажмите, чтобы открыть экран воспроизведения с прозрачной навигации или проведите чтобы открыть без прозрачной навигации</string>
     <string name="pref_now_playing_screen_title">Нажмите или Проведите</string>
-
-    <string name="pref_only_lollipop">"Доступно только на Lollipop."</string>
 
     <string name="pref_snow_fall_title">Эффект снегопада</string>
 

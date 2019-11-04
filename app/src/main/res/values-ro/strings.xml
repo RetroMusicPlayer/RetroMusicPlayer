@@ -310,8 +310,6 @@
     <string name="pref_header_lockscreen">Ecran de blocare</string>
     <string name="pref_header_playlists">Playlist-uri</string>
 
-    <string name="pref_only_lollipop">"Valabil doar pe Lollipop"</string>
-
     <string name="pref_summary_album_art_on_lockscreen">Folosește coperta de album curentă ca imagine de fundal pe ecranul de blocare.</string>
     <string name="pref_summary_audio_ducking">Notificațiile, navigarea etc.</string>
     <string name="pref_summary_blurred_album_art">Spălăcește coperta de album pe ecranul de blocare. Poate cauza probleme cu alte aplcicatii sau widget-uri.</string>

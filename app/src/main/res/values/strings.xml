@@ -35,7 +35,6 @@
     <string name="action_rename">Rename</string>
     <string name="action_save_playing_queue">Save playing queue</string>
     <string name="action_scan">Scan</string>
-    <string name="action_scan_directory">Scan directory</string>
     <string name="action_search">Search</string>
     <string name="action_set">Start</string>
     <string name="action_set_as_ringtone">Set as ringtone</string>
@@ -66,7 +65,6 @@
     <string name="album_or_artist_empty">The title or artist is empty.</string>
 
     <string name="albums">Albums</string>
-    <string name="albums_label">Albums</string>
 
 
     <string name="always">Always</string>
@@ -84,7 +82,6 @@
     <string name="artist">Artist</string>
 
     <string name="artists">Artists</string>
-    <string name="artists_label">Artists</string>
 
     <string name="audio_focus_denied">Audio focus denied.</string>
     <string name="audio_settings_summary">Change the sound settings and adjust the equalizer controls</string>
@@ -177,8 +174,6 @@
 
     <string name="dark_theme_name">Kinda Dark</string>
 
-    <string name="day_night_theme_name">Day Night(alpha)</string>
-
     <string name="default_hint">No Lyrics</string>
 
     <string name="delete_playlist_title">Delete playlist</string>
@@ -248,7 +243,6 @@
     <string name="genre">Genre</string>
 
     <string name="genres">Genres</string>
-    <string name="genres_label">Genres</string>
 
     <string name="git_hub_summary">Fork the project on GitHub</string>
 
@@ -267,7 +261,6 @@
     <string name="hinge">Hinge</string>
 
     <string name="history">History</string>
-    <string name="history_label">History</string>
 
     <string name="home">Home</string>
 
@@ -363,8 +356,6 @@
     <string name="now_playing_summary">Customize the now playing screen</string>
     <string name="now_playing_themes">9+ now playing themes</string>
 
-    <string name="on">On</string>
-
     <string name="only_on_wifi">Only on Wi-Fi</string>
 
     <string name="other_settings_summary">Advanced testing features</string>
@@ -402,7 +393,6 @@
     <string name="playlist_name_empty">Playlist name</string>
 
     <string name="playlists">Playlists</string>
-    <string name="playlists_label">Playlists</string>
 
     <string name="pref_album_detail_style">Album detail style</string>
     <string name="pref_blur_amount_summary">Amount of blur applied for blur themes, lower is faster</string>
@@ -423,7 +413,7 @@
     <string name="pref_keep_screen_on_title">Keep the screen on</string>
     <string name="pref_now_playing_screen_summary">Click to open with or slide to without transparent navigation of now playing screen</string>
     <string name="pref_now_playing_screen_title">Click or Slide</string>
-    <string name="pref_only_lollipop">"Only available on Lollipop."</string>
+
     <string name="pref_snow_fall_title">Snow fall effect</string>
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
@@ -489,8 +479,6 @@
     <string name="pref_title_toggle_volume">Volume controls</string>
     <string name="pref_title_user_info">User info</string>
 
-    <string name="premium">Get Premium</string>
-
     <string name="primary_color">Primary color</string>
     <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
 
@@ -502,7 +490,6 @@
     <string name="purchase_summary">*Think before buying, don\'t ask for refund.</string>
 
     <string name="queue">Queue</string>
-    <string name="queue_label">Queue</string>
 
     <string name="rate_app">Rate the app</string>
     <string name="rate_on_google_play_summary">Love this app? Let us know in the Google Play Store how we can make it even better</string>
@@ -551,8 +538,6 @@
     <string name="saf_guide_slide2_title">Select your SD card in navigation drawer</string>
     <string name="saf_guide_slide3_description">Do not open any sub-folders</string>
     <string name="saf_guide_slide3_title">Tap \'select\' button at the bottom of the screen</string>
-    <string name="saf_pick_file">File access required. Pick %s</string>
-    <string name="saf_pick_sdcard">SD card access required. Please pick root directory of SD card</string>
     <string name="saf_write_failed">File write failed: %s</string>
 
     <string name="save">Save</string>
@@ -573,7 +558,6 @@
 
     <string name="select_all">Select all</string>
     <string name="select_banner_photo">Select banner photo</string>
-    <string name="select_preset">Select preset</string>
 
     <string name="selected">Selected</string>
 
@@ -658,7 +642,6 @@
 
     <string name="top_albums">Top albums</string>
     <string name="top_artists">Top artists</string>
-    <string name="top_tracks_label">Top Tracks</string>
 
     <string name="track_hint">"Track (2 for track 2 or 3004 for CD3 track 4)"</string>
     <string name="track_list">Track number</string>
@@ -678,8 +661,6 @@
     <string name="update_image">Update image</string>
 
     <string name="updating">Updating…</string>
-
-    <string name="upgrade_to_premium">Upgrade to premium</string>
 
     <string name="username">Username</string>
 
@@ -709,4 +690,6 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+
+    <string name="label_more_from">More from %s</string>
 </resources>

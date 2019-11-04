@@ -233,8 +233,6 @@
     <string name="pref_header_images">圖片</string>
     <string name="pref_header_lockscreen">鎖定螢幕</string>
 
-    <string name="pref_only_lollipop">"只適用於 Lollipop。"</string>
-
     <string name="pref_summary_album_art_on_lockscreen">將播放中歌曲的專輯封面設為鎖定螢幕背景。</string>
     <string name="pref_summary_audio_ducking">通知鈴聲、導航語音等。</string>
     <string name="pref_summary_blurred_album_art">在鎖定畫面上模糊化專輯圖片。第三方程式和小工具可能不正常運作。</string>

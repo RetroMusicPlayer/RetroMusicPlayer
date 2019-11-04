@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Salva coda</string>
 
     <string name="action_scan">Scansiona</string>
-    <string name="action_scan_directory">Scansiona cartella</string>
 
     <string name="action_search">Cerca</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Ascoltando attualmente %1$s di %2$s.</string>
 
     <string name="dark_theme_name">Tipo buio</string>
-
-    <string name="day_night_theme_name">Chiaro Scuro (alpha)</string>
 
     <string name="default_hint">Nessun testo</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">Personalizza la schermata riproduzione</string>
     <string name="now_playing_themes">Più di 9 schermate di riproduzione</string>
 
-    <string name="on">Acceso</string>
-
     <string name="only_on_wifi">Solo tramite Wi-fi</string>
 
     <string name="other_settings_summary">Funzionalità avanzate</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">Premi per aprire o scorri nella schermata di riproduzione</string>
     <string name="pref_now_playing_screen_title">Premi o scorri</string>
-
-    <string name="pref_only_lollipop">"Disponibile solo con Lollipop"</string>
 
     <string name="pref_snow_fall_title">Effetto neve</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Modalità casuale</string>
     <string name="pref_title_toggle_volume">Controlli volume</string>
     <string name="pref_title_user_info">Info utente</string>
-
-    <string name="premium">Ottieni premium</string>
 
     <string name="primary_color">Colore primario</string>
     <string name="primary_color_desc">Il colore primario del tema, blu-grigio di default, per ora funziona con colori scuri</string>
@@ -637,8 +628,6 @@
     <string name="select_all">Seleziona tutto</string>
 
     <string name="select_banner_photo">Seleziona la foto del banner</string>
-
-    <string name="select_preset">Seleziona preimpostato</string>
 
     <string name="selected">Selezionato</string>
 
@@ -754,8 +743,6 @@
     <string name="update_image">Aggiorna immagine</string>
 
     <string name="updating">Aggiornamento...</string>
-
-    <string name="upgrade_to_premium">Passa a premium</string>
 
     <string name="username">Nome utente</string>
 

@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Lưu hàng đợi phát</string>
 
     <string name="action_scan">Quét</string>
-    <string name="action_scan_directory">Quét thư mục</string>
 
     <string name="action_search">Tìm kiếm</string>
 
@@ -481,8 +480,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_now_playing_screen_summary">Nhấp hoặc trượt để mở mà không cần điều hướng của màn hình đang phát</string>
     <string name="pref_now_playing_screen_title">Nhấp hoặc Trượt</string>
 
-    <string name="pref_only_lollipop">"Chỉ có trên phiên bản Lollipop"</string>
-
     <string name="pref_snow_fall_title">Hiệu ứng tuyết rơi</string>
 
     <string name="pref_summary_album_art_on_lockscreen">Sử dụng ảnh bìa album bài hát đang phát làm ảnh nền màn hình khóa.</string>
@@ -547,8 +544,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="pref_title_toggle_toggle_shuffle">Chế độ ngẫu nhiên</string>
     <string name="pref_title_toggle_volume">Điều khiển âm lượng</string>
     <string name="pref_title_user_info">Thông tin người dùng</string>
-
-    <string name="premium">Nâng cấp Premium</string>
 
     <string name="primary_color">Màu chủ đạo</string>
     <string name="primary_color_desc">Màu sắc chủ đạo, mặc định là màu xanh xám, bây giờ hoạt động với màu tối</string>
@@ -628,8 +623,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="select_all">Chọn tất cả</string>
 
     <string name="select_banner_photo">Chọn ảnh biểu ngữ</string>
-
-    <string name="select_preset">Chọn Preset</string>
 
     <string name="selected">Đã chọn</string>
 
@@ -743,8 +736,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="update_image">Cập nhật hình ảnh</string>
 
     <string name="updating">Đang cập nhật...</string>
-
-    <string name="upgrade_to_premium">Nâng cấp lên Premium</string>
 
     <string name="username">Tên người dùng</string>
 

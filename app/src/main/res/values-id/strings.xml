@@ -48,7 +48,6 @@
     <string name="action_save_playing_queue">Simpan antrean pemutar</string>
 
     <string name="action_scan">Pindai</string>
-    <string name="action_scan_directory">Pindai direktori</string>
 
     <string name="action_search">Cari</string>
 
@@ -476,7 +475,6 @@ anda dapat berdonasi disini</string>
     <string name="pref_now_playing_screen_summary">Klik atau geser untuk membuka layar sedang diputar</string>
     <string name="pref_now_playing_screen_title">Klik atau geser</string>
 
-    <string name="pref_only_lollipop">"Hanya tersedia di Lollipop"</string>
 
     <string name="pref_snow_fall_title">Efek salju jatuh</string>
 
@@ -621,8 +619,6 @@ anda dapat berdonasi disini</string>
     <string name="select_all">Pilih semua</string>
 
     <string name="select_banner_photo">Pilih foto banner</string>
-
-    <string name="select_preset">Pilih Preset</string>
 
     <string name="selected">Terpilih</string>
 

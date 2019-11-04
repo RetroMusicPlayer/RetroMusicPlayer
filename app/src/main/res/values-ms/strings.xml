@@ -280,7 +280,6 @@
     <string name="pref_header_lockscreen">Skrin kunci</string>
     <string name="pref_header_playlists">Senarai main</string>
 
-    <string name="pref_only_lollipop">"Hanya tersedia pada Lollipop."</string>
 
     <string name="pref_summary_album_art_on_lockscreen">Menggunakan kulit album lagu semasa sebagai hias latar skrin kunci</string>
     <string name="pref_summary_audio_ducking">Pemberitahuan, pandu arah dan lain-lain.</string>

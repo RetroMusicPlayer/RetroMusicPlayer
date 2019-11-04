@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Warteschleife abspeichern</string>
 
     <string name="action_scan">Scannen</string>
-    <string name="action_scan_directory">Verzeichnis scannen</string>
 
     <string name="action_search">Suchen</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Du hörst gerade %1$s von %2$s.</string>
 
     <string name="dark_theme_name">Ziemlich Dunkel</string>
-
-    <string name="day_night_theme_name">Tag-Nacht</string>
 
     <string name="default_hint">Kein Songtext</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">Passe den Abspielbildschirm an</string>
     <string name="now_playing_themes">Mehr als 10 Abspiel-Themes</string>
 
-    <string name="on">An</string>
-
     <string name="only_on_wifi">Nur über WLAN</string>
 
     <string name="other_settings_summary">Erweiterte Testfunktionen</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">Tippen oder wischen, um den Abspielbildschirm zu öffnen. Ist Wischen aktiv, kann die Navigationsleiste nicht transparent sein.</string>
     <string name="pref_now_playing_screen_title">Wischgesten</string>
-
-    <string name="pref_only_lollipop">"Nur auf Lollipop verfügbar."</string>
 
     <string name="pref_snow_fall_title">Schneefall-Effekt</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Shuffle-Modus</string>
     <string name="pref_title_toggle_volume">Lautstärkesteuerung</string>
     <string name="pref_title_user_info">Nutzerinfo</string>
-
-    <string name="premium">Premium kaufen</string>
 
     <string name="primary_color">Primärfarbe</string>
     <string name="primary_color_desc">Die Primärfarbe, standardmäßig blau/grau, funktioniert nun auch mit dunklen Farben</string>
@@ -637,8 +628,6 @@
     <string name="select_all">Alle auswählen</string>
 
     <string name="select_banner_photo">Banner-Foto auswählen</string>
-
-    <string name="select_preset">Wähle eine Voreinstellung</string>
 
     <string name="selected">Ausgewähltes beschriftet</string>
 
@@ -754,8 +743,6 @@
     <string name="update_image">Bild aktualisieren</string>
 
     <string name="updating">Aktualisieren...</string>
-
-    <string name="upgrade_to_premium">Upgrade auf Premium</string>
 
     <string name="username">Benutzername</string>
 

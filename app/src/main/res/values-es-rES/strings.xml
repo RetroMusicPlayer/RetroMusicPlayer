@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
 
     <string name="action_scan">Escanear</string>
-    <string name="action_scan_directory">Escanear directorio</string>
 
     <string name="action_search">Buscar</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Estás escuchando a</string>
 
     <string name="dark_theme_name">Algo oscuro</string>
-
-    <string name="day_night_theme_name">Día Noche (alpha)</string>
 
     <string name="default_hint">No hay letras</string>
 
@@ -486,8 +483,6 @@
     <string name="pref_now_playing_screen_summary">Toca para abrir con o desliza sin la barra de navegación transparente de la pantalla de reproducción</string>
     <string name="pref_now_playing_screen_title">Hacer clic o deslizar</string>
 
-    <string name="pref_only_lollipop">"Sólo disponible en Lollipop."</string>
-
     <string name="pref_snow_fall_title">Efecto de caída de nieve</string>
 
     <string name="pref_summary_album_art_on_lockscreen">Utiliza la portada del álbum de la canción que se está reproduciendo como fondo de la pantalla de bloqueo</string>
@@ -552,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatorio</string>
     <string name="pref_title_toggle_volume">Controles de volumen</string>
     <string name="pref_title_user_info">Información del usuario</string>
-
-    <string name="premium">Obtener premium</string>
 
     <string name="primary_color">Color primario</string>
     <string name="primary_color_desc">El color de tema primario, azul grisáceo por defecto, por ahora funciona con colores oscuros</string>
@@ -635,8 +628,6 @@
     <string name="select_all">Seleccionar todo</string>
 
     <string name="select_banner_photo">Elegir una foto de portada</string>
-
-    <string name="select_preset">Seleccionar preset</string>
 
     <string name="selected">Seleccionado</string>
 
@@ -752,8 +743,6 @@
     <string name="update_image">Actualizar imagen</string>
 
     <string name="updating">Actualizando...</string>
-
-    <string name="upgrade_to_premium">Mejorado a premium</string>
 
     <string name="username">Nombre de Usuario</string>
 

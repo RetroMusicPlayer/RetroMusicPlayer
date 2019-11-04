@@ -3,20 +3,14 @@
 
 
     <!-- Red -->
-    <color name="md_red_200">#EF9A9A</color>
     <color name="md_red_400">#EF5350</color>
     <color name="md_red_500">#F44336</color>
-    <color name="md_red_A700">#D50000</color>
     <color name="md_red_A400">#FF1744</color>
-    <color name="md_red_500A12">#30F44336</color>
 
     <!-- Pink -->
-    <color name="md_pink_500">#E91E63</color>
-    <color name="md_pink_A400">#F50057</color>
 
     <!-- Yellow -->
     <color name="md_yellow_A400">#FFD600</color>
-    <color name="md_yellow_500A12">#30FFEB3B</color>
 
 
     <!-- Deep Purple -->
@@ -27,44 +21,28 @@
     <color name="md_deep_purple_600">#5E35B1</color>
     <color name="md_deep_purple_700">#512DA8</color>
     <color name="md_deep_purple_800">#4527A0</color>
-    <color name="md_deep_purple_500A12">#30673AB7</color>
     <color name="md_deep_purple_500">#673AB7</color>
-    <color name="md_deep_purple_A700">#6200EA</color>
     <color name="md_deep_purple_A200">#7C4DFF</color>
 
     <!-- Indigo -->
-    <color name="md_indigo_500">#3F51B5</color>
-    <color name="md_indigo_300">#7986CB</color>
-    <color name="md_indigo_400">#5C6BC0</color>
-    <color name="md_indigo_600">#3949AB</color>
-    <color name="md_indigo_700">#303F9F</color>
-    <color name="md_indigo_800">#283593</color>
 
 
     <!-- Blue -->
-    <color name="md_blue_200">#90CAF9</color>
     <color name="md_blue_500">#2196F3</color>
     <color name="md_blue_A200">#448AFF</color>
     <color name="md_blue_A400">#2979FF</color>
-    <color name="md_blue_A700">#2962FF</color>
-    <color name="md_blue_500A12">#302196F3</color>
 
 
     <color name="md_green_A200">#69F0AE</color>
     <color name="md_green_A700">#00C853</color>
     <color name="md_green_500">#4CAF50</color>
-    <color name="md_green_500A12">#304CAF50</color>
 
 
     <color name="md_grey_200">#EEEEEE</color>
     <color name="md_grey_400">#BDBDBD</color>
     <color name="md_grey_500">#9E9E9E</color>
-    <color name="md_grey_700">#616161</color>
     <color name="md_grey_800">#424242</color>
     <color name="md_grey_900">#212121</color>
-
-
-    <color name="md_blue_grey_800">#37474F</color>
 
 
     <color name="md_black_1000">#000000</color>
@@ -73,6 +51,5 @@
 
     <color name="md_teal_A400">#1DE9B6</color>
     <color name="md_deep_orange_A400">#FF3D00</color>
-    <color name="md_orange_A400">#FF9100</color>
     <color name="md_light_green_A400">#76FF03</color>
 </resources>

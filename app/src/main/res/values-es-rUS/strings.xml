@@ -44,7 +44,6 @@
     <string name="action_save_playing_queue">Guardar cola de reproducción</string>
 
     <string name="action_scan">Escanear</string>
-    <string name="action_scan_directory">Escanear directorio</string>
 
     <string name="action_search">Buscar</string>
 
@@ -431,8 +430,6 @@
 
     <string name="pref_now_playing_screen_summary">Click para abrir con o sin navegación transparente de la pantalla de reproducción actual</string>
     <string name="pref_now_playing_screen_title">Hacer Clic o Deslizar</string>
-
-    <string name="pref_only_lollipop">"Sólo disponible en Lollipop"</string>
 
     <string name="pref_snow_fall_title">Efecto \"Snow Fall\"</string>
 

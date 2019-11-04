@@ -46,7 +46,6 @@
     <string name="action_save_playing_queue">Guardar lista de reproducción</string>
 
     <string name="action_scan">Escanear</string>
-    <string name="action_scan_directory">Escanear directorio</string>
 
     <string name="action_search">Buscar</string>
 
@@ -432,7 +431,6 @@
     <string name="pref_now_playing_screen_summary">Toca para abrir con o desliza sin la barra de navegación transparente de la pantalla de reproducción</string>
     <string name="pref_now_playing_screen_title">Toca o desliza</string>
 
-    <string name="pref_only_lollipop">"Solo disponible en Lollipop."</string>
 
     <string name="pref_snow_fall_title">Efecto de nevada</string>
 

@@ -46,7 +46,6 @@
     <string name="action_save_playing_queue">再生キューを保存</string>
 
     <string name="action_scan">スキャン</string>
-    <string name="action_scan_directory">ディレクトリをスキャン</string>
 
     <string name="action_search">検索</string>
 
@@ -465,8 +464,6 @@
 
     <string name="pref_now_playing_screen_summary">現在再生中の画面に移動せずに、クリックまたはスライドして開く</string>
     <string name="pref_now_playing_screen_title">クリックもしくはスライド</string>
-
-    <string name="pref_only_lollipop">"Lollipop バージョンでのみ利用できます"</string>
 
     <string name="pref_snow_fall_title">スノーフォールエフェクト</string>
 

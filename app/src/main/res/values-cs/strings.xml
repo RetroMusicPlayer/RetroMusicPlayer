@@ -184,7 +184,6 @@
     <string name="pref_header_audio">Zvuk</string>
     <string name="pref_header_images">Obrázky</string>
     <string name="pref_header_lockscreen">Obrazovka uzamčení</string>
-    <string name="pref_only_lollipop">"K dispozici pouze na Lollipop."</string>
     <string name="pref_summary_album_art_on_lockscreen">Používá současný obal alba písní jako tapetu zámku.</string>
     <string name="pref_summary_audio_ducking">Oznámení, navigace atd.</string>
     <string name="pref_summary_blurred_album_art">Blur obal alba na uzamčení obrazovky. Může způsobit problémy s aplikacemi třetích stran a widgety.</string>

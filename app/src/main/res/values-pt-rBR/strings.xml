@@ -49,7 +49,6 @@
     <string name="action_save_playing_queue">Salvar fila de reprodução</string>
 
     <string name="action_scan">Escanear</string>
-    <string name="action_scan_directory">Escanear diretório</string>
 
     <string name="action_search">Pesquisar</string>
 
@@ -213,8 +212,6 @@
     <string name="currently_listening_to_x_by_x">Atualmente ouvindo %1$s por %2$s.</string>
 
     <string name="dark_theme_name">Meio escuro</string>
-
-    <string name="day_night_theme_name">Day Night(alpha)</string>
 
     <string name="default_hint">Sem letras</string>
 
@@ -422,8 +419,6 @@
     <string name="now_playing_summary">Personalizar tela de reprodução</string>
     <string name="now_playing_themes">Incríveis 9 temas para a interface do reprodutor</string>
 
-    <string name="on">Ligado</string>
-
     <string name="only_on_wifi">Apenas com Wi-Fi</string>
 
     <string name="other_settings_summary">Recursos avançados em teste</string>
@@ -487,8 +482,6 @@
 
     <string name="pref_now_playing_screen_summary">Clique para abrir ou deslizar sem a navegação transparente da tela que está sendo reproduzida agora</string>
     <string name="pref_now_playing_screen_title">Clique ou deslize</string>
-
-    <string name="pref_only_lollipop">"Disponível apenas no Android Lollipop"</string>
 
     <string name="pref_snow_fall_title">Efeito de neve caindo</string>
 
@@ -554,8 +547,6 @@
     <string name="pref_title_toggle_toggle_shuffle">Modo aleatório</string>
     <string name="pref_title_toggle_volume">Controles do volume</string>
     <string name="pref_title_user_info">Informação do usuário</string>
-
-    <string name="premium">Obtenha o Premium</string>
 
     <string name="primary_color">Cor primária</string>
     <string name="primary_color_desc">A cor principal do tema por padrão é cinza azulado, por enquanto funciona com cores escuras</string>
@@ -637,8 +628,6 @@
     <string name="select_all">Selecionar tudo</string>
 
     <string name="select_banner_photo">Selecione a foto do mural</string>
-
-    <string name="select_preset">Selecionar predefinição</string>
 
     <string name="selected">Selecionado</string>
 
@@ -755,8 +744,6 @@
     <string name="update_image">Atualizar imagem</string>
 
     <string name="updating">Atualizando...</string>
-
-    <string name="upgrade_to_premium">Atualize para o premium</string>
 
     <string name="username">Nome de usuário</string>
 
