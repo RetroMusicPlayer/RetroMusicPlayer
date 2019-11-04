@@ -6,6 +6,7 @@
 
         <code.name.monkey.retromusic.preferences.BlacklistPreference
             android:key="blacklist"
+            android:layout="@layout/list_item_view"
             android:summary="@string/pref_summary_blacklist"
             android:title="@string/pref_title_blacklist"
             app:enableCopying="true"

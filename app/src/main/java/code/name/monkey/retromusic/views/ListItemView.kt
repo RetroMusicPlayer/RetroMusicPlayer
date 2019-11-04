@@ -18,8 +18,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.util.DensityUtil
 import kotlinx.android.synthetic.main.list_item_view.view.*
 
 /**
@@ -42,7 +44,16 @@ class ListItemView : FrameLayout {
         View.inflate(context, R.layout.list_item_view, this)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ListItemView)
-        appCompatImageView.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
+        if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {
+            icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
+        } else {
+            val params = title.layoutParams as ConstraintLayout.LayoutParams
+            val startDP = DensityUtil.dip2px(context, 72.0f)
+            params.setMargins(startDP, title.paddingTop, title.paddingRight, title.paddingBottom)
+            summary.setPadding(startDP, title.paddingTop, title.paddingRight, title.paddingBottom)
+            icon.hide()
+        }
+
         title.text = typedArray.getText(R.styleable.ListItemView_listItemTitle)
         if (typedArray.hasValue(R.styleable.ListItemView_listItemSummary)) {
             summary.text = typedArray.getText(R.styleable.ListItemView_listItemSummary)

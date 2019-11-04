@@ -18,7 +18,6 @@ import android.content.Context
 import android.graphics.PorterDuff
 import android.util.AttributeSet
 import androidx.preference.Preference
-import code.name.monkey.appthemehelper.R
 import code.name.monkey.appthemehelper.ThemeStore
 
 class ATEPreference @JvmOverloads constructor(
@@ -29,7 +28,7 @@ class ATEPreference @JvmOverloads constructor(
 ) : Preference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        layoutResource = R.layout.ate_preference_custom_support
+
         icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
     }
 }

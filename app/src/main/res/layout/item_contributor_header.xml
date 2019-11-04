@@ -24,7 +24,7 @@
     tools:ignore="PrivateResource">
 
     <code.name.monkey.retromusic.views.CircularImageView
-        android:id="@+id/image"
+        android:id="@+id/icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_margin="8dp"

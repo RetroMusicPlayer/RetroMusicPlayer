@@ -17,7 +17,6 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7
 import android.content.Context
 import android.util.AttributeSet
 import androidx.preference.DialogPreference
-import code.name.monkey.appthemehelper.R
 
 open class ATEDialogPreference @JvmOverloads constructor(
         context: Context,
@@ -26,6 +25,6 @@ open class ATEDialogPreference @JvmOverloads constructor(
 ) : DialogPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        layoutResource = R.layout.ate_preference_custom_support
+
     }
 }

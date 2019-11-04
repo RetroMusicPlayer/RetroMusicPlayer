@@ -21,8 +21,6 @@
     android:minHeight="72dp"
     android:orientation="horizontal"
     android:padding="16dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
     tools:ignore="PrivateResource">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -38,6 +36,8 @@
         android:id="@android:id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewSubtitle1"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
@@ -50,6 +50,8 @@
         android:id="@android:id/summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingStart="0dp"
+        android:paddingEnd="16dp"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
@@ -62,8 +64,18 @@
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_front_margin"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="52dp" />
 
+    <code.name.monkey.appthemehelper.common.views.ATESwitch
+        android:id="@android:id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:clickable="false"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

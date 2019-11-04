@@ -29,6 +29,7 @@
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="?colorOnSurface"
@@ -40,24 +41,12 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextViewSubtitle1"
         app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toTopOf="parent"
         tools:maxLines="@string/grid_size_1"
         tools:text="@tools:sample/lorem" />
-
-    <code.name.monkey.retromusic.views.BaselineGridTextView
-        android:id="@android:id/summary"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@android:id/checkbox"
-        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
-        app:layout_constraintTop_toBottomOf="@android:id/title"
-        app:lineHeightHint="24sp"
-        tools:maxLines="2"
-        tools:text="@tools:sample/lorem/random" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_front_margin"

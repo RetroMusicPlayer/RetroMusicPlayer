@@ -10,6 +10,7 @@
             android:entries="@array/pref_grid_style_list_titles"
             android:entryValues="@array/pref_grid_style_list_values"
             android:key="album_grid_style"
+            android:layout="@layout/list_item_view"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_album_grid_style"
@@ -21,6 +22,7 @@
             android:entries="@array/pref_grid_style_list_titles"
             android:entryValues="@array/pref_grid_style_list_values"
             android:key="artist_grid_style"
+            android:layout="@layout/list_item_view"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_artist_grid_style"
@@ -33,6 +35,7 @@
             android:entries="@array/pref_home_grid_style_list_titles"
             android:entryValues="@array/pref_home_grid_style_list_values"
             android:key="home_artist_grid_style"
+            android:layout="@layout/list_item_view"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_home_artist_grid_style"
@@ -42,6 +45,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="toggle_home_banner"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
 
@@ -51,6 +55,7 @@
 
             <code.name.monkey.retromusic.preferences.LibraryPreference
                 android:key="library_categories"
+                android:layout="@layout/list_item_view"
                 android:summary="@string/pref_summary_library_categories"
                 android:title="@string/library_categories"
                 app:enableCopying="true"
@@ -61,6 +66,7 @@
                 android:entries="@array/pref_tab_text_mode_titles"
                 android:entryValues="@array/pref_tab_text_mode_values"
                 android:key="tab_text_mode"
+                android:layout="@layout/list_item_view"
                 android:negativeButtonText="@null"
                 android:positiveButtonText="@null"
                 android:title="@string/pref_title_tab_text_mode"

@@ -4,17 +4,20 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_general">
+
         <code.name.monkey.retromusic.preferences.MaterialListPreference
             android:defaultValue="dark"
             android:entries="@array/pref_general_theme_list_titles"
             android:entryValues="@array/pref_general_theme_list_values"
             android:key="general_theme"
+            android:layout="@layout/list_item_view"
             android:title="@string/pref_title_general_theme"
             app:enableCopying="true"
             app:icon="@drawable/ic_color_lens_white_24dp" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:key="black_theme"
+            android:layout="@layout/list_item_view_switch_no_title"
             android:title="@string/black_theme_name"
             app:enableCopying="true" />
 
@@ -26,6 +29,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"
+            android:layout="@layout/list_item_view"
             android:persistent="false"
             android:summary="@string/accent_color_desc"
             android:title="@string/accent_color"
@@ -35,6 +39,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="desaturated_color"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_desaturated_color"
             android:title="@string/pref_title_desaturated_color"
             app:enableCopying="true" />
@@ -42,6 +47,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="adaptive_color_app"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app"
             android:title="@string/pref_title_colored_app"
             app:enableCopying="true" />
@@ -49,6 +55,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="should_color_app_shortcuts"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app_shortcuts"
             android:title="@string/pref_title_app_shortcuts"
             app:enableCopying="true" />
@@ -56,6 +63,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="dominant_color"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_dominant_color"
             android:title="@string/pref_title_toggle_dominant_color"
             app:enableCopying="true" />
