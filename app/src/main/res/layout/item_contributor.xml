@@ -41,7 +41,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textAppearance="@style/TextViewSubtitle1"
-        android:textStyle="bold"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"

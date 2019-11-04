@@ -18,16 +18,17 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.util.DensityUtil
+import code.name.monkey.retromusic.extensions.show
 import kotlinx.android.synthetic.main.list_item_view.view.*
 
 /**
  * Created by hemanths on 2019-10-02.
  */
 class ListItemView : FrameLayout {
+
+
     constructor(context: Context) : super(context) {
         init(context, null)
     }
@@ -47,10 +48,7 @@ class ListItemView : FrameLayout {
         if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {
             icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
         } else {
-            val params = title.layoutParams as ConstraintLayout.LayoutParams
-            val startDP = DensityUtil.dip2px(context, 72.0f)
-            params.setMargins(startDP, title.paddingTop, title.paddingRight, title.paddingBottom)
-            summary.setPadding(startDP, title.paddingTop, title.paddingRight, title.paddingBottom)
+
             icon.hide()
         }
 
@@ -61,5 +59,10 @@ class ListItemView : FrameLayout {
             summary.hide()
         }
         typedArray.recycle()
+    }
+
+    fun setSummary(appVersion: String) {
+        summary.show()
+        summary.text = appVersion
     }
 }
