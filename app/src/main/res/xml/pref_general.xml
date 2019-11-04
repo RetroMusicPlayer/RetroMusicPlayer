@@ -35,8 +35,8 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="desaturated_color"
-            android:summary="As per Material Design guide lines in dark mode colors should be desaturated"
-            android:title="Desaturated color"
+            android:summary="@string/pref_summary_desaturated_color"
+            android:title="@string/pref_title_desaturated_color"
             app:enableCopying="true" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
