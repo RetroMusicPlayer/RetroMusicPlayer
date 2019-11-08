@@ -54,7 +54,7 @@
 
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:layout="@layout/list_item_view"
+            android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
             app:icon="@drawable/ic_volume_up_white_24dp"
             app:key="toggle_volume"
