@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
@@ -91,8 +90,6 @@ public final class ToolbarContentTintHelper {
             final View backButton = toolbar.getChildAt(i);
             if (backButton instanceof ImageView) {
                 ((ImageView) backButton).getDrawable().setColorFilter(colorFilter);
-            } else if (backButton instanceof TextView) {
-                // ((TextView) backButton).setTextColor(color);
             }
         }
     }
