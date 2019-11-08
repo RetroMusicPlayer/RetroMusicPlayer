@@ -13,8 +13,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "com.milind.retromusic"
-        versionCode 384
-        versionName '3.4.500'
+        versionCode 390
+        versionName '3.4.600'
 
         multiDexEnabled true
 
