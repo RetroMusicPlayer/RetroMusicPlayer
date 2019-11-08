@@ -56,7 +56,6 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view"
             app:defaultValue="false"
-            app:enableCopying="true"
             app:icon="@drawable/ic_volume_up_white_24dp"
             app:key="toggle_volume"
             app:summary="@string/pref_summary_toggle_volume"

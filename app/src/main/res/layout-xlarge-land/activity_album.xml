@@ -31,7 +31,7 @@
             app:titleEnabled="false">
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
