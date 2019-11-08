@@ -139,8 +139,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         this.album = album
 
         albumTitle.text = album.title
-        albumText.text = String.format("%s • %s • %s", album.artistName, MusicUtil.getYearString(album.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
-
+        if (MusicUtil.getYearString(album.year) == "-") {
+            albumText.text = String.format("%s • %s", album.artistName, MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
+        } else {
+            albumText.text = String.format("%s • %s • %s", album.artistName, MusicUtil.getYearString(album.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
+        }
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
         albumDetailsPresenter.loadMore(album.artistId)
