@@ -2,14 +2,16 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
 import android.transition.Slide
-import android.view.*
+import android.view.Gravity
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -20,7 +22,6 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
@@ -31,7 +32,6 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
@@ -39,7 +39,6 @@ import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.Glide
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
 import java.util.*
@@ -72,10 +71,12 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         setDrawUnderStatusBar()
         setupWindowTransitions()
         super.onCreate(savedInstanceState)
-        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
         toggleBottomNavigationView(true)
+        setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
+        setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -115,7 +116,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     private fun setUpViews() {
         setupRecyclerView()
-        setupToolbarMarginHeight()
         setupContainerHeight()
     }
 
@@ -127,42 +127,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
         }
     }
 
-    private fun setupToolbarMarginHeight() {
-        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
-        collapsingToolbarLayout?.let {
-            it.setContentScrimColor(primaryColor)
-            it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
-        }
 
-        toolbar?.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        setSupportActionBar(toolbar)
-
-        supportActionBar?.title = null
-
-        if (toolbar != null && !PreferenceUtil.getInstance(this).fullScreenMode) {
-            val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = RetroUtil.getStatusBarHeight()
-            toolbar!!.layoutParams = params
-        }
-
-        appBarLayout?.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
-                val color: Int = when (state) {
-                    State.COLLAPSED -> {
-                        setLightStatusbar(ColorUtil.isColorLight(primaryColor))
-                        primaryColor
-                    }
-                    State.EXPANDED, State.IDLE -> {
-                        setLightStatusbar(false)
-                        Color.TRANSPARENT
-                    }
-
-                }
-                ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.context, toolbar, color)
-            }
-        })
-        setColors(ThemeStore.accentColor(this))
-    }
 
     private fun setupRecyclerView() {
         albumAdapter = HorizontalAlbumAdapter(this, ArrayList(), false, null)
@@ -261,7 +226,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     private fun setColors(color: Int) {
 
-        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
+        else ThemeStore.accentColor(this)
 
         albumTitle.setTextColor(textColor)
         songTitle.setTextColor(textColor)
@@ -272,6 +238,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
+
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = null
     }
 
 

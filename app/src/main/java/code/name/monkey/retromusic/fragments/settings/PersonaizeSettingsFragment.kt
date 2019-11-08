@@ -33,12 +33,12 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
                 showProToastAndNavigate(activity!!.getString(R.string.pref_title_round_corners))
                 return@setOnPreferenceChangeListener false
             }
-            activity!!.recreate()
+            requireActivity().recreate()
             return@setOnPreferenceChangeListener true
         }
         val toggleFullScreen: TwoStatePreference = findPreference("toggle_full_screen")!!
         toggleFullScreen.setOnPreferenceChangeListener { _, _ ->
-            activity!!.recreate()
+            requireActivity().recreate()
             true
         }
     }

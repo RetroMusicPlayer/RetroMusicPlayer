@@ -38,11 +38,11 @@
             app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
     </FrameLayout>
 
-    <com.google.android.material.card.MaterialCardView
+    <code.name.monkey.retromusic.views.WidthFitSquareCardView
         android:id="@+id/imageContainer"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,10 +50,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/playerImage"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
-    </com.google.android.material.card.MaterialCardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
     <LinearLayout
         android:id="@+id/titleContainer"
