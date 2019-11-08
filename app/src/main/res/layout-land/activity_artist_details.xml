@@ -1,35 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/artistImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:transitionName="@string/transition_album_art"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar" />
+                style="@style/Toolbar"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:transitionName="@string/transition_artist_image"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
-        </FrameLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/artistImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -37,67 +54,53 @@
             android:layout_weight="1"
             android:overScrollMode="never">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/contentContainer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                android:layout_marginTop="6dp"
-                app:shapeAppearanceOverlay="@style/TopCornerCardView">
+                android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/background"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                        <LinearLayout
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/artistTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:maxLines="2"
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textStyle="bold"
+                            tools:ignore="MissingPrefix"
+                            tools:text="Title" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/artistTitle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:maxLines="2"
-                                android:textAppearance="@style/TextViewHeadline6"
-                                android:textStyle="bold"
-                                tools:ignore="MissingPrefix"
-                                tools:text="Title" />
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="4dp"
+                            android:textAppearance="@style/TextViewSubtitle2"
+                            tools:ignore="MissingPrefix"
+                            tools:text="Title" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/text"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="4dp"
-                                android:textAppearance="@style/TextViewSubtitle2"
-                                tools:ignore="MissingPrefix"
-                                tools:text="Title" />
-
-                        </LinearLayout>
-
-                        <include layout="@layout/activity_artist_content" />
                     </LinearLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/status_bar_padding" />
-
+                    <include layout="@layout/activity_artist_content" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/status_bar_padding" />
+
+            </LinearLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@drawable/shadow_down_strong" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

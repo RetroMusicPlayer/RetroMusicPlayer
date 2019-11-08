@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.transition.Slide
@@ -16,7 +15,6 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
@@ -32,7 +30,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
@@ -40,9 +37,7 @@ import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
-import com.google.android.material.appbar.AppBarLayout
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
@@ -66,6 +61,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
     private fun setupWindowTransition() {
         val slide = Slide(Gravity.BOTTOM)
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        slide.excludeTarget(android.R.id.navigationBarBackground, true)
+        slide.excludeTarget(toolbar, true)
         slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
         window.enterTransition = slide
     }
@@ -77,19 +75,19 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         setDrawUnderStatusBar()
         setupWindowTransition()
         super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
         toggleBottomNavigationView(true)
-        setLightNavigationBar(true)
+        setStatusbarColor(Color.TRANSPARENT)
         setNavigationbarColorAuto()
+        setTaskDescriptionColorAuto()
+        setLightNavigationBar(true)
+        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
-        contentContainer?.setCardBackgroundColor(ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
-
+        App.musicComponent.inject(this)
         postponeEnterTransition()
 
         artistImage = findViewById(R.id.artistImage)
 
         setupRecyclerView()
-        setupToolbarMarginHeight()
 
         artistImage.setOnClickListener {
             val artistPairs = ActivityOptions.makeSceneTransitionAnimation(this, UtilPair.create(artistImage, getString(R.string.transition_artist_image)))
@@ -119,43 +117,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
             itemAnimator = DefaultItemAnimator()
             isNestedScrollingEnabled = false
             adapter = simpleSongAdapter
-        }
-    }
-
-    private fun setupToolbarMarginHeight() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = null
-        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
-        collapsingToolbarLayout?.let {
-            it.setContentScrimColor(primaryColor)
-            it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
-        }
-
-
-        toolbar.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-
-        if (toolbar != null && !PreferenceUtil.getInstance(this).fullScreenMode) {
-            val params = toolbar.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = RetroUtil.getStatusBarHeight()
-            toolbar.layoutParams = params
-        }
-
-        appBarLayout?.apply {
-            addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-                override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
-                    val color: Int = when (state) {
-                        State.COLLAPSED -> {
-                            setLightStatusbar(ColorUtil.isColorLight(primaryColor))
-                            primaryColor
-                        }
-                        State.EXPANDED, State.IDLE -> {
-                            setLightStatusbar(false)
-                            Color.TRANSPARENT
-                        }
-                    }
-                    ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
-                }
-            })
         }
     }
 
@@ -244,7 +205,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(this@AlbumDetailsActivity, toolbar, color)
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = null
+
     }
 
 

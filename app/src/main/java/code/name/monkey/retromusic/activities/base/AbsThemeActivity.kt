@@ -10,8 +10,8 @@ import android.view.WindowManager
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ATH
-import code.name.monkey.appthemehelper.ATHActivity
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ThemeManager
 
-abstract class AbsThemeActivity : ATHActivity(), Runnable {
+abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     private val handler = Handler()
 

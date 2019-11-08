@@ -43,6 +43,7 @@
     <dimen name="toolbar_margin_vertical">0dp</dimen>
     <dimen name="item_song_height">52dp</dimen>
     <dimen name="button_padding_vertical">10dp</dimen>
-    <dimen name="button_margin_horizontal">4dp</dimen>
+    <dimen name="button_margin_horizontal">16dp</dimen>
     <dimen name="home_icon_padding">14dp</dimen>
+    <dimen name="button_corner">24dp</dimen>
 </resources>

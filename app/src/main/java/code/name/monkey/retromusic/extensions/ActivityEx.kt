@@ -24,8 +24,9 @@ fun AppCompatActivity.applyToolbar(toolbar: Toolbar) {
     toolbar.apply {
         setNavigationOnClickListener { onBackPressed() }
         setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        ToolbarContentTintHelper.colorBackButton(toolbar )
+        ToolbarContentTintHelper.colorBackButton(toolbar)
         setBackgroundColor(ATHUtil.resolveColor(this@applyToolbar, R.attr.colorPrimary))
+
     }
     setSupportActionBar(toolbar)
 }
