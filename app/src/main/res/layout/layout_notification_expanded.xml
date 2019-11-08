@@ -79,6 +79,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="0dp"
             android:singleLine="true"
+            android:textAppearance="@style/Theme.RetroMusic.Notification"
             android:textStyle="bold"
             tools:text="@tools:sample/lorem/random" />
 
@@ -91,6 +92,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="0dp"
             android:singleLine="true"
+            android:textAppearance="@style/Theme.RetroMusic.Notification.Title"
             tools:text="@tools:sample/lorem/random" />
 
         <LinearLayout
@@ -100,34 +102,38 @@
             android:paddingStart="8dp"
             android:paddingEnd="0dp">
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/action_prev"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
+                android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
                 tools:src="@drawable/ic_skip_previous_round_white_32dp"
                 tools:tint="?colorOnPrimary" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/action_play_pause"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
+                android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
                 tools:src="@drawable/ic_pause_white_48dp"
                 tools:tint="?colorOnPrimary" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/action_next"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
+                android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
                 tools:src="@drawable/ic_skip_next_round_white_32dp"
                 tools:tint="?colorOnPrimary" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/action_quit"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
+                android:background="@drawable/notification_selector"
                 android:scaleType="centerInside"
                 tools:src="@drawable/ic_close_white_24dp"
                 tools:tint="?colorOnPrimary" />

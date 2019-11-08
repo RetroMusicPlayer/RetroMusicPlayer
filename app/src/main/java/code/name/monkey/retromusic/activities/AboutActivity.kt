@@ -69,7 +69,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         loadContributors()
         setSupportActionBar(toolbar)
         ToolbarContentTintHelper.colorBackButton(toolbar )
-        appVersion.text = getAppVersion()
+        version.setSummary ( getAppVersion())
         setUpView()
     }
 

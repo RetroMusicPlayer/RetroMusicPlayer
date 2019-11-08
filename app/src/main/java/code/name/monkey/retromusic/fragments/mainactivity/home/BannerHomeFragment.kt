@@ -1,12 +1,10 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.app.ActivityOptions
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -28,15 +26,10 @@ import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
-import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
@@ -45,11 +38,10 @@ import java.util.*
 import javax.inject.Inject
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
-    private lateinit var homeAdapter: HomeAdapter
     @Inject
     lateinit var homePresenter: HomePresenter
 
-    private var disposable: CompositeDisposable = CompositeDisposable()
+    private lateinit var homeAdapter: HomeAdapter
     private lateinit var toolbar: Toolbar
 
     override fun sections(sections: ArrayList<Home>) {
@@ -62,23 +54,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun loadImageFromStorage() {
-        disposable.add(Compressor(context!!)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it != null) {
-                        userImage.setImageBitmap(it)
-                    } else {
-                        userImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_person_flat))
-                    }
-                }) {
-                    userImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_person_flat))
-                })
+        Glide.with(requireContext())
+                .load(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
+                .asBitmap()
+                .placeholder(R.drawable.ic_person_flat)
+                .error(R.drawable.ic_person_flat)
+                .into(userImage)
     }
 
     private val displayMetrics: DisplayMetrics
@@ -169,7 +150,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onDestroyView() {
         super.onDestroyView()
-        disposable.dispose()
         homePresenter.detachView()
     }
 
@@ -200,7 +180,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun getTimeOfTheDay() {
         val c = Calendar.getInstance()
         val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
-
         var images = arrayOf<String>()
         when (timeOfDay) {
             in 0..5 -> images = resources.getStringArray(R.array.night)
@@ -209,28 +188,25 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             in 16..19 -> images = resources.getStringArray(R.array.evening)
             in 20..23 -> images = resources.getStringArray(R.array.night)
         }
-
         val day = images[Random().nextInt(images.size)]
         loadTimeImage(day)
     }
 
 
     private fun loadTimeImage(day: String) {
-        if (bannerImage != null) {
+        bannerImage?.let {
+            val request = Glide.with(requireContext())
             if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
-                Glide.with(requireActivity())
-                        .load(day)
+                request.load(day)
                         .placeholder(R.drawable.material_design_default)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(bannerImage!!)
+                        .error(R.drawable.material_design_default)
+                        .into(it)
             } else {
-                disposable.add(Compressor(requireActivity())
-                        .setQuality(100)
-                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                        .compressToBitmapAsFlowable(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe { bitmap -> bannerImage.setImageBitmap(bitmap) })
+                request.load(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
+                        .asBitmap()
+                        .placeholder(R.drawable.material_design_default)
+                        .error(R.drawable.material_design_default)
+                        .into(it)
             }
         }
         loadImageFromStorage()

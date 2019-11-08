@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
@@ -24,106 +23,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/changelog"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/sb4"
-            tools:ignore="PrivateResource">
+            app:listItemSummary="@string/changelog_summary"
+            app:listItemTitle="@string/changelog" />
 
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/changelog"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textStyle="bold" />
-
-            <code.name.monkey.retromusic.views.BaselineGridTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/changelog_summary"
-                app:lineHeightHint="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/openSource"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/changelog"
-            tools:ignore="PrivateResource">
+            app:listItemSummary="@string/pref_summary_open_source_licences"
+            app:listItemTitle="@string/pref_title_open_source_licences" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pref_title_open_source_licences"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textStyle="bold" />
-
-            <code.name.monkey.retromusic.views.BaselineGridTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pref_summary_open_source_licences"
-                app:lineHeightHint="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/version"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/openSource"
-            tools:ignore="PrivateResource">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/version"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textStyle="bold" />
-
-            <code.name.monkey.retromusic.views.BaselineGridTextView
-                android:id="@+id/appVersion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0.0.0"
-                app:lineHeightHint="24sp" />
-        </LinearLayout>
+            app:listItemSummary="@string/pref_summary_open_source_licences"
+            app:listItemTitle="@string/version" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/madeText"

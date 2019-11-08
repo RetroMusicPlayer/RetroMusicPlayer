@@ -2,104 +2,176 @@
 <resources>
     <string name="accent_color">Warna aksen</string>
     <string name="accent_color_desc">Warna tema aksen, tetapan asalnya adalah hijau</string>
+
     <string name="action_about">Mengenai</string>
+
     <string name="action_add_to_favorites">Tambahkan ke kegemaran</string>
     <string name="action_add_to_playing_queue">Tambahkan ke baris gilir main</string>
     <string name="action_add_to_playlist">Tambahkan ke senarai main...</string>
+
     <string name="action_clear_playing_queue">Kosongkan baris gilir main</string>
     <string name="action_clear_playlist">Kosongkan senarai main</string>
+
     <string name="action_delete">Padam</string>
     <string name="action_delete_from_device">Padamkan daripada peranti</string>
+
     <string name="action_details">Butiran</string>
+
     <string name="action_go_to_album">Pergi ke album</string>
     <string name="action_go_to_artist">Pergi ke seniman</string>
     <string name="action_go_to_start_directory">Pergi ke direktori mula</string>
+
     <string name="action_grant">Keizinan</string>
+
     <string name="action_grid_size">Saiz grid</string>
     <string name="action_grid_size_land">Saiz grid (landskap)</string>
+
     <string name="action_next">Seterusnya</string>
+
     <string name="action_play">Main</string>
     <string name="action_play_next">Mainkan seterusnya</string>
     <string name="action_play_pause">Main/Jeda</string>
+
     <string name="action_previous">Sebelumnya</string>
+
     <string name="action_remove_from_favorites">Keluarkan daripada kegemaran</string>
     <string name="action_remove_from_playing_queue">Keluarkan daripada baris gilir main</string>
     <string name="action_remove_from_playlist">Keluarkan daripada senarai main</string>
+
     <string name="action_rename">Namakan semula</string>
+
     <string name="action_save_playing_queue">Simpan baris gilir main</string>
+
     <string name="action_scan">Imbas</string>
+
     <string name="action_search">Cari</string>
+
     <string name="action_set">Tetapkan</string>
     <string name="action_set_as_ringtone">Tetapkan sebagai nada dering</string>
     <string name="action_set_as_start_directory">Tetapkan sebagai direktori mula</string>
+
     <string name="action_settings">"Seting"</string>
+
     <string name="action_share">Kongsi</string>
+
     <string name="action_shuffle_all">Kocok semua</string>
     <string name="action_shuffle_playlist">Kocok senarai main</string>
+
     <string name="action_sleep_timer">Pemasa tidur</string>
+
     <string name="action_tag_editor">Penyunting tag</string>
+
     <string name="add_action">Tambah</string>
+
     <string name="add_photo">Tambah \ngambar</string>
+
     <string name="add_playlist_title">"Tambahkan ke senarai main"</string>
+
     <string name="added_title_to_playing_queue">"1 judul ditambah ke baris gilir."</string>
+
     <string name="added_x_titles_to_playing_queue">%1$d judul ditambah ke baris gilir.</string>
+
     <string name="album">Album</string>
+
     <string name="album_artist">Seniman album</string>
+
     <string name="album_or_artist_empty">Judul atau seniman adalah kosong.</string>
+
     <string name="albums">Album</string>
+
     <!-- Android Auto -->
     <string name="always">Sentiasa</string>
+
     <string name="app_share">Hai. Cuba lihat pemain muzik hebat ini di: https://play.google.com/store/apps/details?id=%s</string>
+
     <!-- App Shortcuts -->
     <string name="app_shortcut_shuffle_all_short">Kocok</string>
     <string name="app_shortcut_top_tracks_short">Runut teratas</string>
+
     <string name="app_widget_big_name">Retro Music - Besar</string>
     <string name="app_widget_card_name">Retro Music - Kad</string>
     <string name="app_widget_classic_name">Retro Music - Klasik</string>
     <string name="app_widget_small_name">Retro Music - Kecil</string>
+
     <string name="artist">Seniman</string>
+
     <string name="artists">Seniman</string>
+
     <string name="audio_focus_denied">Fokus audio dinafikan.</string>
+
     <string name="biography">Biografi</string>
+
     <string name="black_theme_name">Cuma hitam</string>
+
     <string name="blacklist">Senarai hitam</string>
+
     <string name="cancel_current_timer">Batalkan pemasa semasa</string>
+
     <string name="changelog">Log perubahan</string>
+
     <string name="changelog_summary">Log perubahan dikelolakan daripada aplikasi Telegram</string>
+
     <string name="clear_action">Kosongkan</string>
+
     <string name="clear_blacklist">Kosongkan senarai hitam</string>
+
     <string name="clear_playlist_title">Kosongkan senarai main</string>
     <string name="clear_playlist_x"><![CDATA[Kosongkan <b>%1$s</b>? Perbuatan ini tidak boleh diundurkan!]]></string>
+
     <string name="colors">Warna</string>
+
     <string name="could_not_create_playlist">Tidak dapat mencipta senarai main.</string>
     <string name="could_not_download_album_cover">"Tidak dapat memuat turun kulit album yang sepadan."</string>
     <string name="could_not_scan_files">Tidak dapat mengimbas %d fail.</string>
+
     <string name="create_action">Cipta</string>
+
     <string name="created_playlist_x">Senarai main %1$s dicipta.</string>
+
     <string name="currently_listening_to_x_by_x">Sedang mendengar %1$s oleh %2$s.</string>
+
     <string name="dark_theme_name">Macam gelap</string>
+
     <string name="default_hint">Tiada seni kata</string>
+
     <string name="delete_playlist_title">Padam senarai main</string>
     <string name="delete_playlist_x"><![CDATA[Padamkan senarai main <b>%1$s</b>?]]></string>
+
     <string name="delete_playlists_title">Padam senarai main</string>
+
     <string name="delete_song_x"><![CDATA[Padamkan lagu <b>%1$s</b>?]]></string>
+
     <string name="delete_x_playlists"><![CDATA[Padamkan <b>%1$d</b> senarai main?]]></string>
     <string name="delete_x_songs"><![CDATA[Padamkan <b>%1$d</b> lagu?]]></string>
     <string name="deleted_x_songs">%1$d lagu dipadamkan.</string>
+
     <string name="do_you_want_to_clear_the_blacklist">Adakah anda ingin mengosongkan senarai hitam?</string>
     <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Adakah anda ingin mengeluarkan <b>%1$s</b> daripada senarai hitam?]]></string>
+
     <string name="donate">Sumbang</string>
+
     <string name="donate_summary">Jika anda rasa saya layak untuk menerima bayaran bagi hasil kerja saya, anda boleh memberi sumbangan di sini.</string>
+
     <string name="donation_header">Belikan saya</string>
+
     <string name="download_from_last_fm">Muat turun daripada Last.fm</string>
+
     <string name="empty">Kosong</string>
+
     <string name="equalizer">Penyama</string>
+
     <string name="favorites">Kegemaran</string>
+
     <string name="flat">Rata</string>
+
     <string name="folders">Folder</string>
+
     <string name="for_you">Untuk anda</string>
+
     <string name="full">Penuh</string>
+
     <string name="genre">Genre</string>
+
     <string name="grid_size_1">1</string>
     <string name="grid_size_2">2</string>
     <string name="grid_size_3">3</string>
@@ -108,60 +180,107 @@
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
+
     <string name="history">Sejarah</string>
+
     <string name="home">Utama</string>
+
     <string name="inserted_x_songs_into_playlist_x">%1$d lagu ditambahkan ke dalam senarai main %2$s.</string>
+
     <string name="label_bit_rate">Kadar bit</string>
+
     <string name="label_file_format">Format</string>
     <string name="label_file_name">Nama fail</string>
     <string name="label_file_path">Laluan fail</string>
     <string name="label_file_size">Saiz</string>
+
     <string name="label_sampling_rate">Kadar pensampelan</string>
+
     <string name="label_track_length">Panjang</string>
+
     <string name="last_added">Terakhir ditambah</string>
+
     <string name="lets_play_something">Mari mainkan sesuatu</string>
+
     <string name="library">Semak seimbas</string>
+
     <string name="licenses">Lesen</string>
+
     <string name="light_theme_name">Sememangnya putih</string>
+
     <string name="listing_files">Fail senarai</string>
+
     <string name="loading_products">Memuatkan produk...</string>
+
     <string name="lyrics">Seni kata</string>
+
     <string name="my_name">Nama saya</string>
+
     <string name="my_top_tracks">Runut teratas saya</string>
+
     <string name="never">Tidak pernah</string>
+
     <string name="new_playlist_title">Senarai main baru</string>
+
     <string name="new_start_directory">%s ialah direktori mula yang baru</string>
+
     <string name="no_albums">Tiada album</string>
+
     <string name="no_artists">Tiada seniman</string>
+
     <string name="no_audio_ID">"Mainkan lagu dahulu, kemudian cuba lagi."</string>
+
     <string name="no_equalizer">Tiada penyama dijumpai.</string>
+
     <string name="no_genres">Tiada genre</string>
+
     <string name="no_lyrics_found">Tiada seni kata dijumpai</string>
+
     <string name="no_playlists">Tiada senarai main</string>
+
     <string name="no_results">Tiada hasil</string>
+
     <string name="no_songs">Tiada lagu</string>
+
     <string name="normal">Normal</string>
+
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> tidak disenaraikan dalam gedung media.]]></string>
+
     <string name="nothing_to_scan">Tiada apa-apa untuk diimbas</string>
+
     <string name="notification">Pemberitahuan</string>
+
     <string name="now_playing_queue">Kini memainkan baris gilir</string>
+
     <string name="only_on_wifi">Hanya dengan Wi-Fi</string>
+
     <string name="past_three_months">3 bulan lepas</string>
+
     <string name="permission_external_storage_denied">Keizinan untuk mencapai storan luar dinafikan.</string>
+
     <string name="permissions_denied">Keizinan ditolak.</string>
+
     <string name="pick_from_local_storage">Pilih daripada storan tempatan</string>
+
     <string name="plain">Biasa</string>
+
     <string name="playing_notification_description">Pemberitahuan main menyediakan tindakan untuk main/jeda dan lain-lain.</string>
     <string name="playing_notification_name">Pemberitahuan main</string>
+
     <string name="playlist_empty_text">Senarai main kosong</string>
+
     <string name="playlist_is_empty">Senarai main kosong</string>
+
     <string name="playlist_name_empty">Nama senarai main</string>
+
     <string name="playlists">Senarai main</string>
+
     <string name="pref_header_audio">Audio</string>
     <string name="pref_header_images">Imej</string>
     <string name="pref_header_lockscreen">Skrin kunci</string>
     <string name="pref_header_playlists">Senarai main</string>
-    <string name="pref_only_lollipop">"Hanya tersedia pada Lollipop."</string>
+
+
     <string name="pref_summary_album_art_on_lockscreen">Menggunakan kulit album lagu semasa sebagai hias latar skrin kunci</string>
     <string name="pref_summary_audio_ducking">Pemberitahuan, pandu arah dan lain-lain.</string>
     <string name="pref_summary_blurred_album_art">Kaburkan kulit album pada skrin kunci. Ini boleh menyebabkan masalah dengan aplikasi dan widget pihak ketiga.</string>
@@ -180,6 +299,7 @@
     <string name="pref_summary_toggle_full_screen">Dayakan ini untuk mod terendam</string>
     <string name="pref_summary_toggle_headset">Mainkan muzik apabila fon kepala disambungkan</string>
     <string name="pref_summary_toggle_volume">Mendayakan kawalan kelantangan jika terdapat ruang pada skrin kini dimainkan</string>
+
     <string name="pref_title_album_art_on_lockscreen">Tunjukkan kulit album</string>
     <string name="pref_title_app_shortcuts">Pintasan aplikasi berwarna</string>
     <string name="pref_title_audio_ducking">Kurangkan kelantangan jika kehilangan fokus</string>
@@ -203,68 +323,122 @@
     <string name="pref_title_toggle_toggle_headset">Automain</string>
     <string name="pref_title_toggle_volume">Kawalan kelantangan</string>
     <string name="pref_title_user_info">Maklumat pengguna</string>
+
     <string name="primary_color">Warna utama</string>
     <string name="primary_color_desc">Warna tema utama, tetapan asalnya adalah putih</string>
+
     <string name="queue">Baris gilir</string>
+
     <string name="rate_app">Nilaikan aplikasi</string>
+
     <string name="rate_on_google_play_summary">Sukakan aplikasi ini. Beritahu kami di Gedung Google Play untuk menyediakan pengalaman yang lebih baik</string>
+
     <string name="remove_action">Alih keluar</string>
+
     <string name="remove_cover">Alih keluar kulit</string>
+
     <string name="remove_from_blacklist">Keluarkan daripada senarai hitam</string>
+
     <string name="remove_song_from_playlist_title">Keluarkan lagu daripada senarai main</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Keluarkan lagu <b>%1$s</b> daripada senarai main?]]></string>
+
     <string name="remove_songs_from_playlist_title">Keluarkan lagu daripada senarai main</string>
+
     <string name="remove_x_songs_from_playlist"><![CDATA[Keluarkan <b>%1$d</b> lagu daripada senarai main?]]></string>
+
     <string name="rename_playlist_title">Namakan semula senarai main</string>
+
     <string name="reset_artist_image">Tetapkan semula imej seniman</string>
+
     <string name="restored_previous_purchases">Pembelian sebelumnya dipulihkan.</string>
+
     <string name="retro_equalizer">Penyama Retro</string>
+
     <!-- SAF -->
     <!-- SAF guide -->
     <string name="save_playlist_title">Simpan sebagai fail</string>
     <string name="saved_playlist_to">Senarai main yang disimpan ke %s.</string>
+
     <string name="saving_changes">Menyimpan perubahan</string>
+
     <string name="scanned_files">%1$d daripada %2$d fail diimbas.</string>
+
     <string name="search_hint">Cari pustaka anda...</string>
+
     <string name="set_artist_image">Tetapkan imej seniman</string>
+
     <string name="shuffle">Kocok</string>
+
     <string name="simple">Ringkas</string>
+
     <string name="sleep_timer_canceled">Pemasa tidur dibatalkan.</string>
     <string name="sleep_timer_set">Pemasa tidur ditetapkan untuk %d minit dari sekarang.</string>
+
     <string name="song">Lagu</string>
+
     <string name="song_duration">Tempoh lagu</string>
+
     <string name="songs">Lagu</string>
+
     <string name="sort_order">Isih susunan</string>
+
     <string name="speech_not_supported">Maaf, peranti anda tidak menyokong input ucapan.</string>
+
     <string name="speech_prompt">Cari pustaka anda</string>
+
     <string name="summary_user_info">Hanya tunjukkan nama anda pada skrin utama</string>
+
     <string name="support_development">Sokong pembangunan</string>
+
     <!-- Message displayed when tag editing fails -->
     <string name="thank_you">Terima kasih!</string>
+
     <string name="the_audio_file">Fail audio</string>
+
     <string name="this_month">Bulan ini</string>
+
     <string name="this_week">Minggu ini</string>
+
     <string name="this_year">Tahun ini</string>
+
     <string name="tiny">Kecil</string>
+
     <string name="title_dashboard">Papan pemuka</string>
+
     <string name="title_good_afternoon">Selamat tengah hari</string>
     <string name="title_good_day">Selamat siang</string>
     <string name="title_good_evening">Selamat petang</string>
     <string name="title_good_morning">Selamat pagi</string>
     <string name="title_good_night">Selamat malam</string>
+
     <string name="title_user_info">Siapakah nama anda</string>
+
     <string name="today">Hari ini</string>
+
     <string name="track_hint">"Runut (2 untuk runut 2 atau 3004 untuk CD3 runut 4)"</string>
+
     <string name="track_list">Nombor runut</string>
+
     <string name="translate">Terjemah</string>
+
     <string name="unplayable_file">Tidak dapat memainkan lagu ini.</string>
+
     <string name="up_next">Seterusnya</string>
+
     <string name="update_image">Kemas kini imej</string>
+
     <string name="updating">Mengemas kini...</string>
+
     <string name="version">Versi</string>
+
     <string name="web_search">Carian web</string>
+
     <string name="what_do_you_want_to_share">Apakah yang anda ingin kongsikan?</string>
+
     <string name="x_has_been_set_as_ringtone">Tetapkan %1$s sebagai nada dering anda.</string>
+
     <string name="x_selected">%1$d dipilih</string>
+
     <string name="year">Tahun</string>
+    <string name="label_more_from">More from %s</string>
 </resources>

@@ -190,7 +190,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
     override fun moreAlbums(albums: ArrayList<Album>) {
         moreTitle.show()
         moreRecyclerView.show()
-        moreTitle.text = String.format("More from %s", album.artistName)
+        moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
 
         val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
         moreRecyclerView.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)

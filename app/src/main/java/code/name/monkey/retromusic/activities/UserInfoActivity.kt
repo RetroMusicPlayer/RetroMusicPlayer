@@ -237,7 +237,7 @@ class UserInfoActivity : AbsBaseActivity() {
                 .compressToBitmapAsFlowable(File(profileImagePath, USER_BANNER))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { bitmap -> bannerImage.setImageBitmap(bitmap) })
+                .subscribe({ bitmap -> bannerImage.setImageBitmap(bitmap) }, { t -> println() }))
     }
 
     private fun loadImageFromStorage(path: String) {
@@ -249,7 +249,7 @@ class UserInfoActivity : AbsBaseActivity() {
                 .compressToBitmapAsFlowable(File(path, USER_PROFILE))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { bitmap -> userImage!!.setImageBitmap(bitmap) })
+                .subscribe({ bitmap -> userImage!!.setImageBitmap(bitmap) },  { t -> println() }))
     }
 
     private fun saveToInternalStorage(bitmapImage: Bitmap, userBanner: String): String {

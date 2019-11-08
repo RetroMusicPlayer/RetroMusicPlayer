@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="bottom_sheet_width">600dp</dimen>
-    <dimen name="progress_slider_height">32dp</dimen>
-</resources>
