@@ -73,7 +73,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        setupWindowTransition()
+        //setupWindowTransition()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
         setStatusbarColor(Color.TRANSPARENT)
@@ -165,6 +165,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist)
                 .generatePalette(this).build()
                 .dontAnimate()
+                .dontTransform()
                 .into(object : RetroMusicColoredTarget(artistImage) {
                     override fun onColorReady(color: Int) {
 
@@ -177,7 +178,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
                 .checkIgnoreMediaStore(this)
                 .generatePalette(this).build()
-                .dontAnimate()
+                .dontAnimate().dontTransform()
                 .into(object : RetroMusicColoredTarget(image) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
