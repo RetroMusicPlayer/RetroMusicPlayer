@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
+import android.util.Log
 import android.view.*
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -150,8 +151,13 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     private fun showSyncedLyrics() {
         var content = ""
         try {
-            content = LyricUtil.getStringFromFile(song.title, song.artistName)
+            content = LyricUtil.getStringFromFile(song.data, song.artistName)
         } catch (e: Exception) {
+            try{
+                content = LyricUtil.getStringFromFile(song.title, song.artistName)
+            } catch ( e2 : Exception){
+
+            }
             e.printStackTrace()
         }
 
@@ -161,7 +167,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             input(hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
                     inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
-                LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
+                LyricUtil.writeLrcToLoc(song.data, song.artistName, input.toString())
             }
             positiveButton(android.R.string.ok) {
                 updateSong()
@@ -364,8 +370,12 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         private fun loadLRCLyrics() {
             val song = MusicPlayerRemote.currentSong
-            if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-                showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
+            if (LyricUtil.isLrcFile2Exist(song.data, song.artistName)) {
+                showLyricsLocal(LyricUtil.getLocalLyricFile(song.data, song.artistName))
+            } else {
+                if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
+                    showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
+                }
             }
         }
 
