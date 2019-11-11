@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.adapter.base;
 
-import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -81,14 +80,14 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
         image = itemView.findViewById(R.id.image);
         time = itemView.findViewById(R.id.time);
 
-        imageText = itemView.findViewById(R.id.image_text);
-        imageContainer = itemView.findViewById(R.id.image_container);
-        imageTextContainer = itemView.findViewById(R.id.image_text_container);
-        imageContainerCard = itemView.findViewById(R.id.image_container_card);
+        imageText = itemView.findViewById(R.id.imageText);
+        imageContainer = itemView.findViewById(R.id.imageContainer);
+        imageTextContainer = itemView.findViewById(R.id.imageTextContainer);
+        imageContainerCard = itemView.findViewById(R.id.imageContainerCard);
 
         menu = itemView.findViewById(R.id.menu);
         dragView = itemView.findViewById(R.id.drag_view);
-        paletteColorContainer = itemView.findViewById(R.id.palette_color_container);
+        paletteColorContainer = itemView.findViewById(R.id.paletteColorContainer);
         recyclerView = itemView.findViewById(R.id.recycler_view);
         mask = itemView.findViewById(R.id.mask);
         playSongs = itemView.findViewById(R.id.playSongs);
@@ -111,7 +110,7 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
     }
 
     public void setImageTransitionName(@NonNull String transitionName) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && image != null) {
+        if (image != null) {
             image.setTransitionName(transitionName);
         }
     }

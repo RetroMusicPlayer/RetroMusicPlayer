@@ -49,6 +49,7 @@ class AppWidgetClassic : BaseAppWidget() {
     override fun defaultAppWidget(context: Context, appWidgetIds: IntArray) {
         val appWidgetView = RemoteViews(context.packageName, R.layout.app_widget_classic)
 
+
         appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_album_art)
         appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
@@ -63,8 +64,7 @@ class AppWidgetClassic : BaseAppWidget() {
      * Update all active widget instances by pushing changes
      */
     override fun performUpdate(service: MusicService, appWidgetIds: IntArray?) {
-        val appWidgetView = RemoteViews(service.packageName,
-                R.layout.app_widget_classic)
+        val appWidgetView = RemoteViews(service.packageName, R.layout.app_widget_classic)
 
         val isPlaying = service.isPlaying
         val song = service.currentSong

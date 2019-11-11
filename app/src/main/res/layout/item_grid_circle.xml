@@ -15,7 +15,7 @@
         tools:ignore="UnusedAttribute,UselessParent">
 
         <code.name.monkey.retromusic.views.WidthFitSquareLayout
-            android:id="@+id/image_container"
+            android:id="@+id/imageContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp">

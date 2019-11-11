@@ -10,7 +10,7 @@
     android:orientation="horizontal">
 
     <FrameLayout
-        android:id="@+id/image_container"
+        android:id="@+id/imageContainer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/image_text"
+            android:id="@+id/imageText"
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:fontFeatureSettings="onum"
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/time"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/image_container"
+        app:layout_constraintStart_toEndOf="@+id/imageContainer"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Song title" />
 

@@ -92,10 +92,8 @@ class SearchAdapter(
                 ALBUM -> setImageTransitionName(activity.getString(R.string.transition_album_art))
                 ARTIST -> setImageTransitionName(activity.getString(R.string.transition_artist_image))
                 else -> {
-                    val container = itemView.findViewById<View>(R.id.image_container)
-                    if (container != null) {
-                        container.visibility = View.GONE
-                    }
+                    val container = itemView.findViewById<View>(R.id.imageContainer)
+                    container?.visibility = View.GONE
                 }
             }
         }

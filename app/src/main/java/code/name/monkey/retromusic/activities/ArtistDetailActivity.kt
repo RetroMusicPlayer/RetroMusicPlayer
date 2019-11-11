@@ -69,7 +69,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        setupWindowTransitions()
+       // setupWindowTransitions()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
         setStatusbarColor(Color.TRANSPARENT)

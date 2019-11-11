@@ -5,10 +5,10 @@
         <shape>
             <padding
                 android:bottom="5dp"
-                android:left="8dp"
-                android:right="8dp"
-                android:top="8dp" />
-            <solid android:color="@android:color/transparent" />
+                android:left="10dp"
+                android:right="10dp"
+                android:top="10dp" />
+            <solid android:color="@color/transparent" />
         </shape>
     </item>
 
@@ -19,8 +19,8 @@
                 android:left="0dp"
                 android:right="0dp"
                 android:top="0dp" />
-            <solid android:color="#55d4d4d4" />
-            <corners android:radius="6dp" />
+            <solid android:color="@color/card_shadow_1" />
+            <corners android:radius="2dp" />
         </shape>
     </item>
     <item>
@@ -30,15 +30,16 @@
                 android:left="0dp"
                 android:right="0dp"
                 android:top="0dp" />
-            <solid android:color="#55dddddd" />
-            <corners android:radius="6dp" />
+            <solid android:color="@color/card_shadow_2" />
+            <corners android:radius="2dp" />
+        </shape>
+    </item>
+    <!-- Background -->
+    <item>
+        <shape>
+            <solid android:color="@color/card_background" />
+            <corners android:radius="2dp" />
         </shape>
     </item>
 
-    <item>
-        <shape>
-            <solid android:color="@android:color/white" />
-            <corners android:radius="6dp" />
-        </shape>
-    </item>
 </layer-list>

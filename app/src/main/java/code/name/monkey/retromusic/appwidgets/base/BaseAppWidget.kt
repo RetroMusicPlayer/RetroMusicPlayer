@@ -73,11 +73,11 @@ abstract class BaseAppWidget : AppWidgetProvider() {
     /**
      * Check against [AppWidgetManager] if there are any instances of this widget.
      */
-    protected fun hasInstances(context: Context): Boolean {
+    private fun hasInstances(context: Context): Boolean {
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val mAppWidgetIds = appWidgetManager.getAppWidgetIds(ComponentName(context,
                 javaClass))
-        return mAppWidgetIds.size > 0
+        return mAppWidgetIds.isNotEmpty()
     }
 
     protected fun buildPendingIntent(context: Context, action: String,
