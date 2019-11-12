@@ -16,6 +16,8 @@ package code.name.monkey.retromusic.util;
 
 import android.util.Base64;
 
+import androidx.annotation.NonNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by hefuyi on 2016/11/8.
@@ -40,11 +40,11 @@ public class LyricUtil {
     public static File writeLrcToLoc(@NonNull String title, @NonNull String artist, @NonNull String lrcContext) {
         FileWriter writer = null;
         try {
-            File file = new File(getLrcPath(title, artist));
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
+            File file = new File(getLrcPath2(title, artist));
+            if (!file.exists()) {
+                file.mkdirs();
             }
-            writer = new FileWriter(getLrcPath(title, artist));
+            writer = new FileWriter(getLrcPath2(title, artist));
             writer.write(lrcContext);
             return file;
         } catch (IOException e) {
@@ -70,17 +70,46 @@ public class LyricUtil {
         return file.exists();
     }
 
-    @NonNull
-    public static File getLocalLyricFile(@NonNull String title, @NonNull String artist) {
-        File file = new File(getLrcPath(title, artist));
-        if (file.exists()) {
-            return file;
-        } else {
-            return new File("lyric file not exist");
-        }
+    public static boolean isLrcFile2Exist(@NonNull String title, @NonNull String artist) {
+        File file = new File(getLrcPath2(title, artist));
+
+        return file.exists();
     }
 
-    private static String getLrcPath(String title, String artist) {
+    @NonNull
+    public static File getLocalLyricFile(@NonNull String title, @NonNull String artist) {
+        try{
+        File file = new File(getLrcPath(title, artist));
+        File file2 = new File(getLrcPath2(title, artist));
+        if (file.exists()) {
+    
+            return file;
+        } else if (file2.exists())  {
+  
+            return file2;
+        }
+        else {
+
+            return new File("lyric file not exist");
+        }} catch (Exception dfs){
+            dfs.printStackTrace();
+            return new File("lyric file not exist");
+
+        }
+    }
+    public static String getLrcPath2(String title, String artist) {
+        String x2;
+        if(title.endsWith(".flac")||title.endsWith(".mogg")||title.endsWith(".alac")||title.endsWith(".aiff")||title.endsWith(".webv")){
+            x2= title.substring(0, title.length() -5 ) + ".lrc";
+        }
+        else{
+                x2= title.substring(0, title.length() -4 ) + ".lrc";}
+
+
+        return x2;
+    }
+
+    public static String getLrcPath(String title, String artist) {
         return lrcRootPath + title + " - " + artist + ".lrc";
     }
 
@@ -103,10 +132,18 @@ public class LyricUtil {
 
     @NonNull
     public static String getStringFromFile(@NonNull String title, @NonNull String artist) throws Exception {
-        File file = new File(getLrcPath(title, artist));
+        File file;
+        File file2 = new File(getLrcPath(title, artist));
+        File file3 = new File(getLrcPath2(title, artist));
+        if(file2.exists()){
+            file = file2;
+        } else {
+            file = file3;
+        }
         FileInputStream fin = new FileInputStream(file);
         String ret = convertStreamToString(fin);
         fin.close();
+      //  Log.d("damn2",ret);
         return ret;
     }
 

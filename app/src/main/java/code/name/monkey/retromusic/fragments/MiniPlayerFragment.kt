@@ -11,10 +11,6 @@ import android.view.*
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.fistElement
-import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.lastElement
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -96,7 +92,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onServiceConnected() {
         updateSongTitle()
         updatePlayPauseDrawableState()
-        updateButtons()
     }
 
     override fun onPlayingMetaChanged() {
@@ -105,24 +100,8 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
-        updateButtons()
     }
 
-    private fun updateButtons() {
-        if (PreferenceUtil.getInstance(requireContext()).isExtraControls) {
-            if (MusicPlayerRemote.playingQueue.fistElement()) {
-                actionPrevious.hide()
-            } else {
-                actionPrevious.show()
-            }
-
-            if (MusicPlayerRemote.playingQueue.lastElement()) {
-                actionNext.hide()
-            } else {
-                actionNext.show()
-            }
-        }
-    }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         progressBar.max = total
@@ -146,7 +125,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         if (MusicPlayerRemote.isPlaying) {
             miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_pause_white_24dp)
         } else {
-            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_play_arrow_white_24dp)
         }
     }
 

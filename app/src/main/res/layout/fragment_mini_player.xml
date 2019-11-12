@@ -58,17 +58,34 @@
             app:srcCompat="@drawable/ic_skip_previous_white_24dp"
             app:tint="?colorOnSecondary" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/miniPlayerPlayPauseButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+        <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
-            android:background="?roundSelector"
-            android:padding="6dp"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_pause_white_24dp"
-            app:tint="?colorOnSecondary"
-            tools:ignore="ContentDescription" />
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/miniPlayerPlayPauseButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="?roundSelector"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_pause_white_24dp"
+                app:tint="?colorOnSecondary"
+                tools:ignore="ContentDescription" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:rotation="270"
+                android:layout_gravity="center"
+                android:progressTint="?colorAccent"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/circle_progress"
+                tools:progress="80" />
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionNext"
@@ -95,10 +112,5 @@
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        tools:progress="20" />
+
 </FrameLayout>

@@ -25,10 +25,10 @@
         android:layout_height="wrap_content"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp"
         app:cardUseCompatPadding="false"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:cardBackgroundColor="?colorSecondary"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
 
         <FrameLayout
