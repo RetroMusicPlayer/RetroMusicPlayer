@@ -81,10 +81,6 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     }
 
-    override fun getImageFromLastFM() {
-
-    }
-
     override fun searchImageOnWeb() {
 
     }

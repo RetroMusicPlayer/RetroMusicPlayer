@@ -118,7 +118,7 @@
             android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
             android:elevation="@dimen/card_elevation"
             app:behavior_overlapTop="72dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

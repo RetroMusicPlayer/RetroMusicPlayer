@@ -51,7 +51,7 @@
         android:background="@drawable/bg_bottom_sheet_dialog_fragment"
         android:fillViewport="true"
         android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/contentContainer"

@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/toolbar_margin_horizontal"
             android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <include layout="@layout/home_content" />
         </androidx.core.widget.NestedScrollView>

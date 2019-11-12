@@ -21,9 +21,12 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
@@ -50,17 +53,18 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var savedArtworkInfo: ArtworkInfo? = null
 
     protected val show: MaterialDialog
-        get() = MaterialDialog(this@AbsTagEditorActivity).show {
-            title(code.name.monkey.retromusic.R.string.update_image)
-            listItems(items = items) { _, position, _ ->
-                when (position) {
-                    0 -> getImageFromLastFM()
-                    1 -> startImagePicker()
-                    2 -> searchImageOnWeb()
-                    3 -> deleteImage()
+        get() = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT))
+                .show {
+                    cornerRadius(PreferenceUtil.getInstance(this@AbsTagEditorActivity).dialogCorner)
+                    title(R.string.update_image)
+                    listItems(items = items) { _, position, _ ->
+                        when (position) {
+                            0 -> startImagePicker()
+                            1 -> searchImageOnWeb()
+                            2 -> deleteImage()
+                        }
+                    }
                 }
-            }
-        }
     protected abstract val contentViewLayout: Int
 
     internal val albumArtist: String?
@@ -185,7 +189,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(contentViewLayout)
 
-        saveFab = findViewById( R.id.saveTags)
+        saveFab = findViewById(R.id.saveTags)
         getIntentExtras()
 
         songPaths = getSongPaths()
@@ -215,8 +219,8 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     private fun setUpImageView() {
         loadCurrentImage()
-        items = listOf(getString(code.name.monkey.retromusic.R.string.download_from_last_fm), getString(code.name.monkey.retromusic.R.string.pick_from_local_storage), getString(code.name.monkey.retromusic.R.string.web_search), getString(code.name.monkey.retromusic.R.string.remove_cover))
-        editorImage.setOnClickListener { show }
+        items = listOf(getString(code.name.monkey.retromusic.R.string.pick_from_local_storage), getString(code.name.monkey.retromusic.R.string.web_search), getString(code.name.monkey.retromusic.R.string.remove_cover))
+        editorImage?.setOnClickListener { show }
     }
 
     private fun startImagePicker() {
@@ -226,8 +230,6 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     }
 
     protected abstract fun loadCurrentImage()
-
-    protected abstract fun getImageFromLastFM()
 
     protected abstract fun searchImageOnWeb()
 
@@ -273,8 +275,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
+        when (item.itemId) {
             android.R.id.home -> {
                 super.onBackPressed()
                 return true
@@ -285,9 +286,9 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected fun setNoImageMode() {
         isInNoImageMode = true
-        imageContainer!!.visibility = View.GONE
-        editorImage.visibility = View.GONE
-        editorImage.isEnabled = false
+        imageContainer?.visibility = View.GONE
+        editorImage?.visibility = View.GONE
+        editorImage?.isEnabled = false
 
         setColors(intent.getIntExtra(EXTRA_PALETTE, ATHUtil.resolveColor(this, R.attr.colorPrimary)))
     }

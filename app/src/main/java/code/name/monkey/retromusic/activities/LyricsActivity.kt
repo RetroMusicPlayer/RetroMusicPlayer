@@ -306,6 +306,11 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             }.execute()
         }
 
+        override fun onActivityCreated(savedInstanceState: Bundle?) {
+            super.onActivityCreated(savedInstanceState)
+            loadSongLyrics()
+        }
+
         override fun onDestroyView() {
             super.onDestroyView()
             if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask!!.isCancelled) {
