@@ -8,7 +8,6 @@ import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.App
@@ -109,7 +108,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     }
 
     private fun setupRecyclerView() {
-        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView, ThemeStore.accentColor(this))
+        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView )
         songAdapter = ShuffleButtonSongAdapter(this, ArrayList(), R.layout.item_list, false, this)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
