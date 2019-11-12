@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
-import android.util.Log
 import android.view.*
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -153,9 +152,9 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         try {
             content = LyricUtil.getStringFromFile(song.data, song.artistName)
         } catch (e: Exception) {
-            try{
+            try {
                 content = LyricUtil.getStringFromFile(song.title, song.artistName)
-            } catch ( e2 : Exception){
+            } catch (e2: Exception) {
 
             }
             e.printStackTrace()
@@ -221,7 +220,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         return baseUrl
     }
 
-    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
         class Tabs(@StringRes val title: Int,
                    val fragment: Fragment)
 

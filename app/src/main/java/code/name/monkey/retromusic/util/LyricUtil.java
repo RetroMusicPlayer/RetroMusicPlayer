@@ -15,7 +15,8 @@
 package code.name.monkey.retromusic.util;
 
 import android.util.Base64;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by hefuyi on 2016/11/8.
