@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingBottom="12dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeDown"
@@ -14,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:srcCompat="@drawable/ic_volume_down_white_24dp"
         app:tint="?colorOnBackground" />
 
@@ -36,7 +38,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="12dp"
         app:srcCompat="@drawable/ic_volume_up_white_24dp"
         app:tint="?colorOnBackground" />
 </LinearLayout>

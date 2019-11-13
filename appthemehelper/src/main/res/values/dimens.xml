@@ -3,9 +3,6 @@
 
     <dimen name="ate_circleview_border">1dp</dimen>
 
-    <dimen name="ate_default_textsize_subheading">16sp</dimen>
-    <dimen name="ate_default_textsize_body">14sp</dimen>
-
     <dimen name="ate_preference_inset">16dp</dimen>
 
 </resources>

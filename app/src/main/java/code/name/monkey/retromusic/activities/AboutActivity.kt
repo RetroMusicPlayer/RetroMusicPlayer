@@ -9,7 +9,6 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
@@ -69,8 +68,8 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
         loadContributors()
         setSupportActionBar(toolbar)
-        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.resolveColor(this, R.attr.colorOnSurface))
-        appVersion.text = getAppVersion()
+        ToolbarContentTintHelper.colorBackButton(toolbar )
+        version.setSummary ( getAppVersion())
         setUpView()
     }
 

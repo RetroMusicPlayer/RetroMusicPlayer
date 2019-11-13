@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,86 +15,78 @@
             android:id="@+id/buyProContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:cardUseCompatPadding="true"
             app:strokeColor="?dividerColor"
-            app:strokeWidth="1dp">
+            app:strokeWidth="1.5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/titleContainer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toStartOf="@+id/text3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="16dp"
-                        android:paddingEnd="0dp"
-                        android:text="@string/upgrade_to_premium"
-                        android:textAppearance="@style/TextViewOverline" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp"
-                        android:paddingEnd="0dp"
-                        android:paddingBottom="8dp"
-                        android:text="@string/buy_pro"
-                        android:textAppearance="@style/TextViewHeadline6"
-                        android:textColor="?colorOnSurface"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/text2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="0dp"
-                        android:text="@string/pro_summary"
-                        android:textColor="?colorOnSurface" />
-                </LinearLayout>
+                android:orientation="vertical"
+                android:padding="4dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/text3"
-                    android:layout_width="72dp"
-                    android:layout_height="72dp"
-                    android:layout_gravity="center_vertical"
+                    android:id="@+id/diamondIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_diamond_stone_white_24dp"
+                    app:tint="?colorOnSecondary" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@string/retro_music_pro"
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textColor="?colorOnPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/diamondIcon" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/pro_summary"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/titleContainer"
-                    app:srcCompat="@drawable/promotional" />
+                    android:background="?dividerColor"
+                    app:layout_constraintTop_toBottomOf="@id/text" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buyPremium"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/premium"
-                    android:textAppearance="@style/TextViewNormal"
-                    app:icon="@drawable/ic_diamond_stone_white_24dp"
+                    android:gravity="start|center_vertical"
+                    android:text="@string/buy_now"
+                    android:textAllCaps="false"
+                    android:textColor="?colorAccent"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/titleContainer"
-                    tools:backgroundTint="@color/md_red_400" />
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -131,6 +122,7 @@
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
                     android:textAppearance="@style/TextViewSubtitle1"
+                    android:textColor="?colorOnPrimary"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
@@ -261,8 +253,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:text="@string/personalize"
                     android:singleLine="true"
+                    android:text="@string/personalize"
                     android:textAppearance="@style/TextViewSubtitle1"
                     android:textStyle="bold" />
 

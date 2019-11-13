@@ -74,34 +74,46 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/title"
+        app:layout_constraintBottom_toTopOf="@+id/titleContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressContainer"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/lorem/random" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/titleContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/md_red_500"
-        android:ellipsize="end"
-        android:fontFeatureSettings="smcp"
-        android:letterSpacing="0.2"
-        android:maxLines="1"
-        android:padding="4dp"
-        android:textAllCaps="true"
-        android:textStyle="bold"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        tools:text="@tools:sample/full_names" />
+        app:layout_constraintTop_toBottomOf="@+id/text">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/md_red_500"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:fontFeatureSettings="smcp"
+            android:freezesText="true"
+            android:gravity="center"
+            android:letterSpacing="0.2"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:padding="4dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
 
 
     <RelativeLayout
@@ -115,7 +127,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:ignore="ContentDescription,UnusedAttribute"
         tools:showIn="@layout/fragment_player_playback_controls">
 

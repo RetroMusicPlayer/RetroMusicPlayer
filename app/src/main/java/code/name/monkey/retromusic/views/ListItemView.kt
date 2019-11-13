@@ -20,12 +20,15 @@ import android.view.View
 import android.widget.FrameLayout
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import kotlinx.android.synthetic.main.list_item_view.view.*
 
 /**
  * Created by hemanths on 2019-10-02.
  */
 class ListItemView : FrameLayout {
+
+
     constructor(context: Context) : super(context) {
         init(context, null)
     }
@@ -42,7 +45,13 @@ class ListItemView : FrameLayout {
         View.inflate(context, R.layout.list_item_view, this)
 
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.ListItemView)
-        appCompatImageView.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
+        if (typedArray.hasValue(R.styleable.ListItemView_listItemIcon)) {
+            icon.setImageDrawable(typedArray.getDrawable(R.styleable.ListItemView_listItemIcon))
+        } else {
+
+            icon.hide()
+        }
+
         title.text = typedArray.getText(R.styleable.ListItemView_listItemTitle)
         if (typedArray.hasValue(R.styleable.ListItemView_listItemSummary)) {
             summary.text = typedArray.getText(R.styleable.ListItemView_listItemSummary)
@@ -50,5 +59,10 @@ class ListItemView : FrameLayout {
             summary.hide()
         }
         typedArray.recycle()
+    }
+
+    fun setSummary(appVersion: String) {
+        summary.show()
+        summary.text = appVersion
     }
 }

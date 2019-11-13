@@ -39,7 +39,7 @@ class SettingsActivity : AbsBaseActivity() {
             setTitleTextColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorOnPrimary))
             setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorOnSecondary))
+            ToolbarContentTintHelper.colorBackButton(toolbar)
         }
         appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
 

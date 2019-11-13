@@ -35,11 +35,6 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowExitTransition">@transition/grid_exit</item>
-        <item name="android:windowEnterTransition">@transition/grid_exit</item>
-
-        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
-        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="windowActionBar">false</item>
@@ -71,11 +66,6 @@
         <item name="android:windowBackground">@color/black_color</item>
 
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowExitTransition">@transition/grid_exit</item>
-        <item name="android:windowEnterTransition">@transition/grid_exit</item>
-
-        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
-        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="windowActionBar">false</item>
@@ -131,11 +121,6 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:windowExitTransition">@transition/grid_exit</item>
-        <item name="android:windowEnterTransition">@transition/grid_exit</item>
-
-        <item name="android:windowSharedElementEnterTransition">@transition/grid_exit</item>
-        <item name="android:windowSharedElementExitTransition">@transition/grid_exit</item>
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="windowActionBar">false</item>
@@ -146,7 +131,7 @@
         <item name="colorSecondary">@color/lightColorSecondary</item>
         <item name="colorPrimaryVariant">@color/md_red_400</item>
 
-        <item name="colorOnPrimary">@color/mi_text_color_primary_light</item>
+        <item name="colorOnPrimary">@color/lightColorOnPrimary</item>
         <item name="colorAccent">@color/md_deep_purple_A200</item>
         <item name="colorOnSecondary">@color/mi_text_color_secondary_light</item>
         <item name="colorSecondaryVariant">@color/md_green_A700</item>
@@ -170,39 +155,6 @@
     <!-- content description is necessary to find the overflow button later in the layout-->
     <style name="Widget.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="android:contentDescription">@string/abc_action_menu_overflow_description</item>
-    </style>
-
-    <!-- set the rounded drawable as background to your bottom sheet -->
-    <style name="BottomSheet" parent="@style/Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_bottom_sheet_dialog_fragment</item>
-    </style>
-
-    <style name="BaseBottomSheetDialog" parent="@style/Theme.Design.Light.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="bottomSheetStyle">@style/BottomSheet</item>
-    </style>
-
-    <style name="BaseBottomSheetDialogDark" parent="@style/Theme.Design.BottomSheetDialog">
-        <item name="android:windowIsFloating">false</item>
-        <item name="bottomSheetStyle">@style/BottomSheet</item>
-    </style>
-
-    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">?cardBackgroundColor</item>
-    </style>
-
-    <style name="BottomSheetDialogThemeDark" parent="BaseBottomSheetDialogDark">
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">?cardBackgroundColor</item>
-    </style>
-
-    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
-    </style>
-
-    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="FabParent">

@@ -100,9 +100,9 @@ class OrderablePlaylistSongAdapter(activity: AppCompatActivity,
         init {
             if (dragView != null) {
                 if (onMoveItemListener != null) {
-                    dragView!!.visibility = View.VISIBLE
+                    dragView?.visibility = View.VISIBLE
                 } else {
-                    dragView!!.visibility = View.GONE
+                    dragView?.visibility = View.GONE
                 }
             }
         }

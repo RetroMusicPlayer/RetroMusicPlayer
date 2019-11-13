@@ -12,22 +12,21 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.util.schedulers;
+package code.name.monkey.retromusic.extensions
 
-import androidx.annotation.NonNull;
-import io.reactivex.Scheduler;
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 
 /**
- * Created by hemanths on 12/08/17.
+ * Created by hemanths on 2019-11-01.
  */
 
-public interface BaseSchedulerProvider {
-    @NonNull
-    Scheduler computation();
 
-    @NonNull
-    Scheduler io();
+fun ArrayList<Song>.lastElement(): Boolean {
+    println("${this.size} ${this.indexOf(MusicPlayerRemote.currentSong)}")
+    return this.size - 1 == this.indexOf(MusicPlayerRemote.currentSong)
+}
 
-    @NonNull
-    Scheduler ui();
+fun ArrayList<Song>.fistElement(): Boolean {
+    return 0 == this.indexOf(MusicPlayerRemote.currentSong)
 }

@@ -18,7 +18,8 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playSongs"

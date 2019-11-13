@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.fragments
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
@@ -16,8 +15,10 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_mini_player.*
 import kotlin.math.abs
 
@@ -52,9 +53,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious.visibility = View.VISIBLE
             actionPlayingQueue.visibility = View.VISIBLE
         } else {
-            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
-            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.GONE else View.VISIBLE
-            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraMiniExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.GONE else View.VISIBLE
+            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
         }
 
         actionPlayingQueue.setOnClickListener(this)
@@ -91,17 +92,16 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
     override fun onServiceConnected() {
         updateSongTitle()
         updatePlayPauseDrawableState()
-        //updateIsFavorite()
     }
 
     override fun onPlayingMetaChanged() {
         updateSongTitle()
-        //updateIsFavorite()
     }
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
     }
+
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         progressBar.max = total
@@ -125,7 +125,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         if (MusicPlayerRemote.isPlaying) {
             miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_pause_white_24dp)
         } else {
-            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            miniPlayerPlayPauseButton!!.setImageResource(R.drawable.ic_play_arrow_white_24dp)
         }
     }
 
@@ -156,35 +156,5 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         override fun onTouch(v: View, event: MotionEvent): Boolean {
             return flingPlayBackController.onTouchEvent(event)
         }
-    }
-
-    fun toggleFavorite(song: Song) {
-        MusicUtil.toggleFavorite(requireActivity(), song)
-        if (song.id == MusicPlayerRemote.currentSong.id) {
-            updateIsFavorite()
-        }
-    }
-
-    private var updateIsFavoriteTask: AsyncTask<*, *, *>? = null
-
-    @SuppressLint("StaticFieldLeak")
-    fun updateIsFavorite() {
-        if (updateIsFavoriteTask != null) {
-            updateIsFavoriteTask!!.cancel(false)
-        }
-        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
-            override fun doInBackground(vararg params: Song): Boolean {
-                return MusicUtil.isFavorite(requireActivity(), params[0])
-            }
-
-            override fun onPostExecute(isFavorite: Boolean) {
-                val res = if (isFavorite)
-                    R.drawable.ic_favorite_white_24dp
-                else
-                    R.drawable.ic_favorite_border_white_24dp
-                val drawable = RetroUtil.getTintedVectorDrawable(requireActivity(), res, ThemeStore.accentColor(requireActivity()))
-                miniPlayerImage.setImageDrawable(drawable)
-            }
-        }.execute(MusicPlayerRemote.currentSong)
     }
 }

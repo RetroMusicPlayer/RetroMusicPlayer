@@ -24,7 +24,7 @@
         tools:visibility="visible" />
 
     <FrameLayout
-        android:id="@+id/image_container"
+        android:id="@+id/imageContainer"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
@@ -32,7 +32,7 @@
         android:paddingEnd="0dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/image_text_container"
+            android:id="@+id/imageTextContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -48,7 +48,7 @@
                 tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/image_text"
+                android:id="@+id/imageText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFeatureSettings="onum"

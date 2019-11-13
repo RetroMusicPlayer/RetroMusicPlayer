@@ -14,19 +14,22 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
  */
 
-interface SearchView {
+interface SearchView : BaseView {
     fun showData(data: MutableList<Any>)
-
-    fun showEmptyView()
 }
 
 interface SearchPresenter : Presenter<SearchView> {
@@ -35,18 +38,27 @@ interface SearchPresenter : Presenter<SearchView> {
 
     class SearchPresenterImpl @Inject constructor(
             private val repository: Repository
-    ) : PresenterImpl<SearchView>(), SearchPresenter {
+    ) : PresenterImpl<SearchView>(), SearchPresenter, CoroutineScope {
 
-        override fun attachView(view: SearchView) {
-            super.attachView(view)
-        }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
+
+        private var job: Job = Job()
 
         override fun detachView() {
             super.detachView()
+            job.cancel()
         }
 
         override fun search(query: String?) {
-            view.showData(repository.search(query))
+            launch {
+                when (val result = repository.search(query)) {
+                    is Success -> withContext(Dispatchers.Main) {
+                        view?.showData(result.data)
+                    }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
         }
     }
 }

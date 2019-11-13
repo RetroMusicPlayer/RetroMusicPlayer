@@ -16,7 +16,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -74,9 +74,11 @@
                     android:layout_marginTop="@dimen/toolbar_margin_vertical"
                     android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
                     android:layout_marginBottom="@dimen/toolbar_margin_vertical"
+                    app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="8dp"
                     app:cardUseCompatPadding="true"
-                    app:layout_scrollFlags="scroll|enterAlways">
+                    app:layout_scrollFlags="scroll|enterAlways"
+                    app:shapeAppearance="@style/ToolbarCornerCardView">
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
@@ -104,7 +106,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp">
+            app:cardBackgroundColor="?colorPrimary"
+            app:cardElevation="8dp"
+            app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
             <include layout="@layout/home_content" />
         </com.google.android.material.card.MaterialCardView>

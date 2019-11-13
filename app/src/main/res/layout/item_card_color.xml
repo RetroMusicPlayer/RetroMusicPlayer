@@ -10,7 +10,7 @@
     tools:ignore="MissingPrefix">
 
     <LinearLayout
-        android:id="@+id/palette_color_container"
+        android:id="@+id/paletteColorContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?rectSelector"
@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 

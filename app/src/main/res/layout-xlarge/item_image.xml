@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/image_container_card"
+            android:id="@+id/imageContainerCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"

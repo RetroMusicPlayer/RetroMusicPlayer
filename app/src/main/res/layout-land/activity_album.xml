@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:transitionName="@string/transition_album_art"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
-                style="@style/Toolbar" />
-        </FrameLayout>
+                style="@style/Toolbar"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:transitionName="@string/transition_album_art"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -37,76 +56,69 @@
             android:fillViewport="true"
             android:overScrollMode="never">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/contentContainer"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <code.name.monkey.retromusic.views.CircularImageView
+                        android:id="@+id/artistImage"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="0"
+                        app:civ_border="false"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                        <code.name.monkey.retromusic.views.CircularImageView
-                            android:id="@+id/artistImage"
-                            android:layout_width="52dp"
-                            android:layout_height="52dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="0"
-                            app:civ_border="false"
-                            tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
-
-                        <LinearLayout
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/albumTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:padding="16dp">
+                            android:maxLines="2"
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textStyle="bold"
+                            tools:ignore="MissingPrefix"
+                            tools:text="Album name" />
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/albumTitle"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:maxLines="2"
-                                android:textAppearance="@style/TextViewHeadline6"
-                                android:textStyle="bold"
-                                tools:ignore="MissingPrefix"
-                                tools:text="Album name" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/albumText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:ellipsize="marquee"
-                                android:focusable="true"
-                                android:focusableInTouchMode="true"
-                                android:freezesText="true"
-                                android:marqueeRepeatLimit="marquee_forever"
-                                android:paddingTop="4dp"
-                                android:scrollHorizontally="true"
-                                android:singleLine="true"
-                                android:textAppearance="@style/TextViewHeadline6"
-                                tools:ignore="MissingPrefix"
-                                tools:text="Album details name" />
-
-                        </LinearLayout>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/albumText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:ellipsize="marquee"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:freezesText="true"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingTop="4dp"
+                            android:scrollHorizontally="true"
+                            android:singleLine="true"
+                            android:textAppearance="@style/TextViewHeadline6"
+                            tools:ignore="MissingPrefix"
+                            tools:text="Album details name" />
 
                     </LinearLayout>
 
-                    <include layout="@layout/activity_album_content" />
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+
+                <include layout="@layout/activity_album_content" />
+            </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
 

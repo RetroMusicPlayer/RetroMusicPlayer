@@ -21,10 +21,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.SettingsActivity
@@ -74,11 +71,11 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         buyPremium.setOnClickListener {
             NavigationUtil.goToProVersion(requireContext())
         }
-        MaterialUtil.setTint(buyPremium)
-        val primaryColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), ColorUtil.isColorLight(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)))
-        text.setTextColor(ColorUtil.withAlpha(primaryColor, 0.75f))
-        text2.setTextColor(primaryColor)
-        text3.imageTintList = ColorStateList.valueOf(primaryColor)
+        ThemeStore.accentColor(requireContext()).let {
+            buyPremium.setTextColor(it)
+            diamondIcon.imageTintList = ColorStateList.valueOf(it)
+        }
+
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {

@@ -28,7 +28,6 @@ import android.view.View
 import android.view.animation.PathInterpolator
 import android.widget.ProgressBar
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -41,14 +40,6 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 object ViewUtil {
 
     const val RETRO_MUSIC_ANIM_TIME = 1000
-
-    fun createTextColorTransition(v: TextView, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "textColor", startColor, endColor)
-    }
-
-    fun createBackgroundColorTransition(v: View, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "backgroundColor", startColor, endColor)
-    }
 
     fun setProgressDrawable(progressSlider: SeekBar, newColor: Int, thumbTint: Boolean = false) {
 
@@ -66,11 +57,11 @@ object ViewUtil {
         progress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
         val background = ld.findDrawableByLayerId(android.R.id.background)
-        val primaryColor = ATHUtil.resolveColor(progressSlider.context, R.attr.colorPrimary);
+        val primaryColor = ATHUtil.resolveColor(progressSlider.context, R.attr.colorPrimary)
         background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(primaryColor)), PorterDuff.Mode.SRC_IN)
 
         val secondaryProgress = ld.findDrawableByLayerId(android.R.id.secondaryProgress)
-        secondaryProgress.setColorFilter(ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN)
+        secondaryProgress?.setColorFilter(ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN)
     }
 
     private fun createColorAnimator(target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
@@ -87,21 +78,6 @@ object ViewUtil {
         }
         animator.duration = RETRO_MUSIC_ANIM_TIME.toLong()
         return animator
-    }
-
-    fun setStatusBarHeight(context: Context, statusBar: View) {
-        val lp = statusBar.layoutParams
-        lp.height = getStatusBarHeight(context)
-        statusBar.requestLayout()
-    }
-
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = context.resources.getDimensionPixelSize(resourceId)
-        }
-        return result
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {
@@ -121,7 +97,7 @@ object ViewUtil {
         recyclerView.setPopupTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
         recyclerView.setThumbColor(accentColor)
         recyclerView.setTrackColor(Color.TRANSPARENT)
-        recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));
+        recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f))
 
     }
 

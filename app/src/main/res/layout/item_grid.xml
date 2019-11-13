@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/image_container_card"
+                android:id="@+id/imageContainerCard"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -32,7 +32,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     tools:ignore="ContentDescription"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[18]" />
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
             </com.google.android.material.card.MaterialCardView>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -41,9 +41,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingStart="4dp"
+            android:paddingStart="12dp"
             android:paddingTop="8dp"
-            android:paddingEnd="4dp"
+            android:paddingEnd="12dp"
             android:paddingBottom="8dp">
 
             <com.google.android.material.textview.MaterialTextView

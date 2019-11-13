@@ -4,6 +4,7 @@
     android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:background="@color/md_red_500"
     tools:ignore="ContentDescription">
 
     <RelativeLayout
@@ -19,15 +20,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop" />
-
-        <ImageView
-            android:id="@+id/foregroundImage"
-            android:layout_width="96dp"
-            android:layout_height="match_parent"
-            android:layout_alignStart="@id/largeIcon"
-            android:src="@drawable/background_image"
-            tools:tint="@color/md_black_1000" />
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
 
     </RelativeLayout>
 
@@ -36,17 +30,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingTop="6dp"
+        android:paddingStart="4dp"
+        android:paddingTop="4dp"
         android:paddingEnd="8dp">
 
         <ImageView
             android:id="@+id/smallIcon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_marginStart="8dp"
             tools:src="@drawable/ic_audiotrack_black_24dp"
             tools:tint="@color/md_black_1000" />
@@ -59,13 +52,13 @@
             android:ellipsize="end"
             android:lines="1"
             android:singleLine="true"
-            android:textSize="12sp"
+            android:textSize="10sp"
             tools:text="@string/app_name" />
 
         <ImageView
             android:id="@+id/arrow"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
             android:layout_marginStart="2dp"
             android:scaleType="centerInside"
             android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
@@ -82,9 +75,9 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@id/actions"
         android:orientation="vertical"
-        android:paddingStart="0dp"
+        android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        android:paddingBottom="12dp">
+        android:paddingBottom="8dp">
 
         <TextView
             android:id="@+id/title"
@@ -92,11 +85,10 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
             android:singleLine="true"
+            android:textAppearance="@style/Theme.RetroMusic.Notification"
             android:textStyle="bold"
-            tools:text="@string/title_dashboard" />
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/subtitle"
@@ -104,10 +96,9 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="0dp"
             android:singleLine="true"
-            tools:text="@string/title_dashboard" />
+            android:textAppearance="@style/Theme.RetroMusic.Notification.Title"
+            tools:text="@tools:sample/lorem/random" />
 
     </LinearLayout>
 
@@ -122,35 +113,46 @@
         android:layout_marginEnd="48dp"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
             android:id="@+id/action_prev"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:scaleType="centerInside" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/notification_selector"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_skip_previous_round_white_32dp"
+            tools:tint="?colorOnPrimary" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/action_play_pause"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:scaleType="centerInside" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/notification_selector"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_pause_white_24dp"
+            tools:tint="?colorOnPrimary" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/action_next"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:scaleType="centerInside" />
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/notification_selector"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_skip_next_round_white_32dp"
+            tools:tint="?colorOnPrimary" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/action_quit"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/notification_selector"
             android:scaleType="centerInside"
             android:visibility="gone" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/fifth"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/notification_selector"
             android:scaleType="centerInside" />
     </LinearLayout>
 </RelativeLayout>

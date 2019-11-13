@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import code.name.monkey.retromusic.R
-import io.reactivex.Observable
 
 
 object SearchLoader {

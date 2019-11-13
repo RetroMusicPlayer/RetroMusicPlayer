@@ -2,7 +2,10 @@ package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -11,6 +14,8 @@ import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -60,6 +65,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
             setMiniPlayerAlphaProgress(slideOffset)
+            dimBackground.show()
+            dimBackground.alpha = slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -69,6 +76,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     onPanelCollapsed()
+                    dimBackground.hide()
                 }
                 else -> {
 
@@ -88,6 +96,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         updateTabs()
 
         bottomSheetBehavior = BottomSheetBehavior.from(slidingPanel)
+
+        val themeColor = ATHUtil.resolveColor(this, R.attr.colorPrimary, Color.GRAY)
+        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
     }
 
     override fun onResume() {
@@ -117,16 +128,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         return slidingMusicPanelLayout
     }
 
-    fun setAntiDragView(antiDragView: View) {
-        //slidingLayout.setAntiDragView(antiDragView)
-    }
-
     private fun collapsePanel() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     fun expandPanel() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
@@ -175,7 +183,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                         }
                         when (panelState) {
                             BottomSheetBehavior.STATE_EXPANDED -> {
-
                                 onPanelExpanded()
                             }
                             BottomSheetBehavior.STATE_COLLAPSED -> onPanelCollapsed()
@@ -343,5 +350,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                         .setIcon(menu.icon)
             }
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
+                val outRect = Rect()
+                slidingPanel.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
     }
 }

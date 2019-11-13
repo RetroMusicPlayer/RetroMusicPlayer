@@ -20,7 +20,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimary"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -59,7 +58,8 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
+                app:tint="?colorOnSecondary"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 app:srcCompat="@drawable/ic_play_arrow_white_64dp" />

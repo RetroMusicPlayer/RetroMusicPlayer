@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/transparent"
-            app:civ_border="false" />
+            app:civ_border="false"
+            tools:src="@tools:sample/avatars" />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
     <com.google.android.material.textview.MaterialTextView

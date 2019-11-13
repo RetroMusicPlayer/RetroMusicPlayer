@@ -9,10 +9,11 @@
     <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:layoutAnimation="@anim/layout_animation_fall_down"
-        android:scrollbars="none" />
+        android:scrollbars="none"
+        app:layout_dodgeInsetEdges="bottom" />
 
     <LinearLayout
         android:id="@android:id/empty"

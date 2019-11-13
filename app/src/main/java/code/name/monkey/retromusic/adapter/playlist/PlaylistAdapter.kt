@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import code.name.monkey.appthemehelper.ThemeStore
@@ -30,15 +29,15 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import java.util.*
 
 
-class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayList<Playlist>,
-                      @param:LayoutRes protected var itemLayoutRes: Int, cabHolder: CabHolder?) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(activity, cabHolder, R.menu.menu_playlists_selection) {
-    var dataSet: ArrayList<Playlist>
-        protected set
+class PlaylistAdapter(private val activity: AppCompatActivity,
+                      var dataSet: ArrayList<Playlist>,
+                      private var itemLayoutRes: Int,
+                      cabHolder: CabHolder?) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(activity, cabHolder, R.menu.menu_playlists_selection) {
+
     var songs = ArrayList<Song>()
 
 
     init {
-        this.dataSet = dataSet
         setHasStableIds(true)
     }
 
@@ -70,20 +69,11 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val playlist = dataSet[position]
-        val songs = getSongs(playlist)
         holder.itemView.isActivated = isChecked(playlist)
-
-        if (holder.title != null) {
-            holder.title!!.text = getPlaylistTitle(playlist)
-        }
-        if (holder.text != null) {
-            holder.text!!.text = getPlaylistText(playlist)
-        }
-        if (holder.image != null) {
-            holder.image!!.setImageDrawable(getIconRes(playlist))
-        }
+        holder.title?.text = getPlaylistTitle(playlist)
+        holder.text?.text = getPlaylistText(playlist)
+        holder.image?.setImageDrawable(getIconRes(playlist))
     }
 
     private fun getIconRes(playlist: Playlist): Drawable {
@@ -215,9 +205,7 @@ class PlaylistAdapter(protected val activity: AppCompatActivity, dataSet: ArrayL
     }
 
     companion object {
-
         val TAG: String = PlaylistAdapter::class.java.simpleName
-
         private const val SMART_PLAYLIST = 0
         private const val DEFAULT_PLAYLIST = 1
     }

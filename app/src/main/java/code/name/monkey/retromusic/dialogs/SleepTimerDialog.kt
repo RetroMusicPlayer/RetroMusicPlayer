@@ -181,78 +181,7 @@ class SleepTimerDialog : DialogFragment() {
             updateCancelButton()
         }
     }
-
-    /* override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-         return inflater.inflate(R.layout.dialog_sleep_timer, container, false)
-     }*/
-
     private fun setProgressBarColor(dark: Int) {
         ViewUtil.setProgressDrawable(progressSlider = seekBar, newColor = dark)
     }
-
-    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        MaterialUtil.setTint(actionCancel, false)
-
-        title.setTextColor(ThemeStore.textColorPrimary(context!!))
-        timerDisplay!!.setTextColor(ThemeStore.textColorSecondary(context!!))
-
-        timerUpdater = TimerUpdater()
-
-        seekArcProgress = PreferenceUtil.getInstance().lastSleepTimerValue
-        updateTimeDisplayTime()
-        seekBar.progress = seekArcProgress
-
-        setProgressBarColor(ThemeStore.accentColor(context!!))
-
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-                if (i < 1) {
-                    seekBar.progress = 1
-                    return
-                }
-                seekArcProgress = i
-                updateTimeDisplayTime()
-            }
-
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-                PreferenceUtil.getInstance().lastSleepTimerValue = seekArcProgress
-            }
-        })
-
-        actionCancel.apply {
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_close_white_24dp)
-            setOnClickListener {
-                val previous = makeTimerPendingIntent(PendingIntent.FLAG_NO_CREATE)
-                if (previous != null) {
-                    val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                    am.cancel(previous)
-                    previous.cancel()
-                    Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_canceled), Toast.LENGTH_SHORT).show()
-                }
-                dismiss()
-            }
-        }
-        actionSet.apply {
-            icon = ContextCompat.getDrawable(context, R.drawable.ic_time_lapse_white_24dp)
-            MaterialUtil.setTint(actionSet)
-            setOnClickListener {
-                val minutes = seekArcProgress
-                val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
-                val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
-                PreferenceUtil.getInstance().setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
-                val am = activity!!.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
-                Toast.makeText(activity, activity!!.resources.getString(R.string.sleep_timer_set, minutes), Toast.LENGTH_SHORT).show()
-                dismiss()
-            }
-        }
-    }*/
-
-
 }

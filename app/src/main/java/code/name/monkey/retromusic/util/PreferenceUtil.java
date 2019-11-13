@@ -19,6 +19,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.TypedArray;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
@@ -57,6 +59,7 @@ import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 
 public final class PreferenceUtil {
     public static final String LIBRARY_CATEGORIES = "library_categories";
+    public static final String DESATURATED_COLOR = "desaturated_color";
     public static final String BLACK_THEME = "black_theme";
     public static final String DIALOG_CORNER = "dialog_corner";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -142,9 +145,22 @@ public final class PreferenceUtil {
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
-
     private PreferenceUtil(@NonNull final Context context) {
         mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    public static boolean isAllowedToDownloadMetadata(final Context context) {
+        switch (getInstance(context).autoDownloadImagesPolicy()) {
+            case "always":
+                return true;
+            case "only_wifi":
+                final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+                return netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI && netInfo.isConnectedOrConnecting();
+            case "never":
+            default:
+                return false;
+        }
     }
 
     @NonNull
@@ -164,6 +180,16 @@ public final class PreferenceUtil {
             default:
                 return R.style.Theme_RetroMusic;
         }
+    }
+
+    public boolean desaturatedColor() {
+        return mPreferences.getBoolean(DESATURATED_COLOR, false);
+    }
+
+    public void setDesaturatedColor(boolean value) {
+        final SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(DESATURATED_COLOR, value);
+        editor.apply();
     }
 
     public boolean getSleepTimerFinishMusic() {
@@ -265,7 +291,7 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(INITIALIZED_BLACKLIST, false);
     }
 
-    public boolean isExtraMiniExtraControls() {
+    public boolean isExtraControls() {
         return mPreferences.getBoolean(TOGGLE_ADD_CONTROLS, false);
     }
 

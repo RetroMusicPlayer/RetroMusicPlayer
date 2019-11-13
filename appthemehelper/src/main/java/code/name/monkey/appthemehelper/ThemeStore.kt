@@ -206,8 +206,9 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         @ColorInt
         fun accentColor(context: Context): Int {
+            val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
             val color = prefs(context).getInt(ThemeStorePrefKeys.KEY_ACCENT_COLOR, ATHUtil.resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238")))
-            return if (ATHUtil.isWindowBackgroundDark(context)) ColorUtil.desaturateColor(color, 0.4f) else color
+            return if (ATHUtil.isWindowBackgroundDark(context) && desaturatedColor) ColorUtil.desaturateColor(color, 0.4f) else color
         }
 
         @CheckResult

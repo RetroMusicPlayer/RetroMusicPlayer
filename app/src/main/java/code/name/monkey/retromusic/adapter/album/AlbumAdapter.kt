@@ -80,19 +80,11 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val album = dataSet[position]
-
         val isChecked = isChecked(album)
         holder.itemView.isActivated = isChecked
-
-        if (holder.title != null) {
-            holder.title!!.text = getAlbumTitle(album)
-        }
-        if (holder.text != null) {
-            holder.text!!.text = getAlbumText(album)
-        }
-        if (holder.playSongs != null) {
-            holder.playSongs!!.setOnClickListener { MusicPlayerRemote.openQueue(album.songs!!, 0, true) }
-        }
+        holder.title?.text = getAlbumTitle(album)
+        holder.text?.text = getAlbumText(album)
+        holder.playSongs?.setOnClickListener { album.songs?.let { songs -> MusicPlayerRemote.openQueue(songs, 0, true) } }
         loadAlbumCover(album, holder)
     }
 

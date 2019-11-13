@@ -84,9 +84,9 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingStart="24dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="24dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
             android:textAppearance="@style/TextViewBody2"
             tools:text="@tools:sample/lorem/random" />
     </LinearLayout>

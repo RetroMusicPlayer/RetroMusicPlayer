@@ -54,7 +54,15 @@
                         tools:background="@color/md_red_400"
                         tools:ignore="ContentDescription"
                         tools:srcCompat="@tools:sample/backgrounds/scenic[9]" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/shadow_up_full_theme"
+                        android:backgroundTint="?colorPrimary" />
                 </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -78,6 +86,7 @@
                         android:layout_marginTop="@dimen/toolbar_margin_vertical"
                         android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
                         android:layout_marginBottom="@dimen/toolbar_margin_vertical"
+                        app:cardBackgroundColor="@android:color/transparent"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="6dp"
                         app:cardUseCompatPadding="true"
@@ -114,7 +123,9 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="12dp">
+                app:cardBackgroundColor="?colorPrimary"
+                app:cardElevation="8dp"
+                app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
                 <include layout="@layout/home_content" />
             </com.google.android.material.card.MaterialCardView>

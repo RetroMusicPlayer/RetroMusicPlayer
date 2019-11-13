@@ -55,7 +55,7 @@
                     android:paddingBottom="16dp">
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/playerTitle"
+                        android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="marquee"
@@ -71,7 +71,7 @@
                         tools:text="Title" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/playerText"
+                        android:id="@+id/text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"

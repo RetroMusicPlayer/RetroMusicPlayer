@@ -38,11 +38,11 @@
             app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
     </FrameLayout>
 
-    <com.google.android.material.card.MaterialCardView
+    <code.name.monkey.retromusic.views.WidthFitSquareCardView
         android:id="@+id/imageContainer"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         app:cardCornerRadius="8dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,25 +50,37 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/playerImage"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
-    </com.google.android.material.card.MaterialCardView>
+    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
+    <LinearLayout
+        android:id="@+id/titleContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:maxLines="1"
-        android:textAppearance="@style/TextViewSubtitle1"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarContainer"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewSubtitle1"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -76,14 +88,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextViewBody2"
         android:textColor="?colorOnSecondary"
         app:layout_constraintBottom_toBottomOf="@+id/imageContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="@tools:sample/lorem" />
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        tools:text="@tools:sample/lorem/random" />
 
     <FrameLayout
         android:id="@+id/playbackControlsFragmentContainer"

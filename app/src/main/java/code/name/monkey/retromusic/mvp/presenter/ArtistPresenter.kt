@@ -14,15 +14,15 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.helper.SearchQueryHelper.songs
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
+import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 interface ArtistsView : BaseView {
     fun artists(artists: ArrayList<Artist>)
@@ -34,29 +34,26 @@ interface ArtistsPresenter : Presenter<ArtistsView> {
 
     class ArtistsPresenterImpl @Inject constructor(
             private val repository: Repository
-    ) : PresenterImpl<ArtistsView>(), ArtistsPresenter {
+    ) : PresenterImpl<ArtistsView>(), ArtistsPresenter, CoroutineScope {
+        private val job = Job()
 
-        private var disposable: Disposable? = null
-
-        private fun showList(artists: ArrayList<Artist>) {
-            if (songs.isNotEmpty())
-                view.artists(artists)
-            else
-                view.showEmptyView()
-        }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
         override fun detachView() {
             super.detachView()
-            disposable?.dispose()
+            job.cancel()
         }
 
         override fun loadArtists() {
-            disposable = repository.allArtistsFlowable
-                    .subscribe({
-                        view.artists(it)
-                    }, {
-                        println(it)
-                    })
+            launch {
+                when (val result = repository.allArtists()) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artists(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
         }
     }
 }

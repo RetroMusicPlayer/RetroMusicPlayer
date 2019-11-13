@@ -14,13 +14,15 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 10/08/17.
@@ -33,23 +35,27 @@ interface SongView {
 
 interface SongPresenter : Presenter<SongView> {
     fun loadSongs()
-
     class SongPresenterImpl @Inject constructor(
             private val repository: Repository
-    ) : PresenterImpl<SongView>(), SongPresenter {
+    ) : PresenterImpl<SongView>(), SongPresenter, CoroutineScope {
 
-        private var disposable: Disposable? = null
+        private var job: Job = Job()
+
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
         override fun loadSongs() {
-            disposable = repository.allSongsFlowable
-                    .subscribe({
-                        view?.songs(it)
-                    }, { t -> print(t) })
+            launch {
+                when (val songs = repository.allSongs()) {
+                    is Result.Success -> withContext(Dispatchers.Main) { view?.songs(songs.data) }
+                    is Result.Error -> view?.showEmptyView()
+                }
+            }
         }
 
         override fun detachView() {
             super.detachView()
-            disposable?.dispose()
+            job.cancel();
         }
     }
 }

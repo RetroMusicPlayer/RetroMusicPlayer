@@ -71,4 +71,6 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     companion object {
         const val SLIDER_ANIMATION_TIME: Long = 400
     }
+
+
 }

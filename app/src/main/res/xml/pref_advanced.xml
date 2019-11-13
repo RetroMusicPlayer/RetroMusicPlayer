@@ -8,8 +8,10 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
             android:defaultValue="30"
             android:key="filter_song"
+            android:layout="@layout/list_item_view_seekbar"
             android:max="60"
             android:title="@string/pref_filter_song_title"
+            android:summary="@string/pref_filter_song_summary"
             app:enableCopying="true"
             app:icon="@drawable/ic_filter_song_white_24dp"
             app:showSeekBarValue="true" />
@@ -17,6 +19,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="pause_on_zero_volume"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_keep_pause_on_zero_volume_summary"
             android:title="@string/pref_keep_pause_on_zero_volume_title"
             app:enableCopying="true"
@@ -25,6 +28,7 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="keep_screen_on"
+            android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_keep_screen_on_summary"
             android:title="@string/pref_keep_screen_on_title"
             app:enableCopying="true"
@@ -33,7 +37,9 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
             android:defaultValue="16"
             android:key="dialog_corner"
+            android:layout="@layout/list_item_view_seekbar"
             android:max="50"
+            android:summary="@string/pref_dialog_corner_summary"
             android:title="@string/pref_dialog_corner_title"
             app:enableCopying="true"
             app:icon="@drawable/ic_rounded_corner"

@@ -31,7 +31,7 @@
             app:titleEnabled="false">
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal" />
@@ -57,9 +57,9 @@
             android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:cardPreventCornerOverlap="true">
+            android:layout_marginTop="6dp"
+            app:cardElevation="8dp"
+            app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"

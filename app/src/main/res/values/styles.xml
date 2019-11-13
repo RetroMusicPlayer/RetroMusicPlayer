@@ -42,18 +42,10 @@
     </style>
 
     <style name="ToolbarTextAppearanceNormal">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
         <item name="android:textSize">20sp</item>
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
-        </item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="ToolbarSubTitleTextAppearance">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
-
-    <style name="BigTitleTextAppearance">
-        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.0125</item>
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">
@@ -86,24 +78,6 @@
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
-    <style name="MaterialShuffleButtonStyle" parent="Widget.MaterialComponents.Button.Icon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">16dp</item>
-        <item name="android:text">@string/action_shuffle_all</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="cornerRadius">25dp</item>
-        <item name="android:padding">16dp</item>
-        <item name="icon">@drawable/ic_shuffle_white_24dp</item>
-        <item name="backgroundTint">@color/md_red_400</item>
-        <item name="iconGravity">start</item>
-    </style>
-
-    <style name="NavigationViewTitleTextAppearance">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Subhead</item>
-    </style>
-
     <style name="Fab" parent="FabParent" />
 
     <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
@@ -124,42 +98,8 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="OptionButtonsStyle" parent="@style/Widget.MaterialComponents.Button.TextButton.Icon">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="iconPadding">16dp</item>
-        <item name="iconTint">?iconColor</item>
-        <item name="rippleColor">?iconColor</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingBottom">8dp</item>
-        <item name="android:paddingTop">8dp</item>
-        <item name="iconSize">12dp</item>
-    </style>
-
-    <style name="OptionButtonsTextStyle" parent="@style/Widget.MaterialComponents.Button.TextButton">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-
     <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
 
-    </style>
-
-    <style name="AppTextAppearance.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textAllCaps">false</item>
-    </style>
-
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="boxBackgroundColor">@color/text_field_background</item>
-    </style>
-
-    <style name="CarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/md_deep_purple_700</item>
-        <item name="colorAccent">@color/md_deep_purple_A400</item>
-        <item name="colorPrimary">@color/md_deep_purple_500</item>
     </style>
 
     <style name="TextViewNormal">
@@ -180,10 +120,6 @@
     </style>
 
     <style name="TextViewHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
-
-    <style name="TextViewHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
@@ -213,8 +149,16 @@
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
-
-    <style name="ChipFont" parent="TextAppearance.MaterialComponents.Chip">
-        <item name="android:fontFamily">@font/circular</item>
+    <style name="TopCornerCardView">
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
     </style>
+
+    <style name="ToolbarCornerCardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
 </resources>

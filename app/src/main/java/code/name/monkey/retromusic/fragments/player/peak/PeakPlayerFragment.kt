@@ -26,6 +26,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_peak_player.*
 
@@ -46,6 +47,10 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpPlayerToolbar()
         setUpSubFragments()
+        title.isSelected = true
+        playerImage.setOnClickListener {
+            NavigationUtil.goToLyrics(requireActivity())
+        }
     }
 
     private fun setUpSubFragments() {
@@ -111,10 +116,6 @@ class PeakPlayerFragment : AbsPlayerFragment() {
 
     }
 
-    override fun onPlayStateChanged() {
-        super.onPlayStateChanged()
-    }
-
     override fun onServiceConnected() {
         super.onServiceConnected()
         updateSong()
@@ -124,7 +125,4 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         super.onPlayingMetaChanged()
         updateSong()
     }
-
-
-
 }

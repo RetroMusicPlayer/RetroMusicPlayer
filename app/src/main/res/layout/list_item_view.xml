@@ -18,55 +18,51 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/rectSelector"
-    android:minHeight="@dimen/md_listitem_height"
+    android:minHeight="72dp"
     android:orientation="horizontal"
+    android:padding="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     tools:ignore="PrivateResource">
 
-
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+        android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_telegram_white"
-        app:tint="?colorOnSurface" />
-
+        app:tint="?colorOnSurface"
+        tools:srcCompat="@drawable/ic_telegram_white" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:id="@android:id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:textStyle="bold"
-        android:layout_marginEnd="16dp"
-        android:text="@string/telegram_group"
         android:textAppearance="@style/TextViewSubtitle1"
         app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toTopOf="@+id/summary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:maxLines="@string/grid_size_1"
+        tools:text="@tools:sample/lorem" />
 
     <code.name.monkey.retromusic.views.BaselineGridTextView
-        android:id="@+id/summary"
+        android:id="@android:id/summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
+        app:layout_constraintTop_toBottomOf="@android:id/title"
+        app:lineHeightHint="24sp"
+        tools:maxLines="2"
+        tools:text="@tools:sample/lorem/random" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_front_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/telegram_group_summary"
-        app:layout_constrainedWidth="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="52dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

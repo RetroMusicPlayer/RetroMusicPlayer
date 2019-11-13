@@ -151,7 +151,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         });
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
-        ToolbarContentTintHelper.colorBackButton(toolbar, ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSurface));
+        ToolbarContentTintHelper.colorBackButton(toolbar );
         toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 

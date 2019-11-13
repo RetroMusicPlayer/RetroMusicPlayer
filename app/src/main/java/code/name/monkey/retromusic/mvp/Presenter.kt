@@ -14,13 +14,17 @@
 
 package code.name.monkey.retromusic.mvp
 
+import androidx.annotation.CallSuper
+
 /**
  * Created by hemanths on 16/08/17.
  */
 
 
 interface Presenter<T> {
+    @CallSuper
     fun attachView(view: T)
 
+    @CallSuper
     fun detachView()
 }

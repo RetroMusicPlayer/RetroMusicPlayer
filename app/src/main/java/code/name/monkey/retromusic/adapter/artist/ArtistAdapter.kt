@@ -126,9 +126,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
 
         init {
             setImageTransitionName(activity.getString(code.name.monkey.retromusic.R.string.transition_artist_image))
-            if (menu != null) {
-                menu!!.visibility = View.GONE
-            }
+            menu?.visibility = View.GONE
         }
 
         override fun onClick(v: View?) {

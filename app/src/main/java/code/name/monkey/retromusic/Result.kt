@@ -12,19 +12,13 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.util
+package code.name.monkey.retromusic
 
-import android.content.Context
-import androidx.annotation.AttrRes
+/**
+ * Created by hemanths on 2019-10-23.
+ */
 
-object AttrsUtil {
-    @JvmOverloads
-    fun resolveColor(context: Context, @AttrRes attr: Int, fallback: Int = 0): Int {
-        val a = context.theme.obtainStyledAttributes(intArrayOf(attr))
-        try {
-            return a.getColor(0, fallback)
-        } finally {
-            a.recycle()
-        }
-    }
+sealed class Result<out T : Any> {
+    class Success<out T : Any>(val data: T) : Result<T>()
+    class Error(val exception: Throwable) : Result<Nothing>()
 }

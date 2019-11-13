@@ -4,6 +4,7 @@
 
     <code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
         android:key="now_playing_screen_id"
+        android:layout="@layout/list_item_view"
         android:title="@string/pref_title_now_playing_screen_appearance"
         app:enableCopying="true"
         app:icon="@drawable/ic_play_circle_filled_white_24dp" />
@@ -11,8 +12,10 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">
+
         <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
             android:key="album_cover_style_id"
+            android:layout="@layout/list_item_view"
             android:title="@string/pref_title_album_cover_style"
             app:enableCopying="true"
             app:icon="@drawable/ic_image_white_24dp" />
@@ -22,10 +25,12 @@
             android:entries="@array/pref_album_cover_transform_entities"
             android:entryValues="@array/pref_album_cover_transform_values"
             android:key="album_cover_transform"
+            android:layout="@layout/list_item_view"
             android:title="@string/pref_title_album_cover_transform"
             app:enableCopying="true" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
             app:enableCopying="true"
             app:icon="@drawable/ic_view_carousel_black_24dp"
@@ -37,7 +42,9 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_controls">
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
             app:enableCopying="true"
             app:icon="@drawable/ic_play_arrow_white_32dp"
@@ -47,8 +54,8 @@
 
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+            android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:enableCopying="true"
             app:icon="@drawable/ic_volume_up_white_24dp"
             app:key="toggle_volume"
             app:summary="@string/pref_summary_toggle_volume"
@@ -58,6 +65,7 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESeekBarPreference
         android:defaultValue="12"
         android:key="new_blur_amount"
+        android:layout="@layout/list_item_view_seekbar"
         android:max="25"
         android:summary="@string/pref_blur_amount_summary"
         android:title="@string/pref_blur_amount_title"

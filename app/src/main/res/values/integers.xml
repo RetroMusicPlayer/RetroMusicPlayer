@@ -12,5 +12,4 @@
     <integer name="max_columns_land">6</integer>
 
     <integer name="anim_duration_medium">200</integer>
-    <integer name="options_height">240</integer>
 </resources>

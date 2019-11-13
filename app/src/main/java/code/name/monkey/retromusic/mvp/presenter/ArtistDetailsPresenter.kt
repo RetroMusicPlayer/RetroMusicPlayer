@@ -51,7 +51,7 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
                                    cache: String?) {
             disposable += repository.artistInfoFloable(name, lang, cache)
                     .subscribe {
-                        view.artistInfo(it)
+                        view?.artistInfo(it)
                     }
         }
 
@@ -60,20 +60,16 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
         override fun loadArtist(artistId: Int) {
             disposable += repository.getArtistByIdFlowable(artistId)
                     .doOnComplete {
-                        view.complete()
+                        view?.complete()
                     }
-                    .subscribe {
-                        this.showArtist(it)
-                    }
+                    .subscribe({
+                        view?.artist(it)
+                    }, { t -> println(t) })
         }
 
         override fun detachView() {
             super.detachView()
             disposable.dispose()
-        }
-
-        private fun showArtist(artist: Artist) {
-            view.artist(artist)
         }
     }
 }

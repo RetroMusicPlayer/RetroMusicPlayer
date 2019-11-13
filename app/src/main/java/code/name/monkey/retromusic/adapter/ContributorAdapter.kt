@@ -51,7 +51,7 @@ class ContributorAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
         val text: TextView = itemView.findViewById(R.id.text)
-        val image: CircularImageView = itemView.findViewById(R.id.image)
+        val image: CircularImageView = itemView.findViewById(R.id.icon)
 
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name

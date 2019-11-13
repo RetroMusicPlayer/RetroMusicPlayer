@@ -19,7 +19,9 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
@@ -30,7 +32,7 @@
             app:titleEnabled="false">
 
             <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:id="@+id/image_container"
+                android:id="@+id/imageContainer"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content" />
 
@@ -56,8 +58,9 @@
             android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp">
+            android:layout_marginTop="6dp"
+            app:cardElevation="8dp"
+            app:shapeAppearanceOverlay="@style/TopCornerCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"

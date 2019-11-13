@@ -9,10 +9,9 @@
     <color name="dark_grey">#121212</color>
     <color name="card_dark_color">#2C2D30</color>
     <color name="black_color">#121212</color>
-    <color name="card_black_color">#1E1E1E</color>
-    <color name="pitch_black">#000000</color>
 
     <color name="lightColorPrimary">#FFFFFF</color>
+    <color name="lightColorOnPrimary">#202020</color>
     <color name="lightColorSecondary">#FEFEFE</color>
     <color name="lightColorBackground">#FFFFFF</color>
     <color name="lightColorSurface">#FEFEFE</color>
@@ -26,4 +25,11 @@
     <color name="blackColorSecondary">#000000</color>
     <color name="blackColorBackground">#000000</color>
     <color name="blackColorSurface">#121212</color>
+
+    <color name="transparent">#00000000</color>
+    <!-- card colors -->
+    <color name="card_background">#ffffff</color>
+    <color name="card_shadow_1">#d4d4d4</color>
+    <color name="card_shadow_2">#dddddd</color>
+    <color name="card_detailing">#eee</color>
 </resources>
