@@ -29,7 +29,6 @@
             android:type="sweep"
             android:useLevel="true">
             <solid android:color="?colorAccent" />
-
         </shape>
     </item>
 </layer-list>

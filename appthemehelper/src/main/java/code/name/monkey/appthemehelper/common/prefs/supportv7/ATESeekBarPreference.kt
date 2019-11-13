@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context

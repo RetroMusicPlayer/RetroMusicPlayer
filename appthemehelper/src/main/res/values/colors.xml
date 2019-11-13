@@ -14,6 +14,7 @@
     <color name="ate_text_disabled_light">#61000000</color>
     <!-- 54% -->
     <color name="ate_secondary_text_light">#8A000000</color>
+    <!--Grey 50, #ffffff, Opacity 100%-->
     <color name="ate_control_normal_light">#8A000000</color>
     <!-- 87% -->
     <color name="ate_primary_text_light">#DE000000</color>

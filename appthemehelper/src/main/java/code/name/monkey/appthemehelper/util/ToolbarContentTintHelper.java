@@ -223,7 +223,6 @@ public final class ToolbarContentTintHelper {
                 secondaryTextColor, menuWidgetColor);
     }
 
-    @SuppressWarnings("unchecked")
     public static void setToolbarContentColor(@NonNull Context context,
                                               Toolbar toolbar,
                                               @Nullable Menu menu,
