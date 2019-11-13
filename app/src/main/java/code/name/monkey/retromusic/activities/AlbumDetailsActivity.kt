@@ -4,10 +4,12 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.transition.Slide
-import android.view.*
-import android.view.animation.AnimationUtils
+import android.view.Menu
+import android.view.MenuItem
+import android.view.SubMenu
+import android.view.View
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,20 +40,18 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
 import java.util.*
 import javax.inject.Inject
 import android.util.Pair as UtilPair
 
+
 class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
     private lateinit var simpleSongAdapter: SimpleSongAdapter
-    private var disposable = CompositeDisposable()
-
     private lateinit var album: Album
-
+    private lateinit var artistImage: ImageView
     private val savedSortOrder: String
         get() = PreferenceUtil.getInstance(this).albumDetailSongSortOrder
 
@@ -59,21 +59,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         return wrapSlidingMusicPanel(R.layout.activity_album)
     }
 
-    private fun setupWindowTransition() {
-        val slide = Slide(Gravity.BOTTOM)
-        slide.excludeTarget(android.R.id.statusBarBackground, true)
-        slide.excludeTarget(android.R.id.navigationBarBackground, true)
-        slide.excludeTarget(toolbar, true)
-        slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
-        window.enterTransition = slide
-    }
-
     @Inject
     lateinit var albumDetailsPresenter: AlbumDetailsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        //setupWindowTransition()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
         setStatusbarColor(Color.TRANSPARENT)
@@ -82,9 +72,9 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         setLightNavigationBar(true)
         setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
-        App.musicComponent.inject(this)
-        postponeEnterTransition()
+        ActivityCompat.postponeEnterTransition(this)
 
+        App.musicComponent.inject(this)
         artistImage = findViewById(R.id.artistImage)
 
         setupRecyclerView()
@@ -122,12 +112,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
         albumDetailsPresenter.detachView()
     }
 
     override fun complete() {
-        scheduleStartPostponedTransition(image)
+        ActivityCompat.startPostponedEnterTransition(this)
     }
 
     override fun album(album: Album) {
@@ -149,7 +138,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         albumDetailsPresenter.loadMore(album.artistId)
     }
 
-    private lateinit var artistImage: ImageView
 
     override fun moreAlbums(albums: ArrayList<Album>) {
         moreTitle.show()
@@ -186,16 +174,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
                 })
     }
 
-    private fun scheduleStartPostponedTransition(image: ImageView) {
-        image.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                image.viewTreeObserver.removeOnPreDrawListener(this)
-                startPostponedEnterTransition();
-                return true;
-            }
-        })
-    }
-
     private fun setColors(color: Int) {
         val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ThemeStore.accentColor(this)
@@ -212,9 +190,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView {
         toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_album_detail, menu)

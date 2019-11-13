@@ -162,10 +162,8 @@ open class AlbumAdapter(protected val activity: AppCompatActivity,
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(code.name.monkey.retromusic.R.string.transition_album_art))
-            if (menu != null) {
-                menu!!.visibility = View.GONE
-            }
+            setImageTransitionName(activity.getString(R.string.transition_album_art))
+            menu?.visibility = View.GONE
         }
 
         override fun onClick(v: View?) {

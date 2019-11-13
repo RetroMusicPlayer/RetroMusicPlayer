@@ -62,10 +62,10 @@ public class NavigationUtil {
 
     public static void goToAlbumOptions(@NonNull Activity activity,
                                         int albumId,
-                                        @NonNull ActivityOptions activityOptions) {
+                                        @NonNull ActivityOptions options) {
         Intent intent = new Intent(activity, AlbumDetailsActivity.class);
         intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, albumId);
-        ActivityCompat.startActivity(activity, intent, activityOptions.toBundle());
+        ActivityCompat.startActivity(activity, intent, options.toBundle());
     }
 
     public static void goToArtistOptions(@NotNull AppCompatActivity activity,

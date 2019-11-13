@@ -14,7 +14,6 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
@@ -106,8 +105,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun checkForPadding() {
-        val height = DensityUtil.dip2px(this, 102f)
-        recyclerView.setPadding(0, 0, 0, (height))
+
     }
 
     override fun onQueueChanged() {

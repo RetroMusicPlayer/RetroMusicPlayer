@@ -19,7 +19,7 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
-import kotlinx.android.synthetic.main.activity_album.*
+import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
     private var fragment: LockScreenPlayerControlsFragment? = null
@@ -102,7 +102,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
                 .checkIgnoreMediaStore(this)
                 .generatePalette(this).build()
                 .dontAnimate()
-                .into(object : RetroMusicColoredTarget(image) {
+                .into(object : RetroMusicColoredTarget(image ) {
                     override fun onColorReady(color: Int) {
                         fragment?.setDark(color)
                     }

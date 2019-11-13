@@ -125,7 +125,7 @@ class ArtistAdapter(val activity: AppCompatActivity,
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
         init {
-            setImageTransitionName(activity.getString(code.name.monkey.retromusic.R.string.transition_artist_image))
+            setImageTransitionName(activity.getString(R.string.transition_artist_image))
             menu?.visibility = View.GONE
         }
 

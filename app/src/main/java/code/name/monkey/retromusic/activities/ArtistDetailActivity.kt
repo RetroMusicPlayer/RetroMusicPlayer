@@ -7,12 +7,9 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.transition.Slide
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -54,12 +51,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
     private lateinit var albumAdapter: AlbumAdapter
     private var forceDownload: Boolean = false
 
-    private fun setupWindowTransitions() {
-        val slide = Slide(Gravity.BOTTOM)
-        slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
-        window.enterTransition = slide
-    }
-
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
     }
@@ -69,7 +60,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-       // setupWindowTransitions()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
         setStatusbarColor(Color.TRANSPARENT)
@@ -126,7 +116,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView {
             it.layoutParams = params
         }
     }
-
 
 
     private fun setupRecyclerView() {
