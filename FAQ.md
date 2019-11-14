@@ -38,7 +38,7 @@ Reinstalling the app should fix this issue.
 Change the theme to Black or Dark and change it back to what you had before.
 
 ##### Q: Why some of my songs are not showing in my library?
-Try checking up if those songs are not less than 30 seconds, if so head to settings -> filter song duration. Put this to zero and see the songs should start appearimg in the library.
+Try checking up if those songs are not less than 30 seconds, if so head to settings -> other -> filter song duration. Put this to zero and see the songs should start appearimg in the library.
 If this doesn't work out for you, re-scanning the media folder should help and subsquently rebooting the device to refresh media store.
 
 ##### Q: Why my playlist/playlist songs keep disappearing?
