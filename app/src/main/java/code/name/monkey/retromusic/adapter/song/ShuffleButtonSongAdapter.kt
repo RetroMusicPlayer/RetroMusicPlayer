@@ -3,8 +3,6 @@ package code.name.monkey.retromusic.adapter.song
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
@@ -27,13 +25,11 @@ class ShuffleButtonSongAdapter(activity: AppCompatActivity,
         if (holder.itemViewType == OFFSET_ITEM) {
             val viewHolder = holder as ViewHolder
             viewHolder.playAction?.let {
-                MaterialUtil.setTint(it, color = ATHUtil.resolveColor(activity, R.attr.cardBackgroundColor))
                 it.setOnClickListener {
                     MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
             }
             viewHolder.shuffleAction?.let {
-                MaterialUtil.setTint(button = it, color = ATHUtil.resolveColor(activity, R.attr.cardBackgroundColor))
                 it.setOnClickListener {
                     MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }

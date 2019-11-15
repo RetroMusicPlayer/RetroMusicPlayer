@@ -30,6 +30,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -61,11 +62,11 @@ public class LicenseActivity extends AbsBaseActivity {
         setContentView(R.layout.activity_license);
         setStatusbarColorAuto();
         setNavigationBarColorPrimary();
-        setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ToolbarContentTintHelper.colorBackButton(toolbar );
+        ToolbarContentTintHelper.colorBackButton(toolbar);
+        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorPrimary));
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();

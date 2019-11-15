@@ -29,7 +29,6 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         setTheme(ThemeManager.getThemeResValue(this))
         hideStatusBar()
         super.onCreate(savedInstanceState)
-        //MaterialDialogsUtil.updateMaterialDialogsThemeSingleton(this)
 
         changeBackgroundShape()
         setImmersiveFullscreen()

@@ -27,6 +27,7 @@
             android:fontFeatureSettings="onum"
             android:gravity="center"
             android:maxLines="1"
+            tools:text="@tools:sample/date/hhmm"
             android:minHeight="40dp"
             android:textAppearance="@style/TextViewNormal"
             android:textColor="?colorOnSecondary" />
@@ -45,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Song title" />
+        tools:text="@tools:sample/lorem/random" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/time"
@@ -58,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="22:00" />
+        tools:text="@tools:sample/date/hhmm" />
 
 
     <androidx.appcompat.widget.AppCompatImageView

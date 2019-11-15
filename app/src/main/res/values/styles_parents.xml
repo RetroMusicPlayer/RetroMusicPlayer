@@ -27,7 +27,7 @@
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 
         <!-- just in case-->
-        <item name="android:windowBackground">@color/dark_color</item>
+        <item name="android:windowBackground">@color/md_red_500</item>
 
         <!-- necessary to find the overflow button later in the layout-->
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
@@ -40,6 +40,7 @@
         <item name="windowActionBar">false</item>
 
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
 
         <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorSecondary">@color/darkColorSecondary</item>
@@ -49,7 +50,7 @@
 
         <item name="colorAccent">@color/md_deep_purple_A200</item>
 
-        <item name="android:colorBackground">@color/darkColorBackground</item>
+        <item name="android:colorBackground">@color/md_red_500</item>
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
@@ -124,8 +125,9 @@
         <item name="android:fontFamily">@font/circular</item>
 
         <item name="windowActionBar">false</item>
+
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
-        <!--<item name="android:textColorPrimary">@color/md_grey_900</item>-->
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
 
         <item name="colorPrimary">@color/lightColorPrimary</item>
         <item name="colorSecondary">@color/lightColorSecondary</item>
@@ -166,5 +168,15 @@
 
     <style name="MaterialAlertDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.Dialog">
         <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
+    </style>
+
+    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">24dp</item>
+        <item name="android:textAppearance">@style/TextViewNormal</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
+        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+        <item name="iconGravity">textStart</item>
+        <item name="backgroundTint">?colorSurface</item>
     </style>
 </resources>

@@ -1,9 +1,10 @@
 package code.name.monkey.appthemehelper.common;
 
 import android.graphics.drawable.ColorDrawable;
+import android.view.Menu;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import android.view.Menu;
 
 import code.name.monkey.appthemehelper.ATHActivity;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
@@ -11,6 +12,15 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 
 public class ATHToolbarActivity extends ATHActivity {
     private Toolbar toolbar;
+
+    public static int getToolbarBackgroundColor(Toolbar toolbar) {
+        if (toolbar != null) {
+            if (toolbar.getBackground() instanceof ColorDrawable) {
+                return ((ColorDrawable) toolbar.getBackground()).getColor();
+            }
+        }
+        return 0;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -33,14 +43,5 @@ public class ATHToolbarActivity extends ATHActivity {
 
     protected Toolbar getATHToolbar() {
         return toolbar;
-    }
-
-    public static int getToolbarBackgroundColor(Toolbar toolbar) {
-        if (toolbar != null) {
-            if (toolbar.getBackground() instanceof ColorDrawable) {
-                return ((ColorDrawable) toolbar.getBackground()).getColor();
-            }
-        }
-        return 0;
     }
 }

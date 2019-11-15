@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,12 +37,11 @@ import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.util.NavigationUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import io.reactivex.disposables.CompositeDisposable;
 
-public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks, SharedPreferences.OnSharedPreferenceChangeListener {
+public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
 
     public static final String TAG = "LibraryFragment";
     private static final String CURRENT_TAB_ID = "current_tab_id";
@@ -75,19 +73,18 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     public void onDestroyView() {
         super.onDestroyView();
         disposable.dispose();
-        PreferenceUtil.getInstance(requireActivity()).unregisterOnSharedPreferenceChangedListener(this);
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbarContainer = view.findViewById(R.id.toolbarContainer);
         toolbar = view.findViewById(R.id.toolbar);
-        PreferenceUtil.getInstance(requireActivity()).registerOnSharedPreferenceChangedListener(this);
         return view;
     }
 
@@ -456,12 +453,5 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             return true;
         }
         return false;
-    }
-
-
-    @Override
-    public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences,
-                                          @NonNull String key) {
-
     }
 }

@@ -161,4 +161,17 @@
         <item name="cornerSize">8dp</item>
     </style>
 
+    <style name="TopCornerCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlayCardViewTopCorners</item>
+    </style>
+
+
+    <style name="ShapeAppearanceOverlayCardViewTopCorners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
 </resources>

@@ -27,7 +27,7 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <com.google.android.material.card.MaterialCardView
+        <code.name.monkey.retromusic.views.WidthFitSquareCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -37,57 +37,16 @@
             app:cardPreventCornerOverlap="false"
             app:cardUseCompatPadding="true">
 
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/playerImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal">
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription,UnusedAttribute"
+                tools:srcCompat="@tools:sample/backgrounds/scenic[10]" />
 
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/playerImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription,UnusedAttribute"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[10]" />
-
-                <ScrollView
-                    android:id="@+id/lyricsContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/twenty_percent_black_overlay"
-                    android:visibility="gone"
-                    tools:visibility="visible">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/lyricsView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:lineSpacingExtra="4dp"
-                            android:lineSpacingMultiplier="1.5"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/md_white_1000" />
-                    </FrameLayout>
-                </ScrollView>
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/expand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:padding="16dp"
-                    app:srcCompat="@drawable/ic_unfold_more_black_24dp"
-                    app:tint="@color/md_white_1000" />
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
         <FrameLayout
             android:layout_width="match_parent"
