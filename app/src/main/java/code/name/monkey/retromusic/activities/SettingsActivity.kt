@@ -5,13 +5,11 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
 import kotlinx.android.synthetic.main.activity_settings.*
-
 
 class SettingsActivity : AbsBaseActivity() {
 

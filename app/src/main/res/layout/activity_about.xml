@@ -15,16 +15,16 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@string/action_about" />
+            app:title="@string/action_about"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <include layout="@layout/activity_about_content" />
     </androidx.core.widget.NestedScrollView>

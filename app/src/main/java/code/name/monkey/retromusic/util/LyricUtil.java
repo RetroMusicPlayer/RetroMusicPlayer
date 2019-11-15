@@ -14,7 +14,9 @@
 
 package code.name.monkey.retromusic.util;
 
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -78,35 +80,38 @@ public class LyricUtil {
 
     @NonNull
     public static File getLocalLyricFile(@NonNull String title, @NonNull String artist) {
-        try{
-        File file = new File(getLrcPath(title, artist));
-        File file2 = new File(getLrcPath2(title, artist));
-        if (file.exists()) {
-    
-            return file;
-        } else if (file2.exists())  {
-  
-            return file2;
-        }
-        else {
+        try {
+            File file = new File(getLrcPath(title, artist));
+            File file2 = new File(getLrcPath2(title, artist));
+            if (file.exists()) {
 
-            return new File("lyric file not exist");
-        }} catch (Exception dfs){
+                return file;
+            } else if (file2.exists()) {
+
+                return file2;
+            } else {
+
+                return new File("lyric file not exist");
+            }
+        } catch (Exception dfs) {
             dfs.printStackTrace();
             return new File("lyric file not exist");
 
         }
     }
+
     public static String getLrcPath2(String title, String artist) {
-        String x2;
-        if(title.endsWith(".flac")||title.endsWith(".mogg")||title.endsWith(".alac")||title.endsWith(".aiff")||title.endsWith(".webv")){
-            x2= title.substring(0, title.length() -5 ) + ".lrc";
+        Log.i("HEM", "getLrcPath2: " + title);
+        if (!TextUtils.isEmpty(title)) {
+            String x2;
+            if (title.endsWith(".flac") || title.endsWith(".mogg") || title.endsWith(".alac") || title.endsWith(".aiff") || title.endsWith(".webv")) {
+                x2 = title.substring(0, title.length() - 5) + ".lrc";
+            } else {
+                x2 = title.substring(0, title.length() - 4) + ".lrc";
+            }
+            return x2;
         }
-        else{
-                x2= title.substring(0, title.length() -4 ) + ".lrc";}
-
-
-        return x2;
+        return "";
     }
 
     public static String getLrcPath(String title, String artist) {
@@ -135,7 +140,7 @@ public class LyricUtil {
         File file;
         File file2 = new File(getLrcPath(title, artist));
         File file3 = new File(getLrcPath2(title, artist));
-        if(file2.exists()){
+        if (file2.exists()) {
             file = file2;
         } else {
             file = file3;
@@ -143,7 +148,7 @@ public class LyricUtil {
         FileInputStream fin = new FileInputStream(file);
         String ret = convertStreamToString(fin);
         fin.close();
-      //  Log.d("damn2",ret);
+        //  Log.d("damn2",ret);
         return ret;
     }
 

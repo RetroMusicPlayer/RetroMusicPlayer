@@ -76,4 +76,8 @@
         <attr name="android:textAppearance" />
         <attr name="android:fontFamily" />
     </declare-styleable>
+
+    <declare-styleable name="CircleRectView">
+        <attr name="circleRadius" format="dimension" />
+    </declare-styleable>
 </resources>

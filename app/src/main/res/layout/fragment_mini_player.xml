@@ -7,7 +7,7 @@
     android:layout_height="48dp"
     android:background="?colorSecondary"
     android:clickable="true"
-    android:focusable="false"
+    android:focusable="true"
     tools:ignore="UnusedAttribute">
 
     <LinearLayout

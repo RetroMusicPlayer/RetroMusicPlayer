@@ -21,26 +21,29 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@string/action_tag_editor"
-            tools:ignore="UnusedAttribute" />
+            app:title="@string/action_tag_editor" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <code.name.monkey.retromusic.views.HeightFitSquareLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/imageContainer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:transitionName="@string/transition_album_art"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/editorImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:transitionName="@string/transition_album_art"
-                    tools:ignore="UnusedAttribute" />
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -50,16 +53,14 @@
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
-            </code.name.monkey.retromusic.views.HeightFitSquareLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@color/md_white_1000"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
                 <LinearLayout
                     android:id="@+id/editables"
@@ -67,7 +68,6 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:padding="16dp">
-
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/albumTitleContainer"

@@ -19,8 +19,8 @@
     <color name="darkColorPrimary">#202124</color>
     <color name="darkColorOnPrimary">#ffffff</color>
     <color name="darkColorSecondary">#202124</color>
-    <color name="darkColorBackground">#202124</color>
-    <color name="darkColorSurface">#17181a</color>
+    <color name="darkColorBackground">#121212</color>
+    <color name="darkColorSurface">#3C4043</color>
 
     <color name="blackColorPrimary">#000000</color>
     <color name="blackColorOnPrimary">#ffffff</color>

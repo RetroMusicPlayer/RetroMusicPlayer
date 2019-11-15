@@ -31,7 +31,6 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
      * @see .getGridSize
      */
     protected val itemLayoutRes: Int
-        @LayoutRes
         get() = if (getGridSize() > maxGridSizeForList) {
             R.layout.item_grid
         } else R.layout.item_list
@@ -124,13 +123,11 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         applyRecyclerViewPaddingForLayoutRes(recyclerView(), currentLayoutRes)
     }
 
-    private fun applyRecyclerViewPaddingForLayoutRes(recyclerView: RecyclerView,
-                                                     @LayoutRes res: Int) {
-        val padding: Int
-        if (res == R.layout.item_grid) {
-            padding = (resources.displayMetrics.density * 2).toInt()
+    private fun applyRecyclerViewPaddingForLayoutRes(recyclerView: RecyclerView, res: Int) {
+        val padding: Int = if (res == R.layout.item_grid) {
+            (resources.displayMetrics.density * 2).toInt()
         } else {
-            padding = 0
+            0
         }
         recyclerView.setPadding(padding, padding, padding, padding)
     }

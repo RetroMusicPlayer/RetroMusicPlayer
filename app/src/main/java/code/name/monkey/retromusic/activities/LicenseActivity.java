@@ -61,11 +61,11 @@ public class LicenseActivity extends AbsBaseActivity {
         setContentView(R.layout.activity_license);
         setStatusbarColorAuto();
         setNavigationBarColorPrimary();
-        setTaskDescriptionColorAuto();
         setLightNavigationBar(true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ToolbarContentTintHelper.colorBackButton(toolbar );
+        ToolbarContentTintHelper.colorBackButton(toolbar);
+        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorPrimary));
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();

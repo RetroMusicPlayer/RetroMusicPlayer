@@ -30,6 +30,7 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -92,7 +93,7 @@ object ViewUtil {
     }
 
     fun setUpFastScrollRecyclerViewColor(context: Context,
-                                         recyclerView: FastScrollRecyclerView, accentColor: Int) {
+                                         recyclerView: FastScrollRecyclerView, accentColor: Int = ThemeStore.accentColor(context)) {
         recyclerView.setPopupBgColor(accentColor)
         recyclerView.setPopupTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
         recyclerView.setThumbColor(accentColor)

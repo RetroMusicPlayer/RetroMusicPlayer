@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
@@ -37,7 +36,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     private fun setUpRecyclerView() {
         if (recyclerView is FastScrollRecyclerView) {
-            ViewUtil.setUpFastScrollRecyclerViewColor(activity!!, recyclerView as FastScrollRecyclerView, ThemeStore.accentColor(activity!!))
+            ViewUtil.setUpFastScrollRecyclerViewColor(requireActivity(), recyclerView as FastScrollRecyclerView)
         }
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
