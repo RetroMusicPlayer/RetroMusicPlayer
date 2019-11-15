@@ -120,13 +120,6 @@
             android:windowSoftInputMode="stateVisible" />
 
         <activity
-            android:name=".activities.bugreport.ErrorHandlerActivity"
-            android:immersive="true"
-            android:label="@string/error"
-            android:launchMode="singleInstance"
-            android:theme="@style/ErrorHandlingTheme" />
-
-        <activity
             android:name=".activities.LockScreenActivity"
             android:noHistory="true"
             android:showOnLockScreen="true" />

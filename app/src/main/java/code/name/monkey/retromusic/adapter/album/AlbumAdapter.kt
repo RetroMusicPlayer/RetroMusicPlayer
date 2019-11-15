@@ -3,186 +3,198 @@ package code.name.monkey.retromusic.adapter.album
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.annotation.LayoutRes
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
-import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.helper.SortOrder
+import code.name.monkey.retromusic.adapter.base.*
+import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.helper.*
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.util.*
 import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
+open class AlbumAdapter(
+		protected val activity: AppCompatActivity,
+		dataSet: ArrayList<Album>,
+		protected var itemLayoutRes: Int,
+		usePalette: Boolean,
+		cabHolder: CabHolder?
+) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
+		activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection
+), FastScrollRecyclerView.SectionedAdapter {
+	var dataSet: ArrayList<Album>
+		protected set
 
-open class AlbumAdapter(protected val activity: AppCompatActivity,
-                        dataSet: ArrayList<Album>,
-                        @param:LayoutRes protected var itemLayoutRes: Int,
-                        usePalette: Boolean,
-                        cabHolder: CabHolder?) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(activity, cabHolder, code.name.monkey.retromusic.R.menu.menu_media_selection), FastScrollRecyclerView.SectionedAdapter {
-    var dataSet: ArrayList<Album>
-        protected set
+	protected var usePalette = false
 
-    protected var usePalette = false
+	init {
+		this.dataSet = dataSet
+		this.usePalette = usePalette
+		this.setHasStableIds(true)
+	}
 
+	fun useItemLayout(itemLayoutRes: Int) {
+		this.itemLayoutRes = itemLayoutRes
+		notifyDataSetChanged()
+	}
 
-    init {
-        this.dataSet = dataSet
-        this.usePalette = usePalette
-        this.setHasStableIds(true)
-    }
+	fun usePalette(usePalette: Boolean) {
+		this.usePalette = usePalette
+		notifyDataSetChanged()
+	}
 
-    fun useItemLayout(itemLayoutRes: Int) {
-        this.itemLayoutRes = itemLayoutRes
-        notifyDataSetChanged()
-    }
+	fun swapDataSet(dataSet: ArrayList<Album>) {
+		this.dataSet = dataSet
+		notifyDataSetChanged()
+	}
 
-    fun usePalette(usePalette: Boolean) {
-        this.usePalette = usePalette
-        notifyDataSetChanged()
-    }
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+		val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
+		return createViewHolder(view, viewType)
+	}
 
-    fun swapDataSet(dataSet: ArrayList<Album>) {
-        this.dataSet = dataSet
-        notifyDataSetChanged()
-    }
+	protected open fun createViewHolder(view: View, viewType: Int): ViewHolder {
+		return ViewHolder(view)
+	}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
-        return createViewHolder(view, viewType)
-    }
+	private fun getAlbumTitle(album: Album): String? {
+		return album.title
+	}
 
-    protected open fun createViewHolder(view: View, viewType: Int): ViewHolder {
-        return ViewHolder(view)
-    }
+	protected open fun getAlbumText(album: Album): String? {
+		return album.artistName
+	}
 
-    private fun getAlbumTitle(album: Album): String? {
-        return album.title
-    }
+	override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+		val album = dataSet[position]
+		val isChecked = isChecked(album)
+		holder.itemView.isActivated = isChecked
+		holder.title?.text = getAlbumTitle(album)
+		holder.text?.text = getAlbumText(album)
+		holder.playSongs?.setOnClickListener {
+			album.songs?.let { songs ->
+				MusicPlayerRemote.openQueue(
+						songs, 0, true
+				)
+			}
+		}
+		loadAlbumCover(album, holder)
+	}
 
-    protected open fun getAlbumText(album: Album): String? {
-        return album.artistName
-    }
+	protected open fun setColors(color: Int, holder: ViewHolder) {
+		if (holder.paletteColorContainer != null) {
+			holder.title?.setTextColor(
+					MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color))
+			)
+			holder.text?.setTextColor(
+					MaterialValueHelper.getSecondaryTextColor(
+							activity, ColorUtil.isColorLight(
+							color
+					)
+					)
+			)
+			holder.paletteColorContainer?.setBackgroundColor(color)
+		}
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val album = dataSet[position]
-        val isChecked = isChecked(album)
-        holder.itemView.isActivated = isChecked
-        holder.title?.text = getAlbumTitle(album)
-        holder.text?.text = getAlbumText(album)
-        holder.playSongs?.setOnClickListener { album.songs?.let { songs -> MusicPlayerRemote.openQueue(songs, 0, true) } }
-        loadAlbumCover(album, holder)
-    }
+		holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
+	}
 
-    protected open fun setColors(color: Int, holder: ViewHolder) {
-        if (holder.paletteColorContainer != null) {
-            holder.title?.setTextColor(
-                    MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
-            holder.paletteColorContainer?.setBackgroundColor(color)
-        }
+	protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
+		if (holder.image == null) {
+			return
+		}
 
-        holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
-    }
+		SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+			.checkIgnoreMediaStore(activity).generatePalette(activity).build()
+			.into(object : RetroMusicColoredTarget(holder.image!!) {
+				override fun onLoadCleared(placeholder: Drawable?) {
+					super.onLoadCleared(placeholder)
+					setColors(defaultFooterColor, holder)
+				}
 
-    protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
-        if (holder.image == null) {
-            return
-        }
+				override fun onColorReady(color: Int) {
+					setColors(color, holder)
+				}
+			})
+	}
 
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                .checkIgnoreMediaStore(activity)
-                .generatePalette(activity).build()
-                .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        super.onLoadCleared(placeholder)
-                        setColors(defaultFooterColor, holder)
-                    }
+	override fun getItemCount(): Int {
+		return dataSet.size
+	}
 
-                    override fun onColorReady(color: Int) {
-                        setColors(color, holder)
-                    }
-                })
-    }
+	override fun getItemId(position: Int): Long {
+		return dataSet[position].id.toLong()
+	}
 
-    override fun getItemCount(): Int {
-        return dataSet.size
-    }
+	override fun getIdentifier(position: Int): Album? {
+		return dataSet[position]
+	}
 
-    override fun getItemId(position: Int): Long {
-        return dataSet[position].id.toLong()
-    }
+	override fun getName(album: Album): String {
+		return album.title!!
+	}
 
-    override fun getIdentifier(position: Int): Album? {
-        return dataSet[position]
-    }
+	override fun onMultipleItemAction(
+			menuItem: MenuItem, selection: ArrayList<Album>
+	) {
+		SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
+	}
 
-    override fun getName(album: Album): String {
-        return album.title!!
-    }
+	private fun getSongList(albums: List<Album>): ArrayList<Song> {
+		val songs = ArrayList<Song>()
+		for (album in albums) {
+			songs.addAll(album.songs!!)
+		}
+		return songs
+	}
 
-    override fun onMultipleItemAction(menuItem: MenuItem,
-                                      selection: ArrayList<Album>) {
-        SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
-    }
+	override fun getSectionName(position: Int): String {
+		var sectionName: String? = null
+		when (PreferenceUtil.getInstance(activity).albumSortOrder) {
+			SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName = dataSet[position].title
+			SortOrder.AlbumSortOrder.ALBUM_ARTIST                                  -> sectionName = dataSet[position].artistName
+			SortOrder.AlbumSortOrder.ALBUM_YEAR                                    -> return MusicUtil.getYearString(
+					dataSet[position].year
+			)
+		}
 
-    private fun getSongList(albums: List<Album>): ArrayList<Song> {
-        val songs = ArrayList<Song>()
-        for (album in albums) {
-            songs.addAll(album.songs!!)
-        }
-        return songs
-    }
+		return MusicUtil.getSectionName(sectionName)
+	}
 
-    override fun getSectionName(position: Int): String {
-        var sectionName: String? = null
-        when (PreferenceUtil.getInstance(activity).albumSortOrder) {
-            SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName = dataSet[position].title
-            SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].artistName
-            SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(dataSet[position].year)
-        }
+	inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
 
-        return MusicUtil.getSectionName(sectionName)
-    }
+		init {
+			setImageTransitionName(activity.getString(R.string.transition_album_art))
+			menu?.visibility = View.GONE
+		}
 
-    inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
+		override fun onClick(v: View?) {
+			super.onClick(v)
+			if (isInQuickSelectMode) {
+				toggleChecked(adapterPosition)
+			} else {
+				val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
+						activity, image, activity.getString(
+						R.string.transition_album_art
+				)
+				)
+				NavigationUtil.goToAlbumOptions(
+						activity, dataSet[adapterPosition].id, activityOptions
+				)
+			}
+		}
 
-        init {
-            setImageTransitionName(activity.getString(R.string.transition_album_art))
-            menu?.visibility = View.GONE
-        }
+		override fun onLongClick(v: View?): Boolean {
+			toggleChecked(adapterPosition)
+			return super.onLongClick(v)
+		}
+	}
 
-        override fun onClick(v: View?) {
-            super.onClick(v)
-            if (isInQuickSelectMode) {
-                toggleChecked(adapterPosition)
-            } else {
-                val activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, image, activity.getString(R.string.transition_album_art))
-                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
-            }
-        }
-
-        override fun onLongClick(v: View?): Boolean {
-            toggleChecked(adapterPosition)
-            return super.onLongClick(v)
-        }
-    }
-
-    companion object {
-        val TAG: String = AlbumAdapter::class.java.simpleName
-    }
+	companion object {
+		val TAG: String = AlbumAdapter::class.java.simpleName
+	}
 }

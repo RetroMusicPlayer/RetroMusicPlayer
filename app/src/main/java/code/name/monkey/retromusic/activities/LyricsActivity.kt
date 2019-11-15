@@ -95,7 +95,13 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         appBarLayout.setBackgroundColor(primaryColor)
         toolbar.apply {
             setBackgroundColor(primaryColor)
-            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
+            navigationIcon = TintHelper.createTintedDrawable(
+                    ContextCompat.getDrawable(
+                            this@LyricsActivity,
+                            R.drawable.ic_keyboard_backspace_black_24dp
+                    ),
+                    ThemeStore.textColorSecondary(this@LyricsActivity)
+            )
             setSupportActionBar(toolbar)
         }
 
@@ -160,12 +166,17 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        val materialDialog = MaterialDialog(
+                this,
+                BottomSheet(LayoutMode.WRAP_CONTENT)
+        ).show {
             title(R.string.add_time_framed_lryics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
-            input(hint = getString(R.string.paste_lyrics_here),
+            input(
+                    hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
-                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            ) { _, input ->
                 LyricUtil.writeLrcToLoc(song.data, song.artistName, input.toString())
             }
             positiveButton(android.R.string.ok) {
@@ -189,12 +200,16 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             lyricsString!!
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        val materialDialog = MaterialDialog(
+                this, BottomSheet(LayoutMode.WRAP_CONTENT)
+        ).show {
             title(R.string.add_lyrics)
             negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
-            input(hint = getString(R.string.paste_lyrics_here),
+            input(
+                    hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
-                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
                 WriteTagsAsyncTask(this@LyricsActivity).execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null))
@@ -221,8 +236,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     }
 
     class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-        class Tabs(@StringRes val title: Int,
-                   val fragment: Fragment)
+        class Tabs(
+                @StringRes val title: Int,
+                val fragment: Fragment
+        )
 
         private var tabs = ArrayList<Tabs>()
 

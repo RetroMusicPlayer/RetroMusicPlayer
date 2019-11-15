@@ -6,9 +6,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import androidx.annotation.IntRange;
+
 import java.util.Arrays;
 
-import androidx.annotation.IntRange;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class DeviceInfo {
