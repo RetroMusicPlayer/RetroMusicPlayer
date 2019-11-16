@@ -26,8 +26,7 @@
 
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 
-        <!-- just in case-->
-        <item name="android:windowBackground">@color/md_red_500</item>
+
 
         <!-- necessary to find the overflow button later in the layout-->
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
@@ -49,8 +48,9 @@
         <item name="colorOnSecondary">@color/mi_text_color_secondary_dark</item>
 
         <item name="colorAccent">@color/md_deep_purple_A200</item>
-
-        <item name="android:colorBackground">@color/md_red_500</item>
+        <!-- just in case-->
+        <item name="android:windowBackground">@color/darkColorBackground</item>
+        <item name="android:colorBackground">@color/darkColorBackground</item>
         <item name="colorSurface">@color/darkColorSurface</item>
         <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
         <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>

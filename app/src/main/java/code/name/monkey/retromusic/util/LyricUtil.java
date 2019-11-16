@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.util;
 
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -101,7 +100,6 @@ public class LyricUtil {
     }
 
     public static String getLrcPath2(String title, String artist) {
-        Log.i("HEM", "getLrcPath2: " + title);
         if (!TextUtils.isEmpty(title)) {
             String x2;
             if (title.endsWith(".flac") || title.endsWith(".mogg") || title.endsWith(".alac") || title.endsWith(".aiff") || title.endsWith(".webv")) {
