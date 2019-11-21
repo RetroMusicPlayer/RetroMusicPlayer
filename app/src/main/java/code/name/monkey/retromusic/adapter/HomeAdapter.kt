@@ -4,6 +4,7 @@ import android.util.DisplayMetrics
 import android.view.*
 import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
@@ -34,9 +35,7 @@ class HomeAdapter(
 			else                        -> {
 				AlbumViewHolder(
 						LayoutInflater.from(activity).inflate(
-								R.layout.metal_section_recycler_view,
-								parent,
-								false
+								R.layout.metal_section_recycler_view, parent, false
 						)
 				)
 			}
@@ -46,7 +45,7 @@ class HomeAdapter(
 	override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 		println("ViewType ${getItemViewType(position)}")
 		when (getItemViewType(position)) {
-			RECENT_ALBUMS -> {
+			RECENT_ALBUMS  -> {
 				val viewHolder = holder as AlbumViewHolder
 				viewHolder.bindView(
 						list[position].arrayList.toAlbums(),
@@ -54,7 +53,7 @@ class HomeAdapter(
 						R.string.recent_added_albums
 				)
 			}
-			TOP_ALBUMS -> {
+			TOP_ALBUMS     -> {
 				val viewHolder = holder as AlbumViewHolder
 				viewHolder.bindView(
 						list[position].arrayList.toAlbums(),
@@ -70,7 +69,7 @@ class HomeAdapter(
 						R.string.recent_added_artists
 				)
 			}
-			TOP_ARTISTS -> {
+			TOP_ARTISTS    -> {
 				val viewHolder = holder as ArtistViewHolder
 
 				viewHolder.bindView(
@@ -79,7 +78,7 @@ class HomeAdapter(
 						R.string.most_played_artists
 				)
 			}
-			PLAYLISTS -> {
+			PLAYLISTS      -> {
 				val viewHolder = holder as PlaylistViewHolder
 				viewHolder.bindView(
 						list[position].arrayList.toPlaylist(),
@@ -135,10 +134,7 @@ class HomeAdapter(
 				recyclerView.apply {
 					show()
 					layoutManager = GridLayoutManager(
-							activity,
-							1,
-							GridLayoutManager.HORIZONTAL,
-							false
+							activity, 1, GridLayoutManager.HORIZONTAL, false
 					)
 					val artistAdapter = ArtistAdapter(
 							activity,
@@ -164,17 +160,10 @@ class HomeAdapter(
 					recyclerView.apply {
 						show()
 						val songAdapter = SongAdapter(
-								activity,
-								songs,
-								R.layout.item_album_card,
-								false,
-								null
+								activity, songs, R.layout.item_album_card, false, null
 						)
 						layoutManager = GridLayoutManager(
-								activity,
-								1,
-								GridLayoutManager.HORIZONTAL,
-								false
+								activity, 1, GridLayoutManager.HORIZONTAL, false
 						)
 						adapter = songAdapter
 
@@ -190,7 +179,7 @@ class HomeAdapter(
 	open inner class AbsHomeViewItem(itemView: View) : RecyclerView.ViewHolder(itemView) {
 		val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
 		val titleContainer: View = itemView.findViewById(R.id.titleContainer)
-		val title: MaterialTextView = itemView.findViewById(R.id.title)
+		val title: AppCompatTextView = itemView.findViewById(R.id.title)
 		val text: MaterialTextView = itemView.findViewById(R.id.text)
 	}
 }

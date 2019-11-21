@@ -16,7 +16,7 @@
         <shape
             android:dither="true"
             android:shape="ring"
-            android:thickness="4dp"
+            android:thickness="3dp"
             android:type="sweep"
             android:useLevel="false">
             <solid android:color="?colorOnSecondary" />
@@ -25,7 +25,7 @@
     <item android:id="@android:id/progress">
         <shape
             android:shape="ring"
-            android:thickness="4dp"
+            android:thickness="3dp"
             android:type="sweep"
             android:useLevel="true">
             <solid android:color="?colorAccent" />

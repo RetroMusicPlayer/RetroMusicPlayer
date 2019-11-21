@@ -39,10 +39,10 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextViewCaption"
+                android:visibility="gone"
                 tools:text="@tools:sample/full_names" />
         </LinearLayout>
 
