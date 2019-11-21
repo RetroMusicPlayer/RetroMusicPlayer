@@ -15,13 +15,17 @@
 package code.name.monkey.retromusic.views
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
+import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RippleUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
@@ -38,7 +42,11 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
-
+        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), null)
         setOnApplyWindowInsetsListener(null)
     }
+}
+
+private fun Int.addAlpha(): Int {
+    return ColorUtil.withAlpha(this, 0.12f)
 }

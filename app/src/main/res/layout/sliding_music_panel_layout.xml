@@ -53,6 +53,7 @@
         android:background="?colorSecondary"
         android:elevation="0dp"
         android:visibility="gone"
+        app:itemBackground="@drawable/bottom_navigation_item_background"
         app:itemIconTint="@drawable/bottom_navigation_item_colors"
         app:itemTextAppearanceActive="@style/BottomSheetItemTextAppearanceActive"
         app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearanceInactive"
