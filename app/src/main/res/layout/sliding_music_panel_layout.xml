@@ -59,6 +59,7 @@
         app:itemTextAppearanceInactive="@style/BottomSheetItemTextAppearanceInactive"
         app:itemTextColor="@drawable/bottom_navigation_item_colors"
         app:labelVisibilityMode="labeled"
+        app:itemHorizontalTranslationEnabled="false"
         app:menu="@menu/bottom_navigation_main"
         tools:layout_height="56dp" />
 
