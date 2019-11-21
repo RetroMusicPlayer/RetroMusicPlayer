@@ -43,7 +43,7 @@ class App : MultiDexApplication() {
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
             ThemeStore.editTheme(this)
-                    .accentColorRes(R.color.md_green_A200)
+                    .accentColorRes(R.color.md_deep_purple_A200)
                     .coloredNavigationBar(true)
                     .commit()
         }

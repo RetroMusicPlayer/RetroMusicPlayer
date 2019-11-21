@@ -68,10 +68,12 @@
 
     <style name="BottomSheetItemTextAppearanceInactive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:fontFamily">@font/circular</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="BottomSheetItemTextAppearanceActive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:fontFamily">@font/circular</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Fab" parent="FabParent" />

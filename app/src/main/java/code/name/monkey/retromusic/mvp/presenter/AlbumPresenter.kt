@@ -50,10 +50,8 @@ interface AlbumsPresenter : Presenter<AlbumsView> {
 		override fun loadAlbums() {
 			launch {
 				when (val result = repository.allAlbums()) {
-					is Result.Success -> {
-						withContext(Dispatchers.Main) {
-							view?.albums(result.data)
-						}
+					is Result.Success -> withContext(Dispatchers.Main) {
+						view?.albums(result.data)
 					}
 					is Result.Error   -> withContext(Dispatchers.Main) { view?.showEmptyView() }
 				}
