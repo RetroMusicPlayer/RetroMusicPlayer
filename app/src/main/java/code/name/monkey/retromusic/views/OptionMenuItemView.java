@@ -55,14 +55,14 @@ public class OptionMenuItemView extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
 
         int accentColor = ThemeStore.Companion.accentColor(context);
-        setBackground(ContextCompat.getDrawable(context, R.drawable.menu_item_background));
+        int colorWithAlpha = ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f);
+
+        setBackground(ContextCompat.getDrawable(context, R.drawable.option_menu_background));
 
         setClickable(true);
         setFocusable(true);
 
         inflate(context, R.layout.item_option_menu, this);
-
-        setBackgroundTintList(ColorStateList.valueOf(ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f)));
 
         textView = findViewById(R.id.title);
         iconImageView = findViewById(R.id.icon);
@@ -83,8 +83,11 @@ public class OptionMenuItemView extends FrameLayout {
         super.setSelected(selected);
         if (selected) {
             int accentColor = ThemeStore.Companion.accentColor(getContext());
+            int colorWithAlpha = ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f);
             textView.setTextColor(accentColor);
             iconImageView.setImageTintList(ColorStateList.valueOf(accentColor));
+            setBackgroundTintList(ColorStateList.valueOf(colorWithAlpha));
         }
     }
 }
+

@@ -7,6 +7,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     android:paddingBottom="12dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -15,8 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:padding="8dp"
         app:srcCompat="@drawable/ic_volume_down_white_24dp"
         app:tint="?colorOnBackground" />
 
@@ -39,9 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="12dp"
+        android:padding="8dp"
         app:srcCompat="@drawable/ic_volume_up_white_24dp"
         app:tint="?colorOnBackground" />
 </LinearLayout>
