@@ -40,19 +40,4 @@
         </clip>
     </item>
 
-</layer-list><!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@android:id/background">
-            <shape>
-                <corners android:radius="8dp" />
-                <solid android:color="?android:colorButtonNormal" />
-            </shape>
-        </item>
-        <item android:id="@android:id/progress">
-            <clip>
-                <shape>
-                    <corners android:radius="8dp" />
-                    <solid android:color="@color/md_black_1000" />
-                </shape>
-            </clip>
-        </item>
-    </layer-list>-->
+</layer-list>
