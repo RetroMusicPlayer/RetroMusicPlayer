@@ -15,14 +15,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
+            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
-            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
             tools:subtitle="@tools:sample/full_names"
             tools:title="@tools:sample/full_names" />
 

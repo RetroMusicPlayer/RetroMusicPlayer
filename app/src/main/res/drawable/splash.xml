@@ -19,7 +19,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/retro" />
+            android:src="@drawable/ic_splash" />
     </item>
 
 </layer-list>

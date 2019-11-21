@@ -73,7 +73,7 @@
                         android:id="@+id/breadCrumbs"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/tab_height"
-                        android:background="?colorSecondary"
+                        app:cardBackgroundColor="?colorSurface"
                         android:paddingStart="60dp"
                         android:paddingEnd="8dp"
                         app:layout_collapseMode="pin" />

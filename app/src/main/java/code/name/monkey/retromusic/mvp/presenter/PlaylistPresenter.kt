@@ -16,9 +16,7 @@ package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.BaseView
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.mvp.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -57,9 +55,7 @@ interface PlaylistsPresenter : Presenter<PlaylistView> {
                     is Result.Success -> withContext(Dispatchers.Main) {
                         view?.playlists(result.data)
                     }
-                    is Result.Error -> withContext(Dispatchers.Main) {
-                        view?.showEmptyView()
-                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
                 }
             }
         }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<resources>
+
+    <style name="TextViewStyleIm" parent="android:Widget.Material.TextView">
+        <item name="android:hyphenationFrequency">none</item>
+    </style>
+
+    <style name="BottomSheetItemTextAppearanceInactive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:breakStrategy">simple</item>
+        <item name="android:hyphenationFrequency">none</item>
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+
+    <style name="BottomSheetItemTextAppearanceActive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:breakStrategy">simple</item>
+        <item name="android:hyphenationFrequency">none</item>
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+</resources>

@@ -2,8 +2,8 @@
 <resources>
     <string name="about_settings_summary">Team e pagine social</string>
 
-    <string name="accent_color">Colore dominante</string>
-    <string name="accent_color_desc">Il colore di accento del tema, verde acqua è il predefinito</string>
+    <string name="accent_color">Accento colore</string>
+    <string name="accent_color_desc">Il colore di accento del tema, il predefinito é verde acqua</string>
 
     <string name="action_about">Informazioni</string>
 
@@ -14,8 +14,10 @@
     <string name="action_clear_playing_queue">Cancella coda</string>
     <string name="action_clear_playlist">Svuota la playlist</string>
 
-    <string name="action_delete">Rimuovi</string>
-    <string name="action_delete_from_device">Cancella dal dispositivo</string>
+    <string name="action_cycle_repeat">Modalità ripetizione continua</string>
+
+    <string name="action_delete">Elimina</string>
+    <string name="action_delete_from_device">Elimina dal dispositivo</string>
 
     <string name="action_details">Dettagli</string>
 
@@ -46,7 +48,7 @@
 
     <string name="action_rename">Rinomina</string>
 
-    <string name="action_save_playing_queue">Salva coda</string>
+    <string name="action_save_playing_queue">Salva coda di riproduzione</string>
 
     <string name="action_scan">Scansiona</string>
 
@@ -69,13 +71,16 @@
 
     <string name="action_tag_editor">Modifica tag</string>
 
+    <string name="action_toggle_favorite">Seleziona preferito</string>
+    <string name="action_toggle_shuffle">Seleziona modalità di riproduzione casuale</string>
+
     <string name="adaptive">Adattivo</string>
 
     <string name="add_action">Aggiungi</string>
 
     <string name="add_lyrics">Aggiungi testi</string>
 
-    <string name="add_photo">Aggiungi immagine</string>
+    <string name="add_photo">Aggiungi foto</string>
 
     <string name="add_playlist_title">"Aggiungi alla playlist"</string>
 
@@ -87,18 +92,17 @@
 
     <string name="album">Album</string>
 
-    <string name="album_artist">Artista album</string>
+    <string name="album_artist">Artista dell\'album</string>
 
     <string name="album_or_artist_empty">Il titolo o l\'artista sono vuoti</string>
 
     <string name="albums">Album</string>
 
-    <!-- Android Auto -->
     <string name="always">Sempre</string>
 
-    <string name="app_share">Hey,  dai un\'occhiata a questo bel lettore musicale a:</string>
+    <string name="app_share">Hey, dai un\'occhiata a questo fantastico lettore musicale:
+https://play.google.com/store/apps/details?id=%s</string>
 
-    <!-- App Shortcuts -->
     <string name="app_shortcut_shuffle_all_short">Casuale</string>
     <string name="app_shortcut_top_tracks_short">Tracce migliori</string>
 
@@ -148,6 +152,8 @@
     <string name="bug_report_summary">Si è verificato un errore imprevisto. Mi dispiace, se continua a bloccarsi \"Cancella i dati\" dell\'app o inviami un\'email</string>
     <string name="bug_report_uploading">Caricando il rapporto su GitHub...</string>
     <string name="bug_report_use_account">Invia con l\'account GitHub</string>
+
+    <string name="buy_now">Acquista ora</string>
 
     <string name="cancel_current_timer">Annulla</string>
 
@@ -211,7 +217,7 @@
 
     <string name="currently_listening_to_x_by_x">Ascoltando attualmente %1$s di %2$s.</string>
 
-    <string name="dark_theme_name">Tipo buio</string>
+    <string name="dark_theme_name">Scuro</string>
 
     <string name="default_hint">Nessun testo</string>
 
@@ -220,7 +226,7 @@
 
     <string name="delete_playlists_title">Elimina playlist</string>
 
-    <string name="delete_song_title">Elimina canzone</string>
+    <string name="delete_song_title">Elimina brano</string>
     <string name="delete_song_x"><![CDATA[Eliminare il brano <b>%1$s</b>?]]></string>
 
     <string name="delete_songs_title">Elimina brani</string>
@@ -228,6 +234,8 @@
     <string name="delete_x_playlists"><![CDATA[Elimina <b>%1$d</b> playlist?]]></string>
     <string name="delete_x_songs"><![CDATA[Eliminare <b>%1$d</b> brani?]]></string>
     <string name="deleted_x_songs">Eliminati %1$d brani</string>
+
+    <string name="deleting_songs">Eliminando i brani</string>
 
     <string name="depth">Profondità</string>
 
@@ -264,6 +272,8 @@
 
     <string name="favorites">Preferiti</string>
 
+    <string name="favorites_songs">I tuoi brani preferiti</string>
+
     <string name="finish_last_song">Termina ultimo brano</string>
 
     <string name="fit">Adatta</string>
@@ -271,6 +281,8 @@
     <string name="flat">Piatto</string>
 
     <string name="folders">Cartelle</string>
+
+    <string name="follow_system">Sistema</string>
 
     <string name="for_you">Per te</string>
 
@@ -346,7 +358,7 @@
 
     <string name="licenses">Licenze</string>
 
-    <string name="light_theme_name">Bianco puro</string>
+    <string name="light_theme_name">Chiaro</string>
 
     <string name="listing_files">Elenco dei file</string>
 
@@ -363,6 +375,9 @@
     <string name="md_error_label">Errore</string>
 
     <string name="md_storage_perm_error">Errore di autorizzazione</string>
+
+    <string name="most_played_albums">Album più ascoltati</string>
+    <string name="most_played_artists">Artisti più ascoltati</string>
 
     <string name="my_name">Nome</string>
 
@@ -464,6 +479,8 @@
     <string name="pref_blur_amount_summary">Quantità di sfocatura applicata per i temi con sfocatura, minore è più veloce</string>
     <string name="pref_blur_amount_title">Quantità di sfocatura</string>
 
+    <string name="pref_dialog_corner_title">Angoli finestra</string>
+
     <string name="pref_filter_song_title">Filtro durata brano</string>
 
     <string name="pref_header_album">Stile album</string>
@@ -475,9 +492,9 @@
     <string name="pref_header_lockscreen">Schermata di blocco</string>
     <string name="pref_header_playlists">Playlist</string>
 
-    <string name="pref_keep_pause_on_zero_volume_summary">Mette in pausa la riproduzione a zero e riprende aumentando il volume. Attenzione: quando aumenti il volume la riproduzione inizia anche all\'esterno dell\'app</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Mette in pausa la riproduzione quando il volume scende a zero e riprende aumentando il volume. Funziona anche al di fuori dell\'app</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pausa a zero</string>
-    <string name="pref_keep_screen_on_summary">Ricorda che abilitando questa opzione la batteria potrebbe risentirne</string>
+    <string name="pref_keep_screen_on_summary">"Ricorda che abilitando questa opzione l'autonomia del tuo dispositivo potrebbe risentirne "</string>
     <string name="pref_keep_screen_on_title">Mantieni lo schermo acceso</string>
 
     <string name="pref_now_playing_screen_summary">Premi per aprire o scorri nella schermata di riproduzione</string>
@@ -495,6 +512,7 @@
     <string name="pref_summary_colored_app_shortcuts">Colora le scorciatoie dell\'app con il colore in rilievo. Ogni volta che cambi colore attiva questo perché abbia effetto</string>
     <string name="pref_summary_colored_navigation_bar">Colora la barra di navigazione con il colore primario</string>
     <string name="pref_summary_colored_notification">"Colora la notifica con il colore principale della copertina dell'album"</string>
+    <string name="pref_summary_desaturated_color">Secondo le linee guida del Material Design, in modalità scura i colori devono essere desaturati</string>
     <string name="pref_summary_dominant_color">Il colore dominante verrà selezionato dall\'album o dalla copertina dell\'artista</string>
     <string name="pref_summary_extra_controls">Aggiungi controlli extra nel mini player</string>
     <string name="pref_summary_gapless_playback">"Può causare problemi di riproduzione su alcuni dispositivi"</string>
@@ -525,6 +543,7 @@
     <string name="pref_title_classic_notification">Design classico per le notifiche</string>
     <string name="pref_title_colored_app">Colore adattivo</string>
     <string name="pref_title_colored_notification">Notifica colorata</string>
+    <string name="pref_title_desaturated_color">Colori desaturati</string>
     <string name="pref_title_extra_controls">Controlli extra</string>
     <string name="pref_title_gapless_playback">Riproduzione senza interruzioni</string>
     <string name="pref_title_general_theme">Tema generale</string>
@@ -564,6 +583,9 @@
     <string name="rate_app">Valuta l\'app</string>
 
     <string name="rate_on_google_play_summary">Adori quest\'app? Facci sapere sul Play Store come possiamo renderla ancora migliore</string>
+
+    <string name="recent_added_albums">Album aggiunti di recente</string>
+    <string name="recent_added_artists">Artisti aggiunti di recente</string>
 
     <string name="recent_albums">Album recenti</string>
 
@@ -606,6 +628,22 @@
     <string name="retro_equalizer">Equalizzatore di Retro Music</string>
 
     <string name="retro_music_pro">Retro Music Pro</string>
+
+    <string name="saf_delete_failed">Eliminazione file fallita: %s</string>
+
+    <!-- SAF -->
+    <string name="saf_error_uri">Impossibile ottenere l\'URI dal SAF</string>
+
+    <string name="saf_guide_slide1_description">Apri il pannello di navigazione</string>
+    <string name="saf_guide_slide1_description_before_o">Abilita \'Mostra scheda SD\' nel menu a comparsa</string>
+    <!-- SAF guide -->
+    <string name="saf_guide_slide1_title">%s richiede l\'accesso alla scheda SD</string>
+    <string name="saf_guide_slide2_description">Seleziona la directory principale della scheda SD</string>
+    <string name="saf_guide_slide2_title">Seleziona la tua scheda SD nel pannello di navigazione</string>
+    <string name="saf_guide_slide3_description">Non aprire alcuna sottocartella</string>
+    <string name="saf_guide_slide3_title">Tocca \'seleziona\' nella parte inferiore dello schermo</string>
+
+    <string name="saf_write_failed">Scrittura file fallita: %s</string>
 
     <string name="save">Salva</string>
 
@@ -775,5 +813,4 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Verrai reindirizzato al sito web dei problemi.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">I dati del tuo account vengono utilizzati solo per l\'autenticazione.</string>
-    <string name="label_more_from">More from %s</string>
 </resources>

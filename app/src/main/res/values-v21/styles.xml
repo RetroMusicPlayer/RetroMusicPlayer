@@ -18,12 +18,6 @@
         <item name="android:textViewStyle">@style/TextViewStyleIm</item>
     </style>
 
-    <style name="RetroTextViewStyle" parent="android:Widget.Material.TextView" />
-
-    <style name="TextViewStyleIm" parent="RetroTextViewStyle">
-        <item name="android:hyphenationFrequency">none</item>
-    </style>
-
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.Material.Notification" />
 
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.Material.Notification.Title" />
