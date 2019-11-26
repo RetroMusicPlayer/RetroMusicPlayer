@@ -46,7 +46,9 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
     ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter {
 
         private lateinit var album: Album
+
         private var disposable: CompositeDisposable = CompositeDisposable()
+
         override fun loadMore(artistId: Int) {
             disposable += repository.getArtistByIdFlowable(artistId)
                     .map {

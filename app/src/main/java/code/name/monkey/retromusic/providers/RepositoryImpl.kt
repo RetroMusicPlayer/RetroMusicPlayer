@@ -28,6 +28,7 @@ import code.name.monkey.retromusic.rest.model.LastFmArtist
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.io.IOException
 
 class RepositoryImpl(private val context: Context) : Repository {
 
@@ -98,14 +99,14 @@ class RepositoryImpl(private val context: Context) : Repository {
 
     override suspend fun allSongs(): Result<ArrayList<Song>> {
         return try {
-            val songs = SongLoader.getAllSongs(context);
+            val songs = SongLoader.getAllSongs(context)
             if (songs.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(songs);
+                Success(songs)
             }
         } catch (e: Exception) {
-            Error(e);
+            Error(e)
         }
     }
 
@@ -116,7 +117,7 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 PlaylistSongsLoader.getPlaylistSongList(context, playlist.id)
             }
-            Success(songs);
+            Success(songs)
         } catch (e: Exception) {
             Error(e)
         }
@@ -128,7 +129,7 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (songs.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(songs);
+                Success(songs)
             }
         } catch (e: Exception) {
             Error(e)
@@ -165,7 +166,7 @@ class RepositoryImpl(private val context: Context) : Repository {
                         albums,
                         HomeAdapter.RECENT_ALBUMS,
                         R.drawable.ic_album_white_24dp
-                ));
+                ))
             }
         } catch (e: Exception) {
             Error(e)
@@ -184,7 +185,7 @@ class RepositoryImpl(private val context: Context) : Repository {
                         albums,
                         HomeAdapter.TOP_ALBUMS,
                         R.drawable.ic_album_white_24dp
-                ));
+                ))
             }
         } catch (e: Exception) {
             Error(e)
@@ -204,7 +205,7 @@ class RepositoryImpl(private val context: Context) : Repository {
                         artists,
                         HomeAdapter.TOP_ARTISTS,
                         R.drawable.ic_artist_white_24dp
-                ));
+                ))
             }
         } catch (e: Exception) {
             Error(e)
@@ -223,23 +224,33 @@ class RepositoryImpl(private val context: Context) : Repository {
                         playlists,
                         HomeAdapter.PLAYLISTS,
                         R.drawable.ic_favorite_white_24dp
-                ));
+                ))
             }
         } catch (e: Exception) {
             Error(e)
         }
     }
 
-    override fun artistInfoFloable(
+    override suspend fun artistInfo(
             name: String,
             lang: String?,
             cache: String?
-    ): Observable<LastFmArtist> {
-        return LastFMRestClient(context).apiService.getArtistInfoFloable(name, lang, cache)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
+    ): Result<LastFmArtist> = safeApiCall(
+            call = {
+                Success(LastFMRestClient(context).apiService.artistInfo(name, lang, cache))
+            },
+            errorMessage = "Error"
 
+    )
+
+    override suspend fun artistById(artistId: Int): Result<Artist> {
+        return try {
+            val artist = ArtistLoader.getArtist(context, artistId)
+            return Success(artist)
+        } catch (e: Exception) {
+            Error(Throwable("Error loading artist"))
+        }
+    }
 
     override fun getSongFlowable(id: Int): Observable<Song> {
         return SongLoader.getSongFlowable(context, id)
@@ -342,4 +353,10 @@ class RepositoryImpl(private val context: Context) : Repository {
     }
 
 
+}
+
+suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String): Result<T> = try {
+    call.invoke()
+} catch (e: Exception) {
+    Result.Error(IOException(errorMessage, e))
 }

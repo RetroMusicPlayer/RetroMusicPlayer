@@ -14,16 +14,17 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 import java.util.*
 import javax.inject.Inject
-
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
@@ -38,38 +39,48 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
 
     fun loadArtist(artistId: Int)
 
-    fun loadBiography(name: String,
-                      lang: String? = Locale.getDefault().language,
-                      cache: String?)
+    fun loadBiography(
+            name: String, lang: String? = Locale.getDefault().language, cache: String?
+    )
 
     class ArtistDetailsPresenterImpl @Inject constructor(
             private val repository: Repository
-    ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter {
+    ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter, CoroutineScope {
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-        override fun loadBiography(name: String,
-                                   lang: String?,
-                                   cache: String?) {
-            disposable += repository.artistInfoFloable(name, lang, cache)
-                    .subscribe {
-                        view?.artistInfo(it)
+        private val job = Job()
+
+        override fun loadBiography(name: String, lang: String?, cache: String?) {
+            launch {
+                when (val result = repository.artistInfo(name, lang, cache)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artistInfo(result.data)
                     }
+                    is Result.Error -> withContext(Dispatchers.Main) {
+
+                    }
+                }
+            }
         }
 
-        private var disposable = CompositeDisposable()
-
         override fun loadArtist(artistId: Int) {
-            disposable += repository.getArtistByIdFlowable(artistId)
-                    .doOnComplete {
+            launch {
+                when (val result = repository.artistById(artistId)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artist(result.data)
                         view?.complete()
                     }
-                    .subscribe({
-                        view?.artist(it)
-                    }, { t -> println(t) })
+                    is Result.Error -> withContext(Dispatchers.Main) {
+                        view?.showEmptyView()
+                    }
+                }
+            }
         }
 
         override fun detachView() {
             super.detachView()
-            disposable.dispose()
+            job.cancel()
         }
     }
 }

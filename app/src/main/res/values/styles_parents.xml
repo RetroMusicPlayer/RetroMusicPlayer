@@ -169,7 +169,7 @@
     </style>
 
     <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">24dp</item>
+        <item name="cornerRadius">8dp</item>
         <item name="android:textAppearance">@style/TextViewNormal</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>

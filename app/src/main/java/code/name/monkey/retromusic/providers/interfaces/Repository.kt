@@ -51,6 +51,10 @@ interface Repository {
 
     suspend fun favoritePlaylist(): Result<Home>
 
+    suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
+
+    suspend fun artistById(artistId: Int): Result<Artist>
+
     val allSongsFlowable: Observable<ArrayList<Song>>
 
     val suggestionSongsFlowable: Observable<ArrayList<Song>>
@@ -91,7 +95,4 @@ interface Repository {
     val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
 
 
-    fun artistInfoFloable(name: String,
-                          lang: String?,
-                          cache: String?): Observable<LastFmArtist>
 }
