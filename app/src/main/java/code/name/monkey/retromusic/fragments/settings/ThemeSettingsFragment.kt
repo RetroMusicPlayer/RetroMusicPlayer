@@ -63,6 +63,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
 
         accentColorPref.setOnPreferenceClickListener {
             MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
                 colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
@@ -77,7 +78,6 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         val blackTheme: ATESwitchPreference? = findPreference("black_theme")
         blackTheme?.setOnPreferenceChangeListener { _, _ ->
             ThemeStore.markChanged(requireContext())
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()

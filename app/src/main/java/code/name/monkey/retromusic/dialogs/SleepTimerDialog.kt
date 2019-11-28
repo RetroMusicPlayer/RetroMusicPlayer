@@ -28,6 +28,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
@@ -109,7 +110,7 @@ class SleepTimerDialog : DialogFragment() {
         shouldFinishLastSong = materialDialog.getCustomView().findViewById(R.id.shouldFinishLastSong)
         seekBar = materialDialog.getCustomView().findViewById(R.id.seekBar)
         timerDisplay = materialDialog.getCustomView().findViewById(R.id.timerDisplay)
-
+        TintHelper.setTintAuto(shouldFinishLastSong, ThemeStore.accentColor(requireContext()), false)
 
         val finishMusic = PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic
         shouldFinishLastSong.isChecked = finishMusic
@@ -119,7 +120,7 @@ class SleepTimerDialog : DialogFragment() {
         updateTimeDisplayTime()
         seekBar.progress = seekArcProgress
 
-        setProgressBarColor(ThemeStore.accentColor(context!!))
+        setProgressBarColor(ThemeStore.accentColor(requireContext()))
 
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
@@ -181,6 +182,7 @@ class SleepTimerDialog : DialogFragment() {
             updateCancelButton()
         }
     }
+
     private fun setProgressBarColor(dark: Int) {
         ViewUtil.setProgressDrawable(progressSlider = seekBar, newColor = dark)
     }
