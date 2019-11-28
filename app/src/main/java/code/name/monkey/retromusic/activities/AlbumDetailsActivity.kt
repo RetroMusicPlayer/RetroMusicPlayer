@@ -291,6 +291,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
     }
 
+    override fun onBackPressed() {
+        if (cab != null && cab!!.isActive) {
+            cab?.finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     companion object {
 
         const val EXTRA_ALBUM_ID = "extra_album_id"

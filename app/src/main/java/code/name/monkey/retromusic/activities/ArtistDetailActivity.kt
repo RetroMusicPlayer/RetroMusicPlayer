@@ -311,6 +311,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         }
     }
 
+    override fun onBackPressed() {
+        if (cab != null && cab!!.isActive) {
+            cab?.finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     companion object {
 
         const val EXTRA_ARTIST_ID = "extra_artist_id"
