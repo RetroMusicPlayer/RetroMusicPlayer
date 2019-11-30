@@ -84,6 +84,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
                 ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             return MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 title(R.string.md_error_label)
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 message(R.string.md_storage_perm_error)
                 positiveButton(android.R.string.ok)
             }
@@ -141,6 +142,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         val dialog = dialog as MaterialDialog?
 
         dialog?.apply {
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             setTitle(parentFolder!!.absolutePath)
             listItems(items = contentsArray()) { _, index, _ ->
                 onSelection(index)
