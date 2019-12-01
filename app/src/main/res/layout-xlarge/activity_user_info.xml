@@ -9,6 +9,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:elevation="0dp"
         app:elevation="0dp">
 
@@ -64,8 +65,8 @@
                         android:layout_gravity="center"
                         android:background="?roundSelector"
                         android:padding="16dp"
-                        app:tint="@color/md_white_1000"
-                        app:srcCompat="@drawable/ic_add_photo_white_24dp" />
+                        app:srcCompat="@drawable/ic_add_photo_white_24dp"
+                        app:tint="@color/md_white_1000" />
 
                     <FrameLayout
                         android:layout_width="wrap_content"

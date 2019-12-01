@@ -1,6 +1,6 @@
 package code.name.monkey.appthemehelper.common;
 
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Color;
 import android.view.Menu;
 
 import androidx.annotation.Nullable;
@@ -15,13 +15,11 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 public class ATHToolbarActivity extends ATHActivity {
     private Toolbar toolbar;
 
-    public static int getToolbarBackgroundColor(Toolbar toolbar) {
+    public static int getToolbarBackgroundColor(@Nullable Toolbar toolbar) {
         if (toolbar != null) {
-            if (toolbar.getBackground() instanceof ColorDrawable) {
-                return ((ColorDrawable) toolbar.getBackground()).getColor();
-            }
+            return ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), R.attr.colorSurface);
         }
-        return 0;
+        return Color.BLACK;
     }
 
     @Override

@@ -158,7 +158,6 @@
     <string name="error">Hata</string>
     <string name="faq">SSS</string>
     <string name="favorites">Gözdeler</string>
-    <string name="favorites_songs">Favori Şarkıların</string>
     <string name="finish_last_song">Son şarkıyı bitir</string>
     <string name="fit">Fit</string>
     <string name="flat">Düz</string>
@@ -216,8 +215,6 @@
     <string name="material">Materyal</string>
     <string name="md_error_label">Hata</string>
     <string name="md_storage_perm_error">İzin hatası</string>
-    <string name="most_played_albums">En çok çalınan albümler</string>
-    <string name="most_played_artists">En çok çalınan sanatçılar</string>
     <string name="my_name">İsim</string>
     <string name="my_top_tracks">Sık oynatılanlar</string>
     <string name="never">Asla</string>
@@ -361,8 +358,6 @@
     <string name="queue">Kuyruk</string>
     <string name="rate_app">Uygulamayı Değerlendir</string>
     <string name="rate_on_google_play_summary">Bu uygulamayı sevdin mi? Daha iyi bir gelişim için lütfen Google Play\'de nasıl daha iyi yapabileceğimizi bildir.</string>
-    <string name="recent_added_albums">Son eklenen albümler</string>
-    <string name="recent_added_artists">Son eklenen sanatçılar</string>
     <string name="recent_albums">Son albümler</string>
     <string name="recent_artists">Son sanatçılar</string>
     <string name="remove_action">Kaldır</string>

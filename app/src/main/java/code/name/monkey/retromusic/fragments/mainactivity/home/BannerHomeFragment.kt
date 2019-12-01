@@ -72,15 +72,13 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setStatusBarColorAuto(view)
         toolbar = view.findViewById(R.id.toolbar)
 
         bannerImage?.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        if (!PreferenceUtil.getInstance(requireContext()).isHomeBanner)
-            setStatusBarColorAuto(view)
 
         lastAdded.setOnClickListener {
             NavigationUtil.goToPlaylistNew(requireActivity(), LastAddedPlaylist(requireActivity()))
@@ -127,7 +125,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun setupToolbar() {
         toolbar.apply {
-            setBackgroundColor(toolbarColor())
+            setBackgroundColor(RetroColorUtil.toolbarColor(mainActivity))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
                 val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))

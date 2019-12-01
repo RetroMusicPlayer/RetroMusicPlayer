@@ -8,54 +8,16 @@
     android:paddingBottom="12dp">
 
 
-    <code.name.monkey.retromusic.views.CircularImageView
-        android:id="@+id/userImage"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:civ_border="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:ellipsize="end"
-        android:text="@string/welcome"
-        android:textColor="?colorOnBackground"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
-        app:layout_constraintTop_toTopOf="@+id/userImage" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/titleWelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:padding="0dp"
-        android:textAppearance="@style/TextViewHeadline5"
-        android:textColor="?colorOnPrimary"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/userImage"
-        app:layout_constraintStart_toEndOf="@+id/userImage"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        tools:text="@string/app_name" />
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/history"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintEnd_toStartOf="@+id/lastAdded"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleWelcome">
+        app:layout_constraintTop_toTopOf="parent">
 
         <code.name.monkey.retromusic.views.ColorIconsImageView
             android:id="@+id/v1"
@@ -80,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v1"
-            tools:text="Hemanth savarala kumar dai" />
+            tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -117,7 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v2"
-            tools:text="Hemanth savarala" />
+            tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,7 +116,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v3"
-            tools:text="Hemanth savarala" />
+            tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -191,7 +153,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/v4"
-            tools:text="Hemanth savarala" />
+            tools:text="@tools:sample/lorem" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

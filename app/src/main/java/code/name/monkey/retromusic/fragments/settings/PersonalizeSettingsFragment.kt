@@ -36,7 +36,6 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnS
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
-        addPreferencesFromResource(R.xml.pref_lockscreen)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

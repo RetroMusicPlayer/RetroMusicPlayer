@@ -60,7 +60,7 @@
         android:layout_gravity="fill_vertical"
         android:layout_marginStart="128dp"
         android:layout_marginEnd="128dp"
-        android:background="@drawable/bg_bottom_sheet_dialog_fragment"
+        android:background="?attr/colorSurface"
         android:fillViewport="true"
         android:overScrollMode="never"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">

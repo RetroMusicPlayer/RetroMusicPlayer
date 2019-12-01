@@ -91,11 +91,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         if (statusBar != null) {
             when {
                 VersionUtils.hasMarshmallow() -> window.statusBarColor = color
-                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(
-                        ColorUtil.darkenColor(
-                                color
-                        )
-                )
+                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
                 else -> statusBar.setBackgroundColor(color)
             }
         } else {
@@ -104,12 +100,13 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
                 else -> window.statusBarColor = ColorUtil.darkenColor(color)
             }
         }
-        setLightStatusbarAuto(color)
+        setLightStatusbarAuto(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
     }
 
     fun setStatusbarColorAuto() {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         //setStatusbarColor(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
+        setLightStatusbarAuto(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
     }
 
     open fun setTaskDescriptionColor(@ColorInt color: Int) {
@@ -117,7 +114,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     fun setTaskDescriptionColorAuto() {
-        setTaskDescriptionColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        setTaskDescriptionColor(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
     }
 
     open fun setNavigationbarColor(color: Int) {
@@ -129,11 +126,11 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     open fun setNavigationBarColorPrimary() {
-        ATH.setNavigationbarColor(this, ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        ATH.setNavigationbarColor(this, ATHUtil.resolveColor(this, android.R.attr.windowBackground))
     }
 
     fun setNavigationbarColorAuto() {
-        setNavigationbarColor(ATHUtil.resolveColor(this, R.attr.colorSecondary))
+        setNavigationbarColor(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
     }
 
     open fun setLightStatusbar(enabled: Boolean) {

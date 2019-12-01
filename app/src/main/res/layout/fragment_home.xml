@@ -16,7 +16,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="?colorPrimary"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -35,7 +34,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?colorPrimary"
+            android:background="@android:color/transparent"
             app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView

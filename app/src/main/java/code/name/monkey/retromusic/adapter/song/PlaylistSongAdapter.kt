@@ -1,18 +1,14 @@
 package code.name.monkey.retromusic.adapter.song
 
 import android.app.ActivityOptions
-import android.content.res.ColorStateList
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
 import com.google.android.material.button.MaterialButton
 import java.util.*
 
@@ -33,30 +29,18 @@ open class PlaylistSongAdapter(
     }
 
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
-
         if (holder.itemViewType == OFFSET_ITEM) {
-
-            val buttonColor = RetroColorUtil.toolbarColor(activity)
-            val textColor = MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(buttonColor))
             val viewHolder = holder as ViewHolder
-
             viewHolder.playAction?.let {
-                it.backgroundTintList = ColorStateList.valueOf(buttonColor)
-                it.setTextColor(textColor)
-                it.iconTint = ColorStateList.valueOf(textColor)
                 it.setOnClickListener {
                     MusicPlayerRemote.openQueue(dataSet, 0, true)
                 }
             }
             viewHolder.shuffleAction?.let {
-                it.backgroundTintList = ColorStateList.valueOf(buttonColor)
-                it.setTextColor(textColor)
-                it.iconTint = ColorStateList.valueOf(textColor)
                 it.setOnClickListener {
                     MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
                 }
             }
-
         } else {
             super.onBindViewHolder(holder, position - 1)
         }

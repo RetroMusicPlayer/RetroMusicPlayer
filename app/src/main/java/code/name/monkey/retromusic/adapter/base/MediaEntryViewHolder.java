@@ -93,7 +93,7 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
         playSongs = itemView.findViewById(R.id.playSongs);
 
         if (imageContainerCard != null) {
-            imageContainerCard.setCardBackgroundColor(ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorPrimary));
+            imageContainerCard.setCardBackgroundColor(ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorSurface));
         }
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);

@@ -4,10 +4,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ShareCompat
-import androidx.recyclerview.widget.*
-import code.name.monkey.appthemehelper.util.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
@@ -20,9 +22,12 @@ import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.model.Contributor
-import code.name.monkey.retromusic.util.*
-import com.afollestad.materialdialogs.*
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
@@ -62,11 +67,11 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 		setNavigationBarColorPrimary()
 		setLightNavigationBar(true)
 
+
 		loadContributors()
 		setSupportActionBar(toolbar)
 		toolbar.apply {
-			setTitleTextColor(ATHUtil.resolveColor(this@AboutActivity, R.attr.colorOnPrimary))
-			setBackgroundColor(ATHUtil.resolveColor(this@AboutActivity, R.attr.colorPrimary))
+			setBackgroundColor(surfaceColor(context))
 			setNavigationOnClickListener { onBackPressed() }
 			ToolbarContentTintHelper.colorBackButton(toolbar)
 		}

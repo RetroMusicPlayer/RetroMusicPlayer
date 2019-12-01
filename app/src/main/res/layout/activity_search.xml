@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?colorPrimary"
+        android:background="@android:color/transparent"
         android:fitsSystemWindows="true"
         app:liftOnScroll="true">
 
@@ -77,9 +78,9 @@
                         android:layout_height="wrap_content"
                         android:background="?roundSelector"
                         android:padding="12dp"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_close_white_24dp"
                         app:tint="?colorOnSurface"
-                        android:visibility="gone"
                         tools:visibility="visible" />
                 </FrameLayout>
             </LinearLayout>

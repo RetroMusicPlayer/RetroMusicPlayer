@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -140,7 +141,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundTintList(ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));

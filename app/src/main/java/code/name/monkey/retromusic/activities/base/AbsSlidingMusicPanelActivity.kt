@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
@@ -35,6 +34,7 @@ import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
@@ -114,13 +114,11 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     override fun onDestroy() {
         super.onDestroy()
         bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallbackList)
-        if (navigationBarColorAnimator != null) navigationBarColorAnimator!!.cancel() // just in case
+        if (navigationBarColorAnimator != null) navigationBarColorAnimator?.cancel() // just in case
     }
 
     protected fun wrapSlidingMusicPanel(@LayoutRes resId: Int): View {
-        @SuppressLint("InflateParams") val slidingMusicPanelLayout = layoutInflater.inflate(
-                R.layout.sliding_music_panel_layout, null
-        )
+        val slidingMusicPanelLayout = layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
         val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
         layoutInflater.inflate(resId, contentContainer)
         return slidingMusicPanelLayout
@@ -143,7 +141,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
 
         bottomNavigationView.translationY = progress * 500
-        bottomNavigationView.alpha = alpha
+        //bottomNavigationView.alpha = alpha
     }
 
     open fun onPanelCollapsed() {
@@ -296,13 +294,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
             } else {
-                super.setLightStatusbar(
-                        ColorUtil.isColorLight(
-                                ATHUtil.resolveColor(
-                                        this, R.attr.colorPrimary
-                                )
-                        )
-                )
+                super.setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, android.R.attr.windowBackground)))
                 super.setLightNavigationBar(true)
             }
         }
@@ -339,14 +331,15 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
     private fun updateTabs() {
         bottomNavigationView.menu.clear()
-        val currentTabs = PreferenceUtil.getInstance(this).libraryCategoryInfos
+        val currentTabs: List<CategoryInfo> = PreferenceUtil.getInstance(this).libraryCategoryInfos
         for (tab in currentTabs) {
             if (tab.visible) {
                 val menu = tab.category
-                bottomNavigationView.menu.add(
-                        0, menu.id, 0, menu.stringRes
-                ).setIcon(menu.icon)
+                bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes).setIcon(menu.icon)
             }
+        }
+        if (currentTabs.size <= 1) {
+            toggleBottomNavigationView(true)
         }
     }
 

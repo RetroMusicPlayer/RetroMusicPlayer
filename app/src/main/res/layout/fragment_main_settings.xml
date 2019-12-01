@@ -49,7 +49,6 @@
                     android:paddingEnd="16dp"
                     android:text="@string/retro_music_pro"
                     android:textAppearance="@style/TextViewSubtitle1"
-                    android:textColor="?colorOnPrimary"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@id/diamondIcon" />
 
@@ -83,6 +82,7 @@
                     android:textAllCaps="false"
                     android:textColor="?colorAccent"
                     android:textStyle="bold"
+                    app:backgroundTint="?attr/colorSurface"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +122,6 @@
                     android:singleLine="true"
                     android:text="@string/general_settings_title"
                     android:textAppearance="@style/TextViewSubtitle1"
-                    android:textColor="?colorOnPrimary"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView

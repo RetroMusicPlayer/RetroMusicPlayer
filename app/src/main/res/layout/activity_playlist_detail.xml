@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     tools:ignore="UnusedAttribute">
 
@@ -20,9 +21,11 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
-            android:background="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp"
             app:liftOnScroll="true">
 
             <FrameLayout
@@ -33,7 +36,6 @@
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
-                    android:background="?attr/colorPrimary"
                     app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -49,6 +51,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:clipToPadding="false"
             android:scrollbars="none"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />

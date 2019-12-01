@@ -20,6 +20,7 @@
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">

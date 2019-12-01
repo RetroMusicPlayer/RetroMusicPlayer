@@ -48,44 +48,23 @@ class HomeAdapter(
         when (getItemViewType(position)) {
             RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(
-                        list[position].arrayList.toAlbums(),
-                        R.string.recent_albums,
-                        R.string.recent_added_albums
-                )
+                viewHolder.bindView(list[position].arrayList.toAlbums(), R.string.recent_albums)
             }
             TOP_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
-                viewHolder.bindView(
-                        list[position].arrayList.toAlbums(),
-                        R.string.top_albums,
-                        R.string.most_played_albums
-                )
+                viewHolder.bindView(list[position].arrayList.toAlbums(), R.string.top_albums)
             }
             RECENT_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-                viewHolder.bindView(
-                        list[position].arrayList.toArtists(),
-                        R.string.recent_artists,
-                        R.string.recent_added_artists
-                )
+                viewHolder.bindView(list[position].arrayList.toArtists(), R.string.recent_artists)
             }
             TOP_ARTISTS -> {
                 val viewHolder = holder as ArtistViewHolder
-
-                viewHolder.bindView(
-                        list[position].arrayList.toArtists(),
-                        R.string.top_artists,
-                        R.string.most_played_artists
-                )
+                viewHolder.bindView(list[position].arrayList.toArtists(), R.string.top_artists)
             }
             PLAYLISTS -> {
                 val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(
-                        list[position].arrayList.toPlaylist(),
-                        R.string.favorites,
-                        R.string.favorites_songs
-                )
+                viewHolder.bindView(list[position].arrayList.toPlaylist(), R.string.favorites)
             }
         }
     }
@@ -114,7 +93,7 @@ class HomeAdapter(
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(list: ArrayList<Album>, titleRes: Int, subtitleRes: Int) {
+        fun bindView(list: ArrayList<Album>, titleRes: Int) {
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
@@ -126,7 +105,7 @@ class HomeAdapter(
     }
 
     inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(list: ArrayList<Artist>, titleRes: Int, subtitleRes: Int) {
+        fun bindView(list: ArrayList<Artist>, titleRes: Int) {
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
@@ -148,7 +127,7 @@ class HomeAdapter(
     }
 
     private inner class PlaylistViewHolder(view: View) : AbsHomeViewItem(view) {
-        fun bindView(arrayList: ArrayList<Playlist>, titleRes: Int, subtitleRes: Int) {
+        fun bindView(arrayList: ArrayList<Playlist>, titleRes: Int) {
             if (arrayList.isNotEmpty()) {
                 val songs = PlaylistSongsLoader.getPlaylistSongList(activity, arrayList[0])
                 if (songs.isNotEmpty()) {

@@ -5,7 +5,8 @@ import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
@@ -25,8 +26,7 @@ class SettingsActivity : AbsBaseActivity() {
         setupToolbar()
 
         if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment())
-                    .commit()
+            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment()).commit()
         }
     }
 
@@ -34,13 +34,10 @@ class SettingsActivity : AbsBaseActivity() {
         setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
-            setTitleTextColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorOnPrimary))
-            setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
+            setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorSurface))
             setNavigationOnClickListener { onBackPressed() }
             ToolbarContentTintHelper.colorBackButton(toolbar)
         }
-        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorPrimary))
-
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {

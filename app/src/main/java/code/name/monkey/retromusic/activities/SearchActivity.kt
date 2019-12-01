@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
@@ -125,7 +124,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
     private fun setUpToolBar() {
         title = null
-        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     private fun search(query: String) {

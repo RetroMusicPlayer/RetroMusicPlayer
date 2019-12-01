@@ -27,7 +27,7 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="8dp" />
-                    <solid android:color="?colorPrimary" />
+                    <solid android:color="?attr/colorControlHighlight" />
                 </shape>
             </item>
         </ripple>

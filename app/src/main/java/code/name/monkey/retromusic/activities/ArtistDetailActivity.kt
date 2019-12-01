@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -39,6 +37,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
+import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -74,11 +73,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -240,7 +238,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        status_bar.setBackgroundColor(toolbarColor)
+        toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

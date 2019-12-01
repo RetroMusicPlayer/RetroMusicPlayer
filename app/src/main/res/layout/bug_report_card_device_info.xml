@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?cardBackgroundColor"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
@@ -33,7 +32,7 @@
             android:padding="16dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="?android:textColorSecondary"
-            tools:text="@string/donate_summary" />
+            tools:text="@tools:sample/lorem/random" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

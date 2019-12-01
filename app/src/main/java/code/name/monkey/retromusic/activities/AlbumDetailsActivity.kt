@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
@@ -44,6 +43,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
+import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -80,11 +80,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -191,18 +190,20 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ThemeStore.accentColor(this)
 
-        songTitle.setTextColor(ThemeStore.accentColor(this))
-        moreTitle.setTextColor(ThemeStore.accentColor(this))
+        songTitle.setTextColor(themeColor)
+        moreTitle.setTextColor(themeColor)
 
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color
         else
-            ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
+            ATHUtil.resolveColor(this, R.attr.colorControlNormal)
 
-        //MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
-        //MaterialUtil.setTint(button = playAction, color = buttonColor)
+        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
+        MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        status_bar.setBackgroundColor(toolbarColor)
+        toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

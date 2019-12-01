@@ -53,7 +53,7 @@ class ColorIconsImageView : AppCompatImageView {
         if (ATHUtil.isWindowBackgroundDark(context) && PreferenceUtil.getInstance(context).desaturatedColor()) {
             val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)
             backgroundTintList = ColorStateList.valueOf(desaturatedColor)
-            imageTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorPrimary))
+            imageTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context,  R.attr.colorSurface))
         } else {
             backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
             imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.75f))

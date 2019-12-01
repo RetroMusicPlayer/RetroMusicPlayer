@@ -33,7 +33,7 @@
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewNormal"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 </LinearLayout>

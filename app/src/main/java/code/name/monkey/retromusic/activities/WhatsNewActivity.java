@@ -60,7 +60,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
 
-        int primaryColor = INSTANCE.resolveColor(this, R.attr.colorPrimary);
+        int primaryColor = INSTANCE.resolveColor(this, R.attr.colorSurface);
         toolbar.setBackgroundColor(primaryColor);
         appBarLayout.setBackgroundColor(primaryColor);
         //setSupportActionBar(toolbar);
@@ -79,11 +79,10 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorPrimary, Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, android.R.attr.windowBackground, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()
-                    .replace("{style-placeholder}",
-                            String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
+                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
                     .replace("{link-color}", colorToCSS(ThemeStore.Companion.accentColor(this)))
                     .replace("{link-color-active}", colorToCSS(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))));
 

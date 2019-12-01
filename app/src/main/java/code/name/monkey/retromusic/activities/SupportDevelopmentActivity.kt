@@ -2,20 +2,30 @@ package code.name.monkey.retromusic.activities
 
 import android.content.Intent
 import android.graphics.Paint
-import android.os.*
+import android.os.AsyncTask
+import android.os.Bundle
 import android.util.Log
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
-import code.name.monkey.retromusic.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.extensions.applyToolbar
-import com.anjlab.android.iab.v3.*
+import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.SkuDetails
+import com.anjlab.android.iab.v3.TransactionDetails
 import kotlinx.android.synthetic.main.activity_donation.*
 import java.lang.ref.WeakReference
 import java.util.*
@@ -61,8 +71,6 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 	}
 
 	private fun setupToolbar() {
-		val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
-		appBarLayout.setBackgroundColor(primaryColor)
 		applyToolbar(toolbar)
 	}
 

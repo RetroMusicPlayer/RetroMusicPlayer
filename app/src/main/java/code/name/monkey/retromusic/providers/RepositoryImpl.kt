@@ -144,7 +144,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(0,
                         R.string.recent_artists,
-                        R.string.recent_added_artists,
                         artists,
                         HomeAdapter.RECENT_ARTISTS,
                         R.drawable.ic_artist_white_24dp))
@@ -162,7 +161,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(1,
                         R.string.recent_albums,
-                        R.string.recent_added_albums,
                         albums,
                         HomeAdapter.RECENT_ALBUMS,
                         R.drawable.ic_album_white_24dp
@@ -181,7 +179,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(3,
                         R.string.top_albums,
-                        R.string.most_played_albums,
                         albums,
                         HomeAdapter.TOP_ALBUMS,
                         R.drawable.ic_album_white_24dp
@@ -201,7 +198,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(2,
                         R.string.top_artists,
-                        R.string.most_played_artists,
                         artists,
                         HomeAdapter.TOP_ARTISTS,
                         R.drawable.ic_artist_white_24dp
@@ -220,7 +216,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(4,
                         R.string.favorites,
-                        R.string.favorites_songs,
                         playlists,
                         HomeAdapter.PLAYLISTS,
                         R.drawable.ic_favorite_white_24dp

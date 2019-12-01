@@ -27,42 +27,36 @@
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <include
+                layout="@layout/bug_report_card_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="vertical">
+                android:layout_marginBottom="8dp" />
 
-                <include
-                    layout="@layout/bug_report_card_report"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp" />
+            <include
+                layout="@layout/bug_report_card_device_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-                <include
-                    layout="@layout/bug_report_card_device_info"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_margin="16dp" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_margin="16dp" />
+        </LinearLayout>
 
-            </LinearLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/sendFab"
-                style="@style/Fab"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                app:srcCompat="@drawable/ic_send_white_24dp" />
-
-        </FrameLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/sendFab"
+        style="@style/Fab"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/ic_send_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

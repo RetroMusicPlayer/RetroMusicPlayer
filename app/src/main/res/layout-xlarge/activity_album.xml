@@ -2,9 +2,9 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:transitionName="@string/transition_album_art">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -60,6 +60,7 @@
         android:layout_gravity="fill_vertical"
         android:layout_marginStart="96dp"
         android:layout_marginEnd="96dp"
+        android:background="?attr/colorSurface"
         android:fillViewport="true"
         android:overScrollMode="never"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">

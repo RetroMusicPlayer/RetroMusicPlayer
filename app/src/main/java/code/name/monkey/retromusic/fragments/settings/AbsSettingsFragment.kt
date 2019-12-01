@@ -63,7 +63,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
+        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)

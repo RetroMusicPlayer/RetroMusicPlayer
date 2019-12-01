@@ -41,6 +41,6 @@
         android:layout_weight="1"
         android:text="@string/folders"
         android:textAppearance="@style/TextViewNormal"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="16sp" />
 </LinearLayout>

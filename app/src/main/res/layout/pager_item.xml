@@ -42,9 +42,7 @@
         android:paddingStart="16dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="@style/TextViewNormal"
-        android:textColor="?colorOnBackground"
+        android:paddingBottom="4dp" 
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 
