@@ -246,7 +246,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_tag_editor -> {
                 val intent = Intent(this, AlbumTagEditorActivity::class.java)
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
-                startActivityForResult(intent, TAG_EDITOR_REQUEST)
+                val options = ActivityOptions.makeSceneTransitionAnimation(this, image, getString(R.string.transition_album_art))
+                startActivityForResult(intent, TAG_EDITOR_REQUEST, options.toBundle())
                 return true
             }
             /*Sort*/
