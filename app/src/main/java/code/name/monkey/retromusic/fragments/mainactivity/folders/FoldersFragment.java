@@ -221,7 +221,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setStatusbarColorAuto(view);
+        setStatusBarColorAuto(view);
         setUpAppbarColor();
         setUpBreadCrumbs();
         setUpRecyclerView();

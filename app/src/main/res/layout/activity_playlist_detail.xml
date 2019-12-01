@@ -20,6 +20,7 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
+            android:background="?attr/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:liftOnScroll="true">
@@ -32,6 +33,7 @@
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
+                    android:background="?attr/colorPrimary"
                     app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 

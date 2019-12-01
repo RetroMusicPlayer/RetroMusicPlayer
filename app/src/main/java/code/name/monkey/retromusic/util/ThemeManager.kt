@@ -15,7 +15,7 @@ object ThemeManager {
     @StyleRes
     fun getThemeResValue(context: Context): Int = when (PreferenceUtil.getInstance(context).generalThemeValue) {
         "light" -> R.style.Theme_RetroMusic_Light
-        "auto" -> if (isSystemDarkModeEnabled(context)) R.style.Theme_RetroMusic else R.style.Theme_RetroMusic_Light
+        "auto" ->  R.style.Theme_RetroMusic_FollowSystem
         "black" -> R.style.Theme_RetroMusic_Black
         else -> R.style.Theme_RetroMusic
         /**

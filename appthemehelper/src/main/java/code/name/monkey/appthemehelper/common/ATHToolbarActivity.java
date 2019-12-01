@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
 import code.name.monkey.appthemehelper.ATHActivity;
+import code.name.monkey.appthemehelper.R;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 
 

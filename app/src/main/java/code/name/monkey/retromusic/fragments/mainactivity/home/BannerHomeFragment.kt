@@ -80,7 +80,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
         if (!PreferenceUtil.getInstance(requireContext()).isHomeBanner)
-            setStatusbarColorAuto(view)
+            setStatusBarColorAuto(view)
 
         lastAdded.setOnClickListener {
             NavigationUtil.goToPlaylistNew(requireActivity(), LastAddedPlaylist(requireActivity()))

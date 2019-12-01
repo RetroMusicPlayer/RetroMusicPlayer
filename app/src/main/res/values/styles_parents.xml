@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="md_font_title">@font/circular</item>
+        <item name="md_font_body">@font/circular</item>
+        <item name="md_font_button">@font/circular</item>
+
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:fontFamily">@font/circular</item>
+
+        <item name="windowActionBarOverlay">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
+    </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
 
@@ -170,11 +190,13 @@
 
     <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">8dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textAppearance">@style/TextViewNormal</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="iconGravity">textStart</item>
-        <item name="backgroundTint">?colorSurface</item>
     </style>
 </resources>

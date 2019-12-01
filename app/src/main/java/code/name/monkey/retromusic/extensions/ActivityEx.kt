@@ -26,7 +26,6 @@ fun AppCompatActivity.applyToolbar(toolbar: Toolbar) {
         setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
         ToolbarContentTintHelper.colorBackButton(toolbar)
         setBackgroundColor(ATHUtil.resolveColor(this@applyToolbar, R.attr.colorPrimary))
-
     }
     setSupportActionBar(toolbar)
 }

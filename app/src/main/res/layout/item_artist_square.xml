@@ -33,7 +33,6 @@
                 android:maxLines="1"
                 android:padding="8dp"
                 android:textAppearance="@style/TextViewNormal"
-                android:textColor="?colorOnPrimary"
                 tools:text="@string/home" />
         </FrameLayout>
     </LinearLayout>

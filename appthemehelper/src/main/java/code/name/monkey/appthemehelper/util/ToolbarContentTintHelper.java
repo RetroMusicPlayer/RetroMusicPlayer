@@ -84,7 +84,7 @@ public final class ToolbarContentTintHelper {
     }
 
     public static void colorBackButton(@NonNull Toolbar toolbar) {
-        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(), R.attr.colorOnPrimary);
+        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(),  R.attr.colorControlNormal);
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);

@@ -108,7 +108,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setStatusbarColorAuto(view);
+        setStatusBarColorAuto(view);
         setupToolbar();
         inflateFragment();
     }
@@ -149,7 +149,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
+        //toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 
     private Fragment getCurrentFragment() {

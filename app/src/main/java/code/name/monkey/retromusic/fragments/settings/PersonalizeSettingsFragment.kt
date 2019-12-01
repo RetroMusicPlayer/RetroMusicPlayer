@@ -19,23 +19,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 
-class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun invalidateSettings() {
-        val cornerWindow: TwoStatePreference = findPreference("corner_window")!!
-        cornerWindow.setOnPreferenceChangeListener { _, newValue ->
-            if (newValue as Boolean && !App.isProVersion()) {
-                showProToastAndNavigate(activity!!.getString(R.string.pref_title_round_corners))
-                return@setOnPreferenceChangeListener false
-            }
-            requireActivity().recreate()
-            return@setOnPreferenceChangeListener true
-        }
+
         val toggleFullScreen: TwoStatePreference = findPreference("toggle_full_screen")!!
         toggleFullScreen.setOnPreferenceChangeListener { _, _ ->
             requireActivity().recreate()
@@ -45,7 +36,6 @@ class PersonaizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSh
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.pref_ui)
-        addPreferencesFromResource(R.xml.pref_window)
         addPreferencesFromResource(R.xml.pref_lockscreen)
     }
 

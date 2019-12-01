@@ -91,7 +91,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:textAppearance="@style/TextViewBody2"
-        android:textColor="?colorOnSecondary"
+        android:textColor="?attr/colorOnSecondary"
         app:layout_constraintBottom_toBottomOf="@+id/imageContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageContainer"

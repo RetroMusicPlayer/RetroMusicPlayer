@@ -37,7 +37,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?colorPrimary"
+            android:background="@android:color/transparent"
             app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
@@ -48,7 +48,6 @@
                 android:layout_marginTop="@dimen/toolbar_margin_vertical"
                 android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
                 android:layout_marginBottom="@dimen/toolbar_margin_vertical"
-                app:cardBackgroundColor="?colorSurface"
                 app:cardCornerRadius="8dp"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">

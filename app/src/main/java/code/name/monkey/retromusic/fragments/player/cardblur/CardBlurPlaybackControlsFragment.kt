@@ -14,24 +14,23 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_card_blur_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
-import kotlinx.android.synthetic.main.player_time.*
+
 
 class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

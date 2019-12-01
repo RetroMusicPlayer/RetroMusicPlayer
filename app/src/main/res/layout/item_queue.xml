@@ -85,7 +85,7 @@
             style="@style/OverFlowButton"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            app:tint="?colorOnBackground" />
+            app:tint="?attr/colorControlNormal" />
 
     </LinearLayout>
 </FrameLayout>

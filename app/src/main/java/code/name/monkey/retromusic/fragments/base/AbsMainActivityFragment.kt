@@ -26,11 +26,11 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
         mainActivity.setBottomBarVisibility(View.VISIBLE)
     }
 
-    private fun setStatusbarColor(view: View, color: Int) {
+    private fun setStatusBarColor(view: View, color: Int) {
         val statusBar = view.findViewById<View>(R.id.status_bar)
         if (statusBar != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                statusBar.setBackgroundColor(color)
+                //statusBar.setBackgroundColor(color)
                 mainActivity.setLightStatusbarAuto(color)
             } else {
                 statusBar.setBackgroundColor(color)
@@ -38,13 +38,13 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
         }
     }
 
-    fun setStatusbarColorAuto(view: View) {
-        val colorPrimary = ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)
+    fun setStatusBarColorAuto(view: View) {
+        val colorPrimary = ATHUtil.resolveColor(requireContext(), android.R.attr.windowBackground)
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         if (VersionUtils.hasMarshmallow()) {
-            setStatusbarColor(view, colorPrimary)
+            setStatusBarColor(view, colorPrimary)
         } else {
-            setStatusbarColor(view, ColorUtil.darkenColor(colorPrimary))
+            setStatusBarColor(view, ColorUtil.darkenColor(colorPrimary))
         }
     }
 

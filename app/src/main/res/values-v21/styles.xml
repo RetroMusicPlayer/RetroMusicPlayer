@@ -18,6 +18,12 @@
         <item name="android:textViewStyle">@style/TextViewStyleIm</item>
     </style>
 
+    <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:textViewStyle">@style/TextViewStyleIm</item>
+    </style>
+
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.Material.Notification" />
 
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.Material.Notification.Title" />

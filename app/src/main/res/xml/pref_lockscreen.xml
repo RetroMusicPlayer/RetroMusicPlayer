@@ -1,32 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
-        android:layout="@layout/preference_category_title"
-        android:title="@string/pref_header_lockscreen">
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="true"
-            android:key="album_art_on_lockscreen"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_album_art_on_lockscreen"
-            android:title="@string/pref_title_album_art_on_lockscreen"
-            app:enableCopying="true" />
 
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:dependency="album_art_on_lockscreen"
-            android:key="blurred_album_art"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_blurred_album_art"
-            android:title="@string/pref_title_blurred_album_art"
-            app:enableCopying="true" />
-
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="lock_screen"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_lock_screen"
-            android:title="@string/pref_title_lock_screen"
-            app:enableCopying="true" />
-    </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

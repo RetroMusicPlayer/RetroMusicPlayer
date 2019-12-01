@@ -240,8 +240,7 @@
         android:text="@string/save"
         app:cornerRadius="25dp"
         app:icon="@drawable/ic_save_white_24dp"
-        app:iconGravity="textStart"
-        tools:backgroundTint="@color/md_red_400" />
+        app:iconGravity="textStart" />
 
     <ProgressBar
         android:id="@+id/progressBar"

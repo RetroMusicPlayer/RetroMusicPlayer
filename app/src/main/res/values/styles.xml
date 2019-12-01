@@ -6,6 +6,8 @@
 
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black" />
 
+    <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive" />
+
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />
 
     <style name="Theme.RetroMusic.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title" />

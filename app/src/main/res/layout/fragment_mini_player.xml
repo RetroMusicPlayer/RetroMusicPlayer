@@ -5,7 +5,7 @@
     android:id="@+id/miniPlayerContent"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="?colorSecondary"
+    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true"
     tools:ignore="UnusedAttribute">
@@ -26,9 +26,8 @@
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
-            app:tint="?colorOnSecondary"
-            tools:ignore="ContentDescription"
-            tools:tint="?colorOnSurface" />
+            app:tint="?attr/colorControlNormal"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/miniPlayerTitle"
@@ -45,23 +44,13 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewNormal"
-            android:textColor="?colorOnSurface"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="@tools:sample/lorem/random" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/actionPrevious"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="?roundSelector"
-            android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
-            app:tint="?colorOnSecondary" />
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/miniPlayerPlayPauseButton"
@@ -71,7 +60,7 @@
                 android:background="?roundSelector"
                 android:scaleType="center"
                 app:srcCompat="@drawable/ic_pause_white_24dp"
-                app:tint="?colorOnSecondary"
+                app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription" />
 
             <ProgressBar
@@ -79,25 +68,12 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:rotation="270"
                 android:layout_gravity="center"
-                android:progressTint="?colorAccent"
                 android:indeterminate="false"
                 android:progressDrawable="@drawable/circle_progress"
+                android:rotation="270"
                 tools:progress="80" />
         </FrameLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/actionNext"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="?roundSelector"
-            android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_next_white_24dp"
-            app:tint="?colorOnSecondary"
-            tools:tint="?colorOnSecondary" />
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPlayingQueue"
@@ -107,10 +83,7 @@
             android:background="?roundSelector"
             android:padding="6dp"
             app:srcCompat="@drawable/ic_playlist_play_white_24dp"
-            app:tint="?colorOnSecondary"
-            tools:tint="?colorOnSecondary" />
+            app:tint="?attr/colorControlNormal" />
 
     </LinearLayout>
-
-
 </FrameLayout>

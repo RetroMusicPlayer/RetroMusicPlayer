@@ -1,5 +1,5 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/ate_control_normal_light">
+    android:color="?attr/colorOnSecondary">
 
     <item
         android:id="@android:id/mask"

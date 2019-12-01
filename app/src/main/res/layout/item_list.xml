@@ -19,7 +19,7 @@
         android:layout_gravity="center_vertical|start"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
-        app:tint="?colorOnBackground"
+        app:tint="?attr/colorControlNormal"
         tools:ignore="ContentDescription"
         tools:visibility="visible" />
 
@@ -80,7 +80,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textAppearance="@style/TextViewSubtitle1"
-            android:textColor="?colorOnPrimary"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Song name" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="?colorOnBackground"
+            android:textColor="?android:attr/textColorSecondary"
             tools:text="Song artist name " />
     </LinearLayout>
 
@@ -98,6 +98,6 @@
         style="@style/OverFlowButton"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        app:tint="?colorOnBackground" />
+        app:tint="?attr/colorControlNormal" />
 
 </LinearLayout>

@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
@@ -192,14 +191,16 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
         else ThemeStore.accentColor(this)
 
-        songTitle.setTextColor(themeColor)
-        moreTitle.setTextColor(themeColor)
+        songTitle.setTextColor(ThemeStore.accentColor(this))
+        moreTitle.setTextColor(ThemeStore.accentColor(this))
 
-        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
-        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color
+        else
+            ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
 
-        MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
-        MaterialUtil.setTint(button = playAction, color = buttonColor)
+        //MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
+        //MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
         setSupportActionBar(toolbar)
