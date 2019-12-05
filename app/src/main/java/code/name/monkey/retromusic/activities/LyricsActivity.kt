@@ -89,7 +89,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         setContentView(R.layout.activity_lyrics)
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
 
         applyToolbar(toolbar)
         fab.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))

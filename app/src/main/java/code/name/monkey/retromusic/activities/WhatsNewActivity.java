@@ -49,11 +49,11 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_whats_new);
-
         setStatusbarColorAuto();
-        setNavigationBarColorPrimary();
+        setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
 
         webView = findViewById(R.id.webView);

@@ -33,10 +33,11 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_playing_queue)
         setStatusbarColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 

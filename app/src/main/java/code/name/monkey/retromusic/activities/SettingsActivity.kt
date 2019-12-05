@@ -17,10 +17,11 @@ class SettingsActivity : AbsBaseActivity() {
     private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         setStatusbarColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
         setLightNavigationBar(true)
 
         setupToolbar()
@@ -31,13 +32,13 @@ class SettingsActivity : AbsBaseActivity() {
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
             setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorSurface))
             setNavigationOnClickListener { onBackPressed() }
             ToolbarContentTintHelper.colorBackButton(toolbar)
         }
+        setSupportActionBar(toolbar)
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {

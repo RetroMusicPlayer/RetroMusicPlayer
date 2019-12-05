@@ -27,7 +27,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 		setContentView(R.layout.activity_pro_version)
 		setDrawUnderStatusBar()
 		setStatusbarColorAuto()
-		setNavigationBarColorPrimary()
+		setNavigationbarColorAuto()
 		setTaskDescriptionColorAuto()
 		setLightNavigationBar(true)
 

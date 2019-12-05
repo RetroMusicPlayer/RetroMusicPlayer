@@ -9,15 +9,16 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:textAppearance="@style/TextViewHeadline6"
         android:textStyle="bold"
+        app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/lorem" />
 
     <code.name.monkey.retromusic.views.MetalRecyclerViewPager
         android:id="@+id/recyclerView"

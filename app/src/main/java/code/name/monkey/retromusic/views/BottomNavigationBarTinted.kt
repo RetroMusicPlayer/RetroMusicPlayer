@@ -42,7 +42,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
-        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), null)
+        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask))
         setOnApplyWindowInsetsListener(null)
         //itemRippleColor = ColorStateList.valueOf(accentColor)
         backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context, android.R.attr.windowBackground))

@@ -19,7 +19,6 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:cardUseCompatPadding="true"
-            app:strokeColor="?dividerColor"
             app:strokeWidth="1.5dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -69,7 +68,7 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
-                    android:background="?dividerColor"
+                    android:background="?attr/dividerHorizontal"
                     app:layout_constraintTop_toBottomOf="@id/text" />
 
                 <com.google.android.material.button.MaterialButton

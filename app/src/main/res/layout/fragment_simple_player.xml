@@ -8,6 +8,13 @@
     android:focusable="true"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <include layout="@layout/shadow_statusbar_toolbar" />
 
     <LinearLayout

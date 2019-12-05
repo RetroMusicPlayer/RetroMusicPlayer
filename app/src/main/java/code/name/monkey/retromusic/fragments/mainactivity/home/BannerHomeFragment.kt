@@ -1,12 +1,14 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.app.ActivityOptions
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
@@ -98,11 +100,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         setupToolbar()
 
-        userImage.setOnClickListener {
+        userImage?.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        titleWelcome.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
+        titleWelcome?.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         App.musicComponent.inject(this)
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
@@ -125,7 +127,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun setupToolbar() {
         toolbar.apply {
-            setBackgroundColor(RetroColorUtil.toolbarColor(mainActivity))
+            backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
                 val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))

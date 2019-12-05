@@ -34,7 +34,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
 		hideStatusBar()
 		setStatusbarColorAuto()
-		setNavigationBarColorPrimary()
+		setNavigationbarColorAuto()
 		setTaskDescriptionColorAuto()
 		setLightNavigationBar(true)
 

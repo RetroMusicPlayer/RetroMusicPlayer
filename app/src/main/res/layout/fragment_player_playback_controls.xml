@@ -42,7 +42,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -56,7 +56,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -101,7 +101,8 @@
         android:layout_gravity="center"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="1" android:paddingStart="16dp"
+        android:maxLines="1"
+        android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorSecondary"
@@ -205,9 +206,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:backgroundTint="@color/md_red_400"
+        tools:background="@color/md_red_400"
         tools:layout_height="52dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

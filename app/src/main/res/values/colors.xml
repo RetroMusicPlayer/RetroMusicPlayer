@@ -26,7 +26,7 @@
     <color name="blackColorOnPrimary">#ffffff</color>
     <color name="blackColorSecondary">#000000</color>
     <color name="blackColorBackground">#000000</color>
-    <color name="blackColorSurface">#17181a</color>
+    <color name="blackColorSurface">#000000</color>
 
     <color name="transparent">#00000000</color>
     <!-- card colors -->

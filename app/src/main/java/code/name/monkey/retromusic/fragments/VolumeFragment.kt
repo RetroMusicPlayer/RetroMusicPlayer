@@ -1,18 +1,22 @@
 package code.name.monkey.retromusic.fragments
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.media.AudioManager
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.*
-import code.name.monkey.retromusic.volume.*
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.volume.AudioVolumeObserver
+import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import kotlinx.android.synthetic.main.fragment_volume.*
 
 class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolumeChangedListener, View.OnClickListener {
@@ -33,10 +37,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 		setTintable(ThemeStore.accentColor(requireContext()))
 		volumeDown.setOnClickListener(this)
 		volumeUp.setOnClickListener(this)
-
-		val iconColor = ATHUtil.resolveColor(requireContext(), R.attr.iconColor)
-		volumeDown.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-		volumeUp.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
 	}
 
 	override fun onResume() {

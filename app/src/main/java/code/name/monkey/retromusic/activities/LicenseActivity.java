@@ -57,10 +57,11 @@ public class LicenseActivity extends AbsBaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
         setStatusbarColorAuto();
-        setNavigationBarColorPrimary();
+        setNavigationbarColorAuto();
         setLightNavigationBar(true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

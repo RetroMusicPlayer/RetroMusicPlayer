@@ -48,7 +48,7 @@ class UserInfoActivity : AbsBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
         setStatusbarColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 

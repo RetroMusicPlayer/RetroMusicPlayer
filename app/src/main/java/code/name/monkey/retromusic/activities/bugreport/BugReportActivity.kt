@@ -62,6 +62,7 @@ open class BugReportActivity : AbsThemeActivity() {
 	private var deviceInfo: DeviceInfo? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		setDrawUnderStatusBar()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_bug_report)
 		setStatusbarColorAuto()

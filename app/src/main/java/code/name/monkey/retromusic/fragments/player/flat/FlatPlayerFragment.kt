@@ -41,10 +41,9 @@ class FlatPlayerFragment : AbsPlayerFragment() {
 
     private fun setUpPlayerToolbar() {
         playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { _ -> activity!!.onBackPressed() }
+        playerToolbar.setNavigationOnClickListener { _ -> requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context,
-                R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
     }
 
     private fun colorize(i: Int) {
@@ -90,24 +89,21 @@ class FlatPlayerFragment : AbsPlayerFragment() {
     override fun toolbarIconColor(): Int {
         val isLight = ColorUtil.isColorLight(paletteColor)
         return if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(context, isLight)
+            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(context, R.attr.iconColor)
+            ATHUtil.resolveColor(context, R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {
         lastColor = color
         flatPlaybackControlsFragment.setDark(color)
-        callbacks!!.onPaletteColorChanged()
-
+        callbacks?.onPaletteColorChanged()
         val isLight = ColorUtil.isColorLight(color)
-
-        //TransitionManager.beginDelayedTransition(mToolbar);
         val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
+            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(context!!, R.attr.iconColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
         if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }

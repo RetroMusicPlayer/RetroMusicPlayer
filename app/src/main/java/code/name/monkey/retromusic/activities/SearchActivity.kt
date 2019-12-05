@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.App
@@ -26,7 +27,6 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
 import code.name.monkey.retromusic.mvp.presenter.SearchView
-import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_search.*
@@ -45,13 +45,13 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        App.musicComponent.inject(this)
-        searchPresenter.attachView(this)
-
         setStatusbarColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+
+        App.musicComponent.inject(this)
+        searchPresenter.attachView(this)
 
         setupRecyclerView()
         setUpToolBar()
@@ -64,7 +64,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-        searchContainer.setCardBackgroundColor(RetroColorUtil.toolbarColor(this))
+        searchContainer.backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorSurface))
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager

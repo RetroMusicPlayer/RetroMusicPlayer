@@ -21,94 +21,103 @@
     android:focusable="true"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/toolbarContainer"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/playerToolbar"
-            style="@style/Toolbar"
-            android:layout_gravity="bottom"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-    </FrameLayout>
-
-    <code.name.monkey.retromusic.views.WidthFitSquareCardView
-        android:id="@+id/imageContainer"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="16dp"
-        app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/playerImage"
+        <FrameLayout
+            android:id="@+id/toolbarContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
-    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/titleContainer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageContainer"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/playerToolbar"
+                style="@style/Toolbar"
+                android:layout_gravity="bottom"
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </FrameLayout>
+
+        <code.name.monkey.retromusic.views.WidthFitSquareCardView
+            android:id="@+id/imageContainer"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="16dp"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/playerImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+
+        <LinearLayout
+            android:id="@+id/titleContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageContainer"
+            app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
+                tools:text="@tools:sample/lorem/random" />
+        </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:id="@+id/text"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:ellipsize="marquee"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:freezesText="true"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:textAppearance="@style/TextViewSubtitle1"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextViewBody2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/imageContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageContainer"
+            app:layout_constraintTop_toBottomOf="@+id/titleContainer"
             tools:text="@tools:sample/lorem/random" />
-    </LinearLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textAppearance="@style/TextViewBody2"
-        android:textColor="?attr/colorOnSecondary"
-        app:layout_constraintBottom_toBottomOf="@+id/imageContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageContainer"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
-        tools:text="@tools:sample/lorem/random" />
-
-    <FrameLayout
-        android:id="@+id/playbackControlsFragmentContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/imageContainer">
-
-        <fragment
-            android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
+        <FrameLayout
+            android:id="@+id/playbackControlsFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_peak_control_player" />
-    </FrameLayout>
+            app:layout_constraintTop_toBottomOf="@+id/imageContainer">
+
+            <fragment
+                android:id="@+id/playbackControlsFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_peak_control_player" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

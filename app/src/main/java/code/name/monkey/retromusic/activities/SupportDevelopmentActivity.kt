@@ -59,7 +59,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 		setContentView(R.layout.activity_donation)
 
 		setStatusbarColorAuto()
-		setNavigationBarColorPrimary()
+		setNavigationbarColorAuto()
 		setTaskDescriptionColorAuto()
 		setLightNavigationBar(true)
 
