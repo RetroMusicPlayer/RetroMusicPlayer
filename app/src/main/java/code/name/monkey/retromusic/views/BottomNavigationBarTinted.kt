@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
@@ -45,7 +46,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask))
         setOnApplyWindowInsetsListener(null)
         //itemRippleColor = ColorStateList.valueOf(accentColor)
-        backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(context, android.R.attr.windowBackground))
+        background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
     }
 }
 

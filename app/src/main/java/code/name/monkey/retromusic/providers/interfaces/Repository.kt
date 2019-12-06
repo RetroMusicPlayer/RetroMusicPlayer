@@ -55,28 +55,6 @@ interface Repository {
 
     suspend fun artistById(artistId: Int): Result<Artist>
 
-    val allSongsFlowable: Observable<ArrayList<Song>>
-
-    val suggestionSongsFlowable: Observable<ArrayList<Song>>
-
-    val allAlbumsFlowable: Observable<ArrayList<Album>>
-
-    val recentAlbumsFlowable: Observable<ArrayList<Album>>
-
-    val topAlbumsFlowable: Observable<ArrayList<Album>>
-
-    val allArtistsFlowable: Observable<ArrayList<Artist>>
-
-    val recentArtistsFlowable: Observable<ArrayList<Artist>>
-
-    val topArtistsFlowable: Observable<ArrayList<Artist>>
-
-    val allPlaylistsFlowable: Observable<ArrayList<Playlist>>
-
-    val allGenresFlowable: Observable<ArrayList<Genre>>
-
-    fun getSongFlowable(id: Int): Observable<Song>
-
     fun getSong(id: Int): Song
 
     fun getAlbumFlowable(albumId: Int): Observable<Album>
@@ -89,10 +67,6 @@ interface Repository {
 
     fun getPlaylistSongsFlowable(playlist: Playlist): Observable<ArrayList<Song>>
 
-    fun getGenreFlowable(genreId: Int): Observable<ArrayList<Song>>
-
-
     val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
-
 
 }

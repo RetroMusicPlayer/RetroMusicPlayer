@@ -79,7 +79,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
             keyboardPopup.iconTint = this
         }
         if (savedInstanceState != null) {
-            query = savedInstanceState.getString(QUERY);
+            query = savedInstanceState.getString(QUERY)
         }
 
     }

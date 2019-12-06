@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -57,7 +58,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         cab = MaterialCab(this, R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
                 .start(callback)
         return cab as MaterialCab
     }
@@ -187,16 +188,16 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
+        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color.ripAlpha()
         else ThemeStore.accentColor(this)
 
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
 
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
-            color
+            color.ripAlpha()
         else
-            ATHUtil.resolveColor(this, R.attr.colorControlNormal)
+            ATHUtil.resolveColor(this, R.attr.colorSurface)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)

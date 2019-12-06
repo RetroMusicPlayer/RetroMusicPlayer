@@ -60,9 +60,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
 
-        int primaryColor = INSTANCE.resolveColor(this, R.attr.colorSurface);
-        toolbar.setBackgroundColor(primaryColor);
-        appBarLayout.setBackgroundColor(primaryColor);
+        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorSurface));
         //setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
@@ -79,7 +77,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, android.R.attr.windowBackground, Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this,  R.attr.colorSurface, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()
                     .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))

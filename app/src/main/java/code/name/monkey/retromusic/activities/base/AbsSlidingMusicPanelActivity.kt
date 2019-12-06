@@ -2,9 +2,7 @@ package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -338,12 +336,13 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes).setIcon(menu.icon)
             }
         }
+        print("Tabs -> ${currentTabs.size}")
         if (currentTabs.size <= 1) {
             toggleBottomNavigationView(true)
         }
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+    /*override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         if (ev?.action == MotionEvent.ACTION_DOWN) {
             if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
                 val outRect = Rect()
@@ -354,5 +353,5 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             }
         }
         return super.dispatchTouchEvent(ev)
-    }
+    }*/
 }

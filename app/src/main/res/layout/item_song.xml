@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:minHeight="40dp"
             android:textAppearance="@style/TextViewNormal"
-            android:textColor="?attr/colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             tools:text="@tools:sample/date/hhmm" />
     </FrameLayout>
 
@@ -55,7 +55,7 @@
         android:layout_weight="0"
         android:fontFeatureSettings="onum"
         android:padding="4dp"
-        android:textColor="?attr/colorOnSecondary"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintTop_toTopOf="parent"

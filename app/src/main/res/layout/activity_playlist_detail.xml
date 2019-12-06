@@ -65,21 +65,22 @@
             android:visibility="gone"
             tools:visibility="visible">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                app:srcCompat="@drawable/ic_disc_full_black_24dp"
-                app:tint="?colorOnBackground" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emptyEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/empty_text_emoji"
+                android:textAppearance="@style/TextViewHeadline3" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/emptyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/playlist_empty_text"
-                android:textAppearance="@style/TextViewNormal"
-                android:textColor="?colorOnBackground"
-                android:visibility="gone"
+                android:text="@string/no_songs"
+                android:textAppearance="@style/TextViewHeadline5"
+                android:textColor="?android:attr/textColorSecondary"
                 tools:visibility="visible" />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,7 +39,12 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     private lateinit var songAdapter: ShuffleButtonSongAdapter
     private var cab: MaterialCab? = null
 
+    private fun getEmojiByUnicode(unicode: Int): String {
+        return String(Character.toChars(unicode))
+    }
+
     private fun checkIsEmpty() {
+        emptyEmoji.text = getEmojiByUnicode(0x1F631)
         empty?.visibility = if (songAdapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 

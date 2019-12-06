@@ -190,8 +190,13 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     private fun checkIsEmpty() {
         checkForPadding()
+        emptyEmoji.text = getEmojiByUnicode(0x1F631)
         empty.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
         emptyText.visibility = if (adapter.itemCount == 0) View.VISIBLE else View.GONE
+    }
+
+    private fun getEmojiByUnicode(unicode: Int): String {
+        return String(Character.toChars(unicode))
     }
 
     public override fun onPause() {
