@@ -9,6 +9,13 @@
     android:orientation="vertical">
 
     <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
         android:id="@+id/gradient_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

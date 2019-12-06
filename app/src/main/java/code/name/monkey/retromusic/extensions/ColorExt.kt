@@ -14,8 +14,16 @@
 
 package code.name.monkey.retromusic.extensions
 
+import android.content.Context
+import android.graphics.Color
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.retromusic.R
 
 fun Int.ripAlpha(): Int {
     return ColorUtil.stripAlpha(this)
+}
+
+fun Any.surfaceColor(context: Context): Int {
+    return ATHUtil.resolveColor(context, R.attr.colorSurface, Color.WHITE)
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="172dp"
         android:layout_margin="8dp"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="16dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
@@ -42,9 +42,7 @@
         android:paddingStart="16dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="@style/TextViewNormal"
-        android:textColor="?colorOnBackground"
+        android:paddingBottom="4dp" 
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 

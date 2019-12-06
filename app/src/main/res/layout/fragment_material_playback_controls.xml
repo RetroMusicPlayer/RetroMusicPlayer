@@ -28,7 +28,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -42,7 +42,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -100,7 +100,8 @@
         android:layout_gravity="center"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="1" android:paddingStart="16dp"
+        android:maxLines="1"
+        android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody1"
         app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"

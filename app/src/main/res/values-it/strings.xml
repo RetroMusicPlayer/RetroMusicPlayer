@@ -272,8 +272,6 @@ https://play.google.com/store/apps/details?id=%s</string>
 
     <string name="favorites">Preferiti</string>
 
-    <string name="favorites_songs">I tuoi brani preferiti</string>
-
     <string name="finish_last_song">Termina ultimo brano</string>
 
     <string name="fit">Adatta</string>
@@ -375,9 +373,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="md_error_label">Errore</string>
 
     <string name="md_storage_perm_error">Errore di autorizzazione</string>
-
-    <string name="most_played_albums">Album più ascoltati</string>
-    <string name="most_played_artists">Artisti più ascoltati</string>
 
     <string name="my_name">Nome</string>
 
@@ -583,9 +578,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="rate_app">Valuta l\'app</string>
 
     <string name="rate_on_google_play_summary">Adori quest\'app? Facci sapere sul Play Store come possiamo renderla ancora migliore</string>
-
-    <string name="recent_added_albums">Album aggiunti di recente</string>
-    <string name="recent_added_artists">Artisti aggiunti di recente</string>
 
     <string name="recent_albums">Album recenti</string>
 

@@ -3,7 +3,6 @@ package code.name.monkey.retromusic.fragments.player.normal
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,7 @@ import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_player.*
 
 
-class PlayerFragment : AbsPlayerFragment()  {
+class PlayerFragment : AbsPlayerFragment() {
 
     private var lastColor: Int = 0
     override val paletteColor: Int
@@ -34,15 +33,19 @@ class PlayerFragment : AbsPlayerFragment()  {
 
     private fun colorize(i: Int) {
         if (valueAnimator != null) {
-            valueAnimator!!.cancel()
+            valueAnimator?.cancel()
         }
 
-        valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), android.R.color.transparent, i)
-        valueAnimator!!.addUpdateListener { animation ->
-            val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0)
-            colorGradientBackground?.background = drawable
+        valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), ATHUtil.resolveColor(requireContext(), R.attr.colorSurface), i)
+        valueAnimator?.addUpdateListener { animation ->
+            if (isAdded) {
+                val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM,
+                        intArrayOf(animation.animatedValue as Int,
+                                ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)), 0)
+                colorGradientBackground?.background = drawable
+            }
         }
-        valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
+        valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
     }
 
     override fun onShow() {
@@ -59,23 +62,19 @@ class PlayerFragment : AbsPlayerFragment()  {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.iconColor)
+        return ATHUtil.resolveColor(context, R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {
         playbackControlsFragment.setDark(color)
         lastColor = color
-        callbacks!!.onPaletteColorChanged()
+        callbacks?.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), activity)
 
         if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }
-    }
-
-    private fun getCutOff(): Int {
-        return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) 20 else 0
     }
 
     override fun toggleFavorite(song: Song) {

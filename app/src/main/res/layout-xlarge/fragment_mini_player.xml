@@ -5,7 +5,7 @@
     android:id="@+id/miniPlayerContent"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="?colorSecondary"
+    android:background="?android:attr/background"
     android:clickable="true"
     android:focusable="false"
     android:transitionName="@string/transition_mini_player"

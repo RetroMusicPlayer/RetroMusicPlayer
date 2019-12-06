@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.SearchAdapter
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
 import code.name.monkey.retromusic.mvp.presenter.SearchView
-import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.activity_search.*
@@ -46,13 +45,13 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        App.musicComponent.inject(this)
-        searchPresenter.attachView(this)
-
         setStatusbarColorAuto()
-        setNavigationBarColorPrimary()
+        setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+
+        App.musicComponent.inject(this)
+        searchPresenter.attachView(this)
 
         setupRecyclerView()
         setUpToolBar()
@@ -65,7 +64,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-        searchContainer.setCardBackgroundColor(RetroColorUtil.toolbarColor(this))
+        searchContainer.backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorSurface))
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -80,7 +79,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
             keyboardPopup.iconTint = this
         }
         if (savedInstanceState != null) {
-            query = savedInstanceState.getString(QUERY);
+            query = savedInstanceState.getString(QUERY)
         }
 
     }
@@ -125,7 +124,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
     private fun setUpToolBar() {
         title = null
-        appBarLayout.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
     }
 
     private fun search(query: String) {

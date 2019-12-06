@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -26,6 +24,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -45,6 +44,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
+import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -58,7 +58,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         cab = MaterialCab(this, R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
                 .start(callback)
         return cab as MaterialCab
     }
@@ -81,11 +81,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -189,19 +188,23 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
+        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color.ripAlpha()
         else ThemeStore.accentColor(this)
 
         songTitle.setTextColor(themeColor)
         moreTitle.setTextColor(themeColor)
 
-        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
-        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ATHUtil.resolveColor(this, R.attr.colorSurface)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        status_bar.setBackgroundColor(toolbarColor)
+        toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }
@@ -244,7 +247,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_tag_editor -> {
                 val intent = Intent(this, AlbumTagEditorActivity::class.java)
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
-                startActivityForResult(intent, TAG_EDITOR_REQUEST)
+                val options = ActivityOptions.makeSceneTransitionAnimation(this, image, getString(R.string.transition_album_art))
+                startActivityForResult(intent, TAG_EDITOR_REQUEST, options.toBundle())
                 return true
             }
             /*Sort*/

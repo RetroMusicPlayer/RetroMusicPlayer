@@ -40,7 +40,7 @@
             android:layout_gravity="center"
             android:text="@string/empty"
             android:textAppearance="@style/TextViewHeadline5"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             tools:visibility="visible" />
     </LinearLayout>
 </FrameLayout>

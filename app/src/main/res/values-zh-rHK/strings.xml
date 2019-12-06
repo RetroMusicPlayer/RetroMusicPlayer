@@ -158,7 +158,6 @@
     <string name="error">錯誤</string>
     <string name="faq">常見問題</string>
     <string name="favorites">我的最愛</string>
-    <string name="favorites_songs">你最喜愛的歌曲</string>
     <string name="finish_last_song">最後一首已經結束播放</string>
     <string name="fit">Fit</string>
     <string name="flat">平面</string>
@@ -216,8 +215,6 @@
     <string name="material">物質</string>
     <string name="md_error_label">錯誤</string>
     <string name="md_storage_perm_error">權限錯誤</string>
-    <string name="most_played_albums">最常播放的專輯</string>
-    <string name="most_played_artists">最常播放的歌手</string>
     <string name="my_name">名字</string>
     <string name="my_top_tracks">最常播放</string>
     <string name="never">永不</string>
@@ -361,8 +358,6 @@
     <string name="queue">播放列表</string>
     <string name="rate_app">為這個App評分</string>
     <string name="rate_on_google_play_summary">喜歡這個App嗎?請讓我們知道如何提供更好的體驗</string>
-    <string name="recent_added_albums">最近新增的專輯</string>
-    <string name="recent_added_artists">最近新增的歌手</string>
     <string name="recent_albums">近期專輯</string>
     <string name="recent_artists">近期歌手</string>
     <string name="remove_action">移除</string>

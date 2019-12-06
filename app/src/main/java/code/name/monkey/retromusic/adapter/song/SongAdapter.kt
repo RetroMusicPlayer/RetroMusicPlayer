@@ -2,17 +2,25 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.app.ActivityOptions
 import android.graphics.drawable.Drawable
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.adapter.base.*
-import code.name.monkey.retromusic.glide.*
-import code.name.monkey.retromusic.helper.*
-import code.name.monkey.retromusic.helper.menu.*
+import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
+import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.helper.SortOrder
+import code.name.monkey.retromusic.helper.menu.SongMenuHelper
+import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
@@ -79,20 +87,8 @@ open class SongAdapter(
 	private fun setColors(color: Int, holder: ViewHolder) {
 		if (holder.paletteColorContainer != null) {
 			holder.paletteColorContainer?.setBackgroundColor(color)
-			holder.title?.setTextColor(
-					MaterialValueHelper.getPrimaryTextColor(
-							activity, ColorUtil.isColorLight(
-							color
-					)
-					)
-			)
-			holder.text?.setTextColor(
-					MaterialValueHelper.getSecondaryTextColor(
-							activity, ColorUtil.isColorLight(
-							color
-					)
-					)
-			)
+			//holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
+			//holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
 		}
 	}
 

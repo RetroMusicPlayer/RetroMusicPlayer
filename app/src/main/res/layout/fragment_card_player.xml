@@ -4,9 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
     android:clickable="true"
     android:focusable="true">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface" />
 
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
@@ -14,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_album_full_cover" />
+
+    <include layout="@layout/shadow_statusbar_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"

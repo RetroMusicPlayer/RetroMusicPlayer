@@ -1,21 +1,32 @@
 package code.name.monkey.retromusic.activities.bugreport
 
-import android.app.*
-import android.content.*
+import android.app.Activity
+import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.annotation.*
+import androidx.annotation.StringDef
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
-import code.name.monkey.retromusic.activities.bugreport.model.*
-import code.name.monkey.retromusic.activities.bugreport.model.github.*
+import code.name.monkey.retromusic.activities.bugreport.model.DeviceInfo
+import code.name.monkey.retromusic.activities.bugreport.model.Report
+import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
+import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
+import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
 import code.name.monkey.retromusic.misc.DialogAsyncTask
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
@@ -25,7 +36,8 @@ import kotlinx.android.synthetic.main.activity_bug_report.*
 import kotlinx.android.synthetic.main.bug_report_card_device_info.*
 import kotlinx.android.synthetic.main.bug_report_card_report.*
 import org.eclipse.egit.github.core.Issue
-import org.eclipse.egit.github.core.client.*
+import org.eclipse.egit.github.core.client.GitHubClient
+import org.eclipse.egit.github.core.client.RequestException
 import org.eclipse.egit.github.core.service.IssueService
 import java.io.IOException
 
@@ -50,9 +62,9 @@ open class BugReportActivity : AbsThemeActivity() {
 	private var deviceInfo: DeviceInfo? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		setDrawUnderStatusBar()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_bug_report)
-
 		setStatusbarColorAuto()
 		setNavigationbarColorAuto()
 		setTaskDescriptionColorAuto()
@@ -67,7 +79,7 @@ open class BugReportActivity : AbsThemeActivity() {
 
 	private fun initViews() {
 		val accentColor = ThemeStore.accentColor(this)
-		val primaryColor = ATHUtil.resolveColor(this, R.attr.colorPrimary)
+		val primaryColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
 		toolbar.setBackgroundColor(primaryColor)
 		setSupportActionBar(toolbar)
 		ToolbarContentTintHelper.colorBackButton(toolbar)

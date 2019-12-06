@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.views
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
@@ -38,12 +39,14 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         labelVisibilityMode = PreferenceUtil.getInstance(context).tabTitleMode
         selectedItemId = PreferenceUtil.getInstance(context).lastPage
 
-        val iconColor = ATHUtil.resolveColor(context, R.attr.iconColor)
+        val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
-        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), null)
+        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask))
         setOnApplyWindowInsetsListener(null)
+        //itemRippleColor = ColorStateList.valueOf(accentColor)
+        background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
     }
 }
 

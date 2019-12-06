@@ -144,7 +144,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(0,
                         R.string.recent_artists,
-                        R.string.recent_added_artists,
                         artists,
                         HomeAdapter.RECENT_ARTISTS,
                         R.drawable.ic_artist_white_24dp))
@@ -162,7 +161,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(1,
                         R.string.recent_albums,
-                        R.string.recent_added_albums,
                         albums,
                         HomeAdapter.RECENT_ALBUMS,
                         R.drawable.ic_album_white_24dp
@@ -181,7 +179,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(3,
                         R.string.top_albums,
-                        R.string.most_played_albums,
                         albums,
                         HomeAdapter.TOP_ALBUMS,
                         R.drawable.ic_album_white_24dp
@@ -201,7 +198,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(2,
                         R.string.top_artists,
-                        R.string.most_played_artists,
                         artists,
                         HomeAdapter.TOP_ARTISTS,
                         R.drawable.ic_artist_white_24dp
@@ -220,7 +216,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             } else {
                 Success(Home(4,
                         R.string.favorites,
-                        R.string.favorites_songs,
                         playlists,
                         HomeAdapter.PLAYLISTS,
                         R.drawable.ic_favorite_white_24dp
@@ -252,12 +247,6 @@ class RepositoryImpl(private val context: Context) : Repository {
         }
     }
 
-    override fun getSongFlowable(id: Int): Observable<Song> {
-        return SongLoader.getSongFlowable(context, id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
-
     override fun getAlbumFlowable(albumId: Int): Observable<Album> {
         return AlbumLoader.getAlbumFlowable(context, albumId)
                 .subscribeOn(Schedulers.io())
@@ -276,69 +265,11 @@ class RepositoryImpl(private val context: Context) : Repository {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun getGenreFlowable(genreId: Int): Observable<ArrayList<Song>> {
-        return GenreLoader.getSongsFlowable(context, genreId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
-
-
     override val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
         get() = PlaylistLoader.getFavoritePlaylistFlowable(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
 
-
-    override val allSongsFlowable: Observable<ArrayList<Song>>
-        get() = SongLoader.getAllSongsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val suggestionSongsFlowable: Observable<ArrayList<Song>>
-        get() = SongLoader.suggestSongs(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val allAlbumsFlowable: Observable<ArrayList<Album>>
-        get() = AlbumLoader.getAllAlbumsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val recentAlbumsFlowable: Observable<ArrayList<Album>>
-        get() = LastAddedSongsLoader.getLastAddedAlbumsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val topAlbumsFlowable: Observable<ArrayList<Album>>
-        get() = TopAndRecentlyPlayedTracksLoader.getTopAlbumsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val allArtistsFlowable: Observable<ArrayList<Artist>>
-        get() = ArtistLoader.getAllArtistsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val recentArtistsFlowable: Observable<ArrayList<Artist>>
-        get() = LastAddedSongsLoader.getLastAddedArtistsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val topArtistsFlowable: Observable<ArrayList<Artist>>
-        get() = TopAndRecentlyPlayedTracksLoader.getTopArtistsFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-    override val allPlaylistsFlowable: Observable<ArrayList<Playlist>>
-        get() = PlaylistLoader.getAllPlaylistsFlowoable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-
-    override val allGenresFlowable: Observable<ArrayList<Genre>>
-        get() = GenreLoader.getAllGenresFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
 
     override fun getSong(id: Int): Song {
         return SongLoader.getSong(context, id)
@@ -352,11 +283,10 @@ class RepositoryImpl(private val context: Context) : Repository {
         return ArtistLoader.getArtist(context, artistId.toInt())
     }
 
-
 }
 
 suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String): Result<T> = try {
     call.invoke()
 } catch (e: Exception) {
-    Result.Error(IOException(errorMessage, e))
+    Error(IOException(errorMessage, e))
 }

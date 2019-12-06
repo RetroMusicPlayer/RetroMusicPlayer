@@ -28,6 +28,6 @@
         android:gravity="center"
         android:maxLines="1"
         android:paddingTop="12dp"
-        android:textColor="?colorOnPrimary"
+        android:textColor="?android:attr/textColorPrimary"
         tools:text="Name" />
 </LinearLayout>

@@ -8,8 +8,8 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:paddingBottom="12dp">
+    android:paddingBottom="14dp"
+    android:paddingEnd="8dp" >
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeDown"
@@ -19,7 +19,7 @@
         android:background="?roundSelector"
         android:padding="8dp"
         app:srcCompat="@drawable/ic_volume_down_white_24dp"
-        app:tint="?colorOnBackground" />
+        app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
@@ -31,7 +31,7 @@
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
         tools:progress="20"
-        tools:progressTint="?colorControlNormal" />
+        tools:progressTint="?attr/colorControlNormal" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -42,5 +42,5 @@
         android:background="?roundSelector"
         android:padding="8dp"
         app:srcCompat="@drawable/ic_volume_up_white_24dp"
-        app:tint="?colorOnBackground" />
+        app:tint="?attr/colorControlNormal" />
 </LinearLayout>

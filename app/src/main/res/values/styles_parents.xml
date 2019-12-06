@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="md_font_title">@font/circular</item>
+        <item name="md_font_body">@font/circular</item>
+        <item name="md_font_button">@font/circular</item>
+        <item name="md_background_color">@color/md_red_500</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:fontFamily">@font/circular</item>
+
+        <item name="windowActionBarOverlay">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
+
+
+    </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
-
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
         <item name="md_color_button_text">@color/md_white_1000</item>
-        <item name="md_background_color">@color/dark_color</item>
-
+        <item name="md_background_color">@color/darkColorPrimary</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
-
-
         <item name="roundSelector">@drawable/round_selector_dark</item>
         <item name="rectSelector">@drawable/rect_selector_dark</item>
         <item name="rectSelectorStrong">@drawable/rect_selector_strong_dark</item>
-
-        <item name="cardBackgroundColor">@color/card_dark_color</item>
-        <item name="defaultFooterColor">@color/dark_color</item>
-        <item name="dividerColor">@color/md_grey_800</item>
-
-        <item name="iconColor">@color/ate_secondary_text_dark</item>
-
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
 
         <!-- necessary to find the overflow button later in the layout-->
@@ -38,54 +48,31 @@
 
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-
-        <item name="colorPrimary">@color/darkColorPrimary</item>
-        <item name="colorSecondary">@color/darkColorSecondary</item>
-        <item name="colorPrimaryVariant">@color/darkColorPrimary</item>
-        <item name="colorOnPrimary">@color/mi_text_color_primary_dark</item>
-        <item name="colorOnSecondary">@color/mi_text_color_secondary_dark</item>
-
-        <item name="colorAccent">@color/md_deep_purple_A200</item>
-        <!-- just in case-->
-        <item name="android:windowBackground">@color/darkColorSurface</item>
-        <item name="android:colorBackground">@color/darkColorSurface</item>
-        <item name="colorSurface">@color/darkColorSurface</item>
-        <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
-        <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
-        <item name="colorControlNormal">@color/md_white_1000</item>
     </style>
 
-    <style name="Theme.RetroMusic.Base.Black" parent="@style/Theme.RetroMusic.Base">
+    <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
 
-        <item name="dividerColor">@color/dark_color</item>
-        <item name="defaultFooterColor">@color/md_grey_800</item>
-        <item name="cardBackgroundColor">@color/black_color</item>
-        <item name="md_background_color">@color/black_color</item>
+        <item name="md_font_title">@font/circular</item>
+        <item name="md_font_body">@font/circular</item>
+        <item name="md_font_button">@font/circular</item>
+        <item name="md_background_color">@color/blackColorSurface</item>
 
-        <item name="android:windowBackground">@color/black_color</item>
 
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
+
+        <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:fontFamily">@font/circular</item>
 
-        <item name="windowActionBar">false</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
 
-        <item name="colorPrimary">@color/blackColorPrimary</item>
-        <item name="colorOnPrimary">@color/mi_text_color_primary_dark</item>
-        <item name="colorPrimaryVariant">@color/blackColorPrimary</item>
-
-        <item name="colorSecondary">@color/blackColorSecondary</item>
-        <item name="colorOnSecondary">@color/mi_text_color_secondary_dark</item>
-        <item name="colorSecondaryVariant">@color/md_green_A700</item>
-
-        <item name="colorAccent">@color/md_deep_purple_A200</item>
-        <item name="colorControlNormal">@color/md_white_1000</item>
-
-        <item name="android:colorBackground">@color/blackColorBackground</item>
-        <item name="colorOnBackground">@color/mi_text_color_secondary_dark</item>
-
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="colorSurface">@color/blackColorSurface</item>
-        <item name="colorOnSurface">@color/mi_text_color_primary_dark</item>
-
+        <item name="colorOnBackground">@color/blackColorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -170,11 +157,12 @@
 
     <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">8dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">?attr/colorControlNormal</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textAppearance">@style/TextViewNormal</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:paddingTop">@dimen/button_padding_vertical</item>
         <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
-        <item name="iconGravity">textStart</item>
-        <item name="backgroundTint">?colorSurface</item>
     </style>
 </resources>

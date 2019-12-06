@@ -9,7 +9,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -19,7 +22,7 @@
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"

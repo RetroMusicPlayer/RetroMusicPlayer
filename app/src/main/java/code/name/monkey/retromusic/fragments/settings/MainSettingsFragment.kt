@@ -37,7 +37,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             R.id.generalSettings -> inflateFragment(ThemeSettingsFragment(), R.string.general_settings_title)
             R.id.audioSettings -> inflateFragment(AudioSettings(), R.string.pref_header_audio)
             R.id.nowPlayingSettings -> inflateFragment(NowPlayingSettingsFragment(), R.string.now_playing)
-            R.id.personalizeSettings -> inflateFragment(PersonaizeSettingsFragment(), R.string.personalize)
+            R.id.personalizeSettings -> inflateFragment(PersonalizeSettingsFragment(), R.string.personalize)
             R.id.imageSettings -> inflateFragment(ImageSettingFragment(), R.string.pref_header_images)
             R.id.notificationSettings -> inflateFragment(NotificationSettingsFragment(), R.string.notification)
             R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)

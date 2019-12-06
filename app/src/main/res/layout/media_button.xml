@@ -8,8 +8,7 @@
     android:layoutDirection="ltr"
     android:paddingStart="4dp"
     android:paddingEnd="4dp"
-    tools:ignore="ContentDescription,UnusedAttribute"
-    tools:showIn="@layout/fragment_player_playback_controls">
+    tools:ignore="ContentDescription,UnusedAttribute">
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/previousButton"

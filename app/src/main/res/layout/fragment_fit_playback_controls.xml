@@ -21,7 +21,7 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -34,7 +34,7 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textColor="?colorOnSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:22" />
@@ -93,5 +93,11 @@
 
     <include layout="@layout/media_button" />
 
-    <include layout="@layout/volume_controls" />
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" />
 </LinearLayout>

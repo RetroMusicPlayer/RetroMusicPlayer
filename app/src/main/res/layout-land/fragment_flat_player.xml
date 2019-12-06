@@ -9,6 +9,11 @@
     android:orientation="vertical">
 
     <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface" />
+
+    <View
         android:id="@+id/colorGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -14,8 +14,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
-        android:paddingEnd="8dp"
         android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,10 +27,10 @@
             android:fontFeatureSettings="onum"
             android:gravity="center"
             android:maxLines="1"
-            tools:text="@tools:sample/date/hhmm"
             android:minHeight="40dp"
             android:textAppearance="@style/TextViewNormal"
-            android:textColor="?colorOnSecondary" />
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="@tools:sample/date/hhmm" />
     </FrameLayout>
 
 
@@ -55,7 +55,7 @@
         android:layout_weight="0"
         android:fontFeatureSettings="onum"
         android:padding="4dp"
-        android:textColor="?colorOnSecondary"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintTop_toTopOf="parent"
@@ -72,6 +72,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="?colorOnSecondary"
+        app:tint="?attr/colorControlNormal"
         tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

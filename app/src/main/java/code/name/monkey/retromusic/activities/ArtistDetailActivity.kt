@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -17,7 +16,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -26,6 +24,7 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -39,6 +38,7 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
+import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -51,7 +51,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         cab = MaterialCab(this, R.id.cab_stub)
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
                 .start(callback)
         return cab as MaterialCab
     }
@@ -74,11 +74,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         toggleBottomNavigationView(true)
-        setStatusbarColor(Color.TRANSPARENT)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, R.attr.colorPrimary)))
 
         ActivityCompat.postponeEnterTransition(this)
 
@@ -226,21 +225,26 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun setColors(color: Int) {
-
-        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
-        else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ThemeStore.accentColor(this)
 
         albumTitle.setTextColor(textColor)
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color
-        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ATHUtil.resolveColor(this, R.attr.colorSurface)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        status_bar.setBackgroundColor(toolbarColor)
+        toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }
@@ -271,21 +275,12 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                startActivityForResult(
-                        Intent.createChooser(
-                                intent, getString(R.string.pick_from_local_storage)
-                        ), REQUEST_CODE_SELECT_IMAGE
-                )
+                startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE)
                 return true
             }
             R.id.action_reset_artist_image -> {
-                Toast.makeText(
-                        this@ArtistDetailActivity,
-                        resources.getString(R.string.updating),
-                        Toast.LENGTH_SHORT
-                ).show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity)
-                        .resetCustomArtistImage(artist)
+                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating), Toast.LENGTH_SHORT).show()
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
                 forceDownload = true
                 return true
             }

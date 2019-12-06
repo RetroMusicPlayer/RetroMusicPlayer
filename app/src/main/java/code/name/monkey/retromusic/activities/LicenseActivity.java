@@ -57,15 +57,16 @@ public class LicenseActivity extends AbsBaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setDrawUnderStatusBar();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
         setStatusbarColorAuto();
-        setNavigationBarColorPrimary();
+        setNavigationbarColorAuto();
         setLightNavigationBar(true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorPrimary));
+        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorSurface));
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();
@@ -78,7 +79,7 @@ public class LicenseActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorPrimary, Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, android.R.attr.windowBackground, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()
                     .replace("{style-placeholder}",

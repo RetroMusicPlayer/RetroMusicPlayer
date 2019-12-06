@@ -2,20 +2,28 @@ package code.name.monkey.retromusic.activities.tageditor
 
 import android.app.Activity
 import android.content.res.ColorStateList
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.*
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.widget.Toast
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.glide.palette.*
+import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.ImageUtil
+import code.name.monkey.retromusic.util.LastFMUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
 import com.bumptech.glide.Glide
@@ -43,16 +51,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 				) {
 					getColor(resource?.palette, Color.TRANSPARENT)
 					albumArtBitmap = resource?.bitmap?.let { ImageUtil.resizeBitmap(it, 2048) }
-					setImageBitmap(
-							albumArtBitmap,
-							getColor(
-									resource?.palette,
-									ATHUtil.resolveColor(
-											this@AlbumTagEditorActivity,
-											R.attr.defaultFooterColor
-									)
-							)
-					)
+					setImageBitmap(albumArtBitmap, getColor(resource?.palette, ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)))
 					deleteAlbumArt = false
 					dataChanged()
 					setResult(Activity.RESULT_OK)
@@ -72,8 +71,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 	private val disposable = CompositeDisposable()
 
 	private fun setupToolbar() {
-		toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorPrimary))
-		setSupportActionBar(toolbar)
+		applyToolbar(toolbar)
 		supportActionBar?.setDisplayShowHomeEnabled(true)
 	}
 

@@ -15,13 +15,10 @@ object ThemeManager {
     @StyleRes
     fun getThemeResValue(context: Context): Int = when (PreferenceUtil.getInstance(context).generalThemeValue) {
         "light" -> R.style.Theme_RetroMusic_Light
-        "auto" -> if (isSystemDarkModeEnabled(context)) R.style.Theme_RetroMusic else R.style.Theme_RetroMusic_Light
+        "dark" -> R.style.Theme_RetroMusic_Base
+        "auto" -> R.style.Theme_RetroMusic_FollowSystem
         "black" -> R.style.Theme_RetroMusic_Black
-        else -> R.style.Theme_RetroMusic
-        /**
-         * To add a toggle for amoled theme just add an if statement such as
-         * if(PreferenceUtil.getInstance(context).useAmoled) blablabla
-         */
+        else -> R.style.Theme_RetroMusic_FollowSystem
     }
 
     private fun isSystemDarkModeEnabled(context: Context): Boolean {

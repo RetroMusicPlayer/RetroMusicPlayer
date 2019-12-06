@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.mainactivity;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -108,7 +109,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setStatusbarColorAuto(view);
+        setStatusBarColorAuto(view);
         setupToolbar();
         inflateFragment();
     }
@@ -140,7 +141,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
     @SuppressWarnings("ConstantConditions")
     private void setupToolbar() {
-        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundTintList(ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
@@ -149,7 +150,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
+        //toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 
     private Fragment getCurrentFragment() {
@@ -187,7 +188,7 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
                 .setMenu(menuRes)
                 .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
                 .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorPrimary)))
+                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)))
                 .start(callback);
         return cab;
     }

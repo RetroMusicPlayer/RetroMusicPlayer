@@ -7,7 +7,6 @@
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
     <com.google.android.material.textview.MaterialTextView
-        android:textColor="?colorOnSecondary"
         android:id="@+id/offlineLyrics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,5 +17,6 @@
         android:paddingEnd="16dp"
         android:paddingBottom="128dp"
         android:text="@string/no_lyrics_found"
-        android:textAppearance="@style/TextViewBody1" />
+        android:textAppearance="@style/TextViewBody1"
+        android:textColor="?android:attr/textColorPrimary" />
 </ScrollView>

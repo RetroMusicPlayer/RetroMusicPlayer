@@ -143,9 +143,9 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
-            ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, requireActivity())
             setTitleTextColor(primaryColor)
-            setSubtitleTextColor(ThemeStore.textColorSecondary(context!!))
+            setSubtitleTextColor(ThemeStore.textColorSecondary(requireContext()))
             setOnMenuItemClickListener(this@AdaptiveFragment)
         }
     }
@@ -183,8 +183,8 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     override fun onColorChanged(color: Int) {
         playbackControlsFragment.setDark(color)
         lastColor = color
-        callbacks!!.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        callbacks?.onPaletteColorChanged()
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
     }
 
     override fun onShow() {
@@ -201,7 +201,7 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.iconColor)
+        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
     override val paletteColor: Int

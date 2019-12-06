@@ -19,7 +19,7 @@
             android:thickness="3dp"
             android:type="sweep"
             android:useLevel="false">
-            <solid android:color="?colorOnSecondary" />
+            <solid android:color="?android:attr/textColorSecondary" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
@@ -28,7 +28,7 @@
             android:thickness="3dp"
             android:type="sweep"
             android:useLevel="true">
-            <solid android:color="?colorAccent" />
+            <solid android:color="?attr/colorAccent" />
 
         </shape>
     </item>

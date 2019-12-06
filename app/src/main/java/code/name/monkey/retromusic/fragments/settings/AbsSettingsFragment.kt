@@ -40,7 +40,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         NavigationUtil.goToProVersion(requireActivity())
     }
 
-    internal fun setSummary(preference: Preference, value: Any) {
+    internal fun setSummary(preference: Preference, value: Any?) {
         val stringValue = value.toString()
         if (preference is ListPreference) {
             val index = preference.findIndexOfValue(stringValue)
@@ -52,16 +52,18 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     abstract fun invalidateSettings()
 
-    protected fun setSummary(preference: Preference) {
-        setSummary(preference, PreferenceManager
-                .getDefaultSharedPreferences(preference.context)
-                .getString(preference.key, "")!!)
+    protected fun setSummary(preference: Preference?) {
+        preference?.let {
+            setSummary(it, PreferenceManager
+                    .getDefaultSharedPreferences(it.context)
+                    .getString(it.key, ""))
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary))
+        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)

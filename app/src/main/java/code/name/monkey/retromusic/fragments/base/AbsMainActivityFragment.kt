@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.base
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -26,10 +25,10 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
         mainActivity.setBottomBarVisibility(View.VISIBLE)
     }
 
-    private fun setStatusbarColor(view: View, color: Int) {
+    private fun setStatusBarColor(view: View, color: Int) {
         val statusBar = view.findViewById<View>(R.id.status_bar)
         if (statusBar != null) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (VersionUtils.hasMarshmallow()) {
                 statusBar.setBackgroundColor(color)
                 mainActivity.setLightStatusbarAuto(color)
             } else {
@@ -38,13 +37,13 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
         }
     }
 
-    fun setStatusbarColorAuto(view: View) {
-        val colorPrimary = ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)
+    fun setStatusBarColorAuto(view: View) {
+        val colorPrimary = ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
         if (VersionUtils.hasMarshmallow()) {
-            setStatusbarColor(view, colorPrimary)
+            setStatusBarColor(view, colorPrimary)
         } else {
-            setStatusbarColor(view, ColorUtil.darkenColor(colorPrimary))
+            setStatusBarColor(view, ColorUtil.darkenColor(colorPrimary))
         }
     }
 
