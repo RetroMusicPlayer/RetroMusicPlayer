@@ -18,6 +18,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
+        android:background="?attr/colorSurface"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,6 +26,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:elevation="0dp"
             app:elevation="0dp">
 
@@ -73,9 +75,9 @@
                         android:id="@+id/breadCrumbs"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/tab_height"
-                        app:cardBackgroundColor="?colorSurface"
                         android:paddingStart="60dp"
                         android:paddingEnd="8dp"
+                        app:cardBackgroundColor="?colorSurface"
                         app:layout_collapseMode="pin" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
