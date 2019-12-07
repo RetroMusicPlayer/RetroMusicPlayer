@@ -2,18 +2,22 @@ package code.name.monkey.retromusic.activities
 
 import android.app.KeyguardManager
 import android.content.Context
-import android.os.*
-import android.view.*
+import android.os.Build
+import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.core.view.ViewCompat
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerControlsFragment
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
-import com.r0adkll.slidr.model.*
+import com.r0adkll.slidr.model.SlidrConfig
+import com.r0adkll.slidr.model.SlidrListener
+import com.r0adkll.slidr.model.SlidrPosition
 import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
@@ -25,13 +29,10 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 			setShowWhenLocked(true)
 			setTurnScreenOn(true)
 		} else {
-			this.window.addFlags(
-					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-			)
+			this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
 		}
 		setDrawUnderStatusBar()
 		setContentView(R.layout.activity_lock_screen)
-
 		hideStatusBar()
 		setStatusbarColorAuto()
 		setNavigationbarColorAuto()
@@ -70,12 +71,6 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 			alpha = 0f
 			ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
 		}
-
-		findViewById<View>(R.id.root_layout).setBackgroundColor(
-				ATHUtil.resolveColor(
-						this, R.attr.colorPrimary
-				)
-		)
 	}
 
 	override fun onPlayingMetaChanged() {

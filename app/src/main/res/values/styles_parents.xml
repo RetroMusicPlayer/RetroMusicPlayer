@@ -5,7 +5,6 @@
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
-        <item name="md_background_color">@color/md_red_500</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:fontFamily">@font/circular</item>

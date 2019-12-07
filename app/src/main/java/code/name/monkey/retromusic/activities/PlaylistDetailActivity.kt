@@ -140,15 +140,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         if (cab != null && cab!!.isActive) {
             cab!!.finish()
         }
-        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes)
-                .setCloseDrawableRes(R.drawable.ic_close_white_24dp).setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(
-                                ATHUtil.resolveColor(
-                                        this,
-                                        R.attr.colorPrimary
-                                )
-                        )
-                ).start(callback)
+        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp).setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface))).start(callback)
         return cab!!
     }
 
