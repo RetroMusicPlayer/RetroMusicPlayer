@@ -1,15 +1,19 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="?attr/colorOnSecondary">
-
-    <item
-        android:id="@android:id/mask"
-        android:drawable="@android:color/white" />
+    android:color="?attr/colorControlHighlight">
+    <item android:id="@android:id/mask">
+        <shape>
+            <corners android:radius="8dp" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
     <item>
         <selector>
-            <item
-                android:drawable="@color/ripple_material_light"
-                android:state_activated="true" />
+            <item android:state_activated="true">
+                <shape>
+                    <corners android:radius="8dp" />
+                    <solid android:color="?android:attr/colorControlHighlight" />
+                </shape>
+            </item>
         </selector>
     </item>
-
 </ripple>

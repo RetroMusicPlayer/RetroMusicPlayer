@@ -3,7 +3,6 @@
 
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
-    <attr name="rectSelectorStrong" format="reference" />
 
     <attr name="defaultFooterColor" format="color" />
 

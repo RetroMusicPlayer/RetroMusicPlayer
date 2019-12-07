@@ -7,19 +7,16 @@
         <item name="md_font_button">@font/circular</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:fontFamily">@font/circular</item>
-
         <item name="windowActionBarOverlay">true</item>
+        <item name="android:fontFamily">@font/circular</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
-        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
-
-
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -29,45 +26,32 @@
         <item name="md_color_button_text">@color/md_white_1000</item>
         <item name="md_background_color">@color/darkColorPrimary</item>
         <item name="android:windowActionBarOverlay">true</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="roundSelector">@drawable/round_selector_dark</item>
-        <item name="rectSelector">@drawable/rect_selector_dark</item>
-        <item name="rectSelectorStrong">@drawable/rect_selector_strong_dark</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
-
-        <!-- necessary to find the overflow button later in the layout-->
-        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
-
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:fontFamily">@font/circular</item>
-
+        <item name="windowActionBarOverlay">true</item>
+        <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="roundSelector">@drawable/round_selector_dark</item>
+        <item name="rectSelector">@drawable/rect_selector_dark</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="windowActionBar">false</item>
-
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
-
         <item name="md_font_title">@font/circular</item>
         <item name="md_font_body">@font/circular</item>
         <item name="md_font_button">@font/circular</item>
         <item name="md_background_color">@color/blackColorSurface</item>
-
-
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
-        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
-
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:fontFamily">@font/circular</item>
-
         <item name="windowActionBarOverlay">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="colorSurface">@color/blackColorSurface</item>
@@ -86,7 +70,6 @@
 
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
-        <item name="rectSelectorStrong">@drawable/rect_selector_strong</item>
 
         <item name="cardBackgroundColor">@color/md_white_1000</item>
 

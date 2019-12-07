@@ -66,11 +66,11 @@
                         android:background="?colorSurface"
                         app:contentInsetStart="0dp"
                         app:contentInsetStartWithNavigation="0dp"
-                        app:popupTheme="?toolbarPopupTheme"
+                        app:popupTheme="?attr/toolbarPopupTheme"
                         app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
                         app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
-                        app:titleTextColor="?colorOnSurface"
+                        app:titleTextColor="?android:attr/textColorSecondary"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub

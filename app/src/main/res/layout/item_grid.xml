@@ -4,37 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?rectSelector"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?rectSelector"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
         tools:ignore="UnusedAttribute,UselessParent">
 
-        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        <code.name.monkey.retromusic.views.WidthFitSquareCardView
+            android:id="@+id/imageContainerCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/imageContainerCard"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
-            </com.google.android.material.card.MaterialCardView>
-        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
