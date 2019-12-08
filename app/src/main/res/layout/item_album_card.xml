@@ -29,7 +29,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingStart="12dp"
-        android:paddingTop="6dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewNormal"

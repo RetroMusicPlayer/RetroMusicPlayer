@@ -17,11 +17,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/rectSelector"
+    android:background="?selectableItemBackground"
     android:gravity="center_vertical"
-    android:minHeight="72dp"
+    android:minHeight="64dp"
     android:orientation="horizontal"
-    android:padding="12dp"
+    android:paddingStart="12dp"
+    android:paddingEnd="12dp"
     tools:ignore="PrivateResource">
 
     <code.name.monkey.retromusic.views.CircularImageView

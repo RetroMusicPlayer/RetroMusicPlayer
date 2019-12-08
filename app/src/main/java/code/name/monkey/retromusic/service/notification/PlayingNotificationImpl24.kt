@@ -48,16 +48,8 @@ class PlayingNotificationImpl24 : PlayingNotification() {
         val song = service.currentSong
         val isPlaying = service.isPlaying
         val isFavorite = MusicUtil.isFavorite(service, song)
-        val playButtonResId = if (isPlaying)
-            R.drawable.ic_pause_white_48dp
-        else
-            R.drawable.ic_play_arrow_white_48dp
-
-        val favoriteResId = if (isFavorite)
-            R.drawable.ic_favorite_white_24dp
-        else
-            R.drawable.ic_favorite_border_white_24dp
-
+        val playButtonResId = if (isPlaying) R.drawable.ic_pause_white_48dp else R.drawable.ic_play_arrow_white_48dp
+        val favoriteResId = if (isFavorite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp
 
         val action = Intent(service, MainActivity::class.java)
         action.putExtra("expand", true)
@@ -99,30 +91,10 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                 bitmapFinal = BitmapFactory.decodeResource(service.resources, R.drawable.default_album_art)
                             }
 
-
-                            val toggleFavorite = NotificationCompat.Action(favoriteResId,
-                                    service.getString(R.string.action_toggle_favorite),
-                                    retrievePlaybackAction(TOGGLE_FAVORITE))
-
-                            val playPauseAction = NotificationCompat.Action(
-                                    playButtonResId,
-                                    service.getString(R.string.action_play_pause),
-                                    retrievePlaybackAction(ACTION_TOGGLE_PAUSE))
-
-                            val closeAction = NotificationCompat.Action(
-                                    R.drawable.ic_close_white_24dp,
-                                    service.getString(R.string.close_notification),
-                                    retrievePlaybackAction(ACTION_QUIT))
-
-                            val previousAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_previous_round_white_32dp,
-                                    service.getString(R.string.action_previous),
-                                    retrievePlaybackAction(ACTION_REWIND))
-
-                            val nextAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_next_round_white_32dp,
-                                    service.getString(R.string.action_next),
-                                    retrievePlaybackAction(ACTION_SKIP))
+                            val toggleFavorite = NotificationCompat.Action(favoriteResId, service.getString(R.string.action_toggle_favorite), retrievePlaybackAction(TOGGLE_FAVORITE))
+                            val playPauseAction = NotificationCompat.Action(playButtonResId, service.getString(R.string.action_play_pause), retrievePlaybackAction(ACTION_TOGGLE_PAUSE))
+                            val previousAction = NotificationCompat.Action(R.drawable.ic_skip_previous_round_white_32dp, service.getString(R.string.action_previous), retrievePlaybackAction(ACTION_REWIND))
+                            val nextAction = NotificationCompat.Action(R.drawable.ic_skip_next_round_white_32dp, service.getString(R.string.action_next), retrievePlaybackAction(ACTION_SKIP))
 
                             val builder = NotificationCompat.Builder(service,
                                     NOTIFICATION_CHANNEL_ID)
@@ -139,7 +111,6 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                     .addAction(previousAction)
                                     .addAction(playPauseAction)
                                     .addAction(nextAction)
-                                    .addAction(closeAction)
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                                 builder.setStyle(MediaStyle()

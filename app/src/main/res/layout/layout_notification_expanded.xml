@@ -16,6 +16,7 @@
             android:id="@+id/largeIcon"
             android:layout_width="@dimen/notification_big_image_size"
             android:layout_height="@dimen/notification_big_image_size"
+            android:forceDarkAllowed="false"
             android:layout_alignParentEnd="true"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />

@@ -54,9 +54,6 @@ public class OptionMenuItemView extends FrameLayout {
     public OptionMenuItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
 
-        int accentColor = ThemeStore.Companion.accentColor(context);
-        int colorWithAlpha = ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f);
-
         setBackground(ContextCompat.getDrawable(context, R.drawable.option_menu_background));
 
         setClickable(true);

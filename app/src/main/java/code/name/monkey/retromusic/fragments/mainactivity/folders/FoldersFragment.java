@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments.mainactivity.folders;
 import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -231,15 +232,14 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private void setUpAppbarColor() {
         int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setBackgroundColor(RetroColorUtil.toolbarColor(getMainActivity()));
+        toolbar.setBackgroundTintList(ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(v -> {
             showMainMenu(OptionsSheetDialogFragment.FOLDER);
         });
         breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(),
-                ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(getContext())));
+        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(requireContext())));
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
             NavigationUtil.goToSearch(getMainActivity(), options);

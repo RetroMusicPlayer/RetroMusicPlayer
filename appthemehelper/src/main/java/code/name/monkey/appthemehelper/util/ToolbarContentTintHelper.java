@@ -199,18 +199,24 @@ public final class ToolbarContentTintHelper {
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, int toolbarColor) {
+                                                                 Toolbar toolbar,
+                                                                 int toolbarColor) {
         setToolbarContentColorBasedOnToolbarColor(context, toolbar, null, toolbarColor);
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, @Nullable Menu menu, int toolbarColor) {
+                                                                 Toolbar toolbar,
+                                                                 @Nullable Menu menu,
+                                                                 int toolbarColor) {
         setToolbarContentColorBasedOnToolbarColor(context, toolbar, menu, toolbarColor,
                 ThemeStore.Companion.accentColor(context));
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, @Nullable Menu menu, int toolbarColor, final @ColorInt int menuWidgetColor) {
+                                                                 Toolbar toolbar,
+                                                                 @Nullable Menu menu,
+                                                                 int toolbarColor,
+                                                                 final @ColorInt int menuWidgetColor) {
         setToolbarContentColor(context, toolbar, menu, toolbarContentColor(context, toolbarColor),
                 toolbarTitleColor(context, toolbarColor), toolbarSubtitleColor(context, toolbarColor),
                 menuWidgetColor);

@@ -48,16 +48,18 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="?android:attr/textColorPrimary"
                 android:textStyle="bold"
-                tools:text="@string/bug_report_summary" />
+                tools:text="@tools:sample/lorem" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="4dp"
+                android:paddingTop="2dp"
                 android:singleLine="true"
-                tools:text="@string/bug_report_summary" />
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="@tools:sample/lorem" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

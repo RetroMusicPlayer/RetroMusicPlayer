@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="md_font_title">@font/circular</item>
@@ -17,6 +31,7 @@
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -38,25 +53,7 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-
-    </style>
-
-    <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="md_font_title">@font/circular</item>
-        <item name="md_font_body">@font/circular</item>
-        <item name="md_font_button">@font/circular</item>
-        <item name="md_background_color">@color/blackColorSurface</item>
-        <item name="roundSelector">@drawable/round_selector</item>
-        <item name="rectSelector">@drawable/rect_selector</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowActivityTransitions">true</item>
-        <item name="android:fontFamily">@font/circular</item>
-        <item name="windowActionBarOverlay">true</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
-        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-        <item name="colorSurface">@color/blackColorSurface</item>
-        <item name="colorOnBackground">@color/blackColorSurface</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -77,40 +74,6 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
-    </style>
-
-
-    <style name="MusicProgressSliderParent">
-        <item name="android:progressDrawable">@android:color/transparent</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:thumb">@drawable/slider_thumb</item>
-    </style>
-
-    <!-- content description is necessary to find the overflow button later in the layout-->
-    <style name="Widget.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
-        <item name="android:contentDescription">@string/abc_action_menu_overflow_description</item>
-    </style>
-
-    <style name="FabParent">
-        <item name="borderWidth">0dp</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-
-    <style name="MaterialAlertDialogTheme" parent="@style/ThemeOverlay.MaterialComponents.Dialog">
-        <item name="android:dialogCornerRadius" tools:targetApi="p">12dp</item>
-    </style>
-
-    <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">8dp</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconTint">?attr/colorControlNormal</item>
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textAppearance">@style/TextViewNormal</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:paddingTop">@dimen/button_padding_vertical</item>
-        <item name="android:paddingBottom">@dimen/button_padding_vertical</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 </resources>

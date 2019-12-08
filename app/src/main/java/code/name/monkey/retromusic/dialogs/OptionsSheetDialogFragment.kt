@@ -86,7 +86,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         }
 
         return super.onCreateView(inflater, container, savedInstanceState)
-
     }
 
     companion object {

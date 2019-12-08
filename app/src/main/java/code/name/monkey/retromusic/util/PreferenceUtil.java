@@ -657,9 +657,7 @@ public final class PreferenceUtil {
     }
 
     public void saveProfileImage(String profileImagePath) {
-        mPreferences.edit().putString(PROFILE_IMAGE_PATH, profileImagePath)
-                .apply();
-
+        mPreferences.edit().putString(PROFILE_IMAGE_PATH, profileImagePath).apply();
     }
 
     public String getProfileImage() {

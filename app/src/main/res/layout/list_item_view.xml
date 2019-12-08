@@ -17,7 +17,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/rectSelector"
+    android:background="?selectableItemBackground"
     android:minHeight="72dp"
     android:orientation="horizontal"
     android:padding="16dp"

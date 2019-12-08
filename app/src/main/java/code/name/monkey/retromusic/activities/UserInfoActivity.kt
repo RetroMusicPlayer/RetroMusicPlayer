@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities
 
 import android.app.Activity
-import android.content.ContentUris
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
@@ -9,7 +8,6 @@ import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.provider.DocumentsContract
 import android.provider.MediaStore.Images.Media
 import android.provider.MediaStore.Images.Media.getBitmap
 import android.text.TextUtils
@@ -123,10 +121,7 @@ class UserInfoActivity : AbsBaseActivity() {
         pickImageIntent.putExtra("aspectY", 9)
         pickImageIntent.putExtra("scale", true)
         //intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(pickImageIntent, "Select Picture"),
-                PICK_BANNER_REQUEST
-        )
+        startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_BANNER_REQUEST)
     }
 
     private fun pickNewPhoto() {
@@ -138,10 +133,7 @@ class UserInfoActivity : AbsBaseActivity() {
         pickImageIntent.putExtra("aspectX", 1)
         pickImageIntent.putExtra("aspectY", 1)
         pickImageIntent.putExtra("scale", true)
-        startActivityForResult(
-                Intent.createChooser(pickImageIntent, "Select Picture"),
-                PICK_IMAGE_REQUEST
-        )
+        startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_IMAGE_REQUEST)
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -180,32 +172,6 @@ class UserInfoActivity : AbsBaseActivity() {
         }
     }
 
-    private fun getImagePathFromUri(aUri: Uri?): String? {
-        var imagePath: String? = null
-        if (aUri == null) {
-            return imagePath
-        }
-        if (DocumentsContract.isDocumentUri(App.getContext(), aUri)) {
-            val documentId = DocumentsContract.getDocumentId(aUri)
-            if ("com.android.providers.media.documents" == aUri.authority) {
-                val id = documentId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-                val selection = Media._ID + "=" + id
-                imagePath = getImagePath(Media.EXTERNAL_CONTENT_URI, selection)
-            } else if ("com.android.providers.downloads.documents" == aUri.authority) {
-                val contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"),
-                        java.lang.Long.valueOf(documentId)
-                )
-                imagePath = getImagePath(contentUri, null)
-            }
-        } else if ("content".equals(aUri.scheme!!, ignoreCase = true)) {
-            imagePath = getImagePath(aUri, null)
-        } else if ("file".equals(aUri.scheme!!, ignoreCase = true)) {
-            imagePath = aUri.path
-        }
-        return imagePath
-    }
-
     private fun getImagePath(aUri: Uri, aSelection: String?): String? {
         var path: String? = null
         val cursor = App.getContext().contentResolver.query(aUri, null, aSelection, null, null)
@@ -219,27 +185,25 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun loadBannerFromStorage(profileImagePath: String) {
-        disposable.add(
-                Compressor(this).setQuality(100).setCompressFormat(Bitmap.CompressFormat.WEBP).compressToBitmapAsFlowable(
-                        File(profileImagePath, USER_BANNER)
-                ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        { bitmap -> bannerImage.setImageBitmap(bitmap) },
-                        { t -> println() })
+        disposable.add(Compressor(this).setQuality(100)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(File(profileImagePath, USER_BANNER))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ bitmap -> bannerImage.setImageBitmap(bitmap) }, { t -> println(t) })
         )
     }
 
     private fun loadImageFromStorage(path: String) {
-        disposable.add(
-                Compressor(this).setMaxHeight(300).setMaxWidth(300).setQuality(75).setCompressFormat(
-                        Bitmap.CompressFormat.WEBP
-                ).compressToBitmapAsFlowable(
-                        File(
-                                path,
-                                USER_PROFILE
-                        )
-                ).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
-                        { bitmap -> userImage!!.setImageBitmap(bitmap) },
-                        { t -> println() })
+        disposable.add(Compressor(this)
+                .setMaxHeight(300)
+                .setMaxWidth(300)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .compressToBitmapAsFlowable(File(path, USER_PROFILE))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ bitmap -> userImage.setImageBitmap(bitmap) }, { t -> println(t) })
         )
     }
 

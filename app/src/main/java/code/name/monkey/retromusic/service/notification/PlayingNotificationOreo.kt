@@ -114,7 +114,7 @@ class PlayingNotificationOreo : PlayingNotification() {
 
                         override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
                             super.onLoadFailed(e, errorDrawable)
-                            update(null, ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE))
+                            update(null, ATHUtil.resolveColor(service, R.attr.colorSurface, Color.WHITE))
                         }
 
                         private fun update(bitmap: Bitmap?, bgColor: Int) {
