@@ -50,7 +50,7 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
         recyclerViewSwipeManager = RecyclerViewSwipeManager()
 
         val animator = DraggableItemAnimator()
-        animator.supportsChangeAnimations = false;
+        animator.supportsChangeAnimations = false
         wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(adapter!!) as RecyclerView.Adapter<*>
         wrappedAdapter = recyclerViewSwipeManager?.createWrappedAdapter(wrappedAdapter) as RecyclerView.Adapter<*>
         recyclerView().layoutManager = layoutManager

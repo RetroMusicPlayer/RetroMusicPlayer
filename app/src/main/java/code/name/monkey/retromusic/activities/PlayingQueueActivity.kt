@@ -15,8 +15,10 @@ import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
+import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
+import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playing_queue.*
 
@@ -24,6 +26,8 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private var wrappedAdapter: RecyclerView.Adapter<*>? = null
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
+    private var recyclerViewSwipeManager: RecyclerViewSwipeManager? = null
+    private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
     private var playingQueueAdapter: PlayingQueueAdapter? = null
     private lateinit var linearLayoutManager: LinearLayoutManager
 
@@ -61,8 +65,12 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setUpRecyclerView() {
+        recyclerViewTouchActionGuardManager = RecyclerViewTouchActionGuardManager()
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
-        val animator = RefactoredDefaultItemAnimator()
+        recyclerViewSwipeManager = RecyclerViewSwipeManager()
+
+        val animator = DraggableItemAnimator()
+        animator.supportsChangeAnimations = false
 
         playingQueueAdapter = PlayingQueueAdapter(
                 this,
@@ -71,16 +79,16 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
                 R.layout.item_queue
         )
         wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(playingQueueAdapter!!)
+        wrappedAdapter = wrappedAdapter?.let { recyclerViewSwipeManager?.createWrappedAdapter(it) }
 
         linearLayoutManager = LinearLayoutManager(this)
 
-        recyclerView.apply {
-            layoutManager = linearLayoutManager
-            adapter = wrappedAdapter
-            itemAnimator = animator
-            recyclerViewDragDropManager?.attachRecyclerView(this)
-        }
-
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = wrappedAdapter
+        recyclerView.itemAnimator = animator
+        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView)
+        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
+        recyclerViewSwipeManager?.attachRecyclerView(recyclerView)
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -151,7 +159,10 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
             recyclerViewDragDropManager!!.release()
             recyclerViewDragDropManager = null
         }
-
+        if (recyclerViewSwipeManager != null) {
+            recyclerViewSwipeManager?.release()
+            recyclerViewSwipeManager = null
+        }
         if (wrappedAdapter != null) {
             WrapperAdapterUtils.releaseAll(wrappedAdapter)
             wrappedAdapter = null
