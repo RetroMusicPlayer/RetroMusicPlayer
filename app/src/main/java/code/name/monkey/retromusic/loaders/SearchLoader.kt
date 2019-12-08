@@ -41,10 +41,7 @@ object SearchLoader {
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val genres: List<Genre> = GenreLoader.getAllGenres(context).filter { genre -> genre.name.toLowerCase(Locale.getDefault()).contains(searchString.toLowerCase(Locale.getDefault())) }
-             genres.forEach {
-                 println(it.name)
-             }
+            val genres: List<Genre> = GenreLoader.searchGenres(context).filter { genre -> genre.name.toLowerCase(Locale.getDefault()).contains(searchString.toLowerCase(Locale.getDefault())) }
             if (genres.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)

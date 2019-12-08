@@ -20,8 +20,6 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
-import java.util.*
-import kotlin.collections.ArrayList
 import android.util.Pair as UtilPair
 
 class SearchAdapter(
@@ -70,7 +68,6 @@ class SearchAdapter(
             GENRE -> {
                 val genre = dataSet?.get(position) as Genre
                 holder.title?.text = genre.name
-                holder.text?.text = String.format(Locale.getDefault(), "%d %s", genre.songCount, if (genre.songCount > 1) activity.getString(R.string.songs) else activity.getString(R.string.song))
             }
             else -> {
                 holder.title?.text = dataSet?.get(position).toString()

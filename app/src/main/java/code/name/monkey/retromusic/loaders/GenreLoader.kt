@@ -24,14 +24,16 @@ import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
 
 
 object GenreLoader {
 
-
     fun getAllGenres(context: Context): ArrayList<Genre> {
         return getGenresFromCursor(context, makeGenreCursor(context))
+    }
+
+    fun searchGenres(context: Context): ArrayList<Genre> {
+        return getGenresFromCursorForSearch(context, makeGenreCursor(context));
     }
 
     fun getSongs(context: Context, genreId: Int): ArrayList<Song> {
@@ -49,6 +51,12 @@ object GenreLoader {
         val songCount = getSongs(context, id).size
         return Genre(id, name, songCount)
 
+    }
+
+    private fun getGenreFromCursorWithOutSongs(context: Context, cursor: Cursor): Genre {
+        val id = cursor.getInt(0)
+        val name = cursor.getString(1)
+        return Genre(id, name, -1)
     }
 
     private fun getSongsWithNoGenre(context: Context): ArrayList<Song> {
@@ -107,7 +115,6 @@ object GenreLoader {
                             context.contentResolver.delete(Genres.EXTERNAL_CONTENT_URI, Genres._ID + " == " + genre.id, null)
                         } catch (e: Exception) {
                             e.printStackTrace()
-                            // nothing we can do then
                         }
 
                     }
@@ -118,18 +125,24 @@ object GenreLoader {
         return genres
     }
 
+    private fun getGenresFromCursorForSearch(context: Context, cursor: Cursor?): ArrayList<Genre> {
+        val genres = arrayListOf<Genre>()
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                genres.add(getGenreFromCursorWithOutSongs(context, cursor))
+            } while (cursor.moveToNext())
+        }
+        cursor?.close()
+        return genres
+    }
+
 
     private fun makeGenreCursor(context: Context): Cursor? {
         val projection = arrayOf(Genres._ID, Genres.NAME)
-
         try {
-            return context.contentResolver.query(
-                    Genres.EXTERNAL_CONTENT_URI,
-                    projection, null, null, PreferenceUtil.getInstance(context).genreSortOrder)
+            return context.contentResolver.query(Genres.EXTERNAL_CONTENT_URI, projection, null, null, PreferenceUtil.getInstance(context).genreSortOrder)
         } catch (e: SecurityException) {
             return null
         }
-
     }
-
 }
