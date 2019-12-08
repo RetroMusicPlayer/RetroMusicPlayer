@@ -47,6 +47,16 @@
             android:textColor="?android:attr/textColorPrimary"
             tools:text="@tools:sample/lorem/random" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/actionPrevious"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="?roundSelector"
+            android:padding="6dp"
+            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+            app:tint="?attr/colorControlNormal" />
+
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,6 +84,16 @@
                 android:rotation="270"
                 tools:progress="80" />
         </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/actionNext"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:background="?roundSelector"
+            android:padding="6dp"
+            app:srcCompat="@drawable/ic_skip_next_white_24dp"
+            app:tint="?attr/colorControlNormal" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPlayingQueue"

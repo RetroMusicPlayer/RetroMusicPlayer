@@ -49,14 +49,20 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         setUpMiniPlayer()
 
         if (RetroUtil.isTablet()) {
+            actionNext.visibility = View.VISIBLE
+            actionPrevious.visibility = View.VISIBLE
             actionNext?.visibility = View.VISIBLE
             actionPrevious?.visibility = View.VISIBLE
             actionPlayingQueue.visibility = View.VISIBLE
         } else {
+            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
             actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.GONE else View.VISIBLE
+            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
         }
 
         actionPlayingQueue.setOnClickListener(this)
+        actionNext.setOnClickListener(this)
+        actionPrevious.setOnClickListener(this)
         actionNext?.setOnClickListener(this)
         actionPrevious?.setOnClickListener(this)
 
