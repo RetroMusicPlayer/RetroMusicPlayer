@@ -885,13 +885,14 @@ public final class PreferenceUtil {
 
     @NonNull
     public List<CategoryInfo> getDefaultLibraryCategoryInfos() {
-        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(6);
+        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(7);
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.HOME, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.SONGS, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ALBUMS, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ARTISTS, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
         defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, false));
+        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.QUEUE, false));
         return defaultCategoryInfos;
     }
 

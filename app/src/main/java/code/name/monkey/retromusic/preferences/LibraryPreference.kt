@@ -61,11 +61,10 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = requireActivity().layoutInflater.inflate(R.layout.preference_dialog_library_categories, null)
 
-        val categoryInfos: List<CategoryInfo>
-        if (savedInstanceState != null) {
-            categoryInfos = savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
+        val categoryInfos: List<CategoryInfo> = if (savedInstanceState != null) {
+            savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
         } else {
-            categoryInfos = PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos
+            PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos
         }
         adapter = CategoryInfoAdapter(categoryInfos)
 

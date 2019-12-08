@@ -3,6 +3,7 @@
     <item name="action_new_playlist" type="id" />
     <item name="action_show_lyrics" type="id" />
     <item name="action_genre" type="id" />
+    <item name="action_playing_queue" type="id" />
     <item name="action_album_sort_order_asc" type="id" />
     <item name="action_album_sort_order_desc" type="id" />
     <item name="action_album_sort_order_artist" type="id" />

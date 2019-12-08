@@ -136,6 +136,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             case R.id.action_genre:
                 selectedFragment(GenresFragment.Companion.newInstance());
                 break;
+            case R.id.action_playing_queue:
+                selectedFragment(PlayingQueueFragment.Companion.newInstance());
+                break;
         }
     }
 

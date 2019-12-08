@@ -223,30 +223,15 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     }
 
-    private fun showPromotionalOffer() {
-        /*MaterialDialog(this).show {
-            positiveButton(text = "Buy") { startActivity(Intent(this@MainActivity, PurchaseActivity::class.java)) }
-            negativeButton(android.R.string.cancel)
-            customView(R.layout.dialog_promotional_offer)
-            onDismiss {
-                PreferenceManager.getDefaultSharedPreferences(this@MainActivity)
-                        .edit()
-                        .putBoolean("shown", true)
-                        .apply()
-            }
-        }*/
-    }
-
     private fun selectedFragment(itemId: Int) {
         when (itemId) {
-            R.id.action_album, R.id.action_artist, R.id.action_playlist, R.id.action_genre, R.id.action_song -> setCurrentFragment(
-                    LibraryFragment.newInstance(itemId),
-                    itemId.toString()
-            )
-            R.id.action_home -> setCurrentFragment(
-                    BannerHomeFragment.newInstance(),
-                    BannerHomeFragment.TAG
-            )
+            R.id.action_album,
+            R.id.action_artist,
+            R.id.action_playlist,
+            R.id.action_genre,
+            R.id.action_playing_queue,
+            R.id.action_song -> setCurrentFragment(LibraryFragment.newInstance(itemId), itemId.toString())
+            R.id.action_home -> setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             else -> {
                 setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG)
             }
