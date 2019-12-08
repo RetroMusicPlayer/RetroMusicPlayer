@@ -153,7 +153,11 @@ object MusicPlayerRemote {
         }
         return null
     }
-
+    fun getQueueDurationSongs(): Int {
+        return if (musicService != null) {
+            musicService!!.playingQueue.size
+        } else -1
+    }
     /**
      * Async
      */

@@ -23,8 +23,10 @@ import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.ViewUtil
-import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
+import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
+import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
+import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playing_queue.*
 
@@ -33,28 +35,32 @@ import kotlinx.android.synthetic.main.activity_playing_queue.*
  */
 class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>() {
 
-    private var wrappedAdapter: RecyclerView.Adapter<*>? = null
+    private lateinit var wrappedAdapter: RecyclerView.Adapter<*>
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null
+    private var recyclerViewSwipeManager: RecyclerViewSwipeManager? = null
+    private var recyclerViewTouchActionGuardManager: RecyclerViewTouchActionGuardManager? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
     }
-
     private fun setupRecyclerView() {
+        recyclerViewTouchActionGuardManager = RecyclerViewTouchActionGuardManager()
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
-        val animator = RefactoredDefaultItemAnimator()
+        recyclerViewSwipeManager = RecyclerViewSwipeManager()
 
-        wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(createAdapter())
+        val animator = DraggableItemAnimator()
+        animator.supportsChangeAnimations = false;
+        wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(adapter!!) as RecyclerView.Adapter<*>
+        wrappedAdapter = recyclerViewSwipeManager?.createWrappedAdapter(wrappedAdapter) as RecyclerView.Adapter<*>
+        recyclerView().layoutManager = layoutManager
+        recyclerView().adapter = wrappedAdapter
+        recyclerView().itemAnimator = animator
+        recyclerViewTouchActionGuardManager?.attachRecyclerView(recyclerView)
+        recyclerViewDragDropManager?.attachRecyclerView(recyclerView)
+        recyclerViewSwipeManager?.attachRecyclerView(recyclerView)
 
-
-        recyclerView.apply {
-            layoutManager = createLayoutManager()
-            adapter = wrappedAdapter
-            itemAnimator = animator
-            recyclerViewDragDropManager?.attachRecyclerView(this)
-        }
-        createLayoutManager().scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
+        layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
         ViewUtil.setUpFastScrollRecyclerViewColor(requireContext(), recyclerView)
     }
 
@@ -64,6 +70,11 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
 
     override fun createAdapter(): PlayingQueueAdapter {
         return PlayingQueueAdapter(requireActivity() as AppCompatActivity, MusicPlayerRemote.playingQueue, MusicPlayerRemote.position, R.layout.item_queue)
+    }
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        updateQueue()
     }
 
     override fun onQueueChanged() {
@@ -87,7 +98,7 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
 
     private fun resetToCurrentPosition() {
         recyclerView.stopScroll()
-        createLayoutManager().scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
+        layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
     override fun onPause() {
@@ -101,14 +112,16 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
     override fun onDestroyView() {
         super.onDestroyView()
         if (recyclerViewDragDropManager != null) {
-            recyclerViewDragDropManager!!.release()
+            recyclerViewDragDropManager?.release()
             recyclerViewDragDropManager = null
         }
 
-        if (wrappedAdapter != null) {
-            WrapperAdapterUtils.releaseAll(wrappedAdapter)
-            wrappedAdapter = null
+        if (recyclerViewSwipeManager != null) {
+            recyclerViewSwipeManager?.release()
+            recyclerViewSwipeManager = null
         }
+
+        WrapperAdapterUtils.releaseAll(wrappedAdapter)
     }
 
     companion object {

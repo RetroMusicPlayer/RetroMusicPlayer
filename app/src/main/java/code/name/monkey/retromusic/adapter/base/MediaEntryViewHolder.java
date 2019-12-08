@@ -25,11 +25,12 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
+import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableSwipeableItemViewHolder;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
 
-public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHolder implements View.OnLongClickListener, View.OnClickListener {
     @Nullable
     public TextView title;
 
@@ -71,6 +72,8 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
 
     @Nullable
     public ImageView image;
+    @Nullable
+    public View dummyContainer;
 
     public MediaEntryViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -91,12 +94,18 @@ public class MediaEntryViewHolder extends RecyclerView.ViewHolder implements Vie
         recyclerView = itemView.findViewById(R.id.recycler_view);
         mask = itemView.findViewById(R.id.mask);
         playSongs = itemView.findViewById(R.id.playSongs);
+        dummyContainer = itemView.findViewById(R.id.dummy_view);
 
         if (imageContainerCard != null) {
             imageContainerCard.setCardBackgroundColor(ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorSurface));
         }
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
+    }
+
+    @Override
+    public View getSwipeableContainerView() {
+        return null;
     }
 
     @Override
