@@ -17,81 +17,73 @@ package code.name.monkey.retromusic.glide.artistimage
 import android.content.Context
 import code.name.monkey.retromusic.deezer.Data
 import code.name.monkey.retromusic.deezer.DeezerApiService
-import code.name.monkey.retromusic.deezer.DeezerResponse
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority
-import com.bumptech.glide.integration.okhttp3.OkHttpStreamFetcher
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.Options
+import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.data.DataFetcher
+import com.bumptech.glide.load.model.GenericLoaderFactory
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.ModelLoader
 import com.bumptech.glide.load.model.ModelLoaderFactory
-import com.bumptech.glide.load.model.MultiModelLoaderFactory
-import com.bumptech.glide.signature.ObjectKey
+import com.bumptech.glide.load.model.stream.StreamModelLoader
 import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
 
 class ArtistImage(val artistName: String, val skipOkHttpCache: Boolean)
 
-class ArtistImageFetcher(private val context: Context,
-                         private val deezerApiService: DeezerApiService,
-                         private val okHttp: OkHttpClient,
-                         private val model: ArtistImage) : DataFetcher<InputStream> {
-    @Volatile
+class ArtistImageFetcher(
+        private val context: Context,
+        private val deezerApiService: DeezerApiService,
+        val model: ArtistImage,
+        val urlLoader: ModelLoader<GlideUrl, InputStream>,
+        val width: Int,
+        val height: Int
+) : DataFetcher<InputStream> {
+
+    private var urlFetcher: DataFetcher<InputStream>? = null
     private var isCancelled: Boolean = false
-    private var call: Call<DeezerResponse>? = null
-    private var streamFetcher: OkHttpStreamFetcher? = null
 
-
-    override fun getDataClass(): Class<InputStream> {
-        return InputStream::class.java
+    override fun cleanup() {
+        urlFetcher?.cleanup()
     }
 
-    override fun getDataSource(): DataSource {
-        return DataSource.LOCAL
+    override fun getId(): String {
+        return model.artistName
     }
 
-    override fun loadData(priority: Priority, callback: DataFetcher.DataCallback<in InputStream>) {
-        try {
-            if (!MusicUtil.isArtistNameUnknown(model.artistName) && RetroUtil.isAllowedToDownloadMetadata(context)) {
-                val artists = model.artistName.split(",")
-                call = deezerApiService.getArtistImage(artists[0])
-                call?.enqueue(object : Callback<DeezerResponse> {
-                    override fun onFailure(call: Call<DeezerResponse>, t: Throwable) {
-                        callback.onLoadFailed(Exception(t))
-                    }
+    override fun cancel() {
+        isCancelled = true
+        urlFetcher?.cancel()
+    }
 
-                    override fun onResponse(call: Call<DeezerResponse>, response: Response<DeezerResponse>) {
-                        if (isCancelled) {
-                            callback.onDataReady(null)
-                            return
-                        }
-                        try {
-                            val deezerResponse: DeezerResponse? = response.body()
-                            val url = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
-                            streamFetcher = OkHttpStreamFetcher(okHttp, GlideUrl(url))
-                            streamFetcher?.loadData(priority, callback)
-                        } catch (e: Exception) {
-                            callback.onLoadFailed(Exception("No artist image url found"))
-                        }
-                    }
+    override fun loadData(priority: Priority?): InputStream? {
+        if (!MusicUtil.isArtistNameUnknown(model.artistName) && PreferenceUtil.isAllowedToDownloadMetadata(context)) {
+            val artists = model.artistName.split(",")
+            val response = deezerApiService.getArtistImage(artists[0]).execute()
 
-                })
+            if (!response.isSuccessful) {
+                throw   IOException("Request failed with code: " + response.code());
             }
-        } catch (e: Exception) {
-            callback.onLoadFailed(e)
-        }
 
+            if (isCancelled) return null
+
+            return try {
+                val deezerResponse = response.body();
+                val imageUrl = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
+                val glideUrl = GlideUrl(imageUrl)
+                urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
+                urlFetcher?.loadData(priority)
+            } catch (e: Exception) {
+                null
+            }
+        } else return null
     }
 
-    fun getHighestQuality(imageUrl: Data): String {
+    private fun getHighestQuality(imageUrl: Data): String {
         return when {
             imageUrl.pictureXl.isNotEmpty() -> imageUrl.pictureXl
             imageUrl.pictureBig.isNotEmpty() -> imageUrl.pictureBig
@@ -101,61 +93,49 @@ class ArtistImageFetcher(private val context: Context,
             else -> ""
         }
     }
+}
 
-    override fun cleanup() {
-        if (streamFetcher != null) {
-            streamFetcher!!.cleanup()
-        }
-    }
+class ArtistImageLoader(
+        val context: Context,
+        private val deezerApiService: DeezerApiService,
+        private val urlLoader: ModelLoader<GlideUrl, InputStream>
+) : StreamModelLoader<ArtistImage> {
 
-    override fun cancel() {
-        isCancelled = true
-        call?.cancel()
-        if (streamFetcher != null) {
-            streamFetcher!!.cancel()
-        }
-    }
-
-    companion object {
-        val TAG: String = ArtistImageFetcher::class.java.simpleName
+    override fun getResourceFetcher(model: ArtistImage, width: Int, height: Int): DataFetcher<InputStream> {
+        return ArtistImageFetcher(context, deezerApiService, model, urlLoader, width, height)
     }
 }
 
-class ArtistImageLoader(private val context: Context,
-                        private val deezerApiService: DeezerApiService,
-                        private val okhttp: OkHttpClient) : ModelLoader<ArtistImage, InputStream> {
+class Factory(
+        val context: Context
+) : ModelLoaderFactory<ArtistImage, InputStream> {
+    private var deezerApiService: DeezerApiService
+    private var okHttpFactory: OkHttpUrlLoader.Factory
 
-    override fun buildLoadData(model: ArtistImage, width: Int, height: Int, options: Options): ModelLoader.LoadData<InputStream>? {
-        return ModelLoader.LoadData(ObjectKey(model.artistName), ArtistImageFetcher(context, deezerApiService, okhttp, model))
+    init {
+        okHttpFactory = OkHttpUrlLoader.Factory(OkHttpClient.Builder()
+                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .build())
+        deezerApiService = DeezerApiService.invoke(DeezerApiService.createDefaultOkHttpClient(context)
+                .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .build())
     }
 
-    override fun handles(model: ArtistImage): Boolean {
-        return true
+    override fun build(context: Context?, factories: GenericLoaderFactory?): ModelLoader<ArtistImage, InputStream> {
+        return ArtistImageLoader(context!!, deezerApiService, okHttpFactory.build(context, factories))
     }
 
-    class Factory(private val context: Context) : ModelLoaderFactory<ArtistImage, InputStream> {
-        private val deezerApiService: DeezerApiService =
-                DeezerApiService.invoke(DeezerApiService.createDefaultOkHttpClient(context)
-                        .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                        .readTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                        .writeTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                        .build())
-        private val okHttp: OkHttpClient = OkHttpClient.Builder()
-                .connectTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .readTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .writeTimeout(TIMEOUT.toLong(), TimeUnit.MILLISECONDS)
-                .build()
-
-
-        override fun build(multiFactory: MultiModelLoaderFactory): ModelLoader<ArtistImage, InputStream> {
-            return ArtistImageLoader(context, deezerApiService, okHttp)
-        }
-
-        override fun teardown() {}
+    override fun teardown() {
+        okHttpFactory.teardown()
     }
 
     companion object {
         // we need these very low values to make sure our artist image loading calls doesn't block the image loading queue
-        private const val TIMEOUT = 700
+        private const val TIMEOUT: Long = 700
     }
+
 }

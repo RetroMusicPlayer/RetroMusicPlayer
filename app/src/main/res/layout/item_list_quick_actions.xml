@@ -14,7 +14,6 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -26,29 +25,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_weight="1"
-        android:padding="10dp"
         android:text="@string/action_play_all"
-        android:textAllCaps="false"
-        app:cornerRadius="6dp"
-        app:icon="@drawable/ic_play_arrow_white_24dp"
-        app:iconGravity="textStart"
-        tools:backgroundTint="@color/md_grey_900" />
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_play_arrow_white_24dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:layout_weight="1"
-        android:padding="10dp"
         android:text="@string/shuffle"
-        android:textAllCaps="false"
-        app:cornerRadius="6dp"
-        app:icon="@drawable/ic_shuffle_white_24dp"
-        app:iconGravity="textStart"
-        tools:backgroundTint="@color/md_grey_900" />
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_shuffle_white_24dp" />
 
 </LinearLayout>

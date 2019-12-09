@@ -17,9 +17,5 @@ package code.name.monkey.retromusic.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-/**
- * @author Hemanth S (h4h13).
- */
-
 @Parcelize
-class Genre(val id: Int = -1, val name: String, val songCount: Int) : Parcelable
+data class Genre(val id: Int = -1, val name: String, val songCount: Int) : Parcelable

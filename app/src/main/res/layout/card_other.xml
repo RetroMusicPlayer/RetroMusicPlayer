@@ -1,124 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+            android:id="@+id/sb4"
             style="@style/SubTitleTextAppearance"
-            android:text="@string/others" />
+            android:text="@string/others"
+            android:textAppearance="@style/TextViewOverline"
+            android:textColor="?colorAccent"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        <LinearLayout
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/changelog"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
-            tools:ignore="PrivateResource">
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sb4"
+            app:listItemSummary="@string/changelog_summary"
+            app:listItemTitle="@string/changelog" />
 
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/changelog"
-                app:fontFamily="@font/circular_std_medium" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.85"
-                android:text="@string/changelog_summary" />
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.ListItemView
             android:id="@+id/openSource"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
-            tools:ignore="PrivateResource">
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/changelog"
+            app:listItemSummary="@string/pref_summary_open_source_licences"
+            app:listItemTitle="@string/pref_title_open_source_licences" />
 
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pref_title_open_source_licences"
-                app:fontFamily="@font/circular_std_medium" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.85"
-                android:text="@string/pref_summary_open_source_licences" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <code.name.monkey.retromusic.views.ListItemView
+            android:id="@+id/version"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="?attr/rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="@dimen/md_listitem_height"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="8dp"
-            tools:ignore="PrivateResource">
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/openSource"
+            app:listItemSummary="@string/pref_summary_open_source_licences"
+            app:listItemTitle="@string/version" />
 
-
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                style="@style/TextAppearance.MaterialComponents.Subtitle1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/version"
-                app:fontFamily="@font/circular_std_medium" />
-
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/appVersion"
-                style="@style/TextAppearance.MaterialComponents.Body2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:alpha="0.85"
-                android:text="0.0.0" />
-        </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/madeText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/made_with_love"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="?android:attr/textColorSecondary"
-            android:textSize="12sp" />
-    </LinearLayout>
+            android:textAppearance="@style/TextViewBody1"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/version" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

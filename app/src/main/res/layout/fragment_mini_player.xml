@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<code.name.monkey.retromusic.views.FitSystemWindowsLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mini_player_content"
+    android:id="@+id/miniPlayerContent"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@android:color/transparent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
-    android:focusable="false"
+    android:focusable="true"
     tools:ignore="UnusedAttribute">
 
     <LinearLayout
@@ -17,17 +17,19 @@
         android:paddingStart="0dp"
         android:paddingEnd="8dp">
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/mini_player_image"
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/miniPlayerImage"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
+            app:tint="?attr/colorControlNormal"
             tools:ignore="ContentDescription" />
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/miniPlayerTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -40,54 +42,68 @@
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="@tools:sample/lorem/random" />
 
-
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPrevious"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_previous_white_24dp" />
+            app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+            app:tint="?attr/colorControlNormal" />
 
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/miniPlayerPlayPauseButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="?roundSelector"
-            android:padding="6dp"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_pause_white_24dp"
-            tools:ignore="ContentDescription" />
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
-        <code.name.monkey.retromusic.views.IconImageView
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/miniPlayerPlayPauseButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="?roundSelector"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_pause_white_24dp"
+                app:tint="?attr/colorControlNormal"
+                tools:ignore="ContentDescription" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/circle_progress"
+                android:rotation="270"
+                tools:progress="80" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionNext"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_skip_next_white_24dp" />
+            app:srcCompat="@drawable/ic_skip_next_white_24dp"
+            app:tint="?attr/colorControlNormal" />
 
-        <code.name.monkey.retromusic.views.IconImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/actionPlayingQueue"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:background="?roundSelector"
             android:padding="6dp"
-            app:srcCompat="@drawable/ic_playlist_play_white_24dp" />
+            app:srcCompat="@drawable/ic_playlist_play_white_24dp"
+            app:tint="?attr/colorControlNormal" />
 
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:progress="20"
-        android:progressDrawable="@drawable/color_progress_seek" />
-</code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+</FrameLayout>

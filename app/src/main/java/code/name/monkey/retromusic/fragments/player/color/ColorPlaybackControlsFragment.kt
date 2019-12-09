@@ -1,10 +1,8 @@
 package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ObjectAnimator
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,15 +13,21 @@ import android.widget.SeekBar
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.ViewUtil
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.text
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.title
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
-import kotlinx.android.synthetic.main.media_button.*
+
 
 class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -53,6 +57,8 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
+        title.isSelected = true
+        text.isSelected = true
     }
 
     private fun updateSong() {
@@ -99,9 +105,9 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         title!!.setTextColor(lastPlaybackControlsColor)
         text!!.setTextColor(lastDisabledPlaybackControlsColor)
 
-        setProgressBarColor(lastPlaybackControlsColor, lastDisabledPlaybackControlsColor)
+        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor, true)
 
-        volumeFragment?.setTintableColor(lastPlaybackControlsColor)
+        volumeFragment?.setTintableColor(color)
 
         songCurrentProgress.setTextColor(lastDisabledPlaybackControlsColor)
         songTotalTime.setTextColor(lastDisabledPlaybackControlsColor)
@@ -109,17 +115,6 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
-    }
-
-    private fun setProgressBarColor(c1: Int, c2: Int) {
-        progressSlider.thumbTintList = ColorStateList.valueOf(c1)
-        val ld = progressSlider.progressDrawable as LayerDrawable
-
-        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
-        clipDrawableProgress.setColorFilter(c1, PorterDuff.Mode.SRC_IN)
-
-        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-        clipDrawableBackground.setColorFilter(c2, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {

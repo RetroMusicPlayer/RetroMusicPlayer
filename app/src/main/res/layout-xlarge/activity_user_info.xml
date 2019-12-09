@@ -9,14 +9,16 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:elevation="0dp"
         app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:title="@string/profile" />
+            app:title="@string/profile"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -26,7 +28,7 @@
         android:layout_marginStart="128dp"
         android:layout_marginEnd="128dp"
         android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,13 +59,14 @@
                         android:layout_height="228dp"
                         android:background="@color/twenty_percent_black_overlay" />
 
-                    <code.name.monkey.retromusic.views.IconImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="?roundSelector"
                         android:padding="16dp"
-                        app:srcCompat="@drawable/ic_add_photo_white_24dp" />
+                        app:srcCompat="@drawable/ic_add_photo_white_24dp"
+                        app:tint="@color/md_white_1000" />
 
                     <FrameLayout
                         android:layout_width="wrap_content"
@@ -98,12 +101,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:hintEnabled="true">
 
 
@@ -119,12 +122,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/bioContainer"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 app:hintEnabled="true">
 
 
@@ -135,7 +138,8 @@
                     android:background="@null"
                     android:hint="@string/bio"
                     android:inputType="textPersonName|textCapWords|text"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:visibility="gone" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </LinearLayout>
@@ -147,8 +151,8 @@
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
         android:gravity="center"
-        app:iconGravity="textStart"
         android:padding="16dp"
         android:text="@string/save"
-        app:icon="@drawable/ic_save_white_24dp" />
+        app:icon="@drawable/ic_save_white_24dp"
+        app:iconGravity="textStart" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?rectSelector"
+    android:background="?attr/colorSurface"
+    android:foreground="?rectSelector"
     android:gravity="center_vertical|start"
     android:minHeight="@dimen/tab_height"
     android:orientation="horizontal"
-    android:paddingEnd="4dp"
+    android:paddingStart="12dp"
     android:paddingLeft="12dp"
-    android:paddingRight="4dp"
-    android:paddingStart="12dp">
+    android:paddingEnd="4dp"
+    android:paddingRight="4dp">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingEnd="8dp"

@@ -1,9 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <FrameLayout
@@ -20,6 +34,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
@@ -30,17 +45,26 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="6dp"
                 app:cardUseCompatPadding="true"
+                app:layout_collapseMode="pin"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <androidx.appcompat.widget.Toolbar
+                <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:background="?colorSurface"
+                    app:contentInsetStart="0dp"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:popupTheme="?toolbarPopupTheme"
                     app:title="@string/search_hint"
                     app:titleMarginStart="0dp"
-                    app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                     tools:ignore="UnusedAttribute" />
             </com.google.android.material.card.MaterialCardView>
 
@@ -49,30 +73,60 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/horizontal_margin"
-            android:layout_marginEnd="@dimen/horizontal_margin"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+            android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <LinearLayout
-                android:id="@+id/contentContainer"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:descendantFocusability="blocksDescendants"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
+                <code.name.monkey.retromusic.views.CircularImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:civ_border="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
 
-                <include layout="@layout/abs_playlists" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false" />
-            </LinearLayout>
+                    android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:text="@string/welcome"
+                    app:layout_constraintStart_toEndOf="@+id/userImage"
+                    app:layout_constraintTop_toTopOf="@+id/userImage"
+                    tools:text="@tools:sample/lorem" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/titleWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:padding="0dp"
+                    android:textAppearance="@style/TextViewHeadline5"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/userImage"
+                    app:layout_constraintStart_toEndOf="@+id/userImage"
+                    app:layout_constraintTop_toBottomOf="@+id/text"
+                    tools:text="@tools:sample/lorem" />
+
+                <include
+                    layout="@layout/home_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/titleWelcome" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>
-
-

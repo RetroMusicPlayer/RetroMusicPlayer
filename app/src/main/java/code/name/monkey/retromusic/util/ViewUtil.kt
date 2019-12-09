@@ -28,42 +28,28 @@ import android.view.View
 import android.view.animation.PathInterpolator
 import android.widget.ProgressBar
 import android.widget.SeekBar
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.R
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 object ViewUtil {
 
     const val RETRO_MUSIC_ANIM_TIME = 1000
 
-    fun createTextColorTransition(v: TextView, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "textColor", startColor, endColor)
-    }
-
-    fun createBackgroundColorTransition(v: View, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
-        return createColorAnimator(v, "backgroundColor", startColor, endColor)
-    }
-
     fun setProgressDrawable(progressSlider: SeekBar, newColor: Int, thumbTint: Boolean = false) {
 
         if (thumbTint) {
             progressSlider.thumbTintList = ColorStateList.valueOf(newColor)
         }
-
-        if (progressSlider.progressDrawable is LayerDrawable) {
-            val ld = progressSlider.progressDrawable as LayerDrawable?
-
-            if (ld != null) {
-                val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
-                clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-
-                val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-                clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
-            }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            val layerDrawable = progressSlider.progressDrawable as LayerDrawable
+            val progressDrawable = layerDrawable.findDrawableByLayerId(android.R.id.progress)
+            progressDrawable.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
         } else {
             progressSlider.progressTintList = ColorStateList.valueOf(newColor)
         }
@@ -73,15 +59,22 @@ object ViewUtil {
 
         val ld = progressSlider.progressDrawable as LayerDrawable
 
-        val clipDrawableProgress = ld.findDrawableByLayerId(android.R.id.progress)
-        clipDrawableProgress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+        val progress = ld.findDrawableByLayerId(android.R.id.progress)
+        progress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
-        val clipDrawableBackground = ld.findDrawableByLayerId(android.R.id.background)
-        clipDrawableBackground.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(ThemeStore.primaryColor(progressSlider.context))), PorterDuff.Mode.SRC_IN)
+        val background = ld.findDrawableByLayerId(android.R.id.background)
+        val primaryColor = ATHUtil.resolveColor(progressSlider.context, android.R.attr.windowBackground)
+        background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(primaryColor)), PorterDuff.Mode.SRC_IN)
 
+        val secondaryProgress = ld.findDrawableByLayerId(android.R.id.secondaryProgress)
+        secondaryProgress?.setColorFilter(
+                ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN
+        )
     }
 
-    private fun createColorAnimator(target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int): Animator {
+    private fun createColorAnimator(
+            target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int
+    ): Animator {
         val animator: ObjectAnimator
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animator = ObjectAnimator.ofArgb(target, propertyName, startColor, endColor)
@@ -97,21 +90,6 @@ object ViewUtil {
         return animator
     }
 
-    fun setStatusBarHeight(context: Context, statusBar: View) {
-        val lp = statusBar.layoutParams
-        lp.height = getStatusBarHeight(context)
-        statusBar.requestLayout()
-    }
-
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = context.resources.getDimensionPixelSize(resourceId)
-        }
-        return result
-    }
-
     fun hitTest(v: View, x: Int, y: Int): Boolean {
         val tx = (ViewCompat.getTranslationX(v) + 0.5f).toInt()
         val ty = (ViewCompat.getTranslationY(v) + 0.5f).toInt()
@@ -123,14 +101,16 @@ object ViewUtil {
         return x in left..right && y >= top && y <= bottom
     }
 
-    fun setUpFastScrollRecyclerViewColor(context: Context,
-                                         recyclerView: FastScrollRecyclerView, accentColor: Int) {
+    fun setUpFastScrollRecyclerViewColor(
+            context: Context,
+            recyclerView: FastScrollRecyclerView,
+            accentColor: Int = ThemeStore.accentColor(context)
+    ) {
         recyclerView.setPopupBgColor(accentColor)
-        recyclerView.setPopupTextColor(
-                MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
+        recyclerView.setPopupTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
         recyclerView.setThumbColor(accentColor)
         recyclerView.setTrackColor(Color.TRANSPARENT)
-        //recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f));
+        recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f))
     }
 
     fun convertDpToPixel(dp: Float, resources: Resources): Float {

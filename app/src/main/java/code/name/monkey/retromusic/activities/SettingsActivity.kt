@@ -1,51 +1,44 @@
 package code.name.monkey.retromusic.activities
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
-import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_settings.*
 
-
-class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+class SettingsActivity : AbsBaseActivity() {
 
     private val fragmentManager = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
-
         setLightNavigationBar(true)
 
         setupToolbar()
 
         if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment())
-                    .commit()
+            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment()).commit()
         }
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(toolbar)
         setTitle(R.string.action_settings)
         toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(context))
+            setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorSurface))
             setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(context))
+            ToolbarContentTintHelper.colorBackButton(toolbar)
         }
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-
+        setSupportActionBar(toolbar)
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {
@@ -82,23 +75,6 @@ class SettingsActivity : AbsBaseActivity(), SharedPreferences.OnSharedPreference
         }
         return super.onOptionsItemSelected(item)
     }
-
-    public override fun onPause() {
-        super.onPause()
-        PreferenceUtil.getInstance().unregisterOnSharedPreferenceChangedListener(this)
-    }
-
-    public override fun onResume() {
-        super.onResume()
-        PreferenceUtil.getInstance().registerOnSharedPreferenceChangedListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == PreferenceUtil.PROFILE_IMAGE_PATH) {
-            recreate()
-        }
-    }
-
 
     companion object {
         const val TAG: String = "SettingsActivity"

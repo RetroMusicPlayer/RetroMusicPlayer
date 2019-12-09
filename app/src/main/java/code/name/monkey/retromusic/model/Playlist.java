@@ -18,14 +18,24 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
 
-/**
- * @author Karim Abou Zeid (kabouzeid)
- */
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
+import io.reactivex.Observable;
+
+
 public class Playlist implements Parcelable {
+    public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
+        public Playlist createFromParcel(Parcel source) {
+            return new Playlist(source);
+        }
+
+        public Playlist[] newArray(int size) {
+            return new Playlist[size];
+        }
+    };
     public final int id;
     public final String name;
 
@@ -37,6 +47,23 @@ public class Playlist implements Parcelable {
     public Playlist() {
         this.id = -1;
         this.name = "";
+    }
+
+    protected Playlist(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+    }
+
+    @NonNull
+    public Observable<ArrayList<Song>> getSongsFlowable(@NonNull Context context) {
+        // this default implementation covers static playlists
+        return PlaylistSongsLoader.INSTANCE.getPlaylistSongListFlowable(context, id);
+    }
+
+    @NonNull
+    public  ArrayList<Song> getSongs(@NonNull Context context) {
+        // this default implementation covers static playlists
+        return PlaylistSongsLoader.INSTANCE.getPlaylistSongList(context, id);
     }
 
     @Override
@@ -66,7 +93,6 @@ public class Playlist implements Parcelable {
                 '}';
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -77,21 +103,6 @@ public class Playlist implements Parcelable {
         dest.writeInt(this.id);
         dest.writeString(this.name);
     }
-
-    protected Playlist(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-    }
-
-    public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
-        public Playlist createFromParcel(Parcel source) {
-            return new Playlist(source);
-        }
-
-        public Playlist[] newArray(int size) {
-            return new Playlist[size];
-        }
-    };
 
 
 }

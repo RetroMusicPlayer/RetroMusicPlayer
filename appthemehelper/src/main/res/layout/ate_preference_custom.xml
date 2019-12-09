@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -41,7 +40,6 @@
             android:layout_alignParentLeft="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:singleLine="true"
             tools:text="Title" />
 
@@ -54,7 +52,6 @@
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
             android:maxLines="4"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
             tools:text="Summary" />
 
     </RelativeLayout>

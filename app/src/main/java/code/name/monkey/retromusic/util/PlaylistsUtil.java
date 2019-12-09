@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.util;
 
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -24,6 +23,9 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,12 +37,8 @@ import code.name.monkey.retromusic.helper.M3UWriter;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.PlaylistSong;
 import code.name.monkey.retromusic.model.Song;
-import io.reactivex.Observable;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 
 import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
-
 
 public class PlaylistsUtil {
     public static boolean doesPlaylistExist(@NonNull final Context context, final int playlistId) {
@@ -72,8 +70,7 @@ public class PlaylistsUtil {
                     if (uri != null) {
                         // Necessary because somehow the MediaStoreObserver is not notified when adding a playlist
                         context.getContentResolver().notifyChange(Uri.parse("content://media"), null);
-                        Toast.makeText(context, context.getResources().getString(
-                                R.string.created_playlist_x, name), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getResources().getString(R.string.created_playlist_x, name), Toast.LENGTH_SHORT).show();
                         id = Integer.parseInt(uri.getLastPathSegment());
                     }
                 } else {
@@ -112,42 +109,50 @@ public class PlaylistsUtil {
         }
     }
 
-    public static void addToPlaylist(@NonNull final Context context, final Song song, final int playlistId, final boolean showToastOnFinish) {
+    static void addToPlaylist(@NonNull Context context,
+                              @NonNull Song song,
+                              int playlistId,
+                              boolean showToastOnFinish) {
         List<Song> helperList = new ArrayList<>();
         helperList.add(song);
         addToPlaylist(context, helperList, playlistId, showToastOnFinish);
     }
 
-    public static void addToPlaylist(@NonNull final Context context, @NonNull final List<Song> songs, final int playlistId, final boolean showToastOnFinish) {
-        final int size = songs.size();
+    public static void addToPlaylist(@NonNull Context context,
+                                     @NonNull List<Song> songs,
+                                     int playlistId,
+                                     boolean showToastOnFinish) {
+
+        ArrayList<Song> noSongs = new ArrayList<Song>();
+        for (Song song : songs) {
+            if (!doPlaylistContains(context, playlistId, song.getId())) {
+                noSongs.add(song);
+            }
+        }
+
+
+        final int size = noSongs.size();
         final ContentResolver resolver = context.getContentResolver();
         final String[] projection = new String[]{"max(" + MediaStore.Audio.Playlists.Members.PLAY_ORDER + ")",};
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
-        Cursor cursor = null;
+
+
         int base = 0;
+        try (Cursor cursor = resolver.query(uri, projection, null, null, null)) {
 
-        try {
-            try {
-                cursor = resolver.query(uri, projection, null, null, null);
-
-                if (cursor != null && cursor.moveToFirst()) {
-                    base = cursor.getInt(0) + 1;
-                }
-            } finally {
-                if (cursor != null) {
-                    cursor.close();
-                }
-            }
-
-            int numInserted = 0;
-            for (int offSet = 0; offSet < size; offSet += 1000)
-                numInserted += resolver.bulkInsert(uri, makeInsertItems(songs, offSet, 1000, base));
-
-            if (showToastOnFinish) {
-                Toast.makeText(context, context.getResources().getString(
-                        R.string.inserted_x_songs_into_playlist_x, numInserted, getNameForPlaylist(context, playlistId)), Toast.LENGTH_SHORT).show();
+            if (cursor != null && cursor.moveToFirst()) {
+                base = cursor.getInt(0) + 1;
             }
         } catch (SecurityException ignored) {
+        }
+
+        int numInserted = 0;
+        for (int offSet = 0; offSet < size; offSet += 1000)
+            numInserted += resolver.bulkInsert(uri, makeInsertItems(noSongs, offSet, 1000, base));
+
+        if (showToastOnFinish) {
+            Toast.makeText(context, context.getResources().getString(
+                    R.string.inserted_x_songs_into_playlist_x, numInserted, getNameForPlaylist(context, playlistId)), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -255,7 +260,9 @@ public class PlaylistsUtil {
         return "";
     }
 
-    public static Observable<File> savePlaylist(Context context, Playlist playlist) throws IOException {
+    @Nullable
+    public static File savePlaylist(@NonNull Context context,
+                                    @NonNull Playlist playlist) throws IOException {
         return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
@@ -270,5 +277,4 @@ public class PlaylistsUtil {
         }
         return exists;
     }
-
 }

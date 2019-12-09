@@ -30,7 +30,7 @@
         android:id="@+id/playerContent"
         android:layout_width="400dp"
         android:layout_height="0dp"
-        android:layout_above="@id/toolbar_container"
+        android:layout_above="@id/playerToolbar"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -51,7 +51,8 @@
                 android:id="@+id/playerAlbumCoverFragment"
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_album_cover" />
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
         <FrameLayout
@@ -69,14 +70,14 @@
     </LinearLayout>
 
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/playerToolbar"
         style="@style/Toolbar"
         android:layout_height="48dp"
-        android:navigationIcon="@drawable/ic_close_white_24dp"
+        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:navigationIcon="@drawable/ic_close_white_24dp" />
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

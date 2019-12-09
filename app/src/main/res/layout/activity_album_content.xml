@@ -1,75 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playAction"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
+        android:layout_marginStart="@dimen/button_margin_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/button_margin_horizontal"
+        android:layout_marginBottom="8dp"
+        android:text="@string/action_play_all"
+        app:icon="@drawable/ic_play_arrow_white_24dp"
+        app:layout_constraintEnd_toStartOf="@+id/shuffleAction"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/playAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="@string/action_play"
-            android:textAllCaps="false"
-            app:cornerRadius="6dp"
-            app:icon="@drawable/ic_play_arrow_white_24dp"
-            app:iconGravity="textStart"
-            tools:backgroundTint="@color/md_grey_900" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shuffleAction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/button_margin_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/button_margin_horizontal"
+        android:layout_marginBottom="8dp"
+        android:text="@string/shuffle"
+        app:icon="@drawable/ic_shuffle_white_24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/playAction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/playAction"
+        app:layout_constraintTop_toTopOf="@+id/playAction" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/shuffleAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:padding="10dp"
-            android:text="@string/shuffle"
-            android:textAllCaps="false"
-            app:cornerRadius="6dp"
-            app:icon="@drawable/ic_shuffle_white_24dp"
-            app:iconGravity="textStart"
-            tools:backgroundTint="@color/md_grey_900" />
 
-    </LinearLayout>
-
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTitle"
         style="@style/SubTitleTextAppearance"
-        android:text="@string/songs" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/songs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playAction" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/songTitle"
+        tools:listitem="@layout/item_song" />
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/moreTitle"
         style="@style/SubTitleTextAppearance"
-        android:text="@string/songs"
-        android:visibility="gone" />
+        android:layout_width="0dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
+        tools:text="More by Artist"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moreRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreTitle"
+        tools:listitem="@layout/item_album_card"
+        tools:visibility="visible" />
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="72dp" />
-</LinearLayout>
+        android:layout_height="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreRecyclerView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

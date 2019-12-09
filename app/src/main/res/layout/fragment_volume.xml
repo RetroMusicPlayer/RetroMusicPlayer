@@ -1,35 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewGroup"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingBottom="14dp"
+    android:paddingEnd="8dp" >
 
-    <code.name.monkey.retromusic.views.IconImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="12dp"
-        app:srcCompat="@drawable/ic_volume_down_white_24dp" />
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_volume_down_white_24dp"
+        app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:maxHeight="3dp"
-        android:progressDrawable="@drawable/color_progress_seek" />
+        android:max="100"
+        android:maxHeight="2dp"
+        android:progressDrawable="@drawable/color_progress_seek"
+        tools:progress="20"
+        tools:progressTint="?attr/colorControlNormal" />
 
-    <code.name.monkey.retromusic.views.IconImageView
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="12dp"
-        app:srcCompat="@drawable/ic_volume_up_white_24dp" />
+        android:padding="8dp"
+        app:srcCompat="@drawable/ic_volume_up_white_24dp"
+        app:tint="?attr/colorControlNormal" />
 </LinearLayout>

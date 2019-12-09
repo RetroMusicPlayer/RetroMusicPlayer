@@ -15,50 +15,55 @@
         android:orientation="vertical"
         tools:ignore="MissingPrefix">
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/volumeFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:freezesText="true"
-                android:gravity="center"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                tools:text="@string/pref_title_user_info" />
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:alpha="0.5"
-                android:gravity="center_horizontal"
-                android:maxLines="1"
-                tools:text="@string/action_share" />
-
-        </LinearLayout>
-
-        <include layout="@layout/volume_controls" />
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
 
         <include layout="@layout/media_button" />
 
-        <include layout="@layout/player_time" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/songCurrentProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textAppearance="@style/TextViewOverline"
+                android:textStyle="bold"
+                tools:text="22.00" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/songTotalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textAppearance="@style/TextViewOverline"
+                android:textStyle="bold"
+                tools:text="22.00" />
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="3dp"
+            android:maxHeight="2dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:progressDrawable="@drawable/color_progress_seek"

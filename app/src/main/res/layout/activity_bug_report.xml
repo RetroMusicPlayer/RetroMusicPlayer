@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?actionBarSize" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
+    <code.name.monkey.retromusic.views.StatusBarView
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:background="?attr/colorSurface"
+        tools:ignore="UnusedAttribute" />
 
-        <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface">
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:liftOnScroll="true">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Toolbar"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:title="@string/report_bug"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -52,7 +62,7 @@
 
             </LinearLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/sendFab"
@@ -60,7 +70,5 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             app:srcCompat="@drawable/ic_send_white_24dp" />
-
-    </FrameLayout>
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

@@ -14,41 +14,52 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.PlaylistContract
-import java.util.*
+import code.name.monkey.retromusic.mvp.*
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
 /**
  * Created by hemanths on 19/08/17.
  */
 
-class PlaylistPresenter(private val view: PlaylistContract.PlaylistView) : Presenter(), PlaylistContract.Presenter {
+interface PlaylistView : BaseView {
+    fun playlists(playlists: ArrayList<Playlist>)
+}
 
-    override fun subscribe() {
-        loadPlaylists()
-    }
+interface PlaylistsPresenter : Presenter<PlaylistView> {
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun playlists()
 
-    override fun loadPlaylists() {
-        disposable.add(repository.allPlaylists
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+    class PlaylistsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<PlaylistView>(), PlaylistsPresenter, CoroutineScope {
 
-    private fun showList(songs: ArrayList<Playlist>) {
-        if (songs.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(songs)
+        private val job = Job()
+
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
+
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
+
+        override fun playlists() {
+            launch {
+                when (val result = repository.allPlaylists()) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.playlists(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
         }
     }
 }
+
+

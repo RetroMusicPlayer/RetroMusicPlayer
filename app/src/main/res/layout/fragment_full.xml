@@ -7,11 +7,16 @@
     android:clickable="true"
     android:focusable="true">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface" />
+
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:layout="@layout/fragment_album_full_cover" />
 
     <View
@@ -19,28 +24,23 @@
         android:layout_height="match_parent"
         android:background="#90000000" />
 
-    <code.name.monkey.retromusic.views.FitSystemWindowsLayout
-        android:id="@+id/safeArea"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:orientation="vertical">
-
-            <fragment
-                android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                tools:layout="@layout/fragment_full_player_controls" />
+            tools:layout="@layout/fragment_full_player_controls" />
 
 
-        </LinearLayout>
-    </code.name.monkey.retromusic.views.FitSystemWindowsLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/toolbar_container"
@@ -55,17 +55,18 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/playerToolbar"
             style="@style/Toolbar"
-            android:navigationIcon="@drawable/ic_close_white_24dp">
+            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSongLabel"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -81,7 +82,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSong"
                     style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="0dp"
@@ -113,7 +114,8 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/default_artist_art" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <FrameLayout
             android:id="@+id/player_lyrics"

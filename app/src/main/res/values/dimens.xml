@@ -2,7 +2,6 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="status_bar_padding">0dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
-    <dimen name="default_item_margin">16dp</dimen>
 
     <dimen name="card_elevation">2dp</dimen>
 
@@ -11,30 +10,12 @@
 
     <dimen name="tab_height">48dp</dimen>
 
-    <dimen name="pause_bar_width">5dp</dimen>
-    <dimen name="pause_bar_distance">4dp</dimen>
-    <dimen name="pause_bar_height">16dp</dimen>
+    <dimen name="notification_big_image_size">112dp</dimen>
 
-
-    <dimen name="empty_text_size">20sp</dimen>
-
-    <dimen name="notification_big_image_size">134dp</dimen>
-
-    <!-- MUST BE THE RESULT OF WIDTH PLUS INSET-->
-
-    <!-- ONLY 0dp WHILE THERE IS THE BUG IN DESIGN SUPPORT LIBRARY 22.2.0-->
-
-    <!-- For use with 24dp drawables in the item_list layouts-->
     <dimen name="list_item_image_icon_padding">8dp</dimen>
 
     <dimen name="mini_player_height">48dp</dimen>
 
-
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
-    <!--App Widgets-->
     <dimen name="app_widget_classic_height">96dp</dimen>
     <dimen name="app_widget_classic_image_size">96dp</dimen>
     <dimen name="app_widget_classic_min_width">250dp</dimen>
@@ -50,15 +31,19 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
 
     <dimen name="app_widget_card_image_size">56dp</dimen>
     <dimen name="app_widget_card_min_width">250dp</dimen>
-    <dimen name="app_widget_card_min_height">64dp</dimen>
     <dimen name="app_widget_card_buttons_width">128dp</dimen>
     <dimen name="app_widget_card_radius">2dp</dimen>
     <dimen name="now_playing_top_margin">12dp</dimen>
 
     <dimen name="icon_notification_dimen">32dp</dimen>
-    <dimen name="horizontal_margin">0dp</dimen>
-    <dimen name="bottom_sheet_width">0dp</dimen>
     <dimen name="mini_player_height_expanded">104dp</dimen>
     <dimen name="progress_slider_height">30dp</dimen>
-    <dimen name="triple_and_half_margin">56dp</dimen>
+    <dimen name="toolbar_margin_horizontal">8dp</dimen>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="toolbar_margin_vertical">0dp</dimen>
+    <dimen name="item_song_height">52dp</dimen>
+    <dimen name="button_padding_vertical">10dp</dimen>
+    <dimen name="button_margin_horizontal">16dp</dimen>
+    <dimen name="home_icon_padding">14dp</dimen>
+    <dimen name="button_corner">24dp</dimen>
 </resources>

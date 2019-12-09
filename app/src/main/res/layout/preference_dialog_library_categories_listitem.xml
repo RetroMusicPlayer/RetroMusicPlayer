@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="true"
+    android:foreground="?rectSelector"
+    android:orientation="horizontal"
+    android:paddingStart="16dp"
+    android:paddingEnd="0dp"
+    tools:gravity="start|center_vertical">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center_vertical" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/md_listitem_height"
+        android:paddingStart="@dimen/md_listitem_control_margin"
+        android:paddingLeft="@dimen/md_listitem_control_margin"
+        android:paddingTop="@dimen/md_listitem_vertical_margin_choice"
+        android:paddingBottom="@dimen/md_listitem_vertical_margin_choice"
+        android:singleLine="true"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/md_listitem_textsize"
+        tools:text="Item" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/drag_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:clickable="false"
+        android:focusable="false"
+        android:padding="16dp"
+        android:tintMode="src_in"
+        app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
+        app:tint="?attr/colorControlNormal"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>

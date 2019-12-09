@@ -14,42 +14,54 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.GenreDetailsContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
 import java.util.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
 /**
  * Created by hemanths on 20/08/17.
  */
 
-class GenreDetailsPresenter(private val view: GenreDetailsContract.GenreDetailsView,
-                            private val genreId: Int) : Presenter(), GenreDetailsContract.Presenter {
+interface GenreDetailsView : BaseView {
+    fun songs(songs: ArrayList<Song>)
+}
 
-    override fun subscribe() {
-        loadGenre(genreId)
-    }
+interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
+    fun loadGenreSongs(genreId: Int)
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    class GenreDetailsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<GenreDetailsView>(), GenreDetailsPresenter, CoroutineScope {
+        private val job = Job()
 
-    override fun loadGenre(genreId: Int) {
-        disposable.add(repository.getGenre(genreId)
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showGenre(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-    private fun showGenre(songs: ArrayList<Song>?) {
-        if (songs != null) {
-            view.showData(songs)
-        } else {
-            view.showEmptyView()
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
+
+
+        override fun loadGenreSongs(genreId: Int) {
+            launch {
+                when (val result = repository.getGenre(genreId)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.songs(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) {
+                        view?.showEmptyView()
+                    }
+                }
+            }
         }
     }
 }

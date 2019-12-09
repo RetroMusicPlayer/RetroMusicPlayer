@@ -15,39 +15,72 @@
 package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.AlbumDetailsContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
 
 /**
  * Created by hemanths on 20/08/17.
  */
+interface AlbumDetailsView {
+    fun album(album: Album)
 
-class AlbumDetailsPresenter(private val view: AlbumDetailsContract.AlbumDetailsView, private val albumId: Int) : Presenter(), AlbumDetailsContract.Presenter {
+    fun complete()
 
-    override fun subscribe() {
-        loadAlbumSongs(albumId)
-    }
+    fun loadArtistImage(artist: Artist)
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun moreAlbums(albums: ArrayList<Album>)
+}
 
-    override fun loadAlbumSongs(albumId: Int) {
-        disposable.add(repository.getAlbum(albumId)
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showAlbum(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
+    fun loadAlbum(albumId: Int)
 
-    private fun showAlbum(album: Album?) {
-        if (album != null) {
-            view.showData(album)
-        } else {
-            view.showEmptyView()
+    fun loadMore(artistId: Int)
+
+    class AlbumDetailsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter {
+
+        private lateinit var album: Album
+
+        private var disposable: CompositeDisposable = CompositeDisposable()
+
+        override fun loadMore(artistId: Int) {
+            disposable += repository.getArtistByIdFlowable(artistId)
+                    .map {
+                        view?.loadArtistImage(it)
+                        return@map it.albums
+                    }
+                    .map {
+                        it.filter { filterAlbum -> album.id != filterAlbum.id }
+                    }
+                    .subscribe({
+                        if (it.isEmpty()) {
+                            return@subscribe
+                        }
+                        view?.moreAlbums(ArrayList(it))
+                    }, { t -> println(t) })
+        }
+
+
+        override fun loadAlbum(albumId: Int) {
+            disposable += repository.getAlbumFlowable(albumId)
+                    .doOnComplete {
+                        view?.complete()
+                    }
+                    .subscribe({
+                        album = it
+                        view?.album(it)
+                    }, { t -> println(t) })
+        }
+
+        override fun detachView() {
+            super.detachView()
+            disposable.dispose()
         }
     }
 }

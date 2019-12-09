@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical"
@@ -14,7 +15,7 @@
         android:layout_height="@dimen/progress_container_height"
         android:background="@color/twenty_percent_black_overlay">
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -22,11 +23,11 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -34,11 +35,11 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             style="@style/MusicProgressSlider"
             android:layout_height="match_parent"
@@ -54,12 +55,8 @@
         android:id="@+id/volumeFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp">
-
-    </FrameLayout>
-
+        android:paddingEnd="8dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,41 +71,52 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:padding="16dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_play_circle_filled_white_24dp"
+            app:tint="?colorAccent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:layout_weight="1.0"
             android:orientation="vertical"
-            android:paddingStart="16dp"
+            android:paddingStart="0dp"
             android:paddingEnd="16dp">
 
-            <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
-                android:id="@+id/songTitle"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textSize="16sp" />
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewHeadline6"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
 
-            <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-                android:id="@+id/songText"
-                style="@style/TextAppearance.AppCompat.Body1"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:ellipsize="end"
-                android:maxLines="1" />
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

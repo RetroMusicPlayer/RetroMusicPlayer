@@ -15,7 +15,7 @@
         tools:ignore="UnusedAttribute,UselessParent">
 
         <code.name.monkey.retromusic.views.WidthFitSquareLayout
-            android:id="@+id/image_container"
+            android:id="@+id/imageContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="4dp">
@@ -27,8 +27,8 @@
                 android:scaleType="centerCrop"
                 app:civ_border="false"
                 app:civ_shadow="false"
-                tools:background="@color/md_red_400"
-                tools:ignore="ContentDescription" />
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
@@ -42,26 +42,24 @@
             android:paddingEnd="4dp"
             android:paddingBottom="8dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="center"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="4dp"
+                android:paddingTop="2dp"
                 android:singleLine="true"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="12sp" />
-
+                tools:text="@tools:sample/lorem" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -4,7 +4,7 @@
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_classic_height"
-    android:background="#AA000000"
+    android:background="@color/md_black_1000"
     android:orientation="horizontal"
     tools:ignore="ContentDescription">
 
@@ -27,8 +27,8 @@
             android:layoutDirection="ltr"
             android:orientation="horizontal"
             android:paddingStart="8dp"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp">
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp">
 
             <ImageButton
                 android:id="@+id/button_prev"
@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
                 android:textColor="@color/ate_primary_text_dark"
                 tools:text="Title" />
 
@@ -84,8 +85,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:paddingTop="4dp"
                 android:singleLine="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textAppearance="@style/TextViewNormal"
                 android:textColor="@color/ate_secondary_text_dark"
                 tools:text="Text" />
 

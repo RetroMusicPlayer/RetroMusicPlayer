@@ -6,9 +6,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
+import androidx.annotation.IntRange;
+
 import java.util.Arrays;
 
-import androidx.annotation.IntRange;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class DeviceInfo {
@@ -54,9 +55,9 @@ public class DeviceInfo {
             versionCode = -1;
             versionName = null;
         }
-        baseTheme = PreferenceUtil.getInstance().getBaseTheme();
-        nowPlayingTheme = context.getString(PreferenceUtil.getInstance().getNowPlayingScreen().getTitleRes());
-        isAdaptive = PreferenceUtil.getInstance().getAdaptiveColor();
+        baseTheme = PreferenceUtil.getInstance(context).getBaseTheme();
+        nowPlayingTheme = context.getString(PreferenceUtil.getInstance(context).getNowPlayingScreen().getTitleRes());
+        isAdaptive = PreferenceUtil.getInstance(context).getAdaptiveColor();
     }
 
     public String toMarkdown() {

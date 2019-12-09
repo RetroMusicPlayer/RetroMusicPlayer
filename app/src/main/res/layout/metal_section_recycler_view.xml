@@ -1,42 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="12dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:background="@drawable/material_design_outline"
-        android:backgroundTint="?dividerColor"
-        android:gravity="center_vertical"
-        android:paddingStart="12dp"
-        android:paddingTop="6dp"
-        android:paddingEnd="12dp"
-        android:paddingBottom="6dp">
-
-        <code.name.monkey.retromusic.views.IconImageView
-            android:id="@+id/sectionIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            app:srcCompat="@drawable/ic_person_white_24dp" />
-
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
-            android:id="@+id/sectionTitle"
-            style="@style/SubTitleTextAppearance"
-            android:padding="0dp"
-            android:text="@string/for_you" />
-
-    </LinearLayout>
+        android:padding="16dp"
+        android:textAppearance="@style/TextViewHeadline6"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem" />
 
     <code.name.monkey.retromusic.views.MetalRecyclerViewPager
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:nestedScrollingEnabled="false"
-        app:itemMargin="28dp" />
-</LinearLayout>
+        android:visibility="gone"
+        app:itemMargin="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:visibility="visible" />
+</androidx.constraintlayout.widget.ConstraintLayout>

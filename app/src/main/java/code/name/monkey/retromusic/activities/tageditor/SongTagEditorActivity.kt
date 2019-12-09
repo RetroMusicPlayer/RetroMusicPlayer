@@ -4,40 +4,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.loaders.SongLoader
 import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
 import java.util.*
-
 
 class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override val contentViewLayout: Int
         get() = R.layout.activity_song_tag_editor
 
-    private fun setupToolbar() {
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(context))
-            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(context, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorPrimary(context))
-            setNavigationOnClickListener { onBackPressed() }
-            setSupportActionBar(toolbar)
-        }
-        title = null
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setNoImageMode()
         setUpViews()
-        setupToolbar()
+        applyToolbar(toolbar)
         setStatusbarColorAuto()
     }
 
@@ -53,15 +40,15 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         MaterialUtil.setTint(trackNumberContainer, false)
         MaterialUtil.setTint(lyricsContainer, false)
 
-        albumText.addTextChangedListener(this)
-        songText.addTextChangedListener(this)
-        albumText.addTextChangedListener(this)
-        artistText.addTextChangedListener(this)
-        genreText.addTextChangedListener(this)
-        yearText.addTextChangedListener(this)
-        trackNumberText.addTextChangedListener(this)
-        lyricsText.addTextChangedListener(this)
-        songComposerText.addTextChangedListener(this)
+        songText.appHandleColor().addTextChangedListener(this)
+        albumText.appHandleColor().addTextChangedListener(this)
+        albumArtistText.appHandleColor().addTextChangedListener(this)
+        artistText.appHandleColor().addTextChangedListener(this)
+        genreText.appHandleColor().addTextChangedListener(this)
+        yearText.appHandleColor().addTextChangedListener(this)
+        trackNumberText.appHandleColor().addTextChangedListener(this)
+        lyricsText.appHandleColor().addTextChangedListener(this)
+        songComposerText.appHandleColor().addTextChangedListener(this)
     }
 
     private fun fillViewsWithFileTags() {
@@ -77,10 +64,6 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     }
 
     override fun loadCurrentImage() {
-
-    }
-
-    override fun getImageFromLastFM() {
 
     }
 
@@ -108,7 +91,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override fun getSongPaths(): List<String> {
         val paths = ArrayList<String>(1)
-        paths.add(SongLoader.getSong(this, id).blockingFirst().data)
+        paths.add(SongLoader.getSong(this, id).data)
         return paths
     }
 
@@ -132,3 +115,5 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         val TAG: String = SongTagEditorActivity::class.java.simpleName
     }
 }
+
+

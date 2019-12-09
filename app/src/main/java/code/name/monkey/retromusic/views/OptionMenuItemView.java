@@ -24,16 +24,20 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.retromusic.R;
 
 /**
  * Created by hemanths on 3/23/19
  */
 public class OptionMenuItemView extends FrameLayout {
+
+    TextView textView;
+    AppCompatImageView iconImageView;
 
     public OptionMenuItemView(@NonNull Context context) {
         this(context, null);
@@ -49,13 +53,16 @@ public class OptionMenuItemView extends FrameLayout {
 
     public OptionMenuItemView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+
+        setBackground(ContextCompat.getDrawable(context, R.drawable.option_menu_background));
+
+        setClickable(true);
+        setFocusable(true);
+
         inflate(context, R.layout.item_option_menu, this);
 
-        setBackgroundTintList(ColorStateList.valueOf(ThemeStore.Companion.accentColor(context)));
-
-        TextView textView = findViewById(R.id.title);
-        textView.setTextColor(MaterialValueHelper.INSTANCE.getPrimaryTextColor(context, ColorUtil.INSTANCE.isColorLight(ThemeStore.Companion.primaryColor(context))));
-        IconImageView iconImageView = findViewById(R.id.icon);
+        textView = findViewById(R.id.title);
+        iconImageView = findViewById(R.id.icon);
 
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.OptionMenuItemView, 0, 0);
 
@@ -67,4 +74,17 @@ public class OptionMenuItemView extends FrameLayout {
 
         attributes.recycle();
     }
+
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        if (selected) {
+            int accentColor = ThemeStore.Companion.accentColor(getContext());
+            int colorWithAlpha = ColorUtil.INSTANCE.adjustAlpha(accentColor, 0.22f);
+            textView.setTextColor(accentColor);
+            iconImageView.setImageTintList(ColorStateList.valueOf(accentColor));
+            setBackgroundTintList(ColorStateList.valueOf(colorWithAlpha));
+        }
+    }
 }
+

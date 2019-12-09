@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?cardBackgroundColor"
     app:cardCornerRadius="8dp"
     app:cardUseCompatPadding="true">
 
@@ -13,7 +13,7 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical">
 
-        <TextView
+        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|center_vertical"
@@ -21,18 +21,18 @@
             android:paddingTop="24dp"
             android:paddingRight="16dp"
             android:text="@string/device_info"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textColor="?android:textColorSecondary" />
+            android:textAppearance="@style/TextViewOverline" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/airTextDeviceInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?rectSelector"
+            android:lineSpacingExtra="8dp"
             android:padding="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?android:textColorSecondary" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?android:textColorSecondary"
+            tools:text="@tools:sample/lorem/random" />
 
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

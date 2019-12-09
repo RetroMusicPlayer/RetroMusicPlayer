@@ -14,41 +14,49 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.GenreContract
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
 import java.util.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * @author Hemanth S (h4h13).
  */
+interface GenresView : BaseView {
+    fun genres(genres: ArrayList<Genre>)
+}
 
-class GenrePresenter(
-        private val view: GenreContract.GenreView) : Presenter(), GenreContract.Presenter {
+interface GenresPresenter : Presenter<GenresView> {
+    fun loadGenres()
 
-    override fun subscribe() {
-        loadGenre()
-    }
+    class GenresPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<GenresView>(), GenresPresenter, CoroutineScope {
+        private val job = Job()
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-    override fun loadGenre() {
-        disposable.add(repository.allGenres
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
 
-    private fun showList(genres: ArrayList<Genre>) {
-        if (genres.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(genres)
+        override fun loadGenres() {
+            launch {
+                when (val result = repository.allGenres()) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.genres(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
         }
     }
 }

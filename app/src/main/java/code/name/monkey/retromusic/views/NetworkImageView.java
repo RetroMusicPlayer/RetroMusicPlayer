@@ -21,8 +21,9 @@ import android.util.AttributeSet;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.glide.GlideApp;
 
 /**
  * @author Hemanth S (h4h13).
@@ -49,7 +50,7 @@ public class NetworkImageView extends CircularImageView {
     }
 
     public void setImageUrl(@NonNull Context context, @NonNull String imageUrl) {
-        GlideApp.with(context)
+        Glide.with(context)
                 .load(imageUrl)
                 .error(R.drawable.ic_account_white_24dp)
                 .placeholder(R.drawable.ic_account_white_24dp)

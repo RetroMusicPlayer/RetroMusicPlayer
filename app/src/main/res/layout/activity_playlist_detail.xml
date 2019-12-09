@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical"
     tools:ignore="UnusedAttribute">
 
@@ -22,35 +23,29 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="@dimen/card_elevation"
-            app:elevation="@dimen/card_elevation">
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:liftOnScroll="true">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsingToolbarLayout"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:titleEnabled="false">
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <FrameLayout
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
+
+                <ViewStub
+                    android:id="@+id/cab_stub"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="48dp" />
 
-                    <ViewStub
-                        android:id="@+id/cab_stub"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp" />
-
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        style="@style/Toolbar"
-                        app:layout_collapseMode="pin"
-                        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
-
-                </FrameLayout>
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>
-
 
         <com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
             android:id="@+id/recyclerView"
@@ -58,8 +53,7 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:scrollbars="none"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
         <LinearLayout
             android:id="@android:id/empty"
@@ -67,21 +61,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <code.name.monkey.retromusic.views.IconImageView
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                app:srcCompat="@drawable/ic_disc_full_black_24dp" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/emptyEmoji"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/empty_text_emoji"
+                android:textAppearance="@style/TextViewHeadline3" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/emptyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/playlist_empty_text"
-                android:textColor="?android:textColorSecondary"
-                android:visibility="gone"
+                android:text="@string/no_songs"
+                android:textAppearance="@style/TextViewHeadline5"
+                android:textColor="?android:attr/textColorSecondary"
                 tools:visibility="visible" />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

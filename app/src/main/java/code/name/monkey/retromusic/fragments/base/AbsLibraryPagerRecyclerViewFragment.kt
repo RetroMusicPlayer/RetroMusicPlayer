@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.DensityUtil
@@ -21,10 +20,10 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main_activity_recycler_view, container, false);
-        return view
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_main_activity_recycler_view, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,7 +36,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     private fun setUpRecyclerView() {
         if (recyclerView is FastScrollRecyclerView) {
-            ViewUtil.setUpFastScrollRecyclerViewColor(activity!!, recyclerView as FastScrollRecyclerView, ThemeStore.accentColor(activity!!))
+            ViewUtil.setUpFastScrollRecyclerViewColor(requireActivity(), recyclerView as FastScrollRecyclerView)
         }
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
@@ -45,7 +44,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     private fun initAdapter() {
         adapter = createAdapter()
-        adapter!!.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+        adapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onChanged() {
                 super.onChanged()
                 checkIsEmpty()
@@ -55,20 +54,28 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
     }
 
     protected open val emptyMessage: Int
-        @StringRes
-        get() = R.string.empty
+        @StringRes get() = R.string.empty
+
+    private fun getEmojiByUnicode(unicode: Int): String {
+        return String(Character.toChars(unicode))
+    }
 
     private fun checkIsEmpty() {
+        emptyEmoji.text = getEmojiByUnicode(0x1F631)
         emptyText.setText(emptyMessage)
         empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }
 
     private fun checkForPadding() {
-        val height = if (MusicPlayerRemote.playingQueue.isEmpty())
-            DensityUtil.dip2px(context!!, 52f)
-        else
-            0
-        recyclerView.setPadding(0, 0, 0, (height * 2.3).toInt())
+        val itemCount: Int = adapter?.itemCount ?: 0
+        val params = container.layoutParams as ViewGroup.MarginLayoutParams
+        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
+            val height = DensityUtil.dip2px(requireContext(), 104f)
+            params.bottomMargin = height
+        } else {
+            val height = DensityUtil.dip2px(requireContext(), 52f)
+            params.bottomMargin = height
+        }
     }
 
     private fun initLayoutManager() {
@@ -81,8 +88,11 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
     protected abstract fun createAdapter(): A
 
     override fun onOffsetChanged(p0: AppBarLayout?, i: Int) {
-        container.setPadding(container.paddingLeft, container.paddingTop,
-                container.paddingRight, libraryFragment.totalAppBarScrollingRange + i)
+        container.setPadding(
+                container.paddingLeft,
+                container.paddingTop,
+                container.paddingRight,
+                libraryFragment.totalAppBarScrollingRange + i)
     }
 
     override fun onQueueChanged() {

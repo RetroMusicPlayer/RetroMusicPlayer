@@ -14,6 +14,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
@@ -97,11 +98,12 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePrevNextColor()
         updatePlayPauseColor()
 
-        val colorFinal = if (PreferenceUtil.getInstance().adaptiveColor) {
+        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
             ThemeStore.accentColor(context!!)
-        }
+        }.ripAlpha()
+
         TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)), false)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)

@@ -2,91 +2,86 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.transition.Slide
-import android.view.*
-import android.view.animation.AnimationUtils
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.misc.AppBarStateChangeListener
+import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
-import code.name.monkey.retromusic.rest.LastFMRestClient
+import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
-import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.activity_album_content.*
+import com.afollestad.materialcab.MaterialCab
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
-import kotlinx.android.synthetic.main.activity_artist_content.playAction
-import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
-import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
-import kotlinx.android.synthetic.main.activity_artist_content.songTitle
 import kotlinx.android.synthetic.main.activity_artist_details.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContract.ArtistsDetailsView {
+class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, CabHolder {
+    override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
+        cab?.let {
+            if (it.isActive) it.finish()
+        }
+        cab = MaterialCab(this, R.id.cab_stub)
+                .setMenu(menuRes)
+                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
+                .start(callback)
+        return cab as MaterialCab
+    }
 
+    private var cab: MaterialCab? = null
     private var biography: Spanned? = null
     private lateinit var artist: Artist
-    private var lastFMRestClient: LastFMRestClient? = null
-    private lateinit var artistDetailsPresenter: ArtistDetailsPresenter
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: AlbumAdapter
     private var forceDownload: Boolean = false
-
-    private fun setupWindowTransitions() {
-        val slide = Slide(Gravity.BOTTOM)
-        slide.interpolator = AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in)
-        window.enterTransition = slide
-    }
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
     }
 
+    @Inject
+    lateinit var artistDetailsPresenter: ArtistDetailsPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
-        setupWindowTransitions()
         super.onCreate(savedInstanceState)
-        collapsingToolbarLayout?.setBackgroundColor(ThemeStore.primaryColor(this))
         toggleBottomNavigationView(true)
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
+        setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
         ActivityCompat.postponeEnterTransition(this)
 
-        lastFMRestClient = LastFMRestClient(this)
-
         setUpViews()
-
-        artistDetailsPresenter = ArtistDetailsPresenter(this, intent.extras!!)
-        artistDetailsPresenter.subscribe()
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -102,58 +97,33 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                 biographyText.maxLines = 4
             }
         }
+
+        App.musicComponent.inject(this)
+        artistDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
+        } else {
+            finish()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        artistDetailsPresenter.detachView()
     }
 
     private fun setUpViews() {
         setupRecyclerView()
-        setupToolbarMarginHeight()
         setupContainerHeight()
     }
 
     private fun setupContainerHeight() {
-        if (imageContainer != null) {
-            val params = imageContainer!!.layoutParams
+        imageContainer?.let {
+            val params = it.layoutParams
             params.width = DensityUtil.getScreenHeight(this) / 2
-            imageContainer!!.layoutParams = params
+            it.layoutParams = params
         }
-    }
-
-    private fun setupToolbarMarginHeight() {
-        val primaryColor = ThemeStore.primaryColor(this)
-        TintHelper.setTintAuto(contentContainer!!, primaryColor, true)
-        collapsingToolbarLayout?.let {
-            it.setContentScrimColor(primaryColor)
-            it.setStatusBarScrimColor(ColorUtil.darkenColor(primaryColor))
-        }
-
-        toolbar?.setNavigationIcon(R.drawable.ic_keyboard_backspace_black_24dp)
-        setSupportActionBar(toolbar)
-
-        supportActionBar!!.title = null
-
-        if (toolbar != null && !PreferenceUtil.getInstance().fullScreenMode) {
-            val params = toolbar!!.layoutParams as ViewGroup.MarginLayoutParams
-            params.topMargin = RetroUtil.getStatusBarHeight()
-            toolbar!!.layoutParams = params
-        }
-
-        appBarLayout?.addOnOffsetChangedListener(object : AppBarStateChangeListener() {
-            override fun onStateChanged(appBarLayout: AppBarLayout, state: State) {
-                val color: Int = when (state) {
-                    State.COLLAPSED -> {
-                        setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(appBarLayout.context)))
-                        ThemeStore.primaryColor(appBarLayout.context)
-                    }
-                    State.EXPANDED, State.IDLE -> {
-                        setLightStatusbar(false)
-                        Color.TRANSPARENT
-                    }
-
-                }
-                ToolbarContentTintHelper.setToolbarContentColorBasedOnToolbarColor(appBarLayout.context, toolbar, color)
-            }
-        })
-        setColors(ThemeStore.accentColor(this))
     }
 
     private fun setupRecyclerView() {
@@ -163,7 +133,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
             adapter = albumAdapter
         }
-        songAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song, false)
+        songAdapter = SimpleSongAdapter(this, ArrayList(), R.layout.item_song, this)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this.context)
@@ -171,12 +141,13 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         }
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             REQUEST_CODE_SELECT_IMAGE -> if (resultCode == Activity.RESULT_OK) {
-                CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist!!, data!!.data!!)
+                data?.data?.let {
+                    CustomArtistImageUtil.getInstance(this).setCustomArtistImage(artist, it)
+                }
             }
             else -> if (resultCode == Activity.RESULT_OK) {
                 reload()
@@ -184,30 +155,15 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        artistDetailsPresenter.unsubscribe()
-    }
-
-    override fun loading() {}
-
     override fun showEmptyView() {
 
     }
 
-    override fun completed() {
+    override fun complete() {
         ActivityCompat.startPostponedEnterTransition(this)
     }
 
-    override fun showData(list: Artist) {
-        setArtist(list)
-    }
-
-    private fun getArtist(): Artist {
-        return this.artist;
-    }
-
-    private fun setArtist(artist: Artist) {
+    override fun artist(artist: Artist) {
         if (artist.songCount <= 0) {
             finish()
         }
@@ -215,98 +171,90 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
         loadArtistImage()
 
         if (RetroUtil.isAllowedToDownloadMetadata(this)) {
-            loadBiography()
+            loadBiography(artist.name)
         }
         artistTitle.text = artist.name
-        text.text = String.format("%s • %s", MusicUtil.getArtistInfoString(this, artist), MusicUtil
-                .getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs)))
-        //val songs = artist.songs.sortedWith(compareBy { it.title }) as ArrayList<Song>
-        songAdapter.swapDataSet(artist.songs)
+        text.text = String.format(
+                "%s • %s",
+                MusicUtil.getArtistInfoString(this, artist),
+                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs))
+        )
 
-        //val albums = artist.albums?.sortedWith(compareBy { it.artistName }) as ArrayList<Album>
+        songAdapter.swapDataSet(artist.songs)
         albumAdapter.swapDataSet(artist.albums!!)
     }
 
-    private fun loadBiography(lang: String? = Locale.getDefault().language) {
+    private fun loadBiography(
+            name: String, lang: String? = Locale.getDefault().language
+    ) {
         biography = null
-
-        lastFMRestClient!!.apiService
-                .getArtistInfo(getArtist().name, lang, null)
-                .enqueue(object : Callback<LastFmArtist> {
-                    override fun onResponse(call: Call<LastFmArtist>,
-                                            response: Response<LastFmArtist>) {
-                        val lastFmArtist = response.body()
-                        if (lastFmArtist != null && lastFmArtist.artist != null) {
-                            val bioContent = lastFmArtist.artist.bio.content
-                            if (bioContent != null && !bioContent.trim { it <= ' ' }.isEmpty()) {
-                                //TransitionManager.beginDelayedTransition(titleContainer);
-                                biographyText.visibility = View.VISIBLE
-                                biographyTitle.visibility = View.VISIBLE
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    biography = Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
-                                } else {
-                                    biography = Html.fromHtml(bioContent)
-                                }
-                                biographyText!!.text = biography
-                            }
-                        }
-
-                        // If the "lang" parameter is set and no biography is given, retry with default language
-                        if (biography == null && lang != null) {
-                            loadBiography(null)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<LastFmArtist>, t: Throwable) {
-                        t.printStackTrace()
-                        biography = null
-                    }
-                })
+        this.lang = lang
+        artistDetailsPresenter.loadBiography(name, lang, null)
     }
 
+    override fun artistInfo(lastFmArtist: LastFmArtist?) {
+        if (lastFmArtist != null && lastFmArtist.artist != null) {
+            val bioContent = lastFmArtist.artist.bio.content
+            if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
+                biographyText.visibility = View.VISIBLE
+                biographyTitle.visibility = View.VISIBLE
+                biography = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
+                } else {
+                    Html.fromHtml(bioContent)
+                }
+                biographyText.text = biography
+            }
+        }
+
+        // If the "lang" parameter is set and no biography is given, retry with default language
+        if (biography == null && lang != null) {
+            loadBiography(artist.name, null)
+        }
+    }
+
+    private var lang: String? = null
 
     private fun loadArtistImage() {
-        GlideApp.with(this)
-                .asBitmapPalette()
-                .load(RetroGlideExtension.getArtistModel(artist, forceDownload))
-                .transition(RetroGlideExtension.getDefaultTransition())
-                .artistOptions(artist)
-                .dontAnimate()
-                .into(object : RetroMusicColoredTarget(artistImage) {
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
+                .dontAnimate().into(object : RetroMusicColoredTarget(artistImage) {
                     override fun onColorReady(color: Int) {
                         setColors(color)
                     }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        setColors(defaultFooterColor)
-                    }
                 })
-        forceDownload = false;
     }
 
     private fun setColors(color: Int) {
-
-        val textColor = if (PreferenceUtil.getInstance().adaptiveColor) color else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ThemeStore.accentColor(this)
 
         albumTitle.setTextColor(textColor)
         songTitle.setTextColor(textColor)
         biographyTitle.setTextColor(textColor)
 
-        val buttonColor = if (PreferenceUtil.getInstance().adaptiveColor) color
-        else ATHUtil.resolveColor(this, R.attr.cardBackgroundColor)
+        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ATHUtil.resolveColor(this, R.attr.colorSurface)
 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
-    }
 
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        status_bar.setBackgroundColor(toolbarColor)
+        toolbar.setBackgroundColor(toolbarColor)
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = null
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return handleSortOrderMenuItem(item)
     }
 
     private fun handleSortOrderMenuItem(item: MenuItem): Boolean {
-        val songs = getArtist().songs
+        val songs = artist.songs
         when (item.itemId) {
             android.R.id.home -> {
                 super.onBackPressed()
@@ -331,9 +279,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
                 return true
             }
             R.id.action_reset_artist_image -> {
-                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating),
-                        Toast.LENGTH_SHORT).show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist!!)
+                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating), Toast.LENGTH_SHORT).show()
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
                 forceDownload = true
                 return true
             }
@@ -352,8 +299,19 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailContrac
     }
 
     private fun reload() {
-        artistDetailsPresenter.unsubscribe()
-        artistDetailsPresenter.subscribe()
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
+        } else {
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (cab != null && cab!!.isActive) {
+            cab?.finish()
+        } else {
+            super.onBackPressed()
+        }
     }
 
     companion object {

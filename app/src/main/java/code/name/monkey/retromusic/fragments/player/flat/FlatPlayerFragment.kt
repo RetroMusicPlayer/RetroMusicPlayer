@@ -13,16 +13,16 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_flat_player.*
 
-class FlatPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbacks {
+class FlatPlayerFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -41,10 +41,9 @@ class FlatPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
 
     private fun setUpPlayerToolbar() {
         playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { _ -> activity!!.onBackPressed() }
+        playerToolbar.setNavigationOnClickListener { _ -> requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context,
-                R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
     }
 
     private fun colorize(i: Int) {
@@ -89,26 +88,23 @@ class FlatPlayerFragment : AbsPlayerFragment(), PlayerAlbumCoverFragment.Callbac
 
     override fun toolbarIconColor(): Int {
         val isLight = ColorUtil.isColorLight(paletteColor)
-        return if (PreferenceUtil.getInstance().adaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(context, isLight)
+        return if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
+            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(context, R.attr.iconColor)
+            ATHUtil.resolveColor(context, R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {
         lastColor = color
         flatPlaybackControlsFragment.setDark(color)
-        callbacks!!.onPaletteColorChanged()
-
+        callbacks?.onPaletteColorChanged()
         val isLight = ColorUtil.isColorLight(color)
-
-        //TransitionManager.beginDelayedTransition(mToolbar);
-        val iconColor = if (PreferenceUtil.getInstance().adaptiveColor)
-            MaterialValueHelper.getPrimaryTextColor(context!!, isLight)
+        val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
+            MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(context!!, R.attr.iconColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, activity)
-        if (PreferenceUtil.getInstance().adaptiveColor) {
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
+        if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
         }
     }

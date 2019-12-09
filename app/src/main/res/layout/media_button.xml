@@ -2,17 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/playerMediaControllerContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:layoutDirection="ltr"
     android:paddingStart="4dp"
     android:paddingEnd="4dp"
-    tools:ignore="ContentDescription,UnusedAttribute"
-    tools:showIn="@layout/fragment_player_playback_controls">
+    tools:ignore="ContentDescription,UnusedAttribute">
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/previousButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +24,7 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +38,7 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/repeatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +51,7 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/shuffleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,11 +70,10 @@
         android:layout_height="56dp"
         android:layout_centerInParent="true" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/playPauseButton"
         android:layout_width="52dp"
         android:layout_height="52dp"
-        android:layout_above="@id/title_container"
         android:layout_centerInParent="true"
         android:background="@drawable/color_circle_gradient"
         android:elevation="4dp"

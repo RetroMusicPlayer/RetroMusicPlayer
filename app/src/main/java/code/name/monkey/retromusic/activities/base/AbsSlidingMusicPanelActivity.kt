@@ -1,16 +1,18 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
@@ -19,27 +21,31 @@ import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
-import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
+import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
 import code.name.monkey.retromusic.fragments.player.plain.PlainPlayerFragment
 import code.name.monkey.retromusic.fragments.player.simple.SimplePlayerFragment
 import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.model.CategoryInfo
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
-import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 
-abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), SlidingUpPanelLayout.PanelSlideListener, AbsPlayerFragment.Callbacks {
+abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlayerFragment.Callbacks {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var playerFragment: AbsPlayerFragment? = null
     private var currentNowPlayingScreen: NowPlayingScreen? = null
@@ -48,63 +54,92 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     private var lightStatusBar: Boolean = false
     private var lightNavigationBar: Boolean = false
     private var navigationBarColorAnimator: ValueAnimator? = null
-
     protected abstract fun createContentView(): View
+    private val panelState: Int
+        get() = bottomSheetBehavior.state
 
-    val panelState: SlidingUpPanelLayout.PanelState?
-        get() = slidingLayout.panelState
+    private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
+
+        override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            setMiniPlayerAlphaProgress(slideOffset)
+            dimBackground.show()
+            dimBackground.alpha = slideOffset
+        }
+
+        override fun onStateChanged(bottomSheet: View, newState: Int) {
+            when (newState) {
+                BottomSheetBehavior.STATE_EXPANDED -> {
+                    onPanelExpanded()
+                }
+                BottomSheetBehavior.STATE_COLLAPSED -> {
+                    onPanelCollapsed()
+                    dimBackground.hide()
+                }
+                else -> {
+
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(createContentView())
 
-
         chooseFragmentForTheme()
         setupSlidingUpPanel()
+
+        updateTabs()
+
+        bottomSheetBehavior = BottomSheetBehavior.from(slidingPanel)
+
+        val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
+        dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
     }
 
     override fun onResume() {
         super.onResume()
-        if (currentNowPlayingScreen != PreferenceUtil.getInstance().nowPlayingScreen) {
+        if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).nowPlayingScreen) {
             postRecreate()
+        }
+        bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
+
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            setMiniPlayerAlphaProgress(1f)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (navigationBarColorAnimator != null) navigationBarColorAnimator!!.cancel() // just in case
+        bottomSheetBehavior.removeBottomSheetCallback(bottomSheetCallbackList)
+        if (navigationBarColorAnimator != null) navigationBarColorAnimator?.cancel() // just in case
     }
 
-
     protected fun wrapSlidingMusicPanel(@LayoutRes resId: Int): View {
-        @SuppressLint("InflateParams")
         val slidingMusicPanelLayout = layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
         val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
         layoutInflater.inflate(resId, contentContainer)
         return slidingMusicPanelLayout
     }
 
-    fun setAntiDragView(antiDragView: View) {
-        slidingLayout.setAntiDragView(antiDragView)
-    }
-
     private fun collapsePanel() {
-        slidingLayout.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
     fun expandPanel() {
-        slidingLayout.panelState = SlidingUpPanelLayout.PanelState.EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        setMiniPlayerAlphaProgress(1f)
     }
 
     private fun setMiniPlayerAlphaProgress(progress: Float) {
-        if (miniPlayerFragment!!.view == null) return
+        if (miniPlayerFragment?.view == null) return
         val alpha = 1 - progress
-        miniPlayerFragment!!.view!!.alpha = alpha
+        miniPlayerFragment?.view?.alpha = alpha
         // necessary to make the views below clickable
-        miniPlayerFragment!!.view!!.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
+        miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
 
         bottomNavigationView.translationY = progress * 500
-        bottomNavigationView.alpha = alpha
+        //bottomNavigationView.alpha = alpha
     }
 
     open fun onPanelCollapsed() {
@@ -115,40 +150,37 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
         super.setLightNavigationBar(lightNavigationBar)
 
 
-        playerFragment!!.setMenuVisibility(false)
-        playerFragment!!.userVisibleHint = false
-        playerFragment!!.onHide()
+        playerFragment?.setMenuVisibility(false)
+        playerFragment?.userVisibleHint = false
+        playerFragment?.onHide()
     }
 
     open fun onPanelExpanded() {
         val playerFragmentColor = playerFragment!!.paletteColor
         super.setTaskDescriptionColor(playerFragmentColor)
 
-        playerFragment!!.setMenuVisibility(true)
-        playerFragment!!.userVisibleHint = true
-        playerFragment!!.onShow()
+        playerFragment?.setMenuVisibility(true)
+        playerFragment?.userVisibleHint = true
+        playerFragment?.onShow()
         onPaletteColorChanged()
     }
 
     private fun setupSlidingUpPanel() {
-        slidingLayout.viewTreeObserver
-                .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-                    override fun onGlobalLayout() {
-                        slidingLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                        if (panelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
-                            onPanelSlide(slidingLayout, 1f)
-                            onPanelExpanded()
-                        } else if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
-                            onPanelCollapsed()
-                        } else {
-                            playerFragment!!.onHide()
-                        }
-                    }
-                })
-
-        slidingLayout.addPanelSlideListener(this)
-
+        slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                if (currentNowPlayingScreen != PEAK) {
+                    val params = slidingPanel.layoutParams as ViewGroup.LayoutParams
+                    params.height = ViewGroup.LayoutParams.MATCH_PARENT
+                    slidingPanel.layoutParams = params
+                }
+                when (panelState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> onPanelExpanded()
+                    BottomSheetBehavior.STATE_COLLAPSED -> onPanelCollapsed()
+                    else -> playerFragment!!.onHide()
+                }
+            }
+        })
     }
 
     fun toggleBottomNavigationView(toggle: Boolean) {
@@ -159,16 +191,21 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
         return bottomNavigationView
     }
 
-    fun hideBottomBar(hide: Boolean) {
+    private fun hideBottomBar(hide: Boolean) {
         val heightOfBar = resources.getDimensionPixelSize(R.dimen.mini_player_height)
         val heightOfBarWithTabs = resources.getDimensionPixelSize(R.dimen.mini_player_height_expanded)
 
         if (hide) {
-            slidingLayout.panelHeight = 0
+            bottomSheetBehavior.isHideable = true
+            bottomSheetBehavior.peekHeight = 0
             collapsePanel()
+            bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
         } else {
-            if (!MusicPlayerRemote.playingQueue.isEmpty()) {
-                slidingLayout.panelHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
+            if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
+                slidingPanel.cardElevation = DensityUtil.dip2px(this, 10f).toFloat()
+                bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
+                bottomSheetBehavior.isHideable = false
+                bottomSheetBehavior.peekHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
             }
         }
     }
@@ -179,7 +216,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     }
 
     private fun chooseFragmentForTheme() {
-        currentNowPlayingScreen = PreferenceUtil.getInstance().nowPlayingScreen
+        currentNowPlayingScreen = PreferenceUtil.getInstance(this).nowPlayingScreen
 
         val fragment: Fragment = when (currentNowPlayingScreen) {
             BLUR -> BlurPlayerFragment()
@@ -195,23 +232,24 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
             MATERIAL -> MaterialFragment()
             COLOR -> ColorFragment()
             TINY -> TinyPlayerFragment()
-            CLASSIC -> ClassicPlayerFragment()
+            PEAK -> PeakPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
-        supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)
+                .commit()
         supportFragmentManager.executePendingTransactions()
 
         playerFragment = supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
         miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.miniPlayerFragment) as MiniPlayerFragment
-        miniPlayerFragment!!.view!!.setOnClickListener { expandPanel() }
+        miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
-        if (!MusicPlayerRemote.playingQueue.isEmpty()) {
-            slidingLayout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
+            slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    slidingLayout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     hideBottomBar(false)
                 }
             })
@@ -224,55 +262,37 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
     }
 
     override fun onBackPressed() {
-        if (!handleBackPress())
-            super.onBackPressed()
+        if (!handleBackPress()) super.onBackPressed()
     }
 
     open fun handleBackPress(): Boolean {
-        if (slidingLayout.panelHeight != 0 && playerFragment!!.onBackPressed())
-            return true
-        if (panelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+        if (bottomSheetBehavior.peekHeight != 0 && playerFragment!!.onBackPressed()) return true
+        if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
             return true
         }
         return false
     }
 
-    override fun onPanelSlide(panel: View?, slideOffset: Float) {
-        setMiniPlayerAlphaProgress(slideOffset)
-    }
-
-    override fun onPanelStateChanged(panel: View, previousState: SlidingUpPanelLayout.PanelState, newState: SlidingUpPanelLayout.PanelState) {
-        when (newState) {
-            SlidingUpPanelLayout.PanelState.COLLAPSED -> onPanelCollapsed()
-            SlidingUpPanelLayout.PanelState.EXPANDED -> onPanelExpanded()
-            SlidingUpPanelLayout.PanelState.ANCHORED -> collapsePanel() // this fixes a bug where the panel would get stuck for some reason
-            else -> {
-            }
-        }
-    }
-
     override fun onPaletteColorChanged() {
-        if (panelState == SlidingUpPanelLayout.PanelState.EXPANDED) {
+        if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
             val paletteColor = playerFragment!!.paletteColor
             super.setTaskDescriptionColor(paletteColor)
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
-            if (PreferenceUtil.getInstance().adaptiveColor &&
-                    (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
+
+            if (PreferenceUtil.getInstance(this).adaptiveColor && (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
-            } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD ||
-                    currentNowPlayingScreen == FIT || currentNowPlayingScreen == CLASSIC ||
-                    currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
+            } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD || currentNowPlayingScreen == FIT || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
-            } else if (currentNowPlayingScreen == COLOR) {
+            } else if (currentNowPlayingScreen == COLOR || currentNowPlayingScreen == TINY) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
             } else {
-                super.setLightStatusbar(ColorUtil.isColorLight(ThemeStore.primaryColor(this)))
+                super.setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, android.R.attr.windowBackground)))
                 super.setLightNavigationBar(true)
             }
         }
@@ -280,21 +300,21 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
     override fun setLightStatusbar(enabled: Boolean) {
         lightStatusBar = enabled
-        if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+        if (panelState == BottomSheetBehavior.STATE_COLLAPSED) {
             super.setLightStatusbar(enabled)
         }
     }
 
     override fun setLightNavigationBar(enabled: Boolean) {
         lightNavigationBar = enabled
-        if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+        if (panelState == BottomSheetBehavior.STATE_COLLAPSED) {
             super.setLightNavigationBar(enabled)
         }
     }
 
     override fun setNavigationbarColor(color: Int) {
         navigationBarColor = color
-        if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+        if (panelState == BottomSheetBehavior.STATE_COLLAPSED) {
             if (navigationBarColorAnimator != null) navigationBarColorAnimator!!.cancel()
             super.setNavigationbarColor(color)
         }
@@ -302,9 +322,36 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), Sliding
 
     override fun setTaskDescriptionColor(color: Int) {
         taskColor = color
-        if (panelState == SlidingUpPanelLayout.PanelState.COLLAPSED) {
+        if (panelState == BottomSheetBehavior.STATE_COLLAPSED) {
             super.setTaskDescriptionColor(color)
         }
     }
 
+    private fun updateTabs() {
+        bottomNavigationView.menu.clear()
+        val currentTabs: List<CategoryInfo> = PreferenceUtil.getInstance(this).libraryCategoryInfos
+        for (tab in currentTabs) {
+            if (tab.visible) {
+                val menu = tab.category
+                bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes).setIcon(menu.icon)
+            }
+        }
+        print("Tabs -> ${currentTabs.size}")
+        if (currentTabs.size <= 1) {
+            toggleBottomNavigationView(true)
+        }
+    }
+
+    /*override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        if (ev?.action == MotionEvent.ACTION_DOWN) {
+            if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
+                val outRect = Rect()
+                slidingPanel.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }*/
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<com.heinrichreimersoftware.materialintro.view.parallax.ParallaxLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="false"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/mi_baseline">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/mi_image"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/mi_baseline"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:scaleType="center"
+        app:layout_parallaxFactor="0.75"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[4]" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@id/mi_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mi_baseline"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textAppearance="@style/TextViewHeadline5"
+        tools:ignore="UnusedAttribute"
+        tools:text="Lorem ipsum" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@id/mi_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/mi_baseline"
+        android:gravity="center"
+        android:textAppearance="@style/TextViewSubtitle1"
+        tools:text="Lorem ipsum dolor sit amet, consectetur, adipisci velit, …" />
+
+</com.heinrichreimersoftware.materialintro.view.parallax.ParallaxLinearLayout>

@@ -3,28 +3,34 @@ package code.name.monkey.retromusic.fragments.mainactivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.contract.PlaylistContract
-import code.name.monkey.retromusic.mvp.presenter.PlaylistPresenter
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
-import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
+import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.mvp.presenter.PlaylistView
+import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
+import javax.inject.Inject
 
 
-class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistContract.PlaylistView {
+class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView {
 
-    private var presenter: PlaylistPresenter? = null
+    @Inject
+    lateinit var playlistsPresenter: PlaylistsPresenter
 
     override val emptyMessage: Int
         get() = R.string.no_playlists
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-        presenter = PlaylistPresenter(this)
+        App.musicComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        playlistsPresenter.attachView(this)
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
@@ -36,45 +42,29 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
                 R.layout.item_list, libraryFragment)
     }
 
-    override fun setMenuVisibility(menuVisible: Boolean) {
-        super.setMenuVisibility(menuVisible)
-        if (menuVisible) {
-            libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.playlists)
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        libraryFragment.setTitle(if (PreferenceUtil.getInstance().tabTitles()) R.string.library else R.string.playlists)
         if (adapter!!.dataSet.isEmpty()) {
-            presenter!!.subscribe()
+            playlistsPresenter.playlists()
         }
     }
 
-    override fun onDestroy() {
-        presenter!!.unsubscribe()
-        super.onDestroy()
+    override fun onDestroyView() {
+        playlistsPresenter.detachView()
+        super.onDestroyView()
     }
 
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        presenter!!.loadPlaylists()
-    }
-
-    override fun loading() {
-
+        playlistsPresenter.playlists()
     }
 
     override fun showEmptyView() {
-        adapter!!.swapDataSet(ArrayList())
+        adapter?.swapDataSet(ArrayList())
     }
 
-    override fun completed() {
-
-    }
-
-    override fun showData(list: ArrayList<Playlist>) {
-        adapter!!.swapDataSet(list)
+    override fun playlists(playlists: ArrayList<Playlist>) {
+        adapter?.swapDataSet(playlists)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -86,6 +76,8 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
     }
 
     companion object {
+        @JvmField
+        val TAG: String = PlaylistsFragment::class.java.simpleName
 
         fun newInstance(): PlaylistsFragment {
             val args = Bundle()

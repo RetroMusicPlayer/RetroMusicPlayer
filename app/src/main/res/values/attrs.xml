@@ -3,7 +3,6 @@
 
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
-    <attr name="rectSelectorStrong" format="reference" />
 
     <attr name="defaultFooterColor" format="color" />
 
@@ -36,6 +35,7 @@
     </declare-styleable>
     <declare-styleable name="ColorIconsImageView">
         <attr name="iconBackgroundColor" format="color" />
+        <attr name="colorIconColor" format="color" />
         <attr name="icon" format="reference" />
     </declare-styleable>
 
@@ -46,24 +46,37 @@
 
 
     <declare-styleable name="LrcView">
-        <attr name="lrcTextSize" format="dimension"/>
-        <attr name="lrcLineSpaceSize" format="dimension"/>
-        <attr name="lrcNormalTextColor" format="reference|color"/>
-        <attr name="lrcCurrentTextColor" format="reference|color"/>
-        <attr name="lrcTouchDelay" format="integer"/>
-        <attr name="noLrcTextSize" format="dimension"/>
-        <attr name="noLrcTextColor" format="reference|color"/>
-        <attr name="indicatorLineHeight" format="dimension"/>
-        <attr name="indicatorTextSize" format="dimension"/>
-        <attr name="indicatorTextColor" format="reference|color"/>
-        <attr name="currentIndicateLrcColor" format="reference|color"/>
-        <attr name="indicatorTouchDelay" format="integer"/>
-        <attr name="indicatorLineColor" format="reference|color"/>
-        <attr name="indicatorStartEndMargin" format="dimension"/>
-        <attr name="iconLineGap" format="dimension"/>
-        <attr name="playIconWidth" format="dimension"/>
-        <attr name="playIconHeight" format="dimension"/>
-        <attr name="playIcon" format="reference"/>
+        <attr name="lrcTextSize" format="dimension" />
+        <attr name="lrcLineSpaceSize" format="dimension" />
+        <attr name="lrcNormalTextColor" format="reference|color" />
+        <attr name="lrcCurrentTextColor" format="reference|color" />
+        <attr name="lrcTouchDelay" format="integer" />
+        <attr name="noLrcTextSize" format="dimension" />
+        <attr name="noLrcTextColor" format="reference|color" />
+        <attr name="indicatorLineHeight" format="dimension" />
+        <attr name="indicatorTextSize" format="dimension" />
+        <attr name="indicatorTextColor" format="reference|color" />
+        <attr name="currentIndicateLrcColor" format="reference|color" />
+        <attr name="indicatorTouchDelay" format="integer" />
+        <attr name="indicatorLineColor" format="reference|color" />
+        <attr name="indicatorStartEndMargin" format="dimension" />
+        <attr name="iconLineGap" format="dimension" />
+        <attr name="playIconWidth" format="dimension" />
+        <attr name="playIconHeight" format="dimension" />
+        <attr name="playIcon" format="reference" />
     </declare-styleable>
 
+    <attr name="lineHeightHint" format="dimension" />
+
+    <declare-styleable name="BaselineGridTextView">
+        <attr name="lineHeightMultiplierHint" format="float" />
+        <attr name="lineHeightHint" />
+        <attr name="maxLinesByHeight" format="boolean" />
+        <attr name="android:textAppearance" />
+        <attr name="android:fontFamily" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleRectView">
+        <attr name="circleRadius" format="dimension" />
+    </declare-styleable>
 </resources>

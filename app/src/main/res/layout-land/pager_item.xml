@@ -11,11 +11,12 @@
         android:id="@+id/imageContainer"
         android:layout_width="match_parent"
         android:layout_height="156dp"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="16dp"
         app:cardUseCompatPadding="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
+            tools:src="@tools:sample/avatars"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
@@ -32,7 +33,7 @@
             app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
     </com.google.android.material.card.MaterialCardView>
 
-    <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -42,20 +43,19 @@
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
-        android:textSize="13sp"
         tools:ignore="MissingPrefix"
-        tools:text="My top tracks" />
+        tools:text="@tools:sample/lorem/random" />
 
-    <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="1"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textSize="14sp"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textStyle="bold"
         tools:ignore="MissingPrefix"
-        tools:text="My top tracks" />
+        tools:text="@tools:sample/lorem/random" />
 </LinearLayout>

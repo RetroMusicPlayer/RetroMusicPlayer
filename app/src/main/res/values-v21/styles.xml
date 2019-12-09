@@ -18,10 +18,10 @@
         <item name="android:textViewStyle">@style/TextViewStyleIm</item>
     </style>
 
-    <style name="RetroTextViewStyle" parent="android:Widget.Material.TextView" />
-
-    <style name="TextViewStyleIm" parent="RetroTextViewStyle">
-        <item name="android:hyphenationFrequency">none</item>
+    <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowSharedElementsUseOverlay">false</item>
+        <item name="android:textViewStyle">@style/TextViewStyleIm</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.Material.Notification" />

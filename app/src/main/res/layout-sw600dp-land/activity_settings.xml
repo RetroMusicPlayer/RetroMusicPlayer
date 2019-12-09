@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/contentFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+            <FrameLayout
+                android:id="@+id/detailContentFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:liftOnScroll="true">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
+            tools:title="@string/action_settings" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+

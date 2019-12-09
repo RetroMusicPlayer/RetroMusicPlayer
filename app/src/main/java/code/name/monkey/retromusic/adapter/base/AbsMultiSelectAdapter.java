@@ -1,12 +1,13 @@
 package code.name.monkey.retromusic.adapter.base;
 
 import android.content.Context;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.MenuRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.afollestad.materialcab.MaterialCab;
 

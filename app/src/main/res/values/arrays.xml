@@ -43,10 +43,13 @@
     <string-array name="pref_general_theme_list_titles">
         <item>@string/light_theme_name</item>
         <item>@string/dark_theme_name</item>
-        <item>@string/black_theme_name</item>
-        <item>@string/color_theme_name</item>
+        <item>@string/follow_system</item>
     </string-array>
-
+    <string-array name="pref_general_theme_list_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>auto</item>
+    </string-array>
     <string-array name="pref_grid_style_list_titles">
         <item>@string/normal_style</item>
         <item>@string/card_style</item>
@@ -92,12 +95,6 @@
         <item>@layout/item_album_card</item>
     </array>
 
-    <string-array name="pref_general_theme_list_values">
-        <item>light</item>
-        <item>dark</item>
-        <item>black</item>
-        <item>color</item>
-    </string-array>
 
     <array name="pref_auto_download_images_values">
         <item>always</item>
@@ -105,9 +102,6 @@
         <item>never</item>
     </array>
 
-    <array name="pref_album_detail_style_values">
-        <item>@layout/activity_album</item>
-    </array>
 
     <string-array name="pref_playlists_last_added_interval_titles">
         <item>@string/today</item>
@@ -177,28 +171,9 @@
         <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/1.png</item>
     </string-array>
 
-    <string-array name="pref_equalizer_types_titles">
-        <item>@string/system_equalizer</item>
-        <item>@string/retro_equalizer</item>
-    </string-array>
-
-    <string-array name="pref_equalizer_types_values">
-        <item>system</item>
-        <item>retro</item>
-    </string-array>
-
-    <array name="pref_album_details_style_titles">
-        <item>@string/normal</item>
-        <item>@string/small</item>
-    </array>
 
     <array name="pref_album_details_style_layout">
         <item>@layout/activity_album</item>
     </array>
-
-    <string-array name="pref_album_details_style_values">
-        <item>0</item>
-        <item>1</item>
-    </string-array>
 
 </resources>

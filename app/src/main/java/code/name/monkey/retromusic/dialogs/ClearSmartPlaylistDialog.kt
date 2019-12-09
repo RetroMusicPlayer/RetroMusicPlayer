@@ -20,6 +20,8 @@ import android.text.Html
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
@@ -33,8 +35,9 @@ class ClearSmartPlaylistDialog : DialogFragment() {
 
         val content = Html.fromHtml(getString(R.string.clear_playlist_x, playlist!!.name))
 
-        return MaterialDialog(activity!!, BottomSheet()).show {
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(title)
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             message(text = content)
             positiveButton(R.string.clear_action) {
                 if (activity == null) {

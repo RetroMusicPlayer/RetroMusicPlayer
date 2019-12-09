@@ -1,36 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/artistImage"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+
+                <ViewStub
+                    android:id="@+id/cab_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:transitionName="@string/transition_album_art" />
+                android:layout_margin="16dp"
+                android:transitionName="@string/transition_artist_image"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/artistImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-
-        </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,28 +81,22 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/artistTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/text"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:freezesText="true"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:scrollHorizontally="true"
-                            android:singleLine="true"
+                            android:paddingTop="4dp"
+                            android:textAppearance="@style/TextViewSubtitle2"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 
@@ -91,9 +113,4 @@
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@drawable/shadow_down_strong" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

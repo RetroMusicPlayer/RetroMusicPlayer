@@ -14,40 +14,49 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.SongContract
+import code.name.monkey.retromusic.mvp.*
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
 import java.util.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 10/08/17.
  */
+interface SongView {
+	fun songs(songs: ArrayList<Song>)
 
-class SongPresenter(private val view: SongContract.SongView) : Presenter(), SongContract.Presenter {
-
-    override fun loadSongs() {
-        disposable.add(repository.allSongs
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
-
-    override fun subscribe() {
-        loadSongs()
-    }
-
-    private fun showList(songs: ArrayList<Song>) {
-        if (songs.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(songs)
-        }
-    }
-
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+	fun showEmptyView()
 }
+
+interface SongPresenter : Presenter<SongView> {
+	fun loadSongs()
+	class SongPresenterImpl @Inject constructor(
+			private val repository: Repository
+	) : PresenterImpl<SongView>(), SongPresenter, CoroutineScope {
+
+		private var job: Job = Job()
+
+		override val coroutineContext: CoroutineContext
+			get() = Dispatchers.IO + job
+
+		override fun loadSongs() {
+			launch {
+				when (val songs = repository.allSongs()) {
+					is Result.Success -> withContext(Dispatchers.Main) { view?.songs(songs.data) }
+					is Result.Error   -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+				}
+			}
+		}
+
+		override fun detachView() {
+			super.detachView()
+			job.cancel();
+		}
+	}
+}
+
+

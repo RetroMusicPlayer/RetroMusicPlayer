@@ -10,41 +10,24 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:elevation="0dp"
-        app:elevation="0dp">
+        app:elevation="0dp"
+        app:liftOnScroll="true">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
-            app:titleEnabled="false">
-
-            <FrameLayout
-                android:id="@+id/imageContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/editorImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone" />
-            </FrameLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar"
-                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-                app:title="@string/action_tag_editor"
-                tools:ignore="UnusedAttribute" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:title="@string/action_tag_editor"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
+            tools:ignore="UnusedAttribute" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
             android:id="@+id/editables"
@@ -59,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <code.name.monkey.appthemehelper.common.views.ATEEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/songText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,7 +60,7 @@
                 android:layout_marginTop="8dp"
                 app:hintEnabled="true">
 
-                <code.name.monkey.appthemehelper.common.views.ATEEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/albumText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -240,19 +223,25 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="52dp" />
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/saveTags"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="16dp"
         android:gravity="center"
+        android:paddingStart="32dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="32dp"
+        android:paddingBottom="12dp"
         android:text="@string/save"
+        app:cornerRadius="25dp"
         app:icon="@drawable/ic_save_white_24dp"
         app:iconGravity="textStart" />
 

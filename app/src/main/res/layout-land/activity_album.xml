@@ -1,36 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    tools:ignore="UnusedAttribute">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar"
+                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+
+                <ViewStub
+                    android:id="@+id/cab_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:transitionName="@string/transition_album_art" />
+                android:layout_margin="16dp"
+                android:transitionName="@string/transition_album_art"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Toolbar" />
-        </FrameLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/contentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,7 +85,8 @@
                         android:layout_height="52dp"
                         android:layout_marginStart="8dp"
                         android:layout_weight="0"
-                        app:civ_border="false" />
+                        app:civ_border="false"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,17 +96,18 @@
                         android:orientation="vertical"
                         android:padding="16dp">
 
-                        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/albumTitle"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
-                            tools:ignore="MissingPrefix" />
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textStyle="bold"
+                            tools:ignore="MissingPrefix"
+                            tools:text="Album name" />
 
-                        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+                        <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/albumText"
-                            style="@style/TextAppearance.MaterialComponents.Subtitle2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -83,10 +116,12 @@
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
                             android:marqueeRepeatLimit="marquee_forever"
+                            android:paddingTop="4dp"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
+                            android:textAppearance="@style/TextViewHeadline6"
                             tools:ignore="MissingPrefix"
-                            tools:text="Title" />
+                            tools:text="Album details name" />
 
                     </LinearLayout>
 
@@ -94,7 +129,8 @@
 
                 <include layout="@layout/activity_album_content" />
             </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
 

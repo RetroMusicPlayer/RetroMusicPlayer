@@ -16,15 +16,18 @@ import androidx.annotation.StringDef
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.misc.DialogAsyncTask
 import code.name.monkey.retromusic.activities.base.AbsThemeActivity
 import code.name.monkey.retromusic.activities.bugreport.model.DeviceInfo
 import code.name.monkey.retromusic.activities.bugreport.model.Report
 import code.name.monkey.retromusic.activities.bugreport.model.github.ExtraInfo
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubLogin
 import code.name.monkey.retromusic.activities.bugreport.model.github.GithubTarget
+import code.name.monkey.retromusic.misc.DialogAsyncTask
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -44,7 +47,13 @@ private const val RESULT_INVALID_TOKEN = "RESULT_INVALID_TOKEN"
 private const val RESULT_ISSUES_NOT_ENABLED = "RESULT_ISSUES_NOT_ENABLED"
 private const val RESULT_UNKNOWN = "RESULT_UNKNOWN"
 
-@StringDef(RESULT_SUCCESS, RESULT_BAD_CREDENTIALS, RESULT_INVALID_TOKEN, RESULT_ISSUES_NOT_ENABLED, RESULT_UNKNOWN)
+@StringDef(
+        RESULT_SUCCESS,
+        RESULT_BAD_CREDENTIALS,
+        RESULT_INVALID_TOKEN,
+        RESULT_ISSUES_NOT_ENABLED,
+        RESULT_UNKNOWN
+)
 @Retention(AnnotationRetention.SOURCE)
 private annotation class Result
 
@@ -53,66 +62,62 @@ open class BugReportActivity : AbsThemeActivity() {
     private var deviceInfo: DeviceInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bug_report)
-
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
 
         initViews()
 
-        if (TextUtils.isEmpty(title))
-            setTitle(R.string.report_an_issue)
-
+        if (TextUtils.isEmpty(title)) setTitle(R.string.report_an_issue)
 
         deviceInfo = DeviceInfo(this)
-        airTextDeviceInfo!!.text = deviceInfo!!.toString()
+        airTextDeviceInfo.text = deviceInfo.toString()
     }
 
     private fun initViews() {
         val accentColor = ThemeStore.accentColor(this)
-        val primaryColor = ThemeStore.primaryColor(this)
-        toolbar!!.setBackgroundColor(primaryColor)
+        val primaryColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        toolbar.setBackgroundColor(primaryColor)
         setSupportActionBar(toolbar)
+        ToolbarContentTintHelper.colorBackButton(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        TintHelper.setTintAuto(optionUseAccount, accentColor, false)
+        optionUseAccount?.setOnClickListener {
+            inputTitle.isEnabled = true
+            inputDescription.isEnabled = true
+            inputUsername.isEnabled = true
+            inputPassword.isEnabled = true
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
-        TintHelper.setTintAuto(optionUseAccount!!, accentColor, false)
-        optionUseAccount!!.setOnClickListener {
-            inputTitle!!.isEnabled = true
-            inputDescription!!.isEnabled = true
-            inputUsername!!.isEnabled = true
-            inputPassword!!.isEnabled = true
-
-            optionAnonymous!!.isChecked = false
-            sendFab!!.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            optionAnonymous.isChecked = false
+            sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab!!.setImageResource(R.drawable.ic_send_white_24dp)
-                    sendFab!!.show()
+                    sendFab.setImageResource(R.drawable.ic_send_white_24dp)
+                    sendFab.show()
                 }
             })
         }
-        TintHelper.setTintAuto(optionAnonymous!!, accentColor, false)
-        optionAnonymous!!.setOnClickListener {
-            inputTitle!!.isEnabled = false
-            inputDescription!!.isEnabled = false
-            inputUsername!!.isEnabled = false
-            inputPassword!!.isEnabled = false
+        TintHelper.setTintAuto(optionAnonymous, accentColor, false)
+        optionAnonymous.setOnClickListener {
+            inputTitle.isEnabled = false
+            inputDescription.isEnabled = false
+            inputUsername.isEnabled = false
+            inputPassword.isEnabled = false
 
-            optionUseAccount!!.isChecked = false
-            sendFab!!.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+            optionUseAccount.isChecked = false
+            sendFab.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
                 override fun onHidden(fab: FloatingActionButton?) {
                     super.onHidden(fab)
-                    sendFab!!.setImageResource(R.drawable.ic_open_in_browser_white_24dp)
-                    sendFab!!.show()
+                    sendFab.setImageResource(R.drawable.ic_open_in_browser_white_24dp)
+                    sendFab.show()
                 }
             })
         }
 
-        inputPassword!!.setOnEditorActionListener { _, actionId, _ ->
+        inputPassword.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {
                 reportIssue()
                 return@setOnEditorActionListener true
@@ -120,22 +125,22 @@ open class BugReportActivity : AbsThemeActivity() {
             false
         }
 
-        airTextDeviceInfo!!.setOnClickListener { copyDeviceInfoToClipBoard() }
+        airTextDeviceInfo.setOnClickListener { copyDeviceInfoToClipBoard() }
 
-        TintHelper.setTintAuto(sendFab!!, accentColor, true)
-        sendFab!!.setOnClickListener { reportIssue() }
+        TintHelper.setTintAuto(sendFab, accentColor, true)
+        sendFab.setOnClickListener { reportIssue() }
 
-        TintHelper.setTintAuto(inputTitle!!, accentColor, false)
-        TintHelper.setTintAuto(inputDescription!!, accentColor, false)
-        TintHelper.setTintAuto(inputUsername!!, accentColor, false)
-        TintHelper.setTintAuto(inputPassword!!, accentColor, false)
+        MaterialUtil.setTint(inputLayoutTitle, false)
+        MaterialUtil.setTint(inputLayoutDescription, false)
+        MaterialUtil.setTint(inputLayoutUsername, false)
+        MaterialUtil.setTint(inputLayoutPassword, false)
     }
 
     private fun reportIssue() {
-        if (optionUseAccount!!.isChecked) {
+        if (optionUseAccount.isChecked) {
             if (!validateInput()) return
-            val username = inputUsername!!.text!!.toString()
-            val password = inputPassword!!.text!!.toString()
+            val username = inputUsername.text.toString()
+            val password = inputPassword.text.toString()
             sendBugReport(GithubLogin(username, password))
         } else {
             copyDeviceInfoToClipBoard()
@@ -149,43 +154,46 @@ open class BugReportActivity : AbsThemeActivity() {
 
     private fun copyDeviceInfoToClipBoard() {
         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo!!.toMarkdown())
-        clipboard.primaryClip = clip
-
-        Toast.makeText(this@BugReportActivity, R.string.copied_device_info_to_clipboard, Toast.LENGTH_LONG).show()
+        val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo?.toMarkdown())
+        clipboard.setPrimaryClip(clip)
+        Toast.makeText(
+                this@BugReportActivity,
+                R.string.copied_device_info_to_clipboard,
+                Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun validateInput(): Boolean {
         var hasErrors = false
 
-        if (optionUseAccount!!.isChecked) {
-            if (TextUtils.isEmpty(inputUsername!!.text)) {
-                setError(inputLayoutUsername!!, R.string.bug_report_no_username)
+        if (optionUseAccount.isChecked) {
+            if (TextUtils.isEmpty(inputUsername.text)) {
+                setError(inputLayoutUsername, R.string.bug_report_no_username)
                 hasErrors = true
             } else {
-                removeError(inputLayoutUsername!!)
+                removeError(inputLayoutUsername)
             }
 
-            if (TextUtils.isEmpty(inputPassword!!.text)) {
-                setError(inputLayoutPassword!!, R.string.bug_report_no_password)
+            if (TextUtils.isEmpty(inputPassword.text)) {
+                setError(inputLayoutPassword, R.string.bug_report_no_password)
                 hasErrors = true
             } else {
-                removeError(inputLayoutPassword!!)
+                removeError(inputLayoutPassword)
             }
         }
 
-        if (TextUtils.isEmpty(inputTitle!!.text)) {
-            setError(inputLayoutTitle!!, R.string.bug_report_no_title)
+        if (TextUtils.isEmpty(inputTitle.text)) {
+            setError(inputLayoutTitle, R.string.bug_report_no_title)
             hasErrors = true
         } else {
-            removeError(inputLayoutTitle!!)
+            removeError(inputLayoutTitle)
         }
 
-        if (TextUtils.isEmpty(inputDescription!!.text)) {
-            setError(inputLayoutDescription!!, R.string.bug_report_no_description)
+        if (TextUtils.isEmpty(inputDescription.text)) {
+            setError(inputLayoutDescription, R.string.bug_report_no_description)
             hasErrors = true
         } else {
-            removeError(inputLayoutDescription!!)
+            removeError(inputLayoutDescription)
         }
 
         return !hasErrors
@@ -202,8 +210,8 @@ open class BugReportActivity : AbsThemeActivity() {
     private fun sendBugReport(login: GithubLogin) {
         if (!validateInput()) return
 
-        val bugTitle = inputTitle!!.text!!.toString()
-        val bugDescription = inputDescription!!.text!!.toString()
+        val bugTitle = inputTitle.text.toString()
+        val bugDescription = inputDescription.text.toString()
 
         val extraInfo = ExtraInfo()
         onSaveExtraInfo()
@@ -223,11 +231,14 @@ open class BugReportActivity : AbsThemeActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private class ReportIssueAsyncTask private constructor(activity: Activity, private val report: Report, private val target: GithubTarget,
-                                                           private val login: GithubLogin) : DialogAsyncTask<Void, Void, String>(activity) {
+    private class ReportIssueAsyncTask private constructor(
+            activity: Activity,
+            private val report: Report,
+            private val target: GithubTarget,
+            private val login: GithubLogin
+    ) : DialogAsyncTask<Void, Void, String>(activity) {
         override fun createDialog(context: Context): Dialog {
-            return AlertDialog.Builder(context)
-                    .show()
+            return AlertDialog.Builder(context).show()
         }
 
         @Result
@@ -300,7 +311,12 @@ open class BugReportActivity : AbsThemeActivity() {
 
         companion object {
 
-            fun report(activity: Activity, report: Report, target: GithubTarget, login: GithubLogin) {
+            fun report(
+                    activity: Activity,
+                    report: Report,
+                    target: GithubTarget,
+                    login: GithubLogin
+            ) {
                 ReportIssueAsyncTask(activity, report, target, login).execute()
             }
         }

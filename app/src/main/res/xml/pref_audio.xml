@@ -5,6 +5,7 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="true"
         android:key="audio_ducking"
+        android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking"
         app:enableCopying="true"
@@ -13,29 +14,22 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="gapless_playback"
+        android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_gapless_playback"
         android:title="@string/pref_title_gapless_playback"
         app:enableCopying="true" />
 
-    <code.name.monkey.retromusic.preferences.MaterialListPreference
-        android:defaultValue="system"
-        android:entries="@array/pref_equalizer_types_titles"
-        android:entryValues="@array/pref_equalizer_types_values"
-        android:key="choose_equalizer"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="@string/pref_title_choose_equalizer"
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreference
+        android:key="equalizer"
+        android:layout="@layout/list_item_view_no_title"
+        android:title="@string/equalizer"
         app:enableCopying="true"
         app:icon="@drawable/ic_equalizer_white_24dp" />
-
-    <Preference
-        android:key="equalizer"
-        android:title="@string/equalizer"
-        app:enableCopying="true" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="toggle_headset"
+        android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_toggle_headset"
         android:title="@string/pref_title_toggle_toggle_headset"
         app:enableCopying="true"
@@ -44,6 +38,7 @@
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
         android:defaultValue="false"
         android:key="toggle_shuffle"
+        android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_toggle_shuffle"
         android:title="@string/pref_title_toggle_toggle_shuffle"
         app:enableCopying="true"

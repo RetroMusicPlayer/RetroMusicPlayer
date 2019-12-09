@@ -17,9 +17,12 @@ package code.name.monkey.retromusic.model.smartplaylist;
 import android.content.Context;
 import android.os.Parcel;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Song;
@@ -47,7 +50,13 @@ public class ShuffleAllPlaylist extends AbsSmartPlaylist {
 
     @NonNull
     @Override
-    public Observable<ArrayList<Song>> getSongs(@NonNull Context context) {
+    public Observable<ArrayList<Song>> getSongsFlowable(@NotNull @NonNull Context context) {
+        return SongLoader.INSTANCE.getAllSongsFlowable(context);
+    }
+
+    @NonNull
+    @Override
+    public ArrayList<Song> getSongs(@NotNull Context context) {
         return SongLoader.INSTANCE.getAllSongs(context);
     }
 

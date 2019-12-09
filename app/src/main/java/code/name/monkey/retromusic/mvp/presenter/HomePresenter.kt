@@ -14,108 +14,61 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.HomeContract
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.GENRES
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.PLAYLISTS
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ALBUMS
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.RECENT_ARTISTS
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ALBUMS
-import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.TOP_ARTISTS
-import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
     add(disposable)
 }
 
-class HomePresenter(private val view: HomeContract.HomeView) : Presenter(), HomeContract.HomePresenter {
-    private val hashSet: HashSet<Home> = HashSet()
+interface HomeView : BaseView {
+    fun sections(sections: ArrayList<Home>)
+}
 
-    override fun homeSections() {
-        loadRecentArtists()
-        loadRecentAlbums()
-        loadTopArtists()
-        loadATopAlbums()
-        loadFavorite()
-        if (PreferenceUtil.getInstance().isGenreShown) loadGenre()
-    }
+interface HomePresenter : Presenter<HomeView> {
+    fun loadSections()
 
-    override fun subscribe() {
-        homeSections()
-    }
+    class HomePresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<HomeView>(), HomePresenter, CoroutineScope {
+        private val job = Job()
 
-    override fun unsubscribe() {
-        disposable.dispose()
-    }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-    private fun loadRecentArtists() {
-        disposable += repository.recentArtists
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(0, R.string.recent_artists, 0, it, RECENT_ARTISTS, R.drawable.ic_artist_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
-    }
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
 
-    private fun loadRecentAlbums() {
-        disposable += repository.recentAlbums
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(1, R.string.recent_albums, 0, it, RECENT_ALBUMS, R.drawable.ic_album_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
-    }
-
-    private fun loadATopAlbums() {
-        disposable += repository.topAlbums
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(3, R.string.top_albums, 0, it, TOP_ALBUMS, R.drawable.ic_album_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
-    }
-
-    private fun loadTopArtists() {
-        disposable += repository.topArtists
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(2, R.string.top_artists, 0, it, TOP_ARTISTS, R.drawable.ic_artist_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
-    }
-
-    private fun loadFavorite() {
-        disposable += repository.favoritePlaylist
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(4, R.string.favorites, 0, it, PLAYLISTS, R.drawable.ic_favorite_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
-    }
-
-    private fun loadGenre() {
-        disposable += repository.allGenres
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    if (it.isNotEmpty()) hashSet.add(Home(6, R.string.genres, 0, it, GENRES, R.drawable.ic_guitar_acoustic_white_24dp))
-                    view.showData(ArrayList(hashSet))
-                }, {
-                    view.showEmpty()
-                })
+        override fun loadSections() {
+            launch {
+                val list = ArrayList<Home>()
+                val recentArtistResult = listOf(
+                        repository.topArtists(),
+                        repository.topAlbums(),
+                        repository.recentArtists(),
+                        repository.recentAlbums(),
+                        repository.favoritePlaylist()
+                )
+                for (r in recentArtistResult) {
+                    when (r) {
+                        is Result.Success -> list.add(r.data)
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    if (list.isNotEmpty()) view?.sections(list) else view?.showEmptyView()
+                }
+            }
+        }
     }
 }

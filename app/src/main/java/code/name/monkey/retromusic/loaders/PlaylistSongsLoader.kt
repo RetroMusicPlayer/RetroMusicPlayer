@@ -24,8 +24,8 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
 import io.reactivex.Observable
-import io.reactivex.annotations.NonNull
 import java.util.*
+
 
 /**
  * Created by hemanths on 16/08/17.
@@ -33,14 +33,24 @@ import java.util.*
 
 object PlaylistSongsLoader {
 
-    @NonNull
-    fun getPlaylistSongList(@NonNull context: Context, playlist: Playlist): Observable<ArrayList<Song>> {
+    fun getPlaylistSongListFlowable(
+            context: Context,
+            playlist: Playlist
+    ): Observable<ArrayList<Song>> {
+        return (playlist as? AbsCustomPlaylist)?.getSongsFlowable(context)
+                ?: getPlaylistSongListFlowable(context, playlist.id)
+    }
+
+    fun getPlaylistSongList(
+            context: Context,
+            playlist: Playlist
+    ): ArrayList<Song> {
         return (playlist as? AbsCustomPlaylist)?.getSongs(context)
                 ?: getPlaylistSongList(context, playlist.id)
     }
 
-    @NonNull
-    fun getPlaylistSongList(@NonNull context: Context, playlistId: Int): Observable<ArrayList<Song>> {
+
+    fun getPlaylistSongListFlowable(context: Context, playlistId: Int): Observable<ArrayList<Song>> {
         return Observable.create { e ->
             val songs = ArrayList<Song>()
             val cursor = makePlaylistSongCursor(context, playlistId)
@@ -56,8 +66,21 @@ object PlaylistSongsLoader {
         }
     }
 
-    @NonNull
-    private fun getPlaylistSongFromCursorImpl(@NonNull cursor: Cursor, playlistId: Int): PlaylistSong {
+    fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
+        val songs = arrayListOf<Song>()
+        val cursor = makePlaylistSongCursor(context, playlistId)
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                songs.add(getPlaylistSongFromCursorImpl(cursor, playlistId))
+            } while (cursor.moveToNext())
+        }
+        cursor?.close()
+        return songs
+    }
+
+
+    private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Int): PlaylistSong {
         val id = cursor.getInt(0)
         val title = cursor.getString(1)
         val trackNumber = cursor.getInt(2)
@@ -75,7 +98,7 @@ object PlaylistSongsLoader {
         return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer)
     }
 
-    private fun makePlaylistSongCursor(@NonNull context: Context, playlistId: Int): Cursor? {
+    private fun makePlaylistSongCursor(context: Context, playlistId: Int): Cursor? {
         try {
             return context.contentResolver.query(
                     MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId.toLong()),

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
@@ -9,14 +9,16 @@
     tools:ignore="MissingPrefix">
 
     <RelativeLayout
+        android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_container_height"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp">
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -25,91 +27,109 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:fontFamily="sans-serif-medium"
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/songTotalTime"
             android:layout_toRightOf="@id/songCurrentProgress"
-            android:maxHeight="3dp"
-            android:progressDrawable="@drawable/color_progress_seek"
             android:splitTrack="false"
             android:thumb="@drawable/switch_square"
             tools:ignore="RtlHardcoded,UnusedAttribute"
             tools:progress="20" />
     </RelativeLayout>
 
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/md_red_500"
+        android:ellipsize="end"
+        android:fontFeatureSettings="smcp"
+        android:letterSpacing="0.1"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextViewBody2"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/titleContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        tools:text="@tools:sample/lorem/random" />
+
     <LinearLayout
+        android:id="@+id/titleContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/md_red_500"
-            android:ellipsize="end"
-            android:fontFeatureSettings="smcp"
-            android:letterSpacing="0.1"
-            android:maxLines="1"
-            android:padding="4dp"
-            android:textAllCaps="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            tools:text="Title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="@color/md_red_500"
-            android:ellipsize="end"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:fontFeatureSettings="smcp"
+            android:freezesText="true"
+            android:gravity="center"
             android:letterSpacing="0.2"
-            android:maxLines="1"
+            android:marqueeRepeatLimit="marquee_forever"
             android:padding="4dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textAllCaps="true"
-            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
-            tools:text="Title" />
-
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 
+
     <RelativeLayout
-        android:id="@+id/player_media_controller_container"
+        android:id="@+id/playerMediaControllerContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        tools:ignore="ContentDescription,UnusedAttribute">
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        tools:ignore="ContentDescription,UnusedAttribute"
+        tools:showIn="@layout/fragment_player_playback_controls">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playPauseButton"
@@ -153,5 +173,14 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/volume_controls" />
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:backgroundTint="@color/md_red_400"
+        tools:layout_height="52dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

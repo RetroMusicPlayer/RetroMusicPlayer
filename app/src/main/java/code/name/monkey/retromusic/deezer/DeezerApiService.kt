@@ -24,7 +24,9 @@ interface DeezerApiService {
     ): Call<DeezerResponse>
 
     companion object {
-        operator fun invoke(client: okhttp3.Call.Factory): DeezerApiService {
+        operator fun invoke(
+                client: okhttp3.Call.Factory
+        ): DeezerApiService {
             return Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .callFactory(client)
@@ -33,12 +35,16 @@ interface DeezerApiService {
                     .create()
         }
 
-        fun createDefaultOkHttpClient(context: Context): OkHttpClient.Builder =
+        fun createDefaultOkHttpClient(
+                context: Context
+        ): OkHttpClient.Builder =
                 OkHttpClient.Builder()
                         .cache(createDefaultCache(context))
                         .addInterceptor(createCacheControlInterceptor())
 
-        private fun createDefaultCache(context: Context): Cache? {
+        private fun createDefaultCache(
+                context: Context
+        ): Cache? {
             val cacheDir = File(context.applicationContext.cacheDir.absolutePath, "/okhttp-deezer/")
             if (cacheDir.mkdir() or cacheDir.isDirectory) {
                 return Cache(cacheDir, 1024 * 1024 * 10)
@@ -49,8 +55,7 @@ interface DeezerApiService {
         private fun createCacheControlInterceptor(): Interceptor {
             return Interceptor { chain ->
                 val modifiedRequest = chain.request().newBuilder()
-                        .addHeader("Cache-Control",
-                                String.format(Locale.getDefault(), "max-age=31536000, max-stale=31536000")).build()
+                        .addHeader("Cache-Control", String.format(Locale.getDefault(), "max-age=31536000, max-stale=31536000")).build()
                 chain.proceed(modifiedRequest)
             }
         }

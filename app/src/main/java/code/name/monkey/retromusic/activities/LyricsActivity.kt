@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -34,6 +35,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.input.getInputLayout
@@ -49,11 +51,8 @@ import kotlin.collections.ArrayList
 class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
-            ViewPager.SCROLL_STATE_IDLE ->
-                fab.show(true)
-            ViewPager.SCROLL_STATE_DRAGGING,
-            ViewPager.SCROLL_STATE_SETTLING ->
-                fab.hide(true)
+            ViewPager.SCROLL_STATE_IDLE -> fab.show()
+            ViewPager.SCROLL_STATE_DRAGGING, ViewPager.SCROLL_STATE_SETTLING -> fab.hide()
         }
     }
 
@@ -61,7 +60,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     }
 
     override fun onPageSelected(position: Int) {
-        PreferenceUtil.getInstance().lyricsOptions = position
+        PreferenceUtil.getInstance(this).lyricsOptions = position
         if (position == 0) fab.text = getString(R.string.synced_lyrics)
         else if (position == 1) fab.text = getString(R.string.lyrics)
     }
@@ -88,36 +87,38 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lyrics)
-
         setStatusbarColorAuto()
         setTaskDescriptionColorAuto()
         setNavigationbarColorAuto()
 
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.apply {
-            setBackgroundColor(ThemeStore.primaryColor(this@LyricsActivity))
-            navigationIcon = TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.ic_keyboard_backspace_black_24dp), ThemeStore.textColorSecondary(this@LyricsActivity))
-            setSupportActionBar(toolbar)
-        }
-
-
+        applyToolbar(toolbar)
         fab.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))).apply {
-            fab.setTextColor(this)
-            fab.iconTint = this
-        }
+        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this))))
+                .apply {
+                    fab.setTextColor(this)
+                    fab.iconTint = this
+                }
         setupWakelock()
 
         viewPager.apply {
             adapter = PagerAdapter(supportFragmentManager)
-            currentItem = PreferenceUtil.getInstance().lyricsOptions
+            currentItem = PreferenceUtil.getInstance(this@LyricsActivity).lyricsOptions
             addOnPageChangeListener(this@LyricsActivity)
         }
 
         tabs.apply {
             setupWithViewPager(viewPager)
-            setSelectedTabIndicator(TintHelper.createTintedDrawable(ContextCompat.getDrawable(this@LyricsActivity, R.drawable.tab_indicator), ThemeStore.accentColor(this@LyricsActivity)))
-            setTabTextColors(ThemeStore.textColorSecondary(this@LyricsActivity), ThemeStore.accentColor(this@LyricsActivity))
+            setSelectedTabIndicator(
+                    TintHelper.createTintedDrawable(
+                            ContextCompat.getDrawable(
+                                    this@LyricsActivity, R.drawable.tab_indicator
+                            ), ThemeStore.accentColor(this@LyricsActivity)
+                    )
+            )
+            setTabTextColors(
+                    ThemeStore.textColorSecondary(this@LyricsActivity),
+                    ThemeStore.accentColor(this@LyricsActivity)
+            )
             setSelectedTabIndicatorColor(ThemeStore.accentColor(context))
         }
         fab.setOnClickListener(this)
@@ -151,18 +152,31 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     private fun showSyncedLyrics() {
         var content = ""
         try {
-            content = LyricUtil.getStringFromFile(song.title, song.artistName)
+            content = LyricUtil.getStringFromFile(song.data, song.artistName)
         } catch (e: Exception) {
+            try {
+                content = LyricUtil.getStringFromFile(song.title, song.artistName)
+            } catch (e2: Exception) {
+
+            }
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet()).show {
+        val materialDialog = MaterialDialog(
+                this, BottomSheet(LayoutMode.WRAP_CONTENT)
+        ).show {
             title(R.string.add_time_framed_lryics)
-            negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl) }
-            input(hint = getString(R.string.paste_lyrics_here),
+            negativeButton(R.string.action_search) {
+                RetroUtil.openUrl(
+                        this@LyricsActivity, googleSearchLrcUrl
+                )
+            }
+            input(
+                    hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
-                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
-                LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            ) { _, input ->
+                LyricUtil.writeLrcToLoc(song.data, song.artistName, input.toString())
             }
             positiveButton(android.R.string.ok) {
                 updateSong()
@@ -185,15 +199,27 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             lyricsString!!
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet()).show {
+        val materialDialog = MaterialDialog(
+                this, BottomSheet(LayoutMode.WRAP_CONTENT)
+        ).show {
             title(R.string.add_lyrics)
-            negativeButton(R.string.action_search) { RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl()) }
-            input(hint = getString(R.string.paste_lyrics_here),
+            negativeButton(R.string.action_search) {
+                RetroUtil.openUrl(
+                        this@LyricsActivity, getGoogleSearchUrl()
+                )
+            }
+            input(
+                    hint = getString(R.string.paste_lyrics_here),
                     prefill = content,
-                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE) { _, input ->
+                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            ) { _, input ->
                 val fieldKeyValueMap = EnumMap<FieldKey, String>(FieldKey::class.java)
                 fieldKeyValueMap[FieldKey.LYRICS] = input.toString()
-                WriteTagsAsyncTask(this@LyricsActivity).execute(WriteTagsAsyncTask.LoadingInfo(getSongPaths(song), fieldKeyValueMap, null))
+                WriteTagsAsyncTask(this@LyricsActivity).execute(
+                        WriteTagsAsyncTask.LoadingInfo(
+                                getSongPaths(song), fieldKeyValueMap, null
+                        )
+                )
             }
             positiveButton(android.R.string.ok) {
                 updateSong()
@@ -216,9 +242,12 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         return baseUrl
     }
 
-    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
-        class Tabs(@StringRes val title: Int,
-                   val fragment: Fragment)
+    class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(
+            fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    ) {
+        class Tabs(
+                @StringRes val title: Int, val fragment: Fragment
+        )
 
         private var tabs = ArrayList<Tabs>()
 
@@ -234,7 +263,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return App.context.getString(tabs[position].title)
+            return App.getContext().getString(tabs[position].title)
         }
 
         override fun getCount(): Int {
@@ -302,14 +331,21 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             }.execute()
         }
 
+        override fun onActivityCreated(savedInstanceState: Bundle?) {
+            super.onActivityCreated(savedInstanceState)
+            loadSongLyrics()
+        }
+
         override fun onDestroyView() {
             super.onDestroyView()
             if (updateLyricsAsyncTask != null && !updateLyricsAsyncTask!!.isCancelled) {
-                updateLyricsAsyncTask!!.cancel(true)
+                updateLyricsAsyncTask?.cancel(true)
             }
         }
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(
+                inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        ): View? {
             return inflater.inflate(R.layout.fragment_lyrics, container, false)
         }
     }
@@ -320,7 +356,9 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         private lateinit var updateHelper: MusicProgressViewUpdateHelper
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        override fun onCreateView(
+                inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        ): View? {
             return inflater.inflate(R.layout.fragment_synced, container, false)
         }
 
@@ -365,8 +403,12 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         private fun loadLRCLyrics() {
             val song = MusicPlayerRemote.currentSong
-            if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-                showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
+            if (LyricUtil.isLrcFile2Exist(song.data, song.artistName)) {
+                showLyricsLocal(LyricUtil.getLocalLyricFile(song.data, song.artistName))
+            } else {
+                if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
+                    showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
+                }
             }
         }
 

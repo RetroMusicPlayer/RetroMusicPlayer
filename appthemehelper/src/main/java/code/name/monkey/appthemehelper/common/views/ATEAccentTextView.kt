@@ -20,20 +20,13 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import code.name.monkey.appthemehelper.ThemeStore
 
-class ATEAccentTextView : AppCompatTextView {
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
+class ATEAccentTextView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
+    init {
         setTextColor(ThemeStore.accentColor(context))
     }
 }

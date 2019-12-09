@@ -1,14 +1,9 @@
 package code.name.monkey.retromusic.fragments.player.color
 
-import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.AsyncTask
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,22 +14,25 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
+import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.activities.LyricsActivity
-import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.ViewUtil
-import com.bumptech.glide.request.transition.Transition
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
 import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment() {
+
+    private var lastColor: Int = 0
+    private var backgroundColor: Int = 0
+    private lateinit var playbackControlsFragment: ColorPlaybackControlsFragment
+    private var valueAnimator: ValueAnimator? = null
+
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -50,22 +48,12 @@ class ColorFragment : AbsPlayerFragment() {
 
     }
 
-
-    private var lastColor: Int = 0
-    private var backgroundColor: Int = 0
-
-    private var playbackControlsFragment: ColorPlaybackControlsFragment? = null
-
-    private var valueAnimator: ValueAnimator? = null
-    private var updateLyricsAsyncTask: AsyncTask<*, *, *>? = null
-    private var lyricsColor: Lyrics? = null
-
     override fun onShow() {
-        playbackControlsFragment!!.show()
+        playbackControlsFragment.show()
     }
 
     override fun onHide() {
-        playbackControlsFragment!!.hide()
+        playbackControlsFragment.hide()
         onBackPressed()
     }
 
@@ -92,8 +80,9 @@ class ColorFragment : AbsPlayerFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_color_player, container, false)
     }
@@ -102,200 +91,84 @@ class ColorFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
-        setupViews()
+        playerImage.setOnClickListener {
+            NavigationUtil.goToLyrics(requireActivity())
+        }
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ColorPlaybackControlsFragment?
-
+        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ColorPlaybackControlsFragment
     }
 
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@ColorFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
         }
     }
 
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
         updateSong()
-        updateLyricsLocal()
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
         updateSong()
-        updateLyricsLocal()
     }
 
     private fun updateSong() {
-
-        GlideApp.with(activity!!).asBitmapPalette()
-                .load(RetroGlideExtension.getSongModel(MusicPlayerRemote.currentSong))
-                .songOptions(MusicPlayerRemote.currentSong)
-                .transition(RetroGlideExtension.getDefaultTransition())
+        SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
+                .checkIgnoreMediaStore(requireContext()).generatePalette(requireContext()).build()
                 .into(object : RetroMusicColoredTarget(playerImage) {
                     override fun onColorReady(color: Int) {
 
                     }
 
-                    override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: Transition<in BitmapPaletteWrapper>?) {
+                    override fun onResourceReady(
+                            resource: BitmapPaletteWrapper?,
+                            glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
+                    ) {
                         super.onResourceReady(resource, glideAnimation)
+                        resource?.let {
+                            val palette = resource.palette
+                            val swatch = RetroColorUtil.getSwatch(palette)
 
-                        val background = resource.palette.getColor()
-                        val accentColor = resource.palette.getContrastColor(background)
+                            val textColor = RetroColorUtil.getTextColor(palette)
+                            val backgroundColor = swatch.rgb
 
-                        val palette = resource.palette
-                        val swatch = RetroColorUtil.getSwatch(palette)
+                            setColors(backgroundColor, textColor)
+                        }
 
-                        val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = swatch.rgb
-
-                        setColors(backgroundColor, textColor)
-                    }
-
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        super.onLoadFailed(errorDrawable)
-                        val backgroundColor = defaultFooterColor
-                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor))
-                            MaterialValueHelper.getPrimaryTextColor(context, true)
-                        else
-                            MaterialValueHelper.getPrimaryTextColor(context, false)
-
-                        setColors(backgroundColor, textColor)
-                    }
-                })
-
-        /*SongGlideRequest.Builder.from(Glide.with(activity), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(activity!!)
-                .generatePalette(activity).build().dontAnimate()
-                .into(object : RetroMusicColoredTarget(playerImage) {
-                    override fun onColorReady(color: Int) {
-                        //setColors(color);
                     }
 
                     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
                         super.onLoadFailed(e, errorDrawable)
-
                         val backgroundColor = defaultFooterColor
-                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor))
-                            MaterialValueHelper.getPrimaryTextColor(context, true)
-                        else
-                            MaterialValueHelper.getPrimaryTextColor(context, false)
+                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(
+                                context,
+                                true
+                        )
+                        else MaterialValueHelper.getPrimaryTextColor(context, false)
 
                         setColors(backgroundColor, textColor)
                     }
-
-                    override fun onResourceReady(resource: BitmapPaletteWrapper,
-                                                 glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?) {
-                        super.onResourceReady(resource, glideAnimation)
-                        *//* MediaNotificationProcessor processor = new MediaNotificationProcessor(getContext(),
-                getContext());
-            Palette.Builder builder = MediaNotificationProcessor
-                .generatePalette(resource.getBitmap());
-
-            int backgroundColor = processor.getBackgroundColor(builder);
-            int textColor = processor.getTextColor(builder);*//*
-
-                        val palette = resource.palette
-                        val swatch = RetroColorUtil.getSwatch(palette)
-
-                        val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = swatch.rgb
-
-                        setColors(backgroundColor, textColor)
-                    }
-                })*/
+                })
     }
 
     private fun setColors(backgroundColor: Int, textColor: Int) {
-        playbackControlsFragment!!.setDark(textColor, backgroundColor)
-
+        playbackControlsFragment.setDark(textColor, backgroundColor)
         colorGradientBackground?.setBackgroundColor(backgroundColor)
-
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, textColor, activity)
-
         lastColor = textColor
-
         this.backgroundColor = backgroundColor
-
-        if (playerActivity != null) {
-            playerActivity!!.setLightNavigationBar(ColorUtil.isColorLight(backgroundColor))
-        }
-        callbacks!!.onPaletteColorChanged()
-
-    }
-
-    private fun colorize(i: Int) {
-        if (valueAnimator != null) {
-            valueAnimator!!.cancel()
-        }
-
-        valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), paletteColor, i)
-        valueAnimator!!.addUpdateListener { animation ->
-            colorGradientBackground?.setBackgroundColor(animation.animatedValue as Int)
-        }
-        valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private fun updateLyricsLocal() {
-        if (updateLyricsAsyncTask != null) {
-            updateLyricsAsyncTask!!.cancel(false)
-        }
-        val song = MusicPlayerRemote.currentSong
-        updateLyricsAsyncTask = object : AsyncTask<Void?, Void?, Lyrics?>() {
-            override fun onPreExecute() {
-                super.onPreExecute()
-                lyricsColor = null
-                playerToolbar.menu.removeItem(R.id.action_show_lyrics)
-            }
-
-            override fun doInBackground(vararg params: Void?): Lyrics? {
-                val data = MusicUtil.getLyrics(song)
-                return if (TextUtils.isEmpty(data)) {
-                    null
-                } else Lyrics.parse(song, data!!)
-            }
-
-            override fun onPostExecute(l: Lyrics?) {
-                lyricsColor = l
-                if (lyricsColor == null) {
-                    lyricsView.setText(R.string.no_lyrics_found)
-                } else {
-                    lyricsView.text = lyricsColor!!.text
-                }
-            }
-
-            override fun onCancelled(s: Lyrics?) {
-                onPostExecute(null)
-            }
-        }.execute()
-    }
-
-    private fun setupViews() {
-        lyricsView.setOnClickListener {
-            if (lyricsContainer!!.visibility == View.GONE) {
-                lyricsContainer!!.visibility = View.VISIBLE
-            } else {
-                lyricsContainer!!.visibility = View.GONE
-            }
-        }
-        playerImage.setOnClickListener {
-            if (lyricsContainer!!.visibility == View.GONE) {
-                lyricsContainer!!.visibility = View.VISIBLE
-            } else {
-                lyricsContainer!!.visibility = View.GONE
-            }
-        }
-        expand.setOnClickListener { startActivity(Intent(context, LyricsActivity::class.java)) }
+        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(backgroundColor))
+        callbacks?.onPaletteColorChanged()
     }
 
     companion object {
-
         fun newInstance(): ColorFragment {
             val args = Bundle()
             val fragment = ColorFragment()
@@ -303,11 +176,6 @@ class ColorFragment : AbsPlayerFragment() {
             return fragment
         }
     }
-}
-
-fun Palette.getContrastColor(background: Int): Int {
-
-    return 0
 }
 
 fun Palette.getColor(): Int {

@@ -14,47 +14,45 @@
 
 package code.name.monkey.retromusic.dialogs
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
-
+import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.adapter.playlist.AddToPlaylist
-import code.name.monkey.retromusic.views.RoundedBottomSheetDialogFragment
-import kotlinx.android.synthetic.main.dialog_add_to_playlist.*
+import code.name.monkey.retromusic.util.PlaylistsUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.list.listItems
 
 
-class AddToPlaylistDialog : RoundedBottomSheetDialogFragment() {
+class AddToPlaylistDialog : DialogFragment() {
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-
-        return inflater.inflate(R.layout.dialog_add_to_playlist, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val songs = arguments!!.getParcelableArrayList<Song>("songs")
-
-        actionAddPlaylist.setOnClickListener {
-            CreatePlaylistDialog.create(songs!!).show(activity!!.supportFragmentManager, "ADD_TO_PLAYLIST")
-            dismiss()
+    override fun onCreateDialog(
+            savedInstanceState: Bundle?
+    ): Dialog {
+        val playlists = PlaylistLoader.getAllPlaylists(requireContext())
+        val playlistNames: MutableList<String> = mutableListOf()
+        playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
+        for (p in playlists) {
+            playlistNames.add(p.name)
         }
 
-        bannerTitle.setTextColor(ThemeStore.textColorPrimary(context!!))
-        val playlists = PlaylistLoader.getAllPlaylists(activity!!).blockingFirst()
-        val playlistAdapter = AddToPlaylist(activity!!, playlists, R.layout.item_playlist, songs!!, dialog!!)
-        recyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            itemAnimator = DefaultItemAnimator()
-            adapter = playlistAdapter
+        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            title(R.string.add_playlist_title)
+            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            listItems(items = playlistNames) { dialog, index, _ ->
+                val songs = arguments!!.getParcelableArrayList<Song>("songs") ?: return@listItems
+                if (index == 0) {
+                    dialog.dismiss()
+                    activity?.supportFragmentManager?.let { CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST") }
+                } else {
+                    dialog.dismiss()
+                    PlaylistsUtil.addToPlaylist(requireContext(), songs, playlists[index - 1].id, true)
+                }
+            }
         }
     }
 

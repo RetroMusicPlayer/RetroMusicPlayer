@@ -14,33 +14,47 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.PlaylistSongsContract
+import code.name.monkey.retromusic.Result
+import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.mvp.*
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
  */
+interface PlaylistSongsView : BaseView {
+    fun songs(songs: ArrayList<Song>)
+}
 
-class PlaylistSongsPresenter(private val view: PlaylistSongsContract.PlaylistSongsView,
-                             private val mPlaylist: Playlist) : Presenter(), PlaylistSongsContract.Presenter {
+interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
+    fun loadPlaylistSongs(playlist: Playlist)
 
+    class PlaylistSongsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<PlaylistSongsView>(), PlaylistSongsPresenter, CoroutineScope {
 
-    override fun subscribe() {
-        loadSongs(mPlaylist)
-    }
+        private var job: Job = Job()
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-    override fun loadSongs(playlist: Playlist) {
-        disposable.add(repository.getPlaylistSongs(playlist)
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ songs -> view.showData(songs) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
+        override fun loadPlaylistSongs(playlist: Playlist) {
+            launch {
+                when (val songs = repository.getPlaylistSongs(playlist)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.songs(songs.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
+        }
+
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
     }
 }

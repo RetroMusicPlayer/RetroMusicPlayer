@@ -5,8 +5,8 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.fragments.VolumeFragment
+import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 
@@ -61,16 +61,16 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
     protected var volumeFragment: VolumeFragment? = null
 
     private fun hideVolumeIfAvailable() {
-        if (PreferenceUtil.getInstance().volumeToggle) {
+        if (PreferenceUtil.getInstance(requireContext()).volumeToggle) {
             childFragmentManager.beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             childFragmentManager.executePendingTransactions()
-
             volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 
     companion object {
         const val SLIDER_ANIMATION_TIME: Long = 400
-        const val VOLUME_FRAGMENT: String = "volume_fragment"
     }
+
+
 }

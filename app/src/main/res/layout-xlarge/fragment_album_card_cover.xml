@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView
         android:id="@+id/player_album_art_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:ignore="ContentDescription,UnusedAttribute" />
+            tools:ignore="ContentDescription,UnusedAttribute"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[2]" />
 
         <View
             android:layout_width="match_parent"

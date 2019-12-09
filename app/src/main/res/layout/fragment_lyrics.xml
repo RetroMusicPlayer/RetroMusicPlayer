@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fadingEdge="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/offlineLyrics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="start"
         android:lineSpacingExtra="3dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="128dp"
         android:text="@string/no_lyrics_found"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+        android:textAppearance="@style/TextViewBody1"
+        android:textColor="?android:attr/textColorPrimary" />
 </ScrollView>

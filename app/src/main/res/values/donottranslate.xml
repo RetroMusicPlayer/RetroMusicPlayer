@@ -11,7 +11,13 @@
     </string-array>
 
     <string name="app_name" translatable="false">Retro Music</string>
-    <string name="google_plus" translatable="false">Google Plus</string>
     <string name="git_hub" translatable="false">GitHub</string>
-    <string name="social_buttons" translatable="false">Social Buttons</string>
+
+
+    <string name="app_shortcut_last_added_long" translatable="false">@string/last_added</string>
+    <string name="app_shortcut_last_added_short" translatable="false">@string/last_added</string>
+    <string name="app_shortcut_shuffle_all_long" translatable="false">@string/action_shuffle_all</string>
+    <string name="app_shortcut_top_tracks_long" translatable="false">@string/my_top_tracks</string>
+
+    <string name="empty_text_emoji" translatable="false">&#129300;</string>
 </resources>

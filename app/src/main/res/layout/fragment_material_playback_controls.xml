@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
@@ -10,12 +10,16 @@
     tools:ignore="MissingPrefix">
 
     <RelativeLayout
+        android:id="@+id/progressContainer"
         android:layout_width="match_parent"
         android:layout_height="@dimen/progress_slider_height"
         android:paddingStart="12dp"
-        android:paddingEnd="12dp">
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -24,12 +28,12 @@
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -38,13 +42,14 @@
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:22" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -58,14 +63,16 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/titleContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="8dp">
+        app:layout_constraintBottom_toTopOf="@+id/text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer">
 
-        <androidx.appcompat.widget.AppCompatTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,36 +83,50 @@
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="@style/TextViewHeadline6"
             android:textColor="?android:attr/textColorPrimary"
-            tools:text="Title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="4dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="1"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/player_media_controller_container"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:ignore="ContentDescription,UnusedAttribute">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textAppearance="@style/TextViewBody1"
+        app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+        tools:text="@tools:sample/lorem/random" />
 
-        <ImageButton
+    <RelativeLayout
+        android:id="@+id/playerMediaControllerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        tools:ignore="ContentDescription,UnusedAttribute"
+        tools:showIn="@layout/fragment_player_playback_controls">
+
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/previousButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +140,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,7 +154,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/repeatButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,7 +167,7 @@
             tools:ignore="MissingPrefix"
             tools:tint="@color/md_black_1000" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/shuffleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -165,17 +186,25 @@
             android:layout_height="56dp"
             android:layout_centerInParent="true" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playPauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@id/title_container"
             android:layout_centerInParent="true"
             android:background="?attr/roundSelector"
-            app:srcCompat="@drawable/ic_pause_white_big"
+            app:srcCompat="@drawable/ic_pause_white_64dp"
             tools:tint="@color/md_black_1000" />
 
     </RelativeLayout>
 
-    <include layout="@layout/volume_controls" />
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:backgroundTint="@color/md_red_400"
+        tools:layout_height="52dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

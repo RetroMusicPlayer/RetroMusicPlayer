@@ -4,64 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?rectSelector"
+    android:layout_margin="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?rectSelector"
     tools:ignore="MissingPrefix">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:orientation="vertical"
         tools:ignore="UnusedAttribute,UselessParent">
 
-        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        <code.name.monkey.retromusic.views.WidthFitSquareCardView
+            android:id="@+id/imageContainerCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/image_container_card"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true">
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription" />
-            </com.google.android.material.card.MaterialCardView>
-        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="vertical"
-            android:paddingStart="4dp"
+            android:paddingStart="12dp"
             android:paddingTop="8dp"
-            android:paddingEnd="4dp"
+            android:paddingEnd="12dp"
             android:paddingBottom="8dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textColor="?android:attr/textColorPrimary" />
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold"
+                tools:text="@string/bug_report_summary" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="4dp"
                 android:singleLine="true"
                 android:textColor="?android:attr/textColorSecondary"
-                android:textSize="12sp" />
+                tools:text="@string/bug_report_summary" />
 
         </LinearLayout>
     </LinearLayout>

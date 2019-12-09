@@ -29,19 +29,22 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.retromusic.R;
 
 public class RetroColorUtil {
+    public static int desaturateColor(int color, float ratio) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(color, hsv);
+
+        hsv[1] = (hsv[1] / 1 * ratio) + (0.2f * (1.0f - ratio));
+
+        return Color.HSVToColor(hsv);
+    }
+
     public static int toolbarColor(@NonNull Context context) {
-        int color = ThemeStore.Companion.primaryColor(context);
-        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
-            return ATHUtil.INSTANCE.resolveColor(context, R.attr.cardBackgroundColor);
-        } else {
-            return color;
-        }
+        return ATHUtil.INSTANCE.resolveColor(context, R.attr.colorButtonNormal);
     }
 
     @Nullable
@@ -195,6 +198,13 @@ public class RetroColorUtil {
         return backgroundColor;
     }
 
+    @ColorInt
+    public static int shiftBackgroundColorForDarkText(@ColorInt int backgroundColor) {
+        while (!ColorUtil.INSTANCE.isColorLight(backgroundColor)) {
+            backgroundColor = ColorUtil.INSTANCE.lightenColor(backgroundColor);
+        }
+        return backgroundColor;
+    }
 
     private static class SwatchComparator implements Comparator<Palette.Swatch> {
 

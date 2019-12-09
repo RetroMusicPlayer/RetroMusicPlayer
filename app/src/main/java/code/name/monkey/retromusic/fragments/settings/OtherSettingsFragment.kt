@@ -30,8 +30,6 @@ class OtherSettingsFragment : AbsSettingsFragment() {
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.pref_blacklist)
-        addPreferencesFromResource(R.xml.pref_playlists)
         addPreferencesFromResource(R.xml.pref_advanced)
     }
 

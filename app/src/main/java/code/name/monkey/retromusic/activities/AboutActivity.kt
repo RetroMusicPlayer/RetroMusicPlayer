@@ -9,12 +9,10 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
-import code.name.monkey.retromusic.Constants.DISCORD_LINK
 import code.name.monkey.retromusic.Constants.FAQ_LINK
 import code.name.monkey.retromusic.Constants.GITHUB_PROJECT
 import code.name.monkey.retromusic.Constants.PINTEREST
@@ -24,9 +22,13 @@ import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -59,22 +61,24 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
-
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
 
+
         loadContributors()
-        setUpToolbar()
-
-        appVersion.text = getAppVersion()
-
+        setSupportActionBar(toolbar)
+        toolbar.apply {
+            setBackgroundColor(surfaceColor(context))
+            setNavigationOnClickListener { onBackPressed() }
+            ToolbarContentTintHelper.colorBackButton(toolbar)
+        }
+        version.setSummary(getAppVersion())
         setUpView()
-
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
@@ -82,13 +86,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun setUpToolbar() {
-        appBarLayout.setBackgroundColor(ThemeStore.primaryColor(this))
-        toolbar.setBackgroundColor(ThemeStore.primaryColor(this))
-        setSupportActionBar(toolbar)
-        ToolbarContentTintHelper.colorBackButton(toolbar, ThemeStore.textColorSecondary(this))
     }
 
     private fun openUrl(url: String) {
@@ -111,6 +108,8 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         changelog.setOnClickListener(this)
         openSource.setOnClickListener(this)
         pinterestLink.setOnClickListener(this)
+        bugReportLink.setOnClickListener(this)
+
     }
 
     override fun onClick(view: View) {
@@ -118,7 +117,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.pinterestLink -> openUrl(PINTEREST)
             R.id.faqLink -> openUrl(FAQ_LINK)
             R.id.telegramLink -> openUrl(APP_TELEGRAM_LINK)
-            R.id.discordLink -> openUrl(DISCORD_LINK)
             R.id.appGithub -> openUrl(GITHUB_PROJECT)
             R.id.appTranslation -> openUrl(TRANSLATE)
             R.id.appRate -> openUrl(RATE_ON_GOOGLE_PLAY)
@@ -128,11 +126,13 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.twitterLink -> openUrl(APP_TWITTER_LINK)
             R.id.changelog -> showChangeLogOptions()
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
+            R.id.bugReportLink -> NavigationUtil.bugReport(this)
         }
     }
 
     private fun showChangeLogOptions() {
-        MaterialDialog(this).show {
+        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            cornerRadius(PreferenceUtil.getInstance(this@AboutActivity).dialogCorner)
             listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
                 if (position == 0) {
                     openUrl(TELEGRAM_CHANGE_LOG)
@@ -154,11 +154,9 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun shareApp() {
-        ShareCompat.IntentBuilder.from(this)
-                .setType("text/plain")
+        ShareCompat.IntentBuilder.from(this).setType("text/plain")
                 .setChooserTitle(R.string.share_app)
-                .setText(String.format(getString(R.string.app_share), packageName))
-                .startChooser()
+                .setText(String.format(getString(R.string.app_share), packageName)).startChooser()
     }
 
     private fun loadContributors() {

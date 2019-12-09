@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
+    android:layout_height="match_parent"
+    android:transitionName="@string/transition_lyrics">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:subtitleTextAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
-            app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+            tools:subtitle="@tools:sample/full_names"
+            tools:title="@tools:sample/full_names" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -48,6 +47,13 @@
                 android:text="@string/normal_lyrics" />
         </com.google.android.material.tabs.TabLayout>
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab"

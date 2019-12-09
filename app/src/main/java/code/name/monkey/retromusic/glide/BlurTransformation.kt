@@ -26,26 +26,65 @@ import code.name.monkey.retromusic.helper.StackBlur
 import code.name.monkey.retromusic.util.ImageUtil
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import java.security.MessageDigest
 
 
 class BlurTransformation : BitmapTransformation {
+
     private var context: Context? = null
     private var blurRadius: Float = 0.toFloat()
     private var sampling: Int = 0
-
-    private constructor(builder: Builder) : super() {
-        init(builder)
-    }
-
-    private constructor(builder: Builder, bitmapPool: BitmapPool) : super() {
-        init(builder)
-    }
 
     private fun init(builder: Builder) {
         this.context = builder.context
         this.blurRadius = builder.blurRadius
         this.sampling = builder.sampling
+    }
+
+    private constructor(builder: Builder) : super(builder.context) {
+        init(builder)
+    }
+
+    private constructor(builder: Builder, bitmapPool: BitmapPool) : super(bitmapPool) {
+        init(builder)
+    }
+
+    class Builder(val context: Context) {
+        private var bitmapPool: BitmapPool? = null
+        var blurRadius = DEFAULT_BLUR_RADIUS
+        var sampling: Int = 0
+
+        /**
+         * @param blurRadius The radius to use. Must be between 0 and 25. Default is 5.
+         * @return the same Builder
+         */
+        fun blurRadius(@FloatRange(from = 0.0, to = 25.0) blurRadius: Float): Builder {
+            this.blurRadius = blurRadius
+            return this
+        }
+
+        /**
+         * @param sampling The inSampleSize to use. Must be a power of 2, or 1 for no down sampling or 0 for auto detect sampling. Default is 0.
+         * @return the same Builder
+         */
+        fun sampling(sampling: Int): Builder {
+            this.sampling = sampling
+            return this
+        }
+
+        /**
+         * @param bitmapPool The BitmapPool to use.
+         * @return the same Builder
+         */
+        fun bitmapPool(bitmapPool: BitmapPool): Builder {
+            this.bitmapPool = bitmapPool
+            return this
+        }
+
+        fun build(): BlurTransformation {
+            return if (bitmapPool != null) {
+                BlurTransformation(this, bitmapPool!!)
+            } else BlurTransformation(this)
+        }
     }
 
     override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap? {
@@ -99,60 +138,11 @@ class BlurTransformation : BitmapTransformation {
         return StackBlur.blur(out, blurRadius)
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is BlurTransformation
-    }
-
-    override fun hashCode(): Int {
-        return ID.hashCode()
-    }
-
-    override fun updateDiskCacheKey(messageDigest: MessageDigest) {
-        messageDigest.update("BlurTransformation(radius=$blurRadius, sampling=$sampling)".toByteArray(CHARSET))
-    }
-
-    class Builder(val context: Context) {
-        var bitmapPool: BitmapPool? = null
-        var blurRadius = DEFAULT_BLUR_RADIUS
-        var sampling: Int = 0
-
-        /**
-         * @param blurRadius The radius to use. Must be between 0 and 25. Default is 5.
-         * @return the same Builder
-         */
-        fun blurRadius(@FloatRange(from = 0.0, to = 25.0) blurRadius: Float): Builder {
-            this.blurRadius = blurRadius
-            return this
-        }
-
-        /**
-         * @param sampling The inSampleSize to use. Must be a power of 2, or 1 for no down sampling or 0 for auto detect sampling. Default is 0.
-         * @return the same Builder
-         */
-        fun sampling(sampling: Int): Builder {
-            this.sampling = sampling
-            return this
-        }
-
-        /**
-         * @param bitmapPool The BitmapPool to use.
-         * @return the same Builder
-         */
-        fun bitmapPool(bitmapPool: BitmapPool): Builder {
-            this.bitmapPool = bitmapPool
-            return this
-        }
-
-        fun build(): BlurTransformation {
-            return if (bitmapPool != null) {
-                BlurTransformation(this, bitmapPool!!)
-            } else BlurTransformation(this)
-        }
+    override fun getId(): String {
+        return "BlurTransformation(radius=$blurRadius, sampling=$sampling)"
     }
 
     companion object {
-
-        const val DEFAULT_BLUR_RADIUS = 5f
-        private const val ID = "code.name.monkey.retromusic.glide.BlurTransformation"
+        val DEFAULT_BLUR_RADIUS = 5f
     }
 }

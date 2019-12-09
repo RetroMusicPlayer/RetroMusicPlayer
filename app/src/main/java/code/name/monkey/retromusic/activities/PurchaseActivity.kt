@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
@@ -18,138 +17,139 @@ import com.anjlab.android.iab.v3.TransactionDetails
 import kotlinx.android.synthetic.main.activity_pro_version.*
 import java.lang.ref.WeakReference
 
-
 class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
+	private lateinit var billingProcessor: BillingProcessor
+	private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
 
-    private lateinit var billingProcessor: BillingProcessor
-    private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_pro_version)
+		setDrawUnderStatusBar()
+		setStatusbarColorAuto()
+		setNavigationbarColorAuto()
+		setTaskDescriptionColorAuto()
+		setLightNavigationBar(true)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pro_version)
-        setDrawUnderStatusBar()
+		applyToolbar(toolbar)
 
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setTaskDescriptionColorAuto()
-        setLightNavigationBar(true)
+		restoreButton.isEnabled = false
+		purchaseButton.isEnabled = false
 
-        val primaryColor = ThemeStore.primaryColor(this)
-        toolbar.setBackgroundColor(primaryColor)
-        appBarLayout.setBackgroundColor(primaryColor)
+		billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
 
-        applyToolbar(toolbar)
+		MaterialUtil.setTint(restoreButton, false)
+		MaterialUtil.setTint(purchaseButton, true)
 
-        restoreButton.isEnabled = false
-        purchaseButton.isEnabled = false
+		restoreButton.setOnClickListener {
+			if (restorePurchaseAsyncTask == null || restorePurchaseAsyncTask!!.status != AsyncTask.Status.RUNNING) {
+				restorePurchase()
+			}
 
-        billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
+		}
+		purchaseButton.setOnClickListener {
+			billingProcessor.purchase(this@PurchaseActivity, App.PRO_VERSION_PRODUCT_ID)
+		}
+	}
 
-        MaterialUtil.setTint(restoreButton, false)
-        MaterialUtil.setTint(purchaseButton, true)
+	private fun restorePurchase() {
+		if (restorePurchaseAsyncTask != null) {
+			restorePurchaseAsyncTask!!.cancel(false)
+		}
+		restorePurchaseAsyncTask = RestorePurchaseAsyncTask(this).execute()
+	}
 
-        restoreButton.setOnClickListener {
-            if (restorePurchaseAsyncTask == null || restorePurchaseAsyncTask!!.status != AsyncTask.Status.RUNNING) {
-                restorePurchase()
-            }
+	override fun onProductPurchased(productId: String, details: TransactionDetails?) {
+		Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
+		setResult(RESULT_OK)
+	}
 
-        }
-        purchaseButton.setOnClickListener {
-            billingProcessor.purchase(this@PurchaseActivity, App.PRO_VERSION_PRODUCT_ID)
-        }
-    }
+	override fun onPurchaseHistoryRestored() {
+		if (App.isProVersion()) {
+			Toast.makeText(
+					this,
+					R.string.restored_previous_purchase_please_restart,
+					Toast.LENGTH_LONG
+			).show()
+			setResult(RESULT_OK)
+		} else {
+			Toast.makeText(this, R.string.no_purchase_found, Toast.LENGTH_SHORT).show()
+		}
+	}
 
-    private fun restorePurchase() {
-        if (restorePurchaseAsyncTask != null) {
-            restorePurchaseAsyncTask!!.cancel(false)
-        }
-        restorePurchaseAsyncTask = RestorePurchaseAsyncTask(this).execute()
-    }
+	override fun onBillingError(errorCode: Int, error: Throwable?) {
+		Log.e(TAG, "Billing error: code = $errorCode", error)
+	}
 
+	override fun onBillingInitialized() {
+		restoreButton.isEnabled = true
+		purchaseButton.isEnabled = true
+	}
 
-    override fun onProductPurchased(productId: String, details: TransactionDetails?) {
-        Toast.makeText(this, R.string.thank_you, Toast.LENGTH_SHORT).show()
-        setResult(RESULT_OK)
-    }
+	public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
+			super.onActivityResult(requestCode, resultCode, data)
+		}
+	}
 
-    override fun onPurchaseHistoryRestored() {
-        if (App.isProVersion) {
-            Toast.makeText(this, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show()
-            setResult(RESULT_OK)
-        } else {
-            Toast.makeText(this, R.string.no_purchase_found, Toast.LENGTH_SHORT).show()
-        }
-    }
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		when (item.itemId) {
+			android.R.id.home -> finish()
+		}
+		return super.onOptionsItemSelected(item)
+	}
 
-    override fun onBillingError(errorCode: Int, error: Throwable?) {
-        Log.e(TAG, "Billing error: code = $errorCode", error)
-    }
+	override fun onDestroy() {
+		billingProcessor.release()
+		super.onDestroy()
+	}
 
+	private class RestorePurchaseAsyncTask internal constructor(purchaseActivity: PurchaseActivity) : AsyncTask<Void, Void, Boolean>() {
 
-    override fun onBillingInitialized() {
-        restoreButton.isEnabled = true
-        purchaseButton.isEnabled = true
-    }
+		private val buyActivityWeakReference: WeakReference<PurchaseActivity> = WeakReference(
+				purchaseActivity
+		)
 
+		override fun onPreExecute() {
+			super.onPreExecute()
+			val purchaseActivity = buyActivityWeakReference.get()
+			if (purchaseActivity != null) {
+				Toast.makeText(purchaseActivity, R.string.restoring_purchase, Toast.LENGTH_SHORT)
+					.show()
+			} else {
+				cancel(false)
+			}
+		}
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (!billingProcessor.handleActivityResult(requestCode, resultCode, data)) {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
+		override fun doInBackground(vararg params: Void): Boolean? {
+			val purchaseActivity = buyActivityWeakReference.get()
+			if (purchaseActivity != null) {
+				return purchaseActivity.billingProcessor.loadOwnedPurchasesFromGoogle()
+			}
+			cancel(false)
+			return null
+		}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+		override fun onPostExecute(b: Boolean?) {
+			super.onPostExecute(b)
+			val purchaseActivity = buyActivityWeakReference.get()
+			if (purchaseActivity == null || b == null) {
+				return
+			}
 
-    override fun onDestroy() {
-        billingProcessor.release()
-        super.onDestroy()
-    }
+			if (b) {
+				purchaseActivity.onPurchaseHistoryRestored()
+			} else {
+				Toast.makeText(
+						purchaseActivity,
+						R.string.could_not_restore_purchase,
+						Toast.LENGTH_SHORT
+				).show()
+			}
+		}
+	}
 
-    private class RestorePurchaseAsyncTask internal constructor(purchaseActivity: PurchaseActivity) : AsyncTask<Void, Void, Boolean>() {
-
-        private val buyActivityWeakReference: WeakReference<PurchaseActivity> = WeakReference(purchaseActivity)
-
-        override fun onPreExecute() {
-            super.onPreExecute()
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity != null) {
-                Toast.makeText(purchaseActivity, R.string.restoring_purchase, Toast.LENGTH_SHORT).show()
-            } else {
-                cancel(false)
-            }
-        }
-
-        override fun doInBackground(vararg params: Void): Boolean? {
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity != null) {
-                return purchaseActivity.billingProcessor.loadOwnedPurchasesFromGoogle()
-            }
-            cancel(false)
-            return null
-        }
-
-        override fun onPostExecute(b: Boolean?) {
-            super.onPostExecute(b)
-            val purchaseActivity = buyActivityWeakReference.get()
-            if (purchaseActivity == null || b == null) {
-                return
-            }
-
-            if (b) {
-                purchaseActivity.onPurchaseHistoryRestored()
-            } else {
-                Toast.makeText(purchaseActivity, R.string.could_not_restore_purchase, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    companion object {
-        private const val TAG: String = "PurchaseActivity"
-    }
+	companion object {
+		private const val TAG: String = "PurchaseActivity"
+	}
 }

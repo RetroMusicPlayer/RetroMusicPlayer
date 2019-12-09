@@ -14,43 +14,73 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import android.os.Bundle
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.ArtistDetailContract
-import code.name.monkey.retromusic.activities.ArtistDetailActivity
-
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import code.name.monkey.retromusic.rest.model.LastFmArtist
+import kotlinx.coroutines.*
+import java.util.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
  */
+interface ArtistDetailsView : BaseView {
+    fun artist(artist: Artist)
+    fun artistInfo(lastFmArtist: LastFmArtist?)
+    fun complete()
+}
 
-class ArtistDetailsPresenter(private val view: ArtistDetailContract.ArtistsDetailsView,
-                             private val bundle: Bundle) : Presenter(), ArtistDetailContract.Presenter {
+interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
 
-    override fun subscribe() {
-        loadArtistById()
-    }
+    fun loadArtist(artistId: Int)
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun loadBiography(
+            name: String, lang: String? = Locale.getDefault().language, cache: String?
+    )
 
-    override fun loadArtistById() {
-        disposable.add(repository.getArtistById(bundle.getInt(ArtistDetailActivity.EXTRA_ARTIST_ID).toLong())
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showArtist(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
+    class ArtistDetailsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter, CoroutineScope {
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-    private fun showArtist(album: Artist?) {
-        if (album != null) {
-            view.showData(album)
-        } else {
-            view.showEmptyView()
+        private val job = Job()
+
+        override fun loadBiography(name: String, lang: String?, cache: String?) {
+            launch {
+                when (val result = repository.artistInfo(name, lang, cache)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artistInfo(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) {
+
+                    }
+                }
+            }
+        }
+
+        override fun loadArtist(artistId: Int) {
+            launch {
+                when (val result = repository.artistById(artistId)) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artist(result.data)
+                        view?.complete()
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) {
+                        view?.showEmptyView()
+                    }
+                }
+            }
+        }
+
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
         }
     }
 }

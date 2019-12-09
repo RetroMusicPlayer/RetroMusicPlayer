@@ -3,36 +3,18 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-static def gitBranch() {
-    def branch = 'GitHub'
-    try {
-        def gitcheck = 'command -v git >/dev/null 2>&1'.execute()
-        gitcheck.waitFor()
-        if (gitcheck.exitValue() == 0) {
-            def proc = 'git rev-parse --abbrev-ref HEAD'.execute()
-            proc.in.eachLine { line -> branch = line }
-            proc.err.eachLine { line -> println line }
-            proc.waitFor()
-        }
-    } catch (Exception e) {
-        // Do nothing
-        println e
-    }
-    branch
-}
-
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         renderscriptTargetApi 28 //must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 334
-        versionName '3.1.900'
+        versionCode 393
+        versionName '3.4.800'
 
         multiDexEnabled true
 
@@ -52,14 +34,11 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "cast_app_id", "BA9C3F5E"
             signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix '.debug'
-            versionNameSuffix ' DEBUG (' + gitBranch() + ')'
-            resValue "string", "cast_app_id", "BA9C3F5E"
-
+            versionNameSuffix ' DEBUG'
         }
     }
 
@@ -68,6 +47,11 @@ android {
 
     productFlavors {
         normal {
+            versionCode defaultConfig.versionCode + 10000
+            versionName defaultConfig.versionName + "_" + getDate()
+            dimension "default"
+        }
+        font {
             versionCode defaultConfig.versionCode + 10000
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
@@ -88,12 +72,16 @@ android {
         sourceCompatibility '1.8'
         targetCompatibility '1.8'
     }
+    buildToolsVersion = '29.0.2'
 
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
     }
     androidExtensions {
         experimental = true
+    }
+    kapt {
+        generateStubs = true
     }
 
 }
@@ -118,57 +106,67 @@ static def getDate() {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':appthemehelper')
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.fragment:fragment:1.1.0-beta01'
-    implementation 'androidx.appcompat:appcompat:1.1.0-beta01'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
+    implementation 'androidx.fragment:fragment:1.2.0-rc02'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
     implementation "androidx.gridlayout:gridlayout:1.0.0"
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.palette:palette:1.0.0"
     implementation 'androidx.annotation:annotation:1.1.0'
-    implementation 'androidx.preference:preference:1.1.0-beta01'
+    implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.core:core-ktx:1.1.0'
 
-    implementation 'com.google.android.material:material:1.1.0-alpha07'
-    implementation 'com.google.android.material:material:1.1.0-alpha07'
+    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'com.google.android.play:core:1.6.4'
 
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
-    implementation 'com.afollestad.material-dialogs:core:3.0.0-alpha1'
-    implementation 'com.afollestad.material-dialogs:input:3.0.0-alpha1'
-    implementation 'com.afollestad.material-dialogs:color:3.0.0-alpha1'
-    implementation 'com.afollestad.material-dialogs:bottomsheets:3.0.0-alpha1'
+    implementation 'com.afollestad.material-dialogs:core:3.1.1'
+    implementation 'com.afollestad.material-dialogs:input:3.1.1'
+    implementation 'com.afollestad.material-dialogs:color:3.1.1'
+    implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.1'
     implementation 'com.afollestad:material-cab:0.1.12'
 
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
+
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
 
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
 
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
 
-    implementation 'com.anjlab.android.iab.v3:library:1.0.44'
     /*UI Library*/
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
-    implementation 'com.r0adkll:slidableactivity:2.0.6'
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1"
+
+
     implementation 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:3.4.0.201406110918-r'
 
-    implementation 'com.github.jetradarmobile:android-snowfall:1.2.0'
-    implementation 'com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.3'
     implementation 'com.github.ksoichiro:android-observablescrollview:1.6.0'
-    implementation 'com.github.kabouzeid:RecyclerView-FastScroll:1.0.16-kmod'
-    implementation 'com.github.kabouzeid:AndroidSlidingUpPanel:3.3.0-kmod3'
+    implementation 'com.github.kabouzeid:recyclerview-fastscroll:1.9-kmod'
+
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
-    implementation project(':appthemehelper')
-}
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+    implementation 'com.r0adkll:slidableactivity:2.1.0'
+    implementation 'com.heinrichreimersoftware:material-intro:1.6'
 
+    implementation 'com.google.dagger:dagger:2.23.1'
+    kapt 'com.google.dagger:dagger-compiler:2.23.1'
+
+
+}

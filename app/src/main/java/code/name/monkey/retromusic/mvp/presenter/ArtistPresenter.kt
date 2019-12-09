@@ -14,36 +14,46 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.ArtistContract
-import java.util.*
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class ArtistPresenter(private val mView: ArtistContract.ArtistView) : Presenter(), ArtistContract.Presenter {
+interface ArtistsView : BaseView {
+    fun artists(artists: ArrayList<Artist>)
+}
 
-    override fun subscribe() {
-        loadArtists()
-    }
+interface ArtistsPresenter : Presenter<ArtistsView> {
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun loadArtists()
 
-    private fun showList(songs: ArrayList<Artist>) {
-        if (songs.isEmpty()) {
-            mView.showEmptyView()
-        } else {
-            mView.showData(songs)
+    class ArtistsPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<ArtistsView>(), ArtistsPresenter, CoroutineScope {
+        private val job = Job()
+
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
+
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
         }
-    }
 
-    override fun loadArtists() {
-        disposable.add(repository.allArtists
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { mView.loading() }
-                .subscribe({ this.showList(it) },
-                        { mView.showEmptyView() },
-                        { mView.completed() }))
+        override fun loadArtists() {
+            launch {
+                when (val result = repository.allArtists()) {
+                    is Result.Success -> withContext(Dispatchers.Main) {
+                        view?.artists(result.data)
+                    }
+                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
+        }
     }
 }

@@ -6,7 +6,14 @@ import androidx.annotation.FloatRange
 
 
 object ColorUtil {
+    fun desaturateColor(color: Int, ratio: Float): Int {
+        val hsv = FloatArray(3)
+        Color.colorToHSV(color, hsv)
 
+        hsv[1] = hsv[1] / 1 * ratio + 0.2f * (1.0f - ratio)
+
+        return Color.HSVToColor(hsv)
+    }
     fun stripAlpha(@ColorInt color: Int): Int {
         return -0x1000000 or color
     }

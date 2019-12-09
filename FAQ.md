@@ -8,8 +8,7 @@ You can opt-in for the beta build by clicking on this link: https://play.google.
 - STEP 4: You have to copy or move the file into a location on the SD Card: whatever_sdcard/RetroMusic/lyrics/ and paste inside your ".lrc" file in there.
 
 #### Q: Why isn't the artist's image downloading?
-STEP 1: Settings -> Images -> Auto-download artist images -> Always
-STEP 2: Open the artists tab and wait some time for the images to download.
+Last.fm has disabled the download of artist's images for the time being, whether functionality for this will be restored in future is uncertain.
 
 #### Q: How do I change the theme?
 Settings -> Look and feel -> Select your theme.
@@ -35,8 +34,12 @@ Clear the app's cache and data.
 ##### Q: My app is crashing, how do i fix this? (Sorry, settings have changed internally) 
 Reinstalling the app should fix this issue. 
 
-##### Q: Artist images are not loading, why? 
-The Last.fm service has a limited number of requests of download data it can handle (artist images). If that request limit is exceeded, it will not download for some time.
-
 ##### Q: Why has all the text gone white/dissapeared? 
 Change the theme to Black or Dark and change it back to what you had before.
+
+##### Q: Why some of my songs are not showing in my library?
+Try checking up if those songs are not less than 30 seconds, if so head to settings -> other -> filter song duration. Put this to zero and see the songs should start appearimg in the library.
+If this doesn't work out for you, re-scanning the media folder should help and subsquently rebooting the device to refresh media store.
+
+##### Q: Why my playlist/playlist songs keep disappearing?
+Playlist/Playlist songs disappearing is based on android media store system. Save those playlist as file(Tap on three dot menu next to available playlist and save as file) and it should get fixed.

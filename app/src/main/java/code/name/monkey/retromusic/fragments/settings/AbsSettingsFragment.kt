@@ -22,9 +22,10 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.preferences.*
 import code.name.monkey.retromusic.util.NavigationUtil
 
@@ -32,20 +33,14 @@ import code.name.monkey.retromusic.util.NavigationUtil
  * @author Hemanth S (h4h13).
  */
 
-abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
+abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
+
     internal fun showProToastAndNavigate(message: String) {
-        Toast.makeText(context, "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
-
-        NavigationUtil.goToProVersion(activity!!)
+        Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT).show()
+        NavigationUtil.goToProVersion(requireActivity())
     }
 
-    protected fun setSummary(preference: Preference) {
-        setSummary(preference, PreferenceManager
-                .getDefaultSharedPreferences(preference.context)
-                .getString(preference.key, "")!!)
-    }
-
-    internal fun setSummary(preference: Preference, value: Any) {
+    internal fun setSummary(preference: Preference, value: Any?) {
         val stringValue = value.toString()
         if (preference is ListPreference) {
             val index = preference.findIndexOfValue(stringValue)
@@ -57,38 +52,34 @@ abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
 
     abstract fun invalidateSettings()
 
+    protected fun setSummary(preference: Preference?) {
+        preference?.let {
+            setSummary(it, PreferenceManager
+                    .getDefaultSharedPreferences(it.context)
+                    .getString(it.key, ""))
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setDivider(ColorDrawable(Color.TRANSPARENT))
-        listView.setBackgroundColor(ThemeStore.primaryColor(context!!))
+        listView.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         listView.overScrollMode = View.OVER_SCROLL_NEVER
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)
         invalidateSettings()
     }
 
-    override fun onDisplayPreferenceDialog(preference: Preference) {
-        var dialogFragment: DialogFragment? = null
-        if (preference is NowPlayingScreenPreference) {
-            dialogFragment = NowPlayingScreenPreferenceDialog.newInstance(preference.key);
-        } else if (preference is AlbumCoverStylePreference) {
-            dialogFragment = AlbumCoverStylePreferenceDialog.newInstance(preference.key);
+    override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {
+        return when (preference) {
+            is LibraryPreference -> LibraryPreferenceDialog.newInstance(preference.key)
+            is NowPlayingScreenPreference -> NowPlayingScreenPreferenceDialog.newInstance(preference.key)
+            is AlbumCoverStylePreference -> AlbumCoverStylePreferenceDialog.newInstance(preference.key)
+            is MaterialListPreference -> {
+                MaterialListPreferenceDialog.newInstance(preference)
+            }
+            is BlacklistPreference -> BlacklistPreferenceDialog.newInstance()
+            else -> super.onCreatePreferenceDialog(preference)
         }
-        if (preference is MaterialListPreference) {
-            preference.entries
-            dialogFragment = MaterialListPreferenceDialog.newInstance(preference)
-        }
-        if (preference is BlacklistPreference) {
-            dialogFragment = BlacklistPreferenceDialog.newInstance(preference.key)
-        }
-        if (dialogFragment != null) {
-            // The dialog was created (it was one of our custom Preferences), show the dialog for it
-            dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(this.fragmentManager!!, "android.support.v7.preference.PreferenceFragment.DIALOG");
-        } else {
-            // Dialog creation could not be handled here. Try with the super method.
-            super.onDisplayPreferenceDialog(preference);
-        }
-
     }
 }

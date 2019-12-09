@@ -32,11 +32,19 @@ import java.util.*
 
 object TopAndRecentlyPlayedTracksLoader {
 
-    fun getRecentlyPlayedTracks(context: Context): Observable<ArrayList<Song>> {
+    fun getRecentlyPlayedTracksFlowable(context: Context): Observable<ArrayList<Song>> {
+        return SongLoader.getSongsFlowable(makeRecentTracksCursorAndClearUpDatabase(context))
+    }
+
+    fun getRecentlyPlayedTracks(context: Context): ArrayList<Song> {
         return SongLoader.getSongs(makeRecentTracksCursorAndClearUpDatabase(context))
     }
 
-    fun getTopTracks(context: Context): Observable<ArrayList<Song>> {
+    fun getTopTracksFlowable(context: Context): Observable<ArrayList<Song>> {
+        return SongLoader.getSongsFlowable(makeTopTracksCursorAndClearUpDatabase(context))
+    }
+
+    fun getTopTracks(context: Context): ArrayList<Song> {
         return SongLoader.getSongs(makeTopTracksCursorAndClearUpDatabase(context))
     }
 
@@ -87,11 +95,9 @@ object TopAndRecentlyPlayedTracksLoader {
         val songs = SongPlayCountStore.getInstance(context)
                 .getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
 
-        try {
-            return makeSortedCursor(context, songs,
-                    songs!!.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID))
-        } finally {
-            songs?.close()
+        songs.use { localSongs ->
+            return makeSortedCursor(context, localSongs,
+                    localSongs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID))
         }
     }
 
@@ -132,9 +138,11 @@ object TopAndRecentlyPlayedTracksLoader {
         return null
     }
 
-    fun getTopAlbums(context: Context): Observable<ArrayList<Album>> {
+    fun getTopAlbumsFlowable(
+            context: Context
+    ): Observable<ArrayList<Album>> {
         return Observable.create { e ->
-            getTopTracks(context).subscribe { songs ->
+            getTopTracksFlowable(context).subscribe { songs ->
                 if (songs.size > 0) {
                     e.onNext(AlbumLoader.splitIntoAlbums(songs))
                 }
@@ -143,14 +151,25 @@ object TopAndRecentlyPlayedTracksLoader {
         }
     }
 
-    fun getTopArtists(context: Context): Observable<ArrayList<Artist>> {
+    fun getTopAlbums(
+            context: Context
+    ): ArrayList<Album> {
+        arrayListOf<Album>()
+        return AlbumLoader.splitIntoAlbums(getTopTracks(context))
+    }
+
+    fun getTopArtistsFlowable(context: Context): Observable<ArrayList<Artist>> {
         return Observable.create { e ->
-            getTopAlbums(context).subscribe { albums ->
+            getTopAlbumsFlowable(context).subscribe { albums ->
                 if (albums.size > 0) {
                     e.onNext(ArtistLoader.splitIntoArtists(albums))
                 }
                 e.onComplete()
             }
         }
+    }
+
+    fun getTopArtists(context: Context): ArrayList<Artist> {
+        return ArtistLoader.splitIntoArtists(getTopAlbums(context))
     }
 }

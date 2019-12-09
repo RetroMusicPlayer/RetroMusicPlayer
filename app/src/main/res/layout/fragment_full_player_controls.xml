@@ -16,30 +16,32 @@
             android:id="@+id/playerMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:background="?attr/roundSelector"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_more_vert_white_24dp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
             android:textColor="@color/md_white_1000"
+            android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/songFavourite"
             app:layout_constraintStart_toEndOf="@+id/playerMenu"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/for_you" />
+            tools:text="@tools:sample/lorem/random" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -47,8 +49,9 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="8dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="8dp"
             android:textColor="@color/md_white_1000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/songFavourite"
@@ -60,7 +63,8 @@
             android:id="@+id/songFavourite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:background="?attr/roundSelector"
+            android:padding="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -78,38 +82,39 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
-            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:fontFamily="sans-serif-medium"
+            android:fontFeatureSettings="onum"
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="@color/md_white_1000"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:00" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
-            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:fontFamily="sans-serif-medium"
+            android:fontFeatureSettings="onum"
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="@color/md_white_1000"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
             tools:text="00:00" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
+            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -129,7 +134,7 @@
         android:minHeight="96dp"
         tools:ignore="ContentDescription,UnusedAttribute">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/previousButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
@@ -143,7 +148,7 @@
             app:srcCompat="@drawable/ic_skip_previous_white_24dp"
             tools:ignore="MissingPrefix" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/nextButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
@@ -157,7 +162,7 @@
             app:srcCompat="@drawable/ic_skip_next_white_24dp"
             tools:ignore="MissingPrefix" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/repeatButton"
             android:layout_width="52dp"
             android:layout_height="52dp"
@@ -170,7 +175,7 @@
             app:srcCompat="@drawable/ic_repeat_white_24dp"
             tools:ignore="MissingPrefix" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/shuffleButton"
             android:layout_width="52dp"
             android:layout_height="52dp"

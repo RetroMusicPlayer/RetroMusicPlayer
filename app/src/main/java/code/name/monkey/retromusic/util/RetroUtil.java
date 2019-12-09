@@ -21,50 +21,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.ResultReceiver;
-import android.provider.BaseColumns;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.FrameLayout;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
-import java.lang.reflect.Method;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.List;
-
-import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
-import code.name.monkey.retromusic.R;
 
 public class RetroUtil {
 
@@ -94,40 +74,6 @@ public class RetroUtil {
     public static boolean isRTL(@NonNull Context context) {
         Configuration config = context.getResources().getConfiguration();
         return config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
-    }
-
-    @TargetApi(19)
-    public static void setStatusBarTranslucent(@NonNull Window window) {
-        window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
-                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-    }
-
-    public static boolean isMarshMellow() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
-    }
-
-    public static boolean isNougat() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
-    }
-
-    public static boolean isOreo() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
-    }
-
-    public static float getDistance(float x1, float y1, float x2, float y2) {
-        return (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-    }
-
-    public static float convertDpToPixel(float dp, @NonNull Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-    }
-
-    public static float convertPixelsToDp(float px, @NonNull Context context) {
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        return px / ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     public static void openUrl(@NonNull Activity context, @NonNull String str) {
@@ -162,20 +108,7 @@ public class RetroUtil {
         }
     }
 
-    public static void showIme(@NonNull View view) {
-        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService
-                (Context.INPUT_METHOD_SERVICE);
-        // the public methods don't seem to work for me, so… reflection.
-        try {
-            Method showSoftInputUnchecked = InputMethodManager.class.getMethod(
-                    "showSoftInputUnchecked", int.class, ResultReceiver.class);
-            showSoftInputUnchecked.setAccessible(true);
-            showSoftInputUnchecked.invoke(imm, 0, null);
-        } catch (Exception e) {
-            // ho hum
-        }
-    }
-
+    @Nullable
     public static Drawable getVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
                                              @Nullable Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= 21) {
@@ -184,22 +117,11 @@ public class RetroUtil {
         return VectorDrawableCompat.create(res, resId, theme);
     }
 
+    @Nullable
     public static Drawable getTintedVectorDrawable(@NonNull Context context, @DrawableRes int id,
                                                    @ColorInt int color) {
-        return TintHelper
-                .createTintedDrawable(getVectorDrawable(context.getResources(), id, context.getTheme()),
-                        color);
-    }
-
-    public static Drawable getTintedDrawable(@NonNull Context context, @DrawableRes int id,
-                                             @ColorInt int color) {
-        return TintHelper.createTintedDrawable(ContextCompat.getDrawable(context, id), color);
-    }
-
-    public static Drawable getTintedDrawable(@DrawableRes int id) {
-        return TintHelper
-                .createTintedDrawable(ContextCompat.getDrawable(App.Companion.getInstance(), id),
-                        ThemeStore.Companion.accentColor(App.Companion.getInstance()));
+        return TintHelper.createTintedDrawable(
+                getVectorDrawable(context.getResources(), id, context.getTheme()), color);
     }
 
     @NonNull
@@ -219,7 +141,7 @@ public class RetroUtil {
     }
 
     public static boolean isAllowedToDownloadMetadata(final @NonNull Context context) {
-        switch (PreferenceUtil.getInstance().autoDownloadImagesPolicy()) {
+        switch (PreferenceUtil.getInstance(context).autoDownloadImagesPolicy()) {
             case "always":
                 return true;
             case "only_wifi":
@@ -232,68 +154,6 @@ public class RetroUtil {
             default:
                 return false;
         }
-    }
-
-    public static String getIPAddress(boolean useIPv4) {
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
-                for (InetAddress addr : addrs) {
-                    if (!addr.isLoopbackAddress()) {
-                        String sAddr = addr.getHostAddress();
-                        //boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
-                        boolean isIPv4 = sAddr.indexOf(':') < 0;
-
-                        if (useIPv4) {
-                            if (isIPv4)
-                                return sAddr;
-                        } else {
-                            if (!isIPv4) {
-                                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim < 0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-        }
-        return "";
-    }
-
-    public static Uri getSongUri(Context context, long id) {
-        final String[] projection = new String[]{
-                BaseColumns._ID, MediaStore.MediaColumns.DATA, MediaStore.Audio.AudioColumns.ALBUM_ID
-        };
-        final StringBuilder selection = new StringBuilder();
-        selection.append(BaseColumns._ID + " IN (");
-        selection.append(id);
-        selection.append(")");
-        final Cursor c = context.getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, projection, selection.toString(),
-                null, null);
-
-        if (c == null) {
-            return null;
-        }
-        c.moveToFirst();
-
-
-        try {
-
-            Uri uri = Uri.parse(c.getString(1));
-            c.close();
-
-            return uri;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static void statusBarHeight(View statusBar) {
-        statusBar.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight()));
     }
 
     public static int getStatusBarHeight() {
@@ -321,118 +181,5 @@ public class RetroUtil {
     public static void setAllowDrawUnderStatusBar(@NonNull Window window) {
         window.getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
-
-    public static int getSoftButtonsBarSizePort(Activity activity) {
-        // getRealMetrics is only available with API 17 and +
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int usableHeight = metrics.heightPixels;
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight)
-            return realHeight - usableHeight;
-        else
-            return 0;
-    }
-
-    public static int getNavigationBarHeight(Activity activity) {
-       /* int result = 0;
-        int resourceId = App.getContext().getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = App.getContext().getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;*/
-        DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int usableHeight = metrics.heightPixels;
-        activity.getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
-        int realHeight = metrics.heightPixels;
-        if (realHeight > usableHeight)
-            if (PreferenceUtil.getInstance().getFullScreenMode()) {
-                return 0;
-            } else
-                return realHeight - usableHeight;
-        else
-            return 0;
-    }
-
-    public static int getNavBarHeight(Context c) {
-        int result = 0;
-        boolean hasMenuKey = ViewConfiguration.get(c).hasPermanentMenuKey();
-        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-
-        if (!hasMenuKey && !hasBackKey) {
-            //The device has a navigation bar
-            Resources resources = c.getResources();
-
-            int orientation = resources.getConfiguration().orientation;
-            int resourceId;
-            if (isTablet(c)) {
-                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-            } else {
-                resourceId = resources.getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_width", "dimen", "android");
-            }
-
-            if (resourceId > 0) {
-                return resources.getDimensionPixelSize(resourceId);
-            }
-        }
-        return result;
-    }
-
-
-    private static boolean isTablet(Context c) {
-        return (c.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK)
-                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
-    private static boolean hasNavBar(Resources resources) {
-        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        if (id > 0)
-            return resources.getBoolean(id);
-        else
-            return false;
-    }
-
-    public static int getNavigationBarHeight(Resources resources) {
-        if (!hasNavBar(resources))
-            return 0;
-
-        int orientation = resources.getConfiguration().orientation;
-
-        //Only phone between 0-599 has navigationbar can move
-        boolean isSmartphone = resources.getConfiguration().smallestScreenWidthDp < 600;
-        if (isSmartphone && Configuration.ORIENTATION_LANDSCAPE == orientation)
-            return 0;
-
-        int id = resources
-                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        if (id > 0)
-            return resources.getDimensionPixelSize(id);
-
-        return 0;
-    }
-
-    public static boolean checkNavigationBarHeight() {
-        Resources resources = App.Companion.getContext().getResources();
-        int orientation = resources.getConfiguration().orientation;
-        if (!hasNavBar(resources)) {
-            return false;
-        }
-        boolean isSmartPhone = resources.getConfiguration().smallestScreenWidthDp < 600;
-        if (isSmartPhone && Configuration.ORIENTATION_LANDSCAPE == orientation)
-            return false;
-        int id = resources
-                .getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-        return id > 0;
-    }
-
-    @NonNull
-    public static Drawable resize(@NonNull Context context, @NonNull Drawable image) {
-        Bitmap b = ((BitmapDrawable) image).getBitmap();
-        Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 50, 50, false);
-        return new BitmapDrawable(context.getResources(), bitmapResized);
     }
 }

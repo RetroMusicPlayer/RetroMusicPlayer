@@ -1,10 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_fragment_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <FrameLayout
@@ -18,7 +31,6 @@
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,15 +38,20 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:elevation="0dp"
-            app:elevation="0dp">
+            app:elevation="0dp"
+            app:liftOnScroll="true">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="6dp"
-                android:id="@+id/toolbarContainer"
                 app:cardUseCompatPadding="true"
                 app:layout_scrollFlags="scroll|enterAlways">
 
@@ -42,16 +59,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <androidx.appcompat.widget.Toolbar
+                    <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/toolbar"
-                        style="@style/Toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/toolbar_height"
+                        android:background="?colorSurface"
+                        app:contentInsetStart="0dp"
+                        app:contentInsetStartWithNavigation="0dp"
+                        app:popupTheme="?attr/toolbarPopupTheme"
+                        app:title="@string/search_hint"
                         app:titleMarginStart="0dp"
+                        app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
+                        app:titleTextColor="?android:attr/textColorSecondary"
                         tools:ignore="UnusedAttribute" />
 
                     <ViewStub
                         android:id="@+id/cab_stub"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="@dimen/toolbar_height" />
                 </FrameLayout>
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
@@ -60,8 +85,6 @@
             android:id="@+id/fragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/md_white_1000"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

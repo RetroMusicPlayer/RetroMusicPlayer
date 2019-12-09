@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
-import android.widget.TextView;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
@@ -84,14 +83,13 @@ public final class ToolbarContentTintHelper {
         }
     }
 
-    public static void colorBackButton(@NonNull Toolbar toolbar, @ColorInt int color) {
+    public static void colorBackButton(@NonNull Toolbar toolbar) {
+        int color = ATHUtil.INSTANCE.resolveColor(toolbar.getContext(),  R.attr.colorControlNormal);
         final PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY);
         for (int i = 0; i < toolbar.getChildCount(); i++) {
             final View backButton = toolbar.getChildAt(i);
             if (backButton instanceof ImageView) {
                 ((ImageView) backButton).getDrawable().setColorFilter(colorFilter);
-            } else if (backButton instanceof TextView) {
-               // ((TextView) backButton).setTextColor(color);
             }
         }
     }
@@ -201,18 +199,24 @@ public final class ToolbarContentTintHelper {
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, int toolbarColor) {
+                                                                 Toolbar toolbar,
+                                                                 int toolbarColor) {
         setToolbarContentColorBasedOnToolbarColor(context, toolbar, null, toolbarColor);
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, @Nullable Menu menu, int toolbarColor) {
+                                                                 Toolbar toolbar,
+                                                                 @Nullable Menu menu,
+                                                                 int toolbarColor) {
         setToolbarContentColorBasedOnToolbarColor(context, toolbar, menu, toolbarColor,
                 ThemeStore.Companion.accentColor(context));
     }
 
     public static void setToolbarContentColorBasedOnToolbarColor(@NonNull Context context,
-                                                                 Toolbar toolbar, @Nullable Menu menu, int toolbarColor, final @ColorInt int menuWidgetColor) {
+                                                                 Toolbar toolbar,
+                                                                 @Nullable Menu menu,
+                                                                 int toolbarColor,
+                                                                 final @ColorInt int menuWidgetColor) {
         setToolbarContentColor(context, toolbar, menu, toolbarContentColor(context, toolbarColor),
                 toolbarTitleColor(context, toolbarColor), toolbarSubtitleColor(context, toolbarColor),
                 menuWidgetColor);
@@ -226,9 +230,12 @@ public final class ToolbarContentTintHelper {
     }
 
     @SuppressWarnings("unchecked")
-    public static void setToolbarContentColor(@NonNull Context context, Toolbar toolbar,
-                                              @Nullable Menu menu, final @ColorInt int toolbarContentColor,
-                                              final @ColorInt int titleTextColor, final @ColorInt int subtitleTextColor,
+    public static void setToolbarContentColor(@NonNull Context context,
+                                              Toolbar toolbar,
+                                              @Nullable Menu menu,
+                                              final @ColorInt int toolbarContentColor,
+                                              final @ColorInt int titleTextColor,
+                                              final @ColorInt int subtitleTextColor,
                                               final @ColorInt int menuWidgetColor) {
         if (toolbar == null) {
             return;

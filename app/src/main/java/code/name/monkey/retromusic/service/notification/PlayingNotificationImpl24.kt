@@ -24,21 +24,20 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
 import androidx.core.app.NotificationCompat
-import code.name.monkey.retromusic.Constants.ACTION_QUIT
-import code.name.monkey.retromusic.Constants.ACTION_REWIND
-import code.name.monkey.retromusic.Constants.ACTION_SKIP
-import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
+import androidx.media.app.NotificationCompat.MediaStyle
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.glide.GlideApp
-import code.name.monkey.retromusic.glide.RetroGlideExtension
-import code.name.monkey.retromusic.glide.RetroSimpleTarget
+import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.service.MusicService.*
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.animation.GlideAnimation
+import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 
 class PlayingNotificationImpl24 : PlayingNotification() {
     private var target: Target<BitmapPaletteWrapper>? = null
@@ -48,11 +47,9 @@ class PlayingNotificationImpl24 : PlayingNotification() {
 
         val song = service.currentSong
         val isPlaying = service.isPlaying
-
-        val playButtonResId = if (isPlaying)
-            R.drawable.ic_pause_white_24dp
-        else
-            R.drawable.ic_play_arrow_white_32dp
+        val isFavorite = MusicUtil.isFavorite(service, song)
+        val playButtonResId = if (isPlaying) R.drawable.ic_pause_white_48dp else R.drawable.ic_play_arrow_white_48dp
+        val favoriteResId = if (isFavorite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp
 
         val action = Intent(service, MainActivity::class.java)
         action.putExtra("expand", true)
@@ -69,22 +66,22 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                 .getDimensionPixelSize(R.dimen.notification_big_image_size)
         service.runOnUiThread {
             if (target != null) {
-                GlideApp.with(service).clear(target);
+                Glide.clear(target)
             }
-            target = GlideApp.with(service)
-                    .asBitmapPalette()
-                    .load(RetroGlideExtension.getSongModel(song))
-                    .transition(RetroGlideExtension.getDefaultTransition())
-                    .songOptions(song)
-                    .into(object : RetroSimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, transition: Transition<in BitmapPaletteWrapper>?) {
+            target = SongGlideRequest.Builder.from(Glide.with(service), song)
+                    .checkIgnoreMediaStore(service)
+                    .generatePalette(service).build()
+                    .centerCrop()
+                    .into(object : SimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
+                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
                             update(resource.bitmap, when {
-                                PreferenceUtil.getInstance().isDominantColor -> RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
+                                PreferenceUtil.getInstance(service).isDominantColor -> RetroColorUtil.getDominantColor(resource.bitmap, Color.TRANSPARENT)
                                 else -> RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
                             })
                         }
 
-                        override fun onLoadFailed(errorDrawable: Drawable?) {
+                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                            super.onLoadFailed(e, errorDrawable)
                             update(null, Color.TRANSPARENT)
                         }
 
@@ -93,28 +90,14 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                             if (bitmapFinal == null) {
                                 bitmapFinal = BitmapFactory.decodeResource(service.resources, R.drawable.default_album_art)
                             }
-                            val playPauseAction = NotificationCompat.Action(
-                                    playButtonResId,
-                                    service.getString(R.string.action_play_pause),
-                                    retrievePlaybackAction(ACTION_TOGGLE_PAUSE))
 
-                            val closeAction = NotificationCompat.Action(
-                                    R.drawable.ic_close_white_24dp,
-                                    service.getString(R.string.close_notification),
-                                    retrievePlaybackAction(ACTION_QUIT))
-
-                            val previousAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_previous_white_24dp,
-                                    service.getString(R.string.action_previous),
-                                    retrievePlaybackAction(ACTION_REWIND))
-
-                            val nextAction = NotificationCompat.Action(
-                                    R.drawable.ic_skip_next_white_24dp,
-                                    service.getString(R.string.action_next),
-                                    retrievePlaybackAction(ACTION_SKIP))
+                            val toggleFavorite = NotificationCompat.Action(favoriteResId, service.getString(R.string.action_toggle_favorite), retrievePlaybackAction(TOGGLE_FAVORITE))
+                            val playPauseAction = NotificationCompat.Action(playButtonResId, service.getString(R.string.action_play_pause), retrievePlaybackAction(ACTION_TOGGLE_PAUSE))
+                            val previousAction = NotificationCompat.Action(R.drawable.ic_skip_previous_round_white_32dp, service.getString(R.string.action_previous), retrievePlaybackAction(ACTION_REWIND))
+                            val nextAction = NotificationCompat.Action(R.drawable.ic_skip_next_round_white_32dp, service.getString(R.string.action_next), retrievePlaybackAction(ACTION_SKIP))
 
                             val builder = NotificationCompat.Builder(service,
-                                    PlayingNotification.NOTIFICATION_CHANNEL_ID)
+                                    NOTIFICATION_CHANNEL_ID)
                                     .setSmallIcon(R.drawable.ic_notification)
                                     .setLargeIcon(bitmapFinal)
                                     .setContentIntent(clickIntent)
@@ -124,17 +107,17 @@ class PlayingNotificationImpl24 : PlayingNotification() {
                                     .setSubText(Html.fromHtml("<b>" + song.albumName + "</b>"))
                                     .setOngoing(isPlaying)
                                     .setShowWhen(false)
+                                    .addAction(toggleFavorite)
                                     .addAction(previousAction)
                                     .addAction(playPauseAction)
                                     .addAction(nextAction)
-                                    .addAction(closeAction)
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                builder.setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                                builder.setStyle(MediaStyle()
                                         .setMediaSession(service.mediaSession.sessionToken)
-                                        .setShowActionsInCompactView(0, 1, 2, 3, 4))
+                                        .setShowActionsInCompactView(1, 2, 3))
                                         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance().coloredNotification()) {
+                                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance(service).coloredNotification()) {
                                     builder.color = color
                                 }
                             }

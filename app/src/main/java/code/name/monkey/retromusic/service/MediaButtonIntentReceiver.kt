@@ -27,12 +27,7 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.BuildConfig
-import code.name.monkey.retromusic.Constants.ACTION_PAUSE
-import code.name.monkey.retromusic.Constants.ACTION_PLAY
-import code.name.monkey.retromusic.Constants.ACTION_REWIND
-import code.name.monkey.retromusic.Constants.ACTION_SKIP
-import code.name.monkey.retromusic.Constants.ACTION_STOP
-import code.name.monkey.retromusic.Constants.ACTION_TOGGLE_PAUSE
+import code.name.monkey.retromusic.service.MusicService.*
 
 
 /**
@@ -51,11 +46,11 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        val TAG = MediaButtonIntentReceiver::class.java.simpleName
+        val TAG: String = MediaButtonIntentReceiver::class.java.simpleName
         private val DEBUG = BuildConfig.DEBUG
-        private val MSG_HEADSET_DOUBLE_CLICK_TIMEOUT = 2
+        private const val MSG_HEADSET_DOUBLE_CLICK_TIMEOUT = 2
 
-        private val DOUBLE_CLICK = 400
+        private const val DOUBLE_CLICK = 400
 
         private var wakeLock: WakeLock? = null
         private var mClickCounter = 0

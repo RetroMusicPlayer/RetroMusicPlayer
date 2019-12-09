@@ -14,41 +14,51 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
+import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.contract.SearchContract
-import java.util.*
-import java.util.concurrent.TimeUnit
+import code.name.monkey.retromusic.mvp.PresenterImpl
+import code.name.monkey.retromusic.providers.interfaces.Repository
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
  */
 
-class SearchPresenter(private val view: SearchContract.SearchView) : Presenter(), SearchContract.SearchPresenter {
+interface SearchView : BaseView {
+    fun showData(data: MutableList<Any>)
+}
 
-    override fun subscribe() {
-        search("")
-    }
+interface SearchPresenter : Presenter<SearchView> {
 
-    override fun unsubscribe() {
-        disposable.clear()
-    }
+    fun search(query: String?)
 
-    private fun showList(albums: ArrayList<Any>) {
-        if (albums.isEmpty()) {
-            view.showEmptyView()
-        } else {
-            view.showData(albums)
+    class SearchPresenterImpl @Inject constructor(
+            private val repository: Repository
+    ) : PresenterImpl<SearchView>(), SearchPresenter, CoroutineScope {
+
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
+
+        private var job: Job = Job()
+
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
+
+        override fun search(query: String?) {
+            launch {
+                when (val result = repository.search(query)) {
+                    is Success -> withContext(Dispatchers.Main) { view?.showData(result.data) }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
         }
     }
-
-    override fun search(query: String?) {
-        disposable.add(repository.search(query)
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .subscribeOn(schedulerProvider.computation())
-                .observeOn(schedulerProvider.ui())
-                .doOnSubscribe { view.loading() }
-                .subscribe({ this.showList(it) },
-                        { view.showEmptyView() },
-                        { view.completed() }))
-    }
 }
+
+

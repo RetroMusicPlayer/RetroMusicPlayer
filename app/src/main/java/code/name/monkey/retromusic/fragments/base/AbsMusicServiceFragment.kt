@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
+import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 
 /**
  * Created by hemanths on 18/08/17.
@@ -32,12 +32,13 @@ open class AbsMusicServiceFragment : Fragment(), MusicServiceEventListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playerActivity!!.addMusicServiceEventListener(this)
+        playerActivity?.addMusicServiceEventListener(this)
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        playerActivity!!.removeMusicServiceEventListener(this)
+        playerActivity?.removeMusicServiceEventListener(this)
     }
 
     override fun onPlayingMetaChanged() {

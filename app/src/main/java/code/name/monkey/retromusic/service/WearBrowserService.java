@@ -24,12 +24,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.service.media.MediaBrowserService;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.AlbumLoader;
@@ -194,7 +195,7 @@ public class WearBrowserService extends MediaBrowserService {
                 } else {
                     switch (Integer.parseInt(Character.toString(parentId.charAt(0)))) {
                         case TYPE_ARTIST:
-                            List<Artist> artistList = ArtistLoader.INSTANCE.getAllArtists(mContext).blockingFirst();
+                            List<Artist> artistList = ArtistLoader.INSTANCE.getAllArtists(mContext) ;
                             for (Artist artist : artistList) {
                                 String albumNmber = String.format("%d %s", artist.getAlbums().size(), artist.getAlbums().size() > 1 ? "Albums" : "Album");
                                 String songCount = String.format("%d %s", artist.getSongs().size(), artist.getSongs().size() > 1 ? "Songs" : "Song");
@@ -215,7 +216,7 @@ public class WearBrowserService extends MediaBrowserService {
                                     Uri.parse("android.resource://code.name.monkey.retromusic/drawable/default_artist_art"),
                                     MediaBrowser.MediaItem.FLAG_BROWSABLE);
 
-                            List<Album> artistAlbums = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getAlbums(); //ArtistAlbumLoader.getAlbumsForArtist(mContext, Long.parseLong(parentId.substring(1)));
+                            List<Album> artistAlbums = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).getAlbums(); //ArtistAlbumLoader.getAlbumsForArtist(mContext, Long.parseLong(parentId.substring(1)));
                             for (Album album : artistAlbums) {
                                 String songCount = String.format("%d %s", album.getSongs().size(), album.getSongs().size() > 1 ? "Songs" : "Song");
                                 fillMediaItems(mediaItems,
@@ -227,7 +228,7 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_ALBUM:
-                            List<Album> albumList = AlbumLoader.Companion.getAllAlbums(mContext).blockingFirst();
+                            List<Album> albumList = AlbumLoader.INSTANCE.getAllAlbums(mContext);
                             for (Album album : albumList) {
                                 fillMediaItems(mediaItems,
                                         Integer.toString(TYPE_ALBUM_SONGS) + Long.toString(album.getId()),
@@ -238,7 +239,7 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_SONG:
-                            List<Song> songList = SongLoader.INSTANCE.getAllSongs(mContext).blockingFirst();
+                            List<Song> songList = SongLoader.INSTANCE.getAllSongs(mContext);
                             for (Song song : songList) {
                                 fillMediaItems(mediaItems,
                                         String.valueOf(song.getId()),
@@ -250,7 +251,7 @@ public class WearBrowserService extends MediaBrowserService {
                             break;
 
                         case TYPE_ALBUM_SONGS:
-                            List<Song> albumSongList = AlbumLoader.Companion.getAlbum(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
+                            List<Song> albumSongList = AlbumLoader.INSTANCE.getAlbum(mContext, Integer.parseInt(parentId.substring(1))).getSongs();
                             for (Song song : albumSongList) {
                                 fillMediaItems(mediaItems,
                                         String.valueOf(song.getId()),
@@ -261,7 +262,7 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_ARTIST_ALL_SONGS:
-                            List<Song> artistSongs = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst().getSongs();
+                            List<Song> artistSongs = ArtistLoader.INSTANCE.getArtist(mContext, Integer.parseInt(parentId.substring(1))).getSongs();
                             for (Song song : artistSongs) {
                                 fillMediaItems(mediaItems,
                                         String.valueOf(song.getId()),
@@ -272,9 +273,9 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_PLAYLIST:
-                            List<Playlist> playlistList = PlaylistLoader.INSTANCE.getAllPlaylists(mContext).blockingFirst();
+                            List<Playlist> playlistList = PlaylistLoader.INSTANCE.getAllPlaylists(mContext);
                             for (Playlist playlist : playlistList) {
-                                int size = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, playlist).blockingFirst().size();
+                                int size = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, playlist).size();
                                 String songCount = String.format("%d %s", size, size > 1 ? "Songs" : "Song");
                                 fillMediaItems(mediaItems,
                                         Integer.toString(TYPE_PLAYLIST_ALL_SONGS) + Long.toString(playlist.id),
@@ -285,7 +286,7 @@ public class WearBrowserService extends MediaBrowserService {
                             }
                             break;
                         case TYPE_PLAYLIST_ALL_SONGS:
-                            List<Song> playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, Integer.parseInt(parentId.substring(1))).blockingFirst();
+                            List<Song> playlistSongs = PlaylistSongsLoader.INSTANCE.getPlaylistSongList(mContext, Integer.parseInt(parentId.substring(1)));
                             for (Song song : playlistSongs) {
                                 fillMediaItems(mediaItems,
                                         String.valueOf(song.getId()),
@@ -326,7 +327,7 @@ public class WearBrowserService extends MediaBrowserService {
             long songId = Long.parseLong(mediaId);
             setSessionActive();
             ArrayList<Song> songs = new ArrayList<>();
-            songs.add(SongLoader.INSTANCE.getSong(mContext, Integer.parseInt(mediaId)).blockingFirst());
+            songs.add(SongLoader.INSTANCE.getSong(mContext, Integer.parseInt(mediaId)));
             MusicPlayerRemote.INSTANCE.openQueue(songs, 0, true);
         }
 

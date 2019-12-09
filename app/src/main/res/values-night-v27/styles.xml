@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2019 Hemanth Savarala.
+  ~
+  ~ Licensed under the GNU General Public License v3
+  ~
+  ~ This is free software: you can redistribute it and/or modify it under
+  ~ the terms of the GNU General Public License as published by
+  ~  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+  ~
+  ~ This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  -->
+
+<resources>
+
+    <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="md_font_title">@font/circular</item>
+        <item name="md_font_body">@font/circular</item>
+        <item name="md_font_button">@font/circular</item>
+        <item name="md_background_color">?attr/colorSurface</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:fontFamily">@font/circular</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
+        <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
+        <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>
