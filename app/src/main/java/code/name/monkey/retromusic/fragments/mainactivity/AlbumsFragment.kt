@@ -65,7 +65,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun setUsePalette(usePalette: Boolean) {
-        adapter!!.usePalette(usePalette)
+        adapter?.usePalette(usePalette)
     }
 
     override fun setGridSize(gridSize: Int) {

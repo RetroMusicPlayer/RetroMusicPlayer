@@ -10,7 +10,6 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/colorSurface"
         tools:ignore="UnusedAttribute" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

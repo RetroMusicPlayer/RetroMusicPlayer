@@ -48,7 +48,7 @@ class ColorIconsImageView : AppCompatImageView {
         attributes.recycle()
     }
 
-    private fun setIconBackgroundColor(color: Int) {
+    fun setIconBackgroundColor(color: Int) {
         setBackgroundResource(R.drawable.color_circle_gradient)
         if (ATHUtil.isWindowBackgroundDark(context) && PreferenceUtil.getInstance(context).desaturatedColor()) {
             val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)

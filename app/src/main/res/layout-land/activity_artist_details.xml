@@ -97,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="4dp"
                             android:textAppearance="@style/TextViewSubtitle2"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:ignore="MissingPrefix"
                             tools:text="Title" />
 

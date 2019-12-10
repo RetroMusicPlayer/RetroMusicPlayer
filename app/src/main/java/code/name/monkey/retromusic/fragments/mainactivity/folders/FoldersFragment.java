@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,7 +48,6 @@ import java.util.Objects;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
@@ -87,15 +87,11 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
 
     private View coordinatorLayout, empty;
-
+    private TextView emojiText;
     private MaterialCardView toolbarContainer;
-
     private Toolbar toolbar;
-
     private BreadCrumbLayout breadCrumbs;
-
     private AppBarLayout appBarLayout;
-
     private FastScrollRecyclerView recyclerView;
 
     private Comparator<File> fileComparator = (lhs, rhs) -> {
@@ -151,6 +147,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
+    private String getEmojiByUnicode(int unicode) {
+        return new String(Character.toChars(unicode));
+    }
+
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
         toolbarContainer = view.findViewById(R.id.toolbarContainer);
@@ -159,6 +159,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
         toolbar = view.findViewById(R.id.toolbar);
         empty = view.findViewById(android.R.id.empty);
+        emojiText = view.findViewById(R.id.emptyEmoji);
     }
 
     private void setCrumb(BreadCrumbLayout.Crumb crumb, boolean addToHistory) {
@@ -232,13 +233,14 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private void setUpAppbarColor() {
         int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface);
         getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setBackgroundTintList(ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
+        toolbar.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
+        toolbarContainer.setCardBackgroundColor(ColorStateList.valueOf(primaryColor));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setNavigationOnClickListener(v -> {
             showMainMenu(OptionsSheetDialogFragment.FOLDER);
         });
-        breadCrumbs.setActivatedContentColor(ToolbarContentTintHelper.toolbarTitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
-        breadCrumbs.setDeactivatedContentColor(ToolbarContentTintHelper.toolbarSubtitleColor(requireActivity(), ColorUtil.INSTANCE.darkenColor(primaryColor)));
+        breadCrumbs.setActivatedContentColor(ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorPrimary));
+        breadCrumbs.setDeactivatedContentColor(ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorSecondary));
         appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity().setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(requireContext())));
         toolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
@@ -470,6 +472,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void checkIsEmpty() {
+        emojiText.setText(getEmojiByUnicode(0x1F631));
         if (empty != null) {
             empty.setVisibility(adapter == null || adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
         }
@@ -491,8 +494,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         adapter.swapDataSet(files);
         BreadCrumbLayout.Crumb crumb = getActiveCrumb();
         if (crumb != null && recyclerView != null) {
-            ((LinearLayoutManager) recyclerView.getLayoutManager())
-                    .scrollToPositionWithOffset(crumb.getScrollPosition(), 0);
+            ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(crumb.getScrollPosition(), 0);
         }
     }
 

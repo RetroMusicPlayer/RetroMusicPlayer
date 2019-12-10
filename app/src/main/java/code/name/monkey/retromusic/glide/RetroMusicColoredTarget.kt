@@ -28,10 +28,10 @@ import com.bumptech.glide.request.animation.GlideAnimation
 abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(view) {
 
     protected val defaultFooterColor: Int
-        get() = ATHUtil.resolveColor(getView().context, R.attr.defaultFooterColor)
+        get() = ATHUtil.resolveColor(getView().context, R.attr.colorSurface)
 
     protected val albumArtistFooterColor: Int
-        get() = ATHUtil.resolveColor(getView().context, R.attr.cardBackgroundColor)
+        get() = ATHUtil.resolveColor(getView().context, R.attr.colorSurface)
 
     abstract fun onColorReady(color: Int)
 

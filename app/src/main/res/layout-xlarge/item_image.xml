@@ -6,29 +6,22 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareLayout
+    <code.name.monkey.retromusic.views.WidthFitSquareCardView
         android:layout_width="156dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="4dp"
+        app:cardPreventCornerOverlap="true">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/imageContainerCard"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="4dp"
-            app:cardPreventCornerOverlap="true">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[17]" />
-        </com.google.android.material.card.MaterialCardView>
-
-    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[17]" />
+    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"

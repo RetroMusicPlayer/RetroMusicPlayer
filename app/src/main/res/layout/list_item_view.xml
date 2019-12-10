@@ -55,6 +55,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toBottomOf="@android:id/title"
         app:lineHeightHint="24sp"
+        android:textColor="?android:attr/textColorSecondary"
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 

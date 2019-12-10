@@ -1,10 +1,13 @@
 package code.name.monkey.retromusic.adapter.album
 
 import android.graphics.drawable.Drawable
-import android.view.*
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.*
-import code.name.monkey.retromusic.glide.*
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
+import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
@@ -28,22 +31,8 @@ class HorizontalAlbumAdapter(
 	}
 
 	override fun setColors(color: Int, holder: ViewHolder) {
-		holder.title?.setTextColor(
-				MaterialValueHelper.getPrimaryTextColor(
-						activity,
-						ColorUtil.isColorLight(
-								color
-						)
-				)
-		)
-		holder.text?.setTextColor(
-				MaterialValueHelper.getSecondaryTextColor(
-						activity,
-						ColorUtil.isColorLight(
-								color
-						)
-				)
-		)
+		holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
+		holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
 	}
 
 	override fun loadAlbumCover(album: Album, holder: ViewHolder) {

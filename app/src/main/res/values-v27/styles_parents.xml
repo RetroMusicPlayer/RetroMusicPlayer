@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2019 Hemanth Savarala.
   ~
   ~ Licensed under the GNU General Public License v3
@@ -46,14 +45,16 @@
         <item name="windowActionBarOverlay">true</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
-        <item name="roundSelector">@drawable/round_selector_dark</item>
-        <item name="rectSelector">@drawable/rect_selector_dark</item>
+        <item name="roundSelector">@drawable/round_selector</item>
+        <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="android:windowLightNavigationBar">false</item>
+        <!--Manual setting colors-->
+        <item name="colorSurface">@color/darkColorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">

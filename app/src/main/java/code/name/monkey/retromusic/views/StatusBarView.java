@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.views;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -27,14 +26,17 @@ public class StatusBarView extends View {
 
     public StatusBarView(@NonNull Context context) {
         super(context);
+        init(context);
     }
 
     public StatusBarView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
+        init(context);
     }
 
     public StatusBarView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(context);
     }
 
     public static int getStatusBarHeight(@NonNull Resources r) {
@@ -44,6 +46,10 @@ public class StatusBarView extends View {
             result = r.getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    private void init(Context context) {
+
     }
 
     @Override

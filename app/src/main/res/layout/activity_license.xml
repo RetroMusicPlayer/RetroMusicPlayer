@@ -42,7 +42,7 @@
             android:layout_gravity="fill_vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <WebView
+            <code.name.monkey.retromusic.views.LollipopFixedWebView
                 android:id="@+id/license"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

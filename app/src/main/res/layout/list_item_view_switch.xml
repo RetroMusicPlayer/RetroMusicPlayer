@@ -52,6 +52,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="0dp"
         android:paddingEnd="16dp"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"

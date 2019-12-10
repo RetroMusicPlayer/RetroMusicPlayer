@@ -38,7 +38,6 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
-import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -243,7 +242,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        status_bar.setBackgroundColor(toolbarColor)
+        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null

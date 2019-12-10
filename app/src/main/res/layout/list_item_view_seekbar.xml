@@ -50,6 +50,7 @@
         android:id="@android:id/summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"

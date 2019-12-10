@@ -48,9 +48,7 @@ interface ArtistsPresenter : Presenter<ArtistsView> {
         override fun loadArtists() {
             launch {
                 when (val result = repository.allArtists()) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        view?.artists(result.data)
-                    }
+                    is Result.Success -> withContext(Dispatchers.Main) { view?.artists(result.data) }
                     is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
                 }
             }

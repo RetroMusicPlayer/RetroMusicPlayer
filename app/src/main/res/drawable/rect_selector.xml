@@ -1,9 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@color/ripple_material_light" android:state_activated="true" android:state_pressed="true" />
-    <item android:drawable="@color/ripple_material_light" android:state_activated="true" />
-    <item android:drawable="@color/ripple_material_light" android:state_pressed="true" />
-    <item android:drawable="@android:color/transparent" />
-
-</selector>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item android:id="@android:id/mask">
+        <shape>
+            <corners android:radius="8dp" />
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <item>
+        <selector>
+            <item android:state_activated="true">
+                <shape>
+                    <corners android:radius="8dp" />
+                    <solid android:color="?android:attr/colorControlHighlight" />
+                </shape>
+            </item>
+            <item android:state_pressed="true">
+                <ripple android:color="?android:attr/colorControlHighlight">
+                    <item>
+                        <shape>
+                            <corners android:radius="8dp" />
+                            <solid android:color="?android:attr/colorControlHighlight" />
+                        </shape>
+                    </item>
+                </ripple>
+            </item>
+        </selector>
+    </item>
+</ripple>

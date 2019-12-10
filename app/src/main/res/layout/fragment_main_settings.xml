@@ -89,355 +89,79 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/generalSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_theme_palette_white_24dp"
+            app:settingListItemIconColor="@color/md_blue_A400"
+            app:settingListItemText="@string/general_settings_summary"
+            app:settingListItemTitle="@string/general_settings_title" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/general_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_blue_A400"
-                app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/general_settings_title"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/general_settings_summary" />
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/nowPlayingSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_play_circle_filled_white_24dp"
+            app:settingListItemIconColor="@color/md_red_A400"
+            app:settingListItemText="@string/now_playing_summary"
+            app:settingListItemTitle="@string/now_playing" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/now_playing_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_red_A400"
-                app:srcCompat="@drawable/ic_play_circle_filled_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/now_playing"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/now_playing_summary" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/audioSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_volume_up_white_24dp"
+            app:settingListItemIconColor="@color/md_deep_purple_A400"
+            app:settingListItemText="@string/audio_settings_summary"
+            app:settingListItemTitle="@string/pref_header_audio" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/audio_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_deep_purple_A400"
-                app:srcCompat="@drawable/ic_volume_up_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/pref_header_audio"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/audio_settings_summary" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/personalizeSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_hdr_strong_white_24dp"
+            app:settingListItemIconColor="@color/md_teal_A400"
+            app:settingListItemText="@string/personalize_settings_summary"
+            app:settingListItemTitle="@string/personalize" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/personalize_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_teal_A400"
-                app:srcCompat="@drawable/ic_hdr_strong_white_24dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/personalize"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/personalize_settings_summary" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/imageSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_image_white_24dp"
+            app:settingListItemIconColor="@color/md_deep_orange_A400"
+            app:settingListItemText="@string/image_settings_summary"
+            app:settingListItemTitle="@string/pref_header_images" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/image_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_deep_orange_A400"
-                app:srcCompat="@drawable/ic_image_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/pref_header_images"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/image_settings_summary" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/notificationSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_notifications_active_white_24dp"
+            app:settingListItemIconColor="@color/md_yellow_A400"
+            app:settingListItemText="@string/notification_settings_summary"
+            app:settingListItemTitle="@string/notification" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/notification_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_yellow_A400"
-                app:srcCompat="@drawable/ic_notifications_active_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/notification"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/notification_settings_summary" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/otherSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_notifications_active_white_24dp"
+            app:settingListItemIconColor="@color/md_indigo_A400"
+            app:settingListItemText="@string/other_settings_summary"
+            app:settingListItemTitle="@string/others" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/other_settings_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_indigo_A400"
-                app:srcCompat="@drawable/ic_testing_white_24dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="16dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/others"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:maxLines="4"
-                    android:text="@string/other_settings_summary" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <code.name.monkey.retromusic.views.SettingListItemView
             android:id="@+id/aboutSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?rectSelector"
-            android:gravity="center_vertical"
-            android:minHeight="72dp"
-            android:orientation="horizontal">
+            app:settingListItemIcon="@drawable/ic_info_outline_white_24dp"
+            app:settingListItemIconColor="@color/md_light_green_A400"
+            app:settingListItemText="@string/about_settings_summary"
+            app:settingListItemTitle="@string/action_about" />
 
-            <code.name.monkey.retromusic.views.ColorIconsImageView
-                android:id="@+id/about_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:padding="10dp"
-                app:iconBackgroundColor="@color/md_light_green_A400"
-                app:srcCompat="@drawable/ic_info_outline_white_24dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="16dp"
-                android:gravity="center_vertical"
-                android:orientation="vertical">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
-                    android:fadingEdge="horizontal"
-                    android:singleLine="true"
-                    android:text="@string/action_about"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/about_settings_summary" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -90,7 +90,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         val statusBar = window.decorView.rootView.findViewById<View>(R.id.status_bar)
         if (statusBar != null) {
             when {
-                VersionUtils.hasMarshmallow() -> window.statusBarColor = color
+                VersionUtils.hasMarshmallow() -> statusBar.setBackgroundColor(color)
                 VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
                 else -> statusBar.setBackgroundColor(color)
             }
@@ -105,7 +105,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     fun setStatusbarColorAuto() {
         // we don't want to use statusbar color because we are doing the color darkening on our own to support KitKat
-        //setStatusbarColor(ATHUtil.resolveColor(this, android.R.attr.windowBackground))
+        setStatusbarColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
         setLightStatusbarAuto(ATHUtil.resolveColor(this, R.attr.colorSurface))
     }
 

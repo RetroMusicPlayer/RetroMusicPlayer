@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="toolbar_margin_horizontal">52dp</dimen>
+    <dimen name="toolbar_margin_horizontal">8dp</dimen>
 </resources>

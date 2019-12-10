@@ -119,7 +119,8 @@
                             android:paddingTop="4dp"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
-                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textAppearance="@style/TextViewSubtitle2"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:ignore="MissingPrefix"
                             tools:text="Album details name" />
 

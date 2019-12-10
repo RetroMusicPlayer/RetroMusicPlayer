@@ -126,7 +126,7 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/albumText"
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                            style="@style/TextViewHeadline6"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -134,6 +134,7 @@
                             android:focusable="true"
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
+                            android:textColor="?android:attr/textColorSecondary"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:paddingTop="4dp"
                             android:scrollHorizontally="true"

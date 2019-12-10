@@ -44,7 +44,6 @@ import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.*
 import kotlinx.android.synthetic.main.activity_album_content.*
-import kotlinx.android.synthetic.main.status_bar.*
 import java.util.*
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -203,7 +202,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        status_bar.setBackgroundColor(toolbarColor)
+        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
@@ -266,14 +265,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
     private fun setUpSortOrderMenu(sortOrder: SubMenu) {
         when (savedSortOrder) {
-            AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title)
-                    .isChecked = true
-            AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc)
-                    .isChecked = true
-            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list)
-                    .isChecked = true
-            AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration)
-                    .isChecked = true
+            AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
+            AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
+            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list).isChecked = true
+            AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration).isChecked = true
         }
     }
 
