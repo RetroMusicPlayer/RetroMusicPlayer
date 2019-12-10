@@ -50,22 +50,11 @@ class PlayingNotificationOreo : PlayingNotification() {
     private var target: Target<BitmapPaletteWrapper>? = null
 
     private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
-        val remoteViews = RemoteViews(service.packageName,
-                if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded)
-
+        val remoteViews = RemoteViews(service.packageName, if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded)
         remoteViews.setTextViewText(R.id.appName, service.getString(R.string.app_name) + " • " + song.albumName)
         remoteViews.setTextViewText(R.id.title, song.title)
         remoteViews.setTextViewText(R.id.subtitle, song.artistName)
-
-        val typedArray = service.obtainStyledAttributes(intArrayOf(android.R.attr.selectableItemBackground))
-        val selectableItemBackground = typedArray.getResourceId(0, 0)
-        typedArray.recycle()
-
-        remoteViews.setInt(R.id.content, "setBackgroundResource", selectableItemBackground)
-
         linkButtons(remoteViews)
-
-        //setNotificationContent(remoteViews, ColorUtil.isColorLight(backgroundColor));
         return remoteViews
     }
 
@@ -176,9 +165,6 @@ class PlayingNotificationOreo : PlayingNotification() {
 
                             notificationLayout.setImageViewBitmap(R.id.smallIcon, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_notification, secondary)!!, 0.6f))
                             notificationLayoutBig.setImageViewBitmap(R.id.smallIcon, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_notification, secondary)!!, 0.6f))
-
-                            notificationLayout.setInt(R.id.arrow, "setColorFilter", secondary)
-                            notificationLayoutBig.setInt(R.id.arrow, "setColorFilter", secondary)
 
                         }
                     })

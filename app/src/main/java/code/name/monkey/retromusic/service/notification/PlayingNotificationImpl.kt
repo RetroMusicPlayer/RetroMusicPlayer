@@ -39,7 +39,7 @@ import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 
-class PlayingNotificationImpl24 : PlayingNotification() {
+class PlayingNotificationImpl : PlayingNotification() {
     private var target: Target<BitmapPaletteWrapper>? = null
     @Synchronized
     override fun update() {
@@ -54,8 +54,7 @@ class PlayingNotificationImpl24 : PlayingNotification() {
         val action = Intent(service, MainActivity::class.java)
         action.putExtra("expand", true)
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        val clickIntent = PendingIntent
-                .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
+        val clickIntent = PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val serviceName = ComponentName(service, MusicService::class.java)
         val intent = Intent(ACTION_QUIT)
