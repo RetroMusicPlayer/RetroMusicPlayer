@@ -39,6 +39,8 @@
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
 
+        <!--Manual setting colors-->
+        <item name="colorSurface">@color/darkColorSurface</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
