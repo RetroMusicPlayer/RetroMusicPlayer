@@ -61,7 +61,6 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
-                app:strokeColor="?dividerColor"
                 app:strokeWidth="1.5dp">
 
                 <LinearLayout
