@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
     android:clickable="true"
     android:focusable="true">
 
@@ -23,7 +22,7 @@
         android:id="@+id/masked"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?colorPrimary" />
+        android:background="?attr/colorSurface" />
 
     <ProgressBar
         android:id="@+id/progressBar"
