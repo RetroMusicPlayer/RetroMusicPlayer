@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:fontFeatureSettings="onum"
-        android:padding="4dp"
+        android:padding="8dp"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/menu"

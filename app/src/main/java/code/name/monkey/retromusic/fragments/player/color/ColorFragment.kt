@@ -1,14 +1,12 @@
 package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.palette.graphics.Palette
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -16,7 +14,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.glide.SongGlideRequest.Builder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
@@ -80,10 +78,7 @@ class ColorFragment : AbsPlayerFragment() {
         }
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_color_player, container, false)
     }
 
@@ -120,8 +115,10 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     private fun updateSong() {
-        SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(requireContext()).generatePalette(requireContext()).build()
+        Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
+                .checkIgnoreMediaStore(requireContext())
+                .generatePalette(requireContext())
+                .build()
                 .into(object : RetroMusicColoredTarget(playerImage) {
                     override fun onColorReady(color: Int) {
 
@@ -147,25 +144,21 @@ class ColorFragment : AbsPlayerFragment() {
                     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
                         super.onLoadFailed(e, errorDrawable)
                         val backgroundColor = defaultFooterColor
-                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(
-                                context,
-                                true
-                        )
-                        else MaterialValueHelper.getPrimaryTextColor(context, false)
-
+                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(requireContext(), true)
+                        else MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
                         setColors(backgroundColor, textColor)
                     }
                 })
     }
 
-    private fun setColors(backgroundColor: Int, textColor: Int) {
-        playbackControlsFragment.setDark(textColor, backgroundColor)
-        colorGradientBackground?.setBackgroundColor(backgroundColor)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, textColor, activity)
-        lastColor = textColor
+    private fun setColors(backgroundColor: Int, componentsColor: Int) {
+        this.lastColor = componentsColor
         this.backgroundColor = backgroundColor
+        playbackControlsFragment.setDark(componentsColor, backgroundColor)
+        colorGradientBackground?.setBackgroundColor(backgroundColor)
         playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(backgroundColor))
         callbacks?.onPaletteColorChanged()
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, componentsColor, requireActivity())
     }
 
     companion object {
@@ -175,14 +168,5 @@ class ColorFragment : AbsPlayerFragment() {
             fragment.arguments = args
             return fragment
         }
-    }
-}
-
-fun Palette.getColor(): Int {
-    return when {
-        darkMutedSwatch != null -> darkMutedSwatch!!.rgb
-        mutedSwatch != null -> mutedSwatch!!.rgb
-        lightMutedSwatch != null -> lightMutedSwatch!!.rgb
-        else -> Palette.Swatch(Color.BLACK, 1).rgb
     }
 }
