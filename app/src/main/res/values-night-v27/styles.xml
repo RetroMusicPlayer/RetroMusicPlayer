@@ -34,7 +34,6 @@
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
         <item name="android:windowLightNavigationBar">false</item>
         <!--Manual setting colors-->
-        <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorSurface">@color/darkColorSurface</item>
     </style>
 </resources>
