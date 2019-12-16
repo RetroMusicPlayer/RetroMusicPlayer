@@ -15,15 +15,11 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -52,7 +48,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
             ViewPager.SCROLL_STATE_IDLE -> fab.show()
-            ViewPager.SCROLL_STATE_DRAGGING, ViewPager.SCROLL_STATE_SETTLING -> fab.hide()
+            ViewPager.SCROLL_STATE_DRAGGING,
+            ViewPager.SCROLL_STATE_SETTLING -> fab.hide()
         }
     }
 
@@ -91,7 +88,6 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         setTaskDescriptionColorAuto()
         setNavigationbarColorAuto()
 
-        applyToolbar(toolbar)
         fab.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this))))
                 .apply {
@@ -106,33 +102,30 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
             addOnPageChangeListener(this@LyricsActivity)
         }
 
-        tabs.apply {
-            setupWithViewPager(viewPager)
-            setSelectedTabIndicator(
-                    TintHelper.createTintedDrawable(
-                            ContextCompat.getDrawable(
-                                    this@LyricsActivity, R.drawable.tab_indicator
-                            ), ThemeStore.accentColor(this@LyricsActivity)
-                    )
-            )
-            setTabTextColors(
-                    ThemeStore.textColorSecondary(this@LyricsActivity),
-                    ThemeStore.accentColor(this@LyricsActivity)
-            )
-            setSelectedTabIndicatorColor(ThemeStore.accentColor(context))
-        }
+        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
+        toolbar.setBackgroundColor(toolbarColor)
+        tabs.setBackgroundColor(toolbarColor)
+        ToolbarContentTintHelper.colorBackButton(toolbar)
+
+        tabs.setupWithViewPager(viewPager)
+        tabs.setSelectedTabIndicator(TintHelper.createTintedDrawable(ContextCompat.getDrawable(this, R.drawable.tab_indicator), ThemeStore.accentColor(this)))
+        tabs.setTabTextColors(ATHUtil.resolveColor(this, android.R.attr.textColorSecondary), ThemeStore.accentColor(this))
+        tabs.setSelectedTabIndicatorColor(ThemeStore.accentColor(this))
+
         fab.setOnClickListener(this)
     }
 
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
-        song = MusicPlayerRemote.currentSong
-        toolbar.title = song.title
-        toolbar.subtitle = song.artistName
+        updateTitleSong()
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
+        updateTitleSong()
+    }
+
+    private fun updateTitleSong() {
         song = MusicPlayerRemote.currentSong
         toolbar.title = song.title
         toolbar.subtitle = song.artistName

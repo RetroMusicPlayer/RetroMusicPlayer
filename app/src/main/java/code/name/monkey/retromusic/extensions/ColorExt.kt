@@ -15,7 +15,9 @@
 package code.name.monkey.retromusic.extensions
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
@@ -26,4 +28,10 @@ fun Int.ripAlpha(): Int {
 
 fun Any.surfaceColor(context: Context): Int {
     return ATHUtil.resolveColor(context, R.attr.colorSurface, Color.WHITE)
+}
+
+fun Toolbar.backgroundTintList() {
+    val surfaceColor = ATHUtil.resolveColor(context, R.attr.colorSurface, Color.BLACK)
+    val colorStateList = ColorStateList.valueOf(surfaceColor)
+    backgroundTintList = colorStateList
 }
