@@ -145,36 +145,30 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
     private fun showSyncedLyrics() {
         var content = ""
         try {
-            content = LyricUtil.getStringFromFile(song.data, song.artistName)
+            content = LyricUtil.getStringFromFile(song.title, song.artistName)
         } catch (e: Exception) {
-            try {
-                content = LyricUtil.getStringFromFile(song.title, song.artistName)
-            } catch (e2: Exception) {
-
-            }
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(
-                this, BottomSheet(LayoutMode.WRAP_CONTENT)
-        ).show {
-            title(R.string.add_time_framed_lryics)
-            negativeButton(R.string.action_search) {
-                RetroUtil.openUrl(
-                        this@LyricsActivity, googleSearchLrcUrl
-                )
-            }
-            input(
-                    hint = getString(R.string.paste_lyrics_here),
-                    prefill = content,
-                    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
-            ) { _, input ->
-                LyricUtil.writeLrcToLoc(song.data, song.artistName, input.toString())
-            }
-            positiveButton(android.R.string.ok) {
-                updateSong()
-            }
-        }
+        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT))
+                .show {
+                    cornerRadius(PreferenceUtil.getInstance(this@LyricsActivity).dialogCorner)
+                    title(R.string.add_time_framed_lryics)
+                    negativeButton(R.string.action_search) {
+                        RetroUtil.openUrl(this@LyricsActivity, googleSearchLrcUrl)
+                    }
+                    input(
+                            hint = getString(R.string.paste_lyrics_here),
+                            prefill = content,
+                            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                    ) { _, input ->
+                        LyricUtil.writeLrcToLoc(song.title, song.artistName, input.toString())
+                    }
+                    positiveButton(android.R.string.ok) {
+                        updateSong()
+                    }
+                }
+
         MaterialUtil.setTint(materialDialog.getInputLayout(), false)
     }
 
@@ -195,11 +189,10 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         val materialDialog = MaterialDialog(
                 this, BottomSheet(LayoutMode.WRAP_CONTENT)
         ).show {
+            cornerRadius(PreferenceUtil.getInstance(this@LyricsActivity).dialogCorner)
             title(R.string.add_lyrics)
             negativeButton(R.string.action_search) {
-                RetroUtil.openUrl(
-                        this@LyricsActivity, getGoogleSearchUrl()
-                )
+                RetroUtil.openUrl(this@LyricsActivity, getGoogleSearchUrl())
             }
             input(
                     hint = getString(R.string.paste_lyrics_here),
@@ -396,12 +389,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
         private fun loadLRCLyrics() {
             val song = MusicPlayerRemote.currentSong
-            if (LyricUtil.isLrcFile2Exist(song.data, song.artistName)) {
-                showLyricsLocal(LyricUtil.getLocalLyricFile(song.data, song.artistName))
-            } else {
-                if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
-                    showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
-                }
+            if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
+                showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
             }
         }
 
