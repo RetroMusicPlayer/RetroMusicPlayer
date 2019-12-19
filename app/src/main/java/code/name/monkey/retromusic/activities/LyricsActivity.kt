@@ -388,7 +388,9 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         }
 
         private fun loadLRCLyrics() {
+            lyricsView.resetView("Empty")
             val song = MusicPlayerRemote.currentSong
+            println("${song.title} ${song.artistName}")
             if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
                 showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
             }
