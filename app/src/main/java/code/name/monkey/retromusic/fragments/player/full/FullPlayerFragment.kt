@@ -24,10 +24,12 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_full.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
     private lateinit var lyricsLayout: FrameLayout
@@ -213,18 +215,19 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     private val compositeDisposable = CompositeDisposable()
 
     private fun updateArtistImage() {
-        compositeDisposable.addAll(ArtistLoader.getArtistFlowable(context!!, MusicPlayerRemote.currentSong.artistId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    ArtistGlideRequest.Builder.from(Glide.with(requireContext()), it)
-                            .generatePalette(requireContext())
-                            .build().into(object : RetroMusicColoredTarget(artistImage) {
-                                override fun onColorReady(color: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val artist = ArtistLoader.getArtist(requireContext(), MusicPlayerRemote.currentSong.artistId)
+            withContext(Dispatchers.Main) {
+                ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
+                        .generatePalette(requireContext())
+                        .build()
+                        .into(object : RetroMusicColoredTarget(artistImage) {
+                            override fun onColorReady(color: Int) {
 
-                                }
-                            })
-                })
+                            }
+                        })
+            }
+        }
     }
 
     override fun onQueueChanged() {

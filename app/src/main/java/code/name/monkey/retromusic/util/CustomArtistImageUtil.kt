@@ -80,7 +80,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit()
                                     ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                                    App.getContext().getContentResolver().notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                                    App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
                                 }
                                 return null
                             }

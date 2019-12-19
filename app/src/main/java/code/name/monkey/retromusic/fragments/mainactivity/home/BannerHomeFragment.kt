@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
@@ -59,6 +60,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         Glide.with(requireContext())
                 .load(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
                 .asBitmap()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .placeholder(R.drawable.ic_person_flat)
                 .error(R.drawable.ic_person_flat)
                 .into(userImage)
@@ -198,12 +201,16 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             val request = Glide.with(requireContext())
             if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
                 request.load(day)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .placeholder(R.drawable.material_design_default)
                         .error(R.drawable.material_design_default)
                         .into(it)
             } else {
                 request.load(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
                         .asBitmap()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .placeholder(R.drawable.material_design_default)
                         .error(R.drawable.material_design_default)
                         .into(it)

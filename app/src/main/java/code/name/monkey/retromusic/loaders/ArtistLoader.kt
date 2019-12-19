@@ -30,20 +30,6 @@ object ArtistLoader {
                 PreferenceUtil.getInstance(context).artistDetailSongSortOrder
     }
 
-    fun getAllArtistsFlowable(
-            context: Context
-    ): Observable<ArrayList<Artist>> {
-        return Observable.create { e ->
-            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
-                    context, null, null,
-                    getSongLoaderSortOrder(context))
-            ).subscribe { songs ->
-                e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
-                e.onComplete()
-            }
-        }
-    }
-
     fun getAllArtists(context: Context): ArrayList<Artist> {
         val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
                 context,
@@ -51,20 +37,6 @@ object ArtistLoader {
                 getSongLoaderSortOrder(context))
         )
         return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
-    }
-
-    fun getArtistsFlowable(context: Context, query: String): Observable<ArrayList<Artist>> {
-        return Observable.create { e ->
-            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(
-                    context,
-                    AudioColumns.ARTIST + " LIKE ?",
-                    arrayOf("%$query%"),
-                    getSongLoaderSortOrder(context))
-            ).subscribe { songs ->
-                e.onNext(splitIntoArtists(AlbumLoader.splitIntoAlbums(songs)))
-                e.onComplete()
-            }
-        }
     }
 
     fun getArtists(context: Context, query: String): ArrayList<Artist> {
