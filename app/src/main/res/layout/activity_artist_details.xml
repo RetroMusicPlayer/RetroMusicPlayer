@@ -96,6 +96,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif"
+                    android:fontFeatureSettings="onum"
                     android:layout_marginEnd="16dp"
                     android:textAppearance="@style/TextViewSubtitle2"
                     android:textColor="?android:attr/textColorSecondary"

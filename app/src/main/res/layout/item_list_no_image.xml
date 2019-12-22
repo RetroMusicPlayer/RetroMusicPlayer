@@ -38,6 +38,7 @@
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:fontFeatureSettings="onum"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"

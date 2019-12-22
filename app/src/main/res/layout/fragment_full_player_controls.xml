@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toStartOf="@+id/songFavourite"
             app:layout_constraintStart_toEndOf="@+id/playerMenu"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:text="@string/for_you" />
+            tools:text="@tools:sample/lorem" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/songFavourite"

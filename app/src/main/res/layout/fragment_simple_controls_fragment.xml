@@ -58,6 +58,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingStart="16dp"
+        android:fontFamily="sans-serif"
+        android:fontFeatureSettings="onum"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewSubtitle2"
         app:layout_constraintBottom_toTopOf="@+id/playerMediaControllerContainer"

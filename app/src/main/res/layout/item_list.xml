@@ -92,6 +92,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:fontFeatureSettings="onum"
             android:maxLines="1"
             android:textColor="?android:attr/textColorSecondary"
             tools:text="Song artist name " />

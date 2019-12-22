@@ -14,12 +14,13 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?rectSelector"
-    android:gravity="center_vertical"
     android:layout_marginStart="4dp"
     android:layout_marginEnd="4dp"
+    android:background="?rectSelector"
+    android:gravity="center_vertical"
     android:orientation="horizontal">
 
     <code.name.monkey.retromusic.views.ColorIconsImageView
@@ -34,8 +35,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -44,9 +45,9 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:singleLine="true"
-            android:text="@string/general_settings_title"
             android:textAppearance="@style/TextViewSubtitle1"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:maxLines="4"
-            android:text="@string/general_settings_summary"
-            android:textColor="?android:attr/textColorSecondary" />
+            android:textColor="?android:attr/textColorSecondary"
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </LinearLayout>

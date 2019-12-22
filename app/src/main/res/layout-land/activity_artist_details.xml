@@ -40,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp" />
             </FrameLayout>
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -95,6 +96,8 @@
                             android:id="@+id/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:fontFeatureSettings="onum"
                             android:paddingTop="4dp"
                             android:textAppearance="@style/TextViewSubtitle2"
                             android:textColor="?android:attr/textColorSecondary"
