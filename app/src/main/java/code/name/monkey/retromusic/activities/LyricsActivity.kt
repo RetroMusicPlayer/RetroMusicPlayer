@@ -106,7 +106,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         toolbar.setBackgroundColor(toolbarColor)
         tabs.setBackgroundColor(toolbarColor)
         ToolbarContentTintHelper.colorBackButton(toolbar)
-
+        setSupportActionBar(toolbar)
         tabs.setupWithViewPager(viewPager)
         tabs.setSelectedTabIndicator(TintHelper.createTintedDrawable(ContextCompat.getDrawable(this, R.drawable.tab_indicator), ThemeStore.accentColor(this)))
         tabs.setTabTextColors(ATHUtil.resolveColor(this, android.R.attr.textColorSecondary), ThemeStore.accentColor(this))
@@ -137,7 +137,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            finish()
+            return true
         }
         return super.onOptionsItemSelected(item)
     }

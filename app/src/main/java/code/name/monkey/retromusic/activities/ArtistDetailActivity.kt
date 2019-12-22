@@ -184,7 +184,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun loadBiography(
-            name: String, lang: String? = Locale.getDefault().language
+            name: String,
+            lang: String? = Locale.getDefault().language
     ) {
         biography = null
         this.lang = lang
