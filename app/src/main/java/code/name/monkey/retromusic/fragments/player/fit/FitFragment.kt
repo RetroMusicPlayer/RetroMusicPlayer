@@ -47,9 +47,7 @@ class FitFragment : AbsPlayerFragment() {
         playbackControlsFragment.setDark(color)
         lastColor = color
         callbacks?.onPaletteColorChanged()
-
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
-
     }
 
     override fun toggleFavorite(song: Song) {
@@ -77,8 +75,7 @@ class FitFragment : AbsPlayerFragment() {
 
     private fun setUpSubFragments() {
         playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FitPlaybackControlsFragment
-
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val playerAlbumCoverFragment: PlayerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
         playerAlbumCoverFragment.removeEffect()
     }
@@ -88,13 +85,12 @@ class FitFragment : AbsPlayerFragment() {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@FitFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
+            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
         }
     }
 
     override fun onServiceConnected() {
         updateIsFavorite()
-
     }
 
     override fun onPlayingMetaChanged() {
@@ -102,7 +98,6 @@ class FitFragment : AbsPlayerFragment() {
     }
 
     companion object {
-
         fun newInstance(): FitFragment {
             return FitFragment()
         }

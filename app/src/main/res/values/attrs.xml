@@ -3,14 +3,9 @@
 
     <attr name="roundSelector" format="reference" />
     <attr name="rectSelector" format="reference" />
-
     <attr name="defaultFooterColor" format="color" />
-
     <attr name="toolbarPopupTheme" format="reference" />
-
-    <attr name="iconColor" format="color" />
     <attr name="dividerColor" format="color" />
-
 
     <declare-styleable name="BlurLayout">
         <attr name="blk_downscaleFactor" format="float" />

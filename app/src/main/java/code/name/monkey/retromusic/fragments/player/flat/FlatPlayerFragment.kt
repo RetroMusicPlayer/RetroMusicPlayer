@@ -43,7 +43,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         playerToolbar.inflateMenu(R.menu.menu_player)
         playerToolbar.setNavigationOnClickListener { _ -> requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
     }
 
     private fun colorize(i: Int) {

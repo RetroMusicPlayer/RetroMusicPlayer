@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -105,8 +106,8 @@
                     android:layout_margin="16dp"
                     android:gravity="center"
                     android:padding="12dp"
-                    app:tint="?attr/colorControlNormal"
-                    android:src="@drawable/ic_add_photo_white_24dp" />
+                    android:src="@drawable/ic_add_photo_white_24dp"
+                    app:tint="?attr/colorControlNormal" />
             </FrameLayout>
 
             <com.google.android.material.textfield.TextInputLayout
