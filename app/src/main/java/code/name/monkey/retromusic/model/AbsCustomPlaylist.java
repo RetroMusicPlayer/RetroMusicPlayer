@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import io.reactivex.Observable;
-
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
@@ -40,9 +38,6 @@ public abstract class AbsCustomPlaylist extends Playlist {
     public AbsCustomPlaylist(Parcel in) {
         super(in);
     }
-
-    @NonNull
-    public abstract Observable<ArrayList<Song>> getSongsFlowable(@NotNull Context context);
 
     @NonNull
     public abstract ArrayList<Song> getSongs(@NotNull Context context);

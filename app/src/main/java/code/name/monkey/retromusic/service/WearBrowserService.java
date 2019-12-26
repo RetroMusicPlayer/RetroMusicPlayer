@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.model.Album;
 import code.name.monkey.retromusic.model.Artist;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
 /**
@@ -234,7 +235,7 @@ public class WearBrowserService extends MediaBrowserService {
                                         Integer.toString(TYPE_ALBUM_SONGS) + Long.toString(album.getId()),
                                         album.getTitle(),
                                         album.getArtistName(),
-                                        RetroUtil.getAlbumArtUri(album.getId()),
+                                        MusicUtil.getMediaStoreAlbumCoverUri(album.getId()),
                                         MediaBrowser.MediaItem.FLAG_BROWSABLE);
                             }
                             break;

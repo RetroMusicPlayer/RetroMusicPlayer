@@ -14,13 +14,16 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
+import code.name.monkey.retromusic.Result
+import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
 /**
@@ -43,44 +46,47 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
 
     class AlbumDetailsPresenterImpl @Inject constructor(
             private val repository: Repository
-    ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter {
-
+    ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter, CoroutineScope {
+        private val job = Job()
         private lateinit var album: Album
 
-        private var disposable: CompositeDisposable = CompositeDisposable()
-
         override fun loadMore(artistId: Int) {
-            disposable += repository.getArtistByIdFlowable(artistId)
-                    .map {
-                        view?.loadArtistImage(it)
-                        return@map it.albums
-                    }
-                    .map {
-                        it.filter { filterAlbum -> album.id != filterAlbum.id }
-                    }
-                    .subscribe({
-                        if (it.isEmpty()) {
-                            return@subscribe
-                        }
-                        view?.moreAlbums(ArrayList(it))
-                    }, { t -> println(t) })
+            launch {
+                when (val result = repository.artistById(artistId)) {
+                    is Success -> withContext(Dispatchers.Main) { showArtistImage(result.data) }
+                    is Result.Error -> withContext(Dispatchers.Main) {}
+                }
+            }
+        }
+
+        private fun showArtistImage(artist: Artist) {
+            view?.loadArtistImage(artist)
+
+            artist.albums?.filter { it.id != album.id }?.let {
+                view?.moreAlbums(ArrayList(it))
+            }
         }
 
 
         override fun loadAlbum(albumId: Int) {
-            disposable += repository.getAlbumFlowable(albumId)
-                    .doOnComplete {
-                        view?.complete()
+            launch {
+                when (val result = repository.albumById(albumId)) {
+                    is Success -> withContext(Dispatchers.Main) {
+                        album = result.data
+                        view?.album(result.data)
                     }
-                    .subscribe({
-                        album = it
-                        view?.album(it)
-                    }, { t -> println(t) })
+                    is Error -> withContext(Dispatchers.Main) { view?.complete() }
+                }
+                view?.complete()
+            }
         }
 
         override fun detachView() {
             super.detachView()
-            disposable.dispose()
+            job.cancel()
         }
+
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
     }
 }

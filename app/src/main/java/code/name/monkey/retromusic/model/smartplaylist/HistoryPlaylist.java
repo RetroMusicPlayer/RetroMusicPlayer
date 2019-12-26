@@ -27,7 +27,6 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.HistoryStore;
-import io.reactivex.Observable;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -50,12 +49,6 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
 
     protected HistoryPlaylist(Parcel in) {
         super(in);
-    }
-
-    @NonNull
-    @Override
-    public Observable<ArrayList<Song>> getSongsFlowable(@NotNull @NonNull Context context) {
-        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getRecentlyPlayedTracksFlowable(context);
     }
 
     @NonNull

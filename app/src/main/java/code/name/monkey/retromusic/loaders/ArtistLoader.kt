@@ -19,15 +19,11 @@ import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.Observable
 
 
 object ArtistLoader {
     private fun getSongLoaderSortOrder(context: Context): String {
-        return PreferenceUtil.getInstance(context).artistSortOrder + ", " +
-                PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " +
-                PreferenceUtil.getInstance(context).albumDetailSongSortOrder + ", " +
-                PreferenceUtil.getInstance(context).artistDetailSongSortOrder
+        return PreferenceUtil.getInstance(context).artistSortOrder + ", " + PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " + PreferenceUtil.getInstance(context).albumSongSortOrder
     }
 
     fun getAllArtists(context: Context): ArrayList<Artist> {
@@ -68,34 +64,6 @@ object ArtistLoader {
         val album = Artist()
         artists.add(album)
         return album
-    }
-
-    fun splitIntoArtists(albums: Observable<ArrayList<Album>>): Observable<ArrayList<Artist>> {
-        return Observable.create { e ->
-            val artists = ArrayList<Artist>()
-            albums.subscribe { localAlbums ->
-                if (localAlbums != null) {
-                    for (album in localAlbums) {
-                        getOrCreateArtist(artists, album.artistId).albums!!.add(album)
-                    }
-                }
-                e.onNext(artists)
-                e.onComplete()
-            }
-        }
-    }
-
-    fun getArtistFlowable(context: Context, artistId: Int): Observable<Artist> {
-        return Observable.create { e ->
-            SongLoader.getSongsFlowable(SongLoader.makeSongCursor(context, AudioColumns.ARTIST_ID + "=?",
-                    arrayOf(artistId.toString()),
-                    getSongLoaderSortOrder(context)))
-                    .subscribe { songs ->
-                        val artist = Artist(AlbumLoader.splitIntoAlbums(songs))
-                        e.onNext(artist)
-                        e.onComplete()
-                    }
-        }
     }
 
     fun getArtist(context: Context, artistId: Int): Artist {

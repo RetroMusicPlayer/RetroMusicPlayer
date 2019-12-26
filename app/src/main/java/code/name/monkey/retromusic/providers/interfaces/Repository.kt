@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.providers.interfaces
 import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import io.reactivex.Observable
 
 /**
  * Created by hemanths on 11/08/17.
@@ -26,6 +25,8 @@ import io.reactivex.Observable
 interface Repository {
 
     suspend fun allAlbums(): Result<ArrayList<Album>>
+
+    suspend fun albumById(albumId: Int): Result<Album>
 
     suspend fun allSongs(): Result<ArrayList<Song>>
 
@@ -54,19 +55,4 @@ interface Repository {
     suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
 
     suspend fun artistById(artistId: Int): Result<Artist>
-
-    fun getSong(id: Int): Song
-
-    fun getAlbumFlowable(albumId: Int): Observable<Album>
-
-    fun getAlbum(albumId: Int): Album
-
-    fun getArtistByIdFlowable(artistId: Int): Observable<Artist>
-
-    fun getArtistById(artistId: Long): Artist
-
-    fun getPlaylistSongsFlowable(playlist: Playlist): Observable<ArrayList<Song>>
-
-    val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
-
 }

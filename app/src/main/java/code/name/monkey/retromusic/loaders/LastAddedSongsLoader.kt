@@ -21,20 +21,12 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.Observable
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Created by hemanths on 16/08/17.
  */
 
 object LastAddedSongsLoader {
-
-
-    fun getLastAddedSongsFlowable(context: Context): Observable<ArrayList<Song>> {
-        return SongLoader.getSongsFlowable(makeLastAddedCursor(context))
-    }
 
     fun getLastAddedSongs(context: Context): ArrayList<Song> {
         return SongLoader.getSongs(makeLastAddedCursor(context))
@@ -50,19 +42,8 @@ object LastAddedSongsLoader {
                 MediaStore.Audio.Media.DATE_ADDED + " DESC")
     }
 
-
-    fun getLastAddedAlbumsFlowable(context: Context): Observable<ArrayList<Album>> {
-        return AlbumLoader.splitIntoAlbumsFlowable(getLastAddedSongsFlowable(context))
-    }
-
-
     fun getLastAddedAlbums(context: Context): ArrayList<Album> {
         return AlbumLoader.splitIntoAlbums(getLastAddedSongs(context))
-    }
-
-
-    fun getLastAddedArtistsFlowable(context: Context): Observable<ArrayList<Artist>> {
-        return ArtistLoader.splitIntoArtists(getLastAddedAlbumsFlowable(context))
     }
 
     fun getLastAddedArtists(context: Context): ArrayList<Artist> {

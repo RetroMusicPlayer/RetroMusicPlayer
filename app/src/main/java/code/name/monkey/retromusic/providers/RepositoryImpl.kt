@@ -25,9 +25,6 @@ import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.io.IOException
 
 class RepositoryImpl(private val context: Context) : Repository {
@@ -39,6 +36,19 @@ class RepositoryImpl(private val context: Context) : Repository {
                 Success(albums)
             } else {
                 Error(Throwable("No items found"))
+            }
+        } catch (e: Exception) {
+            Error(e)
+        }
+    }
+
+    override suspend fun albumById(albumId: Int): Result<Album> {
+        return try {
+            val album = AlbumLoader.getAlbum(context, albumId)
+            if (album != null) {
+                Success(album)
+            } else {
+                Error(Throwable("No album"))
             }
         } catch (e: Exception) {
             Error(e)
@@ -246,43 +256,6 @@ class RepositoryImpl(private val context: Context) : Repository {
             Error(Throwable("Error loading artist"))
         }
     }
-
-    override fun getAlbumFlowable(albumId: Int): Observable<Album> {
-        return AlbumLoader.getAlbumFlowable(context, albumId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    override fun getArtistByIdFlowable(artistId: Int): Observable<Artist> {
-        return ArtistLoader.getArtistFlowable(context, artistId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    override fun getPlaylistSongsFlowable(playlist: Playlist): Observable<ArrayList<Song>> {
-        return PlaylistSongsLoader.getPlaylistSongListFlowable(context, playlist)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-    }
-
-    override val favoritePlaylistFlowable: Observable<ArrayList<Playlist>>
-        get() = PlaylistLoader.getFavoritePlaylistFlowable(context)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-
-
-    override fun getSong(id: Int): Song {
-        return SongLoader.getSong(context, id)
-    }
-
-    override fun getAlbum(albumId: Int): Album {
-        return AlbumLoader.getAlbum(context, albumId)
-    }
-
-    override fun getArtistById(artistId: Long): Artist {
-        return ArtistLoader.getArtist(context, artistId.toInt())
-    }
-
 }
 
 suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String): Result<T> = try {
