@@ -25,6 +25,7 @@ import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -77,6 +78,10 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         }
         val blackTheme: ATESwitchPreference? = findPreference("black_theme")
         blackTheme?.setOnPreferenceChangeListener { _, _ ->
+            if (!App.isProVersion()) {
+                showProToastAndNavigate("Just Black theme")
+                return@setOnPreferenceChangeListener false
+            }
             ThemeStore.markChanged(requireContext())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue("black"))
