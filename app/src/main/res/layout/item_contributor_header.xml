@@ -58,6 +58,6 @@
             android:layout_height="wrap_content"
             android:textColor="?android:attr/textColorSecondary"
             app:lineHeightHint="24sp"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/full_names" />
     </LinearLayout>
 </LinearLayout>

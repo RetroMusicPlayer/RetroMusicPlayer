@@ -50,12 +50,13 @@
         android:id="@android:id/summary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toBottomOf="@android:id/title"
-        app:lineHeightHint="24sp"
+        app:lineHeightHint="20sp"
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 

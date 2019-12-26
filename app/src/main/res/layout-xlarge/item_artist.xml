@@ -26,9 +26,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingTop="12dp"
         android:textAppearance="@style/TextViewNormal"
-        android:textColor="?attr/colorOnPrimary"
-        tools:text="Name" />
+        tools:text="@tools:sample/full_names" />
 </LinearLayout>

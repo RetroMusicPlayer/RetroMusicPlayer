@@ -27,12 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingStart="12dp"
         android:paddingEnd="8dp"
         android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewNormal"
-        android:textColor="?android:attr/textColorPrimary"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 </LinearLayout>

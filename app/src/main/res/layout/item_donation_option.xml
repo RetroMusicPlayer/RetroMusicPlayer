@@ -48,14 +48,14 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewBody2"
-                tools:text="Title" />
+                tools:text="@tools:sample/full_names" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextViewBody1"
-                tools:text="description" />
+                tools:text="@tools:sample/full_names" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>
