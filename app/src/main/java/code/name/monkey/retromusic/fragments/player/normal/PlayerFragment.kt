@@ -70,7 +70,7 @@ class PlayerFragment : AbsPlayerFragment() {
         lastColor = color
         callbacks?.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
 
         if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
@@ -110,10 +110,10 @@ class PlayerFragment : AbsPlayerFragment() {
 
     private fun setUpPlayerToolbar() {
         playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener { activity!!.onBackPressed() }
+        playerToolbar.setNavigationOnClickListener {requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.iconColor), activity)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
     }
 
     override fun onServiceConnected() {

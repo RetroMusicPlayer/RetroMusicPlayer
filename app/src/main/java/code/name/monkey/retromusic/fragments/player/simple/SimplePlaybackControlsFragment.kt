@@ -173,8 +173,7 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
 
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        songCurrentProgress!!.text = String.format("%s / %s", MusicUtil.getReadableDurationString(progress.toLong()),
-                MusicUtil.getReadableDurationString(total.toLong()))
+        songCurrentProgress!!.text = String.format("%s / %s", MusicUtil.getReadableDurationString(progress.toLong()), MusicUtil.getReadableDurationString(total.toLong()))
     }
 
     override fun setDark(color: Int) {

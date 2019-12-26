@@ -68,7 +68,6 @@ class SimplePlayerFragment : AbsPlayerFragment() {
         callbacks?.onPaletteColorChanged()
         simplePlaybackControlsFragment.setDark(color)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
-
     }
 
     override fun onFavoriteToggled() {
@@ -83,11 +82,9 @@ class SimplePlayerFragment : AbsPlayerFragment() {
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar.apply {
-            inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { requireActivity().onBackPressed() }
-            setOnMenuItemClickListener(this@SimplePlayerFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
-        }
+        playerToolbar.inflateMenu(R.menu.menu_player)
+        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        playerToolbar.setOnMenuItemClickListener(this)
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
     }
 }
