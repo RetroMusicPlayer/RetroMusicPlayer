@@ -63,7 +63,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         aboutSettings.setOnClickListener(this)
 
         buyProContainer.apply {
-            if (!App.isProVersion()) show() else hide()
+            if (App.isProVersion()) show() else hide()
             setOnClickListener {
                 NavigationUtil.goToProVersion(requireContext())
             }
@@ -75,7 +75,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             buyPremium.setTextColor(it)
             diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
-
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {

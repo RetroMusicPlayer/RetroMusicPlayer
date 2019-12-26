@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:ignore="UnusedAttribute">
+    android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/status_bar_container"
+    <code.name.monkey.retromusic.views.StatusBarView
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:background="?attr/colorSurface"
+        tools:ignore="UnusedAttribute" />
 
-        <include layout="@layout/status_bar" />
-    </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/status_bar_container"
-        android:layout_alignParentStart="true">
+        android:background="?attr/colorSurface">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -48,9 +46,10 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <com.google.android.material.card.MaterialCardView
@@ -164,7 +163,6 @@
                 android:id="@+id/actions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/content"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
@@ -195,6 +193,6 @@
                     android:textAllCaps="false" />
 
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</RelativeLayout>
+</LinearLayout>

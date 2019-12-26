@@ -23,14 +23,12 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 	private var restorePurchaseAsyncTask: AsyncTask<*, *, *>? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
+		setDrawUnderStatusBar()
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_pro_version)
-		setDrawUnderStatusBar()
 		setStatusbarColorAuto()
 		setNavigationbarColorAuto()
-		setTaskDescriptionColorAuto()
 		setLightNavigationBar(true)
-
 		applyToolbar(toolbar)
 
 		restoreButton.isEnabled = false
