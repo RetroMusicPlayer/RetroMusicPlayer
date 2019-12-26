@@ -30,17 +30,16 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_user_info.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
 class UserInfoActivity : AbsBaseActivity() {
-
-    private var disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -185,26 +184,28 @@ class UserInfoActivity : AbsBaseActivity() {
     }
 
     private fun loadBannerFromStorage(profileImagePath: String) {
-        disposable.add(Compressor(this).setQuality(100)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(File(profileImagePath, USER_BANNER))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ bitmap -> bannerImage.setImageBitmap(bitmap) }, { t -> println(t) })
-        )
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val bitmap = Compressor(this@UserInfoActivity).setQuality(100)
+                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                        .compressToBitmap(File(profileImagePath, USER_BANNER))
+                withContext(Dispatchers.Main) { bannerImage.setImageBitmap(bitmap) }
+            }
+        }
     }
 
     private fun loadImageFromStorage(path: String) {
-        disposable.add(Compressor(this)
-                .setMaxHeight(300)
-                .setMaxWidth(300)
-                .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                .compressToBitmapAsFlowable(File(path, USER_PROFILE))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ bitmap -> userImage.setImageBitmap(bitmap) }, { t -> println(t) })
-        )
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                val bitmap = Compressor(this@UserInfoActivity)
+                        .setMaxHeight(300)
+                        .setMaxWidth(300)
+                        .setQuality(75)
+                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                        .compressToBitmap(File(path, USER_PROFILE))
+                withContext(Dispatchers.Main) { userImage.setImageBitmap(bitmap) }
+            }
+        }
     }
 
     private fun saveToInternalStorage(bitmapImage: Bitmap, userBanner: String): String {

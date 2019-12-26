@@ -20,8 +20,6 @@ import android.graphics.Bitmap;
 import java.io.File;
 import java.io.IOException;
 
-import io.reactivex.Flowable;
-
 /**
  * Created on : June 18, 2016
  * Author     : zetbaitsu
@@ -76,29 +74,5 @@ public class Compressor {
 
     public Bitmap compressToBitmap(File imageFile) throws IOException {
         return ImageUtil.decodeSampledBitmapFromFile(imageFile, maxWidth, maxHeight);
-    }
-
-    public Flowable<File> compressToFileAsFlowable(final File imageFile) {
-        return compressToFileAsFlowable(imageFile, imageFile.getName());
-    }
-
-    public Flowable<File> compressToFileAsFlowable(final File imageFile, final String compressedFileName) {
-        return Flowable.defer(() -> {
-            try {
-                return Flowable.just(compressToFile(imageFile, compressedFileName));
-            } catch (IOException e) {
-                return Flowable.error(e);
-            }
-        });
-    }
-
-    public Flowable<Bitmap> compressToBitmapAsFlowable(final File imageFile) {
-        return Flowable.defer(() -> {
-            try {
-                return Flowable.just(compressToBitmap(imageFile));
-            } catch (IOException e) {
-                return Flowable.error(e);
-            }
-        });
     }
 }

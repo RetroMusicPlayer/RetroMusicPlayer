@@ -120,10 +120,10 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.fragment:fragment:1.2.0-rc02'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
+    implementation 'androidx.fragment:fragment:1.2.0-rc04'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
 
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'com.google.android.material:material:1.2.0-alpha03'
     implementation 'com.google.android.play:core:1.6.4'
 
     def retrofit_version = "2.6.2"
@@ -140,17 +140,12 @@ dependencies {
     implementation "com.afollestad.material-dialogs:bottomsheets:$material_dialog_version"
     implementation 'com.afollestad:material-cab:0.1.12'
 
-
     implementation 'com.github.bumptech.glide:glide:3.8.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:1.5.0'
-
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
 
     implementation('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.11.0@aar') {
         transitive = true
     }
-
     /*UI Library*/
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
@@ -174,6 +169,4 @@ dependencies {
     def dagger_version = "2.23.1"
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
-
-
 }
