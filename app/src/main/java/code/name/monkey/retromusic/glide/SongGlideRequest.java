@@ -41,15 +41,16 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
  */
 public class SongGlideRequest {
 
-    public static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
-    public static final int DEFAULT_ERROR_IMAGE = R.drawable.default_album_art;
-    public static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
+    private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
+    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_album_art;
+    private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
 
     public static class Builder {
         final RequestManager requestManager;
         final Song song;
         boolean ignoreMediaStore;
 
+        @NonNull
         public static Builder from(@NonNull RequestManager requestManager, Song song) {
             return new Builder(requestManager, song);
         }
@@ -59,23 +60,28 @@ public class SongGlideRequest {
             this.song = song;
         }
 
-        public PaletteBuilder generatePalette(Context context) {
+        @NonNull
+        public PaletteBuilder generatePalette(@NonNull Context context) {
             return new PaletteBuilder(this, context);
         }
 
+        @NonNull
         public BitmapBuilder asBitmap() {
             return new BitmapBuilder(this);
         }
 
-        public Builder checkIgnoreMediaStore(Context context) {
+        @NonNull
+        public Builder checkIgnoreMediaStore(@NonNull Context context) {
             return ignoreMediaStore(PreferenceUtil.getInstance(context).ignoreMediaStoreArtwork());
         }
 
+        @NonNull
         public Builder ignoreMediaStore(boolean ignoreMediaStore) {
             this.ignoreMediaStore = ignoreMediaStore;
             return this;
         }
 
+        @NonNull
         public DrawableRequestBuilder<GlideDrawable> build() {
             //noinspection unchecked
             return createBaseRequest(requestManager, song, ignoreMediaStore)
@@ -125,7 +131,10 @@ public class SongGlideRequest {
         }
     }
 
-    public static DrawableTypeRequest createBaseRequest(RequestManager requestManager, Song song, boolean ignoreMediaStore) {
+    @NonNull
+    private static DrawableTypeRequest createBaseRequest(@NonNull RequestManager requestManager,
+                                                         @NonNull Song song,
+                                                         boolean ignoreMediaStore) {
         if (ignoreMediaStore) {
             return requestManager.load(new AudioFileCover(song.getData()));
         } else {
@@ -133,7 +142,8 @@ public class SongGlideRequest {
         }
     }
 
-    public static Key createSignature(Song song) {
+    @NonNull
+    private static Key createSignature(@NonNull Song song) {
         return new MediaStoreSignature("", song.getDateModified(), 0);
     }
 }

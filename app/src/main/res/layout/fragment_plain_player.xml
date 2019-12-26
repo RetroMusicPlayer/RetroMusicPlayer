@@ -57,7 +57,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:paddingTop="8dp"
-                android:textColor="?colorOnBackground"
                 tools:text="Text" />
         </LinearLayout>
 

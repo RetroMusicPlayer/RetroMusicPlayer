@@ -58,10 +58,6 @@ public class RetroUtil {
         return (int) (dpWidth / 180);
     }
 
-    public static Uri getAlbumArtUri(long paramInt) {
-        return ContentUris.withAppendedId(Uri.parse("content://media/external/audio/albumart"), paramInt);
-    }
-
     public static boolean isTablet() {
         return App.Companion.getContext().getResources().getConfiguration().smallestScreenWidthDp >= 600;
     }

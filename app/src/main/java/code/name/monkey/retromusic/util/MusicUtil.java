@@ -58,10 +58,9 @@ public class MusicUtil {
     public static final String TAG = MusicUtil.class.getSimpleName();
     private static Playlist playlist;
 
+    @NonNull
     public static Uri getMediaStoreAlbumCoverUri(int albumId) {
-        final Uri sArtworkUri = Uri
-                .parse("content://media/external/audio/albumart");
-
+        final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
         return ContentUris.withAppendedId(sArtworkUri, albumId);
     }
 

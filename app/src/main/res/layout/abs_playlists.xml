@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -41,8 +40,7 @@
             android:text="@string/history"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v1"
-            tools:text="@tools:sample/lorem" />
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,8 +76,7 @@
             android:text="@string/last_added"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v2"
-            tools:text="@tools:sample/lorem" />
+            app:layout_constraintTop_toBottomOf="@+id/v2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -115,8 +112,7 @@
             android:text="@string/my_top_tracks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v3"
-            tools:text="@tools:sample/lorem" />
+            app:layout_constraintTop_toBottomOf="@+id/v3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -152,8 +148,7 @@
             android:text="@string/shuffle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/v4"
-            tools:text="@tools:sample/lorem" />
+            app:layout_constraintTop_toBottomOf="@+id/v4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
