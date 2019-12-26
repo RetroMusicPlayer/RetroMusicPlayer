@@ -74,7 +74,7 @@ class MetalRecyclerViewPager : RecyclerView {
             itemWidth = if (RetroUtil.isTablet()) {
                 displayMetrics.widthPixels / 2 - itemMargin * 3
             } else if (RetroUtil.isLandscape()) {
-                ((displayMetrics.widthPixels / 1.5f) - itemMargin).toInt()
+                ((displayMetrics.widthPixels / 2.5f) - itemMargin).toInt()
             } else {
                 displayMetrics.widthPixels - itemMargin
             }

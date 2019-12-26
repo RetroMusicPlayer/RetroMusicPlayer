@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -40,7 +41,8 @@
                 android:id="@+id/songTextContainer"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:hintEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/songText"
@@ -48,8 +50,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/song"
                     android:inputType="text|textCapWords"
-                    android:maxLines="1"
-                    tools:text="@string/song" />
+                    android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
