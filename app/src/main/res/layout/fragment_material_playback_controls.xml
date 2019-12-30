@@ -24,8 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-
-
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"
@@ -39,8 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-
-
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
@@ -102,7 +98,7 @@
         android:layout_gravity="center"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody1"

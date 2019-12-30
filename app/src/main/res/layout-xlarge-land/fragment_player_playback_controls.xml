@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         android:textAppearance="@style/TextViewHeadline5"

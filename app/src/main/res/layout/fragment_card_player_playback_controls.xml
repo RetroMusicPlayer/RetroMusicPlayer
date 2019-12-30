@@ -113,8 +113,8 @@
 				android:focusableInTouchMode="true"
 				android:freezesText="true"
 				android:marqueeRepeatLimit="marquee_forever"
+				android:maxLines="2"
 				android:scrollHorizontally="true"
-				android:singleLine="true"
 				android:textStyle="bold"
 				tools:text="@tools:sample/lorem/random" />
 		</LinearLayout>
