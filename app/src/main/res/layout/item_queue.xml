@@ -43,7 +43,7 @@
                     android:id="@+id/imageText"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:fontFeatureSettings="onum"
+
                     android:gravity="center"
                     android:maxLines="1"
                     android:minWidth="36dp"
@@ -78,8 +78,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:fontFamily="sans-serif"
-                    android:fontFeatureSettings="onum"
+
+
                     android:maxLines="1"
                     tools:text="Song details" />
             </LinearLayout>

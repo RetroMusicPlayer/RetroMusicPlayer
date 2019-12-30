@@ -130,8 +130,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:fontFamily="sans-serif"
-            android:fontFeatureSettings="onum"
+
+
             android:gravity="center_vertical|right|end"
             android:paddingRight="8dp"
             android:singleLine="true"
@@ -145,8 +145,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
-            android:fontFamily="sans-serif"
-            android:fontFeatureSettings="onum"
+
+
             android:gravity="center_vertical|left|end"
             android:paddingLeft="8dp"
             android:singleLine="true"

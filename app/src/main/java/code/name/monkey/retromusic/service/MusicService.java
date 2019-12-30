@@ -747,12 +747,12 @@ public class MusicService extends Service implements
         uiThreadHandler.post(runnable);
     }
 
-    @Nullable
+    @NonNull
     public Song getCurrentSong() {
         return getSongAt(getPosition());
     }
 
-    @Nullable
+    @NonNull
     public Song getSongAt(int position) {
         if (position >= 0 && getPlayingQueue() != null && position < getPlayingQueue().size()) {
             return getPlayingQueue().get(position);

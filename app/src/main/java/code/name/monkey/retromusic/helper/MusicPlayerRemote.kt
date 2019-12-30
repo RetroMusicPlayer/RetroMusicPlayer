@@ -69,7 +69,7 @@ object MusicPlayerRemote {
 
     val playingQueue: ArrayList<Song>
         get() = if (musicService != null) {
-            musicService!!.playingQueue
+            musicService?.playingQueue as ArrayList<Song>
         } else ArrayList()
 
     val songProgressMillis: Int
@@ -153,11 +153,13 @@ object MusicPlayerRemote {
         }
         return null
     }
+
     fun getQueueDurationSongs(): Int {
         return if (musicService != null) {
-            musicService!!.playingQueue.size
+            musicService!!.playingQueue!!.size
         } else -1
     }
+
     /**
      * Async
      */

@@ -126,8 +126,6 @@
                             android:id="@+id/albumText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif"
-                            android:fontFeatureSettings="onum"
                             android:paddingTop="4dp"
                             android:textAppearance="@style/TextViewHeadline6"
                             android:textColor="?android:attr/textColorSecondary"

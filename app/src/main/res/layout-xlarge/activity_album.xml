@@ -132,8 +132,6 @@
                             android:layout_gravity="center"
                             android:ellipsize="marquee"
                             android:focusable="true"
-                            android:fontFamily="sans-serif"
-                            android:fontFeatureSettings="onum"
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
                             android:textColor="?android:attr/textColorSecondary"
