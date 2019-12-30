@@ -25,6 +25,8 @@ class ThrottledSeekHandler(
 ) : Runnable {
 
     fun notifySeek() {
+        musicService.updateMediaSessionPlaybackState()
+        musicService.updateMediaSessionMetaData()
         handler.removeCallbacks(this)
         handler.postDelayed(this, THROTTLE)
     }

@@ -686,7 +686,7 @@ public class MusicService extends Service implements
                 .build());
     }
 
-    private void updateMediaSessionMetaData() {
+      void updateMediaSessionMetaData() {
         final Song song = getCurrentSong();
 
         if (song.getId() == -1) {
@@ -1047,7 +1047,6 @@ public class MusicService extends Service implements
             try {
                 int newPosition = playback.seek(millis);
                 throttledSeekHandler.notifySeek();
-                updateMediaSessionPlaybackState();
                 return newPosition;
             } catch (Exception e) {
                 return -1;
