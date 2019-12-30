@@ -18,79 +18,79 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
-import kotlinx.android.synthetic.main.activity_lock_screen.*
+import kotlinx.android.synthetic.main.activity_lock_screen.image
 
 class LockScreenActivity : AbsMusicServiceActivity() {
-	private var fragment: LockScreenPlayerControlsFragment? = null
+    private var fragment: LockScreenPlayerControlsFragment? = null
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-			setShowWhenLocked(true)
-			setTurnScreenOn(true)
-		} else {
-			this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
-		}
-		setDrawUnderStatusBar()
-		setContentView(R.layout.activity_lock_screen)
-		hideStatusBar()
-		setStatusbarColorAuto()
-		setNavigationbarColorAuto()
-		setTaskDescriptionColorAuto()
-		setLightNavigationBar(true)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
+        }
+        setDrawUnderStatusBar()
+        setContentView(R.layout.activity_lock_screen)
+        hideStatusBar()
+        setStatusbarColorAuto()
+        setNavigationbarColorAuto()
+        setTaskDescriptionColorAuto()
+        setLightNavigationBar(true)
 
-		val config = SlidrConfig.Builder().listener(object : SlidrListener {
-			override fun onSlideStateChanged(state: Int) {
+        val config = SlidrConfig.Builder().listener(object : SlidrListener {
+            override fun onSlideStateChanged(state: Int) {
+            }
 
-			}
+            override fun onSlideChange(percent: Float) {
+            }
 
-			override fun onSlideChange(percent: Float) {
+            override fun onSlideOpened() {
+            }
 
-			}
+            override fun onSlideClosed(): Boolean {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+                    keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
+                }
+                finish()
+                return true
+            }
+        }).position(SlidrPosition.BOTTOM).build()
 
-			override fun onSlideOpened() {
+        Slidr.attach(this, config)
 
-			}
+        fragment =
+            supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
 
-			override fun onSlideClosed(): Boolean {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-					val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-					keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
-				}
-				finish()
-				return true
-			}
-		}).position(SlidrPosition.BOTTOM).build()
+        findViewById<View>(R.id.slide).apply {
+            translationY = 100f
+            alpha = 0f
+            ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
+        }
+    }
 
-		Slidr.attach(this, config)
+    override fun onPlayingMetaChanged() {
+        super.onPlayingMetaChanged()
+        updateSongs()
+    }
 
-		fragment = supportFragmentManager.findFragmentById(R.id.playback_controls_fragment) as LockScreenPlayerControlsFragment?
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        updateSongs()
+    }
 
-		findViewById<View>(R.id.slide).apply {
-			translationY = 100f
-			alpha = 0f
-			ViewCompat.animate(this).translationY(0f).alpha(1f).setDuration(1500).start()
-		}
-	}
-
-	override fun onPlayingMetaChanged() {
-		super.onPlayingMetaChanged()
-		updateSongs()
-	}
-
-	override fun onServiceConnected() {
-		super.onServiceConnected()
-		updateSongs()
-	}
-
-	private fun updateSongs() {
-		val song = MusicPlayerRemote.currentSong
-		SongGlideRequest.Builder.from(Glide.with(this), song).checkIgnoreMediaStore(this)
-			.generatePalette(this).build().dontAnimate()
-			.into(object : RetroMusicColoredTarget(image) {
-				override fun onColorReady(color: Int) {
-					fragment?.setDark(color)
-				}
-			})
-	}
+    private fun updateSongs() {
+        val song = MusicPlayerRemote.currentSong
+        SongGlideRequest.Builder.from(Glide.with(this), song).checkIgnoreMediaStore(this)
+            .generatePalette(this).build().dontAnimate()
+            .into(object : RetroMusicColoredTarget(image) {
+                override fun onColorReady(color: Int) {
+                    fragment?.setDark(color)
+                }
+            })
+    }
 }

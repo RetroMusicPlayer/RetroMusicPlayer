@@ -23,8 +23,11 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
-import kotlinx.android.synthetic.main.activity_playlist_detail.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_playlist_detail.empty
+import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
+import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
+import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
+import java.util.ArrayList
 import javax.inject.Inject
 
 /**
@@ -75,7 +78,6 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
 
         App.musicComponent.inject(this)
         genreDetailsPresenter.attachView(this)
-
     }
 
     private fun setUpToolBar() {
@@ -98,7 +100,6 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     }
 
     override fun showEmptyView() {
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -135,7 +136,15 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         if (cab != null && cab!!.isActive) cab?.finish()
-        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp).setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface))).start(callback)
+        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setBackgroundColor(
+                RetroColorUtil.shiftBackgroundColorForLightText(
+                    ATHUtil.resolveColor(
+                        this,
+                        R.attr.colorSurface
+                    )
+                )
+            ).start(callback)
         return cab!!
     }
 

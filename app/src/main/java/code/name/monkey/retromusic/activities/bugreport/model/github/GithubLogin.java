@@ -3,11 +3,12 @@ package code.name.monkey.retromusic.activities.bugreport.model.github;
 import android.text.TextUtils;
 
 public class GithubLogin {
-    private final String username;
+
+    private final String apiToken;
 
     private final String password;
 
-    private final String apiToken;
+    private final String username;
 
     public GithubLogin(String username, String password) {
         this.username = username;
@@ -21,20 +22,20 @@ public class GithubLogin {
         this.apiToken = apiToken;
     }
 
-    public String getUsername() {
-        return username;
+    public String getApiToken() {
+        return apiToken;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public boolean shouldUseApiToken() {
-        return TextUtils.isEmpty(username) || TextUtils.isEmpty(password);
+    public String getUsername() {
+        return username;
     }
 
-    public String getApiToken() {
-        return apiToken;
+    public boolean shouldUseApiToken() {
+        return TextUtils.isEmpty(username) || TextUtils.isEmpty(password);
     }
 
 }

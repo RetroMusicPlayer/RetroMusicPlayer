@@ -13,7 +13,9 @@ import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(), AlbumsView {
+open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+    AlbumsView {
+
     @Inject
     lateinit var albumsPresenter: AlbumsPresenter
 
@@ -73,7 +75,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         adapter?.notifyDataSetChanged()
     }
 
-
     override fun loadSortOrder(): String {
 
         return PreferenceUtil.getInstance(requireContext()).albumSortOrder
@@ -117,7 +118,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         albumsPresenter.loadAlbums()
     }
 
-
     override fun showEmptyView() {
         adapter?.swapDataSet(ArrayList())
     }
@@ -133,5 +133,4 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
             return fragment
         }
     }
-
 }

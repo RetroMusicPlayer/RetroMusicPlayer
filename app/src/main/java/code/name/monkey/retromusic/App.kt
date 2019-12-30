@@ -25,27 +25,21 @@ import code.name.monkey.retromusic.dagger.module.AppModule
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 
-
 class App : MultiDexApplication() {
 
     lateinit var billingProcessor: BillingProcessor
 
     override fun onCreate() {
-       /* if (MissingSplitsManagerFactory.create(this).disableAppIfMissingRequiredSplits()) {
-            return
-        }*/
         super.onCreate()
         instance = this
-        musicComponent = DaggerMusicComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+        musicComponent = initDagger(this)
 
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
             ThemeStore.editTheme(this)
-                    .accentColorRes(R.color.md_deep_purple_A200)
-                    .coloredNavigationBar(true)
-                    .commit()
+                .accentColorRes(R.color.md_deep_purple_A200)
+                .coloredNavigationBar(true)
+                .commit()
         }
 
         if (VersionUtils.hasNougatMR())
@@ -53,18 +47,24 @@ class App : MultiDexApplication() {
 
         // automatically restores purchases
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY,
-                object : BillingProcessor.IBillingHandler {
-                    override fun onProductPurchased(productId: String, details: TransactionDetails?) {}
+            object : BillingProcessor.IBillingHandler {
+                override fun onProductPurchased(productId: String, details: TransactionDetails?) {}
 
-                    override fun onPurchaseHistoryRestored() {
-                        Toast.makeText(this@App, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG).show();
-                    }
+                override fun onPurchaseHistoryRestored() {
+                    Toast.makeText(this@App, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG)
+                        .show()
+                }
 
-                    override fun onBillingError(errorCode: Int, error: Throwable?) {}
+                override fun onBillingError(errorCode: Int, error: Throwable?) {}
 
-                    override fun onBillingInitialized() {}
-                })
+                override fun onBillingInitialized() {}
+            })
     }
+
+    private fun initDagger(app: App): MusicComponent =
+        DaggerMusicComponent.builder()
+            .appModule(AppModule(app))
+            .build()
 
     override fun onTerminate() {
         super.onTerminate()
@@ -85,6 +85,5 @@ class App : MultiDexApplication() {
         lateinit var musicComponent: MusicComponent
 
         const val PRO_VERSION_PRODUCT_ID = "pro_version"
-
     }
 }

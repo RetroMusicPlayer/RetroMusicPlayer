@@ -32,9 +32,19 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.activity_bug_report.*
-import kotlinx.android.synthetic.main.bug_report_card_device_info.*
-import kotlinx.android.synthetic.main.bug_report_card_report.*
+import kotlinx.android.synthetic.main.activity_bug_report.sendFab
+import kotlinx.android.synthetic.main.activity_bug_report.toolbar
+import kotlinx.android.synthetic.main.bug_report_card_device_info.airTextDeviceInfo
+import kotlinx.android.synthetic.main.bug_report_card_report.inputDescription
+import kotlinx.android.synthetic.main.bug_report_card_report.inputLayoutDescription
+import kotlinx.android.synthetic.main.bug_report_card_report.inputLayoutPassword
+import kotlinx.android.synthetic.main.bug_report_card_report.inputLayoutTitle
+import kotlinx.android.synthetic.main.bug_report_card_report.inputLayoutUsername
+import kotlinx.android.synthetic.main.bug_report_card_report.inputPassword
+import kotlinx.android.synthetic.main.bug_report_card_report.inputTitle
+import kotlinx.android.synthetic.main.bug_report_card_report.inputUsername
+import kotlinx.android.synthetic.main.bug_report_card_report.optionAnonymous
+import kotlinx.android.synthetic.main.bug_report_card_report.optionUseAccount
 import org.eclipse.egit.github.core.Issue
 import org.eclipse.egit.github.core.client.GitHubClient
 import org.eclipse.egit.github.core.client.RequestException
@@ -48,11 +58,11 @@ private const val RESULT_ISSUES_NOT_ENABLED = "RESULT_ISSUES_NOT_ENABLED"
 private const val RESULT_UNKNOWN = "RESULT_UNKNOWN"
 
 @StringDef(
-        RESULT_SUCCESS,
-        RESULT_BAD_CREDENTIALS,
-        RESULT_INVALID_TOKEN,
-        RESULT_ISSUES_NOT_ENABLED,
-        RESULT_UNKNOWN
+    RESULT_SUCCESS,
+    RESULT_BAD_CREDENTIALS,
+    RESULT_INVALID_TOKEN,
+    RESULT_ISSUES_NOT_ENABLED,
+    RESULT_UNKNOWN
 )
 @Retention(AnnotationRetention.SOURCE)
 private annotation class Result
@@ -157,9 +167,9 @@ open class BugReportActivity : AbsThemeActivity() {
         val clip = ClipData.newPlainText(getString(R.string.device_info), deviceInfo?.toMarkdown())
         clipboard.setPrimaryClip(clip)
         Toast.makeText(
-                this@BugReportActivity,
-                R.string.copied_device_info_to_clipboard,
-                Toast.LENGTH_LONG
+            this@BugReportActivity,
+            R.string.copied_device_info_to_clipboard,
+            Toast.LENGTH_LONG
         ).show()
     }
 
@@ -232,11 +242,12 @@ open class BugReportActivity : AbsThemeActivity() {
     }
 
     private class ReportIssueAsyncTask private constructor(
-            activity: Activity,
-            private val report: Report,
-            private val target: GithubTarget,
-            private val login: GithubLogin
+        activity: Activity,
+        private val report: Report,
+        private val target: GithubTarget,
+        private val login: GithubLogin
     ) : DialogAsyncTask<Void, Void, String>(activity) {
+
         override fun createDialog(context: Context): Dialog {
             return AlertDialog.Builder(context).show()
         }
@@ -268,7 +279,6 @@ open class BugReportActivity : AbsThemeActivity() {
                 e.printStackTrace()
                 return RESULT_UNKNOWN
             }
-
         }
 
         override fun onPostExecute(@Result result: String) {
@@ -312,10 +322,10 @@ open class BugReportActivity : AbsThemeActivity() {
         companion object {
 
             fun report(
-                    activity: Activity,
-                    report: Report,
-                    target: GithubTarget,
-                    login: GithubLogin
+                activity: Activity,
+                report: Report,
+                target: GithubTarget,
+                login: GithubLogin
             ) {
                 ReportIssueAsyncTask(activity, report, target, login).execute()
             }

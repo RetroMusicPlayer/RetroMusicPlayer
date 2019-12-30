@@ -32,11 +32,22 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_about.*
-import kotlinx.android.synthetic.main.card_credit.*
-import kotlinx.android.synthetic.main.card_other.*
-import kotlinx.android.synthetic.main.card_retro_info.*
-import kotlinx.android.synthetic.main.card_social.*
+import kotlinx.android.synthetic.main.activity_about.toolbar
+import kotlinx.android.synthetic.main.card_credit.recyclerView
+import kotlinx.android.synthetic.main.card_other.changelog
+import kotlinx.android.synthetic.main.card_other.openSource
+import kotlinx.android.synthetic.main.card_other.version
+import kotlinx.android.synthetic.main.card_retro_info.appGithub
+import kotlinx.android.synthetic.main.card_retro_info.appRate
+import kotlinx.android.synthetic.main.card_retro_info.appShare
+import kotlinx.android.synthetic.main.card_retro_info.appTranslation
+import kotlinx.android.synthetic.main.card_retro_info.bugReportLink
+import kotlinx.android.synthetic.main.card_retro_info.donateLink
+import kotlinx.android.synthetic.main.card_retro_info.faqLink
+import kotlinx.android.synthetic.main.card_social.instagramLink
+import kotlinx.android.synthetic.main.card_social.pinterestLink
+import kotlinx.android.synthetic.main.card_social.telegramLink
+import kotlinx.android.synthetic.main.card_social.twitterLink
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
@@ -67,7 +78,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
-
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
         toolbar.setBackgroundColor(toolbarColor)
@@ -107,7 +117,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         openSource.setOnClickListener(this)
         pinterestLink.setOnClickListener(this)
         bugReportLink.setOnClickListener(this)
-
     }
 
     override fun onClick(view: View) {
@@ -153,8 +162,8 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
     private fun shareApp() {
         ShareCompat.IntentBuilder.from(this).setType("text/plain")
-                .setChooserTitle(R.string.share_app)
-                .setText(String.format(getString(R.string.app_share), packageName)).startChooser()
+            .setChooserTitle(R.string.share_app)
+            .setText(String.format(getString(R.string.app_share), packageName)).startChooser()
     }
 
     private fun loadContributors() {

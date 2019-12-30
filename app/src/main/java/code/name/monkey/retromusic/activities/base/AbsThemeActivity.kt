@@ -68,7 +68,8 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         var background: Drawable? = if (PreferenceUtil.getInstance(this).isRoundCorners)
             ContextCompat.getDrawable(this, R.drawable.round_window)
         else ContextCompat.getDrawable(this, R.drawable.square_window)
-        background = TintHelper.createTintedDrawable(background, ATHUtil.resolveColor(this, android.R.attr.windowBackground))
+        background =
+            TintHelper.createTintedDrawable(background, ATHUtil.resolveColor(this, android.R.attr.windowBackground))
         window.setBackgroundDrawable(background)
     }
 
@@ -158,7 +159,8 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     private fun setImmersiveFullscreen() {
-        val flags = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        val flags =
+            (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
         if (PreferenceUtil.getInstance(this).fullScreenMode) {
             window.decorView.systemUiVisibility = flags
@@ -190,6 +192,5 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
             handler.postDelayed(this, 500)
         }
         return super.onKeyDown(keyCode, event)
-
     }
 }

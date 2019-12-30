@@ -5,40 +5,55 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
-
 import androidx.annotation.IntRange;
-
+import code.name.monkey.retromusic.util.PreferenceUtil;
 import java.util.Arrays;
 
-import code.name.monkey.retromusic.util.PreferenceUtil;
-
 public class DeviceInfo {
-    private final int versionCode;
-    private final String versionName;
-    private final String buildVersion = Build.VERSION.INCREMENTAL;
-    private final String releaseVersion = Build.VERSION.RELEASE;
-    @IntRange(from = 0)
-    private final int sdkVersion = Build.VERSION.SDK_INT;
-    private final String buildID = Build.DISPLAY;
-    private final String brand = Build.BRAND;
-    private final String manufacturer = Build.MANUFACTURER;
-    private final String device = Build.DEVICE;
-    private final String model = Build.MODEL;
-    private final String product = Build.PRODUCT;
-    private final String hardware = Build.HARDWARE;
-    private final String baseTheme;
-    private final String nowPlayingTheme;
-    private final boolean isAdaptive;
+
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private final String[] abis = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_ABIS : new String[]{Build.CPU_ABI, Build.CPU_ABI2};
+
     @SuppressLint("NewApi")
     private final String[] abis32Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_32_BIT_ABIS : null;
+
     @SuppressLint("NewApi")
     private final String[] abis64Bits = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ?
             Build.SUPPORTED_64_BIT_ABIS : null;
+
+    private final String baseTheme;
+
+    private final String brand = Build.BRAND;
+
+    private final String buildID = Build.DISPLAY;
+
+    private final String buildVersion = Build.VERSION.INCREMENTAL;
+
+    private final String device = Build.DEVICE;
+
+    private final String hardware = Build.HARDWARE;
+
+    private final boolean isAdaptive;
+
+    private final String manufacturer = Build.MANUFACTURER;
+
+    private final String model = Build.MODEL;
+
+    private final String nowPlayingTheme;
+
+    private final String product = Build.PRODUCT;
+
+    private final String releaseVersion = Build.VERSION.RELEASE;
+
+    @IntRange(from = 0)
+    private final int sdkVersion = Build.VERSION.SDK_INT;
+
+    private final int versionCode;
+
+    private final String versionName;
 
     public DeviceInfo(Context context) {
         PackageInfo packageInfo;

@@ -15,7 +15,20 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR_CARD
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.CARD
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.COLOR
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FIT
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FLAT
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.MATERIAL
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.NORMAL
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.PEAK
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.PLAIN
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.SIMPLE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.TINY
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
@@ -38,7 +51,9 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
-import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.bottomNavigationView
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.dimBackground
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.slidingPanel
 
 abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlayerFragment.Callbacks {
     companion object {
@@ -205,7 +220,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 slidingPanel.cardElevation = DensityUtil.dip2px(this, 10f).toFloat()
                 bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
                 bottomSheetBehavior.isHideable = false
-                bottomSheetBehavior.peekHeight = if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
+                bottomSheetBehavior.peekHeight =
+                    if (bottomNavigationView.visibility == View.VISIBLE) heightOfBarWithTabs else heightOfBar
             }
         }
     }
@@ -236,7 +252,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)
-                .commit()
+            .commit()
         supportFragmentManager.executePendingTransactions()
 
         playerFragment = supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
@@ -292,7 +308,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
             } else {
-                super.setLightStatusbar(ColorUtil.isColorLight(ATHUtil.resolveColor(this, android.R.attr.windowBackground)))
+                super.setLightStatusbar(
+                    ColorUtil.isColorLight(
+                        ATHUtil.resolveColor(
+                            this,
+                            android.R.attr.windowBackground
+                        )
+                    )
+                )
                 super.setLightNavigationBar(true)
             }
         }

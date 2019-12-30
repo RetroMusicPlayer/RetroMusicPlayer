@@ -20,14 +20,29 @@ import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.Result.Error
 import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.loaders.*
-import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.loaders.AlbumLoader
+import code.name.monkey.retromusic.loaders.ArtistLoader
+import code.name.monkey.retromusic.loaders.GenreLoader
+import code.name.monkey.retromusic.loaders.LastAddedSongsLoader
+import code.name.monkey.retromusic.loaders.PlaylistLoader
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
+import code.name.monkey.retromusic.loaders.SearchLoader
+import code.name.monkey.retromusic.loaders.SongLoader
+import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader
+import code.name.monkey.retromusic.model.AbsCustomPlaylist
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import java.io.IOException
+import javax.inject.Inject
 
-class RepositoryImpl(private val context: Context) : Repository {
+class RepositoryImpl @Inject constructor(private val context: Context) : Repository {
 
     override suspend fun allAlbums(): Result<ArrayList<Album>> {
         return try {
@@ -152,11 +167,15 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (artists.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(Home(0,
+                Success(
+                    Home(
+                        0,
                         R.string.recent_artists,
                         artists,
                         HomeAdapter.RECENT_ARTISTS,
-                        R.drawable.ic_artist_white_24dp))
+                        R.drawable.ic_artist_white_24dp
+                    )
+                )
             }
         } catch (e: Exception) {
             Error(e)
@@ -169,12 +188,15 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (albums.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(Home(1,
+                Success(
+                    Home(
+                        1,
                         R.string.recent_albums,
                         albums,
                         HomeAdapter.RECENT_ALBUMS,
                         R.drawable.ic_album_white_24dp
-                ))
+                    )
+                )
             }
         } catch (e: Exception) {
             Error(e)
@@ -187,18 +209,20 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (albums.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(Home(3,
+                Success(
+                    Home(
+                        3,
                         R.string.top_albums,
                         albums,
                         HomeAdapter.TOP_ALBUMS,
                         R.drawable.ic_album_white_24dp
-                ))
+                    )
+                )
             }
         } catch (e: Exception) {
             Error(e)
         }
     }
-
 
     override suspend fun topArtists(): Result<Home> {
         return try {
@@ -206,12 +230,15 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (artists.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(Home(2,
+                Success(
+                    Home(
+                        2,
                         R.string.top_artists,
                         artists,
                         HomeAdapter.TOP_ARTISTS,
                         R.drawable.ic_artist_white_24dp
-                ))
+                    )
+                )
             }
         } catch (e: Exception) {
             Error(e)
@@ -224,12 +251,15 @@ class RepositoryImpl(private val context: Context) : Repository {
             if (playlists.isEmpty()) {
                 Error(Throwable("No items found"))
             } else {
-                Success(Home(4,
+                Success(
+                    Home(
+                        4,
                         R.string.favorites,
                         playlists,
                         HomeAdapter.PLAYLISTS,
                         R.drawable.ic_favorite_white_24dp
-                ))
+                    )
+                )
             }
         } catch (e: Exception) {
             Error(e)
@@ -237,14 +267,14 @@ class RepositoryImpl(private val context: Context) : Repository {
     }
 
     override suspend fun artistInfo(
-            name: String,
-            lang: String?,
-            cache: String?
+        name: String,
+        lang: String?,
+        cache: String?
     ): Result<LastFmArtist> = safeApiCall(
-            call = {
-                Success(LastFMRestClient(context).apiService.artistInfo(name, lang, cache))
-            },
-            errorMessage = "Error"
+        call = {
+            Success(LastFMRestClient(context).apiService.artistInfo(name, lang, cache))
+        },
+        errorMessage = "Error"
 
     )
 

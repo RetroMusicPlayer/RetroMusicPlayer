@@ -1,6 +1,10 @@
 package code.name.monkey.retromusic.activities
 
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -22,7 +26,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
+import java.util.ArrayList
 
 class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -49,7 +53,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun onCreate(
-            savedInstanceState: Bundle?
+        savedInstanceState: Bundle?
     ) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
@@ -76,14 +80,13 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             val currentVersion = pInfo.versionCode
             if (currentVersion != PreferenceUtil.getInstance(this).lastChangelogVersion) {
                 startActivityForResult(
-                        Intent(this, WhatsNewActivity::class.java),
-                        APP_INTRO_REQUEST
+                    Intent(this, WhatsNewActivity::class.java),
+                    APP_INTRO_REQUEST
                 )
             }
         } catch (e: Throwable) {
             e.printStackTrace()
         }
-
     }
 
     override fun onResume() {
@@ -112,13 +115,14 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     private fun setCurrentFragment(fragment: Fragment, tag: String) {
         if (tag != supportFragmentManager.findFragmentById(R.id.fragment_container)?.tag) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, fragment, tag).commit()
+                .replace(R.id.fragment_container, fragment, tag).commit()
             currentFragment = fragment as MainActivityFragmentCallbacks
         }
     }
 
     private fun restoreCurrentFragment() {
-        currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container) as MainActivityFragmentCallbacks
+        currentFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as MainActivityFragmentCallbacks
     }
 
     private fun handlePlaybackIntent(intent: Intent?) {
@@ -200,7 +204,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
                 }
             }
         }
-
     }
 
     override fun handleBackPress(): Boolean {
@@ -219,8 +222,8 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == PreferenceUtil.GENERAL_THEME || key == PreferenceUtil.BLACK_THEME || key == PreferenceUtil.ADAPTIVE_COLOR_APP || key == PreferenceUtil.DOMINANT_COLOR || key == PreferenceUtil.USER_NAME || key == PreferenceUtil.TOGGLE_FULL_SCREEN || key == PreferenceUtil.TOGGLE_VOLUME || key == PreferenceUtil.ROUND_CORNERS || key == PreferenceUtil.CAROUSEL_EFFECT || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID || key == PreferenceUtil.TOGGLE_GENRE || key == PreferenceUtil.BANNER_IMAGE_PATH || key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART || key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE || key == PreferenceUtil.ALBUM_GRID_STYLE || key == PreferenceUtil.ARTIST_GRID_STYLE || key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS || key == PreferenceUtil.ALBUM_COVER_STYLE || key == PreferenceUtil.HOME_ARTIST_GRID_STYLE || key == PreferenceUtil.ALBUM_COVER_TRANSFORM || key == PreferenceUtil.DESATURATED_COLOR || key == PreferenceUtil.TAB_TEXT_MODE || key == PreferenceUtil.LIBRARY_CATEGORIES) postRecreate()
-
+        if (key == PreferenceUtil.GENERAL_THEME || key == PreferenceUtil.BLACK_THEME || key == PreferenceUtil.ADAPTIVE_COLOR_APP || key == PreferenceUtil.DOMINANT_COLOR || key == PreferenceUtil.USER_NAME || key == PreferenceUtil.TOGGLE_FULL_SCREEN || key == PreferenceUtil.TOGGLE_VOLUME || key == PreferenceUtil.ROUND_CORNERS || key == PreferenceUtil.CAROUSEL_EFFECT || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID || key == PreferenceUtil.TOGGLE_GENRE || key == PreferenceUtil.BANNER_IMAGE_PATH || key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART || key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE || key == PreferenceUtil.ALBUM_GRID_STYLE || key == PreferenceUtil.ARTIST_GRID_STYLE || key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS || key == PreferenceUtil.ALBUM_COVER_STYLE || key == PreferenceUtil.HOME_ARTIST_GRID_STYLE || key == PreferenceUtil.ALBUM_COVER_TRANSFORM || key == PreferenceUtil.DESATURATED_COLOR || key == PreferenceUtil.TAB_TEXT_MODE || key == PreferenceUtil.LIBRARY_CATEGORIES
+        ) postRecreate()
     }
 
     private fun selectedFragment(itemId: Int) {

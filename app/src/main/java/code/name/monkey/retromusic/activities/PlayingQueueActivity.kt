@@ -20,7 +20,10 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playing_queue.*
+import kotlinx.android.synthetic.main.activity_playing_queue.clearQueue
+import kotlinx.android.synthetic.main.activity_playing_queue.playerQueueSubHeader
+import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
+import kotlinx.android.synthetic.main.activity_playing_queue.toolbar
 
 open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
@@ -33,7 +36,10 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private fun getUpNextAndQueueTime(): String {
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
-        return MusicUtil.buildInfoString(resources.getString(R.string.up_next), MusicUtil.getReadableDurationString(duration))
+        return MusicUtil.buildInfoString(
+            resources.getString(R.string.up_next),
+            MusicUtil.getReadableDurationString(duration)
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,10 +79,10 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
         animator.supportsChangeAnimations = false
 
         playingQueueAdapter = PlayingQueueAdapter(
-                this,
-                MusicPlayerRemote.playingQueue,
-                MusicPlayerRemote.position,
-                R.layout.item_queue
+            this,
+            MusicPlayerRemote.playingQueue,
+            MusicPlayerRemote.position,
+            R.layout.item_queue
         )
         wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(playingQueueAdapter!!)
         wrappedAdapter = wrappedAdapter?.let { recyclerViewSwipeManager?.createWrappedAdapter(it) }
@@ -105,7 +111,6 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun checkForPadding() {
-
     }
 
     override fun onQueueChanged() {
@@ -178,14 +183,14 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
         applyToolbar(toolbar)
         clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(
-                MaterialValueHelper.getPrimaryTextColor(
-                        this,
-                        ColorUtil.isColorLight(
-                                ThemeStore.accentColor(
-                                        this
-                                )
-                        )
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                ColorUtil.isColorLight(
+                    ThemeStore.accentColor(
+                        this
+                    )
                 )
+            )
         ).apply {
             clearQueue.setTextColor(this)
             clearQueue.iconTint = this

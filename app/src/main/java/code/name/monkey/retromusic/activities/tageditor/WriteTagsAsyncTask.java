@@ -7,19 +7,14 @@ import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.misc.DialogAsyncTask;
+import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
+import code.name.monkey.retromusic.util.MusicUtil;
+import code.name.monkey.retromusic.util.SAFUtil;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.images.Artwork;
-import org.jaudiotagger.tag.images.ArtworkFactory;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,21 +22,50 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
-
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.misc.DialogAsyncTask;
-import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
-import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.SAFUtil;
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+import org.jaudiotagger.tag.images.Artwork;
+import org.jaudiotagger.tag.images.ArtworkFactory;
 
 public class WriteTagsAsyncTask extends
         DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
+
+    public static class LoadingInfo {
+
+        @Nullable
+        final Map<FieldKey, String> fieldKeyValueMap;
+
+        final Collection<String> filePaths;
+
+        @Nullable
+        private AbsTagEditorActivity.ArtworkInfo artworkInfo;
+
+        public LoadingInfo(Collection<String> filePaths,
+                @Nullable Map<FieldKey, String> fieldKeyValueMap,
+                @Nullable AbsTagEditorActivity.ArtworkInfo artworkInfo) {
+            this.filePaths = filePaths;
+            this.fieldKeyValueMap = fieldKeyValueMap;
+            this.artworkInfo = artworkInfo;
+        }
+    }
 
     private WeakReference<Activity> activity;
 
     public WriteTagsAsyncTask(@NonNull Activity activity) {
         super(activity);
         this.activity = new WeakReference<>(activity);
+    }
+
+    @NonNull
+    @Override
+    protected Dialog createDialog(@NonNull Context context) {
+        return new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.saving_changes)
+                .setCancelable(false)
+                .setView(R.layout.loading)
+                .create();
     }
 
     @Override
@@ -120,8 +144,9 @@ public class WriteTagsAsyncTask extends
             if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
                 paths = new ArrayList<>(info.filePaths.size());
                 for (String path : info.filePaths) {
-                    if (path.contains(SAFUtil.SEPARATOR))
+                    if (path.contains(SAFUtil.SEPARATOR)) {
                         path = path.split(SAFUtil.SEPARATOR)[0];
+                    }
                     paths.add(path);
                 }
             }
@@ -134,32 +159,15 @@ public class WriteTagsAsyncTask extends
     }
 
     @Override
-    protected void onPostExecute(String[] toBeScanned) {
-        super.onPostExecute(toBeScanned);
-        scan(toBeScanned);
-    }
-
-    @Override
     protected void onCancelled(String[] toBeScanned) {
         super.onCancelled(toBeScanned);
         scan(toBeScanned);
     }
 
-    private void scan(String[] toBeScanned) {
-        Activity activity = this.activity.get();
-        if (activity != null) {
-            MediaScannerConnection.scanFile(activity, toBeScanned, null, new UpdateToastMediaScannerCompletionListener(activity, toBeScanned));
-        }
-    }
-
-    @NonNull
     @Override
-    protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.saving_changes)
-                .setCancelable(false)
-                .setView(R.layout.loading)
-                .create();
+    protected void onPostExecute(String[] toBeScanned) {
+        super.onPostExecute(toBeScanned);
+        scan(toBeScanned);
     }
 
     @Override
@@ -169,20 +177,11 @@ public class WriteTagsAsyncTask extends
         //((MaterialDialog) dialog).setProgress(values[0]);
     }
 
-    public static class LoadingInfo {
-
-        final Collection<String> filePaths;
-        @Nullable
-        final Map<FieldKey, String> fieldKeyValueMap;
-        @Nullable
-        private AbsTagEditorActivity.ArtworkInfo artworkInfo;
-
-        public LoadingInfo(Collection<String> filePaths,
-                           @Nullable Map<FieldKey, String> fieldKeyValueMap,
-                           @Nullable AbsTagEditorActivity.ArtworkInfo artworkInfo) {
-            this.filePaths = filePaths;
-            this.fieldKeyValueMap = fieldKeyValueMap;
-            this.artworkInfo = artworkInfo;
+    private void scan(String[] toBeScanned) {
+        Activity activity = this.activity.get();
+        if (activity != null) {
+            MediaScannerConnection.scanFile(activity, toBeScanned, null,
+                    new UpdateToastMediaScannerCompletionListener(activity, toBeScanned));
         }
     }
 }

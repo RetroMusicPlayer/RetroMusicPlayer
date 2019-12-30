@@ -33,14 +33,29 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.CustomArtistImageUtil
+import code.name.monkey.retromusic.util.DensityUtil
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_artist_content.*
-import kotlinx.android.synthetic.main.activity_artist_details.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_artist_content.albumRecyclerView
+import kotlinx.android.synthetic.main.activity_artist_content.albumTitle
+import kotlinx.android.synthetic.main.activity_artist_content.biographyText
+import kotlinx.android.synthetic.main.activity_artist_content.biographyTitle
+import kotlinx.android.synthetic.main.activity_artist_content.playAction
+import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
+import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
+import kotlinx.android.synthetic.main.activity_artist_content.songTitle
+import kotlinx.android.synthetic.main.activity_artist_details.artistImage
+import kotlinx.android.synthetic.main.activity_artist_details.artistTitle
+import kotlinx.android.synthetic.main.activity_artist_details.imageContainer
+import kotlinx.android.synthetic.main.activity_artist_details.text
+import kotlinx.android.synthetic.main.activity_artist_details.toolbar
+import java.util.Locale
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, CabHolder {
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
@@ -48,10 +63,17 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             if (it.isActive) it.finish()
         }
         cab = MaterialCab(this, R.id.cab_stub)
-                .setMenu(menuRes)
-                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
-                .start(callback)
+            .setMenu(menuRes)
+            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setBackgroundColor(
+                RetroColorUtil.shiftBackgroundColorForLightText(
+                    ATHUtil.resolveColor(
+                        this,
+                        R.attr.colorSurface
+                    )
+                )
+            )
+            .start(callback)
         return cab as MaterialCab
     }
 
@@ -155,7 +177,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     override fun showEmptyView() {
-
     }
 
     override fun complete() {
@@ -174,9 +195,9 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         }
         artistTitle.text = artist.name
         text.text = String.format(
-                "%s • %s",
-                MusicUtil.getArtistInfoString(this, artist),
-                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs))
+            "%s • %s",
+            MusicUtil.getArtistInfoString(this, artist),
+            MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs))
         )
 
         songAdapter.swapDataSet(artist.songs)
@@ -184,8 +205,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun loadBiography(
-            name: String,
-            lang: String? = Locale.getDefault().language
+        name: String,
+        lang: String? = Locale.getDefault().language
     ) {
         biography = null
         this.lang = lang
@@ -217,11 +238,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
 
     private fun loadArtistImage() {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
-                .dontAnimate().into(object : RetroMusicColoredTarget(artistImage) {
-                    override fun onColorReady(color: Int) {
-                        setColors(color)
-                    }
-                })
+            .dontAnimate().into(object : RetroMusicColoredTarget(artistImage) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
+                }
+            })
     }
 
     private fun setColors(color: Int) {
@@ -275,11 +296,15 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             R.id.action_set_artist_image -> {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
                 intent.type = "image/*"
-                startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_from_local_storage)), REQUEST_CODE_SELECT_IMAGE)
+                startActivityForResult(
+                    Intent.createChooser(intent, getString(R.string.pick_from_local_storage)),
+                    REQUEST_CODE_SELECT_IMAGE
+                )
                 return true
             }
             R.id.action_reset_artist_image -> {
-                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating), Toast.LENGTH_SHORT)
+                    .show()
                 CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
                 forceDownload = true
                 return true

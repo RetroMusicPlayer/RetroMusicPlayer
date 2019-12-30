@@ -42,12 +42,19 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_album.*
-import kotlinx.android.synthetic.main.activity_album_content.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_album.albumText
+import kotlinx.android.synthetic.main.activity_album.albumTitle
+import kotlinx.android.synthetic.main.activity_album.image
+import kotlinx.android.synthetic.main.activity_album.toolbar
+import kotlinx.android.synthetic.main.activity_album_content.moreRecyclerView
+import kotlinx.android.synthetic.main.activity_album_content.moreTitle
+import kotlinx.android.synthetic.main.activity_album_content.playAction
+import kotlinx.android.synthetic.main.activity_album_content.recyclerView
+import kotlinx.android.synthetic.main.activity_album_content.shuffleAction
+import kotlinx.android.synthetic.main.activity_album_content.songTitle
+import java.util.ArrayList
 import javax.inject.Inject
 import android.util.Pair as UtilPair
-
 
 class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, CabHolder {
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
@@ -55,10 +62,17 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             if (it.isActive) it.finish()
         }
         cab = MaterialCab(this, R.id.cab_stub)
-                .setMenu(menuRes)
-                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface)))
-                .start(callback)
+            .setMenu(menuRes)
+            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setBackgroundColor(
+                RetroColorUtil.shiftBackgroundColorForLightText(
+                    ATHUtil.resolveColor(
+                        this,
+                        R.attr.colorSurface
+                    )
+                )
+            )
+            .start(callback)
         return cab as MaterialCab
     }
 
@@ -93,7 +107,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         setupRecyclerView()
 
         artistImage.setOnClickListener {
-            val artistPairs = ActivityOptions.makeSceneTransitionAnimation(this, UtilPair.create(artistImage, getString(R.string.transition_artist_image)))
+            val artistPairs = ActivityOptions.makeSceneTransitionAnimation(
+                this,
+                UtilPair.create(artistImage, getString(R.string.transition_artist_image))
+            )
             NavigationUtil.goToArtistOptions(this, album.artistId, artistPairs)
         }
         playAction.apply {
@@ -142,9 +159,18 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
         albumTitle.text = album.title
         if (MusicUtil.getYearString(album.year) == "-") {
-            albumText.text = String.format("%s • %s", album.artistName, MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
+            albumText.text = String.format(
+                "%s • %s",
+                album.artistName,
+                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs))
+            )
         } else {
-            albumText.text = String.format("%s • %s • %s", album.artistName, MusicUtil.getYearString(album.year), MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs)))
+            albumText.text = String.format(
+                "%s • %s • %s",
+                album.artistName,
+                MusicUtil.getYearString(album.year),
+                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs))
+            )
         }
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
@@ -158,22 +184,20 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
         val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
         moreRecyclerView.layoutManager = GridLayoutManager(
-                this,
-                1,
-                GridLayoutManager.HORIZONTAL,
-                false
+            this,
+            1,
+            GridLayoutManager.HORIZONTAL,
+            false
         )
         moreRecyclerView.adapter = albumAdapter
     }
 
     override fun loadArtistImage(artist: Artist) {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
-                .dontAnimate().dontTransform().into(object : RetroMusicColoredTarget(artistImage) {
-                    override fun onColorReady(color: Int) {
-
-                    }
-                })
-
+            .dontAnimate().dontTransform().into(object : RetroMusicColoredTarget(artistImage) {
+                override fun onColorReady(color: Int) {
+                }
+            })
     }
 
     private fun loadAlbumCover() {
@@ -183,15 +207,15 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
                  .dontAnimate().into(image)*/
 
         SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
-                .checkIgnoreMediaStore(this)
-                .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())
-                .generatePalette(this)
-                .build().dontAnimate().dontTransform()
-                .into(object : RetroMusicColoredTarget(image) {
-                    override fun onColorReady(color: Int) {
-                        setColors(color)
-                    }
-                })
+            .checkIgnoreMediaStore(this)
+            .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())
+            .generatePalette(this)
+            .build().dontAnimate().dontTransform()
+            .into(object : RetroMusicColoredTarget(image) {
+                override fun onColorReady(color: Int) {
+                    setColors(color)
+                }
+            })
     }
 
     private fun setColors(color: Int) {
@@ -254,7 +278,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_tag_editor -> {
                 val intent = Intent(this, AlbumTagEditorActivity::class.java)
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
-                val options = ActivityOptions.makeSceneTransitionAnimation(this, image, getString(R.string.transition_album_art))
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    this,
+                    image,
+                    getString(R.string.transition_album_art)
+                )
                 startActivityForResult(intent, TAG_EDITOR_REQUEST, options.toBundle())
                 return true
             }
@@ -275,8 +303,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         when (savedSortOrder) {
             AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
             AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
-            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list).isChecked = true
-            AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration).isChecked = true
+            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list).isChecked =
+                true
+            AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration)
+                .isChecked = true
         }
     }
 

@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.dagger.module
 
+import android.app.Application
 import android.content.Context
 
 import dagger.Module
@@ -24,11 +25,9 @@ import javax.inject.Singleton
  * Created by hemanths on 2019-09-04.
  */
 @Module
-class AppModule(private val context: Context) {
+class AppModule(private val application: Application) {
 
     @Provides
     @Singleton
-    fun provideContext(): Context {
-        return context
-    }
+    fun provideContext(): Context = application
 }

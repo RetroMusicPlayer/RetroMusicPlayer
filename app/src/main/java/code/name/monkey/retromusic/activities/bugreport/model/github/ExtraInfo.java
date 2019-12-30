@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ExtraInfo {
+
     private final Map<String, String> extraInfo = new LinkedHashMap<>();
 
     public void put(String key, String value) {
@@ -39,7 +40,9 @@ public class ExtraInfo {
     }
 
     public String toMarkdown() {
-        if (extraInfo.isEmpty()) return "";
+        if (extraInfo.isEmpty()) {
+            return "";
+        }
 
         StringBuilder output = new StringBuilder();
         output.append("Extra info:\n"

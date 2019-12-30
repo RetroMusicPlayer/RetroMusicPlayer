@@ -29,10 +29,17 @@ import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
 import code.name.monkey.retromusic.mvp.presenter.SearchView
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.activity_search.*
-import java.util.*
+import kotlinx.android.synthetic.main.activity_search.appBarLayout
+import kotlinx.android.synthetic.main.activity_search.back
+import kotlinx.android.synthetic.main.activity_search.clearText
+import kotlinx.android.synthetic.main.activity_search.empty
+import kotlinx.android.synthetic.main.activity_search.keyboardPopup
+import kotlinx.android.synthetic.main.activity_search.recyclerView
+import kotlinx.android.synthetic.main.activity_search.searchContainer
+import kotlinx.android.synthetic.main.activity_search.searchView
+import kotlinx.android.synthetic.main.activity_search.voiceSearch
+import java.util.Locale
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
     @Inject
@@ -73,7 +80,7 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
         keyboardPopup.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(
-                MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))
+            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))
         ).apply {
             keyboardPopup.setTextColor(this)
             keyboardPopup.iconTint = this
@@ -81,7 +88,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         if (savedInstanceState != null) {
             query = savedInstanceState.getString(QUERY)
         }
-
     }
 
     private fun setupRecyclerView() {
@@ -181,8 +187,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
     private fun startMicSearch() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
         intent.putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
         )
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speech_prompt))
@@ -191,13 +197,11 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         } catch (e: ActivityNotFoundException) {
             e.printStackTrace()
             Toast.makeText(this, getString(R.string.speech_not_supported), Toast.LENGTH_SHORT)
-                    .show()
+                .show()
         }
-
     }
 
     override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-
     }
 
     override fun onTextChanged(newText: CharSequence, start: Int, before: Int, count: Int) {
@@ -205,7 +209,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
     }
 
     override fun afterTextChanged(s: Editable) {
-
     }
 
     companion object {

@@ -14,9 +14,18 @@
 
 package code.name.monkey.retromusic.dagger
 
-import code.name.monkey.retromusic.activities.*
-import code.name.monkey.retromusic.dagger.module.*
-import code.name.monkey.retromusic.fragments.mainactivity.*
+import code.name.monkey.retromusic.activities.AlbumDetailsActivity
+import code.name.monkey.retromusic.activities.ArtistDetailActivity
+import code.name.monkey.retromusic.activities.GenreDetailsActivity
+import code.name.monkey.retromusic.activities.PlaylistDetailActivity
+import code.name.monkey.retromusic.activities.SearchActivity
+import code.name.monkey.retromusic.dagger.module.AppModule
+import code.name.monkey.retromusic.dagger.module.PresenterModule
+import code.name.monkey.retromusic.fragments.mainactivity.AlbumsFragment
+import code.name.monkey.retromusic.fragments.mainactivity.ArtistsFragment
+import code.name.monkey.retromusic.fragments.mainactivity.GenresFragment
+import code.name.monkey.retromusic.fragments.mainactivity.PlaylistsFragment
+import code.name.monkey.retromusic.fragments.mainactivity.SongsFragment
 import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -25,17 +34,12 @@ import javax.inject.Singleton
  * Created by hemanths on 2019-09-04.
  */
 @Singleton
-@Component(modules = [
-    RepositoryModule::class,
-    AlbumModule::class,
-    ArtistModule::class,
-    GenreModule::class,
-    HomeModule::class,
-    PlaylistModule::class,
-    SearchModule::class,
-    SongModule::class,
-    ActivityModule::class
-])
+@Component(
+    modules = [
+        AppModule::class,
+        PresenterModule::class
+    ]
+)
 interface MusicComponent {
 
     fun inject(songsFragment: SongsFragment)

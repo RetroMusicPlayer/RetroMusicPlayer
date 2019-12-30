@@ -29,7 +29,11 @@ import com.afollestad.materialcab.MaterialCab
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playlist_detail.*
+import kotlinx.android.synthetic.main.activity_playlist_detail.empty
+import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
+import kotlinx.android.synthetic.main.activity_playlist_detail.emptyText
+import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
+import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
 import javax.inject.Inject
 
 class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsView {
@@ -79,19 +83,25 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             recyclerViewDragDropManager = RecyclerViewDragDropManager()
             val animator = RefactoredDefaultItemAnimator()
             adapter = OrderablePlaylistSongAdapter(this,
-                    ArrayList(),
-                    R.layout.item_list,
-                    false,
-                    this,
-                    object : OrderablePlaylistSongAdapter.OnMoveItemListener {
-                        override fun onMoveItem(fromPosition: Int, toPosition: Int) {
-                            if (PlaylistsUtil.moveItem(this@PlaylistDetailActivity, playlist.id, fromPosition, toPosition)) {
-                                val song = adapter.dataSet.removeAt(fromPosition)
-                                adapter.dataSet.add(toPosition, song)
-                                adapter.notifyItemMoved(fromPosition, toPosition)
-                            }
+                ArrayList(),
+                R.layout.item_list,
+                false,
+                this,
+                object : OrderablePlaylistSongAdapter.OnMoveItemListener {
+                    override fun onMoveItem(fromPosition: Int, toPosition: Int) {
+                        if (PlaylistsUtil.moveItem(
+                                this@PlaylistDetailActivity,
+                                playlist.id,
+                                fromPosition,
+                                toPosition
+                            )
+                        ) {
+                            val song = adapter.dataSet.removeAt(fromPosition)
+                            adapter.dataSet.add(toPosition, song)
+                            adapter.notifyItemMoved(fromPosition, toPosition)
                         }
-                    })
+                    }
+                })
             wrappedAdapter = recyclerViewDragDropManager!!.createWrappedAdapter(adapter)
 
             recyclerView.adapter = wrappedAdapter
@@ -120,8 +130,8 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(
-                if (playlist is AbsCustomPlaylist) R.menu.menu_smart_playlist_detail
-                else R.menu.menu_playlist_detail, menu
+            if (playlist is AbsCustomPlaylist) R.menu.menu_smart_playlist_detail
+            else R.menu.menu_playlist_detail, menu
         )
         return super.onCreateOptionsMenu(menu)
     }
@@ -140,7 +150,15 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         if (cab != null && cab!!.isActive) {
             cab!!.finish()
         }
-        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp).setBackgroundColor(RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.resolveColor(this, R.attr.colorSurface))).start(callback)
+        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+            .setBackgroundColor(
+                RetroColorUtil.shiftBackgroundColorForLightText(
+                    ATHUtil.resolveColor(
+                        this,
+                        R.attr.colorSurface
+                    )
+                )
+            ).start(callback)
         return cab!!
     }
 
