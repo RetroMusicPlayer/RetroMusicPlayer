@@ -53,7 +53,7 @@
                 android:orientation="vertical">
 
                 <code.name.monkey.retromusic.views.WidthFitSquareCardView
-                    android:id="@+id/albumCoverContainer"
+                    android:id="@+id/artistCoverContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
@@ -65,7 +65,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/artistImage"
+                        android:id="@+id/image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
@@ -86,7 +86,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/albumCoverContainer"
+                    app:layout_constraintTop_toBottomOf="@id/artistCoverContainer"
                     tools:ignore="MissingPrefix"
                     tools:text="Title" />
 

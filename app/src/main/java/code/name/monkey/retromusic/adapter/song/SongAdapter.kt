@@ -26,22 +26,23 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-import java.util.*
+import java.util.ArrayList
 
 /**
  * Created by hemanths on 13/08/17.
  */
 
 open class SongAdapter(
-        protected val activity: AppCompatActivity,
-        dataSet: ArrayList<Song>,
-        protected var itemLayoutRes: Int,
-        usePalette: Boolean,
-        cabHolder: CabHolder?,
-        showSectionName: Boolean = true
+    protected val activity: AppCompatActivity,
+    dataSet: ArrayList<Song>,
+    protected var itemLayoutRes: Int,
+    usePalette: Boolean,
+    cabHolder: CabHolder?,
+    showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
-        activity, cabHolder, R.menu.menu_media_selection
+    activity, cabHolder, R.menu.menu_media_selection
 ), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
+
     var dataSet: ArrayList<Song>
 
     protected var usePalette = false
@@ -104,18 +105,18 @@ open class SongAdapter(
             return
         }
         SongGlideRequest.Builder.from(Glide.with(activity), song).checkIgnoreMediaStore(activity)
-                .generatePalette(activity).build()
-                .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        super.onLoadCleared(placeholder)
-                        setColors(defaultFooterColor, holder)
-                    }
+            .generatePalette(activity).build()
+            .into(object : RetroMusicColoredTarget(holder.image!!) {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    super.onLoadCleared(placeholder)
+                    setColors(defaultFooterColor, holder)
+                }
 
-                    override fun onColorReady(color: Int) {
-                        if (usePalette) setColors(color, holder)
-                        else setColors(defaultFooterColor, holder)
-                    }
-                })
+                override fun onColorReady(color: Int) {
+                    if (usePalette) setColors(color, holder)
+                    else setColors(defaultFooterColor, holder)
+                }
+            })
     }
 
     private fun getSongTitle(song: Song): String? {
@@ -183,10 +184,12 @@ open class SongAdapter(
             if (image != null && image!!.visibility == View.VISIBLE) {
                 when (item.itemId) {
                     R.id.action_go_to_album -> {
-                        val options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                                activity, image, activity.getString(R.string.transition_album_art)
+                        val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                            activity,
+                            imageContainerCard ?: image,
+                            "${activity.getString(R.string.transition_album_art)}_${song.albumId}"
                         )
-                        NavigationUtil.goToAlbumOptions(activity, song.albumId, options)
+                        NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
                         return true
                     }
                 }

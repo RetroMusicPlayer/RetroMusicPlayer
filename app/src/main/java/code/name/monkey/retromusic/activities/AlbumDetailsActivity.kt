@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.activities
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.transition.Slide
 import android.view.Menu
 import android.view.MenuItem
 import android.view.SubMenu
@@ -42,6 +43,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_album.albumCoverContainer
 import kotlinx.android.synthetic.main.activity_album.albumText
 import kotlinx.android.synthetic.main.activity_album.albumTitle
 import kotlinx.android.synthetic.main.activity_album.image
@@ -90,6 +92,16 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     @Inject
     lateinit var albumDetailsPresenter: AlbumDetailsPresenter
 
+    private fun windowEnterTransition() {
+        val slide = Slide()
+        slide.excludeTarget(R.id.appBarLayout, true)
+        slide.excludeTarget(R.id.status_bar, true)
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        slide.excludeTarget(android.R.id.navigationBarBackground, true)
+
+        window.enterTransition = slide
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
@@ -98,10 +110,24 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-
-        ActivityCompat.postponeEnterTransition(this)
+        window.sharedElementsUseOverlay = true
 
         App.musicComponent.inject(this)
+        albumDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
+            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let {
+                albumDetailsPresenter.loadAlbum(it)
+                albumCoverContainer?.transitionName = "${getString(R.string.transition_album_art)}_$it"
+            }
+        } else {
+            finish()
+        }
+
+        windowEnterTransition()
+        ActivityCompat.postponeEnterTransition(this)
+
+
         artistImage = findViewById(R.id.artistImage)
 
         setupRecyclerView()
@@ -109,7 +135,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         artistImage.setOnClickListener {
             val artistPairs = ActivityOptions.makeSceneTransitionAnimation(
                 this,
-                UtilPair.create(artistImage, getString(R.string.transition_artist_image))
+                UtilPair.create(
+                    artistImage,
+                    "${getString(R.string.transition_artist_image)}_${album.artistId}"
+                )
             )
             NavigationUtil.goToArtistOptions(this, album.artistId, artistPairs)
         }
@@ -118,15 +147,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
         shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
-        }
-
-
-        albumDetailsPresenter.attachView(this)
-
-        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
-            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let { albumDetailsPresenter.loadAlbum(it) }
-        } else {
-            finish()
         }
     }
 
@@ -150,7 +170,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     override fun album(album: Album) {
-
+        complete()
         if (album.songs!!.isEmpty()) {
             finish()
             return

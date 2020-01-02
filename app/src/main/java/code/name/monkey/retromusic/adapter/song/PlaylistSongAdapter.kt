@@ -10,14 +10,14 @@ import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.google.android.material.button.MaterialButton
-import java.util.*
+import java.util.ArrayList
 
 open class PlaylistSongAdapter(
-        activity: AppCompatActivity,
-        dataSet: ArrayList<Song>,
-        itemLayoutRes: Int,
-        usePalette: Boolean,
-        cabHolder: CabHolder?
+    activity: AppCompatActivity,
+    dataSet: ArrayList<Song>,
+    itemLayoutRes: Int,
+    usePalette: Boolean,
+    cabHolder: CabHolder?
 ) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, usePalette, cabHolder, false) {
 
     init {
@@ -60,13 +60,11 @@ open class PlaylistSongAdapter(
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             if (item.itemId == R.id.action_go_to_album) {
                 val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                        activity, image, activity.getString(
-                        R.string.transition_album_art
+                    activity,
+                    imageContainerCard ?: image,
+                    "${activity.getString(R.string.transition_album_art)}_${song.albumId}"
                 )
-                )
-                NavigationUtil.goToAlbumOptions(
-                        activity, dataSet[adapterPosition - 1].albumId, activityOptions
-                )
+                NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
                 return true
             }
             return super.onSongMenuItemClick(item)

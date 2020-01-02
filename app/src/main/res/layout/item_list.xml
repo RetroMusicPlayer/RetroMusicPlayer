@@ -55,7 +55,6 @@
                 android:id="@+id/imageText"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
                 android:gravity="center"
                 android:maxLines="1"
                 android:minHeight="40dp"

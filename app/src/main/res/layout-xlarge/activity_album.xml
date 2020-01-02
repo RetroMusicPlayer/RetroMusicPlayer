@@ -14,7 +14,6 @@
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/backgrounds/scenic[15]" />
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -90,6 +89,7 @@
                         android:layout_weight="0">
 
                         <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/albumCoverContainer"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="8dp"
@@ -134,11 +134,11 @@
                             android:focusable="true"
                             android:focusableInTouchMode="true"
                             android:freezesText="true"
-                            android:textColor="?android:attr/textColorSecondary"
                             android:marqueeRepeatLimit="marquee_forever"
                             android:paddingTop="4dp"
                             android:scrollHorizontally="true"
                             android:singleLine="true"
+                            android:textColor="?android:attr/textColorSecondary"
                             tools:ignore="MissingPrefix"
                             tools:text="Album details" />
 

@@ -21,15 +21,19 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-
 
 /**
  * Created by hemanths on 20/08/17.
  */
 interface AlbumDetailsView {
+
     fun album(album: Album)
 
     fun complete()
@@ -45,8 +49,9 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
     fun loadMore(artistId: Int)
 
     class AlbumDetailsPresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter, CoroutineScope {
+
         private val job = Job()
         private lateinit var album: Album
 
@@ -63,10 +68,9 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
             view?.loadArtistImage(artist)
 
             artist.albums?.filter { it.id != album.id }?.let {
-                view?.moreAlbums(ArrayList(it))
+                if (it.isNotEmpty()) view?.moreAlbums(ArrayList(it))
             }
         }
-
 
         override fun loadAlbum(albumId: Int) {
             launch {
@@ -77,7 +81,6 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
                     }
                     is Error -> withContext(Dispatchers.Main) { view?.complete() }
                 }
-                view?.complete()
             }
         }
 

@@ -16,11 +16,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import java.util.*
+import java.util.ArrayList
 
 class AlbumCoverPagerAdapter(
-        fm: FragmentManager,
-        private val dataSet: ArrayList<Song>
+    fm: FragmentManager,
+    private val dataSet: ArrayList<Song>
 ) : CustomFragmentStatePagerAdapter(fm) {
 
     private var currentColorReceiver: AlbumCoverFragment.ColorReceiver? = null
@@ -90,9 +90,9 @@ class AlbumCoverPagerAdapter(
         }
 
         override fun onCreateView(
-                inflater: LayoutInflater,
-                container: ViewGroup?,
-                savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
         ): View? {
             val finalLayout = when {
                 PreferenceUtil.getInstance(activity).carouselEffect() -> R.layout.fragment_album_carousel_cover
@@ -119,13 +119,13 @@ class AlbumCoverPagerAdapter(
 
         private fun loadAlbumCover() {
             SongGlideRequest.Builder.from(Glide.with(requireContext()), song)
-                    .checkIgnoreMediaStore(requireContext())
-                    .generatePalette(requireContext()).build()
-                    .into(object : RetroMusicColoredTarget(albumCover) {
-                        override fun onColorReady(color: Int) {
-                            setColor(color)
-                        }
-                    })
+                .checkIgnoreMediaStore(requireContext())
+                .generatePalette(requireContext()).build()
+                .into(object : RetroMusicColoredTarget(albumCover) {
+                    override fun onColorReady(color: Int) {
+                        setColor(color)
+                    }
+                })
         }
 
         private fun setColor(color: Int) {

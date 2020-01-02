@@ -19,29 +19,25 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
+import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.retromusic.R;
 import com.google.android.material.card.MaterialCardView;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableSwipeableItemViewHolder;
 
-import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.retromusic.R;
-
-public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHolder implements View.OnLongClickListener, View.OnClickListener {
-    @Nullable
-    public TextView title;
+public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHolder
+        implements View.OnLongClickListener, View.OnClickListener {
 
     @Nullable
-    public TextView text;
+    public View dragView;
 
     @Nullable
-    public TextView time;
+    public View dummyContainer;
 
     @Nullable
-    public TextView imageText;
+    public ImageView image;
 
     @Nullable
     public ViewGroup imageContainer;
@@ -50,30 +46,34 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     public MaterialCardView imageContainerCard;
 
     @Nullable
-    public View menu;
-
-    @Nullable
-    public View dragView;
-
-    @Nullable
-    public View paletteColorContainer;
-
-    @Nullable
-    public RecyclerView recyclerView;
-
-    @Nullable
-    public ImageButton playSongs;
-
-    @Nullable
-    public View mask;
+    public TextView imageText;
 
     @Nullable
     public MaterialCardView imageTextContainer;
 
     @Nullable
-    public ImageView image;
+    public View mask;
+
     @Nullable
-    public View dummyContainer;
+    public View menu;
+
+    @Nullable
+    public View paletteColorContainer;
+
+    @Nullable
+    public ImageButton playSongs;
+
+    @Nullable
+    public RecyclerView recyclerView;
+
+    @Nullable
+    public TextView text;
+
+    @Nullable
+    public TextView time;
+
+    @Nullable
+    public TextView title;
 
     public MediaEntryViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -97,7 +97,8 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         dummyContainer = itemView.findViewById(R.id.dummy_view);
 
         if (imageContainerCard != null) {
-            imageContainerCard.setCardBackgroundColor(ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorSurface));
+            imageContainerCard.setCardBackgroundColor(
+                    ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorSurface));
         }
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
@@ -109,16 +110,19 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
     }
 
     @Override
-    public boolean onLongClick(View v) {
-        return false;
-    }
-
-    @Override
     public void onClick(View v) {
 
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        return false;
+    }
+
     public void setImageTransitionName(@NonNull String transitionName) {
+        if (imageContainerCard != null) {
+            imageContainerCard.setTransitionName(transitionName);
+        }
         if (image != null) {
             image.setTransitionName(transitionName);
         }

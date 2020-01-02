@@ -28,16 +28,17 @@ import com.bumptech.glide.Glide
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 
 open class AlbumAdapter(
-        protected val activity: AppCompatActivity,
-        dataSet: ArrayList<Album>,
-        protected var itemLayoutRes: Int,
-        usePalette: Boolean,
-        cabHolder: CabHolder?
+    protected val activity: AppCompatActivity,
+    dataSet: ArrayList<Album>,
+    protected var itemLayoutRes: Int,
+    usePalette: Boolean,
+    cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
-        activity,
-        cabHolder,
-        R.menu.menu_media_selection
+    activity,
+    cabHolder,
+    R.menu.menu_media_selection
 ), FastScrollRecyclerView.SectionedAdapter {
+
     var dataSet: ArrayList<Album>
         protected set
 
@@ -87,14 +88,32 @@ open class AlbumAdapter(
         holder.itemView.isActivated = isChecked
         holder.title?.text = getAlbumTitle(album)
         holder.text?.text = getAlbumText(album)
-        holder.playSongs?.setOnClickListener { album.songs?.let { songs -> MusicPlayerRemote.openQueue(songs, 0, true) } }
+        holder.playSongs?.setOnClickListener {
+            album.songs?.let { songs ->
+                MusicPlayerRemote.openQueue(
+                    songs,
+                    0,
+                    true
+                )
+            }
+        }
         loadAlbumCover(album, holder)
     }
 
     protected open fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
+            holder.title?.setTextColor(
+                MaterialValueHelper.getPrimaryTextColor(
+                    activity,
+                    ColorUtil.isColorLight(color)
+                )
+            )
+            holder.text?.setTextColor(
+                MaterialValueHelper.getSecondaryTextColor(
+                    activity,
+                    ColorUtil.isColorLight(color)
+                )
+            )
             holder.paletteColorContainer?.setBackgroundColor(color)
         }
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
@@ -106,17 +125,17 @@ open class AlbumAdapter(
         }
 
         SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                .checkIgnoreMediaStore(activity).generatePalette(activity).build()
-                .into(object : RetroMusicColoredTarget(holder.image!!) {
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        super.onLoadCleared(placeholder)
-                        setColors(defaultFooterColor, holder)
-                    }
+            .checkIgnoreMediaStore(activity).generatePalette(activity).build()
+            .into(object : RetroMusicColoredTarget(holder.image!!) {
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    super.onLoadCleared(placeholder)
+                    setColors(defaultFooterColor, holder)
+                }
 
-                    override fun onColorReady(color: Int) {
-                        setColors(color, holder)
-                    }
-                })
+                override fun onColorReady(color: Int) {
+                    setColors(color, holder)
+                }
+            })
     }
 
     override fun getItemCount(): Int {
@@ -136,7 +155,7 @@ open class AlbumAdapter(
     }
 
     override fun onMultipleItemAction(
-            menuItem: MenuItem, selection: ArrayList<Album>
+        menuItem: MenuItem, selection: ArrayList<Album>
     ) {
         SongsMenuHelper.handleMenuClick(activity, getSongList(selection), menuItem.itemId)
     }
@@ -152,10 +171,11 @@ open class AlbumAdapter(
     override fun getSectionName(position: Int): String {
         var sectionName: String? = null
         when (PreferenceUtil.getInstance(activity).albumSortOrder) {
-            SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName = dataSet[position].title
+            SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName =
+                dataSet[position].title
             SortOrder.AlbumSortOrder.ALBUM_ARTIST -> sectionName = dataSet[position].artistName
             SortOrder.AlbumSortOrder.ALBUM_YEAR -> return MusicUtil.getYearString(
-                    dataSet[position].year
+                dataSet[position].year
             )
         }
 
@@ -175,13 +195,11 @@ open class AlbumAdapter(
                 toggleChecked(adapterPosition)
             } else {
                 val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                        activity, image, activity.getString(
-                        R.string.transition_album_art
+                    activity,
+                    imageContainerCard ?: image,
+                    "${activity.getString(R.string.transition_album_art)}_${dataSet[adapterPosition].id}"
                 )
-                )
-                NavigationUtil.goToAlbumOptions(
-                        activity, dataSet[adapterPosition].id, activityOptions
-                )
+                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
             }
         }
 

@@ -20,20 +20,18 @@ import android.view.View
 import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
+import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
-import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.RingtoneManager
-
 
 object SongMenuHelper {
     val MENU_RES = R.menu.menu_item_song
@@ -49,7 +47,12 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_share -> {
-                activity.startActivity(Intent.createChooser(MusicUtil.createShareSongFileIntent(song, activity), null))
+                activity.startActivity(
+                    Intent.createChooser(
+                        MusicUtil.createShareSongFileIntent(song, activity),
+                        null
+                    )
+                )
                 return true
             }
             R.id.action_delete_from_device -> {
@@ -72,7 +75,10 @@ object SongMenuHelper {
                 val tagEditorIntent = Intent(activity, SongTagEditorActivity::class.java)
                 tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id)
                 if (activity is PaletteColorHolder)
-                    tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_PALETTE, (activity as PaletteColorHolder).paletteColor)
+                    tagEditorIntent.putExtra(
+                        AbsTagEditorActivity.EXTRA_PALETTE,
+                        (activity as PaletteColorHolder).paletteColor
+                    )
                 activity.startActivity(tagEditorIntent)
                 return true
             }
@@ -92,7 +98,8 @@ object SongMenuHelper {
         return false
     }
 
-    abstract class OnClickSongMenu protected constructor(private val activity: AppCompatActivity) : View.OnClickListener, PopupMenu.OnMenuItemClickListener {
+    abstract class OnClickSongMenu protected constructor(private val activity: AppCompatActivity) :
+        View.OnClickListener, PopupMenu.OnMenuItemClickListener {
 
         open val menuRes: Int
             get() = MENU_RES

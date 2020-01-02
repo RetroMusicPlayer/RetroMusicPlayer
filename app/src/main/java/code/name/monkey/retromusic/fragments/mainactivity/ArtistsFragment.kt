@@ -13,7 +13,9 @@ import code.name.monkey.retromusic.mvp.presenter.ArtistsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(), ArtistsView {
+class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
+    ArtistsView {
+
     override fun artists(artists: ArrayList<Artist>) {
         adapter?.swapDataSet(artists)
     }
@@ -33,6 +35,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         super.onViewCreated(view, savedInstanceState)
         artistsPresenter.attachView(this)
     }
+
     override fun onResume() {
         super.onResume()
         if (adapter!!.dataSet.isEmpty()) {
@@ -67,7 +70,6 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         return ArtistAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, loadUsePalette(), libraryFragment)
     }
 
-
     override fun loadGridSize(): Int {
         return PreferenceUtil.getInstance(requireContext()).getArtistGridSize(activity!!)
     }
@@ -101,7 +103,6 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         adapter?.notifyDataSetChanged()
     }
 
-
     override fun loadSortOrder(): String {
         return PreferenceUtil.getInstance(requireContext()).artistSortOrder
     }
@@ -109,7 +110,6 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     override fun saveSortOrder(sortOrder: String) {
         PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
     }
-
 
     override fun showEmptyView() {
         adapter?.swapDataSet(ArrayList())

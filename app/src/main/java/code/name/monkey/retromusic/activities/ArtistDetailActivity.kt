@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.transition.Slide
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -49,8 +50,9 @@ import kotlinx.android.synthetic.main.activity_artist_content.playAction
 import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
 import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
 import kotlinx.android.synthetic.main.activity_artist_content.songTitle
-import kotlinx.android.synthetic.main.activity_artist_details.artistImage
+import kotlinx.android.synthetic.main.activity_artist_details.artistCoverContainer
 import kotlinx.android.synthetic.main.activity_artist_details.artistTitle
+import kotlinx.android.synthetic.main.activity_artist_details.image
 import kotlinx.android.synthetic.main.activity_artist_details.imageContainer
 import kotlinx.android.synthetic.main.activity_artist_details.text
 import kotlinx.android.synthetic.main.activity_artist_details.toolbar
@@ -91,6 +93,16 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     @Inject
     lateinit var artistDetailsPresenter: ArtistDetailsPresenter
 
+    private fun windowEnterTransition() {
+        val slide = Slide()
+        slide.excludeTarget(R.id.appBarLayout, true)
+        slide.excludeTarget(R.id.status_bar, true)
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        slide.excludeTarget(android.R.id.navigationBarBackground, true)
+
+        window.enterTransition = slide
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
@@ -99,7 +111,21 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+        window.sharedElementsUseOverlay = true
 
+        App.musicComponent.inject(this)
+        artistDetailsPresenter.attachView(this)
+
+        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
+            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let {
+                artistDetailsPresenter.loadArtist(it)
+                artistCoverContainer?.transitionName = "${getString(R.string.transition_artist_image)}_$it"
+            }
+        } else {
+            finish()
+        }
+
+        windowEnterTransition()
         ActivityCompat.postponeEnterTransition(this)
 
         setUpViews()
@@ -117,15 +143,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             } else {
                 biographyText.maxLines = 4
             }
-        }
-
-        App.musicComponent.inject(this)
-        artistDetailsPresenter.attachView(this)
-
-        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
-            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
-        } else {
-            finish()
         }
     }
 
@@ -184,6 +201,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     override fun artist(artist: Artist) {
+        complete()
         if (artist.songCount <= 0) {
             finish()
         }
@@ -238,7 +256,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
 
     private fun loadArtistImage() {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
-            .dontAnimate().into(object : RetroMusicColoredTarget(artistImage) {
+            .dontAnimate().into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)
                 }
