@@ -26,8 +26,11 @@ import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.so
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songTotalTime
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.text
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.title
-import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
-
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.nextButton
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.previousButton
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.shuffleButton
 
 class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -91,7 +94,6 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-
     fun setDark(textColor: Int, background: Int) {
         setDark(textColor)
         TintHelper.setTintAuto(playPauseButton, background, false)
@@ -123,14 +125,12 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
-
     private fun updatePlayPauseDrawableState() {
         when {
             MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
-            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_32dp)
+            else -> playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
         }
     }
-
 
     private fun setUpMusicControllers() {
         setUpPlayPauseFab()
@@ -157,7 +157,10 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
@@ -183,14 +186,13 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         }
     }
 
-
     public override fun show() {
         playPauseButton!!.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .rotation(360f)
-                .setInterpolator(DecelerateInterpolator())
-                .start()
+            .scaleX(1f)
+            .scaleY(1f)
+            .rotation(360f)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
     }
 
     public override fun hide() {

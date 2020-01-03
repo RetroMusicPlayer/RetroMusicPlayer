@@ -814,4 +814,5 @@
     <string name="pref_header_blacklist">Blacklist</string>
     <string name="no_playing_queue">No songs playing</string>
     <string name="nothing_to_see">Nothing to see</string>
+
 </resources>

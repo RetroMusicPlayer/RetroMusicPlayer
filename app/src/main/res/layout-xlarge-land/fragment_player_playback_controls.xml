@@ -66,7 +66,7 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/playPauseButton"
         android:layout_width="96dp"
         android:layout_height="96dp"

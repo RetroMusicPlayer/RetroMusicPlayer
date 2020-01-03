@@ -22,7 +22,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90000000" />
+        android:background="#C0000000" />
 
 
     <LinearLayout
@@ -86,9 +86,9 @@
                     android:id="@+id/nextSong"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
                     android:gravity="center"
-                    android:marqueeRepeatLimit="marquee_forever"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:singleLine="true"
