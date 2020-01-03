@@ -4,18 +4,27 @@ You can opt-in for the beta build by clicking on this link: https://play.google.
 #### Q: How do I use offline synced lyrics?
 There are two methods for how to get offline synced lyrics.
 
-Method 1:-
-STEP 1: Find the time stamped lyrics for your songs which don't have lyrics already. A time stamped lyrics looks like this, "[00:04:02] Some lyrics text" for example.
-STEP 2: Copy these time stamped lyrics.
-STEP 3: Open retro music and head to the song synced lyrics editor.
-STEP 4: Paste the lyrics there normally and exit the editor
-STEP 5: Open lyrics and you should see your time stamped lyrics there.
+#### Method 1:-
+##### STEP 1: 
+Find the time stamped lyrics for your songs which don't have lyrics already. A time stamped lyrics looks like this, "[00:04:02] Some lyrics text" for example.
+##### STEP 2: 
+Copy these time stamped lyrics.
+##### STEP 3: 
+Open retro music and head to the song synced lyrics editor.
+##### STEP 4: 
+Paste the lyrics there normally and exit the editor
+##### STEP 5: 
+Open lyrics and you should see your time stamped lyrics there.
 
-Method 2:-
-STEP 1: Find the ".lrc" files for your songs which doesn't have lyrics already.
-STEP 2: A ".lrc" is like a text file which contains the time stamped lyrics for example, "[00:04:02] Some lyrics text"
-STEP 3: Now you have to rename the file you created in this way: <song_name> - <artist_name>.lrc or for better matching copy the <song_name> and the <artist_name> from the tag editor and then rename the file.
-STEP 4: You have to copy or move this file into a location on the SD Card: whatever_sdcard/RetroMusic/lyrics/ and paste it there.
+#### Method 2:-
+##### STEP 1: 
+Find the ".lrc" files for your songs which doesn't have lyrics already.
+##### STEP 2: 
+A ".lrc" is like a text file which contains the time stamped lyrics for example, "[00:04:02] Some lyrics text"
+##### STEP 3: 
+Now you have to rename the file you created in this way: <song_name> - <artist_name>.lrc or for better matching copy the <song_name> and the <artist_name> from the tag editor and then rename the file.
+##### STEP 4: 
+You have to copy or move this file into a location on the SD Card: whatever_sdcard/RetroMusic/lyrics/ and paste it there.
 Finally you will be able to see the lyrics working.
 
 > If you want to skip to particular time stamp, simply scroll to the time stamp from where you want to start from and a 'Play' icon will appear left to the particular stamp. Tap on play button to play from there.
