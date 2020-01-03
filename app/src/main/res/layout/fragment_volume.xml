@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/viewGroup"
@@ -7,8 +7,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp" >
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeDown"
@@ -16,22 +16,31 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="8dp"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/volumeSeekBar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_volume_down_white_24dp"
         app:tint="?attr/colorControlNormal" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
         style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:max="100"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
+        app:layout_constraintBottom_toBottomOf="@+id/volumeDown"
+        app:layout_constraintEnd_toStartOf="@+id/volumeUp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/volumeDown"
+        app:layout_constraintTop_toTopOf="@+id/volumeDown"
         tools:progress="20"
         tools:progressTint="?attr/colorControlNormal" />
-
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeUp"
@@ -39,7 +48,12 @@
         android:layout_height="wrap_content"
         android:layout_weight="0"
         android:background="?roundSelector"
-        android:padding="8dp"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/volumeSeekBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/volumeSeekBar"
+        app:layout_constraintTop_toTopOf="@+id/volumeSeekBar"
         app:srcCompat="@drawable/ic_volume_up_white_24dp"
         app:tint="?attr/colorControlNormal" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

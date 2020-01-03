@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:layout_marginEnd="4dp"
     android:layout_marginStart="4dp"
     android:layout_marginTop="2dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginBottom="2dp"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?rectSelector"
@@ -32,8 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
-        android:paddingStart="16dp"
-        android:paddingEnd="0dp">
+        android:paddingEnd="0dp"
+        android:paddingStart="16dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageTextContainer"
@@ -73,8 +73,8 @@
         android:layout_weight="1.0"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -84,18 +84,16 @@
             android:maxLines="1"
             android:textAppearance="@style/TextViewSubtitle1"
             android:textColor="?android:attr/textColorPrimary"
-            tools:text="Song name" />
+            tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-
-
             android:maxLines="1"
             android:textColor="?android:attr/textColorSecondary"
-            tools:text="Song artist name " />
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView

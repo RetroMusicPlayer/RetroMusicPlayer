@@ -43,7 +43,7 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         setNoImageMode()
         setUpViews()
         applyToolbar(toolbar)
-        setStatusbarColorAuto()
+
     }
 
     private fun setUpViews() {

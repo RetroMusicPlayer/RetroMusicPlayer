@@ -193,11 +193,10 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playPauseButton"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@drawable/color_circle_gradient"
-            android:elevation="4dp"
             android:padding="16dp"
             app:srcCompat="@drawable/ic_play_arrow_white_32dp" />
 

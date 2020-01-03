@@ -2,10 +2,10 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="@dimen/icon_notification_dimen"
     android:height="@dimen/icon_notification_dimen"
-    android:viewportHeight="24"
-    android:viewportWidth="24">
+    android:viewportWidth="24"
+    android:viewportHeight="24">
 
     <path
         android:fillColor="@color/md_white_1000"
-        android:pathData="M6 6h2v12H6zm3.5 6l8.5 6V6l-8.5 6zm6.5 2.14L12.97 12 16 9.86v4.28z" />
+        android:pathData="M7 6c0.55 0 1 0.45 1 1v10c0 0.55-0.45 1-1 1s-1-0.45-1-1V7c0-0.55 0.45 -1 1-1zm3.66 6.82l5.77 4.07c0.66 0.47 1.58-0.01 1.58-0.82V7.93c0-0.81-0.91-1.28-1.58-0.82l-5.77 4.07c-0.57 0.4 -0.57 1.24 0 1.64z" />
 </vector>

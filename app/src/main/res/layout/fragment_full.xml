@@ -65,7 +65,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSongLabel"
                     android:layout_width="0dp"
@@ -77,6 +76,7 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:text="@string/next_song"
+                    android:textAppearance="@style/TextViewSubtitle2"
                     android:textColor="@color/md_white_1000"
                     app:layout_constraintEnd_toStartOf="@+id/artistImage"
                     app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +84,6 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/nextSong"
-                    style="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
@@ -93,12 +92,13 @@
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
                     android:singleLine="true"
+                    android:textAppearance="@style/TextViewSubtitle1"
                     android:textColor="@color/md_white_1000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/artistImage"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nextSongLabel"
-                    tools:text="@string/for_you" />
+                    tools:text="@tools:sample/lorem/random" />
 
                 <code.name.monkey.retromusic.views.CircularImageView
                     android:id="@+id/artistImage"

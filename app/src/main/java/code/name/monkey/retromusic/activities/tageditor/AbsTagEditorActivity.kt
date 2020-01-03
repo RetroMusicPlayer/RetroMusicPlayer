@@ -187,7 +187,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
         setUpViews()
 
-
+        setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
     }

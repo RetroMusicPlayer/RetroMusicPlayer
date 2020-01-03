@@ -4,28 +4,28 @@
     <item
         android:id="@+id/action_home"
         android:enabled="true"
-        android:icon="@drawable/toggle_home"
+        android:icon="@drawable/ic_home_white_24dp"
         android:title="@string/for_you" />
 
     <item
         android:id="@+id/action_song"
         android:enabled="true"
-        android:icon="@drawable/toggle_audiotrack"
+        android:icon="@drawable/ic_audiotrack_white_24dp"
         android:title="@string/songs" />
     <item
         android:id="@+id/action_album"
         android:enabled="true"
-        android:icon="@drawable/toggle_album"
+        android:icon="@drawable/ic_album_white_24dp"
         android:title="@string/albums" />
     <item
         android:id="@+id/action_artist"
         android:enabled="true"
-        android:icon="@drawable/toggle_artist"
+        android:icon="@drawable/ic_artist_white_24dp"
         android:title="@string/artists" />
     <item
         android:id="@+id/action_playlist"
         android:enabled="true"
-        android:icon="@drawable/toggle_queue_music"
+        android:icon="@drawable/ic_queue_music_white_24dp"
         android:title="@string/playlists" />
 
 </menu>

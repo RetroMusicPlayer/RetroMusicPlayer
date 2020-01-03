@@ -146,7 +146,7 @@
             android:id="@+id/otherSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:settingListItemIcon="@drawable/ic_notifications_active_white_24dp"
+            app:settingListItemIcon="@drawable/ic_testing_white_24dp"
             app:settingListItemIconColor="@color/md_indigo_A400"
             app:settingListItemText="@string/other_settings_summary"
             app:settingListItemTitle="@string/others" />
