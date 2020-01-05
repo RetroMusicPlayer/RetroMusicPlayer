@@ -27,8 +27,8 @@
     </FrameLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
         android:id="@+id/container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
@@ -53,7 +53,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/bannerImage"
                         android:layout_width="match_parent"
@@ -62,7 +61,6 @@
                         app:layout_collapseMode="parallax"
                         tools:ignore="ContentDescription"
                         tools:srcCompat="@tools:sample/backgrounds/scenic[9]" />
-
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/toolbarContainer"

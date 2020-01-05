@@ -10,7 +10,9 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
-import kotlinx.android.synthetic.main.activity_settings.*
+import kotlinx.android.synthetic.main.activity_settings.appBarLayout
+import kotlinx.android.synthetic.main.activity_settings.detailContentFrame
+import kotlinx.android.synthetic.main.activity_settings.toolbar
 
 class SettingsActivity : AbsBaseActivity() {
 

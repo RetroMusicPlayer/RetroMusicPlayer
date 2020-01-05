@@ -304,8 +304,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
                 intent.putExtra(AbsTagEditorActivity.EXTRA_ID, album.id)
                 val options = ActivityOptions.makeSceneTransitionAnimation(
                     this,
-                    image,
-                    getString(R.string.transition_album_art)
+                    albumCoverContainer,
+                    "${getString(R.string.transition_album_art)}_${album.id}"
                 )
                 startActivityForResult(intent, TAG_EDITOR_REQUEST, options.toBundle())
                 return true

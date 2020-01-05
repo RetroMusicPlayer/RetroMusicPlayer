@@ -22,7 +22,6 @@ import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-
 class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun invalidateSettings() {

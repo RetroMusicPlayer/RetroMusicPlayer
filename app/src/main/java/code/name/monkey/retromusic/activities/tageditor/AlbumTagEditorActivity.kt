@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.transition.Slide
 import android.widget.Toast
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
@@ -37,6 +38,7 @@ import kotlinx.android.synthetic.main.activity_album_tag_editor.albumText
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumTitleContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.genreContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.genreTitle
+import kotlinx.android.synthetic.main.activity_album_tag_editor.imageContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.toolbar
 import kotlinx.android.synthetic.main.activity_album_tag_editor.yearContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.yearTitle
@@ -47,6 +49,16 @@ import java.util.EnumMap
 class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override val contentViewLayout: Int
         get() = R.layout.activity_album_tag_editor
+
+    private fun windowEnterTransition() {
+        val slide = Slide()
+        slide.excludeTarget(R.id.appBarLayout, true)
+        slide.excludeTarget(R.id.status_bar, true)
+        slide.excludeTarget(android.R.id.statusBarBackground, true)
+        slide.excludeTarget(android.R.id.navigationBarBackground, true)
+
+        window.enterTransition = slide
+    }
 
     override fun loadImageFromFile(selectedFileUri: Uri?) {
 
@@ -93,8 +105,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
+        window.sharedElementsUseOverlay = true
         lastFMRestClient = LastFMRestClient(this)
-
+        imageContainer?.transitionName = "${getString(R.string.transition_album_art)}_$id"
+        windowEnterTransition()
         setUpViews()
         setupToolbar()
     }
