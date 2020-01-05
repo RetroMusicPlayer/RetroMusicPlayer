@@ -2,6 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "ru.cleverpumpkin.proguard-dictionaries-generator"
+
+proguardDictionaries {
+    dictionaryNames = [
+            "build/class-dictionary",
+            "build/package-dictionary",
+            "build/obfuscation-dictionary"
+    ]
+}
 
 android {
     compileSdkVersion 29

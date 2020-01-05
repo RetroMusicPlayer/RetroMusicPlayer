@@ -68,3 +68,11 @@
 -keep class android.support.** { *; }
 -keep class com.google.** { *; }
 -keep class java.nio.file.** { *; }
+
+-obfuscationdictionary build/obfuscation-dictionary.txt
+-classobfuscationdictionary build/class-dictionary.txt
+-packageobfuscationdictionary build/package-dictionary.txt
+
+# Move all classes and packages into the root package.
+-repackageclasses ''
+-flattenpackagehierarchy
