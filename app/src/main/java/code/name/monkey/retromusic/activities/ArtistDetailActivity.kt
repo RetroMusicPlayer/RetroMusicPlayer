@@ -42,6 +42,7 @@ import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_album.container
 import kotlinx.android.synthetic.main.activity_artist_content.albumRecyclerView
 import kotlinx.android.synthetic.main.activity_artist_content.albumTitle
 import kotlinx.android.synthetic.main.activity_artist_content.biographyText
@@ -56,6 +57,7 @@ import kotlinx.android.synthetic.main.activity_artist_details.image
 import kotlinx.android.synthetic.main.activity_artist_details.imageContainer
 import kotlinx.android.synthetic.main.activity_artist_details.text
 import kotlinx.android.synthetic.main.activity_artist_details.toolbar
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.Locale
 import javax.inject.Inject
 
@@ -177,6 +179,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             layoutManager = LinearLayoutManager(this.context)
             adapter = songAdapter
         }
+        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

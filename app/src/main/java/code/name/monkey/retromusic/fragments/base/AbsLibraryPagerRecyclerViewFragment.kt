@@ -13,15 +13,21 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.google.android.material.appbar.AppBarLayout
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.*
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.container
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.empty
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.emptyEmoji
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.emptyText
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.recyclerView
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
-abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> : AbsLibraryPagerFragment(), AppBarLayout.OnOffsetChangedListener {
+abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
+    AbsLibraryPagerFragment(), AppBarLayout.OnOffsetChangedListener {
 
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main_activity_recycler_view, container, false)
     }
@@ -40,6 +46,8 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         }
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
     }
 
     private fun initAdapter() {
@@ -89,10 +97,11 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onOffsetChanged(p0: AppBarLayout?, i: Int) {
         container.setPadding(
-                container.paddingLeft,
-                container.paddingTop,
-                container.paddingRight,
-                libraryFragment.totalAppBarScrollingRange + i)
+            container.paddingLeft,
+            container.paddingTop,
+            container.paddingRight,
+            libraryFragment.totalAppBarScrollingRange + i
+        )
     }
 
     override fun onQueueChanged() {

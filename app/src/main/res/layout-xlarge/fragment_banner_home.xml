@@ -111,6 +111,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:behavior_overlapTop="52dp"

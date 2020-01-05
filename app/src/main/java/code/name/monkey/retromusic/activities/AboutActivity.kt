@@ -32,6 +32,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.android.synthetic.main.activity_about.container
 import kotlinx.android.synthetic.main.activity_about.toolbar
 import kotlinx.android.synthetic.main.card_credit.recyclerView
 import kotlinx.android.synthetic.main.card_other.changelog
@@ -48,6 +49,7 @@ import kotlinx.android.synthetic.main.card_social.instagramLink
 import kotlinx.android.synthetic.main.card_social.pinterestLink
 import kotlinx.android.synthetic.main.card_social.telegramLink
 import kotlinx.android.synthetic.main.card_social.twitterLink
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.IOException
 import java.nio.charset.StandardCharsets
 
@@ -86,6 +88,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         version.setSummary(getAppVersion())
         setUpView()
         loadContributors()
+        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

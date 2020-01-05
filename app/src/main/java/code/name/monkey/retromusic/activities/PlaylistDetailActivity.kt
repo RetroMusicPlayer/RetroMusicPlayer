@@ -34,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
 import kotlinx.android.synthetic.main.activity_playlist_detail.emptyText
 import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
 import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import javax.inject.Inject
 
 class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsView {
@@ -75,6 +76,8 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     private fun setUpRecyclerView() {
         ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         if (playlist is AbsCustomPlaylist) {
             adapter = PlaylistSongAdapter(this, ArrayList(), R.layout.item_list, false, this)

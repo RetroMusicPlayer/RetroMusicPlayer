@@ -4,12 +4,16 @@ import android.app.ActivityOptions
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
@@ -30,14 +34,24 @@ import code.name.monkey.retromusic.mvp.presenter.HomePresenter
 import code.name.monkey.retromusic.mvp.presenter.HomeView
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.abs_playlists.*
-import kotlinx.android.synthetic.main.fragment_banner_home.*
-import kotlinx.android.synthetic.main.home_content.*
+import kotlinx.android.synthetic.main.abs_playlists.actionShuffle
+import kotlinx.android.synthetic.main.abs_playlists.history
+import kotlinx.android.synthetic.main.abs_playlists.lastAdded
+import kotlinx.android.synthetic.main.abs_playlists.topPlayed
+import kotlinx.android.synthetic.main.fragment_banner_home.bannerImage
+import kotlinx.android.synthetic.main.fragment_banner_home.titleWelcome
+import kotlinx.android.synthetic.main.fragment_banner_home.toolbarContainer
+import kotlinx.android.synthetic.main.fragment_banner_home.userImage
+import kotlinx.android.synthetic.main.fragment_home.container
+import kotlinx.android.synthetic.main.home_content.emptyContainer
+import kotlinx.android.synthetic.main.home_content.recyclerView
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
-import java.util.*
+import java.util.ArrayList
+import java.util.Calendar
+import java.util.Random
 import javax.inject.Inject
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
@@ -53,18 +67,22 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home, viewGroup, false)
+        return inflater.inflate(
+            if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
+            viewGroup,
+            false
+        )
     }
 
     private fun loadImageFromStorage() {
         Glide.with(requireContext())
-                .load(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .placeholder(R.drawable.ic_person_flat)
-                .error(R.drawable.ic_person_flat)
-                .into(userImage)
+            .load(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
+            .asBitmap()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .placeholder(R.drawable.ic_person_flat)
+            .error(R.drawable.ic_person_flat)
+            .into(userImage)
     }
 
     private val displayMetrics: DisplayMetrics
@@ -81,7 +99,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         toolbar = view.findViewById(R.id.toolbar)
 
         bannerImage?.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                mainActivity,
+                userImage,
+                getString(R.string.transition_user_image)
+            )
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
 
@@ -104,7 +126,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         setupToolbar()
 
         userImage?.setOnClickListener {
-            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, userImage, getString(R.string.transition_user_image))
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                mainActivity,
+                userImage,
+                getString(R.string.transition_user_image)
+            )
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
         titleWelcome?.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
@@ -118,14 +144,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         homePresenter.attachView(this)
         homePresenter.loadSections()
-    }
 
-    private fun toolbarColor(): Int {
-        return if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) {
-            ColorUtil.withAlpha(RetroColorUtil.toolbarColor(mainActivity), 0.85f)
-        } else {
-            RetroColorUtil.toolbarColor(mainActivity)
-        }
+        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     private fun setupToolbar() {
@@ -133,7 +153,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
-                val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))
+                val options = ActivityOptions.makeSceneTransitionAnimation(
+                    mainActivity,
+                    toolbarContainer,
+                    getString(R.string.transition_toolbar)
+                )
                 NavigationUtil.goToSearch(requireActivity(), options)
             }
 
@@ -164,7 +188,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_search, menu)
 
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar))
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+            requireActivity(),
+            toolbar,
+            menu,
+            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
+        )
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -174,7 +203,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_search) {
-            val options = ActivityOptions.makeSceneTransitionAnimation(mainActivity, toolbarContainer, getString(R.string.transition_toolbar))
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                mainActivity,
+                toolbarContainer,
+                getString(R.string.transition_toolbar)
+            )
             NavigationUtil.goToSearch(requireActivity(), true, options)
         }
         return super.onOptionsItemSelected(item)
@@ -195,25 +228,24 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         loadTimeImage(day)
     }
 
-
     private fun loadTimeImage(day: String) {
         bannerImage?.let {
             val request = Glide.with(requireContext())
             if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
                 request.load(day)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .placeholder(R.drawable.material_design_default)
-                        .error(R.drawable.material_design_default)
-                        .into(it)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.material_design_default)
+                    .error(R.drawable.material_design_default)
+                    .into(it)
             } else {
                 request.load(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
-                        .asBitmap()
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .placeholder(R.drawable.material_design_default)
-                        .error(R.drawable.material_design_default)
-                        .into(it)
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.material_design_default)
+                    .error(R.drawable.material_design_default)
+                    .into(it)
             }
         }
         loadImageFromStorage()

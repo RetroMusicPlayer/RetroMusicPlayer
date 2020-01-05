@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_playing_queue.clearQueue
 import kotlinx.android.synthetic.main.activity_playing_queue.playerQueueSubHeader
 import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
 import kotlinx.android.synthetic.main.activity_playing_queue.toolbar
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
@@ -108,6 +109,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
             }
         })
         ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
     }
 
     private fun checkForPadding() {

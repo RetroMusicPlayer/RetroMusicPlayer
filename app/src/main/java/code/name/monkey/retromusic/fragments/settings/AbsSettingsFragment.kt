@@ -26,8 +26,18 @@ import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.preferences.*
+import code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
+import code.name.monkey.retromusic.preferences.AlbumCoverStylePreferenceDialog
+import code.name.monkey.retromusic.preferences.BlacklistPreference
+import code.name.monkey.retromusic.preferences.BlacklistPreferenceDialog
+import code.name.monkey.retromusic.preferences.LibraryPreference
+import code.name.monkey.retromusic.preferences.LibraryPreferenceDialog
+import code.name.monkey.retromusic.preferences.MaterialListPreference
+import code.name.monkey.retromusic.preferences.MaterialListPreferenceDialog
+import code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
+import code.name.monkey.retromusic.preferences.NowPlayingScreenPreferenceDialog
 import code.name.monkey.retromusic.util.NavigationUtil
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 /**
  * @author Hemanth S (h4h13).
@@ -54,9 +64,11 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     protected fun setSummary(preference: Preference?) {
         preference?.let {
-            setSummary(it, PreferenceManager
+            setSummary(
+                it, PreferenceManager
                     .getDefaultSharedPreferences(it.context)
-                    .getString(it.key, ""))
+                    .getString(it.key, "")
+            )
         }
     }
 
@@ -68,6 +80,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)
         invalidateSettings()
+        OverScrollDecoratorHelper.setUpOverScroll(listView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
     }
 
     override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {

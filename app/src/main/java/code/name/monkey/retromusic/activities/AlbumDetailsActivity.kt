@@ -46,6 +46,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.albumCoverContainer
 import kotlinx.android.synthetic.main.activity_album.albumText
 import kotlinx.android.synthetic.main.activity_album.albumTitle
+import kotlinx.android.synthetic.main.activity_album.container
 import kotlinx.android.synthetic.main.activity_album.image
 import kotlinx.android.synthetic.main.activity_album.toolbar
 import kotlinx.android.synthetic.main.activity_album_content.moreRecyclerView
@@ -54,6 +55,7 @@ import kotlinx.android.synthetic.main.activity_album_content.playAction
 import kotlinx.android.synthetic.main.activity_album_content.recyclerView
 import kotlinx.android.synthetic.main.activity_album_content.shuffleAction
 import kotlinx.android.synthetic.main.activity_album_content.songTitle
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.ArrayList
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -158,6 +160,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             isNestedScrollingEnabled = false
             adapter = simpleSongAdapter
         }
+
+        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onDestroy() {

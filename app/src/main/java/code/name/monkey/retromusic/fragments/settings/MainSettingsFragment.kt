@@ -28,12 +28,23 @@ import code.name.monkey.retromusic.activities.SettingsActivity
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
-import kotlinx.android.synthetic.main.fragment_main_settings.*
-
+import kotlinx.android.synthetic.main.fragment_main_settings.aboutSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.audioSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.buyPremium
+import kotlinx.android.synthetic.main.fragment_main_settings.buyProContainer
+import kotlinx.android.synthetic.main.fragment_main_settings.container
+import kotlinx.android.synthetic.main.fragment_main_settings.diamondIcon
+import kotlinx.android.synthetic.main.fragment_main_settings.generalSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.imageSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.notificationSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.nowPlayingSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.otherSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.personalizeSettings
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
-    override fun onClick(v: View) {
-        when (v.id) {
+    override fun onClick(view: View) {
+        when (view.id) {
             R.id.generalSettings -> inflateFragment(ThemeSettingsFragment(), R.string.general_settings_title)
             R.id.audioSettings -> inflateFragment(AudioSettings(), R.string.pref_header_audio)
             R.id.nowPlayingSettings -> inflateFragment(NowPlayingSettingsFragment(), R.string.now_playing)
@@ -45,8 +56,10 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_main_settings, container, false)
     }
 
@@ -75,7 +88,7 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             buyPremium.setTextColor(it)
             diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
-
+        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {
