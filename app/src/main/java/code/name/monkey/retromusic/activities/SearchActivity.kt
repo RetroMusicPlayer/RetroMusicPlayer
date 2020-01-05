@@ -38,7 +38,6 @@ import kotlinx.android.synthetic.main.activity_search.recyclerView
 import kotlinx.android.synthetic.main.activity_search.searchContainer
 import kotlinx.android.synthetic.main.activity_search.searchView
 import kotlinx.android.synthetic.main.activity_search.voiceSearch
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.Locale
 import javax.inject.Inject
 
@@ -113,8 +112,6 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
                 }
             }
         })
-
-        OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
     }
 
     private fun setupSearchView() {
