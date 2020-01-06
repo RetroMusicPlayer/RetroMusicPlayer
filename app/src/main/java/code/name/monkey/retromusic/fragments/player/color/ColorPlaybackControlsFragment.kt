@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -20,6 +21,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.nextButton
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.playPauseButton
@@ -28,6 +30,7 @@ import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.pr
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.repeatButton
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.shuffleButton
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songInfo
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.songTotalTime
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.text
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.title
@@ -68,6 +71,12 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onServiceConnected() {
@@ -104,8 +113,9 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         lastPlaybackControlsColor = color
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color, 0.5f)
 
-        title!!.setTextColor(lastPlaybackControlsColor)
-        text!!.setTextColor(lastDisabledPlaybackControlsColor)
+        title.setTextColor(lastPlaybackControlsColor)
+        text.setTextColor(lastDisabledPlaybackControlsColor)
+        songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
         ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor, true)
 

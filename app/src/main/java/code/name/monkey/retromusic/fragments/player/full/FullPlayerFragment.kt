@@ -25,7 +25,10 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.fragment_full.*
+import kotlinx.android.synthetic.main.fragment_full.artistImage
+import kotlinx.android.synthetic.main.fragment_full.nextSong
+import kotlinx.android.synthetic.main.fragment_full.nextSongLabel
+import kotlinx.android.synthetic.main.fragment_full.playerToolbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,7 +66,10 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
             lyricsLine1.visibility = View.VISIBLE
             lyricsLine2.visibility = View.VISIBLE
 
-            lyricsLine2.measure(View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.UNSPECIFIED)
+            lyricsLine2.measure(
+                View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.UNSPECIFIED
+            )
             val h: Float = lyricsLine2.measuredHeight.toFloat()
 
             lyricsLine1.alpha = 1f
@@ -125,8 +131,10 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_full, container, false)
     }
 
@@ -152,19 +160,19 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     private fun setUpSubFragments() {
-        fullPlaybackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FullPlaybackControlsFragment
+        fullPlaybackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FullPlaybackControlsFragment
 
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
         playerAlbumCoverFragment.removeSlideEffect()
     }
 
     override fun onShow() {
-
     }
 
     override fun onHide() {
-
     }
 
     override fun onBackPressed(): Boolean {
@@ -219,13 +227,12 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
             val artist = ArtistLoader.getArtist(requireContext(), MusicPlayerRemote.currentSong.artistId)
             withContext(Dispatchers.Main) {
                 ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
-                        .generatePalette(requireContext())
-                        .build()
-                        .into(object : RetroMusicColoredTarget(artistImage) {
-                            override fun onColorReady(color: Int) {
-
-                            }
-                        })
+                    .generatePalette(requireContext())
+                    .build()
+                    .into(object : RetroMusicColoredTarget(artistImage) {
+                        override fun onColorReady(color: Int) {
+                        }
+                    })
             }
         }
     }

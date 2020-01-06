@@ -18,7 +18,7 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import kotlinx.android.synthetic.main.fragment_adaptive_player.*
+import kotlinx.android.synthetic.main.fragment_adaptive_player.playerToolbar
 
 class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
 
@@ -53,7 +53,10 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
             lyricsLine1.visibility = View.VISIBLE
             lyricsLine2.visibility = View.VISIBLE
 
-            lyricsLine2.measure(View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY), View.MeasureSpec.UNSPECIFIED)
+            lyricsLine2.measure(
+                View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.UNSPECIFIED
+            )
             val h: Float = lyricsLine2.measuredHeight.toFloat()
 
             lyricsLine1.alpha = 1f
@@ -130,8 +133,10 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as AdaptivePlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.apply {
             removeSlideEffect()
             setCallbacks(this@AdaptiveFragment)
@@ -184,7 +189,11 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
         playbackControlsFragment.setDark(color)
         lastColor = color
         callbacks?.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            requireActivity()
+        )
     }
 
     override fun onShow() {
@@ -206,5 +215,4 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
 
     override val paletteColor: Int
         get() = lastColor
-
 }

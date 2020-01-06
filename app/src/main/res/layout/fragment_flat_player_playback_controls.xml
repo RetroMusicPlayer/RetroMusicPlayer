@@ -57,6 +57,27 @@
             tools:progress="20" />
     </RelativeLayout>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/songInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/md_red_500"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="4dp"
+        android:textAllCaps="true"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="12sp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        tools:text="@tools:sample/full_names" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text"
@@ -66,7 +87,6 @@
         android:layout_marginEnd="16dp"
         android:background="@color/md_red_500"
         android:ellipsize="end"
-        android:fontFeatureSettings="smcp"
         android:letterSpacing="0.1"
         android:maxLines="1"
         android:padding="4dp"
@@ -79,8 +99,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@+id/songInfo"
+        tools:text="@tools:sample/full_names" />
 
     <LinearLayout
         android:id="@+id/titleContainer"
@@ -113,7 +133,7 @@
             android:singleLine="true"
             android:textAllCaps="true"
             android:textStyle="bold"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/full_names" />
     </LinearLayout>
 
 

@@ -15,6 +15,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -26,7 +27,15 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.shuffleButton
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.songInfo
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.text
+import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.title
 
 class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
 
@@ -34,14 +43,15 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_flat_player_playback_controls, container, false)
     }
 
@@ -76,12 +86,11 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
 
     public override fun show() {
         playPauseButton!!.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .setInterpolator(DecelerateInterpolator())
-                .start()
+            .scaleX(1f)
+            .scaleY(1f)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
     }
-
 
     public override fun hide() {
         playPauseButton!!.apply {
@@ -130,6 +139,8 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         title.setTextColor(colorPrimary)
         text.setBackgroundColor(darkColor)
         text.setTextColor(colorSecondary)
+        songInfo.setBackgroundColor(darkColor)
+        songInfo.setTextColor(colorSecondary)
     }
 
     override fun onServiceConnected() {
@@ -172,7 +183,11 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
-
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun setUpProgressSlider() {
@@ -180,8 +195,10 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis,
-                            MusicPlayerRemote.songDurationMillis)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
                 }
             }
         })
@@ -222,9 +239,11 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
-
 }

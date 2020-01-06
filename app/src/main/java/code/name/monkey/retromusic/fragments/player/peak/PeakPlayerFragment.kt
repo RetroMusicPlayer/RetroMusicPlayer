@@ -22,13 +22,19 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_peak_player.*
+import kotlinx.android.synthetic.main.fragment_peak_player.playerImage
+import kotlinx.android.synthetic.main.fragment_peak_player.playerToolbar
+import kotlinx.android.synthetic.main.fragment_peak_player.songInfo
+import kotlinx.android.synthetic.main.fragment_peak_player.text
+import kotlinx.android.synthetic.main.fragment_peak_player.title
 
 /**
  * Created by hemanths on 2019-10-03.
@@ -54,7 +60,8 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PeakPlayerControlFragment
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PeakPlayerControlFragment
     }
 
     private fun setUpPlayerToolbar() {
@@ -62,7 +69,11 @@ class PeakPlayerFragment : AbsPlayerFragment() {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@PeakPlayerFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
+            ToolbarContentTintHelper.colorizeToolbar(
+                this,
+                ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+                requireActivity()
+            )
         }
     }
 
@@ -71,11 +82,9 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onShow() {
-
     }
 
     override fun onHide() {
-
     }
 
     override fun onBackPressed(): Boolean {
@@ -96,24 +105,27 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onFavoriteToggled() {
-
     }
 
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
 
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(requireContext())
-                .generatePalette(requireContext())
-                .build()
-                .into(object : RetroMusicColoredTarget(playerImage) {
-                    override fun onColorReady(color: Int) {
-                        playbackControlsFragment.setDark(color)
-                    }
-                })
-
+            .checkIgnoreMediaStore(requireContext())
+            .generatePalette(requireContext())
+            .build()
+            .into(object : RetroMusicColoredTarget(playerImage) {
+                override fun onColorReady(color: Int) {
+                    playbackControlsFragment.setDark(color)
+                }
+            })
     }
 
     override fun onServiceConnected() {

@@ -20,7 +20,8 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_card_blur_player.*
+import kotlinx.android.synthetic.main.fragment_card_blur_player.colorBackground
+import kotlinx.android.synthetic.main.fragment_card_blur_player.playerToolbar
 
 class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
     override fun playerToolbar(): Toolbar {
@@ -31,7 +32,6 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     override val paletteColor: Int
         get() = lastColor
     private lateinit var playbackControlsFragment: CardBlurPlaybackControlsFragment
-
 
     override fun onShow() {
         playbackControlsFragment.show()
@@ -71,9 +71,10 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_card_blur_player, container, false)
     }
@@ -85,13 +86,14 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardBlurPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardBlurPlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
         if (playerAlbumCoverFragment != null) {
             playerAlbumCoverFragment.setCallbacks(this)
             playerAlbumCoverFragment.removeEffect()
         }
-
     }
 
     private fun setUpPlayerToolbar() {
@@ -126,21 +128,21 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
 
     private fun updateBlur() {
         val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                .getInt(PreferenceUtil.NEW_BLUR_AMOUNT, 25)
+            .getInt(PreferenceUtil.NEW_BLUR_AMOUNT, 25)
         colorBackground!!.clearColorFilter()
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(requireContext())
-                .generatePalette(requireContext()).build()
-                .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
-                //.centerCrop()
-                //.override(320, 480)
-                .into(object : RetroMusicColoredTarget(colorBackground) {
-                    override fun onColorReady(color: Int) {
-                        if (color == defaultFooterColor) {
-                            colorBackground!!.setColorFilter(color)
-                        }
+            .checkIgnoreMediaStore(requireContext())
+            .generatePalette(requireContext()).build()
+            .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
+            //.centerCrop()
+            //.override(320, 480)
+            .into(object : RetroMusicColoredTarget(colorBackground) {
+                override fun onColorReady(color: Int) {
+                    if (color == defaultFooterColor) {
+                        colorBackground!!.setColorFilter(color)
                     }
-                })
+                }
+            })
     }
 
     override fun onResume() {
@@ -150,7 +152,8 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
 
     override fun onDestroyView() {
         super.onDestroyView()
-        PreferenceManager.getDefaultSharedPreferences(requireContext()).unregisterOnSharedPreferenceChangeListener(this)
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .unregisterOnSharedPreferenceChangeListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

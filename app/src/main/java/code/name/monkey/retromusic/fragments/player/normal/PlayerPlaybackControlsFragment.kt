@@ -1,6 +1,8 @@
 package code.name.monkey.retromusic.fragments.player.normal
 
 import android.animation.ObjectAnimator
+import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -32,11 +35,12 @@ import kotlinx.android.synthetic.main.fragment_player_playback_controls.progress
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.repeatButton
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.shuffleButton
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_player_playback_controls.songInfo
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.songTotalTime
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.text
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.title
 
-class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
+class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(), OnSharedPreferenceChangeListener {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -51,7 +55,6 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_player_playback_controls, container, false)
     }
 
@@ -67,6 +70,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
             showBonceAnimation(playPauseButton)
         }
         title.isSelected = true
+        PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
     }
 
     override fun setDark(color: Int) {
@@ -103,10 +107,16 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePrevNextColor()
     }
 
+
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onResume() {
@@ -252,5 +262,17 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        println(key)
+        if (key == PreferenceUtil.EXTRA_SONG_INFO) {
+            updateSong()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        PreferenceUtil.getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
     }
 }

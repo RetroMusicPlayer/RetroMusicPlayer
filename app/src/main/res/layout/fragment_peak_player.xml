@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/imageContainer"
             app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
 
             <com.google.android.material.textview.MaterialTextView
@@ -95,22 +95,37 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/TextViewBody2"
             android:textColor="?android:attr/textColorSecondary"
-            app:layout_constraintBottom_toBottomOf="@+id/imageContainer"
+            app:layout_constraintBottom_toTopOf="@+id/songInfo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/imageContainer"
             app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+            tools:text="@tools:sample/lorem" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/imageContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageContainer"
+            app:layout_constraintTop_toBottomOf="@+id/text"
             tools:text="@tools:sample/lorem/random" />
 
         <FrameLayout
             android:id="@+id/playbackControlsFragmentContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/imageContainer">
+            app:layout_constraintTop_toBottomOf="@+id/songInfo">
 
             <fragment
                 android:id="@+id/playbackControlsFragment"

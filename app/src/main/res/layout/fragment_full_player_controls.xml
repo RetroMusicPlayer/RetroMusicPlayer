@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:background="@color/md_grey_800">
 
-
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/playerMenu"
         android:layout_width="wrap_content"
@@ -200,8 +199,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/songInfo"
         app:layout_constraintTop_toBottomOf="@+id/playPauseButton"
         tools:background="@color/md_red_400"
         tools:layout_height="52dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/songInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:textColor="@color/md_white_1000"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="@tools:sample/lorem/random" />
 </androidx.constraintlayout.widget.ConstraintLayout>

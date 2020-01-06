@@ -403,6 +403,8 @@
 
     <string name="no_lyrics_found">No lyrics found</string>
 
+    <string name="no_playing_queue">No songs playing</string>
+
     <string name="no_playlists">You have no playlists</string>
 
     <string name="no_purchase_found">No purchase found.</string>
@@ -420,6 +422,7 @@
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> is not listed in the media store.]]></string>
 
     <string name="nothing_to_scan">Nothing to scan.</string>
+    <string name="nothing_to_see">Nothing to see</string>
 
     <string name="notification">Notification</string>
 
@@ -483,8 +486,10 @@
     <string name="pref_filter_song_summary">Filter songs by length</string>
     <string name="pref_filter_song_title">Filter song duration</string>
 
+    <string name="pref_header_advanced">Advanced</string>
     <string name="pref_header_album">Album style</string>
     <string name="pref_header_audio">Audio</string>
+    <string name="pref_header_blacklist">Blacklist</string>
     <string name="pref_header_controls">Controls</string>
     <string name="pref_header_general">Theme</string>
     <string name="pref_header_images">Images</string>
@@ -515,6 +520,7 @@
     <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
     <string name="pref_summary_dominant_color">Most dominant color will be picked from the album or artist cover</string>
     <string name="pref_summary_extra_controls">Add extra controls for mini player</string>
+    <string name="pref_summary_extra_song_info">Show extra Song information, such as file format, bitrate and frequency</string>
     <string name="pref_summary_gapless_playback">"Can cause playback issues on some devices."</string>
     <string name="pref_summary_genre_toggle">Toggle genre tab</string>
     <string name="pref_summary_home_banner">Toggle home banner style</string>
@@ -545,6 +551,7 @@
     <string name="pref_title_colored_notification">Colored notification</string>
     <string name="pref_title_desaturated_color">Desaturated color</string>
     <string name="pref_title_extra_controls">Extra controls</string>
+    <string name="pref_title_extra_song_info">Song info</string>
     <string name="pref_title_gapless_playback">Gapless playback</string>
     <string name="pref_title_general_theme">App theme</string>
     <string name="pref_title_genre_toggle">Show genre tab</string>
@@ -810,9 +817,4 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="pref_header_advanced">Advanced</string>
-    <string name="pref_header_blacklist">Blacklist</string>
-    <string name="no_playing_queue">No songs playing</string>
-    <string name="nothing_to_see">Nothing to see</string>
-
 </resources>

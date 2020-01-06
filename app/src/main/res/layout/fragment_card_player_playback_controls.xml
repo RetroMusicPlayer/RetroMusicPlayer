@@ -1,122 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/playback_controls"
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:clickable="true"
-	android:focusable="true"
-	android:orientation="vertical"
-	tools:ignore="MissingPrefix">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/playback_controls"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    tools:ignore="MissingPrefix">
 
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="@dimen/progress_container_height"
-		android:background="@color/twenty_percent_black_overlay">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progress_container_height"
+        android:background="@color/twenty_percent_black_overlay">
 
-		<com.google.android.material.textview.MaterialTextView
-			android:id="@+id/songCurrentProgress"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_alignParentLeft="true"
-			android:gravity="center_vertical|left|end"
-			android:paddingLeft="8dp"
-			android:singleLine="true"
-			android:textColor="?colorOnSecondary"
-			android:textSize="12sp"
-			tools:ignore="RtlHardcoded,RtlSymmetry" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songCurrentProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical|left|end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="?colorOnSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-		<com.google.android.material.textview.MaterialTextView
-			android:id="@+id/songTotalTime"
-			android:layout_width="wrap_content"
-			android:layout_height="match_parent"
-			android:layout_alignParentRight="true"
-			android:gravity="center_vertical|right|end"
-			android:paddingRight="8dp"
-			android:singleLine="true"
-			android:textColor="?colorOnSecondary"
-			android:textSize="12sp"
-			tools:ignore="RtlHardcoded,RtlSymmetry" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical|right|end"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="?colorOnSecondary"
+            android:textSize="12sp"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
 
-		<androidx.appcompat.widget.AppCompatSeekBar
-			android:id="@+id/progressSlider"
-			style="@style/MusicProgressSlider"
-			android:layout_height="match_parent"
-			android:layout_toLeftOf="@id/songTotalTime"
-			android:layout_toRightOf="@id/songCurrentProgress"
-			tools:ignore="RtlHardcoded,UnusedAttribute" />
+        <androidx.appcompat.widget.AppCompatSeekBar
+            android:id="@+id/progressSlider"
+            style="@style/MusicProgressSlider"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/songTotalTime"
+            android:layout_toRightOf="@id/songCurrentProgress"
+            tools:ignore="RtlHardcoded,UnusedAttribute" />
 
-	</RelativeLayout>
+    </RelativeLayout>
 
-	<include layout="@layout/media_button" />
+    <include layout="@layout/media_button" />
 
-	<FrameLayout
-		android:id="@+id/volumeFragmentContainer"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:paddingStart="8dp"
-		android:paddingEnd="8dp" />
+    <FrameLayout
+        android:id="@+id/volumeFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp" />
 
-	<LinearLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:clickable="true"
-		android:focusable="true"
-		android:foreground="?rectSelector"
-		android:minHeight="72dp"
-		android:orientation="horizontal"
-		tools:ignore="UnusedAttribute">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?rectSelector"
+        android:minHeight="72dp"
+        android:orientation="horizontal"
+        tools:ignore="UnusedAttribute">
 
 
-		<androidx.appcompat.widget.AppCompatImageView
-			android:id="@+id/image"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_vertical"
-			android:padding="16dp"
-			android:scaleType="centerCrop"
-			app:srcCompat="@drawable/ic_play_circle_filled_white_24dp"
-			app:tint="?colorAccent" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="16dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_play_circle_filled_white_24dp"
+            app:tint="?colorAccent" />
 
-		<LinearLayout
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="12dp"
-			android:layout_marginBottom="12dp"
-			android:layout_weight="1.0"
-			android:orientation="vertical"
-			android:paddingStart="0dp"
-			android:paddingEnd="16dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_weight="1.0"
+            android:orientation="vertical"
+            android:paddingStart="0dp"
+            android:paddingEnd="16dp">
 
-			<com.google.android.material.textview.MaterialTextView
-				android:id="@+id/title"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:ellipsize="marquee"
-				android:focusable="true"
-				android:focusableInTouchMode="true"
-				android:freezesText="true"
-				android:marqueeRepeatLimit="marquee_forever"
-				android:scrollHorizontally="true"
-				android:singleLine="true"
-				android:textAppearance="@style/TextViewHeadline6"
-				android:textStyle="bold"
-				tools:text="@tools:sample/lorem/random" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewHeadline6"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
 
-			<com.google.android.material.textview.MaterialTextView
-				android:id="@+id/text"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:ellipsize="marquee"
-				android:focusable="true"
-				android:focusableInTouchMode="true"
-				android:freezesText="true"
-				android:marqueeRepeatLimit="marquee_forever"
-				android:maxLines="2"
-				android:scrollHorizontally="true"
-				android:textStyle="bold"
-				tools:text="@tools:sample/lorem/random" />
-		</LinearLayout>
-	</LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="2"
+                android:scrollHorizontally="true"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/songInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingTop="4dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/lorem/random" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -23,7 +24,12 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_tiny_player.*
+import kotlinx.android.synthetic.main.fragment_tiny_player.playerSongTotalTime
+import kotlinx.android.synthetic.main.fragment_tiny_player.playerToolbar
+import kotlinx.android.synthetic.main.fragment_tiny_player.progressBar
+import kotlinx.android.synthetic.main.fragment_tiny_player.songInfo
+import kotlinx.android.synthetic.main.fragment_tiny_player.text
+import kotlinx.android.synthetic.main.fragment_tiny_player.title
 
 class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
     override fun onUpdateProgressViews(progress: Int, total: Int) {
@@ -38,17 +44,17 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         animatorSet.interpolator = LinearInterpolator()
         animatorSet.start()
 
-        playerSongTotalTime.text = String.format("%s/%s", MusicUtil.getReadableDurationString(total.toLong()),
-                MusicUtil.getReadableDurationString(progress.toLong()))
+        playerSongTotalTime.text = String.format(
+            "%s/%s", MusicUtil.getReadableDurationString(total.toLong()),
+            MusicUtil.getReadableDurationString(progress.toLong())
+        )
     }
-
 
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
 
     override fun onShow() {
-
     }
 
     override fun onHide() {
@@ -95,7 +101,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
         title.setTextColor(textColorPrimary)
         text.setTextColor(textColorPrimaryDisabled)
-
+        songInfo.setTextColor(textColorPrimaryDisabled)
         playerSongTotalTime.setTextColor(textColorPrimary)
 
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, textColorPrimary, requireActivity())
@@ -127,6 +133,12 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
+
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -144,10 +156,11 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     private fun setUpSubFragments() {
-        tinyPlaybackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as TinyPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        tinyPlaybackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as TinyPlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
-
     }
 
     private fun setUpPlayerToolbar() {
@@ -174,5 +187,4 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         super.onPlayingMetaChanged()
         updateSong()
     }
-
 }

@@ -33,5 +33,6 @@
         android:paddingStart="12dp"
         android:textAppearance="@style/TextViewNormal"
         tools:ignore="MissingPrefix"
+        android:textColor="?android:attr/textColorPrimary"
         tools:text="@tools:sample/full_names" />
 </LinearLayout>

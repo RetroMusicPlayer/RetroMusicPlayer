@@ -18,6 +18,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -57,7 +58,7 @@ public final class PreferenceUtil {
 
     public static final String LIBRARY_CATEGORIES = "library_categories";
 
-    public static final String HIDE_HOME_BANNER_SEARCH = "hide_home_banner_search";
+    public static final String EXTRA_SONG_INFO = "extra_song_info";
 
     public static final String DESATURATED_COLOR = "desaturated_color";
 
@@ -698,8 +699,8 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
     }
 
-    public boolean getBannerSearchEnable() {
-        return mPreferences.getBoolean(HIDE_HOME_BANNER_SEARCH, false);
+    public boolean isSongInfo() {
+        return mPreferences.getBoolean(EXTRA_SONG_INFO, false);
     }
 
     public void setSleepTimerFinishMusic(final boolean value) {
@@ -992,7 +993,7 @@ public final class PreferenceUtil {
     }
 
     public void unregisterOnSharedPreferenceChangedListener(
-            SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {
+            @NonNull OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {
         mPreferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 }

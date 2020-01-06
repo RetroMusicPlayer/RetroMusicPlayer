@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import kotlinx.android.synthetic.main.fragment_card_player.*
+import kotlinx.android.synthetic.main.fragment_card_player.playerToolbar
 
 class CardFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {
@@ -62,8 +62,10 @@ class CardFragment : AbsPlayerFragment() {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_card_player, container, false)
     }
@@ -75,8 +77,10 @@ class CardFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardPlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
         playerAlbumCoverFragment.removeSlideEffect()
     }
@@ -87,7 +91,6 @@ class CardFragment : AbsPlayerFragment() {
         playerToolbar.setOnMenuItemClickListener(this)
 
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
-
     }
 
     override fun onServiceConnected() {
@@ -107,6 +110,4 @@ class CardFragment : AbsPlayerFragment() {
             return fragment
         }
     }
-
-
 }

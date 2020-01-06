@@ -12,13 +12,14 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import kotlinx.android.synthetic.main.fragment_simple_player.*
+import kotlinx.android.synthetic.main.fragment_simple_player.playerToolbar
 
 /**
  * @author Hemanth S (h4h13).
  */
 
 class SimplePlayerFragment : AbsPlayerFragment() {
+
     override fun playerToolbar(): Toolbar {
         return playerToolbar
     }
@@ -29,8 +30,10 @@ class SimplePlayerFragment : AbsPlayerFragment() {
 
     private lateinit var simplePlaybackControlsFragment: SimplePlaybackControlsFragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_simple_player, container, false)
     }
@@ -42,9 +45,11 @@ class SimplePlayerFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
-        simplePlaybackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as SimplePlaybackControlsFragment
+        simplePlaybackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as SimplePlaybackControlsFragment
     }
 
     override fun onShow() {
@@ -67,7 +72,11 @@ class SimplePlayerFragment : AbsPlayerFragment() {
         lastColor = color
         callbacks?.onPaletteColorChanged()
         simplePlaybackControlsFragment.setDark(color)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            requireActivity()
+        )
     }
 
     override fun onFavoriteToggled() {
@@ -85,6 +94,10 @@ class SimplePlayerFragment : AbsPlayerFragment() {
         playerToolbar.inflateMenu(R.menu.menu_player)
         playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            requireActivity()
+        )
     }
 }

@@ -108,5 +108,4 @@
                 tools:layout="@layout/fragment_adaptive_player_playback_controls" />
         </FrameLayout>
     </LinearLayout>
-
 </FrameLayout>

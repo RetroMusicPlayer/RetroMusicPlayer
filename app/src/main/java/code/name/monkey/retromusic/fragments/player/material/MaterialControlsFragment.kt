@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -23,7 +24,17 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.nextButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.previousButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.shuffleButton
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.songInfo
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.text
+import kotlinx.android.synthetic.main.fragment_material_playback_controls.title
 
 /**
  * @author Hemanth S (h4h13).
@@ -34,14 +45,15 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_material_playback_controls, container, false)
     }
 
@@ -56,6 +68,12 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onResume() {
@@ -96,10 +114,12 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         updateRepeatState()
@@ -133,7 +153,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         if (MusicPlayerRemote.isPlaying) {
             playPauseButton.setImageResource(R.drawable.ic_pause_white_64dp)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp);
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp)
         }
     }
 
@@ -162,7 +182,10 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
@@ -189,11 +212,9 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     public override fun show() {
-
     }
 
     public override fun hide() {
-
     }
 
     override fun setUpProgressSlider() {
@@ -201,8 +222,10 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis,
-                            MusicPlayerRemote.songDurationMillis)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
                 }
             }
         })

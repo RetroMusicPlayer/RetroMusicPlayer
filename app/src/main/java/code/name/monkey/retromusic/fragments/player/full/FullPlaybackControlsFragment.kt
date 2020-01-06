@@ -21,6 +21,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -32,7 +33,19 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_full_player_controls.*
+import kotlinx.android.synthetic.main.fragment_full_player_controls.nextButton
+import kotlinx.android.synthetic.main.fragment_full_player_controls.playPauseButton
+import kotlinx.android.synthetic.main.fragment_full_player_controls.playerMenu
+import kotlinx.android.synthetic.main.fragment_full_player_controls.previousButton
+import kotlinx.android.synthetic.main.fragment_full_player_controls.progressSlider
+import kotlinx.android.synthetic.main.fragment_full_player_controls.repeatButton
+import kotlinx.android.synthetic.main.fragment_full_player_controls.shuffleButton
+import kotlinx.android.synthetic.main.fragment_full_player_controls.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_full_player_controls.songFavourite
+import kotlinx.android.synthetic.main.fragment_full_player_controls.songInfo
+import kotlinx.android.synthetic.main.fragment_full_player_controls.songTotalTime
+import kotlinx.android.synthetic.main.fragment_full_player_controls.text
+import kotlinx.android.synthetic.main.fragment_full_player_controls.title
 
 /**
  * Created by hemanths on 20/09/17.
@@ -49,12 +62,13 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_full_player_controls, container, false)
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -90,12 +104,11 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
 
     public override fun show() {
         playPauseButton!!.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .setInterpolator(DecelerateInterpolator())
-                .start()
+            .scaleX(1f)
+            .scaleY(1f)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
     }
-
 
     public override fun hide() {
         playPauseButton.apply {
@@ -120,12 +133,16 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 
         playPauseButton.backgroundTintList = ColorStateList.valueOf(colorFinal)
-        playPauseButton.imageTintList = ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(colorFinal)))
+        playPauseButton.imageTintList = ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                context,
+                ColorUtil.isColorLight(colorFinal)
+            )
+        )
 
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
-
     }
 
     override fun onServiceConnected() {
@@ -140,6 +157,11 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         title.text = song.title
         text.text = song.artistName
         updateIsFavorite()
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onPlayingMetaChanged() {
@@ -199,7 +221,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
-
     private fun updatePrevNextColor() {
         nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
@@ -216,7 +237,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         })
     }
 
-
     override fun onRepeatModeChanged() {
         updateRepeatState()
     }
@@ -231,7 +251,10 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
@@ -306,5 +329,4 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
     fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
-
 }

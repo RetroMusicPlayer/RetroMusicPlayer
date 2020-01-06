@@ -12,6 +12,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -19,7 +20,15 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.nextButton
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.playPauseButton
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.previousButton
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.repeatButton
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.shuffleButton
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.songInfo
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.text
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.title
 
 /**
  * @author Hemanth S (h4h13).
@@ -30,7 +39,6 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-
 
     override fun onPlayStateChanged() {
         updatePlayPauseDrawableState()
@@ -55,7 +63,6 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         super.onCreate(savedInstanceState)
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_simple_controls_fragment, container, false)
@@ -110,7 +117,10 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
@@ -140,21 +150,25 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+            songInfo?.text = getSongInfo(song)
+        } else {
+            songInfo?.hide()
+        }
     }
 
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
         updateSong()
-
     }
 
     public override fun show() {
         playPauseButton!!.animate()
-                .scaleX(1f)
-                .scaleY(1f)
-                .rotation(360f)
-                .setInterpolator(DecelerateInterpolator())
-                .start()
+            .scaleX(1f)
+            .scaleY(1f)
+            .rotation(360f)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
     }
 
     public override fun hide() {
@@ -168,12 +182,14 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setUpProgressSlider() {
-
     }
 
-
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        songCurrentProgress!!.text = String.format("%s / %s", MusicUtil.getReadableDurationString(progress.toLong()), MusicUtil.getReadableDurationString(total.toLong()))
+        songCurrentProgress!!.text = String.format(
+            "%s / %s",
+            MusicUtil.getReadableDurationString(progress.toLong()),
+            MusicUtil.getReadableDurationString(total.toLong())
+        )
     }
 
     override fun setDark(color: Int) {
@@ -194,7 +210,11 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         volumeFragment?.setTintable(colorFinal)
 
-        TintHelper.setTintAuto(playPauseButton, MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)), false)
+        TintHelper.setTintAuto(
+            playPauseButton,
+            MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)),
+            false
+        )
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
         text.setTextColor(colorFinal)
 

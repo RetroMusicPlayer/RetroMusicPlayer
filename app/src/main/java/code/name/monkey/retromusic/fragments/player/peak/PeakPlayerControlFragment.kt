@@ -39,7 +39,14 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_peak_control_player.*
+import kotlinx.android.synthetic.main.fragment_peak_control_player.nextButton
+import kotlinx.android.synthetic.main.fragment_peak_control_player.playPauseButton
+import kotlinx.android.synthetic.main.fragment_peak_control_player.previousButton
+import kotlinx.android.synthetic.main.fragment_peak_control_player.progressSlider
+import kotlinx.android.synthetic.main.fragment_peak_control_player.repeatButton
+import kotlinx.android.synthetic.main.fragment_peak_control_player.shuffleButton
+import kotlinx.android.synthetic.main.fragment_peak_control_player.songCurrentProgress
+import kotlinx.android.synthetic.main.fragment_peak_control_player.songTotalTime
 
 /**
  * Created by hemanths on 2019-10-04.
@@ -67,37 +74,37 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_peak_control_player, container, false)
     }
 
     override fun onViewCreated(
-            view: View,
-            savedInstanceState: Bundle?
+        view: View,
+        savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
         setUpMusicControllers()
     }
 
     override fun show() {
-
     }
 
     override fun hide() {
-
     }
 
     override fun setDark(color: Int) {
         val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
@@ -185,14 +192,15 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
-
     override fun updateShuffleState() {
         when (MusicPlayerRemote.shuffleMode) {
-            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            MusicService.SHUFFLE_MODE_SHUFFLE -> shuffleButton.setColorFilter(
+                lastPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
             else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         }
     }
-
 
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {

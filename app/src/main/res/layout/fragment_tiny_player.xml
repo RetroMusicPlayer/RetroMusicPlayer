@@ -51,15 +51,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-
-
-        android:padding="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewHeadline3"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/playbackControlsFragmentContainer"
+        app:layout_constraintEnd_toStartOf="@+id/songInfo"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
+        app:layout_constraintVertical_bias="0"
         tools:ignore="MissingPrefix"
         tools:text="@tools:sample/date/hhmm" />
+
+    <code.name.monkey.retromusic.views.VerticalTextView
+        android:id="@+id/songInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@+id/playbackControlsFragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_bar"
+        app:layout_constraintVertical_bias="0"
+        tools:ignore="MissingPrefix"
+        tools:text="@tools:sample/lorem" />
 
     <FrameLayout
         android:id="@+id/toolbarContainer"

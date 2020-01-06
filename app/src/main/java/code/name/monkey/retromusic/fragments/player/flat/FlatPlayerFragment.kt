@@ -20,7 +20,8 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
-import kotlinx.android.synthetic.main.fragment_flat_player.*
+import kotlinx.android.synthetic.main.fragment_flat_player.colorGradientBackground
+import kotlinx.android.synthetic.main.fragment_flat_player.playerToolbar
 
 class FlatPlayerFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {
@@ -34,8 +35,10 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         get() = lastColor
 
     private fun setUpSubFragments() {
-        flatPlaybackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FlatPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        flatPlaybackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FlatPlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
@@ -43,7 +46,11 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         playerToolbar.inflateMenu(R.menu.menu_player)
         playerToolbar.setNavigationOnClickListener { _ -> requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            requireActivity()
+        )
     }
 
     private fun colorize(i: Int) {
@@ -53,16 +60,20 @@ class FlatPlayerFragment : AbsPlayerFragment() {
 
         valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), android.R.color.transparent, i)
         valueAnimator!!.addUpdateListener { animation ->
-            val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM,
-                    intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0)
+            val drawable = DrawableGradient(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0
+            )
             colorGradientBackground?.background = drawable
 
         }
         valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_flat_player, container, false)
     }
 
@@ -70,7 +81,6 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpPlayerToolbar()
         setUpSubFragments()
-
     }
 
     override fun onShow() {
@@ -109,11 +119,9 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         }
     }
 
-
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
-
 
     override fun toggleFavorite(song: Song) {
         super.toggleFavorite(song)

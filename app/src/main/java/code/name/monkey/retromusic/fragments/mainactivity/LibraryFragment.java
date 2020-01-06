@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -19,13 +18,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.afollestad.materialcab.MaterialCab;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.card.MaterialCardView;
-
-import org.jetbrains.annotations.NotNull;
-
 import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
@@ -40,21 +32,29 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
+import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.card.MaterialCardView;
 import io.reactivex.disposables.CompositeDisposable;
+import org.jetbrains.annotations.NotNull;
 
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
 
     public static final String TAG = "LibraryFragment";
+
     private static final String CURRENT_TAB_ID = "current_tab_id";
 
-    private Toolbar toolbar;
     private AppBarLayout appBarLayout;
-    private MaterialCardView toolbarContainer;
 
     private MaterialCab cab;
-    private FragmentManager fragmentManager;
+
     private CompositeDisposable disposable;
 
+    private FragmentManager fragmentManager;
+
+    private Toolbar toolbar;
+
+    private MaterialCardView toolbarContainer;
 
     @NonNull
     public static Fragment newInstance(int tab) {
@@ -70,17 +70,11 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return new LibraryFragment();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        disposable.dispose();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
         disposable = new CompositeDisposable();
         appBarLayout = view.findViewById(R.id.appBarLayout);
@@ -88,23 +82,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         toolbar = view.findViewById(R.id.toolbar);
         return view;
     }
-
-    public void setTitle(@StringRes int name) {
-        toolbar.setTitle(getString(name));
-    }
-
-    public void addOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
-        appBarLayout.addOnOffsetChangedListener(onOffsetChangedListener);
-    }
-
-    public void removeOnAppBarOffsetChangedListener(@NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
-        appBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
-    }
-
-    public int getTotalAppBarScrollingRange() {
-        return appBarLayout.getTotalScrollRange();
-    }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -114,53 +91,19 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         inflateFragment();
     }
 
-    private void inflateFragment() {
-        if (getArguments() == null) {
-            selectedFragment(SongsFragment.Companion.newInstance());
-            return;
-        }
-        switch (getArguments().getInt(CURRENT_TAB_ID)) {
-            default:
-            case R.id.action_song:
-                selectedFragment(SongsFragment.Companion.newInstance());
-                break;
-            case R.id.action_album:
-                selectedFragment(AlbumsFragment.Companion.newInstance());
-                break;
-            case R.id.action_artist:
-                selectedFragment(ArtistsFragment.Companion.newInstance());
-                break;
-            case R.id.action_playlist:
-                selectedFragment(PlaylistsFragment.Companion.newInstance());
-                break;
-            case R.id.action_genre:
-                selectedFragment(GenresFragment.Companion.newInstance());
-                break;
-            case R.id.action_playing_queue:
-                selectedFragment(PlayingQueueFragment.Companion.newInstance());
-                break;
-        }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        disposable.dispose();
     }
 
-    @SuppressWarnings("ConstantConditions")
-    private void setupToolbar() {
-        toolbar.setBackgroundTintList(ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
-        toolbar.setOnClickListener(v -> {
-            ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
-            NavigationUtil.goToSearch(getMainActivity(), options);
-        });
-        getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
-        ToolbarContentTintHelper.colorBackButton(toolbar);
-        //toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
+    public void addOnAppBarOffsetChangedListener(
+            @NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+        appBarLayout.addOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    private Fragment getCurrentFragment() {
-        if (fragmentManager == null) {
-            return SongsFragment.Companion.newInstance();
-        }
-        return fragmentManager.findFragmentByTag(LibraryFragment.TAG);
+    public int getTotalAppBarScrollingRange() {
+        return appBarLayout.getTotalScrollRange();
     }
 
     @Override
@@ -172,31 +115,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return false;
     }
 
-    private void selectedFragment(Fragment fragment) {
-        fragmentManager = getChildFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction
-                .replace(R.id.fragmentContainer, fragment, LibraryFragment.TAG)
-                .commit();
-    }
-
-    @NonNull
-    @Override
-    public MaterialCab openCab(int menuRes, @NonNull MaterialCab.Callback callback) {
-        if (cab != null && cab.isActive()) {
-            cab.finish();
-        }
-
-        cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
-                .setMenu(menuRes)
-                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
-                .setBackgroundColor(
-                        RetroColorUtil.shiftBackgroundColorForLightText(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)))
-                .start(callback);
-        return cab;
-    }
-
-
     @Override
     public void onCreateOptionsMenu(@NotNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -205,7 +123,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         Fragment currentFragment = getCurrentFragment();
         if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment
                 && currentFragment.isAdded()) {
-            AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
+            AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment
+                    = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
 
             MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
             if (RetroUtil.isLandscape()) {
@@ -220,10 +139,41 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             menu.removeItem(R.id.action_grid_size);
             menu.removeItem(R.id.action_sort_order);
         } else {
-            menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title).setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
+                    .setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.removeItem(R.id.action_grid_size);
         }
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu, ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu,
+                ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //if (pager == null) return false;
+        Fragment currentFragment = getCurrentFragment();
+        if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment) {
+            AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment
+                    = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
+            if (handleGridSizeMenuItem(fragment, item)) {
+                return true;
+            }
+            if (handleSortOrderMenuItem(fragment, item)) {
+                return true;
+            }
+        }
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_search:
+                ActivityOptions options = ActivityOptions
+                        .makeSceneTransitionAnimation(getMainActivity(), toolbarContainer,
+                                getString(R.string.transition_toolbar));
+                NavigationUtil.goToSearch(getMainActivity(), options);
+                break;
+            case R.id.action_new_playlist:
+                CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -236,45 +186,76 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         ToolbarContentTintHelper.handleOnPrepareOptionsMenu(activity, toolbar);
     }
 
-
-    private void setUpSortOrderMenu(
-            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
-            @NonNull SubMenu sortOrderMenu) {
-        String currentSortOrder = fragment.getSortOrder();
-        sortOrderMenu.clear();
-
-        if (fragment instanceof AlbumsFragment) {
-            sortOrderMenu.add(0, R.id.action_album_sort_order_asc, 0, R.string.sort_order_a_z)
-                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z));
-            sortOrderMenu.add(0, R.id.action_album_sort_order_desc, 1, R.string.sort_order_z_a)
-                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A));
-            sortOrderMenu.add(0, R.id.action_album_sort_order_artist, 2, R.string.sort_order_artist)
-                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST));
-            sortOrderMenu.add(0, R.id.action_album_sort_order_year, 3, R.string.sort_order_year)
-                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_YEAR));
-        } else if (fragment instanceof ArtistsFragment) {
-            sortOrderMenu.add(0, R.id.action_artist_sort_order_asc, 0, R.string.sort_order_a_z)
-                    .setChecked(currentSortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_A_Z));
-            sortOrderMenu.add(0, R.id.action_artist_sort_order_desc, 1, R.string.sort_order_z_a)
-                    .setChecked(currentSortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_Z_A));
-        } else if (fragment instanceof SongsFragment) {
-            sortOrderMenu.add(0, R.id.action_song_sort_order_asc, 0, R.string.sort_order_a_z)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_desc, 1, R.string.sort_order_z_a)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_artist, 2, R.string.sort_order_artist)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_album, 3, R.string.sort_order_album)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_year, 4, R.string.sort_order_year)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_YEAR));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_date, 5, R.string.sort_order_date)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_DATE));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 6, R.string.sort_order_composer)
-                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.COMPOSER));
+    @NonNull
+    @Override
+    public MaterialCab openCab(int menuRes, @NonNull MaterialCab.Callback callback) {
+        if (cab != null && cab.isActive()) {
+            cab.finish();
         }
 
-        sortOrderMenu.setGroupCheckable(0, true, true);
+        cab = new MaterialCab(getMainActivity(), R.id.cab_stub)
+                .setMenu(menuRes)
+                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+                .setBackgroundColor(
+                        RetroColorUtil.shiftBackgroundColorForLightText(
+                                ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)))
+                .start(callback);
+        return cab;
+    }
+
+    public void removeOnAppBarOffsetChangedListener(
+            @NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
+        appBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
+    }
+
+    public void setTitle(@StringRes int name) {
+        toolbar.setTitle(getString(name));
+    }
+
+    private Fragment getCurrentFragment() {
+        if (fragmentManager == null) {
+            return SongsFragment.Companion.newInstance();
+        }
+        return fragmentManager.findFragmentByTag(LibraryFragment.TAG);
+    }
+
+    private boolean handleGridSizeMenuItem(
+            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+                    fragment, @NonNull MenuItem item) {
+        int gridSize = 0;
+        switch (item.getItemId()) {
+            case R.id.action_grid_size_1:
+                gridSize = 1;
+                break;
+            case R.id.action_grid_size_2:
+                gridSize = 2;
+                break;
+            case R.id.action_grid_size_3:
+                gridSize = 3;
+                break;
+            case R.id.action_grid_size_4:
+                gridSize = 4;
+                break;
+            case R.id.action_grid_size_5:
+                gridSize = 5;
+                break;
+            case R.id.action_grid_size_6:
+                gridSize = 6;
+                break;
+            case R.id.action_grid_size_7:
+                gridSize = 7;
+                break;
+            case R.id.action_grid_size_8:
+                gridSize = 8;
+                break;
+        }
+
+        if (gridSize > 0) {
+            item.setChecked(true);
+            fragment.setAndSaveGridSize(gridSize);
+            return true;
+        }
+        return false;
     }
 
     private boolean handleSortOrderMenuItem(
@@ -341,33 +322,41 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         return false;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //if (pager == null) return false;
-        Fragment currentFragment = getCurrentFragment();
-        if (currentFragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment) {
-            AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
-            if (handleGridSizeMenuItem(fragment, item)) {
-                return true;
-            }
-            if (handleSortOrderMenuItem(fragment, item)) {
-                return true;
-            }
+    private void inflateFragment() {
+        if (getArguments() == null) {
+            selectedFragment(SongsFragment.Companion.newInstance());
+            return;
         }
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_search:
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(getMainActivity(), toolbarContainer, getString(R.string.transition_toolbar));
-                NavigationUtil.goToSearch(getMainActivity(), options);
+        switch (getArguments().getInt(CURRENT_TAB_ID)) {
+            default:
+            case R.id.action_song:
+                selectedFragment(SongsFragment.Companion.newInstance());
                 break;
-            case R.id.action_new_playlist:
-                CreatePlaylistDialog.Companion.create().show(getChildFragmentManager(), "CREATE_PLAYLIST");
-                return true;
+            case R.id.action_album:
+                selectedFragment(AlbumsFragment.Companion.newInstance());
+                break;
+            case R.id.action_artist:
+                selectedFragment(ArtistsFragment.Companion.newInstance());
+                break;
+            case R.id.action_playlist:
+                selectedFragment(PlaylistsFragment.Companion.newInstance());
+                break;
+            case R.id.action_genre:
+                selectedFragment(GenresFragment.Companion.newInstance());
+                break;
+            case R.id.action_playing_queue:
+                selectedFragment(PlayingQueueFragment.Companion.newInstance());
+                break;
         }
-        return super.onOptionsItemSelected(item);
     }
 
+    private void selectedFragment(Fragment fragment) {
+        fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction
+                .replace(R.id.fragmentContainer, fragment, LibraryFragment.TAG)
+                .commit();
+    }
 
     private void setUpGridSizeMenu(
             @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
@@ -419,43 +408,60 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         }
     }
 
+    private void setUpSortOrderMenu(
+            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
+            @NonNull SubMenu sortOrderMenu) {
+        String currentSortOrder = fragment.getSortOrder();
+        sortOrderMenu.clear();
 
-    private boolean handleGridSizeMenuItem(
-            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment
-                    fragment, @NonNull MenuItem item) {
-        int gridSize = 0;
-        switch (item.getItemId()) {
-            case R.id.action_grid_size_1:
-                gridSize = 1;
-                break;
-            case R.id.action_grid_size_2:
-                gridSize = 2;
-                break;
-            case R.id.action_grid_size_3:
-                gridSize = 3;
-                break;
-            case R.id.action_grid_size_4:
-                gridSize = 4;
-                break;
-            case R.id.action_grid_size_5:
-                gridSize = 5;
-                break;
-            case R.id.action_grid_size_6:
-                gridSize = 6;
-                break;
-            case R.id.action_grid_size_7:
-                gridSize = 7;
-                break;
-            case R.id.action_grid_size_8:
-                gridSize = 8;
-                break;
+        if (fragment instanceof AlbumsFragment) {
+            sortOrderMenu.add(0, R.id.action_album_sort_order_asc, 0, R.string.sort_order_a_z)
+                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z));
+            sortOrderMenu.add(0, R.id.action_album_sort_order_desc, 1, R.string.sort_order_z_a)
+                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A));
+            sortOrderMenu.add(0, R.id.action_album_sort_order_artist, 2, R.string.sort_order_artist)
+                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST));
+            sortOrderMenu.add(0, R.id.action_album_sort_order_year, 3, R.string.sort_order_year)
+                    .setChecked(currentSortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_YEAR));
+        } else if (fragment instanceof ArtistsFragment) {
+            sortOrderMenu.add(0, R.id.action_artist_sort_order_asc, 0, R.string.sort_order_a_z)
+                    .setChecked(currentSortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_A_Z));
+            sortOrderMenu.add(0, R.id.action_artist_sort_order_desc, 1, R.string.sort_order_z_a)
+                    .setChecked(currentSortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_Z_A));
+        } else if (fragment instanceof SongsFragment) {
+            sortOrderMenu.add(0, R.id.action_song_sort_order_asc, 0, R.string.sort_order_a_z)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_desc, 1, R.string.sort_order_z_a)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_artist, 2, R.string.sort_order_artist)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_album, 3, R.string.sort_order_album)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_year, 4, R.string.sort_order_year)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_YEAR));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_date, 5, R.string.sort_order_date)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.SONG_DATE));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 6, R.string.sort_order_composer)
+                    .setChecked(currentSortOrder.equals(SortOrder.SongSortOrder.COMPOSER));
         }
 
-        if (gridSize > 0) {
-            item.setChecked(true);
-            fragment.setAndSaveGridSize(gridSize);
-            return true;
-        }
-        return false;
+        sortOrderMenu.setGroupCheckable(0, true, true);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    private void setupToolbar() {
+        toolbar.setBackgroundTintList(
+                ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
+        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
+        toolbar.setOnClickListener(v -> {
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(getMainActivity(), toolbarContainer,
+                            getString(R.string.transition_toolbar));
+            NavigationUtil.goToSearch(getMainActivity(), options);
+        });
+        getMainActivity().setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
+        //ToolbarContentTintHelper.colorBackButton(toolbar);
+        //toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 }

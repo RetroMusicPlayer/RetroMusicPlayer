@@ -71,5 +71,19 @@
             android:thumbTint="@color/md_white_1000"
             tools:progress="20" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/songInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingEnd="16dp"
+            android:textSize="12sp"
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </FrameLayout>
