@@ -226,11 +226,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun loadAlbumCover() {
-        /* Glide.with(this).load(RetroUtil.getAlbumArtUri(album.id)).placeholder(R.drawable.default_album_art)
-                 .error(R.drawable.default_album_art)
-                 .dontTransform()
-                 .dontAnimate().into(image)*/
-
         SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
             .checkIgnoreMediaStore(this)
             .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())

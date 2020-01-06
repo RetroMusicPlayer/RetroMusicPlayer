@@ -59,6 +59,8 @@
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
         <item name="colorSurface">@color/blackColorSurface</item>
         <item name="colorOnBackground">@color/blackColorSurface</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -106,7 +108,7 @@
     </style>
 
     <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">8dp</item>
+        <item name="cornerRadius">24dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconTint">?attr/colorControlNormal</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>

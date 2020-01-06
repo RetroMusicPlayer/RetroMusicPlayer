@@ -7,7 +7,11 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import android.view.*
+import android.view.GestureDetector
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -15,14 +19,18 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_mini_player.*
+import kotlinx.android.synthetic.main.fragment_mini_player.actionNext
+import kotlinx.android.synthetic.main.fragment_mini_player.actionPrevious
+import kotlinx.android.synthetic.main.fragment_mini_player.miniPlayerPlayPauseButton
+import kotlinx.android.synthetic.main.fragment_mini_player.miniPlayerTitle
+import kotlinx.android.synthetic.main.fragment_mini_player.progressBar
 import kotlin.math.abs
 
-open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback, View.OnClickListener {
+open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback,
+    View.OnClickListener {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
@@ -37,7 +45,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.actionPlayingQueue -> NavigationUtil.goToPlayingQueue(requireActivity())
             R.id.actionNext -> MusicPlayerRemote.playNextSong()
             R.id.actionPrevious -> MusicPlayerRemote.back()
         }
@@ -53,19 +60,16 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
             actionPrevious.visibility = View.VISIBLE
             actionNext?.visibility = View.VISIBLE
             actionPrevious?.visibility = View.VISIBLE
-            actionPlayingQueue.visibility = View.VISIBLE
         } else {
-            actionNext.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
-            actionPlayingQueue.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.GONE else View.VISIBLE
-            actionPrevious.visibility = if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+            actionNext.visibility =
+                if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+            actionPrevious.visibility =
+                if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
         }
-
-        actionPlayingQueue.setOnClickListener(this)
         actionNext.setOnClickListener(this)
         actionPrevious.setOnClickListener(this)
         actionNext?.setOnClickListener(this)
         actionPrevious?.setOnClickListener(this)
-
     }
 
     private fun setUpMiniPlayer() {
@@ -106,7 +110,6 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         updatePlayPauseDrawableState()
     }
 
-
     override fun onUpdateProgressViews(progress: Int, total: Int) {
         progressBar.max = total
         val animator = ObjectAnimator.ofInt(progressBar, "progress", progress)
@@ -139,21 +142,23 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         init {
             flingPlayBackController = GestureDetector(context,
-                    object : GestureDetector.SimpleOnGestureListener() {
-                        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float,
-                                             velocityY: Float): Boolean {
-                            if (abs(velocityX) > abs(velocityY)) {
-                                if (velocityX < 0) {
-                                    MusicPlayerRemote.playNextSong()
-                                    return true
-                                } else if (velocityX > 0) {
-                                    MusicPlayerRemote.playPreviousSong()
-                                    return true
-                                }
+                object : GestureDetector.SimpleOnGestureListener() {
+                    override fun onFling(
+                        e1: MotionEvent, e2: MotionEvent, velocityX: Float,
+                        velocityY: Float
+                    ): Boolean {
+                        if (abs(velocityX) > abs(velocityY)) {
+                            if (velocityX < 0) {
+                                MusicPlayerRemote.playNextSong()
+                                return true
+                            } else if (velocityX > 0) {
+                                MusicPlayerRemote.playPreviousSong()
+                                return true
                             }
-                            return false
                         }
-                    })
+                        return false
+                    }
+                })
         }
 
         @SuppressLint("ClickableViewAccessibility")

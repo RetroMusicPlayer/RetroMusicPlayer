@@ -70,12 +70,12 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
 
 
         materialDialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .show {
-                    icon(R.mipmap.ic_launcher_round)
-                    title(R.string.app_name)
-                    customView(view = layout, scrollable = true)
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
-                }
+            .show {
+                icon(R.mipmap.ic_launcher_round)
+                title(R.string.app_name)
+                customView(view = layout, scrollable = true)
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            }
         return materialDialog
     }
 

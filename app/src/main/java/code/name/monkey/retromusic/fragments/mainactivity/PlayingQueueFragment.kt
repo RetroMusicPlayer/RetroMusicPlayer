@@ -28,7 +28,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playing_queue.*
+import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
 
 /**
  * Created by hemanths on 2019-12-08.
@@ -44,6 +44,7 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
     }
+
     private fun setupRecyclerView() {
         recyclerViewTouchActionGuardManager = RecyclerViewTouchActionGuardManager()
         recyclerViewDragDropManager = RecyclerViewDragDropManager()
@@ -69,7 +70,12 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
     }
 
     override fun createAdapter(): PlayingQueueAdapter {
-        return PlayingQueueAdapter(requireActivity() as AppCompatActivity, MusicPlayerRemote.playingQueue, MusicPlayerRemote.position, R.layout.item_queue)
+        return PlayingQueueAdapter(
+            requireActivity() as AppCompatActivity,
+            MusicPlayerRemote.playingQueue,
+            MusicPlayerRemote.position,
+            R.layout.item_queue
+        )
     }
 
     override fun onServiceConnected() {

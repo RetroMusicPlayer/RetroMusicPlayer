@@ -29,7 +29,7 @@
                 android:padding="8dp"
                 android:visibility="gone"
                 app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
-                app:tint="?colorOnBackground"
+                app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription"
                 tools:visibility="visible" />
 

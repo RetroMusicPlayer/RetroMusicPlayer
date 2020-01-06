@@ -55,7 +55,6 @@
         <item name="android:windowLightNavigationBar">false</item>
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
-
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">

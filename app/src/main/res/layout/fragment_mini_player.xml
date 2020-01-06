@@ -94,16 +94,5 @@
             android:padding="6dp"
             app:srcCompat="@drawable/ic_skip_next_white_24dp"
             app:tint="?attr/colorControlNormal" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/actionPlayingQueue"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical"
-            android:background="?roundSelector"
-            android:padding="6dp"
-            app:srcCompat="@drawable/ic_playlist_play_white_24dp"
-            app:tint="?attr/colorControlNormal" />
-
     </LinearLayout>
 </FrameLayout>
