@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR_CARD
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.CARD
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.CIRCLE
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.COLOR
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.FIT
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.FLAT
@@ -34,6 +35,7 @@ import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
+import code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
@@ -249,6 +251,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             COLOR -> ColorFragment()
             TINY -> TinyPlayerFragment()
             PEAK -> PeakPlayerFragment()
+            CIRCLE -> CirclePlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)

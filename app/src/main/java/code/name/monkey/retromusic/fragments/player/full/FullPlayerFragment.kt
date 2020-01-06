@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.full
 
+import android.app.ActivityOptions
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -155,7 +156,15 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     private fun setupArtist() {
         artistImage.setOnClickListener {
-            NavigationUtil.goToArtist(requireActivity(), MusicPlayerRemote.currentSong.artistId)
+            val transitionName =
+                "${getString(R.string.transition_artist_image)}_${MusicPlayerRemote.currentSong.artistId}"
+            val activityOptions =
+                ActivityOptions.makeSceneTransitionAnimation(requireActivity(), artistImage, transitionName)
+            NavigationUtil.goToArtistOptions(
+                requireActivity(),
+                MusicPlayerRemote.currentSong.artistId,
+                activityOptions
+            )
         }
     }
 

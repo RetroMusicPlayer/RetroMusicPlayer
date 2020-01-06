@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
@@ -79,7 +78,7 @@ public class NavigationUtil {
         ActivityCompat.startActivity(activity, intent, null);
     }
 
-    public static void goToArtistOptions(@NotNull AppCompatActivity activity,
+    public static void goToArtistOptions(@NotNull Activity activity,
             int artistId,
             @NonNull ActivityOptions options) {
 

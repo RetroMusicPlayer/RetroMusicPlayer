@@ -121,7 +121,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
             intent.extras?.getInt(EXTRA_ARTIST_ID)?.let {
                 artistDetailsPresenter.loadArtist(it)
-                artistCoverContainer?.transitionName = "${getString(R.string.transition_artist_image)}_$it"
+                val name = "${getString(R.string.transition_artist_image)}_$it"
+                artistCoverContainer?.transitionName = name
             }
         } else {
             finish()

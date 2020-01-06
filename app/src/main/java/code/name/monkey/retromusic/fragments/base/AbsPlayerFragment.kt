@@ -18,21 +18,31 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
-import code.name.monkey.retromusic.dialogs.*
+import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
+import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog
+import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.dialogs.SleepTimerDialog
+import code.name.monkey.retromusic.dialogs.SongDetailDialog
+import code.name.monkey.retromusic.dialogs.SongShareDialog
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import code.name.monkey.retromusic.util.*
-import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.*
+import code.name.monkey.retromusic.util.LyricUtil
+import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.RingtoneManager
+import kotlinx.android.synthetic.main.shadow_statusbar_toolbar.statusBarShadow
 import java.io.FileNotFoundException
 
 abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
-        Toolbar.OnMenuItemClickListener,
-        PaletteColorHolder,
-        PlayerAlbumCoverFragment.Callbacks {
+    Toolbar.OnMenuItemClickListener,
+    PaletteColorHolder,
+    PlayerAlbumCoverFragment.Callbacks {
 
     var callbacks: Callbacks? = null
         private set
@@ -41,7 +51,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
     private var playerAlbumCoverFragment: PlayerAlbumCoverFragment? = null
 
     override fun onAttach(
-            context: Context
+        context: Context
     ) {
         super.onAttach(context)
         try {
@@ -57,7 +67,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
     }
 
     override fun onMenuItemClick(
-            item: MenuItem
+        item: MenuItem
     ): Boolean {
         val song = MusicPlayerRemote.currentSong
         when (item.itemId) {
@@ -83,7 +93,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
             }
             R.id.action_save_playing_queue -> {
                 CreatePlaylistDialog.create(MusicPlayerRemote.playingQueue)
-                        .show(requireFragmentManager(), "ADD_TO_PLAYLIST")
+                    .show(requireFragmentManager(), "ADD_TO_PLAYLIST")
                 return true
             }
             R.id.action_tag_editor -> {
@@ -130,7 +140,8 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
             }
             R.id.action_go_to_genre -> {
                 val retriever = MediaMetadataRetriever()
-                val trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id.toLong())
+                val trackUri =
+                    ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, song.id.toLong())
                 retriever.setDataSource(activity, trackUri)
                 var genre: String? = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE)
                 if (genre == null) {
@@ -147,7 +158,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
         MusicUtil.toggleFavorite(requireActivity(), song)
     }
 
-    abstract fun playerToolbar(): Toolbar
+    abstract fun playerToolbar(): Toolbar?
 
     abstract fun onShow()
 
@@ -194,9 +205,9 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                     R.drawable.ic_favorite_border_white_24dp
 
                 val drawable = RetroUtil.getTintedVectorDrawable(requireContext(), res, toolbarIconColor())
-                if (playerToolbar().menu.findItem(R.id.action_toggle_favorite) != null)
-                    playerToolbar().menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title = if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
-
+                if (playerToolbar() != null && playerToolbar()!!.menu.findItem(R.id.action_toggle_favorite) != null)
+                    playerToolbar()!!.menu.findItem(R.id.action_toggle_favorite).setIcon(drawable).title =
+                        if (isFavorite) getString(R.string.action_remove_from_favorites) else getString(R.string.action_add_to_favorites)
             }
         }.execute(MusicPlayerRemote.currentSong)
     }
@@ -238,17 +249,18 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
     }
 
     open fun setLyrics(l: Lyrics?) {
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSecondary))
         if (PreferenceUtil.getInstance(requireContext()).fullScreenMode &&
-                view.findViewById<View>(R.id.status_bar) != null) {
+            view.findViewById<View>(R.id.status_bar) != null
+        ) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE
         }
-        playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
+        playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
         playerAlbumCoverFragment?.setCallbacks(this)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -269,8 +281,8 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
         val duration = MusicPlayerRemote.getQueueDurationMillis(MusicPlayerRemote.position)
 
         return MusicUtil.buildInfoString(
-                resources.getString(R.string.up_next),
-                MusicUtil.getReadableDurationString(duration)
+            resources.getString(R.string.up_next),
+            MusicUtil.getReadableDurationString(duration)
         )
     }
 }

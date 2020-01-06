@@ -18,6 +18,7 @@ enum class NowPlayingScreen constructor(
     PEAK(R.string.peak, R.drawable.np_peak, 14),
 
     ADAPTIVE(R.string.adaptive, R.drawable.np_adaptive, 10),
+    CIRCLE(R.string.circle, R.drawable.np_adaptive, 15),
     BLUR(R.string.blur, R.drawable.np_blur, 4),
     BLUR_CARD(R.string.blur_card, R.drawable.np_blur_card, 9),
     CARD(R.string.card, R.drawable.np_card, 6),

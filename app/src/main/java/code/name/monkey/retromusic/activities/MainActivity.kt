@@ -8,11 +8,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.Menu
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.fragments.mainactivity.LibraryFragment
@@ -250,7 +248,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
             else -> selectedFragment(PreferenceUtil.getInstance(this).lastPage)
         }
     }
-
 
     companion object {
         const val APP_INTRO_REQUEST = 2323
