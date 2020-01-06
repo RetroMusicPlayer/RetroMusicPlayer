@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.transition.Slide
 import android.widget.Toast
@@ -22,9 +21,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
 import code.name.monkey.retromusic.rest.LastFMRestClient
-import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.util.ImageUtil
-import code.name.monkey.retromusic.util.LastFMUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
 import com.bumptech.glide.Glide
@@ -151,62 +148,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         disposable.clear()
     }
 
-    private fun extractDetails(lastFmAlbum: LastFmAlbum) {
-        if (lastFmAlbum.album != null) {
-
-            val url = LastFMUtil.getLargestAlbumImageUrl(lastFmAlbum.album.image)
-
-            if (!TextUtils.isEmpty(url) && url.trim { it <= ' ' }.isNotEmpty()) {
-                Glide.with(this@AlbumTagEditorActivity).load(url).asBitmap()
-                    .transcode(BitmapPaletteTranscoder(this), BitmapPaletteWrapper::class.java)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.default_album_art)
-                    .into(object : SimpleTarget<BitmapPaletteWrapper>() {
-                        override fun onLoadFailed(
-                            e: java.lang.Exception?,
-                            errorDrawable: Drawable?
-                        ) {
-                            super.onLoadFailed(e, errorDrawable)
-                            Toast.makeText(
-                                this@AlbumTagEditorActivity,
-                                e.toString(),
-                                Toast.LENGTH_LONG
-                            ).show()
-                        }
-
-                        override fun onResourceReady(
-                            resource: BitmapPaletteWrapper?,
-                            glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
-                        ) {
-                            albumArtBitmap = resource?.bitmap?.let {
-                                ImageUtil.resizeBitmap(
-                                    it,
-                                    2048
-                                )
-                            }
-                            setImageBitmap(
-                                albumArtBitmap,
-                                getColor(
-                                    resource?.palette,
-                                    ATHUtil.resolveColor(
-                                        this@AlbumTagEditorActivity,
-                                        R.attr.defaultFooterColor
-                                    )
-                                )
-                            )
-                            deleteAlbumArt = false
-                            dataChanged()
-                            setResult(RESULT_OK)
-                        }
-                    })
-                return
-            }
-            if (lastFmAlbum.album.tags.tag.size > 0) {
-                genreTitle.setText(lastFmAlbum.album.tags.tag[0].name)
-            }
-        }
-        toastLoadingFailed()
-    }
-
     private fun toastLoadingFailed() {
         Toast.makeText(
             this@AlbumTagEditorActivity,
@@ -237,8 +178,8 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         fieldKeyValueMap[FieldKey.GENRE] = genreTitle.text.toString()
         fieldKeyValueMap[FieldKey.YEAR] = yearTitle.text.toString()
 
-        writeValuesToFiles(
-            fieldKeyValueMap, if (deleteAlbumArt) ArtworkInfo(id, null)
+        writeValuesToFiles(fieldKeyValueMap,
+            if (deleteAlbumArt) ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )
     }

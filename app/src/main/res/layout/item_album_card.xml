@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="?attr/rectSelector"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -28,11 +29,11 @@
         android:layout_height="match_parent"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:paddingEnd="8dp"
         android:paddingStart="12dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewNormal"
-        tools:ignore="MissingPrefix"
         android:textColor="?android:attr/textColorPrimary"
+        tools:ignore="MissingPrefix"
         tools:text="@tools:sample/full_names" />
 </LinearLayout>

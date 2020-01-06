@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="2dp"
     android:layout_marginBottom="2dp"
-    android:layout_marginEnd="4dp"
-    android:layout_marginStart="4dp"
-    android:layout_marginTop="2dp"
+    android:background="?rectSelector"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?rectSelector"
-    android:gravity="center_vertical"
     android:minHeight="64dp"
     android:orientation="horizontal"
     tools:ignore="MissingPrefix">
@@ -32,8 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="0"
-        android:paddingEnd="0dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="0dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageTextContainer"
@@ -73,8 +71,8 @@
         android:layout_weight="1.0"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"

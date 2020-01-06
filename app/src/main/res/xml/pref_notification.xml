@@ -7,7 +7,6 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_classic_notification"
         android:title="@string/pref_title_classic_notification"
-        app:enableCopying="true"
         app:icon="@drawable/ic_cellphone_lock_white_24dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -15,7 +14,6 @@
         android:key="colored_notification"
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_colored_notification"
-        android:title="@string/pref_title_colored_notification"
-        app:enableCopying="true" />
+        android:title="@string/pref_title_colored_notification" />
 
 </androidx.preference.PreferenceScreen>

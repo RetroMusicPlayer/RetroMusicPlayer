@@ -5,6 +5,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/rectSelector"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -16,10 +17,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            tools:src="@tools:sample/avatars"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/playSongs"

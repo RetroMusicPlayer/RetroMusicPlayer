@@ -19,6 +19,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -321,7 +322,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected fun setImageBitmap(bitmap: Bitmap?, bgColor: Int) {
         if (bitmap == null) {
-            editorImage.setImageResource(code.name.monkey.retromusic.R.drawable.default_album_art)
+            editorImage.setImageResource(drawable.default_album_art)
         } else {
             editorImage.setImageBitmap(bitmap)
         }
@@ -414,4 +415,5 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
         private val TAG = AbsTagEditorActivity::class.java.simpleName
         private const val REQUEST_CODE_SELECT_IMAGE = 1000
     }
+
 }

@@ -5,6 +5,7 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/rectSelector"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -42,7 +43,7 @@
         android:paddingStart="16dp"
         android:paddingTop="6dp"
         android:paddingEnd="8dp"
-        android:paddingBottom="4dp" 
+        android:paddingBottom="4dp"
         tools:ignore="MissingPrefix"
         tools:text="My top tracks" />
 

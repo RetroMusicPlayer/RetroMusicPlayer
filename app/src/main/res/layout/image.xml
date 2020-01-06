@@ -4,6 +4,7 @@
     android:id="@+id/imageContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:foreground="?attr/rectSelector"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView

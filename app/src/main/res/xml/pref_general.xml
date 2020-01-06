@@ -12,14 +12,12 @@
             android:key="general_theme"
             android:layout="@layout/list_item_view"
             android:title="@string/pref_title_general_theme"
-            app:enableCopying="true"
             app:icon="@drawable/ic_color_lens_white_24dp" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:key="black_theme"
             android:layout="@layout/list_item_view_switch_no_title"
-            android:title="@string/black_theme_name"
-            app:enableCopying="true" />
+            android:title="@string/black_theme_name" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
@@ -33,7 +31,6 @@
             android:persistent="false"
             android:summary="@string/accent_color_desc"
             android:title="@string/accent_color"
-            app:enableCopying="true"
             app:icon="@drawable/ic_colorize_white_24dp" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -41,32 +38,28 @@
             android:key="desaturated_color"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_desaturated_color"
-            android:title="@string/pref_title_desaturated_color"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_desaturated_color" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="adaptive_color_app"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app"
-            android:title="@string/pref_title_colored_app"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_colored_app" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="should_color_app_shortcuts"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app_shortcuts"
-            android:title="@string/pref_title_app_shortcuts"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_app_shortcuts" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="dominant_color"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_dominant_color"
-            android:title="@string/pref_title_toggle_dominant_color"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_toggle_dominant_color" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

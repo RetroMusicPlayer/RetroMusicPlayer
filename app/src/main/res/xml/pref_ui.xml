@@ -13,7 +13,6 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_album_grid_style"
-            app:enableCopying="true"
             app:icon="@drawable/ic_album_white_24dp" />
 
         <code.name.monkey.retromusic.preferences.MaterialListPreference
@@ -25,7 +24,6 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_artist_grid_style"
-            app:enableCopying="true"
             app:icon="@drawable/ic_artist_white_24dp" />
 
 
@@ -38,7 +36,6 @@
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
             android:title="@string/pref_title_home_artist_grid_style"
-            app:enableCopying="true"
             app:icon="@drawable/ic_home_white_24dp" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -47,6 +44,7 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="extra_song_info"
@@ -65,7 +63,6 @@
             android:layout="@layout/list_item_view"
             android:summary="@string/pref_summary_library_categories"
             android:title="@string/library_categories"
-            app:enableCopying="true"
             app:icon="@drawable/ic_library_music_white_24dp" />
 
         <code.name.monkey.retromusic.preferences.MaterialListPreference
@@ -76,9 +73,9 @@
             android:layout="@layout/list_item_view"
             android:negativeButtonText="@null"
             android:positiveButtonText="@null"
-            android:title="@string/pref_title_tab_text_mode"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_tab_text_mode" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/window">
@@ -91,16 +88,17 @@
             android:title="@string/pref_title_toggle_full_screen"
             app:icon="@drawable/ic_cellphone_white_24dp" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_lockscreen">
+
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="true"
             android:key="album_art_on_lockscreen"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_album_art_on_lockscreen"
-            android:title="@string/pref_title_album_art_on_lockscreen"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_album_art_on_lockscreen" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
@@ -108,15 +106,13 @@
             android:key="blurred_album_art"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_blurred_album_art"
-            android:title="@string/pref_title_blurred_album_art"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_blurred_album_art" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:defaultValue="false"
             android:key="lock_screen"
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_lock_screen"
-            android:title="@string/pref_title_lock_screen"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_lock_screen" />
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

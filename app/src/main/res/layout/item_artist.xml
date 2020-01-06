@@ -5,6 +5,7 @@
     android:layout_width="106dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:background="?attr/rectSelector"
     android:orientation="vertical">
 
     <code.name.monkey.retromusic.views.WidthFitSquareLayout

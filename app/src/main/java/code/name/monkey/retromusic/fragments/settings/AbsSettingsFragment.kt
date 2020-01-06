@@ -37,7 +37,6 @@ import code.name.monkey.retromusic.preferences.MaterialListPreferenceDialog
 import code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
 import code.name.monkey.retromusic.preferences.NowPlayingScreenPreferenceDialog
 import code.name.monkey.retromusic.util.NavigationUtil
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 /**
  * @author Hemanth S (h4h13).
@@ -80,7 +79,6 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         listView.setPadding(0, 0, 0, 0)
         listView.setPaddingRelative(0, 0, 0, 0)
         invalidateSettings()
-        OverScrollDecoratorHelper.setUpOverScroll(listView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
     }
 
     override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {

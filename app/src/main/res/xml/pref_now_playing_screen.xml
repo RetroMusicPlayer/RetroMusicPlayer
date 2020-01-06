@@ -6,7 +6,6 @@
         android:key="now_playing_screen_id"
         android:layout="@layout/list_item_view"
         android:title="@string/pref_title_now_playing_screen_appearance"
-        app:enableCopying="true"
         app:icon="@drawable/ic_play_circle_filled_white_24dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
@@ -17,7 +16,6 @@
             android:key="album_cover_style_id"
             android:layout="@layout/list_item_view"
             android:title="@string/pref_title_album_cover_style"
-            app:enableCopying="true"
             app:icon="@drawable/ic_image_white_24dp" />
 
         <code.name.monkey.retromusic.preferences.MaterialListPreference
@@ -26,13 +24,11 @@
             android:entryValues="@array/pref_album_cover_transform_values"
             android:key="album_cover_transform"
             android:layout="@layout/list_item_view"
-            android:title="@string/pref_title_album_cover_transform"
-            app:enableCopying="true" />
+            android:title="@string/pref_title_album_cover_transform" />
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:enableCopying="true"
             app:icon="@drawable/ic_view_carousel_black_24dp"
             app:key="carousel_effect"
             app:summary="@string/pref_summary_carousel_effect"
@@ -46,7 +42,6 @@
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
             android:layout="@layout/list_item_view_switch"
             app:defaultValue="false"
-            app:enableCopying="true"
             app:icon="@drawable/ic_play_arrow_white_32dp"
             app:key="toggle_add_controls"
             app:summary="@string/pref_summary_extra_controls"
@@ -69,7 +64,6 @@
         android:max="25"
         android:summary="@string/pref_blur_amount_summary"
         android:title="@string/pref_blur_amount_title"
-        app:enableCopying="true"
         app:icon="@drawable/ic_blur_on_white_24dp"
         app:showSeekBarValue="true" />
 

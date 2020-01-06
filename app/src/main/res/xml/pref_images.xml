@@ -8,7 +8,6 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_ignore_media_store_artwork"
         android:title="@string/pref_title_ignore_media_store_artwork"
-        app:enableCopying="true"
         app:icon="@drawable/ic_image_white_24dp" />
 
     <code.name.monkey.retromusic.preferences.MaterialListPreference
@@ -17,6 +16,5 @@
         android:entryValues="@array/pref_auto_download_images_values"
         android:key="auto_download_images_policy"
         android:layout="@layout/list_item_view"
-        android:title="@string/pref_title_auto_download_artist_images"
-        app:enableCopying="true" />
+        android:title="@string/pref_title_auto_download_artist_images" />
 </androidx.preference.PreferenceScreen>

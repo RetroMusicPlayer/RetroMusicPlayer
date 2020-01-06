@@ -8,7 +8,6 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_audio_ducking"
         android:title="@string/pref_title_audio_ducking"
-        app:enableCopying="true"
         app:icon="@drawable/ic_volume_down_white_24dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -16,14 +15,12 @@
         android:key="gapless_playback"
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_gapless_playback"
-        android:title="@string/pref_title_gapless_playback"
-        app:enableCopying="true" />
+        android:title="@string/pref_title_gapless_playback" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreference
         android:key="equalizer"
         android:layout="@layout/list_item_view_no_title"
         android:title="@string/equalizer"
-        app:enableCopying="true"
         app:icon="@drawable/ic_equalizer_white_24dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -32,7 +29,6 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_toggle_headset"
         android:title="@string/pref_title_toggle_toggle_headset"
-        app:enableCopying="true"
         app:icon="@drawable/ic_play_arrow_white_32dp" />
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -41,7 +37,6 @@
         android:layout="@layout/list_item_view_switch"
         android:summary="@string/pref_summary_toggle_shuffle"
         android:title="@string/pref_title_toggle_toggle_shuffle"
-        app:enableCopying="true"
         app:icon="@drawable/ic_shuffle_white_24dp" />
 
 </androidx.preference.PreferenceScreen>

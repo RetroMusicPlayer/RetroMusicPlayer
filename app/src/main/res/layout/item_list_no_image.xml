@@ -17,11 +17,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/rectSelector"
-    android:minHeight="72dp"
-    android:padding="16dp"
+    android:layout_margin="2dp"
+    android:background="?rectSelector"
+    android:minHeight="64dp"
+    android:padding="14dp"
     tools:ignore="UnusedAttribute">
-
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"

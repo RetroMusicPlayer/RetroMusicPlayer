@@ -19,21 +19,26 @@ import android.app.Activity;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-
 import code.name.monkey.retromusic.R;
+import java.lang.ref.WeakReference;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
 public class UpdateToastMediaScannerCompletionListener implements MediaScannerConnection.OnScanCompletedListener {
-    private final String[] toBeScanned;
-    private final String scannedFiles;
-    private final String couldNotScanFiles;
+
     private final WeakReference<Activity> activityWeakReference;
-    private int scanned = 0;
+
+    private final String couldNotScanFiles;
+
     private int failed = 0;
+
+    private int scanned = 0;
+
+    private final String scannedFiles;
+
+    private final String[] toBeScanned;
+
     private Toast toast;
 
     @SuppressLint("ShowToast")
@@ -55,7 +60,8 @@ public class UpdateToastMediaScannerCompletionListener implements MediaScannerCo
                 } else {
                     scanned++;
                 }
-                String text = " " + String.format(scannedFiles, scanned, toBeScanned.length) + (failed > 0 ? " " + String.format(couldNotScanFiles, failed) : "");
+                String text = " " + String.format(scannedFiles, scanned, toBeScanned.length) + (failed > 0 ? " "
+                        + String.format(couldNotScanFiles, failed) : "");
                 toast.setText(text);
                 toast.show();
             });
