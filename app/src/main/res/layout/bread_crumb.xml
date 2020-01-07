@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foreground="?rectSelector"
+    android:background="?rectSelector"
     android:gravity="center_vertical|start"
     android:minHeight="@dimen/tab_height"
     android:orientation="horizontal"
@@ -27,7 +27,7 @@
         android:scaleType="fitXY"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_keyboard_arrow_right_white_24dp"
-        tools:tint="#000"
+        tools:tint="?android:attr/colorControlNormal"
         tools:visibility="visible" />
 
 </LinearLayout>

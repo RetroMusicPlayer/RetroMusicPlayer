@@ -96,11 +96,12 @@
         android:layout_gravity="center"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody1"
         android:textColor="?android:attr/textColorSecondary"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />

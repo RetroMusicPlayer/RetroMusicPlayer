@@ -1,121 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorSurface"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <code.name.monkey.retromusic.views.StatusBarView
+        android:id="@+id/status_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:elevation="0dp"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp"
-        app:liftOnScroll="true">
+        android:layout_height="0dp"
+        android:background="?attr/colorSurface"
+        tools:ignore="UnusedAttribute" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/searchContainer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSurface"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/toolbar_margin_horizontal"
-            android:layout_marginTop="@dimen/toolbar_margin_vertical"
-            android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
-            android:layout_marginBottom="@dimen/toolbar_margin_vertical"
-            app:cardBackgroundColor="?colorSurface"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true"
-            app:layout_scrollFlags="scroll|enterAlways">
+            android:background="@android:color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:liftOnScroll="true">
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_marginStart="@dimen/toolbar_margin_horizontal"
+                android:layout_marginTop="@dimen/toolbar_margin_vertical"
+                android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+                android:layout_marginBottom="@dimen/toolbar_margin_vertical"
+                app:cardBackgroundColor="?colorSurface"
+                app:cardCornerRadius="8dp"
+                app:cardUseCompatPadding="true"
+                app:layout_scrollFlags="scroll|enterAlways">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
-                    app:tint="?colorOnSurface" />
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchView"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/toolbar_height"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/action_search"
-                    android:inputType="text|textAutoComplete"
-                    android:textAppearance="@style/TextViewSubtitle1">
-
-                    <requestFocus />
-                </com.google.android.material.textfield.TextInputEditText>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0">
+                    android:gravity="center_vertical">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/voiceSearch"
+                        android:id="@+id/back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-                        android:background="?roundSelector"
                         android:padding="12dp"
-                        app:srcCompat="@drawable/ic_mic_white_24dp"
-                        app:tint="?colorOnSurface"
-                        tools:visibility="visible" />
+                        app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
+                        app:tint="?colorOnSurface" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/clearText"
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/searchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/toolbar_height"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/action_search"
+                        android:inputType="text|textAutoComplete"
+                        android:textAppearance="@style/TextViewSubtitle1">
+
+                        <requestFocus />
+                    </com.google.android.material.textfield.TextInputEditText>
+
+                    <FrameLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="?roundSelector"
-                        android:padding="12dp"
-                        android:visibility="gone"
-                        app:srcCompat="@drawable/ic_close_white_24dp"
-                        app:tint="?colorOnSurface"
-                        tools:visibility="visible" />
-                </FrameLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-    </com.google.android.material.appbar.AppBarLayout>
+                        android:layout_weight="0">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@android:id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/no_results"
-        android:textAppearance="@style/TextViewHeadline6"
-        android:visibility="gone"
-        tools:visibility="visible" />
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/voiceSearch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+                            android:background="?roundSelector"
+                            android:padding="12dp"
+                            app:srcCompat="@drawable/ic_mic_white_24dp"
+                            app:tint="?colorOnSurface"
+                            tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/keyboardPopup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:text="@string/keyboard"
-        android:textAppearance="@style/TextViewHeadline6"
-        app:icon="@drawable/ic_keyboard_white_24dp" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/clearText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="?roundSelector"
+                            android:padding="12dp"
+                            android:visibility="gone"
+                            app:srcCompat="@drawable/ic_close_white_24dp"
+                            app:tint="?colorOnSurface"
+                            tools:visibility="visible" />
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@android:id/empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/no_results"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/keyboardPopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:text="@string/keyboard"
+            android:textAppearance="@style/TextViewHeadline6"
+            app:icon="@drawable/ic_keyboard_white_24dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

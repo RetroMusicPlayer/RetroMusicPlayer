@@ -21,6 +21,13 @@
     android:focusable="true"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,7 +60,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/playerToolbar">
 
         <com.google.android.material.textview.MaterialTextView
@@ -75,21 +82,21 @@
         android:gravity="center"
         android:maxLines="2"
         android:textAppearance="@style/TextViewBody1"
-        app:layout_constraintBottom_toTopOf="@+id/volumeSeekBar"
+        app:layout_constraintBottom_toTopOf="@+id/progressContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />
 
     <code.name.monkey.retromusic.views.SeekArc
         android:id="@+id/volumeSeekBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="300dp"
         android:padding="28dp"
         app:arcColor="?android:attr/colorControlHighlight"
         app:arcWidth="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:progressWidth="4dp"
@@ -142,17 +149,19 @@
         android:textAppearance="@style/TextViewSubtitle2"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="@+id/volumeSeekBar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/volumeSeekBar"
         app:layout_constraintStart_toStartOf="@+id/volumeSeekBar" />
 
     <RelativeLayout
         android:id="@+id/progressContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="28dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
-        app:layout_constraintTop_toBottomOf="@+id/volumeSeekBar">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text">
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
@@ -197,19 +206,20 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songInfo"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="16dp"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintStart_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/progressContainer"
+        tools:text="@tools:sample/lorem" />
 </androidx.constraintlayout.widget.ConstraintLayout>
