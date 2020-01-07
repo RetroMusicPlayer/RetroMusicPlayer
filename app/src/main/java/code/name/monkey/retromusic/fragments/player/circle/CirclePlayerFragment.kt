@@ -226,7 +226,6 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         if (volumeSeekBar == null) {
             return
         }
-
         volumeSeekBar.max = maxVolume
         volumeSeekBar.progress = currentVolume
     }

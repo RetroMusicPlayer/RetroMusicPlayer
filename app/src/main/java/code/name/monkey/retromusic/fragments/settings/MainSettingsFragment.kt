@@ -39,8 +39,6 @@ import kotlinx.android.synthetic.main.fragment_main_settings.notificationSetting
 import kotlinx.android.synthetic.main.fragment_main_settings.nowPlayingSettings
 import kotlinx.android.synthetic.main.fragment_main_settings.otherSettings
 import kotlinx.android.synthetic.main.fragment_main_settings.personalizeSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.scrollView
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
@@ -88,7 +86,6 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             buyPremium.setTextColor(it)
             diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
-        OverScrollDecoratorHelper.setUpOverScroll(scrollView)
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {

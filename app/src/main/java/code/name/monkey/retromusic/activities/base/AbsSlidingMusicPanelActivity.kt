@@ -362,7 +362,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 bottomNavigationView.menu.add(0, menu.id, 0, menu.stringRes).setIcon(menu.icon)
             }
         }
-        print("Tabs -> ${currentTabs.size}")
         if (currentTabs.size <= 1) {
             toggleBottomNavigationView(true)
         }

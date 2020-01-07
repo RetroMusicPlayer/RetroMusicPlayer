@@ -61,11 +61,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:maxLines="1"
-            android:textAppearance="@style/TextViewHeadline4"
+            android:maxLines="2"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textAppearance="@style/TextViewHeadline5"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/full_names" />
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
