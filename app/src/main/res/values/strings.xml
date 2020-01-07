@@ -818,4 +818,5 @@
 
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
     <string name="circle">Circle</string>
+    <string name="volume">Volume</string>
 </resources>

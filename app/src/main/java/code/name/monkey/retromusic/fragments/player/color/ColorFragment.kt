@@ -22,7 +22,9 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
-import kotlinx.android.synthetic.main.fragment_color_player.*
+import kotlinx.android.synthetic.main.fragment_color_player.colorGradientBackground
+import kotlinx.android.synthetic.main.fragment_color_player.playerImage
+import kotlinx.android.synthetic.main.fragment_color_player.playerToolbar
 
 class ColorFragment : AbsPlayerFragment() {
 
@@ -43,7 +45,7 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     override fun onFavoriteToggled() {
-
+        //toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
     override fun onShow() {

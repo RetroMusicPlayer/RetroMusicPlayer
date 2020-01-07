@@ -122,6 +122,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
                 nowPlayingScreen == NowPlayingScreen.COLOR ||
                 nowPlayingScreen == NowPlayingScreen.SIMPLE ||
                 nowPlayingScreen == NowPlayingScreen.BLUR_CARD ||
+                nowPlayingScreen == NowPlayingScreen.CIRCLE ||
                 nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
                 && !App.isProVersion()
     }
