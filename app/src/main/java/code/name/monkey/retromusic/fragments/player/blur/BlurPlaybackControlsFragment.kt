@@ -132,6 +132,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePrevNextColor()
 
         text.setTextColor(lastDisabledPlaybackControlsColor)
+        songInfo.setTextColor(lastDisabledPlaybackControlsColor)
 
         TintHelper.setTintAuto(progressSlider, lastPlaybackControlsColor, false)
         volumeFragment?.setTintableColor(lastPlaybackControlsColor)

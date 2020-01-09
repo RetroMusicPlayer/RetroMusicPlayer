@@ -30,9 +30,9 @@ import code.name.monkey.retromusic.util.RippleUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomNavigationBarTinted @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
@@ -43,13 +43,21 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
         val accentColor = ThemeStore.accentColor(context)
         NavigationViewUtil.setItemIconColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
         NavigationViewUtil.setItemTextColors(this, ColorUtil.withAlpha(iconColor, 0.5f), accentColor)
-        itemBackground = RippleDrawable(RippleUtils.convertToRippleDrawableColor(ColorStateList.valueOf(ThemeStore.accentColor(context).addAlpha())), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background), ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask))
+        itemBackground = RippleDrawable(
+            RippleUtils.convertToRippleDrawableColor(
+                ColorStateList.valueOf(
+                    ThemeStore.accentColor(context).addAlpha()
+                )
+            ),
+            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background),
+            ContextCompat.getDrawable(context, R.drawable.bottom_navigation_item_background_mask)
+        )
         setOnApplyWindowInsetsListener(null)
         //itemRippleColor = ColorStateList.valueOf(accentColor)
         background = ColorDrawable(ATHUtil.resolveColor(context, R.attr.colorSurface))
     }
 }
 
-private fun Int.addAlpha(): Int {
+fun Int.addAlpha(): Int {
     return ColorUtil.withAlpha(this, 0.12f)
 }

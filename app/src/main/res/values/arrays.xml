@@ -81,18 +81,21 @@
         <item>@string/circular</item>
         <item>@string/card_color_style</item>
         <item>@string/card_style</item>
+        <item>@string/tiny_card_style</item>
     </string-array>
 
     <string-array name="pref_home_grid_style_list_values">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
     </string-array>
 
     <array name="pref_home_grid_style_layout">
         <item>@layout/item_artist</item>
         <item>@layout/item_artist_square</item>
         <item>@layout/item_album_card</item>
+        <item>@layout/item_artist_card</item>
     </array>
 
 
@@ -176,4 +179,5 @@
         <item>@layout/activity_album</item>
     </array>
 
+    <string name="tiny_card_style">Tiny card</string>
 </resources>

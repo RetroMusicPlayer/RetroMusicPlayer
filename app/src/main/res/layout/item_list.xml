@@ -58,7 +58,7 @@
                 android:minHeight="40dp"
                 android:textAppearance="@style/TextViewSubtitle2"
                 android:visibility="gone"
-                tools:text="1"
+                tools:text="100"
                 tools:visibility="visible" />
         </com.google.android.material.card.MaterialCardView>
     </FrameLayout>

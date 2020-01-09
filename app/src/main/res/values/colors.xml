@@ -29,6 +29,7 @@
     <color name="blackColorSurface">#000000</color>
 
     <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#40000000</color>
     <!-- card colors -->
     <color name="card_background">#ffffff</color>
     <color name="card_shadow_1">#d4d4d4</color>

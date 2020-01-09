@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
@@ -63,13 +64,13 @@ class ArtistAdapter(
         val isChecked = isChecked(artist)
         holder.itemView.isActivated = isChecked
         holder.title?.text = artist.name
-        holder.text?.visibility = View.GONE
+        holder.text?.hide()
         loadArtistImage(artist, holder)
     }
 
     fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer?.setBackgroundColor(color)
+            holder.paletteColorContainer?.backgroundTintList = ColorStateList.valueOf(color)
             holder.title?.setTextColor(
                 MaterialValueHelper.getPrimaryTextColor(
                     activity, ColorUtil.isColorLight(
@@ -78,7 +79,7 @@ class ArtistAdapter(
                 )
             )
         }
-
+        holder.imageContainerCard?.setCardBackgroundColor(color)
         holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
     }
 

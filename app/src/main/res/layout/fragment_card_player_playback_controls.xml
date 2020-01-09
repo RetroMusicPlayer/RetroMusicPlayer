@@ -25,7 +25,8 @@
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:00" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
@@ -37,7 +38,8 @@
             android:singleLine="true"
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            tools:ignore="RtlHardcoded,RtlSymmetry"
+            tools:text="00:00" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"

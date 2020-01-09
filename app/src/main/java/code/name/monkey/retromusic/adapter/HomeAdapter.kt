@@ -8,6 +8,7 @@ import androidx.annotation.IntDef
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumFullWidthAdapter
@@ -22,7 +23,7 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 class HomeAdapter(
-        private val activity: AppCompatActivity, private val displayMetrics: DisplayMetrics
+    private val activity: AppCompatActivity, private val displayMetrics: DisplayMetrics
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list = ArrayList<Home>()
@@ -33,12 +34,18 @@ class HomeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layout = LayoutInflater.from(activity)
-                .inflate(R.layout.section_recycler_view, parent, false)
+            .inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
             PLAYLISTS -> PlaylistViewHolder(layout)
             else -> {
-                AlbumViewHolder(LayoutInflater.from(activity).inflate(R.layout.metal_section_recycler_view, parent, false))
+                AlbumViewHolder(
+                    LayoutInflater.from(activity).inflate(
+                        R.layout.metal_section_recycler_view,
+                        parent,
+                        false
+                    )
+                )
             }
         }
     }
@@ -89,7 +96,6 @@ class HomeAdapter(
         const val RECENT_ARTISTS = 2
         const val TOP_ARTISTS = 0
         const val PLAYLISTS = 4
-
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {
@@ -109,15 +115,13 @@ class HomeAdapter(
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
-                    layoutManager = GridLayoutManager(
-                            activity, 1, GridLayoutManager.HORIZONTAL, false
-                    )
+                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     val artistAdapter = ArtistAdapter(
-                            activity,
-                            list,
-                            PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
-                            false,
-                            null
+                        activity,
+                        list,
+                        PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
+                        false,
+                        null
                     )
                     adapter = artistAdapter
                 }
@@ -134,10 +138,10 @@ class HomeAdapter(
                     recyclerView.apply {
                         show()
                         val songAdapter = SongAdapter(
-                                activity, songs, R.layout.item_album_card, false, null
+                            activity, songs, R.layout.item_album_card, false, null
                         )
                         layoutManager = GridLayoutManager(
-                                activity, 1, GridLayoutManager.HORIZONTAL, false
+                            activity, 1, GridLayoutManager.HORIZONTAL, false
                         )
                         adapter = songAdapter
 
@@ -159,7 +163,7 @@ private fun <E> ArrayList<E>.toAlbums(): ArrayList<Album> {
     for (x in this) {
         arrayList.add(x as Album)
     }
-    return arrayList;
+    return arrayList
 }
 
 private fun <E> ArrayList<E>.toArtists(): ArrayList<Artist> {
@@ -167,7 +171,7 @@ private fun <E> ArrayList<E>.toArtists(): ArrayList<Artist> {
     for (x in this) {
         arrayList.add(x as Artist)
     }
-    return arrayList;
+    return arrayList
 }
 
 private fun <E> ArrayList<E>.toPlaylist(): ArrayList<Playlist> {
@@ -175,6 +179,6 @@ private fun <E> ArrayList<E>.toPlaylist(): ArrayList<Playlist> {
     for (x in this) {
         arrayList.add(x as Playlist)
     }
-    return arrayList;
+    return arrayList
 }
 

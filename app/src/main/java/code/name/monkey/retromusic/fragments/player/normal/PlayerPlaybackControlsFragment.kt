@@ -107,7 +107,6 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(), OnSharedPref
         updatePrevNextColor()
     }
 
-
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title

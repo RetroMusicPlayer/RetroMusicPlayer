@@ -101,7 +101,6 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(finalLayout, container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
-
                 NavigationUtil.goToLyrics(requireActivity())
             }
             return view

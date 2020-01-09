@@ -14,7 +14,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_player_album_cover.*
+import kotlinx.android.synthetic.main.fragment_player_album_cover.viewPager
 
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
@@ -44,8 +44,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         viewPager.addOnPageChangeListener(this)
         //noinspection ConstantConditions
         if (PreferenceUtil.getInstance(requireContext()).carouselEffect() &&
@@ -60,8 +58,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
             viewPager.offscreenPageLimit = 2
             viewPager.setPageTransformer(true, PreferenceUtil.getInstance(requireContext()).albumCoverTransform)
         }
-
-
     }
 
     override fun onDestroyView() {

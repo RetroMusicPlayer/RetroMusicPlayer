@@ -12,7 +12,6 @@
         android:layout_gravity="center">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/player_album_art_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"

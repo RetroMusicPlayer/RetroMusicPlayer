@@ -90,6 +90,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val color = MaterialValueHelper.getPrimaryTextColor(context, false)
         songTotalTime.setTextColor(color)
         songCurrentProgress.setTextColor(color)
+        songInfo.setTextColor(color)
     }
 
     override fun onResume() {

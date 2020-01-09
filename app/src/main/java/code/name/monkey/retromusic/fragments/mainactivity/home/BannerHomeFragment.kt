@@ -151,8 +151,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private fun setupToolbar() {
 
         toolbar.apply {
-            backgroundTintList =
-                ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+            backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
             setNavigationIcon(R.drawable.ic_menu_white_24dp)
             setOnClickListener {
                 val options = ActivityOptions.makeSceneTransitionAnimation(
