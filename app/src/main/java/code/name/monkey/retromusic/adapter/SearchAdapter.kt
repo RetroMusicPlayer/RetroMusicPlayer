@@ -23,7 +23,8 @@ import com.bumptech.glide.Glide
 import android.util.Pair as UtilPair
 
 class SearchAdapter(
-        private val activity: AppCompatActivity, private var dataSet: List<Any>?
+    private val activity: AppCompatActivity,
+    private var dataSet: List<Any>?
 ) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     fun swapDataSet(dataSet: MutableList<Any>) {
@@ -39,7 +40,13 @@ class SearchAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == HEADER) ViewHolder(LayoutInflater.from(activity).inflate(R.layout.sub_header, parent, false), viewType)
+        return if (viewType == HEADER) ViewHolder(
+            LayoutInflater.from(activity).inflate(
+                R.layout.sub_header,
+                parent,
+                false
+            ), viewType
+        )
         else
             ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false), viewType)
     }
@@ -51,14 +58,14 @@ class SearchAdapter(
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
                 SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-                        .checkIgnoreMediaStore(activity).build().into(holder.image)
+                    .checkIgnoreMediaStore(activity).build().into(holder.image)
             }
             ARTIST -> {
                 val artist = dataSet?.get(position) as Artist
                 holder.title?.text = artist.name
                 holder.text?.text = MusicUtil.getArtistInfoString(activity, artist)
                 ArtistGlideRequest.Builder.from(Glide.with(activity), artist).build()
-                        .into(holder.image)
+                    .into(holder.image)
             }
             SONG -> {
                 val song = dataSet?.get(position) as Song
@@ -108,11 +115,17 @@ class SearchAdapter(
             val item = dataSet!![adapterPosition]
             when (itemViewType) {
                 ALBUM -> {
-                    val options = ActivityOptions.makeSceneTransitionAnimation(activity, UtilPair.create(image, activity.getString(R.string.transition_album_art)))
+                    val options = ActivityOptions.makeSceneTransitionAnimation(
+                        activity,
+                        UtilPair.create(image, activity.getString(R.string.transition_album_art))
+                    )
                     NavigationUtil.goToAlbumOptions(activity, (item as Album).id, options)
                 }
                 ARTIST -> {
-                    val options = ActivityOptions.makeSceneTransitionAnimation(activity, UtilPair.create(image, activity.getString(R.string.transition_artist_image)))
+                    val options = ActivityOptions.makeSceneTransitionAnimation(
+                        activity,
+                        UtilPair.create(image, activity.getString(R.string.transition_artist_image))
+                    )
                     NavigationUtil.goToArtistOptions(activity, (item as Artist).id, options)
                 }
                 GENRE -> {

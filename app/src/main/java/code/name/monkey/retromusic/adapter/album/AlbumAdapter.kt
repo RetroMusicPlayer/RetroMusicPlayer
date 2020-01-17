@@ -25,7 +25,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
     protected val activity: AppCompatActivity,
@@ -37,7 +37,7 @@ open class AlbumAdapter(
     activity,
     cabHolder,
     R.menu.menu_media_selection
-), FastScrollRecyclerView.SectionedAdapter {
+), PopupTextProvider {
 
     var dataSet: ArrayList<Album>
         protected set
@@ -168,7 +168,11 @@ open class AlbumAdapter(
         return songs
     }
 
-    override fun getSectionName(position: Int): String {
+    override fun getPopupText(position: Int): String {
+        return getSectionName(position)
+    }
+
+    private fun getSectionName(position: Int): String {
         var sectionName: String? = null
         when (PreferenceUtil.getInstance(activity).albumSortOrder) {
             SortOrder.AlbumSortOrder.ALBUM_A_Z, SortOrder.AlbumSortOrder.ALBUM_Z_A -> sectionName =

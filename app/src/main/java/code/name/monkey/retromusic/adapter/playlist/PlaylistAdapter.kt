@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.adapter.playlist
 
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -15,6 +16,8 @@ import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.dialogs.ClearSmartPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeletePlaylistDialog
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
@@ -26,17 +29,17 @@ import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-import java.util.*
+import java.util.ArrayList
 
 class PlaylistAdapter(
-        private val activity: AppCompatActivity,
-        var dataSet: ArrayList<Playlist>,
-        private var itemLayoutRes: Int,
-        cabHolder: CabHolder?
+    private val activity: AppCompatActivity,
+    var dataSet: ArrayList<Playlist>,
+    private var itemLayoutRes: Int,
+    cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(
-        activity,
-        cabHolder,
-        R.menu.menu_playlists_selection
+    activity,
+    cabHolder,
+    R.menu.menu_playlists_selection
 ) {
 
     var songs = ArrayList<Song>()
@@ -77,12 +80,26 @@ class PlaylistAdapter(
         holder.title?.text = getPlaylistTitle(playlist)
         holder.text?.text = getPlaylistText(playlist)
         holder.image?.setImageDrawable(getIconRes(playlist))
+        val isChecked = isChecked(playlist)
+        if (isChecked) {
+            holder.menu?.hide()
+        } else {
+            holder.menu?.show()
+        }
     }
 
     private fun getIconRes(playlist: Playlist): Drawable {
         return if (MusicUtil.isFavoritePlaylist(activity, playlist))
-            TintHelper.createTintedDrawable(activity, R.drawable.ic_favorite_white_24dp, ThemeStore.accentColor(activity))!!
-        else TintHelper.createTintedDrawable(activity, R.drawable.ic_playlist_play_white_24dp, ATHUtil.resolveColor(activity, R.attr.colorControlNormal))!!
+            TintHelper.createTintedDrawable(
+                activity,
+                R.drawable.ic_favorite_white_24dp,
+                ThemeStore.accentColor(activity)
+            )
+        else TintHelper.createTintedDrawable(
+            activity,
+            R.drawable.ic_playlist_play_white_24dp,
+            ATHUtil.resolveColor(activity, R.attr.colorControlNormal)
+        )
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -109,7 +126,7 @@ class PlaylistAdapter(
                     val playlist = selection[i]
                     if (playlist is AbsSmartPlaylist) {
                         ClearSmartPlaylistDialog.create(playlist).show(
-                                activity.supportFragmentManager, "CLEAR_PLAYLIST_" + playlist.name
+                            activity.supportFragmentManager, "CLEAR_PLAYLIST_" + playlist.name
                         )
                         selection.remove(playlist)
                         i--
@@ -118,13 +135,13 @@ class PlaylistAdapter(
                 }
                 if (selection.size > 0) {
                     DeletePlaylistDialog.create(selection)
-                            .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
+                        .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
                 }
             }
             else -> SongsMenuHelper.handleMenuClick(
-                    activity,
-                    getSongList(selection),
-                    menuItem.itemId
+                activity,
+                getSongList(selection),
+                menuItem.itemId
             )
         }
     }
@@ -157,15 +174,14 @@ class PlaylistAdapter(
             image?.apply {
                 val iconPadding = activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
                 setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
-                //setColorFilter(ATHUtil.resolveColor(activity, R.attr.iconColor), PorterDuff.Mode.SRC_IN)
             }
 
             menu?.setOnClickListener { view ->
                 val playlist = dataSet[adapterPosition]
                 val popupMenu = PopupMenu(activity, view)
                 popupMenu.inflate(
-                        if (itemViewType == SMART_PLAYLIST) R.menu.menu_item_smart_playlist
-                        else R.menu.menu_item_playlist
+                    if (itemViewType == SMART_PLAYLIST) R.menu.menu_item_smart_playlist
+                    else R.menu.menu_item_playlist
                 )
                 if (playlist is LastAddedPlaylist) {
                     popupMenu.menu.findItem(R.id.action_clear_playlist).isVisible = false
@@ -174,14 +190,14 @@ class PlaylistAdapter(
                     if (item.itemId == R.id.action_clear_playlist) {
                         if (playlist is AbsSmartPlaylist) {
                             ClearSmartPlaylistDialog.create(playlist).show(
-                                    activity.supportFragmentManager,
-                                    "CLEAR_SMART_PLAYLIST_" + playlist.name
+                                activity.supportFragmentManager,
+                                "CLEAR_SMART_PLAYLIST_" + playlist.name
                             )
                             return@setOnMenuItemClickListener true
                         }
                     }
                     PlaylistMenuHelper.handleMenuClick(
-                            activity, dataSet[adapterPosition], item
+                        activity, dataSet[adapterPosition], item
                     )
                 }
                 popupMenu.show()
@@ -189,7 +205,7 @@ class PlaylistAdapter(
 
             imageTextContainer?.apply {
                 cardElevation = 0f
-                setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorSurface))
+                setCardBackgroundColor(Color.TRANSPARENT)
             }
         }
 

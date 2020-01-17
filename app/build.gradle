@@ -22,7 +22,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 403
+        versionCode 404
         versionName '3.4.850'
 
         multiDexEnabled true
@@ -175,6 +175,7 @@ dependencies {
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
+    implementation 'me.zhanghai.android.fastscroll:library:1.1.0'
 
     def dagger_version = "2.23.1"
     implementation "com.google.dagger:dagger:$dagger_version"

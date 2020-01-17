@@ -9,15 +9,19 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.util.NavigationUtil
-import java.util.*
+import java.util.ArrayList
+import java.util.Locale
 
 /**
  * @author Hemanth S (h4h13).
  */
 
 class GenreAdapter(
-        private val activity: Activity, dataSet: ArrayList<Genre>, private val mItemLayoutRes: Int
+    private val activity: Activity,
+    dataSet: ArrayList<Genre>,
+    private val mItemLayoutRes: Int
 ) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+
     var dataSet = ArrayList<Genre>()
         private set
 
@@ -32,7 +36,12 @@ class GenreAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val genre = dataSet[position]
         holder.title?.text = genre.name
-        holder.text?.text = String.format(Locale.getDefault(), "%d %s", genre.songCount, if (genre.songCount > 1) activity.getString(R.string.songs) else activity.getString(R.string.song))
+        holder.text?.text = String.format(
+            Locale.getDefault(),
+            "%d %s",
+            genre.songCount,
+            if (genre.songCount > 1) activity.getString(R.string.songs) else activity.getString(R.string.song)
+        )
     }
 
     override fun getItemCount(): Int {

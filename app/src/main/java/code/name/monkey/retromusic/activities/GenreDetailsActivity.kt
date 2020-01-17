@@ -116,7 +116,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
 
     private fun setupRecyclerView() {
         ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
-        songAdapter = ShuffleButtonSongAdapter(this, ArrayList(), R.layout.item_list, false, this)
+        songAdapter = ShuffleButtonSongAdapter(this, ArrayList(), R.layout.item_list, this)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = LinearLayoutManager(this@GenreDetailsActivity)

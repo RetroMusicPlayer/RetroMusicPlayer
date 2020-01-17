@@ -61,13 +61,14 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     }
 
     override fun createAdapter(): ArtistAdapter {
-        var itemLayoutRes = itemLayoutRes
-        notifyLayoutResChanged(itemLayoutRes)
-        if (itemLayoutRes != R.layout.item_list) {
-            itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getArtistGridStyle(requireContext())
-        }
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return ArtistAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, loadUsePalette(), libraryFragment)
+        return ArtistAdapter(
+            libraryFragment.mainActivity,
+            dataSet,
+            itemLayoutRes(),
+            loadUsePalette(),
+            libraryFragment
+        )
     }
 
     override fun loadGridSize(): Int {
@@ -127,5 +128,16 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun setLayoutRes(layoutRes: Int) {
+    }
+
+    override fun loadLayoutRes(): Int {
+        return PreferenceUtil.getInstance(requireContext()).artistGridStyle
+    }
+
+    override fun saveLayoutRes(layoutRes: Int) {
+        PreferenceUtil.getInstance(requireContext()).artistGridStyle = layoutRes
     }
 }

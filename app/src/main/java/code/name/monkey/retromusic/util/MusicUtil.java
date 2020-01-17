@@ -112,7 +112,7 @@ public class MusicUtil {
 
     @NonNull
     public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
-        final long duration = getTotalDuration(context, songs);
+        final long duration = getTotalDuration(songs);
 
         return MusicUtil.buildInfoString(
                 MusicUtil.getSongCountString(context, songs.size()),
@@ -388,7 +388,7 @@ public class MusicUtil {
         if (musicMediaTitle.isEmpty()) {
             return "";
         }
-        return String.valueOf(musicMediaTitle.charAt(0)).toUpperCase();
+        return musicMediaTitle.substring(0, 1).toUpperCase();
     }
 
     @NonNull
@@ -400,7 +400,7 @@ public class MusicUtil {
         MusicUtil.playlist = playlist;
     }
 
-    public static long getTotalDuration(@NonNull final Context context, @NonNull List<Song> songs) {
+    public static long getTotalDuration(@NonNull List<Song> songs) {
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
             duration += songs.get(i).getDuration();
@@ -408,7 +408,7 @@ public class MusicUtil {
         return duration;
     }
 
-    public static int indexOfSongInList(List<Song> songs, int songId) {
+    public static int indexOfSongInList(@NonNull List<Song> songs, int songId) {
         for (int i = 0; i < songs.size(); i++) {
             if (songs.get(i).getId() == songId) {
                 return i;

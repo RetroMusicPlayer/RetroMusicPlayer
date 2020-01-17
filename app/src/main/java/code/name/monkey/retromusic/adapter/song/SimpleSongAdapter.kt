@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import java.util.*
+import java.util.ArrayList
 
 class SimpleSongAdapter(
-        context: AppCompatActivity,
-        songs: ArrayList<Song>,
-        i: Int,
-        cabHolder: CabHolder?
-) : SongAdapter(context, songs, i, false, cabHolder) {
+    context: AppCompatActivity,
+    songs: ArrayList<Song>,
+    layoutRes: Int,
+    cabHolder: CabHolder?
+) : SongAdapter(context, songs, layoutRes, cabHolder) {
 
     override fun swapDataSet(dataSet: ArrayList<Song>) {
         this.dataSet.clear()

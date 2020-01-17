@@ -23,7 +23,8 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PreferenceUtil
 
 class HomeAdapter(
-    private val activity: AppCompatActivity, private val displayMetrics: DisplayMetrics
+    private val activity: AppCompatActivity,
+    private val displayMetrics: DisplayMetrics
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list = ArrayList<Home>()
@@ -137,14 +138,9 @@ class HomeAdapter(
                 if (songs.isNotEmpty()) {
                     recyclerView.apply {
                         show()
-                        val songAdapter = SongAdapter(
-                            activity, songs, R.layout.item_album_card, false, null
-                        )
-                        layoutManager = GridLayoutManager(
-                            activity, 1, GridLayoutManager.HORIZONTAL, false
-                        )
+                        val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, null)
+                        layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
                         adapter = songAdapter
-
                     }
                     title.text = activity.getString(titleRes)
                 }

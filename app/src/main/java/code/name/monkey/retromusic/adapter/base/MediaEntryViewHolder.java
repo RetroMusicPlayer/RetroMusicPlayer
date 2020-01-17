@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.adapter.base;
 
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -22,7 +23,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
 import com.google.android.material.card.MaterialCardView;
 import com.h6ah4i.android.widget.advrecyclerview.utils.AbstractDraggableSwipeableItemViewHolder;
@@ -97,8 +97,7 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         dummyContainer = itemView.findViewById(R.id.dummy_view);
 
         if (imageContainerCard != null) {
-            imageContainerCard.setCardBackgroundColor(
-                    ATHUtil.INSTANCE.resolveColor(itemView.getContext(), R.attr.colorSurface));
+            imageContainerCard.setCardBackgroundColor(Color.TRANSPARENT);
         }
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);

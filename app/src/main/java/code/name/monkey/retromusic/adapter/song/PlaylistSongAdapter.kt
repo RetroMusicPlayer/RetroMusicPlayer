@@ -16,9 +16,8 @@ open class PlaylistSongAdapter(
     activity: AppCompatActivity,
     dataSet: ArrayList<Song>,
     itemLayoutRes: Int,
-    usePalette: Boolean,
     cabHolder: CabHolder?
-) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, usePalette, cabHolder, false) {
+) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
 
     init {
         this.setMultiSelectMenuRes(R.menu.menu_cannot_delete_single_songs_playlist_songs_selection)

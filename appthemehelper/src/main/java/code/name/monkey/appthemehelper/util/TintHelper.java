@@ -78,7 +78,7 @@ public final class TintHelper {
     }
 
     @CheckResult
-    @Nullable
+    @NonNull
     public static Drawable createTintedDrawable(Context context,
             @DrawableRes int res, @ColorInt int color) {
         Drawable drawable = ContextCompat.getDrawable(context, res);
@@ -87,7 +87,7 @@ public final class TintHelper {
 
     // This returns a NEW Drawable because of the mutate() call. The mutate() call is necessary because Drawables with the same resource have shared states otherwise.
     @CheckResult
-    @Nullable
+    @NonNull
     public static Drawable createTintedDrawable(@Nullable Drawable drawable, @ColorInt int color) {
         if (drawable == null) {
             return null;

@@ -19,24 +19,26 @@ import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-
 import androidx.annotation.FontRes;
-
-import com.google.android.material.textview.MaterialTextView;
-
 import code.name.monkey.retromusic.R;
+import com.google.android.material.textview.MaterialTextView;
 
 public class BaselineGridTextView extends MaterialTextView {
 
     private final float FOUR_DIP;
 
-    private float lineHeightMultiplierHint = 1f;
-    private float lineHeightHint = 0f;
-    private boolean maxLinesByHeight = false;
-    private int extraTopPadding = 0;
     private int extraBottomPadding = 0;
+
+    private int extraTopPadding = 0;
+
     private @FontRes
     int fontResId = 0;
+
+    private float lineHeightHint = 0f;
+
+    private float lineHeightMultiplierHint = 1f;
+
+    private boolean maxLinesByHeight = false;
 
     public BaselineGridTextView(Context context) {
         this(context, null);
@@ -73,13 +75,21 @@ public class BaselineGridTextView extends MaterialTextView {
         computeLineHeight();
     }
 
-    public float getLineHeightMultiplierHint() {
-        return lineHeightMultiplierHint;
+    @Override
+    public int getCompoundPaddingBottom() {
+        // include extra padding to make the height a multiple of 4dp
+        return super.getCompoundPaddingBottom() + extraBottomPadding;
     }
 
-    public void setLineHeightMultiplierHint(float lineHeightMultiplierHint) {
-        this.lineHeightMultiplierHint = lineHeightMultiplierHint;
-        computeLineHeight();
+    @Override
+    public int getCompoundPaddingTop() {
+        // include extra padding to place the first line's baseline on the grid
+        return super.getCompoundPaddingTop() + extraTopPadding;
+    }
+
+    public @FontRes
+    int getFontResId() {
+        return fontResId;
     }
 
     public float getLineHeightHint() {
@@ -91,6 +101,15 @@ public class BaselineGridTextView extends MaterialTextView {
         computeLineHeight();
     }
 
+    public float getLineHeightMultiplierHint() {
+        return lineHeightMultiplierHint;
+    }
+
+    public void setLineHeightMultiplierHint(float lineHeightMultiplierHint) {
+        this.lineHeightMultiplierHint = lineHeightMultiplierHint;
+        computeLineHeight();
+    }
+
     public boolean getMaxLinesByHeight() {
         return maxLinesByHeight;
     }
@@ -98,23 +117,6 @@ public class BaselineGridTextView extends MaterialTextView {
     public void setMaxLinesByHeight(boolean maxLinesByHeight) {
         this.maxLinesByHeight = maxLinesByHeight;
         requestLayout();
-    }
-
-    public @FontRes
-    int getFontResId() {
-        return fontResId;
-    }
-
-    @Override
-    public int getCompoundPaddingTop() {
-        // include extra padding to place the first line's baseline on the grid
-        return super.getCompoundPaddingTop() + extraTopPadding;
-    }
-
-    @Override
-    public int getCompoundPaddingBottom() {
-        // include extra padding to make the height a multiple of 4dp
-        return super.getCompoundPaddingBottom() + extraBottomPadding;
     }
 
     @Override
@@ -129,18 +131,18 @@ public class BaselineGridTextView extends MaterialTextView {
         checkMaxLines(height, MeasureSpec.getMode(heightMeasureSpec));
     }
 
-    private void parseTextAttrs(TypedArray a) {
-        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightMultiplierHint)) {
-            lineHeightMultiplierHint =
-                    a.getFloat(R.styleable.BaselineGridTextView_lineHeightMultiplierHint, 1f);
+    /**
+     * When measured with an exact height, text can be vertically clipped mid-line. Prevent
+     * this by setting the {@code maxLines} property based on the available space.
+     */
+    private void checkMaxLines(int height, int heightMode) {
+        if (!maxLinesByHeight || heightMode != MeasureSpec.EXACTLY) {
+            return;
         }
-        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightHint)) {
-            lineHeightHint = a.getDimensionPixelSize(
-                    R.styleable.BaselineGridTextView_lineHeightHint, 0);
-        }
-        if (a.hasValue(R.styleable.BaselineGridTextView_android_fontFamily)) {
-            fontResId = a.getResourceId(R.styleable.BaselineGridTextView_android_fontFamily, 0);
-        }
+
+        int textHeight = height - getCompoundPaddingTop() - getCompoundPaddingBottom();
+        int completeLines = (int) Math.floor(textHeight / getLineHeight());
+        setMaxLines(completeLines);
     }
 
     /**
@@ -181,15 +183,17 @@ public class BaselineGridTextView extends MaterialTextView {
         return extraBottomPadding;
     }
 
-    /**
-     * When measured with an exact height, text can be vertically clipped mid-line. Prevent
-     * this by setting the {@code maxLines} property based on the available space.
-     */
-    private void checkMaxLines(int height, int heightMode) {
-        if (!maxLinesByHeight || heightMode != MeasureSpec.EXACTLY) return;
-
-        int textHeight = height - getCompoundPaddingTop() - getCompoundPaddingBottom();
-        int completeLines = (int) Math.floor(textHeight / getLineHeight());
-        setMaxLines(completeLines);
+    private void parseTextAttrs(TypedArray a) {
+        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightMultiplierHint)) {
+            lineHeightMultiplierHint =
+                    a.getFloat(R.styleable.BaselineGridTextView_lineHeightMultiplierHint, 1f);
+        }
+        if (a.hasValue(R.styleable.BaselineGridTextView_lineHeightHint)) {
+            lineHeightHint = a.getDimensionPixelSize(
+                    R.styleable.BaselineGridTextView_lineHeightHint, 0);
+        }
+        if (a.hasValue(R.styleable.BaselineGridTextView_android_fontFamily)) {
+            fontResId = a.getResourceId(R.styleable.BaselineGridTextView_android_fontFamily, 0);
+        }
     }
 }

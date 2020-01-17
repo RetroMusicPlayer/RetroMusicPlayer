@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.adapter.song
 
-import android.graphics.Color
 import android.graphics.PorterDuff.Mode
 import android.view.MenuItem
 import android.view.View
@@ -31,7 +30,7 @@ class PlayingQueueAdapter(
     private var current: Int,
     itemLayoutRes: Int
 ) : SongAdapter(
-    activity, dataSet, itemLayoutRes, false, null
+    activity, dataSet, itemLayoutRes, null
 ), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>, SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder> {
 
     private var color = -1
@@ -47,9 +46,6 @@ class PlayingQueueAdapter(
         holder.time?.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
         if (holder.itemViewType == HISTORY || holder.itemViewType == CURRENT) {
             setAlpha(holder, 0.5f)
-        }
-        if (usePalette) {
-            setColor(holder, Color.WHITE)
         }
     }
 
@@ -68,12 +64,6 @@ class PlayingQueueAdapter(
         if (holder.menu != null) {
             (holder.menu as ImageView).setColorFilter(white, Mode.SRC_IN)
         }
-    }
-
-    override fun usePalette(usePalette: Boolean) {
-        super.usePalette(usePalette)
-        this.usePalette = usePalette
-        notifyDataSetChanged()
     }
 
     override fun getItemViewType(position: Int): Int {

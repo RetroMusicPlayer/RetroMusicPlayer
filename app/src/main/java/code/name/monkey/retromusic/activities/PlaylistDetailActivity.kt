@@ -77,7 +77,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         if (playlist is AbsCustomPlaylist) {
-            adapter = PlaylistSongAdapter(this, ArrayList(), R.layout.item_list, false, this)
+            adapter = PlaylistSongAdapter(this, ArrayList(), R.layout.item_list, this)
             recyclerView.adapter = adapter
         } else {
             recyclerViewDragDropManager = RecyclerViewDragDropManager()
@@ -85,7 +85,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             adapter = OrderablePlaylistSongAdapter(this,
                 ArrayList(),
                 R.layout.item_list,
-                false,
                 this,
                 object : OrderablePlaylistSongAdapter.OnMoveItemListener {
                     override fun onMoveItem(fromPosition: Int, toPosition: Int) {

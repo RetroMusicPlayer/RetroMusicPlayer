@@ -187,14 +187,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             albumText.text = String.format(
                 "%s • %s",
                 album.artistName,
-                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs))
+                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         } else {
             albumText.text = String.format(
                 "%s • %s • %s",
                 album.artistName,
                 MusicUtil.getYearString(album.year),
-                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, album.songs))
+                MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(album.songs))
             )
         }
         loadAlbumCover()

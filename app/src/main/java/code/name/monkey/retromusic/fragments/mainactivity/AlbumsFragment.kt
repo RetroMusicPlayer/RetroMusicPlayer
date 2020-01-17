@@ -53,13 +53,13 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun createAdapter(): AlbumAdapter {
-        var itemLayoutRes = itemLayoutRes
-        notifyLayoutResChanged(itemLayoutRes)
-        if (itemLayoutRes != R.layout.item_list) {
-            itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getAlbumGridStyle(requireContext())
-        }
+        /* var itemLayoutRes = itemLayoutRes
+         notifyLayoutResChanged(itemLayoutRes)
+         if (itemLayoutRes != R.layout.item_list) {
+             itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getAlbumGridStyle(requireContext())
+         }*/
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return AlbumAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, loadUsePalette(), libraryFragment)
+        return AlbumAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes(), loadUsePalette(), libraryFragment)
     }
 
     public override fun loadUsePalette(): Boolean {
@@ -76,37 +76,30 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun loadSortOrder(): String {
-
         return PreferenceUtil.getInstance(requireContext()).albumSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-
         PreferenceUtil.getInstance(requireContext()).albumSortOrder = sortOrder
     }
 
     override fun loadGridSize(): Int {
-
         return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(activity!!)
     }
 
     override fun saveGridSize(gridColumns: Int) {
-
         PreferenceUtil.getInstance(requireContext()).setAlbumGridSize(gridColumns)
     }
 
     override fun loadGridSizeLand(): Int {
-
         return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(activity!!)
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-
         PreferenceUtil.getInstance(requireContext()).setAlbumGridSizeLand(gridColumns)
     }
 
     override fun saveUsePalette(usePalette: Boolean) {
-
         PreferenceUtil.getInstance(requireContext()).setAlbumColoredFooters(usePalette)
     }
 
@@ -120,6 +113,18 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
 
     override fun showEmptyView() {
         adapter?.swapDataSet(ArrayList())
+    }
+
+    override fun setLayoutRes(layoutRes: Int) {
+        //adapter?.itemCount?.let { adapter?.notifyItemRangeChanged(0, it) }
+    }
+
+    override fun loadLayoutRes(): Int {
+        return PreferenceUtil.getInstance(requireContext()).albumGridStyle
+    }
+
+    override fun saveLayoutRes(layoutRes: Int) {
+        PreferenceUtil.getInstance(requireContext()).albumGridStyle = layoutRes
     }
 
     companion object {

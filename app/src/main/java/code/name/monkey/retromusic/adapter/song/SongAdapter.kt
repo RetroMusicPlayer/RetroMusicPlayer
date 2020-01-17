@@ -25,7 +25,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.ArrayList
 
 /**
@@ -36,32 +36,23 @@ open class SongAdapter(
     protected val activity: AppCompatActivity,
     dataSet: ArrayList<Song>,
     protected var itemLayoutRes: Int,
-    usePalette: Boolean,
     cabHolder: CabHolder?,
     showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
     activity, cabHolder, R.menu.menu_media_selection
-), MaterialCab.Callback, FastScrollRecyclerView.SectionedAdapter {
+), MaterialCab.Callback, PopupTextProvider {
 
     var dataSet: ArrayList<Song>
-
-    protected var usePalette = false
     private var showSectionName = true
 
     init {
         this.dataSet = dataSet
-        this.usePalette = usePalette
         this.showSectionName = showSectionName
         this.setHasStableIds(true)
     }
 
     open fun swapDataSet(dataSet: ArrayList<Song>) {
         this.dataSet = dataSet
-        notifyDataSetChanged()
-    }
-
-    open fun usePalette(usePalette: Boolean) {
-        this.usePalette = usePalette
         notifyDataSetChanged()
     }
 
@@ -113,8 +104,7 @@ open class SongAdapter(
                 }
 
                 override fun onColorReady(color: Int) {
-                    if (usePalette) setColors(color, holder)
-                    else setColors(defaultFooterColor, holder)
+                    setColors(color, holder)
                 }
             })
     }
@@ -143,10 +133,7 @@ open class SongAdapter(
         SongsMenuHelper.handleMenuClick(activity, selection, menuItem.itemId)
     }
 
-    override fun getSectionName(position: Int): String {
-        if (!showSectionName) {
-            return ""
-        }
+    override fun getPopupText(position: Int): String {
         val sectionName: String? = when (PreferenceUtil.getInstance(activity).songSortOrder) {
             SortOrder.SongSortOrder.SONG_A_Z, SortOrder.SongSortOrder.SONG_Z_A -> dataSet[position].title
             SortOrder.SongSortOrder.SONG_ALBUM -> dataSet[position].albumName
@@ -157,6 +144,7 @@ open class SongAdapter(
                 return ""
             }
         }
+        println("File name -> $sectionName")
         return MusicUtil.getSectionName(sectionName)
     }
 

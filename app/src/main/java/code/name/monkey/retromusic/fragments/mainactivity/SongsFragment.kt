@@ -2,7 +2,8 @@ package code.name.monkey.retromusic.fragments.mainactivity
 
 import android.os.Bundle
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
@@ -12,14 +13,14 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
+import java.util.ArrayList
 import javax.inject.Inject
 
-class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(), SongView {
+class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, LinearLayoutManager>(),
+    SongView {
 
     @Inject
     lateinit var songPresenter: SongPresenter
-
 
     override val emptyMessage: Int
         get() = R.string.no_songs
@@ -34,20 +35,18 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         songPresenter.attachView(this)
     }
 
-    override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(activity, getGridSize())
+    override fun createLayoutManager(): LinearLayoutManager {
+        return LinearLayoutManager(activity)
     }
 
     override fun createAdapter(): SongAdapter {
-        val itemLayoutRes = itemLayoutRes
-        notifyLayoutResChanged(itemLayoutRes)
-        val usePalette = loadUsePalette()
-
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-
-        return if (getGridSize() <= maxGridSizeForList) {
-            ShuffleButtonSongAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, usePalette, libraryFragment)
-        } else SongAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes, usePalette, libraryFragment)
+        return ShuffleButtonSongAdapter(
+            libraryFragment.mainActivity,
+            dataSet,
+            R.layout.item_list,
+            libraryFragment
+        )
     }
 
     override fun songs(songs: ArrayList<Song>) {
@@ -83,11 +82,9 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     public override fun setUsePalette(usePalette: Boolean) {
-        adapter?.usePalette(usePalette)
     }
 
     override fun setGridSize(gridSize: Int) {
-        layoutManager?.spanCount = gridSize
         adapter?.notifyDataSetChanged()
     }
 
@@ -130,5 +127,16 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun setLayoutRes(@LayoutRes layoutRes: Int) {
+    }
+
+    @LayoutRes
+    override fun loadLayoutRes(): Int {
+        return R.layout.item_list
+    }
+
+    override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
     }
 }

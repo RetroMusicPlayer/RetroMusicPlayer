@@ -219,7 +219,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         text.text = String.format(
             "%s • %s",
             MusicUtil.getArtistInfoString(this, artist),
-            MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(this, artist.songs))
+            MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(artist.songs))
         )
 
         songAdapter.swapDataSet(artist.songs)

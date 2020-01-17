@@ -41,11 +41,7 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnS
         super.onViewCreated(view, savedInstanceState)
         PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
 
-        var preference: Preference? = findPreference("album_grid_style")
-        setSummary(preference!!)
-        preference = findPreference("artist_grid_style")
-        setSummary(preference!!)
-        preference = findPreference("home_artist_grid_style")
+        var preference: Preference? = findPreference("home_artist_grid_style")
         setSummary(preference!!)
         preference = findPreference("tab_text_mode")
         setSummary(preference!!)

@@ -8,6 +8,13 @@
         android:title="@string/pref_title_now_playing_screen_appearance"
         app:icon="@drawable/ic_play_circle_filled_white_24dp" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="extra_song_info"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_extra_song_info"
+        android:title="@string/pref_title_extra_song_info" />
+
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">

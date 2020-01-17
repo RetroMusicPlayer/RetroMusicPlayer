@@ -28,7 +28,6 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
-import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.MainActivity;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
@@ -118,11 +117,11 @@ public final class PreferenceUtil {
 
     public static final String TOGGLE_SEPARATE_LINE = "toggle_separate_line";
 
-    public static final String ALBUM_GRID_STYLE = "album_grid_style";
+    public static final String ALBUM_GRID_STYLE = "album_grid_style_home";
 
     public static final String HOME_ARTIST_GRID_STYLE = "home_artist_grid_style";
 
-    public static final String ARTIST_GRID_STYLE = "artist_grid_style";
+    public static final String ARTIST_GRID_STYLE = "artist_grid_style_home";
 
     public static final String TOGGLE_ADD_CONTROLS = "toggle_add_controls";
 
@@ -233,7 +232,7 @@ public final class PreferenceUtil {
     @NonNull
     public static PreferenceUtil getInstance(Context context) {
         if (sInstance == null) {
-            sInstance = new PreferenceUtil(App.Companion.getContext());
+            sInstance = new PreferenceUtil(context);
         }
         return sInstance;
     }
@@ -249,7 +248,7 @@ public final class PreferenceUtil {
         }
     }
 
-    public static boolean isAllowedToDownloadMetadata(final Context context) {
+    public static boolean isAllowedToDownloadMetadata(@NonNull Context context) {
         switch (getInstance(context).autoDownloadImagesPolicy()) {
             case "always":
                 return true;
@@ -392,26 +391,25 @@ public final class PreferenceUtil {
         return layoutRes;
     }
 
-    public final int getAlbumGridSize(Context context) {
+    public final int getAlbumGridSize(@NonNull Context context) {
         return mPreferences
                 .getInt(ALBUM_GRID_SIZE, context.getResources().getInteger(R.integer.default_grid_columns));
     }
 
-    public final int getAlbumGridSizeLand(Context context) {
-        return mPreferences.getInt(ALBUM_GRID_SIZE_LAND,
-                context.getResources().getInteger(R.integer.default_grid_columns_land));
+    public final int getAlbumGridSizeLand(@NonNull Context context) {
+        return mPreferences
+                .getInt(ALBUM_GRID_SIZE_LAND, context.getResources().getInteger(R.integer.default_grid_columns_land));
     }
 
     @LayoutRes
-    public int getAlbumGridStyle(Context context) {
-        int pos = Integer.parseInt(mPreferences.getString(ALBUM_GRID_STYLE, "0"));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.item_card;
-        }
-        return layoutRes;
+    public int getAlbumGridStyle() {
+        return mPreferences.getInt(ALBUM_GRID_STYLE, R.layout.item_grid);
+    }
+
+    public void setAlbumGridStyle(int layoutRes) {
+        mPreferences.edit()
+                .putInt(ALBUM_GRID_STYLE, layoutRes)
+                .apply();
     }
 
     public final String getAlbumSongSortOrder() {
@@ -455,15 +453,12 @@ public final class PreferenceUtil {
     }
 
     @LayoutRes
-    public int getArtistGridStyle(Context context) {
-        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ARTIST_GRID_STYLE, "0")));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.item_card;
-        }
-        return layoutRes;
+    public int getArtistGridStyle() {
+        return mPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid);
+    }
+
+    public void setArtistGridStyle(int viewAs) {
+        mPreferences.edit().putInt(ARTIST_GRID_STYLE, viewAs).apply();
     }
 
     public final String getArtistSongSortOrder() {
@@ -699,10 +694,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(SLEEP_TIMER_FINISH_SONG, false);
     }
 
-    public boolean isSongInfo() {
-        return mPreferences.getBoolean(EXTRA_SONG_INFO, false);
-    }
-
     public void setSleepTimerFinishMusic(final boolean value) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(SLEEP_TIMER_FINISH_SONG, value);
@@ -836,6 +827,10 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(SNOW_FALL_EFFECT, false);
     }
 
+    public boolean isSongInfo() {
+        return mPreferences.getBoolean(EXTRA_SONG_INFO, false);
+    }
+
     public boolean pauseOnZeroVolume() {
         return mPreferences.getBoolean(PAUSE_ON_ZERO_VOLUME, false);
     }
@@ -897,10 +892,6 @@ public final class PreferenceUtil {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt(ARTIST_GRID_SIZE_LAND, gridSize);
         editor.apply();
-    }
-
-    public void setArtistGridStyle(int viewAs) {
-        mPreferences.edit().putInt(ARTIST_GRID_STYLE, viewAs).apply();
     }
 
     public void setBannerImagePath(String bannerImagePath) {
@@ -980,17 +971,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(SONG_COLORED_FOOTERS, false);
     }
 
-    public final boolean synchronizedLyricsShow() {
-        return mPreferences.getBoolean(SYNCHRONIZED_LYRICS_SHOW, true);
-    }
-
-    public boolean tabTitles() {
-        return getTabTitleMode() != LabelVisibilityMode.LABEL_VISIBILITY_UNLABELED;
-    }
-
-    public boolean toggleSeparateLine() {
-        return mPreferences.getBoolean(TOGGLE_SEPARATE_LINE, false);
-    }
 
     public void unregisterOnSharedPreferenceChangedListener(
             @NonNull OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {

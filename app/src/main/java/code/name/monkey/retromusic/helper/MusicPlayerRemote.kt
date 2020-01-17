@@ -16,7 +16,12 @@ package code.name.monkey.retromusic.helper
 
 import android.annotation.TargetApi
 import android.app.Activity
-import android.content.*
+import android.content.ComponentName
+import android.content.ContentResolver
+import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
+import android.content.ServiceConnection
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
@@ -32,8 +37,9 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.io.File
-import java.util.*
-
+import java.util.ArrayList
+import java.util.Random
+import java.util.WeakHashMap
 
 object MusicPlayerRemote {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
@@ -116,7 +122,12 @@ object MusicPlayerRemote {
         }
         val binder = ServiceBinder(callback)
 
-        if (contextWrapper.bindService(Intent().setClass(contextWrapper, MusicService::class.java), binder, Context.BIND_AUTO_CREATE)) {
+        if (contextWrapper.bindService(
+                Intent().setClass(contextWrapper, MusicService::class.java),
+                binder,
+                Context.BIND_AUTO_CREATE
+            )
+        ) {
             mConnectionMap[contextWrapper] = binder
             return ServiceToken(contextWrapper)
         }
@@ -234,7 +245,11 @@ object MusicPlayerRemote {
         }
     }
 
-    private fun tryToHandleOpenPlayingQueue(queue: ArrayList<Song>, startPosition: Int, startPlaying: Boolean): Boolean {
+    private fun tryToHandleOpenPlayingQueue(
+        queue: ArrayList<Song>,
+        startPosition: Int,
+        startPlaying: Boolean
+    ): Boolean {
         if (playingQueue === queue) {
             if (startPlaying) {
                 playSongAt(startPosition)
@@ -291,7 +306,11 @@ object MusicPlayerRemote {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(musicService, musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                musicService,
+                musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue),
+                Toast.LENGTH_SHORT
+            ).show()
             return true
         }
         return false
@@ -304,7 +323,11 @@ object MusicPlayerRemote {
             } else {
                 openQueue(songs, 0, false)
             }
-            val toast = if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue, songs.size)
+            val toast =
+                if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue,
+                    songs.size
+                )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
             return true
         }
@@ -320,7 +343,11 @@ object MusicPlayerRemote {
                 queue.add(song)
                 openQueue(queue, 0, false)
             }
-            Toast.makeText(musicService, musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                musicService,
+                musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue),
+                Toast.LENGTH_SHORT
+            ).show()
             return true
         }
         return false
@@ -333,7 +360,11 @@ object MusicPlayerRemote {
             } else {
                 openQueue(songs, 0, false)
             }
-            val toast = if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue, songs.size)
+            val toast =
+                if (songs.size == 1) musicService!!.resources.getString(code.name.monkey.retromusic.R.string.added_title_to_playing_queue) else musicService!!.resources.getString(
+                    code.name.monkey.retromusic.R.string.added_x_titles_to_playing_queue,
+                    songs.size
+                )
             Toast.makeText(musicService, toast, Toast.LENGTH_SHORT).show()
             return true
         }
@@ -385,18 +416,21 @@ object MusicPlayerRemote {
                         songId = uri.lastPathSegment
                     }
                     if (songId != null) {
-                        songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                        songs = SongLoader.getSongs(
+                            SongLoader.makeSongCursor(
                                 musicService!!,
                                 MediaStore.Audio.AudioColumns._ID + "=?",
                                 arrayOf(songId)
-                        ))
+                            )
+                        )
                     }
                 }
             }
             if (songs == null) {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
-                    songFile = File(Environment.getExternalStorageDirectory(), uri.path?.split(":".toRegex(), 2)?.get(1))
+                    songFile =
+                        File(Environment.getExternalStorageDirectory(), uri.path?.split(":".toRegex(), 2)?.get(1))
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(musicService!!, uri)
@@ -407,11 +441,13 @@ object MusicPlayerRemote {
                     songFile = File(uri.path)
                 }
                 if (songFile != null) {
-                    songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+                    songs = SongLoader.getSongs(
+                        SongLoader.makeSongCursor(
                             musicService!!,
                             MediaStore.Audio.AudioColumns.DATA + "=?",
                             arrayOf(songFile.absolutePath)
-                    ))
+                        )
+                    )
                 }
             }
             if (songs != null && songs.isNotEmpty()) {
@@ -442,5 +478,4 @@ object MusicPlayerRemote {
     }
 
     class ServiceToken internal constructor(internal var mWrappedContext: ContextWrapper)
-
 }

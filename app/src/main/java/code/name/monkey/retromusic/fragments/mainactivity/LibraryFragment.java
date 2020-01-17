@@ -35,7 +35,6 @@ import code.name.monkey.retromusic.util.RetroUtil;
 import com.afollestad.materialcab.MaterialCab;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.card.MaterialCardView;
-import io.reactivex.disposables.CompositeDisposable;
 import org.jetbrains.annotations.NotNull;
 
 public class LibraryFragment extends AbsMainActivityFragment implements CabHolder, MainActivityFragmentCallbacks {
@@ -47,8 +46,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     private AppBarLayout appBarLayout;
 
     private MaterialCab cab;
-
-    private CompositeDisposable disposable;
 
     private FragmentManager fragmentManager;
 
@@ -76,7 +73,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             @Nullable ViewGroup container,
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_library, container, false);
-        disposable = new CompositeDisposable();
         appBarLayout = view.findViewById(R.id.appBarLayout);
         toolbarContainer = view.findViewById(R.id.toolbarContainer);
         toolbar = view.findViewById(R.id.toolbar);
@@ -91,11 +87,6 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         inflateFragment();
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        disposable.dispose();
-    }
 
     public void addOnAppBarOffsetChangedListener(
             @NonNull AppBarLayout.OnOffsetChangedListener onOffsetChangedListener) {
@@ -126,11 +117,18 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment
                     = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
 
-            MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
-            if (RetroUtil.isLandscape()) {
-                gridSizeItem.setTitle(R.string.action_grid_size_land);
+            if (fragment instanceof SongsFragment) {
+                menu.removeItem(R.id.action_grid_size);
+                menu.removeItem(R.id.action_layout_type);
+            } else {
+                MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
+                if (RetroUtil.isLandscape()) {
+                    gridSizeItem.setTitle(R.string.action_grid_size_land);
+                }
+                setUpGridSizeMenu(fragment, gridSizeItem.getSubMenu());
+                MenuItem layoutItem = menu.findItem(R.id.action_layout_type);
+                setupLayoutMenu(fragment, layoutItem.getSubMenu());
             }
-            setUpGridSizeMenu(fragment, gridSizeItem.getSubMenu());
 
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).getSubMenu());
 
@@ -155,6 +153,9 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment
                     = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) currentFragment;
             if (handleGridSizeMenuItem(fragment, item)) {
+                return true;
+            }
+            if (handleLayoutResType(fragment, item)) {
                 return true;
             }
             if (handleSortOrderMenuItem(fragment, item)) {
@@ -220,8 +221,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
     private boolean handleGridSizeMenuItem(
-            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment
-                    fragment, @NonNull MenuItem item) {
+            @NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
+            @NonNull MenuItem item) {
         int gridSize = 0;
         switch (item.getItemId()) {
             case R.id.action_grid_size_1:
@@ -253,6 +254,38 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         if (gridSize > 0) {
             item.setChecked(true);
             fragment.setAndSaveGridSize(gridSize);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean handleLayoutResType(
+            final AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
+            final MenuItem item) {
+        int layoutRes = -1;
+        switch (item.getItemId()) {
+            case R.id.action_layout_normal:
+                layoutRes = R.layout.item_grid;
+                break;
+            case R.id.action_layout_card:
+                layoutRes = R.layout.item_card;
+                break;
+            case R.id.action_layout_colored_card:
+                layoutRes = R.layout.item_card_color;
+                break;
+            case R.id.action_layout_circular:
+                layoutRes = R.layout.item_grid_circle;
+                break;
+            case R.id.action_layout_image:
+                layoutRes = R.layout.image;
+                break;
+            case R.id.action_layout_gradient_image:
+                layoutRes = R.layout.item_image_gradient;
+                break;
+        }
+        if (layoutRes != -1) {
+            item.setChecked(true);
+            fragment.setAndSaveLayoutRes(layoutRes);
             return true;
         }
         return false;
@@ -448,7 +481,31 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         sortOrderMenu.setGroupCheckable(0, true, true);
     }
 
-    @SuppressWarnings("ConstantConditions")
+    private void setupLayoutMenu(
+            @NonNull final AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
+            @NonNull final SubMenu subMenu) {
+        switch (fragment.itemLayoutRes()) {
+            case R.layout.item_card:
+                subMenu.findItem(R.id.action_layout_card).setChecked(true);
+                break;
+            case R.layout.item_grid:
+                subMenu.findItem(R.id.action_layout_normal).setChecked(true);
+                break;
+            case R.layout.item_card_color:
+                subMenu.findItem(R.id.action_layout_colored_card).setChecked(true);
+                break;
+            case R.layout.item_grid_circle:
+                subMenu.findItem(R.id.action_layout_circular).setChecked(true);
+                break;
+            case R.layout.image:
+                subMenu.findItem(R.id.action_layout_image).setChecked(true);
+                break;
+            case R.layout.item_image_gradient:
+                subMenu.findItem(R.id.action_layout_gradient_image).setChecked(true);
+                break;
+        }
+    }
+
     private void setupToolbar() {
         toolbar.setBackgroundTintList(
                 ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
@@ -462,6 +519,5 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
         getMainActivity().setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(v -> showMainMenu(OptionsSheetDialogFragment.LIBRARY));
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        //toolbar.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorOnSecondary));
     }
 }
