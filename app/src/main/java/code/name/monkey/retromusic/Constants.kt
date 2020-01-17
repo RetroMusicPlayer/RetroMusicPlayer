@@ -46,6 +46,4 @@ object Constants {
             MediaStore.Audio.AudioColumns.ARTIST,// 10
             MediaStore.Audio.AudioColumns.COMPOSER)// 11
     const val NUMBER_OF_TOP_TRACKS = 99
-
-
 }

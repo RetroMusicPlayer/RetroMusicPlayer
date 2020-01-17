@@ -115,7 +115,7 @@
                 android:focusableInTouchMode="true"
                 android:freezesText="true"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="2"
+               android:singleLine="true"
                 android:scrollHorizontally="true"
                 android:textStyle="bold"
                 tools:text="@tools:sample/lorem/random" />

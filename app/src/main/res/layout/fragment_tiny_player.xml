@@ -141,7 +141,7 @@
         android:layout_height="0dp"
         android:ellipsize="end"
         android:gravity="start"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:rotation="0"

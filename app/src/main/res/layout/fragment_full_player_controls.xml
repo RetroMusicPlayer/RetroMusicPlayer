@@ -44,7 +44,7 @@
         android:alpha="0.75"
         android:ellipsize="end"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="1"
         android:paddingStart="8dp"
         android:paddingTop="12dp"
         android:paddingEnd="8dp"
