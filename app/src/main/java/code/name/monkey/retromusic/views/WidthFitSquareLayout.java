@@ -14,40 +14,41 @@
 
 package code.name.monkey.retromusic.views;
 
+
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 public class WidthFitSquareLayout extends FrameLayout {
+
     private boolean forceSquare = true;
 
     public WidthFitSquareLayout(Context context) {
         super(context);
     }
 
-    public WidthFitSquareLayout(Context context, AttributeSet attributeSet) {
-        super(context, attributeSet);
+    public WidthFitSquareLayout(Context context, AttributeSet attrs) {
+        super(context, attrs);
     }
 
-    public WidthFitSquareLayout(Context context, AttributeSet attributeSet, int i) {
-        super(context, attributeSet, i);
+    public WidthFitSquareLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(21)
-    public WidthFitSquareLayout(Context context, AttributeSet attributeSet, int i, int i2) {
-        super(context, attributeSet, i, i2);
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public WidthFitSquareLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void forceSquare(boolean z) {
-        this.forceSquare = z;
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, forceSquare ? widthMeasureSpec : heightMeasureSpec);
+    }
+
+    public void forceSquare(boolean forceSquare) {
+        this.forceSquare = forceSquare;
         requestLayout();
-    }
-
-    protected void onMeasure(int i, int i2) {
-        if (this.forceSquare) {
-            i2 = i;
-        }
-        super.onMeasure(i, i2);
     }
 }
