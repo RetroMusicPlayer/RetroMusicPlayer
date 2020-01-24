@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
@@ -52,9 +55,10 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.bottomNavigationView
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.dimBackground
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.mainContent
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.sheet2Container
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.slidingPanel
 
 abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlayerFragment.Callbacks {
@@ -62,7 +66,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var playerFragment: AbsPlayerFragment? = null
     private var currentNowPlayingScreen: NowPlayingScreen? = null
@@ -71,6 +75,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     private var lightStatusBar: Boolean = false
     private var lightNavigationBar: Boolean = false
     private var navigationBarColorAnimator: ValueAnimator? = null
+    private lateinit var queueAdapter: PlayingQueueAdapter
     protected abstract fun createContentView(): View
     private val panelState: Int
         get() = bottomSheetBehavior.state
@@ -112,6 +117,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
         val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
+
+        queueAdapter = PlayingQueueAdapter(this, ArrayList(), MusicPlayerRemote.position, R.layout.item_queue)
+        sheet2Container.adapter = queueAdapter
+        sheet2Container.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onResume() {
@@ -270,6 +279,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 override fun onGlobalLayout() {
                     slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     hideBottomBar(false)
+                    queueAdapter.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
                 }
             })
         } // don't call hideBottomBar(true) here as it causes a bug with the SlidingUpPanelLayout
@@ -278,6 +288,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     override fun onQueueChanged() {
         super.onQueueChanged()
         hideBottomBar(MusicPlayerRemote.playingQueue.isEmpty())
+        queueAdapter.swapDataSet(MusicPlayerRemote.playingQueue, MusicPlayerRemote.position)
     }
 
     override fun onBackPressed() {
@@ -285,11 +296,14 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     }
 
     open fun handleBackPress(): Boolean {
-        if (bottomSheetBehavior.peekHeight != 0 && playerFragment!!.onBackPressed()) return true
+        /*if (bottomSheetBehavior.peekHeight != 0 && playerFragment!!.onBackPressed()) return true
         if (panelState == BottomSheetBehavior.STATE_EXPANDED) {
             collapsePanel()
             return true
-        }
+        }*/
+
+        if (mainContent.consumeBackPress())
+            return true
         return false
     }
 

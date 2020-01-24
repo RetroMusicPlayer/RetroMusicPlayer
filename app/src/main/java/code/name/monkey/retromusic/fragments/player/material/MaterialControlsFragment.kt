@@ -111,7 +111,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
+        val colorBg = ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =

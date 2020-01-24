@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<code.name.monkey.retromusic.MultiSheetView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainContent"
@@ -28,22 +28,95 @@
         app:cardBackgroundColor="?attr/colorSurface"
         app:cardCornerRadius="0dp"
         app:cardUseCompatPadding="false"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior"
         app:strokeWidth="0dp">
 
-
         <FrameLayout
-            android:id="@+id/playerFragmentContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:elevation="2dp"
+            app:behavior_peekHeight="@dimen/bottom_sheet_peek_1_height"
+            app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior">
 
-        <fragment
-            android:id="@+id/miniPlayerFragment"
-            android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            tools:layout="@layout/fragment_mini_player" />
+            <FrameLayout
+                android:id="@+id/playerFragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/bottom_sheet_peek_2_height" />
 
+            <fragment
+                android:id="@+id/miniPlayerFragment"
+                android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                tools:layout="@layout/fragment_mini_player" />
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/sheet1Coordinator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/sheet2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="?attr/colorSurface"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    app:behavior_peekHeight="@dimen/bottom_sheet_peek_2_height"
+                    app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior">
+
+                    <FrameLayout
+                        android:id="@+id/sheet2PeekView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/bottom_sheet_peek_2_height"
+                        android:elevation="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <code.name.monkey.retromusic.views.StatusBarView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/thumb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
+                            app:tint="?attr/colorControlNormal" />
+                    </FrameLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sheet2Container"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/extendedToolbar" />
+
+                    <FrameLayout
+                        android:id="@+id/extendedToolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:elevation="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/sheet2PeekView">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/collapseBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="14dp"
+                            app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
+                            app:tint="?attr/colorControlNormal" />
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </FrameLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
@@ -61,5 +134,4 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_main"
         tools:layout_height="56dp" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</code.name.monkey.retromusic.MultiSheetView>

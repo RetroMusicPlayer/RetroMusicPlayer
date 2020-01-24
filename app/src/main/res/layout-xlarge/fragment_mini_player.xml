@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/miniPlayerContent"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="?android:attr/background"
+    android:layout_height="@dimen/bottom_sheet_peek_1_height"
+    android:background="?attr/colorSurface"
     android:clickable="true"
-    android:focusable="false"
+    android:focusable="true"
     android:transitionName="@string/transition_mini_player"
     tools:ignore="UnusedAttribute">
 

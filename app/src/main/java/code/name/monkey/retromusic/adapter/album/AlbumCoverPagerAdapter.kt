@@ -19,9 +19,9 @@ import com.bumptech.glide.Glide
 import java.util.ArrayList
 
 class AlbumCoverPagerAdapter(
-    fm: FragmentManager,
+    fragmentManager: FragmentManager,
     private val dataSet: ArrayList<Song>
-) : CustomFragmentStatePagerAdapter(fm) {
+) : CustomFragmentStatePagerAdapter(fragmentManager) {
 
     private var currentColorReceiver: AlbumCoverFragment.ColorReceiver? = null
     private var currentColorReceiverPosition = -1
