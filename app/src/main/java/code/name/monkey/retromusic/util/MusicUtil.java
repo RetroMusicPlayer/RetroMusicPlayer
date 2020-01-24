@@ -27,21 +27,9 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
-
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.tag.FieldKey;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
-
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.loaders.PlaylistLoader;
@@ -51,75 +39,21 @@ import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics;
 import code.name.monkey.retromusic.service.MusicService;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.tag.FieldKey;
 
 
 public class MusicUtil {
 
     public static final String TAG = MusicUtil.class.getSimpleName();
+
     private static Playlist playlist;
-
-    @NonNull
-    public static Uri getMediaStoreAlbumCoverUri(int albumId) {
-        final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
-        return ContentUris.withAppendedId(sArtworkUri, albumId);
-    }
-
-    public static Uri getSongFileUri(int songId) {
-        return ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songId);
-    }
-
-    @NonNull
-    public static Intent createShareSongFileIntent(@NonNull final Song song, @NonNull Context context) {
-        try {
-            return new Intent()
-                    .setAction(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName(), new File(song.getData())))
-                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    .setType("audio/*");
-        } catch (IllegalArgumentException e) {
-            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
-            e.printStackTrace();
-            Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
-            return new Intent();
-        }
-    }
-
-    @NonNull
-    public static String getSongCountString(@NonNull final Context context, int songCount) {
-        final String songString = songCount == 1 ? context.getResources().getString(R.string.song) : context.getResources().getString(R.string.songs);
-        return songCount + " " + songString;
-    }
-
-    @NonNull
-    public static String getSongInfoString(@NonNull Song song) {
-        return MusicUtil.buildInfoString(
-                song.getArtistName(),
-                song.getAlbumName()
-        );
-    }
-
-    @NonNull
-    public static String getArtistInfoString(@NonNull final Context context,
-                                             @NonNull final Artist artist) {
-        int albumCount = artist.getAlbumCount();
-        int songCount = artist.getSongCount();
-        String albumString = albumCount == 1 ? context.getResources().getString(R.string.album)
-                : context.getResources().getString(R.string.albums);
-        String songString = songCount == 1 ? context.getResources().getString(R.string.song)
-                : context.getResources().getString(R.string.songs);
-        return albumCount + " " + albumString + " • " + songCount + " " + songString;
-    }
-
-    @NonNull
-    public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
-        final long duration = getTotalDuration(songs);
-
-        return MusicUtil.buildInfoString(
-                MusicUtil.getSongCountString(context, songs.size()),
-                MusicUtil.getReadableDurationString(duration)
-        );
-    }
-
 
     /**
      * Build a concatenated string from the provided arguments
@@ -142,61 +76,40 @@ public class MusicUtil {
         return string1 + "  •  " + string2;
     }
 
-    public static String getReadableDurationString(long songDurationMillis) {
-        long minutes = (songDurationMillis / 1000) / 60;
-        long seconds = (songDurationMillis / 1000) % 60;
-        if (minutes < 60) {
-            return String.format(Locale.getDefault(), "%01d:%02d", minutes, seconds);
-        } else {
-            long hours = minutes / 60;
-            minutes = minutes % 60;
-            return String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds);
-        }
-    }
-
-    //iTunes uses for example 1002 for track 2 CD1 or 3011 for track 11 CD3.
-    //this method converts those values to normal tracknumbers
-    public static int getFixedTrackNumber(int trackNumberToFix) {
-        return trackNumberToFix % 1000;
-    }
-
-    public static void insertAlbumArt(@NonNull Context context, int albumId, String path) {
-        ContentResolver contentResolver = context.getContentResolver();
-
-        Uri artworkUri = Uri.parse("content://media/external/audio/albumart");
-        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null);
-
-        ContentValues values = new ContentValues();
-        values.put("album_id", albumId);
-        values.put("_data", path);
-
-        contentResolver.insert(artworkUri, values);
-    }
-
     @NonNull
     public static File createAlbumArtFile() {
         return new File(createAlbumArtDir(), String.valueOf(System.currentTimeMillis()));
     }
 
     @NonNull
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static File createAlbumArtDir() {
-        File albumArtDir = new File(Environment.getExternalStorageDirectory(), "/albumthumbs/");
-        if (!albumArtDir.exists()) {
-            albumArtDir.mkdirs();
-            try {
-                new File(albumArtDir, ".nomedia").createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public static Intent createShareSongFileIntent(@NonNull final Song song, @NonNull Context context) {
+        try {
+            return new Intent()
+                    .setAction(Intent.ACTION_SEND)
+                    .putExtra(Intent.EXTRA_STREAM, FileProvider
+                            .getUriForFile(context, context.getApplicationContext().getPackageName(),
+                                    new File(song.getData())))
+                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    .setType("audio/*");
+        } catch (IllegalArgumentException e) {
+            // TODO the path is most likely not like /storage/emulated/0/... but something like /storage/28C7-75B0/...
+            e.printStackTrace();
+            Toast.makeText(context, "Could not share this file, I'm aware of the issue.", Toast.LENGTH_SHORT).show();
+            return new Intent();
         }
-        return albumArtDir;
     }
 
-    public static void deleteTracks(@NonNull final Activity activity,
-                                    @NonNull final List<Song> songs,
-                                    @Nullable final List<Uri> safUris,
-                                    @Nullable final Runnable callback) {
+    public static void deleteAlbumArt(@NonNull Context context, int albumId) {
+        ContentResolver contentResolver = context.getContentResolver();
+        Uri localUri = Uri.parse("content://media/external/audio/albumart");
+        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null);
+    }
+
+    public static void deleteTracks(
+            @NonNull final Activity activity,
+            @NonNull final List<Song> songs,
+            @Nullable final List<Uri> safUris,
+            @Nullable final Runnable callback) {
         final String[] projection = new String[]{
                 BaseColumns._ID, MediaStore.MediaColumns.DATA
         };
@@ -204,7 +117,8 @@ public class MusicUtil {
         // Split the query into multiple batches, and merge the resulting cursors
         int batchStart = 0;
         int batchEnd = 0;
-        final int batchSize = 1000000 / 10; // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID
+        final int batchSize = 1000000
+                / 10; // 10^6 being the SQLite limite on the query lenth in bytes, 10 being the max number of digits in an int, used to store the track ID
         final int songCount = songs.size();
 
         while (batchEnd < songCount) {
@@ -263,19 +177,31 @@ public class MusicUtil {
         activity.getContentResolver().notifyChange(Uri.parse("content://media"), null);
 
         activity.runOnUiThread(() -> {
-            Toast.makeText(activity, activity.getString(R.string.deleted_x_songs, songCount), Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, activity.getString(R.string.deleted_x_songs, songCount), Toast.LENGTH_SHORT)
+                    .show();
             if (callback != null) {
                 callback.run();
             }
         });
     }
 
-    public static void deleteAlbumArt(@NonNull Context context, int albumId) {
-        ContentResolver contentResolver = context.getContentResolver();
-        Uri localUri = Uri.parse("content://media/external/audio/albumart");
-        contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null);
+    @NonNull
+    public static String getArtistInfoString(@NonNull final Context context,
+            @NonNull final Artist artist) {
+        int albumCount = artist.getAlbumCount();
+        int songCount = artist.getSongCount();
+        String albumString = albumCount == 1 ? context.getResources().getString(R.string.album)
+                : context.getResources().getString(R.string.albums);
+        String songString = songCount == 1 ? context.getResources().getString(R.string.song)
+                : context.getResources().getString(R.string.songs);
+        return albumCount + " " + albumString + " • " + songCount + " " + songString;
     }
 
+    //iTunes uses for example 1002 for track 2 CD1 or 3011 for track 11 CD3.
+    //this method converts those values to normal tracknumbers
+    public static int getFixedTrackNumber(int trackNumberToFix) {
+        return trackNumberToFix % 1000;
+    }
 
     @Nullable
     public static String getLyrics(@NonNull Song song) {
@@ -334,44 +260,41 @@ public class MusicUtil {
         return lyrics;
     }
 
-    public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
-        if (isFavorite(context, song)) {
-            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).id);
+    @NonNull
+    public static Uri getMediaStoreAlbumCoverUri(int albumId) {
+        final Uri sArtworkUri = Uri.parse("content://media/external/audio/albumart");
+        return ContentUris.withAppendedId(sArtworkUri, albumId);
+    }
+
+    @NonNull
+    public static Playlist getPlaylist() {
+        return playlist;
+    }
+
+    public static void setPlaylist(@NonNull Playlist playlist) {
+        MusicUtil.playlist = playlist;
+    }
+
+    @NonNull
+    public static String getPlaylistInfoString(@NonNull final Context context, @NonNull List<Song> songs) {
+        final long duration = getTotalDuration(songs);
+
+        return MusicUtil.buildInfoString(
+                MusicUtil.getSongCountString(context, songs.size()),
+                MusicUtil.getReadableDurationString(duration)
+        );
+    }
+
+    public static String getReadableDurationString(long songDurationMillis) {
+        long minutes = (songDurationMillis / 1000) / 60;
+        long seconds = (songDurationMillis / 1000) % 60;
+        if (minutes < 60) {
+            return String.format(Locale.getDefault(), "%01d:%02d", minutes, seconds);
         } else {
-            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).id,
-                    false);
+            long hours = minutes / 60;
+            minutes = minutes % 60;
+            return String.format(Locale.getDefault(), "%d:%02d:%02d", hours, minutes, seconds);
         }
-        context.sendBroadcast(new Intent(MusicService.FAVORITE_STATE_CHANGED));
-    }
-
-    public static boolean isFavoritePlaylist(@NonNull final Context context,
-                                             @NonNull final Playlist playlist) {
-        return playlist.name != null && playlist.name.equals(context.getString(R.string.favorites));
-    }
-
-    private static Playlist getFavoritesPlaylist(@NonNull final Context context) {
-        return PlaylistLoader.INSTANCE.getPlaylist(context, context.getString(R.string.favorites));
-    }
-
-    private static Playlist getOrCreateFavoritesPlaylist(@NonNull final Context context) {
-        return PlaylistLoader.INSTANCE.getPlaylist(context,
-                PlaylistsUtil.createPlaylist(context, context.getString(R.string.favorites)));
-    }
-
-    public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
-        return PlaylistsUtil
-                .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.getId());
-    }
-
-    public static boolean isArtistNameUnknown(@Nullable String artistName) {
-        if (TextUtils.isEmpty(artistName)) {
-            return false;
-        }
-        if (artistName.equals(Artist.UNKNOWN_ARTIST_DISPLAY_NAME)) {
-            return true;
-        }
-        artistName = artistName.trim().toLowerCase();
-        return artistName.equals("unknown") || artistName.equals("<unknown>");
     }
 
     @NonNull
@@ -392,12 +315,22 @@ public class MusicUtil {
     }
 
     @NonNull
-    public static Playlist getPlaylist() {
-        return playlist;
+    public static String getSongCountString(@NonNull final Context context, int songCount) {
+        final String songString = songCount == 1 ? context.getResources().getString(R.string.song)
+                : context.getResources().getString(R.string.songs);
+        return songCount + " " + songString;
     }
 
-    public static void setPlaylist(@NonNull Playlist playlist) {
-        MusicUtil.playlist = playlist;
+    public static Uri getSongFileUri(int songId) {
+        return ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songId);
+    }
+
+    @NonNull
+    public static String getSongInfoString(@NonNull Song song) {
+        return MusicUtil.buildInfoString(
+                song.getArtistName(),
+                song.getAlbumName()
+        );
     }
 
     public static long getTotalDuration(@NonNull List<Song> songs) {
@@ -406,6 +339,11 @@ public class MusicUtil {
             duration += songs.get(i).getDuration();
         }
         return duration;
+    }
+
+    @NonNull
+    public static String getYearString(int year) {
+        return year > 0 ? String.valueOf(year) : "-";
     }
 
     public static int indexOfSongInList(@NonNull List<Song> songs, int songId) {
@@ -417,8 +355,71 @@ public class MusicUtil {
         return -1;
     }
 
+    public static void insertAlbumArt(@NonNull Context context, int albumId, String path) {
+        ContentResolver contentResolver = context.getContentResolver();
+
+        Uri artworkUri = Uri.parse("content://media/external/audio/albumart");
+        contentResolver.delete(ContentUris.withAppendedId(artworkUri, albumId), null, null);
+
+        ContentValues values = new ContentValues();
+        values.put("album_id", albumId);
+        values.put("_data", path);
+
+        contentResolver.insert(artworkUri, values);
+    }
+
+    public static boolean isArtistNameUnknown(@Nullable String artistName) {
+        if (TextUtils.isEmpty(artistName)) {
+            return false;
+        }
+        if (artistName.equals(Artist.UNKNOWN_ARTIST_DISPLAY_NAME)) {
+            return true;
+        }
+        artistName = artistName.trim().toLowerCase();
+        return artistName.equals("unknown") || artistName.equals("<unknown>");
+    }
+
+    public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {
+        return PlaylistsUtil
+                .doPlaylistContains(context, getFavoritesPlaylist(context).id, song.getId());
+    }
+
+    public static boolean isFavoritePlaylist(@NonNull final Context context,
+            @NonNull final Playlist playlist) {
+        return playlist.name != null && playlist.name.equals(context.getString(R.string.favorites));
+    }
+
+    public static void toggleFavorite(@NonNull final Context context, @NonNull final Song song) {
+        if (isFavorite(context, song)) {
+            PlaylistsUtil.removeFromPlaylist(context, song, getFavoritesPlaylist(context).id);
+        } else {
+            PlaylistsUtil.addToPlaylist(context, song, getOrCreateFavoritesPlaylist(context).id,
+                    false);
+        }
+        context.sendBroadcast(new Intent(MusicService.FAVORITE_STATE_CHANGED));
+    }
+
     @NonNull
-    public static String getYearString(int year) {
-        return year > 0 ? String.valueOf(year) : "-";
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    private static File createAlbumArtDir() {
+        File albumArtDir = new File(Environment.getExternalStorageDirectory(), "/albumthumbs/");
+        if (!albumArtDir.exists()) {
+            albumArtDir.mkdirs();
+            try {
+                new File(albumArtDir, ".nomedia").createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return albumArtDir;
+    }
+
+    private static Playlist getFavoritesPlaylist(@NonNull final Context context) {
+        return PlaylistLoader.INSTANCE.getPlaylist(context, context.getString(R.string.favorites));
+    }
+
+    private static Playlist getOrCreateFavoritesPlaylist(@NonNull final Context context) {
+        return PlaylistLoader.INSTANCE.getPlaylist(context,
+                PlaylistsUtil.createPlaylist(context, context.getString(R.string.favorites)));
     }
 }

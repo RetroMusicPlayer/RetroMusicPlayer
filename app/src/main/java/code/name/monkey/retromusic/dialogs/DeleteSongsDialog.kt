@@ -31,7 +31,6 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
-
 class DeleteSongsDialog : DialogFragment() {
     @JvmField
     var currentSong: Song? = null
@@ -39,7 +38,6 @@ class DeleteSongsDialog : DialogFragment() {
     var songsToRemove: List<Song>? = null
 
     private var deleteSongsAsyncTask: DeleteSongsAsyncTask? = null
-
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val songs: ArrayList<Song>? = arguments?.getParcelableArrayList("songs")
@@ -95,7 +93,7 @@ class DeleteSongsDialog : DialogFragment() {
     }
 
     fun deleteSongs(songs: List<Song>, safUris: List<Uri>?) {
-        MusicUtil.deleteTracks(activity!!, songs, safUris) { this.dismiss() }
+        MusicUtil.deleteTracks(requireActivity(), songs, safUris) { this.dismiss() }
     }
 
     companion object {
