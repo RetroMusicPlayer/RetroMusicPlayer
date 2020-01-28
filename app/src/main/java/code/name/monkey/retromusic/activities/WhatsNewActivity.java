@@ -23,7 +23,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class WhatsNewActivity extends AbsBaseActivity {
 
@@ -52,7 +51,6 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         ToolbarContentTintHelper.colorBackButton(toolbar);
         NestedScrollView nestedScrollView = findViewById(R.id.container);
-        OverScrollDecoratorHelper.setUpOverScroll(nestedScrollView);
         
         try {
             StringBuilder buf = new StringBuilder();

@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -38,25 +37,31 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
+import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.albumCoverContainer
 import kotlinx.android.synthetic.main.activity_album.albumText
 import kotlinx.android.synthetic.main.activity_album.albumTitle
-import kotlinx.android.synthetic.main.activity_album.container
 import kotlinx.android.synthetic.main.activity_album.image
 import kotlinx.android.synthetic.main.activity_album.toolbar
+import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumText
+import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumTitle
+import kotlinx.android.synthetic.main.activity_album_content.listeners
+import kotlinx.android.synthetic.main.activity_album_content.listenersLabel
 import kotlinx.android.synthetic.main.activity_album_content.moreRecyclerView
 import kotlinx.android.synthetic.main.activity_album_content.moreTitle
 import kotlinx.android.synthetic.main.activity_album_content.playAction
 import kotlinx.android.synthetic.main.activity_album_content.recyclerView
+import kotlinx.android.synthetic.main.activity_album_content.scrobbles
+import kotlinx.android.synthetic.main.activity_album_content.scrobblesLabel
 import kotlinx.android.synthetic.main.activity_album_content.shuffleAction
 import kotlinx.android.synthetic.main.activity_album_content.songTitle
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.ArrayList
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -151,6 +156,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
         }
+
+        aboutAlbumText.setOnClickListener {
+            if (aboutAlbumText.maxLines == 4) {
+                aboutAlbumText.maxLines = Integer.MAX_VALUE
+            } else {
+                aboutAlbumText.maxLines = 4
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -161,8 +174,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             isNestedScrollingEnabled = false
             adapter = simpleSongAdapter
         }
-
-        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onDestroy() {
@@ -200,6 +211,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
         albumDetailsPresenter.loadMore(album.artistId)
+        albumDetailsPresenter.aboutAlbum(album.artistName!!, album.title!!)
     }
 
     override fun moreAlbums(albums: ArrayList<Album>) {
@@ -215,6 +227,24 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             false
         )
         moreRecyclerView.adapter = albumAdapter
+    }
+
+    override fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
+        if (lastFmAlbum.album.wiki != null) {
+            aboutAlbumText.show()
+            aboutAlbumTitle.show()
+            aboutAlbumTitle.text = String.format("About %s", lastFmAlbum.album.name)
+            aboutAlbumText.text = lastFmAlbum.album.wiki.content
+        }
+        if (lastFmAlbum.album.listeners.isNotEmpty()) {
+            listeners.show()
+            listenersLabel.show()
+            scrobbles.show()
+            scrobblesLabel.show()
+
+            listeners.text = RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
+            scrobbles.text = RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
+        }
     }
 
     override fun loadArtistImage(artist: Artist) {
@@ -239,11 +269,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color.ripAlpha()
-        else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
 
-        songTitle.setTextColor(themeColor)
-        moreTitle.setTextColor(themeColor)
+        songTitle.setTextColor(textColor)
+        moreTitle.setTextColor(textColor)
+        aboutAlbumTitle.setTextColor(textColor)
 
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color.ripAlpha()

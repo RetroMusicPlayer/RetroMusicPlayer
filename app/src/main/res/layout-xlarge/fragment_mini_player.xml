@@ -24,7 +24,7 @@
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
-            app:tint="?colorOnSurface"
+            app:tint="?attr/colorControlNormal"
             tools:ignore="ContentDescription"
             tools:tint="?colorOnSurface" />
 
@@ -43,7 +43,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewNormal"
-            android:textColor="?colorOnSurface"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Song name and details" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -54,7 +54,7 @@
             android:background="?roundSelector"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_skip_previous_white_24dp"
-            app:tint="?colorOnSurface"
+            app:tint="?attr/colorControlNormal"
             tools:tint="@color/black_color" />
 
 
@@ -66,7 +66,7 @@
             android:background="?roundSelector"
             android:scaleType="center"
             app:srcCompat="@drawable/ic_pause_white_24dp"
-            app:tint="?colorOnSurface"
+            app:tint="?attr/colorControlNormal"
             tools:ignore="ContentDescription"
             tools:tint="?colorOnSurface" />
 
@@ -80,7 +80,7 @@
             android:background="?roundSelector"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_skip_next_white_24dp"
-            app:tint="?colorOnSurface"
+            app:tint="?attr/colorControlNormal"
             tools:tint="?colorOnSurface" />
     </LinearLayout>
 

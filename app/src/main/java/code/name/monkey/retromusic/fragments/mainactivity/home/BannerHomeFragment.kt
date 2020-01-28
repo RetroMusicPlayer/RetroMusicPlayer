@@ -44,10 +44,8 @@ import kotlinx.android.synthetic.main.fragment_banner_home.bannerImage
 import kotlinx.android.synthetic.main.fragment_banner_home.titleWelcome
 import kotlinx.android.synthetic.main.fragment_banner_home.toolbarContainer
 import kotlinx.android.synthetic.main.fragment_banner_home.userImage
-import kotlinx.android.synthetic.main.fragment_home.container
 import kotlinx.android.synthetic.main.home_content.emptyContainer
 import kotlinx.android.synthetic.main.home_content.recyclerView
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.io.File
 import java.util.ArrayList
 import java.util.Calendar
@@ -144,8 +142,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
         homePresenter.attachView(this)
         homePresenter.loadSections()
-
-        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     private fun setupToolbar() {

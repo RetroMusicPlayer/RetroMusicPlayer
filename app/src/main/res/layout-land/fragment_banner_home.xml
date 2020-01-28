@@ -86,7 +86,7 @@
                             app:contentInsetStart="0dp"
                             app:contentInsetStartWithNavigation="0dp"
                             app:popupTheme="?toolbarPopupTheme"
-                            app:title="@string/search_hint"
+                            app:title="@string/action_search"
                             app:titleMarginStart="0dp"
                             app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
                             tools:ignore="UnusedAttribute" />

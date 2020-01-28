@@ -34,6 +34,7 @@ import kotlin.coroutines.CoroutineContext
  * Created by hemanths on 20/08/17.
  */
 interface ArtistDetailsView : BaseView {
+
     fun artist(artist: Artist)
     fun artistInfo(lastFmArtist: LastFmArtist?)
     fun complete()
@@ -44,12 +45,15 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
     fun loadArtist(artistId: Int)
 
     fun loadBiography(
-            name: String, lang: String? = Locale.getDefault().language, cache: String?
+        name: String,
+        lang: String? = Locale.getDefault().language,
+        cache: String?
     )
 
     class ArtistDetailsPresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter, CoroutineScope {
+
         override val coroutineContext: CoroutineContext
             get() = Dispatchers.IO + job
 

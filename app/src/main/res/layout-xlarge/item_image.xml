@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <code.name.monkey.retromusic.views.WidthFitSquareCardView
-        android:layout_width="156dp"
+        android:layout_width="196dp"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:orientation="vertical"

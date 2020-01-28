@@ -88,7 +88,6 @@
                     app:layout_constraintTop_toBottomOf="@id/albumCoverContainer"
                     tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
-
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/albumTitle"
                     android:layout_width="0dp"
@@ -96,7 +95,8 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:maxLines="3"
-                    android:textAppearance="@style/TextViewHeadline6"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textAppearance="@style/TextViewHeadline4"
                     android:textStyle="bold"
                     app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"

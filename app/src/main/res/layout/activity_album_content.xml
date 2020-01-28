@@ -10,10 +10,10 @@
         android:id="@+id/playAction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="@dimen/button_margin_horizontal"
         android:layout_marginStart="@dimen/button_margin_horizontal"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/button_margin_horizontal"
+        android:layout_marginBottom="8dp"
         android:text="@string/action_play_all"
         android:textColor="?android:attr/textColorPrimary"
         app:backgroundTint="?attr/colorSurface"
@@ -27,10 +27,10 @@
         android:id="@+id/shuffleAction"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="@dimen/button_margin_horizontal"
         android:layout_marginStart="@dimen/button_margin_horizontal"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/button_margin_horizontal"
+        android:layout_marginBottom="8dp"
         android:text="@string/shuffle"
         android:textColor="?android:attr/textColorPrimary"
         app:backgroundTint="?attr/colorSurface"
@@ -44,10 +44,12 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTitle"
-        style="@style/SubTitleTextAppearance"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="16dp"
         android:text="@string/songs"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playAction" />
@@ -66,11 +68,16 @@
         android:id="@+id/moreTitle"
         style="@style/SubTitleTextAppearance"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/songs"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerView"
-        tools:text="More by Hemanth"
+        tools:text="More by Artist"
         tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -88,10 +95,104 @@
         tools:listitem="@layout/item_album_card"
         tools:visibility="visible" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aboutAlbumTitle"
+        style="@style/SubTitleTextAppearance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/songs"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/moreRecyclerView"
+        tools:text="About Album"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/aboutAlbumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lineSpacingExtra="5dp"
+        android:maxLines="4"
+        android:padding="16dp"
+        android:textAppearance="@style/TextViewBody1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutAlbumTitle"
+        tools:text="@tools:sample/lorem/random"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/listenersLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/listeners_label"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutAlbumText"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scrobblesLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/scrobbles_label"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listenersLabel"
+        app:layout_constraintTop_toBottomOf="@id/aboutAlbumText"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/listeners"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextViewBody1"
+        android:textColor="?android:attr/textColorTertiary"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/listenersLabel"
+        app:layout_constraintStart_toStartOf="@id/listenersLabel"
+        app:layout_constraintTop_toBottomOf="@id/listenersLabel"
+        tools:text="100000"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scrobbles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextViewBody1"
+        android:textColor="?android:attr/textColorTertiary"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/scrobblesLabel"
+        app:layout_constraintStart_toStartOf="@id/scrobblesLabel"
+        app:layout_constraintTop_toBottomOf="@id/scrobblesLabel"
+        tools:text="100000"
+        tools:visibility="visible" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="72dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moreRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@id/listeners" />
 </androidx.constraintlayout.widget.ConstraintLayout>

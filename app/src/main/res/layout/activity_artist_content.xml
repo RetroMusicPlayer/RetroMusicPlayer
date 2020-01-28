@@ -38,13 +38,69 @@
 
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/biographyTitle"
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/biography"
-        android:visibility="gone"
+        android:id="@+id/albumTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="@string/albums"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/playAction"
+        app:layout_constraintTop_toBottomOf="@id/playAction" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/albumRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:barrierDirection="bottom"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumTitle"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_album_card"
+        tools:spanCount="3" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/songTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/songs"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/songTitle"
+        tools:listitem="@layout/item_song"
+        tools:visibility="gone" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/biographyTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/biography"
+        android:textAppearance="@style/TextViewHeadline5"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerView"
         tools:visibility="visible" />
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/biographyText"
@@ -56,49 +112,78 @@
         android:maxLines="4"
         android:padding="16dp"
         android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/biographyTitle"
         tools:text="@string/bug_report_summary"
         tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/albumTitle"
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/albums"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/biographyText" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/albumRecyclerView"
-        android:layout_width="match_parent"
+        android:id="@+id/listenersLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/listeners_label"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/albumTitle"
-        tools:itemCount="3"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/item_album_card"
-        tools:spanCount="3" />
+        app:layout_constraintTop_toBottomOf="@id/biographyText"
+        tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/songTitle"
-        style="@style/SubTitleTextAppearance"
-        android:text="@string/songs"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/albumRecyclerView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
+        android:id="@+id/scrobblesLabel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/songTitle"
-        tools:listitem="@layout/item_song" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/scrobbles_label"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listenersLabel"
+        app:layout_constraintTop_toBottomOf="@id/biographyText"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/listeners"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextViewBody2"
+        android:textColor="?android:attr/textColorTertiary"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/listenersLabel"
+        app:layout_constraintStart_toStartOf="@id/listenersLabel"
+        app:layout_constraintTop_toBottomOf="@id/listenersLabel"
+        tools:text="100000"
+        tools:visibility="visible" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/scrobbles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextViewBody2"
+        android:textColor="?android:attr/textColorTertiary"
+        android:visibility="gone"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="@id/scrobblesLabel"
+        app:layout_constraintStart_toStartOf="@id/scrobblesLabel"
+        app:layout_constraintTop_toBottomOf="@id/scrobblesLabel"
+        tools:text="100000"
+        tools:visibility="visible" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="72dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@id/listeners" />
 </androidx.constraintlayout.widget.ConstraintLayout>

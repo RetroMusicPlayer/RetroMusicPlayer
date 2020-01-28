@@ -30,5 +30,6 @@
         android:maxLines="2"
         android:paddingTop="12dp"
         android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorPrimary"
         tools:text="@tools:sample/full_names" />
 </LinearLayout>
