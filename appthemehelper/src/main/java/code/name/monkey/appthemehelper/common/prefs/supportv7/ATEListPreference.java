@@ -16,9 +16,7 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7;
 
 import android.content.Context;
 import android.util.AttributeSet;
-
 import androidx.preference.ListPreference;
-
 import code.name.monkey.appthemehelper.R;
 
 public class ATEListPreference extends ListPreference {
@@ -45,7 +43,8 @@ public class ATEListPreference extends ListPreference {
 
     private void init(Context context, AttributeSet attrs) {
         setLayoutResource(R.layout.ate_preference_custom_support);
-        if (getSummary() == null || getSummary().toString().trim().isEmpty())
+        if (getSummary() == null || getSummary().toString().trim().isEmpty()) {
             setSummary("%s");
+        }
     }
 }

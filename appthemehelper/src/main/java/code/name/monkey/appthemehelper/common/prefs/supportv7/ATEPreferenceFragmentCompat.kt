@@ -14,18 +14,17 @@
 
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
-
 import androidx.fragment.app.DialogFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEListPreferenceDialogFragmentCompat
 import code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs.ATEPreferenceDialogFragment
 
-
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
 abstract class ATEPreferenceFragmentCompat : PreferenceFragmentCompat() {
+
     override fun onDisplayPreferenceDialog(preference: Preference) {
         if (callbackFragment is OnPreferenceDisplayDialogCallback) {
             (callbackFragment as OnPreferenceDisplayDialogCallback).onPreferenceDisplayDialog(this, preference)

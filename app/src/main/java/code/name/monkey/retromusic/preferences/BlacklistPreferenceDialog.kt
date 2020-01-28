@@ -32,7 +32,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
-import java.util.*
+import java.util.ArrayList
 
 class BlacklistPreference : ATEDialogPreference {
     constructor(context: Context) : super(context)
@@ -67,7 +67,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 dismiss()
             }
             neutralButton(text = getString(R.string.clear_action)) {
-                MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+                MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                     title(code.name.monkey.retromusic.R.string.clear_blacklist)
                     message(code.name.monkey.retromusic.R.string.do_you_want_to_clear_the_blacklist)
                     cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)

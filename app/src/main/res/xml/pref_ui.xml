@@ -23,8 +23,6 @@
             android:summary="@string/pref_summary_home_banner"
             android:title="@string/pref_title_home_banner" />
 
-
-
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 
     <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory

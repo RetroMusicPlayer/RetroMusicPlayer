@@ -25,9 +25,9 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.BorderCircleView
 
 class ATEColorPreference @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : Preference(context, attrs, defStyleAttr) {
 
     private var mView: View? = null

@@ -27,7 +27,7 @@
 
         <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
             android:key="accent_color"
-            android:layout="@layout/list_item_view"
+            android:layout="@layout/list_item_color_view"
             android:persistent="false"
             android:summary="@string/accent_color_desc"
             android:title="@string/accent_color"

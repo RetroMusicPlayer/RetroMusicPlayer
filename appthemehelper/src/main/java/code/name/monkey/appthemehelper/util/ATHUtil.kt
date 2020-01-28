@@ -26,8 +26,12 @@ object ATHUtil {
         try {
             return Class.forName(clsName)
         } catch (t: Throwable) {
-            throw IllegalStateException(String.format("%s is not in your class path! You must include the associated library.", clsName))
+            throw IllegalStateException(
+                String.format(
+                    "%s is not in your class path! You must include the associated library.",
+                    clsName
+                )
+            )
         }
-
     }
 }
