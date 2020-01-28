@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:padding="12dp"
                         app:srcCompat="@drawable/ic_keyboard_backspace_black_24dp"
-                        app:tint="?colorOnSurface" />
+                        app:tint="?attr/colorControlNormal" />
 
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -73,11 +73,10 @@
                             android:id="@+id/voiceSearch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:background="?roundSelector"
                             android:padding="12dp"
                             app:srcCompat="@drawable/ic_mic_white_24dp"
-                            app:tint="?colorOnSurface"
+                            app:tint="?attr/colorControlNormal"
                             tools:visibility="visible" />
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -88,7 +87,7 @@
                             android:padding="12dp"
                             android:visibility="gone"
                             app:srcCompat="@drawable/ic_close_white_24dp"
-                            app:tint="?colorOnSurface"
+                            app:tint="?attr/colorControlNormal"
                             tools:visibility="visible" />
                     </FrameLayout>
                 </LinearLayout>
