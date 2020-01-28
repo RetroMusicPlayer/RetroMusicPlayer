@@ -33,7 +33,7 @@ object GenreLoader {
     }
 
     fun searchGenres(context: Context): ArrayList<Genre> {
-        return getGenresFromCursorForSearch(context, makeGenreCursor(context));
+        return getGenresFromCursorForSearch(context, makeGenreCursor(context))
     }
 
     fun getSongs(context: Context, genreId: Int): ArrayList<Song> {
