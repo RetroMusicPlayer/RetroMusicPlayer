@@ -23,9 +23,7 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
-import io.reactivex.Observable
-import java.util.*
-
+import java.util.ArrayList
 
 /**
  * Created by hemanths on 16/08/17.
@@ -33,37 +31,12 @@ import java.util.*
 
 object PlaylistSongsLoader {
 
-    fun getPlaylistSongListFlowable(
-            context: Context,
-            playlist: Playlist
-    ): Observable<ArrayList<Song>> {
-        return (playlist as? AbsCustomPlaylist)?.getSongsFlowable(context)
-                ?: getPlaylistSongListFlowable(context, playlist.id)
-    }
-
     fun getPlaylistSongList(
-            context: Context,
-            playlist: Playlist
+        context: Context,
+        playlist: Playlist
     ): ArrayList<Song> {
         return (playlist as? AbsCustomPlaylist)?.getSongs(context)
-                ?: getPlaylistSongList(context, playlist.id)
-    }
-
-
-    fun getPlaylistSongListFlowable(context: Context, playlistId: Int): Observable<ArrayList<Song>> {
-        return Observable.create { e ->
-            val songs = ArrayList<Song>()
-            val cursor = makePlaylistSongCursor(context, playlistId)
-
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    songs.add(getPlaylistSongFromCursorImpl(cursor, playlistId))
-                } while (cursor.moveToNext())
-            }
-            cursor?.close()
-            e.onNext(songs)
-            e.onComplete()
-        }
+            ?: getPlaylistSongList(context, playlist.id)
     }
 
     fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
@@ -78,7 +51,6 @@ object PlaylistSongsLoader {
         cursor?.close()
         return songs
     }
-
 
     private fun getPlaylistSongFromCursorImpl(cursor: Cursor, playlistId: Int): PlaylistSong {
         val id = cursor.getInt(0)
@@ -95,28 +67,46 @@ object PlaylistSongsLoader {
         val idInPlaylist = cursor.getInt(11)
         val composer = cursor.getString(12)
 
-        return PlaylistSong(id, title, trackNumber, year, duration, data, dateModified, albumId, albumName, artistId, artistName, playlistId, idInPlaylist, composer)
+        return PlaylistSong(
+            id,
+            title,
+            trackNumber,
+            year,
+            duration,
+            data,
+            dateModified,
+            albumId,
+            albumName,
+            artistId,
+            artistName,
+            playlistId,
+            idInPlaylist,
+            composer
+        )
     }
 
     private fun makePlaylistSongCursor(context: Context, playlistId: Int): Cursor? {
         try {
             return context.contentResolver.query(
-                    MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId.toLong()),
-                    arrayOf(MediaStore.Audio.Playlists.Members.AUDIO_ID, // 0
-                            AudioColumns.TITLE, // 1
-                            AudioColumns.TRACK, // 2
-                            AudioColumns.YEAR, // 3
-                            AudioColumns.DURATION, // 4
-                            AudioColumns.DATA, // 5
-                            AudioColumns.DATE_MODIFIED, // 6
-                            AudioColumns.ALBUM_ID, // 7
-                            AudioColumns.ALBUM, // 8
-                            AudioColumns.ARTIST_ID, // 9
-                            AudioColumns.ARTIST, // 10
-                            MediaStore.Audio.Playlists.Members._ID,//11
-                            AudioColumns.COMPOSER)// 12
-                    , BASE_SELECTION, null,
-                    MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER)
+                MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId.toLong()),
+                arrayOf(
+                    MediaStore.Audio.Playlists.Members.AUDIO_ID, // 0
+                    AudioColumns.TITLE, // 1
+                    AudioColumns.TRACK, // 2
+                    AudioColumns.YEAR, // 3
+                    AudioColumns.DURATION, // 4
+                    AudioColumns.DATA, // 5
+                    AudioColumns.DATE_MODIFIED, // 6
+                    AudioColumns.ALBUM_ID, // 7
+                    AudioColumns.ALBUM, // 8
+                    AudioColumns.ARTIST_ID, // 9
+                    AudioColumns.ARTIST, // 10
+                    MediaStore.Audio.Playlists.Members._ID,//11
+                    AudioColumns.COMPOSER
+                )// 12
+                , BASE_SELECTION, null,
+                MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER
+            )
         } catch (e: SecurityException) {
             return null
         }

@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater
 import code.name.monkey.retromusic.util.PreferenceUtil
-import io.reactivex.disposables.CompositeDisposable
 import java.util.ArrayList
 
 class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
@@ -33,7 +32,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     private lateinit var currentFragment: MainActivityFragmentCallbacks
 
     private var blockRequestPermissions: Boolean = false
-    private val disposable = CompositeDisposable()
+
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
@@ -107,7 +106,6 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.clear()
         unregisterReceiver(broadcastReceiver)
         PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this)
     }

@@ -23,8 +23,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.HistoryStore
 import code.name.monkey.retromusic.providers.SongPlayCountStore
-import io.reactivex.Observable
-import java.util.*
+import java.util.ArrayList
 
 /**
  * Created by hemanths on 16/08/17.
@@ -32,16 +31,8 @@ import java.util.*
 
 object TopAndRecentlyPlayedTracksLoader {
 
-    fun getRecentlyPlayedTracksFlowable(context: Context): Observable<ArrayList<Song>> {
-        return SongLoader.getSongsFlowable(makeRecentTracksCursorAndClearUpDatabase(context))
-    }
-
     fun getRecentlyPlayedTracks(context: Context): ArrayList<Song> {
         return SongLoader.getSongs(makeRecentTracksCursorAndClearUpDatabase(context))
-    }
-
-    fun getTopTracksFlowable(context: Context): Observable<ArrayList<Song>> {
-        return SongLoader.getSongsFlowable(makeTopTracksCursorAndClearUpDatabase(context))
     }
 
     fun getTopTracks(context: Context): ArrayList<Song> {
@@ -83,8 +74,10 @@ object TopAndRecentlyPlayedTracksLoader {
         val songs = HistoryStore.getInstance(context).queryRecentIds()
 
         try {
-            return makeSortedCursor(context, songs,
-                    songs!!.getColumnIndex(HistoryStore.RecentStoreColumns.ID))
+            return makeSortedCursor(
+                context, songs,
+                songs!!.getColumnIndex(HistoryStore.RecentStoreColumns.ID)
+            )
         } finally {
             songs?.close()
         }
@@ -93,16 +86,20 @@ object TopAndRecentlyPlayedTracksLoader {
     private fun makeTopTracksCursorImpl(context: Context): SortedLongCursor? {
         // first get the top results ids from the internal database
         val songs = SongPlayCountStore.getInstance(context)
-                .getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
+            .getTopPlayedResults(NUMBER_OF_TOP_TRACKS)
 
         songs.use { localSongs ->
-            return makeSortedCursor(context, localSongs,
-                    localSongs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID))
+            return makeSortedCursor(
+                context, localSongs,
+                localSongs.getColumnIndex(SongPlayCountStore.SongPlayCountColumns.ID)
+            )
         }
     }
 
-    private fun makeSortedCursor(context: Context,
-                                 cursor: Cursor?, idColumn: Int): SortedLongCursor? {
+    private fun makeSortedCursor(
+        context: Context,
+        cursor: Cursor?, idColumn: Int
+    ): SortedLongCursor? {
 
         if (cursor != null && cursor.moveToFirst()) {
             // create the list of ids to select against
@@ -138,35 +135,11 @@ object TopAndRecentlyPlayedTracksLoader {
         return null
     }
 
-    fun getTopAlbumsFlowable(
-            context: Context
-    ): Observable<ArrayList<Album>> {
-        return Observable.create { e ->
-            getTopTracksFlowable(context).subscribe { songs ->
-                if (songs.size > 0) {
-                    e.onNext(AlbumLoader.splitIntoAlbums(songs))
-                }
-                e.onComplete()
-            }
-        }
-    }
-
     fun getTopAlbums(
-            context: Context
+        context: Context
     ): ArrayList<Album> {
         arrayListOf<Album>()
         return AlbumLoader.splitIntoAlbums(getTopTracks(context))
-    }
-
-    fun getTopArtistsFlowable(context: Context): Observable<ArrayList<Artist>> {
-        return Observable.create { e ->
-            getTopAlbumsFlowable(context).subscribe { albums ->
-                if (albums.size > 0) {
-                    e.onNext(ArtistLoader.splitIntoArtists(albums))
-                }
-                e.onComplete()
-            }
-        }
     }
 
     fun getTopArtists(context: Context): ArrayList<Artist> {

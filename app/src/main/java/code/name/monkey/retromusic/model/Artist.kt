@@ -15,8 +15,7 @@
 package code.name.monkey.retromusic.model
 
 import code.name.monkey.retromusic.util.MusicUtil
-import java.util.*
-
+import java.util.ArrayList
 
 class Artist {
     val albums: ArrayList<Album>?

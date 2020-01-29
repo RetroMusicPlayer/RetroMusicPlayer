@@ -28,7 +28,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistText
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumText
@@ -92,7 +91,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
     private var lastFMRestClient: LastFMRestClient? = null
-    private val disposable = CompositeDisposable()
 
     private fun setupToolbar() {
         applyToolbar(toolbar)
@@ -145,7 +143,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override fun onPause() {
         super.onPause()
-        disposable.clear()
     }
 
     private fun toastLoadingFailed() {
@@ -178,7 +175,8 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         fieldKeyValueMap[FieldKey.GENRE] = genreTitle.text.toString()
         fieldKeyValueMap[FieldKey.YEAR] = yearTitle.text.toString()
 
-        writeValuesToFiles(fieldKeyValueMap,
+        writeValuesToFiles(
+            fieldKeyValueMap,
             if (deleteAlbumArt) ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )

@@ -17,16 +17,13 @@ package code.name.monkey.retromusic.model;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
-
-import java.util.ArrayList;
-
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
-import io.reactivex.Observable;
+import java.util.ArrayList;
 
 
 public class Playlist implements Parcelable {
+
     public static final Creator<Playlist> CREATOR = new Creator<Playlist>() {
         public Playlist createFromParcel(Parcel source) {
             return new Playlist(source);
@@ -36,7 +33,9 @@ public class Playlist implements Parcelable {
             return new Playlist[size];
         }
     };
+
     public final int id;
+
     public final String name;
 
     public Playlist(final int id, final String name) {
@@ -54,28 +53,33 @@ public class Playlist implements Parcelable {
         this.name = in.readString();
     }
 
-    @NonNull
-    public Observable<ArrayList<Song>> getSongsFlowable(@NonNull Context context) {
-        // this default implementation covers static playlists
-        return PlaylistSongsLoader.INSTANCE.getPlaylistSongListFlowable(context, id);
-    }
-
-    @NonNull
-    public  ArrayList<Song> getSongs(@NonNull Context context) {
-        // this default implementation covers static playlists
-        return PlaylistSongsLoader.INSTANCE.getPlaylistSongList(context, id);
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Playlist playlist = (Playlist) o;
 
-        if (id != playlist.id) return false;
+        if (id != playlist.id) {
+            return false;
+        }
         return name != null ? name.equals(playlist.name) : playlist.name == null;
 
+    }
+
+    @NonNull
+    public ArrayList<Song> getSongs(@NonNull Context context) {
+        // this default implementation covers static playlists
+        return PlaylistSongsLoader.INSTANCE.getPlaylistSongList(context, id);
     }
 
     @Override
@@ -91,11 +95,6 @@ public class Playlist implements Parcelable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     @Override

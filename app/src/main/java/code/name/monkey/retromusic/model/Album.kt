@@ -14,8 +14,7 @@
 
 package code.name.monkey.retromusic.model
 
-import java.util.*
-
+import java.util.ArrayList
 
 class Album {
     val songs: ArrayList<Song>?
