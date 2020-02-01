@@ -371,6 +371,7 @@ object MusicPlayerRemote {
         return false
     }
 
+    @JvmStatic
     fun removeFromQueue(song: Song): Boolean {
         if (musicService != null) {
             musicService!!.removeSong(song)

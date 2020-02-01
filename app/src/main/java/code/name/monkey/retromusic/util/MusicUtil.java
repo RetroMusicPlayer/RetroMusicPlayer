@@ -103,6 +103,7 @@ public class MusicUtil {
         ContentResolver contentResolver = context.getContentResolver();
         Uri localUri = Uri.parse("content://media/external/audio/albumart");
         contentResolver.delete(ContentUris.withAppendedId(localUri, albumId), null, null);
+        contentResolver.notifyChange(localUri, null);
     }
 
     public static void deleteTracks(
@@ -149,8 +150,8 @@ public class MusicUtil {
                     cursor.moveToFirst();
                     while (!cursor.isAfterLast()) {
                         final int id = cursor.getInt(0);
-                        final Song song = SongLoader.INSTANCE.getSong(activity, id);
-                        MusicPlayerRemote.INSTANCE.removeFromQueue(song);
+                        final Song song = SongLoader.getSong(activity, id);
+                        MusicPlayerRemote.removeFromQueue(song);
                         cursor.moveToNext();
                     }
 
@@ -325,14 +326,6 @@ public class MusicUtil {
         return ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, songId);
     }
 
-    @NonNull
-    public static String getSongInfoString(@NonNull Song song) {
-        return MusicUtil.buildInfoString(
-                song.getArtistName(),
-                song.getAlbumName()
-        );
-    }
-
     public static long getTotalDuration(@NonNull List<Song> songs) {
         long duration = 0;
         for (int i = 0; i < songs.size(); i++) {
@@ -366,6 +359,7 @@ public class MusicUtil {
         values.put("_data", path);
 
         contentResolver.insert(artworkUri, values);
+        contentResolver.notifyChange(artworkUri, null);
     }
 
     public static boolean isArtistNameUnknown(@Nullable String artistName) {

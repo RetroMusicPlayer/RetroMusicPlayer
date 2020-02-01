@@ -21,6 +21,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.AsyncTask
+import android.provider.MediaStore
 import android.widget.Toast
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.model.Artist
@@ -32,7 +33,7 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 
 class CustomArtistImageUtil private constructor(context: Context) {
@@ -80,7 +81,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
                                 if (succesful) {
                                     mPreferences.edit().putBoolean(getFileName(artist), true).commit()
                                     ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                                    App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                                    App.getContext().contentResolver.notifyChange(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, null) // trigger media store changed to force artist image reload
                                 }
                                 return null
                             }
@@ -95,7 +96,7 @@ class CustomArtistImageUtil private constructor(context: Context) {
             override fun doInBackground(vararg params: Void): Void? {
                 mPreferences.edit().putBoolean(getFileName(artist), false).commit()
                 ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                App.getContext().contentResolver.notifyChange(Uri.parse("content://media"), null) // trigger media store changed to force artist image reload
+                App.getContext().contentResolver.notifyChange(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, null) // trigger media store changed to force artist image reload
 
                 val file = getFile(artist)
                 if (!file.exists()) {

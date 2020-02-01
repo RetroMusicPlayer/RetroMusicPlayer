@@ -38,6 +38,6 @@ class MediaStoreObserver(
 
     companion object {
         // milliseconds to delay before calling refresh to aggregate events
-        private val REFRESH_DELAY: Long = 500
+        private const val REFRESH_DELAY: Long = 500
     }
 }

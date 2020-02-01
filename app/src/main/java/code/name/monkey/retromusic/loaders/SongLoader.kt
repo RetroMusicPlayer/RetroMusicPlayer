@@ -74,6 +74,7 @@ object SongLoader {
         return song
     }
 
+    @JvmStatic
     fun getSong(context: Context, queryId: Int): Song {
         val cursor = makeSongCursor(context, AudioColumns._ID + "=?", arrayOf(queryId.toString()))
         return getSong(cursor)
