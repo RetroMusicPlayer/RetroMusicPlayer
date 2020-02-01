@@ -126,23 +126,22 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            lastPlaybackControlsColor = color
             color
         } else {
             ThemeStore.textColorSecondary(requireContext())
-        }
+        }.ripAlpha()
 
         text.setTextColor(colorFinal)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal.ripAlpha(), true)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
 
-        volumeFragment?.setTintable(colorFinal.ripAlpha())
+        volumeFragment?.setTintable(colorFinal)
 
-        updatePlayPauseColor()
-        updatePrevNextColor()
+        updatePlayPauseColor(colorFinal)
+        updatePrevNextColor(colorFinal)
     }
 
-    private fun updatePlayPauseColor() {
-        playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+    private fun updatePlayPauseColor(color: Int) {
+        playPauseButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {
@@ -166,14 +165,14 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setUpPrevNext() {
-        updatePrevNextColor()
+        updatePrevNextColor(ThemeStore.textColorSecondary(requireContext()))
         nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
         previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
-    private fun updatePrevNextColor() {
-        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+    private fun updatePrevNextColor(color: Int) {
+        nextButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        previousButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpShuffleButton() {
