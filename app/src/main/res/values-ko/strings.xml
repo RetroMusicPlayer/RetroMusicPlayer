@@ -124,7 +124,6 @@
     <string name="clear_blacklist">블랙리스트 비우기</string>
 
     <string name="clear_playlist_title">재생목록 비우기</string>
-    <string name="clear_playlist_x"><![CDATA[<b>%1$s</b> \uc7ac\uc0dd\ubaa9\ub85d\uc744 \ube44\uc6b0\uc2dc\uaca0\uc2b5\ub2c8\uae4c? \uc774 \uc791\uc5c5\uc740 \ucde8\uc18c\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4!]]></string>
 
     <string name="color">색상</string>
 

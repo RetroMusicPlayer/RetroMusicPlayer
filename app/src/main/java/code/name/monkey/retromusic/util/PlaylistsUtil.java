@@ -129,7 +129,7 @@ public class PlaylistsUtil {
         }
     }
 
-    public static boolean doPlaylistContains(@NonNull final Context context, final long playlistId,
+    static boolean doPlaylistContains(@NonNull final Context context, final long playlistId,
             final int songId) {
         if (playlistId != -1) {
             try {
@@ -154,12 +154,6 @@ public class PlaylistsUtil {
         return playlistId != -1 && doesPlaylistExist(context,
                 MediaStore.Audio.Playlists._ID + "=?",
                 new String[]{String.valueOf(playlistId)});
-    }
-
-    public static boolean doesPlaylistExist(@NonNull final Context context, final String name) {
-        return doesPlaylistExist(context,
-                MediaStore.Audio.PlaylistsColumns.NAME + "=?",
-                new String[]{name});
     }
 
     public static String getNameForPlaylist(@NonNull final Context context, final long id) {

@@ -55,8 +55,7 @@
     <string name="albums">الألبومات</string>
     <!-- Android Auto -->
     <string name="always">دائما</string>
-    <string name="app_share">مرحبا القي نظرة على مشغل الموسيقى الرائع هذا في: 
-https://play.google.com/store/apps/details?id=%s</string>
+    <string name="app_share">مرحبا القي نظرة على مشغل الموسيقى الرائع هذا في: https://play.google.com/store/apps/details?id=%s</string>
     <!-- App Shortcuts -->
     <string name="app_shortcut_shuffle_all_short">عشوائي</string>
     <string name="app_shortcut_top_tracks_short">المسارات الاكثر شعبية</string>
@@ -92,13 +91,10 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="clear_action">إزالة</string>
     <string name="clear_blacklist">إزالة القائمة السوداء</string>
     <string name="clear_playlist_title">إزالة قائمة التشغيل</string>
-    <string name="clear_playlist_x"><![CDATA[\u0625\u0632\u0627\u0644\u0629 \u0645\u0646 \u0642\u0627\u0626\u0645\u0629 \u0627\u0644\u062a\u0634\u063a\u064a\u0644 <b>%1$s</b>\u061f \u0644\u0627 \u064a\u0645\u0643\u0646 \u0627\u0644\u0642\u064a\u0627\u0645 \u0628\u0630\u0644\u0643!]]></string>
     <string name="close_notification">اغلاق</string>
     <string name="color">لون</string>
     <string name="color_theme_name">لون</string>
     <string name="colors">الوان</string>
-    <string name="could_not_create_playlist">\u0644\u0627\u064a\u0645\u0643\u0646 \u0625\u0646\u0634\u0627\u0621 \u0642\u0627\u0626\u0645\u0629 \u062a\u0634\u063a\u064a\u0644</string>
-    <string name="could_not_download_album_cover">"\u0644\u0627\u064a\u0645\u0643\u0646 \u062a\u0646\u0632\u064a\u0644 \u063a\u0644\u0627\u0641 \u0627\u0644\u0628\u0648\u0645 \u0645\u062a\u0637\u0627\u0628\u0642."</string>
     <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
     <string name="create_action">إنشاء</string>
@@ -222,7 +218,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_navigation_bar">تلوين شريط التنقل باللون الاساسي</string>
-    <string name="pref_summary_colored_notification">"\u062a\u0644\u0648\u064a\u0646 \u0627\u0644\u0625\u0634\u0639\u0627\u0631\u0627\u062a \u0628\u0644\u0648\u0646 \u063a\u0644\u0627\u0641 \u0627\u0644\u0623\u0644\u0628\u0648\u0645 \u0627\u0644\u0648\u0627\u0646 \u0646\u0627\u0628\u0636\u0629"</string>
     <string name="pref_summary_dominant_color">سيتم اختيار اللون الأكثر انتشارًا من الألبوم أو غلاف الفنان</string>
     <string name="pref_summary_gapless_playback">"يمكن أن يسبب مشاكل في التشغيل على بعض الأجهزة."</string>
     <string name="pref_summary_ignore_media_store_artwork">يمكنك أن تزيد من جودة غلاف الألبوم ، لكنه يسبب بطئ في التحميل للصور. قم بتمكين هذا فقط إذا كنت تواجه مشاكل مع صور ألبومات منخفضة الدقة</string>
@@ -355,7 +350,6 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="translate_community">ساعدها لترجمة التطبيق الى لغتك</string>
     <string name="twitter_page">تويتر</string>
     <string name="twitter_page_summary">شارك تصميمك مع ريترو ميوزك</string>
-    <string name="unplayable_file">\u0644\u0627\u064a\u0645\u0643\u0646 \u062a\u0634\u063a\u064a\u0644 \u0647\u0630\u0627 \u0627\u0644\u0645\u0644\u0641.</string>
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>

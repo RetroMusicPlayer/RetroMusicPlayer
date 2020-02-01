@@ -190,7 +190,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="clear_playing_queue">Cancella coda</string>
 
     <string name="clear_playlist_title">Cancella playlist</string>
-    <string name="clear_playlist_x"><![CDATA[Cancella la playlist <b>% 1 $ s </ b>? Questo non pu\u00f2 essere annullato!]]></string>
+    <string name="clear_playlist_x"><![CDATA[Cancella la playlist <b>%1$s </ b>? Questo non pu\u00f2 essere annullato!]]></string>
 
     <string name="close_notification">Chiudi</string>
 
@@ -211,7 +211,7 @@ https://play.google.com/store/apps/details?id=%s</string>
 
     <string name="create_action">Crea</string>
 
-    <string name="created_playlist_x">Playlist creata</string>
+    <string name="created_playlist_x">Playlist creata %1$s.</string>
 
     <string name="credit_title">Membri e contributori</string>
 

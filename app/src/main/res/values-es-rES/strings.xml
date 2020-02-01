@@ -205,11 +205,10 @@
 
     <string name="create_action">Crear</string>
 
-    <string name="created_playlist_x">Lista de reproducción creada.</string>
+    <string name="created_playlist_x">Lista de reproducción creada %1$s.</string>
 
     <string name="credit_title">Miembros y colaboradores</string>
 
-    <string name="currently_listening_to_x_by_x">Estás escuchando a</string>
 
     <string name="dark_theme_name">Algo oscuro</string>
 
@@ -221,11 +220,9 @@
     <string name="delete_playlists_title">Eliminar listas de reproducción</string>
 
     <string name="delete_song_title">Eliminar canción</string>
-    <string name="delete_song_x"><![CDATA[¿Eliminar canción?]]></string>
 
     <string name="delete_songs_title">Eliminar canciones</string>
 
-    <string name="delete_x_playlists"><![CDATA[¿Eliminar lista de reproducción?]]></string>
     <string name="delete_x_songs"><![CDATA[¿Desea eliminar <b>%1$d</b> canciones?]]></string>
     <string name="deleted_x_songs">Se han eliminado %1$d canciones.</string>
 

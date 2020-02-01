@@ -230,20 +230,22 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     override fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
-        if (lastFmAlbum.album.wiki != null) {
-            aboutAlbumText.show()
-            aboutAlbumTitle.show()
-            aboutAlbumTitle.text = String.format("About %s", lastFmAlbum.album.name)
-            aboutAlbumText.text = lastFmAlbum.album.wiki.content
-        }
-        if (lastFmAlbum.album.listeners.isNotEmpty()) {
-            listeners.show()
-            listenersLabel.show()
-            scrobbles.show()
-            scrobblesLabel.show()
+        if (lastFmAlbum.album != null) {
+            if (lastFmAlbum.album.wiki != null) {
+                aboutAlbumText.show()
+                aboutAlbumTitle.show()
+                aboutAlbumTitle.text = String.format("About %s", lastFmAlbum.album.name)
+                aboutAlbumText.text = lastFmAlbum.album.wiki.content
+            }
+            if (lastFmAlbum.album.listeners.isNotEmpty()) {
+                listeners.show()
+                listenersLabel.show()
+                scrobbles.show()
+                scrobblesLabel.show()
 
-            listeners.text = RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
-            scrobbles.text = RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
+                listeners.text = RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
+                scrobbles.text = RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
+            }
         }
     }
 

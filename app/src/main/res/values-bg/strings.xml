@@ -174,7 +174,6 @@
     <string name="clear_playing_queue">Изчисти опашката</string>
 
     <string name="clear_playlist_title">Изчисти плейлист</string>
-    <string name="clear_playlist_x"><![CDATA[\u0418\u0437\u0447\u0438\u0441\u0442\u0438 \u043f\u043b\u0435\u0439\u043b\u0438\u0441\u0442 <b>%1$s</b>? \u0422\u043e\u0432\u0430 \u043d\u0435 \u043c\u043e\u0436\u0435 \u0434\u0430 \u0431\u044a\u0434\u0435 \u043e\u0442\u043c\u0435\u043d\u0435\u043d\u043e!]]></string>
 
     <string name="close_notification">Затвори</string>
 
@@ -186,8 +185,6 @@
 
     <string name="copied_device_info_to_clipboard">Копирана информация за устройството в клипборда.</string>
 
-    <string name="could_not_create_playlist">\u041d\u0435\u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0441\u044a\u0437\u0434\u0430\u0432\u0430\u043d\u0435 \u043d\u0430 \u043f\u043b\u0435\u0439\u043b\u0438\u0441\u0442.</string>
-    <string name="could_not_download_album_cover">"\u041d\u0435\u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0438\u0437\u0442\u0435\u0433\u043b\u044f\u043d\u0435 \u043d\u0430 \u043a\u043e\u0440\u0438\u0446\u0430 \u043d\u0430 \u0430\u043b\u0431\u0443\u043c\u0430."</string>
     <string name="could_not_restore_purchase">Неуспешно възстановяване на покупката.</string>
     <string name="could_not_scan_files">Неуспешно сканиране на %d файлове.</string>
 
@@ -299,6 +296,8 @@
     <string name="label_file_name">Име на файл</string>
     <string name="label_file_path">Местонахождение на файла</string>
     <string name="label_file_size">Размер</string>
+
+    <string name="label_more_from">More from %s</string>
 
     <string name="label_sampling_rate">Размер на използване</string>
 
@@ -430,7 +429,6 @@
 
     <string name="pref_now_playing_screen_summary">Натисни за или плъзни за без прозрачна навигация на екрана с песен</string>
     <string name="pref_now_playing_screen_title">Натисни или плъзни</string>
-
 
     <string name="pref_snow_fall_title">Ефект на валящ сняг</string>
 
@@ -698,5 +696,4 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Ще бъдете препратени към сайта на тракера.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Данните на акаунта Ви се използват единствено за автентификация.</string>
-    <string name="label_more_from">More from %s</string>
 </resources>
