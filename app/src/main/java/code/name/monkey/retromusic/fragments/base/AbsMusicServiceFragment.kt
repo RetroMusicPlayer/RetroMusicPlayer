@@ -75,13 +75,17 @@ open class AbsMusicServiceFragment : Fragment(), MusicServiceEventListener {
     fun getSongInfo(song: Song): String {
         val file = File(song.data)
         if (file.exists()) {
-            val audioHeader = AudioFileIO.read(File(song.data)).audioHeader
-            val string: StringBuilder = StringBuilder()
-            val uriFile = Uri.fromFile(file)
-            string.append(getMimeType(uriFile.toString())).append(" • ")
-            string.append(audioHeader.bitRate).append(" kb/s").append(" • ")
-            string.append(RetroUtil.frequencyCount(audioHeader.sampleRate.toInt())).append(" kHz")
-            return string.toString()
+            return try {
+                val audioHeader = AudioFileIO.read(File(song.data)).audioHeader
+                val string: StringBuilder = StringBuilder()
+                val uriFile = Uri.fromFile(file)
+                string.append(getMimeType(uriFile.toString())).append(" • ")
+                string.append(audioHeader.bitRate).append(" kb/s").append(" • ")
+                string.append(RetroUtil.frequencyCount(audioHeader.sampleRate.toInt())).append(" kHz")
+                string.toString()
+            } catch (er: Exception) {
+                " - "
+            }
         }
         return "-"
     }
