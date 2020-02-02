@@ -126,7 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-                app:title="@string/social_instagram"
+                app:title="@string/social_stories"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
         </com.google.android.material.appbar.AppBarLayout>
     </LinearLayout>

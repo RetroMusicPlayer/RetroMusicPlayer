@@ -42,7 +42,7 @@ class SongShareDialog : DialogFragment() {
                     items = listOf(
                         getString(code.name.monkey.retromusic.R.string.the_audio_file),
                         "\u201C" + currentlyListening + "\u201D",
-                        getString(R.string.social_instagram)
+                        getString(R.string.social_stories)
                     )
                 ) { _, index, _ ->
                     when (index) {

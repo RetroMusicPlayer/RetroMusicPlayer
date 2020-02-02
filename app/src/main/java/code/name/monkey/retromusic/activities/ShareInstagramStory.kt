@@ -91,7 +91,7 @@ class ShareInstagramStory : AbsBaseActivity() {
                     "Design", null
                 )
                 val uri = Uri.parse(path)
-                Share.shareFileToInstagram(
+                Share.shareStoryToSocial(
                     this@ShareInstagramStory,
                     uri
                 )

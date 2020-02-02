@@ -821,6 +821,6 @@
     <string name="volume">Volume</string>
     <string name="listeners_label">Listeners</string>
     <string name="scrobbles_label">Scrobbles</string>
-    <string name="social_instagram">Instagram story</string>
+    <string name="social_stories">Share story</string>
     <string name="share_to_stories">Share to Stories</string>
 </resources>
