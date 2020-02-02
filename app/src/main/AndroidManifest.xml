@@ -119,7 +119,7 @@
         <activity android:name=".activities.PurchaseActivity" />
         <activity android:name=".activities.WhatsNewActivity" />
         <activity android:name=".activities.bugreport.BugReportActivity" />
-
+        <activity android:name=".activities.ShareInstagramStory" />
         <activity
             android:name=".activities.SearchActivity"
             android:windowSoftInputMode="stateVisible" />

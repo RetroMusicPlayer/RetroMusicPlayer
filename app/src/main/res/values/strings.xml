@@ -460,7 +460,7 @@
     <string name="pick_image_intent_text">Pick image</string>
 
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Follow Pintrest page for Retro Music design inspiration</string>
+    <string name="pinterest_page_summary">Follow Pinterest page for Retro Music design inspiration</string>
 
     <string name="plain">Plain</string>
 
@@ -821,4 +821,5 @@
     <string name="volume">Volume</string>
     <string name="listeners_label">Listeners</string>
     <string name="scrobbles_label">Scrobbles</string>
+    <string name="social_instagram">Instagram story</string>
 </resources>

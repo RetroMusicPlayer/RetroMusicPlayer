@@ -19,6 +19,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -29,7 +30,7 @@ import com.afollestad.materialdialogs.list.listItems
 
 class SongShareDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val song: Song? = arguments!!.getParcelable("song")
+        val song: Song? = arguments?.getParcelable("song")
         val currentlyListening: String =
             getString(R.string.currently_listening_to_x_by_x, song?.title, song?.artistName)
 
@@ -40,7 +41,8 @@ class SongShareDialog : DialogFragment() {
                 listItems(
                     items = listOf(
                         getString(code.name.monkey.retromusic.R.string.the_audio_file),
-                        "\u201C" + currentlyListening + "\u201D"
+                        "\u201C" + currentlyListening + "\u201D",
+                        getString(R.string.social_instagram)
                     )
                 ) { _, index, _ ->
                     when (index) {
@@ -53,7 +55,7 @@ class SongShareDialog : DialogFragment() {
                             }, null))
                         }
                         1 -> {
-                            activity!!.startActivity(
+                            startActivity(
                                 Intent.createChooser(
                                     Intent()
                                         .setAction(Intent.ACTION_SEND)
@@ -62,6 +64,16 @@ class SongShareDialog : DialogFragment() {
                                     null
                                 )
                             )
+                        }
+                        2 -> {
+                            if (song != null) {
+                                startActivity(
+                                    Intent(requireContext(), ShareInstagramStory::class.java).putExtra(
+                                        ShareInstagramStory.EXTRA_SONG,
+                                        song
+                                    )
+                                )
+                            }
                         }
                     }
                 }

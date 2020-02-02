@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
         android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_more_vert_white_24dp" />
@@ -45,9 +46,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingStart="8dp"
-        android:paddingTop="12dp"
-        android:paddingEnd="8dp"
+        android:padding="8dp"
         android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toTopOf="@+id/progressSlider"
         app:layout_constraintEnd_toStartOf="@+id/playerMenu"
@@ -62,9 +61,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
         android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toTopOf="@+id/title"
         app:srcCompat="@drawable/ic_favorite_border_white_24dp" />
 
 

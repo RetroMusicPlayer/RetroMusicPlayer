@@ -306,6 +306,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD || currentNowPlayingScreen == FIT || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
+                super.setNavigationbarColor(Color.BLACK)
             } else if (currentNowPlayingScreen == COLOR || currentNowPlayingScreen == TINY) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
