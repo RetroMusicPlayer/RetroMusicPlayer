@@ -16,15 +16,19 @@ package code.name.monkey.retromusic.activities
 
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
+import android.view.MenuItem
 import androidx.core.view.drawToBitmap
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
@@ -46,25 +50,37 @@ class ShareInstagramStory : AbsBaseActivity() {
         const val EXTRA_SONG = "extra_song"
     }
 
+    private lateinit var colorString: String
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_share_instagram)
-        setStatusbarColorAuto()
-        setNavigationbarColorAuto()
-        setLightNavigationBar(true)
+        setStatusbarColor(Color.TRANSPARENT)
+        setNavigationbarColor(Color.BLACK)
 
-        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
-        ToolbarContentTintHelper.colorBackButton(toolbar)
+        toolbar.setBackgroundColor(Color.TRANSPARENT)
         setSupportActionBar(toolbar)
 
         val song = intent.extras?.getParcelable<Song>(EXTRA_SONG)
         song?.let { songFinal ->
             SongGlideRequest.Builder.from(Glide.with(this), songFinal)
-                .asBitmap()
+                .checkIgnoreMediaStore(this@ShareInstagramStory)
+                .generatePalette(this@ShareInstagramStory)
                 .build()
-                .into(image)
+                .into(object : RetroMusicColoredTarget(image) {
+                    override fun onColorReady(color: Int) {
+                        val isColorLight = ColorUtil.isColorLight(color)
+                        setColors(isColorLight, color)
+                    }
+                })
 
             shareTitle.text = songFinal.title
             shareText.text = songFinal.artistName
@@ -77,11 +93,24 @@ class ShareInstagramStory : AbsBaseActivity() {
                 val uri = Uri.parse(path)
                 Share.shareFileToInstagram(
                     this@ShareInstagramStory,
-                    songFinal,
                     uri
                 )
             }
         }
+        shareButton.setTextColor(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                ColorUtil.isColorLight(ThemeStore.accentColor(this))
+            )
+        )
         shareButton.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+    }
+
+    private fun setColors(colorLight: Boolean, color: Int) {
+        setLightStatusbar(ColorUtil.isColorLight(color))
+        toolbar.setTitleTextColor(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight))
+        toolbar.navigationIcon?.setTintList(ColorStateList.valueOf(Color.WHITE))
+        mainContent.background =
+            GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(color, Color.BLACK))
     }
 }

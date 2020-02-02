@@ -11,54 +11,37 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.StatusBarView
-        android:id="@+id/status_bar"
+    <LinearLayout
+        android:id="@+id/mainContent"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?attr/colorSurface"
-        tools:ignore="UnusedAttribute" />
-
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
-        android:orientation="vertical">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:title="@string/social_instagram" />
-        </com.google.android.material.appbar.AppBarLayout>
+        android:layout_height="wrap_content"
+        android:background="@drawable/instagram_story_background"
+        android:gravity="center"
+        android:minHeight="1080dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mainContent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
             <code.name.monkey.retromusic.views.WidthFitSquareCardView
                 android:id="@+id/imageContainerCard"
-                android:layout_width="320dp"
+                android:layout_width="290dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="24dp"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="16dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,44 +57,77 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/shareTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:textAppearance="@style/TextViewHeadline5"
-                android:textColor="@color/md_white_1000"
-                android:textStyle="bold"
-                app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageContainerCard"
-                tools:text="@tools:sample/full_names" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/shareText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAppearance="@style/TextViewHeadline6"
                 android:textColor="@color/md_white_1000"
                 android:textStyle="bold"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageContainerCard"
+                app:layout_constraintStart_toStartOf="@+id/imageContainerCard"
+                app:layout_constraintTop_toBottomOf="@id/imageContainerCard"
+                tools:text="@tools:sample/full_names" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/shareText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="@color/md_grey_400"
+                android:textStyle="bold"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="@+id/imageContainerCard"
+                app:layout_constraintStart_toStartOf="@+id/imageContainerCard"
                 app:layout_constraintTop_toBottomOf="@id/shareTitle"
                 tools:text="@tools:sample/full_names" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/shareButton"
-            android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/shareButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="16dp"
+        android:paddingStart="24dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="14dp"
+        android:text="@string/share_to_stories"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainContent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <code.name.monkey.retromusic.views.StatusBarView
+            android:id="@+id/status_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="?attr/colorSurface"
+            tools:ignore="UnusedAttribute" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="16dp"
-            android:text="Instagram Stories"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainContent" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</LinearLayout>
+            android:background="@color/transparent"
+            android:elevation="0dp"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:title="@string/social_instagram"
+                app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
+        </com.google.android.material.appbar.AppBarLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
