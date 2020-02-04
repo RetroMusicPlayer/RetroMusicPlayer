@@ -3,6 +3,7 @@ package code.name.monkey.retromusic.fragments.mainactivity;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -132,14 +133,16 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
 
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).getSubMenu());
 
-        } else if (currentFragment instanceof GenresFragment) {
+        } else if (currentFragment instanceof GenresFragment || currentFragment instanceof PlayingQueueFragment) {
             menu.removeItem(R.id.action_new_playlist);
+            menu.removeItem(R.id.action_layout_type);
             menu.removeItem(R.id.action_grid_size);
             menu.removeItem(R.id.action_sort_order);
         } else {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
                     .setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             menu.removeItem(R.id.action_grid_size);
+            menu.removeItem(R.id.action_layout_type);
         }
         ToolbarContentTintHelper.handleOnCreateOptionsMenu(requireActivity(), toolbar, menu,
                 ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
@@ -507,7 +510,8 @@ public class LibraryFragment extends AbsMainActivityFragment implements CabHolde
     }
 
     private void setupToolbar() {
-        toolbar.setBackgroundTintList(
+        toolbar.setBackgroundColor(Color.TRANSPARENT);
+        toolbarContainer.setCardBackgroundColor(
                 ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)));
         toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
         toolbar.setOnClickListener(v -> {

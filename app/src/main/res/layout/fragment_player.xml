@@ -32,18 +32,6 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/playerToolbar"
-                style="@style/Toolbar"
-                android:layout_gravity="bottom"
-                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-        </FrameLayout>
 
         <code.name.monkey.retromusic.views.WidthFitSquareLayout
             android:id="@+id/playerAlbumCoverContainer"
@@ -70,6 +58,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_player_playback_controls" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/playerToolbar"
+                style="@style/Toolbar"
+                android:layout_gravity="bottom"
+                android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </FrameLayout>
     </LinearLayout>
 </FrameLayout>

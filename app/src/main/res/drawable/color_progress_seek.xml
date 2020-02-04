@@ -18,7 +18,7 @@
     <item android:id="@android:id/background">
         <shape>
             <corners android:radius="8dip" />
-            <solid android:color="?colorButtonNormal" />
+            <solid android:color="?android:attr/colorControlHighlight" />
         </shape>
     </item>
 
@@ -26,7 +26,7 @@
         <clip>
             <shape>
                 <corners android:radius="8dip" />
-                <solid android:color="?colorButtonNormal" />
+                <solid android:color="?attr/colorControlNormal" />
             </shape>
         </clip>
     </item>

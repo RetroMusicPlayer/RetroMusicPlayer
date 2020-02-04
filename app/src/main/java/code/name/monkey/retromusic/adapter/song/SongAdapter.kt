@@ -144,7 +144,7 @@ open class SongAdapter(
                 return ""
             }
         }
-        println("File name -> $sectionName")
+
         return MusicUtil.getSectionName(sectionName)
     }
 

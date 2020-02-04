@@ -32,8 +32,8 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
     protected abstract fun setLayoutRes(layoutRes: Int)
 
     fun setAndSaveLayoutRes(layoutRes: Int) {
-        saveLayoutRes(layoutRes)
         setLayoutRes(layoutRes)
+        saveLayoutRes(layoutRes)
     }
 
     private val maxGridSizeForList: Int

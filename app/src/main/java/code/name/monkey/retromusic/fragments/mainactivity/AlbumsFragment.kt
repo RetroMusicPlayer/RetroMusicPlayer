@@ -84,7 +84,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(requireContext())
     }
 
     override fun saveGridSize(gridColumns: Int) {
@@ -92,7 +92,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(requireContext())
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {

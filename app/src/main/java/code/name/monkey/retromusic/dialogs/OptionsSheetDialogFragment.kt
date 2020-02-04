@@ -38,6 +38,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             R.id.actionFolders -> mainActivity.setMusicChooser(MainActivity.FOLDER)
             R.id.actionLibrary -> mainActivity.setMusicChooser(MainActivity.LIBRARY)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
+            R.id.actionDriveMode -> NavigationUtil.gotoDriveMode(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
         }
         materialDialog.dismiss()
@@ -47,6 +48,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     private lateinit var actionLibrary: OptionMenuItemView
     private lateinit var actionFolders: OptionMenuItemView
     private lateinit var actionRate: OptionMenuItemView
+    private lateinit var actionDriveMode: OptionMenuItemView
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -56,6 +58,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionRate = layout.findViewById(R.id.actionRate)
         actionLibrary = layout.findViewById(R.id.actionLibrary)
         actionFolders = layout.findViewById(R.id.actionFolders)
+        actionDriveMode = layout.findViewById(R.id.actionDriveMode)
 
 
         when (arguments?.getInt(WHICH_ONE)) {
@@ -67,7 +70,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionRate.setOnClickListener(this)
         actionLibrary.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
-
+        actionDriveMode.setOnClickListener(this)
 
         materialDialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT))
             .show {

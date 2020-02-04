@@ -21,7 +21,6 @@ import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsView
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.empty
 import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
@@ -115,7 +114,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     }
 
     private fun setupRecyclerView() {
-        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        //ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
         songAdapter = ShuffleButtonSongAdapter(this, ArrayList(), R.layout.item_list, this)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()

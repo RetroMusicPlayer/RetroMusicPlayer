@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.activities.ArtistDetailActivity;
+import code.name.monkey.retromusic.activities.DriveModeActivity;
 import code.name.monkey.retromusic.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;
 import code.name.monkey.retromusic.activities.LyricsActivity;
@@ -146,6 +147,10 @@ public class NavigationUtil {
             @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class),
                 activityOptions.toBundle());
+    }
+
+    public static void gotoDriveMode(@NotNull final Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, DriveModeActivity.class), null);
     }
 
     public static void gotoWhatNews(@NonNull Activity activity) {

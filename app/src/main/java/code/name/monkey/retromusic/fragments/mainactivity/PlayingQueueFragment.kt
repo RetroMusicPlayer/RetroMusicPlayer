@@ -22,7 +22,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.ViewUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -62,7 +61,6 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
         recyclerViewSwipeManager?.attachRecyclerView(recyclerView)
 
         layoutManager?.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
-        ViewUtil.setUpFastScrollRecyclerViewColor(requireContext(), recyclerView)
     }
 
     override fun createLayoutManager(): LinearLayoutManager {

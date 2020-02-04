@@ -37,15 +37,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:layout_constraintStart_toStartOf="@+id/imageContainerCard"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/ic_launcher_round" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/appName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/app_name"
+                android:textColor="@color/md_white_1000"
+                app:layout_constraintBottom_toBottomOf="@id/appIcon"
+                app:layout_constraintStart_toEndOf="@id/appIcon"
+                app:layout_constraintTop_toTopOf="@id/appIcon" />
+
             <code.name.monkey.retromusic.views.WidthFitSquareCardView
                 android:id="@+id/imageContainerCard"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="16dp"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/appIcon">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"

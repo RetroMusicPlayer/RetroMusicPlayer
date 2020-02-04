@@ -107,9 +107,9 @@ class ShareInstagramStory : AbsBaseActivity() {
     }
 
     private fun setColors(colorLight: Boolean, color: Int) {
-        setLightStatusbar(ColorUtil.isColorLight(color))
+        setLightStatusbar(colorLight)
         toolbar.setTitleTextColor(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight))
-        toolbar.navigationIcon?.setTintList(ColorStateList.valueOf(Color.WHITE))
+        toolbar.navigationIcon?.setTintList(ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight)))
         mainContent.background =
             GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(color, Color.BLACK))
     }

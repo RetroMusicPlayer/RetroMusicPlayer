@@ -823,4 +823,5 @@
     <string name="scrobbles_label">Scrobbles</string>
     <string name="social_stories">Share story</string>
     <string name="share_to_stories">Share to Stories</string>
+    <string name="drive_mode">Drive mode</string>
 </resources>

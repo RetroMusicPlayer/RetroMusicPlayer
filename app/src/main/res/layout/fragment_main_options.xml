@@ -26,6 +26,14 @@
         app:optionTitle="@string/folders" />
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
+        android:id="@+id/actionDriveMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        app:optionIcon="@drawable/ic_drive_eta_white_24dp"
+        app:optionTitle="@string/drive_mode" />
+
+    <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
