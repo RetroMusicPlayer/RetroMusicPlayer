@@ -40,7 +40,7 @@
                 android:name="code.name.monkey.retromusic.fragments.player.fit.FitPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/fragment_player_playback_controls" />
+                tools:layout="@layout/fragment_fit_playback_controls" />
         </FrameLayout>
 
         <FrameLayout

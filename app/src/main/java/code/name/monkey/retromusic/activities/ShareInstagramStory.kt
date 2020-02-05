@@ -50,7 +50,6 @@ class ShareInstagramStory : AbsBaseActivity() {
         const val EXTRA_SONG = "extra_song"
     }
 
-    private lateinit var colorString: String
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
@@ -109,7 +108,14 @@ class ShareInstagramStory : AbsBaseActivity() {
     private fun setColors(colorLight: Boolean, color: Int) {
         setLightStatusbar(colorLight)
         toolbar.setTitleTextColor(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight))
-        toolbar.navigationIcon?.setTintList(ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight)))
+        toolbar.navigationIcon?.setTintList(
+            ColorStateList.valueOf(
+                MaterialValueHelper.getPrimaryTextColor(
+                    this@ShareInstagramStory,
+                    colorLight
+                )
+            )
+        )
         mainContent.background =
             GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(color, Color.BLACK))
     }

@@ -116,6 +116,7 @@ static def getDate() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':appthemehelper')
+    implementation project(':fonts')
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation "androidx.gridlayout:gridlayout:1.0.0"

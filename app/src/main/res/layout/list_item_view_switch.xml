@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="52dp" />
+        app:layout_constraintGuide_begin="56dp" />
 
     <code.name.monkey.appthemehelper.common.views.ATESwitch
         android:id="@android:id/checkbox"

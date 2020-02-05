@@ -60,12 +60,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/toolbar_height"
                         android:background="?colorSurface"
-                        app:contentInsetStart="0dp"
-                        app:contentInsetStartWithNavigation="0dp"
                         app:popupTheme="?attr/toolbarPopupTheme"
                         app:title="@string/action_search"
-                        app:titleMarginStart="0dp"
-                        app:titleTextAppearance="@style/ToolbarTextAppearanceSearch"
+                        app:titleTextAppearance="@style/TextViewHeadline6"
                         app:titleTextColor="?android:attr/textColorSecondary"
                         tools:ignore="UnusedAttribute" />
 

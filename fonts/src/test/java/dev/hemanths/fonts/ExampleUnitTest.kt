@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (c) 2020 Hemanth Savarala.
  *
  * Licensed under the GNU General Public License v3
  *
@@ -12,20 +12,21 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.appthemehelper.common.views
+package dev.hemanths.fonts
 
-import android.content.Context
-import android.util.AttributeSet
-import code.name.monkey.appthemehelper.ThemeStore
-import com.google.android.material.textview.MaterialTextView
+import org.junit.Test
 
-class ATESecondaryTextView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : MaterialTextView(context, attrs, defStyleAttr) {
+import org.junit.Assert.*
 
-    init {
-        setTextColor(ThemeStore.textColorSecondary(context))
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * See [testing documentation](http://d.android.com/tools/testing).
+ */
+class ExampleUnitTest {
+
+    @Test
+    fun addition_isCorrect() {
+        assertEquals(4, 2 + 2)
     }
 }

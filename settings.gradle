@@ -1,1 +1,1 @@
-include ':app', ':appthemehelper'
+include ':app', ':appthemehelper', ':fonts'

@@ -19,7 +19,8 @@
         android:layout_gravity="center"
         android:layout_marginStart="@dimen/ate_preference_inset"
         android:layout_marginLeft="@dimen/ate_preference_inset"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/icon_back_black" />
 
     <RelativeLayout
         android:layout_width="0dp"
@@ -33,19 +34,22 @@
         android:layout_marginBottom="12dip"
         android:layout_weight="1">
 
-        <code.name.monkey.appthemehelper.common.views.ATEPrimaryTextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@android:id/title"
-            style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
+            android:fontFamily="@font/circular"
             android:singleLine="true"
-            tools:text="Title" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textColor="?android:attr/textColorPrimary"
+            tools:text="@tools:sample/lorem/random" />
 
-        <code.name.monkey.appthemehelper.common.views.ATESecondaryTextView
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +57,9 @@
             android:layout_alignStart="@android:id/title"
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
+            android:fontFamily="@font/circular"
             android:maxLines="4"
+            android:textColor="?android:attr/textColorSecondary"
             tools:text="I have one solution for you.you can change font size for specific preference by managing layout file." />
 
     </RelativeLayout>
