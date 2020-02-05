@@ -46,10 +46,6 @@
 -dontwarn
 -ignorewarnings
 
-# ------- FastScrollRecycleView START -------
--keep class com.simplecityapps.recyclerview_fastscroll.views.FastScrollPopup { *; }
-# ------- FastScrollRecycleView END -------
-
 -keep public class android.support.design.widget.BottomNavigationView { *; }
 -keep public class android.support.design.internal.BottomNavigationMenuView { *; }
 -keep public class android.support.design.internal.BottomNavigationPresenter { *; }

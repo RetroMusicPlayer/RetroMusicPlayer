@@ -10,7 +10,7 @@
     android:background="?rectSelector"
     android:clickable="true"
     android:focusable="true"
-    android:minHeight="64dp"
+    android:minHeight="?attr/listPreferredItemHeight"
     android:orientation="horizontal"
     tools:ignore="MissingPrefix">
 
