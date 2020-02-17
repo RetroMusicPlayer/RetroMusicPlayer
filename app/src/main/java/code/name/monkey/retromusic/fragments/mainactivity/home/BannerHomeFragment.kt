@@ -47,7 +47,6 @@ import kotlinx.android.synthetic.main.fragment_banner_home.userImage
 import kotlinx.android.synthetic.main.home_content.emptyContainer
 import kotlinx.android.synthetic.main.home_content.recyclerView
 import java.io.File
-import java.util.ArrayList
 import java.util.Calendar
 import java.util.Random
 import javax.inject.Inject
@@ -59,7 +58,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var toolbar: Toolbar
 
-    override fun sections(sections: ArrayList<Home>) {
+    override fun sections(sections: List<Home>) {
         println(sections.size)
         homeAdapter.swapData(sections)
     }

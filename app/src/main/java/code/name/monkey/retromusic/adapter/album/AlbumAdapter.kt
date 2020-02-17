@@ -29,9 +29,8 @@ import me.zhanghai.android.fastscroll.PopupTextProvider
 
 open class AlbumAdapter(
     protected val activity: AppCompatActivity,
-    dataSet: ArrayList<Album>,
+    var dataSet: List<Album>,
     protected var itemLayoutRes: Int,
-    usePalette: Boolean,
     cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<AlbumAdapter.ViewHolder, Album>(
     activity,
@@ -39,28 +38,11 @@ open class AlbumAdapter(
     R.menu.menu_media_selection
 ), PopupTextProvider {
 
-    var dataSet: ArrayList<Album>
-        protected set
-
-    protected var usePalette = false
-
     init {
-        this.dataSet = dataSet
-        this.usePalette = usePalette
         this.setHasStableIds(true)
     }
 
-    fun useItemLayout(itemLayoutRes: Int) {
-        this.itemLayoutRes = itemLayoutRes
-        notifyDataSetChanged()
-    }
-
-    fun usePalette(usePalette: Boolean) {
-        this.usePalette = usePalette
-        notifyDataSetChanged()
-    }
-
-    fun swapDataSet(dataSet: ArrayList<Album>) {
+    fun swapDataSet(dataSet: List<Album>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
     }

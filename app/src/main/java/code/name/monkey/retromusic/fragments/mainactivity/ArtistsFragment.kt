@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
     ArtistsView {
 
-    override fun artists(artists: ArrayList<Artist>) {
+    override fun artists(artists: List<Artist>) {
         adapter?.swapDataSet(artists)
     }
 
@@ -66,7 +66,6 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
             libraryFragment.mainActivity,
             dataSet,
             itemLayoutRes(),
-            loadUsePalette(),
             libraryFragment
         )
     }
@@ -85,18 +84,6 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     override fun saveGridSizeLand(gridColumns: Int) {
         PreferenceUtil.getInstance(requireContext()).setArtistGridSizeLand(gridColumns)
-    }
-
-    override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setArtistColoredFooters(usePalette)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).artistColoredFooters()
-    }
-
-    override fun setUsePalette(usePalette: Boolean) {
-        adapter?.usePalette(usePalette)
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -121,9 +108,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
         val TAG: String = ArtistsFragment::class.java.simpleName
 
         fun newInstance(): ArtistsFragment {
-
             val args = Bundle()
-
             val fragment = ArtistsFragment()
             fragment.arguments = args
             return fragment

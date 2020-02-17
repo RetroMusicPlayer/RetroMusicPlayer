@@ -14,7 +14,8 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
@@ -36,7 +37,9 @@ import kotlin.coroutines.CoroutineContext
 interface ArtistDetailsView : BaseView {
 
     fun artist(artist: Artist)
+
     fun artistInfo(lastFmArtist: LastFmArtist?)
+
     fun complete()
 }
 
@@ -62,12 +65,8 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
         override fun loadBiography(name: String, lang: String?, cache: String?) {
             launch {
                 when (val result = repository.artistInfo(name, lang, cache)) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        view?.artistInfo(result.data)
-                    }
-                    is Result.Error -> withContext(Dispatchers.Main) {
-
-                    }
+                    is Success -> withContext(Dispatchers.Main) { view?.artistInfo(result.data) }
+                    is Error -> withContext(Dispatchers.Main) {}
                 }
             }
         }
@@ -75,13 +74,8 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
         override fun loadArtist(artistId: Int) {
             launch {
                 when (val result = repository.artistById(artistId)) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        view?.artist(result.data)
-
-                    }
-                    is Result.Error -> withContext(Dispatchers.Main) {
-                        view?.showEmptyView()
-                    }
+                    is Success -> withContext(Dispatchers.Main) { view?.artist(result.data) }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
                 }
             }
         }

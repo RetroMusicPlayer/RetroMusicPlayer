@@ -238,7 +238,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         emptyText.visibility = View.VISIBLE
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         adapter.swapDataSet(songs)
     }
 

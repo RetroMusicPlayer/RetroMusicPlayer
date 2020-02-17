@@ -15,9 +15,8 @@ class SimpleSongAdapter(
     cabHolder: CabHolder?
 ) : SongAdapter(context, songs, layoutRes, cabHolder) {
 
-    override fun swapDataSet(dataSet: ArrayList<Song>) {
-        this.dataSet.clear()
-        this.dataSet = dataSet
+    override fun swapDataSet(dataSet: List<Song>) {
+        this.dataSet = dataSet.toMutableList()
         notifyDataSetChanged()
     }
 

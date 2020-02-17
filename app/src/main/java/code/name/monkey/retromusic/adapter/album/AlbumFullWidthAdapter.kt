@@ -32,7 +32,7 @@ import com.bumptech.glide.Glide
 
 class AlbumFullWidthAdapter(
     private val activity: Activity,
-    private val dataSet: ArrayList<Album>,
+    private val dataSet: List<Album>,
     metrics: DisplayMetrics
 ) : MetalRecyclerViewPager.MetalAdapter<AlbumFullWidthAdapter.FullMetalViewHolder>(metrics) {
 

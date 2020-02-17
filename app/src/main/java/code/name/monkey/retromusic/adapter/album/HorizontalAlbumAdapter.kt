@@ -12,15 +12,13 @@ import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.Glide
-import java.util.ArrayList
 
 class HorizontalAlbumAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Album>,
-    usePalette: Boolean,
+    dataSet: List<Album>,
     cabHolder: CabHolder?
 ) : AlbumAdapter(
-    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, usePalette, cabHolder
+    activity, dataSet, HorizontalAdapterHelper.LAYOUT_RES, cabHolder
 ) {
 
     override fun createViewHolder(view: View, viewType: Int): ViewHolder {
@@ -45,8 +43,7 @@ class HorizontalAlbumAdapter(
                 }
 
                 override fun onColorReady(color: Int) {
-                    if (usePalette) setColors(color, holder)
-                    else setColors(albumArtistFooterColor, holder)
+                    setColors(color, holder)
                 }
             })
     }

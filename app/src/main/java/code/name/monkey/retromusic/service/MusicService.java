@@ -844,7 +844,7 @@ public class MusicService extends Service implements
         return true;
     }
 
-    public void openQueue(@Nullable final ArrayList<Song> playingQueue, final int startPosition,
+    public void openQueue(@Nullable final List<Song> playingQueue, final int startPosition,
             final boolean startPlaying) {
         if (playingQueue != null && !playingQueue.isEmpty() && startPosition >= 0 && startPosition < playingQueue
                 .size()) {

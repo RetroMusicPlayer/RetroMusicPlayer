@@ -118,12 +118,6 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
 
     protected abstract fun saveGridSizeLand(gridColumns: Int)
 
-    protected abstract fun saveUsePalette(usePalette: Boolean)
-
-    protected abstract fun loadUsePalette(): Boolean
-
-    protected abstract fun setUsePalette(usePalette: Boolean)
-
     protected abstract fun loadLayoutRes(): Int
 
     protected abstract fun saveLayoutRes(layoutRes: Int)

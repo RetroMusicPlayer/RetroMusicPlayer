@@ -27,7 +27,7 @@ class HomeAdapter(
     private val displayMetrics: DisplayMetrics
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var list = ArrayList<Home>()
+    private var list = listOf<Home>()
 
     override fun getItemViewType(position: Int): Int {
         return list[position].homeSection
@@ -81,7 +81,7 @@ class HomeAdapter(
         return list.size
     }
 
-    fun swapData(sections: ArrayList<Home>) {
+    fun swapData(sections: List<Home>) {
         list = sections
         notifyDataSetChanged()
     }
@@ -121,7 +121,6 @@ class HomeAdapter(
                         activity,
                         list,
                         PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
-                        false,
                         null
                     )
                     adapter = artistAdapter

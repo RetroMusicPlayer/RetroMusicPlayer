@@ -26,14 +26,12 @@ import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenresView
 import javax.inject.Inject
 
-
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenresView {
-    override fun genres(genres: ArrayList<Genre>) {
+    override fun genres(genres: List<Genre>) {
         adapter?.swapDataSet(genres)
     }
 
     override fun showEmptyView() {
-
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
@@ -48,10 +46,8 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     override val emptyMessage: Int
         get() = R.string.no_genres
 
-
     @Inject
     lateinit var genresPresenter: GenresPresenter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +58,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
         super.onViewCreated(view, savedInstanceState)
         genresPresenter.attachView(this)
     }
+
     override fun onResume() {
         super.onResume()
         if (adapter!!.dataSet.isEmpty()) {

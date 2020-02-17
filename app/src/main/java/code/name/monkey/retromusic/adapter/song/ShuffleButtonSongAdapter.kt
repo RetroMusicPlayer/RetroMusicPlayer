@@ -7,11 +7,10 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
-import java.util.ArrayList
 
 class ShuffleButtonSongAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {

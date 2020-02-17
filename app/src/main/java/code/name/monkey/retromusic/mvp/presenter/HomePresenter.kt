@@ -29,7 +29,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 interface HomeView : BaseView {
-    fun sections(sections: ArrayList<Home>)
+    fun sections(sections: List<Home>)
 }
 
 interface HomePresenter : Presenter<HomeView> {

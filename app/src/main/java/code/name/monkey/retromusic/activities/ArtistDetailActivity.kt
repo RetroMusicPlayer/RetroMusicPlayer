@@ -154,7 +154,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun setupRecyclerView() {
-        albumAdapter = HorizontalAlbumAdapter(this, ArrayList(), false, null)
+        albumAdapter = HorizontalAlbumAdapter(this, ArrayList(), null)
         albumRecyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)

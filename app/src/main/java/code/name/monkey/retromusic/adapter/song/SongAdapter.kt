@@ -34,25 +34,25 @@ import java.util.ArrayList
 
 open class SongAdapter(
     protected val activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     cabHolder: CabHolder?,
     showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity,
+    cabHolder,
+    R.menu.menu_media_selection
 ), MaterialCab.Callback, PopupTextProvider {
 
-    var dataSet: ArrayList<Song>
     private var showSectionName = true
 
     init {
-        this.dataSet = dataSet
         this.showSectionName = showSectionName
         this.setHasStableIds(true)
     }
 
-    open fun swapDataSet(dataSet: ArrayList<Song>) {
-        this.dataSet = dataSet
+    open fun swapDataSet(dataSet: List<Song>) {
+        this.dataSet = dataSet.toMutableList()
         notifyDataSetChanged()
     }
 

@@ -9,11 +9,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
-import java.util.ArrayList
 
 abstract class AbsOffsetSongAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     @LayoutRes itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : SongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {

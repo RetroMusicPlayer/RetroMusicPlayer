@@ -34,7 +34,7 @@ import java.util.ArrayList
 
 class PlaylistAdapter(
     private val activity: AppCompatActivity,
-    var dataSet: ArrayList<Playlist>,
+    var dataSet: List<Playlist>,
     private var itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(
@@ -43,13 +43,12 @@ class PlaylistAdapter(
     R.menu.menu_playlists_selection
 ) {
 
-    var songs = ArrayList<Song>()
 
     init {
         setHasStableIds(true)
     }
 
-    fun swapDataSet(dataSet: ArrayList<Playlist>) {
+    fun swapDataSet(dataSet: List<Playlist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
     }

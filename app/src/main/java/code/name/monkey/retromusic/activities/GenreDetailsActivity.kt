@@ -129,7 +129,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         })
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         songAdapter.swapDataSet(songs)
     }
 

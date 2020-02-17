@@ -14,32 +14,37 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-
 
 /**
  * Created by hemanths on 20/08/17.
  */
 
 interface GenreDetailsView : BaseView {
-    fun songs(songs: ArrayList<Song>)
+
+    fun songs(songs: List<Song>)
 }
 
 interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
     fun loadGenreSongs(genreId: Int)
 
     class GenreDetailsPresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<GenreDetailsView>(), GenreDetailsPresenter, CoroutineScope {
+
         private val job = Job()
 
         override val coroutineContext: CoroutineContext
@@ -50,16 +55,11 @@ interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
             job.cancel()
         }
 
-
         override fun loadGenreSongs(genreId: Int) {
             launch {
                 when (val result = repository.getGenre(genreId)) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        view?.songs(result.data)
-                    }
-                    is Result.Error -> withContext(Dispatchers.Main) {
-                        view?.showEmptyView()
-                    }
+                    is Success -> withContext(Dispatchers.Main) { view?.songs(result.data) }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
                 }
             }
         }

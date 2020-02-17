@@ -27,11 +27,10 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 
-
 class AddToPlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(
-            savedInstanceState: Bundle?
+        savedInstanceState: Bundle?
     ): Dialog {
         val playlists = PlaylistLoader.getAllPlaylists(requireContext())
         val playlistNames: MutableList<String> = mutableListOf()
@@ -47,7 +46,9 @@ class AddToPlaylistDialog : DialogFragment() {
                 val songs = arguments!!.getParcelableArrayList<Song>("songs") ?: return@listItems
                 if (index == 0) {
                     dialog.dismiss()
-                    activity?.supportFragmentManager?.let { CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST") }
+                    activity?.supportFragmentManager?.let {
+                        CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST")
+                    }
                 } else {
                     dialog.dismiss()
                     PlaylistsUtil.addToPlaylist(requireContext(), songs, playlists[index - 1].id, true)
@@ -64,10 +65,10 @@ class AddToPlaylistDialog : DialogFragment() {
             return create(list)
         }
 
-        fun create(songs: ArrayList<Song>): AddToPlaylistDialog {
+        fun create(songs: List<Song>): AddToPlaylistDialog {
             val dialog = AddToPlaylistDialog()
             val args = Bundle()
-            args.putParcelableArrayList("songs", songs)
+            args.putParcelableArrayList("songs", ArrayList(songs))
             dialog.arguments = args
             return dialog
         }

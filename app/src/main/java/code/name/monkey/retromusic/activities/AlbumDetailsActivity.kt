@@ -214,12 +214,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         albumDetailsPresenter.aboutAlbum(album.artistName!!, album.title!!)
     }
 
-    override fun moreAlbums(albums: ArrayList<Album>) {
+    override fun moreAlbums(albums: List<Album>) {
         moreTitle.show()
         moreRecyclerView.show()
         moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
 
-        val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
+        val albumAdapter = HorizontalAlbumAdapter(this, albums, null)
         moreRecyclerView.layoutManager = GridLayoutManager(
             this,
             1,

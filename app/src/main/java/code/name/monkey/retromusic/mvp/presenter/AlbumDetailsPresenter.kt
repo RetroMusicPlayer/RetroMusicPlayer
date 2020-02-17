@@ -40,9 +40,7 @@ interface AlbumDetailsView {
 
     fun loadArtistImage(artist: Artist)
 
-    fun moreAlbums(
-        albums: ArrayList<Album>
-    )
+    fun moreAlbums(albums: List<Album>)
 
     fun aboutAlbum(lastFmAlbum: LastFmAlbum)
 }
@@ -51,6 +49,7 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
     fun loadAlbum(albumId: Int)
 
     fun loadMore(artistId: Int)
+
     fun aboutAlbum(artist: String, album: String)
 
     class AlbumDetailsPresenterImpl @Inject constructor(

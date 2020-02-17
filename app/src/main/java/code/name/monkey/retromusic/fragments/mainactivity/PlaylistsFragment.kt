@@ -39,7 +39,7 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
 
     override fun createAdapter(): PlaylistAdapter {
         return PlaylistAdapter(libraryFragment.mainActivity, ArrayList(),
-                R.layout.item_list, libraryFragment)
+            R.layout.item_list, libraryFragment)
     }
 
     override fun onResume() {
@@ -63,7 +63,7 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
         adapter?.swapDataSet(ArrayList())
     }
 
-    override fun playlists(playlists: ArrayList<Playlist>) {
+    override fun playlists(playlists: List<Playlist>) {
         adapter?.swapDataSet(playlists)
     }
 

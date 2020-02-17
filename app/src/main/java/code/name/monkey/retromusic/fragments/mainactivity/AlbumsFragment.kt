@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     AlbumsView {
 
     @Inject
@@ -41,7 +41,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         albumsPresenter.detachView()
     }
 
-    override fun albums(albums: java.util.ArrayList<Album>) {
+    override fun albums(albums: List<Album>) {
         adapter?.swapDataSet(albums)
     }
 
@@ -53,21 +53,13 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun createAdapter(): AlbumAdapter {
-        /* var itemLayoutRes = itemLayoutRes
-         notifyLayoutResChanged(itemLayoutRes)
-         if (itemLayoutRes != R.layout.item_list) {
-             itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getAlbumGridStyle(requireContext())
-         }*/
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return AlbumAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes(), loadUsePalette(), libraryFragment)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).albumColoredFooters()
-    }
-
-    override fun setUsePalette(usePalette: Boolean) {
-        adapter?.usePalette(usePalette)
+        return AlbumAdapter(
+            libraryFragment.mainActivity,
+            dataSet,
+            itemLayoutRes(),
+            libraryFragment
+        )
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -99,10 +91,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         PreferenceUtil.getInstance(requireContext()).setAlbumGridSizeLand(gridColumns)
     }
 
-    override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setAlbumColoredFooters(usePalette)
-    }
-
     override fun onMediaStoreChanged() {
         albumsPresenter.loadAlbums()
     }
@@ -116,7 +104,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun setLayoutRes(layoutRes: Int) {
-        //adapter?.itemCount?.let { adapter?.notifyItemRangeChanged(0, it) }
     }
 
     override fun loadLayoutRes(): Int {

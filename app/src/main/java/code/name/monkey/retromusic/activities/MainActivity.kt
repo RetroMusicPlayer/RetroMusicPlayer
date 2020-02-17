@@ -220,8 +220,20 @@ class MainActivity : AbsSlidingMusicPanelActivity(), SharedPreferences.OnSharedP
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        if (key == PreferenceUtil.GENERAL_THEME || key == PreferenceUtil.BLACK_THEME || key == PreferenceUtil.ADAPTIVE_COLOR_APP || key == PreferenceUtil.DOMINANT_COLOR || key == PreferenceUtil.USER_NAME || key == PreferenceUtil.TOGGLE_FULL_SCREEN || key == PreferenceUtil.TOGGLE_VOLUME || key == PreferenceUtil.ROUND_CORNERS || key == PreferenceUtil.CAROUSEL_EFFECT || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID || key == PreferenceUtil.TOGGLE_GENRE || key == PreferenceUtil.BANNER_IMAGE_PATH || key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART || key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE || key == PreferenceUtil.ALBUM_GRID_STYLE || key == PreferenceUtil.ARTIST_GRID_STYLE || key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS || key == PreferenceUtil.ALBUM_COVER_STYLE || key == PreferenceUtil.HOME_ARTIST_GRID_STYLE || key == PreferenceUtil.ALBUM_COVER_TRANSFORM || key == PreferenceUtil.DESATURATED_COLOR || key == PreferenceUtil.TAB_TEXT_MODE || key == PreferenceUtil.LIBRARY_CATEGORIES
-        ) postRecreate()
+        if (key == PreferenceUtil.GENERAL_THEME || key == PreferenceUtil.BLACK_THEME ||
+            key == PreferenceUtil.ADAPTIVE_COLOR_APP || key == PreferenceUtil.DOMINANT_COLOR ||
+            key == PreferenceUtil.USER_NAME || key == PreferenceUtil.TOGGLE_FULL_SCREEN ||
+            key == PreferenceUtil.TOGGLE_VOLUME || key == PreferenceUtil.ROUND_CORNERS ||
+            key == PreferenceUtil.CAROUSEL_EFFECT || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID ||
+            key == PreferenceUtil.TOGGLE_GENRE || key == PreferenceUtil.BANNER_IMAGE_PATH ||
+            key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART ||
+            key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE ||
+            key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS ||
+            key == PreferenceUtil.ALBUM_COVER_STYLE || key == PreferenceUtil.HOME_ARTIST_GRID_STYLE ||
+            key == PreferenceUtil.ALBUM_COVER_TRANSFORM || key == PreferenceUtil.DESATURATED_COLOR ||
+            key == PreferenceUtil.TAB_TEXT_MODE || key == PreferenceUtil.LIBRARY_CATEGORIES
+        )
+            postRecreate()
     }
 
     private fun selectedFragment(itemId: Int) {

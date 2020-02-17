@@ -104,10 +104,10 @@ class DeleteSongsDialog : DialogFragment() {
             return create(list)
         }
 
-        fun create(songs: ArrayList<Song>): DeleteSongsDialog {
+        fun create(songs: List<Song>): DeleteSongsDialog {
             val dialog = DeleteSongsDialog()
             val args = Bundle()
-            args.putParcelableArrayList("songs", songs)
+            args.putParcelableArrayList("songs", ArrayList(songs))
             dialog.arguments = args
             return dialog
         }

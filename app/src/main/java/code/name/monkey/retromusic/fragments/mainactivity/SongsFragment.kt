@@ -40,7 +40,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun createAdapter(): SongAdapter {
-        val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
+        val dataSet = if (adapter == null) mutableListOf() else adapter!!.dataSet
         return ShuffleButtonSongAdapter(
             libraryFragment.mainActivity,
             dataSet,
@@ -49,7 +49,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         )
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         adapter?.swapDataSet(songs)
     }
 
@@ -73,26 +73,14 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         PreferenceUtil.getInstance(requireContext()).setSongGridSizeLand(gridColumns)
     }
 
-    public override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setSongColoredFooters(usePalette)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).songColoredFooters()
-    }
-
-    public override fun setUsePalette(usePalette: Boolean) {
-    }
-
     override fun setGridSize(gridSize: Int) {
         adapter?.notifyDataSetChanged()
     }
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter?.itemCount != 0)
             songPresenter.loadSongs()
-        }
     }
 
     override fun onDestroyView() {
