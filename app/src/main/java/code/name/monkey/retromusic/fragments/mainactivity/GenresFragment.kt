@@ -61,7 +61,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             genresPresenter.loadGenres()
         }
     }

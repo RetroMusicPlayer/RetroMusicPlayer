@@ -31,7 +31,7 @@ class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAd
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             albumsPresenter.loadAlbums()
         }
     }

@@ -30,7 +30,7 @@
         app:cardUseCompatPadding="false"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         app:strokeWidth="0dp">
-        
+
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
             android:layout_width="match_parent"

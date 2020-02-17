@@ -14,7 +14,6 @@ import code.name.monkey.retromusic.mvp.presenter.PlaylistView
 import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
 import javax.inject.Inject
 
-
 class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView {
 
     @Inject
@@ -38,13 +37,15 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
     }
 
     override fun createAdapter(): PlaylistAdapter {
-        return PlaylistAdapter(libraryFragment.mainActivity, ArrayList(),
-            R.layout.item_list, libraryFragment)
+        return PlaylistAdapter(
+            libraryFragment.mainActivity, ArrayList(),
+            R.layout.item_list, libraryFragment
+        )
     }
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             playlistsPresenter.playlists()
         }
     }

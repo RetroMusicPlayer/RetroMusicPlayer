@@ -22,6 +22,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.OptionMenuItemView
@@ -71,6 +73,10 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         actionLibrary.setOnClickListener(this)
         actionFolders.setOnClickListener(this)
         actionDriveMode.setOnClickListener(this)
+
+        if (MusicPlayerRemote.playingQueue.isEmpty()) {
+            actionDriveMode.hide()
+        }
 
         materialDialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT))
             .show {

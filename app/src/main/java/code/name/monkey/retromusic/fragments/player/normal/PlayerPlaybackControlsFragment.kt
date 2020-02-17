@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.nextButton
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.playPauseButton
@@ -158,10 +159,20 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(), OnSharedPref
     }
 
     private fun updatePlayPauseDrawableState() {
-        if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
+        val playResIcon = if (RetroUtil.isTablet()) {
+            R.drawable.ic_play_arrow_white_64dp
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_24dp)
+            R.drawable.ic_play_arrow_white_24dp
+        }
+        val pauseResIcon = if (RetroUtil.isTablet()) {
+            R.drawable.ic_pause_white_64dp
+        } else {
+            R.drawable.ic_pause_white_64dp
+        }
+        if (MusicPlayerRemote.isPlaying) {
+            playPauseButton.setImageResource(playResIcon)
+        } else {
+            playPauseButton.setImageResource(pauseResIcon)
         }
     }
 

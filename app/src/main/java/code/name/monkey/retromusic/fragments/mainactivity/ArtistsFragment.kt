@@ -38,7 +38,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             artistsPresenter.loadArtists()
         }
     }

@@ -162,7 +162,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
         app:layout_constraintTop_toBottomOf="@+id/songInfo"
-        app:srcCompat="@drawable/ic_pause_white_64dp"
+        app:srcCompat="@drawable/ic_pause_white_24dp"
         tools:tint="@color/md_black_1000" />
 
     <androidx.appcompat.widget.AppCompatImageButton

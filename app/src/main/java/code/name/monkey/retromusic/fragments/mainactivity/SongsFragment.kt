@@ -79,7 +79,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun onResume() {
         super.onResume()
-        if (adapter?.itemCount != 0)
+        if (adapter?.dataSet.isNullOrEmpty())
             songPresenter.loadSongs()
     }
 
