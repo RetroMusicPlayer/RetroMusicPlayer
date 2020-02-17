@@ -8,7 +8,9 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
-import code.name.monkey.retromusic.fragments.NowPlayingScreen
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FIT
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
@@ -46,8 +48,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         val nowPlayingScreen = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen
 
         if (PreferenceUtil.getInstance(requireContext()).carouselEffect() &&
-            !((nowPlayingScreen == NowPlayingScreen.FULL) || (nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
-                    || (nowPlayingScreen == NowPlayingScreen.FIT))
+            !((nowPlayingScreen == FULL) || (nowPlayingScreen == ADAPTIVE) || (nowPlayingScreen == FIT))
         ) {
             viewPager.clipToPadding = false
             viewPager.setPadding(40, 40, 40, 0)
