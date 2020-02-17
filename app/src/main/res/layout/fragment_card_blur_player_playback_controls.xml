@@ -32,7 +32,6 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp">
 
-
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/songCurrentProgress"
                 android:layout_width="wrap_content"
@@ -40,10 +39,8 @@
                 android:layout_weight="1"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:textAppearance="@style/TextViewOverline"
                 android:textStyle="bold"
                 tools:text="22.00" />
-
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/songTotalTime"
@@ -52,7 +49,6 @@
                 android:layout_weight="0"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:textAppearance="@style/TextViewOverline"
                 android:textStyle="bold"
                 tools:text="22.00" />
         </LinearLayout>
@@ -81,8 +77,8 @@
             android:maxLines="1"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
             android:textSize="12sp"
             tools:text="@tools:sample/lorem/random" />
     </LinearLayout>

@@ -35,6 +35,10 @@ class ArtistAdapter(
     activity, cabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
+    init {
+        this.setHasStableIds(true)
+    }
+
     fun swapDataSet(dataSet: List<Artist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()

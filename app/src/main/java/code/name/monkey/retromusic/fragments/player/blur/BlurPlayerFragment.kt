@@ -54,7 +54,7 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
     }
 
     private fun setUpPlayerToolbar() {
-        playerToolbar!!.apply {
+        playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { activity!!.onBackPressed() }
             ToolbarContentTintHelper.colorizeToolbar(this, Color.WHITE, activity)
@@ -68,8 +68,8 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
     override fun onColorChanged(color: Int) {
         playbackControlsFragment.setDark(color)
         lastColor = color
-        callbacks!!.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar!!, Color.WHITE, activity)
+        callbacks?.onPaletteColorChanged()
+        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }
 
     override fun toggleFavorite(song: Song) {
@@ -99,17 +99,16 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
     private fun updateBlur() {
         val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
             .getInt(PreferenceUtil.NEW_BLUR_AMOUNT, 25)
-        colorBackground!!.clearColorFilter()
+        colorBackground.clearColorFilter()
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
             .checkIgnoreMediaStore(requireContext())
             .generatePalette(requireContext()).build()
+            .dontAnimate()
             .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
-            //.centerCrop()
-            //.override(320, 480)
             .into(object : RetroMusicColoredTarget(colorBackground) {
                 override fun onColorReady(color: Int) {
                     if (color == defaultFooterColor) {
-                        colorBackground!!.setColorFilter(color)
+                        colorBackground.setColorFilter(color)
                     }
                 }
             })

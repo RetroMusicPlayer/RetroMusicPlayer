@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     android:clickable="true"
     android:focusable="true">
 
@@ -11,7 +12,9 @@
         android:id="@+id/colorBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop" />
+        android:background="?attr/colorSurface"
+        android:scaleType="centerCrop"
+        app:srcCompat="@color/black_color" />
 
     <View
         android:id="@+id/mask"
