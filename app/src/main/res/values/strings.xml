@@ -825,4 +825,6 @@
     <string name="share_to_stories">Share to Stories</string>
     <string name="drive_mode">Drive mode</string>
     <string name="retro_music_player">Retro Music Player</string>
+    <string name="pro">Pro</string>
+    <string name="free">Free</string>
 </resources>
