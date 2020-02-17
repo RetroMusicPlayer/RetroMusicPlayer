@@ -18,9 +18,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/rectSelector"
-    android:minHeight="72dp"
-    android:orientation="horizontal"
-    android:padding="16dp"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:paddingStart="?attr/listPreferredItemPaddingStart"
+    android:paddingTop="16dp"
+    android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+    android:paddingBottom="16dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     tools:ignore="PrivateResource">
@@ -65,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="52dp" />
+        app:layout_constraintGuide_begin="@dimen/list_pref_guideline_begin" />
 
     <SeekBar
         android:id="@+id/seekbar"

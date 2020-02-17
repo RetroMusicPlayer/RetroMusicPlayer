@@ -11,7 +11,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
 import kotlinx.android.synthetic.main.activity_settings.appBarLayout
-import kotlinx.android.synthetic.main.activity_settings.detailContentFrame
 import kotlinx.android.synthetic.main.activity_settings.toolbar
 
 class SettingsActivity : AbsBaseActivity() {
@@ -45,17 +44,17 @@ class SettingsActivity : AbsBaseActivity() {
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {
         val fragmentTransaction = fragmentManager
-                .beginTransaction()
-                .setCustomAnimations(R.anim.sliding_in_left, R.anim.sliding_out_right, android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            .beginTransaction()
+            .setCustomAnimations(
+                R.anim.sliding_in_left,
+                R.anim.sliding_out_right,
+                android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right
+            )
 
-        if (detailContentFrame == null) {
-            fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.tag)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        } else {
-            fragmentTransaction.replace(R.id.detailContentFrame, fragment, fragment.tag)
-            fragmentTransaction.commit()
-        }
+        fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.tag)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
 
         TransitionManager.beginDelayedTransition(appBarLayout)
         setTitle(titleName)

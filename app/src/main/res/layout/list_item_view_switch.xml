@@ -18,9 +18,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/rectSelector"
-    android:minHeight="72dp"
-    android:orientation="horizontal"
-    android:padding="16dp"
+    android:minHeight="?attr/listPreferredItemHeight"
+    android:paddingStart="?attr/listPreferredItemPaddingStart"
+    android:paddingTop="16dp"
+    android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+    android:paddingBottom="16dp"
     tools:ignore="PrivateResource">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -67,7 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="56dp" />
+        app:layout_constraintGuide_begin="@dimen/list_pref_guideline_begin" />
 
     <code.name.monkey.appthemehelper.common.views.ATESwitch
         android:id="@android:id/checkbox"
