@@ -148,8 +148,8 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
             return values().size
         }
 
-        override fun isViewFromObject(view: View, `object`: Any): Boolean {
-            return view === `object`
+        override fun isViewFromObject(view: View, instace: Any): Boolean {
+            return view === instace
         }
 
         override fun getPageTitle(position: Int): CharSequence? {

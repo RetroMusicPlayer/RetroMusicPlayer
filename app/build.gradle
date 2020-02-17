@@ -23,7 +23,7 @@ android {
 
         applicationId "code.name.monkey.retromusic"
         versionCode 409
-        versionName '3.5.000'
+        versionName '3.4.950'
 
         multiDexEnabled true
 

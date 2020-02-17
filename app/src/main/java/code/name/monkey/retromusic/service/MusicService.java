@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.service;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
+import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,6 +32,8 @@ import android.media.AudioManager;
 import android.media.audiofx.AudioEffect;
 import android.os.Binder;
 import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -218,6 +221,10 @@ public class MusicService extends Service implements
 
     private boolean becomingNoisyReceiverRegistered;
 
+    private IntentFilter bluetoothConnectedIntentFilter = new IntentFilter(BluetoothDevice.ACTION_ACL_CONNECTED);
+
+    private boolean bluetoothConnectedRegistered = false;
+
     private IntentFilter headsetReceiverIntentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
 
     private boolean headsetReceiverRegistered = false;
@@ -271,6 +278,27 @@ public class MusicService extends Service implements
 
     private SongPlayCountHelper songPlayCountHelper = new SongPlayCountHelper();
 
+    private final BroadcastReceiver bluetoothReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            String action = intent.getAction();
+            Log.i(TAG, "onReceive: " + action);
+            if (action != null) {
+                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                    if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                        if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
+                            play();
+                        }
+                    } else {
+                        if (getAudioManager().isBluetoothA2dpOn()) {
+                            play();
+                        }
+                    }
+                }
+            }
+        }
+    };
+
     private PhoneStateListener phoneStateListener = new PhoneStateListener() {
         @Override
         public void onCallStateChanged(int state, String incomingNumber) {
@@ -299,11 +327,9 @@ public class MusicService extends Service implements
                     int state = intent.getIntExtra("state", -1);
                     switch (state) {
                         case 0:
-                            Log.d(TAG, "Headset unplugged");
                             pause();
                             break;
                         case 1:
-                            Log.d(TAG, "Headset plugged");
                             play();
                             break;
                     }
@@ -425,6 +451,7 @@ public class MusicService extends Service implements
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
 
         registerHeadsetEvents();
+        registerBluetoothConnected();
     }
 
     @Override
@@ -438,6 +465,10 @@ public class MusicService extends Service implements
         if (headsetReceiverRegistered) {
             unregisterReceiver(headsetReceiver);
             headsetReceiverRegistered = false;
+        }
+        if (bluetoothConnectedRegistered) {
+            unregisterReceiver(bluetoothReceiver);
+            bluetoothConnectedRegistered = false;
         }
         mediaSession.setActive(false);
         quit();
@@ -1276,6 +1307,14 @@ public class MusicService extends Service implements
             } else {
                 setPosition(position - 1);
             }
+        }
+    }
+
+    private void registerBluetoothConnected() {
+        Log.i(TAG, "registerBluetoothConnected: ");
+        if (!bluetoothConnectedRegistered) {
+            registerReceiver(bluetoothReceiver, bluetoothConnectedIntentFilter);
+            bluetoothConnectedRegistered = true;
         }
     }
 
