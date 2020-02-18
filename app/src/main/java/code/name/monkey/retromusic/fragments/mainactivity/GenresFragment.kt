@@ -21,12 +21,19 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenresView
 import javax.inject.Inject
 
-class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenresView {
+class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
+    GenresView, MainActivityFragmentCallbacks {
+
+    override fun handleBackPress(): Boolean {
+        return false
+    }
+
     override fun genres(genres: List<Genre>) {
         adapter?.swapDataSet(genres)
     }
@@ -40,7 +47,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(libraryFragment.mainActivity, dataSet, R.layout.item_list_no_image)
+        return GenreAdapter(mainActivity, dataSet, R.layout.item_list_no_image)
     }
 
     override val emptyMessage: Int

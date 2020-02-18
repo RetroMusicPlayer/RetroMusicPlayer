@@ -35,7 +35,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryFragment.addOnAppBarOffsetChangedListener(this)
+        mainActivity.addOnAppBarOffsetChangedListener(this)
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
@@ -109,7 +109,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
             container.paddingLeft,
             container.paddingTop,
             container.paddingRight,
-            libraryFragment.totalAppBarScrollingRange + i
+            mainActivity.getTotalAppBarScrollingRange() + i
         )
     }
 
@@ -136,7 +136,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        libraryFragment.removeOnAppBarOffsetChangedListener(this)
+        mainActivity.removeOnAppBarOffsetChangedListener(this)
     }
 
     fun recyclerView(): RecyclerView {

@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
@@ -32,7 +33,12 @@ import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
 /**
  * Created by hemanths on 2019-12-08.
  */
-class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>() {
+class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
+    MainActivityFragmentCallbacks {
+
+    override fun handleBackPress(): Boolean {
+        return false
+    }
 
     private lateinit var wrappedAdapter: RecyclerView.Adapter<*>
     private var recyclerViewDragDropManager: RecyclerViewDragDropManager? = null

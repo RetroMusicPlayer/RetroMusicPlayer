@@ -7,6 +7,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumsView
@@ -14,7 +15,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
 class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    AlbumsView {
+    AlbumsView, MainActivityFragmentCallbacks {
 
     @Inject
     lateinit var albumsPresenter: AlbumsPresenter
@@ -49,16 +50,16 @@ class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAd
         get() = R.string.no_albums
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(activity, getGridSize())
+        return GridLayoutManager(requireActivity(), getGridSize())
     }
 
     override fun createAdapter(): AlbumAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return AlbumAdapter(
-            libraryFragment.mainActivity,
+            mainActivity,
             dataSet,
             itemLayoutRes(),
-            libraryFragment
+            mainActivity
         )
     }
 
@@ -124,5 +125,9 @@ class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAd
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun handleBackPress(): Boolean {
+        return false
     }
 }
