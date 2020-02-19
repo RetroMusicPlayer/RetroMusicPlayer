@@ -124,7 +124,6 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         fun newInstance(listPreference: ListPreference): MaterialListPreferenceDialog {
             val entries = listPreference.entries.toList() as ArrayList<String>
             val entriesValues = listPreference.entryValues.toList() as ArrayList<String>
-            println("List value: ${listPreference.value}")
             val position = listPreference.findIndexOfValue(listPreference.value)
             val args = Bundle()
             args.putString(ARG_KEY, listPreference.key)

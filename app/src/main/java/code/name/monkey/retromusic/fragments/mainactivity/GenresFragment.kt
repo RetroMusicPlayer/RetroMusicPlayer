@@ -85,7 +85,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     companion object {
         @JvmField
         val TAG: String = GenresFragment::class.java.simpleName
-
+        @JvmStatic
         fun newInstance(): GenresFragment {
             return GenresFragment()
         }

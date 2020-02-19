@@ -109,7 +109,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
             container.paddingLeft,
             container.paddingTop,
             container.paddingRight,
-            mainActivity.getTotalAppBarScrollingRange() + i
+            mainActivity.totalAppBarScrollingRange + i
         )
     }
 

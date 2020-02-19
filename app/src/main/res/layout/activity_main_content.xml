@@ -46,7 +46,7 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/toolbar_height"
-                        android:background="?colorSurface"
+                        android:background="?attr/colorSurface"
                         app:navigationIcon="@drawable/ic_menu_white_24dp"
                         app:popupTheme="?attr/toolbarPopupTheme"
                         app:title="@string/action_search"

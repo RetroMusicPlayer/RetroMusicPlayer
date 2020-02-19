@@ -38,7 +38,7 @@ object PlaylistSongsLoader {
         return (playlist as? AbsCustomPlaylist)?.getSongs(context)
             ?: getPlaylistSongList(context, playlist.id)
     }
-
+    @JvmStatic
     fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
         val songs = arrayListOf<Song>()
         val cursor = makePlaylistSongCursor(context, playlistId)

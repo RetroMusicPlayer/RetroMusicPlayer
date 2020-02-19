@@ -67,7 +67,6 @@ class ContributorAdapter(
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name
             text.text = contributor.summary
-            println(contributor.profileImage)
             Glide.with(image.context).load(contributor.profileImage)
                 .error(R.drawable.ic_account_white_24dp)
                 .placeholder(R.drawable.ic_account_white_24dp).dontAnimate().into(image)

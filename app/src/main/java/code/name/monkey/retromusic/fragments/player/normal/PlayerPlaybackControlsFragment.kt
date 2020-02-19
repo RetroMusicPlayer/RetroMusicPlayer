@@ -265,7 +265,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(), OnSharedPref
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        println(key)
+
         if (key == PreferenceUtil.EXTRA_SONG_INFO) {
             if (activity != null) updateSong()
         }

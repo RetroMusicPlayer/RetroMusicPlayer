@@ -88,6 +88,7 @@ class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, L
         @JvmField
         val TAG: String = PlaylistsFragment::class.java.simpleName
 
+        @JvmStatic
         fun newInstance(): PlaylistsFragment {
             val args = Bundle()
             val fragment = PlaylistsFragment()

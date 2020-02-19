@@ -20,27 +20,32 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-
 object ArtistLoader {
     private fun getSongLoaderSortOrder(context: Context): String {
-        return PreferenceUtil.getInstance(context).artistSortOrder + ", " + PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " + PreferenceUtil.getInstance(context).albumSongSortOrder
+        return PreferenceUtil.getInstance(context).artistSortOrder + ", " + PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " + PreferenceUtil.getInstance(
+            context
+        ).albumSongSortOrder
     }
 
     fun getAllArtists(context: Context): ArrayList<Artist> {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+        val songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
                 context,
                 null, null,
-                getSongLoaderSortOrder(context))
+                getSongLoaderSortOrder(context)
+            )
         )
         return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
 
     fun getArtists(context: Context, query: String): ArrayList<Artist> {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+        val songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
                 context,
                 AudioColumns.ARTIST + " LIKE ?",
                 arrayOf("%$query%"),
-                getSongLoaderSortOrder(context))
+                getSongLoaderSortOrder(context)
+            )
         )
         return splitIntoArtists(AlbumLoader.splitIntoAlbums(songs))
     }
@@ -66,12 +71,15 @@ object ArtistLoader {
         return album
     }
 
+    @JvmStatic
     fun getArtist(context: Context, artistId: Int): Artist {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+        val songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
                 context,
                 AudioColumns.ARTIST_ID + "=?",
                 arrayOf(artistId.toString()),
-                getSongLoaderSortOrder(context))
+                getSongLoaderSortOrder(context)
+            )
         )
         return Artist(AlbumLoader.splitIntoAlbums(songs))
     }

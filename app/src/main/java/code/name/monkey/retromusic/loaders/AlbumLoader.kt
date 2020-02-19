@@ -19,8 +19,7 @@ import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Comparator
 
 
 /**
@@ -41,7 +40,7 @@ object AlbumLoader {
         )
         return splitIntoAlbums(songs)
     }
-
+    @JvmStatic
     fun getAlbum(
             context: Context,
             albumId: Int

@@ -137,7 +137,7 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
     companion object {
         @JvmField
         val TAG: String = PlayingQueueFragment::class.java.simpleName
-
+        @JvmStatic
         fun newInstance(): PlayingQueueFragment {
             return PlayingQueueFragment()
         }

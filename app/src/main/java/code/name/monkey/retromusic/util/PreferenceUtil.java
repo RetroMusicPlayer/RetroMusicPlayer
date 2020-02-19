@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.activities.MainActivity;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
@@ -583,14 +582,6 @@ public final class PreferenceUtil {
 
     public final int getLastChangelogVersion() {
         return mPreferences.getInt(LAST_CHANGELOG_VERSION, -1);
-    }
-
-    public final int getLastMusicChooser() {
-        return mPreferences.getInt(LAST_MUSIC_CHOOSER, MainActivity.HOME);
-    }
-
-    public void setLastMusicChooser(int value) {
-        mPreferences.edit().putInt(LAST_MUSIC_CHOOSER, value).apply();
     }
 
     public final int getLastPage() {

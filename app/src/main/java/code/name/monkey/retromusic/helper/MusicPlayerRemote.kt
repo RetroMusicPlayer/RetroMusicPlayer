@@ -44,7 +44,7 @@ object MusicPlayerRemote {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
-
+    @JvmStatic
     val isPlaying: Boolean
         get() = musicService != null && musicService!!.isPlaying
 
@@ -91,7 +91,7 @@ object MusicPlayerRemote {
         get() = if (musicService != null) {
             musicService!!.repeatMode
         } else MusicService.REPEAT_MODE_NONE
-
+    @JvmStatic
     val shuffleMode: Int
         get() = if (musicService != null) {
             musicService!!.shuffleMode
@@ -207,6 +207,7 @@ object MusicPlayerRemote {
     /**
      * Async
      */
+    @JvmStatic
     fun openQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean) {
         if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
             musicService?.openQueue(queue, startPosition, startPlaying)
@@ -218,6 +219,7 @@ object MusicPlayerRemote {
     /**
      * Async
      */
+    @JvmStatic
     fun openAndShuffleQueue(queue: List<Song>, startPlaying: Boolean) {
         var startPosition = 0
         if (queue.isNotEmpty()) {
@@ -388,7 +390,7 @@ object MusicPlayerRemote {
         }
         return false
     }
-
+    @JvmStatic
     fun playFromUri(uri: Uri) {
         if (musicService != null) {
 

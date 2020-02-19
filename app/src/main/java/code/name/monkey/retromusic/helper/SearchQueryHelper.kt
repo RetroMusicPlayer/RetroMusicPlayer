@@ -20,8 +20,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
-import java.util.*
-
+import java.util.ArrayList
 
 object SearchQueryHelper {
     private const val TITLE_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.TITLE + ") = ?"
@@ -29,7 +28,7 @@ object SearchQueryHelper {
     private const val ARTIST_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.ARTIST + ") = ?"
     private const val AND = " AND "
     var songs = ArrayList<Song>()
-
+    @JvmStatic
     fun getSongs(context: Context, extras: Bundle): ArrayList<Song> {
         val query = extras.getString(SearchManager.QUERY, null)
         val artistName = extras.getString(MediaStore.EXTRA_MEDIA_ARTIST, null)
@@ -38,42 +37,79 @@ object SearchQueryHelper {
 
         var songs = ArrayList<Song>()
         if (artistName != null && albumName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), albumName.toLowerCase(), titleName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION,
+                    arrayOf(artistName.toLowerCase(), albumName.toLowerCase(), titleName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
         if (artistName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION + AND + TITLE_SELECTION, arrayOf(artistName.toLowerCase(), titleName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ARTIST_SELECTION + AND + TITLE_SELECTION,
+                    arrayOf(artistName.toLowerCase(), titleName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
         if (albumName != null && titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION + AND + TITLE_SELECTION, arrayOf(albumName.toLowerCase(), titleName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ALBUM_SELECTION + AND + TITLE_SELECTION,
+                    arrayOf(albumName.toLowerCase(), titleName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
         if (artistName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(artistName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ARTIST_SELECTION,
+                    arrayOf(artistName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
         if (albumName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(albumName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ALBUM_SELECTION,
+                    arrayOf(albumName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
         if (titleName != null) {
-            songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(titleName.toLowerCase())))
+            songs = SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    TITLE_SELECTION,
+                    arrayOf(titleName.toLowerCase())
+                )
+            )
         }
         if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(query.toLowerCase())))
+        songs =
+            SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(query.toLowerCase())))
 
         if (songs.isNotEmpty()) {
             return songs
@@ -87,6 +123,4 @@ object SearchQueryHelper {
             songs
         } else ArrayList()
     }
-
-
 }

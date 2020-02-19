@@ -118,7 +118,7 @@ class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAd
     companion object {
         @JvmField
         var TAG: String = AlbumsFragment::class.java.simpleName
-
+@JvmStatic
         fun newInstance(): AlbumsFragment {
             val args = Bundle()
             val fragment = AlbumsFragment()

@@ -52,7 +52,6 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        println("ViewType ${getItemViewType(position)}")
         when (getItemViewType(position)) {
             RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
