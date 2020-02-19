@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity.folders;
 
-import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,18 +18,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.common.ATHToolbarActivity;
 import code.name.monkey.appthemehelper.util.ATHUtil;
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.adapter.SongFileAdapter;
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
@@ -43,17 +37,13 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
-import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
-import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ThemedFastScroller;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
 import com.afollestad.materialcab.MaterialCab;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
@@ -71,7 +61,7 @@ import me.zhanghai.android.fastscroll.FastScroller;
 public class FoldersFragment extends AbsMainActivityFragment implements
         MainActivityFragmentCallbacks,
         CabHolder, BreadCrumbLayout.SelectionCallback, SongFileAdapter.Callbacks,
-        AppBarLayout.OnOffsetChangedListener, LoaderManager.LoaderCallbacks<List<File>> {
+        LoaderManager.LoaderCallbacks<List<File>> {
 
     public static class ListPathsAsyncTask extends
             ListingFilesDialogAsyncTask<ListPathsAsyncTask.LoadingInfo, String, String[]> {
@@ -327,8 +317,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private SongFileAdapter adapter;
 
-    private AppBarLayout appBarLayout;
-
     private BreadCrumbLayout breadCrumbs;
 
     private MaterialCab cab;
@@ -350,9 +338,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private RecyclerView recyclerView;
 
-    private Toolbar toolbar;
-
-    private MaterialCardView toolbarContainer;
 
     public static File getDefaultStartDirectory() {
         File musicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
@@ -435,12 +420,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onDestroyView() {
-        appBarLayout.removeOnOffsetChangedListener(this);
-        super.onDestroyView();
-    }
-
-    @Override
     public boolean handleBackPress() {
         if (cab != null && cab.isActive()) {
             cab.finish();
@@ -463,8 +442,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_folders, menu);
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(getActivity(), toolbar, menu,
-                ATHToolbarActivity.getToolbarBackgroundColor(toolbar));
     }
 
     @Override
@@ -591,13 +568,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     @Override
-    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-        recyclerView.setPadding(recyclerView.getPaddingLeft(), recyclerView.getPaddingTop(),
-                recyclerView.getPaddingRight(), DensityUtil.dip2px(requireContext(), 52f) +
-                        this.appBarLayout.getTotalScrollRange() + verticalOffset);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_go_to_start_directory:
@@ -617,11 +587,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onPrepareOptionsMenu(Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(getActivity(), toolbar);
-    }
 
     @NonNull
     @Override
@@ -661,11 +626,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void initViews(View view) {
         coordinatorLayout = view.findViewById(R.id.coordinatorLayout);
-        toolbarContainer = view.findViewById(R.id.toolbarContainer);
         recyclerView = view.findViewById(R.id.recyclerView);
-        appBarLayout = view.findViewById(R.id.appBarLayout);
         breadCrumbs = view.findViewById(R.id.breadCrumbs);
-        toolbar = view.findViewById(R.id.toolbar);
         empty = view.findViewById(android.R.id.empty);
         emojiText = view.findViewById(R.id.emptyEmoji);
     }
@@ -703,7 +665,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAdapter() {
-        adapter = new SongFileAdapter(getMainActivity(), new LinkedList<File>(), R.layout.item_list,
+        adapter = new SongFileAdapter(getMainActivity(), new LinkedList<>(), R.layout.item_list,
                 this, this);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -717,26 +679,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpAppbarColor() {
-        int primaryColor = ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface);
-        getMainActivity().setSupportActionBar(toolbar);
-        toolbar.setBackgroundTintList(ColorStateList.valueOf(primaryColor));
-        toolbarContainer.setCardBackgroundColor(ColorStateList.valueOf(primaryColor));
-        toolbar.setNavigationIcon(R.drawable.ic_menu_white_24dp);
-        toolbar.setNavigationOnClickListener(v -> {
-            showMainMenu(OptionsSheetDialogFragment.FOLDER);
-        });
         breadCrumbs.setActivatedContentColor(
                 ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorPrimary));
         breadCrumbs.setDeactivatedContentColor(
                 ATHUtil.INSTANCE.resolveColor(requireContext(), android.R.attr.textColorSecondary));
-        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> getMainActivity()
-                .setLightStatusbar(!ATHUtil.INSTANCE.isWindowBackgroundDark(requireContext())));
-        toolbar.setOnClickListener(v -> {
-            ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(getMainActivity(), toolbarContainer,
-                            getString(R.string.transition_toolbar));
-            NavigationUtil.goToSearch(getMainActivity(), options);
-        });
     }
 
     private void setUpBreadCrumbs() {
@@ -745,7 +691,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
 
     private void setUpRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        appBarLayout.addOnOffsetChangedListener(this);
         FastScroller fastScroller = ThemedFastScroller.INSTANCE.create(recyclerView);
         recyclerView.setOnApplyWindowInsetsListener(
                 new ScrollingViewOnApplyWindowInsetsListener(recyclerView, fastScroller));

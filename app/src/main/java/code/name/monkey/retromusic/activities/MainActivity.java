@@ -49,6 +49,7 @@ import code.name.monkey.retromusic.fragments.mainactivity.GenresFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.PlayingQueueFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.PlaylistsFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.SongsFragment;
+import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SearchQueryHelper;
@@ -65,6 +66,7 @@ import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.AppRater;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialcab.MaterialCab.Callback;
@@ -91,6 +93,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     MainActivityFragmentCallbacks currentFragment;
 
     private boolean blockRequestPermissions = false;
+
+    private MaterialCab cab;
 
     private AppBarLayout mAppBarLayout;
 
@@ -134,7 +138,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         });
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
+            setMusicChooser(PreferenceUtil.getInstance(this).getLastMusicChooser());
         } else {
             restoreCurrentFragment();
         }
@@ -187,6 +191,15 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
 
     public int getTotalAppBarScrollingRange() {
         return mAppBarLayout.getTotalScrollRange();
+    }
+
+    @Override
+    public boolean handleBackPress() {
+        if (cab != null && cab.isActive()) {
+            cab.finish();
+            return true;
+        }
+        return super.handleBackPress() || (currentFragment != null && currentFragment.handleBackPress());
     }
 
     @Override
@@ -275,7 +288,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 key.equals(PreferenceUtil.USER_NAME) || key.equals(PreferenceUtil.TOGGLE_FULL_SCREEN) ||
                 key.equals(PreferenceUtil.TOGGLE_VOLUME) || key.equals(PreferenceUtil.ROUND_CORNERS) ||
                 key.equals(PreferenceUtil.CAROUSEL_EFFECT) || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID ||
-                key == PreferenceUtil.TOGGLE_GENRE || key == PreferenceUtil.BANNER_IMAGE_PATH ||
+                key == PreferenceUtil.TOGGLE_GENRE || key.equals(PreferenceUtil.BANNER_IMAGE_PATH) ||
                 key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART ||
                 key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE ||
                 key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS ||
@@ -290,7 +303,17 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     @NotNull
     @Override
     public MaterialCab openCab(final int menuRes, @NotNull final Callback callback) {
-        return null;
+        if (cab != null && cab.isActive()) {
+            cab.finish();
+        }
+        cab = new MaterialCab(this, R.id.cab_stub)
+                .setMenu(menuRes)
+                .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+                .setBackgroundColor(
+                        RetroColorUtil.shiftBackgroundColorForLightText(
+                                ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface)))
+                .start(callback);
+        return cab;
     }
 
     public void removeOnAppBarOffsetChangedListener(
@@ -298,10 +321,40 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         mAppBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
+    public void setCurrentFragment(Fragment fragment, String tag) {
+        String currentTag = null;
+        if (getSupportFragmentManager().findFragmentByTag(tag) != null) {
+            currentTag = getSupportFragmentManager().findFragmentByTag(tag).getTag();
+        }
+
+        if (!tag.equals(currentTag)) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, fragment, tag)
+                    .commit();
+            currentFragment = (MainActivityFragmentCallbacks) fragment;
+        }
+    }
+
+    public void setMusicChooser(final int option) {
+        PreferenceUtil.getInstance(this).setLastMusicChooser(option);
+        if (option == OptionsSheetDialogFragment.FOLDER) {
+            setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG);
+        } else {
+            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
+        }
+    }
+
     @NotNull
     @Override
     protected View createContentView() {
         return wrapSlidingMusicPanel(R.layout.activity_main_content);
+    }
+
+    @Override
+    protected void requestPermissions() {
+        if (!blockRequestPermissions) {
+            super.requestPermissions();
+        }
     }
 
     private void checkShowChangelog() {
@@ -563,20 +616,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         }
     }
 
-    private void setCurrentFragment(Fragment fragment, String tag) {
-        String currentTag = null;
-        if (getSupportFragmentManager().findFragmentByTag(tag) != null) {
-            currentTag = getSupportFragmentManager().findFragmentByTag(tag).getTag();
-        }
-
-        if (!tag.equals(currentTag)) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, fragment, tag)
-                    .commit();
-            currentFragment = (MainActivityFragmentCallbacks) fragment;
-        }
-    }
-
     private void setUpGridSizeMenu(@NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
             @NonNull SubMenu gridSizeMenu) {
 
@@ -702,7 +741,17 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                     .makeSceneTransitionAnimation(this, mToolbarContainer, getString(R.string.transition_toolbar));
             NavigationUtil.goToSearch(this, options);
         });
+
         mToolbar.setNavigationOnClickListener(
-                v -> OptionsSheetDialogFragment.newInstance().show(getSupportFragmentManager(), "Main_Menu"));
+                v -> {
+                    Fragment fragment = getCurrentFragment();
+                    if (fragment instanceof FoldersFragment) {
+                        OptionsSheetDialogFragment.newInstance(OptionsSheetDialogFragment.FOLDER)
+                                .show(getSupportFragmentManager(), "Main_Menu");
+                    } else {
+                        OptionsSheetDialogFragment.newInstance(OptionsSheetDialogFragment.LIBRARY)
+                                .show(getSupportFragmentManager(), "Main_Menu");
+                    }
+                });
     }
 }
