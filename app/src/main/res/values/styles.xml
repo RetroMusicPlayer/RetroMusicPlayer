@@ -183,9 +183,4 @@
         <item name="android:windowBackground">@drawable/splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
-
-    <style name="RetroPopupTheme">
-        <item name="android:popupBackground">@drawable/popup_background</item>
-        <item name="android:popupElevation">4dp</item>
-    </style>
 </resources>

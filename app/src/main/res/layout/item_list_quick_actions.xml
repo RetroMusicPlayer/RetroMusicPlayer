@@ -14,44 +14,33 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="16dp"
-    android:paddingEnd="0dp">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/songCount"
-        android:layout_width="match_parent"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playAction"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_weight="1"
-        android:textAppearance="@style/TextViewSubtitle1"
-        android:textStyle="bold" />
+        android:text="@string/action_play_all"
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_play_arrow_white_24dp" />
 
-
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:background="?attr/roundSelector"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_shuffle_white_24dp"
-        app:tint="?attr/colorControlNormal"
-        tools:tint="@color/black_color" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sortAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:background="?attr/roundSelector"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_sort_white_24dp"
-        app:tint="?attr/colorControlNormal"
-        tools:tint="@color/black_color" />
-
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:text="@string/shuffle"
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_shuffle_white_24dp" />
 
 </LinearLayout>

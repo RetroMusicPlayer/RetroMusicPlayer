@@ -34,6 +34,5 @@
         <!--Manual setting colors-->
         <item name="colorPrimary">@color/darkColorPrimary</item>
         <item name="colorSurface">@color/darkColorSurface</item>
-        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 </resources>
