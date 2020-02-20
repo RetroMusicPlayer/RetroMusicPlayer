@@ -34,5 +34,7 @@
         <item name="android:windowLightNavigationBar">false</item>
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
+        <item name="android:popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 </resources>

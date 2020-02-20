@@ -152,14 +152,12 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
 
     private fun setUpShuffleButton() {
         shuffleButton.setOnClickListener {
-            println("shuffleButton Click")
             MusicPlayerRemote.toggleShuffleMode()
         }
     }
 
     private fun setUpRepeatButton() {
         repeatButton.setOnClickListener {
-            println("repeatButton Click")
             MusicPlayerRemote.cycleRepeatMode()
         }
     }

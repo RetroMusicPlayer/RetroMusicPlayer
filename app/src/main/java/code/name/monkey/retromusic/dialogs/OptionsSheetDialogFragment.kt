@@ -37,8 +37,8 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
-            R.id.actionFolders -> mainActivity.setMusicChooser(MainActivity.FOLDER)
-            R.id.actionLibrary -> mainActivity.setMusicChooser(MainActivity.LIBRARY)
+            R.id.actionFolders -> mainActivity.setMusicChooser(FOLDER)
+            R.id.actionLibrary -> mainActivity.setMusicChooser(LIBRARY)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
             R.id.actionDriveMode -> NavigationUtil.gotoDriveMode(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
@@ -105,6 +105,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         @JvmField
         var FOLDER: Int = 1
 
+        @JvmStatic
         fun newInstance(selectedId: Int): OptionsSheetDialogFragment {
             val bundle = Bundle()
             bundle.putInt(WHICH_ONE, selectedId)
@@ -113,6 +114,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             return fragment
         }
 
+        @JvmStatic
         fun newInstance(): OptionsSheetDialogFragment {
             return OptionsSheetDialogFragment()
         }

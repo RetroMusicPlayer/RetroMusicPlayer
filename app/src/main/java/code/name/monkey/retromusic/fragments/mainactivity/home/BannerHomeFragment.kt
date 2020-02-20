@@ -1,26 +1,17 @@
 package code.name.monkey.retromusic.fragments.mainactivity.home
 
 import android.app.ActivityOptions
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.common.ATHToolbarActivity
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -42,7 +33,6 @@ import kotlinx.android.synthetic.main.abs_playlists.lastAdded
 import kotlinx.android.synthetic.main.abs_playlists.topPlayed
 import kotlinx.android.synthetic.main.fragment_banner_home.bannerImage
 import kotlinx.android.synthetic.main.fragment_banner_home.titleWelcome
-import kotlinx.android.synthetic.main.fragment_banner_home.toolbarContainer
 import kotlinx.android.synthetic.main.fragment_banner_home.userImage
 import kotlinx.android.synthetic.main.home_content.emptyContainer
 import kotlinx.android.synthetic.main.home_content.recyclerView
@@ -56,10 +46,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     lateinit var homePresenter: HomePresenter
 
     private lateinit var homeAdapter: HomeAdapter
-    private lateinit var toolbar: Toolbar
 
     override fun sections(sections: List<Home>) {
-        println(sections.size)
         homeAdapter.swapData(sections)
     }
 
@@ -93,7 +81,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setStatusBarColorAuto(view)
-        toolbar = view.findViewById(R.id.toolbar)
 
         bannerImage?.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(
@@ -120,8 +107,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
-        setupToolbar()
-
         userImage?.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 mainActivity,
@@ -143,24 +128,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homePresenter.loadSections()
     }
 
-    private fun setupToolbar() {
-        toolbar.apply {
-            backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
-            setNavigationIcon(R.drawable.ic_menu_white_24dp)
-            setOnClickListener {
-                val options = ActivityOptions.makeSceneTransitionAnimation(
-                    mainActivity,
-                    toolbarContainer,
-                    getString(R.string.transition_toolbar)
-                )
-                NavigationUtil.goToSearch(requireActivity(), options)
-            }
-
-        }
-        mainActivity.setSupportActionBar(toolbar)
-        toolbar.setNavigationOnClickListener { showMainMenu(OptionsSheetDialogFragment.LIBRARY) }
-    }
-
     override fun handleBackPress(): Boolean {
         return false
     }
@@ -177,35 +144,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun showEmptyView() {
         emptyContainer.show()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_search, menu)
-
-        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
-            requireActivity(),
-            toolbar,
-            menu,
-            ATHToolbarActivity.getToolbarBackgroundColor(toolbar)
-        )
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        ToolbarContentTintHelper.handleOnPrepareOptionsMenu(requireActivity(), toolbar)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_search) {
-            val options = ActivityOptions.makeSceneTransitionAnimation(
-                mainActivity,
-                toolbarContainer,
-                getString(R.string.transition_toolbar)
-            )
-            NavigationUtil.goToSearch(requireActivity(), true, options)
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun getTimeOfTheDay() {
@@ -250,6 +188,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
         const val TAG: String = "BannerHomeFragment"
 
+        @JvmStatic
         fun newInstance(): BannerHomeFragment {
             return BannerHomeFragment()
         }

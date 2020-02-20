@@ -29,7 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.activities.MainActivity;
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
@@ -153,13 +153,13 @@ public final class PreferenceUtil {
 
     private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
 
-    private static final String SONG_SORT_ORDER = "song_sort_order";
+    public static final String SONG_SORT_ORDER = "song_sort_order";
 
     private static final String ALBUM_GRID_SIZE = "album_grid_size";
 
     private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
 
-    private static final String SONG_GRID_SIZE = "song_grid_size";
+    public static final String SONG_GRID_SIZE = "song_grid_size";
 
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
 
@@ -586,7 +586,7 @@ public final class PreferenceUtil {
     }
 
     public final int getLastMusicChooser() {
-        return mPreferences.getInt(LAST_MUSIC_CHOOSER, MainActivity.HOME);
+        return mPreferences.getInt(LAST_MUSIC_CHOOSER, OptionsSheetDialogFragment.LIBRARY);
     }
 
     public void setLastMusicChooser(int value) {
