@@ -176,6 +176,8 @@
 
     <string name="changelog_summary">Changelog maintained on the Telegram channel</string>
 
+    <string name="circle">Circle</string>
+
     <string name="circular">Circular</string>
 
     <string name="classic">Classic</string>
@@ -257,6 +259,8 @@
 
     <string name="download_from_last_fm">Download from Last.fm</string>
 
+    <string name="drive_mode">Drive mode</string>
+
     <string name="edit">Edit</string>
 
     <string name="edit_cover">Edit cover</string>
@@ -282,6 +286,8 @@
     <string name="follow_system">Follow system</string>
 
     <string name="for_you">For you</string>
+
+    <string name="free">Free</string>
 
     <string name="full">Full</string>
 
@@ -358,6 +364,8 @@
     <string name="licenses">Licenses</string>
 
     <string name="light_theme_name">Clearly White</string>
+
+    <string name="listeners_label">Listeners</string>
 
     <string name="listing_files">Listing files</string>
 
@@ -510,6 +518,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Use the currently playing song album cover as the lockscreen wallpaper</string>
     <string name="pref_summary_audio_ducking">Lower the volume when a system sound is played or a notification is received</string>
     <string name="pref_summary_blacklist">The content of blacklisted folders is hidden from your library.</string>
+    <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
     <string name="pref_summary_blurred_album_art">Blur the album cover on the lockscreen. Can cause problems with third party apps and widgets</string>
     <string name="pref_summary_carousel_effect">Carousel effect for the album art in the now playing screen. Note that Card and Blur Card themes won\'t work</string>
     <string name="pref_summary_classic_notification">Use the classic notification design</string>
@@ -544,6 +553,7 @@
     <string name="pref_title_audio_ducking">Reduce volume on focus loss</string>
     <string name="pref_title_auto_download_artist_images">Auto-download artist images</string>
     <string name="pref_title_blacklist">Blacklist</string>
+    <string name="pref_title_bluetooth_playback">Bluetooth playback</string>
     <string name="pref_title_blurred_album_art">Blur album cover</string>
     <string name="pref_title_choose_equalizer">Choose equalizer</string>
     <string name="pref_title_classic_notification">Classic notification design</string>
@@ -576,6 +586,8 @@
 
     <string name="primary_color">Primary color</string>
     <string name="primary_color_desc">The primary theme color, defaults to blue grey, for now works with dark colors</string>
+
+    <string name="pro">Pro</string>
 
     <string name="pro_summary">Black theme, Now playing themes, Carousel effect and more..</string>
 
@@ -631,6 +643,7 @@
 
     <string name="retro_equalizer">Retro Music Equalizer</string>
 
+    <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
 
     <string name="saf_delete_failed">File delete failed: %s</string>
@@ -665,6 +678,8 @@
 
     <string name="scanned_files">Scanned %1$d of %2$d files.</string>
 
+    <string name="scrobbles_label">Scrobbles</string>
+
     <string name="search_hint">Search your library…</string>
 
     <string name="select_all">Select all</string>
@@ -683,6 +698,8 @@
 
     <string name="share_app">Share app</string>
 
+    <string name="share_to_stories">Share to Stories</string>
+
     <string name="shuffle">Shuffle</string>
 
     <string name="simple">Simple</string>
@@ -695,6 +712,8 @@
     <string name="small">Small album</string>
 
     <string name="social">Social</string>
+
+    <string name="social_stories">Share story</string>
 
     <string name="song">Song</string>
 
@@ -794,6 +813,8 @@
 
     <string name="virtualizer">Virtualizer</string>
 
+    <string name="volume">Volume</string>
+
     <string name="web_search">Web search</string>
 
     <string name="welcome">Welcome,</string>
@@ -817,14 +838,4 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
-    <string name="circle">Circle</string>
-    <string name="volume">Volume</string>
-    <string name="listeners_label">Listeners</string>
-    <string name="scrobbles_label">Scrobbles</string>
-    <string name="social_stories">Share story</string>
-    <string name="share_to_stories">Share to Stories</string>
-    <string name="drive_mode">Drive mode</string>
-    <string name="retro_music_player">Retro Music Player</string>
-    <string name="pro">Pro</string>
-    <string name="free">Free</string>
 </resources>

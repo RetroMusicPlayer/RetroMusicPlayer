@@ -137,6 +137,8 @@ public final class PreferenceUtil {
 
     private static final String LAST_PAGE = "last_start_page";
 
+    private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
+
     private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
 
     private static final String DEFAULT_START_PAGE = "default_start_page";
@@ -290,6 +292,10 @@ public final class PreferenceUtil {
 
     public final String autoDownloadImagesPolicy() {
         return mPreferences.getString(AUTO_DOWNLOAD_IMAGES_POLICY, "only_wifi");
+    }
+
+    public boolean bluetoothSpeaker() {
+        return mPreferences.getBoolean(BLUETOOTH_PLAYBACK, false);
     }
 
     public final boolean blurredAlbumArt() {

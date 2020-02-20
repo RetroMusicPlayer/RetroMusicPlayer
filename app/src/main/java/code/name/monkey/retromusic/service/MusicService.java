@@ -282,9 +282,9 @@ public class MusicService extends Service implements
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action = intent.getAction();
-            Log.i(TAG, "onReceive: " + action);
             if (action != null) {
-                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action) &&
+                        PreferenceUtil.getInstance(context).bluetoothSpeaker()) {
                     if (VERSION.SDK_INT >= VERSION_CODES.M) {
                         if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
                             play();
