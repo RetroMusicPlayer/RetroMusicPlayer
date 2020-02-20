@@ -547,7 +547,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 case R.id.action_song_sort_order_composer:
                     sortOrder = SongSortOrder.COMPOSER;
                     break;
-
             }
         }
 

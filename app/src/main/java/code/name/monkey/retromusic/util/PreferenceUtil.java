@@ -153,13 +153,13 @@ public final class PreferenceUtil {
 
     private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
 
-    private static final String SONG_SORT_ORDER = "song_sort_order";
+    public static final String SONG_SORT_ORDER = "song_sort_order";
 
     private static final String ALBUM_GRID_SIZE = "album_grid_size";
 
     private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
 
-    private static final String SONG_GRID_SIZE = "song_grid_size";
+    public static final String SONG_GRID_SIZE = "song_grid_size";
 
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
 

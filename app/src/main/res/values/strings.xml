@@ -307,7 +307,7 @@
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
 
-    <string name="grid_style_label"><![CDATA[Grids & Style]]></string>
+    <string name="grid_style_label">Grid style</string>
 
     <string name="hinge">Hinge</string>
 
@@ -827,4 +827,8 @@
     <string name="retro_music_player">Retro Music Player</string>
     <string name="pro">Pro</string>
     <string name="free">Free</string>
+    <plurals name="songCount">
+        <item quantity="one">%d Song</item>
+        <item quantity="other">%d Songs</item>
+    </plurals>
 </resources>

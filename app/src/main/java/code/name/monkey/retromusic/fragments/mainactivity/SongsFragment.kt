@@ -1,5 +1,7 @@
 package code.name.monkey.retromusic.fragments.mainactivity
 
+import android.content.SharedPreferences
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
@@ -18,7 +20,7 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, LinearLayoutManager>(),
-    SongView, MainActivityFragmentCallbacks {
+    SongView, MainActivityFragmentCallbacks, OnSharedPreferenceChangeListener {
 
     @Inject
     lateinit var songPresenter: SongPresenter
@@ -82,11 +84,13 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         super.onResume()
         if (adapter?.dataSet.isNullOrEmpty())
             songPresenter.loadSongs()
+        PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         songPresenter.detachView()
+        PreferenceUtil.getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun showEmptyView() {
@@ -132,5 +136,11 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun handleBackPress(): Boolean {
         return false
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        if (key == PreferenceUtil.SONG_SORT_ORDER || key == PreferenceUtil.SONG_GRID_SIZE) {
+            songPresenter.loadSongs()
+        }
     }
 }

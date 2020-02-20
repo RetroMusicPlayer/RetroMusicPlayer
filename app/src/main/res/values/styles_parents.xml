@@ -17,6 +17,8 @@
         <item name="roundSelector">@drawable/round_selector</item>
         <item name="rectSelector">@drawable/rect_selector</item>
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
+        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
+        <item name="android:popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
@@ -41,6 +43,8 @@
 
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
+        <item name="android:popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
@@ -61,6 +65,8 @@
         <item name="colorOnBackground">@color/blackColorSurface</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
+        <item name="android:popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
@@ -81,6 +87,8 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+        <item name="popupMenuStyle">@style/RetroPopupTheme</item>
+        <item name="android:popupMenuStyle">@style/RetroPopupTheme</item>
     </style>
 
 
