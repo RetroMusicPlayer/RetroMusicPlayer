@@ -57,7 +57,6 @@ import kotlinx.android.synthetic.main.activity_artist_details.artistTitle
 import kotlinx.android.synthetic.main.activity_artist_details.image
 import kotlinx.android.synthetic.main.activity_artist_details.text
 import kotlinx.android.synthetic.main.activity_artist_details.toolbar
-import java.text.DecimalFormat
 import java.util.Locale
 import javax.inject.Inject
 
@@ -281,22 +280,9 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
-    }
-
-    private fun numberFormat(count: Float): String {
-        val prefixes = arrayOf("", "K", "M", "B", "T", "P", "E")
-        var index = 0
-        var finalCount = count
-        while (finalCount / 1000 >= 1) {
-            finalCount /= 1000
-            index++
-        }
-        val decimal = DecimalFormat("#.##")
-        return String.format("%s %s", decimal.format(finalCount), prefixes[index])
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

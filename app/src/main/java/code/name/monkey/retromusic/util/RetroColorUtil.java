@@ -43,10 +43,6 @@ public class RetroColorUtil {
         return Color.HSVToColor(hsv);
     }
 
-    public static int toolbarColor(@NonNull Context context) {
-        return ATHUtil.INSTANCE.resolveColor(context, R.attr.colorButtonNormal);
-    }
-
     @Nullable
     public static Palette generatePalette(@Nullable Bitmap bitmap) {
         return bitmap == null ? null : Palette.from(bitmap).clearFilters().generate();

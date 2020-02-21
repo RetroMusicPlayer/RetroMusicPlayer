@@ -289,7 +289,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
