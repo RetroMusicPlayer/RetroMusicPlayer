@@ -13,6 +13,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -150,10 +151,12 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+
         if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
-            songInfo?.text = getSongInfo(song)
+            songInfo.text = getSongInfo(song)
+            songInfo.show()
         } else {
-            songInfo?.hide()
+            songInfo.hide()
         }
     }
 

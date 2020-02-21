@@ -287,14 +287,14 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 key.equals(PreferenceUtil.ADAPTIVE_COLOR_APP) || key.equals(PreferenceUtil.DOMINANT_COLOR) ||
                 key.equals(PreferenceUtil.USER_NAME) || key.equals(PreferenceUtil.TOGGLE_FULL_SCREEN) ||
                 key.equals(PreferenceUtil.TOGGLE_VOLUME) || key.equals(PreferenceUtil.ROUND_CORNERS) ||
-                key.equals(PreferenceUtil.CAROUSEL_EFFECT) || key == PreferenceUtil.NOW_PLAYING_SCREEN_ID ||
-                key == PreferenceUtil.TOGGLE_GENRE || key.equals(PreferenceUtil.BANNER_IMAGE_PATH) ||
-                key == PreferenceUtil.PROFILE_IMAGE_PATH || key == PreferenceUtil.CIRCULAR_ALBUM_ART ||
-                key == PreferenceUtil.KEEP_SCREEN_ON || key == PreferenceUtil.TOGGLE_SEPARATE_LINE ||
-                key == PreferenceUtil.TOGGLE_HOME_BANNER || key == PreferenceUtil.TOGGLE_ADD_CONTROLS ||
-                key == PreferenceUtil.ALBUM_COVER_STYLE || key == PreferenceUtil.HOME_ARTIST_GRID_STYLE ||
-                key == PreferenceUtil.ALBUM_COVER_TRANSFORM || key == PreferenceUtil.DESATURATED_COLOR ||
-                key == PreferenceUtil.TAB_TEXT_MODE || key == PreferenceUtil.LIBRARY_CATEGORIES
+                key.equals(PreferenceUtil.CAROUSEL_EFFECT) || key.equals(PreferenceUtil.NOW_PLAYING_SCREEN_ID) ||
+                key.equals(PreferenceUtil.TOGGLE_GENRE) || key.equals(PreferenceUtil.BANNER_IMAGE_PATH) ||
+                key.equals(PreferenceUtil.PROFILE_IMAGE_PATH) || key.equals(PreferenceUtil.CIRCULAR_ALBUM_ART) ||
+                key.equals(PreferenceUtil.KEEP_SCREEN_ON) || key.equals(PreferenceUtil.TOGGLE_SEPARATE_LINE) ||
+                key.equals(PreferenceUtil.TOGGLE_HOME_BANNER) || key.equals(PreferenceUtil.TOGGLE_ADD_CONTROLS) ||
+                key.equals(PreferenceUtil.ALBUM_COVER_STYLE) || key.equals(PreferenceUtil.HOME_ARTIST_GRID_STYLE) ||
+                key.equals(PreferenceUtil.ALBUM_COVER_TRANSFORM) || key.equals(PreferenceUtil.DESATURATED_COLOR) ||
+                key.equals(PreferenceUtil.TAB_TEXT_MODE) || key.equals(PreferenceUtil.LIBRARY_CATEGORIES)
         ) {
             postRecreate();
         }
@@ -321,7 +321,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         mAppBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    public void setCurrentFragment(Fragment fragment, String tag) {
+    public void setCurrentFragment(@NonNull Fragment fragment, @NonNull String tag) {
         String currentTag = null;
         if (getSupportFragmentManager().findFragmentByTag(tag) != null) {
             currentTag = getSupportFragmentManager().findFragmentByTag(tag).getTag();
@@ -547,6 +547,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 case R.id.action_song_sort_order_composer:
                     sortOrder = SongSortOrder.COMPOSER;
                     break;
+                case R.id.action_song_sort_order_date_modified:
+                    sortOrder = SongSortOrder.SONG_DATE_MODIFIED;
+                    break;
             }
         }
 
@@ -699,6 +702,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             sortOrderMenu.add(0, R.id.action_song_sort_order_date, 5, R.string.sort_order_date)
                     .setChecked(currentSortOrder.equals(SongSortOrder.SONG_DATE));
             sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 6, R.string.sort_order_composer)
+                    .setChecked(currentSortOrder.equals(SongSortOrder.COMPOSER));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_date_modified, 6, R.string.sort_order_date_modified)
                     .setChecked(currentSortOrder.equals(SongSortOrder.COMPOSER));
         }
 

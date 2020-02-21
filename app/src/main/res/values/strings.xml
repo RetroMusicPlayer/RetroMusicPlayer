@@ -727,6 +727,7 @@
     <string name="sort_order_artist">Artist</string>
     <string name="sort_order_composer">Composer</string>
     <string name="sort_order_date">Date</string>
+    <string name="sort_order_date_modified">Date modified</string>
     <string name="sort_order_year">Year</string>
     <string name="sort_order_z_a">Descending</string>
 

@@ -23,6 +23,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
@@ -111,10 +112,12 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title
         text.text = song.artistName
+
         if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
-            songInfo?.text = getSongInfo(song)
+            songInfo.text = getSongInfo(song)
+            songInfo.show()
         } else {
-            songInfo?.hide()
+            songInfo.hide()
         }
 
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)

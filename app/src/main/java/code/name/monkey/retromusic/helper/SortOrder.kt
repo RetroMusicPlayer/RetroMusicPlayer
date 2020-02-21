@@ -92,7 +92,7 @@ class SortOrder {
             const val SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC"
 
             /* Song sort modified date */
-            const val SONG_MODIFIED = MediaStore.Audio.Media.DATE_MODIFIED + " DESC"
+            const val SONG_DATE_MODIFIED = MediaStore.Audio.Media.DATE_MODIFIED + " DESC"
 
             /* Song sort order composer*/
             const val COMPOSER = MediaStore.Audio.Media.COMPOSER

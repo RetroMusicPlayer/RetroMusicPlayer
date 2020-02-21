@@ -14,6 +14,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -135,9 +136,10 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
 
         if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
-            songInfo?.text = getSongInfo(song)
+            songInfo.text = getSongInfo(song)
+            songInfo.show()
         } else {
-            songInfo?.hide()
+            songInfo.hide()
         }
     }
 
