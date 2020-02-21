@@ -14,8 +14,6 @@
 
 package code.name.monkey.retromusic.activities;
 
-import static code.name.monkey.appthemehelper.util.ATHUtil.INSTANCE;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -23,6 +21,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -49,7 +48,7 @@ public class LicenseActivity extends AbsBaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorSurface));
+        toolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();
@@ -62,8 +61,8 @@ public class LicenseActivity extends AbsBaseActivity {
             in.close();
 
             // Inject color values for WebView body background and links
-            final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorSurface,
+            final boolean isDark = ATHUtil.INSTANCE.isWindowBackgroundDark(this);
+            final String backgroundColor = colorToCSS(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface,
                     Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()

@@ -71,7 +71,7 @@ object MusicPlayerRemote {
                 musicService!!.position = position
             }
         }
-
+    @JvmStatic
     val playingQueue: ArrayList<Song>
         get() = if (musicService != null) {
             musicService?.playingQueue as ArrayList<Song>
@@ -390,6 +390,7 @@ object MusicPlayerRemote {
         }
         return false
     }
+
     @JvmStatic
     fun playFromUri(uri: Uri) {
         if (musicService != null) {

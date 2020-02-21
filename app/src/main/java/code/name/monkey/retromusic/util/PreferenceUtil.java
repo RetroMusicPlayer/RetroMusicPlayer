@@ -36,6 +36,7 @@ import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragmen
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
+import code.name.monkey.retromusic.model.CategoryInfo.Category;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
@@ -491,14 +492,15 @@ public final class PreferenceUtil {
 
     @NonNull
     public List<CategoryInfo> getDefaultLibraryCategoryInfos() {
-        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(7);
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.HOME, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.SONGS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ALBUMS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ARTISTS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, false));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.QUEUE, false));
+        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(8);
+        defaultCategoryInfos.add(new CategoryInfo(Category.HOME, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.SONGS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.ALBUMS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.ARTISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.PLAYLISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.GENRES, false));
+        defaultCategoryInfos.add(new CategoryInfo(Category.QUEUE, false));
+        defaultCategoryInfos.add(new CategoryInfo(Category.FOLDER, false));
         return defaultCategoryInfos;
     }
 

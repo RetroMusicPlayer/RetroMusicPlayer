@@ -37,8 +37,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
-            R.id.actionFolders -> mainActivity.setMusicChooser(FOLDER)
-            R.id.actionLibrary -> mainActivity.setMusicChooser(LIBRARY)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
             R.id.actionDriveMode -> NavigationUtil.gotoDriveMode(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
@@ -47,8 +45,6 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private lateinit var actionSettings: OptionMenuItemView
-    private lateinit var actionLibrary: OptionMenuItemView
-    private lateinit var actionFolders: OptionMenuItemView
     private lateinit var actionRate: OptionMenuItemView
     private lateinit var actionDriveMode: OptionMenuItemView
     private lateinit var materialDialog: MaterialDialog
@@ -58,20 +54,10 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
         actionRate = layout.findViewById(R.id.actionRate)
-        actionLibrary = layout.findViewById(R.id.actionLibrary)
-        actionFolders = layout.findViewById(R.id.actionFolders)
         actionDriveMode = layout.findViewById(R.id.actionDriveMode)
-
-
-        when (arguments?.getInt(WHICH_ONE)) {
-            LIBRARY -> actionLibrary.isSelected = true
-            FOLDER -> actionFolders.isSelected = true
-        }
 
         actionSettings.setOnClickListener(this)
         actionRate.setOnClickListener(this)
-        actionLibrary.setOnClickListener(this)
-        actionFolders.setOnClickListener(this)
         actionDriveMode.setOnClickListener(this)
 
         if (MusicPlayerRemote.playingQueue.isEmpty()) {

@@ -159,8 +159,7 @@ public final class ToolbarContentTintHelper {
                                         radioButtonField.setAccessible(true);
 
                                         final boolean isDark = !ColorUtil.INSTANCE.isColorLight(
-                                                ATHUtil.INSTANCE
-                                                        .resolveColor(context, android.R.attr.windowBackground));
+                                                ATHUtil.INSTANCE.resolveColor(context, android.R.attr.windowBackground));
 
                                         for (int i = 0; i < listView.getChildCount(); i++) {
                                             View v = listView.getChildAt(i);

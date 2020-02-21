@@ -207,11 +207,21 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         getMenuInflater().inflate(R.menu.menu_main, menu);
         if (isPlaylistPage()) {
             menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
-                    .setIcon(R.drawable.ic_playlist_add_white_24dp).setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                    .setIcon(R.drawable.ic_playlist_add_white_24dp)
+                    .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         if (isHomePage()) {
             menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
-                    .setIcon(R.drawable.ic_mic_white_24dp).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                    .setIcon(R.drawable.ic_mic_white_24dp)
+                    .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        }
+        if (isFolderPage()) {
+            menu.add(0, R.id.action_scan, 0, R.string.scan_media)
+                    .setIcon(R.drawable.ic_scanner_white_24dp)
+                    .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+            menu.add(0, R.id.action_go_to_start_directory, 0, R.string.action_go_to_start_directory)
+                    .setIcon(R.drawable.ic_bookmark_music_white_24dp)
+                    .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         Fragment fragment = getCurrentFragment();
         if (fragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment) {
@@ -562,6 +572,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         return false;
     }
 
+    private boolean isFolderPage() {
+        return getSupportFragmentManager().findFragmentByTag(FoldersFragment.TAG) instanceof FoldersFragment;
+    }
+
     private boolean isHomePage() {
         return getSupportFragmentManager().findFragmentByTag(BannerHomeFragment.TAG) instanceof BannerHomeFragment;
     }
@@ -610,6 +624,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 break;
             case R.id.action_song:
                 setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG);
+                break;
+            case R.id.action_folder:
+                setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG);
                 break;
             default:
             case R.id.action_home:

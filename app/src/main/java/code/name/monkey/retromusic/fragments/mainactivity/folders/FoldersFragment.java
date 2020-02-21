@@ -7,11 +7,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -37,6 +36,7 @@ import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
 import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
+import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
@@ -392,7 +392,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getMainActivity().setBottomBarVisibility(View.GONE);
 
         if (savedInstanceState == null) {
             //noinspection ConstantConditions
@@ -436,12 +435,6 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     @Override
     public Loader<List<File>> onCreateLoader(int id, Bundle args) {
         return new AsyncFileLoader(this);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_folders, menu);
     }
 
     @Override
@@ -587,6 +580,17 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onQueueChanged() {
+        super.onQueueChanged();
+        checkForPadding();
+    }
+
+    @Override
+    public void onServiceConnected() {
+        super.onServiceConnected();
+        checkForPadding();
+    }
 
     @NonNull
     @Override
@@ -601,6 +605,13 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                         ATHUtil.INSTANCE.resolveColor(requireContext(), R.attr.colorSurface)))
                 .start(callback);
         return cab;
+    }
+
+    private void checkForPadding() {
+        final int count = adapter.getItemCount();
+        final MarginLayoutParams params = (MarginLayoutParams) coordinatorLayout.getLayoutParams();
+        params.bottomMargin = count > 0 && !MusicPlayerRemote.getPlayingQueue().isEmpty() ? DensityUtil
+                .dip2px(requireContext(), 104f) : DensityUtil.dip2px(requireContext(), 54f);
     }
 
     private void checkIsEmpty() {
@@ -672,6 +683,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             public void onChanged() {
                 super.onChanged();
                 checkIsEmpty();
+                checkForPadding();
             }
         });
         recyclerView.setAdapter(adapter);
