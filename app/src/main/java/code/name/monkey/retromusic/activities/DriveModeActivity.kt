@@ -159,6 +159,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         super.onPlayStateChanged()
         updatePlayPauseDrawableState()
     }
+
     override fun onServiceConnected() {
         super.onServiceConnected()
         updatePlayPauseDrawableState()

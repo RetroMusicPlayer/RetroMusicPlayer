@@ -53,8 +53,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/close"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_margin="16dp"
         android:background="@drawable/color_circle_gradient"
         android:backgroundTint="@color/semi_transparent"
@@ -65,8 +65,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/songFavourite"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_margin="16dp"
         android:background="@drawable/color_circle_gradient"
         android:backgroundTint="@color/semi_transparent"
@@ -77,15 +77,15 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/playPauseButton"
-        android:layout_width="112dp"
-        android:layout_height="112dp"
-        android:layout_marginBottom="42dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:background="?roundSelector"
         android:src="@drawable/ic_pause_white_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/repeatButton"
+        app:layout_constraintBottom_toBottomOf="@id/previousButton"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/previousButton" />
+        app:layout_constraintStart_toEndOf="@+id/previousButton"
+        app:layout_constraintTop_toTopOf="@+id/previousButton" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/nextButton"
@@ -93,7 +93,7 @@
         android:layout_height="72dp"
         android:background="?roundSelector"
         app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shuffleButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
@@ -104,24 +104,25 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:background="?roundSelector"
-        app:layout_constraintBottom_toBottomOf="@+id/playPauseButton"
+        app:layout_constraintBottom_toBottomOf="@+id/repeatButton"
         app:layout_constraintEnd_toStartOf="@+id/playPauseButton"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/playPauseButton"
+        app:layout_constraintStart_toEndOf="@+id/repeatButton"
+        app:layout_constraintTop_toTopOf="@+id/repeatButton"
         app:srcCompat="@drawable/ic_skip_previous_white_24dp" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/repeatButton"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:layout_marginBottom="32dp"
         android:background="?roundSelector"
-        app:layout_constraintBottom_toBottomOf="@+id/image"
-        app:layout_constraintEnd_toStartOf="@+id/shuffleButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/previousButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_repeat_white_24dp" />
+        app:layout_constraintTop_toBottomOf="@id/progressSlider"
+        app:srcCompat="@drawable/ic_repeat_white_24dp"
+        tools:layout_editor_absoluteY="240dp" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -129,29 +130,32 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:background="?roundSelector"
-        app:layout_constraintBottom_toBottomOf="@+id/repeatButton"
+        app:layout_constraintBottom_toBottomOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/repeatButton"
-        app:layout_constraintTop_toTopOf="@+id/repeatButton"
+        app:layout_constraintStart_toEndOf="@+id/nextButton"
+        app:layout_constraintTop_toTopOf="@+id/nextButton"
         app:srcCompat="@drawable/ic_shuffle_white_24dp" />
 
     <LinearLayout
         android:id="@+id/titleContainer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/progressSlider"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/close">
+        app:layout_constraintTop_toBottomOf="@+id/songFavourite">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="3"
+            android:maxLines="1"
             android:textAppearance="@style/TextViewHeadline5"
             android:textColor="@color/md_white_1000"
             android:textStyle="bold"
@@ -161,9 +165,9 @@
             android:id="@+id/songText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:gravity="center"
-            android:layout_marginTop="4dp"
-            android:maxLines="3"
+            android:maxLines="1"
             android:textAppearance="@style/TextViewHeadline6"
             android:textColor="@color/md_grey_200"
             tools:text="@tools:sample/lorem/random" />
@@ -182,8 +186,8 @@
         android:splitTrack="false"
         android:thumb="@drawable/switch_thumb_material"
         app:layout_constraintBottom_toTopOf="@id/songCurrentProgress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/shuffleButton"
+        app:layout_constraintStart_toStartOf="@id/repeatButton"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 
@@ -195,7 +199,7 @@
         android:singleLine="true"
         android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/repeatButton"
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
@@ -207,7 +211,7 @@
         android:singleLine="true"
         android:textColor="@color/md_white_1000"
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/shuffleButton"
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
