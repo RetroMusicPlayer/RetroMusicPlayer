@@ -701,12 +701,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                     .setChecked(currentSortOrder.equals(SongSortOrder.SONG_YEAR));
             sortOrderMenu.add(0, R.id.action_song_sort_order_date, 5, R.string.sort_order_date)
                     .setChecked(currentSortOrder.equals(SongSortOrder.SONG_DATE));
-            sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 6, R.string.sort_order_composer)
-                    .setChecked(currentSortOrder.equals(SongSortOrder.COMPOSER));
             sortOrderMenu.add(0, R.id.action_song_sort_order_date_modified, 6, R.string.sort_order_date_modified)
+                    .setChecked(currentSortOrder.equals(SongSortOrder.SONG_DATE_MODIFIED));
+            sortOrderMenu.add(0, R.id.action_song_sort_order_composer, 7, R.string.sort_order_composer)
                     .setChecked(currentSortOrder.equals(SongSortOrder.COMPOSER));
         }
-
         sortOrderMenu.setGroupCheckable(0, true, true);
     }
 
