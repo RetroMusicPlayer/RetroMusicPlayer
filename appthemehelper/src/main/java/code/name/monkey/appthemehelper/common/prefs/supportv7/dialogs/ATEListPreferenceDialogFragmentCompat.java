@@ -75,12 +75,4 @@ public class ATEListPreferenceDialogFragmentCompat extends ATEPreferenceDialogFr
             }
         }
     }
-
-   /* @Override
-    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-        mClickedDialogEntryIndex = which;
-        onClick(dialog, DialogAction.POSITIVE);
-        dismiss();
-        return true;
-    }*/
 }

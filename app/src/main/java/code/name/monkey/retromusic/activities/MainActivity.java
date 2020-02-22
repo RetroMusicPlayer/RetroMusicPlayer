@@ -26,6 +26,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -36,6 +37,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.transition.TransitionManager;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -72,6 +74,7 @@ import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialcab.MaterialCab.Callback;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
 import java.util.ArrayList;
 import java.util.List;
 import org.jetbrains.annotations.NotNull;
@@ -97,6 +100,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private MaterialCab cab;
 
     private AppBarLayout mAppBarLayout;
+
+    private MaterialTextView mAppTitle;
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -144,6 +149,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         }
 
         mToolbarContainer = findViewById(R.id.toolbarContainer);
+        mAppTitle = findViewById(R.id.appTitle);
         mToolbar = findViewById(R.id.toolbar);
         mAppBarLayout = findViewById(R.id.appBarLayout);
 
@@ -752,6 +758,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     }
 
     private void setupToolbar() {
+        setTitle(null);
         mToolbar.setBackgroundColor(Color.TRANSPARENT);
         mToolbarContainer.setCardBackgroundColor(
                 ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface)));
@@ -773,5 +780,15 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                                 .show(getSupportFragmentManager(), "Main_Menu");
                     }
                 });
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                TransitionManager.beginDelayedTransition(mToolbar);
+                Log.i(TAG, "run: " + Thread.currentThread().getName());
+                mAppTitle.setVisibility(View.GONE);
+                setTitle(R.string.action_search);
+            }
+        }, 1500);
     }
 }

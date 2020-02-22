@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/imageContainer"
             android:layout_width="0dp"

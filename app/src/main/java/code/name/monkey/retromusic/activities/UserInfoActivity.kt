@@ -14,6 +14,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -22,7 +23,6 @@ import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -30,7 +30,13 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
-import kotlinx.android.synthetic.main.activity_user_info.*
+import kotlinx.android.synthetic.main.activity_user_info.bannerImage
+import kotlinx.android.synthetic.main.activity_user_info.bannerSelect
+import kotlinx.android.synthetic.main.activity_user_info.name
+import kotlinx.android.synthetic.main.activity_user_info.nameContainer
+import kotlinx.android.synthetic.main.activity_user_info.next
+import kotlinx.android.synthetic.main.activity_user_info.toolbar
+import kotlinx.android.synthetic.main.activity_user_info.userImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,7 +55,8 @@ class UserInfoActivity : AbsBaseActivity() {
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
-        applyToolbar(toolbar)
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
 
         MaterialUtil.setTint(nameContainer, false)
         name.setText(PreferenceUtil.getInstance(this).userName)
@@ -64,7 +71,12 @@ class UserInfoActivity : AbsBaseActivity() {
             MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 cornerRadius(PreferenceUtil.getInstance(this@UserInfoActivity).dialogCorner)
                 title(text = getString(R.string.set_photo))
-                listItems(items = listOf(getString(R.string.new_profile_photo), getString(R.string.remove_profile_photo))) { _, position, _ ->
+                listItems(
+                    items = listOf(
+                        getString(R.string.new_profile_photo),
+                        getString(R.string.remove_profile_photo)
+                    )
+                ) { _, position, _ ->
                     when (position) {
                         0 -> pickNewPhoto()
                         1 -> PreferenceUtil.getInstance(this@UserInfoActivity).saveProfileImage("")
@@ -76,7 +88,12 @@ class UserInfoActivity : AbsBaseActivity() {
             MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
                 cornerRadius(PreferenceUtil.getInstance(this@UserInfoActivity).dialogCorner)
                 title(R.string.select_banner_photo)
-                listItems(items = listOf(getString(R.string.new_banner_photo), getString(R.string.remove_banner_photo)))
+                listItems(
+                    items = listOf(
+                        getString(R.string.new_banner_photo),
+                        getString(R.string.remove_banner_photo)
+                    )
+                )
                 { _, position, _ ->
                     when (position) {
                         0 -> selectBannerImage()
@@ -96,11 +113,16 @@ class UserInfoActivity : AbsBaseActivity() {
             finish()
         }
         next.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
-        ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this))))
-                .apply {
-                    next.setTextColor(this)
-                    next.iconTint = this
-                }
+        ColorStateList.valueOf(
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                ColorUtil.isColorLight(ThemeStore.accentColor(this))
+            )
+        )
+            .apply {
+                next.setTextColor(this)
+                next.iconTint = this
+            }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -143,14 +165,13 @@ class UserInfoActivity : AbsBaseActivity() {
                     try {
                         data.data?.let {
                             val bitmap = getResizedBitmap(
-                                    getBitmap(contentResolver, it),
-                                    PROFILE_ICON_SIZE
+                                getBitmap(contentResolver, it),
+                                PROFILE_ICON_SIZE
                             )
                             val profileImagePath = saveToInternalStorage(bitmap, USER_PROFILE)
                             PreferenceUtil.getInstance(this).saveProfileImage(profileImagePath)
                             loadImageFromStorage(profileImagePath)
                         }
-
                     } catch (e: IOException) {
                         e.printStackTrace()
                     }
@@ -187,8 +208,8 @@ class UserInfoActivity : AbsBaseActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val bitmap = Compressor(this@UserInfoActivity).setQuality(100)
-                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                        .compressToBitmap(File(profileImagePath, USER_BANNER))
+                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                    .compressToBitmap(File(profileImagePath, USER_BANNER))
                 withContext(Dispatchers.Main) { bannerImage.setImageBitmap(bitmap) }
             }
         }
@@ -198,11 +219,11 @@ class UserInfoActivity : AbsBaseActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.IO) {
                 val bitmap = Compressor(this@UserInfoActivity)
-                        .setMaxHeight(300)
-                        .setMaxWidth(300)
-                        .setQuality(75)
-                        .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                        .compressToBitmap(File(path, USER_PROFILE))
+                    .setMaxHeight(300)
+                    .setMaxWidth(300)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                    .compressToBitmap(File(path, USER_PROFILE))
                 withContext(Dispatchers.Main) { userImage.setImageBitmap(bitmap) }
             }
         }

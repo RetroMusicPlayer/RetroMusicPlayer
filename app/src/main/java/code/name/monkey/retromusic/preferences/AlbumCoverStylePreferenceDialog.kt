@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.preferences
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -26,13 +25,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.CARD
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.CIRCLE
@@ -45,19 +46,12 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
-class AlbumCoverStylePreference : ATEDialogPreference {
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
-        context,
-        attrs,
-        defStyleAttr,
-        defStyleRes
-    )
+class AlbumCoverStylePreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) : ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     private val mLayoutRes = R.layout.preference_dialog_now_playing_screen
 
@@ -66,7 +60,8 @@ class AlbumCoverStylePreference : ATEDialogPreference {
     }
 
     init {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorControlNormal(context), SRC_IN)
     }
 }
 

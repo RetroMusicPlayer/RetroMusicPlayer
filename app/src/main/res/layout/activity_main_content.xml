@@ -49,10 +49,17 @@
                         android:background="?attr/colorSurface"
                         app:navigationIcon="@drawable/ic_menu_white_24dp"
                         app:popupTheme="?attr/toolbarPopupTheme"
-                        app:title="@string/action_search"
                         app:titleTextAppearance="@style/TextViewHeadline6"
-                        app:titleTextColor="?android:attr/textColorSecondary"
-                        tools:ignore="UnusedAttribute" />
+                        tools:ignore="UnusedAttribute">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/appTitle"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:text="@string/app_name" />
+                    </androidx.appcompat.widget.Toolbar>
 
                     <ViewStub
                         android:id="@+id/cab_stub"

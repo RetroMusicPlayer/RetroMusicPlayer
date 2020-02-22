@@ -20,22 +20,10 @@ object ATH {
 
     @SuppressLint("CommitPrefEdits")
     fun didThemeValuesChange(context: Context, since: Long): Boolean {
-        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(ThemeStorePrefKeys.VALUES_CHANGED, -1) > since
-    }
-
-    fun setStatusbarColorAuto(activity: Activity) {
-        setStatusbarColor(activity, ThemeStore.statusBarColor(activity))
-    }
-
-    fun setStatusbarColor(activity: Activity, color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.window.statusBarColor = color
-            setLightStatusbarAuto(activity, color)
-        }
-    }
-
-    fun setLightStatusbarAuto(activity: Activity, bgColor: Int) {
-        setLightStatusbar(activity, ColorUtil.isColorLight(bgColor))
+        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(
+            ThemeStorePrefKeys.VALUES_CHANGED,
+            -1
+        ) > since
     }
 
     fun setLightStatusbar(activity: Activity, enabled: Boolean) {
@@ -84,8 +72,10 @@ object ATH {
         setActivityToolbarColor(activity, toolbar, ThemeStore.primaryColor(activity))
     }
 
-    fun setActivityToolbarColor(activity: Activity, toolbar: Toolbar?,
-                                color: Int) {
+    fun setActivityToolbarColor(
+        activity: Activity, toolbar: Toolbar?,
+        color: Int
+    ) {
         if (toolbar == null) {
             return
         }

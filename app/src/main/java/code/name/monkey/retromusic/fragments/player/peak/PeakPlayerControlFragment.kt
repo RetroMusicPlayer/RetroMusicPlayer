@@ -23,13 +23,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import android.widget.SeekBar
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -111,7 +111,7 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
             lastPlaybackControlsColor = color
             color
         } else {
-            ThemeStore.textColorSecondary(requireContext())
+            textColorSecondary(requireContext())
         }.ripAlpha()
 
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)

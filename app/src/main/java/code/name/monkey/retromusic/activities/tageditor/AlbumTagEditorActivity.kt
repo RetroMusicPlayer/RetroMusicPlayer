@@ -16,7 +16,6 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
@@ -93,8 +92,8 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private var lastFMRestClient: LastFMRestClient? = null
 
     private fun setupToolbar() {
-        applyToolbar(toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -139,10 +138,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
             )
         )
         deleteAlbumArt = false
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     private fun toastLoadingFailed() {

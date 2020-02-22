@@ -17,41 +17,34 @@ package code.name.monkey.retromusic.preferences
 import android.app.Dialog
 import android.content.Context
 import android.content.res.TypedArray
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
+class MaterialListPreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) : ListPreference(context, attrs, defStyleAttr, defStyleRes) {
 
-class MaterialListPreference : ListPreference {
     private val mLayoutRes = R.layout.ate_preference_list
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init(context)
+    init {
+        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            colorControlNormal(context),
+            SRC_IN
+        )
     }
 
     override fun getDialogLayoutResource(): Int {
@@ -80,23 +73,27 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
         val position: Int = arguments?.getInt(EXTRA_POSITION) ?: 0
         materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .title(text = materialListPreference.title.toString())
-                .positiveButton(R.string.set)
-                .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
-                .listItemsSingleChoice(items = entries, initialSelection = position, waitForPositiveButton = true) { _, index, _ ->
-                    entriesValues?.let {
-                        materialListPreference.callChangeListener(it[index])
-                        materialListPreference.setCustomValue(it[index])
-                    }
-                    entries?.let {
-                        materialListPreference.summary = it[index]
-                        val value = materialListPreference.entryValues[index].toString()
-                        if (materialListPreference.callChangeListener(value)) {
-                            materialListPreference.value = value
-                        }
-                    }
-                    dismiss()
+            .title(text = materialListPreference.title.toString())
+            .positiveButton(R.string.set)
+            .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            .listItemsSingleChoice(
+                items = entries,
+                initialSelection = position,
+                waitForPositiveButton = true
+            ) { _, index, _ ->
+                entriesValues?.let {
+                    materialListPreference.callChangeListener(it[index])
+                    materialListPreference.setCustomValue(it[index])
                 }
+                entries?.let {
+                    materialListPreference.summary = it[index]
+                    val value = materialListPreference.entryValues[index].toString()
+                    if (materialListPreference.callChangeListener(value)) {
+                        materialListPreference.value = value
+                    }
+                }
+                dismiss()
+            }
         return materialDialog
     }
 

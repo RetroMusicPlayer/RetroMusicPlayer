@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.textColorPrimary
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -86,10 +88,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         val song = MusicPlayerRemote.currentSong
         val title = SpannableString(song.title)
-        title.setSpan(ForegroundColorSpan(ThemeStore.textColorPrimary(requireContext())), 0, title.length, 0)
+        title.setSpan(ForegroundColorSpan(textColorPrimary(requireContext())), 0, title.length, 0)
 
         val text = SpannableString(song.artistName)
-        text.setSpan(ForegroundColorSpan(ThemeStore.textColorSecondary(requireContext())), 0, text.length, 0)
+        text.setSpan(ForegroundColorSpan(textColorSecondary(requireContext())), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)
 

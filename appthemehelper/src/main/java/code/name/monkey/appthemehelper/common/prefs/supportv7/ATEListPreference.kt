@@ -11,29 +11,24 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
-
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
-import androidx.preference.Preference
-import code.name.monkey.appthemehelper.util.ATHUtil
+import androidx.preference.ListPreference
+import code.name.monkey.appthemehelper.R.layout
 
-class ATEPreference @JvmOverloads constructor(
+class ATEListPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
-) : Preference(context, attrs, defStyleAttr, defStyleRes) {
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) : ListPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-            ATHUtil.resolveColor(
-                context,
-                android.R.attr.colorControlNormal
-            ), BlendModeCompat.SRC_IN
-        )
+        layoutResource = layout.ate_preference_custom_support
+        if (summary == null || summary.toString().trim { it <= ' ' }.isEmpty()) {
+            summary = "%s"
+        }
     }
 }

@@ -23,6 +23,8 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.textColorPrimary
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
@@ -216,11 +218,8 @@ class SkuDetailsAdapter(
         val titleTextColor = if (purchased) ATHUtil.resolveColor(
             donationsDialog,
             android.R.attr.textColorHint
-        ) else ThemeStore.textColorPrimary(donationsDialog)
-        val contentTextColor = if (purchased) titleTextColor else ThemeStore.textColorSecondary(
-            donationsDialog
-        )
-
+        ) else textColorPrimary(donationsDialog)
+        val contentTextColor = if (purchased) titleTextColor else textColorSecondary(donationsDialog)
 
         viewHolder.title.setTextColor(titleTextColor)
         viewHolder.text.setTextColor(contentTextColor)

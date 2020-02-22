@@ -23,10 +23,10 @@
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
-            app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:subtitleTextAppearance="@style/TextViewSubtitle1"
             app:titleMargin="0dp"
             app:titleMarginStart="0dp"
-            app:titleTextAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
             tools:subtitle="@tools:sample/full_names"
             tools:title="@tools:sample/full_names" />
 

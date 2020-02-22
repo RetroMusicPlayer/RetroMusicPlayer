@@ -159,7 +159,8 @@ public final class ToolbarContentTintHelper {
                                         radioButtonField.setAccessible(true);
 
                                         final boolean isDark = !ColorUtil.INSTANCE.isColorLight(
-                                                ATHUtil.INSTANCE.resolveColor(context, android.R.attr.windowBackground));
+                                                ATHUtil.INSTANCE
+                                                        .resolveColor(context, android.R.attr.windowBackground));
 
                                         for (int i = 0; i < listView.getChildCount(); i++) {
                                             View v = listView.getChildAt(i);
@@ -351,8 +352,9 @@ public final class ToolbarContentTintHelper {
             }
 
             //Step 3: Changing the color of title and subtitle.
-            toolbarView.setTitleTextColor(ThemeStore.Companion.textColorPrimary(activity));
-            toolbarView.setSubtitleTextColor(ThemeStore.Companion.textColorSecondary(activity));
+            toolbarView.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(activity, android.R.attr.textColorPrimary));
+            toolbarView
+                    .setSubtitleTextColor(ATHUtil.INSTANCE.resolveColor(activity, android.R.attr.textColorSecondary));
 
             //Step 4: Changing the color of the Overflow Menu icon.
             setOverflowButtonColor(activity, toolbarView, toolbarIconsColor);

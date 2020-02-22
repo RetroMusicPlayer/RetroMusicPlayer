@@ -4,8 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import androidx.annotation.*
+import androidx.annotation.AttrRes
+import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.annotation.IntRange
+import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -15,6 +19,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
  */
 class ThemeStore @SuppressLint("CommitPrefEdits")
 private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeStoreInterface {
+
     private val mEditor: SharedPreferences.Editor
 
     init {
@@ -166,8 +171,8 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
 
     override fun commit() {
         mEditor.putLong(ThemeStorePrefKeys.VALUES_CHANGED, System.currentTimeMillis())
-                .putBoolean(ThemeStorePrefKeys.IS_CONFIGURED_KEY, true)
-                .commit()
+            .putBoolean(ThemeStorePrefKeys.IS_CONFIGURED_KEY, true)
+            .commit()
     }
 
     companion object {
@@ -194,29 +199,24 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         @ColorInt
         fun primaryColor(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_PRIMARY_COLOR, ATHUtil.resolveColor(context, R.attr.colorPrimary, Color.parseColor("#455A64")))
-        }
-
-        @CheckResult
-        @ColorInt
-        fun primaryColorDark(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_PRIMARY_COLOR_DARK, ATHUtil.resolveColor(context, R.attr.colorPrimaryDark, Color.parseColor("#37474F")))
+            return prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_PRIMARY_COLOR,
+                ATHUtil.resolveColor(context, R.attr.colorPrimary, Color.parseColor("#455A64"))
+            )
         }
 
         @CheckResult
         @ColorInt
         fun accentColor(context: Context): Int {
             val desaturatedColor = prefs(context).getBoolean("desaturated_color", false)
-            val color = prefs(context).getInt(ThemeStorePrefKeys.KEY_ACCENT_COLOR, ATHUtil.resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238")))
-            return if (ATHUtil.isWindowBackgroundDark(context) && desaturatedColor) ColorUtil.desaturateColor(color, 0.4f) else color
-        }
-
-        @CheckResult
-        @ColorInt
-        fun statusBarColor(context: Context): Int {
-            return if (!coloredStatusBar(context)) {
-                Color.BLACK
-            } else prefs(context).getInt(ThemeStorePrefKeys.KEY_STATUS_BAR_COLOR, primaryColorDark(context))
+            val color = prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_ACCENT_COLOR,
+                ATHUtil.resolveColor(context, R.attr.colorAccent, Color.parseColor("#263238"))
+            )
+            return if (ATHUtil.isWindowBackgroundDark(context) && desaturatedColor) ColorUtil.desaturateColor(
+                color,
+                0.4f
+            ) else color
         }
 
         @CheckResult
@@ -225,30 +225,6 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
             return if (!coloredNavigationBar(context)) {
                 Color.BLACK
             } else prefs(context).getInt(ThemeStorePrefKeys.KEY_NAVIGATION_BAR_COLOR, primaryColor(context))
-        }
-
-        @CheckResult
-        @ColorInt
-        fun textColorPrimary(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_TEXT_COLOR_PRIMARY, ATHUtil.resolveColor(context, android.R.attr.textColorPrimary))
-        }
-
-        @CheckResult
-        @ColorInt
-        fun textColorPrimaryInverse(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_TEXT_COLOR_PRIMARY_INVERSE, ATHUtil.resolveColor(context, android.R.attr.textColorPrimaryInverse))
-        }
-
-        @CheckResult
-        @ColorInt
-        fun textColorSecondary(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_TEXT_COLOR_SECONDARY, ATHUtil.resolveColor(context, android.R.attr.textColorSecondary))
-        }
-
-        @CheckResult
-        @ColorInt
-        fun textColorSecondaryInverse(context: Context): Int {
-            return prefs(context).getInt(ThemeStorePrefKeys.KEY_TEXT_COLOR_SECONDARY_INVERSE, ATHUtil.resolveColor(context, android.R.attr.textColorSecondaryInverse))
         }
 
         @CheckResult
@@ -272,7 +248,12 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         }
 
         @SuppressLint("CommitPrefEdits")
-        fun isConfigured(context: Context, @IntRange(from = 0, to = Integer.MAX_VALUE.toLong()) version: Int): Boolean {
+        fun isConfigured(
+            context: Context, @IntRange(
+                from = 0,
+                to = Integer.MAX_VALUE.toLong()
+            ) version: Int
+        ): Boolean {
             val prefs = prefs(context)
             val lastVersion = prefs.getInt(ThemeStorePrefKeys.IS_CONFIGURED_VERSION_KEY, -1)
             if (version > lastVersion) {

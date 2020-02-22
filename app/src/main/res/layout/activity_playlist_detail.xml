@@ -24,9 +24,6 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp"
             app:liftOnScroll="true">
 
             <FrameLayout
@@ -36,7 +33,8 @@
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
-                    style="@style/Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -53,6 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
+            android:overScrollMode="never"
             android:scrollbars="none"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 

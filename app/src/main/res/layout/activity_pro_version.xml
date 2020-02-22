@@ -38,6 +38,7 @@
                     android:id="@+id/toolbar"
                     style="@style/Toolbar"
                     app:layout_collapseMode="pin"
+                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                     app:title="@string/retro_music_pro"
                     app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                     tools:ignore="UnusedAttribute" />

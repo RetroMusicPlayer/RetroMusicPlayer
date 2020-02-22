@@ -15,14 +15,15 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
 import android.content.Context
-import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import code.name.monkey.appthemehelper.R
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.BorderCircleView
+import code.name.monkey.appthemehelper.util.ATHUtil
 
 class ATEColorPreference @JvmOverloads constructor(
     context: Context,
@@ -39,7 +40,12 @@ class ATEColorPreference @JvmOverloads constructor(
         widgetLayoutResource = R.layout.ate_preference_color
         isPersistent = false
 
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            ATHUtil.resolveColor(
+                context,
+                android.R.attr.colorControlNormal
+            ), BlendModeCompat.SRC_IN
+        )
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

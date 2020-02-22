@@ -18,21 +18,20 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Window;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.preference.DialogPreference;
-
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
 public class ATEPreferenceDialogFragment extends DialogFragment {
-    protected static final String ARG_KEY = "key";
+
+    static final String ARG_KEY = "key";
 
     private DialogPreference mPreference;
 
@@ -56,6 +55,10 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
         }
     }
 
+    public DialogPreference getPreference() {
+        return this.mPreference;
+    }
+
     @NonNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         MaterialAlertDialogBuilder materialDialog = new MaterialAlertDialogBuilder(requireActivity())
@@ -77,23 +80,19 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
         return dialog;
     }
 
-    public DialogPreference getPreference() {
-        return this.mPreference;
-    }
+    public void onDialogClosed(boolean positiveResult) {
 
-    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
     }
 
     protected boolean needInputMethod() {
         return false;
     }
 
+    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
+    }
+
     private void requestInputMethod(Dialog dialog) {
         Window window = dialog.getWindow();
         window.setSoftInputMode(5);
-    }
-
-    public void onDialogClosed(boolean positiveResult) {
-
     }
 }

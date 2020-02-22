@@ -1,38 +1,31 @@
 package code.name.monkey.appthemehelper.common.prefs.supportv7
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.graphics.PorterDuff
-import android.os.Build
 import android.util.AttributeSet
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.preference.CheckBoxPreference
 import code.name.monkey.appthemehelper.R
-import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATESwitchPreference : CheckBoxPreference {
+class ATESwitchPreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) :
+    CheckBoxPreference(context, attrs, defStyleAttr, defStyleRes) {
 
-    constructor(context: Context) : super(context) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init()
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
-        init()
-    }
-
-    private fun init() {
+    init {
         widgetLayoutResource = R.layout.ate_preference_switch_support
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            ATHUtil.resolveColor(
+                context,
+                android.R.attr.colorControlNormal
+            ), BlendModeCompat.SRC_IN
+        )
     }
 }
