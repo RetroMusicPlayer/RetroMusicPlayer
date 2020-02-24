@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -17,12 +16,14 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
+import com.google.android.material.slider.Slider
+import com.google.android.material.slider.Slider.OnChangeListener
 import kotlinx.android.synthetic.main.fragment_volume.volumeDown
 import kotlinx.android.synthetic.main.fragment_volume.volumeSeekBar
 import kotlinx.android.synthetic.main.fragment_volume.volumeUp
 
-class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolumeChangedListener,
-    View.OnClickListener {
+class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
+    View.OnClickListener, OnChangeListener {
 
     private var audioVolumeObserver: AudioVolumeObserver? = null
 
@@ -51,20 +52,22 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
         val audioManager = audioManager
         if (audioManager != null) {
-            volumeSeekBar.max = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-            volumeSeekBar.progress = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+            volumeSeekBar.valueTo = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+            volumeSeekBar.value = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toFloat()
         }
-        volumeSeekBar.setOnSeekBarChangeListener(this)
+        volumeSeekBar.addOnChangeListener(this)
     }
 
-    override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
+    override fun onAudioVolumeChanged(currentVolume: Float, maxVolume: Float) {
         if (volumeSeekBar == null) {
             return
         }
-
-        volumeSeekBar.max = maxVolume
-        volumeSeekBar.progress = currentVolume
-        volumeDown.setImageResource(if (currentVolume == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
+        if (maxVolume <= 0) {
+            return
+        }
+        volumeSeekBar.valueTo = maxVolume
+        volumeSeekBar.valueFrom = currentVolume
+        volumeDown.setImageResource(if (currentVolume == 0.0f) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
     }
 
     override fun onDestroyView() {
@@ -72,19 +75,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         if (audioVolumeObserver != null) {
             audioVolumeObserver!!.unregister()
         }
-    }
-
-    override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-        val audioManager = audioManager
-        audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0)
-        setPauseWhenZeroVolume(i < 1)
-        volumeDown?.setImageResource(if (i == 0) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
-    }
-
-    override fun onStartTrackingTouch(seekBar: SeekBar) {
-    }
-
-    override fun onStopTrackingTouch(seekBar: SeekBar) {
     }
 
     override fun onClick(view: View) {
@@ -111,10 +101,6 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 
-    fun removeThumb() {
-        volumeSeekBar.thumb = null
-    }
-
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
         if (PreferenceUtil.getInstance(requireContext()).pauseOnZeroVolume()) if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
             MusicPlayerRemote.pauseSong()
@@ -133,5 +119,15 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         fun newInstance(): VolumeFragment {
             return VolumeFragment()
         }
+    }
+
+    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
+        if (value <= 0) {
+            return
+        }
+        val audioManager = audioManager
+        audioManager?.setStreamVolume(AudioManager.STREAM_MUSIC, value.toInt(), 0)
+        setPauseWhenZeroVolume(value < 1.0f)
+        volumeDown.setImageResource(if (value == 0.0f) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
     }
 }

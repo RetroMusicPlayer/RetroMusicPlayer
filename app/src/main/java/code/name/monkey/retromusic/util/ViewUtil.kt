@@ -28,6 +28,7 @@ import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import com.google.android.material.slider.Slider
 
 object ViewUtil {
 
@@ -45,6 +46,16 @@ object ViewUtil {
         } else {
             progressSlider.progressTintList = ColorStateList.valueOf(newColor)
         }
+    }
+
+    fun setProgressDrawable(progressSlider: Slider, color: Int, thumbTint: Boolean = false) {
+        if (thumbTint) {
+            progressSlider.thumbColor = ColorStateList.valueOf(color)
+        }
+        val colorWithAlpha = ColorUtil.withAlpha(color, 0.25f)
+        progressSlider.haloColor = ColorStateList.valueOf(colorWithAlpha)
+        progressSlider.trackColorActive = ColorStateList.valueOf(color)
+        progressSlider.trackColorInactive = ColorStateList.valueOf(colorWithAlpha)
     }
 
     fun setProgressDrawable(progressSlider: ProgressBar, newColor: Int) {

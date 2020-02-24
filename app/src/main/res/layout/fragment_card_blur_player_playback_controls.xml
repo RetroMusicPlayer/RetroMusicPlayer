@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
     android:layout_width="match_parent"
@@ -53,18 +54,18 @@
                 tools:text="22.00" />
         </LinearLayout>
 
-        <androidx.appcompat.widget.AppCompatSeekBar
+        <com.google.android.material.slider.Slider
             android:id="@+id/progressSlider"
-            style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="2dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:progressDrawable="@drawable/color_progress_seek"
-            android:progressTint="@color/md_white_1000"
-            android:splitTrack="false"
-            android:thumbTint="@color/md_white_1000"
+            app:haloColor="@color/md_white_semi_transparent"
+            app:labelBehavior="gone"
+            app:thumbColor="@color/md_white_1000"
+            app:trackColorActive="@color/md_white_1000"
+            app:trackColorInactive="@color/md_white_semi_transparent"
+            app:trackHeight="2dp"
             tools:progress="20" />
 
         <com.google.android.material.textview.MaterialTextView

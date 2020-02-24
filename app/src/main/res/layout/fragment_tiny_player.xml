@@ -45,7 +45,6 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
-
     <code.name.monkey.retromusic.views.VerticalTextView
         android:id="@+id/playerSongTotalTime"
         android:layout_width="wrap_content"

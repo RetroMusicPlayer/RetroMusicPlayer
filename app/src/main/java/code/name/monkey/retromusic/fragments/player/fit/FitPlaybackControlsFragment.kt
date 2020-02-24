@@ -27,17 +27,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.nextButton
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.playPauseButton
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.previousButton
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.progressSlider
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.repeatButton
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.shuffleButton
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.songInfo
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.songTotalTime
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.text
-import kotlinx.android.synthetic.main.fragment_fit_playback_controls.title
+import kotlinx.android.synthetic.main.fragment_fit_playback_controls.*
 
 class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -126,10 +116,12 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorBg = ATHUtil.resolveColor(activity, android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
         } else {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
@@ -196,7 +188,10 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -208,7 +203,10 @@ class FitPlaybackControlsFragment : AbsPlayerControlsFragment() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)

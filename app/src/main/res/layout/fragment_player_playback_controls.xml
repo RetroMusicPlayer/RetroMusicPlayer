@@ -18,26 +18,21 @@
         android:minWidth="40dp"
         android:singleLine="true"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxHeight="3dp"
-        android:padding="0dp"
-        android:progressDrawable="@drawable/color_progress_seek"
-        android:splitTrack="false"
-        android:thumb="@drawable/switch_thumb_material"
+        app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
+        app:trackHeight="3dp"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 
@@ -50,7 +45,6 @@
         android:minWidth="40dp"
         android:singleLine="true"
         android:textColor="?android:attr/textColorSecondary"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressSlider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

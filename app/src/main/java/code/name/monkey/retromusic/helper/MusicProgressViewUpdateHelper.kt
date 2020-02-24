@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.helper
 import android.os.Handler
 import android.os.Message
 
-
 class MusicProgressViewUpdateHelper : Handler {
 
     private var callback: Callback? = null
@@ -54,8 +53,8 @@ class MusicProgressViewUpdateHelper : Handler {
     private fun refreshProgressViews(): Int {
         val progressMillis = MusicPlayerRemote.songProgressMillis
         val totalMillis = MusicPlayerRemote.songDurationMillis
-
-        callback!!.onUpdateProgressViews(progressMillis, totalMillis)
+        println("$progressMillis $totalMillis")
+        callback?.onUpdateProgressViews(progressMillis, totalMillis)
 
         if (!MusicPlayerRemote.isPlaying) {
             return intervalPaused

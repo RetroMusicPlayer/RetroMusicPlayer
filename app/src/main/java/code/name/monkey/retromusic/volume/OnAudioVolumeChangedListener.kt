@@ -11,10 +11,8 @@
  * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  * See the GNU General Public License for more details.
  */
+package code.name.monkey.retromusic.volume
 
-package code.name.monkey.retromusic.volume;
-
-public interface OnAudioVolumeChangedListener {
-
-    void onAudioVolumeChanged(int currentVolume, int maxVolume);
+interface OnAudioVolumeChangedListener {
+    fun onAudioVolumeChanged(currentVolume: Float, maxVolume: Float)
 }

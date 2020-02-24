@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.fragments.player.circle
 
-import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -23,8 +22,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -32,14 +29,13 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.setRange
 import code.name.monkey.retromusic.extensions.show
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -100,14 +96,7 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
     }
 
     private fun setupViews() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis, MusicPlayerRemote.songDurationMillis)
-                }
-            }
-        })
+        setUpProgressSlider()
         ViewUtil.setProgressDrawable(progressSlider, ThemeStore.accentColor(requireContext()))
         volumeSeekBar.progressColor = ThemeStore.accentColor(requireContext())
         setUpPlayPauseFab()
@@ -205,18 +194,6 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         }
     }
 
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
-    }
-
     private fun updatePlayPauseDrawableState() {
         when {
             MusicPlayerRemote.isPlaying -> playPauseButton.setImageResource(R.drawable.ic_pause_white_24dp)
@@ -224,12 +201,13 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         }
     }
 
-    override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
+    override fun onAudioVolumeChanged(currentVolume: Float, maxVolume: Float) {
         if (volumeSeekBar == null) {
             return
         }
-        volumeSeekBar.max = maxVolume
-        volumeSeekBar.progress = currentVolume
+
+        volumeSeekBar.max = maxVolume.toInt()
+        volumeSeekBar.progress = currentVolume.toInt()
     }
 
     override fun onDestroyView() {
@@ -248,5 +226,26 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
     }
 
     override fun onStopTrackingTouch(seekArc: SeekArc?) {
+    }
+
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (total <= 0) {
+            return
+        }
+        progressSlider.setRange(progress.toFloat(), total.toFloat())
+        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    fun setUpProgressSlider() {
+        progressSlider.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(value.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
+            }
+        }
     }
 }

@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
-import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
+import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;

@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.fragments.player.full
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -12,9 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.LinearInterpolator
 import android.widget.PopupMenu
-import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -23,36 +20,25 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.extensions.setRange
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_full_player_controls.nextButton
-import kotlinx.android.synthetic.main.fragment_full_player_controls.playPauseButton
-import kotlinx.android.synthetic.main.fragment_full_player_controls.playerMenu
-import kotlinx.android.synthetic.main.fragment_full_player_controls.previousButton
-import kotlinx.android.synthetic.main.fragment_full_player_controls.progressSlider
-import kotlinx.android.synthetic.main.fragment_full_player_controls.repeatButton
-import kotlinx.android.synthetic.main.fragment_full_player_controls.shuffleButton
-import kotlinx.android.synthetic.main.fragment_full_player_controls.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_full_player_controls.songFavourite
-import kotlinx.android.synthetic.main.fragment_full_player_controls.songInfo
-import kotlinx.android.synthetic.main.fragment_full_player_controls.songTotalTime
-import kotlinx.android.synthetic.main.fragment_full_player_controls.text
-import kotlinx.android.synthetic.main.fragment_full_player_controls.title
+import kotlinx.android.synthetic.main.fragment_full_player_controls.*
 
 /**
  * Created by hemanths on 20/09/17.
  */
 
-class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMenuItemClickListener {
+class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
+    PopupMenu.OnMenuItemClickListener {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -91,17 +77,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         progressViewUpdateHelper!!.stop()
     }
 
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
-    }
 
     public override fun show() {
         playPauseButton!!.animate()
@@ -228,15 +203,25 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (total <= 0) {
+            return
+        }
+        progressSlider.setRange(progress.toFloat(), total.toFloat())
+        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
     override fun setUpProgressSlider() {
-        progressSlider!!.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis, MusicPlayerRemote.songDurationMillis)
-                }
+        progressSlider.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(value.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
             }
-        })
+        }
     }
 
     override fun onRepeatModeChanged() {
@@ -257,7 +242,10 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -269,7 +257,10 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
@@ -300,7 +291,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(), PopupMenu.OnMe
     @SuppressLint("StaticFieldLeak")
     fun updateIsFavorite() {
         if (updateIsFavoriteTask != null) {
-            updateIsFavoriteTask!!.cancel(false)
+            updateIsFavoriteTask?.cancel(false)
         }
         updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
             override fun doInBackground(vararg params: Song): Boolean? {
