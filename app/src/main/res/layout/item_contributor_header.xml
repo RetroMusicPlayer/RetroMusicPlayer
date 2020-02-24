@@ -23,13 +23,14 @@
     android:paddingBottom="24dp"
     tools:ignore="PrivateResource">
 
-    <code.name.monkey.retromusic.views.CircularImageView
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
         android:id="@+id/icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_margin="8dp"
         app:civ_border="false"
         app:civ_shadow="false"
+        app:retroCornerSize="36dp"
         app:srcCompat="@drawable/ic_person_flat"
         tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
 
@@ -38,10 +39,10 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="8dp">
+        android:paddingStart="16dp"
+        android:paddingTop="8dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"

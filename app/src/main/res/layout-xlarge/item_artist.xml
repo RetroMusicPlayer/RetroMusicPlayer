@@ -12,11 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <code.name.monkey.retromusic.views.CircularImageView
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:civ_border="false"
+            app:retroCornerSize="78dp"
             tools:src="@tools:sample/avatars" />
     </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 

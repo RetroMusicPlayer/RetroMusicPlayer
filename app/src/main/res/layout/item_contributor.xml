@@ -21,19 +21,20 @@
     android:gravity="center_vertical"
     android:minHeight="64dp"
     android:orientation="horizontal"
-    android:paddingStart="12dp"
     android:paddingEnd="12dp"
+    android:paddingStart="12dp"
     tools:ignore="PrivateResource">
 
-    <code.name.monkey.retromusic.views.CircularImageView
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
         android:id="@+id/icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         app:civ_border="false"
         app:civ_shadow="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:retroCornerSize="21dp"
         app:srcCompat="@drawable/ic_person_flat"
         tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
 

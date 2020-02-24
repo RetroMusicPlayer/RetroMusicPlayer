@@ -11,10 +11,10 @@
   ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ~ See the GNU General Public License for more details.
   -->
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
@@ -55,15 +55,16 @@
                     android:background="@drawable/shadow_up"
                     app:layout_constraintBottom_toBottomOf="parent" />
 
-                <code.name.monkey.retromusic.views.CircularImageView
+                <code.name.monkey.retromusic.views.RetroShapeableImageView
                     android:id="@+id/userImage"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
-                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
                     app:civ_border="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:retroCornerSize="21dp"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <com.google.android.material.textview.MaterialTextView

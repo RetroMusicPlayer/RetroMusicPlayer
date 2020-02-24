@@ -143,7 +143,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         });
 
         if (savedInstanceState == null) {
-            setMusicChooser(PreferenceUtil.getInstance(this).getLastMusicChooser());
+            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
         } else {
             restoreCurrentFragment();
         }

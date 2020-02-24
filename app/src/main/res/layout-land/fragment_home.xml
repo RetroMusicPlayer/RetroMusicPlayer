@@ -12,30 +12,31 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/toolbar_margin_horizontal"
     android:layout_marginEnd="@dimen/toolbar_margin_horizontal"
+    android:layout_marginStart="@dimen/toolbar_margin_horizontal"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <code.name.monkey.retromusic.views.CircularImageView
+        <code.name.monkey.retromusic.views.RetroShapeableImageView
             android:id="@+id/userImage"
             android:layout_width="42dp"
             android:layout_height="42dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
             app:civ_border="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:retroCornerSize="21dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <com.google.android.material.textview.MaterialTextView
