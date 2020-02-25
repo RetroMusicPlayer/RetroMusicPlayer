@@ -191,6 +191,7 @@ class SkuDetailsAdapter(
             4 -> R.drawable.ic_fast_food_meal_white_24dp
             5 -> R.drawable.ic_popcorn_white_24dp
             6 -> R.drawable.ic_card_giftcard_white_24dp
+            7 -> R.drawable.ic_food_croissant_white_24dp
             else -> R.drawable.ic_card_giftcard_white_24dp
         }
     }

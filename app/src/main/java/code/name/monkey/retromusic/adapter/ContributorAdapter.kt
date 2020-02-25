@@ -10,6 +10,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.RetroUtil.openUrl
 import code.name.monkey.retromusic.views.CircularImageView
+import code.name.monkey.retromusic.views.RetroShapeableImageView
 import com.bumptech.glide.Glide
 
 class ContributorAdapter(
@@ -62,14 +63,17 @@ class ContributorAdapter(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.title)
         val text: TextView = itemView.findViewById(R.id.text)
-        val image: CircularImageView = itemView.findViewById(R.id.icon)
+        val image: RetroShapeableImageView = itemView.findViewById(R.id.icon)
 
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name
             text.text = contributor.summary
-            Glide.with(image.context).load(contributor.profileImage)
+            Glide.with(image.context)
+                .load(contributor.profileImage)
                 .error(R.drawable.ic_account_white_24dp)
-                .placeholder(R.drawable.ic_account_white_24dp).dontAnimate().into(image)
+                .placeholder(R.drawable.ic_account_white_24dp)
+                .dontAnimate()
+                .into(image)
         }
     }
 }

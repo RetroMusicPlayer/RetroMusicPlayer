@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -16,8 +17,8 @@
             android:id="@+id/toolbar"
             style="@style/Toolbar"
             app:layout_collapseMode="pin"
-            app:title="@string/support_development"
             app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+            app:title="@string/support_development"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
             tools:ignore="UnusedAttribute" />
 
