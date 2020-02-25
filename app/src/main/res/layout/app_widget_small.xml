@@ -14,7 +14,7 @@
         android:layout_height="@dimen/app_widget_small_image_size"
         android:scaleType="centerInside"
         tools:ignore="ContentDescription"
-        tools:src="@drawable/default_album_art" />
+        tools:src="@drawable/default_audio_art" />
 
     <LinearLayout
         android:id="@+id/media_actions"

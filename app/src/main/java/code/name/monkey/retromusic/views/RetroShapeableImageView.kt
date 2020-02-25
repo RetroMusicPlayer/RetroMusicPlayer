@@ -27,14 +27,24 @@ class RetroShapeableImageView @JvmOverloads constructor(
     defStyle: Int = -1
 ) : ShapeableImageView(context, attrs, defStyle) {
 
+
     init {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.RetroShapeableImageView, defStyle, -1)
         val cornerSize =
             typedArray.getDimension(R.styleable.RetroShapeableImageView_retroCornerSize, 0f);
+        updateCornerSize(cornerSize)
+        typedArray.recycle()
+    }
+
+    fun updateCornerSize(cornerSize: Float) {
         shapeAppearanceModel = ShapeAppearanceModel.Builder()
             .setAllCorners(CornerFamily.ROUNDED, cornerSize)
             .build()
-        typedArray.recycle()
+    }
+
+    //For square
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
     }
 }

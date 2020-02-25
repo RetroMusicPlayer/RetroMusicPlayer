@@ -16,15 +16,10 @@ package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
-import code.name.monkey.retromusic.App;
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
-import code.name.monkey.retromusic.model.Artist;
-import code.name.monkey.retromusic.util.ArtistSignatureUtil;
-import code.name.monkey.retromusic.util.CustomArtistImageUtil;
+
 import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.DrawableTypeRequest;
@@ -35,8 +30,24 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
+import code.name.monkey.retromusic.App;
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
+import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
+import code.name.monkey.retromusic.model.Artist;
+import code.name.monkey.retromusic.util.ArtistSignatureUtil;
+import code.name.monkey.retromusic.util.CustomArtistImageUtil;
+
 
 public class ArtistGlideRequest {
+    private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
+
+    private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.SOURCE;
+
+    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_artist_art;
 
     public static class Builder {
 
@@ -121,13 +132,15 @@ public class ArtistGlideRequest {
         }
 
         public BitmapRequestBuilder<?, BitmapPaletteWrapper> build() {
+            Drawable drawable = TintHelper.createTintedDrawable(context, DEFAULT_ERROR_IMAGE, ThemeStore.Companion.accentColor(context));
             //noinspection unchecked
             return createBaseRequest(builder.requestManager, builder.artist, builder.noCustomImage,
                     builder.forceDownload)
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(drawable)
+                    .error(drawable)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
@@ -135,11 +148,6 @@ public class ArtistGlideRequest {
         }
     }
 
-    private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
-
-    private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.SOURCE;
-
-    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_artist_art;
 
     @NonNull
     public static Key createSignature(@NonNull Artist artist) {
@@ -148,8 +156,8 @@ public class ArtistGlideRequest {
 
     @NonNull
     private static DrawableTypeRequest createBaseRequest(@NonNull RequestManager requestManager,
-            @NonNull Artist artist,
-            boolean noCustomImage, boolean forceDownload) {
+                                                         @NonNull Artist artist,
+                                                         boolean noCustomImage, boolean forceDownload) {
         boolean hasCustomImage = CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext())
                 .hasCustomArtistImage(artist);
         if (noCustomImage || !hasCustomImage) {

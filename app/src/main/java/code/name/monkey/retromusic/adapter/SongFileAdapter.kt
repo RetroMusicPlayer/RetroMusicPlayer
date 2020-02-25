@@ -20,7 +20,7 @@ import com.bumptech.glide.signature.MediaStoreSignature
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.io.File
 import java.text.DecimalFormat
-import java.util.ArrayList
+import java.util.*
 import kotlin.math.log10
 import kotlin.math.pow
 
@@ -87,7 +87,12 @@ class SongFileAdapter(
                 it.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
                 it.setImageResource(R.drawable.ic_folder_white_24dp)
             }
-            holder.imageTextContainer?.setCardBackgroundColor(ATHUtil.resolveColor(activity, R.attr.colorSurface))
+            holder.imageTextContainer?.setCardBackgroundColor(
+                ATHUtil.resolveColor(
+                    activity,
+                    R.attr.colorSurface
+                )
+            )
         } else {
             val error = RetroUtil.getTintedVectorDrawable(
                 activity, R.drawable.ic_file_music_white_24dp, iconColor

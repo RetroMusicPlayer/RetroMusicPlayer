@@ -9,7 +9,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.util.NavigationUtil
-import java.util.Locale
+import java.util.*
 
 /**
  * @author Hemanth S (h4h13).

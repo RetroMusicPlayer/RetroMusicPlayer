@@ -9,16 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
 import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -52,7 +48,10 @@ class SearchAdapter(
             ), viewType
         )
         else
-            ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false), viewType)
+            ViewHolder(
+                LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
+                viewType
+            )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -61,7 +60,7 @@ class SearchAdapter(
                 val album = dataSet?.get(position) as Album
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
-                SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
                     .checkIgnoreMediaStore(activity).build().into(holder.image)
             }
             ARTIST -> {

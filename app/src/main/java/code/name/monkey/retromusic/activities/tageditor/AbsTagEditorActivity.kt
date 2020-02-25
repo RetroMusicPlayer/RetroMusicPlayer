@@ -322,7 +322,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected fun setImageBitmap(bitmap: Bitmap?, bgColor: Int) {
         if (bitmap == null) {
-            editorImage.setImageResource(drawable.default_album_art)
+            editorImage.setImageResource(drawable.default_audio_art)
         } else {
             editorImage.setImageBitmap(bitmap)
         }

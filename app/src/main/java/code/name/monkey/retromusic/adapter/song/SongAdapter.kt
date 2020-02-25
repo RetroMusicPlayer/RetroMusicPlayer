@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 13/08/17.
@@ -86,8 +86,6 @@ open class SongAdapter(
     private fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
             holder.paletteColorContainer?.setBackgroundColor(color)
-            //holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            //holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
         }
     }
 
@@ -95,7 +93,8 @@ open class SongAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), song).checkIgnoreMediaStore(activity)
+        SongGlideRequest.Builder.from(Glide.with(activity), song)
+            .checkIgnoreMediaStore(activity)
             .generatePalette(activity).build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {

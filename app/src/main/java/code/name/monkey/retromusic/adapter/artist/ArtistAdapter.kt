@@ -24,7 +24,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.ArrayList
+import java.util.*
 
 class ArtistAdapter(
     val activity: AppCompatActivity,
@@ -85,8 +85,10 @@ class ArtistAdapter(
         if (holder.image == null) {
             return
         }
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist).generatePalette(activity)
-            .build().into(object : RetroMusicColoredTarget(holder.image!!) {
+        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
+            .generatePalette(activity)
+            .build()
+            .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
                     setColors(defaultFooterColor, holder)

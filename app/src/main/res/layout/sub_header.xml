@@ -7,6 +7,6 @@
     android:layout_gravity="start"
     android:gravity="start"
     android:padding="16dp"
-    android:textAppearance="@style/TextViewHeadline5"
+    android:textAppearance="@style/TextViewHeadline6"
     android:textStyle="bold"
     tools:text="@tools:sample/lorem" />

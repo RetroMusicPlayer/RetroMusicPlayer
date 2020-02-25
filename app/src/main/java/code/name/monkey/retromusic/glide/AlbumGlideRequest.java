@@ -1,21 +1,9 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -39,13 +27,9 @@ import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.MusicUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
-/**
- * Created by hemanths on 2019-09-15.
- */
-public class SongGlideRequest {
-
+public class AlbumGlideRequest {
     private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
-    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_audio_art;
+    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_album_art;
     private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
 
     public static class Builder {
@@ -89,8 +73,7 @@ public class SongGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, song, ignoreMediaStore)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(new ColorDrawable(Color.RED))
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(song));
         }
@@ -108,8 +91,7 @@ public class SongGlideRequest {
             return createBaseRequest(builder.requestManager, builder.song, builder.ignoreMediaStore)
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(new ColorDrawable(Color.GREEN))
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }

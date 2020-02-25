@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
@@ -34,8 +34,10 @@ class HorizontalAlbumAdapter(
 
     override fun loadAlbumCover(album: Album, holder: ViewHolder) {
         if (holder.image == null) return
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity).generatePalette(activity).build()
+        AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+            .checkIgnoreMediaStore(activity)
+            .generatePalette(activity)
+            .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)

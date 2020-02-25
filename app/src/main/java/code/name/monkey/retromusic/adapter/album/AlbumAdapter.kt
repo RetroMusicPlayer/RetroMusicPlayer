@@ -13,8 +13,8 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper
@@ -106,12 +106,14 @@ open class AlbumAdapter(
             return
         }
 
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
-            .checkIgnoreMediaStore(activity).generatePalette(activity).build()
+        AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+            .checkIgnoreMediaStore(activity)
+            .generatePalette(activity)
+            .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
-                    setColors(defaultFooterColor, holder)
+                    //setColors(defaultFooterColor, holder)
                 }
 
                 override fun onColorReady(color: Int) {
@@ -185,7 +187,11 @@ open class AlbumAdapter(
                     imageContainerCard ?: image,
                     "${activity.getString(R.string.transition_album_art)}_${dataSet[adapterPosition].id}"
                 )
-                NavigationUtil.goToAlbumOptions(activity, dataSet[adapterPosition].id, activityOptions)
+                NavigationUtil.goToAlbumOptions(
+                    activity,
+                    dataSet[adapterPosition].id,
+                    activityOptions
+                )
             }
         }
 

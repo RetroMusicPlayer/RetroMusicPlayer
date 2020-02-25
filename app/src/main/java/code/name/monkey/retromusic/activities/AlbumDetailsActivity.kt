@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
@@ -250,19 +251,25 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     override fun loadArtistImage(artist: Artist) {
-        ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
-            .dontAnimate().dontTransform().into(object : RetroMusicColoredTarget(artistImage) {
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+            .generatePalette(this)
+            .build()
+            .dontAnimate()
+            .dontTransform()
+            .into(object : RetroMusicColoredTarget(artistImage) {
                 override fun onColorReady(color: Int) {
                 }
             })
     }
 
     private fun loadAlbumCover() {
-        SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
+        AlbumGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
             .checkIgnoreMediaStore(this)
             .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())
             .generatePalette(this)
-            .build().dontAnimate().dontTransform()
+            .build()
+            .dontAnimate()
+            .dontTransform()
             .into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)

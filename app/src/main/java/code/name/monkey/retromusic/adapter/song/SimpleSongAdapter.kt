@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import java.util.ArrayList
+import java.util.*
 
 class SimpleSongAdapter(
     context: AppCompatActivity,

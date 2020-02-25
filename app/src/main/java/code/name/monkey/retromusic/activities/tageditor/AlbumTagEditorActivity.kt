@@ -154,7 +154,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override fun deleteImage() {
         setImageBitmap(
-            BitmapFactory.decodeResource(resources, R.drawable.default_album_art),
+            BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
             ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
         )
         deleteAlbumArt = true

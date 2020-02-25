@@ -115,7 +115,8 @@ class HomeAdapter(
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
-                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    layoutManager =
+                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     val artistAdapter = ArtistAdapter(
                         activity,
                         list,
@@ -136,8 +137,10 @@ class HomeAdapter(
                 if (songs.isNotEmpty()) {
                     recyclerView.apply {
                         show()
-                        val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, null)
-                        layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                        val songAdapter =
+                            SongAdapter(activity, songs, R.layout.item_album_card, null)
+                        layoutManager =
+                            GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
                         adapter = songAdapter
                     }
                     title.text = activity.getString(titleRes)
