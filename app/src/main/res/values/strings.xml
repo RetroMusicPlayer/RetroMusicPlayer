@@ -839,4 +839,7 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">You will be forwarded to the issue tracker website.</string>
 
     <string name="your_account_data_is_only_used_for_authentication">Your account data is only used for authentication.</string>
+    <string name="amount">Amount</string>
+    <string name="note">Note(Optional)</string>
+    <string name="start_payment">Start payment</string>
 </resources>

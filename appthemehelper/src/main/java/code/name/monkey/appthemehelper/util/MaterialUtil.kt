@@ -19,7 +19,12 @@ object MaterialUtil {
         val context = button.context
         val colorState = ColorStateList.valueOf(color)
         val textColor =
-            ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)))
+            ColorStateList.valueOf(
+                MaterialValueHelper.getPrimaryTextColor(
+                    context,
+                    ColorUtil.isColorLight(color)
+                )
+            )
 
 
         if (background) {
@@ -56,7 +61,12 @@ object MaterialUtil {
         val context = temp.context
         val colorState = ColorStateList.valueOf(color)
         val textColor =
-            ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)))
+            ColorStateList.valueOf(
+                MaterialValueHelper.getPrimaryTextColor(
+                    context,
+                    ColorUtil.isColorLight(color)
+                )
+            )
 
         if (background) {
             temp.backgroundTintList = colorState

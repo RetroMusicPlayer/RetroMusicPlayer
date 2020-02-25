@@ -18,24 +18,22 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.dialogs.UpiPaymentBottomSheetDialogFragment
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.SkuDetails
 import com.anjlab.android.iab.v3.TransactionDetails
 import kotlinx.android.synthetic.main.activity_about.toolbar
-import kotlinx.android.synthetic.main.activity_donation.donation
-import kotlinx.android.synthetic.main.activity_donation.progress
-import kotlinx.android.synthetic.main.activity_donation.progressContainer
-import kotlinx.android.synthetic.main.activity_donation.recyclerView
+import kotlinx.android.synthetic.main.activity_donation.*
 import java.lang.ref.WeakReference
-import java.util.ArrayList
-import java.util.Arrays
+import java.util.*
 
 class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
@@ -58,7 +56,7 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
 
     fun donate(i: Int) {
         val ids = resources.getStringArray(DONATION_PRODUCT_IDS)
-        billingProcessor!!.purchase(this, ids[i])
+        billingProcessor?.purchase(this, ids[i])
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +73,14 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
         billingProcessor = BillingProcessor(this, BuildConfig.GOOGLE_PLAY_LICENSING_KEY, this)
         TintHelper.setTint(progress, ThemeStore.accentColor(this))
         donation.setTextColor(ThemeStore.accentColor(this))
+
+        MaterialUtil.setTint(upiClick)
+        upiClick.setOnClickListener {
+            UpiPaymentBottomSheetDialogFragment().show(
+                supportFragmentManager,
+                UpiPaymentBottomSheetDialogFragment.TAG
+            )
+        }
     }
 
     private fun setupToolbar() {
@@ -120,12 +126,8 @@ class SupportDevelopmentActivity : AbsBaseActivity(), BillingProcessor.IBillingH
     }
 
     override fun onDestroy() {
-        if (billingProcessor != null) {
-            billingProcessor!!.release()
-        }
-        if (skuDetailsLoadAsyncTask != null) {
-            skuDetailsLoadAsyncTask!!.cancel(true)
-        }
+        billingProcessor?.release()
+        skuDetailsLoadAsyncTask?.cancel(true)
         super.onDestroy()
     }
 }
@@ -148,7 +150,8 @@ private class SkuDetailsLoadAsyncTask internal constructor(supportDevelopmentAct
     override fun doInBackground(vararg params: Void): List<SkuDetails>? {
         val dialog = weakReference.get()
         if (dialog != null) {
-            val ids = dialog.resources.getStringArray(SupportDevelopmentActivity.DONATION_PRODUCT_IDS)
+            val ids =
+                dialog.resources.getStringArray(SupportDevelopmentActivity.DONATION_PRODUCT_IDS)
             return dialog.billingProcessor!!.getPurchaseListingDetails(ArrayList(Arrays.asList(*ids)))
         }
         cancel(false)
@@ -220,7 +223,8 @@ class SkuDetailsAdapter(
             donationsDialog,
             android.R.attr.textColorHint
         ) else textColorPrimary(donationsDialog)
-        val contentTextColor = if (purchased) titleTextColor else textColorSecondary(donationsDialog)
+        val contentTextColor =
+            if (purchased) titleTextColor else textColorSecondary(donationsDialog)
 
         viewHolder.title.setTextColor(titleTextColor)
         viewHolder.text.setTextColor(contentTextColor)
@@ -250,8 +254,9 @@ class SkuDetailsAdapter(
         private val LAYOUT_RES_ID = R.layout.item_donation_option
 
         private fun strikeThrough(textView: TextView, strikeThrough: Boolean) {
-            textView.paintFlags = if (strikeThrough) textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            else textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            textView.paintFlags =
+                if (strikeThrough) textView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                else textView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
 }
