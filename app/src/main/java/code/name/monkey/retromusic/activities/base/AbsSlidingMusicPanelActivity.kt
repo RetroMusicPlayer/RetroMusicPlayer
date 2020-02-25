@@ -219,7 +219,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-                slidingPanel.cardElevation = DensityUtil.dip2px(this, 10f).toFloat()
+                slidingPanel.elevation = DensityUtil.dip2px(this, 10f).toFloat()
                 bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
                 bottomSheetBehavior.isHideable = false
                 bottomSheetBehavior.peekHeight =

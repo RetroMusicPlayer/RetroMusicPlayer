@@ -30,13 +30,7 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
-import kotlinx.android.synthetic.main.activity_user_info.bannerImage
-import kotlinx.android.synthetic.main.activity_user_info.bannerSelect
-import kotlinx.android.synthetic.main.activity_user_info.name
-import kotlinx.android.synthetic.main.activity_user_info.nameContainer
-import kotlinx.android.synthetic.main.activity_user_info.next
-import kotlinx.android.synthetic.main.activity_user_info.toolbar
-import kotlinx.android.synthetic.main.activity_user_info.userImage
+import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -142,7 +136,10 @@ class UserInfoActivity : AbsBaseActivity() {
         pickImageIntent.putExtra("aspectY", 9)
         pickImageIntent.putExtra("scale", true)
         //intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_BANNER_REQUEST)
+        startActivityForResult(
+            Intent.createChooser(pickImageIntent, "Select Picture"),
+            PICK_BANNER_REQUEST
+        )
     }
 
     private fun pickNewPhoto() {
@@ -154,7 +151,10 @@ class UserInfoActivity : AbsBaseActivity() {
         pickImageIntent.putExtra("aspectX", 1)
         pickImageIntent.putExtra("aspectY", 1)
         pickImageIntent.putExtra("scale", true)
-        startActivityForResult(Intent.createChooser(pickImageIntent, "Select Picture"), PICK_IMAGE_REQUEST)
+        startActivityForResult(
+            Intent.createChooser(pickImageIntent, "Select Picture"),
+            PICK_IMAGE_REQUEST
+        )
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
