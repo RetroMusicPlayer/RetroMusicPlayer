@@ -29,9 +29,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
-import code.name.monkey.retromusic.R;
 
 public class RetroColorUtil {
     public static int desaturateColor(int color, float ratio) {

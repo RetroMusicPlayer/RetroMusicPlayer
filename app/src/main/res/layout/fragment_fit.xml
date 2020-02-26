@@ -28,6 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_album_full_cover" />
+
+            <include layout="@layout/shadow_statusbar_toolbar" />
         </FrameLayout>
 
         <FrameLayout

@@ -67,7 +67,11 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
-                colorChooser(colors = ACCENT_COLORS, allowCustomArgb = true, subColors = ACCENT_COLORS_SUB) { _, color ->
+                colorChooser(
+                    colors = ACCENT_COLORS,
+                    allowCustomArgb = true,
+                    subColors = ACCENT_COLORS_SUB
+                ) { _, color ->
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
@@ -91,10 +95,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             true
         }
 
-        val desaturatedColor: ATESwitchPreference? = findPreference(PreferenceUtil.DESATURATED_COLOR)
+        val desaturatedColor: ATESwitchPreference? =
+            findPreference(PreferenceUtil.DESATURATED_COLOR)
         desaturatedColor?.setOnPreferenceChangeListener { _, value ->
             val desaturated = value as Boolean
-            ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated).apply()
+            ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated)
+                .apply()
             PreferenceUtil.getInstance(requireContext()).setDesaturatedColor(desaturated)
             requireActivity().recreate()
             true
@@ -105,10 +111,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
         } else {
-            colorAppShortcuts.isChecked = PreferenceUtil.getInstance(requireContext()).coloredAppShortcuts()
+            colorAppShortcuts.isChecked =
+                PreferenceUtil.getInstance(requireContext()).coloredAppShortcuts()
             colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
                 // Save preference
-                PreferenceUtil.getInstance(requireContext()).setColoredAppShortcuts(newValue as Boolean)
+                PreferenceUtil.getInstance(requireContext())
+                    .setColoredAppShortcuts(newValue as Boolean)
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }

@@ -51,7 +51,11 @@ class App : MultiDexApplication() {
                 override fun onProductPurchased(productId: String, details: TransactionDetails?) {}
 
                 override fun onPurchaseHistoryRestored() {
-                    Toast.makeText(this@App, R.string.restored_previous_purchase_please_restart, Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        this@App,
+                        R.string.restored_previous_purchase_please_restart,
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                 }
 
@@ -79,7 +83,9 @@ class App : MultiDexApplication() {
         }
 
         fun isProVersion(): Boolean {
-            return BuildConfig.DEBUG || instance?.billingProcessor!!.isPurchased(PRO_VERSION_PRODUCT_ID)
+            return BuildConfig.DEBUG || instance?.billingProcessor!!.isPurchased(
+                PRO_VERSION_PRODUCT_ID
+            )
         }
 
         lateinit var musicComponent: MusicComponent

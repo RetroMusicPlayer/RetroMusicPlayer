@@ -8,11 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -20,13 +16,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
@@ -47,17 +38,17 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.input.getInputLayout
 import com.afollestad.materialdialogs.input.input
-import kotlinx.android.synthetic.main.activity_lyrics.fab
-import kotlinx.android.synthetic.main.activity_lyrics.tabs
-import kotlinx.android.synthetic.main.activity_lyrics.toolbar
-import kotlinx.android.synthetic.main.activity_lyrics.viewPager
-import kotlinx.android.synthetic.main.fragment_lyrics.offlineLyrics
-import kotlinx.android.synthetic.main.fragment_synced.lyricsView
+import kotlinx.android.synthetic.main.activity_lyrics.*
+import kotlinx.android.synthetic.main.fragment_lyrics.*
+import kotlinx.android.synthetic.main.fragment_synced.*
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
-import java.util.EnumMap
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.set
 
-class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPager.OnPageChangeListener {
+class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
+    ViewPager.OnPageChangeListener {
     override fun onPageScrollStateChanged(state: Int) {
         when (state) {
             ViewPager.SCROLL_STATE_IDLE -> fab.show()

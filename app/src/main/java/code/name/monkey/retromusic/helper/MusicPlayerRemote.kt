@@ -16,12 +16,7 @@ package code.name.monkey.retromusic.helper
 
 import android.annotation.TargetApi
 import android.app.Activity
-import android.content.ComponentName
-import android.content.ContentResolver
-import android.content.Context
-import android.content.ContextWrapper
-import android.content.Intent
-import android.content.ServiceConnection
+import android.content.*
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
@@ -36,9 +31,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.PreferenceUtil
 import java.io.File
-import java.util.ArrayList
-import java.util.Random
-import java.util.WeakHashMap
+import java.util.*
 
 object MusicPlayerRemote {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
@@ -209,7 +202,12 @@ object MusicPlayerRemote {
      */
     @JvmStatic
     fun openQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean) {
-        if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
+        if (!tryToHandleOpenPlayingQueue(
+                queue,
+                startPosition,
+                startPlaying
+            ) && musicService != null
+        ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
             if (PreferenceUtil.getInstance(musicService).isShuffleModeOn)
                 setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
@@ -226,7 +224,12 @@ object MusicPlayerRemote {
             startPosition = Random().nextInt(queue.size)
         }
 
-        if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
+        if (!tryToHandleOpenPlayingQueue(
+                queue,
+                startPosition,
+                startPlaying
+            ) && musicService != null
+        ) {
             openQueue(queue, startPosition, startPlaying)
             setShuffleMode(MusicService.SHUFFLE_MODE_SHUFFLE)
         }
@@ -419,7 +422,10 @@ object MusicPlayerRemote {
                 var songFile: File? = null
                 if (uri.authority != null && uri.authority == "com.android.externalstorage.documents") {
                     songFile =
-                        File(Environment.getExternalStorageDirectory(), uri.path?.split(":".toRegex(), 2)?.get(1))
+                        File(
+                            Environment.getExternalStorageDirectory(),
+                            uri.path?.split(":".toRegex(), 2)?.get(1)
+                        )
                 }
                 if (songFile == null) {
                     val path = getFilePathFromUri(musicService!!, uri)
@@ -453,7 +459,8 @@ object MusicPlayerRemote {
         return DocumentsContract.getDocumentId(uri).split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
     }
 
-    class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) : ServiceConnection {
+    class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) :
+        ServiceConnection {
 
         override fun onServiceConnected(className: ComponentName, service: IBinder) {
             val binder = service as MusicService.MusicBinder

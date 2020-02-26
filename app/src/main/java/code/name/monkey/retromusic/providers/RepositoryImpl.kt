@@ -20,22 +20,8 @@ import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.Result.Error
 import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.loaders.AlbumLoader
-import code.name.monkey.retromusic.loaders.ArtistLoader
-import code.name.monkey.retromusic.loaders.GenreLoader
-import code.name.monkey.retromusic.loaders.LastAddedSongsLoader
-import code.name.monkey.retromusic.loaders.PlaylistLoader
-import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
-import code.name.monkey.retromusic.loaders.SearchLoader
-import code.name.monkey.retromusic.loaders.SongLoader
-import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader
-import code.name.monkey.retromusic.model.AbsCustomPlaylist
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Home
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.loaders.*
+import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
@@ -299,8 +285,9 @@ class RepositoryImpl @Inject constructor(private val context: Context) : Reposit
     }
 }
 
-suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String): Result<T> = try {
-    call.invoke()
-} catch (e: Exception) {
-    Error(IOException(errorMessage, e))
-}
+suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: String): Result<T> =
+    try {
+        call.invoke()
+    } catch (e: Exception) {
+        Error(IOException(errorMessage, e))
+    }

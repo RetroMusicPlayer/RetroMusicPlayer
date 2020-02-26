@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.glide
 
 import android.content.Context
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage
-import code.name.monkey.retromusic.glide.artistimage.ArtistImageLoader
 import code.name.monkey.retromusic.glide.artistimage.Factory
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCoverLoader
@@ -30,7 +29,11 @@ class RetroMusicGlideModule : GlideModule {
     }
 
     override fun registerComponents(context: Context, glide: Glide) {
-        glide.register(AudioFileCover::class.java, InputStream::class.java, AudioFileCoverLoader.Factory())
+        glide.register(
+            AudioFileCover::class.java,
+            InputStream::class.java,
+            AudioFileCoverLoader.Factory()
+        )
         glide.register(ArtistImage::class.java, InputStream::class.java, Factory(context))
     }
 }

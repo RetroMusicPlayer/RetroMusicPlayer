@@ -27,9 +27,11 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 
@@ -56,6 +58,12 @@ public class PopupBackground extends Drawable {
         Resources resources = context.getResources();
         mPaddingStart = resources.getDimensionPixelOffset(R.dimen.afs_md2_popup_padding_start);
         mPaddingEnd = resources.getDimensionPixelOffset(R.dimen.afs_md2_popup_padding_end);
+    }
+
+    private static void pathArcTo(@NonNull Path path, float centerX, float centerY, float radius,
+                                  float startAngle, float sweepAngle) {
+        path.arcTo(centerX - radius, centerY - radius, centerX + radius, centerY + radius,
+                startAngle, sweepAngle, false);
     }
 
     @Override
@@ -145,11 +153,5 @@ public class PopupBackground extends Drawable {
         }
         mTempMatrix.postTranslate(bounds.left, bounds.top);
         mPath.transform(mTempMatrix);
-    }
-
-    private static void pathArcTo(@NonNull Path path, float centerX, float centerY, float radius,
-            float startAngle, float sweepAngle) {
-        path.arcTo(centerX - radius, centerY - radius, centerX + radius, centerY + radius,
-                startAngle, sweepAngle, false);
     }
 }

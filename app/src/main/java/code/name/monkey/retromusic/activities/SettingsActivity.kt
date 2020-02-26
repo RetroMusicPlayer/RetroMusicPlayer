@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.transition.TransitionManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
-import kotlinx.android.synthetic.main.activity_settings.appBarLayout
-import kotlinx.android.synthetic.main.activity_settings.toolbar
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AbsBaseActivity() {
 
@@ -28,7 +26,8 @@ class SettingsActivity : AbsBaseActivity() {
         setupToolbar()
 
         if (savedInstanceState == null) {
-            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment()).commit()
+            fragmentManager.beginTransaction().replace(R.id.contentFrame, MainSettingsFragment())
+                .commit()
         }
     }
 
@@ -51,12 +50,10 @@ class SettingsActivity : AbsBaseActivity() {
                 android.R.anim.slide_in_left,
                 android.R.anim.slide_out_right
             )
-
         fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.tag)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
-        TransitionManager.beginDelayedTransition(appBarLayout)
         setTitle(titleName)
     }
 

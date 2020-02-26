@@ -30,8 +30,9 @@ import java.util.*
  * Created by hemanths on 2019-08-01.
  */
 
-class MediaSessionCallback(private val context: Context,
-                           private val musicService: MusicService
+class MediaSessionCallback(
+    private val context: Context,
+    private val musicService: MusicService
 ) : MediaSessionCompat.Callback() {
 
     override fun onPlay() {

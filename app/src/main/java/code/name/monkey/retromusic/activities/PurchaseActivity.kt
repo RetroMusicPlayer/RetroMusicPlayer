@@ -14,9 +14,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
-import kotlinx.android.synthetic.main.activity_pro_version.purchaseButton
-import kotlinx.android.synthetic.main.activity_pro_version.restoreButton
-import kotlinx.android.synthetic.main.activity_pro_version.toolbar
+import kotlinx.android.synthetic.main.activity_pro_version.*
 import java.lang.ref.WeakReference
 
 class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {

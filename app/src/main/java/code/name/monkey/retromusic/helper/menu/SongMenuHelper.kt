@@ -60,7 +60,8 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song).show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                AddToPlaylistDialog.create(song)
+                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_play_next -> {

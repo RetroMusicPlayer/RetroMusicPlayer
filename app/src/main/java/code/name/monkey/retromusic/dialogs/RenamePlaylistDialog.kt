@@ -48,7 +48,11 @@ class RenamePlaylistDialog : DialogFragment() {
                 positiveButton(string.action_rename) {
                     if (playlistView.toString().trim { it <= ' ' } != "") {
                         val playlistId = arguments!!.getLong(PLAYLIST_ID)
-                        PlaylistsUtil.renamePlaylist(context, playlistId, playlistView.text!!.toString())
+                        PlaylistsUtil.renamePlaylist(
+                            context,
+                            playlistId,
+                            playlistView.text!!.toString()
+                        )
                     }
                 }
             }
@@ -61,7 +65,10 @@ class RenamePlaylistDialog : DialogFragment() {
 
         val playlistId = arguments!!.getLong(PLAYLIST_ID)
         playlistView.appHandleColor()
-            .setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
+            .setText(
+                PlaylistsUtil.getNameForPlaylist(context!!, playlistId),
+                TextView.BufferType.EDITABLE
+            )
         return materialDialog
     }
 

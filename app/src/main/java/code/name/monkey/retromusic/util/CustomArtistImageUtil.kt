@@ -33,7 +33,7 @@ import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.Locale
+import java.util.*
 
 
 class CustomArtistImageUtil private constructor(context: Context) {
@@ -41,53 +41,65 @@ class CustomArtistImageUtil private constructor(context: Context) {
     private val mPreferences: SharedPreferences
 
     init {
-        mPreferences = context.applicationContext.getSharedPreferences(CUSTOM_ARTIST_IMAGE_PREFS, Context.MODE_PRIVATE)
+        mPreferences = context.applicationContext.getSharedPreferences(
+            CUSTOM_ARTIST_IMAGE_PREFS,
+            Context.MODE_PRIVATE
+        )
     }
 
     fun setCustomArtistImage(artist: Artist, uri: Uri) {
         Glide.with(App.getContext())
-                .load(uri)
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(object : SimpleTarget<Bitmap>() {
-                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                        super.onLoadFailed(e, errorDrawable)
-                        e!!.printStackTrace()
-                        Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
-                    }
+            .load(uri)
+            .asBitmap()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(object : SimpleTarget<Bitmap>() {
+                override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                    super.onLoadFailed(e, errorDrawable)
+                    e!!.printStackTrace()
+                    Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
+                }
 
-                    override fun onResourceReady(resource: Bitmap, glideAnimation: GlideAnimation<in Bitmap>) {
-                        object : AsyncTask<Void, Void, Void>() {
-                            @SuppressLint("ApplySharedPref")
-                            override fun doInBackground(vararg params: Void): Void? {
-                                val dir = File(App.getContext().filesDir, FOLDER_NAME)
-                                if (!dir.exists()) {
-                                    if (!dir.mkdirs()) { // create the folder
-                                        return null
-                                    }
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    glideAnimation: GlideAnimation<in Bitmap>
+                ) {
+                    object : AsyncTask<Void, Void, Void>() {
+                        @SuppressLint("ApplySharedPref")
+                        override fun doInBackground(vararg params: Void): Void? {
+                            val dir = File(App.getContext().filesDir, FOLDER_NAME)
+                            if (!dir.exists()) {
+                                if (!dir.mkdirs()) { // create the folder
+                                    return null
                                 }
-                                val file = File(dir, getFileName(artist))
-
-                                var succesful = false
-                                try {
-                                    val os = BufferedOutputStream(FileOutputStream(file))
-                                    succesful = ImageUtil.resizeBitmap(resource, 2048).compress(Bitmap.CompressFormat.JPEG, 100, os)
-                                    os.close()
-                                } catch (e: IOException) {
-                                    Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG).show()
-                                }
-
-                                if (succesful) {
-                                    mPreferences.edit().putBoolean(getFileName(artist), true).commit()
-                                    ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                                    App.getContext().contentResolver.notifyChange(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, null) // trigger media store changed to force artist image reload
-                                }
-                                return null
                             }
-                        }.execute()
-                    }
-                })
+                            val file = File(dir, getFileName(artist))
+
+                            var succesful = false
+                            try {
+                                val os = BufferedOutputStream(FileOutputStream(file))
+                                succesful = ImageUtil.resizeBitmap(resource, 2048)
+                                    .compress(Bitmap.CompressFormat.JPEG, 100, os)
+                                os.close()
+                            } catch (e: IOException) {
+                                Toast.makeText(App.getContext(), e.toString(), Toast.LENGTH_LONG)
+                                    .show()
+                            }
+
+                            if (succesful) {
+                                mPreferences.edit().putBoolean(getFileName(artist), true).commit()
+                                ArtistSignatureUtil.getInstance(App.getContext())
+                                    .updateArtistSignature(artist.name)
+                                App.getContext().contentResolver.notifyChange(
+                                    MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                                    null
+                                ) // trigger media store changed to force artist image reload
+                            }
+                            return null
+                        }
+                    }.execute()
+                }
+            })
     }
 
     fun resetCustomArtistImage(artist: Artist) {
@@ -96,7 +108,10 @@ class CustomArtistImageUtil private constructor(context: Context) {
             override fun doInBackground(vararg params: Void): Void? {
                 mPreferences.edit().putBoolean(getFileName(artist), false).commit()
                 ArtistSignatureUtil.getInstance(App.getContext()).updateArtistSignature(artist.name)
-                App.getContext().contentResolver.notifyChange(MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, null) // trigger media store changed to force artist image reload
+                App.getContext().contentResolver.notifyChange(
+                    MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI,
+                    null
+                ) // trigger media store changed to force artist image reload
 
                 val file = getFile(artist)
                 if (!file.exists()) {

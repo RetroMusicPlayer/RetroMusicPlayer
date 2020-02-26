@@ -82,8 +82,9 @@ object GenreLoader {
     private fun makeAllSongsWithGenreCursor(context: Context): Cursor? {
         try {
             return context.contentResolver.query(
-                    Uri.parse("content://media/external/audio/genres/all/members"),
-                    arrayOf(Genres.Members.AUDIO_ID), null, null, null)
+                Uri.parse("content://media/external/audio/genres/all/members"),
+                arrayOf(Genres.Members.AUDIO_ID), null, null, null
+            )
         } catch (e: SecurityException) {
             return null
         }
@@ -93,8 +94,12 @@ object GenreLoader {
     private fun makeGenreSongCursor(context: Context, genreId: Int): Cursor? {
         try {
             return context.contentResolver.query(
-                    Genres.Members.getContentUri("external", genreId.toLong()),
-                    baseProjection, BASE_SELECTION, null, PreferenceUtil.getInstance(context).songSortOrder)
+                Genres.Members.getContentUri("external", genreId.toLong()),
+                baseProjection,
+                BASE_SELECTION,
+                null,
+                PreferenceUtil.getInstance(context).songSortOrder
+            )
         } catch (e: SecurityException) {
             return null
         }
@@ -112,7 +117,11 @@ object GenreLoader {
                     } else {
                         // try to remove the empty genre from the media store
                         try {
-                            context.contentResolver.delete(Genres.EXTERNAL_CONTENT_URI, Genres._ID + " == " + genre.id, null)
+                            context.contentResolver.delete(
+                                Genres.EXTERNAL_CONTENT_URI,
+                                Genres._ID + " == " + genre.id,
+                                null
+                            )
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -140,7 +149,13 @@ object GenreLoader {
     private fun makeGenreCursor(context: Context): Cursor? {
         val projection = arrayOf(Genres._ID, Genres.NAME)
         try {
-            return context.contentResolver.query(Genres.EXTERNAL_CONTENT_URI, projection, null, null, PreferenceUtil.getInstance(context).genreSortOrder)
+            return context.contentResolver.query(
+                Genres.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null,
+                PreferenceUtil.getInstance(context).genreSortOrder
+            )
         } catch (e: SecurityException) {
             return null
         }

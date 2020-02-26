@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import kotlinx.android.synthetic.main.fragment_material.playerToolbar
+import kotlinx.android.synthetic.main.fragment_material.*
 
 /**
  * @author Hemanth S (h4h13).

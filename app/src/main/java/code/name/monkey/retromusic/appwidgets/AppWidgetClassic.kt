@@ -31,9 +31,7 @@ import code.name.monkey.retromusic.appwidgets.base.BaseAppWidget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.service.MusicService.ACTION_REWIND
-import code.name.monkey.retromusic.service.MusicService.ACTION_SKIP
-import code.name.monkey.retromusic.service.MusicService.ACTION_TOGGLE_PAUSE
+import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.bumptech.glide.Glide
@@ -111,7 +109,8 @@ class AppWidgetClassic : BaseAppWidget() {
         linkButtons(service, appWidgetView)
 
         if (imageSize == 0) {
-            imageSize = service.resources.getDimensionPixelSize(R.dimen.app_widget_classic_image_size)
+            imageSize =
+                service.resources.getDimensionPixelSize(R.dimen.app_widget_classic_image_size)
         }
         if (cardRadius == 0f) {
             cardRadius = service.resources.getDimension(R.dimen.app_widget_card_radius)
@@ -155,7 +154,13 @@ class AppWidgetClassic : BaseAppWidget() {
                             if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_24dp
                         appWidgetView.setImageViewBitmap(
                             R.id.button_toggle_play_pause,
-                            ImageUtil.createBitmap(ImageUtil.getTintedVectorDrawable(service, playPauseRes, color))
+                            ImageUtil.createBitmap(
+                                ImageUtil.getTintedVectorDrawable(
+                                    service,
+                                    playPauseRes,
+                                    color
+                                )
+                            )
                         )
 
                         // Set prev/next button drawables
@@ -182,7 +187,15 @@ class AppWidgetClassic : BaseAppWidget() {
 
                         val image = getAlbumArtDrawable(service.resources, bitmap)
                         val roundedBitmap =
-                            createRoundedBitmap(image, imageSize, imageSize, cardRadius, 0F, cardRadius, 0F)
+                            createRoundedBitmap(
+                                image,
+                                imageSize,
+                                imageSize,
+                                cardRadius,
+                                0F,
+                                cardRadius,
+                                0F
+                            )
                         appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 
                         pushUpdate(appContext, appWidgetIds, appWidgetView)

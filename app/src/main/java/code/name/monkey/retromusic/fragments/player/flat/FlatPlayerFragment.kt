@@ -20,8 +20,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.views.DrawableGradient
-import kotlinx.android.synthetic.main.fragment_flat_player.colorGradientBackground
-import kotlinx.android.synthetic.main.fragment_flat_player.playerToolbar
+import kotlinx.android.synthetic.main.fragment_flat_player.*
 
 class FlatPlayerFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {

@@ -14,10 +14,11 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 
-class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, LinearLayoutManager>(),
+class SongsFragment :
+    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, LinearLayoutManager>(),
     SongView, MainActivityFragmentCallbacks {
 
     @Inject

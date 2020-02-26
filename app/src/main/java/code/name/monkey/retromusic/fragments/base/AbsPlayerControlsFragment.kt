@@ -13,7 +13,8 @@ import code.name.monkey.retromusic.util.PreferenceUtil
  * Created by hemanths on 24/09/17.
  */
 
-abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback {
+abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(),
+    MusicProgressViewUpdateHelper.Callback {
 
     protected abstract fun show()
 
@@ -61,9 +62,11 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(), MusicProgr
 
     private fun hideVolumeIfAvailable() {
         if (PreferenceUtil.getInstance(requireContext()).volumeToggle) {
-            childFragmentManager.beginTransaction().replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
+            childFragmentManager.beginTransaction()
+                .replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             childFragmentManager.executePendingTransactions()
-            volumeFragment = childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
+            volumeFragment =
+                childFragmentManager.findFragmentById(R.id.volumeFragmentContainer) as VolumeFragment?
         }
     }
 

@@ -21,8 +21,8 @@ import code.name.monkey.retromusic.service.MusicService.SAVE_QUEUES
 import java.lang.ref.WeakReference
 
 internal class QueueSaveHandler(
-        musicService: MusicService,
-        looper: Looper
+    musicService: MusicService,
+    looper: Looper
 ) : Handler(looper) {
     private val service: WeakReference<MusicService> = WeakReference(musicService)
 

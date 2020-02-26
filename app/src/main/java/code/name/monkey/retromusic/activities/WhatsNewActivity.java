@@ -7,10 +7,19 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.webkit.WebView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
+
+import com.google.android.material.appbar.AppBarLayout;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
@@ -18,11 +27,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import com.google.android.material.appbar.AppBarLayout;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 public class WhatsNewActivity extends AbsBaseActivity {
 
@@ -31,6 +35,21 @@ public class WhatsNewActivity extends AbsBaseActivity {
     Toolbar toolbar;
 
     WebView webView;
+
+    private static String colorToCSS(int color) {
+        return String.format("rgb(%d, %d, %d)", Color.red(color), Color.green(color),
+                Color.blue(color)); // on API 29, WebView doesn't load with hex colors
+    }
+
+    private static void setChangelogRead(@NonNull Context context) {
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            int currentVersion = pInfo.versionCode;
+            PreferenceUtil.getInstance(context).setLastChangeLogVersion(currentVersion);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,20 +98,5 @@ public class WhatsNewActivity extends AbsBaseActivity {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");
         }
         setChangelogRead(this);
-    }
-
-    private static String colorToCSS(int color) {
-        return String.format("rgb(%d, %d, %d)", Color.red(color), Color.green(color),
-                Color.blue(color)); // on API 29, WebView doesn't load with hex colors
-    }
-
-    private static void setChangelogRead(@NonNull Context context) {
-        try {
-            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            int currentVersion = pInfo.versionCode;
-            PreferenceUtil.getInstance(context).setLastChangeLogVersion(currentVersion);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 }

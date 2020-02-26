@@ -9,28 +9,9 @@ import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.loaders.SongLoader
-import kotlinx.android.synthetic.main.activity_song_tag_editor.albumArtistContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.albumArtistText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.albumText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.albumTextContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.artistContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.artistText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.composerContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.genreContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.genreText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.lyricsContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.lyricsText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.songComposerText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.songText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.songTextContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.toolbar
-import kotlinx.android.synthetic.main.activity_song_tag_editor.trackNumberContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.trackNumberText
-import kotlinx.android.synthetic.main.activity_song_tag_editor.yearContainer
-import kotlinx.android.synthetic.main.activity_song_tag_editor.yearText
+import kotlinx.android.synthetic.main.activity_song_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
-import java.util.ArrayList
-import java.util.EnumMap
+import java.util.*
 
 class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 

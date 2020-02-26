@@ -33,7 +33,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
-import java.util.ArrayList
+import java.util.*
 
 class BlacklistPreference @JvmOverloads constructor(
     context: Context,
@@ -44,7 +44,10 @@ class BlacklistPreference @JvmOverloads constructor(
 
     init {
         icon?.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorControlNormal(context), SRC_IN)
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                colorControlNormal(context),
+                SRC_IN
+            )
     }
 }
 

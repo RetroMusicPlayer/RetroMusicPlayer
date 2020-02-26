@@ -20,11 +20,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.loaders.SongLoader;
 import code.name.monkey.retromusic.model.Song;
-import java.util.ArrayList;
 
 /**
  * @author Andrew Neal, modified for Phonograph by Karim Abou Zeid
@@ -45,6 +48,15 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     private static MusicPlaybackQueueStore sInstance = null;
 
     /**
+     * Constructor of <code>MusicPlaybackState</code>
+     *
+     * @param context The {@link Context} to use
+     */
+    public MusicPlaybackQueueStore(final @NonNull Context context) {
+        super(context, DATABASE_NAME, null, VERSION);
+    }
+
+    /**
      * @param context The {@link Context} to use
      * @return A new instance of this class.
      */
@@ -54,15 +66,6 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
             sInstance = new MusicPlaybackQueueStore(context.getApplicationContext());
         }
         return sInstance;
-    }
-
-    /**
-     * Constructor of <code>MusicPlaybackState</code>
-     *
-     * @param context The {@link Context} to use
-     */
-    public MusicPlaybackQueueStore(final @NonNull Context context) {
-        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override
@@ -98,7 +101,7 @@ public class MusicPlaybackQueueStore extends SQLiteOpenHelper {
     }
 
     public synchronized void saveQueues(@NonNull final ArrayList<Song> playingQueue,
-            @NonNull final ArrayList<Song> originalPlayingQueue) {
+                                        @NonNull final ArrayList<Song> originalPlayingQueue) {
         saveQueue(PLAYING_QUEUE_TABLE_NAME, playingQueue);
         saveQueue(ORIGINAL_PLAYING_QUEUE_TABLE_NAME, originalPlayingQueue);
     }

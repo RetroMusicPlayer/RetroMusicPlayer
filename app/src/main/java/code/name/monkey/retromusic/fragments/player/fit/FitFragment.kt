@@ -12,7 +12,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import kotlinx.android.synthetic.main.fragment_fit.playerToolbar
+import kotlinx.android.synthetic.main.fragment_fit.*
 
 class FitFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {

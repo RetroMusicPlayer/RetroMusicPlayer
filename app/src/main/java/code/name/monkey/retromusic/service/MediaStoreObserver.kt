@@ -18,8 +18,8 @@ import android.database.ContentObserver
 import android.os.Handler
 
 class MediaStoreObserver(
-        private val musicService: MusicService,
-        private val mHandler: Handler
+    private val musicService: MusicService,
+    private val mHandler: Handler
 ) : ContentObserver(mHandler), Runnable {
 
     override fun onChange(selfChange: Boolean) {

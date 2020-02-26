@@ -14,7 +14,8 @@ import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+class AlbumsFragment :
+    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     AlbumsView, MainActivityFragmentCallbacks {
 
     @Inject
@@ -118,7 +119,8 @@ class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAd
     companion object {
         @JvmField
         var TAG: String = AlbumsFragment::class.java.simpleName
-@JvmStatic
+
+        @JvmStatic
         fun newInstance(): AlbumsFragment {
             val args = Bundle()
             val fragment = AlbumsFragment()

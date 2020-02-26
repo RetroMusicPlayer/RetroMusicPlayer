@@ -19,7 +19,10 @@ import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.Comparator
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.isNotEmpty
+import kotlin.collections.sortWith
 
 
 /**
@@ -29,42 +32,54 @@ import java.util.Comparator
 object AlbumLoader {
 
     fun getAlbums(
-            context: Context,
-            query: String
+        context: Context,
+        query: String
     ): ArrayList<Album> {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(
+        val songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
                 context,
                 AudioColumns.ALBUM + " LIKE ?",
                 arrayOf("%$query%"),
-                getSongLoaderSortOrder(context))
+                getSongLoaderSortOrder(context)
+            )
         )
         return splitIntoAlbums(songs)
     }
+
     @JvmStatic
     fun getAlbum(
-            context: Context,
-            albumId: Int
+        context: Context,
+        albumId: Int
     ): Album {
         val songs = SongLoader.getSongs(
-                SongLoader.makeSongCursor(
-                        context,
-                        AudioColumns.ALBUM_ID + "=?",
-                        arrayOf(albumId.toString()),
-                        getSongLoaderSortOrder(context)))
+            SongLoader.makeSongCursor(
+                context,
+                AudioColumns.ALBUM_ID + "=?",
+                arrayOf(albumId.toString()),
+                getSongLoaderSortOrder(context)
+            )
+        )
         val album = Album(songs)
         sortSongsByTrackNumber(album)
         return album
     }
 
     fun getAllAlbums(
-            context: Context
+        context: Context
     ): ArrayList<Album> {
-        val songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, null, null, getSongLoaderSortOrder(context)))
+        val songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
+                context,
+                null,
+                null,
+                getSongLoaderSortOrder(context)
+            )
+        )
         return splitIntoAlbums(songs)
     }
 
     fun splitIntoAlbums(
-            songs: ArrayList<Song>?
+        songs: ArrayList<Song>?
     ): ArrayList<Album> {
         val albums = ArrayList<Album>()
         if (songs != null) {
@@ -79,8 +94,8 @@ object AlbumLoader {
     }
 
     private fun getOrCreateAlbum(
-            albums: ArrayList<Album>,
-            albumId: Int
+        albums: ArrayList<Album>,
+        albumId: Int
     ): Album {
         for (album in albums) {
             if (album.songs!!.isNotEmpty() && album.songs[0].albumId == albumId) {
@@ -97,6 +112,8 @@ object AlbumLoader {
     }
 
     private fun getSongLoaderSortOrder(context: Context): String {
-        return PreferenceUtil.getInstance(context).albumSortOrder + ", " + PreferenceUtil.getInstance(context).albumSongSortOrder
+        return PreferenceUtil.getInstance(context).albumSortOrder + ", " + PreferenceUtil.getInstance(
+            context
+        ).albumSongSortOrder
     }
 }

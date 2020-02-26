@@ -87,7 +87,13 @@ class DeleteSongsDialog : DialogFragment() {
                     deleteSongsAsyncTask?.cancel(true)
                 }
                 deleteSongsAsyncTask = DeleteSongsAsyncTask(this)
-                deleteSongsAsyncTask?.execute(DeleteSongsAsyncTask.LoadingInfo(requestCode, resultCode, data))
+                deleteSongsAsyncTask?.execute(
+                    DeleteSongsAsyncTask.LoadingInfo(
+                        requestCode,
+                        resultCode,
+                        data
+                    )
+                )
             }
         }
     }

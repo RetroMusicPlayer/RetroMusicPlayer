@@ -1,26 +1,15 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.content.ServiceConnection
+import android.content.*
 import android.os.Bundle
 import android.os.IBinder
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
-import code.name.monkey.retromusic.service.MusicService.FAVORITE_STATE_CHANGED
-import code.name.monkey.retromusic.service.MusicService.MEDIA_STORE_CHANGED
-import code.name.monkey.retromusic.service.MusicService.META_CHANGED
-import code.name.monkey.retromusic.service.MusicService.PLAY_STATE_CHANGED
-import code.name.monkey.retromusic.service.MusicService.QUEUE_CHANGED
-import code.name.monkey.retromusic.service.MusicService.REPEAT_MODE_CHANGED
-import code.name.monkey.retromusic.service.MusicService.SHUFFLE_MODE_CHANGED
+import code.name.monkey.retromusic.service.MusicService.*
 import java.lang.ref.WeakReference
-import java.util.ArrayList
+import java.util.*
 
 abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventListener {
 

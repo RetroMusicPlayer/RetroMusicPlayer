@@ -67,7 +67,8 @@ object ViewUtil {
             BlendModeColorFilterCompat.createBlendModeColorFilterCompat(newColor, SRC_IN)
 
         val background = layerDrawable.findDrawableByLayerId(android.R.id.background)
-        val primaryColor = ATHUtil.resolveColor(progressSlider.context, android.R.attr.windowBackground)
+        val primaryColor =
+            ATHUtil.resolveColor(progressSlider.context, android.R.attr.windowBackground)
         background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
             MaterialValueHelper.getPrimaryDisabledTextColor(
                 progressSlider.context,
@@ -77,7 +78,12 @@ object ViewUtil {
 
         val secondaryProgress = layerDrawable.findDrawableByLayerId(android.R.id.secondaryProgress)
         secondaryProgress?.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ColorUtil.withAlpha(newColor, 0.65f), SRC_IN)
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                ColorUtil.withAlpha(
+                    newColor,
+                    0.65f
+                ), SRC_IN
+            )
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {

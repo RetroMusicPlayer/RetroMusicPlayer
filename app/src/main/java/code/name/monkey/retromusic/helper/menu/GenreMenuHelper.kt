@@ -39,7 +39,7 @@ object GenreMenuHelper {
             }
             R.id.action_add_to_playlist -> {
                 AddToPlaylistDialog.create(getGenreSongs(activity, genre))
-                        .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_add_to_current_playing -> {

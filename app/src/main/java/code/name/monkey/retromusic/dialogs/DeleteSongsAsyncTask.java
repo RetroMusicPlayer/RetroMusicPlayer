@@ -21,54 +21,29 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.List;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.SAFUtil;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import java.lang.ref.WeakReference;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by hemanths on 2019-07-31.
  */
 public class DeleteSongsAsyncTask extends DialogAsyncTask<DeleteSongsAsyncTask.LoadingInfo, Integer, Void> {
 
-    public static class LoadingInfo {
-
-        public Intent intent;
-
-        public boolean isIntent;
-
-        public int requestCode;
-
-        public int resultCode;
-
-        public List<Uri> safUris;
-
-        public List<Song> songs;
-
-        public LoadingInfo(List<Song> songs, List<Uri> safUris) {
-            this.isIntent = false;
-            this.songs = songs;
-            this.safUris = safUris;
-        }
-
-        public LoadingInfo(int requestCode, int resultCode, Intent intent) {
-            this.isIntent = true;
-            this.requestCode = requestCode;
-            this.resultCode = resultCode;
-            this.intent = intent;
-        }
-    }
-
     private WeakReference<FragmentActivity> activityWeakReference;
-
     private WeakReference<DeleteSongsDialog> dialogReference;
 
     public DeleteSongsAsyncTask(@NonNull DeleteSongsDialog dialog) {
@@ -137,5 +112,33 @@ public class DeleteSongsAsyncTask extends DialogAsyncTask<DeleteSongsAsyncTask.L
         }
 
         return null;
+    }
+
+    public static class LoadingInfo {
+
+        public Intent intent;
+
+        public boolean isIntent;
+
+        public int requestCode;
+
+        public int resultCode;
+
+        public List<Uri> safUris;
+
+        public List<Song> songs;
+
+        public LoadingInfo(List<Song> songs, List<Uri> safUris) {
+            this.isIntent = false;
+            this.songs = songs;
+            this.safUris = safUris;
+        }
+
+        public LoadingInfo(int requestCode, int resultCode, Intent intent) {
+            this.isIntent = true;
+            this.requestCode = requestCode;
+            this.resultCode = resultCode;
+            this.intent = intent;
+        }
     }
 }

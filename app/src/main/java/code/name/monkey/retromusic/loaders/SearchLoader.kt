@@ -17,7 +17,7 @@ package code.name.monkey.retromusic.loaders
 import android.content.Context
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Genre
-import java.util.Locale
+import java.util.*
 
 object SearchLoader {
     fun searchAll(context: Context, query: String?): MutableList<Any> {

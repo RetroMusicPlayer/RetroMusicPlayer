@@ -16,13 +16,17 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
+
 import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.HistoryStore;
-import java.util.ArrayList;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

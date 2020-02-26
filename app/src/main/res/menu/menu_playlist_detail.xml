@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:visible="false"
         android:id="@+id/action_shuffle_playlist"
         android:icon="@drawable/ic_shuffle_white_24dp"
         android:title="@string/action_shuffle_playlist"
+        android:visible="false"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_play"

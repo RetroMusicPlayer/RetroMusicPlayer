@@ -51,7 +51,12 @@ class AddToPlaylistDialog : DialogFragment() {
                     }
                 } else {
                     dialog.dismiss()
-                    PlaylistsUtil.addToPlaylist(requireContext(), songs, playlists[index - 1].id, true)
+                    PlaylistsUtil.addToPlaylist(
+                        requireContext(),
+                        songs,
+                        playlists[index - 1].id,
+                        true
+                    )
                 }
             }
         }

@@ -20,7 +20,7 @@ import android.provider.BaseColumns
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.PlaylistsColumns
 import code.name.monkey.retromusic.model.Playlist
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.

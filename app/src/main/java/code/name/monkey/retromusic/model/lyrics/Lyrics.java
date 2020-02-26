@@ -15,19 +15,21 @@
 package code.name.monkey.retromusic.model.lyrics;
 
 
-import code.name.monkey.retromusic.model.Song;
 import java.util.ArrayList;
+
+import code.name.monkey.retromusic.model.Song;
 
 public class Lyrics {
 
     private static final ArrayList<Class<? extends Lyrics>> FORMATS = new ArrayList<>();
 
+    static {
+        Lyrics.FORMATS.add(SynchronizedLyricsLRC.class);
+    }
+
     public String data;
-
     public Song song;
-
     protected boolean parsed = false;
-
     protected boolean valid = false;
 
     public static boolean isSynchronized(String data) {
@@ -81,9 +83,5 @@ public class Lyrics {
         this.song = song;
         this.data = data;
         return this;
-    }
-
-    static {
-        Lyrics.FORMATS.add(SynchronizedLyricsLRC.class);
     }
 }

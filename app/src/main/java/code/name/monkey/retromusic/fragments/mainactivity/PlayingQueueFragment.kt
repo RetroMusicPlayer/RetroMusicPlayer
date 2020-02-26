@@ -28,12 +28,13 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
+import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 /**
  * Created by hemanths on 2019-12-08.
  */
-class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
+class PlayingQueueFragment :
+    AbsLibraryPagerRecyclerViewFragment<PlayingQueueAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {
@@ -57,8 +58,10 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
 
         val animator = DraggableItemAnimator()
         animator.supportsChangeAnimations = false
-        wrappedAdapter = recyclerViewDragDropManager?.createWrappedAdapter(adapter!!) as RecyclerView.Adapter<*>
-        wrappedAdapter = recyclerViewSwipeManager?.createWrappedAdapter(wrappedAdapter) as RecyclerView.Adapter<*>
+        wrappedAdapter =
+            recyclerViewDragDropManager?.createWrappedAdapter(adapter!!) as RecyclerView.Adapter<*>
+        wrappedAdapter =
+            recyclerViewSwipeManager?.createWrappedAdapter(wrappedAdapter) as RecyclerView.Adapter<*>
         recyclerView().layoutManager = layoutManager
         recyclerView().adapter = wrappedAdapter
         recyclerView().itemAnimator = animator
@@ -137,6 +140,7 @@ class PlayingQueueFragment : AbsLibraryPagerRecyclerViewFragment<PlayingQueueAda
     companion object {
         @JvmField
         val TAG: String = PlayingQueueFragment::class.java.simpleName
+
         @JvmStatic
         fun newInstance(): PlayingQueueFragment {
             return PlayingQueueFragment()

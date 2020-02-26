@@ -23,7 +23,7 @@ import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 10/08/17.

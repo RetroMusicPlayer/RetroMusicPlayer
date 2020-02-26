@@ -19,8 +19,10 @@ import android.app.Activity;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.widget.Toast;
-import code.name.monkey.retromusic.R;
+
 import java.lang.ref.WeakReference;
+
+import code.name.monkey.retromusic.R;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -30,15 +32,10 @@ public class UpdateToastMediaScannerCompletionListener implements MediaScannerCo
     private final WeakReference<Activity> activityWeakReference;
 
     private final String couldNotScanFiles;
-
-    private int failed = 0;
-
-    private int scanned = 0;
-
     private final String scannedFiles;
-
     private final String[] toBeScanned;
-
+    private int failed = 0;
+    private int scanned = 0;
     private Toast toast;
 
     @SuppressLint("ShowToast")

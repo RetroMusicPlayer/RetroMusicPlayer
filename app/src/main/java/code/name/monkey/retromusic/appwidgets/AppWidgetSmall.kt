@@ -49,9 +49,36 @@ class AppWidgetSmall : BaseAppWidget() {
 
         appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
-        appWidgetView.setImageViewBitmap(R.id.button_next, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_next_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_prev, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_skip_previous_white_24dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
-        appWidgetView.setImageViewBitmap(R.id.button_toggle_play_pause, createBitmap(RetroUtil.getTintedVectorDrawable(context, R.drawable.ic_play_arrow_white_32dp, MaterialValueHelper.getSecondaryTextColor(context, true))!!, 1f))
+        appWidgetView.setImageViewBitmap(
+            R.id.button_next,
+            createBitmap(
+                RetroUtil.getTintedVectorDrawable(
+                    context,
+                    R.drawable.ic_skip_next_white_24dp,
+                    MaterialValueHelper.getSecondaryTextColor(context, true)
+                )!!, 1f
+            )
+        )
+        appWidgetView.setImageViewBitmap(
+            R.id.button_prev,
+            createBitmap(
+                RetroUtil.getTintedVectorDrawable(
+                    context,
+                    R.drawable.ic_skip_previous_white_24dp,
+                    MaterialValueHelper.getSecondaryTextColor(context, true)
+                )!!, 1f
+            )
+        )
+        appWidgetView.setImageViewBitmap(
+            R.id.button_toggle_play_pause,
+            createBitmap(
+                RetroUtil.getTintedVectorDrawable(
+                    context,
+                    R.drawable.ic_play_arrow_white_32dp,
+                    MaterialValueHelper.getSecondaryTextColor(context, true)
+                )!!, 1f
+            )
+        )
 
         linkButtons(context, appWidgetView)
         pushUpdate(context, appWidgetIds, appWidgetView)
@@ -98,66 +125,66 @@ class AppWidgetSmall : BaseAppWidget() {
                 Glide.clear(target)
             }
             target = SongGlideRequest.Builder.from(Glide.with(service), song)
-                    .checkIgnoreMediaStore(service).generatePalette(service).build().centerCrop()
-                    .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
-                        override fun onResourceReady(
-                                resource: BitmapPaletteWrapper,
-                                glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
-                        ) {
-                            val palette = resource.palette
-                            update(
-                                    resource.bitmap, palette.getVibrantColor(
-                                    palette.getMutedColor(
-                                            MaterialValueHelper.getSecondaryTextColor(
-                                                    service, true
-                                            )
+                .checkIgnoreMediaStore(service).generatePalette(service).build().centerCrop()
+                .into(object : SimpleTarget<BitmapPaletteWrapper>(imageSize, imageSize) {
+                    override fun onResourceReady(
+                        resource: BitmapPaletteWrapper,
+                        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
+                    ) {
+                        val palette = resource.palette
+                        update(
+                            resource.bitmap, palette.getVibrantColor(
+                                palette.getMutedColor(
+                                    MaterialValueHelper.getSecondaryTextColor(
+                                        service, true
                                     )
+                                )
                             )
-                            )
-                        }
+                        )
+                    }
 
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                            super.onLoadFailed(e, errorDrawable)
-                            update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
-                        }
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        super.onLoadFailed(e, errorDrawable)
+                        update(null, MaterialValueHelper.getSecondaryTextColor(service, true))
+                    }
 
-                        private fun update(bitmap: Bitmap?, color: Int) {
-                            // Set correct drawable for pause state
-                            val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp
-                            else R.drawable.ic_play_arrow_white_32dp
-                            appWidgetView.setImageViewBitmap(
-                                    R.id.button_toggle_play_pause, createBitmap(
-                                    RetroUtil.getTintedVectorDrawable(
-                                            service, playPauseRes, color
-                                    )!!, 1f
+                    private fun update(bitmap: Bitmap?, color: Int) {
+                        // Set correct drawable for pause state
+                        val playPauseRes = if (isPlaying) R.drawable.ic_pause_white_24dp
+                        else R.drawable.ic_play_arrow_white_32dp
+                        appWidgetView.setImageViewBitmap(
+                            R.id.button_toggle_play_pause, createBitmap(
+                                RetroUtil.getTintedVectorDrawable(
+                                    service, playPauseRes, color
+                                )!!, 1f
                             )
-                            )
+                        )
 
-                            // Set prev/next button drawables
-                            appWidgetView.setImageViewBitmap(
-                                    R.id.button_next, createBitmap(
-                                    RetroUtil.getTintedVectorDrawable(
-                                            service, R.drawable.ic_skip_next_white_24dp, color
-                                    )!!, 1f
+                        // Set prev/next button drawables
+                        appWidgetView.setImageViewBitmap(
+                            R.id.button_next, createBitmap(
+                                RetroUtil.getTintedVectorDrawable(
+                                    service, R.drawable.ic_skip_next_white_24dp, color
+                                )!!, 1f
                             )
+                        )
+                        appWidgetView.setImageViewBitmap(
+                            R.id.button_prev, createBitmap(
+                                RetroUtil.getTintedVectorDrawable(
+                                    service, R.drawable.ic_skip_previous_white_24dp, color
+                                )!!, 1f
                             )
-                            appWidgetView.setImageViewBitmap(
-                                    R.id.button_prev, createBitmap(
-                                    RetroUtil.getTintedVectorDrawable(
-                                            service, R.drawable.ic_skip_previous_white_24dp, color
-                                    )!!, 1f
-                            )
-                            )
+                        )
 
-                            val image = getAlbumArtDrawable(service.resources, bitmap)
-                            val roundedBitmap = createRoundedBitmap(
-                                    image, imageSize, imageSize, cardRadius, 0f, 0f, 0f
-                            )
-                            appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
+                        val image = getAlbumArtDrawable(service.resources, bitmap)
+                        val roundedBitmap = createRoundedBitmap(
+                            image, imageSize, imageSize, cardRadius, 0f, 0f, 0f
+                        )
+                        appWidgetView.setImageViewBitmap(R.id.image, roundedBitmap)
 
-                            pushUpdate(appContext, appWidgetIds, appWidgetView)
-                        }
-                    })
+                        pushUpdate(appContext, appWidgetIds, appWidgetView)
+                    }
+                })
         }
     }
 

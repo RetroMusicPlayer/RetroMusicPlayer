@@ -69,7 +69,10 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
             ContextCompat.getDrawable(this, R.drawable.round_window)
         else ContextCompat.getDrawable(this, R.drawable.square_window)
         background =
-            TintHelper.createTintedDrawable(background, ATHUtil.resolveColor(this, android.R.attr.windowBackground))
+            TintHelper.createTintedDrawable(
+                background,
+                ATHUtil.resolveColor(this, android.R.attr.windowBackground)
+            )
         window.setBackgroundDrawable(background)
     }
 
@@ -92,7 +95,11 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         if (statusBar != null) {
             when {
                 VersionUtils.hasMarshmallow() -> statusBar.setBackgroundColor(color)
-                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(ColorUtil.darkenColor(color))
+                VersionUtils.hasLollipop() -> statusBar.setBackgroundColor(
+                    ColorUtil.darkenColor(
+                        color
+                    )
+                )
                 else -> statusBar.setBackgroundColor(color)
             }
         } else {

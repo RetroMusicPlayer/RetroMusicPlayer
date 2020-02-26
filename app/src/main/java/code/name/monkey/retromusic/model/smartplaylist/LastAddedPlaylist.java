@@ -16,12 +16,16 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
+
 import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.LastAddedSongsLoader;
 import code.name.monkey.retromusic.model.Song;
-import java.util.ArrayList;
-import org.jetbrains.annotations.NotNull;
 
 
 public class LastAddedPlaylist extends AbsSmartPlaylist {

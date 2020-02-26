@@ -19,7 +19,7 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
-import kotlinx.android.synthetic.main.fragment_adaptive_player.playerToolbar
+import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
 class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
 
@@ -55,7 +55,10 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
             lyricsLine2.visibility = View.VISIBLE
 
             lyricsLine2.measure(
-                View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(
+                    lyricsLine2.measuredWidth,
+                    View.MeasureSpec.EXACTLY
+                ),
                 View.MeasureSpec.UNSPECIFIED
             )
             val h: Float = lyricsLine2.measuredHeight.toFloat()
@@ -79,12 +82,13 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     private fun hideLyricsLayout() {
-        lyricsLayout.animate().alpha(0f).setDuration(VISIBILITY_ANIM_DURATION).withEndAction(Runnable {
-            if (!isLyricsLayoutBound()) return@Runnable
-            lyricsLayout.visibility = View.GONE
-            lyricsLine1.text = null
-            lyricsLine2.text = null
-        })
+        lyricsLayout.animate().alpha(0f).setDuration(VISIBILITY_ANIM_DURATION)
+            .withEndAction(Runnable {
+                if (!isLyricsLayoutBound()) return@Runnable
+                lyricsLayout.visibility = View.GONE
+                lyricsLine1.text = null
+                lyricsLine2.text = null
+            })
     }
 
     override fun setLyrics(l: Lyrics?) {
@@ -116,7 +120,11 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     private var lastColor: Int = 0
     private lateinit var playbackControlsFragment: AdaptivePlaybackControlsFragment
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_adaptive_player, container, false)
     }
 

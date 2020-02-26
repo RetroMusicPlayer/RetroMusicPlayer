@@ -91,7 +91,8 @@ class OrderablePlaylistSongAdapter(
         fun onMoveItem(fromPosition: Int, toPosition: Int)
     }
 
-    inner class ViewHolder(itemView: View) : PlaylistSongAdapter.ViewHolder(itemView), DraggableItemViewHolder {
+    inner class ViewHolder(itemView: View) : PlaylistSongAdapter.ViewHolder(itemView),
+        DraggableItemViewHolder {
         @DraggableItemStateFlags
         private var mDragStateFlags: Int = 0
 

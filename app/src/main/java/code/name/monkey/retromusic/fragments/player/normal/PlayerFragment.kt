@@ -36,12 +36,20 @@ class PlayerFragment : AbsPlayerFragment() {
             valueAnimator?.cancel()
         }
 
-        valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), ATHUtil.resolveColor(requireContext(), R.attr.colorSurface), i)
+        valueAnimator = ValueAnimator.ofObject(
+            ArgbEvaluator(),
+            ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
+            i
+        )
         valueAnimator?.addUpdateListener { animation ->
             if (isAdded) {
-                val drawable = DrawableGradient(GradientDrawable.Orientation.TOP_BOTTOM,
-                        intArrayOf(animation.animatedValue as Int,
-                                ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)), 0)
+                val drawable = DrawableGradient(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    intArrayOf(
+                        animation.animatedValue as Int,
+                        ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
+                    ), 0
+                )
                 colorGradientBackground?.background = drawable
             }
         }
@@ -70,7 +78,11 @@ class PlayerFragment : AbsPlayerFragment() {
         lastColor = color
         callbacks?.onPaletteColorChanged()
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            requireActivity()
+        )
 
         if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             colorize(color)
@@ -89,8 +101,10 @@ class PlayerFragment : AbsPlayerFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         return inflater.inflate(R.layout.fragment_player, container, false)
     }
@@ -103,17 +117,23 @@ class PlayerFragment : AbsPlayerFragment() {
 
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
-        val playerAlbumCoverFragment = childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
         playerToolbar.inflateMenu(R.menu.menu_player)
-        playerToolbar.setNavigationOnClickListener {requireActivity().onBackPressed() }
+        playerToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         playerToolbar.setOnMenuItemClickListener(this)
 
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, ATHUtil.resolveColor(context, R.attr.colorControlNormal), requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            requireActivity()
+        )
     }
 
     override fun onServiceConnected() {

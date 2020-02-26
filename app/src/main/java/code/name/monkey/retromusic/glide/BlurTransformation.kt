@@ -87,7 +87,12 @@ class BlurTransformation : BitmapTransformation {
         }
     }
 
-    override fun transform(pool: BitmapPool, toTransform: Bitmap, outWidth: Int, outHeight: Int): Bitmap? {
+    override fun transform(
+        pool: BitmapPool,
+        toTransform: Bitmap,
+        outWidth: Int,
+        outHeight: Int
+    ): Bitmap? {
         val sampling: Int
         if (this.sampling == 0) {
             sampling = ImageUtil.calculateInSampleSize(toTransform.width, toTransform.height, 100)
@@ -114,7 +119,12 @@ class BlurTransformation : BitmapTransformation {
         if (Build.VERSION.SDK_INT >= 17) {
             try {
                 val rs = RenderScript.create(context!!.applicationContext)
-                val input = Allocation.createFromBitmap(rs, out, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT)
+                val input = Allocation.createFromBitmap(
+                    rs,
+                    out,
+                    Allocation.MipmapControl.MIPMAP_NONE,
+                    Allocation.USAGE_SCRIPT
+                )
                 val output = Allocation.createTyped(rs, input.type)
                 val script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs))
 

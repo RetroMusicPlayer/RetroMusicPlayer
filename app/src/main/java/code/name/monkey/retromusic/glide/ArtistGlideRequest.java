@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
@@ -30,8 +29,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 
-import code.name.monkey.appthemehelper.ThemeStore;
-import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
@@ -49,23 +46,38 @@ public class ArtistGlideRequest {
 
     private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_artist_art;
 
+    @NonNull
+    public static Key createSignature(@NonNull Artist artist) {
+        return ArtistSignatureUtil.getInstance(App.Companion.getContext()).getArtistSignature(artist.getName());
+    }
+
+    @NonNull
+    private static DrawableTypeRequest createBaseRequest(@NonNull RequestManager requestManager,
+                                                         @NonNull Artist artist,
+                                                         boolean noCustomImage, boolean forceDownload) {
+        boolean hasCustomImage = CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext())
+                .hasCustomArtistImage(artist);
+        if (noCustomImage || !hasCustomImage) {
+            return requestManager.load(new ArtistImage(artist.getName()));
+        } else {
+            return requestManager.load(CustomArtistImageUtil.getFile(artist));
+        }
+    }
+
     public static class Builder {
 
         final Artist artist;
-
-        boolean forceDownload;
-
-        boolean noCustomImage;
-
         final RequestManager requestManager;
-
-        public static Builder from(@NonNull RequestManager requestManager, Artist artist) {
-            return new Builder(requestManager, artist);
-        }
+        boolean forceDownload;
+        boolean noCustomImage;
 
         private Builder(@NonNull RequestManager requestManager, Artist artist) {
             this.requestManager = requestManager;
             this.artist = artist;
+        }
+
+        public static Builder from(@NonNull RequestManager requestManager, Artist artist) {
+            return new Builder(requestManager, artist);
         }
 
         public BitmapBuilder asBitmap() {
@@ -132,38 +144,18 @@ public class ArtistGlideRequest {
         }
 
         public BitmapRequestBuilder<?, BitmapPaletteWrapper> build() {
-            Drawable drawable = TintHelper.createTintedDrawable(context, DEFAULT_ERROR_IMAGE, ThemeStore.Companion.accentColor(context));
             //noinspection unchecked
             return createBaseRequest(builder.requestManager, builder.artist, builder.noCustomImage,
                     builder.forceDownload)
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(drawable)
-                    .error(drawable)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .signature(createSignature(builder.artist));
-        }
-    }
-
-
-    @NonNull
-    public static Key createSignature(@NonNull Artist artist) {
-        return ArtistSignatureUtil.getInstance(App.Companion.getContext()).getArtistSignature(artist.getName());
-    }
-
-    @NonNull
-    private static DrawableTypeRequest createBaseRequest(@NonNull RequestManager requestManager,
-                                                         @NonNull Artist artist,
-                                                         boolean noCustomImage, boolean forceDownload) {
-        boolean hasCustomImage = CustomArtistImageUtil.Companion.getInstance(App.Companion.getContext())
-                .hasCustomArtistImage(artist);
-        if (noCustomImage || !hasCustomImage) {
-            return requestManager.load(new ArtistImage(artist.getName()));
-        } else {
-            return requestManager.load(CustomArtistImageUtil.getFile(artist));
         }
     }
 }

@@ -14,6 +14,17 @@
 
 package code.name.monkey.retromusic.service;
 
+import android.media.AudioManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+
+import androidx.annotation.NonNull;
+
+import java.lang.ref.WeakReference;
+
+import code.name.monkey.retromusic.util.PreferenceUtil;
+
 import static code.name.monkey.retromusic.service.MusicService.DUCK;
 import static code.name.monkey.retromusic.service.MusicService.META_CHANGED;
 import static code.name.monkey.retromusic.service.MusicService.PLAY_STATE_CHANGED;
@@ -21,20 +32,11 @@ import static code.name.monkey.retromusic.service.MusicService.REPEAT_MODE_NONE;
 import static code.name.monkey.retromusic.service.MusicService.TRACK_ENDED;
 import static code.name.monkey.retromusic.service.MusicService.TRACK_WENT_TO_NEXT;
 
-import android.media.AudioManager;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import androidx.annotation.NonNull;
-import code.name.monkey.retromusic.util.PreferenceUtil;
-import java.lang.ref.WeakReference;
-
 class PlaybackHandler extends Handler {
-
-    private float currentDuckVolume = 1.0f;
 
     @NonNull
     private final WeakReference<MusicService> mService;
+    private float currentDuckVolume = 1.0f;
 
     PlaybackHandler(final MusicService service, @NonNull final Looper looper) {
         super(looper);

@@ -57,7 +57,10 @@ class CreatePlaylistDialog : DialogFragment() {
                         ?: return@positiveButton
 
                     if (playlistView.text.toString().trim { it <= ' ' }.isNotEmpty()) {
-                        val playlistId = PlaylistsUtil.createPlaylist(requireContext(), playlistView.text.toString())
+                        val playlistId = PlaylistsUtil.createPlaylist(
+                            requireContext(),
+                            playlistView.text.toString()
+                        )
                         if (playlistId != -1 && activity != null) {
                             PlaylistsUtil.addToPlaylist(requireContext(), songs, playlistId, true)
                         }
@@ -73,7 +76,10 @@ class CreatePlaylistDialog : DialogFragment() {
 
         val playlistId = arguments!!.getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
         playlistView.appHandleColor()
-            .setText(PlaylistsUtil.getNameForPlaylist(requireContext(), playlistId), TextView.BufferType.EDITABLE)
+            .setText(
+                PlaylistsUtil.getNameForPlaylist(requireContext(), playlistId),
+                TextView.BufferType.EDITABLE
+            )
         return materialDialog
     }
 

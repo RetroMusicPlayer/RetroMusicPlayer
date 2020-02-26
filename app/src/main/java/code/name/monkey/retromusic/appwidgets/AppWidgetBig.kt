@@ -45,40 +45,40 @@ class AppWidgetBig : BaseAppWidget() {
      */
     override fun defaultAppWidget(context: Context, appWidgetIds: IntArray) {
         val appWidgetView = RemoteViews(
-                context.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
+            context.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
         )
 
         appWidgetView.setViewVisibility(
-                code.name.monkey.retromusic.R.id.media_titles,
-                View.INVISIBLE
+            code.name.monkey.retromusic.R.id.media_titles,
+            View.INVISIBLE
         )
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         appWidgetView.setImageViewBitmap(
-                R.id.button_next, BaseAppWidget.createBitmap(
+            R.id.button_next, BaseAppWidget.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        context,
-                        code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
-                        MaterialValueHelper.getPrimaryTextColor(context, false)
+                    context,
+                    code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
+                    MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
-        )
+            )
         )
         appWidgetView.setImageViewBitmap(
-                R.id.button_prev, BaseAppWidget.Companion.createBitmap(
+            R.id.button_prev, BaseAppWidget.Companion.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        context,
-                        code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
-                        MaterialValueHelper.getPrimaryTextColor(context, false)
+                    context,
+                    code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
+                    MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
-        )
+            )
         )
         appWidgetView.setImageViewBitmap(
-                R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(
+            R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        context,
-                        code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp,
-                        MaterialValueHelper.getPrimaryTextColor(context, false)
+                    context,
+                    code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp,
+                    MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
-        )
+            )
         )
 
         linkButtons(context, appWidgetView)
@@ -90,7 +90,7 @@ class AppWidgetBig : BaseAppWidget() {
      */
     override fun performUpdate(service: MusicService, appWidgetIds: IntArray?) {
         val appWidgetView = RemoteViews(
-                service.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
+            service.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
         )
 
         val isPlaying = service.isPlaying
@@ -99,51 +99,52 @@ class AppWidgetBig : BaseAppWidget() {
         // Set the titles and artwork
         if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
             appWidgetView.setViewVisibility(
-                    code.name.monkey.retromusic.R.id.media_titles,
-                    View.INVISIBLE
+                code.name.monkey.retromusic.R.id.media_titles,
+                View.INVISIBLE
             )
         } else {
             appWidgetView.setViewVisibility(
-                    code.name.monkey.retromusic.R.id.media_titles,
-                    View.VISIBLE
+                code.name.monkey.retromusic.R.id.media_titles,
+                View.VISIBLE
             )
             appWidgetView.setTextViewText(code.name.monkey.retromusic.R.id.title, song.title)
             appWidgetView.setTextViewText(
-                    code.name.monkey.retromusic.R.id.text,
-                    getSongArtistAndAlbum(song)
+                code.name.monkey.retromusic.R.id.text,
+                getSongArtistAndAlbum(song)
             )
         }
 
         // Set correct drawable for pause state
-        val playPauseRes = if (isPlaying) code.name.monkey.retromusic.R.drawable.ic_pause_white_24dp else code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp
+        val playPauseRes =
+            if (isPlaying) code.name.monkey.retromusic.R.drawable.ic_pause_white_24dp else code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(
-                R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
+            R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        service,
-                        playPauseRes,
-                        MaterialValueHelper.getPrimaryTextColor(service, false)
+                    service,
+                    playPauseRes,
+                    MaterialValueHelper.getPrimaryTextColor(service, false)
                 )!!, 1f
-        )
+            )
         )
 
         // Set prev/next button drawables
         appWidgetView.setImageViewBitmap(
-                R.id.button_next, BaseAppWidget.Companion.createBitmap(
+            R.id.button_next, BaseAppWidget.Companion.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        service,
-                        code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
-                        MaterialValueHelper.getPrimaryTextColor(service, false)
+                    service,
+                    code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
+                    MaterialValueHelper.getPrimaryTextColor(service, false)
                 )!!, 1f
-        )
+            )
         )
         appWidgetView.setImageViewBitmap(
-                R.id.button_prev, BaseAppWidget.Companion.createBitmap(
+            R.id.button_prev, BaseAppWidget.Companion.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
-                        service,
-                        code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
-                        MaterialValueHelper.getPrimaryTextColor(service, false)
+                    service,
+                    code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
+                    MaterialValueHelper.getPrimaryTextColor(service, false)
                 )!!, 1f
-        )
+            )
         )
 
         // Link actions buttons to intents
@@ -158,32 +159,32 @@ class AppWidgetBig : BaseAppWidget() {
                 Glide.clear(target)
             }
             target = SongGlideRequest.Builder.from(Glide.with(appContext), song)
-                    .checkIgnoreMediaStore(appContext).asBitmap().build()
-                    .into(object : SimpleTarget<Bitmap>(widgetImageSize, widgetImageSize) {
-                        override fun onResourceReady(
-                                resource: Bitmap,
-                                glideAnimation: GlideAnimation<in Bitmap>
-                        ) {
-                            update(resource)
-                        }
+                .checkIgnoreMediaStore(appContext).asBitmap().build()
+                .into(object : SimpleTarget<Bitmap>(widgetImageSize, widgetImageSize) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        glideAnimation: GlideAnimation<in Bitmap>
+                    ) {
+                        update(resource)
+                    }
 
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                            super.onLoadFailed(e, errorDrawable)
-                            update(null)
-                        }
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        super.onLoadFailed(e, errorDrawable)
+                        update(null)
+                    }
 
-                        private fun update(bitmap: Bitmap?) {
-                            if (bitmap == null) {
-                                appWidgetView.setImageViewResource(
-                                        R.id.image,
-                                        R.drawable.default_audio_art
-                                )
-                            } else {
-                                appWidgetView.setImageViewBitmap(R.id.image, bitmap)
-                            }
-                            pushUpdate(appContext, appWidgetIds, appWidgetView)
+                    private fun update(bitmap: Bitmap?) {
+                        if (bitmap == null) {
+                            appWidgetView.setImageViewResource(
+                                R.id.image,
+                                R.drawable.default_audio_art
+                            )
+                        } else {
+                            appWidgetView.setImageViewBitmap(R.id.image, bitmap)
                         }
-                    });
+                        pushUpdate(appContext, appWidgetIds, appWidgetView)
+                    }
+                });
         }
     }
 

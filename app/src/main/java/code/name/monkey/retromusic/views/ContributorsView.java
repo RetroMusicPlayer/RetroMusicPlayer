@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import code.name.monkey.retromusic.R;
 
 import static code.name.monkey.retromusic.util.RetroUtil.openUrl;

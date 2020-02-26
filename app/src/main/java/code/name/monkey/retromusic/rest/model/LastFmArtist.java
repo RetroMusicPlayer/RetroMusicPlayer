@@ -16,12 +16,47 @@ package code.name.monkey.retromusic.rest.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LastFmArtist {
 
+    @Expose
+    private Artist artist;
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
     public static class Artist {
+
+        @Expose
+        public Stats stats;
+        @Expose
+        private Bio bio;
+        @Expose
+        private List<Image> image = new ArrayList<>();
+
+        public Bio getBio() {
+            return bio;
+        }
+
+        public void setBio(Bio bio) {
+            this.bio = bio;
+        }
+
+        public List<Image> getImage() {
+            return image;
+        }
+
+        public void setImage(List<Image> image) {
+            this.image = image;
+        }
 
         public static class Image {
 
@@ -87,41 +122,5 @@ public class LastFmArtist {
                 this.content = content;
             }
         }
-
-        @Expose
-        public Stats stats;
-
-        @Expose
-        private Bio bio;
-
-        @Expose
-        private List<Image> image = new ArrayList<>();
-
-        public Bio getBio() {
-            return bio;
-        }
-
-        public void setBio(Bio bio) {
-            this.bio = bio;
-        }
-
-        public List<Image> getImage() {
-            return image;
-        }
-
-        public void setImage(List<Image> image) {
-            this.image = image;
-        }
-    }
-
-    @Expose
-    private Artist artist;
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
     }
 }

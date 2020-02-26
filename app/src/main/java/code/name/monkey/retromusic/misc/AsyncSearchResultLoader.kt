@@ -22,7 +22,8 @@ import code.name.monkey.retromusic.loaders.ArtistLoader
 import code.name.monkey.retromusic.loaders.SongLoader
 import java.util.*
 
-internal class AsyncSearchResultLoader(context: Context, private val query: String) : WrappedAsyncTaskLoader<List<Any>>(context) {
+internal class AsyncSearchResultLoader(context: Context, private val query: String) :
+    WrappedAsyncTaskLoader<List<Any>>(context) {
 
     override fun loadInBackground(): List<Any>? {
         val results = ArrayList<Any>()

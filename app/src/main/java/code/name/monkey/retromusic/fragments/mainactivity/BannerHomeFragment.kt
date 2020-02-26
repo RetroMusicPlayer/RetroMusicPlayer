@@ -41,18 +41,11 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import kotlinx.android.synthetic.main.abs_playlists.actionShuffle
-import kotlinx.android.synthetic.main.abs_playlists.history
-import kotlinx.android.synthetic.main.abs_playlists.lastAdded
-import kotlinx.android.synthetic.main.abs_playlists.topPlayed
-import kotlinx.android.synthetic.main.fragment_banner_home.bannerImage
-import kotlinx.android.synthetic.main.fragment_banner_home.titleWelcome
-import kotlinx.android.synthetic.main.fragment_banner_home.userImage
-import kotlinx.android.synthetic.main.home_content.emptyContainer
-import kotlinx.android.synthetic.main.home_content.recyclerView
+import kotlinx.android.synthetic.main.abs_playlists.*
+import kotlinx.android.synthetic.main.fragment_banner_home.*
+import kotlinx.android.synthetic.main.home_content.*
 import java.io.File
-import java.util.Calendar
-import java.util.Random
+import java.util.*
 import javax.inject.Inject
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
@@ -65,7 +58,11 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homeAdapter.swapData(sections)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, viewGroup: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        viewGroup: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(
             if (PreferenceUtil.getInstance(requireContext()).isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
             viewGroup,
@@ -75,7 +72,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     private fun loadImageFromStorage() {
         Glide.with(requireContext())
-            .load(File(PreferenceUtil.getInstance(requireContext()).profileImage, Constants.USER_PROFILE))
+            .load(
+                File(
+                    PreferenceUtil.getInstance(requireContext()).profileImage,
+                    Constants.USER_PROFILE
+                )
+            )
             .asBitmap()
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
@@ -110,7 +112,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
 
         topPlayed.setOnClickListener {
-            NavigationUtil.goToPlaylistNew(requireActivity(), MyTopTracksPlaylist(requireActivity()))
+            NavigationUtil.goToPlaylistNew(
+                requireActivity(),
+                MyTopTracksPlaylist(requireActivity())
+            )
         }
 
         actionShuffle.setOnClickListener {
@@ -129,7 +134,8 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             )
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        titleWelcome?.text = String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
+        titleWelcome?.text =
+            String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
         App.musicComponent.inject(this)
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
@@ -186,7 +192,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
                     .error(R.drawable.material_design_default)
                     .into(it)
             } else {
-                request.load(File(PreferenceUtil.getInstance(requireContext()).bannerImage, USER_BANNER))
+                request.load(
+                    File(
+                        PreferenceUtil.getInstance(requireContext()).bannerImage,
+                        USER_BANNER
+                    )
+                )
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)

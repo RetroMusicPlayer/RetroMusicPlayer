@@ -16,21 +16,7 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR_CARD
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.CARD
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.CIRCLE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.COLOR
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FIT
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FLAT
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.MATERIAL
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.NORMAL
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.PEAK
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.PLAIN
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.SIMPLE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.TINY
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
@@ -53,11 +39,10 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.sliding_music_panel_layout.bottomNavigationView
-import kotlinx.android.synthetic.main.sliding_music_panel_layout.dimBackground
-import kotlinx.android.synthetic.main.sliding_music_panel_layout.slidingPanel
+import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 
-abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlayerFragment.Callbacks {
+abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
+    AbsPlayerFragment.Callbacks {
     companion object {
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
@@ -133,8 +118,10 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     }
 
     protected fun wrapSlidingMusicPanel(@LayoutRes resId: Int): View {
-        val slidingMusicPanelLayout = layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
-        val contentContainer = slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
+        val slidingMusicPanelLayout =
+            layoutInflater.inflate(R.layout.sliding_music_panel_layout, null)
+        val contentContainer =
+            slidingMusicPanelLayout.findViewById<ViewGroup>(R.id.mainContentFrame)
         layoutInflater.inflate(resId, contentContainer)
         return slidingMusicPanelLayout
     }
@@ -183,7 +170,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
     }
 
     private fun setupSlidingUpPanel() {
-        slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 if (currentNowPlayingScreen != PEAK) {
@@ -210,7 +198,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
 
     private fun hideBottomBar(hide: Boolean) {
         val heightOfBar = resources.getDimensionPixelSize(R.dimen.mini_player_height)
-        val heightOfBarWithTabs = resources.getDimensionPixelSize(R.dimen.mini_player_height_expanded)
+        val heightOfBarWithTabs =
+            resources.getDimensionPixelSize(R.dimen.mini_player_height_expanded)
 
         if (hide) {
             bottomSheetBehavior.isHideable = true
@@ -258,15 +247,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             .commit()
         supportFragmentManager.executePendingTransactions()
 
-        playerFragment = supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
-        miniPlayerFragment = supportFragmentManager.findFragmentById(R.id.miniPlayerFragment) as MiniPlayerFragment
+        playerFragment =
+            supportFragmentManager.findFragmentById(R.id.playerFragmentContainer) as AbsPlayerFragment
+        miniPlayerFragment =
+            supportFragmentManager.findFragmentById(R.id.miniPlayerFragment) as MiniPlayerFragment
         miniPlayerFragment?.view?.setOnClickListener { expandPanel() }
     }
 
     override fun onServiceConnected() {
         super.onServiceConnected()
         if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
-            slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            slidingPanel.viewTreeObserver.addOnGlobalLayoutListener(object :
+                ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     hideBottomBar(false)
@@ -303,7 +295,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
             if (PreferenceUtil.getInstance(this).adaptiveColor && (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
-            } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD || currentNowPlayingScreen == FIT || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
+            } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
                 super.setNavigationbarColor(Color.BLACK)
@@ -311,6 +303,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(), AbsPlay
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
+            } else if (currentNowPlayingScreen == FIT) {
+                super.setLightStatusbar(false)
             } else {
                 super.setLightStatusbar(
                     ColorUtil.isColorLight(

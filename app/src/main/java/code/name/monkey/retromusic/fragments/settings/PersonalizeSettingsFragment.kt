@@ -22,7 +22,8 @@ import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 
-class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class PersonalizeSettingsFragment : AbsSettingsFragment(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     override fun invalidateSettings() {
 
@@ -49,7 +50,8 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(), SharedPreferences.OnS
 
     override fun onDestroyView() {
         super.onDestroyView()
-        PreferenceUtil.getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.getInstance(requireContext())
+            .unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {

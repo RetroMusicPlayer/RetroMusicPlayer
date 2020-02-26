@@ -25,7 +25,6 @@ import com.bumptech.glide.load.model.stream.StreamModelLoader;
 import java.io.InputStream;
 
 
-
 public class AudioFileCoverLoader implements StreamModelLoader<AudioFileCover> {
 
     @Override

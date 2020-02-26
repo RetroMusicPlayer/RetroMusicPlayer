@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
         android:layoutAnimation="@anim/layout_animation_fall_down"
-        android:scrollbars="none"
         android:overScrollMode="never"
+        android:scrollbars="none"
         app:layout_dodgeInsetEdges="bottom"
         tools:listitem="@layout/item_list" />
 

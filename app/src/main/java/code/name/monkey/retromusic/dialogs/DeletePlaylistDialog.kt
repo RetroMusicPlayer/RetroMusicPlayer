@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import java.util.ArrayList
+import java.util.*
 
 class DeletePlaylistDialog : DialogFragment() {
 

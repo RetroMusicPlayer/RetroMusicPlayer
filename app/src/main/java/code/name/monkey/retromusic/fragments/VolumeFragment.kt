@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.setRange
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -18,9 +19,7 @@ import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.google.android.material.slider.Slider
 import com.google.android.material.slider.Slider.OnChangeListener
-import kotlinx.android.synthetic.main.fragment_volume.volumeDown
-import kotlinx.android.synthetic.main.fragment_volume.volumeSeekBar
-import kotlinx.android.synthetic.main.fragment_volume.volumeUp
+import kotlinx.android.synthetic.main.fragment_volume.*
 
 class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
     View.OnClickListener, OnChangeListener {
@@ -52,7 +51,8 @@ class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
 
         val audioManager = audioManager
         if (audioManager != null) {
-            volumeSeekBar.valueTo = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
+            volumeSeekBar.valueTo =
+                audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
             volumeSeekBar.value = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toFloat()
         }
         volumeSeekBar.addOnChangeListener(this)
@@ -62,11 +62,10 @@ class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
         if (volumeSeekBar == null) {
             return
         }
-        if (maxVolume <= 0) {
+        if (maxVolume <= 0.0f) {
             return
         }
-        volumeSeekBar.valueTo = maxVolume
-        volumeSeekBar.valueFrom = currentVolume
+        volumeSeekBar.setRange(currentVolume, maxVolume)
         volumeDown.setImageResource(if (currentVolume == 0.0f) R.drawable.ic_volume_off_white_24dp else R.drawable.ic_volume_down_white_24dp)
     }
 
@@ -110,7 +109,6 @@ class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
     fun setTintableColor(color: Int) {
         volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        //TintHelper.setTint(volumeSeekBar, color, false)
         ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
     }
 

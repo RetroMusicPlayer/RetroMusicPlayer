@@ -17,9 +17,12 @@ package code.name.monkey.retromusic.model;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
-import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
+
 import java.util.ArrayList;
+
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader;
 
 
 public class Playlist implements Parcelable {

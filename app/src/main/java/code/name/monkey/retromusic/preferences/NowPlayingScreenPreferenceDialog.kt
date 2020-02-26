@@ -34,16 +34,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR_CARD
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.CARD
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.CIRCLE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.COLOR
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.PLAIN
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.SIMPLE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.values
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -72,7 +63,8 @@ class NowPlayingScreenPreference @JvmOverloads constructor(
     }
 }
 
-class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewPager.OnPageChangeListener {
+class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
+    ViewPager.OnPageChangeListener {
 
     private var viewPagerPosition: Int = 0
 
@@ -90,13 +82,15 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(activity).inflate(R.layout.preference_dialog_now_playing_screen, null)
+        val view = LayoutInflater.from(activity)
+            .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
             ?: throw  IllegalStateException("Dialog view must contain a ViewPager with id 'now_playing_screen_view_pager'")
         viewPager.adapter = NowPlayingScreenAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
+        viewPager.currentItem =
+            PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
 
 
         return MaterialDialog(requireContext()).show {
@@ -104,7 +98,8 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
             positiveButton(R.string.set) {
                 val nowPlayingScreen = values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {
-                    val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
+                    val result =
+                        getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(activity!!)
                 } else {
@@ -134,7 +129,11 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
         val nowPlayingScreen = values()[position]
 
         val inflater = LayoutInflater.from(context)
-        val layout = inflater.inflate(R.layout.preference_now_playing_screen_item, collection, false) as ViewGroup
+        val layout = inflater.inflate(
+            R.layout.preference_now_playing_screen_item,
+            collection,
+            false
+        ) as ViewGroup
         collection.addView(layout)
 
         val image = layout.findViewById<ImageView>(R.id.image)

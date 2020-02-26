@@ -29,17 +29,12 @@ import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
 import code.name.monkey.retromusic.mvp.presenter.SearchView
 import code.name.monkey.retromusic.util.RetroUtil
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.activity_search.appBarLayout
-import kotlinx.android.synthetic.main.activity_search.back
-import kotlinx.android.synthetic.main.activity_search.clearText
-import kotlinx.android.synthetic.main.activity_search.empty
-import kotlinx.android.synthetic.main.activity_search.keyboardPopup
-import kotlinx.android.synthetic.main.activity_search.recyclerView
-import kotlinx.android.synthetic.main.activity_search.searchContainer
-import kotlinx.android.synthetic.main.activity_search.searchView
-import kotlinx.android.synthetic.main.activity_search.voiceSearch
-import java.util.Locale
+import kotlinx.android.synthetic.main.activity_search.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
+import kotlin.collections.MutableList
+import kotlin.collections.emptyList
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
     @Inject
@@ -71,7 +66,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         back.setOnClickListener { onBackPressed() }
         voiceSearch.setOnClickListener { startMicSearch() }
         clearText.setOnClickListener { searchView.clearText() }
-        searchContainer.backgroundTintList = ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        searchContainer.backgroundTintList =
+            ColorStateList.valueOf(ATHUtil.resolveColor(this, R.attr.colorSurface))
 
         keyboardPopup.setOnClickListener {
             val inputManager = getSystemService(Service.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -80,7 +76,10 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
 
         keyboardPopup.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
         ColorStateList.valueOf(
-            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(ThemeStore.accentColor(this)))
+            MaterialValueHelper.getPrimaryTextColor(
+                this,
+                ColorUtil.isColorLight(ThemeStore.accentColor(this))
+            )
         ).apply {
             keyboardPopup.setTextColor(this)
             keyboardPopup.iconTint = this
@@ -175,7 +174,8 @@ class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatch
         when (requestCode) {
             REQ_CODE_SPEECH_INPUT -> {
                 if (resultCode == Activity.RESULT_OK && null != data) {
-                    val result: ArrayList<String>? = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    val result: ArrayList<String>? =
+                        data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                     query = result?.get(0)
                     searchView.setText(query, BufferType.EDITABLE)
                     searchPresenter.search(query!!)

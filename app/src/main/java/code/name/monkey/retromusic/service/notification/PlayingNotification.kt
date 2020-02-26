@@ -73,12 +73,15 @@ abstract class PlayingNotification {
     @RequiresApi(26)
     private fun createNotificationChannel() {
         var notificationChannel: NotificationChannel? = notificationManager!!
-                .getNotificationChannel(NOTIFICATION_CHANNEL_ID)
+            .getNotificationChannel(NOTIFICATION_CHANNEL_ID)
         if (notificationChannel == null) {
-            notificationChannel = NotificationChannel(NOTIFICATION_CHANNEL_ID,
-                    service.getString(R.string.playing_notification_name),
-                    NotificationManager.IMPORTANCE_LOW)
-            notificationChannel.description = service.getString(R.string.playing_notification_description)
+            notificationChannel = NotificationChannel(
+                NOTIFICATION_CHANNEL_ID,
+                service.getString(R.string.playing_notification_name),
+                NotificationManager.IMPORTANCE_LOW
+            )
+            notificationChannel.description =
+                service.getString(R.string.playing_notification_description)
             notificationChannel.enableLights(false)
             notificationChannel.enableVibration(false)
             notificationChannel.setShowBadge(false)

@@ -18,6 +18,7 @@ import android.database.ContentObserver;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 
 public class AudioVolumeContentObserver extends ContentObserver {
@@ -31,8 +32,8 @@ public class AudioVolumeContentObserver extends ContentObserver {
     private float mLastVolume;
 
     AudioVolumeContentObserver(@NonNull Handler handler, @NonNull AudioManager audioManager,
-            int audioStreamType,
-            @NonNull OnAudioVolumeChangedListener listener) {
+                               int audioStreamType,
+                               @NonNull OnAudioVolumeChangedListener listener) {
 
         super(handler);
         mAudioManager = audioManager;

@@ -16,7 +16,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        app:showAsAction="always"
         android:icon="@drawable/ic_mic_white_24dp"
-        android:title="@string/action_search" />
+        android:title="@string/action_search"
+        app:showAsAction="always" />
 </menu>

@@ -127,10 +127,10 @@ public class LrcHelper {
             String mil = timeMatcher.group(3);
             Lrc lrc = new Lrc();
             if (content != null && content.length() != 0) {
-                 if(Integer.parseInt(mil)< 100){
-             lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
-                        + Long.parseLong(mil) * 10);}
-                else{
+                if (Integer.parseInt(mil) < 100) {
+                    lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
+                            + Long.parseLong(mil) * 10);
+                } else {
                     lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
                             + Long.parseLong(mil)
                     );

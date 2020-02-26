@@ -36,10 +36,11 @@ object LastAddedSongsLoader {
         val cutoff = PreferenceUtil.getInstance(context).lastAddedCutoff
 
         return SongLoader.makeSongCursor(
-                context,
-                MediaStore.Audio.Media.DATE_ADDED + ">?",
-                arrayOf(cutoff.toString()),
-                MediaStore.Audio.Media.DATE_ADDED + " DESC")
+            context,
+            MediaStore.Audio.Media.DATE_ADDED + ">?",
+            arrayOf(cutoff.toString()),
+            MediaStore.Audio.Media.DATE_ADDED + " DESC"
+        )
     }
 
     fun getLastAddedAlbums(context: Context): ArrayList<Album> {

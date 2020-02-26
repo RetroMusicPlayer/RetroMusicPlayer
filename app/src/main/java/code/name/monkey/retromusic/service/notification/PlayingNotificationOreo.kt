@@ -50,8 +50,14 @@ class PlayingNotificationOreo : PlayingNotification() {
     private var target: Target<BitmapPaletteWrapper>? = null
 
     private fun getCombinedRemoteViews(collapsed: Boolean, song: Song): RemoteViews {
-        val remoteViews = RemoteViews(service.packageName, if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded)
-        remoteViews.setTextViewText(R.id.appName, service.getString(R.string.app_name) + " • " + song.albumName)
+        val remoteViews = RemoteViews(
+            service.packageName,
+            if (collapsed) R.layout.layout_notification_collapsed else R.layout.layout_notification_expanded
+        )
+        remoteViews.setTextViewText(
+            R.id.appName,
+            service.getString(R.string.app_name) + " • " + song.albumName
+        )
         remoteViews.setTextViewText(R.id.title, song.title)
         remoteViews.setTextViewText(R.id.subtitle, song.artistName)
         linkButtons(remoteViews)
@@ -71,103 +77,162 @@ class PlayingNotificationOreo : PlayingNotification() {
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val clickIntent = PendingIntent
-                .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
+            .getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
         val deleteIntent = buildPendingIntent(service, ACTION_QUIT, null)
 
         val builder = NotificationCompat.Builder(service, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentIntent(clickIntent)
-                .setDeleteIntent(deleteIntent)
-                .setCategory(NotificationCompat.CATEGORY_SERVICE)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setCustomContentView(notificationLayout)
-                .setCustomBigContentView(notificationLayoutBig)
-                .setOngoing(isPlaying)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setContentIntent(clickIntent)
+            .setDeleteIntent(deleteIntent)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setCustomContentView(notificationLayout)
+            .setCustomBigContentView(notificationLayoutBig)
+            .setOngoing(isPlaying)
 
         val bigNotificationImageSize = service.resources
-                .getDimensionPixelSize(R.dimen.notification_big_image_size)
+            .getDimensionPixelSize(R.dimen.notification_big_image_size)
         service.runOnUiThread {
             if (target != null) {
                 Glide.clear(target)
             }
             target = SongGlideRequest.Builder.from(Glide.with(service), song)
-                    .checkIgnoreMediaStore(service)
-                    .generatePalette(service).build()
-                    .centerCrop()
-                    .into(object : SimpleTarget<BitmapPaletteWrapper>(bigNotificationImageSize, bigNotificationImageSize) {
-                        override fun onResourceReady(resource: BitmapPaletteWrapper, glideAnimation: GlideAnimation<in BitmapPaletteWrapper>) {
-                            val mediaNotificationProcessor = MediaNotificationProcessor(service, service) { i, _ -> update(resource.bitmap, i) }
-                            mediaNotificationProcessor.processNotification(resource.bitmap)
+                .checkIgnoreMediaStore(service)
+                .generatePalette(service).build()
+                .centerCrop()
+                .into(object : SimpleTarget<BitmapPaletteWrapper>(
+                    bigNotificationImageSize,
+                    bigNotificationImageSize
+                ) {
+                    override fun onResourceReady(
+                        resource: BitmapPaletteWrapper,
+                        glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
+                    ) {
+                        val mediaNotificationProcessor = MediaNotificationProcessor(
+                            service,
+                            service
+                        ) { i, _ -> update(resource.bitmap, i) }
+                        mediaNotificationProcessor.processNotification(resource.bitmap)
+                    }
+
+                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                        super.onLoadFailed(e, errorDrawable)
+                        update(
+                            null,
+                            ATHUtil.resolveColor(service, R.attr.colorSurface, Color.WHITE)
+                        )
+                    }
+
+                    private fun update(bitmap: Bitmap?, bgColor: Int) {
+                        var bgColorFinal = bgColor
+                        if (bitmap != null) {
+                            notificationLayout.setImageViewBitmap(R.id.largeIcon, bitmap)
+                            notificationLayoutBig.setImageViewBitmap(R.id.largeIcon, bitmap)
+                        } else {
+                            notificationLayout.setImageViewResource(
+                                R.id.largeIcon,
+                                R.drawable.default_audio_art
+                            )
+                            notificationLayoutBig.setImageViewResource(
+                                R.id.largeIcon,
+                                R.drawable.default_audio_art
+                            )
                         }
 
-                        override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                            super.onLoadFailed(e, errorDrawable)
-                            update(null, ATHUtil.resolveColor(service, R.attr.colorSurface, Color.WHITE))
+                        if (!PreferenceUtil.getInstance(service).coloredNotification()) {
+                            bgColorFinal =
+                                ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE)
                         }
+                        setBackgroundColor(bgColorFinal)
+                        setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
 
-                        private fun update(bitmap: Bitmap?, bgColor: Int) {
-                            var bgColorFinal = bgColor
-                            if (bitmap != null) {
-                                notificationLayout.setImageViewBitmap(R.id.largeIcon, bitmap)
-                                notificationLayoutBig.setImageViewBitmap(R.id.largeIcon, bitmap)
-                            } else {
-                                notificationLayout.setImageViewResource(R.id.largeIcon, R.drawable.default_audio_art)
-                                notificationLayoutBig.setImageViewResource(R.id.largeIcon, R.drawable.default_audio_art)
-                            }
-
-                            if (!PreferenceUtil.getInstance(service).coloredNotification()) {
-                                bgColorFinal = ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE)
-                            }
-                            setBackgroundColor(bgColorFinal)
-                            setNotificationContent(ColorUtil.isColorLight(bgColorFinal))
-
-                            if (stopped) {
-                                return  // notification has been stopped before loading was finished
-                            }
-                            updateNotifyModeAndPostNotification(builder.build())
+                        if (stopped) {
+                            return  // notification has been stopped before loading was finished
                         }
+                        updateNotifyModeAndPostNotification(builder.build())
+                    }
 
-                        private fun setBackgroundColor(color: Int) {
-                            notificationLayout.setInt(R.id.image, "setBackgroundColor", color)
-                            notificationLayoutBig.setInt(R.id.image, "setBackgroundColor", color)
-                        }
+                    private fun setBackgroundColor(color: Int) {
+                        notificationLayout.setInt(R.id.image, "setBackgroundColor", color)
+                        notificationLayoutBig.setInt(R.id.image, "setBackgroundColor", color)
+                    }
 
-                        private fun setNotificationContent(dark: Boolean) {
-                            val primary = MaterialValueHelper.getPrimaryTextColor(service, dark)
-                            val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
+                    private fun setNotificationContent(dark: Boolean) {
+                        val primary = MaterialValueHelper.getPrimaryTextColor(service, dark)
+                        val secondary = MaterialValueHelper.getSecondaryTextColor(service, dark)
 
-                            val close = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_close_white_24dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val prev = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_previous_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val next = createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_skip_next_round_white_32dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
-                            val playPause = createBitmap(RetroUtil.getTintedVectorDrawable(service,
-                                    if (isPlaying)
-                                        R.drawable.ic_pause_white_48dp
-                                    else
-                                        R.drawable.ic_play_arrow_white_48dp, primary)!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER)
+                        val close = createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                service,
+                                R.drawable.ic_close_white_24dp,
+                                primary
+                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                        )
+                        val prev = createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                service,
+                                R.drawable.ic_skip_previous_round_white_32dp,
+                                primary
+                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                        )
+                        val next = createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                service,
+                                R.drawable.ic_skip_next_round_white_32dp,
+                                primary
+                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                        )
+                        val playPause = createBitmap(
+                            RetroUtil.getTintedVectorDrawable(
+                                service,
+                                if (isPlaying)
+                                    R.drawable.ic_pause_white_48dp
+                                else
+                                    R.drawable.ic_play_arrow_white_48dp, primary
+                            )!!, NOTIFICATION_CONTROLS_SIZE_MULTIPLIER
+                        )
 
-                            notificationLayout.setTextColor(R.id.title, primary)
-                            notificationLayout.setTextColor(R.id.subtitle, secondary)
-                            notificationLayout.setTextColor(R.id.appName, secondary)
+                        notificationLayout.setTextColor(R.id.title, primary)
+                        notificationLayout.setTextColor(R.id.subtitle, secondary)
+                        notificationLayout.setTextColor(R.id.appName, secondary)
 
-                            notificationLayout.setImageViewBitmap(R.id.action_prev, prev)
-                            notificationLayout.setImageViewBitmap(R.id.action_next, next)
-                            notificationLayout.setImageViewBitmap(R.id.action_play_pause, playPause)
+                        notificationLayout.setImageViewBitmap(R.id.action_prev, prev)
+                        notificationLayout.setImageViewBitmap(R.id.action_next, next)
+                        notificationLayout.setImageViewBitmap(R.id.action_play_pause, playPause)
 
-                            notificationLayoutBig.setTextColor(R.id.title, primary)
-                            notificationLayoutBig.setTextColor(R.id.subtitle, secondary)
-                            notificationLayoutBig.setTextColor(R.id.appName, secondary)
+                        notificationLayoutBig.setTextColor(R.id.title, primary)
+                        notificationLayoutBig.setTextColor(R.id.subtitle, secondary)
+                        notificationLayoutBig.setTextColor(R.id.appName, secondary)
 
-                            notificationLayoutBig.setImageViewBitmap(R.id.action_quit, close)
-                            notificationLayoutBig.setImageViewBitmap(R.id.action_prev, prev)
-                            notificationLayoutBig.setImageViewBitmap(R.id.action_next, next)
-                            notificationLayoutBig.setImageViewBitmap(R.id.action_play_pause, playPause)
+                        notificationLayoutBig.setImageViewBitmap(R.id.action_quit, close)
+                        notificationLayoutBig.setImageViewBitmap(R.id.action_prev, prev)
+                        notificationLayoutBig.setImageViewBitmap(R.id.action_next, next)
+                        notificationLayoutBig.setImageViewBitmap(R.id.action_play_pause, playPause)
 
-                            notificationLayout.setImageViewBitmap(R.id.smallIcon, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_notification, secondary)!!, 0.6f))
-                            notificationLayoutBig.setImageViewBitmap(R.id.smallIcon, createBitmap(RetroUtil.getTintedVectorDrawable(service, R.drawable.ic_notification, secondary)!!, 0.6f))
+                        notificationLayout.setImageViewBitmap(
+                            R.id.smallIcon,
+                            createBitmap(
+                                RetroUtil.getTintedVectorDrawable(
+                                    service,
+                                    R.drawable.ic_notification,
+                                    secondary
+                                )!!, 0.6f
+                            )
+                        )
+                        notificationLayoutBig.setImageViewBitmap(
+                            R.id.smallIcon,
+                            createBitmap(
+                                RetroUtil.getTintedVectorDrawable(
+                                    service,
+                                    R.drawable.ic_notification,
+                                    secondary
+                                )!!, 0.6f
+                            )
+                        )
 
-                        }
-                    })
+                    }
+                })
         }
 
         if (stopped) {
@@ -177,8 +242,10 @@ class PlayingNotificationOreo : PlayingNotification() {
     }
 
 
-    private fun buildPendingIntent(context: Context, action: String,
-                                   serviceName: ComponentName?): PendingIntent {
+    private fun buildPendingIntent(
+        context: Context, action: String,
+        serviceName: ComponentName?
+    ): PendingIntent {
         val intent = Intent(action)
         intent.component = serviceName
         return PendingIntent.getService(context, 0, intent, 0)

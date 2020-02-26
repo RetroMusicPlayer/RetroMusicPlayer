@@ -34,7 +34,7 @@ import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import java.util.ArrayList
+import java.util.*
 
 class LibraryPreference @JvmOverloads constructor(
     context: Context,
@@ -46,7 +46,10 @@ class LibraryPreference @JvmOverloads constructor(
 
     init {
         icon?.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorControlNormal(context), SRC_IN)
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                colorControlNormal(context),
+                SRC_IN
+            )
     }
 }
 
@@ -58,7 +61,10 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
     lateinit var adapter: CategoryInfoAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = requireActivity().layoutInflater.inflate(R.layout.preference_dialog_library_categories, null)
+        val view = requireActivity().layoutInflater.inflate(
+            R.layout.preference_dialog_library_categories,
+            null
+        )
 
         val categoryInfos: List<CategoryInfo> = if (savedInstanceState != null) {
             savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
@@ -85,14 +91,18 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
                 dismiss()
             }
             .neutralButton(R.string.reset_action) {
-                adapter.categoryInfos = PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
+                adapter.categoryInfos =
+                    PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
             }
             .noAutoDismiss()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES, ArrayList(adapter.categoryInfos))
+        outState.putParcelableArrayList(
+            PreferenceUtil.LIBRARY_CATEGORIES,
+            ArrayList(adapter.categoryInfos)
+        )
     }
 
     private fun updateCategories(categories: List<CategoryInfo>) {

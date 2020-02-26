@@ -53,12 +53,12 @@
                         tools:ignore="UnusedAttribute">
 
                         <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
                             android:id="@+id/appTitle"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textAppearance="@style/TextViewHeadline6"
-                            android:text="@string/app_name" />
+                            android:text="@string/app_name"
+                            android:textAppearance="@style/TextViewHeadline6" />
                     </androidx.appcompat.widget.Toolbar>
 
                     <ViewStub

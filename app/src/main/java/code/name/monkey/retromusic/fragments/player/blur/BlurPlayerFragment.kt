@@ -19,8 +19,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_blur.colorBackground
-import kotlinx.android.synthetic.main.fragment_blur.playerToolbar
+import kotlinx.android.synthetic.main.fragment_blur.*
 
 class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -126,7 +125,8 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
 
     override fun onResume() {
         super.onResume()
-        PreferenceManager.getDefaultSharedPreferences(requireContext()).registerOnSharedPreferenceChangeListener(this)
+        PreferenceManager.getDefaultSharedPreferences(requireContext())
+            .registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onDestroyView() {

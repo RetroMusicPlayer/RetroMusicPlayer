@@ -16,8 +16,10 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.AbsCustomPlaylist;
 

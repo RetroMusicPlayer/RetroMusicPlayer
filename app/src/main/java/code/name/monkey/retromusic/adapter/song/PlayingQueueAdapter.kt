@@ -23,7 +23,7 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.annotation.SwipeableItemResults
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.ArrayList
+import java.util.*
 
 class PlayingQueueAdapter(
     activity: AppCompatActivity,
@@ -32,7 +32,8 @@ class PlayingQueueAdapter(
     itemLayoutRes: Int
 ) : SongAdapter(
     activity, dataSet, itemLayoutRes, null
-), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>, SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder>,
+), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>,
+    SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder>,
     PopupTextProvider {
 
     private var color = -1
@@ -107,7 +108,11 @@ class PlayingQueueAdapter(
     }
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {
-        return ViewUtil.hitTest(holder.imageText!!, x, y) || ViewUtil.hitTest(holder.dragView!!, x, y)
+        return ViewUtil.hitTest(holder.imageText!!, x, y) || ViewUtil.hitTest(
+            holder.dragView!!,
+            x,
+            y
+        )
     }
 
     override fun onGetItemDraggableRange(holder: ViewHolder, position: Int): ItemDraggableRange? {

@@ -19,9 +19,12 @@ import android.content.res.TypedArray;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+
 import androidx.annotation.FontRes;
-import code.name.monkey.retromusic.R;
+
 import com.google.android.material.textview.MaterialTextView;
+
+import code.name.monkey.retromusic.R;
 
 public class BaselineGridTextView extends MaterialTextView {
 

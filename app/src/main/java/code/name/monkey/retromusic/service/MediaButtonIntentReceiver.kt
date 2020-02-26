@@ -87,7 +87,7 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
             val intentAction = intent.action
             if (Intent.ACTION_MEDIA_BUTTON == intentAction) {
                 val event = intent.getParcelableExtra<KeyEvent>(Intent.EXTRA_KEY_EVENT)
-                        ?: return false
+                    ?: return false
 
                 val keycode = event.keyCode
                 val action = event.action
@@ -99,7 +99,8 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
                 var command: String? = null
                 when (keycode) {
                     KeyEvent.KEYCODE_MEDIA_STOP -> command = ACTION_STOP
-                    KeyEvent.KEYCODE_HEADSETHOOK, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> command = ACTION_TOGGLE_PAUSE
+                    KeyEvent.KEYCODE_HEADSETHOOK, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> command =
+                        ACTION_TOGGLE_PAUSE
                     KeyEvent.KEYCODE_MEDIA_NEXT -> command = ACTION_SKIP
                     KeyEvent.KEYCODE_MEDIA_PREVIOUS -> command = ACTION_REWIND
                     KeyEvent.KEYCODE_MEDIA_PAUSE -> command = ACTION_PAUSE
@@ -125,7 +126,8 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
                                 mHandler.removeMessages(MSG_HEADSET_DOUBLE_CLICK_TIMEOUT)
 
                                 val msg = mHandler.obtainMessage(
-                                        MSG_HEADSET_DOUBLE_CLICK_TIMEOUT, mClickCounter, 0, context)
+                                    MSG_HEADSET_DOUBLE_CLICK_TIMEOUT, mClickCounter, 0, context
+                                )
 
                                 val delay = (if (mClickCounter < 3) DOUBLE_CLICK else 0).toLong()
                                 if (mClickCounter >= 3) {
@@ -164,7 +166,10 @@ class MediaButtonIntentReceiver : BroadcastReceiver() {
             if (wakeLock == null) {
                 val appContext = context.applicationContext
                 val pm = appContext.getSystemService(Context.POWER_SERVICE) as PowerManager
-                wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "RetroMusicApp:Wakelock headset button")
+                wakeLock = pm.newWakeLock(
+                    PowerManager.PARTIAL_WAKE_LOCK,
+                    "RetroMusicApp:Wakelock headset button"
+                )
                 wakeLock!!.setReferenceCounted(false)
             }
             if (DEBUG) Log.v(TAG, "Acquiring wake lock and sending " + msg.what)

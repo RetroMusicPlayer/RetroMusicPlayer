@@ -12,9 +12,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import kotlinx.android.synthetic.main.fragment_plain_player.playerToolbar
-import kotlinx.android.synthetic.main.fragment_plain_player.text
-import kotlinx.android.synthetic.main.fragment_plain_player.title
+import kotlinx.android.synthetic.main.fragment_plain_player.*
 
 class PlainPlayerFragment : AbsPlayerFragment() {
     override fun playerToolbar(): Toolbar {

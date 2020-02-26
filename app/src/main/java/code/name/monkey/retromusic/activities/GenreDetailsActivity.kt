@@ -21,11 +21,8 @@ import code.name.monkey.retromusic.mvp.presenter.GenreDetailsView
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
-import kotlinx.android.synthetic.main.activity_playlist_detail.empty
-import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
-import kotlinx.android.synthetic.main.activity_playlist_detail.recyclerView
-import kotlinx.android.synthetic.main.activity_playlist_detail.toolbar
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_playlist_detail.*
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -134,7 +131,8 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
         if (cab != null && cab!!.isActive) cab?.finish()
-        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes).setCloseDrawableRes(R.drawable.ic_close_white_24dp)
+        cab = MaterialCab(this, R.id.cab_stub).setMenu(menuRes)
+            .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
                     ATHUtil.resolveColor(

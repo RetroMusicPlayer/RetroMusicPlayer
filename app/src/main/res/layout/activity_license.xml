@@ -29,8 +29,8 @@
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
                 app:layout_collapseMode="pin"
-                app:title="@string/licenses"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+                app:title="@string/licenses"
                 app:titleTextAppearance="@style/ToolbarTextAppearanceNormal"
                 tools:ignore="UnusedAttribute" />
 

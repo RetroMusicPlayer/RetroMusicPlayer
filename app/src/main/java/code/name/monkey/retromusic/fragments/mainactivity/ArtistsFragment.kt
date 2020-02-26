@@ -14,7 +14,8 @@ import code.name.monkey.retromusic.mvp.presenter.ArtistsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
+class ArtistsFragment :
+    AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
     ArtistsView, MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {
@@ -111,6 +112,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     companion object {
         @JvmField
         val TAG: String = ArtistsFragment::class.java.simpleName
+
         @JvmStatic
         fun newInstance(): ArtistsFragment {
             val args = Bundle()

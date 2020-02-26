@@ -7,11 +7,7 @@ import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import android.view.GestureDetector
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
@@ -24,11 +20,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_mini_player.actionNext
-import kotlinx.android.synthetic.main.fragment_mini_player.actionPrevious
-import kotlinx.android.synthetic.main.fragment_mini_player.miniPlayerPlayPauseButton
-import kotlinx.android.synthetic.main.fragment_mini_player.miniPlayerTitle
-import kotlinx.android.synthetic.main.fragment_mini_player.progressBar
+import kotlinx.android.synthetic.main.fragment_mini_player.*
 import kotlin.math.abs
 
 open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpdateHelper.Callback,
@@ -41,7 +33,11 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_mini_player, container, false)
     }
 

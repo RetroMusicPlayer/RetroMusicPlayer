@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.util.RetroUtil
 import org.jaudiotagger.audio.AudioFileIO
 import java.io.File
 import java.net.URLEncoder
-import java.util.Locale
+import java.util.*
 
 /**
  * Created by hemanths on 18/08/17.
@@ -81,7 +81,8 @@ open class AbsMusicServiceFragment : Fragment(), MusicServiceEventListener {
                 val uriFile = Uri.fromFile(file)
                 string.append(getMimeType(uriFile.toString())).append(" • ")
                 string.append(audioHeader.bitRate).append(" kb/s").append(" • ")
-                string.append(RetroUtil.frequencyCount(audioHeader.sampleRate.toInt())).append(" kHz")
+                string.append(RetroUtil.frequencyCount(audioHeader.sampleRate.toInt()))
+                    .append(" kHz")
                 string.toString()
             } catch (er: Exception) {
                 " - "

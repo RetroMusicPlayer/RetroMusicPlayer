@@ -15,6 +15,7 @@
 package code.name.monkey.retromusic.glide.palette;
 
 import android.graphics.Bitmap;
+
 import androidx.palette.graphics.Palette;
 
 public class BitmapPaletteWrapper {

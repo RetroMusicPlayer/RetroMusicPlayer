@@ -35,19 +35,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_drive_mode.close
-import kotlinx.android.synthetic.main.activity_drive_mode.image
-import kotlinx.android.synthetic.main.activity_drive_mode.nextButton
-import kotlinx.android.synthetic.main.activity_drive_mode.playPauseButton
-import kotlinx.android.synthetic.main.activity_drive_mode.previousButton
-import kotlinx.android.synthetic.main.activity_drive_mode.progressSlider
-import kotlinx.android.synthetic.main.activity_drive_mode.repeatButton
-import kotlinx.android.synthetic.main.activity_drive_mode.shuffleButton
-import kotlinx.android.synthetic.main.activity_drive_mode.songCurrentProgress
-import kotlinx.android.synthetic.main.activity_drive_mode.songFavourite
-import kotlinx.android.synthetic.main.activity_drive_mode.songText
-import kotlinx.android.synthetic.main.activity_drive_mode.songTitle
-import kotlinx.android.synthetic.main.activity_drive_mode.songTotalTime
+import kotlinx.android.synthetic.main.activity_drive_mode.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -96,7 +84,8 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
 
     private fun toggleFavourite() {
         CoroutineScope(Dispatchers.IO).launch {
-            val isFavourite = MusicUtil.isFavorite(this@DriveModeActivity, MusicPlayerRemote.currentSong)
+            val isFavourite =
+                MusicUtil.isFavorite(this@DriveModeActivity, MusicPlayerRemote.currentSong)
             withContext(Dispatchers.Main) {
                 songFavourite.setImageResource(if (isFavourite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp)
             }
@@ -183,7 +172,10 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -191,7 +183,10 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)

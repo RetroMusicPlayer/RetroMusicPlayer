@@ -82,9 +82,9 @@
                             android:layout_gravity="center"
                             android:scaleType="centerCrop"
                             app:retroCornerSize="36dp"
-                            app:strokeWidth="2dp"
                             app:srcCompat="@drawable/ic_person_flat"
-                            app:strokeColor="?attr/colorSurface" />
+                            app:strokeColor="?attr/colorSurface"
+                            app:strokeWidth="2dp" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"

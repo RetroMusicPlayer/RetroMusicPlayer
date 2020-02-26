@@ -60,7 +60,10 @@ class ArtistImageFetcher(
     }
 
     override fun loadData(priority: Priority?): InputStream? {
-        if (!MusicUtil.isArtistNameUnknown(model.artistName) && PreferenceUtil.isAllowedToDownloadMetadata(context)) {
+        if (!MusicUtil.isArtistNameUnknown(model.artistName) && PreferenceUtil.isAllowedToDownloadMetadata(
+                context
+            )
+        ) {
             val artists = model.artistName.split(",")
             val response = deezerApiService.getArtistImage(artists[0]).execute()
 
@@ -100,7 +103,11 @@ class ArtistImageLoader(
     private val urlLoader: ModelLoader<GlideUrl, InputStream>
 ) : StreamModelLoader<ArtistImage> {
 
-    override fun getResourceFetcher(model: ArtistImage, width: Int, height: Int): DataFetcher<InputStream> {
+    override fun getResourceFetcher(
+        model: ArtistImage,
+        width: Int,
+        height: Int
+    ): DataFetcher<InputStream> {
         return ArtistImageFetcher(context, deezerApiService, model, urlLoader, width, height)
     }
 }
@@ -129,8 +136,15 @@ class Factory(
         )
     }
 
-    override fun build(context: Context?, factories: GenericLoaderFactory?): ModelLoader<ArtistImage, InputStream> {
-        return ArtistImageLoader(context!!, deezerApiService, okHttpFactory.build(context, factories))
+    override fun build(
+        context: Context?,
+        factories: GenericLoaderFactory?
+    ): ModelLoader<ArtistImage, InputStream> {
+        return ArtistImageLoader(
+            context!!,
+            deezerApiService,
+            okHttpFactory.build(context, factories)
+        )
     }
 
     override fun teardown() {

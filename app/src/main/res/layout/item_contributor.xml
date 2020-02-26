@@ -21,8 +21,8 @@
     android:gravity="center_vertical"
     android:minHeight="64dp"
     android:orientation="horizontal"
-    android:paddingEnd="12dp"
     android:paddingStart="12dp"
+    android:paddingEnd="12dp"
     tools:ignore="PrivateResource">
 
     <code.name.monkey.retromusic.views.RetroShapeableImageView

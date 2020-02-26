@@ -28,27 +28,32 @@ import code.name.monkey.retromusic.activities.SettingsActivity
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.util.NavigationUtil
-import kotlinx.android.synthetic.main.fragment_main_settings.aboutSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.audioSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.buyPremium
-import kotlinx.android.synthetic.main.fragment_main_settings.buyProContainer
-import kotlinx.android.synthetic.main.fragment_main_settings.diamondIcon
-import kotlinx.android.synthetic.main.fragment_main_settings.generalSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.imageSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.notificationSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.nowPlayingSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.otherSettings
-import kotlinx.android.synthetic.main.fragment_main_settings.personalizeSettings
+import kotlinx.android.synthetic.main.fragment_main_settings.*
 
 class MainSettingsFragment : Fragment(), View.OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.generalSettings -> inflateFragment(ThemeSettingsFragment(), R.string.general_settings_title)
+            R.id.generalSettings -> inflateFragment(
+                ThemeSettingsFragment(),
+                R.string.general_settings_title
+            )
             R.id.audioSettings -> inflateFragment(AudioSettings(), R.string.pref_header_audio)
-            R.id.nowPlayingSettings -> inflateFragment(NowPlayingSettingsFragment(), R.string.now_playing)
-            R.id.personalizeSettings -> inflateFragment(PersonalizeSettingsFragment(), R.string.personalize)
-            R.id.imageSettings -> inflateFragment(ImageSettingFragment(), R.string.pref_header_images)
-            R.id.notificationSettings -> inflateFragment(NotificationSettingsFragment(), R.string.notification)
+            R.id.nowPlayingSettings -> inflateFragment(
+                NowPlayingSettingsFragment(),
+                R.string.now_playing
+            )
+            R.id.personalizeSettings -> inflateFragment(
+                PersonalizeSettingsFragment(),
+                R.string.personalize
+            )
+            R.id.imageSettings -> inflateFragment(
+                ImageSettingFragment(),
+                R.string.pref_header_images
+            )
+            R.id.notificationSettings -> inflateFragment(
+                NotificationSettingsFragment(),
+                R.string.notification
+            )
             R.id.otherSettings -> inflateFragment(OtherSettingsFragment(), R.string.others)
             R.id.aboutSettings -> NavigationUtil.goToAbout(requireActivity())
         }
@@ -86,6 +91,10 @@ class MainSettingsFragment : Fragment(), View.OnClickListener {
             buyPremium.setTextColor(it)
             diamondIcon.imageTintList = ColorStateList.valueOf(it)
         }
+    }
+
+    companion object {
+
     }
 
     private fun inflateFragment(fragment: Fragment, @StringRes title: Int) {

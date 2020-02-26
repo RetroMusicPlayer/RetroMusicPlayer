@@ -29,12 +29,29 @@ import android.webkit.MimeTypeMap;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.afollestad.materialcab.MaterialCab;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
@@ -57,19 +74,6 @@ import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ThemedFastScroller;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
-import com.afollestad.materialcab.MaterialCab;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.snackbar.Snackbar;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
 import me.zhanghai.android.fastscroll.FastScroller;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
@@ -77,268 +81,19 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         CabHolder, BreadCrumbLayout.SelectionCallback, SongFileAdapter.Callbacks,
         LoaderManager.LoaderCallbacks<List<File>> {
 
-    public static class ListPathsAsyncTask extends
-            ListingFilesDialogAsyncTask<ListPathsAsyncTask.LoadingInfo, String, String[]> {
-
-        public static class LoadingInfo {
-
-            public final File file;
-
-            final FileFilter fileFilter;
-
-            public LoadingInfo(File file, FileFilter fileFilter) {
-                this.file = file;
-                this.fileFilter = fileFilter;
-            }
-        }
-
-        public interface OnPathsListedCallback {
-
-            void onPathsListed(@NonNull String[] paths);
-        }
-
-        private WeakReference<OnPathsListedCallback> onPathsListedCallbackWeakReference;
-
-        public ListPathsAsyncTask(Context context, OnPathsListedCallback callback) {
-            super(context);
-            onPathsListedCallbackWeakReference = new WeakReference<>(callback);
-        }
-
-        @Override
-        protected String[] doInBackground(LoadingInfo... params) {
-            try {
-                if (isCancelled() || checkCallbackReference() == null) {
-                    return null;
-                }
-
-                LoadingInfo info = params[0];
-
-                final String[] paths;
-
-                if (info.file.isDirectory()) {
-                    List<File> files = FileUtil.listFilesDeep(info.file, info.fileFilter);
-
-                    if (isCancelled() || checkCallbackReference() == null) {
-                        return null;
-                    }
-
-                    paths = new String[files.size()];
-                    for (int i = 0; i < files.size(); i++) {
-                        File f = files.get(i);
-                        paths[i] = FileUtil.safeGetCanonicalPath(f);
-
-                        if (isCancelled() || checkCallbackReference() == null) {
-                            return null;
-                        }
-                    }
-                } else {
-                    paths = new String[1];
-                    paths[0] = info.file.getPath();
-                }
-
-                return paths;
-            } catch (Exception e) {
-                e.printStackTrace();
-                cancel(false);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String[] paths) {
-            super.onPostExecute(paths);
-            OnPathsListedCallback callback = checkCallbackReference();
-            if (callback != null && paths != null) {
-                callback.onPathsListed(paths);
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            checkCallbackReference();
-        }
-
-        private OnPathsListedCallback checkCallbackReference() {
-            OnPathsListedCallback callback = onPathsListedCallbackWeakReference.get();
-            if (callback == null) {
-                cancel(false);
-            }
-            return callback;
-        }
-    }
-
-    private static class AsyncFileLoader extends WrappedAsyncTaskLoader<List<File>> {
-
-        private WeakReference<FoldersFragment> fragmentWeakReference;
-
-        AsyncFileLoader(FoldersFragment foldersFragment) {
-            super(Objects.requireNonNull(foldersFragment.getActivity()));
-            fragmentWeakReference = new WeakReference<>(foldersFragment);
-        }
-
-        @Override
-        public List<File> loadInBackground() {
-            FoldersFragment foldersFragment = fragmentWeakReference.get();
-            File directory = null;
-            if (foldersFragment != null) {
-                BreadCrumbLayout.Crumb crumb = foldersFragment.getActiveCrumb();
-                if (crumb != null) {
-                    directory = crumb.getFile();
-                }
-            }
-            if (directory != null) {
-                List<File> files = FileUtil.listFiles(directory, AUDIO_FILE_FILTER);
-                Collections.sort(files, foldersFragment.getFileComparator());
-                return files;
-            } else {
-                return new LinkedList<>();
-            }
-        }
-    }
-
-    private static class ListSongsAsyncTask
-            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
-
-        static class LoadingInfo {
-
-            final Comparator<File> fileComparator;
-
-            final FileFilter fileFilter;
-
-            final List<File> files;
-
-            LoadingInfo(@NonNull List<File> files, @NonNull FileFilter fileFilter,
-                    @NonNull Comparator<File> fileComparator) {
-                this.fileComparator = fileComparator;
-                this.fileFilter = fileFilter;
-                this.files = files;
-            }
-        }
-
-        public interface OnSongsListedCallback {
-
-            void onSongsListed(@NonNull ArrayList<Song> songs, Object extra);
-        }
-
-        private WeakReference<OnSongsListedCallback> callbackWeakReference;
-
-        private WeakReference<Context> contextWeakReference;
-
-        private final Object extra;
-
-        ListSongsAsyncTask(Context context, Object extra, OnSongsListedCallback callback) {
-            super(context);
-            this.extra = extra;
-            contextWeakReference = new WeakReference<>(context);
-            callbackWeakReference = new WeakReference<>(callback);
-        }
-
-        @Override
-        protected ArrayList<Song> doInBackground(LoadingInfo... params) {
-            try {
-                LoadingInfo info = params[0];
-                List<File> files = FileUtil.listFilesDeep(info.files, info.fileFilter);
-
-                if (isCancelled() || checkContextReference() == null
-                        || checkCallbackReference() == null) {
-                    return null;
-                }
-
-                Collections.sort(files, info.fileComparator);
-
-                Context context = checkContextReference();
-                if (isCancelled() || context == null || checkCallbackReference() == null) {
-                    return null;
-                }
-
-                return FileUtil.matchFilesWithMediaStore(context, files);
-            } catch (Exception e) {
-                e.printStackTrace();
-                cancel(false);
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Song> songs) {
-            super.onPostExecute(songs);
-            OnSongsListedCallback callback = checkCallbackReference();
-            if (songs != null && callback != null) {
-                callback.onSongsListed(songs, extra);
-            }
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            checkCallbackReference();
-            checkContextReference();
-        }
-
-        private OnSongsListedCallback checkCallbackReference() {
-            OnSongsListedCallback callback = callbackWeakReference.get();
-            if (callback == null) {
-                cancel(false);
-            }
-            return callback;
-        }
-
-        private Context checkContextReference() {
-            Context context = contextWeakReference.get();
-            if (context == null) {
-                cancel(false);
-            }
-            return context;
-        }
-    }
-
-    private static abstract class ListingFilesDialogAsyncTask<Params, Progress, Result> extends
-            DialogAsyncTask<Params, Progress, Result> {
-
-        ListingFilesDialogAsyncTask(Context context) {
-            super(context);
-        }
-
-        public ListingFilesDialogAsyncTask(Context context, int showDelay) {
-            super(context, showDelay);
-        }
-
-        @Override
-        protected Dialog createDialog(@NonNull Context context) {
-            return new MaterialAlertDialogBuilder(context)
-                    .setTitle(R.string.listing_files)
-                    .setCancelable(false)
-                    .setView(R.layout.loading)
-                    .setOnCancelListener(dialog -> cancel(false))
-                    .setOnDismissListener(dialog -> cancel(false))
-                    .create();
-        }
-    }
-
     public static final String TAG = FoldersFragment.class.getSimpleName();
-
     public static final FileFilter AUDIO_FILE_FILTER = file -> !file.isHidden() && (file.isDirectory() ||
             FileUtil.fileIsMimeType(file, "audio/*", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/opus", MimeTypeMap.getSingleton()) ||
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
-
     private static final String PATH = "path";
-
     private static final String CRUMBS = "crumbs";
-
     private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
-
     private SongFileAdapter adapter;
-
     private BreadCrumbLayout breadCrumbs;
-
     private MaterialCab cab;
-
     private View coordinatorLayout, empty;
-
     private TextView emojiText;
-
     private Comparator<File> fileComparator = (lhs, rhs) -> {
         if (lhs.isDirectory() && !rhs.isDirectory()) {
             return -1;
@@ -349,9 +104,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                     (rhs.getName());
         }
     };
-
     private RecyclerView recyclerView;
 
+    public FoldersFragment() {
+    }
 
     public static File getDefaultStartDirectory() {
         File musicDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MUSIC);
@@ -381,14 +137,20 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         return newInstance(PreferenceUtil.getInstance(context).getStartDirectory());
     }
 
-    public FoldersFragment() {
+    private static File tryGetCanonicalFile(File file) {
+        try {
+            return file.getCanonicalFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return file;
+        }
     }
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState) {
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_folder, container, false);
         initViews(view);
         return view;
@@ -737,12 +499,240 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         }
     }
 
-    private static File tryGetCanonicalFile(File file) {
-        try {
-            return file.getCanonicalFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return file;
+    public static class ListPathsAsyncTask extends
+            ListingFilesDialogAsyncTask<ListPathsAsyncTask.LoadingInfo, String, String[]> {
+
+        private WeakReference<OnPathsListedCallback> onPathsListedCallbackWeakReference;
+
+        public ListPathsAsyncTask(Context context, OnPathsListedCallback callback) {
+            super(context);
+            onPathsListedCallbackWeakReference = new WeakReference<>(callback);
+        }
+
+        @Override
+        protected String[] doInBackground(LoadingInfo... params) {
+            try {
+                if (isCancelled() || checkCallbackReference() == null) {
+                    return null;
+                }
+
+                LoadingInfo info = params[0];
+
+                final String[] paths;
+
+                if (info.file.isDirectory()) {
+                    List<File> files = FileUtil.listFilesDeep(info.file, info.fileFilter);
+
+                    if (isCancelled() || checkCallbackReference() == null) {
+                        return null;
+                    }
+
+                    paths = new String[files.size()];
+                    for (int i = 0; i < files.size(); i++) {
+                        File f = files.get(i);
+                        paths[i] = FileUtil.safeGetCanonicalPath(f);
+
+                        if (isCancelled() || checkCallbackReference() == null) {
+                            return null;
+                        }
+                    }
+                } else {
+                    paths = new String[1];
+                    paths[0] = info.file.getPath();
+                }
+
+                return paths;
+            } catch (Exception e) {
+                e.printStackTrace();
+                cancel(false);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String[] paths) {
+            super.onPostExecute(paths);
+            OnPathsListedCallback callback = checkCallbackReference();
+            if (callback != null && paths != null) {
+                callback.onPathsListed(paths);
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            checkCallbackReference();
+        }
+
+        private OnPathsListedCallback checkCallbackReference() {
+            OnPathsListedCallback callback = onPathsListedCallbackWeakReference.get();
+            if (callback == null) {
+                cancel(false);
+            }
+            return callback;
+        }
+
+        public interface OnPathsListedCallback {
+
+            void onPathsListed(@NonNull String[] paths);
+        }
+
+        public static class LoadingInfo {
+
+            public final File file;
+
+            final FileFilter fileFilter;
+
+            public LoadingInfo(File file, FileFilter fileFilter) {
+                this.file = file;
+                this.fileFilter = fileFilter;
+            }
+        }
+    }
+
+    private static class AsyncFileLoader extends WrappedAsyncTaskLoader<List<File>> {
+
+        private WeakReference<FoldersFragment> fragmentWeakReference;
+
+        AsyncFileLoader(FoldersFragment foldersFragment) {
+            super(Objects.requireNonNull(foldersFragment.getActivity()));
+            fragmentWeakReference = new WeakReference<>(foldersFragment);
+        }
+
+        @Override
+        public List<File> loadInBackground() {
+            FoldersFragment foldersFragment = fragmentWeakReference.get();
+            File directory = null;
+            if (foldersFragment != null) {
+                BreadCrumbLayout.Crumb crumb = foldersFragment.getActiveCrumb();
+                if (crumb != null) {
+                    directory = crumb.getFile();
+                }
+            }
+            if (directory != null) {
+                List<File> files = FileUtil.listFiles(directory, AUDIO_FILE_FILTER);
+                Collections.sort(files, foldersFragment.getFileComparator());
+                return files;
+            } else {
+                return new LinkedList<>();
+            }
+        }
+    }
+
+    private static class ListSongsAsyncTask
+            extends ListingFilesDialogAsyncTask<ListSongsAsyncTask.LoadingInfo, Void, ArrayList<Song>> {
+
+        private final Object extra;
+        private WeakReference<OnSongsListedCallback> callbackWeakReference;
+        private WeakReference<Context> contextWeakReference;
+
+        ListSongsAsyncTask(Context context, Object extra, OnSongsListedCallback callback) {
+            super(context);
+            this.extra = extra;
+            contextWeakReference = new WeakReference<>(context);
+            callbackWeakReference = new WeakReference<>(callback);
+        }
+
+        @Override
+        protected ArrayList<Song> doInBackground(LoadingInfo... params) {
+            try {
+                LoadingInfo info = params[0];
+                List<File> files = FileUtil.listFilesDeep(info.files, info.fileFilter);
+
+                if (isCancelled() || checkContextReference() == null
+                        || checkCallbackReference() == null) {
+                    return null;
+                }
+
+                Collections.sort(files, info.fileComparator);
+
+                Context context = checkContextReference();
+                if (isCancelled() || context == null || checkCallbackReference() == null) {
+                    return null;
+                }
+
+                return FileUtil.matchFilesWithMediaStore(context, files);
+            } catch (Exception e) {
+                e.printStackTrace();
+                cancel(false);
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Song> songs) {
+            super.onPostExecute(songs);
+            OnSongsListedCallback callback = checkCallbackReference();
+            if (songs != null && callback != null) {
+                callback.onSongsListed(songs, extra);
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            checkCallbackReference();
+            checkContextReference();
+        }
+
+        private OnSongsListedCallback checkCallbackReference() {
+            OnSongsListedCallback callback = callbackWeakReference.get();
+            if (callback == null) {
+                cancel(false);
+            }
+            return callback;
+        }
+
+        private Context checkContextReference() {
+            Context context = contextWeakReference.get();
+            if (context == null) {
+                cancel(false);
+            }
+            return context;
+        }
+
+        public interface OnSongsListedCallback {
+
+            void onSongsListed(@NonNull ArrayList<Song> songs, Object extra);
+        }
+
+        static class LoadingInfo {
+
+            final Comparator<File> fileComparator;
+
+            final FileFilter fileFilter;
+
+            final List<File> files;
+
+            LoadingInfo(@NonNull List<File> files, @NonNull FileFilter fileFilter,
+                        @NonNull Comparator<File> fileComparator) {
+                this.fileComparator = fileComparator;
+                this.fileFilter = fileFilter;
+                this.files = files;
+            }
+        }
+    }
+
+    private static abstract class ListingFilesDialogAsyncTask<Params, Progress, Result> extends
+            DialogAsyncTask<Params, Progress, Result> {
+
+        ListingFilesDialogAsyncTask(Context context) {
+            super(context);
+        }
+
+        public ListingFilesDialogAsyncTask(Context context, int showDelay) {
+            super(context, showDelay);
+        }
+
+        @Override
+        protected Dialog createDialog(@NonNull Context context) {
+            return new MaterialAlertDialogBuilder(context)
+                    .setTitle(R.string.listing_files)
+                    .setCancelable(false)
+                    .setView(R.layout.loading)
+                    .setOnCancelListener(dialog -> cancel(false))
+                    .setOnDismissListener(dialog -> cancel(false))
+                    .create();
         }
     }
 }

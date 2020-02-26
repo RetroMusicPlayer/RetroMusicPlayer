@@ -43,23 +43,14 @@ import code.name.monkey.retromusic.views.SeekArc
 import code.name.monkey.retromusic.views.SeekArc.OnSeekArcChangeListener
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
-import kotlinx.android.synthetic.main.fragment_circle_player.nextButton
-import kotlinx.android.synthetic.main.fragment_circle_player.playPauseButton
-import kotlinx.android.synthetic.main.fragment_circle_player.playerToolbar
-import kotlinx.android.synthetic.main.fragment_circle_player.previousButton
-import kotlinx.android.synthetic.main.fragment_circle_player.progressSlider
-import kotlinx.android.synthetic.main.fragment_circle_player.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_circle_player.songInfo
-import kotlinx.android.synthetic.main.fragment_circle_player.songTotalTime
-import kotlinx.android.synthetic.main.fragment_circle_player.text
-import kotlinx.android.synthetic.main.fragment_circle_player.title
-import kotlinx.android.synthetic.main.fragment_circle_player.volumeSeekBar
+import kotlinx.android.synthetic.main.fragment_circle_player.*
 
 /**
  * Created by hemanths on 2020-01-06.
  */
 
-class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChangedListener, OnSeekArcChangeListener {
+class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChangedListener,
+    OnSeekArcChangeListener {
 
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private var audioVolumeObserver: AudioVolumeObserver? = null
@@ -72,7 +63,11 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_circle_player, container, false)
     }
 
@@ -97,7 +92,11 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
 
     private fun setupViews() {
         setUpProgressSlider()
-        ViewUtil.setProgressDrawable(progressSlider, ThemeStore.accentColor(requireContext()))
+        ViewUtil.setProgressDrawable(
+            progressSlider,
+            ThemeStore.accentColor(requireContext()),
+            false
+        )
         volumeSeekBar.progressColor = ThemeStore.accentColor(requireContext())
         setUpPlayPauseFab()
         setUpPrevNext()
@@ -155,7 +154,8 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
 
     override fun onBackPressed(): Boolean = false
 
-    override fun toolbarIconColor(): Int = ATHUtil.resolveColor(requireContext(), android.R.attr.colorControlNormal)
+    override fun toolbarIconColor(): Int =
+        ATHUtil.resolveColor(requireContext(), android.R.attr.colorControlNormal)
 
     override val paletteColor: Int
         get() = Color.BLACK

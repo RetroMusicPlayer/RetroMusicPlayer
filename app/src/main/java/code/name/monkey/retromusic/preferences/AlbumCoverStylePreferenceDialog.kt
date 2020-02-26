@@ -35,10 +35,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle.CARD
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle.CIRCLE
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle.FULL_CARD
-import code.name.monkey.retromusic.fragments.AlbumCoverStyle.values
+import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -61,11 +58,15 @@ class AlbumCoverStylePreference @JvmOverloads constructor(
 
     init {
         icon?.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorControlNormal(context), SRC_IN)
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                colorControlNormal(context),
+                SRC_IN
+            )
     }
 }
 
-class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPager.OnPageChangeListener {
+class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
+    ViewPager.OnPageChangeListener {
     override fun onDialogClosed(positiveResult: Boolean) {
     }
 
@@ -73,7 +74,8 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         @SuppressLint("InflateParams") val view =
-            LayoutInflater.from(activity).inflate(R.layout.preference_dialog_now_playing_screen, null)
+            LayoutInflater.from(activity)
+                .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
         viewPager.adapter = AlbumCoverStyleAdapter(activity!!)
         viewPager.addOnPageChangeListener(this)
@@ -109,13 +111,18 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(), ViewPa
     override fun onPageScrollStateChanged(state: Int) {
     }
 
-    private class AlbumCoverStyleAdapter internal constructor(private val context: Context) : PagerAdapter() {
+    private class AlbumCoverStyleAdapter internal constructor(private val context: Context) :
+        PagerAdapter() {
 
         override fun instantiateItem(collection: ViewGroup, position: Int): Any {
             val albumCoverStyle = values()[position]
 
             val inflater = LayoutInflater.from(context)
-            val layout = inflater.inflate(R.layout.preference_now_playing_screen_item, collection, false) as ViewGroup
+            val layout = inflater.inflate(
+                R.layout.preference_now_playing_screen_item,
+                collection,
+                false
+            ) as ViewGroup
             collection.addView(layout)
 
             val image = layout.findViewById<ImageView>(R.id.image)

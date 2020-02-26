@@ -37,8 +37,10 @@ import java.util.*
 
 object PlaylistMenuHelper {
 
-    fun handleMenuClick(activity: AppCompatActivity,
-                        playlist: Playlist, item: MenuItem): Boolean {
+    fun handleMenuClick(
+        activity: AppCompatActivity,
+        playlist: Playlist, item: MenuItem
+    ): Boolean {
         when (item.itemId) {
             R.id.action_play -> {
                 MusicPlayerRemote.openQueue(getPlaylistSongs(activity, playlist), 9, true)
@@ -50,7 +52,7 @@ object PlaylistMenuHelper {
             }
             R.id.action_add_to_playlist -> {
                 AddToPlaylistDialog.create(getPlaylistSongs(activity, playlist))
-                        .show(activity.supportFragmentManager, "ADD_PLAYLIST")
+                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_add_to_current_playing -> {
@@ -59,12 +61,12 @@ object PlaylistMenuHelper {
             }
             R.id.action_rename_playlist -> {
                 RenamePlaylistDialog.create(playlist.id.toLong())
-                        .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
+                    .show(activity.supportFragmentManager, "RENAME_PLAYLIST")
                 return true
             }
             R.id.action_delete_playlist -> {
                 DeletePlaylistDialog.create(playlist)
-                        .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
+                    .show(activity.supportFragmentManager, "DELETE_PLAYLIST")
                 return true
             }
             R.id.action_save_playlist -> {
@@ -75,8 +77,10 @@ object PlaylistMenuHelper {
         return false
     }
 
-    private fun getPlaylistSongs(activity: Activity,
-                                 playlist: Playlist): ArrayList<Song> {
+    private fun getPlaylistSongs(
+        activity: Activity,
+        playlist: Playlist
+    ): ArrayList<Song> {
         return if (playlist is AbsCustomPlaylist) {
             playlist.getSongs(activity)
         } else {
@@ -84,11 +88,16 @@ object PlaylistMenuHelper {
         }
     }
 
-    private class SavePlaylistAsyncTask internal constructor(context: Context) : WeakContextAsyncTask<Playlist, String, String>(context) {
+    private class SavePlaylistAsyncTask internal constructor(context: Context) :
+        WeakContextAsyncTask<Playlist, String, String>(context) {
 
         override fun doInBackground(vararg params: Playlist): String {
-            return String.format(App.getContext().getString(R.string
-                    .saved_playlist_to), PlaylistsUtil.savePlaylist(App.getContext(), params[0]))
+            return String.format(
+                App.getContext().getString(
+                    R.string
+                        .saved_playlist_to
+                ), PlaylistsUtil.savePlaylist(App.getContext(), params[0])
+            )
         }
 
         override fun onPostExecute(string: String) {

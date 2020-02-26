@@ -25,18 +25,8 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.image
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.progressSlider
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.songInfo
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.songTotalTime
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.text
-import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.title
-import kotlinx.android.synthetic.main.media_button.nextButton
-import kotlinx.android.synthetic.main.media_button.playPauseButton
-import kotlinx.android.synthetic.main.media_button.previousButton
-import kotlinx.android.synthetic.main.media_button.repeatButton
-import kotlinx.android.synthetic.main.media_button.shuffleButton
+import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.*
+import kotlinx.android.synthetic.main.media_button.*
 
 class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
@@ -121,12 +111,20 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     override fun setDark(color: Int) {
 
-        if (ColorUtil.isColorLight(ATHUtil.resolveColor(context, android.R.attr.windowBackground))) {
+        if (ColorUtil.isColorLight(
+                ATHUtil.resolveColor(
+                    context,
+                    android.R.attr.windowBackground
+                )
+            )
+        ) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(activity, true)
         } else {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(activity, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryDisabledTextColor(activity, false)
         }
 
         updateRepeatState()
@@ -196,7 +194,10 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -208,7 +209,10 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
@@ -252,7 +256,10 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis, MusicPlayerRemote.songDurationMillis)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
                 }
             }
         })

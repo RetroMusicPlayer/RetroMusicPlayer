@@ -68,7 +68,10 @@ class SongShareDialog : DialogFragment() {
                         2 -> {
                             if (song != null) {
                                 startActivity(
-                                    Intent(requireContext(), ShareInstagramStory::class.java).putExtra(
+                                    Intent(
+                                        requireContext(),
+                                        ShareInstagramStory::class.java
+                                    ).putExtra(
                                         ShareInstagramStory.EXTRA_SONG,
                                         song
                                     )

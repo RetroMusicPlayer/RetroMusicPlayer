@@ -36,15 +36,21 @@ class MetalRecyclerViewPager : RecyclerView {
         init(context, attrs)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(context, attrs)
     }
 
     private var itemMargin: Int = 0
 
     fun init(context: Context, attrs: AttributeSet?) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.MetalRecyclerViewPager, 0, 0)
-        itemMargin = typedArray.getDimension(R.styleable.MetalRecyclerViewPager_itemMargin, 0f).toInt()
+        val typedArray =
+            context.obtainStyledAttributes(attrs, R.styleable.MetalRecyclerViewPager, 0, 0)
+        itemMargin =
+            typedArray.getDimension(R.styleable.MetalRecyclerViewPager_itemMargin, 0f).toInt()
         typedArray.recycle()
 
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -62,7 +68,8 @@ class MetalRecyclerViewPager : RecyclerView {
         super.setAdapter(adapter)
     }
 
-    abstract class MetalAdapter<VH : MetalViewHolder>(@NonNull val displayMetrics: DisplayMetrics) : RecyclerView.Adapter<VH>() {
+    abstract class MetalAdapter<VH : MetalViewHolder>(@NonNull val displayMetrics: DisplayMetrics) :
+        RecyclerView.Adapter<VH>() {
         private var itemMargin: Int = 0
         private var itemWidth: Int = 0
 

@@ -29,10 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:labelBehavior="gone"
-        app:trackHeight="3dp"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
+        app:trackHeight="3dp"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 

@@ -27,19 +27,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
-import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistContainer
-import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistText
-import kotlinx.android.synthetic.main.activity_album_tag_editor.albumText
-import kotlinx.android.synthetic.main.activity_album_tag_editor.albumTitleContainer
-import kotlinx.android.synthetic.main.activity_album_tag_editor.genreContainer
-import kotlinx.android.synthetic.main.activity_album_tag_editor.genreTitle
-import kotlinx.android.synthetic.main.activity_album_tag_editor.imageContainer
-import kotlinx.android.synthetic.main.activity_album_tag_editor.toolbar
-import kotlinx.android.synthetic.main.activity_album_tag_editor.yearContainer
-import kotlinx.android.synthetic.main.activity_album_tag_editor.yearTitle
+import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.tag.FieldKey
-import java.util.ArrayList
-import java.util.EnumMap
+import java.util.*
 
 class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     override val contentViewLayout: Int
@@ -71,7 +61,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
                         albumArtBitmap,
                         getColor(
                             resource?.palette,
-                            ATHUtil.resolveColor(this@AlbumTagEditorActivity, R.attr.defaultFooterColor)
+                            ATHUtil.resolveColor(
+                                this@AlbumTagEditorActivity,
+                                R.attr.defaultFooterColor
+                            )
                         )
                     )
                     deleteAlbumArt = false

@@ -14,9 +14,6 @@
 
 package code.name.monkey.retromusic.util;
 
-import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
-import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
-
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.ActivityNotFoundException;
@@ -24,8 +21,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.audiofx.AudioEffect;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+
+import org.jetbrains.annotations.NotNull;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
@@ -46,7 +47,9 @@ import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;
 import code.name.monkey.retromusic.model.Playlist;
-import org.jetbrains.annotations.NotNull;
+
+import static code.name.monkey.retromusic.Constants.RATE_ON_GOOGLE_PLAY;
+import static code.name.monkey.retromusic.util.RetroUtil.openUrl;
 
 
 public class NavigationUtil {
@@ -66,8 +69,8 @@ public class NavigationUtil {
     }
 
     public static void goToAlbumOptions(@NonNull Activity activity,
-            int albumId,
-            @NonNull ActivityOptions options) {
+                                        int albumId,
+                                        @NonNull ActivityOptions options) {
         Intent intent = new Intent(activity, AlbumDetailsActivity.class);
         intent.putExtra(AlbumDetailsActivity.EXTRA_ALBUM_ID, albumId);
         ActivityCompat.startActivity(activity, intent, options.toBundle());
@@ -80,8 +83,8 @@ public class NavigationUtil {
     }
 
     public static void goToArtistOptions(@NotNull Activity activity,
-            int artistId,
-            @NonNull ActivityOptions options) {
+                                         int artistId,
+                                         @NonNull ActivityOptions options) {
 
         Intent intent = new Intent(activity, ArtistDetailActivity.class);
         intent.putExtra(ArtistDetailActivity.EXTRA_ARTIST_ID, artistId);
@@ -123,13 +126,13 @@ public class NavigationUtil {
     }
 
     public static void goToSearch(@NonNull Activity activity,
-            @NonNull ActivityOptions activityOptions) {
+                                  @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class),
                 activityOptions.toBundle());
     }
 
     public static void goToSearch(@NonNull Activity activity, boolean isMicOpen,
-            @NonNull ActivityOptions activityOptions) {
+                                  @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class)
                         .putExtra(SearchActivity.EXTRA_SHOW_MIC, isMicOpen),
                 activityOptions.toBundle());
@@ -144,7 +147,7 @@ public class NavigationUtil {
     }
 
     public static void goToUserInfo(@NonNull Activity activity,
-            @NonNull ActivityOptions activityOptions) {
+                                    @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, UserInfoActivity.class),
                 activityOptions.toBundle());
     }

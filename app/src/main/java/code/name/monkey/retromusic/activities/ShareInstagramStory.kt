@@ -33,12 +33,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_share_instagram.image
-import kotlinx.android.synthetic.main.activity_share_instagram.mainContent
-import kotlinx.android.synthetic.main.activity_share_instagram.shareButton
-import kotlinx.android.synthetic.main.activity_share_instagram.shareText
-import kotlinx.android.synthetic.main.activity_share_instagram.shareTitle
-import kotlinx.android.synthetic.main.activity_share_instagram.toolbar
+import kotlinx.android.synthetic.main.activity_share_instagram.*
 
 /**
  * Created by hemanths on 2020-02-02.
@@ -107,7 +102,12 @@ class ShareInstagramStory : AbsBaseActivity() {
 
     private fun setColors(colorLight: Boolean, color: Int) {
         setLightStatusbar(colorLight)
-        toolbar.setTitleTextColor(MaterialValueHelper.getPrimaryTextColor(this@ShareInstagramStory, colorLight))
+        toolbar.setTitleTextColor(
+            MaterialValueHelper.getPrimaryTextColor(
+                this@ShareInstagramStory,
+                colorLight
+            )
+        )
         toolbar.navigationIcon?.setTintList(
             ColorStateList.valueOf(
                 MaterialValueHelper.getPrimaryTextColor(
@@ -117,6 +117,9 @@ class ShareInstagramStory : AbsBaseActivity() {
             )
         )
         mainContent.background =
-            GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, intArrayOf(color, Color.BLACK))
+            GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM,
+                intArrayOf(color, Color.BLACK)
+            )
     }
 }

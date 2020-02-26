@@ -62,7 +62,8 @@ class SleepTimerDialog : DialogFragment() {
             .title(R.string.action_sleep_timer)
             .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .positiveButton(R.string.action_set) {
-                PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic = shouldFinishLastSong.isChecked
+                PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic =
+                    shouldFinishLastSong.isChecked
 
                 val minutes = seekArcProgress
 
@@ -119,10 +120,15 @@ class SleepTimerDialog : DialogFragment() {
             return materialDialog
         }
 
-        shouldFinishLastSong = materialDialog.getCustomView().findViewById(R.id.shouldFinishLastSong)
+        shouldFinishLastSong =
+            materialDialog.getCustomView().findViewById(R.id.shouldFinishLastSong)
         seekBar = materialDialog.getCustomView().findViewById(R.id.seekBar)
         timerDisplay = materialDialog.getCustomView().findViewById(R.id.timerDisplay)
-        TintHelper.setTintAuto(shouldFinishLastSong, ThemeStore.accentColor(requireContext()), false)
+        TintHelper.setTintAuto(
+            shouldFinishLastSong,
+            ThemeStore.accentColor(requireContext()),
+            false
+        )
 
         val finishMusic = PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic
         shouldFinishLastSong.isChecked = finishMusic

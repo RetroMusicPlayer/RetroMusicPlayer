@@ -20,61 +20,45 @@
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_album_full_cover" />
 
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/toolbar_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <include layout="@layout/shadow_statusbar_toolbar" />
 
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
-
-        <FrameLayout
-
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0">
+            android:orientation="vertical">
+
+            <code.name.monkey.retromusic.views.StatusBarView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/status_bar_padding" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/playerToolbar"
                 style="@style/Toolbar"
-                android:navigationIcon="@drawable/ic_close_white_24dp"
-                app:navigationIcon="@drawable/ic_close_white_24dp" />
-        </FrameLayout>
+                android:background="@android:color/transparent"
+                app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+        </LinearLayout>
+    </FrameLayout>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardUseCompatPadding="true">
 
-        <androidx.cardview.widget.CardView
+        <fragment
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.card.CardPlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="64dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="0"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <fragment
-                    android:id="@+id/playbackControlsFragment"
-                    android:name="code.name.monkey.retromusic.fragments.player.card.CardPlaybackControlsFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:layout="@layout/fragment_card_player_playback_controls" />
-            </FrameLayout>
-
-        </androidx.cardview.widget.CardView>
-    </LinearLayout>
-
-    <include layout="@layout/shadow_statusbar_toolbar" />
+            tools:layout="@layout/fragment_card_player_playback_controls" />
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

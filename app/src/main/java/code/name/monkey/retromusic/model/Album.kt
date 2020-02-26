@@ -14,7 +14,7 @@
 
 package code.name.monkey.retromusic.model
 
-import java.util.ArrayList
+import java.util.*
 
 class Album {
 

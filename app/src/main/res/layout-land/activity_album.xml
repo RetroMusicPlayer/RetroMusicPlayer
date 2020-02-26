@@ -79,13 +79,13 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <code.name.monkey.retromusic.views.CircularImageView
+                    <code.name.monkey.retromusic.views.RetroShapeableImageView
                         android:id="@+id/artistImage"
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:layout_marginStart="8dp"
-                        android:layout_weight="0"
-                        app:civ_border="false"
+                        android:scaleType="centerCrop"
+                        app:retroCornerSize="26dp"
                         tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
                     <LinearLayout

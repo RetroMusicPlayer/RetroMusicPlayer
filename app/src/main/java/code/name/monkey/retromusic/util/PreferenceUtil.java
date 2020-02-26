@@ -24,10 +24,24 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.LabelVisibilityMode;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.File;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
@@ -44,15 +58,6 @@ import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public final class PreferenceUtil {
 
@@ -133,37 +138,21 @@ public final class PreferenceUtil {
     public static final String TAB_TEXT_MODE = "tab_text_mode";
 
     public static final String SAF_SDCARD_URI = "saf_sdcard_uri";
-
-    private static final String GENRE_SORT_ORDER = "genre_sort_order";
-
-    private static final String LAST_PAGE = "last_start_page";
-
-    private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
-
-    private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
-
-    private static final String DEFAULT_START_PAGE = "default_start_page";
-
-    private static final String INITIALIZED_BLACKLIST = "initialized_blacklist";
-
-    private static final String ARTIST_SORT_ORDER = "artist_sort_order";
-
-    private static final String ARTIST_SONG_SORT_ORDER = "artist_song_sort_order";
-
-    private static final String ARTIST_ALBUM_SORT_ORDER = "artist_album_sort_order";
-
-    private static final String ALBUM_SORT_ORDER = "album_sort_order";
-
-    private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
-
     public static final String SONG_SORT_ORDER = "song_sort_order";
-
-    private static final String ALBUM_GRID_SIZE = "album_grid_size";
-
-    private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
-
     public static final String SONG_GRID_SIZE = "song_grid_size";
-
+    private static final String GENRE_SORT_ORDER = "genre_sort_order";
+    private static final String LAST_PAGE = "last_start_page";
+    private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
+    private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
+    private static final String DEFAULT_START_PAGE = "default_start_page";
+    private static final String INITIALIZED_BLACKLIST = "initialized_blacklist";
+    private static final String ARTIST_SORT_ORDER = "artist_sort_order";
+    private static final String ARTIST_SONG_SORT_ORDER = "artist_song_sort_order";
+    private static final String ARTIST_ALBUM_SORT_ORDER = "artist_album_sort_order";
+    private static final String ALBUM_SORT_ORDER = "album_sort_order";
+    private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
+    private static final String ALBUM_GRID_SIZE = "album_grid_size";
+    private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
 
     private static final String ARTIST_GRID_SIZE = "artist_grid_size";
@@ -227,10 +216,13 @@ public final class PreferenceUtil {
     private static final String SNOW_FALL_EFFECT = "snow_fall_effect";
 
     private static final String FILTER_SONG = "filter_song";
-
+    private static final String TAG = "PreferenceUtil";
     private static PreferenceUtil sInstance;
-
     private final SharedPreferences mPreferences;
+
+    private PreferenceUtil(@NonNull final Context context) {
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+    }
 
     @NonNull
     public static PreferenceUtil getInstance(Context context) {
@@ -265,10 +257,6 @@ public final class PreferenceUtil {
             default:
                 return false;
         }
-    }
-
-    private PreferenceUtil(@NonNull final Context context) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
     public final boolean albumArtOnLockscreen() {
@@ -410,6 +398,9 @@ public final class PreferenceUtil {
 
     @LayoutRes
     public int getAlbumGridStyle() {
+        if (mPreferences.contains(ALBUM_GRID_STYLE)) {
+            Log.i(TAG, "getAlbumGridStyle: " + mPreferences.getInt(ALBUM_GRID_STYLE, -10));
+        }
         return mPreferences.getInt(ALBUM_GRID_STYLE, R.layout.item_grid);
     }
 
@@ -461,6 +452,9 @@ public final class PreferenceUtil {
 
     @LayoutRes
     public int getArtistGridStyle() {
+        if (mPreferences.contains(ARTIST_GRID_STYLE)) {
+            Log.i(TAG, "getArtistGridStyle: " + mPreferences.getInt(ARTIST_GRID_STYLE, -10));
+        }
         return mPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid);
     }
 

@@ -15,7 +15,8 @@ import code.name.monkey.retromusic.mvp.presenter.PlaylistView
 import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
 import javax.inject.Inject
 
-class PlaylistsFragment : AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView,
+class PlaylistsFragment :
+    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView,
     MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {

@@ -29,7 +29,7 @@ abstract class WrappedAsyncTaskLoader<D>
  *
  * @param context The [Context] to use.
  */
-(context: Context) : AsyncTaskLoader<D>(context) {
+    (context: Context) : AsyncTaskLoader<D>(context) {
 
     private var mData: D? = null
 

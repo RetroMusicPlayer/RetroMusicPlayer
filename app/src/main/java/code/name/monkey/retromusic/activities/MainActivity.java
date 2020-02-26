@@ -33,11 +33,25 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.transition.TransitionManager;
+
+import com.afollestad.materialcab.MaterialCab;
+import com.afollestad.materialcab.MaterialCab.Callback;
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.textview.MaterialTextView;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -47,12 +61,12 @@ import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.AlbumsFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.ArtistsFragment;
+import code.name.monkey.retromusic.fragments.mainactivity.BannerHomeFragment;
+import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.GenresFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.PlayingQueueFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.PlaylistsFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.SongsFragment;
-import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
-import code.name.monkey.retromusic.fragments.mainactivity.BannerHomeFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SearchQueryHelper;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder;
@@ -70,15 +84,6 @@ import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
-import com.afollestad.materialcab.MaterialCab;
-import com.afollestad.materialcab.MaterialCab.Callback;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.textview.MaterialTextView;
-import java.util.ArrayList;
-import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hemanths on 2020-02-19.
@@ -91,18 +96,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     public static final int APP_INTRO_REQUEST = 100;
 
     public static final String EXPAND_PANEL = "expand_panel";
-
-    @Nullable
-    MainActivityFragmentCallbacks currentFragment;
-
-    private boolean blockRequestPermissions = false;
-
-    private MaterialCab cab;
-
-    private AppBarLayout mAppBarLayout;
-
-    private MaterialTextView mAppTitle;
-
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
@@ -117,11 +110,14 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             }
         }
     };
-
     private final IntentFilter mIntentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-
+    @Nullable
+    MainActivityFragmentCallbacks currentFragment;
+    private boolean blockRequestPermissions = false;
+    private MaterialCab cab;
+    private AppBarLayout mAppBarLayout;
+    private MaterialTextView mAppTitle;
     private Toolbar mToolbar;
-
     private MaterialCardView mToolbarContainer;
 
     @Override
@@ -298,7 +294,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
 
     @Override
     public void onSharedPreferenceChanged(final @NonNull SharedPreferences sharedPreferences,
-            final @NonNull String key) {
+                                          final @NonNull String key) {
         if (key.equals(PreferenceUtil.GENERAL_THEME) || key.equals(PreferenceUtil.BLACK_THEME) ||
                 key.equals(PreferenceUtil.ADAPTIVE_COLOR_APP) || key.equals(PreferenceUtil.DOMINANT_COLOR) ||
                 key.equals(PreferenceUtil.USER_NAME) || key.equals(PreferenceUtil.TOGGLE_FULL_SCREEN) ||
@@ -344,19 +340,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         }
 
         if (!tag.equals(currentTag)) {
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .replace(R.id.fragment_container, fragment, tag)
                     .commit();
             currentFragment = (MainActivityFragmentCallbacks) fragment;
-        }
-    }
-
-    public void setMusicChooser(final int option) {
-        PreferenceUtil.getInstance(this).setLastMusicChooser(option);
-        if (option == OptionsSheetDialogFragment.FOLDER) {
-            setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG);
-        } else {
-            selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
         }
     }
 
@@ -591,7 +579,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     }
 
     private long parseIdFromIntent(@NonNull Intent intent, String longKey,
-            String stringKey) {
+                                   String stringKey) {
         long id = intent.getLongExtra(longKey, -1);
         if (id < 0) {
             String idString = intent.getStringExtra(stringKey);
@@ -641,8 +629,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         }
     }
 
+
     private void setUpGridSizeMenu(@NonNull AbsLibraryPagerRecyclerViewCustomGridSizeFragment fragment,
-            @NonNull SubMenu gridSizeMenu) {
+                                   @NonNull SubMenu gridSizeMenu) {
 
         switch (fragment.getGridSize()) {
             case 1:

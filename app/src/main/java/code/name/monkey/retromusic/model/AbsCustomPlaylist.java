@@ -16,9 +16,12 @@ package code.name.monkey.retromusic.model;
 
 import android.content.Context;
 import android.os.Parcel;
+
 import androidx.annotation.NonNull;
-import java.util.ArrayList;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)

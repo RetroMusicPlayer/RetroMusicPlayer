@@ -20,7 +20,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
-import java.util.ArrayList
+import java.util.*
 
 object SearchQueryHelper {
     private const val TITLE_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.TITLE + ") = ?"
@@ -41,7 +41,11 @@ object SearchQueryHelper {
                 SongLoader.makeSongCursor(
                     context,
                     ARTIST_SELECTION + AND + ALBUM_SELECTION + AND + TITLE_SELECTION,
-                    arrayOf(artistName.toLowerCase(), albumName.toLowerCase(), titleName.toLowerCase())
+                    arrayOf(
+                        artistName.toLowerCase(),
+                        albumName.toLowerCase(),
+                        titleName.toLowerCase()
+                    )
                 )
             )
         }
@@ -109,16 +113,34 @@ object SearchQueryHelper {
             return songs
         }
         songs =
-            SongLoader.getSongs(SongLoader.makeSongCursor(context, ARTIST_SELECTION, arrayOf(query.toLowerCase())))
+            SongLoader.getSongs(
+                SongLoader.makeSongCursor(
+                    context,
+                    ARTIST_SELECTION,
+                    arrayOf(query.toLowerCase())
+                )
+            )
 
         if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, ALBUM_SELECTION, arrayOf(query.toLowerCase())))
+        songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
+                context,
+                ALBUM_SELECTION,
+                arrayOf(query.toLowerCase())
+            )
+        )
         if (songs.isNotEmpty()) {
             return songs
         }
-        songs = SongLoader.getSongs(SongLoader.makeSongCursor(context, TITLE_SELECTION, arrayOf(query.toLowerCase())))
+        songs = SongLoader.getSongs(
+            SongLoader.makeSongCursor(
+                context,
+                TITLE_SELECTION,
+                arrayOf(query.toLowerCase())
+            )
+        )
         return if (songs.isNotEmpty()) {
             songs
         } else ArrayList()

@@ -15,11 +15,14 @@
 package code.name.monkey.retromusic.rest;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.rest.service.LastFMService;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
+
+import code.name.monkey.retromusic.rest.service.LastFMService;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.ConnectionPool;
@@ -49,11 +52,6 @@ public class LastFMRestClient {
                 .build();
 
         apiService = restAdapter.create(LastFMService.class);
-    }
-
-    @NonNull
-    public LastFMService getApiService() {
-        return apiService;
     }
 
     private static Interceptor createCacheControlInterceptor() {
@@ -92,5 +90,10 @@ public class LastFMRestClient {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
+    }
+
+    @NonNull
+    public LastFMService getApiService() {
+        return apiService;
     }
 }

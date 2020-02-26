@@ -27,10 +27,12 @@ object HorizontalAdapterHelper {
     private const val TYPE_MIDDLE = 2
     private const val TYPE_LAST = 3
 
-    fun applyMarginToLayoutParams(context: Context,
-                                  layoutParams: ViewGroup.MarginLayoutParams, viewType: Int) {
+    fun applyMarginToLayoutParams(
+        context: Context,
+        layoutParams: ViewGroup.MarginLayoutParams, viewType: Int
+    ) {
         val listMargin = context.resources
-                .getDimensionPixelSize(R.dimen.now_playing_top_margin)
+            .getDimensionPixelSize(R.dimen.now_playing_top_margin)
         if (viewType == TYPE_FIRST) {
             layoutParams.leftMargin = listMargin
         } else if (viewType == TYPE_LAST) {

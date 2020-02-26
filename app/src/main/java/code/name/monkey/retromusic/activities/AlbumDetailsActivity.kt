@@ -30,7 +30,6 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder
 import code.name.monkey.retromusic.interfaces.CabHolder
@@ -39,31 +38,12 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_album.albumCoverContainer
-import kotlinx.android.synthetic.main.activity_album.albumText
-import kotlinx.android.synthetic.main.activity_album.albumTitle
-import kotlinx.android.synthetic.main.activity_album.image
-import kotlinx.android.synthetic.main.activity_album.toolbar
-import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumText
-import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumTitle
-import kotlinx.android.synthetic.main.activity_album_content.listeners
-import kotlinx.android.synthetic.main.activity_album_content.listenersLabel
-import kotlinx.android.synthetic.main.activity_album_content.moreRecyclerView
-import kotlinx.android.synthetic.main.activity_album_content.moreTitle
-import kotlinx.android.synthetic.main.activity_album_content.playAction
-import kotlinx.android.synthetic.main.activity_album_content.recyclerView
-import kotlinx.android.synthetic.main.activity_album_content.scrobbles
-import kotlinx.android.synthetic.main.activity_album_content.scrobblesLabel
-import kotlinx.android.synthetic.main.activity_album_content.shuffleAction
-import kotlinx.android.synthetic.main.activity_album_content.songTitle
-import java.util.ArrayList
+import kotlinx.android.synthetic.main.activity_album.*
+import kotlinx.android.synthetic.main.activity_album_content.*
+import java.util.*
 import javax.inject.Inject
 import android.util.Pair as UtilPair
 
@@ -127,7 +107,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
             intent.extras?.getInt(EXTRA_ALBUM_ID)?.let {
                 albumDetailsPresenter.loadAlbum(it)
-                albumCoverContainer?.transitionName = "${getString(R.string.transition_album_art)}_$it"
+                albumCoverContainer?.transitionName =
+                    "${getString(R.string.transition_album_art)}_$it"
             }
         } else {
             finish()
@@ -357,7 +338,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_sort_order_title -> sortOrder = AlbumSongSortOrder.SONG_A_Z
             R.id.action_sort_order_title_desc -> sortOrder = AlbumSongSortOrder.SONG_Z_A
             R.id.action_sort_order_track_list -> sortOrder = AlbumSongSortOrder.SONG_TRACK_LIST
-            R.id.action_sort_order_artist_song_duration -> sortOrder = AlbumSongSortOrder.SONG_DURATION
+            R.id.action_sort_order_artist_song_duration -> sortOrder =
+                AlbumSongSortOrder.SONG_DURATION
         }
         if (sortOrder != null) {
             item.isChecked = true
@@ -368,9 +350,12 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
     private fun setUpSortOrderMenu(sortOrder: SubMenu) {
         when (savedSortOrder) {
-            AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title).isChecked = true
-            AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc).isChecked = true
-            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list).isChecked =
+            AlbumSongSortOrder.SONG_A_Z -> sortOrder.findItem(R.id.action_sort_order_title)
+                .isChecked = true
+            AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc)
+                .isChecked = true
+            AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list)
+                .isChecked =
                 true
             AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration)
                 .isChecked = true

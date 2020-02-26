@@ -31,11 +31,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_peak_player.playerImage
-import kotlinx.android.synthetic.main.fragment_peak_player.playerToolbar
-import kotlinx.android.synthetic.main.fragment_peak_player.songInfo
-import kotlinx.android.synthetic.main.fragment_peak_player.text
-import kotlinx.android.synthetic.main.fragment_peak_player.title
+import kotlinx.android.synthetic.main.fragment_peak_player.*
 
 /**
  * Created by hemanths on 2019-10-03.
@@ -46,7 +42,11 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     private lateinit var playbackControlsFragment: PeakPlayerControlFragment
     private var lastColor: Int = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_peak_player, container, false)
     }
 

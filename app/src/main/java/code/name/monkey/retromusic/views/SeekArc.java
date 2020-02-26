@@ -24,11 +24,12 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
 import code.name.monkey.retromusic.R;
 
 /**
  * SeekArc.java
- *
+ * <p>
  * This is a class that functions much like a SeekBar but
  * follows a circle path instead of a straight line.
  *
@@ -36,129 +37,70 @@ import code.name.monkey.retromusic.R;
  */
 public class SeekArc extends View {
 
-    public interface OnSeekArcChangeListener {
-
-        /**
-         * Notification that the progress level has changed. Clients can use the
-         * fromUser parameter to distinguish user-initiated changes from those
-         * that occurred programmatically.
-         *
-         * @param seekArc  The SeekArc whose progress has changed
-         * @param progress The current progress level. This will be in the range
-         *                 0..max where max was set by
-         *                 {@link ProgressArc#setMax(int)}. (The default value for
-         *                 max is 100.)
-         * @param fromUser True if the progress change was initiated by the user.
-         */
-        void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser);
-
-        /**
-         * Notification that the user has started a touch gesture. Clients may
-         * want to use this to disable advancing the seekbar.
-         *
-         * @param seekArc The SeekArc in which the touch gesture began
-         */
-        void onStartTrackingTouch(SeekArc seekArc);
-
-        /**
-         * Notification that the user has finished a touch gesture. Clients may
-         * want to use this to re-enable advancing the seekarc.
-         *
-         * @param seekArc The SeekArc in which the touch gesture began
-         */
-        void onStopTrackingTouch(SeekArc seekArc);
-    }
-
     private static final String TAG = SeekArc.class.getSimpleName();
-
     private static int INVALID_PROGRESS_VALUE = -1;
-
     // The initial rotational offset -90 means we start at 12 o'clock
     private final int mAngleOffset = -90;
-
     private Paint mArcPaint;
-
     // Internal variables
     private int mArcRadius = 0;
-
     private RectF mArcRect = new RectF();
-
     /**
      * The Width of the background arc for the SeekArc
      */
     private int mArcWidth = 2;
-
     /**
      * Will the progress increase clockwise or anti-clockwise
      */
     private boolean mClockwise = true;
-
     /**
      * is the control enabled/touchable
      */
     private boolean mEnabled = true;
-
     /**
      * The Maximum value that this SeekArc can be set to
      */
     private int mMax = 100;
-
     private OnSeekArcChangeListener mOnSeekArcChangeListener;
-
     /**
      * The Current value that the SeekArc is set to
      */
     private int mProgress = 0;
-
     private Paint mProgressPaint;
-
     private float mProgressSweep = 0;
-
     /**
      * The width of the progress line for this SeekArc
      */
     private int mProgressWidth = 4;
-
     /**
      * The rotation of the SeekArc- 0 is twelve o'clock
      */
     private int mRotation = 0;
-
     /**
      * Give the SeekArc rounded edges
      */
     private boolean mRoundedEdges = false;
-
     /**
      * The Angle to start drawing this Arc from
      */
     private int mStartAngle = 0;
-
     /**
      * The Angle through which to draw the arc (Max is 360)
      */
     private int mSweepAngle = 360;
-
     /**
      * The Drawable for the seek arc thumbnail
      */
     private Drawable mThumb;
-
     private int mThumbXPos;
-
     private int mThumbYPos;
-
     private double mTouchAngle;
-
     private float mTouchIgnoreRadius;
-
     /**
      * Enable touch inside the SeekArc
      */
     private boolean mTouchInside = true;
-
     private int mTranslateX;
-
     private int mTranslateY;
 
     public SeekArc(Context context) {
@@ -573,5 +515,38 @@ public class SeekArc extends View {
 
     private float valuePerDegree() {
         return (float) mMax / mSweepAngle;
+    }
+
+    public interface OnSeekArcChangeListener {
+
+        /**
+         * Notification that the progress level has changed. Clients can use the
+         * fromUser parameter to distinguish user-initiated changes from those
+         * that occurred programmatically.
+         *
+         * @param seekArc  The SeekArc whose progress has changed
+         * @param progress The current progress level. This will be in the range
+         *                 0..max where max was set by
+         *                 {@link ProgressArc#setMax(int)}. (The default value for
+         *                 max is 100.)
+         * @param fromUser True if the progress change was initiated by the user.
+         */
+        void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser);
+
+        /**
+         * Notification that the user has started a touch gesture. Clients may
+         * want to use this to disable advancing the seekbar.
+         *
+         * @param seekArc The SeekArc in which the touch gesture began
+         */
+        void onStartTrackingTouch(SeekArc seekArc);
+
+        /**
+         * Notification that the user has finished a touch gesture. Clients may
+         * want to use this to re-enable advancing the seekarc.
+         *
+         * @param seekArc The SeekArc in which the touch gesture began
+         */
+        void onStopTrackingTouch(SeekArc seekArc);
     }
 }

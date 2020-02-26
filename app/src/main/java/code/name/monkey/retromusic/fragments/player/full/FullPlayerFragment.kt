@@ -25,10 +25,7 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_full.artistImage
-import kotlinx.android.synthetic.main.fragment_full.nextSong
-import kotlinx.android.synthetic.main.fragment_full.nextSongLabel
-import kotlinx.android.synthetic.main.fragment_full.playerToolbar
+import kotlinx.android.synthetic.main.fragment_full.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -67,7 +64,10 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
             lyricsLine2.visibility = View.VISIBLE
 
             lyricsLine2.measure(
-                View.MeasureSpec.makeMeasureSpec(lyricsLine2.measuredWidth, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(
+                    lyricsLine2.measuredWidth,
+                    View.MeasureSpec.EXACTLY
+                ),
                 View.MeasureSpec.UNSPECIFIED
             )
             val h: Float = lyricsLine2.measuredHeight.toFloat()
@@ -91,12 +91,13 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     private fun hideLyricsLayout() {
-        lyricsLayout.animate().alpha(0f).setDuration(VISIBILITY_ANIM_DURATION).withEndAction(Runnable {
-            if (!isLyricsLayoutBound()) return@Runnable
-            lyricsLayout.visibility = View.GONE
-            lyricsLine1.text = null
-            lyricsLine2.text = null
-        })
+        lyricsLayout.animate().alpha(0f).setDuration(VISIBILITY_ANIM_DURATION)
+            .withEndAction(Runnable {
+                if (!isLyricsLayoutBound()) return@Runnable
+                lyricsLayout.visibility = View.GONE
+                lyricsLine1.text = null
+                lyricsLine2.text = null
+            })
     }
 
     override fun setLyrics(l: Lyrics?) {
@@ -158,7 +159,11 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
             val transitionName =
                 "${getString(R.string.transition_artist_image)}_${MusicPlayerRemote.currentSong.artistId}"
             val activityOptions =
-                ActivityOptions.makeSceneTransitionAnimation(requireActivity(), artistImage, transitionName)
+                ActivityOptions.makeSceneTransitionAnimation(
+                    requireActivity(),
+                    artistImage,
+                    transitionName
+                )
             NavigationUtil.goToArtistOptions(
                 requireActivity(),
                 MusicPlayerRemote.currentSong.artistId,
@@ -229,7 +234,8 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     private fun updateArtistImage() {
         CoroutineScope(Dispatchers.IO).launch {
-            val artist = ArtistLoader.getArtist(requireContext(), MusicPlayerRemote.currentSong.artistId)
+            val artist =
+                ArtistLoader.getArtist(requireContext(), MusicPlayerRemote.currentSong.artistId)
             withContext(Dispatchers.Main) {
                 ArtistGlideRequest.Builder.from(Glide.with(requireContext()), artist)
                     .generatePalette(requireContext())

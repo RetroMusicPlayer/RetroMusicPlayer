@@ -18,19 +18,23 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.webkit.WebView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by hemanths on 2019-09-27.

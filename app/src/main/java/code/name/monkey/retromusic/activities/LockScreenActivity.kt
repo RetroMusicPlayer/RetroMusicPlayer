@@ -18,7 +18,7 @@ import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
 import com.r0adkll.slidr.model.SlidrListener
 import com.r0adkll.slidr.model.SlidrPosition
-import kotlinx.android.synthetic.main.activity_lock_screen.image
+import kotlinx.android.synthetic.main.activity_lock_screen.*
 
 class LockScreenActivity : AbsMusicServiceActivity() {
     private var fragment: LockScreenPlayerControlsFragment? = null
@@ -29,9 +29,11 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             setShowWhenLocked(true)
             setTurnScreenOn(true)
         } else {
-            this.window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
-                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
+            this.window.addFlags(
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                        WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+            )
         }
         setDrawUnderStatusBar()
         setContentView(R.layout.activity_lock_screen)
@@ -53,7 +55,8 @@ class LockScreenActivity : AbsMusicServiceActivity() {
 
             override fun onSlideClosed(): Boolean {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+                    val keyguardManager =
+                        getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
                     keyguardManager.requestDismissKeyguard(this@LockScreenActivity, null)
                 }
                 finish()

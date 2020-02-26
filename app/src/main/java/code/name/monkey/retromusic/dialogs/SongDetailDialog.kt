@@ -86,22 +86,36 @@ class SongDetailDialog : DialogFragment() {
             val songFile = File(song.data)
             if (songFile.exists()) {
                 fileName.text = makeTextWithTitle(context, string.label_file_name, songFile.name)
-                filePath.text = makeTextWithTitle(context, string.label_file_path, songFile.absolutePath)
+                filePath.text =
+                    makeTextWithTitle(context, string.label_file_path, songFile.absolutePath)
                 fileSize.text =
-                    makeTextWithTitle(context, string.label_file_size, getFileSizeString(songFile.length()))
+                    makeTextWithTitle(
+                        context,
+                        string.label_file_size,
+                        getFileSizeString(songFile.length())
+                    )
                 try {
                     val audioFile = AudioFileIO.read(songFile)
                     val audioHeader = audioFile.audioHeader
 
-                    fileFormat.text = makeTextWithTitle(context, string.label_file_format, audioHeader.format)
+                    fileFormat.text =
+                        makeTextWithTitle(context, string.label_file_format, audioHeader.format)
                     trackLength.text = makeTextWithTitle(
                         context,
                         string.label_track_length,
                         MusicUtil.getReadableDurationString((audioHeader.trackLength * 1000).toLong())
                     )
-                    bitRate.text = makeTextWithTitle(context, string.label_bit_rate, audioHeader.bitRate + " kb/s")
+                    bitRate.text = makeTextWithTitle(
+                        context,
+                        string.label_bit_rate,
+                        audioHeader.bitRate + " kb/s"
+                    )
                     samplingRate.text =
-                        makeTextWithTitle(context, string.label_sampling_rate, audioHeader.sampleRate + " Hz")
+                        makeTextWithTitle(
+                            context,
+                            string.label_sampling_rate,
+                            audioHeader.sampleRate + " Hz"
+                        )
                 } catch (@NonNull e: CannotReadException) {
                     Log.e(TAG, "error while reading the song file", e)
                     // fallback

@@ -8,15 +8,13 @@ import androidx.viewpager.widget.ViewPager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter
 import code.name.monkey.retromusic.adapter.album.AlbumCoverPagerAdapter.AlbumCoverFragment
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FIT
-import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_player_album_cover.viewPager
+import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
     private var callbacks: Callbacks? = null
@@ -56,7 +54,10 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
         } else {
             viewPager.offscreenPageLimit = 2
-            viewPager.setPageTransformer(true, PreferenceUtil.getInstance(requireContext()).albumCoverTransform)
+            viewPager.setPageTransformer(
+                true,
+                PreferenceUtil.getInstance(requireContext()).albumCoverTransform
+            )
         }
     }
 

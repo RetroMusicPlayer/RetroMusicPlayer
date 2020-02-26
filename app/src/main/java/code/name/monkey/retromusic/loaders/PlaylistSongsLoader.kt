@@ -23,7 +23,7 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.model.Song
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.
@@ -38,6 +38,7 @@ object PlaylistSongsLoader {
         return (playlist as? AbsCustomPlaylist)?.getSongs(context)
             ?: getPlaylistSongList(context, playlist.id)
     }
+
     @JvmStatic
     fun getPlaylistSongList(context: Context, playlistId: Int): ArrayList<Song> {
         val songs = arrayListOf<Song>()

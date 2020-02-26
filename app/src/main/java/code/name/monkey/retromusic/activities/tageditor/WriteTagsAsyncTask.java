@@ -7,21 +7,12 @@ import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.misc.DialogAsyncTask;
-import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
-import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.SAFUtil;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.tag.FieldKey;
@@ -29,27 +20,22 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.images.Artwork;
 import org.jaudiotagger.tag.images.ArtworkFactory;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.misc.DialogAsyncTask;
+import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
+import code.name.monkey.retromusic.util.MusicUtil;
+import code.name.monkey.retromusic.util.SAFUtil;
+
 public class WriteTagsAsyncTask extends
         DialogAsyncTask<WriteTagsAsyncTask.LoadingInfo, Integer, String[]> {
-
-    public static class LoadingInfo {
-
-        @Nullable
-        final Map<FieldKey, String> fieldKeyValueMap;
-
-        final Collection<String> filePaths;
-
-        @Nullable
-        private AbsTagEditorActivity.ArtworkInfo artworkInfo;
-
-        public LoadingInfo(Collection<String> filePaths,
-                @Nullable Map<FieldKey, String> fieldKeyValueMap,
-                @Nullable AbsTagEditorActivity.ArtworkInfo artworkInfo) {
-            this.filePaths = filePaths;
-            this.fieldKeyValueMap = fieldKeyValueMap;
-            this.artworkInfo = artworkInfo;
-        }
-    }
 
     private WeakReference<Activity> activity;
 
@@ -182,6 +168,25 @@ public class WriteTagsAsyncTask extends
         if (activity != null) {
             MediaScannerConnection.scanFile(activity, toBeScanned, null,
                     new UpdateToastMediaScannerCompletionListener(activity, toBeScanned));
+        }
+    }
+
+    public static class LoadingInfo {
+
+        @Nullable
+        final Map<FieldKey, String> fieldKeyValueMap;
+
+        final Collection<String> filePaths;
+
+        @Nullable
+        private AbsTagEditorActivity.ArtworkInfo artworkInfo;
+
+        public LoadingInfo(Collection<String> filePaths,
+                           @Nullable Map<FieldKey, String> fieldKeyValueMap,
+                           @Nullable AbsTagEditorActivity.ArtworkInfo artworkInfo) {
+            this.filePaths = filePaths;
+            this.fieldKeyValueMap = fieldKeyValueMap;
+            this.artworkInfo = artworkInfo;
         }
     }
 }

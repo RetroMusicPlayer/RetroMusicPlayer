@@ -30,13 +30,12 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.button.MaterialButton
-import kotlinx.android.synthetic.main.activity_album_tag_editor.editorImage
-import kotlinx.android.synthetic.main.activity_album_tag_editor.imageContainer
+import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
 import org.jaudiotagger.tag.FieldKey
 import java.io.File
-import java.util.Collections
+import java.util.*
 
 abstract class AbsTagEditorActivity : AbsBaseActivity() {
 

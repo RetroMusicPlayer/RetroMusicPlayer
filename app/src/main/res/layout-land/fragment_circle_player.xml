@@ -151,8 +151,8 @@
         android:paddingStart="0dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewBody1"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/progressSlider"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/titleContainer"
         tools:text="@tools:sample/lorem/random" />

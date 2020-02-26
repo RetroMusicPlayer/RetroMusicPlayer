@@ -74,7 +74,11 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         return materialDialog
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         dialog?.window?.let {
             (requireActivity() as MainActivity).setNavigationbarColorAuto()
             (requireActivity() as MainActivity).setLightNavigationBar(true)

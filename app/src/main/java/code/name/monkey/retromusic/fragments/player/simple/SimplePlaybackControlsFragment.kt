@@ -21,15 +21,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.nextButton
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.playPauseButton
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.previousButton
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.repeatButton
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.shuffleButton
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.songInfo
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.text
-import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.title
+import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -65,7 +57,11 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         progressViewUpdateHelper = MusicProgressViewUpdateHelper(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_simple_controls_fragment, container, false)
     }
 
@@ -122,7 +118,10 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -134,7 +133,10 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
@@ -199,10 +201,12 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorBg = ATHUtil.resolveColor(context!!, android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(context!!, true)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getSecondaryDisabledTextColor(context!!, true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(context!!, true)
         } else {
             lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(context!!, false)
-            lastDisabledPlaybackControlsColor = MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {

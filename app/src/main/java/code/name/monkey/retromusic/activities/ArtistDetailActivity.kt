@@ -33,32 +33,14 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import code.name.monkey.retromusic.util.CustomArtistImageUtil
-import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.RetroUtil
+import code.name.monkey.retromusic.util.*
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_artist_content.albumRecyclerView
-import kotlinx.android.synthetic.main.activity_artist_content.albumTitle
-import kotlinx.android.synthetic.main.activity_artist_content.biographyText
-import kotlinx.android.synthetic.main.activity_artist_content.biographyTitle
-import kotlinx.android.synthetic.main.activity_artist_content.listeners
-import kotlinx.android.synthetic.main.activity_artist_content.listenersLabel
-import kotlinx.android.synthetic.main.activity_artist_content.playAction
-import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
-import kotlinx.android.synthetic.main.activity_artist_content.scrobbles
-import kotlinx.android.synthetic.main.activity_artist_content.scrobblesLabel
-import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
-import kotlinx.android.synthetic.main.activity_artist_content.songTitle
-import kotlinx.android.synthetic.main.activity_artist_details.artistCoverContainer
-import kotlinx.android.synthetic.main.activity_artist_details.artistTitle
-import kotlinx.android.synthetic.main.activity_artist_details.image
-import kotlinx.android.synthetic.main.activity_artist_details.text
-import kotlinx.android.synthetic.main.activity_artist_details.toolbar
-import java.util.Locale
+import kotlinx.android.synthetic.main.activity_artist_content.*
+import kotlinx.android.synthetic.main.activity_artist_details.*
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, CabHolder {
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
@@ -238,8 +220,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                     scrobbles.show()
                     scrobblesLabel.show()
 
-                    listeners.text = RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
-                    scrobbles.text = RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
+                    listeners.text =
+                        RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
+                    scrobbles.text =
+                        RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
                 }
             }
         }
@@ -318,9 +302,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                 return true
             }
             R.id.action_reset_artist_image -> {
-                Toast.makeText(this@ArtistDetailActivity, resources.getString(R.string.updating), Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    this@ArtistDetailActivity,
+                    resources.getString(R.string.updating),
+                    Toast.LENGTH_SHORT
+                )
                     .show()
-                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity).resetCustomArtistImage(artist)
+                CustomArtistImageUtil.getInstance(this@ArtistDetailActivity)
+                    .resetCustomArtistImage(artist)
                 forceDownload = true
                 return true
             }

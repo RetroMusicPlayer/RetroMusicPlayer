@@ -23,7 +23,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.HistoryStore
 import code.name.monkey.retromusic.providers.SongPlayCountStore
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 16/08/17.

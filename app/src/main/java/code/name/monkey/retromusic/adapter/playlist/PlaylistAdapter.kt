@@ -30,7 +30,7 @@ import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-import java.util.ArrayList
+import java.util.*
 
 class PlaylistAdapter(
     private val activity: AppCompatActivity,
@@ -172,7 +172,8 @@ class PlaylistAdapter(
         init {
 
             image?.apply {
-                val iconPadding = activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
+                val iconPadding =
+                    activity.resources.getDimensionPixelSize(R.dimen.list_item_image_icon_padding)
                 setPadding(iconPadding, iconPadding, iconPadding, iconPadding)
             }
 

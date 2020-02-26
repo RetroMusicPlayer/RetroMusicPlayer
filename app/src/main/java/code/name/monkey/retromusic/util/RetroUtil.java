@@ -35,14 +35,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
+
+import java.text.DecimalFormat;
+
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
-import java.text.DecimalFormat;
 
 public class RetroUtil {
 
@@ -105,20 +108,20 @@ public class RetroUtil {
 
     @Nullable
     public static Drawable getTintedVectorDrawable(@NonNull Context context, @DrawableRes int id,
-            @ColorInt int color) {
+                                                   @ColorInt int color) {
         return TintHelper.createTintedDrawable(
                 getVectorDrawable(context.getResources(), id, context.getTheme()), color);
     }
 
     @Nullable
     public static Drawable getTintedVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
-            @Nullable Resources.Theme theme, @ColorInt int color) {
+                                                   @Nullable Resources.Theme theme, @ColorInt int color) {
         return TintHelper.createTintedDrawable(getVectorDrawable(res, resId, theme), color);
     }
 
     @Nullable
     public static Drawable getVectorDrawable(@NonNull Resources res, @DrawableRes int resId,
-            @Nullable Resources.Theme theme) {
+                                             @Nullable Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= 21) {
             return res.getDrawable(resId, theme);
         }

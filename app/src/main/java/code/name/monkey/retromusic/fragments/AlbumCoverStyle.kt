@@ -5,10 +5,12 @@ import androidx.annotation.StringRes
 import code.name.monkey.retromusic.R
 
 
-enum class AlbumCoverStyle(@param:StringRes @field:StringRes
-                           val titleRes: Int,
-                           @param:DrawableRes @field:DrawableRes
-                           val drawableResId: Int, val id: Int) {
+enum class AlbumCoverStyle(
+    @param:StringRes @field:StringRes
+    val titleRes: Int,
+    @param:DrawableRes @field:DrawableRes
+    val drawableResId: Int, val id: Int
+) {
     NORMAL(R.string.normal, R.drawable.np_normal, 0),
     FLAT(R.string.flat, R.drawable.np_flat, 1),
     CIRCLE(R.string.circular, R.drawable.np_circle, 2),

@@ -39,26 +39,7 @@ import code.name.monkey.retromusic.util.SwipeAndDragHelper;
 public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapter.ViewHolder>
         implements SwipeAndDragHelper.ActionCompletionContract {
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-
-        MaterialCheckBox checkBox;
-
-        View dragView;
-
-        TextView title;
-
-        ViewHolder(View view) {
-            super(view);
-            checkBox = view.findViewById(R.id.checkbox);
-            checkBox.setButtonTintList(
-                    ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
-            title = view.findViewById(R.id.title);
-            dragView = view.findViewById(R.id.drag_view);
-        }
-    }
-
     private List<CategoryInfo> categoryInfos;
-
     private ItemTouchHelper touchHelper;
 
     public CategoryInfoAdapter(@NonNull List<CategoryInfo> categoryInfos) {
@@ -138,5 +119,23 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
             }
         }
         return true;
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        MaterialCheckBox checkBox;
+
+        View dragView;
+
+        TextView title;
+
+        ViewHolder(View view) {
+            super(view);
+            checkBox = view.findViewById(R.id.checkbox);
+            checkBox.setButtonTintList(
+                    ColorStateList.valueOf(ThemeStore.Companion.accentColor(checkBox.getContext())));
+            title = view.findViewById(R.id.title);
+            dragView = view.findViewById(R.id.drag_view);
+        }
     }
 }

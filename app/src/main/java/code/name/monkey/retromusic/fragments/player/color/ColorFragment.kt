@@ -22,9 +22,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
-import kotlinx.android.synthetic.main.fragment_color_player.colorGradientBackground
-import kotlinx.android.synthetic.main.fragment_color_player.playerImage
-import kotlinx.android.synthetic.main.fragment_color_player.playerToolbar
+import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment() {
 
@@ -80,7 +78,11 @@ class ColorFragment : AbsPlayerFragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_color_player, container, false)
     }
 
@@ -94,7 +96,8 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment = childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ColorPlaybackControlsFragment
+        playbackControlsFragment =
+            childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as ColorPlaybackControlsFragment
     }
 
     private fun setUpPlayerToolbar() {
@@ -102,7 +105,11 @@ class ColorFragment : AbsPlayerFragment() {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@ColorFragment)
-            ToolbarContentTintHelper.colorizeToolbar(this, ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal), requireActivity())
+            ToolbarContentTintHelper.colorizeToolbar(
+                this,
+                ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+                requireActivity()
+            )
         }
     }
 
@@ -118,39 +125,43 @@ class ColorFragment : AbsPlayerFragment() {
 
     private fun updateSong() {
         Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-                .checkIgnoreMediaStore(requireContext())
-                .generatePalette(requireContext())
-                .build()
-                .into(object : RetroMusicColoredTarget(playerImage) {
-                    override fun onColorReady(color: Int) {
+            .checkIgnoreMediaStore(requireContext())
+            .generatePalette(requireContext())
+            .build()
+            .into(object : RetroMusicColoredTarget(playerImage) {
+                override fun onColorReady(color: Int) {
 
-                    }
+                }
 
-                    override fun onResourceReady(
-                            resource: BitmapPaletteWrapper?,
-                            glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
-                    ) {
-                        super.onResourceReady(resource, glideAnimation)
-                        resource?.let {
-                            val palette = resource.palette
-                            val swatch = RetroColorUtil.getSwatch(palette)
+                override fun onResourceReady(
+                    resource: BitmapPaletteWrapper?,
+                    glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
+                ) {
+                    super.onResourceReady(resource, glideAnimation)
+                    resource?.let {
+                        val palette = resource.palette
+                        val swatch = RetroColorUtil.getSwatch(palette)
 
-                            val textColor = RetroColorUtil.getTextColor(palette)
-                            val backgroundColor = swatch.rgb
+                        val textColor = RetroColorUtil.getTextColor(palette)
+                        val backgroundColor = swatch.rgb
 
-                            setColors(backgroundColor, textColor)
-                        }
-
-                    }
-
-                    override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                        super.onLoadFailed(e, errorDrawable)
-                        val backgroundColor = defaultFooterColor
-                        val textColor = if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(requireContext(), true)
-                        else MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
                         setColors(backgroundColor, textColor)
                     }
-                })
+
+                }
+
+                override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
+                    super.onLoadFailed(e, errorDrawable)
+                    val backgroundColor = defaultFooterColor
+                    val textColor =
+                        if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(
+                            requireContext(),
+                            true
+                        )
+                        else MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+                    setColors(backgroundColor, textColor)
+                }
+            })
     }
 
     private fun setColors(backgroundColor: Int, componentsColor: Int) {

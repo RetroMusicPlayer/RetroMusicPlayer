@@ -19,9 +19,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.activity_playing_queue.clearQueue
-import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
-import kotlinx.android.synthetic.main.activity_playing_queue.toolbar
+import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 open class PlayingQueueActivity : AbsMusicServiceActivity() {
 

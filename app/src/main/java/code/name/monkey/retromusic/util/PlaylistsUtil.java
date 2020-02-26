@@ -14,8 +14,6 @@
 
 package code.name.monkey.retromusic.util;
 
-import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,24 +23,29 @@ import android.os.Environment;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.helper.M3UWriter;
-import code.name.monkey.retromusic.model.Playlist;
-import code.name.monkey.retromusic.model.PlaylistSong;
-import code.name.monkey.retromusic.model.Song;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import code.name.monkey.retromusic.R;
+import code.name.monkey.retromusic.helper.M3UWriter;
+import code.name.monkey.retromusic.model.Playlist;
+import code.name.monkey.retromusic.model.PlaylistSong;
+import code.name.monkey.retromusic.model.Song;
+
+import static android.provider.MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
+
 public class PlaylistsUtil {
 
     public static void addToPlaylist(@NonNull Context context,
-            @NonNull List<Song> songs,
-            int playlistId,
-            boolean showToastOnFinish) {
+                                     @NonNull List<Song> songs,
+                                     int playlistId,
+                                     boolean showToastOnFinish) {
 
         ArrayList<Song> noSongs = new ArrayList<Song>();
         for (Song song : songs) {
@@ -130,7 +133,7 @@ public class PlaylistsUtil {
     }
 
     static boolean doPlaylistContains(@NonNull final Context context, final long playlistId,
-            final int songId) {
+                                      final int songId) {
         if (playlistId != -1) {
             try {
                 Cursor c = context.getContentResolver().query(
@@ -179,7 +182,7 @@ public class PlaylistsUtil {
 
     @NonNull
     public static ContentValues[] makeInsertItems(@NonNull final List<Song> songs, final int offset, int len,
-            final int base) {
+                                                  final int base) {
         if (offset + len > songs.size()) {
             len = songs.size() - offset;
         }
@@ -246,21 +249,21 @@ public class PlaylistsUtil {
 
     @Nullable
     public static File savePlaylist(@NonNull Context context,
-            @NonNull Playlist playlist) throws IOException {
+                                    @NonNull Playlist playlist) throws IOException {
         return M3UWriter.write(context, new File(Environment.getExternalStorageDirectory(), "Playlists"), playlist);
     }
 
     static void addToPlaylist(@NonNull Context context,
-            @NonNull Song song,
-            int playlistId,
-            boolean showToastOnFinish) {
+                              @NonNull Song song,
+                              int playlistId,
+                              boolean showToastOnFinish) {
         List<Song> helperList = new ArrayList<>();
         helperList.add(song);
         addToPlaylist(context, helperList, playlistId, showToastOnFinish);
     }
 
     private static boolean doesPlaylistExist(@NonNull Context context, @NonNull final String selection,
-            @NonNull final String[] values) {
+                                             @NonNull final String[] values) {
         Cursor cursor = context.getContentResolver().query(EXTERNAL_CONTENT_URI,
                 new String[]{}, selection, values, null);
 

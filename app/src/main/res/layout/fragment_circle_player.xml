@@ -159,7 +159,7 @@
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toBottomOf="@+id/volumeSeekBar"
-        app:thumbColor="?attr/colorSurface"
+        app:thumbColor="@color/md_white_1000"
         app:trackColorInactive="?attr/colorControlNormal"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />

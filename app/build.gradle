@@ -15,7 +15,7 @@ proguardDictionaries {
 android {
     compileSdkVersion 29
     buildToolsVersion = '29.0.2'
-    
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
@@ -24,8 +24,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 411
-        versionName '3.4.950'
+        versionCode 413
+        versionName '3.4.970'
 
         multiDexEnabled true
 
