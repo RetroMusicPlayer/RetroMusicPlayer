@@ -16,18 +16,16 @@ package code.name.monkey.retromusic.model;
 
 import android.content.Context;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
 
 public abstract class AbsCustomPlaylist extends Playlist {
+
     public AbsCustomPlaylist(int id, String name) {
         super(id, name);
     }

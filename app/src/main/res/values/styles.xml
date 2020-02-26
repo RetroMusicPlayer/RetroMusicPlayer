@@ -128,6 +128,10 @@
         <item name="android:fontFamily">@font/circular</item>
     </style>
 
+    <style name="TextViewHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+
     <style name="TextViewSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:fontFamily">@font/circular</item>
     </style>
@@ -180,4 +184,18 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="CircularShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">22dp</item>
+    </style>
+
+    <style name="BigCircularShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">56dp</item>
+    </style>
+
+    <style name="ExtraBigCircularShapeAppearance" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">78dp</item>
+    </style>
 </resources>

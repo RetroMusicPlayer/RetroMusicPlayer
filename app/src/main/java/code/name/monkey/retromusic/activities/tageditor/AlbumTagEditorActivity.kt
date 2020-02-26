@@ -16,7 +16,6 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
@@ -28,7 +27,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.SimpleTarget
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistContainer
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumArtistText
 import kotlinx.android.synthetic.main.activity_album_tag_editor.albumText
@@ -92,11 +90,10 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
     private var lastFMRestClient: LastFMRestClient? = null
-    private val disposable = CompositeDisposable()
 
     private fun setupToolbar() {
-        applyToolbar(toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,11 +140,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         deleteAlbumArt = false
     }
 
-    override fun onPause() {
-        super.onPause()
-        disposable.clear()
-    }
-
     private fun toastLoadingFailed() {
         Toast.makeText(
             this@AlbumTagEditorActivity,
@@ -162,7 +154,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     override fun deleteImage() {
         setImageBitmap(
-            BitmapFactory.decodeResource(resources, R.drawable.default_album_art),
+            BitmapFactory.decodeResource(resources, R.drawable.default_audio_art),
             ATHUtil.resolveColor(this, R.attr.defaultFooterColor)
         )
         deleteAlbumArt = true
@@ -178,7 +170,8 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         fieldKeyValueMap[FieldKey.GENRE] = genreTitle.text.toString()
         fieldKeyValueMap[FieldKey.YEAR] = yearTitle.text.toString()
 
-        writeValuesToFiles(fieldKeyValueMap,
+        writeValuesToFiles(
+            fieldKeyValueMap,
             if (deleteAlbumArt) ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )

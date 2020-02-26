@@ -17,6 +17,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             style="@style/Toolbar"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
             app:title="@string/profile"
             app:titleTextAppearance="@style/ToolbarTextAppearanceNormal" />
 
@@ -87,17 +88,16 @@
                 app:layout_constraintStart_toStartOf="@+id/imageContainer"
                 app:layout_constraintTop_toBottomOf="@id/imageContainer">
 
-                <code.name.monkey.retromusic.views.CircularImageView
+                <code.name.monkey.retromusic.views.RetroShapeableImageView
                     android:id="@+id/userImage"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    app:civ_border="true"
-                    app:civ_border_color="?android:colorBackground"
-                    app:civ_border_width="2dp"
-                    app:civ_shadow="false"
-                    app:srcCompat="@drawable/ic_person_flat" />
+                    app:retroCornerSize="36dp"
+                    app:srcCompat="@drawable/ic_person_flat"
+                    app:strokeColor="?attr/colorSurface"
+                    app:strokeWidth="2dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"

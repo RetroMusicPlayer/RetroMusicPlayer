@@ -14,13 +14,13 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
+import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -40,13 +40,17 @@ interface AlbumDetailsView {
 
     fun loadArtistImage(artist: Artist)
 
-    fun moreAlbums(albums: ArrayList<Album>)
+    fun moreAlbums(albums: List<Album>)
+
+    fun aboutAlbum(lastFmAlbum: LastFmAlbum)
 }
 
 interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
     fun loadAlbum(albumId: Int)
 
     fun loadMore(artistId: Int)
+
+    fun aboutAlbum(artist: String, album: String)
 
     class AlbumDetailsPresenterImpl @Inject constructor(
         private val repository: Repository
@@ -59,7 +63,16 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
             launch {
                 when (val result = repository.artistById(artistId)) {
                     is Success -> withContext(Dispatchers.Main) { showArtistImage(result.data) }
-                    is Result.Error -> withContext(Dispatchers.Main) {}
+                    is Error -> withContext(Dispatchers.Main) {}
+                }
+            }
+        }
+
+        override fun aboutAlbum(artist: String, album: String) {
+            launch {
+                when (val result = repository.albumInfo(artist, album)) {
+                    is Success -> withContext(Dispatchers.Main) { view.aboutAlbum(result.data) }
+                    is Error -> withContext(Dispatchers.Main) {}
                 }
             }
         }

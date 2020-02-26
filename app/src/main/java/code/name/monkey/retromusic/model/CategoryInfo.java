@@ -28,7 +28,8 @@ public class CategoryInfo implements Parcelable {
         ARTISTS(R.id.action_artist, R.string.artists, R.drawable.ic_artist_white_24dp),
         PLAYLISTS(R.id.action_playlist, R.string.playlists, R.drawable.ic_playlist_play_white_24dp),
         GENRES(R.id.action_genre, R.string.genres, R.drawable.ic_guitar_white_24dp),
-        QUEUE(R.id.action_playing_queue, R.string.queue, R.drawable.ic_queue_music_white_24dp);
+        QUEUE(R.id.action_playing_queue, R.string.queue, R.drawable.ic_queue_music_white_24dp),
+        FOLDER(R.id.action_folder, R.string.folders, R.drawable.ic_folder_white_24dp);
 
         public final int icon;
 

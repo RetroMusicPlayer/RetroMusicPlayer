@@ -112,8 +112,8 @@ class PlayingNotificationOreo : PlayingNotification() {
                                 notificationLayout.setImageViewBitmap(R.id.largeIcon, bitmap)
                                 notificationLayoutBig.setImageViewBitmap(R.id.largeIcon, bitmap)
                             } else {
-                                notificationLayout.setImageViewResource(R.id.largeIcon, R.drawable.default_album_art)
-                                notificationLayoutBig.setImageViewResource(R.id.largeIcon, R.drawable.default_album_art)
+                                notificationLayout.setImageViewResource(R.id.largeIcon, R.drawable.default_audio_art)
+                                notificationLayoutBig.setImageViewResource(R.id.largeIcon, R.drawable.default_audio_art)
                             }
 
                             if (!PreferenceUtil.getInstance(service).coloredNotification()) {

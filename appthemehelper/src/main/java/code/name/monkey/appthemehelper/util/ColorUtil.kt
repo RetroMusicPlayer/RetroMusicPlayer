@@ -4,7 +4,6 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
 
-
 object ColorUtil {
     fun desaturateColor(color: Int, ratio: Float): Int {
         val hsv = FloatArray(3)
@@ -14,6 +13,7 @@ object ColorUtil {
 
         return Color.HSVToColor(hsv)
     }
+
     fun stripAlpha(@ColorInt color: Int): Int {
         return -0x1000000 or color
     }
@@ -79,7 +79,6 @@ object ColorUtil {
         return Color.argb(a.toInt(), r.toInt(), g.toInt(), b.toInt())
     }
 
-
     private fun getColorDarkness(@ColorInt color: Int): Double {
         return if (color == Color.BLACK)
             1.0
@@ -104,9 +103,9 @@ object ColorUtil {
     @ColorInt
     fun getMixedColor(@ColorInt color1: Int, @ColorInt color2: Int): Int {
         return Color.rgb(
-                (Color.red(color1) + Color.red(color2)) / 2,
-                (Color.green(color1) + Color.green(color2)) / 2,
-                (Color.blue(color1) + Color.blue(color2)) / 2
+            (Color.red(color1) + Color.red(color2)) / 2,
+            (Color.green(color1) + Color.green(color2)) / 2,
+            (Color.blue(color1) + Color.blue(color2)) / 2
         )
     }
 

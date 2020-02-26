@@ -6,22 +6,20 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playing_queue.clearQueue
-import kotlinx.android.synthetic.main.activity_playing_queue.playerQueueSubHeader
 import kotlinx.android.synthetic.main.activity_playing_queue.recyclerView
 import kotlinx.android.synthetic.main.activity_playing_queue.toolbar
 
@@ -107,7 +105,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
                 }
             }
         })
-        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
+        //ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
     }
 
     private fun checkForPadding() {
@@ -129,7 +127,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun updateCurrentSong() {
-        playerQueueSubHeader.text = getUpNextAndQueueTime()
+        toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     override fun onPlayingMetaChanged() {
@@ -139,7 +137,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     private fun updateQueuePosition() {
         playingQueueAdapter?.setCurrent(MusicPlayerRemote.position)
         resetToCurrentPosition()
-        playerQueueSubHeader.text = getUpNextAndQueueTime()
+        toolbar.subtitle = getUpNextAndQueueTime()
     }
 
     private fun updateQueue() {
@@ -177,20 +175,14 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
     }
 
     private fun setupToolbar() {
-        playerQueueSubHeader.text = getUpNextAndQueueTime()
-        playerQueueSubHeader.setTextColor(ThemeStore.accentColor(this))
+        toolbar.subtitle = getUpNextAndQueueTime()
 
-        applyToolbar(toolbar)
-        clearQueue.backgroundTintList = ColorStateList.valueOf(ThemeStore.accentColor(this))
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
+        val accentColor = ThemeStore.accentColor(this)
+        clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor)
         ColorStateList.valueOf(
-            MaterialValueHelper.getPrimaryTextColor(
-                this,
-                ColorUtil.isColorLight(
-                    ThemeStore.accentColor(
-                        this
-                    )
-                )
-            )
+            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(accentColor))
         ).apply {
             clearQueue.setTextColor(this)
             clearQueue.iconTint = this

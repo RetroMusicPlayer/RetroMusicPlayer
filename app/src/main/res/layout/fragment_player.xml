@@ -32,6 +32,7 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
+
         <code.name.monkey.retromusic.views.WidthFitSquareLayout
             android:id="@+id/playerAlbumCoverContainer"
             android:layout_width="match_parent"
@@ -72,5 +73,4 @@
                 app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </FrameLayout>
     </LinearLayout>
-
 </FrameLayout>

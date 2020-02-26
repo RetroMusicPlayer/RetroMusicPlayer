@@ -14,28 +14,21 @@
 
 package code.name.monkey.retromusic.util
 
-import android.animation.Animator
-import android.animation.ArgbEvaluator
-import android.animation.ObjectAnimator
-import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.view.View
-import android.view.animation.PathInterpolator
 import android.widget.ProgressBar
 import android.widget.SeekBar
-import androidx.annotation.ColorInt
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.core.view.ViewCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
-import code.name.monkey.retromusic.R
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
+import com.google.android.material.slider.Slider
 
 object ViewUtil {
 
@@ -55,39 +48,36 @@ object ViewUtil {
         }
     }
 
-    fun setProgressDrawable(progressSlider: ProgressBar, newColor: Int) {
-
-        val ld = progressSlider.progressDrawable as LayerDrawable
-
-        val progress = ld.findDrawableByLayerId(android.R.id.progress)
-        progress.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-
-        val background = ld.findDrawableByLayerId(android.R.id.background)
-        val primaryColor = ATHUtil.resolveColor(progressSlider.context, android.R.attr.windowBackground)
-        background.setColorFilter(MaterialValueHelper.getPrimaryDisabledTextColor(progressSlider.context, ColorUtil.isColorLight(primaryColor)), PorterDuff.Mode.SRC_IN)
-
-        val secondaryProgress = ld.findDrawableByLayerId(android.R.id.secondaryProgress)
-        secondaryProgress?.setColorFilter(
-                ColorUtil.withAlpha(newColor, 0.65f), PorterDuff.Mode.SRC_IN
-        )
+    fun setProgressDrawable(progressSlider: Slider, color: Int, thumbTint: Boolean = false) {
+        if (thumbTint) {
+            progressSlider.thumbColor = ColorStateList.valueOf(color)
+        }
+        val colorWithAlpha = ColorUtil.withAlpha(color, 0.25f)
+        progressSlider.haloColor = ColorStateList.valueOf(colorWithAlpha)
+        progressSlider.trackColorActive = ColorStateList.valueOf(color)
+        progressSlider.trackColorInactive = ColorStateList.valueOf(colorWithAlpha)
     }
 
-    private fun createColorAnimator(
-            target: Any, propertyName: String, @ColorInt startColor: Int, @ColorInt endColor: Int
-    ): Animator {
-        val animator: ObjectAnimator
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            animator = ObjectAnimator.ofArgb(target, propertyName, startColor, endColor)
-        } else {
-            animator = ObjectAnimator.ofInt(target, propertyName, startColor, endColor)
-            animator.setEvaluator(ArgbEvaluator())
-        }
+    fun setProgressDrawable(progressSlider: ProgressBar, newColor: Int) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            animator.interpolator = PathInterpolator(0.4f, 0f, 1f, 1f)
-        }
-        animator.duration = RETRO_MUSIC_ANIM_TIME.toLong()
-        return animator
+        val layerDrawable = progressSlider.progressDrawable as LayerDrawable
+
+        val progress = layerDrawable.findDrawableByLayerId(android.R.id.progress)
+        progress.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(newColor, SRC_IN)
+
+        val background = layerDrawable.findDrawableByLayerId(android.R.id.background)
+        val primaryColor = ATHUtil.resolveColor(progressSlider.context, android.R.attr.windowBackground)
+        background.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            MaterialValueHelper.getPrimaryDisabledTextColor(
+                progressSlider.context,
+                ColorUtil.isColorLight(primaryColor)
+            ), SRC_IN
+        )
+
+        val secondaryProgress = layerDrawable.findDrawableByLayerId(android.R.id.secondaryProgress)
+        secondaryProgress?.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ColorUtil.withAlpha(newColor, 0.65f), SRC_IN)
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {
@@ -99,18 +89,6 @@ object ViewUtil {
         val bottom = v.bottom + ty
 
         return x in left..right && y >= top && y <= bottom
-    }
-
-    fun setUpFastScrollRecyclerViewColor(
-            context: Context,
-            recyclerView: FastScrollRecyclerView,
-            accentColor: Int = ThemeStore.accentColor(context)
-    ) {
-        recyclerView.setPopupBgColor(accentColor)
-        recyclerView.setPopupTextColor(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(accentColor)))
-        recyclerView.setThumbColor(accentColor)
-        recyclerView.setTrackColor(Color.TRANSPARENT)
-        recyclerView.setTrackColor(ColorUtil.withAlpha(ATHUtil.resolveColor(context, R.attr.colorControlNormal), 0.12f))
     }
 
     fun convertDpToPixel(dp: Float, resources: Resources): Float {

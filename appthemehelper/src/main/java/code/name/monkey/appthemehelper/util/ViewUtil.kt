@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewTreeObserver
 
-
 object ViewUtil {
     fun removeOnGlobalLayoutListener(v: View, listener: ViewTreeObserver.OnGlobalLayoutListener) {
         v.viewTreeObserver.removeOnGlobalLayoutListener(listener)

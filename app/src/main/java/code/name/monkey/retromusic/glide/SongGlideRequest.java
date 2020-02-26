@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
@@ -28,6 +29,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.signature.MediaStoreSignature;
 
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.audiocover.AudioFileCover;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
@@ -42,7 +45,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 public class SongGlideRequest {
 
     private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
-    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_album_art;
+    private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_audio_art;
     private static final int DEFAULT_ANIMATION = android.R.anim.fade_in;
 
     public static class Builder {
@@ -87,6 +90,7 @@ public class SongGlideRequest {
             return createBaseRequest(requestManager, song, ignoreMediaStore)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(song));
         }
@@ -105,6 +109,7 @@ public class SongGlideRequest {
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }
@@ -120,12 +125,14 @@ public class SongGlideRequest {
         }
 
         public BitmapRequestBuilder<?, BitmapPaletteWrapper> build() {
+            Drawable drawable = TintHelper.createTintedDrawable(context, DEFAULT_ERROR_IMAGE, ThemeStore.Companion.accentColor(context));
             //noinspection unchecked
             return createBaseRequest(builder.requestManager, builder.song, builder.ignoreMediaStore)
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(drawable)
+                    .error(drawable)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }

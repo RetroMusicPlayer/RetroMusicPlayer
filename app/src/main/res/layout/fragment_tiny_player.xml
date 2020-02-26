@@ -45,7 +45,6 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
-
     <code.name.monkey.retromusic.views.VerticalTextView
         android:id="@+id/playerSongTotalTime"
         android:layout_width="wrap_content"
@@ -146,6 +145,7 @@
         android:paddingEnd="16dp"
         android:rotation="0"
         android:textAppearance="@style/TextViewHeadline6"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toBottomOf="@id/status_bar"

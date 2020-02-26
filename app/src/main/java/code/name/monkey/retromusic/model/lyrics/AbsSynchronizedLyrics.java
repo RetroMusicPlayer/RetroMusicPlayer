@@ -17,9 +17,11 @@ package code.name.monkey.retromusic.model.lyrics;
 import android.util.SparseArray;
 
 public abstract class AbsSynchronizedLyrics extends Lyrics {
+
     private static final int TIME_OFFSET_MS = 500; // time adjustment to display line before it actually starts
 
     protected final SparseArray<String> lines = new SparseArray<>();
+
     protected int offset = 0;
 
     public String getLine(int time) {
@@ -40,15 +42,6 @@ public abstract class AbsSynchronizedLyrics extends Lyrics {
         return lines.get(lastLineTime);
     }
 
-    public boolean isSynchronized() {
-        return true;
-    }
-
-    public boolean isValid() {
-        parse(true);
-        return valid;
-    }
-
     @Override
     public String getText() {
         parse(false);
@@ -65,5 +58,14 @@ public abstract class AbsSynchronizedLyrics extends Lyrics {
         }
 
         return super.getText();
+    }
+
+    public boolean isSynchronized() {
+        return true;
+    }
+
+    public boolean isValid() {
+        parse(true);
+        return valid;
     }
 }

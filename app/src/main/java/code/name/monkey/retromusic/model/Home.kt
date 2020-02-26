@@ -18,10 +18,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import code.name.monkey.retromusic.adapter.HomeAdapter.Companion.HomeSection
 
-class Home(val priority: Int,
-           @StringRes val title: Int,
-           val arrayList: ArrayList<*>,
-           @HomeSection
-           val homeSection: Int,
-           @DrawableRes
-           val icon: Int)
+class Home(
+    val priority: Int,
+    @StringRes val title: Int,
+    val arrayList: ArrayList<*>,
+    @HomeSection
+    val homeSection: Int,
+    @DrawableRes
+    val icon: Int
+)

@@ -76,15 +76,15 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_share -> {
-                SongShareDialog.create(song).show(requireFragmentManager(), "SHARE_SONG")
+                SongShareDialog.create(song).show(childFragmentManager, "SHARE_SONG")
                 return true
             }
             R.id.action_delete_from_device -> {
-                DeleteSongsDialog.create(song).show(requireFragmentManager(), "DELETE_SONGS")
+                DeleteSongsDialog.create(song).show(childFragmentManager, "DELETE_SONGS")
                 return true
             }
             R.id.action_add_to_playlist -> {
-                AddToPlaylistDialog.create(song).show(requireFragmentManager(), "ADD_PLAYLIST")
+                AddToPlaylistDialog.create(song).show(childFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_clear_playing_queue -> {
@@ -93,7 +93,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
             }
             R.id.action_save_playing_queue -> {
                 CreatePlaylistDialog.create(MusicPlayerRemote.playingQueue)
-                    .show(requireFragmentManager(), "ADD_TO_PLAYLIST")
+                    .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
             R.id.action_tag_editor -> {
@@ -103,7 +103,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_details -> {
-                SongDetailDialog.create(song).show(requireFragmentManager(), "SONG_DETAIL")
+                SongDetailDialog.create(song).show(childFragmentManager, "SONG_DETAIL")
                 return true
             }
             R.id.action_go_to_album -> {

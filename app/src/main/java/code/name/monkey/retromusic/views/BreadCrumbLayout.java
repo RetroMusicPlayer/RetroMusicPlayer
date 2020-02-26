@@ -28,7 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.retromusic.R;
 import java.io.File;
 import java.util.ArrayList;
@@ -41,19 +41,47 @@ import java.util.List;
  */
 public class BreadCrumbLayout extends HorizontalScrollView implements View.OnClickListener {
 
-    @ColorInt
-    private int contentColorActivated;
-    @ColorInt
-    private int contentColorDeactivated;
-
     public static class Crumb implements Parcelable {
+
+        public static final Creator<Crumb> CREATOR = new Creator<Crumb>() {
+            @Override
+            public Crumb createFromParcel(Parcel source) {
+                return new Crumb(source);
+            }
+
+            @Override
+            public Crumb[] newArray(int size) {
+                return new Crumb[size];
+            }
+        };
+
+        private final File file;
+
+        private int scrollPos;
 
         public Crumb(File file) {
             this.file = file;
         }
 
-        private final File file;
-        private int scrollPos;
+        protected Crumb(Parcel in) {
+            this.file = (File) in.readSerializable();
+            this.scrollPos = in.readInt();
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            return (o instanceof Crumb) && ((Crumb) o).getFile() != null &&
+                    ((Crumb) o).getFile().equals(getFile());
+        }
+
+        public File getFile() {
+            return file;
+        }
 
         public int getScrollPosition() {
             return scrollPos;
@@ -67,16 +95,6 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
             return file.getPath().equals("/") ? "root" : file.getName();
         }
 
-        public File getFile() {
-            return file;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            return (o instanceof Crumb) && ((Crumb) o).getFile() != null &&
-                    ((Crumb) o).getFile().equals(getFile());
-        }
-
         @Override
         public String toString() {
             return "Crumb{" +
@@ -86,37 +104,80 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
         }
 
         @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeSerializable(this.file);
+            dest.writeInt(this.scrollPos);
+        }
+    }
+
+    public static class SavedStateWrapper implements Parcelable {
+
+        public static final Creator<SavedStateWrapper> CREATOR = new Creator<SavedStateWrapper>() {
+            public SavedStateWrapper createFromParcel(Parcel source) {
+                return new SavedStateWrapper(source);
+            }
+
+            public SavedStateWrapper[] newArray(int size) {
+                return new SavedStateWrapper[size];
+            }
+        };
+
+        public final int mActive;
+
+        public final List<Crumb> mCrumbs;
+
+        public final int mVisibility;
+
+        public SavedStateWrapper(BreadCrumbLayout view) {
+            mActive = view.mActive;
+            mCrumbs = view.mCrumbs;
+            mVisibility = view.getVisibility();
+        }
+
+        protected SavedStateWrapper(Parcel in) {
+            this.mActive = in.readInt();
+            this.mCrumbs = in.createTypedArrayList(Crumb.CREATOR);
+            this.mVisibility = in.readInt();
+        }
+
+        @Override
         public int describeContents() {
             return 0;
         }
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
-            dest.writeSerializable(this.file);
-            dest.writeInt(this.scrollPos);
+            dest.writeInt(this.mActive);
+            dest.writeTypedList(mCrumbs);
+            dest.writeInt(this.mVisibility);
         }
-
-        protected Crumb(Parcel in) {
-            this.file = (File) in.readSerializable();
-            this.scrollPos = in.readInt();
-        }
-
-        public static final Creator<Crumb> CREATOR = new Creator<Crumb>() {
-            @Override
-            public Crumb createFromParcel(Parcel source) {
-                return new Crumb(source);
-            }
-
-            @Override
-            public Crumb[] newArray(int size) {
-                return new Crumb[size];
-            }
-        };
     }
 
     public interface SelectionCallback {
+
         void onCrumbSelection(Crumb crumb, int index);
     }
+
+    @ColorInt
+    private int contentColorActivated;
+
+    @ColorInt
+    private int contentColorDeactivated;
+
+    private int mActive;
+
+    private SelectionCallback mCallback;
+
+    private LinearLayout mChildFrame;
+
+    // Stores currently visible crumbs
+    private List<Crumb> mCrumbs;
+
+    // Stores user's navigation history, like a fragment back stack
+    private List<Crumb> mHistory;
+
+    // Used in setActiveOrAdd() between clearing crumbs and adding the new set, nullified afterwards
+    private List<Crumb> mOldCrumbs;
 
     public BreadCrumbLayout(Context context) {
         super(context);
@@ -133,59 +194,9 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
         init();
     }
 
-    // Stores currently visible crumbs
-    private List<Crumb> mCrumbs;
-    // Used in setActiveOrAdd() between clearing crumbs and adding the new set, nullified afterwards
-    private List<Crumb> mOldCrumbs;
-    // Stores user's navigation history, like a fragment back stack
-    private List<Crumb> mHistory;
-
-    private LinearLayout mChildFrame;
-    private int mActive;
-    private SelectionCallback mCallback;
-
-    private void init() {
-        contentColorActivated = ThemeStore.Companion.textColorPrimary(getContext());
-        contentColorDeactivated = ThemeStore.Companion.textColorSecondary(getContext());
-        setMinimumHeight((int) getResources().getDimension(R.dimen.tab_height));
-        setClipToPadding(false);
-        setHorizontalScrollBarEnabled(false);
-        mCrumbs = new ArrayList<>();
-        mHistory = new ArrayList<>();
-        mChildFrame = new LinearLayout(getContext());
-        addView(mChildFrame, new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-    }
-
-    public void addHistory(Crumb crumb) {
-        mHistory.add(crumb);
-    }
-
-    public Crumb lastHistory() {
-        if (mHistory.size() == 0) return null;
-        return mHistory.get(mHistory.size() - 1);
-    }
-
-    public boolean popHistory() {
-        if (mHistory.size() == 0) return false;
-        mHistory.remove(mHistory.size() - 1);
-        return mHistory.size() != 0;
-    }
-
-    public int historySize() {
-        return mHistory.size();
-    }
-
-    public void clearHistory() {
-        mHistory.clear();
-    }
-
-    public void reverseHistory() {
-        Collections.reverse(mHistory);
-    }
-
     public void addCrumb(@NonNull Crumb crumb, boolean refreshLayout) {
-        LinearLayout view = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.bread_crumb, this, false);
+        LinearLayout view = (LinearLayout) LayoutInflater.from(getContext())
+                .inflate(R.layout.bread_crumb, this, false);
         view.setTag(mCrumbs.size());
         view.setOnClickListener(this);
 
@@ -205,21 +216,8 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
         invalidateActivatedAll();
     }
 
-    @Override
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-        //RTL works fine like this
-        View child = mChildFrame.getChildAt(mActive);
-        if (child != null)
-            smoothScrollTo(child.getLeft(), 0);
-    }
-
-    public Crumb findCrumb(@NonNull File forDir) {
-        for (int i = 0; i < mCrumbs.size(); i++) {
-            if (mCrumbs.get(i).getFile().equals(forDir))
-                return mCrumbs.get(i);
-        }
-        return null;
+    public void addHistory(Crumb crumb) {
+        mHistory.add(crumb);
     }
 
     public void clearCrumbs() {
@@ -232,65 +230,75 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
         }
     }
 
+    public void clearHistory() {
+        mHistory.clear();
+    }
+
+    public Crumb findCrumb(@NonNull File forDir) {
+        for (int i = 0; i < mCrumbs.size(); i++) {
+            if (mCrumbs.get(i).getFile().equals(forDir)) {
+                return mCrumbs.get(i);
+            }
+        }
+        return null;
+    }
+
+    public int getActiveIndex() {
+        return mActive;
+    }
+
     public Crumb getCrumb(int index) {
         return mCrumbs.get(index);
     }
 
-    public void setCallback(SelectionCallback callback) {
-        mCallback = callback;
+    public SavedStateWrapper getStateWrapper() {
+        return new SavedStateWrapper(this);
     }
 
-    private boolean setActive(Crumb newActive) {
-        mActive = mCrumbs.indexOf(newActive);
-        invalidateActivatedAll();
-        boolean success = mActive > -1;
-        if (success)
+    public int historySize() {
+        return mHistory.size();
+    }
+
+    public Crumb lastHistory() {
+        if (mHistory.size() == 0) {
+            return null;
+        }
+        return mHistory.get(mHistory.size() - 1);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mCallback != null) {
+            int index = (Integer) v.getTag();
+            mCallback.onCrumbSelection(mCrumbs.get(index), index);
+        }
+    }
+
+    public boolean popHistory() {
+        if (mHistory.size() == 0) {
+            return false;
+        }
+        mHistory.remove(mHistory.size() - 1);
+        return mHistory.size() != 0;
+    }
+
+    public void restoreFromStateWrapper(SavedStateWrapper mSavedState) {
+        if (mSavedState != null) {
+            mActive = mSavedState.mActive;
+            for (Crumb c : mSavedState.mCrumbs) {
+                addCrumb(c, false);
+            }
             requestLayout();
-        return success;
-    }
-
-    void invalidateActivatedAll() {
-        for (int i = 0; i < mCrumbs.size(); i++) {
-            Crumb crumb = mCrumbs.get(i);
-            invalidateActivated(mChildFrame.getChildAt(i), mActive == mCrumbs.indexOf(crumb), false, i < mCrumbs.size() - 1).setText(crumb.getTitle());
+            setVisibility(mSavedState.mVisibility);
         }
     }
 
-    void removeCrumbAt(int index) {
-        mCrumbs.remove(index);
-        mChildFrame.removeViewAt(index);
+    public void reverseHistory() {
+        Collections.reverse(mHistory);
     }
 
-    public boolean trim(String path, boolean dir) {
-        if (!dir) return false;
-        int index = -1;
-        for (int i = mCrumbs.size() - 1; i >= 0; i--) {
-            File fi = mCrumbs.get(i).getFile();
-            if (fi.getPath().equals(path)) {
-                index = i;
-                break;
-            }
-        }
-
-        boolean removedActive = index >= mActive;
-        if (index > -1) {
-            while (index <= mCrumbs.size() - 1)
-                removeCrumbAt(index);
-            if (mChildFrame.getChildCount() > 0) {
-                int lastIndex = mCrumbs.size() - 1;
-                invalidateActivated(mChildFrame.getChildAt(lastIndex), mActive == lastIndex, false, false);
-            }
-        }
-        return removedActive || mCrumbs.size() == 0;
-    }
-
-    public boolean trim(File file) {
-        return trim(file.getPath(), file.isDirectory());
-    }
-
-    void updateIndices() {
-        for (int i = 0; i < mChildFrame.getChildCount(); i++)
-            mChildFrame.getChildAt(i).setTag(i);
+    public void setActivatedContentColor(@ColorInt int contentColorActivated) {
+        this.contentColorActivated = contentColorActivated;
     }
 
     public void setActiveOrAdd(@NonNull Crumb crumb, boolean forceRecreate) {
@@ -329,99 +337,115 @@ public class BreadCrumbLayout extends HorizontalScrollView implements View.OnCli
         }
     }
 
-    public int size() {
-        return mCrumbs.size();
-    }
-
-    private TextView invalidateActivated(View view, final boolean isActive, final boolean noArrowIfAlone, final boolean allowArrowVisible) {
-        int contentColor = isActive ? contentColorActivated : contentColorDeactivated;
-        LinearLayout child = (LinearLayout) view;
-        TextView tv = (TextView) child.getChildAt(0);
-        tv.setTextColor(contentColor);
-        ImageView iv = (ImageView) child.getChildAt(1);
-        iv.setColorFilter(contentColor, PorterDuff.Mode.SRC_IN);
-        if (noArrowIfAlone && getChildCount() == 1)
-            iv.setVisibility(View.GONE);
-        else if (allowArrowVisible)
-            iv.setVisibility(View.VISIBLE);
-        else
-            iv.setVisibility(View.GONE);
-        return tv;
-    }
-
-    public int getActiveIndex() {
-        return mActive;
-    }
-
-    public void setActivatedContentColor(@ColorInt int contentColorActivated) {
-        this.contentColorActivated = contentColorActivated;
+    public void setCallback(SelectionCallback callback) {
+        mCallback = callback;
     }
 
     public void setDeactivatedContentColor(@ColorInt int contentColorDeactivated) {
         this.contentColorDeactivated = contentColorDeactivated;
     }
 
+    public int size() {
+        return mCrumbs.size();
+    }
+
+    public boolean trim(String path, boolean dir) {
+        if (!dir) {
+            return false;
+        }
+        int index = -1;
+        for (int i = mCrumbs.size() - 1; i >= 0; i--) {
+            File fi = mCrumbs.get(i).getFile();
+            if (fi.getPath().equals(path)) {
+                index = i;
+                break;
+            }
+        }
+
+        boolean removedActive = index >= mActive;
+        if (index > -1) {
+            while (index <= mCrumbs.size() - 1) {
+                removeCrumbAt(index);
+            }
+            if (mChildFrame.getChildCount() > 0) {
+                int lastIndex = mCrumbs.size() - 1;
+                invalidateActivated(mChildFrame.getChildAt(lastIndex), mActive == lastIndex, false, false);
+            }
+        }
+        return removedActive || mCrumbs.size() == 0;
+    }
+
+    public boolean trim(File file) {
+        return trim(file.getPath(), file.isDirectory());
+    }
+
     @Override
-    public void onClick(View v) {
-        if (mCallback != null) {
-            int index = (Integer) v.getTag();
-            mCallback.onCrumbSelection(mCrumbs.get(index), index);
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        //RTL works fine like this
+        View child = mChildFrame.getChildAt(mActive);
+        if (child != null) {
+            smoothScrollTo(child.getLeft(), 0);
         }
     }
 
-    public static class SavedStateWrapper implements Parcelable {
-
-        public final int mActive;
-        public final List<Crumb> mCrumbs;
-        public final int mVisibility;
-
-        public SavedStateWrapper(BreadCrumbLayout view) {
-            mActive = view.mActive;
-            mCrumbs = view.mCrumbs;
-            mVisibility = view.getVisibility();
+    void invalidateActivatedAll() {
+        for (int i = 0; i < mCrumbs.size(); i++) {
+            Crumb crumb = mCrumbs.get(i);
+            invalidateActivated(mChildFrame.getChildAt(i), mActive == mCrumbs.indexOf(crumb), false,
+                    i < mCrumbs.size() - 1).setText(crumb.getTitle());
         }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeInt(this.mActive);
-            dest.writeTypedList(mCrumbs);
-            dest.writeInt(this.mVisibility);
-        }
-
-        protected SavedStateWrapper(Parcel in) {
-            this.mActive = in.readInt();
-            this.mCrumbs = in.createTypedArrayList(Crumb.CREATOR);
-            this.mVisibility = in.readInt();
-        }
-
-        public static final Creator<SavedStateWrapper> CREATOR = new Creator<SavedStateWrapper>() {
-            public SavedStateWrapper createFromParcel(Parcel source) {
-                return new SavedStateWrapper(source);
-            }
-
-            public SavedStateWrapper[] newArray(int size) {
-                return new SavedStateWrapper[size];
-            }
-        };
     }
 
-    public SavedStateWrapper getStateWrapper() {
-        return new SavedStateWrapper(this);
+    void removeCrumbAt(int index) {
+        mCrumbs.remove(index);
+        mChildFrame.removeViewAt(index);
     }
 
-    public void restoreFromStateWrapper(SavedStateWrapper mSavedState) {
-        if (mSavedState != null) {
-            mActive = mSavedState.mActive;
-            for (Crumb c : mSavedState.mCrumbs) {
-                addCrumb(c, false);
-            }
+    void updateIndices() {
+        for (int i = 0; i < mChildFrame.getChildCount(); i++) {
+            mChildFrame.getChildAt(i).setTag(i);
+        }
+    }
+
+    private void init() {
+        contentColorActivated = ATHUtil.INSTANCE.resolveColor(getContext(), android.R.attr.textColorPrimary);
+        contentColorDeactivated = ATHUtil.INSTANCE.resolveColor(getContext(), android.R.attr.textColorSecondary);
+        setMinimumHeight((int) getResources().getDimension(R.dimen.tab_height));
+        setClipToPadding(false);
+        setHorizontalScrollBarEnabled(false);
+        mCrumbs = new ArrayList<>();
+        mHistory = new ArrayList<>();
+        mChildFrame = new LinearLayout(getContext());
+        addView(mChildFrame, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    }
+
+    private TextView invalidateActivated(View view, final boolean isActive, final boolean noArrowIfAlone,
+            final boolean allowArrowVisible) {
+        int contentColor = isActive ? contentColorActivated : contentColorDeactivated;
+        LinearLayout child = (LinearLayout) view;
+        TextView tv = (TextView) child.getChildAt(0);
+        tv.setTextColor(contentColor);
+        ImageView iv = (ImageView) child.getChildAt(1);
+        iv.setColorFilter(contentColor, PorterDuff.Mode.SRC_IN);
+        if (noArrowIfAlone && getChildCount() == 1) {
+            iv.setVisibility(View.GONE);
+        } else if (allowArrowVisible) {
+            iv.setVisibility(View.VISIBLE);
+        } else {
+            iv.setVisibility(View.GONE);
+        }
+        return tv;
+    }
+
+    private boolean setActive(Crumb newActive) {
+        mActive = mCrumbs.indexOf(newActive);
+        invalidateActivatedAll();
+        boolean success = mActive > -1;
+        if (success) {
             requestLayout();
-            setVisibility(mSavedState.mVisibility);
         }
+        return success;
     }
 }

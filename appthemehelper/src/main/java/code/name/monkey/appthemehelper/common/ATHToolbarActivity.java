@@ -2,10 +2,8 @@ package code.name.monkey.appthemehelper.common;
 
 import android.graphics.Color;
 import android.view.Menu;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-
 import code.name.monkey.appthemehelper.ATHActivity;
 import code.name.monkey.appthemehelper.R;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -13,6 +11,7 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 
 
 public class ATHToolbarActivity extends ATHActivity {
+
     private Toolbar toolbar;
 
     public static int getToolbarBackgroundColor(@Nullable Toolbar toolbar) {

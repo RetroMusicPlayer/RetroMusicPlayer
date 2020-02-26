@@ -13,11 +13,7 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener
 import com.google.android.material.appbar.AppBarLayout
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.container
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.empty
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.emptyEmoji
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.emptyText
-import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.recyclerView
+import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
@@ -35,14 +31,13 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        libraryFragment.addOnAppBarOffsetChangedListener(this)
+        mainActivity.addOnAppBarOffsetChangedListener(this)
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
     }
 
     private fun setUpRecyclerView() {
-
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         val fastScroller = create(recyclerView)
@@ -52,7 +47,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
                 fastScroller
             )
         )
-        //OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL)
+        checkForPadding()
     }
 
     protected open fun createFastScroller(recyclerView: RecyclerView): FastScroller {
@@ -109,7 +104,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
             container.paddingLeft,
             container.paddingTop,
             container.paddingRight,
-            libraryFragment.totalAppBarScrollingRange + i
+            mainActivity.totalAppBarScrollingRange + i
         )
     }
 
@@ -136,7 +131,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        libraryFragment.removeOnAppBarOffsetChangedListener(this)
+        mainActivity.removeOnAppBarOffsetChangedListener(this)
     }
 
     fun recyclerView(): RecyclerView {

@@ -41,6 +41,7 @@
 
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+
     </style>
 
     <style name="Theme.RetroMusic.Base.Black" parent="Theme.MaterialComponents.NoActionBar">
@@ -108,7 +109,7 @@
     </style>
 
     <style name="MaterialButtonTheme" parent="Widget.MaterialComponents.Button">
-        <item name="cornerRadius">24dp</item>
+        <item name="cornerRadius">6dp</item>
         <item name="iconGravity">textStart</item>
         <item name="iconTint">?attr/colorControlNormal</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>

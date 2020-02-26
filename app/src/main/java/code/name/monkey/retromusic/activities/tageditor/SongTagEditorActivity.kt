@@ -4,10 +4,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.loaders.SongLoader
 import kotlinx.android.synthetic.main.activity_song_tag_editor.albumArtistContainer
 import kotlinx.android.synthetic.main.activity_song_tag_editor.albumArtistText
@@ -42,8 +42,8 @@ class SongTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         setNoImageMode()
         setUpViews()
-        applyToolbar(toolbar)
-
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
     }
 
     private fun setUpViews() {

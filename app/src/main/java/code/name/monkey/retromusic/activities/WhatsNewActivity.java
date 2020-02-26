@@ -1,6 +1,5 @@
 package code.name.monkey.retromusic.activities;
 
-import static code.name.monkey.appthemehelper.util.ATHUtil.INSTANCE;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -13,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.widget.NestedScrollView;
 import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -23,7 +23,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
 public class WhatsNewActivity extends AbsBaseActivity {
 
@@ -46,14 +45,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
         toolbar = findViewById(R.id.toolbar);
         appBarLayout = findViewById(R.id.appBarLayout);
 
-        toolbar.setBackgroundColor(INSTANCE.resolveColor(this, R.attr.colorSurface));
+        toolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
         //setSupportActionBar(toolbar);
 
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         ToolbarContentTintHelper.colorBackButton(toolbar);
         NestedScrollView nestedScrollView = findViewById(R.id.container);
-        OverScrollDecoratorHelper.setUpOverScroll(nestedScrollView);
-        
+
         try {
             StringBuilder buf = new StringBuilder();
             InputStream json = getAssets().open("retro-changelog.html");
@@ -65,8 +63,8 @@ public class WhatsNewActivity extends AbsBaseActivity {
             in.close();
 
             // Inject color values for WebView body background and links
-            final boolean isDark = INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(INSTANCE.resolveColor(this, R.attr.colorSurface,
+            final boolean isDark = ATHUtil.INSTANCE.isWindowBackgroundDark(this);
+            final String backgroundColor = colorToCSS(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface,
                     Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String changeLog = buf.toString()

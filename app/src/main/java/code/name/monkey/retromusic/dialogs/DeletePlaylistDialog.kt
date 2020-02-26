@@ -26,8 +26,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import java.util.*
-
+import java.util.ArrayList
 
 class DeletePlaylistDialog : DialogFragment() {
 
@@ -45,18 +44,18 @@ class DeletePlaylistDialog : DialogFragment() {
         }
 
         return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .show {
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
-                    title(title)
-                    message(text = content)
-                    negativeButton(android.R.string.cancel)
-                    positiveButton(R.string.action_delete) {
-                        if (activity == null)
-                            return@positiveButton
-                        PlaylistsUtil.deletePlaylists(activity!!, playlists)
-                    }
-                    negativeButton(android.R.string.cancel)
+            .show {
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+                title(title)
+                message(text = content)
+                negativeButton(android.R.string.cancel)
+                positiveButton(R.string.action_delete) {
+                    if (activity == null)
+                        return@positiveButton
+                    PlaylistsUtil.deletePlaylists(activity!!, playlists)
                 }
+                negativeButton(android.R.string.cancel)
+            }
     }
 
     companion object {
@@ -75,5 +74,4 @@ class DeletePlaylistDialog : DialogFragment() {
             return dialog
         }
     }
-
 }

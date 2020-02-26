@@ -9,8 +9,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.util.NavigationUtil
-import java.util.ArrayList
-import java.util.Locale
+import java.util.*
 
 /**
  * @author Hemanth S (h4h13).
@@ -18,16 +17,10 @@ import java.util.Locale
 
 class GenreAdapter(
     private val activity: Activity,
-    dataSet: ArrayList<Genre>,
+    var dataSet: List<Genre>,
     private val mItemLayoutRes: Int
 ) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
 
-    var dataSet = ArrayList<Genre>()
-        private set
-
-    init {
-        this.dataSet = dataSet
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(activity).inflate(mItemLayoutRes, parent, false))
@@ -48,7 +41,7 @@ class GenreAdapter(
         return dataSet.size
     }
 
-    fun swapDataSet(list: ArrayList<Genre>) {
+    fun swapDataSet(list: List<Genre>) {
         dataSet = list
         notifyDataSetChanged()
     }

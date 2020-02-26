@@ -22,6 +22,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.MainActivity
+import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.OptionMenuItemView
@@ -35,18 +37,16 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         val mainActivity = activity as MainActivity? ?: return
         when (view.id) {
-            R.id.actionFolders -> mainActivity.setMusicChooser(MainActivity.FOLDER)
-            R.id.actionLibrary -> mainActivity.setMusicChooser(MainActivity.LIBRARY)
             R.id.actionSettings -> NavigationUtil.goToSettings(mainActivity)
+            R.id.actionDriveMode -> NavigationUtil.gotoDriveMode(mainActivity)
             R.id.actionRate -> NavigationUtil.goToPlayStore(mainActivity)
         }
         materialDialog.dismiss()
     }
 
     private lateinit var actionSettings: OptionMenuItemView
-    private lateinit var actionLibrary: OptionMenuItemView
-    private lateinit var actionFolders: OptionMenuItemView
     private lateinit var actionRate: OptionMenuItemView
+    private lateinit var actionDriveMode: OptionMenuItemView
     private lateinit var materialDialog: MaterialDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -54,20 +54,15 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         val layout = LayoutInflater.from(context).inflate(R.layout.fragment_main_options, null)
         actionSettings = layout.findViewById(R.id.actionSettings)
         actionRate = layout.findViewById(R.id.actionRate)
-        actionLibrary = layout.findViewById(R.id.actionLibrary)
-        actionFolders = layout.findViewById(R.id.actionFolders)
-
-
-        when (arguments?.getInt(WHICH_ONE)) {
-            LIBRARY -> actionLibrary.isSelected = true
-            FOLDER -> actionFolders.isSelected = true
-        }
+        actionDriveMode = layout.findViewById(R.id.actionDriveMode)
 
         actionSettings.setOnClickListener(this)
         actionRate.setOnClickListener(this)
-        actionLibrary.setOnClickListener(this)
-        actionFolders.setOnClickListener(this)
+        actionDriveMode.setOnClickListener(this)
 
+        if (MusicPlayerRemote.playingQueue.isEmpty()) {
+            actionDriveMode.hide()
+        }
 
         materialDialog = MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT))
             .show {
@@ -96,6 +91,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
         @JvmField
         var FOLDER: Int = 1
 
+        @JvmStatic
         fun newInstance(selectedId: Int): OptionsSheetDialogFragment {
             val bundle = Bundle()
             bundle.putInt(WHICH_ONE, selectedId)
@@ -104,6 +100,7 @@ class OptionsSheetDialogFragment : DialogFragment(), View.OnClickListener {
             return fragment
         }
 
+        @JvmStatic
         fun newInstance(): OptionsSheetDialogFragment {
             return OptionsSheetDialogFragment()
         }

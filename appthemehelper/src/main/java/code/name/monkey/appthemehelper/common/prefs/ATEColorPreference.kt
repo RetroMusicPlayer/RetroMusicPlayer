@@ -15,16 +15,17 @@
 package code.name.monkey.appthemehelper.common.prefs
 
 import android.content.Context
-import android.preference.Preference
 import android.util.AttributeSet
 import android.view.View
+import androidx.preference.Preference
+import androidx.preference.PreferenceViewHolder
 import code.name.monkey.appthemehelper.R
 
 class ATEColorPreference @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        defStyleRes: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : Preference(context, attrs, defStyleAttr, defStyleRes) {
 
     private var mView: View? = null
@@ -32,14 +33,19 @@ class ATEColorPreference @JvmOverloads constructor(
     private var border: Int = 0
 
     init {
-        layoutResource = R.layout.ate_preference_custom
         widgetLayoutResource = R.layout.ate_preference_color
         isPersistent = false
     }
 
-    override fun onBindView(view: View) {
+    /*override fun onBindView(view: View) {
         super.onBindView(view)
         mView = view
+        invalidateColor()
+    }*/
+
+    override fun onBindViewHolder(holder: PreferenceViewHolder?) {
+        super.onBindViewHolder(holder)
+        mView = holder?.itemView
         invalidateColor()
     }
 

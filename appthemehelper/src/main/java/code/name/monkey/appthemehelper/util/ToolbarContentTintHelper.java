@@ -352,8 +352,9 @@ public final class ToolbarContentTintHelper {
             }
 
             //Step 3: Changing the color of title and subtitle.
-            toolbarView.setTitleTextColor(ThemeStore.Companion.textColorPrimary(activity));
-            toolbarView.setSubtitleTextColor(ThemeStore.Companion.textColorSecondary(activity));
+            toolbarView.setTitleTextColor(ATHUtil.INSTANCE.resolveColor(activity, android.R.attr.textColorPrimary));
+            toolbarView
+                    .setSubtitleTextColor(ATHUtil.INSTANCE.resolveColor(activity, android.R.attr.textColorSecondary));
 
             //Step 4: Changing the color of the Overflow Menu icon.
             setOverflowButtonColor(activity, toolbarView, toolbarIconsColor);

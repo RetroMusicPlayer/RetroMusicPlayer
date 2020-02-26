@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/miniPlayerContent"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:background="?android:attr/background"
+    android:layout_height="@dimen/bottom_sheet_peek_1_height"
+    android:background="?attr/colorSurface"
     android:clickable="true"
-    android:focusable="false"
+    android:focusable="true"
     android:transitionName="@string/transition_mini_player"
     tools:ignore="UnusedAttribute">
 
@@ -24,9 +24,8 @@
             android:layout_margin="16dp"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/ic_keyboard_arrow_up_24dp"
-            app:tint="?colorOnSurface"
-            tools:ignore="ContentDescription"
-            tools:tint="?colorOnSurface" />
+            app:tint="?attr/colorControlNormal"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/miniPlayerTitle"
@@ -43,7 +42,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewNormal"
-            android:textColor="?colorOnSurface"
+            android:textColor="?android:attr/textColorPrimary"
             tools:text="Song name and details" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -54,8 +53,7 @@
             android:background="?roundSelector"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_skip_previous_white_24dp"
-            app:tint="?colorOnSurface"
-            tools:tint="@color/black_color" />
+            app:tint="?attr/colorControlNormal" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -66,9 +64,9 @@
             android:background="?roundSelector"
             android:scaleType="center"
             app:srcCompat="@drawable/ic_pause_white_24dp"
-            app:tint="?colorOnSurface"
+            app:tint="?attr/colorControlNormal"
             tools:ignore="ContentDescription"
-            tools:tint="?colorOnSurface" />
+            tools:tint="?attr/colorControlNormal" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -80,8 +78,7 @@
             android:background="?roundSelector"
             android:padding="8dp"
             app:srcCompat="@drawable/ic_skip_next_white_24dp"
-            app:tint="?colorOnSurface"
-            tools:tint="?colorOnSurface" />
+            app:tint="?attr/colorControlNormal" />
     </LinearLayout>
 
     <ProgressBar

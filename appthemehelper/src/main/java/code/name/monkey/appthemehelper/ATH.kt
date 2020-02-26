@@ -20,22 +20,10 @@ object ATH {
 
     @SuppressLint("CommitPrefEdits")
     fun didThemeValuesChange(context: Context, since: Long): Boolean {
-        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(ThemeStorePrefKeys.VALUES_CHANGED, -1) > since
-    }
-
-    fun setStatusbarColorAuto(activity: Activity) {
-        setStatusbarColor(activity, ThemeStore.statusBarColor(activity))
-    }
-
-    fun setStatusbarColor(activity: Activity, color: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.window.statusBarColor = color
-            setLightStatusbarAuto(activity, color)
-        }
-    }
-
-    fun setLightStatusbarAuto(activity: Activity, bgColor: Int) {
-        setLightStatusbar(activity, ColorUtil.isColorLight(bgColor))
+        return ThemeStore.isConfigured(context) && ThemeStore.prefs(context).getLong(
+            ThemeStorePrefKeys.VALUES_CHANGED,
+            -1
+        ) > since
     }
 
     fun setLightStatusbar(activity: Activity, enabled: Boolean) {
@@ -43,9 +31,11 @@ object ATH {
             val decorView = activity.window.decorView
             val systemUiVisibility = decorView.systemUiVisibility
             if (enabled) {
-                decorView.systemUiVisibility = systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                decorView.systemUiVisibility =
+                    systemUiVisibility or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             } else {
-                decorView.systemUiVisibility = systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+                decorView.systemUiVisibility =
+                    systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
             }
         }
     }
@@ -84,8 +74,10 @@ object ATH {
         setActivityToolbarColor(activity, toolbar, ThemeStore.primaryColor(activity))
     }
 
-    fun setActivityToolbarColor(activity: Activity, toolbar: Toolbar?,
-                                color: Int) {
+    fun setActivityToolbarColor(
+        activity: Activity, toolbar: Toolbar?,
+        color: Int
+    ) {
         if (toolbar == null) {
             return
         }
@@ -103,7 +95,17 @@ object ATH {
             // Task description requires fully opaque color
             colorFinal = ColorUtil.stripAlpha(colorFinal)
             // Sets color of entry in the system recents page
-            activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String?, null, colorFinal))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                activity.setTaskDescription(
+                    ActivityManager.TaskDescription(
+                        activity.title as String?,
+                        -1,
+                        colorFinal
+                    )
+                )
+            } else {
+                activity.setTaskDescription(ActivityManager.TaskDescription(activity.title as String?))
+            }
         }
     }
 

@@ -2,7 +2,11 @@
 <com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/title"
-    style="@style/SubTitleTextAppearance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_gravity="start"
     android:gravity="start"
-    tools:text="Songs" />
+    android:padding="16dp"
+    android:textAppearance="@style/TextViewHeadline6"
+    android:textStyle="bold"
+    tools:text="@tools:sample/lorem" />

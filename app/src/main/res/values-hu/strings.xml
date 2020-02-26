@@ -125,7 +125,7 @@
     <string name="could_not_restore_purchase">A vásárlást nem sikerült visszaállítani.</string>
     <string name="could_not_scan_files">Nem sikerült beolvasni %d fájlt.</string>
     <string name="create_action">Létrehozás</string>
-    <string name="created_playlist_x">Létrehozott lejátszási lista %1$s</string>
+    <string name="created_playlist_x">Létrehozott lejátszási lista %1$s.</string>
     <string name="credit_title">Tagok és támogatók</string>
     <string name="currently_listening_to_x_by_x">Jelenleg hallgat %1$s által %2$s</string>
     <string name="dark_theme_name">Kissé sötét</string>

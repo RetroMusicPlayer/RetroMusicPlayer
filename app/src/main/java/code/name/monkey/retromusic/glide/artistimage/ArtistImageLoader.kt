@@ -32,16 +32,15 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
 
-
-class ArtistImage(val artistName: String, val skipOkHttpCache: Boolean)
+class ArtistImage(val artistName: String)
 
 class ArtistImageFetcher(
-        private val context: Context,
-        private val deezerApiService: DeezerApiService,
-        val model: ArtistImage,
-        val urlLoader: ModelLoader<GlideUrl, InputStream>,
-        val width: Int,
-        val height: Int
+    private val context: Context,
+    private val deezerApiService: DeezerApiService,
+    val model: ArtistImage,
+    val urlLoader: ModelLoader<GlideUrl, InputStream>,
+    val width: Int,
+    val height: Int
 ) : DataFetcher<InputStream> {
 
     private var urlFetcher: DataFetcher<InputStream>? = null
@@ -96,9 +95,9 @@ class ArtistImageFetcher(
 }
 
 class ArtistImageLoader(
-        val context: Context,
-        private val deezerApiService: DeezerApiService,
-        private val urlLoader: ModelLoader<GlideUrl, InputStream>
+    val context: Context,
+    private val deezerApiService: DeezerApiService,
+    private val urlLoader: ModelLoader<GlideUrl, InputStream>
 ) : StreamModelLoader<ArtistImage> {
 
     override fun getResourceFetcher(model: ArtistImage, width: Int, height: Int): DataFetcher<InputStream> {
@@ -107,22 +106,27 @@ class ArtistImageLoader(
 }
 
 class Factory(
-        val context: Context
+    val context: Context
 ) : ModelLoaderFactory<ArtistImage, InputStream> {
+
     private var deezerApiService: DeezerApiService
     private var okHttpFactory: OkHttpUrlLoader.Factory
 
     init {
-        okHttpFactory = OkHttpUrlLoader.Factory(OkHttpClient.Builder()
+        okHttpFactory = OkHttpUrlLoader.Factory(
+            OkHttpClient.Builder()
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .build())
-        deezerApiService = DeezerApiService.invoke(DeezerApiService.createDefaultOkHttpClient(context)
+                .build()
+        )
+        deezerApiService = DeezerApiService.invoke(
+            DeezerApiService.createDefaultOkHttpClient(context)
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
-                .build())
+                .build()
+        )
     }
 
     override fun build(context: Context?, factories: GenericLoaderFactory?): ModelLoader<ArtistImage, InputStream> {
@@ -137,5 +141,4 @@ class Factory(
         // we need these very low values to make sure our artist image loading calls doesn't block the image loading queue
         private const val TIMEOUT: Long = 700
     }
-
 }

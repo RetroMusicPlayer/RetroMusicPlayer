@@ -85,7 +85,7 @@
 
     <string name="create_action">Vytvořit</string>
 
-    <string name="created_playlist_x">"Vytvořený seznam skladeb "</string>
+    <string name="created_playlist_x">Vytvořený seznam skladeb %1$s.</string>
 
     <string name="currently_listening_to_x_by_x">Aktuálně posloucháš %1$s od %2$s.</string>
 
@@ -221,7 +221,7 @@
     <string name="remove_song_from_playlist_title">Smazat skladbu ze seznamu skladeb</string>
     <string name="remove_song_x_from_playlist"><![CDATA[Odstranit skladbu <b>%1$s</b> ze seznamu skladeb?]]></string>
     <string name="remove_songs_from_playlist_title">Smazat skladby ze seznamu skladeb</string>
-    <string name="remove_x_songs_from_playlist"><![CDATA[Odstranit <b>%1$s</b> skladby ze seznamu skladeb?]]></string>
+    <string name="remove_x_songs_from_playlist"><![CDATA[Odstranit <b>%1$d</b> skladby ze seznamu skladeb?]]></string>
 
     <string name="rename_playlist_title">Přejmenovat seznam skladeb</string>
 

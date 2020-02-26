@@ -181,7 +181,6 @@
     <string name="clear_playing_queue">清空队列</string>
 
     <string name="clear_playlist_title">清除播放列表</string>
-    <string name="clear_playlist_x"><![CDATA[\u786e\u8ba4\u6e05\u9664\u64ad\u653e\u5217\u8868 <b>%1$s</b> \u5417\uff1f\u8bf7\u6ce8\u610f\uff0c\u6b64\u64cd\u4f5c\u4e0d\u53ef\u6062\u590d\uff01]]></string>
 
     <string name="close_notification">关闭</string>
 
@@ -217,10 +216,10 @@
 
     <string name="delete_playlists_title">删除播放列表</string>
 
-    <string name="delete_song_x"><![CDATA[删除歌曲<b>％1 $ s </ b>吗？]]></string>
+    <string name="delete_song_x"><![CDATA[删除歌曲<b>％1$s</b>吗？]]></string>
 
-    <string name="delete_x_playlists"><![CDATA[删除播放列表 <b>%1$s</b> 吗？]]></string>
-    <string name="delete_x_songs"><![CDATA[删除歌曲 <b>%1$s</b> 吗？]]></string>
+    <string name="delete_x_playlists"><![CDATA[删除播放列表 <b>%1$d</b> 吗？]]></string>
+    <string name="delete_x_songs"><![CDATA[删除歌曲 <b>%1$d</b> 吗？]]></string>
     <string name="deleted_x_songs">已删除 %1$d 首歌曲</string>
 
     <string name="depth">深度</string>

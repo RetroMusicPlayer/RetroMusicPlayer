@@ -14,39 +14,29 @@
 
 package code.name.monkey.retromusic.fragments.player.peak
 
-import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.extensions.setRange
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_peak_control_player.nextButton
-import kotlinx.android.synthetic.main.fragment_peak_control_player.playPauseButton
-import kotlinx.android.synthetic.main.fragment_peak_control_player.previousButton
-import kotlinx.android.synthetic.main.fragment_peak_control_player.progressSlider
-import kotlinx.android.synthetic.main.fragment_peak_control_player.repeatButton
-import kotlinx.android.synthetic.main.fragment_peak_control_player.shuffleButton
-import kotlinx.android.synthetic.main.fragment_peak_control_player.songCurrentProgress
-import kotlinx.android.synthetic.main.fragment_peak_control_player.songTotalTime
+import kotlinx.android.synthetic.main.fragment_peak_control_player.*
 
 /**
  * Created by hemanths on 2019-10-04.
@@ -98,11 +88,13 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun setDark(color: Int) {
         val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
+            lastPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
             lastDisabledPlaybackControlsColor =
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
@@ -111,7 +103,7 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
             lastPlaybackControlsColor = color
             color
         } else {
-            ThemeStore.textColorSecondary(requireContext())
+            textColorSecondary(requireContext())
         }.ripAlpha()
 
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
@@ -120,18 +112,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
-    }
-
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 
     private fun updatePlayPauseDrawableState() {
@@ -152,27 +132,35 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
 
     private fun setUpShuffleButton() {
         shuffleButton.setOnClickListener {
-            println("shuffleButton Click")
             MusicPlayerRemote.toggleShuffleMode()
         }
     }
 
     private fun setUpRepeatButton() {
         repeatButton.setOnClickListener {
-            println("repeatButton Click")
             MusicPlayerRemote.cycleRepeatMode()
         }
     }
 
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        if (total <= 0) {
+            return
+        }
+        progressSlider.setRange(progress.toFloat(), total.toFloat())
+        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
     override fun setUpProgressSlider() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(MusicPlayerRemote.songProgressMillis, MusicPlayerRemote.songDurationMillis)
-                }
+        progressSlider.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(value.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
             }
-        })
+        }
     }
 
     private fun setUpPlayPauseFab() {
@@ -198,7 +186,10 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
                 lastPlaybackControlsColor,
                 PorterDuff.Mode.SRC_IN
             )
-            else -> shuffleButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+            else -> shuffleButton.setColorFilter(
+                lastDisabledPlaybackControlsColor,
+                PorterDuff.Mode.SRC_IN
+            )
         }
     }
 
@@ -206,7 +197,10 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
-                repeatButton.setColorFilter(lastDisabledPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+                repeatButton.setColorFilter(
+                    lastDisabledPlaybackControlsColor,
+                    PorterDuff.Mode.SRC_IN
+                )
             }
             MusicService.REPEAT_MODE_ALL -> {
                 repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)

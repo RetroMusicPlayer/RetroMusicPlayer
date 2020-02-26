@@ -15,7 +15,13 @@
 package code.name.monkey.retromusic.providers.interfaces
 
 import code.name.monkey.retromusic.Result
-import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.Album
+import code.name.monkey.retromusic.model.Artist
+import code.name.monkey.retromusic.model.Genre
+import code.name.monkey.retromusic.model.Home
+import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 
 /**
@@ -53,6 +59,8 @@ interface Repository {
     suspend fun favoritePlaylist(): Result<Home>
 
     suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
+
+    suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
 
     suspend fun artistById(artistId: Int): Result<Artist>
 }

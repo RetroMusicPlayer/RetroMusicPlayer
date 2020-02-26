@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.preferences
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -25,14 +24,26 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.ADAPTIVE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.BLUR_CARD
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.CARD
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.CIRCLE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.COLOR
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.FULL
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.PLAIN
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.SIMPLE
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.values
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -40,24 +51,24 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
 
-class NowPlayingScreenPreference : ATEDialogPreference {
-
-    constructor(context: Context) : super(context) {}
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {}
+class NowPlayingScreenPreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) : ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     private val mLayoutRes = R.layout.preference_dialog_now_playing_screen
 
     override fun getDialogLayoutResource(): Int {
-        return mLayoutRes;
+        return mLayoutRes
     }
 
     init {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            colorControlNormal(context),
+            SRC_IN
+        )
     }
 }
 
@@ -66,11 +77,9 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     private var viewPagerPosition: Int = 0
 
     override fun onPageScrollStateChanged(state: Int) {
-
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
     }
 
     override fun onPageSelected(position: Int) {
@@ -78,14 +87,13 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
-
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(activity).inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
-                ?: throw  IllegalStateException("Dialog view must contain a ViewPager with id 'now_playing_screen_view_pager'")
-        viewPager.adapter = NowPlayingScreenAdapter(activity!!)
+            ?: throw  IllegalStateException("Dialog view must contain a ViewPager with id 'now_playing_screen_view_pager'")
+        viewPager.adapter = NowPlayingScreenAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
@@ -94,7 +102,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         return MaterialDialog(requireContext()).show {
             title(R.string.pref_title_now_playing_screen_appearance)
             positiveButton(R.string.set) {
-                val nowPlayingScreen = NowPlayingScreen.values()[viewPagerPosition]
+                val nowPlayingScreen = values()[viewPagerPosition]
                 if (isNowPlayingThemes(nowPlayingScreen)) {
                     val result = getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
@@ -109,24 +117,6 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
         }
     }
 
-    private fun isNowPlayingThemes(nowPlayingScreen: NowPlayingScreen): Boolean {
-        if (nowPlayingScreen == NowPlayingScreen.BLUR_CARD) {
-            PreferenceUtil.getInstance(requireContext()).resetCarouselEffect()
-            PreferenceUtil.getInstance(requireContext()).resetCircularAlbumArt()
-        }
-
-        return (nowPlayingScreen == NowPlayingScreen.FULL ||
-                nowPlayingScreen == NowPlayingScreen.CARD ||
-                nowPlayingScreen == NowPlayingScreen.PLAIN ||
-                nowPlayingScreen == NowPlayingScreen.BLUR ||
-                nowPlayingScreen == NowPlayingScreen.COLOR ||
-                nowPlayingScreen == NowPlayingScreen.SIMPLE ||
-                nowPlayingScreen == NowPlayingScreen.BLUR_CARD ||
-                nowPlayingScreen == NowPlayingScreen.CIRCLE ||
-                nowPlayingScreen == NowPlayingScreen.ADAPTIVE)
-                && !App.isProVersion()
-    }
-
     companion object {
         fun newInstance(key: String): NowPlayingScreenPreferenceDialog {
             val bundle = Bundle()
@@ -138,10 +128,10 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(), ViewP
     }
 }
 
-private class NowPlayingScreenAdapter internal constructor(private val context: Context) : PagerAdapter() {
+private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapter() {
 
     override fun instantiateItem(collection: ViewGroup, position: Int): Any {
-        val nowPlayingScreen = NowPlayingScreen.values()[position]
+        val nowPlayingScreen = values()[position]
 
         val inflater = LayoutInflater.from(context)
         val layout = inflater.inflate(R.layout.preference_now_playing_screen_item, collection, false) as ViewGroup
@@ -149,27 +139,47 @@ private class NowPlayingScreenAdapter internal constructor(private val context: 
 
         val image = layout.findViewById<ImageView>(R.id.image)
         val title = layout.findViewById<TextView>(R.id.title)
+        val proText = layout.findViewById<TextView>(R.id.proText)
         Glide.with(context).load(nowPlayingScreen.drawableResId).into(image)
         title.setText(nowPlayingScreen.titleRes)
-
+        if (isNowPlayingThemes(nowPlayingScreen)) {
+            proText.setText(R.string.pro)
+        } else {
+            proText.setText(R.string.free)
+        }
         return layout
     }
 
-    override fun destroyItem(collection: ViewGroup,
-                             position: Int,
-                             view: Any) {
+    override fun destroyItem(
+        collection: ViewGroup,
+        position: Int,
+        view: Any
+    ) {
         collection.removeView(view as View)
     }
 
     override fun getCount(): Int {
-        return NowPlayingScreen.values().size
+        return values().size
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view === `object`
+    override fun isViewFromObject(view: View, instance: Any): Boolean {
+        return view === instance
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return context.getString(NowPlayingScreen.values()[position].titleRes)
+        return context.getString(values()[position].titleRes)
     }
+}
+
+private fun isNowPlayingThemes(screen: NowPlayingScreen): Boolean {
+    return (screen == FULL ||
+            screen == CARD ||
+            screen == PLAIN ||
+            screen == BLUR ||
+            screen == COLOR ||
+            screen == SIMPLE ||
+            screen == BLUR_CARD ||
+            screen == CIRCLE ||
+            screen == ADAPTIVE)
+            && !App.isProVersion()
 }

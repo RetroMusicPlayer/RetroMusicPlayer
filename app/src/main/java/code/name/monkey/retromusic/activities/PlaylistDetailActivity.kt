@@ -24,7 +24,6 @@ import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsView
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
 import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemAnimator
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
@@ -114,8 +113,6 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
                 checkIsEmpty()
             }
         })
-
-        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
     }
 
     override fun onResume() {
@@ -241,7 +238,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         emptyText.visibility = View.VISIBLE
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         adapter.swapDataSet(songs)
     }
 

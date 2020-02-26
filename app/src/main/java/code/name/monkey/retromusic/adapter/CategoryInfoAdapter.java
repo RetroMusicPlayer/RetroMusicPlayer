@@ -22,15 +22,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.checkbox.MaterialCheckBox;
+
+import java.util.List;
+
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.util.SwipeAndDragHelper;
-import com.google.android.material.checkbox.MaterialCheckBox;
-import java.util.List;
 
 public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapter.ViewHolder>
         implements SwipeAndDragHelper.ActionCompletionContract {

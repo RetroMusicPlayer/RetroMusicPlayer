@@ -29,7 +29,6 @@ import android.os.Environment
 import android.os.IBinder
 import android.provider.DocumentsContract
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -45,7 +44,7 @@ object MusicPlayerRemote {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
-
+    @JvmStatic
     val isPlaying: Boolean
         get() = musicService != null && musicService!!.isPlaying
 
@@ -72,7 +71,7 @@ object MusicPlayerRemote {
                 musicService!!.position = position
             }
         }
-
+    @JvmStatic
     val playingQueue: ArrayList<Song>
         get() = if (musicService != null) {
             musicService?.playingQueue as ArrayList<Song>
@@ -92,7 +91,7 @@ object MusicPlayerRemote {
         get() = if (musicService != null) {
             musicService!!.repeatMode
         } else MusicService.REPEAT_MODE_NONE
-
+    @JvmStatic
     val shuffleMode: Int
         get() = if (musicService != null) {
             musicService!!.shuffleMode
@@ -158,7 +157,7 @@ object MusicPlayerRemote {
                 return cursor.getString(columnIndex)
             }
         } catch (e: Exception) {
-            Log.e(TAG, e.message)
+            println(e.message)
         } finally {
             cursor?.close()
         }
@@ -166,65 +165,52 @@ object MusicPlayerRemote {
     }
 
     fun getQueueDurationSongs(): Int {
-        return if (musicService != null) {
-            musicService!!.playingQueue!!.size
-        } else -1
+        return musicService?.playingQueue?.size ?: -1
     }
 
     /**
      * Async
      */
     fun playSongAt(position: Int) {
-        if (musicService != null) {
-            musicService!!.playSongAt(position)
-        }
+        musicService?.playSongAt(position)
     }
 
     fun pauseSong() {
-        if (musicService != null) {
-            musicService!!.pause()
-        }
+        musicService?.pause()
     }
 
     /**
      * Async
      */
     fun playNextSong() {
-        if (musicService != null) {
-            musicService!!.playNextSong(true)
-        }
+        musicService?.playNextSong(true)
     }
 
     /**
      * Async
      */
     fun playPreviousSong() {
-        if (musicService != null) {
-            musicService!!.playPreviousSong(true)
-        }
+        musicService?.playPreviousSong(true)
     }
 
     /**
      * Async
      */
     fun back() {
-        if (musicService != null) {
-            musicService!!.back(true)
-        }
+        musicService?.back(true)
     }
 
     fun resumePlaying() {
-        if (musicService != null) {
-            musicService!!.play()
-        }
+        musicService?.play()
     }
 
     /**
      * Async
      */
-    fun openQueue(queue: ArrayList<Song>, startPosition: Int, startPlaying: Boolean) {
+    @JvmStatic
+    fun openQueue(queue: List<Song>, startPosition: Int, startPlaying: Boolean) {
         if (!tryToHandleOpenPlayingQueue(queue, startPosition, startPlaying) && musicService != null) {
-            musicService!!.openQueue(queue, startPosition, startPlaying)
+            musicService?.openQueue(queue, startPosition, startPlaying)
             if (PreferenceUtil.getInstance(musicService).isShuffleModeOn)
                 setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
@@ -233,7 +219,8 @@ object MusicPlayerRemote {
     /**
      * Async
      */
-    fun openAndShuffleQueue(queue: ArrayList<Song>, startPlaying: Boolean) {
+    @JvmStatic
+    fun openAndShuffleQueue(queue: List<Song>, startPlaying: Boolean) {
         var startPosition = 0
         if (queue.isNotEmpty()) {
             startPosition = Random().nextInt(queue.size)
@@ -246,7 +233,7 @@ object MusicPlayerRemote {
     }
 
     private fun tryToHandleOpenPlayingQueue(
-        queue: ArrayList<Song>,
+        queue: List<Song>,
         startPosition: Int,
         startPlaying: Boolean
     ): Boolean {
@@ -275,7 +262,7 @@ object MusicPlayerRemote {
 
     fun cycleRepeatMode(): Boolean {
         if (musicService != null) {
-            musicService!!.cycleRepeatMode()
+            musicService?.cycleRepeatMode()
             return true
         }
         return false
@@ -283,7 +270,7 @@ object MusicPlayerRemote {
 
     fun toggleShuffleMode(): Boolean {
         if (musicService != null) {
-            musicService!!.toggleShuffle()
+            musicService?.toggleShuffle()
             return true
         }
         return false
@@ -300,7 +287,7 @@ object MusicPlayerRemote {
     fun playNext(song: Song): Boolean {
         if (musicService != null) {
             if (playingQueue.size > 0) {
-                musicService!!.addSong(position + 1, song)
+                musicService?.addSong(position + 1, song)
             } else {
                 val queue = ArrayList<Song>()
                 queue.add(song)
@@ -316,10 +303,10 @@ object MusicPlayerRemote {
         return false
     }
 
-    fun playNext(songs: ArrayList<Song>): Boolean {
+    fun playNext(songs: List<Song>): Boolean {
         if (musicService != null) {
             if (playingQueue.size > 0) {
-                musicService!!.addSongs(position + 1, songs)
+                musicService?.addSongs(position + 1, songs)
             } else {
                 openQueue(songs, 0, false)
             }
@@ -337,7 +324,7 @@ object MusicPlayerRemote {
     fun enqueue(song: Song): Boolean {
         if (musicService != null) {
             if (playingQueue.size > 0) {
-                musicService!!.addSong(song)
+                musicService?.addSong(song)
             } else {
                 val queue = ArrayList<Song>()
                 queue.add(song)
@@ -353,10 +340,10 @@ object MusicPlayerRemote {
         return false
     }
 
-    fun enqueue(songs: ArrayList<Song>): Boolean {
+    fun enqueue(songs: List<Song>): Boolean {
         if (musicService != null) {
             if (playingQueue.size > 0) {
-                musicService!!.addSongs(songs)
+                musicService?.addSongs(songs)
             } else {
                 openQueue(songs, 0, false)
             }
@@ -371,6 +358,7 @@ object MusicPlayerRemote {
         return false
     }
 
+    @JvmStatic
     fun removeFromQueue(song: Song): Boolean {
         if (musicService != null) {
             musicService!!.removeSong(song)
@@ -403,10 +391,11 @@ object MusicPlayerRemote {
         return false
     }
 
+    @JvmStatic
     fun playFromUri(uri: Uri) {
         if (musicService != null) {
 
-            var songs: ArrayList<Song>? = null
+            var songs: List<Song>? = null
             if (uri.scheme != null && uri.authority != null) {
                 if (uri.scheme == ContentResolver.SCHEME_CONTENT) {
                     var songId: String? = null
@@ -454,6 +443,7 @@ object MusicPlayerRemote {
                 openQueue(songs, 0, true)
             } else {
                 //TODO the file is not listed in the media store
+                println("The file is not listed in the media store")
             }
         }
     }

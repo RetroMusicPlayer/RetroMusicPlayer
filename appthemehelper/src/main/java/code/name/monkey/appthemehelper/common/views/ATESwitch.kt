@@ -7,7 +7,6 @@ import androidx.appcompat.widget.SwitchCompat
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
 
-
 /**
  * @author Aidan Follestad (afollestad)
  */

@@ -19,13 +19,13 @@ import android.os.Bundle
 import android.text.Html
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-
 
 class RemoveFromPlaylistDialog : DialogFragment() {
 
@@ -37,27 +37,31 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         if (songs != null) {
             if (songs.size > 1) {
                 title = R.string.remove_songs_from_playlist_title
-                content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_x_songs_from_playlist, songs.size))
+                content = Html.fromHtml(getString(string.remove_x_songs_from_playlist, songs.size))
             } else {
                 title = R.string.remove_song_from_playlist_title
-                content = Html.fromHtml(getString(code.name.monkey.retromusic.R.string.remove_song_x_from_playlist, songs[0].title))
+                content = Html.fromHtml(
+                    getString(
+                        code.name.monkey.retromusic.R.string.remove_song_x_from_playlist,
+                        songs[0].title
+                    )
+                )
             }
         }
 
 
         return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .show {
-                    title(title)
-                    message(text = content)
-                    negativeButton(android.R.string.cancel)
-                    positiveButton(R.string.remove_action) {
-                        if (activity == null)
-                            return@positiveButton
-                        PlaylistsUtil.removeFromPlaylist(activity!!, songs as MutableList<PlaylistSong>)
-                    }
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            .show {
+                title(title)
+                message(text = content)
+                negativeButton(android.R.string.cancel)
+                positiveButton(R.string.remove_action) {
+                    if (activity == null)
+                        return@positiveButton
+                    PlaylistsUtil.removeFromPlaylist(activity!!, songs as MutableList<PlaylistSong>)
                 }
-
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            }
     }
 
     companion object {

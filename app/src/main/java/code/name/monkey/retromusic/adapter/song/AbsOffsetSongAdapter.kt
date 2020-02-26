@@ -9,19 +9,17 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
-import java.util.ArrayList
 
 abstract class AbsOffsetSongAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     @LayoutRes itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : SongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongAdapter.ViewHolder {
         if (viewType == OFFSET_ITEM) {
-            val view = LayoutInflater.from(activity)
-                .inflate(R.layout.item_list_quick_actions, parent, false)
+            val view = LayoutInflater.from(activity).inflate(R.layout.item_list_quick_actions, parent, false)
             return createViewHolder(view)
         }
         return super.onCreateViewHolder(parent, viewType)

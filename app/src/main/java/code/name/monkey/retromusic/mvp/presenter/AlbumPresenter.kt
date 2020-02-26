@@ -14,7 +14,8 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
@@ -25,7 +26,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.ArrayList
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -33,35 +33,35 @@ import kotlin.coroutines.CoroutineContext
  * Created by hemanths on 12/08/17.
  */
 interface AlbumsView : BaseView {
-	fun albums(albums: ArrayList<Album>)
+
+    fun albums(albums: List<Album>)
 }
 
 interface AlbumsPresenter : Presenter<AlbumsView> {
 
-	fun loadAlbums()
+    fun loadAlbums()
 
-	class AlbumsPresenterImpl @Inject constructor(
+    class AlbumsPresenterImpl @Inject constructor(
         private val repository: Repository
-	) : PresenterImpl<AlbumsView>(), AlbumsPresenter, CoroutineScope {
-		private val job = Job()
+    ) : PresenterImpl<AlbumsView>(), AlbumsPresenter, CoroutineScope {
 
-		override val coroutineContext: CoroutineContext
-			get() = Dispatchers.IO + job
+        private val job = Job()
 
-		override fun detachView() {
-			super.detachView()
-			job.cancel()
-		}
+        override val coroutineContext: CoroutineContext
+            get() = Dispatchers.IO + job
 
-		override fun loadAlbums() {
-			launch {
-				when (val result = repository.allAlbums()) {
-					is Result.Success -> withContext(Dispatchers.Main) {
-						view?.albums(result.data)
-					}
-					is Result.Error   -> withContext(Dispatchers.Main) { view?.showEmptyView() }
-				}
-			}
-		}
-	}
+        override fun detachView() {
+            super.detachView()
+            job.cancel()
+        }
+
+        override fun loadAlbums() {
+            launch {
+                when (val result = repository.allAlbums()) {
+                    is Success -> withContext(Dispatchers.Main) { view?.albums(result.data) }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                }
+            }
+        }
+    }
 }

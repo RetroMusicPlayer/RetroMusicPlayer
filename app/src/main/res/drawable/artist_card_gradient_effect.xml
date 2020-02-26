@@ -17,5 +17,5 @@
     <gradient
         android:angle="135"
         android:endColor="@color/semi_transparent"
-        android:startColor="@color/md_blue_500" />
+        android:startColor="?attr/colorControlNormal" />
 </shape>

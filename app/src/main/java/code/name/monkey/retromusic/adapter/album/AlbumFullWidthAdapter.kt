@@ -22,8 +22,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -32,12 +32,18 @@ import com.bumptech.glide.Glide
 
 class AlbumFullWidthAdapter(
     private val activity: Activity,
-    private val dataSet: ArrayList<Album>,
+    private val dataSet: List<Album>,
     metrics: DisplayMetrics
 ) : MetalRecyclerViewPager.MetalAdapter<AlbumFullWidthAdapter.FullMetalViewHolder>(metrics) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FullMetalViewHolder {
-        return FullMetalViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.pager_item, parent, false))
+        return FullMetalViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.pager_item,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: FullMetalViewHolder, position: Int) {
@@ -70,7 +76,7 @@ class AlbumFullWidthAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+        AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
             .checkIgnoreMediaStore(activity)
             .generatePalette(activity)
             .build()
@@ -84,7 +90,8 @@ class AlbumFullWidthAdapter(
         return dataSet.size
     }
 
-    inner class FullMetalViewHolder(itemView: View) : MetalRecyclerViewPager.MetalViewHolder(itemView) {
+    inner class FullMetalViewHolder(itemView: View) :
+        MetalRecyclerViewPager.MetalViewHolder(itemView) {
 
         override fun onClick(v: View?) {
             val activityOptions = ActivityOptions.makeSceneTransitionAnimation(

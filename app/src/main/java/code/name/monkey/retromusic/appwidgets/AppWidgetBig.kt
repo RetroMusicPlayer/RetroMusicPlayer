@@ -52,7 +52,7 @@ class AppWidgetBig : BaseAppWidget() {
                 code.name.monkey.retromusic.R.id.media_titles,
                 View.INVISIBLE
         )
-        appWidgetView.setImageViewResource(R.id.image, R.drawable.default_album_art)
+        appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         appWidgetView.setImageViewBitmap(
                 R.id.button_next, BaseAppWidget.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
@@ -176,7 +176,7 @@ class AppWidgetBig : BaseAppWidget() {
                             if (bitmap == null) {
                                 appWidgetView.setImageViewResource(
                                         R.id.image,
-                                        R.drawable.default_album_art
+                                        R.drawable.default_audio_art
                                 )
                             } else {
                                 appWidgetView.setImageViewBitmap(R.id.image, bitmap)

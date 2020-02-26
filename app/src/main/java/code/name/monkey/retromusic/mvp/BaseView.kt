@@ -19,5 +19,6 @@ package code.name.monkey.retromusic.mvp
  */
 
 interface BaseView {
+
     fun showEmptyView()
 }

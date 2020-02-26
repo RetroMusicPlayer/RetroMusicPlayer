@@ -7,17 +7,24 @@ import com.afollestad.materialdialogs.internal.button.DialogActionButton
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 
-
 object MaterialUtil {
 
     @JvmOverloads
-    fun setTint(button: MaterialButton, background: Boolean = true,
-                color: Int = ThemeStore.accentColor(button.context)) {
+    fun setTint(
+        button: MaterialButton, background: Boolean = true,
+        color: Int = ThemeStore.accentColor(button.context)
+    ) {
 
         button.isAllCaps = false
         val context = button.context
         val colorState = ColorStateList.valueOf(color)
-        val textColor = ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)))
+        val textColor =
+            ColorStateList.valueOf(
+                MaterialValueHelper.getPrimaryTextColor(
+                    context,
+                    ColorUtil.isColorLight(color)
+                )
+            )
 
 
         if (background) {
@@ -28,7 +35,6 @@ object MaterialUtil {
             button.setTextColor(colorState)
             button.iconTint = colorState
         }
-
     }
 
     fun setTint(textInputLayout: TextInputLayout, background: Boolean = true) {
@@ -44,14 +50,23 @@ object MaterialUtil {
             textInputLayout.defaultHintTextColor = colorState
             textInputLayout.isHintAnimationEnabled = true
         }
-
     }
 
-    fun setTint(button: DialogActionButton, color: Int = ThemeStore.accentColor(button.context), background: Boolean = true) {
+    fun setTint(
+        button: DialogActionButton,
+        color: Int = ThemeStore.accentColor(button.context),
+        background: Boolean = true
+    ) {
         val temp = button as AppCompatButton
         val context = temp.context
         val colorState = ColorStateList.valueOf(color)
-        val textColor = ColorStateList.valueOf(MaterialValueHelper.getPrimaryTextColor(context, ColorUtil.isColorLight(color)))
+        val textColor =
+            ColorStateList.valueOf(
+                MaterialValueHelper.getPrimaryTextColor(
+                    context,
+                    ColorUtil.isColorLight(color)
+                )
+            )
 
         if (background) {
             temp.backgroundTintList = colorState

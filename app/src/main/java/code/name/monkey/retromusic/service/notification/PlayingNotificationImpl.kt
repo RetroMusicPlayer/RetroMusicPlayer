@@ -87,7 +87,7 @@ class PlayingNotificationImpl : PlayingNotification() {
                         fun update(bitmap: Bitmap?, color: Int) {
                             var bitmapFinal = bitmap
                             if (bitmapFinal == null) {
-                                bitmapFinal = BitmapFactory.decodeResource(service.resources, R.drawable.default_album_art)
+                                bitmapFinal = BitmapFactory.decodeResource(service.resources, R.drawable.default_audio_art)
                             }
 
                             val toggleFavorite = NotificationCompat.Action(favoriteResId, service.getString(R.string.action_toggle_favorite), retrievePlaybackAction(TOGGLE_FAVORITE))

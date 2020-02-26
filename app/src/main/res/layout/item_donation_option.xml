@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     app:srcCompat="@drawable/ic_github_circle_white_24dp"
-                    app:tint="?colorOnBackground" />
+                    app:tint="?attr/colorControlNormal" />
 
             </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 

@@ -9,21 +9,14 @@
     android:paddingEnd="8dp"
     tools:ignore="MissingPrefix">
 
-    <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionLibrary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        app:optionIcon="@drawable/ic_library_music_white_24dp"
-        app:optionTitle="@string/library" />
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
-        android:id="@+id/actionFolders"
+        android:id="@+id/actionDriveMode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
-        app:optionIcon="@drawable/ic_folder_white_24dp"
-        app:optionTitle="@string/folders" />
+        app:optionIcon="@drawable/ic_drive_eta_white_24dp"
+        app:optionTitle="@string/drive_mode" />
 
     <code.name.monkey.retromusic.views.OptionMenuItemView
         android:id="@+id/actionSettings"

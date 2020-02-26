@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by hemanths on 13/08/17.
@@ -34,25 +34,25 @@ import java.util.ArrayList
 
 open class SongAdapter(
     protected val activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    var dataSet: MutableList<Song>,
     protected var itemLayoutRes: Int,
     cabHolder: CabHolder?,
     showSectionName: Boolean = true
 ) : AbsMultiSelectAdapter<SongAdapter.ViewHolder, Song>(
-    activity, cabHolder, R.menu.menu_media_selection
+    activity,
+    cabHolder,
+    R.menu.menu_media_selection
 ), MaterialCab.Callback, PopupTextProvider {
 
-    var dataSet: ArrayList<Song>
     private var showSectionName = true
 
     init {
-        this.dataSet = dataSet
         this.showSectionName = showSectionName
         this.setHasStableIds(true)
     }
 
-    open fun swapDataSet(dataSet: ArrayList<Song>) {
-        this.dataSet = dataSet
+    open fun swapDataSet(dataSet: List<Song>) {
+        this.dataSet = dataSet.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -86,8 +86,6 @@ open class SongAdapter(
     private fun setColors(color: Int, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
             holder.paletteColorContainer?.setBackgroundColor(color)
-            //holder.title?.setTextColor(MaterialValueHelper.getPrimaryTextColor(activity, ColorUtil.isColorLight(color)))
-            //holder.text?.setTextColor(MaterialValueHelper.getSecondaryTextColor(activity, ColorUtil.isColorLight(color)))
         }
     }
 
@@ -95,7 +93,8 @@ open class SongAdapter(
         if (holder.image == null) {
             return
         }
-        SongGlideRequest.Builder.from(Glide.with(activity), song).checkIgnoreMediaStore(activity)
+        SongGlideRequest.Builder.from(Glide.with(activity), song)
+            .checkIgnoreMediaStore(activity)
             .generatePalette(activity).build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
@@ -144,7 +143,7 @@ open class SongAdapter(
                 return ""
             }
         }
-        println("File name -> $sectionName")
+
         return MusicUtil.getSectionName(sectionName)
     }
 

@@ -9,6 +9,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
@@ -17,7 +18,7 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, LinearLayoutManager>(),
-    SongView {
+    SongView, MainActivityFragmentCallbacks {
 
     @Inject
     lateinit var songPresenter: SongPresenter
@@ -36,20 +37,20 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(activity)
+        return LinearLayoutManager(requireActivity())
     }
 
     override fun createAdapter(): SongAdapter {
-        val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
+        val dataSet = if (adapter == null) mutableListOf() else adapter!!.dataSet
         return ShuffleButtonSongAdapter(
-            libraryFragment.mainActivity,
+            mainActivity,
             dataSet,
             R.layout.item_list,
-            libraryFragment
+            mainActivity
         )
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         adapter?.swapDataSet(songs)
     }
 
@@ -58,7 +59,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getSongGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getSongGridSize(requireActivity())
     }
 
     override fun saveGridSize(gridColumns: Int) {
@@ -66,22 +67,11 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getSongGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getSongGridSizeLand(requireActivity())
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
         PreferenceUtil.getInstance(requireContext()).setSongGridSizeLand(gridColumns)
-    }
-
-    public override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setSongColoredFooters(usePalette)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).songColoredFooters()
-    }
-
-    public override fun setUsePalette(usePalette: Boolean) {
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -90,9 +80,8 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter?.dataSet.isNullOrEmpty())
             songPresenter.loadSongs()
-        }
     }
 
     override fun onDestroyView() {
@@ -121,6 +110,7 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
         @JvmField
         var TAG: String = SongsFragment::class.java.simpleName
 
+        @JvmStatic
         fun newInstance(): SongsFragment {
             val args = Bundle()
             val fragment = SongsFragment()
@@ -138,5 +128,9 @@ class SongsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdap
     }
 
     override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
+    }
+
+    override fun handleBackPress(): Boolean {
+        return false
     }
 }

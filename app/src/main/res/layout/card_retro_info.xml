@@ -14,7 +14,12 @@
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             android:id="@+id/sb2"
-            style="@style/SubTitleTextAppearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="?attr/listPreferredItemPaddingStart"
+            android:paddingTop="?attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?attr/listPreferredItemPaddingEnd"
+            android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/support_development"
             android:textAppearance="@style/TextViewOverline"
             android:textColor="?colorAccent"

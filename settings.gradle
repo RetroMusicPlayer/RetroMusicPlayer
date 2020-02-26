@@ -1,1 +1,1 @@
-include ':app', ':appthemehelper', ':liboverscroll'
+include ':app', ':appthemehelper', ':fonts'

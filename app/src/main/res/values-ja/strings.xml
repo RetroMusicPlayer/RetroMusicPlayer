@@ -182,7 +182,6 @@
     <string name="clear_playing_queue">キューを削除</string>
 
     <string name="clear_playlist_title">プレイリストを削除</string>
-    <string name="clear_playlist_x"><![CDATA[\u30d7\u30ec\u30a4\u30ea\u30b9\u30c8 <b>%1$s</b> \u3092\u524a\u9664\u3057\u307e\u3059\u304b? \u3053\u306e\u64cd\u4f5c\u306f\u5fa9\u5143\u3067\u304d\u307e\u305b\u3093!]]></string>
 
     <string name="close_notification">閉じる</string>
 

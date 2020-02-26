@@ -7,11 +7,10 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Song
 import com.google.android.material.button.MaterialButton
-import java.util.ArrayList
 
 class ShuffleButtonSongAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : AbsOffsetSongAdapter(activity, dataSet, itemLayoutRes, cabHolder) {
@@ -23,15 +22,11 @@ class ShuffleButtonSongAdapter(
     override fun onBindViewHolder(holder: SongAdapter.ViewHolder, position: Int) {
         if (holder.itemViewType == OFFSET_ITEM) {
             val viewHolder = holder as ViewHolder
-            viewHolder.playAction?.let {
-                it.setOnClickListener {
-                    MusicPlayerRemote.openQueue(dataSet, 0, true)
-                }
+            viewHolder.playAction?.setOnClickListener {
+                MusicPlayerRemote.openQueue(dataSet, 0, true)
             }
-            viewHolder.shuffleAction?.let {
-                it.setOnClickListener {
-                    MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
-                }
+            viewHolder.shuffleAction?.setOnClickListener {
+                MusicPlayerRemote.openAndShuffleQueue(dataSet, true)
             }
         } else {
             super.onBindViewHolder(holder, position - 1)

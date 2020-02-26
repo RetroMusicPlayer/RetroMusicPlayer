@@ -42,6 +42,7 @@ import androidx.annotation.Nullable;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
+import java.text.DecimalFormat;
 
 public class RetroUtil {
 
@@ -63,6 +64,17 @@ public class RetroUtil {
         drawable.setBounds(0, 0, c.getWidth(), c.getHeight());
         drawable.draw(c);
         return bitmap;
+    }
+
+    public static String formatValue(float value) {
+        String arr[] = {"", "K", "M", "B", "T", "P", "E"};
+        int index = 0;
+        while ((value / 1000) >= 1) {
+            value = value / 1000;
+            index++;
+        }
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        return String.format("%s %s", decimalFormat.format(value), arr[index]);
     }
 
     public static float frequencyCount(int frequency) {

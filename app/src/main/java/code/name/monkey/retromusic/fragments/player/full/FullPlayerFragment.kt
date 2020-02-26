@@ -25,7 +25,6 @@ import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_full.artistImage
 import kotlinx.android.synthetic.main.fragment_full.nextSong
 import kotlinx.android.synthetic.main.fragment_full.nextSongLabel
@@ -195,7 +194,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     override fun onColorChanged(color: Int) {
         lastColor = color
         fullPlaybackControlsFragment.setDark(color)
-        callbacks!!.onPaletteColorChanged()
+        callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }
 
@@ -226,10 +225,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     override fun onDestroyView() {
         super.onDestroyView()
         progressViewUpdateHelper.stop()
-        compositeDisposable.dispose()
     }
-
-    private val compositeDisposable = CompositeDisposable()
 
     private fun updateArtistImage() {
         CoroutineScope(Dispatchers.IO).launch {

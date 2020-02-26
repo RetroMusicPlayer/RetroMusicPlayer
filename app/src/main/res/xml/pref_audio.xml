@@ -39,4 +39,11 @@
         android:title="@string/pref_title_toggle_toggle_shuffle"
         app:icon="@drawable/ic_shuffle_white_24dp" />
 
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
+        android:defaultValue="false"
+        android:key="bluetooth_playback"
+        android:layout="@layout/list_item_view_switch"
+        android:summary="@string/pref_summary_bluetooth_playback"
+        android:title="@string/pref_title_bluetooth_playback" />
+
 </androidx.preference.PreferenceScreen>

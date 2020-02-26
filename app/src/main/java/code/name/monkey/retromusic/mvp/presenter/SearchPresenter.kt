@@ -20,7 +20,11 @@ import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -29,6 +33,7 @@ import kotlin.coroutines.CoroutineContext
  */
 
 interface SearchView : BaseView {
+
     fun showData(data: MutableList<Any>)
 }
 
@@ -37,7 +42,7 @@ interface SearchPresenter : Presenter<SearchView> {
     fun search(query: String?)
 
     class SearchPresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<SearchView>(), SearchPresenter, CoroutineScope {
 
         override val coroutineContext: CoroutineContext

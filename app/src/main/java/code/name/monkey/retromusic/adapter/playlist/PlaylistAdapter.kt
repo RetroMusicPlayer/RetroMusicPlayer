@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.adapter.playlist
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -33,7 +34,7 @@ import java.util.ArrayList
 
 class PlaylistAdapter(
     private val activity: AppCompatActivity,
-    var dataSet: ArrayList<Playlist>,
+    var dataSet: List<Playlist>,
     private var itemLayoutRes: Int,
     cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<PlaylistAdapter.ViewHolder, Playlist>(
@@ -42,13 +43,12 @@ class PlaylistAdapter(
     R.menu.menu_playlists_selection
 ) {
 
-    var songs = ArrayList<Song>()
 
     init {
         setHasStableIds(true)
     }
 
-    fun swapDataSet(dataSet: ArrayList<Playlist>) {
+    fun swapDataSet(dataSet: List<Playlist>) {
         this.dataSet = dataSet
         notifyDataSetChanged()
     }
@@ -62,15 +62,15 @@ class PlaylistAdapter(
         return createViewHolder(view)
     }
 
-    protected fun createViewHolder(view: View): ViewHolder {
+    fun createViewHolder(view: View): ViewHolder {
         return ViewHolder(view)
     }
 
-    protected fun getPlaylistTitle(playlist: Playlist): String {
-        return playlist.name
+    private fun getPlaylistTitle(playlist: Playlist): String {
+        return if (TextUtils.isEmpty(playlist.name)) "-" else playlist.name
     }
 
-    protected fun getPlaylistText(playlist: Playlist): String {
+    private fun getPlaylistText(playlist: Playlist): String {
         return MusicUtil.getPlaylistInfoString(activity, getSongs(playlist))
     }
 

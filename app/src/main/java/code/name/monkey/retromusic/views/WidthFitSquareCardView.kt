@@ -23,24 +23,20 @@ import com.google.android.material.card.MaterialCardView
  * Created by hemanths on 3/18/19
  */
 class WidthFitSquareCardView : MaterialCardView {
-    constructor(context: Context) : super(context) {}
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {}
+    constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(
+        context: Context,
+        attrs: AttributeSet
+    ) : super(context, attrs)
 
-    fun forceSquare(z: Boolean) {
-        this.forceSquare = z
-        requestLayout()
+    constructor(
+        context: Context, attrs:
+        AttributeSet, defStyleAttr: Int
+    ) : super(context, attrs, defStyleAttr)
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
     }
-
-    override fun onMeasure(i: Int, i2: Int) {
-        var width = i2
-        if (this.forceSquare) {
-            width = i
-        }
-        super.onMeasure(i, width)
-    }
-
-    private var forceSquare = true
 }

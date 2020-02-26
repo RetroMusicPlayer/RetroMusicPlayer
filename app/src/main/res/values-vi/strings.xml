@@ -184,7 +184,6 @@ tiếp tục xảy ra hãy \"Xóa dữ liệu ứng dụng\"</string>
     <string name="clear_playing_queue">Xóa hàng đợi</string>
 
     <string name="clear_playlist_title">Xoá danh sách phát</string>
-    <string name="clear_playlist_x"><![CDATA[Xo\u00e1 danh s\u00e1ch ph\u00e1t <b>%1$s</b>? Thao t\u00e1c kh\u00f4ng th\u1ec3 ho\u00e0n t\u00e1c!]]></string>
 
     <string name="close_notification">Đóng</string>
 

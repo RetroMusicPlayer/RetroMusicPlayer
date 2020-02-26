@@ -22,6 +22,7 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionDefault
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.annotation.SwipeableItemResults
+import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.ArrayList
 
 class PlayingQueueAdapter(
@@ -31,7 +32,8 @@ class PlayingQueueAdapter(
     itemLayoutRes: Int
 ) : SongAdapter(
     activity, dataSet, itemLayoutRes, null
-), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>, SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder> {
+), DraggableItemAdapter<PlayingQueueAdapter.ViewHolder>, SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder>,
+    PopupTextProvider {
 
     private var color = -1
     private var songToRemove: Song? = null
@@ -98,6 +100,10 @@ class PlayingQueueAdapter(
         holder.paletteColorContainer?.alpha = alpha
         holder.dragView?.alpha = alpha
         holder.menu?.alpha = alpha
+    }
+
+    override fun getPopupText(position: Int): String {
+        return MusicUtil.getSectionName(dataSet[position].title)
     }
 
     override fun onCheckCanStartDrag(holder: ViewHolder, position: Int, x: Int, y: Int): Boolean {

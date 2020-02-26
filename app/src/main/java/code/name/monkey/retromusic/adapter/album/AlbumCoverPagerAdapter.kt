@@ -16,12 +16,12 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import java.util.ArrayList
+import java.util.*
 
 class AlbumCoverPagerAdapter(
-    fm: FragmentManager,
+    fragmentManager: FragmentManager,
     private val dataSet: ArrayList<Song>
-) : CustomFragmentStatePagerAdapter(fm) {
+) : CustomFragmentStatePagerAdapter(fragmentManager) {
 
     private var currentColorReceiver: AlbumCoverFragment.ColorReceiver? = null
     private var currentColorReceiverPosition = -1
@@ -85,7 +85,7 @@ class AlbumCoverPagerAdapter(
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             if (arguments != null) {
-                song = arguments!!.getParcelable(SONG_ARG)!!
+                song = requireArguments().getParcelable(SONG_ARG)!!
             }
         }
 

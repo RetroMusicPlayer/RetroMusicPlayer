@@ -16,44 +16,43 @@ package code.name.monkey.retromusic.preferences
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.AttributeSet
 import android.widget.Toast
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.PreferenceDialogFragmentCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
+import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import java.util.*
+import java.util.ArrayList
 
-
-class LibraryPreference : ATEDialogPreference {
-    constructor(context: Context) : super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+class LibraryPreference @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = -1,
+    defStyleRes: Int = -1
+) :
+    ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        icon?.setColorFilter(ThemeStore.textColorSecondary(context), PorterDuff.Mode.SRC_IN)
+        icon?.colorFilter =
+            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(colorControlNormal(context), SRC_IN)
     }
 }
 
 class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
 
     override fun onDialogClosed(positiveResult: Boolean) {
-
     }
 
     lateinit var adapter: CategoryInfoAdapter
@@ -75,20 +74,20 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
         adapter.attachToRecyclerView(recyclerView)
 
         return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .title(R.string.library_categories)
-                .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
-                .customView(view = view)
-                .positiveButton(android.R.string.ok) {
-                    updateCategories(adapter.categoryInfos)
-                    dismiss()
-                }
-                .negativeButton(android.R.string.cancel) {
-                    dismiss()
-                }
-                .neutralButton(R.string.reset_action) {
-                    adapter.categoryInfos = PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
-                }
-                .noAutoDismiss()
+            .title(R.string.library_categories)
+            .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+            .customView(view = view)
+            .positiveButton(android.R.string.ok) {
+                updateCategories(adapter.categoryInfos)
+                dismiss()
+            }
+            .negativeButton(android.R.string.cancel) {
+                dismiss()
+            }
+            .neutralButton(R.string.reset_action) {
+                adapter.categoryInfos = PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
+            }
+            .noAutoDismiss()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

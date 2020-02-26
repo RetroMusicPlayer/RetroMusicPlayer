@@ -16,16 +16,12 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.LastAddedSongsLoader;
 import code.name.monkey.retromusic.model.Song;
+import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 
 public class LastAddedPlaylist extends AbsSmartPlaylist {
@@ -48,6 +44,15 @@ public class LastAddedPlaylist extends AbsSmartPlaylist {
         super(in);
     }
 
+    @Override
+    public void clear(@NonNull Context context) {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     @NonNull
     @Override
     public ArrayList<Song> getSongs(@NotNull @NonNull Context context) {
@@ -55,16 +60,7 @@ public class LastAddedPlaylist extends AbsSmartPlaylist {
     }
 
     @Override
-    public void clear(@NonNull Context context) {
-    }
-
-    @Override
     public boolean isClearable() {
         return false;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 }

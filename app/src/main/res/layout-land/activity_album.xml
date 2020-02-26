@@ -15,6 +15,21 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            style="@style/Toolbar"
+            app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
+
+        <ViewStub
+            android:id="@+id/cab_stub"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" />
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,22 +40,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    style="@style/Toolbar"
-                    app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp" />
-
-                <ViewStub
-                    android:id="@+id/cab_stub"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp" />
-            </FrameLayout>
-
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/albumCoverContainer"
@@ -59,15 +58,14 @@
                     tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
             </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fillViewport="true"
-            android:id="@+id/container"
             android:overScrollMode="never">
 
             <LinearLayout
@@ -103,7 +101,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:maxLines="2"
-                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textAppearance="@style/TextViewHeadline5"
                             android:textStyle="bold"
                             tools:ignore="MissingPrefix"
                             tools:text="Album name" />
@@ -126,7 +124,6 @@
 
                 <include layout="@layout/activity_album_content" />
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </LinearLayout>

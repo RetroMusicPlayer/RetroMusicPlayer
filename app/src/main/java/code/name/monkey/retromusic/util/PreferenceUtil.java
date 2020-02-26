@@ -29,13 +29,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewpager.widget.ViewPager;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.activities.MainActivity;
+import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
-import code.name.monkey.retromusic.fragments.mainactivity.folders.FoldersFragment;
+import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
 import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
+import code.name.monkey.retromusic.model.CategoryInfo.Category;
 import code.name.monkey.retromusic.transform.CascadingPageTransformer;
 import code.name.monkey.retromusic.transform.DepthTransformation;
 import code.name.monkey.retromusic.transform.HingeTransformation;
@@ -137,6 +138,8 @@ public final class PreferenceUtil {
 
     private static final String LAST_PAGE = "last_start_page";
 
+    private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
+
     private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
 
     private static final String DEFAULT_START_PAGE = "default_start_page";
@@ -153,13 +156,13 @@ public final class PreferenceUtil {
 
     private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
 
-    private static final String SONG_SORT_ORDER = "song_sort_order";
+    public static final String SONG_SORT_ORDER = "song_sort_order";
 
     private static final String ALBUM_GRID_SIZE = "album_grid_size";
 
     private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
 
-    private static final String SONG_GRID_SIZE = "song_grid_size";
+    public static final String SONG_GRID_SIZE = "song_grid_size";
 
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
 
@@ -290,6 +293,10 @@ public final class PreferenceUtil {
 
     public final String autoDownloadImagesPolicy() {
         return mPreferences.getString(AUTO_DOWNLOAD_IMAGES_POLICY, "only_wifi");
+    }
+
+    public boolean bluetoothSpeaker() {
+        return mPreferences.getBoolean(BLUETOOTH_PLAYBACK, false);
     }
 
     public final boolean blurredAlbumArt() {
@@ -485,14 +492,15 @@ public final class PreferenceUtil {
 
     @NonNull
     public List<CategoryInfo> getDefaultLibraryCategoryInfos() {
-        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(7);
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.HOME, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.SONGS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ALBUMS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.ARTISTS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.PLAYLISTS, true));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.GENRES, false));
-        defaultCategoryInfos.add(new CategoryInfo(CategoryInfo.Category.QUEUE, false));
+        List<CategoryInfo> defaultCategoryInfos = new ArrayList<>(8);
+        defaultCategoryInfos.add(new CategoryInfo(Category.HOME, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.SONGS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.ALBUMS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.ARTISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.PLAYLISTS, true));
+        defaultCategoryInfos.add(new CategoryInfo(Category.GENRES, false));
+        defaultCategoryInfos.add(new CategoryInfo(Category.QUEUE, false));
+        defaultCategoryInfos.add(new CategoryInfo(Category.FOLDER, false));
         return defaultCategoryInfos;
     }
 
@@ -586,7 +594,7 @@ public final class PreferenceUtil {
     }
 
     public final int getLastMusicChooser() {
-        return mPreferences.getInt(LAST_MUSIC_CHOOSER, MainActivity.HOME);
+        return mPreferences.getInt(LAST_MUSIC_CHOOSER, OptionsSheetDialogFragment.LIBRARY);
     }
 
     public void setLastMusicChooser(int value) {

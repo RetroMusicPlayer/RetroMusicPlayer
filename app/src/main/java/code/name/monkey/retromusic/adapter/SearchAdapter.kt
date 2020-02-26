@@ -9,14 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
-import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.loaders.PlaylistSongsLoader
+import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
@@ -36,6 +35,7 @@ class SearchAdapter(
         if (dataSet!![position] is Album) return ALBUM
         if (dataSet!![position] is Artist) return ARTIST
         if (dataSet!![position] is Genre) return GENRE
+        if (dataSet!![position] is Playlist) return PLAYLIST
         return if (dataSet!![position] is Song) SONG else HEADER
     }
 
@@ -48,7 +48,10 @@ class SearchAdapter(
             ), viewType
         )
         else
-            ViewHolder(LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false), viewType)
+            ViewHolder(
+                LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false),
+                viewType
+            )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -57,7 +60,7 @@ class SearchAdapter(
                 val album = dataSet?.get(position) as Album
                 holder.title?.text = album.title
                 holder.text?.text = album.artistName
-                SongGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
+                AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
                     .checkIgnoreMediaStore(activity).build().into(holder.image)
             }
             ARTIST -> {
@@ -76,11 +79,26 @@ class SearchAdapter(
                 val genre = dataSet?.get(position) as Genre
                 holder.title?.text = genre.name
             }
+            PLAYLIST -> {
+                val playlist = dataSet?.get(position) as Playlist
+                holder.title?.text = playlist.name
+                holder.text?.text = MusicUtil.getPlaylistInfoString(activity, getSongs(playlist))
+            }
             else -> {
                 holder.title?.text = dataSet?.get(position).toString()
                 holder.title?.setTextColor(ThemeStore.accentColor(activity))
             }
         }
+    }
+
+    private fun getSongs(playlist: Playlist): java.util.ArrayList<Song> {
+        val songs = java.util.ArrayList<Song>()
+        if (playlist is AbsSmartPlaylist) {
+            songs.addAll(playlist.getSongs(activity))
+        } else {
+            songs.addAll(PlaylistSongsLoader.getPlaylistSongList(activity, playlist.id))
+        }
+        return songs
     }
 
     override fun getItemCount(): Int {
@@ -131,6 +149,9 @@ class SearchAdapter(
                 GENRE -> {
                     NavigationUtil.goToGenre(activity, item as Genre)
                 }
+                PLAYLIST -> {
+                    NavigationUtil.goToPlaylistNew(activity, item as Playlist)
+                }
                 SONG -> {
                     val playList = ArrayList<Song>()
                     playList.add(item as Song)
@@ -146,5 +167,6 @@ class SearchAdapter(
         private const val ARTIST = 2
         private const val SONG = 3
         private const val GENRE = 4
+        private const val PLAYLIST = 5
     }
 }

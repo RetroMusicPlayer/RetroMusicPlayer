@@ -35,3 +35,15 @@ fun Toolbar.backgroundTintList() {
     val colorStateList = ColorStateList.valueOf(surfaceColor)
     backgroundTintList = colorStateList
 }
+
+fun textColorSecondary(context: Context): Int {
+    return ATHUtil.resolveColor(context, android.R.attr.textColorSecondary)
+}
+
+fun colorControlNormal(context: Context): Int {
+    return ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
+}
+
+fun textColorPrimary(context: Context): Int {
+    return ATHUtil.resolveColor(context, android.R.attr.textColorPrimary)
+}

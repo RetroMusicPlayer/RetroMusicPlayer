@@ -113,7 +113,6 @@
     <string name="clear_blacklist">Kara listeyi temizle</string>
     <string name="clear_playing_queue">Kuyruğu temizle</string>
     <string name="clear_playlist_title">Oynatma listesini temizle</string>
-    <string name="clear_playlist_x"><![CDATA[<B>% 1 $ s </ b> oynatma listesini temizlemek istedi\u011finizden emin misiniz? Bu i\u015flem kal\u0131c\u0131d\u0131r ve geri al\u0131namaz!]]></string>
     <string name="close_notification">Kapat</string>
     <string name="color">Renk</string>
     <string name="color_theme_name">Renk</string>

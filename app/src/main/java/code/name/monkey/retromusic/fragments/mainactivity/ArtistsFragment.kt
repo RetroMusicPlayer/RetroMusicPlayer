@@ -7,6 +7,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.ArtistsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistsView
@@ -14,9 +15,13 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
 class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    ArtistsView {
+    ArtistsView, MainActivityFragmentCallbacks {
 
-    override fun artists(artists: ArrayList<Artist>) {
+    override fun handleBackPress(): Boolean {
+        return false
+    }
+
+    override fun artists(artists: List<Artist>) {
         adapter?.swapDataSet(artists)
     }
 
@@ -38,7 +43,7 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             artistsPresenter.loadArtists()
         }
     }
@@ -57,22 +62,21 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(activity, getGridSize())
+        return GridLayoutManager(requireActivity(), getGridSize())
     }
 
     override fun createAdapter(): ArtistAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
         return ArtistAdapter(
-            libraryFragment.mainActivity,
+            mainActivity,
             dataSet,
             itemLayoutRes(),
-            loadUsePalette(),
-            libraryFragment
+            mainActivity
         )
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getArtistGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getArtistGridSize(requireActivity())
     }
 
     override fun saveGridSize(gridColumns: Int) {
@@ -80,23 +84,11 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getArtistGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getArtistGridSizeLand(requireActivity())
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
         PreferenceUtil.getInstance(requireContext()).setArtistGridSizeLand(gridColumns)
-    }
-
-    override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setArtistColoredFooters(usePalette)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).artistColoredFooters()
-    }
-
-    override fun setUsePalette(usePalette: Boolean) {
-        adapter?.usePalette(usePalette)
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -119,11 +111,9 @@ class ArtistsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Artist
     companion object {
         @JvmField
         val TAG: String = ArtistsFragment::class.java.simpleName
-
+        @JvmStatic
         fun newInstance(): ArtistsFragment {
-
             val args = Bundle()
-
             val fragment = ArtistsFragment()
             fragment.arguments = args
             return fragment

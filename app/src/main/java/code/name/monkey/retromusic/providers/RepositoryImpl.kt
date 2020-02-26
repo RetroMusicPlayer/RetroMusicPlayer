@@ -38,6 +38,7 @@ import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFMRestClient
+import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import java.io.IOException
 import javax.inject.Inject
@@ -276,6 +277,16 @@ class RepositoryImpl @Inject constructor(private val context: Context) : Reposit
         },
         errorMessage = "Error"
 
+    )
+
+    override suspend fun albumInfo(
+        artist: String,
+        album: String
+    ): Result<LastFmAlbum> = safeApiCall(
+        call = {
+            Success(LastFMRestClient(context).apiService.albumInfo(artist, album))
+        },
+        errorMessage = "Error"
     )
 
     override suspend fun artistById(artistId: Int): Result<Artist> {

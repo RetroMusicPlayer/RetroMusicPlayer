@@ -184,7 +184,6 @@
     <string name="clear_playing_queue">Wyczyść kolejkę</string>
 
     <string name="clear_playlist_title">Wyczyść playlistę</string>
-    <string name="clear_playlist_x"><![CDATA[Wyczy\u015bci\u0107 playlist\u0119 <b>%1$s</b>? Ta czynno\u015b\u0107 nie mo\u017ce zosta\u0107 cofni\u0119ta!]]></string>
 
     <string name="close_notification">Zamknij</string>
 

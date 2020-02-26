@@ -20,10 +20,10 @@ import androidx.preference.EditTextPreference
 import code.name.monkey.appthemehelper.R
 
 class ATEEditTextPreference @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0,
-        defStyleRes: Int = 0
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
 ) : EditTextPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {

@@ -34,25 +34,24 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-
 class RenamePlaylistDialog : DialogFragment() {
     private lateinit var playlistView: TextInputEditText
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
-                .show {
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
-                    title(string.rename_playlist_title)
-                    customView(layout.dialog_playlist)
-                    negativeButton(android.R.string.cancel)
-                    positiveButton(string.action_rename) {
-                        if (playlistView.toString().trim { it <= ' ' } != "") {
-                            val playlistId = arguments!!.getLong(PLAYLIST_ID)
-                            PlaylistsUtil.renamePlaylist(context, playlistId, playlistView.text!!.toString())
-                        }
+            .show {
+                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+                title(string.rename_playlist_title)
+                customView(layout.dialog_playlist)
+                negativeButton(android.R.string.cancel)
+                positiveButton(string.action_rename) {
+                    if (playlistView.toString().trim { it <= ' ' } != "") {
+                        val playlistId = arguments!!.getLong(PLAYLIST_ID)
+                        PlaylistsUtil.renamePlaylist(context, playlistId, playlistView.text!!.toString())
                     }
                 }
+            }
 
         val dialogView = materialDialog.getCustomView()
         playlistView = dialogView.findViewById(R.id.actionNewPlaylist)
@@ -61,7 +60,8 @@ class RenamePlaylistDialog : DialogFragment() {
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
         val playlistId = arguments!!.getLong(PLAYLIST_ID)
-        playlistView.appHandleColor().setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
+        playlistView.appHandleColor()
+            .setText(PlaylistsUtil.getNameForPlaylist(context!!, playlistId), TextView.BufferType.EDITABLE)
         return materialDialog
     }
 

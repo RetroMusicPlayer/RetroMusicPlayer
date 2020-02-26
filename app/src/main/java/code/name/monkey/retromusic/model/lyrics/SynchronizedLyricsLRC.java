@@ -18,11 +18,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class SynchronizedLyricsLRC extends AbsSynchronizedLyrics {
+
     private static final Pattern LRC_LINE_PATTERN = Pattern.compile("((?:\\[.*?\\])+)(.*)");
+
     private static final Pattern LRC_TIME_PATTERN = Pattern.compile("\\[(\\d+):(\\d{2}(?:\\.\\d+)?)\\]");
+
     private static final Pattern LRC_ATTRIBUTE_PATTERN = Pattern.compile("\\[(\\D+):(.+)\\]");
 
     private static final float LRC_SECONDS_TO_MS_MULTIPLIER = 1000f;
+
     private static final int LRC_MINUTES_TO_MS_MULTIPLIER = 60000;
 
     @Override
@@ -71,7 +75,9 @@ class SynchronizedLyricsLRC extends AbsSynchronizedLyrics {
                         int ms = (int) (s * LRC_SECONDS_TO_MS_MULTIPLIER) + m * LRC_MINUTES_TO_MS_MULTIPLIER;
 
                         this.valid = true;
-                        if (check) return this;
+                        if (check) {
+                            return this;
+                        }
 
                         this.lines.append(ms, text);
                     }

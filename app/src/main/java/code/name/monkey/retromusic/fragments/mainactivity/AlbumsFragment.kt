@@ -7,14 +7,15 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
 import javax.inject.Inject
 
-open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    AlbumsView {
+class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
+    AlbumsView, MainActivityFragmentCallbacks {
 
     @Inject
     lateinit var albumsPresenter: AlbumsPresenter
@@ -31,7 +32,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
 
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             albumsPresenter.loadAlbums()
         }
     }
@@ -41,7 +42,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         albumsPresenter.detachView()
     }
 
-    override fun albums(albums: java.util.ArrayList<Album>) {
+    override fun albums(albums: List<Album>) {
         adapter?.swapDataSet(albums)
     }
 
@@ -49,25 +50,17 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
         get() = R.string.no_albums
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(activity, getGridSize())
+        return GridLayoutManager(requireActivity(), getGridSize())
     }
 
     override fun createAdapter(): AlbumAdapter {
-        /* var itemLayoutRes = itemLayoutRes
-         notifyLayoutResChanged(itemLayoutRes)
-         if (itemLayoutRes != R.layout.item_list) {
-             itemLayoutRes = PreferenceUtil.getInstance(requireContext()).getAlbumGridStyle(requireContext())
-         }*/
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return AlbumAdapter(libraryFragment.mainActivity, dataSet, itemLayoutRes(), loadUsePalette(), libraryFragment)
-    }
-
-    public override fun loadUsePalette(): Boolean {
-        return PreferenceUtil.getInstance(requireContext()).albumColoredFooters()
-    }
-
-    override fun setUsePalette(usePalette: Boolean) {
-        adapter?.usePalette(usePalette)
+        return AlbumAdapter(
+            mainActivity,
+            dataSet,
+            itemLayoutRes(),
+            mainActivity
+        )
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -84,7 +77,7 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(requireContext())
     }
 
     override fun saveGridSize(gridColumns: Int) {
@@ -92,15 +85,11 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(activity!!)
+        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(requireContext())
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
         PreferenceUtil.getInstance(requireContext()).setAlbumGridSizeLand(gridColumns)
-    }
-
-    override fun saveUsePalette(usePalette: Boolean) {
-        PreferenceUtil.getInstance(requireContext()).setAlbumColoredFooters(usePalette)
     }
 
     override fun onMediaStoreChanged() {
@@ -116,7 +105,6 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     }
 
     override fun setLayoutRes(layoutRes: Int) {
-        //adapter?.itemCount?.let { adapter?.notifyItemRangeChanged(0, it) }
     }
 
     override fun loadLayoutRes(): Int {
@@ -130,12 +118,16 @@ open class AlbumsFragment : AbsLibraryPagerRecyclerViewCustomGridSizeFragment<Al
     companion object {
         @JvmField
         var TAG: String = AlbumsFragment::class.java.simpleName
-
+@JvmStatic
         fun newInstance(): AlbumsFragment {
             val args = Bundle()
             val fragment = AlbumsFragment()
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun handleBackPress(): Boolean {
+        return false
     }
 }

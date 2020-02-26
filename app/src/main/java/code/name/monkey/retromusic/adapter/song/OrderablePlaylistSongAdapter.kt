@@ -96,7 +96,7 @@ class OrderablePlaylistSongAdapter(
         private var mDragStateFlags: Int = 0
 
         override var songMenuRes: Int
-            get() = code.name.monkey.retromusic.R.menu.menu_item_playlist_song
+            get() = R.menu.menu_item_playlist_song
             set(value) {
                 super.songMenuRes = value
             }
@@ -113,7 +113,7 @@ class OrderablePlaylistSongAdapter(
 
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
-                code.name.monkey.retromusic.R.id.action_remove_from_playlist -> {
+                R.id.action_remove_from_playlist -> {
                     RemoveFromPlaylistDialog.create(song as PlaylistSong)
                         .show(activity.supportFragmentManager, "REMOVE_FROM_PLAYLIST")
                     return true

@@ -17,8 +17,7 @@ package code.name.monkey.retromusic.loaders
 import android.content.Context
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Genre
-import java.util.*
-
+import java.util.Locale
 
 object SearchLoader {
     fun searchAll(context: Context, query: String?): MutableList<Any> {
@@ -41,10 +40,23 @@ object SearchLoader {
                 results.add(context.resources.getString(R.string.albums))
                 results.addAll(albums)
             }
-            val genres: List<Genre> = GenreLoader.searchGenres(context).filter { genre -> genre.name.toLowerCase(Locale.getDefault()).contains(searchString.toLowerCase(Locale.getDefault())) }
+            val genres: List<Genre> = GenreLoader.searchGenres(context)
+                .filter { genre ->
+                    genre.name.toLowerCase(Locale.getDefault())
+                        .contains(searchString.toLowerCase(Locale.getDefault()))
+                }
             if (genres.isNotEmpty()) {
                 results.add(context.resources.getString(R.string.genres))
                 results.addAll(genres)
+            }
+            val playlist = PlaylistLoader.getAllPlaylists(context)
+                .filter { playlist ->
+                    playlist.name.toLowerCase(Locale.getDefault())
+                        .contains(searchString.toLowerCase(Locale.getDefault()))
+                }
+            if (playlist.isNotEmpty()) {
+                results.add(context.getString(R.string.playlists))
+                results.addAll(playlist)
             }
         }
         return results

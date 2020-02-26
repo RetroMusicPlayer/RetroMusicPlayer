@@ -34,7 +34,7 @@ object AppRater {
 
     private const val DAYS_UNTIL_PROMPT = 3//Min number of days
     private const val LAUNCHES_UNTIL_PROMPT = 5//Min number of launches
-
+    @JvmStatic
     fun appLaunched(context: Context) {
         val prefs = context.getSharedPreferences(APP_RATING, 0)
         if (prefs.getBoolean(DO_NOT_SHOW_AGAIN, false)) {
@@ -66,26 +66,31 @@ object AppRater {
 
     private fun showRateDialog(context: Context, editor: SharedPreferences.Editor) {
         MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT))
-                .show {
+            .show {
 
-                    cornerRadius(PreferenceUtil.getInstance(context).dialogCorner)
-                    title(text = "Rate this App")
-                    message(text = "If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
-                    positiveButton(R.string.app_name) {
-                        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}")))
-                        editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
-                        editor.commit()
-                        dismiss()
-                    }
-                    negativeButton(text = "Later") {
-                        dismiss()
-                    }
-                    neutralButton(text = " No thanks") {
-                        editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
-                        editor.commit()
-                        dismiss()
-                    }
-                    getActionButton(WhichButton.POSITIVE).updateTextColor(Color.RED)
+                cornerRadius(PreferenceUtil.getInstance(context).dialogCorner)
+                title(text = "Rate this App")
+                message(text = "If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
+                positiveButton(R.string.app_name) {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=${context.packageName}")
+                        )
+                    )
+                    editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
+                    editor.commit()
+                    dismiss()
                 }
+                negativeButton(text = "Later") {
+                    dismiss()
+                }
+                neutralButton(text = " No thanks") {
+                    editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
+                    editor.commit()
+                    dismiss()
+                }
+                getActionButton(WhichButton.POSITIVE).updateTextColor(Color.RED)
+            }
     }
 }

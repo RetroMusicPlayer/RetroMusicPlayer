@@ -16,17 +16,13 @@ package code.name.monkey.retromusic.model.smartplaylist;
 
 import android.content.Context;
 import android.os.Parcel;
-
 import androidx.annotation.NonNull;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.loaders.TopAndRecentlyPlayedTracksLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.HistoryStore;
+import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -51,12 +47,6 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
         super(in);
     }
 
-    @NonNull
-    @Override
-    public ArrayList<Song> getSongs(@NotNull @NonNull Context context) {
-        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getRecentlyPlayedTracks(context);
-    }
-
     @Override
     public void clear(@NonNull Context context) {
         HistoryStore.getInstance(context).clear();
@@ -65,5 +55,11 @@ public class HistoryPlaylist extends AbsSmartPlaylist {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @NonNull
+    @Override
+    public ArrayList<Song> getSongs(@NotNull @NonNull Context context) {
+        return TopAndRecentlyPlayedTracksLoader.INSTANCE.getRecentlyPlayedTracks(context);
     }
 }

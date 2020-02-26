@@ -26,7 +26,7 @@ import code.name.monkey.retromusic.fragments.mainactivity.ArtistsFragment
 import code.name.monkey.retromusic.fragments.mainactivity.GenresFragment
 import code.name.monkey.retromusic.fragments.mainactivity.PlaylistsFragment
 import code.name.monkey.retromusic.fragments.mainactivity.SongsFragment
-import code.name.monkey.retromusic.fragments.mainactivity.home.BannerHomeFragment
+import code.name.monkey.retromusic.fragments.mainactivity.BannerHomeFragment
 import dagger.Component
 import javax.inject.Singleton
 

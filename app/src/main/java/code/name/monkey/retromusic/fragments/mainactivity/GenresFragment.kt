@@ -21,19 +21,24 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
+import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenresView
 import javax.inject.Inject
 
+class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
+    GenresView, MainActivityFragmentCallbacks {
 
-class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(), GenresView {
-    override fun genres(genres: ArrayList<Genre>) {
+    override fun handleBackPress(): Boolean {
+        return false
+    }
+
+    override fun genres(genres: List<Genre>) {
         adapter?.swapDataSet(genres)
     }
 
     override fun showEmptyView() {
-
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
@@ -42,16 +47,14 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun createAdapter(): GenreAdapter {
         val dataSet = if (adapter == null) ArrayList() else adapter!!.dataSet
-        return GenreAdapter(libraryFragment.mainActivity, dataSet, R.layout.item_list_no_image)
+        return GenreAdapter(mainActivity, dataSet, R.layout.item_list_no_image)
     }
 
     override val emptyMessage: Int
         get() = R.string.no_genres
 
-
     @Inject
     lateinit var genresPresenter: GenresPresenter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,9 +65,10 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
         super.onViewCreated(view, savedInstanceState)
         genresPresenter.attachView(this)
     }
+
     override fun onResume() {
         super.onResume()
-        if (adapter!!.dataSet.isEmpty()) {
+        if (adapter!!.dataSet.isNullOrEmpty()) {
             genresPresenter.loadGenres()
         }
     }
@@ -81,7 +85,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     companion object {
         @JvmField
         val TAG: String = GenresFragment::class.java.simpleName
-
+        @JvmStatic
         fun newInstance(): GenresFragment {
             return GenresFragment()
         }

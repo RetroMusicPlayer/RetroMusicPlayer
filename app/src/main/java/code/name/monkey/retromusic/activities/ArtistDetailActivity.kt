@@ -15,17 +15,16 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
-import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.extensions.ripAlpha
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -35,29 +34,29 @@ import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.CustomArtistImageUtil
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_album.container
 import kotlinx.android.synthetic.main.activity_artist_content.albumRecyclerView
 import kotlinx.android.synthetic.main.activity_artist_content.albumTitle
 import kotlinx.android.synthetic.main.activity_artist_content.biographyText
 import kotlinx.android.synthetic.main.activity_artist_content.biographyTitle
+import kotlinx.android.synthetic.main.activity_artist_content.listeners
+import kotlinx.android.synthetic.main.activity_artist_content.listenersLabel
 import kotlinx.android.synthetic.main.activity_artist_content.playAction
 import kotlinx.android.synthetic.main.activity_artist_content.recyclerView
+import kotlinx.android.synthetic.main.activity_artist_content.scrobbles
+import kotlinx.android.synthetic.main.activity_artist_content.scrobblesLabel
 import kotlinx.android.synthetic.main.activity_artist_content.shuffleAction
 import kotlinx.android.synthetic.main.activity_artist_content.songTitle
 import kotlinx.android.synthetic.main.activity_artist_details.artistCoverContainer
 import kotlinx.android.synthetic.main.activity_artist_details.artistTitle
 import kotlinx.android.synthetic.main.activity_artist_details.image
-import kotlinx.android.synthetic.main.activity_artist_details.imageContainer
 import kotlinx.android.synthetic.main.activity_artist_details.text
 import kotlinx.android.synthetic.main.activity_artist_details.toolbar
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.Locale
 import javax.inject.Inject
 
@@ -85,7 +84,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     private var biography: Spanned? = null
     private lateinit var artist: Artist
     private lateinit var songAdapter: SimpleSongAdapter
-    private lateinit var albumAdapter: AlbumAdapter
+    private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
 
     override fun createContentView(): View {
@@ -101,7 +100,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         slide.excludeTarget(R.id.status_bar, true)
         slide.excludeTarget(android.R.id.statusBarBackground, true)
         slide.excludeTarget(android.R.id.navigationBarBackground, true)
-
         window.enterTransition = slide
     }
 
@@ -131,7 +129,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         windowEnterTransition()
         ActivityCompat.postponeEnterTransition(this)
 
-        setUpViews()
+        setupRecyclerView()
 
         playAction.apply {
             setOnClickListener { MusicPlayerRemote.openQueue(artist.songs, 0, true) }
@@ -154,21 +152,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         artistDetailsPresenter.detachView()
     }
 
-    private fun setUpViews() {
-        setupRecyclerView()
-        setupContainerHeight()
-    }
-
-    private fun setupContainerHeight() {
-        imageContainer?.let {
-            val params = it.layoutParams
-            params.width = DensityUtil.getScreenHeight(this) / 2
-            it.layoutParams = params
-        }
-    }
-
     private fun setupRecyclerView() {
-        albumAdapter = HorizontalAlbumAdapter(this, ArrayList(), false, null)
+        albumAdapter = HorizontalAlbumAdapter(this, ArrayList(), null)
         albumRecyclerView.apply {
             itemAnimator = DefaultItemAnimator()
             layoutManager = GridLayoutManager(this.context, 1, GridLayoutManager.HORIZONTAL, false)
@@ -180,7 +165,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             layoutManager = LinearLayoutManager(this.context)
             adapter = songAdapter
         }
-        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -247,6 +231,16 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                     Html.fromHtml(bioContent)
                 }
                 biographyText.text = biography
+
+                if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
+                    listeners.show()
+                    listenersLabel.show()
+                    scrobbles.show()
+                    scrobblesLabel.show()
+
+                    listeners.text = RetroUtil.formatValue(lastFmArtist.artist.stats.listeners.toFloat())
+                    scrobbles.text = RetroUtil.formatValue(lastFmArtist.artist.stats.playcount.toFloat())
+                }
             }
         }
 
@@ -271,7 +265,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color.ripAlpha()
         else
-            ThemeStore.accentColor(this)
+            ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
 
         albumTitle.setTextColor(textColor)
         songTitle.setTextColor(textColor)
@@ -286,7 +280,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null

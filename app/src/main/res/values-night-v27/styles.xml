@@ -34,5 +34,6 @@
         <item name="android:windowLightNavigationBar">false</item>
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+
     </style>
 </resources>

@@ -133,13 +133,12 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
             .checkIgnoreMediaStore(requireContext())
             .generatePalette(requireContext()).build()
+            .dontAnimate()
             .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
-            //.centerCrop()
-            //.override(320, 480)
             .into(object : RetroMusicColoredTarget(colorBackground) {
                 override fun onColorReady(color: Int) {
                     if (color == defaultFooterColor) {
-                        colorBackground!!.setColorFilter(color)
+                        colorBackground.setColorFilter(color)
                     }
                 }
             })

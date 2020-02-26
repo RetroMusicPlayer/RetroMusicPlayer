@@ -12,7 +12,6 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
-import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Genre
@@ -21,7 +20,6 @@ import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsView
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.empty
 import kotlinx.android.synthetic.main.activity_playlist_detail.emptyEmoji
@@ -81,7 +79,8 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     }
 
     private fun setUpToolBar() {
-        applyToolbar(toolbar)
+        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        setSupportActionBar(toolbar)
         title = genre.name
     }
 
@@ -115,7 +114,6 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
     }
 
     private fun setupRecyclerView() {
-        ViewUtil.setUpFastScrollRecyclerViewColor(this, recyclerView)
         songAdapter = ShuffleButtonSongAdapter(this, ArrayList(), R.layout.item_list, this)
         recyclerView.apply {
             itemAnimator = DefaultItemAnimator()
@@ -130,7 +128,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         })
     }
 
-    override fun songs(songs: ArrayList<Song>) {
+    override fun songs(songs: List<Song>) {
         songAdapter.swapDataSet(songs)
     }
 

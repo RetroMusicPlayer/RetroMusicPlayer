@@ -113,15 +113,12 @@
     <string name="clear_blacklist">清除黑名單</string>
     <string name="clear_playing_queue">清除列表</string>
     <string name="clear_playlist_title">清除播放清單</string>
-    <string name="clear_playlist_x"><![CDATA[\u8981\u6e05\u9664<b>%1$s</b>\u64ad\u653e\u6e05\u55ae\u55ce?\u8acb\u6ce8\u610f\u9019\u4e0d\u80fd\u5fa9\u539f!]]></string>
     <string name="close_notification">關閉</string>
     <string name="color">彩色</string>
     <string name="color_theme_name">彩色</string>
     <string name="colors">色彩</string>
     <string name="composer">作曲者</string>
     <string name="copied_device_info_to_clipboard">已複製裝置內容到剪貼簿</string>
-    <string name="could_not_create_playlist">\u7121\u6cd5\u5efa\u7acb\u64ad\u653e\u6e05\u55ae\u3002</string>
-    <string name="could_not_download_album_cover">"\u7121\u6cd5\u4e0b\u8f09\u5408\u9069\u7684\u5c08\u8f2f\u5716\u7247\u3002"</string>
     <string name="could_not_restore_purchase">無法恢復購買狀態。</string>
     <string name="could_not_scan_files">無法掃描 %d 個檔案。</string>
     <string name="create_action">新增</string>

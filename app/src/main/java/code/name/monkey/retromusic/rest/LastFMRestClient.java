@@ -15,20 +15,18 @@
 package code.name.monkey.retromusic.rest;
 
 import android.content.Context;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import code.name.monkey.retromusic.rest.service.LastFMService;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
-
-import code.name.monkey.retromusic.rest.service.LastFMService;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -53,13 +51,9 @@ public class LastFMRestClient {
         apiService = restAdapter.create(LastFMService.class);
     }
 
-    @Nullable
-    private static Cache createDefaultCache(Context context) {
-        File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
-        if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
-            return new Cache(cacheDir, 1024 * 1024 * 10);
-        }
-        return null;
+    @NonNull
+    public LastFMService getApiService() {
+        return apiService;
     }
 
     private static Interceptor createCacheControlInterceptor() {
@@ -71,6 +65,15 @@ public class LastFMRestClient {
         };
     }
 
+    @Nullable
+    private static Cache createDefaultCache(Context context) {
+        File cacheDir = new File(context.getCacheDir().getAbsolutePath(), "/okhttp-lastfm/");
+        if (cacheDir.mkdirs() || cacheDir.isDirectory()) {
+            return new Cache(cacheDir, 1024 * 1024 * 10);
+        }
+        return null;
+    }
+
     @NonNull
     private static OkHttpClient.Builder createDefaultOkHttpClientBuilder(@NonNull Context context) {
         return new OkHttpClient.Builder()
@@ -80,11 +83,14 @@ public class LastFMRestClient {
                 .writeTimeout(1, TimeUnit.MINUTES) // write timeout
                 .readTimeout(1, TimeUnit.MINUTES) // read timeout
                 .cache(createDefaultCache(context))
-                .addInterceptor(createCacheControlInterceptor());
+                .addInterceptor(createCacheControlInterceptor())
+                .addInterceptor(createLogInterceptor());
     }
 
     @NonNull
-    public LastFMService getApiService() {
-        return apiService;
+    private static Interceptor createLogInterceptor() {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
     }
 }

@@ -14,6 +14,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -24,12 +25,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
-import kotlinx.android.synthetic.main.fragment_tiny_player.playerSongTotalTime
-import kotlinx.android.synthetic.main.fragment_tiny_player.playerToolbar
-import kotlinx.android.synthetic.main.fragment_tiny_player.progressBar
-import kotlinx.android.synthetic.main.fragment_tiny_player.songInfo
-import kotlinx.android.synthetic.main.fragment_tiny_player.text
-import kotlinx.android.synthetic.main.fragment_tiny_player.title
+import kotlinx.android.synthetic.main.fragment_tiny_player.*
 
 class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
     override fun onUpdateProgressViews(progress: Int, total: Int) {
@@ -85,10 +81,12 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
         if (ColorUtil.isColorLight(colorFinal)) {
             textColorPrimary = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            textColorPrimaryDisabled = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            textColorPrimaryDisabled =
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
         } else {
             textColorPrimary = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            textColorPrimaryDisabled = MaterialValueHelper.getSecondaryTextColor(requireContext(), false)
+            textColorPrimaryDisabled =
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), false)
         }
 
         this.lastColor = colorFinal
@@ -135,13 +133,18 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
 
         if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
-            songInfo?.text = getSongInfo(song)
+            songInfo.text = getSongInfo(song)
+            songInfo.show()
         } else {
-            songInfo?.hide()
+            songInfo.hide()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_tiny_player, container, false)
     }
 

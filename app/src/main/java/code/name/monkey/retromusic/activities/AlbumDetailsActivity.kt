@@ -13,7 +13,6 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
@@ -28,6 +27,7 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
@@ -38,25 +38,31 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
+import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.albumCoverContainer
 import kotlinx.android.synthetic.main.activity_album.albumText
 import kotlinx.android.synthetic.main.activity_album.albumTitle
-import kotlinx.android.synthetic.main.activity_album.container
 import kotlinx.android.synthetic.main.activity_album.image
 import kotlinx.android.synthetic.main.activity_album.toolbar
+import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumText
+import kotlinx.android.synthetic.main.activity_album_content.aboutAlbumTitle
+import kotlinx.android.synthetic.main.activity_album_content.listeners
+import kotlinx.android.synthetic.main.activity_album_content.listenersLabel
 import kotlinx.android.synthetic.main.activity_album_content.moreRecyclerView
 import kotlinx.android.synthetic.main.activity_album_content.moreTitle
 import kotlinx.android.synthetic.main.activity_album_content.playAction
 import kotlinx.android.synthetic.main.activity_album_content.recyclerView
+import kotlinx.android.synthetic.main.activity_album_content.scrobbles
+import kotlinx.android.synthetic.main.activity_album_content.scrobblesLabel
 import kotlinx.android.synthetic.main.activity_album_content.shuffleAction
 import kotlinx.android.synthetic.main.activity_album_content.songTitle
-import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 import java.util.ArrayList
 import javax.inject.Inject
 import android.util.Pair as UtilPair
@@ -151,6 +157,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         shuffleAction.apply {
             setOnClickListener { MusicPlayerRemote.openAndShuffleQueue(album.songs!!, true) }
         }
+
+        aboutAlbumText.setOnClickListener {
+            if (aboutAlbumText.maxLines == 4) {
+                aboutAlbumText.maxLines = Integer.MAX_VALUE
+            } else {
+                aboutAlbumText.maxLines = 4
+            }
+        }
     }
 
     private fun setupRecyclerView() {
@@ -161,8 +175,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             isNestedScrollingEnabled = false
             adapter = simpleSongAdapter
         }
-
-        OverScrollDecoratorHelper.setUpOverScroll(container)
     }
 
     override fun onDestroy() {
@@ -200,14 +212,15 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
         albumDetailsPresenter.loadMore(album.artistId)
+        albumDetailsPresenter.aboutAlbum(album.artistName!!, album.title!!)
     }
 
-    override fun moreAlbums(albums: ArrayList<Album>) {
+    override fun moreAlbums(albums: List<Album>) {
         moreTitle.show()
         moreRecyclerView.show()
         moreTitle.text = String.format(getString(R.string.label_more_from), album.artistName)
 
-        val albumAdapter = HorizontalAlbumAdapter(this, albums, false, null)
+        val albumAdapter = HorizontalAlbumAdapter(this, albums, null)
         moreRecyclerView.layoutManager = GridLayoutManager(
             this,
             1,
@@ -217,20 +230,46 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         moreRecyclerView.adapter = albumAdapter
     }
 
+    override fun aboutAlbum(lastFmAlbum: LastFmAlbum) {
+        if (lastFmAlbum.album != null) {
+            if (lastFmAlbum.album.wiki != null) {
+                aboutAlbumText.show()
+                aboutAlbumTitle.show()
+                aboutAlbumTitle.text = String.format("About %s", lastFmAlbum.album.name)
+                aboutAlbumText.text = lastFmAlbum.album.wiki.content
+            }
+            if (lastFmAlbum.album.listeners.isNotEmpty()) {
+                listeners.show()
+                listenersLabel.show()
+                scrobbles.show()
+                scrobblesLabel.show()
+
+                listeners.text = RetroUtil.formatValue(lastFmAlbum.album.listeners.toFloat())
+                scrobbles.text = RetroUtil.formatValue(lastFmAlbum.album.playcount.toFloat())
+            }
+        }
+    }
+
     override fun loadArtistImage(artist: Artist) {
-        ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
-            .dontAnimate().dontTransform().into(object : RetroMusicColoredTarget(artistImage) {
+        ArtistGlideRequest.Builder.from(Glide.with(this), artist)
+            .generatePalette(this)
+            .build()
+            .dontAnimate()
+            .dontTransform()
+            .into(object : RetroMusicColoredTarget(artistImage) {
                 override fun onColorReady(color: Int) {
                 }
             })
     }
 
     private fun loadAlbumCover() {
-        SongGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
+        AlbumGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
             .checkIgnoreMediaStore(this)
             .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())
             .generatePalette(this)
-            .build().dontAnimate().dontTransform()
+            .build()
+            .dontAnimate()
+            .dontTransform()
             .into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(color: Int) {
                     setColors(color)
@@ -239,11 +278,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: Int) {
-        val themeColor = if (PreferenceUtil.getInstance(this).adaptiveColor) color.ripAlpha()
-        else ThemeStore.accentColor(this)
+        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+            color.ripAlpha()
+        else
+            ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
 
-        songTitle.setTextColor(themeColor)
-        moreTitle.setTextColor(themeColor)
+        songTitle.setTextColor(textColor)
+        moreTitle.setTextColor(textColor)
+        aboutAlbumTitle.setTextColor(textColor)
 
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color.ripAlpha()
@@ -254,7 +296,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        //status_bar.setBackgroundColor(toolbarColor)
         toolbar.setBackgroundColor(toolbarColor)
         setSupportActionBar(toolbar)
         supportActionBar?.title = null

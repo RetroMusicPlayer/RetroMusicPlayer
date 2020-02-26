@@ -20,26 +20,25 @@ import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-operator fun CompositeDisposable.plusAssign(disposable: Disposable) {
-    add(disposable)
-}
-
 interface HomeView : BaseView {
-    fun sections(sections: ArrayList<Home>)
+    fun sections(sections: List<Home>)
 }
 
 interface HomePresenter : Presenter<HomeView> {
     fun loadSections()
 
     class HomePresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<HomeView>(), HomePresenter, CoroutineScope {
+
         private val job = Job()
 
         override val coroutineContext: CoroutineContext
@@ -54,11 +53,11 @@ interface HomePresenter : Presenter<HomeView> {
             launch {
                 val list = ArrayList<Home>()
                 val recentArtistResult = listOf(
-                        repository.topArtists(),
-                        repository.topAlbums(),
-                        repository.recentArtists(),
-                        repository.recentAlbums(),
-                        repository.favoritePlaylist()
+                    repository.topArtists(),
+                    repository.topAlbums(),
+                    repository.recentArtists(),
+                    repository.recentAlbums(),
+                    repository.favoritePlaylist()
                 )
                 for (r in recentArtistResult) {
                     when (r) {

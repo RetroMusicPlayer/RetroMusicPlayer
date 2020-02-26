@@ -27,7 +27,7 @@ class HomeAdapter(
     private val displayMetrics: DisplayMetrics
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var list = ArrayList<Home>()
+    private var list = listOf<Home>()
 
     override fun getItemViewType(position: Int): Int {
         return list[position].homeSection
@@ -52,7 +52,6 @@ class HomeAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        println("ViewType ${getItemViewType(position)}")
         when (getItemViewType(position)) {
             RECENT_ALBUMS -> {
                 val viewHolder = holder as AlbumViewHolder
@@ -81,7 +80,7 @@ class HomeAdapter(
         return list.size
     }
 
-    fun swapData(sections: ArrayList<Home>) {
+    fun swapData(sections: List<Home>) {
         list = sections
         notifyDataSetChanged()
     }
@@ -116,12 +115,12 @@ class HomeAdapter(
             if (list.isNotEmpty()) {
                 recyclerView.apply {
                     show()
-                    layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                    layoutManager =
+                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
                     val artistAdapter = ArtistAdapter(
                         activity,
                         list,
                         PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
-                        false,
                         null
                     )
                     adapter = artistAdapter
@@ -138,8 +137,10 @@ class HomeAdapter(
                 if (songs.isNotEmpty()) {
                     recyclerView.apply {
                         show()
-                        val songAdapter = SongAdapter(activity, songs, R.layout.item_album_card, null)
-                        layoutManager = GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
+                        val songAdapter =
+                            SongAdapter(activity, songs, R.layout.item_album_card, null)
+                        layoutManager =
+                            GridLayoutManager(activity, 1, GridLayoutManager.HORIZONTAL, false)
                         adapter = songAdapter
                     }
                     title.text = activity.getString(titleRes)

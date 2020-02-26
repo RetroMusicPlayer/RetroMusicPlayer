@@ -14,11 +14,19 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
-import code.name.monkey.retromusic.model.*
-import code.name.monkey.retromusic.mvp.*
+import code.name.monkey.retromusic.Result.Error
+import code.name.monkey.retromusic.Result.Success
+import code.name.monkey.retromusic.model.Playlist
+import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.mvp.BaseView
+import code.name.monkey.retromusic.mvp.Presenter
+import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -26,14 +34,15 @@ import kotlin.coroutines.CoroutineContext
  * Created by hemanths on 20/08/17.
  */
 interface PlaylistSongsView : BaseView {
-    fun songs(songs: ArrayList<Song>)
+
+    fun songs(songs: List<Song>)
 }
 
 interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
     fun loadPlaylistSongs(playlist: Playlist)
 
     class PlaylistSongsPresenterImpl @Inject constructor(
-            private val repository: Repository
+        private val repository: Repository
     ) : PresenterImpl<PlaylistSongsView>(), PlaylistSongsPresenter, CoroutineScope {
 
         private var job: Job = Job()
@@ -44,10 +53,8 @@ interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
         override fun loadPlaylistSongs(playlist: Playlist) {
             launch {
                 when (val songs = repository.getPlaylistSongs(playlist)) {
-                    is Result.Success -> withContext(Dispatchers.Main) {
-                        view?.songs(songs.data)
-                    }
-                    is Result.Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
+                    is Success -> withContext(Dispatchers.Main) { view?.songs(songs.data) }
+                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
                 }
             }
         }

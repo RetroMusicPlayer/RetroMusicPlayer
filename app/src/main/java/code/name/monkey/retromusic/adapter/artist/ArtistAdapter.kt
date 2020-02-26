@@ -24,25 +24,23 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.ArrayList
+import java.util.*
 
 class ArtistAdapter(
     val activity: AppCompatActivity,
-    var dataSet: ArrayList<Artist>,
+    var dataSet: List<Artist>,
     var itemLayoutRes: Int,
-    var usePalette: Boolean,
     cabHolder: CabHolder?
 ) : AbsMultiSelectAdapter<ArtistAdapter.ViewHolder, Artist>(
     activity, cabHolder, R.menu.menu_media_selection
 ), PopupTextProvider {
 
-    fun swapDataSet(dataSet: ArrayList<Artist>) {
-        this.dataSet = dataSet
-        notifyDataSetChanged()
+    init {
+        this.setHasStableIds(true)
     }
 
-    fun usePalette(usePalette: Boolean) {
-        this.usePalette = usePalette
+    fun swapDataSet(dataSet: List<Artist>) {
+        this.dataSet = dataSet
         notifyDataSetChanged()
     }
 
@@ -87,8 +85,10 @@ class ArtistAdapter(
         if (holder.image == null) {
             return
         }
-        ArtistGlideRequest.Builder.from(Glide.with(activity), artist).generatePalette(activity)
-            .build().into(object : RetroMusicColoredTarget(holder.image!!) {
+        ArtistGlideRequest.Builder.from(Glide.with(activity), artist)
+            .generatePalette(activity)
+            .build()
+            .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
                     setColors(defaultFooterColor, holder)

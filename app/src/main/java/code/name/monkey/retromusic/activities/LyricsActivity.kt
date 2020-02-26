@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.activities
 
+import android.R.attr
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.AsyncTask
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -390,8 +392,8 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
                 val context = activity!!
                 setCurrentPlayLineColor(ThemeStore.accentColor(context))
                 setIndicatorTextColor(ThemeStore.accentColor(context))
-                setCurrentIndicateLineTextColor(ThemeStore.textColorPrimary(context))
-                setNoLrcTextColor(ThemeStore.textColorPrimary(context))
+                setCurrentIndicateLineTextColor(resolveColor(activity, attr.textColorPrimary))
+                setNoLrcTextColor(resolveColor(activity, attr.textColorPrimary))
                 setOnPlayIndicatorLineListener(object : LrcView.OnPlayIndicatorLineListener {
                     override fun onPlay(time: Long, content: String) {
                         MusicPlayerRemote.seekTo(time.toInt())
@@ -417,7 +419,6 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener, ViewPage
         private fun loadLRCLyrics() {
             lyricsView.resetView("Empty")
             val song = MusicPlayerRemote.currentSong
-            println("${song.title} ${song.artistName}")
             if (LyricUtil.isLrcFileExist(song.title, song.artistName)) {
                 showLyricsLocal(LyricUtil.getLocalLyricFile(song.title, song.artistName))
             }

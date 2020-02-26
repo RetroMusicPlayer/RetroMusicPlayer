@@ -19,7 +19,6 @@ package code.name.monkey.retromusic.interfaces
  */
 
 interface MainActivityFragmentCallbacks {
-    fun handleBackPress(): Boolean
 
-    //void selectedFragment(Fragment fragment);
+    fun handleBackPress(): Boolean
 }
