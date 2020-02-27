@@ -1,6 +1,3 @@
-# This is a project that forked from RetroMusicPlayer. I just wanted to contribute to the development of this application.
-
-
 # Retro Music Player
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
