@@ -43,7 +43,6 @@ import java.util.List;
 import java.util.Objects;
 
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
@@ -587,9 +586,6 @@ public final class PreferenceUtil {
         return mPreferences.getInt(LAST_CHANGELOG_VERSION, -1);
     }
 
-    public final int getLastMusicChooser() {
-        return mPreferences.getInt(LAST_MUSIC_CHOOSER, OptionsSheetDialogFragment.LIBRARY);
-    }
 
     public void setLastMusicChooser(int value) {
         mPreferences.edit().putInt(LAST_MUSIC_CHOOSER, value).apply();

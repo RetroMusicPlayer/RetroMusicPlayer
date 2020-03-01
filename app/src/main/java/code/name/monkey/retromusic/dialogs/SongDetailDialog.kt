@@ -17,13 +17,13 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
 import android.text.Spanned
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.NonNull
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
@@ -53,7 +53,7 @@ class SongDetailDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context: Context = requireContext()
-        val song = arguments!!.getParcelable<Song>("song")
+        val song = requireArguments().getParcelable<Song>("song")
 
         val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
             .show {
@@ -180,7 +180,10 @@ class SongDetailDialog : DialogFragment() {
         }
 
         private fun makeTextWithTitle(context: Context, titleResId: Int, text: String?): Spanned {
-            return Html.fromHtml("<b>" + context.resources.getString(titleResId) + ": " + "</b>" + text)
+            return HtmlCompat.fromHtml(
+                "<b>" + context.resources.getString(titleResId) + ": " + "</b>" + text,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
         }
 
         private fun getFileSizeString(sizeInBytes: Long): String {

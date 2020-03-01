@@ -30,7 +30,7 @@ import com.afollestad.materialdialogs.list.listItems
 
 class SongShareDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val song: Song? = arguments?.getParcelable("song")
+        val song: Song? = requireArguments().getParcelable("song")
         val currentlyListening: String =
             getString(R.string.currently_listening_to_x_by_x, song?.title, song?.artistName)
 

@@ -121,7 +121,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_sleep_timer -> {
-                SleepTimerDialog().show(requireFragmentManager(), TAG)
+                SleepTimerDialog().show(parentFragmentManager, TAG)
                 return true
             }
             R.id.action_set_as_ringtone -> {

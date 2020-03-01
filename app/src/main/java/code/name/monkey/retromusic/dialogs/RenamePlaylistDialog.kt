@@ -47,7 +47,7 @@ class RenamePlaylistDialog : DialogFragment() {
                 negativeButton(android.R.string.cancel)
                 positiveButton(string.action_rename) {
                     if (playlistView.toString().trim { it <= ' ' } != "") {
-                        val playlistId = arguments!!.getLong(PLAYLIST_ID)
+                        val playlistId = requireArguments().getLong(PLAYLIST_ID)
                         PlaylistsUtil.renamePlaylist(
                             context,
                             playlistId,

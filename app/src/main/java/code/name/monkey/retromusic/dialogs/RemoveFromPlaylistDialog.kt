@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Html
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
@@ -37,14 +37,18 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         if (songs != null) {
             if (songs.size > 1) {
                 title = R.string.remove_songs_from_playlist_title
-                content = Html.fromHtml(getString(string.remove_x_songs_from_playlist, songs.size))
+                content = HtmlCompat.fromHtml(
+                    getString(string.remove_x_songs_from_playlist, songs.size),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             } else {
                 title = R.string.remove_song_from_playlist_title
-                content = Html.fromHtml(
+                content = HtmlCompat.fromHtml(
                     getString(
                         code.name.monkey.retromusic.R.string.remove_song_x_from_playlist,
                         songs[0].title
-                    )
+                    ),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
             }
         }
@@ -58,7 +62,10 @@ class RemoveFromPlaylistDialog : DialogFragment() {
                 positiveButton(R.string.remove_action) {
                     if (activity == null)
                         return@positiveButton
-                    PlaylistsUtil.removeFromPlaylist(activity!!, songs as MutableList<PlaylistSong>)
+                    PlaylistsUtil.removeFromPlaylist(
+                        requireContext(),
+                        songs as MutableList<PlaylistSong>
+                    )
                 }
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             }

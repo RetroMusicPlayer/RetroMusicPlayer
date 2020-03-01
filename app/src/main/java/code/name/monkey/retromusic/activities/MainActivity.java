@@ -57,7 +57,6 @@ import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
-import code.name.monkey.retromusic.dialogs.OptionsSheetDialogFragment;
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.AlbumsFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.ArtistsFragment;
@@ -763,19 +762,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                     .makeSceneTransitionAnimation(this, mToolbarContainer, getString(R.string.transition_toolbar));
             NavigationUtil.goToSearch(this, options);
         });
-
-        mToolbar.setNavigationOnClickListener(
-                v -> {
-                    Fragment fragment = getCurrentFragment();
-                    if (fragment instanceof FoldersFragment) {
-                        OptionsSheetDialogFragment.newInstance(OptionsSheetDialogFragment.FOLDER)
-                                .show(getSupportFragmentManager(), "Main_Menu");
-                    } else {
-                        OptionsSheetDialogFragment.newInstance(OptionsSheetDialogFragment.LIBRARY)
-                                .show(getSupportFragmentManager(), "Main_Menu");
-                    }
-                });
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

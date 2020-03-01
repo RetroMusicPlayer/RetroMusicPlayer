@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -207,13 +208,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
                 biographyText.visibility = View.VISIBLE
                 biographyTitle.visibility = View.VISIBLE
-                biography = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Html.fromHtml(bioContent, Html.FROM_HTML_MODE_LEGACY)
-                } else {
-                    Html.fromHtml(bioContent)
-                }
+                biography = HtmlCompat.fromHtml(bioContent,HtmlCompat.FROM_HTML_MODE_LEGACY)
                 biographyText.text = biography
-
                 if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
                     listeners.show()
                     listenersLabel.show()

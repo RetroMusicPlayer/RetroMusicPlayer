@@ -45,8 +45,4 @@ abstract class AbsMainActivityFragment : AbsMusicServiceFragment() {
             setStatusBarColor(view, ColorUtil.darkenColor(colorPrimary))
         }
     }
-
-    protected fun showMainMenu(option: Int) {
-        OptionsSheetDialogFragment.newInstance(option).show(childFragmentManager, "Main_Menu")
-    }
 }

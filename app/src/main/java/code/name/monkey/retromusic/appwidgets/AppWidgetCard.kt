@@ -150,7 +150,7 @@ class AppWidgetCard : BaseAppWidget() {
             cardRadius =
                 service.resources.getDimension(code.name.monkey.retromusic.R.dimen.app_widget_card_radius)
         }
-        val appContext = service.applicationContext
+
         // Load the album cover async and push the update on completion
         service.runOnUiThread {
             if (target != null) {

@@ -17,10 +17,10 @@ package code.name.monkey.retromusic.preferences
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.text.Html
 import android.util.AttributeSet
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
 import code.name.monkey.retromusic.R
@@ -91,11 +91,12 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                     cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                     title(code.name.monkey.retromusic.R.string.remove_from_blacklist)
                     message(
-                        text = Html.fromHtml(
+                        text = HtmlCompat.fromHtml(
                             getString(
                                 code.name.monkey.retromusic.R.string.do_you_want_to_remove_from_the_blacklist,
                                 text
-                            )
+                            ),
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
                         )
                     )
                     positiveButton(code.name.monkey.retromusic.R.string.remove_action) {
