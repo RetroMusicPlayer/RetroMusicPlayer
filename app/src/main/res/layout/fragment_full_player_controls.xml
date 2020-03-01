@@ -88,15 +88,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:haloColor="@color/md_white_semi_transparent"
+        app:haloRadius="0dp"
         app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toBottomOf="@id/text"
         app:thumbColor="@color/md_white_1000"
+        app:thumbRadius="@dimen/slider_thumb_radius"
         app:trackColorActive="@color/md_white_1000"
         app:trackColorInactive="@color/md_white_semi_transparent"
-        app:trackHeight="3dp"
+        app:trackHeight="@dimen/slider_track_height"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 

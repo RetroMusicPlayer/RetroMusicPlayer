@@ -43,7 +43,6 @@ class RingtoneManager(val context: Context) {
             return
         }
 
-
         try {
             val cursor = resolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -65,7 +64,6 @@ class RingtoneManager(val context: Context) {
     }
 
     companion object {
-        private const val TAG = "RingtoneManager"
 
         fun requiresDialog(context: Context): Boolean {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -89,6 +87,5 @@ class RingtoneManager(val context: Context) {
                 negativeButton(android.R.string.cancel)
             }
         }
-
     }
 }

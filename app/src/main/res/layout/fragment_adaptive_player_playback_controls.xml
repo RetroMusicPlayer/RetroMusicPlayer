@@ -29,16 +29,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:value="1.0f"
-        android:valueFrom="-0.1f"
-        android:valueTo="1.0f"
-        app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
-        app:trackHeight="3dp"
-        tools:valueFrom="0.0"
-        tools:valueTo="11.0" />
+        app:haloRadius="0dp"
+        app:thumbRadius="@dimen/slider_thumb_radius"
+        app:trackHeight="@dimen/slider_track_height" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"

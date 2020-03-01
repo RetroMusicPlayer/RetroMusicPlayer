@@ -62,7 +62,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
         songTotalTime.setTextColor(Color.WHITE)
         songCurrentProgress.setTextColor(Color.WHITE)
-
         title.isSelected = true
     }
 

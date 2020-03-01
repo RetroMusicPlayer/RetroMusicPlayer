@@ -37,7 +37,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/volumeDown"
         app:layout_constraintTop_toTopOf="@+id/volumeDown"
-        app:thumbRadius="8dp"
+        app:thumbRadius="@dimen/slider_thumb_radius"
         app:trackHeight="2dp" />
 
     <androidx.appcompat.widget.AppCompatImageView

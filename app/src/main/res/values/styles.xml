@@ -198,4 +198,11 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">78dp</item>
     </style>
+
+    <style name="RetroSliderTooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundColor">@color/md_white_1000</item>
+        <item name="background">@color/md_white_1000</item>
+        <item name="android:background">@color/md_white_1000</item>
+        <item name="android:textColor">@color/md_red_400</item>
+    </style>
 </resources>

@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.SliderReadTimeLabelFormatter
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
@@ -233,6 +234,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setUpProgressSlider() {
+        progressSlider.setLabelFormatter(SliderReadTimeLabelFormatter())
         progressSlider.addOnChangeListener { _, value, fromUser ->
             if (fromUser) {
                 MusicPlayerRemote.seekTo(value.toInt())

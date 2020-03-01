@@ -25,19 +25,15 @@
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
-    <androidx.appcompat.widget.AppCompatSeekBar
+    <com.google.android.material.slider.Slider
         android:id="@+id/progressSlider"
-        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
-        android:maxHeight="3dp"
-        android:progressDrawable="@drawable/color_progress_seek"
-        android:splitTrack="false"
-        android:thumb="@drawable/switch_thumb_material"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
+        app:thumbRadius="@dimen/slider_thumb_radius"
+        app:trackHeight="@dimen/slider_track_height"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 

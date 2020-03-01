@@ -35,8 +35,7 @@
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
-        app:thumbRadius="8dp"
-        app:trackHeight="3dp"
+        app:trackHeight="@dimen/slider_track_height"
         tools:ignore="RtlHardcoded,UnusedAttribute"
         tools:progress="20" />
 

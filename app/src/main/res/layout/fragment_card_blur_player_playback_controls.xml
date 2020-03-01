@@ -61,11 +61,13 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             app:haloColor="@color/md_white_semi_transparent"
+            app:haloRadius="0dp"
             app:labelBehavior="gone"
             app:thumbColor="@color/md_white_1000"
+            app:thumbRadius="@dimen/slider_thumb_radius"
             app:trackColorActive="@color/md_white_1000"
             app:trackColorInactive="@color/md_white_semi_transparent"
-            app:trackHeight="2dp"
+            app:trackHeight="@dimen/slider_track_height"
             tools:progress="20" />
 
         <com.google.android.material.textview.MaterialTextView

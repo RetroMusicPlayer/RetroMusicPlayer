@@ -41,9 +41,10 @@ object SongMenuHelper {
             R.id.action_set_as_ringtone -> {
                 if (RingtoneManager.requiresDialog(activity)) {
                     RingtoneManager.getDialog(activity)
+                } else {
+                    val ringtoneManager = RingtoneManager(activity)
+                    ringtoneManager.setRingtone(song)
                 }
-                val ringtoneManager = RingtoneManager(activity)
-                ringtoneManager.setRingtone(song)
                 return true
             }
             R.id.action_share -> {

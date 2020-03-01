@@ -50,4 +50,6 @@
     <dimen name="bottom_sheet_peek_2_height">32dp</dimen>
     <dimen name="list_pref_guideline_begin">56dp</dimen>
     <dimen name="pref_title_padding">72dp</dimen>
+    <dimen name="slider_thumb_radius">6dp</dimen>
+    <dimen name="slider_track_height">3dp</dimen>
 </resources>

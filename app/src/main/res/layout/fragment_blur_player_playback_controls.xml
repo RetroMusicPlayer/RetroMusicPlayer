@@ -43,22 +43,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="8"
         android:splitTrack="false"
-        android:value="1.0f"
-        android:valueFrom="0.0f"
-        android:valueTo="1.0f"
         app:haloColor="@color/md_white_semi_transparent"
+        app:haloRadius="0dp"
         app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
         app:layout_constraintTop_toTopOf="parent"
         app:thumbColor="@color/md_white_1000"
+        app:thumbRadius="@dimen/slider_thumb_radius"
         app:trackColorActive="@color/md_white_1000"
         app:trackColorInactive="@color/md_white_semi_transparent"
-        app:trackHeight="3dp"
-        tools:ignore="RtlHardcoded,UnusedAttribute"
-        tools:progress="20"
-        tools:valueFrom="0.0"
-        tools:valueTo="11.0" />
+        app:trackHeight="@dimen/slider_track_height" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"

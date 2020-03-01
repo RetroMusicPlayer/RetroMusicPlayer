@@ -67,6 +67,11 @@ android {
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
         }
+        nofont {
+            versionCode defaultConfig.versionCode + 10000
+            versionName defaultConfig.versionName + "_" + getDate()
+            dimension "default"
+        }
     }
 
     packagingOptions {

@@ -25,6 +25,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
@@ -97,6 +98,8 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
             false
         )
         volumeSeekBar.progressColor = ThemeStore.accentColor(requireContext())
+        volumeSeekBar.arcColor = ColorUtil
+            .withAlpha(ThemeStore.accentColor(requireContext()), 0.25f)
         setUpPlayPauseFab()
         setUpPrevNext()
         setUpPlayerToolbar()
@@ -116,7 +119,6 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
 
     private fun setUpPlayPauseFab() {
         TintHelper.setTintAuto(playPauseButton, ThemeStore.accentColor(requireContext()), false)
-        //TintHelper.setTintAuto(playPauseButton, ATHUtil.resolveColor(requireContext(), R.attr.colorSurface), true)
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
     }
 
