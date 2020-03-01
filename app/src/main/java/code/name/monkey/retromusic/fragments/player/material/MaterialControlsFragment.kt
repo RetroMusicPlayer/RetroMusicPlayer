@@ -210,10 +210,8 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        if (total <= 0) {
-            return
-        }
-        progressSlider.setRange(progress.toFloat(), total.toFloat())
+        progressSlider.valueTo = total.toFloat()
+        progressSlider.value = progress.toFloat()
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }

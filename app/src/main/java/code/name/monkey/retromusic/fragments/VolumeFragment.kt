@@ -18,11 +18,11 @@ import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import com.google.android.material.slider.Slider
-import com.google.android.material.slider.Slider.OnChangeListener
+
 import kotlinx.android.synthetic.main.fragment_volume.*
 
 class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
-    View.OnClickListener, OnChangeListener {
+    View.OnClickListener, Slider.OnChangeListener {
 
     private var audioVolumeObserver: AudioVolumeObserver? = null
 

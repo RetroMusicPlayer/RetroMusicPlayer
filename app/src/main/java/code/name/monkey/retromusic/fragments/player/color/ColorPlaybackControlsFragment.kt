@@ -11,7 +11,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.setRange
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -213,10 +212,8 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        if (total <= 0) {
-            return
-        }
-        progressSlider.setRange(progress.toFloat(), total.toFloat())
+        progressSlider.valueTo = total.toFloat()
+        progressSlider.value = progress.toFloat()
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }

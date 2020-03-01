@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:value="1.0f"
-        android:valueFrom="0.0f"
+        android:valueFrom="-0.1f"
         android:valueTo="1.0f"
         app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"

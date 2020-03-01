@@ -53,8 +53,8 @@ class MusicProgressViewUpdateHelper : Handler {
     private fun refreshProgressViews(): Int {
         val progressMillis = MusicPlayerRemote.songProgressMillis
         val totalMillis = MusicPlayerRemote.songDurationMillis
-        println("$progressMillis $totalMillis")
-        callback?.onUpdateProgressViews(progressMillis, totalMillis)
+        if (totalMillis > 0)
+            callback?.onUpdateProgressViews(progressMillis, totalMillis)
 
         if (!MusicPlayerRemote.isPlaying) {
             return intervalPaused
@@ -76,10 +76,9 @@ class MusicProgressViewUpdateHelper : Handler {
     }
 
     companion object {
-        private val CMD_REFRESH_PROGRESS_VIEWS = 1
-
-        private val MIN_INTERVAL = 20
-        private val UPDATE_INTERVAL_PLAYING = 1000
-        private val UPDATE_INTERVAL_PAUSED = 500
+        private const val CMD_REFRESH_PROGRESS_VIEWS = 1
+        private const val MIN_INTERVAL = 20
+        private const val UPDATE_INTERVAL_PLAYING = 1000
+        private const val UPDATE_INTERVAL_PAUSED = 500
     }
 }
