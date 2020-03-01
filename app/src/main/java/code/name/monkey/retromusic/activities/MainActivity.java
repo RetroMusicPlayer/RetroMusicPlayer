@@ -170,7 +170,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         registerReceiver(mBroadcastReceiver, mIntentFilter);
         PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
 
-        if (getIntent().hasExtra(EXPAND_PANEL)) {
+        if (getIntent().hasExtra(EXPAND_PANEL) && PreferenceUtil.getInstance(this).isExpandPanel()) {
             if (getIntent().getBooleanExtra(EXPAND_PANEL, false)) {
                 expandPanel();
                 getIntent().putExtra(EXPAND_PANEL, false);

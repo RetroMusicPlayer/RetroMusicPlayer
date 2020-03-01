@@ -73,7 +73,7 @@ class PlayingNotificationOreo : PlayingNotification() {
         val notificationLayoutBig = getCombinedRemoteViews(false, song)
 
         val action = Intent(service, MainActivity::class.java)
-        action.putExtra("expand", true)
+        action.putExtra(MainActivity.EXPAND_PANEL, true)
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
 
         val clickIntent = PendingIntent

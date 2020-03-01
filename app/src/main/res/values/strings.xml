@@ -842,4 +842,6 @@
     <string name="amount">Amount</string>
     <string name="note">Note(Optional)</string>
     <string name="start_payment">Start payment</string>
+    <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
+    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
 </resources>

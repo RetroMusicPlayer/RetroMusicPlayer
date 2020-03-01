@@ -216,6 +216,7 @@ public final class PreferenceUtil {
 
     private static final String FILTER_SONG = "filter_song";
     private static final String TAG = "PreferenceUtil";
+    private static final String EXPAND_NOW_PLAYING_PANEL = "expand_now_playing_panel";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
 
@@ -973,5 +974,9 @@ public final class PreferenceUtil {
     public void unregisterOnSharedPreferenceChangedListener(
             @NonNull OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {
         mPreferences.unregisterOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
+    }
+
+    public boolean isExpandPanel() {
+        return mPreferences.getBoolean(EXPAND_NOW_PLAYING_PANEL, false);
     }
 }

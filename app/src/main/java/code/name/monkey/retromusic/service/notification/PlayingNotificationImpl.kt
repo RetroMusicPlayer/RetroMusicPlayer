@@ -54,7 +54,7 @@ class PlayingNotificationImpl : PlayingNotification() {
             if (isFavorite) R.drawable.ic_favorite_white_24dp else R.drawable.ic_favorite_border_white_24dp
 
         val action = Intent(service, MainActivity::class.java)
-        action.putExtra("expand", true)
+        action.putExtra(MainActivity.EXPAND_PANEL, true)
         action.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         val clickIntent =
             PendingIntent.getActivity(service, 0, action, PendingIntent.FLAG_UPDATE_CURRENT)
