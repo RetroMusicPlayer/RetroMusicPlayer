@@ -128,7 +128,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!)
+            ThemeStore.accentColor(requireContext())
         }.ripAlpha()
 
         TintHelper.setTintAuto(

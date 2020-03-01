@@ -77,12 +77,12 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper?.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper?.stop()
     }
 
     override fun onServiceConnected() {

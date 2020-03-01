@@ -136,7 +136,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!).ripAlpha()
+            ThemeStore.accentColor(requireContext()).ripAlpha()
         }
         image.setColorFilter(colorFinal, PorterDuff.Mode.SRC_IN)
         TintHelper.setTintAuto(

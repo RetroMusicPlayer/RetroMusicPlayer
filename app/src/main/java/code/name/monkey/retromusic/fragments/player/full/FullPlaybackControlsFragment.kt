@@ -95,12 +95,13 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
     override fun setDark(color: Int) {
         lastPlaybackControlsColor = Color.WHITE
-        lastDisabledPlaybackControlsColor = ContextCompat.getColor(context!!, R.color.md_grey_500)
+        lastDisabledPlaybackControlsColor =
+            ContextCompat.getColor(requireContext(), R.color.md_grey_500)
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!).ripAlpha()
+            ThemeStore.accentColor(requireContext()).ripAlpha()
         }
         volumeFragment?.setTintableColor(colorFinal)
         text.setTextColor(colorFinal)
@@ -180,7 +181,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
     private fun setupMenu() {
         playerMenu.setOnClickListener {
-            val popupMenu = PopupMenu(context!!, it)
+            val popupMenu = PopupMenu(requireContext(), it)
             popupMenu.setOnMenuItemClickListener(this)
             popupMenu.inflate(R.menu.menu_player)
             popupMenu.show()
@@ -277,7 +278,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
     }
 
     private fun toggleFavorite(song: Song) {
-        MusicUtil.toggleFavorite(activity!!, song)
+        MusicUtil.toggleFavorite(requireContext(), song)
         if (song.id == MusicPlayerRemote.currentSong.id) {
             updateIsFavorite()
         }

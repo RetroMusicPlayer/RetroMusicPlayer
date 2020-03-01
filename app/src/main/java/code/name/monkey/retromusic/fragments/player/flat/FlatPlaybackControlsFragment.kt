@@ -94,7 +94,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color
         } else {
-            ThemeStore.accentColor(context!!).ripAlpha()
+            ThemeStore.accentColor(requireContext()).ripAlpha()
         }
 
         updateTextColors(colorFinal)

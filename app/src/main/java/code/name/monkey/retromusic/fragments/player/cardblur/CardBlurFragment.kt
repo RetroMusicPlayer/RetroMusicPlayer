@@ -98,7 +98,7 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setTitleTextColor(Color.WHITE)
             setSubtitleTextColor(Color.WHITE)
             ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
