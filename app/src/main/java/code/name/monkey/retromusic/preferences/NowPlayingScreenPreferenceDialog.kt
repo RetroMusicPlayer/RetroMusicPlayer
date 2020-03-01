@@ -82,7 +82,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = LayoutInflater.from(activity)
+        val view = LayoutInflater.from(requireContext())
             .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
             ?: throw  IllegalStateException("Dialog view must contain a ViewPager with id 'now_playing_screen_view_pager'")
@@ -101,7 +101,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
                     val result =
                         getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
-                    NavigationUtil.goToProVersion(activity!!)
+                    NavigationUtil.goToProVersion(requireContext())
                 } else {
                     PreferenceUtil.getInstance(requireContext()).nowPlayingScreen = nowPlayingScreen
                 }

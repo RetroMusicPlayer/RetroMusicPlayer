@@ -70,7 +70,7 @@ class PlayerFragment : AbsPlayerFragment() {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.colorControlNormal)
+        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {
@@ -80,7 +80,7 @@ class PlayerFragment : AbsPlayerFragment() {
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
-            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
 
@@ -131,7 +131,7 @@ class PlayerFragment : AbsPlayerFragment() {
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
-            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
     }

@@ -10,6 +10,7 @@ import com.google.android.material.textfield.TextInputLayout
 object MaterialUtil {
 
     @JvmOverloads
+    @JvmStatic
     fun setTint(
         button: MaterialButton, background: Boolean = true,
         color: Int = ThemeStore.accentColor(button.context)
@@ -37,6 +38,8 @@ object MaterialUtil {
         }
     }
 
+    @JvmOverloads
+    @JvmStatic
     fun setTint(textInputLayout: TextInputLayout, background: Boolean = true) {
         val context = textInputLayout.context
         val accentColor = ThemeStore.accentColor(context)
@@ -52,6 +55,8 @@ object MaterialUtil {
         }
     }
 
+    @JvmOverloads
+    @JvmStatic
     fun setTint(
         button: DialogActionButton,
         color: Int = ThemeStore.accentColor(button.context),

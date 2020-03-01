@@ -74,10 +74,10 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         @SuppressLint("InflateParams") val view =
-            LayoutInflater.from(activity)
+            LayoutInflater.from(requireContext())
                 .inflate(R.layout.preference_dialog_now_playing_screen, null)
         val viewPager = view.findViewById<ViewPager>(R.id.now_playing_screen_view_pager)
-        viewPager.adapter = AlbumCoverStyleAdapter(activity!!)
+        viewPager.adapter = AlbumCoverStyleAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).albumCoverStyle.ordinal

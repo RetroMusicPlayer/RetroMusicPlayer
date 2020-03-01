@@ -39,7 +39,7 @@ class FitFragment : AbsPlayerFragment() {
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(context, R.attr.colorControlNormal)
+        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {

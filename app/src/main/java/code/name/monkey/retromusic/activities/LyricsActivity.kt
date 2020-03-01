@@ -380,11 +380,15 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
 
         private fun setupLyricsView() {
             lyricsView.apply {
-                val context = activity!!
-                setCurrentPlayLineColor(ThemeStore.accentColor(context))
-                setIndicatorTextColor(ThemeStore.accentColor(context))
-                setCurrentIndicateLineTextColor(resolveColor(activity, attr.textColorPrimary))
-                setNoLrcTextColor(resolveColor(activity, attr.textColorPrimary))
+                setCurrentPlayLineColor(ThemeStore.accentColor(requireContext()))
+                setIndicatorTextColor(ThemeStore.accentColor(requireContext()))
+                setCurrentIndicateLineTextColor(
+                    resolveColor(
+                        requireContext(),
+                        attr.textColorPrimary
+                    )
+                )
+                setNoLrcTextColor(resolveColor(requireContext(), attr.textColorPrimary))
                 setOnPlayIndicatorLineListener(object : LrcView.OnPlayIndicatorLineListener {
                     override fun onPlay(time: Long, content: String) {
                         MusicPlayerRemote.seekTo(time.toInt())

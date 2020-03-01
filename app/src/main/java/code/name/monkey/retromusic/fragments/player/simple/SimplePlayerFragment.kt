@@ -96,7 +96,7 @@ class SimplePlayerFragment : AbsPlayerFragment() {
         playerToolbar.setOnMenuItemClickListener(this)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
-            ATHUtil.resolveColor(context, R.attr.colorControlNormal),
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
             requireActivity()
         )
     }

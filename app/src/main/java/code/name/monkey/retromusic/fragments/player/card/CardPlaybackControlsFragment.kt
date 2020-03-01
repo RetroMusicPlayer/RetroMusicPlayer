@@ -113,7 +113,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
         if (ColorUtil.isColorLight(
                 ATHUtil.resolveColor(
-                    context,
+                    requireContext(),
                     android.R.attr.windowBackground
                 )
             )

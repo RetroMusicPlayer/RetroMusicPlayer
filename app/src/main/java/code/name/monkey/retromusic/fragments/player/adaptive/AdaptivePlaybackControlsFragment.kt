@@ -106,7 +106,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
     override fun setDark(color: Int) {
         if (ColorUtil.isColorLight(
                 ATHUtil.resolveColor(
-                    context,
+                    requireContext(),
                     android.R.attr.windowBackground
                 )
             )

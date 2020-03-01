@@ -100,7 +100,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         return if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
-            ATHUtil.resolveColor(context, R.attr.colorControlNormal)
+            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
     override fun onColorChanged(color: Int) {
