@@ -215,9 +215,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
                     .setIcon(R.drawable.ic_mic_white_24dp)
                     .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menu.add(0, R.id.action_settings, 0, getString(R.string.action_settings))
-                    .setIcon(R.drawable.ic_settings_white_24dp)
-                    .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
         }
         if (isFolderPage()) {
             menu.add(0, R.id.action_scan, 0, R.string.scan_media)
@@ -249,6 +247,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             menu.removeItem(R.id.action_grid_size);
             menu.removeItem(R.id.action_sort_order);
         }
+        menu.add(0, R.id.action_settings, 0, getString(R.string.action_settings))
+                .setIcon(R.drawable.ic_settings_white_24dp)
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         return super.onCreateOptionsMenu(menu);
     }
 

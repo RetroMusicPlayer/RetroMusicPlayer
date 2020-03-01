@@ -19,7 +19,6 @@ import code.name.monkey.retromusic.extensions.appHandleColor
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.loaders.AlbumLoader
-import code.name.monkey.retromusic.rest.LastFMRestClient
 import code.name.monkey.retromusic.util.ImageUtil
 import code.name.monkey.retromusic.util.RetroColorUtil.generatePalette
 import code.name.monkey.retromusic.util.RetroColorUtil.getColor
@@ -82,7 +81,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
     private var albumArtBitmap: Bitmap? = null
     private var deleteAlbumArt: Boolean = false
-    private var lastFMRestClient: LastFMRestClient? = null
 
     private fun setupToolbar() {
         toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
@@ -93,7 +91,6 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         window.sharedElementsUseOverlay = true
-        lastFMRestClient = LastFMRestClient(this)
         imageContainer?.transitionName = "${getString(R.string.transition_album_art)}_$id"
         windowEnterTransition()
         setUpViews()

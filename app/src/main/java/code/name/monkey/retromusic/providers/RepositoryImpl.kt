@@ -23,7 +23,7 @@ import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import code.name.monkey.retromusic.rest.LastFMRestClient
+import code.name.monkey.retromusic.rest.LastFmClient
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import java.io.IOException
@@ -259,7 +259,7 @@ class RepositoryImpl @Inject constructor(private val context: Context) : Reposit
         cache: String?
     ): Result<LastFmArtist> = safeApiCall(
         call = {
-            Success(LastFMRestClient(context).apiService.artistInfo(name, lang, cache))
+            Success(LastFmClient.getApiService().artistInfo(name, lang, cache))
         },
         errorMessage = "Error"
 
@@ -270,7 +270,7 @@ class RepositoryImpl @Inject constructor(private val context: Context) : Reposit
         album: String
     ): Result<LastFmAlbum> = safeApiCall(
         call = {
-            Success(LastFMRestClient(context).apiService.albumInfo(artist, album))
+            Success(LastFmClient.getApiService().albumInfo(artist, album))
         },
         errorMessage = "Error"
     )

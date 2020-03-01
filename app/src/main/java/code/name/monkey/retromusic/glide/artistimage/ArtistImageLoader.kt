@@ -27,7 +27,9 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.ModelLoader
 import com.bumptech.glide.load.model.ModelLoaderFactory
 import com.bumptech.glide.load.model.stream.StreamModelLoader
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.io.InputStream
 import java.util.concurrent.TimeUnit
@@ -76,9 +78,15 @@ class ArtistImageFetcher(
             return try {
                 val deezerResponse = response.body();
                 val imageUrl = deezerResponse?.data?.get(0)?.let { getHighestQuality(it) }
-                val glideUrl = GlideUrl(imageUrl)
-                urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
-                urlFetcher?.loadData(priority)
+                // Fragile way to detect a place holder image returned from Deezer:
+                // ex: "https://e-cdns-images.dzcdn.net/images/artist//250x250-000000-80-0-0.jpg"
+                // the double slash implies no artist identified
+                val placeHolder = imageUrl?.contains("/images/artist//") ?: false
+                if (!placeHolder) {
+                    val glideUrl = GlideUrl(imageUrl)
+                    urlFetcher = urlLoader.getResourceFetcher(glideUrl, width, height)
+                    urlFetcher?.loadData(priority)
+                } else null
             } catch (e: Exception) {
                 null
             }
@@ -132,8 +140,15 @@ class Factory(
                 .connectTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.MILLISECONDS)
+                .addInterceptor(createLogInterceptor())
                 .build()
         )
+    }
+
+    private fun createLogInterceptor(): Interceptor {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        return interceptor
     }
 
     override fun build(
