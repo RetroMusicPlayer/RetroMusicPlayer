@@ -771,6 +771,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 mAppTitle.setVisibility(View.GONE);
                 setTitle(R.string.action_search);
             }
-        }, 1500);
+        }, 3000);
     }
 }
