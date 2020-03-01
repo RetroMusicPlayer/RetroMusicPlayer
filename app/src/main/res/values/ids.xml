@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="action_new_playlist" type="id" />
+    <item name="action_settings" type="id" />
+    <item name="action_search" type="id" />
     <item name="action_show_lyrics" type="id" />
     <item name="action_genre" type="id" />
     <item name="action_playing_queue" type="id" />

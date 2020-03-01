@@ -69,6 +69,10 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 SongShareDialog.create(song).show(childFragmentManager, "SHARE_SONG")
                 return true
             }
+            R.id.action_go_to_drive_mode -> {
+                NavigationUtil.gotoDriveMode(requireActivity())
+                return true
+            }
             R.id.action_delete_from_device -> {
                 DeleteSongsDialog.create(song).show(childFragmentManager, "DELETE_SONGS")
                 return true

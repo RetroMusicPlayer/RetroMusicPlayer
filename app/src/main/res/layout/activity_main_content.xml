@@ -47,8 +47,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/toolbar_height"
                         android:background="?attr/colorSurface"
-                        app:navigationIcon="@drawable/ic_menu_white_24dp"
                         app:popupTheme="?attr/toolbarPopupTheme"
+                        app:titleTextColor="?attr/colorControlNormal"
                         app:titleTextAppearance="@style/TextViewHeadline6"
                         tools:ignore="UnusedAttribute">
 
@@ -58,6 +58,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/app_name"
+                            android:textColor="?attr/colorControlNormal"
                             android:textAppearance="@style/TextViewHeadline6" />
                     </androidx.appcompat.widget.Toolbar>
 

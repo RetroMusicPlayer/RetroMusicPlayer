@@ -15,6 +15,11 @@
         android:title="@string/now_playing_queue"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/action_go_to_drive_mode"
+        android:icon="@drawable/ic_drive_eta_white_24dp"
+        android:orderInCategory="3"
+        android:title="@string/drive_mode" />
+    <item
         android:id="@+id/action_go_to_album"
         android:icon="@drawable/ic_album_white_24dp"
         android:orderInCategory="3"
