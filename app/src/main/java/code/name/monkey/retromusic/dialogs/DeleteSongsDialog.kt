@@ -18,7 +18,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Html
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
@@ -40,16 +40,22 @@ class DeleteSongsDialog : DialogFragment() {
     private var deleteSongsAsyncTask: DeleteSongsAsyncTask? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val songs: ArrayList<Song>? = arguments?.getParcelableArrayList("songs")
+        val songs: ArrayList<Song>? = requireArguments().getParcelableArrayList("songs")
         var title = 0
         var content: CharSequence = ""
         if (songs != null) {
             if (songs.size > 1) {
                 title = R.string.delete_songs_title
-                content = Html.fromHtml(getString(R.string.delete_x_songs, songs.size))
+                content = HtmlCompat.fromHtml(
+                    getString(R.string.delete_x_songs, songs.size),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             } else {
                 title = R.string.delete_song_title
-                content = Html.fromHtml(getString(R.string.delete_song_x, songs[0].title))
+                content = HtmlCompat.fromHtml(
+                    getString(R.string.delete_song_x, songs[0].title),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
             }
         }
 

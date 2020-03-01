@@ -30,7 +30,7 @@ import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 class RemoveFromPlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val songs = arguments!!.getParcelableArrayList<PlaylistSong>("songs")
+        val songs = requireArguments().getParcelableArrayList<PlaylistSong>("songs")
 
         var title = 0
         var content: CharSequence = ""

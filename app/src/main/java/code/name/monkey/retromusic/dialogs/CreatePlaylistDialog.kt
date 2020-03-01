@@ -53,7 +53,7 @@ class CreatePlaylistDialog : DialogFragment() {
                     if (activity == null) {
                         return@positiveButton
                     }
-                    val songs = arguments?.getParcelableArrayList<Song>("songs")
+                    val songs = requireArguments().getParcelableArrayList<Song>("songs")
                         ?: return@positiveButton
 
                     if (playlistView.text.toString().trim { it <= ' ' }.isNotEmpty()) {
@@ -61,7 +61,7 @@ class CreatePlaylistDialog : DialogFragment() {
                             requireContext(),
                             playlistView.text.toString()
                         )
-                        if (playlistId != -1 && activity != null) {
+                        if (playlistId != -1) {
                             PlaylistsUtil.addToPlaylist(requireContext(), songs, playlistId, true)
                         }
                     }
@@ -74,7 +74,7 @@ class CreatePlaylistDialog : DialogFragment() {
 
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
-        val playlistId = arguments!!.getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
+        val playlistId = requireArguments().getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
         playlistView.appHandleColor()
             .setText(
                 PlaylistsUtil.getNameForPlaylist(requireContext(), playlistId),

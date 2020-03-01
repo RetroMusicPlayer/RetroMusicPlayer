@@ -43,7 +43,8 @@ class AddToPlaylistDialog : DialogFragment() {
             title(R.string.add_playlist_title)
             cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             listItems(items = playlistNames) { dialog, index, _ ->
-                val songs = arguments!!.getParcelableArrayList<Song>("songs") ?: return@listItems
+                val songs =
+                    requireArguments().getParcelableArrayList<Song>("songs") ?: return@listItems
                 if (index == 0) {
                     dialog.dismiss()
                     activity?.supportFragmentManager?.let {

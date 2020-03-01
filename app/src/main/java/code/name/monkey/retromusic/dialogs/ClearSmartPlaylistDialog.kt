@@ -16,7 +16,7 @@ package code.name.monkey.retromusic.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Html
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
@@ -30,10 +30,13 @@ class ClearSmartPlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
 
-        val playlist = arguments!!.getParcelable<AbsSmartPlaylist>("playlist")
+        val playlist = requireArguments().getParcelable<AbsSmartPlaylist>("playlist")
         val title = R.string.clear_playlist_title
 
-        val content = Html.fromHtml(getString(R.string.clear_playlist_x, playlist!!.name))
+        val content = HtmlCompat.fromHtml(
+            getString(R.string.clear_playlist_x, playlist!!.name),
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
 
         return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
             title(title)
@@ -43,7 +46,7 @@ class ClearSmartPlaylistDialog : DialogFragment() {
                 if (activity == null) {
                     return@positiveButton
                 }
-                playlist.clear(activity!!)
+                playlist.clear(requireActivity())
             }
             negativeButton { (android.R.string.cancel) }
         }
