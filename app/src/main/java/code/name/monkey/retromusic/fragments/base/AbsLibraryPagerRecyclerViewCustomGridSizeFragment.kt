@@ -39,8 +39,8 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
 
     private val maxGridSizeForList: Int
         get() = if (isLandscape) {
-            activity!!.resources.getInteger(R.integer.default_list_columns_land)
-        } else activity!!.resources.getInteger(R.integer.default_list_columns)
+            resources.getInteger(R.integer.default_list_columns_land)
+        } else resources.getInteger(R.integer.default_list_columns)
 
     fun getGridSize(): Int {
         if (gridSize == 0) {

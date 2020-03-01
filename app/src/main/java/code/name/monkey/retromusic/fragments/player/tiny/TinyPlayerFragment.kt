@@ -152,7 +152,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         super.onViewCreated(view, savedInstanceState)
         title.isSelected = true
         progressBar.setOnClickListener(PlayPauseButtonOnClickHandler())
-        progressBar.setOnTouchListener(MiniPlayerFragment.FlingPlayBackController(activity!!))
+        progressBar.setOnTouchListener(MiniPlayerFragment.FlingPlayBackController(requireContext()))
 
         setUpPlayerToolbar()
         setUpSubFragments()
@@ -169,7 +169,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
-            setNavigationOnClickListener { activity!!.onBackPressed() }
+            setNavigationOnClickListener { requireActivity().onBackPressed() }
             setOnMenuItemClickListener(this@TinyPlayerFragment)
         }
     }

@@ -37,7 +37,7 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
         val carouselEffect: TwoStatePreference = findPreference("carousel_effect")!!
         carouselEffect.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean && !App.isProVersion()) {
-                showProToastAndNavigate(activity!!.getString(R.string.pref_title_toggle_carousel_effect))
+                showProToastAndNavigate(getString(R.string.pref_title_toggle_carousel_effect))
                 return@setOnPreferenceChangeListener false
             }
             return@setOnPreferenceChangeListener true
