@@ -396,11 +396,9 @@ public final class PreferenceUtil {
                 .getInt(ALBUM_GRID_SIZE_LAND, context.getResources().getInteger(R.integer.default_grid_columns_land));
     }
 
+
     @LayoutRes
     public int getAlbumGridStyle() {
-        if (mPreferences.contains(ALBUM_GRID_STYLE)) {
-            Log.i(TAG, "getAlbumGridStyle: " + mPreferences.getInt(ALBUM_GRID_STYLE, -10));
-        }
         return mPreferences.getInt(ALBUM_GRID_STYLE, R.layout.item_grid);
     }
 

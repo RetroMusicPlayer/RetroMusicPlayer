@@ -229,18 +229,14 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         if (fragment instanceof AbsLibraryPagerRecyclerViewCustomGridSizeFragment) {
             AbsLibraryPagerRecyclerViewCustomGridSizeFragment currentFragment
                     = (AbsLibraryPagerRecyclerViewCustomGridSizeFragment) fragment;
-            if (currentFragment instanceof SongsFragment) {
-                menu.removeItem(R.id.action_grid_size);
-                menu.removeItem(R.id.action_layout_type);
-            } else {
-                MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
-                if (RetroUtil.isLandscape()) {
-                    gridSizeItem.setTitle(R.string.action_grid_size_land);
-                }
-                setUpGridSizeMenu(currentFragment, gridSizeItem.getSubMenu());
-                MenuItem layoutItem = menu.findItem(R.id.action_layout_type);
-                setupLayoutMenu(currentFragment, layoutItem.getSubMenu());
+
+            MenuItem gridSizeItem = menu.findItem(R.id.action_grid_size);
+            if (RetroUtil.isLandscape()) {
+                gridSizeItem.setTitle(R.string.action_grid_size_land);
             }
+            setUpGridSizeMenu(currentFragment, gridSizeItem.getSubMenu());
+            MenuItem layoutItem = menu.findItem(R.id.action_layout_type);
+            setupLayoutMenu(currentFragment, layoutItem.getSubMenu());
             setUpSortOrderMenu(currentFragment, menu.findItem(R.id.action_sort_order).getSubMenu());
         } else {
             menu.removeItem(R.id.action_layout_type);

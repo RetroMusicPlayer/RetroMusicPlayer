@@ -25,10 +25,11 @@
 
     <code.name.monkey.retromusic.views.ColorIconsImageView
         android:id="@+id/icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/adaptive_icon_size"
+        android:layout_height="@dimen/adaptive_icon_size"
+        android:padding="@dimen/adaptive_icon_padding"
+        android:layout_gravity="center"
         android:layout_marginStart="8dp"
-        android:padding="10dp"
         app:iconBackgroundColor="@color/md_blue_A400"
         app:srcCompat="@drawable/ic_theme_palette_white_24dp" />
 

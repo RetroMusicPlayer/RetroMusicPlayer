@@ -40,6 +40,5 @@ app/normal/release/
 /models/
 
 app/font/
-app/src/debug/
-app/src/font/
+app/src/debug/ 
 /app/nofont/

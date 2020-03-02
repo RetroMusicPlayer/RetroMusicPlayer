@@ -20,8 +20,8 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.getAdaptiveIconDrawable
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 
@@ -44,15 +44,16 @@ class ColorIconsImageView @JvmOverloads constructor(
     }
 
     fun setIconBackgroundColor(color: Int) {
-        setBackgroundResource(R.drawable.color_circle_gradient)
+        background = getAdaptiveIconDrawable(context)
         if (ATHUtil.isWindowBackgroundDark(context) && PreferenceUtil.getInstance(context).desaturatedColor()) {
             val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)
             backgroundTintList = ColorStateList.valueOf(desaturatedColor)
             imageTintList =
                 ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorSurface))
         } else {
-            backgroundTintList = ColorStateList.valueOf(ColorUtil.adjustAlpha(color, 0.22f))
-            imageTintList = ColorStateList.valueOf(ColorUtil.withAlpha(color, 0.75f))
+            backgroundTintList = ColorStateList.valueOf(color)
+            imageTintList =
+                ColorStateList.valueOf(ATHUtil.resolveColor(context, R.attr.colorSurface))
         }
         requestLayout()
         invalidate()

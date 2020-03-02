@@ -17,10 +17,16 @@ package code.name.monkey.retromusic.extensions
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.util.DensityUtil
 
 fun Context.scaledDrawableResources(@DrawableRes id: Int, @DimenRes width: Int, @DimenRes height: Int): Drawable {
     val w = resources.getDimension(width).toInt()
@@ -34,3 +40,20 @@ fun Context.scaledDrawable(@DrawableRes id: Int, width: Int, height: Int): Drawa
     return BitmapDrawable(resources, bmpScaled)
 }
 
+fun Drawable.getBitmapDrawable(): Bitmap {
+    val bmp = Bitmap.createBitmap(bounds.width(), bounds.height(), Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bmp)
+    draw(canvas)
+    return bmp
+}
+
+fun getAdaptiveIconDrawable(context: Context): Drawable {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        AdaptiveIconDrawable(
+            ContextCompat.getDrawable(context, R.drawable.ic_launcher_background),
+            ContextCompat.getDrawable(context, R.drawable.ic_launcher_background)
+        )
+    } else {
+        ContextCompat.getDrawable(context, R.drawable.color_circle_gradient)!!
+    }
+}

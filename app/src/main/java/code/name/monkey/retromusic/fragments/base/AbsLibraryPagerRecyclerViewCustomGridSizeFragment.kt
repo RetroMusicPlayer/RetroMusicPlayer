@@ -29,7 +29,6 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         } else R.layout.item_list
     }
 
-    protected abstract fun setLayoutRes(layoutRes: Int)
 
     fun setAndSaveLayoutRes(layoutRes: Int) {
         setLayoutRes(layoutRes)
@@ -53,7 +52,6 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         return gridSize
     }
 
-    protected abstract fun setGridSize(gridSize: Int)
 
     fun getSortOrder(): String? {
         if (sortOrder == null) {
@@ -62,7 +60,6 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         return sortOrder
     }
 
-    protected abstract fun setSortOrder(sortOrder: String)
 
     fun setAndSaveSortOrder(sortOrder: String) {
         this.sortOrder = sortOrder
@@ -78,9 +75,9 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         } else {
             saveGridSize(gridSize)
         }
+        invalidateLayoutManager()
         // only recreate the adapter and layout manager if the layout currentLayoutRes has changed
         if (oldLayoutRes != itemLayoutRes()) {
-            invalidateLayoutManager()
             invalidateAdapter()
         } else {
             setGridSize(gridSize)
@@ -106,6 +103,12 @@ abstract class AbsLibraryPagerRecyclerViewCustomGridSizeFragment<A : RecyclerVie
         }
         recyclerView.setPadding(padding, padding, padding, padding)
     }
+
+    protected abstract fun setGridSize(gridSize: Int)
+
+    protected abstract fun setSortOrder(sortOrder: String)
+
+    protected abstract fun setLayoutRes(layoutRes: Int)
 
     protected abstract fun loadSortOrder(): String
 
