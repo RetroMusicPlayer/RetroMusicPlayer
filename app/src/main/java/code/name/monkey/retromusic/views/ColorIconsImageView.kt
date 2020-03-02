@@ -57,5 +57,4 @@ class ColorIconsImageView @JvmOverloads constructor(
         requestLayout()
         invalidate()
     }
-
 }

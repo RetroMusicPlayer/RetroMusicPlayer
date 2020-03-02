@@ -11,8 +11,5 @@
         <attr name="url_link" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="OptionMenuItemView">
-        <attr name="optionTitle" format="reference" />
-        <attr name="optionIcon" format="reference" />
-    </declare-styleable>
+
 </resources>
