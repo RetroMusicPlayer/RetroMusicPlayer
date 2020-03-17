@@ -127,7 +127,7 @@ public class AlbumGlideRequest {
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }
