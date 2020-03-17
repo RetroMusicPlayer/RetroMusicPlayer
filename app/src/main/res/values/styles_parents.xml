@@ -41,6 +41,7 @@
 
         <!--Manual setting colors-->
         <item name="colorSurface">@color/darkColorSurface</item>
+        <item name="android:windowBackground">@color/window_color_dark</item>
 
     </style>
 

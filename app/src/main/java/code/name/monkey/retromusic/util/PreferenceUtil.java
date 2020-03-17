@@ -57,6 +57,7 @@ import code.name.monkey.retromusic.transform.HorizontalFlipTransformation;
 import code.name.monkey.retromusic.transform.NormalPageTransformer;
 import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
+import code.name.monkey.retromusic.util.theme.ThemeMode;
 
 public final class PreferenceUtil {
 
@@ -527,11 +528,20 @@ public final class PreferenceUtil {
     }
 
     @NonNull
-    public String getGeneralThemeValue() {
+    public ThemeMode getGeneralThemeValue() {
         if (isBlackMode()) {
-            return "black";
+            return ThemeMode.BLACK;
         } else {
-            return mPreferences.getString(GENERAL_THEME, "dark");
+            String themeMode = mPreferences.getString(GENERAL_THEME, "dark");
+            switch (themeMode) {
+                case "light":
+                    return ThemeMode.LIGHT;
+                case "dark":
+                    return ThemeMode.DARK;
+                case "auto":
+                default:
+                    return ThemeMode.AUTO;
+            }
         }
     }
 
