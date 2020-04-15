@@ -180,23 +180,23 @@ open class AlbumAdapter(
         override fun onClick(v: View?) {
             super.onClick(v)
             if (isInQuickSelectMode) {
-                toggleChecked(adapterPosition)
+                toggleChecked(layoutPosition)
             } else {
                 val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
                     activity,
                     imageContainerCard ?: image,
-                    "${activity.getString(R.string.transition_album_art)}_${dataSet[adapterPosition].id}"
+                    "${activity.getString(R.string.transition_album_art)}_${dataSet[layoutPosition].id}"
                 )
                 NavigationUtil.goToAlbumOptions(
                     activity,
-                    dataSet[adapterPosition].id,
+                    dataSet[layoutPosition].id,
                     activityOptions
                 )
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            toggleChecked(adapterPosition)
+            toggleChecked(layoutPosition)
             return super.onLongClick(v)
         }
     }

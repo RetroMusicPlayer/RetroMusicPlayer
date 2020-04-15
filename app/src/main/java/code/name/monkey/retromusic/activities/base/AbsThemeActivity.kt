@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.ATH
 import code.name.monkey.appthemehelper.ThemeStore
@@ -19,19 +20,24 @@ import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import code.name.monkey.retromusic.util.ThemeManager
+import code.name.monkey.retromusic.util.theme.ThemeManager
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
     private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(ThemeManager.getThemeResValue(this))
+        updateTheme()
         hideStatusBar()
         super.onCreate(savedInstanceState)
         setImmersiveFullscreen()
         registerSystemUiVisibility()
         toggleScreenOn()
+    }
+
+    private fun updateTheme() {
+        setTheme(ThemeManager.getThemeResValue(this))
+        setDefaultNightMode(ThemeManager.getNightMode(this))
     }
 
     private fun toggleScreenOn() {

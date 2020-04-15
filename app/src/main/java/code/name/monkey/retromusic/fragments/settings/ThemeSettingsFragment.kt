@@ -16,6 +16,7 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.ACCENT_COLORS
@@ -53,7 +54,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
-                requireActivity().recreate()
+                Handler().postDelayed({
+                    requireActivity().recreate()
+                }, 400)
                 true
             }
         }
@@ -75,7 +78,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-                    requireActivity().recreate()
+                    Handler().postDelayed({
+                        requireActivity().recreate()
+                    }, 400)
                 }
             }
             return@setOnPreferenceClickListener true
@@ -91,7 +96,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }
-            requireActivity().recreate()
+            Handler().postDelayed({
+                requireActivity().recreate()
+            }, 400)
             true
         }
 
@@ -102,7 +109,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated)
                 .apply()
             PreferenceUtil.getInstance(requireContext()).setDesaturatedColor(desaturated)
-            requireActivity().recreate()
+            Handler().postDelayed({
+                requireActivity().recreate()
+            }, 400)
             true
         }
 

@@ -47,7 +47,7 @@ public class ArtistGlideRequest {
     private static final int DEFAULT_ERROR_IMAGE = R.drawable.default_artist_art;
 
     @NonNull
-    public static Key createSignature(@NonNull Artist artist) {
+    private static Key createSignature(@NonNull Artist artist) {
         return ArtistSignatureUtil.getInstance(App.Companion.getContext()).getArtistSignature(artist.getName());
     }
 
@@ -88,7 +88,7 @@ public class ArtistGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, artist, noCustomImage, forceDownload)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
@@ -114,7 +114,7 @@ public class ArtistGlideRequest {
 
         private final Builder builder;
 
-        public BitmapBuilder(Builder builder) {
+        BitmapBuilder(Builder builder) {
             this.builder = builder;
         }
 
@@ -124,7 +124,6 @@ public class ArtistGlideRequest {
                     builder.forceDownload)
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
@@ -138,7 +137,7 @@ public class ArtistGlideRequest {
 
         private final Builder builder;
 
-        public PaletteBuilder(Builder builder, Context context) {
+        PaletteBuilder(Builder builder, Context context) {
             this.builder = builder;
             this.context = context;
         }
@@ -151,7 +150,6 @@ public class ArtistGlideRequest {
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .placeholder(DEFAULT_ERROR_IMAGE)
-                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
