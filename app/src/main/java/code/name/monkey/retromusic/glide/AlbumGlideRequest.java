@@ -2,8 +2,6 @@ package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 
 import androidx.annotation.NonNull;
 
@@ -86,7 +84,8 @@ public class AlbumGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, song, ignoreMediaStore)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(new ColorDrawable(Color.RED))
+                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(song));
         }
@@ -95,7 +94,7 @@ public class AlbumGlideRequest {
     public static class BitmapBuilder {
         private final Builder builder;
 
-        public BitmapBuilder(Builder builder) {
+        BitmapBuilder(Builder builder) {
             this.builder = builder;
         }
 
@@ -104,18 +103,18 @@ public class AlbumGlideRequest {
             return createBaseRequest(builder.requestManager, builder.song, builder.ignoreMediaStore)
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(new ColorDrawable(Color.GREEN))
+                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }
     }
 
     public static class PaletteBuilder {
-        private static final String TAG = "PaletteBuilder";
-        final Context context;
+        private  final Context context;
         private final Builder builder;
 
-        public PaletteBuilder(Builder builder, Context context) {
+        PaletteBuilder(Builder builder, Context context) {
             this.builder = builder;
             this.context = context;
         }
@@ -127,6 +126,7 @@ public class AlbumGlideRequest {
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
+                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));

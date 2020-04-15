@@ -30,6 +30,7 @@ class SongsFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.musicComponent.inject(this)
+        retainInstance = true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +39,6 @@ class SongsFragment :
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        println("createLayoutManager: ${getGridSize()}")
         return GridLayoutManager(requireActivity(), getGridSize()).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {

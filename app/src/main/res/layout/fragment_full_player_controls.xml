@@ -13,57 +13,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/text"
+        android:padding="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/titleContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/titleContainer"
         app:srcCompat="@drawable/ic_more_vert_white_24dp" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="315dp"
+    <LinearLayout
+        android:id="@+id/titleContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ellipsize="marquee"
-        android:gravity="center"
-        android:marqueeRepeatLimit="marquee_forever"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:singleLine="true"
-        android:textAppearance="@style/TextViewHeadline6"
-        android:textColor="@color/md_white_1000"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/text"
-        app:layout_constraintEnd_toStartOf="@+id/playerMenu"
-        app:layout_constraintStart_toEndOf="@+id/songFavourite"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/lorem/random" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="315dp"
-        android:layout_height="wrap_content"
-        android:alpha="0.75"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:padding="8dp"
-        android:textColor="@color/md_white_1000"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/progressSlider"
         app:layout_constraintEnd_toStartOf="@+id/playerMenu"
         app:layout_constraintStart_toEndOf="@+id/songFavourite"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:layout_editor_absoluteX="48dp"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textColor="@color/md_white_1000"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.75"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingTop="6dp"
+            android:textColor="@color/md_white_1000"
+            app:layout_constraintBottom_toTopOf="@+id/progressSlider"
+            app:layout_constraintEnd_toStartOf="@+id/playerMenu"
+            app:layout_constraintStart_toEndOf="@+id/songFavourite"
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            tools:layout_editor_absoluteX="48dp"
+            tools:text="@tools:sample/lorem/random" />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/songFavourite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/text"
+        android:padding="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/titleContainer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title"
+        app:layout_constraintTop_toTopOf="@+id/titleContainer"
         app:srcCompat="@drawable/ic_favorite_border_white_24dp" />
 
 
@@ -92,7 +98,7 @@
         app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
-        app:layout_constraintTop_toBottomOf="@id/text"
+        app:layout_constraintTop_toBottomOf="@id/titleContainer"
         app:thumbColor="@color/md_white_1000"
         app:thumbRadius="@dimen/slider_thumb_radius"
         app:trackColorActive="@color/md_white_1000"
