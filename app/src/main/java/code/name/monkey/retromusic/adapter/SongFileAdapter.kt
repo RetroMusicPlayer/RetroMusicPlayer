@@ -97,10 +97,14 @@ class SongFileAdapter(
             val error = RetroUtil.getTintedVectorDrawable(
                 activity, R.drawable.ic_file_music_white_24dp, iconColor
             )
-            Glide.with(activity).load(AudioFileCover(file.path))
-                .diskCacheStrategy(DiskCacheStrategy.NONE).error(error).placeholder(error)
+            Glide.with(activity)
+                .load(AudioFileCover(file.path))
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .error(error)
+                .placeholder(error)
                 .animate(android.R.anim.fade_in)
-                .signature(MediaStoreSignature("", file.lastModified(), 0)).into(holder.image)
+                .signature(MediaStoreSignature("", file.lastModified(), 0))
+                .into(holder.image)
         }
     }
 
