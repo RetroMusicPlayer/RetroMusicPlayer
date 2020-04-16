@@ -55,19 +55,19 @@ abstract class AbsOffsetSongAdapter(
 
         override // could also return null, just to be safe return empty song
         val song: Song
-            get() = if (itemViewType == OFFSET_ITEM) Song.emptySong else dataSet[adapterPosition - 1]
+            get() = if (itemViewType == OFFSET_ITEM) Song.emptySong else dataSet[layoutPosition - 1]
 
         override fun onClick(v: View?) {
             if (isInQuickSelectMode && itemViewType != OFFSET_ITEM) {
-                toggleChecked(adapterPosition)
+                toggleChecked(layoutPosition)
             } else {
-                MusicPlayerRemote.openQueue(dataSet, adapterPosition - 1, true)
+                MusicPlayerRemote.openQueue(dataSet, layoutPosition - 1, true)
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
             if (itemViewType == OFFSET_ITEM) return false
-            toggleChecked(adapterPosition)
+            toggleChecked(layoutPosition)
             return true
         }
     }

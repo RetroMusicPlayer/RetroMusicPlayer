@@ -40,14 +40,14 @@ class PlaylistsFragment :
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(activity, 2)
+        return GridLayoutManager(requireContext(), 1)
     }
 
     override fun createAdapter(): PlaylistAdapter {
         return PlaylistAdapter(
             mainActivity,
             ArrayList(),
-            R.layout.item_card,
+            R.layout.item_list,
             mainActivity
         )
     }

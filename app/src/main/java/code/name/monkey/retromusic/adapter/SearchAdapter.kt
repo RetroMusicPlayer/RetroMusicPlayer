@@ -113,7 +113,7 @@ class SearchAdapter(
                 menu?.visibility = View.VISIBLE
                 menu?.setOnClickListener(object : SongMenuHelper.OnClickSongMenu(activity) {
                     override val song: Song
-                        get() = dataSet!![adapterPosition] as Song
+                        get() = dataSet!![layoutPosition] as Song
                 })
             } else {
                 menu?.visibility = View.GONE
@@ -130,7 +130,7 @@ class SearchAdapter(
         }
 
         override fun onClick(v: View?) {
-            val item = dataSet!![adapterPosition]
+            val item = dataSet!![layoutPosition]
             when (itemViewType) {
                 ALBUM -> {
                     val options = ActivityOptions.makeSceneTransitionAnimation(
