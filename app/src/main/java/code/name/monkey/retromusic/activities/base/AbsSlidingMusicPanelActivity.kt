@@ -146,7 +146,6 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         // necessary to make the views below clickable
         miniPlayerFragment?.view?.visibility = if (alpha == 0f) View.GONE else View.VISIBLE
 
-        bottomNavigationView.translationY = progress * 500
         //bottomNavigationView.alpha = alpha
     }
 
