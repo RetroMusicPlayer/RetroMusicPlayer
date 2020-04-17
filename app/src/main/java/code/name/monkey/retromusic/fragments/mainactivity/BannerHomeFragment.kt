@@ -41,6 +41,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import dev.olog.scrollhelper.layoutmanagers.OverScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
@@ -141,7 +142,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
 
         recyclerView.apply {
-            layoutManager = LinearLayoutManager(mainActivity)
+            layoutManager = OverScrollLinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
         homePresenter.attachView(this)
