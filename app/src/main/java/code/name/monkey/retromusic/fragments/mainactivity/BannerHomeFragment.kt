@@ -20,6 +20,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
@@ -44,6 +45,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 import javax.inject.Inject
@@ -119,7 +122,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         }
 
         actionShuffle.setOnClickListener {
-            MusicPlayerRemote.openAndShuffleQueue(SongLoader.getAllSongs(requireActivity()), true)
+            lifecycleScope.launch {
+                val songs = async { SongLoader.getAllSongs(requireContext()) }
+                MusicPlayerRemote.openAndShuffleQueue(songs.await(), true)
+            }
         }
 
         history.setOnClickListener {
