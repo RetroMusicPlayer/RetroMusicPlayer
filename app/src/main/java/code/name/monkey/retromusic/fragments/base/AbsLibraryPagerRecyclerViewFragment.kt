@@ -8,13 +8,17 @@ import androidx.annotation.NonNull
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.ThemedFastScroller.create
+import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_main_activity_recycler_view.*
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 
 abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, LM : RecyclerView.LayoutManager> :
-    AbsLibraryPagerFragment() {
+    AbsLibraryPagerFragment(), AppBarLayout.OnOffsetChangedListener {
 
     protected var adapter: A? = null
     protected var layoutManager: LM? = null
@@ -27,6 +31,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainActivity.addOnAppBarOffsetChangedListener(this)
         initLayoutManager()
         initAdapter()
         setUpRecyclerView()
@@ -36,6 +41,13 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
         val fastScroller = create(recyclerView)
+        recyclerView.setOnApplyWindowInsetsListener(
+            ScrollingViewOnApplyWindowInsetsListener(
+                recyclerView,
+                fastScroller
+            )
+        )
+        checkForPadding()
     }
 
     protected open fun createFastScroller(recyclerView: RecyclerView): FastScroller {
@@ -48,6 +60,7 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
             override fun onChanged() {
                 super.onChanged()
                 checkIsEmpty()
+                checkForPadding()
             }
         })
     }
@@ -65,6 +78,18 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         empty.visibility = if (adapter!!.itemCount == 0) View.VISIBLE else View.GONE
     }
 
+    private fun checkForPadding() {
+        val itemCount: Int = adapter?.itemCount ?: 0
+        val params = container.layoutParams as ViewGroup.MarginLayoutParams
+        if (itemCount > 0 && MusicPlayerRemote.playingQueue.isNotEmpty()) {
+            val height = DensityUtil.dip2px(requireContext(), 104f)
+            params.bottomMargin = height
+        } else {
+            val height = DensityUtil.dip2px(requireContext(), 52f)
+            params.bottomMargin = height
+        }
+    }
+
     private fun initLayoutManager() {
         layoutManager = createLayoutManager()
     }
@@ -73,6 +98,25 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
 
     @NonNull
     protected abstract fun createAdapter(): A
+
+    override fun onOffsetChanged(p0: AppBarLayout?, i: Int) {
+        container.setPadding(
+            container.paddingLeft,
+            container.paddingTop,
+            container.paddingRight,
+            mainActivity.totalAppBarScrollingRange + i
+        )
+    }
+
+    override fun onQueueChanged() {
+        super.onQueueChanged()
+        checkForPadding()
+    }
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        checkForPadding()
+    }
 
     protected fun invalidateLayoutManager() {
         initLayoutManager()
@@ -83,6 +127,11 @@ abstract class AbsLibraryPagerRecyclerViewFragment<A : RecyclerView.Adapter<*>, 
         initAdapter()
         checkIsEmpty()
         recyclerView.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mainActivity.removeOnAppBarOffsetChangedListener(this)
     }
 
     fun recyclerView(): RecyclerView {

@@ -184,8 +184,6 @@ dependencies {
 
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
-    implementation 'com.github.ologe:scroll-helper:2.0.0-beta01'
-
     implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'

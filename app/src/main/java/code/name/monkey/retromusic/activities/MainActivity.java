@@ -55,7 +55,6 @@ import java.util.List;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
-import code.name.monkey.retromusic.RetroScrollHelper;
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
@@ -84,7 +83,6 @@ import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
-import dev.olog.scrollhelper.ScrollHelper;
 
 /**
  * Created by hemanths on 2020-02-19.
@@ -121,9 +119,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private Toolbar mToolbar;
     private MaterialCardView mToolbarContainer;
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private ScrollHelper scrollHelper;
-
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         setDrawUnderStatusBar();
@@ -156,8 +151,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         checkShowChangelog();
         AppRater.appLaunched(this);
         setupToolbar();
-
-        scrollHelper = new RetroScrollHelper(this);
     }
 
     @Override
