@@ -14,6 +14,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
 import code.name.monkey.retromusic.util.PreferenceUtil
+import dev.olog.scrollhelper.layoutmanagers.OverScrollGridLayoutManager
 import java.util.*
 import javax.inject.Inject
 
@@ -39,7 +40,7 @@ class SongsFragment :
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(requireActivity(), getGridSize()).apply {
+        return OverScrollGridLayoutManager(requireActivity(), getGridSize()).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return if (position == 0) {

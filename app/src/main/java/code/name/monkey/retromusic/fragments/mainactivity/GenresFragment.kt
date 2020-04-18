@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenresView
+import dev.olog.scrollhelper.layoutmanagers.OverScrollLinearLayoutManager
 import javax.inject.Inject
 
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
@@ -42,7 +43,7 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(activity)
+        return OverScrollLinearLayoutManager(activity)
     }
 
     override fun createAdapter(): GenreAdapter {
