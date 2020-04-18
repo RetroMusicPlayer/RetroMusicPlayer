@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.AlbumDetailsActivity;
 import code.name.monkey.retromusic.activities.ArtistDetailActivity;
 import code.name.monkey.retromusic.activities.DriveModeActivity;
+import code.name.monkey.retromusic.activities.EqualizerActivity;
 import code.name.monkey.retromusic.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;
 import code.name.monkey.retromusic.activities.LyricsActivity;
@@ -39,7 +40,6 @@ import code.name.monkey.retromusic.activities.PlayingQueueActivity;
 import code.name.monkey.retromusic.activities.PlaylistDetailActivity;
 import code.name.monkey.retromusic.activities.PurchaseActivity;
 import code.name.monkey.retromusic.activities.SearchActivity;
-import code.name.monkey.retromusic.activities.SettingsActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
@@ -139,7 +139,7 @@ public class NavigationUtil {
     }
 
     public static void goToSettings(@NonNull Activity activity) {
-        ActivityCompat.startActivity(activity, new Intent(activity, SettingsActivity.class), null);
+        ActivityCompat.startActivity(activity, new Intent(activity, EqualizerActivity.class), null);
     }
 
     public static void goToSupportDevelopment(@NonNull Activity activity) {

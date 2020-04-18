@@ -10,22 +10,14 @@ import code.name.monkey.appthemehelper.ThemeStore
 /**
  * @author Aidan Follestad (afollestad)
  */
-class ATESwitch : SwitchCompat {
+class ATESwitch @JvmOverloads constructor(
+    context: Context?,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : SwitchCompat(context, attrs, defStyleAttr) {
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
-        ATH.setTint(this, ThemeStore.accentColor(context))
+    init {
+        ATH.setTint(this, ThemeStore.accentColor(getContext()))
     }
 
     override fun isShown(): Boolean {
