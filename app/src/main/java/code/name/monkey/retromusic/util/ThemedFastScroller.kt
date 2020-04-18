@@ -18,13 +18,11 @@ import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ColorUtil.isColorLight
 import code.name.monkey.appthemehelper.util.MaterialValueHelper.getPrimaryTextColor
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.dimen
-import code.name.monkey.retromusic.extensions.dip
 import code.name.monkey.retromusic.views.PopupBackground
 import me.zhanghai.android.fastscroll.FastScroller
 import me.zhanghai.android.fastscroll.FastScrollerBuilder
 import me.zhanghai.android.fastscroll.PopupStyles
+import me.zhanghai.android.fastscroll.R
 
 object ThemedFastScroller {
     fun create(view: ViewGroup): FastScroller {
@@ -38,13 +36,6 @@ object ThemedFastScroller {
             popupText.background = PopupBackground(context)
             popupText.setTextColor(textColor)
         }
-
-        fastScrollerBuilder.setPadding(
-            0,
-            view.context.dimen(R.dimen.toolbar_height) + view.context.dip(8),
-            0,
-            view.context.dimen(R.dimen.mini_player_height)
-        )
 
         fastScrollerBuilder.setThumbDrawable(
             TintHelper.createTintedDrawable(

@@ -74,7 +74,6 @@ import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ThemedFastScroller;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
 import code.name.monkey.retromusic.views.ScrollingViewOnApplyWindowInsetsListener;
-import dev.olog.scrollhelper.layoutmanagers.OverScrollLinearLayoutManager;
 import me.zhanghai.android.fastscroll.FastScroller;
 
 public class FoldersFragment extends AbsMainActivityFragment implements
@@ -479,7 +478,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     private void setUpRecyclerView() {
-        recyclerView.setLayoutManager(new OverScrollLinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         FastScroller fastScroller = ThemedFastScroller.INSTANCE.create(recyclerView);
         recyclerView.setOnApplyWindowInsetsListener(
                 new ScrollingViewOnApplyWindowInsetsListener(recyclerView, fastScroller));

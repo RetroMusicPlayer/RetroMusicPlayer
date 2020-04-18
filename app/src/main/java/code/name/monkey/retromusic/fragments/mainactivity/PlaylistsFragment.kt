@@ -13,7 +13,6 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.mvp.presenter.PlaylistView
 import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
-import dev.olog.scrollhelper.layoutmanagers.OverScrollGridLayoutManager
 import javax.inject.Inject
 
 class PlaylistsFragment :
@@ -41,7 +40,7 @@ class PlaylistsFragment :
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        return OverScrollGridLayoutManager(requireContext(), 1)
+        return GridLayoutManager(requireContext(), 1)
     }
 
     override fun createAdapter(): PlaylistAdapter {
