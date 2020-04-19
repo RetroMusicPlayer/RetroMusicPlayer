@@ -158,7 +158,7 @@ class PlayingQueueAdapter(
         override fun onSongMenuItemClick(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.action_remove_from_playing_queue -> {
-                    removeFromQueue(adapterPosition)
+                    removeFromQueue(layoutPosition)
                     return true
                 }
             }

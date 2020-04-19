@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
 import javax.inject.Inject
 
 class PlaylistsFragment :
-    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, LinearLayoutManager>(), PlaylistView,
+    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(), PlaylistView,
     MainActivityFragmentCallbacks {
 
     override fun handleBackPress(): Boolean {
@@ -39,8 +39,8 @@ class PlaylistsFragment :
         playlistsPresenter.attachView(this)
     }
 
-    override fun createLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(activity)
+    override fun createLayoutManager(): GridLayoutManager {
+        return GridLayoutManager(requireContext(), 1)
     }
 
     override fun createAdapter(): PlaylistAdapter {

@@ -41,6 +41,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@drawable/shadow_down" />
+
     <LinearLayout
         android:id="@+id/toolbar_container"
         android:layout_width="match_parent"

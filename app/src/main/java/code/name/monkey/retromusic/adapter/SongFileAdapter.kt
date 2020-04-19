@@ -146,7 +146,7 @@ class SongFileAdapter(
         init {
             if (menu != null && callbacks != null) {
                 menu?.setOnClickListener { v ->
-                    val position = adapterPosition
+                    val position = layoutPosition
                     if (isPositionInRange(position)) {
                         callbacks.onFileMenuClicked(dataSet[position], v)
                     }
@@ -158,7 +158,7 @@ class SongFileAdapter(
         }
 
         override fun onClick(v: View?) {
-            val position = adapterPosition
+            val position = layoutPosition
             if (isPositionInRange(position)) {
                 if (isInQuickSelectMode) {
                     toggleChecked(position)
@@ -169,7 +169,7 @@ class SongFileAdapter(
         }
 
         override fun onLongClick(v: View?): Boolean {
-            val position = adapterPosition
+            val position = layoutPosition
             return isPositionInRange(position) && toggleChecked(position)
         }
 

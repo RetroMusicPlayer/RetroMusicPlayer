@@ -63,6 +63,7 @@ class VolumeFragment : Fragment(), OnAudioVolumeChangedListener,
             return
         }
         if (maxVolume <= 0.0f) {
+            setPauseWhenZeroVolume(currentVolume < 1)
             return
         }
         volumeSeekBar.setRange(currentVolume, maxVolume)

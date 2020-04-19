@@ -98,6 +98,12 @@ android {
     kapt {
         generateStubs = true
     }
+
+    kotlin {
+        experimental {
+            coroutines "enable"
+        }
+    }
 }
 
 def getProperties(String fileName) {
@@ -138,6 +144,9 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.fragment:fragment:1.2.4'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    def arch_version = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$arch_version"
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.palette:palette:1.0.0'
     implementation 'androidx.palette:palette-ktx:1.0.0'
@@ -184,4 +193,6 @@ dependencies {
     def dagger_version = "2.23.1"
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    implementation 'com.github.ologe:scroll-helper:1.1.5'
 }

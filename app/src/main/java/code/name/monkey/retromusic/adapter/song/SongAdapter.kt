@@ -150,7 +150,7 @@ open class SongAdapter(
     open inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         protected open var songMenuRes = SongMenuHelper.MENU_RES
         protected open val song: Song
-            get() = dataSet[adapterPosition]
+            get() = dataSet[layoutPosition]
 
         init {
             setImageTransitionName(activity.getString(R.string.transition_album_art))
@@ -186,14 +186,14 @@ open class SongAdapter(
 
         override fun onClick(v: View?) {
             if (isInQuickSelectMode) {
-                toggleChecked(adapterPosition)
+                toggleChecked(layoutPosition)
             } else {
-                MusicPlayerRemote.openQueue(dataSet, adapterPosition, true)
+                MusicPlayerRemote.openQueue(dataSet, layoutPosition, true)
             }
         }
 
         override fun onLongClick(v: View?): Boolean {
-            return toggleChecked(adapterPosition)
+            return toggleChecked(layoutPosition)
         }
     }
 

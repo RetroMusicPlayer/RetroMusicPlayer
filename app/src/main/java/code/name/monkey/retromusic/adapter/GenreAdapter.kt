@@ -4,8 +4,10 @@ import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.adapter.GenreAdapter.ViewHolder
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.util.NavigationUtil
@@ -19,7 +21,7 @@ class GenreAdapter(
     private val activity: Activity,
     var dataSet: List<Genre>,
     private val mItemLayoutRes: Int
-) : RecyclerView.Adapter<GenreAdapter.ViewHolder>() {
+) : ListAdapter<Genre, ViewHolder>(GenreDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -49,8 +51,24 @@ class GenreAdapter(
     inner class ViewHolder(itemView: View) : MediaEntryViewHolder(itemView) {
         override fun onClick(v: View?) {
             super.onClick(v)
-            val genre = dataSet[adapterPosition]
+            val genre = dataSet[layoutPosition]
             NavigationUtil.goToGenre(activity, genre)
         }
+    }
+}
+
+/**
+ * Callback for calculating the diff between two non-null items in a list.
+ *
+ * Used by ListAdapter to calculate the minimum number of changes between and old list and a new
+ * list that's been passed to `submitList`.
+ */
+class GenreDiffCallback : DiffUtil.ItemCallback<Genre>() {
+    override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
+        return oldItem == newItem
     }
 }
