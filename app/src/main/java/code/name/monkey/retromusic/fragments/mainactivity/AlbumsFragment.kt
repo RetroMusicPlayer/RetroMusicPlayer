@@ -12,6 +12,7 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
+import dev.olog.scrollhelper.layoutmanagers.OverScrollGridLayoutManager
 import javax.inject.Inject
 
 class AlbumsFragment :
@@ -51,7 +52,7 @@ class AlbumsFragment :
         get() = R.string.no_albums
 
     override fun createLayoutManager(): GridLayoutManager {
-        return GridLayoutManager(requireActivity(), getGridSize())
+        return OverScrollGridLayoutManager(requireActivity(), getGridSize())
     }
 
     override fun createAdapter(): AlbumAdapter {

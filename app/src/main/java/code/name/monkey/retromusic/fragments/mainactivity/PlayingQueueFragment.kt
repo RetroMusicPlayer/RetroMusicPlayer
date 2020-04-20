@@ -28,6 +28,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
+import dev.olog.scrollhelper.layoutmanagers.OverScrollLinearLayoutManager
 import kotlinx.android.synthetic.main.activity_playing_queue.*
 
 /**
@@ -73,7 +74,7 @@ class PlayingQueueFragment :
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
-        return LinearLayoutManager(requireContext())
+        return OverScrollLinearLayoutManager(requireContext())
     }
 
     override fun createAdapter(): PlayingQueueAdapter {
