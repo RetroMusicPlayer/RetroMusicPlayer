@@ -194,4 +194,6 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 
     implementation 'com.github.ologe:scroll-helper:1.1.5'
+    implementation 'com.diogobernardino:williamchart:2.2'
+    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:0.7.0'
 }

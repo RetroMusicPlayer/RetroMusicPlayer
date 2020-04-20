@@ -68,6 +68,7 @@ import code.name.monkey.retromusic.appwidgets.AppWidgetCard;
 import code.name.monkey.retromusic.appwidgets.AppWidgetClassic;
 import code.name.monkey.retromusic.appwidgets.AppWidgetSmall;
 import code.name.monkey.retromusic.appwidgets.AppWidgetText;
+import code.name.monkey.retromusic.equalizer.AudioEffectsReceiver;
 import code.name.monkey.retromusic.glide.BlurTransformation;
 import code.name.monkey.retromusic.glide.SongGlideRequest;
 import code.name.monkey.retromusic.helper.ShuffleHelper;
@@ -392,6 +393,11 @@ public class MusicService extends Service implements
 
         registerHeadsetEvents();
         registerBluetoothConnected();
+
+        Intent i = new Intent(this, AudioEffectsReceiver.class);
+        i.setAction(AudioEffectsReceiver.ACTION_OPEN_AUDIO_EFFECT_SESSION);
+        i.putExtra(AudioEffectsReceiver.EXTRA_AUDIO_SESSION_ID, getAudioSessionId());
+        sendBroadcast(i);
     }
 
     @Override
@@ -416,7 +422,9 @@ public class MusicService extends Service implements
         getContentResolver().unregisterContentObserver(mediaStoreObserver);
         PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
-
+        Intent i = new Intent(this, AudioEffectsReceiver.class);
+        i.setAction(AudioEffectsReceiver.ACTION_CLOSE_AUDIO_EFFECT_SESSION);
+        sendBroadcast(i);
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
     }
 

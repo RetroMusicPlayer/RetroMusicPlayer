@@ -123,6 +123,7 @@
         <activity android:name=".activities.ShareInstagramStory" />
         <activity android:name=".activities.DriveModeActivity" />
         <activity android:name=".activities.EqualizerActivity" />
+        <activity android:name=".activities.TestActivity" />
         <activity
             android:name=".activities.SearchActivity"
             android:windowSoftInputMode="stateVisible" />
@@ -228,13 +229,14 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_card_info" />
         </receiver>
+
         <receiver
-            android:name=".AudioEffectsReceiver"
+            android:name=".equalizer.AudioEffectsReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="org.oucho.musicplayer.OPEN_AUDIO_EFFECT_SESSION"/>
-                <action android:name="org.oucho.musicplayer.CLOSE_AUDIO_EFFECT_SESSION"/>
+                <action android:name="org.oucho.musicplayer.OPEN_AUDIO_EFFECT_SESSION" />
+                <action android:name="org.oucho.musicplayer.CLOSE_AUDIO_EFFECT_SESSION" />
             </intent-filter>
         </receiver>
 

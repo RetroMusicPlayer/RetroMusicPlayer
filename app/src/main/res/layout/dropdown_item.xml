@@ -5,6 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:textStyle="bold"
     android:textAppearance="@style/TextViewBody1"
     tools:text="@tools:sample/full_names" />

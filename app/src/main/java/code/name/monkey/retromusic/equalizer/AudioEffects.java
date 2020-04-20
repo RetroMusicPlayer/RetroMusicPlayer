@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.audiofx.BassBoost;
 import android.media.audiofx.Equalizer;
+import android.media.audiofx.Virtualizer;
 import android.util.Log;
 
 import code.name.monkey.retromusic.R;
@@ -14,20 +15,23 @@ public class AudioEffects {
 
     public static final short BASSBOOST_MAX_STRENGTH = 1000;
     private static final String PREF_EQ_ENABLED = "enabled";
+    private static final String PREF_VIRTUALIZER_ENABLED = "pref_virtualizer_enabled";
     private static final String PREF_BAND_LEVEL = "level";
     private static final String PREF_PRESET = "preset";
     private static final String PREF_BASSBOOST = "bassboost";
+    private static final String PREF_VIRTUALIZER = "pref_virtualizer";
     private static final String AUDIO_EFFECTS_PREFS = "audioeffects";
 
     private static final BassBoostValues sBassBoostValues = new BassBoostValues();
+    private static final VirtualizerValues sVirtualizerValues = new VirtualizerValues();
     private static final EqualizerValues sEqualizerValues = new EqualizerValues();
     private static BassBoost sBassBoost;
     private static Equalizer sEqualizer;
+    private static Virtualizer sVirtualizer;
     private static boolean sCustomPreset;
 
     public static void init(Context context) {
         SharedPreferences prefs = context.getSharedPreferences(AUDIO_EFFECTS_PREFS, Context.MODE_PRIVATE);
-
         initBassBoostValues(prefs);
         initEqualizerValues(prefs);
     }
@@ -50,11 +54,18 @@ public class AudioEffects {
             sEqualizer.release();
             sEqualizer = null;
         }
+        if (sVirtualizer != null) {
+            sVirtualizer.release();
+            sVirtualizer = null;
+        }
     }
 
     private static void initBassBoostValues(SharedPreferences prefs) {
         sBassBoostValues.enabled = prefs.getBoolean(PREF_EQ_ENABLED, false);
         sBassBoostValues.strength = (short) prefs.getInt(PREF_BASSBOOST, 0);
+
+        sVirtualizerValues.enabled = prefs.getBoolean(PREF_VIRTUALIZER_ENABLED, false);
+        sVirtualizerValues.strength = (short) prefs.getInt(PREF_VIRTUALIZER, 0);
     }
 
     private static void initBassBoost(int audioSessionId) {
@@ -72,17 +83,29 @@ public class AudioEffects {
         }
     }
 
+    private static void initVirtualizerBoost(int audioSessionId) {
+        if (sVirtualizer != null) {
+            sVirtualizer.release();
+            sVirtualizer = null;
+        }
+        sVirtualizer = new Virtualizer(0, audioSessionId);
+        sVirtualizer.setEnabled(sVirtualizerValues.enabled);
+
+        short strength = sVirtualizerValues.strength;
+
+        if (strength >= 0 && strength <= BASSBOOST_MAX_STRENGTH) {
+            sVirtualizer.setStrength(strength);
+        }
+    }
+
     private static void initEqualizerValues(SharedPreferences prefs) {
-
-
         sEqualizerValues.enabled = prefs.getBoolean(PREF_EQ_ENABLED, false);
-
         sEqualizerValues.preset = (short) prefs.getInt(PREF_PRESET, -1);
-
         if (sEqualizerValues.preset == -1) {
             sCustomPreset = true;
         }
     }
+
 
     private static void initEqualizer(SharedPreferences prefs, int audioSessionId) {
 
@@ -90,8 +113,15 @@ public class AudioEffects {
             sEqualizer.release();
             sEqualizer = null;
         }
+        if (sVirtualizer != null) {
+            sVirtualizer.release();
+            sVirtualizer = null;
+        }
         sEqualizer = new Equalizer(0, audioSessionId);
         sEqualizer.setEnabled(sEqualizerValues.enabled);
+
+        sVirtualizer = new Virtualizer(0, audioSessionId);
+        sVirtualizer.setEnabled(sEqualizerValues.enabled);
 
         if (!sCustomPreset) {
             usePreset(sEqualizerValues.preset);
@@ -119,7 +149,6 @@ public class AudioEffects {
 
         sEqualizerValues.levelsSet = true;
 
-
     }
 
     public static short getBassBoostStrength() {
@@ -131,7 +160,17 @@ public class AudioEffects {
         if (sBassBoost != null) {
             sBassBoost.setStrength(strength);
         }
+    }
 
+    public static short getVirtualizerStrength() {
+        return sVirtualizer.getRoundedStrength();
+    }
+
+    public static void setVirtualizerStrength(short strength) {
+        sVirtualizerValues.strength = strength;
+        if (sVirtualizer != null) {
+            sVirtualizer.setStrength(strength);
+        }
     }
 
     public static short[] getBandLevelRange() {
@@ -142,13 +181,31 @@ public class AudioEffects {
     }
 
     public static short getBandLevel(short band) {
-        if (sEqualizer == null) {
+        /*if (sEqualizer == null) {
             if (sEqualizerValues.levelsSet && sEqualizerValues.bandLevels.length > band) {
                 return sEqualizerValues.bandLevels[band];
             }
+        }*/
+        if (sEqualizer != null) {
+            Log.d("audiofx", "eeeD");
+            return sEqualizer.getBandLevel(band);
         }
-        Log.d("audiofx", "eeeD");
-        return sEqualizer.getBandLevel(band);
+        return 0;
+    }
+
+    public static short getBandLevelRange(int i) {
+        if (sEqualizer != null) {
+            Log.i("AudioEffect", "getBandLevelRange: " + sEqualizer.getBandLevelRange()[i]);
+            return sEqualizer.getBandLevelRange()[i];
+        }
+        return 0;
+    }
+
+    public static int getBandLevelOfPreset(short i) {
+        if (sEqualizer != null) {
+            return (int) sEqualizer.getBandLevel(i) - getBandLevelRange(0);
+        }
+        return 0;
     }
 
     public static boolean areAudioEffectsEnabled() {
@@ -256,7 +313,20 @@ public class AudioEffects {
         editor.commit();
     }
 
+
+    public static String getPresetAtIndex(short i) {
+        if (sEqualizer != null) {
+            return sEqualizer.getPresetName(i);
+        }
+        return null;
+    }
+
     private static class BassBoostValues {
+        public boolean enabled;
+        public short strength;
+    }
+
+    private static class VirtualizerValues {
         public boolean enabled;
         public short strength;
     }

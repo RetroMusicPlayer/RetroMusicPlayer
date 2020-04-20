@@ -1,0 +1,318 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/equalizer_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="end|center_vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/equalizer_preset_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/line_button"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equalizer_switch" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/equalizerContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equalizer_preset_spinner">
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seekBar1Wrap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/textView1"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar2Wrap"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/seekBar1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/color_progress_seek"
+                android:thumb="@drawable/switch_thumb_material"
+                app:seekBarRotation="CW270"
+                tools:progress="100" />
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/seekBar1Wrap"
+            app:layout_constraintStart_toStartOf="@id/seekBar1Wrap"
+            app:layout_constraintTop_toBottomOf="@id/seekBar1Wrap"
+            tools:text="10000 Hz" />
+
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seekBar2Wrap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar3Wrap"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/seekBar1Wrap"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/seekBar2"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/color_progress_seek"
+                android:thumb="@drawable/switch_thumb_material"
+                app:seekBarRotation="CW270"
+                tools:progress="100" />
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/seekBar2Wrap"
+            app:layout_constraintStart_toStartOf="@id/seekBar2Wrap"
+            app:layout_constraintTop_toBottomOf="@id/seekBar2Wrap"
+            tools:text="10000 Hz" />
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seekBar3Wrap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            app:layout_constraintBottom_toTopOf="@id/textView3"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar4Wrap"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/seekBar2Wrap"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="3dp">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/seekBar3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/color_progress_seek"
+                android:thumb="@drawable/switch_thumb_material"
+                app:seekBarRotation="CW270" />
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/seekBar3Wrap"
+            app:layout_constraintStart_toStartOf="@id/seekBar3Wrap"
+            app:layout_constraintTop_toBottomOf="@id/seekBar3Wrap"
+            tools:text="10000 Hz" />
+
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seekBar4Wrap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/seekBar5Wrap"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/seekBar3Wrap"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="3dp">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/seekBar4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/color_progress_seek"
+                android:thumb="@drawable/switch_thumb_material"
+                app:seekBarRotation="CW270" />
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/seekBar4Wrap"
+            app:layout_constraintStart_toStartOf="@id/seekBar4Wrap"
+            app:layout_constraintTop_toBottomOf="@id/seekBar4Wrap"
+            tools:text="10000 Hz" />
+
+
+        <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper
+            android:id="@+id/seekBar5Wrap"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/seekBar4Wrap"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="3dp">
+
+            <com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBar
+                android:id="@+id/seekBar5"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                android:maxHeight="3dp"
+                android:progressDrawable="@drawable/color_progress_seek"
+                android:thumb="@drawable/switch_thumb_material"
+                app:seekBarRotation="CW270" />
+        </com.h6ah4i.android.widget.verticalseekbar.VerticalSeekBarWrapper>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextViewNormal"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/seekBar5Wrap"
+            app:layout_constraintStart_toStartOf="@id/seekBar5Wrap"
+            app:layout_constraintTop_toBottomOf="@id/seekBar5Wrap"
+            tools:text="10000 Hz" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equalizerContainer" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/bassBoostText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/bass_boost"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/bassController"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="3dp"
+        android:progressDrawable="@drawable/color_progress_seek"
+        android:thumb="@drawable/switch_thumb_material"
+        app:layout_constraintBottom_toBottomOf="@id/bassBoostText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/bassBoostText"
+        app:layout_constraintTop_toTopOf="@id/bassBoostText" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/controllerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/virtualizer"
+        android:textAppearance="@style/TextViewNormal"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bassBoostText"
+        app:layout_constraintVertical_bias="0.5" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/reverbController"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxHeight="3dp"
+        android:progressDrawable="@drawable/color_progress_seek"
+        android:thumb="@drawable/switch_thumb_material"
+        app:layout_constraintBottom_toBottomOf="@id/controllerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/controllerText"
+        app:layout_constraintTop_toTopOf="@id/controllerText" />
+
+    <!--<code.name.monkey.retromusic.equalizer.AnalogController
+        android:id="@+id/controllerBass"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@+id/controller3D"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/equalizer_preset_spinner" />
+
+
+    <code.name.monkey.retromusic.equalizer.AnalogController
+        android:id="@+id/controller3D"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/controllerBass"
+        app:layout_constraintTop_toBottomOf="@id/equalizer_preset_spinner" />-->
+
+
+    <FrameLayout
+        android:id="@+id/equalizerBlocker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:background="@android:color/transparent"
+        android:clickable="true"
+        android:visibility="invisible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
