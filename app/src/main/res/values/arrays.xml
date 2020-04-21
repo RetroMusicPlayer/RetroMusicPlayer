@@ -179,5 +179,4 @@
         <item>@layout/activity_album</item>
     </array>
 
-    <string name="tiny_card_style">Tiny card</string>
 </resources>
