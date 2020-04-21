@@ -54,9 +54,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
-                Handler().postDelayed({
-                    requireActivity().recreate()
-                }, 400)
+                requireActivity().recreate()
                 true
             }
         }
@@ -96,9 +94,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 requireActivity().setTheme(PreferenceUtil.getThemeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }
-            Handler().postDelayed({
-                requireActivity().recreate()
-            }, 400)
+            requireActivity().recreate()
             true
         }
 
@@ -109,9 +105,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated)
                 .apply()
             PreferenceUtil.getInstance(requireContext()).setDesaturatedColor(desaturated)
-            Handler().postDelayed({
-                requireActivity().recreate()
-            }, 400)
+            requireActivity().recreate()
             true
         }
 
