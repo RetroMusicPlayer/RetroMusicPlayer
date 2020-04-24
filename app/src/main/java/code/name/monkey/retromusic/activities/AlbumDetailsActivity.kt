@@ -216,7 +216,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             if (lastFmAlbum.album.wiki != null) {
                 aboutAlbumText.show()
                 aboutAlbumTitle.show()
-                aboutAlbumTitle.text = String.format("About %s", lastFmAlbum.album.name)
+                aboutAlbumTitle.text = String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
                 aboutAlbumText.text = lastFmAlbum.album.wiki.content
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {

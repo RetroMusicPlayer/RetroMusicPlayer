@@ -140,6 +140,7 @@ public final class PreferenceUtil {
     public static final String SAF_SDCARD_URI = "saf_sdcard_uri";
     public static final String SONG_SORT_ORDER = "song_sort_order";
     public static final String SONG_GRID_SIZE = "song_grid_size";
+    public static final String LANGUAGE_NAME = "language_name";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LAST_PAGE = "last_start_page";
     private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
@@ -154,67 +155,36 @@ public final class PreferenceUtil {
     private static final String ALBUM_GRID_SIZE = "album_grid_size";
     private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
-
     private static final String ARTIST_GRID_SIZE = "artist_grid_size";
-
     private static final String ARTIST_GRID_SIZE_LAND = "artist_grid_size_land";
-
     private static final String ALBUM_COLORED_FOOTERS = "album_colored_footers";
-
     private static final String SONG_COLORED_FOOTERS = "song_colored_footers";
-
     private static final String ARTIST_COLORED_FOOTERS = "artist_colored_footers";
-
     private static final String ALBUM_ARTIST_COLORED_FOOTERS = "album_artist_colored_footers";
-
     private static final String COLORED_APP_SHORTCUTS = "colored_app_shortcuts";
-
     private static final String AUDIO_DUCKING = "audio_ducking";
-
     private static final String LAST_ADDED_CUTOFF = "last_added_interval";
-
     private static final String LAST_SLEEP_TIMER_VALUE = "last_sleep_timer_value";
-
     private static final String NEXT_SLEEP_TIMER_ELAPSED_REALTIME = "next_sleep_timer_elapsed_real_time";
-
     private static final String IGNORE_MEDIA_STORE_ARTWORK = "ignore_media_store_artwork";
-
     private static final String LAST_CHANGELOG_VERSION = "last_changelog_version";
-
     private static final String INTRO_SHOWN = "intro_shown";
-
     private static final String AUTO_DOWNLOAD_IMAGES_POLICY = "auto_download_images_policy";
-
     private static final String START_DIRECTORY = "start_directory";
-
     private static final String SYNCHRONIZED_LYRICS_SHOW = "synchronized_lyrics_show";
-
     private static final String LOCK_SCREEN = "lock_screen";
-
     private static final String ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order";
-
     private static final String ARTIST_DETAIL_SONG_SORT_ORDER = "artist_detail_song_sort_order";
-
     private static final String LYRICS_OPTIONS = "lyrics_tab_position";
-
     private static final String CHOOSE_EQUALIZER = "choose_equalizer";
-
     private static final String TOGGLE_SHUFFLE = "toggle_shuffle";
-
     private static final String SONG_GRID_STYLE = "song_grid_style";
-
     private static final String TOGGLE_ANIMATIONS = "toggle_animations";
-
     private static final String LAST_KNOWN_LYRICS_TYPE = "LAST_KNOWN_LYRICS_TYPE";
-
     private static final String ALBUM_DETAIL_STYLE = "album_detail_style";
-
     private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
-
     private static final String NOW_PLAYING_SCREEN = "now_playing_screen";
-
     private static final String SNOW_FALL_EFFECT = "snow_fall_effect";
-
     private static final String FILTER_SONG = "filter_song";
     private static final String TAG = "PreferenceUtil";
     private static final String EXPAND_NOW_PLAYING_PANEL = "expand_now_playing_panel";
@@ -986,5 +956,9 @@ public final class PreferenceUtil {
 
     public boolean isExpandPanel() {
         return mPreferences.getBoolean(EXPAND_NOW_PLAYING_PANEL, false);
+    }
+
+    public String getLanguageCode() {
+        return mPreferences.getString(LANGUAGE_NAME, "auto");
     }
 }

@@ -846,4 +846,8 @@
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
 
     <string name="tiny_card_style">Tiny card</string>
+    <string name="about_album_label">About %s</string>
+    <string name="pref_language_name">Select language</string>
+    <string name="translators">Translators</string>
+    <string name="translators_summary">The people who helped translate this app</string>
 </resources>

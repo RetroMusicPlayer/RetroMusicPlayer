@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.activities.base
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -17,10 +18,12 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
+import java.util.*
 
 abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
 
@@ -34,6 +37,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         registerSystemUiVisibility()
         toggleScreenOn()
     }
+
 
     private fun updateTheme() {
         setTheme(ThemeManager.getThemeResValue(this))
@@ -205,5 +209,12 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
             handler.postDelayed(this, 500)
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val code = PreferenceUtil.getInstance(newBase).languageCode
+        if (code != "auto") {
+            super.attachBaseContext(LanguageContextWrapper.wrap(newBase, Locale(code)))
+        } else super.attachBaseContext(newBase)
     }
 }

@@ -9,6 +9,7 @@ import android.os.Build;
 import androidx.annotation.IntRange;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 import code.name.monkey.retromusic.util.PreferenceUtil;
 
@@ -57,6 +58,7 @@ public class DeviceInfo {
     private final int versionCode;
 
     private final String versionName;
+    private final String selectedLang;
 
     public DeviceInfo(Context context) {
         PackageInfo packageInfo;
@@ -76,6 +78,7 @@ public class DeviceInfo {
         baseTheme = PreferenceUtil.getInstance(context).getBaseTheme();
         nowPlayingTheme = context.getString(PreferenceUtil.getInstance(context).getNowPlayingScreen().getTitleRes());
         isAdaptive = PreferenceUtil.getInstance(context).getAdaptiveColor();
+        selectedLang = PreferenceUtil.getInstance(context).getLanguageCode();
     }
 
     public String toMarkdown() {
@@ -97,6 +100,7 @@ public class DeviceInfo {
                 + "<tr><td>ABIs</td><td>" + Arrays.toString(abis) + "</td></tr>\n"
                 + "<tr><td>ABIs (32bit)</td><td>" + Arrays.toString(abis32Bits) + "</td></tr>\n"
                 + "<tr><td>ABIs (64bit)</td><td>" + Arrays.toString(abis64Bits) + "</td></tr>\n"
+                + "<tr><td>Language</td><td>" + selectedLang + "</td></tr>\n"
                 + "</table>\n";
     }
 
@@ -119,6 +123,8 @@ public class DeviceInfo {
                 + "ABIs (64bit): " + Arrays.toString(abis64Bits) + "\n"
                 + "Base theme: " + baseTheme + "\n"
                 + "Now playing theme: " + nowPlayingTheme + "\n"
-                + "Adaptive: " + isAdaptive;
+                + "Adaptive: " + isAdaptive + "\n"
+                + "System language: " + Locale.getDefault().toLanguageTag() + "\n"
+                + "In-App Language: " + selectedLang;
     }
 }

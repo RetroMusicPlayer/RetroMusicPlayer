@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_settings_summary">Csapat, társadalmi kapcsolatok</string>
-    <string name="accent_color">A hangsúly színe</string>
-    <string name="accent_color_desc">Az akcentus téma színe alapértelmezés szerint színtiszta</string>
+    <string name="accent_color">Kiemelő szín</string>
+    <string name="accent_color_desc">Az kiemelő téma színe alapértelmezés szerint színtiszta</string>
     <string name="action_about">Rólunk</string>
     <string name="action_add_to_favorites">Hozzáadás a kedvencekhez</string>
-    <string name="action_add_to_playing_queue">Hozzáadás a lejátszási kvótához.</string>
+    <string name="action_add_to_playing_queue">Hozzáadás a lejátszási sorhoz</string>
     <string name="action_add_to_playlist">Hozzáadás lejátszási listához</string>
-    <string name="action_clear_playing_queue">Lejátszási kvóta törlése</string>
+    <string name="action_clear_playing_queue">Lejátszási sor törlése</string>
     <string name="action_clear_playlist">Lejátszási lista törlése</string>
     <string name="action_cycle_repeat">Ciklus ismétlés üzemmód</string>
     <string name="action_delete">Törlés</string>
@@ -28,13 +28,13 @@
     <string name="action_play_pause">Lejátszás / Szünet</string>
     <string name="action_previous">Előző</string>
     <string name="action_remove_from_favorites">Eltávolítás a kedvencekből</string>
-    <string name="action_remove_from_playing_queue">Lejátszási kvóta törlése</string>
+    <string name="action_remove_from_playing_queue">Eltávolítás a lejátszási sorból</string>
     <string name="action_remove_from_playlist">Eltávolítás a lejátszási listáról</string>
     <string name="action_rename">Átnevezés</string>
-    <string name="action_save_playing_queue">Lejátszási kvóta mentése</string>
+    <string name="action_save_playing_queue">Lejátszási sor mentése</string>
     <string name="action_scan">Keresés</string>
     <string name="action_search">Keresés</string>
-    <string name="action_set">Start</string>
+    <string name="action_set">Elkezdés</string>
     <string name="action_set_as_ringtone">Beállítás csengőhangként</string>
     <string name="action_set_as_start_directory">Beállítás kezdőkönyvtárként</string>
     <string name="action_settings">"Beállítások"</string>
@@ -50,10 +50,10 @@
     <string name="add_action">Hozzáad</string>
     <string name="add_lyrics">Dalszöveg hozzáadása</string>
     <string name="add_photo">Fénykép\nhozzáadása</string>
-    <string name="add_playlist_title">"Lejátszási listához adni"</string>
+    <string name="add_playlist_title">"Hozzáadás lejátszási listához"</string>
     <string name="add_time_framed_lryics">Adjon hozzá időkeretet dalszövegeket</string>
-    <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási kvótához."</string>
-    <string name="added_x_titles_to_playing_queue">%1$d cím hozzáadva a lejátszási kvótához.</string>
+    <string name="added_title_to_playing_queue">"1 cím lett hozzáadva a lejátszási sorhoz."</string>
+    <string name="added_x_titles_to_playing_queue">%1$d cím hozzáadva a lejátszási sorhoz.</string>
     <string name="album">Album</string>
     <string name="album_artist">Album előadó</string>
     <string name="album_or_artist_empty">A cím vagy az előadó üres.</string>
@@ -106,6 +106,7 @@
     <string name="cast">Cast</string>
     <string name="changelog">Változtatási napló</string>
     <string name="changelog_summary">A Változtatási napló a Telegram csatornán működik</string>
+    <string name="circle">Kör</string>
     <string name="circular">Kör alakú</string>
     <string name="classic">Klasszikus</string>
     <string name="clear_action">Kiürítés</string>
@@ -151,6 +152,7 @@
     <string name="donate_summary">Ha úgy gondolja, hogy megérdemlem fizetni a munkámért, hagyhatsz néhányat pénzt itt</string>
     <string name="donation_header">Vegyél nekem egy:</string>
     <string name="download_from_last_fm">Letöltés a Last.fm-ről</string>
+    <string name="drive_mode">Vezetés mód</string>
     <string name="edit">Szerkesztés</string>
     <string name="edit_cover">Borító szerkesztése</string>
     <string name="empty">Üres</string>
@@ -159,11 +161,12 @@
     <string name="faq">GYIK</string>
     <string name="favorites">Kedvencek</string>
     <string name="finish_last_song">Fejezze be az utolsó dalt</string>
-    <string name="fit">Fit</string>
+    <string name="fit">Illeszkedő</string>
     <string name="flat">Lapos</string>
     <string name="folders">Mappák</string>
     <string name="follow_system">Kövesse a rendszert</string>
     <string name="for_you">Neked</string>
+    <string name="free">Ingyenes</string>
     <string name="full">Teljes</string>
     <string name="full_card">Teljes kártya</string>
     <string name="general_settings_summary">Módosítsa az alkalmazás témáját és színeit</string>
@@ -180,16 +183,15 @@
     <string name="grid_size_6">6</string>
     <string name="grid_size_7">7</string>
     <string name="grid_size_8">8</string>
-    <string name="grid_style_label"><![CDATA[Rácsok és stílus]]></string>
+    <string name="grid_style_label">Rácsok és stílus</string>
     <string name="hinge">Zsanér</string>
     <string name="history">Előzmény</string>
     <string name="home">Kezdőlap</string>
-    <string name="horizontal_flip">Vízszintes flip</string>
+    <string name="horizontal_flip">Vízszintes forgatás</string>
     <string name="image">Kép</string>
     <string name="image_gradient">Színátmenet kép</string>
     <string name="image_settings_summary">A művészképek letöltésének megváltoztatása.</string>
     <string name="inserted_x_songs_into_playlist_x">%1$d dalt betett a %2$s lejátszási listába.</string>
-    <string name="instagram_page">Instagram</string>
     <string name="instagram_page_summary">Ossza meg Retro Music beállításait, hogy bemutassa a Instagram-on</string>
     <string name="keyboard">Billentyűzet</string>
     <string name="label_bit_rate">Bitrát</string>
@@ -197,6 +199,7 @@
     <string name="label_file_name">Fájl név</string>
     <string name="label_file_path">Fájl elérési út</string>
     <string name="label_file_size">Méret</string>
+    <string name="label_more_from">Több a következőtől: %s</string>
     <string name="label_sampling_rate">Mintavételi arány</string>
     <string name="label_track_length">Hossz</string>
     <string name="labeled">Címkézve</string>
@@ -207,6 +210,7 @@
     <string name="library_categories">Könyvtár kategóriák</string>
     <string name="licenses">Licencek</string>
     <string name="light_theme_name">Világos fehér</string>
+    <string name="listeners_label">Hallgatók</string>
     <string name="listing_files">Listázási fájlok</string>
     <string name="loading_products">A termékek betöltése ...</string>
     <string name="login">Bjelentkezés</string>
@@ -229,6 +233,7 @@
     <string name="no_equalizer">Nem találtunk hangszínszabályzott.</string>
     <string name="no_genres">Nincsenek műfajok</string>
     <string name="no_lyrics_found">Nem található dalszöveg</string>
+    <string name="no_playing_queue">Nincs lejátszott dal</string>
     <string name="no_playlists">Nincs lejátszási lista</string>
     <string name="no_purchase_found">Nincs vásárlás.</string>
     <string name="no_results">Nincs eredmény</string>
@@ -238,6 +243,7 @@
     <string name="normal_style">Normál</string>
     <string name="not_listed_in_media_store"><![CDATA[<b>%s</b> nem szerepel a médiában.]]></string>
     <string name="nothing_to_scan">Nincs szkennelve.</string>
+    <string name="nothing_to_see">Semmit sem látni</string>
     <string name="notification">Értesítés</string>
     <string name="notification_settings_summary">Értesítési stílus testreszabása</string>
     <string name="now_playing">Most lejátszott</string>
@@ -269,10 +275,14 @@
     <string name="pref_album_detail_style">Albumrészletek stílusa</string>
     <string name="pref_blur_amount_summary">Homályosítás mértéke homályos témákhoz, az alacsonyabb gyorsabb</string>
     <string name="pref_blur_amount_title">Homályosítás mértéke</string>
+    <string name="pref_dialog_corner_summary">Állítsa be az alsó párbeszédpanel sarkait</string>
     <string name="pref_dialog_corner_title">Párbeszéd sarok</string>
+    <string name="pref_filter_song_summary">A dalok szűrése hossz szerint</string>
     <string name="pref_filter_song_title">Szűrje a dal időtartamát</string>
+    <string name="pref_header_advanced">Haladó</string>
     <string name="pref_header_album">Album stílusa</string>
     <string name="pref_header_audio">Hang</string>
+    <string name="pref_header_blacklist">Feketelista</string>
     <string name="pref_header_controls">Vezérlők</string>
     <string name="pref_header_general">Téma</string>
     <string name="pref_header_images">Képek</string>
@@ -289,6 +299,7 @@
     <string name="pref_summary_album_art_on_lockscreen">A jelenlegi zeneszámok albumborítóját zárolt háttérképként használja.</string>
     <string name="pref_summary_audio_ducking">Hangerő csökkentése rendszerhang vagy értesítés érkezik</string>
     <string name="pref_summary_blacklist">A feketelistán szereplő mappák tartalma el van rejtve a könyvtárban.</string>
+    <string name="pref_summary_bluetooth_playback">Amint csatlakoztatta a bluetooth készüléket, kezdje el a lejátszást</string>
     <string name="pref_summary_blurred_album_art">Elhomályosítja az album borítóját a zárolás képernyőjén. Problémákat okozhat harmadik féltől származó alkalmazásokkal és widgetekkel.</string>
     <string name="pref_summary_carousel_effect">Körhinta effektus a most játszott képernyőn lévő albumborítón. Ne feledje, hogy a Kártya és a Homályosított Kártya téma nem fog működni</string>
     <string name="pref_summary_classic_notification">Használja a klasszikus értesítési kinézetet.</string>
@@ -299,6 +310,7 @@
     <string name="pref_summary_desaturated_color">Az Anyagtervezés szerint a sötét módban a színeket deszaturálni kell</string>
     <string name="pref_summary_dominant_color">A legtöbb domináns színt az album vagy az előadó borítója veszi fel.</string>
     <string name="pref_summary_extra_controls">Extra irányítás a mini lejátszóhoz</string>
+    <string name="pref_summary_extra_song_info">Mutasson további dalinformációkat, például a fájl formátumát, bitrátáját és frekvenciáját</string>
     <string name="pref_summary_gapless_playback">"Egyes eszközökön lejátszási problémákat okozhat."</string>
     <string name="pref_summary_genre_toggle">Műfaj lap kapcsolása</string>
     <string name="pref_summary_home_banner">Kezdőlap banner stílusának kapcsolása</string>
@@ -321,6 +333,7 @@
     <string name="pref_title_audio_ducking">Csökkentse a fókuszvesztés hangerejét</string>
     <string name="pref_title_auto_download_artist_images">Automatikus letölti képeket</string>
     <string name="pref_title_blacklist">Feketelista</string>
+    <string name="pref_title_bluetooth_playback">Bluetooth lejátszás</string>
     <string name="pref_title_blurred_album_art">Elhomályosított albumborító</string>
     <string name="pref_title_choose_equalizer">Válasszon Hangszínszabélyzott</string>
     <string name="pref_title_classic_notification">Klasszikus értesítési terv</string>
@@ -328,6 +341,7 @@
     <string name="pref_title_colored_notification">Színes értesítés</string>
     <string name="pref_title_desaturated_color">Deszaturált szín</string>
     <string name="pref_title_extra_controls">Extra vezérlők</string>
+    <string name="pref_title_extra_song_info">Dalinformáció</string>
     <string name="pref_title_gapless_playback">Gapless lejátszás</string>
     <string name="pref_title_general_theme">Általános téma</string>
     <string name="pref_title_genre_toggle">Mutasd a műfaj lapot</string>
@@ -351,6 +365,7 @@
     <string name="pref_title_user_info">Felhasználói adatok</string>
     <string name="primary_color">Elsődleges szín</string>
     <string name="primary_color_desc">Az elsődleges téma színe, alapértelmezés szerint kék szürke, jelenleg sötét színekkel működik</string>
+    <string name="pro">Pro</string>
     <string name="pro_summary">Jelenleg témákat játszik, körhinta effektus és még sok más ..</string>
     <string name="profile">Profil</string>
     <string name="purchase">Vásárlás</string>
@@ -379,6 +394,7 @@
     <string name="restored_previous_purchases">Korábbi vásárlások visszaállítása.</string>
     <string name="restoring_purchase">A vásárlás visszaállítása ...</string>
     <string name="retro_equalizer">Retro Zene Hangszínszabályzó</string>
+    <string name="retro_music_player">Retro Music Player</string>
     <string name="retro_music_pro">Retro Music Pro</string>
     <string name="saf_delete_failed">A fájl törlése sikertelen: %s</string>
     <!-- SAF -->
@@ -401,6 +417,7 @@
     <string name="saving_changes">A változtatások mentése</string>
     <string name="scan_media">Média szkennelés</string>
     <string name="scanned_files">%2$d fájlt %1$d szkennelt.</string>
+    <string name="scrobbles_label">Scrobblek</string>
     <string name="search_hint">Keresés a könyvtárban ...</string>
     <string name="select_all">Minden kiválasztása</string>
     <string name="select_banner_photo">Banner fotó kiválasztása</string>
@@ -410,6 +427,7 @@
     <string name="set_artist_image">Állítsa be az előadó képét</string>
     <string name="set_photo">Profilfotó beállítása</string>
     <string name="share_app">Alkalmazás megosztása</string>
+    <string name="share_to_stories">Ossza meg a Történet-ben</string>
     <string name="shuffle">Keverés</string>
     <string name="simple">Egyszerű</string>
     <string name="sleep_timer_canceled">Az elalváskapcsoló kikapcsolva.</string>
@@ -417,6 +435,7 @@
     <string name="slide">Csúsztatás</string>
     <string name="small">Kis album</string>
     <string name="social">Közösségi</string>
+    <string name="social_stories">Ossza meg a történetet</string>
     <string name="song">Dal</string>
     <string name="song_duration">A dal időtartama</string>
     <string name="songs">Dalok</string>
@@ -426,6 +445,7 @@
     <string name="sort_order_artist">Előadó</string>
     <string name="sort_order_composer">Zeneszerző</string>
     <string name="sort_order_date">Dátum</string>
+    <string name="sort_order_date_modified">Módosítás dátuma</string>
     <string name="sort_order_year">Év</string>
     <string name="sort_order_z_a">Csökkenő</string>
     <string name="speech_not_supported">Sajnálom! A készülék nem támogatja a beszédet</string>
@@ -471,8 +491,9 @@
     <string name="updating">Frissítés...</string>
     <string name="username">Felhasználónév</string>
     <string name="version">Verzió</string>
-    <string name="vertical_flip">Függőleges flip</string>
+    <string name="vertical_flip">Függőleges forgatás</string>
     <string name="virtualizer">Virtualizáló</string>
+    <string name="volume">Hangerő</string>
     <string name="web_search">Webes keresés</string>
     <string name="welcome">Üdvözöljük,</string>
     <string name="what_do_you_want_to_share">Mit szeretne megosztani?</string>
@@ -485,4 +506,12 @@
     <string name="you_have_to_select_at_least_one_category">Legalább egy kategóriát kell kiválasztania</string>
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Továbbítani fogjuk a problémakezelő weboldalra.</string>
     <string name="your_account_data_is_only_used_for_authentication">Fiókja adatait kizárólag a hitelesítéshez fogjuk használni.</string>
+    <string name="amount">Tartalom</string>
+    <string name="note">Megjegyzés (opcionális)</string>
+    <string name="start_payment">Kezdje a fizetést</string>
+    <string name="pref_title_expand_now_playing_panel">Jelenítse meg a most játszó képernyőt</string>
+    <string name="pref_summary_expand_now_playing_panel">Az értesítésre kattintva a kezdőképernyő helyett a lejátszási képernyő jelenik meg</string>
+    <string name="tiny_card_style">Apró kártya</string>
+    <string name="about_album_label">%s -ról</string>
+    <string name="pref_language_name">Select language</string>
 </resources>
