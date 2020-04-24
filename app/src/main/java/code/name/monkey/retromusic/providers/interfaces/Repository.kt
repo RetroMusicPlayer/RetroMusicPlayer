@@ -58,4 +58,8 @@ interface Repository {
     suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
 
     suspend fun artistById(artistId: Int): Result<Artist>
+
+    suspend fun contributors(): Result<List<Contributor>>
+
+    suspend fun translators(): Result<List<Contributor>>
 }

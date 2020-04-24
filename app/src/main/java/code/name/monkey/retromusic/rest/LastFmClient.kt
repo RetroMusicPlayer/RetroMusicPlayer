@@ -24,13 +24,12 @@ object LastFmClient {
     }
 
     init {
-        val retrofit = Retrofit.Builder()
+        lastFMService = Retrofit.Builder()
             .baseUrl(baseUrl)
             .callFactory(createDefaultOkHttpClientBuilder().build())
             .addConverterFactory(GsonConverterFactory.create(Gson()))
             .build()
-
-        lastFMService = retrofit.create(LastFMService::class.java)
+            .create(LastFMService::class.java)
     }
 
     private fun createDefaultOkHttpClientBuilder(): OkHttpClient.Builder {

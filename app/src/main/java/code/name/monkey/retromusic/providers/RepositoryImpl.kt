@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.Result.Error
 import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.adapter.HomeAdapter
+import code.name.monkey.retromusic.data.RetroDataService
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.providers.interfaces.Repository
@@ -281,6 +282,22 @@ class RepositoryImpl @Inject constructor(private val context: Context) : Reposit
             return Success(artist)
         } catch (e: Exception) {
             Error(Throwable("Error loading artist"))
+        }
+    }
+
+    override suspend fun contributors(): Result<List<Contributor>> {
+        return try {
+            Success(RetroDataService.retoService.getContributors())
+        } catch (e: Exception) {
+            Error(Throwable(e))
+        }
+    }
+
+    override suspend fun translators(): Result<List<Contributor>> {
+        return try {
+            Success(RetroDataService.retoService.getTranslators())
+        } catch (e: Exception) {
+            Error(Throwable(e))
         }
     }
 }

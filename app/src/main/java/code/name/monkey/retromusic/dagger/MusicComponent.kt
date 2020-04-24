@@ -54,4 +54,6 @@ interface MusicComponent {
     fun inject(searchActivity: SearchActivity)
 
     fun inject(bannerHomeFragment: BannerHomeFragment)
+
+    fun inject(aboutActivity: AboutActivity)
 }
