@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.views.RetroShapeableImageView
-import com.bumptech.glide.Glide
 
 class TranslatorsAdapter(
     private var contributors: List<Contributor>
@@ -46,12 +46,7 @@ class TranslatorsAdapter(
         internal fun bindData(contributor: Contributor) {
             title.text = contributor.name
             text.text = contributor.summary
-            Glide.with(image.context)
-                .load(contributor.profileImage)
-                .error(R.drawable.ic_account_white_24dp)
-                .placeholder(R.drawable.ic_account_white_24dp)
-                .dontAnimate()
-                .into(image)
+            image.hide()
         }
     }
 }

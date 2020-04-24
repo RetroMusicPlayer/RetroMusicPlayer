@@ -25,28 +25,29 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
 import code.name.monkey.retromusic.model.Contributor
-import code.name.monkey.retromusic.mvp.presenter.AboutPresenter
-import code.name.monkey.retromusic.mvp.presenter.AboutView
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_about.*
 import kotlinx.android.synthetic.main.card_credit.*
 import kotlinx.android.synthetic.main.card_other.*
 import kotlinx.android.synthetic.main.card_retro_info.*
 import kotlinx.android.synthetic.main.card_social.*
-import javax.inject.Inject
+import java.io.IOException
+import java.nio.charset.StandardCharsets
 
-class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
+class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
-    /*private val assetJsonData: String?
+    private val contributorsJson: String?
         get() {
             val json: String
             try {
-                val inputStream = assets.open("data/contributors.json")
+                val inputStream = assets.open("contributors.json")
                 val size = inputStream.available()
                 val buffer = ByteArray(size)
                 inputStream.read(buffer)
@@ -56,12 +57,9 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
                 ex.printStackTrace()
                 return null
             }
-
             return json
         }
-*/
-    @Inject
-    lateinit var aboutPresenter: AboutPresenter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
@@ -71,27 +69,13 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
 
-        App.musicComponent.inject(this)
-        aboutPresenter.attachView(this)
-
         val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
         toolbar.setBackgroundColor(toolbarColor)
         ToolbarContentTintHelper.colorBackButton(toolbar)
         setSupportActionBar(toolbar)
         version.setSummary(getAppVersion())
         setUpView()
-        //loadContributors()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        aboutPresenter.loadContributors()
-        aboutPresenter.loadTranslators()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        aboutPresenter.detachView()
+        loadContributors()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -123,7 +107,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
         openSource.setOnClickListener(this)
         pinterestLink.setOnClickListener(this)
         bugReportLink.setOnClickListener(this)
-        translators.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -141,7 +124,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
             R.id.changelog -> showChangeLogOptions()
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
             R.id.bugReportLink -> NavigationUtil.bugReport(this)
-            R.id.translators -> openUrl("");
         }
     }
 
@@ -175,14 +157,15 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener, AboutView {
             .setText(String.format(getString(R.string.app_share), packageName)).startChooser()
     }
 
-    override fun showContributors(contributor: List<Contributor>) {
-        val contributorAdapter = ContributorAdapter(contributor)
+    private fun loadContributors() {
+        val type = object : TypeToken<List<Contributor>>() {
+
+        }.type
+        val contributors = Gson().fromJson<List<Contributor>>(contributorsJson, type)
+
+        val contributorAdapter = ContributorAdapter(contributors)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.itemAnimator = DefaultItemAnimator()
         recyclerView.adapter = contributorAdapter
-    }
-
-    override fun translators(contributor: List<Contributor>) {
-
     }
 }

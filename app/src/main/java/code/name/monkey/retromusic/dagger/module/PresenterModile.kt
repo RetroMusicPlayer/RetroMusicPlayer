@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.dagger.module
 
 import android.content.Context
 import code.name.monkey.retromusic.mvp.presenter.*
-import code.name.monkey.retromusic.mvp.presenter.AboutPresenter.AboutPresenterImpl
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter.AlbumDetailsPresenterImpl
 import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter.AlbumsPresenterImpl
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter.ArtistDetailsPresenterImpl
@@ -97,11 +96,6 @@ class PresenterModule {
 
     @Provides
     fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesAboutPresenter(presenter: AboutPresenterImpl): AboutPresenter {
         return presenter
     }
 }

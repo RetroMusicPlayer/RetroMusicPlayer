@@ -63,10 +63,10 @@ class RenamePlaylistDialog : DialogFragment() {
 
         MaterialUtil.setTint(actionNewPlaylistContainer, false)
 
-        val playlistId = arguments!!.getLong(PLAYLIST_ID)
+        val playlistId = requireArguments().getLong(PLAYLIST_ID)
         playlistView.appHandleColor()
             .setText(
-                PlaylistsUtil.getNameForPlaylist(context!!, playlistId),
+                PlaylistsUtil.getNameForPlaylist(requireContext(), playlistId),
                 TextView.BufferType.EDITABLE
             )
         return materialDialog

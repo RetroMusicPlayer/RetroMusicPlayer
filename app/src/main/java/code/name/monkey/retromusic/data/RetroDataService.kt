@@ -17,7 +17,7 @@ interface RetroDataService {
     suspend fun getTranslators(): List<Contributor>
 
     companion object {
-        val retoService = Retrofit.Builder()
+        val retoService: RetroDataService = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
