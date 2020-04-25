@@ -16,11 +16,10 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import java.util.*
 
 class AlbumCoverPagerAdapter(
     fragmentManager: FragmentManager,
-    private val dataSet: ArrayList<Song>
+    private val dataSet: List<Song>
 ) : CustomFragmentStatePagerAdapter(fragmentManager) {
 
     private var currentColorReceiver: AlbumCoverFragment.ColorReceiver? = null
@@ -95,7 +94,8 @@ class AlbumCoverPagerAdapter(
             savedInstanceState: Bundle?
         ): View? {
             val finalLayout = when {
-                PreferenceUtil.getInstance(requireContext()).carouselEffect() -> R.layout.fragment_album_carousel_cover
+                PreferenceUtil.getInstance(requireContext())
+                    .carouselEffect() -> R.layout.fragment_album_carousel_cover
                 else -> layout
             }
             val view = inflater.inflate(finalLayout, container, false)

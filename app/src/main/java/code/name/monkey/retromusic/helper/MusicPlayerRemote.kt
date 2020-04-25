@@ -37,6 +37,7 @@ object MusicPlayerRemote {
     val TAG: String = MusicPlayerRemote::class.java.simpleName
     private val mConnectionMap = WeakHashMap<Context, ServiceBinder>()
     var musicService: MusicService? = null
+
     @JvmStatic
     val isPlaying: Boolean
         get() = musicService != null && musicService!!.isPlaying
@@ -64,11 +65,12 @@ object MusicPlayerRemote {
                 musicService!!.position = position
             }
         }
+
     @JvmStatic
-    val playingQueue: ArrayList<Song>
+    val playingQueue: List<Song>
         get() = if (musicService != null) {
-            musicService?.playingQueue as ArrayList<Song>
-        } else ArrayList()
+            musicService?.playingQueue as List<Song>
+        } else listOf<Song>()
 
     val songProgressMillis: Int
         get() = if (musicService != null) {
@@ -84,6 +86,7 @@ object MusicPlayerRemote {
         get() = if (musicService != null) {
             musicService!!.repeatMode
         } else MusicService.REPEAT_MODE_NONE
+
     @JvmStatic
     val shuffleMode: Int
         get() = if (musicService != null) {
@@ -456,7 +459,8 @@ object MusicPlayerRemote {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private fun getSongIdFromMediaProvider(uri: Uri): String {
-        return DocumentsContract.getDocumentId(uri).split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+        return DocumentsContract.getDocumentId(uri).split(":".toRegex())
+            .dropLastWhile { it.isEmpty() }.toTypedArray()[1]
     }
 
     class ServiceBinder internal constructor(private val mCallback: ServiceConnection?) :

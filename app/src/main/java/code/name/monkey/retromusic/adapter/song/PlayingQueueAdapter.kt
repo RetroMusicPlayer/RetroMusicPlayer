@@ -23,11 +23,10 @@ import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultAct
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.action.SwipeResultActionRemoveItem
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.annotation.SwipeableItemResults
 import me.zhanghai.android.fastscroll.PopupTextProvider
-import java.util.*
 
 class PlayingQueueAdapter(
     activity: AppCompatActivity,
-    dataSet: ArrayList<Song>,
+    dataSet: MutableList<Song>,
     private var current: Int,
     itemLayoutRes: Int
 ) : SongAdapter(
@@ -82,8 +81,8 @@ class PlayingQueueAdapter(
         // We don't want to load it in this adapter
     }
 
-    fun swapDataSet(dataSet: ArrayList<Song>, position: Int) {
-        this.dataSet = dataSet
+    fun swapDataSet(dataSet: List<Song>, position: Int) {
+        this.dataSet = dataSet.toMutableList()
         current = position
         notifyDataSetChanged()
     }

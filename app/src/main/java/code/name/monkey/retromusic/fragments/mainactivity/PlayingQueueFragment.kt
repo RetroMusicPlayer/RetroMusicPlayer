@@ -79,7 +79,7 @@ class PlayingQueueFragment :
     override fun createAdapter(): PlayingQueueAdapter {
         return PlayingQueueAdapter(
             requireActivity() as AppCompatActivity,
-            MusicPlayerRemote.playingQueue,
+            MusicPlayerRemote.playingQueue.toMutableList(),
             MusicPlayerRemote.position,
             R.layout.item_queue
         )

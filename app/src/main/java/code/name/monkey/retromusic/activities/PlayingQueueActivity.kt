@@ -76,7 +76,7 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
         playingQueueAdapter = PlayingQueueAdapter(
             this,
-            MusicPlayerRemote.playingQueue,
+            MusicPlayerRemote.playingQueue.toMutableList(),
             MusicPlayerRemote.position,
             R.layout.item_queue
         )

@@ -74,8 +74,8 @@ import code.name.monkey.retromusic.helper.ShuffleHelper;
 import code.name.monkey.retromusic.model.Playlist;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.providers.HistoryStore;
-import code.name.monkey.retromusic.providers.MusicPlaybackQueueStore;
 import code.name.monkey.retromusic.providers.SongPlayCountStore;
+import code.name.monkey.retromusic.room.NowPlayingQueue;
 import code.name.monkey.retromusic.service.notification.PlayingNotification;
 import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl;
 import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
@@ -206,11 +206,9 @@ public class MusicService extends Service implements
     private MediaSessionCompat mediaSession;
     private ContentObserver mediaStoreObserver;
     private HandlerThread musicPlayerHandlerThread;
-
     private boolean notHandledMetaChangedForCurrentTrack;
-
-    private ArrayList<Song> originalPlayingQueue = new ArrayList<>();
-
+    private List<Song> originalPlayingQueue = new ArrayList<>();
+    private List<Song> playingQueue = new ArrayList<>();
     private boolean pausedByTransientLossOfFocus;
 
     private final BroadcastReceiver becomingNoisyReceiver = new BroadcastReceiver() {
@@ -239,7 +237,7 @@ public class MusicService extends Service implements
             updateNotification();
         }
     };
-    private ArrayList<Song> playingQueue = new ArrayList<>();
+
     private QueueSaveHandler queueSaveHandler;
     private HandlerThread queueSaveHandlerThread;
     private boolean queuesRestored;
@@ -306,6 +304,7 @@ public class MusicService extends Service implements
     private ThrottledSeekHandler throttledSeekHandler;
     private Handler uiThreadHandler;
     private PowerManager.WakeLock wakeLock;
+    private NowPlayingQueue nowPlayingQueue;
 
     private static Bitmap copy(Bitmap bitmap) {
         Bitmap.Config config = bitmap.getConfig();
@@ -327,6 +326,8 @@ public class MusicService extends Service implements
     @Override
     public void onCreate() {
         super.onCreate();
+
+        nowPlayingQueue = new NowPlayingQueue(this);
 
         final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         if (telephonyManager != null) {
@@ -523,7 +524,7 @@ public class MusicService extends Service implements
     }
 
     @Nullable
-    public ArrayList<Song> getPlayingQueue() {
+    public List<Song> getPlayingQueue() {
         return playingQueue;
     }
 
@@ -985,9 +986,10 @@ public class MusicService extends Service implements
 
     public synchronized void restoreQueuesAndPositionIfNecessary() {
         if (!queuesRestored && playingQueue.isEmpty()) {
-            ArrayList<Song> restoredQueue = MusicPlaybackQueueStore.getInstance(this).getSavedPlayingQueue();
-            ArrayList<Song> restoredOriginalQueue = MusicPlaybackQueueStore.getInstance(this)
-                    .getSavedOriginalPlayingQueue();
+
+
+            List<Song> restoredQueue = nowPlayingQueue.getQueue();//MusicPlaybackQueueStore.getInstance(this).getSavedPlayingQueue();
+            List<Song> restoredOriginalQueue = nowPlayingQueue.getOriginalQueue();//MusicPlaybackQueueStore.getInstance(this).getSavedOriginalPlayingQueue();
             int restoredPosition = PreferenceManager.getDefaultSharedPreferences(this).getInt(SAVED_POSITION, -1);
             int restoredPositionInTrack = PreferenceManager.getDefaultSharedPreferences(this)
                     .getInt(SAVED_POSITION_IN_TRACK, -1);
@@ -1023,7 +1025,9 @@ public class MusicService extends Service implements
     }
 
     public void saveQueuesImpl() {
-        MusicPlaybackQueueStore.getInstance(this).saveQueues(playingQueue, originalPlayingQueue);
+        //MusicPlaybackQueueStore.getInstance(this).saveQueues(playingQueue, originalPlayingQueue);
+        nowPlayingQueue.saveQueue(playingQueue);
+        nowPlayingQueue.saveOriginalQueue(originalPlayingQueue);
     }
 
     public void saveState() {

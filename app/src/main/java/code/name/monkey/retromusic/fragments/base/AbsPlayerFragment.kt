@@ -86,7 +86,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
                 return true
             }
             R.id.action_save_playing_queue -> {
-                CreatePlaylistDialog.create(MusicPlayerRemote.playingQueue)
+                CreatePlaylistDialog.create(ArrayList(MusicPlayerRemote.playingQueue))
                     .show(childFragmentManager, "ADD_TO_PLAYLIST")
                 return true
             }
