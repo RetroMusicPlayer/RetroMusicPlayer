@@ -88,10 +88,10 @@ public class ArtistGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, artist, noCustomImage, forceDownload)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .dontTransform()
                     .signature(createSignature(artist));
         }
 
@@ -127,6 +127,7 @@ public class ArtistGlideRequest {
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .dontTransform()
                     .signature(createSignature(builder.artist));
         }
     }
@@ -149,10 +150,10 @@ public class ArtistGlideRequest {
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                    .dontTransform()
                     .signature(createSignature(builder.artist));
         }
     }
