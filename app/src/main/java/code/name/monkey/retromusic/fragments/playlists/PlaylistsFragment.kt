@@ -1,43 +1,41 @@
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.playlists
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.mvp.presenter.PlaylistView
-import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter
-import javax.inject.Inject
 
 class PlaylistsFragment :
-    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(), PlaylistView,
+    AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
+
+    lateinit var playlistViewModel: PlaylistViewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        playlistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
+        playlistViewModel.playlists.observe(viewLifecycleOwner, Observer { playlists ->
+            if (playlists.isNotEmpty()) {
+                adapter?.swapDataSet(playlists)
+            } else {
+                adapter?.swapDataSet(listOf())
+            }
+        })
+    }
 
     override fun handleBackPress(): Boolean {
         return false
     }
 
-    @Inject
-    lateinit var playlistsPresenter: PlaylistsPresenter
-
     override val emptyMessage: Int
         get() = R.string.no_playlists
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        playlistsPresenter.attachView(this)
-    }
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireContext(), 1)
@@ -52,29 +50,9 @@ class PlaylistsFragment :
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (adapter!!.dataSet.isNullOrEmpty()) {
-            playlistsPresenter.playlists()
-        }
-    }
-
-    override fun onDestroyView() {
-        playlistsPresenter.detachView()
-        super.onDestroyView()
-    }
-
     override fun onMediaStoreChanged() {
         super.onMediaStoreChanged()
-        playlistsPresenter.playlists()
-    }
-
-    override fun showEmptyView() {
-        adapter?.swapDataSet(ArrayList())
-    }
-
-    override fun playlists(playlists: List<Playlist>) {
-        adapter?.swapDataSet(playlists)
+        playlistViewModel.loadPlaylist()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,10 +69,7 @@ class PlaylistsFragment :
 
         @JvmStatic
         fun newInstance(): PlaylistsFragment {
-            val args = Bundle()
-            val fragment = PlaylistsFragment()
-            fragment.arguments = args
-            return fragment
+            return PlaylistsFragment()
         }
     }
 }
