@@ -17,7 +17,12 @@ package code.name.monkey.retromusic.dagger
 import code.name.monkey.retromusic.activities.*
 import code.name.monkey.retromusic.dagger.module.AppModule
 import code.name.monkey.retromusic.dagger.module.PresenterModule
-import code.name.monkey.retromusic.fragments.mainactivity.*
+import code.name.monkey.retromusic.fragments.albums.AlbumsFragment
+import code.name.monkey.retromusic.fragments.artists.ArtistsFragment
+import code.name.monkey.retromusic.fragments.genres.GenresFragment
+import code.name.monkey.retromusic.fragments.home.BannerHomeFragment
+import code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment
+import code.name.monkey.retromusic.fragments.songs.SongsFragment
 import dagger.Component
 import javax.inject.Singleton
 

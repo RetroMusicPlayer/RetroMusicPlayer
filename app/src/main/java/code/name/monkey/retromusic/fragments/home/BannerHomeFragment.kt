@@ -12,7 +12,7 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.home
 
 import android.app.ActivityOptions
 import android.os.Bundle
@@ -20,25 +20,21 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
-import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
-import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
-import code.name.monkey.retromusic.mvp.presenter.HomePresenter
-import code.name.monkey.retromusic.mvp.presenter.HomeView
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
@@ -48,17 +44,11 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 import java.io.File
 import java.util.*
-import javax.inject.Inject
 
-class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks, HomeView {
-    @Inject
-    lateinit var homePresenter: HomePresenter
+class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
 
     private lateinit var homeAdapter: HomeAdapter
-
-    override fun sections(sections: List<Home>) {
-        homeAdapter.swapData(sections)
-    }
+    lateinit var homeModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -110,6 +100,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setStatusBarColorAuto(view)
 
         bannerImage?.setOnClickListener {
@@ -140,7 +131,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToPlaylistNew(requireActivity(), HistoryPlaylist(requireActivity()))
         }
 
-        userImage?.setOnClickListener {
+        userImage.setOnClickListener {
             val options = ActivityOptions.makeSceneTransitionAnimation(
                 mainActivity,
                 userImage,
@@ -151,15 +142,15 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         titleWelcome?.text =
             String.format("%s", PreferenceUtil.getInstance(requireContext()).userName)
 
-        App.musicComponent.inject(this)
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
-
         recyclerView.apply {
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-        homePresenter.attachView(this)
-        homePresenter.loadSections()
+        homeModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeModel.sections.observe(viewLifecycleOwner, androidx.lifecycle.Observer { sections ->
+            homeAdapter.swapData(sections)
+        })
     }
 
     override fun handleBackPress(): Boolean {
@@ -171,18 +162,9 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         getTimeOfTheDay()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        homePresenter.detachView()
-    }
-
-    override fun showEmptyView() {
-        emptyContainer.show()
-    }
-
     private fun getTimeOfTheDay() {
-        val c = Calendar.getInstance()
-        val timeOfDay = c.get(Calendar.HOUR_OF_DAY)
+        val calendar = Calendar.getInstance()
+        val timeOfDay = calendar.get(Calendar.HOUR_OF_DAY)
         var images = arrayOf<String>()
         when (timeOfDay) {
             in 0..5 -> images = resources.getStringArray(R.array.night)

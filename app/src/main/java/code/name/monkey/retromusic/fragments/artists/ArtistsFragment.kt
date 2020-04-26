@@ -1,65 +1,48 @@
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.artists
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.presenter.ArtistsPresenter
-import code.name.monkey.retromusic.mvp.presenter.ArtistsView
 import code.name.monkey.retromusic.util.PreferenceUtil
-import javax.inject.Inject
 
 class ArtistsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
-    ArtistsView, MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks {
+
+    lateinit var artistViewModel: ArtistViewModel
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        artistViewModel = ViewModelProvider(this).get(ArtistViewModel::class.java)
+        artistViewModel.artists.observe(viewLifecycleOwner, Observer { artists ->
+            if (artists.isNotEmpty()) {
+                adapter?.swapDataSet(artists)
+            } else {
+                adapter?.swapDataSet(listOf())
+            }
+        })
+    }
 
     override fun handleBackPress(): Boolean {
         return false
     }
 
-    override fun artists(artists: List<Artist>) {
-        adapter?.swapDataSet(artists)
-    }
-
-    @Inject
-    lateinit var artistsPresenter: ArtistsPresenter
-
     override val emptyMessage: Int
         get() = R.string.no_artists
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        artistsPresenter.attachView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (adapter!!.dataSet.isNullOrEmpty()) {
-            artistsPresenter.loadArtists()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        artistsPresenter.detachView()
-    }
-
     override fun onMediaStoreChanged() {
-        artistsPresenter.loadArtists()
+        artistViewModel.loadArtists()
     }
 
     override fun setSortOrder(sortOrder: String) {
-        artistsPresenter.loadArtists()
+        artistViewModel.loadArtists()
     }
 
     override fun createLayoutManager(): GridLayoutManager {
@@ -105,23 +88,6 @@ class ArtistsFragment :
         PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
     }
 
-    override fun showEmptyView() {
-        adapter?.swapDataSet(ArrayList())
-    }
-
-    companion object {
-        @JvmField
-        val TAG: String = ArtistsFragment::class.java.simpleName
-
-        @JvmStatic
-        fun newInstance(): ArtistsFragment {
-            val args = Bundle()
-            val fragment = ArtistsFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
     override fun setLayoutRes(layoutRes: Int) {
     }
 
@@ -131,5 +97,15 @@ class ArtistsFragment :
 
     override fun saveLayoutRes(layoutRes: Int) {
         PreferenceUtil.getInstance(requireContext()).artistGridStyle = layoutRes
+    }
+
+    companion object {
+        @JvmField
+        val TAG: String = ArtistsFragment::class.java.simpleName
+
+        @JvmStatic
+        fun newInstance(): ArtistsFragment {
+            return ArtistsFragment()
+        }
     }
 }

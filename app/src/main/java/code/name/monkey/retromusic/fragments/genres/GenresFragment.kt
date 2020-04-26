@@ -12,33 +12,43 @@
  * See the GNU General Public License for more details.
  */
 
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.genres
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.GenreAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Genre
-import code.name.monkey.retromusic.mvp.presenter.GenresPresenter
-import code.name.monkey.retromusic.mvp.presenter.GenresView
-import javax.inject.Inject
 
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
-    GenresView, MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks {
+
+    lateinit var genreViewModel: GenreViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        App.musicComponent.inject(this)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        genreViewModel = ViewModelProvider(this).get(GenreViewModel::class.java)
+        genreViewModel.genres.observe(viewLifecycleOwner, Observer { genres ->
+            if (genres.isNotEmpty()) {
+                adapter?.swapDataSet(genres)
+            } else {
+                adapter?.swapDataSet(listOf())
+            }
+        })
+    }
 
     override fun handleBackPress(): Boolean {
         return false
-    }
-
-    override fun genres(genres: List<Genre>) {
-        adapter?.swapDataSet(genres)
-    }
-
-    override fun showEmptyView() {
     }
 
     override fun createLayoutManager(): LinearLayoutManager {
@@ -53,33 +63,8 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
     override val emptyMessage: Int
         get() = R.string.no_genres
 
-    @Inject
-    lateinit var genresPresenter: GenresPresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        genresPresenter.attachView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (adapter!!.dataSet.isNullOrEmpty()) {
-            genresPresenter.loadGenres()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        genresPresenter.detachView()
-    }
-
     override fun onMediaStoreChanged() {
-        genresPresenter.loadGenres()
+        genreViewModel.loadGenre()
     }
 
     companion object {

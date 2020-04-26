@@ -1,50 +1,31 @@
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.albums
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Album
-import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter
-import code.name.monkey.retromusic.mvp.presenter.AlbumsView
 import code.name.monkey.retromusic.util.PreferenceUtil
-import javax.inject.Inject
 
 class AlbumsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
-    AlbumsView, MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks {
 
-    @Inject
-    lateinit var albumsPresenter: AlbumsPresenter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
+    lateinit var albumViewModel: AlbumViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        albumsPresenter.attachView(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (adapter!!.dataSet.isNullOrEmpty()) {
-            albumsPresenter.loadAlbums()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        albumsPresenter.detachView()
-    }
-
-    override fun albums(albums: List<Album>) {
-        adapter?.swapDataSet(albums)
+        albumViewModel = ViewModelProvider(this).get(AlbumViewModel::class.java)
+        albumViewModel.albums.observe(viewLifecycleOwner, Observer { albums ->
+            if (albums.isNotEmpty())
+                adapter?.swapDataSet(albums)
+            else
+                adapter?.swapDataSet(listOf())
+        })
     }
 
     override val emptyMessage: Int
@@ -94,15 +75,11 @@ class AlbumsFragment :
     }
 
     override fun onMediaStoreChanged() {
-        albumsPresenter.loadAlbums()
+        albumViewModel.getAlbums()
     }
 
     override fun setSortOrder(sortOrder: String) {
-        albumsPresenter.loadAlbums()
-    }
-
-    override fun showEmptyView() {
-        adapter?.swapDataSet(ArrayList())
+        albumViewModel.getAlbums()
     }
 
     override fun setLayoutRes(layoutRes: Int) {
@@ -116,20 +93,17 @@ class AlbumsFragment :
         PreferenceUtil.getInstance(requireContext()).albumGridStyle = layoutRes
     }
 
+    override fun handleBackPress(): Boolean {
+        return false
+    }
+
     companion object {
         @JvmField
         var TAG: String = AlbumsFragment::class.java.simpleName
 
         @JvmStatic
         fun newInstance(): AlbumsFragment {
-            val args = Bundle()
-            val fragment = AlbumsFragment()
-            fragment.arguments = args
-            return fragment
+            return AlbumsFragment()
         }
-    }
-
-    override fun handleBackPress(): Boolean {
-        return false
     }
 }

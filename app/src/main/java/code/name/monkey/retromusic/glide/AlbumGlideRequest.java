@@ -84,7 +84,6 @@ public class AlbumGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, song, ignoreMediaStore)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(song));
@@ -103,15 +102,15 @@ public class AlbumGlideRequest {
             return createBaseRequest(builder.requestManager, builder.song, builder.ignoreMediaStore)
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
+                    .dontTransform()
                     .signature(createSignature(builder.song));
         }
     }
 
     public static class PaletteBuilder {
-        private  final Context context;
+        private final Context context;
         private final Builder builder;
 
         PaletteBuilder(Builder builder, Context context) {
@@ -126,7 +125,6 @@ public class AlbumGlideRequest {
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
                     .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));

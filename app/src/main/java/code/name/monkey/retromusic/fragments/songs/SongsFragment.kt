@@ -1,8 +1,9 @@
-package code.name.monkey.retromusic.fragments.mainactivity
+package code.name.monkey.retromusic.fragments.songs
 
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -10,19 +11,13 @@ import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
-import code.name.monkey.retromusic.mvp.presenter.SongView
 import code.name.monkey.retromusic.util.PreferenceUtil
-import java.util.*
-import javax.inject.Inject
 
 class SongsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
-    SongView, MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks {
 
-    @Inject
-    lateinit var songPresenter: SongPresenter
+    lateinit var songViewModel: SongsViewModel
 
     override val emptyMessage: Int
         get() = R.string.no_songs
@@ -35,7 +30,14 @@ class SongsFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        songPresenter.attachView(this)
+        songViewModel = ViewModelProvider(this).get(SongsViewModel::class.java)
+        songViewModel.songs.observe(viewLifecycleOwner,
+            androidx.lifecycle.Observer { songs ->
+                if (songs.isNotEmpty())
+                    adapter?.swapDataSet(songs)
+                else
+                    adapter?.swapDataSet(listOf())
+            })
     }
 
     override fun createLayoutManager(): GridLayoutManager {
@@ -62,12 +64,8 @@ class SongsFragment :
         )
     }
 
-    override fun songs(songs: List<Song>) {
-        adapter?.swapDataSet(songs)
-    }
-
     override fun onMediaStoreChanged() {
-        songPresenter.loadSongs()
+        //songPresenter.loadSongs()
     }
 
     override fun loadGridSize(): Int {
@@ -90,20 +88,6 @@ class SongsFragment :
         adapter?.notifyDataSetChanged()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (adapter?.dataSet.isNullOrEmpty())
-            songPresenter.loadSongs()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        songPresenter.detachView()
-    }
-
-    override fun showEmptyView() {
-        adapter?.swapDataSet(ArrayList())
-    }
 
     override fun loadSortOrder(): String {
         return PreferenceUtil.getInstance(requireContext()).songSortOrder
@@ -114,7 +98,7 @@ class SongsFragment :
     }
 
     override fun setSortOrder(sortOrder: String) {
-        songPresenter.loadSongs()
+        songViewModel.loadSongs()
     }
 
     companion object {
@@ -125,7 +109,8 @@ class SongsFragment :
         @JvmStatic
         fun newInstance(): SongsFragment {
             val args = Bundle()
-            val fragment = SongsFragment()
+            val fragment =
+                SongsFragment()
             fragment.arguments = args
             return fragment
         }
