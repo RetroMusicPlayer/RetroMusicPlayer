@@ -176,6 +176,14 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         this.album = album
 
         albumTitle.text = album.title
+        val songText =
+            resources.getQuantityString(
+                R.plurals.albumSongs,
+                album.songCount,
+                album.songCount
+            )
+        songTitle.text = songText
+
         if (MusicUtil.getYearString(album.year) == "-") {
             albumText.text = String.format(
                 "%s • %s",
@@ -193,7 +201,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
         albumDetailsPresenter.loadMore(album.artistId)
-        albumDetailsPresenter.aboutAlbum(album.artistName!!, album.title!!)
+        albumDetailsPresenter.aboutAlbum(album.artistName ?: "-", album.title ?: "-")
     }
 
     override fun moreAlbums(albums: List<Album>) {
@@ -216,7 +224,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             if (lastFmAlbum.album.wiki != null) {
                 aboutAlbumText.show()
                 aboutAlbumTitle.show()
-                aboutAlbumTitle.text = String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
+                aboutAlbumTitle.text =
+                    String.format(getString(R.string.about_album_label), lastFmAlbum.album.name)
                 aboutAlbumText.text = lastFmAlbum.album.wiki.content
             }
             if (lastFmAlbum.album.listeners.isNotEmpty()) {

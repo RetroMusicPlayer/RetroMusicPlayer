@@ -2,9 +2,7 @@ package code.name.monkey.retromusic.activities
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.text.Spanned
 import android.transition.Slide
 import android.view.Menu
@@ -188,8 +186,21 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             MusicUtil.getArtistInfoString(this, artist),
             MusicUtil.getReadableDurationString(MusicUtil.getTotalDuration(artist.songs))
         )
-
-        songAdapter.swapDataSet(artist.songs)
+        val songText =
+            resources.getQuantityString(
+                R.plurals.albumSongs,
+                artist.songCount,
+                artist.songCount
+            )
+        val albumText =
+            resources.getQuantityString(
+                R.plurals.albums,
+                artist.songCount,
+                artist.songCount
+            )
+        songTitle.text = songText
+        albumTitle.text =albumText
+            songAdapter.swapDataSet(artist.songs)
         albumAdapter.swapDataSet(artist.albums!!)
     }
 
@@ -208,7 +219,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
             if (bioContent != null && bioContent.trim { it <= ' ' }.isNotEmpty()) {
                 biographyText.visibility = View.VISIBLE
                 biographyTitle.visibility = View.VISIBLE
-                biography = HtmlCompat.fromHtml(bioContent,HtmlCompat.FROM_HTML_MODE_LEGACY)
+                biography = HtmlCompat.fromHtml(bioContent, HtmlCompat.FROM_HTML_MODE_LEGACY)
                 biographyText.text = biography
                 if (lastFmArtist.artist.stats.listeners.isNotEmpty()) {
                     listeners.show()

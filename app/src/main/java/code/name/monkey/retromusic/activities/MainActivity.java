@@ -51,21 +51,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity;
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog;
-import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
 import code.name.monkey.retromusic.fragments.albums.AlbumsFragment;
 import code.name.monkey.retromusic.fragments.artists.ArtistsFragment;
+import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment;
+import code.name.monkey.retromusic.fragments.genres.GenresFragment;
 import code.name.monkey.retromusic.fragments.home.BannerHomeFragment;
 import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
-import code.name.monkey.retromusic.fragments.genres.GenresFragment;
-import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment;
 import code.name.monkey.retromusic.fragments.playlists.PlaylistsFragment;
+import code.name.monkey.retromusic.fragments.queue.PlayingQueueFragment;
 import code.name.monkey.retromusic.fragments.songs.SongsFragment;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.SearchQueryHelper;
@@ -765,16 +764,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             @Override
             public void run() {
                 TransitionManager.beginDelayedTransition(mToolbar);
-                Log.i(TAG, "run: " + Thread.currentThread().getName());
                 mAppTitle.setVisibility(View.GONE);
                 setTitle(R.string.action_search);
             }
         }, 3000);
-
-        Locale[] locales = Locale.getAvailableLocales();
-
-        for (Locale l : locales) {
-            Log.d(TAG, "setupToolbar: " + l.toLanguageTag());
-        }
     }
 }

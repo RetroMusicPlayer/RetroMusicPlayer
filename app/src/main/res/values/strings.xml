@@ -851,6 +851,14 @@
     <string name="translators">Translators</string>
     <string name="translators_summary">The people who helped translate this app</string>
 
+    <plurals name="albumSongs">
+        <item quantity="one">Song</item>
+        <item quantity="other">Songs</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="other">Albums</item>
+    </plurals>
     <plurals name="numSongs">
         <item quantity="one">%d Song</item>
         <item quantity="other">%d Songs</item>

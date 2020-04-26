@@ -12,71 +12,35 @@
   ~ See the GNU General Public License for more details.
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/gridSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/gridSize"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
         android:text="@string/action_play_all"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sortOrder"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_grid_size_white_24dp"
-        app:tint="?android:attr/colorControlNormal" />
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_play_arrow_white_24dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/sortOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/action_play_all"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/changeLayoutType"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sort_white_24dp"
-        app:tint="?android:attr/colorControlNormal" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/changeLayoutType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="@string/action_play_all"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/shuffleAction"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_dashboard_white_24dp"
-        app:tint="?android:attr/colorControlNormal" />
-
-    <androidx.appcompat.widget.AppCompatImageView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/shuffleAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
         android:text="@string/shuffle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_shuffle_white_24dp"
-        app:tint="?android:attr/colorControlNormal" />
+        app:backgroundTint="?attr/colorSurface"
+        app:icon="@drawable/ic_shuffle_white_24dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
