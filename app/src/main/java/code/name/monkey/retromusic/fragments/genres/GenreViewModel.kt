@@ -10,7 +10,7 @@ import code.name.monkey.retromusic.providers.RepositoryImpl
 import kotlinx.coroutines.launch
 
 class GenreViewModel(application: Application) : AndroidViewModel(application) {
-    lateinit var genres: MutableLiveData<List<Genre>>
+    var genres = MutableLiveData<List<Genre>>()
 
     init {
         loadGenre()
@@ -19,7 +19,7 @@ class GenreViewModel(application: Application) : AndroidViewModel(application) {
     fun loadGenre() = viewModelScope.launch {
         val result = RepositoryImpl(getApplication()).allGenres()
         if (result is Success) {
-            genres = MutableLiveData(result.data)
+            genres.value = result.data
         }
     }
 }

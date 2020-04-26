@@ -10,7 +10,7 @@ import code.name.monkey.retromusic.providers.RepositoryImpl
 import kotlinx.coroutines.launch
 
 class AlbumViewModel(application: Application) : AndroidViewModel(application) {
-    lateinit var albums: MutableLiveData<List<Album>>
+    var albums = MutableLiveData<List<Album>>()
 
     init {
         getAlbums()
@@ -19,7 +19,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
     fun getAlbums() = viewModelScope.launch {
         val result = RepositoryImpl(getApplication()).allAlbums()
         if (result is Result.Success) {
-            albums = MutableLiveData(result.data)
+            albums.value = result.data
         }
     }
 }

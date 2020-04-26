@@ -10,7 +10,7 @@ import code.name.monkey.retromusic.providers.RepositoryImpl
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-    lateinit var sections: MutableLiveData<List<Home>>
+    var sections = MutableLiveData<List<Home>>()
     var repository: RepositoryImpl = RepositoryImpl(getApplication())
 
     init {
@@ -31,6 +31,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                 is Result.Success -> list.add(r.data)
             }
         }
-        sections = MutableLiveData(list)
+        sections.value = list
     }
 }
