@@ -12,31 +12,19 @@ class NowPlayingQueue(context: Context) {
 
     private val musicQueueRepository: MusicQueueRepository = MusicQueueRepository(queueDao)
 
-    fun saveQueue(songs: List<Song>) = GlobalScope.launch(Dispatchers.IO) {
-        val songEntity = songs.map {
-            Song.toSongEntity(it)
-        }
-        musicQueueRepository.insertQueue(songEntity)
+    fun saveQueue(songs: List<Song>) = GlobalScope.launch(Dispatchers.Default) {
+        musicQueueRepository.insertQueue(songs)
     }
 
-    fun saveOriginalQueue(playingQueue: List<Song>) = GlobalScope.launch(Dispatchers.IO) {
-        val songEntity = playingQueue.map {
-            Song.toSongEntity(it)
-        }
-        musicQueueRepository.insertOriginalQueue(songEntity)
+    fun saveOriginalQueue(songs: List<Song>) = GlobalScope.launch(Dispatchers.Default) {
+        musicQueueRepository.insertOriginalQueue(songs.map { Song.toSongEntity(it) })
     }
 
     fun getQueue(): List<Song> {
-        val songEntity = musicQueueRepository.getQueue()
-        return songEntity.map {
-            SongEntity.toSong(it)
-        }
+        return musicQueueRepository.getQueue()
     }
 
     fun getOriginalQueue(): List<Song> {
-        val songEntity = musicQueueRepository.getOriginalQueue()
-        return songEntity.map {
-            SongEntity.toSong(it)
-        }
+        return musicQueueRepository.getOriginalQueue().map { SongEntity.toSong(it) }
     }
 }

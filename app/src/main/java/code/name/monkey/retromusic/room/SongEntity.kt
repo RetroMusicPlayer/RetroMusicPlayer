@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import code.name.monkey.retromusic.model.Song
 
-@Entity(tableName = "song_entity")
+@Entity(tableName = "original_playing_queue")
 class SongEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "title") val title: String,

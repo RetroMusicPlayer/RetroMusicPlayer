@@ -850,4 +850,17 @@
     <string name="pref_language_name">Select language</string>
     <string name="translators">Translators</string>
     <string name="translators_summary">The people who helped translate this app</string>
+
+    <plurals name="numSongs">
+        <item quantity="one">%d Song</item>
+        <item quantity="other">%d Songs</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d Album</item>
+        <item quantity="other">%d Albums</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d Artist</item>
+        <item quantity="other">%d Artists</item>
+    </plurals>
 </resources>

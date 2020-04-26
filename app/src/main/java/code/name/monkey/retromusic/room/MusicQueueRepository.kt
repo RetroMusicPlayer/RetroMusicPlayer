@@ -1,16 +1,18 @@
 package code.name.monkey.retromusic.room
 
+import code.name.monkey.retromusic.model.Song
+
 class MusicQueueRepository(private val queueDao: QueueDao) {
 
-    fun getQueue(): List<SongEntity> = queueDao.getQueue()
+    fun getQueue(): List<Song> = queueDao.getQueue()
 
-    fun getOriginalQueue(): List<SongEntity> = queueDao.getQueue()
+    fun getOriginalQueue(): List<SongEntity> = queueDao.getOriginalQueue()
 
-    suspend fun insertQueue(queue: List<SongEntity>) {
+    suspend fun insertQueue(queue: List<Song>) {
         queueDao.saveQueue(queue)
     }
 
     suspend fun insertOriginalQueue(queue: List<SongEntity>) {
-        queueDao.saveQueue(queue)
+        queueDao.saveOriginalQueue(queue)
     }
 }
