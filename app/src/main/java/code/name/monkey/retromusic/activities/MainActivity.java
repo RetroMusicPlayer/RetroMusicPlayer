@@ -19,6 +19,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -44,7 +45,17 @@ import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialcab.MaterialCab.Callback;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.InstallState;
+import com.google.android.play.core.install.InstallStateUpdatedListener;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.InstallStatus;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.Task;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,6 +63,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
@@ -91,10 +103,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         implements CabHolder, SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-
     public static final int APP_INTRO_REQUEST = 100;
-
     public static final String EXPAND_PANEL = "expand_panel";
+    private static final int APP_UPDATE_REQUEST_CODE = 9002;
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
@@ -118,6 +129,30 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private MaterialTextView mAppTitle;
     private Toolbar mToolbar;
     private MaterialCardView mToolbarContainer;
+    private AppUpdateManager appUpdateManager;
+    InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
+        @Override
+        public void onStateUpdate(InstallState state) {
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackBarForCompleteUpdate();
+            } else if (state.installStatus() == InstallStatus.INSTALLED) {
+                appUpdateManager.unregisterListener(listener);
+            } else {
+                Log.i(TAG, "InstallStateUpdatedListener: state: " + state.installStatus());
+            }
+        }
+    };
+
+    private void popupSnackBarForCompleteUpdate() {
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.mainContent), "New app is ready!", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction("Install", view -> {
+            if (appUpdateManager != null) {
+                appUpdateManager.completeUpdate();
+            }
+        });
+        snackbar.setActionTextColor(ThemeStore.Companion.accentColor(this));
+        snackbar.show();
+    }
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -151,6 +186,28 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         checkShowChangelog();
         AppRater.appLaunched(this);
         setupToolbar();
+        checkUpdate();
+    }
+
+    private void checkUpdate() {
+        appUpdateManager = AppUpdateManagerFactory.create(this);
+        appUpdateManager.registerListener(listener);
+
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                try {
+                    appUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo,
+                            AppUpdateType.IMMEDIATE,
+                            this,
+                            APP_UPDATE_REQUEST_CODE);
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -160,6 +217,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             blockRequestPermissions = false;
             if (!hasPermissions()) {
                 requestPermissions();
+            }
+        } else if (requestCode == APP_UPDATE_REQUEST_CODE) {
+            if (resultCode != RESULT_OK) {
+
             }
         }
     }
@@ -176,6 +237,23 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 getIntent().putExtra(EXPAND_PANEL, false);
             }
         }
+        appUpdateManager.getAppUpdateInfo()
+                .addOnSuccessListener(appUpdateInfo -> {
+                    if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                        popupSnackBarForCompleteUpdate();
+                    }
+                    try {
+                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                            appUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo,
+                                    AppUpdateType.IMMEDIATE,
+                                    this,
+                                    APP_UPDATE_REQUEST_CODE);
+                        }
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     @Override

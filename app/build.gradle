@@ -24,7 +24,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId "code.name.monkey.retromusic"
-        versionCode 418
+        versionCode 417
         versionName '3.5.100'
 
         multiDexEnabled true
@@ -33,7 +33,7 @@ android {
     }
     signingConfigs {
         release {
-            Properties properties = getProperties('/Users/hemanths/Desktop/KeepSafe/retro.properties')
+            Properties properties = getProperties('/Users/h4h13/Documents/Github/retro.properties')
             storeFile file(getProperty(properties, 'storeFile'))
             keyAlias getProperty(properties, 'keyAlias')
             storePassword getProperty(properties, 'storePassword')
@@ -195,4 +195,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+
+    implementation 'com.google.android.play:core:1.7.2'
 }
