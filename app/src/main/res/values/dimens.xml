@@ -54,4 +54,5 @@
     <dimen name="slider_track_height">3dp</dimen>
     <dimen name="adaptive_icon_size">48dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
+    <dimen name="about_card_radius">16dp</dimen>
 </resources>

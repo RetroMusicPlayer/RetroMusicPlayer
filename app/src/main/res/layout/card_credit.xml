@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="@color/md_blue_100"
+    app:cardCornerRadius="@dimen/about_card_radius"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,7 +12,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/sb1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +23,7 @@
             android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/credit_title"
             android:textAppearance="@style/TextViewOverline"
-            android:textColor="?colorAccent"
+            android:textColor="?android:attr/textColorSecondary"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

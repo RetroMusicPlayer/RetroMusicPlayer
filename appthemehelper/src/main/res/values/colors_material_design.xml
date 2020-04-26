@@ -7,15 +7,10 @@
     <color name="md_red_500">#F44336</color>
     <color name="md_red_A400">#FF1744</color>
 
-    <!-- Pink -->
-
-    <!-- Yellow -->
     <color name="md_yellow_A400">#FFD600</color>
 
-
-    <!-- Deep Purple -->
-
     <color name="md_deep_purple_A400">#651FFF</color>
+
     <color name="md_deep_purple_300">#9575CD</color>
     <color name="md_deep_purple_400">#7E57C2</color>
     <color name="md_deep_purple_600">#5E35B1</color>
@@ -24,14 +19,11 @@
     <color name="md_deep_purple_500">#673AB7</color>
     <color name="md_deep_purple_A200">#7C4DFF</color>
 
-    <!-- Indigo -->
 
-
-    <!-- Blue -->
+    <color name="md_blue_100">#BBDEFB</color>
     <color name="md_blue_500">#2196F3</color>
     <color name="md_blue_A200">#448AFF</color>
     <color name="md_blue_A400">#2979FF</color>
-
 
     <color name="md_green_A200">#69F0AE</color>
     <color name="md_green_A700">#00C853</color>
@@ -44,11 +36,15 @@
     <color name="md_grey_800">#424242</color>
     <color name="md_grey_900">#212121</color>
 
-
     <color name="md_black_1000">#000000</color>
     <color name="md_white_1000">#FFFFFF</color>
     <color name="md_white_semi_transparent">#40FFFFFF</color>
 
+    <color name="md_green_100">#C8E6C9</color>
+    <color name="md_light_green_100">#DCEDC8</color>
+    <color name="md_indigo_100">#C5CAE9</color>
+    <color name="md_purple_100">#E1BEE7</color>
+    <color name="md_deep_purple_100">#D1C4E9</color>
 
     <color name="md_teal_A400">#1DE9B6</color>
     <color name="md_deep_orange_A400">#FF3D00</color>

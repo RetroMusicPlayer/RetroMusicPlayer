@@ -19,6 +19,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -37,8 +38,8 @@ public class WhatsNewActivity extends AbsBaseActivity {
     WebView webView;
 
     private static String colorToCSS(int color) {
-        return String.format("rgb(%d, %d, %d)", Color.red(color), Color.green(color),
-                Color.blue(color)); // on API 29, WebView doesn't load with hex colors
+        return String.format(Locale.getDefault(),"rgba(%d, %d, %d, %d)", Color.red(color), Color.green(color),
+                Color.blue(color), Color.alpha(color)); // on API 29, WebView doesn't load with hex colors
     }
 
     private static void setChangelogRead(@NonNull Context context) {
@@ -83,16 +84,13 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = ATHUtil.INSTANCE.isWindowBackgroundDark(this);
-            final String backgroundColor = colorToCSS(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface,
-                    Color.parseColor(isDark ? "#424242" : "#ffffff")));
+            final String backgroundColor = colorToCSS(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
+            final String textColor = colorToCSS(Color.parseColor(isDark ? "#60FFFFFF" : "#80000000"));
             final String changeLog = buf.toString()
-                    .replace("{style-placeholder}",
-                            String.format("body { background-color: %s; color: %s; }", backgroundColor, contentColor))
+                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; } li {color: %s;}", backgroundColor, contentColor, textColor))
                     .replace("{link-color}", colorToCSS(ThemeStore.Companion.accentColor(this)))
-                    .replace("{link-color-active}",
-                            colorToCSS(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))));
-
+                    .replace("{link-color-active}", colorToCSS(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))));
             webView.loadData(changeLog, "text/html", "UTF-8");
         } catch (Throwable e) {
             webView.loadData("<h1>Unable to load</h1><p>" + e.getLocalizedMessage() + "</p>", "text/html", "UTF-8");
