@@ -86,7 +86,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            return MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            return MaterialDialog(requireActivity()).show {
                 title(R.string.md_error_label)
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 message(R.string.md_storage_perm_error)
@@ -103,7 +103,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         checkIfCanGoUp()
         parentContents = listFiles()
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        return MaterialDialog(requireContext()).show {
             title(text = parentFolder!!.absolutePath)
             cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             listItems(items = contentsArray(), waitForPositiveButton = false) { _, index, _ ->
