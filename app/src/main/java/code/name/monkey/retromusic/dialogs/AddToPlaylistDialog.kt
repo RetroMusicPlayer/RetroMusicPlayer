@@ -39,7 +39,7 @@ class AddToPlaylistDialog : DialogFragment() {
             playlistNames.add(p.name)
         }
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        return MaterialDialog(requireContext()).show {
             title(R.string.add_playlist_title)
             cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             listItems(items = playlistNames) { dialog, index, _ ->

@@ -30,9 +30,7 @@ import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import java.util.*
 
@@ -79,7 +77,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         adapter.attachToRecyclerView(recyclerView)
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        return MaterialDialog(requireContext())
             .title(R.string.library_categories)
             .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .customView(view = view)

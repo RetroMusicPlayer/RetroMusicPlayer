@@ -43,7 +43,7 @@ class CreatePlaylistDialog : DialogFragment() {
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        val materialDialog = MaterialDialog(requireContext())
             .show {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(string.new_playlist_title)

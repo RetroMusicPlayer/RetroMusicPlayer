@@ -12,6 +12,7 @@
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive" >
         <item name="android:windowBackground">@color/window_color</item>
+        <item name="android:scrollbars">none</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />

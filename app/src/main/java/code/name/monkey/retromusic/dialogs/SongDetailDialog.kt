@@ -55,7 +55,7 @@ class SongDetailDialog : DialogFragment() {
         val context: Context = requireContext()
         val song = requireArguments().getParcelable<Song>("song")
 
-        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        val materialDialog = MaterialDialog(requireContext())
             .show {
                 customView(
                     R.layout.dialog_file_details,

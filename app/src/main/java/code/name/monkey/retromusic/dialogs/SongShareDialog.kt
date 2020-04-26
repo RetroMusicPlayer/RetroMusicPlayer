@@ -34,7 +34,7 @@ class SongShareDialog : DialogFragment() {
         val currentlyListening: String =
             getString(R.string.currently_listening_to_x_by_x, song?.title, song?.artistName)
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        return MaterialDialog(requireContext())
             .title(R.string.what_do_you_want_to_share)
             .show {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)

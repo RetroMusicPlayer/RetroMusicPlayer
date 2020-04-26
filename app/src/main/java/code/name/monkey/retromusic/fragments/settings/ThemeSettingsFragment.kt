@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.fragments.settings
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.appthemehelper.ACCENT_COLORS
@@ -30,9 +29,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.color.colorChooser
 
 
@@ -64,7 +61,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            MaterialDialog(requireActivity(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            MaterialDialog(requireActivity()).show {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(R.string.accent_color)
                 positiveButton(R.string.set)
@@ -76,9 +73,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                     ThemeStore.editTheme(requireContext()).accentColor(color).commit()
                     if (VersionUtils.hasNougatMR())
                         DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-                    Handler().postDelayed({
-                        requireActivity().recreate()
-                    }, 400)
+
+                    requireActivity().recreate()
+
                 }
             }
             return@setOnPreferenceClickListener true
@@ -102,7 +99,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             findPreference(PreferenceUtil.DESATURATED_COLOR)
         desaturatedColor?.setOnPreferenceChangeListener { _, value ->
             val desaturated = value as Boolean
-            ThemeStore.prefs(requireContext()).edit().putBoolean("desaturated_color", desaturated)
+            ThemeStore.prefs(requireContext())
+                .edit()
+                .putBoolean("desaturated_color", desaturated)
                 .apply()
             PreferenceUtil.getInstance(requireContext()).setDesaturatedColor(desaturated)
             requireActivity().recreate()

@@ -59,7 +59,7 @@ class DeleteSongsDialog : DialogFragment() {
             }
         }
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        return MaterialDialog(requireContext()).show {
             title(title)
             message(text = content)
             negativeButton(android.R.string.cancel) {

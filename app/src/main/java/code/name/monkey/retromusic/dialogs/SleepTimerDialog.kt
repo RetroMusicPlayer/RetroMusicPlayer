@@ -58,7 +58,7 @@ class SleepTimerDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         timerUpdater = TimerUpdater()
 
-        materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        materialDialog = MaterialDialog(requireContext())
             .title(R.string.action_sleep_timer)
             .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .positiveButton(R.string.action_set) {

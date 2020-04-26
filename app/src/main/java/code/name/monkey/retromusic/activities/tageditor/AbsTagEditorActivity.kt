@@ -52,7 +52,7 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var savedArtworkInfo: ArtworkInfo? = null
 
     protected val show: MaterialDialog
-        get() = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        get() = MaterialDialog(this).show {
             cornerRadius(PreferenceUtil.getInstance(this@AbsTagEditorActivity).dialogCorner)
             title(R.string.update_image)
             listItems(items = items) { _, position, _ ->

@@ -170,7 +170,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT))
+        val materialDialog = MaterialDialog(this)
             .show {
                 cornerRadius(PreferenceUtil.getInstance(this@LyricsActivity).dialogCorner)
                 title(R.string.add_time_framed_lryics)
@@ -208,7 +208,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
         }
 
         val materialDialog = MaterialDialog(
-            this, BottomSheet(LayoutMode.WRAP_CONTENT)
+            this
         ).show {
             cornerRadius(PreferenceUtil.getInstance(this@LyricsActivity).dialogCorner)
             title(R.string.add_lyrics)

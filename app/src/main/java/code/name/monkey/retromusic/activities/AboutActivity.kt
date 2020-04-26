@@ -128,7 +128,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun showChangeLogOptions() {
-        MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        MaterialDialog(this).show {
             cornerRadius(PreferenceUtil.getInstance(this@AboutActivity).dialogCorner)
             listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
                 if (position == 0) {

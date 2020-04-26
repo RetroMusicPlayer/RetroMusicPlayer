@@ -38,7 +38,7 @@ class ClearSmartPlaylistDialog : DialogFragment() {
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+        return MaterialDialog(requireContext()).show {
             title(title)
             cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             message(text = content)

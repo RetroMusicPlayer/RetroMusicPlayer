@@ -65,7 +65,7 @@ object AppRater {
     }
 
     private fun showRateDialog(context: Context, editor: SharedPreferences.Editor) {
-        MaterialDialog(context, BottomSheet(LayoutMode.WRAP_CONTENT))
+        MaterialDialog(context)
             .show {
 
                 cornerRadius(PreferenceUtil.getInstance(context).dialogCorner)

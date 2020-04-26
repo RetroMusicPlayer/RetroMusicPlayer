@@ -62,7 +62,7 @@ class UserInfoActivity : AbsBaseActivity() {
             loadBannerFromStorage(PreferenceUtil.getInstance(this).bannerImage)
         }
         userImage.setOnClickListener {
-            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            MaterialDialog(this).show {
                 cornerRadius(PreferenceUtil.getInstance(this@UserInfoActivity).dialogCorner)
                 title(text = getString(R.string.set_photo))
                 listItems(
@@ -79,7 +79,7 @@ class UserInfoActivity : AbsBaseActivity() {
             }
         }
         bannerSelect.setOnClickListener {
-            MaterialDialog(this, BottomSheet(LayoutMode.WRAP_CONTENT)).show {
+            MaterialDialog(this).show {
                 cornerRadius(PreferenceUtil.getInstance(this@UserInfoActivity).dialogCorner)
                 title(R.string.select_banner_photo)
                 listItems(

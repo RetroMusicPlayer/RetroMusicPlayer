@@ -49,7 +49,7 @@ class DeletePlaylistDialog : DialogFragment() {
             )
         }
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        return MaterialDialog(requireContext())
             .show {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(title)

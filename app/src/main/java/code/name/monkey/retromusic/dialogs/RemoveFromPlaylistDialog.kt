@@ -54,7 +54,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         }
 
 
-        return MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        return MaterialDialog(requireContext())
             .show {
                 title(title)
                 message(text = content)

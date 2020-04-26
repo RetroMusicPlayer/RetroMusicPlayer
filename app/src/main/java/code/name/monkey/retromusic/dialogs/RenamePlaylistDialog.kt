@@ -39,7 +39,7 @@ class RenamePlaylistDialog : DialogFragment() {
     private lateinit var actionNewPlaylistContainer: TextInputLayout
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        val materialDialog = MaterialDialog(requireContext())
             .show {
                 cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
                 title(string.rename_playlist_title)
