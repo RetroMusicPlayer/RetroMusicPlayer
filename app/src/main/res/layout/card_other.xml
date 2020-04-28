@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/md_purple_100"
     app:cardCornerRadius="@dimen/about_card_radius"
     app:cardUseCompatPadding="true">
 
@@ -12,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.google.android.material.textview.MaterialTextView
+        <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             android:id="@+id/sb4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +21,7 @@
             android:paddingBottom="?attr/listPreferredItemPaddingEnd"
             android:text="@string/others"
             android:textAppearance="@style/TextViewOverline"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="?colorAccent"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"

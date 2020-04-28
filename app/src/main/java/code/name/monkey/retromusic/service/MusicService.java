@@ -1026,8 +1026,8 @@ public class MusicService extends Service implements
 
     public void saveQueuesImpl() {
         //MusicPlaybackQueueStore.getInstance(this).saveQueues(playingQueue, originalPlayingQueue);
-        nowPlayingQueue.saveQueue(playingQueue);
-        nowPlayingQueue.saveOriginalQueue(originalPlayingQueue);
+        nowPlayingQueue.saveQueue(new ArrayList<>(playingQueue));
+        nowPlayingQueue.saveOriginalQueue(new ArrayList<>(originalPlayingQueue));
     }
 
     public void saveState() {

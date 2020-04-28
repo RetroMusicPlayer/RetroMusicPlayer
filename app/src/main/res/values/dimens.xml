@@ -55,4 +55,5 @@
     <dimen name="adaptive_icon_size">48dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
     <dimen name="about_card_radius">16dp</dimen>
+    <dimen name="about_card_elevation">2dp</dimen>
 </resources>

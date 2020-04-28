@@ -24,6 +24,7 @@ import java.util.Locale;
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
@@ -38,7 +39,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
     WebView webView;
 
     private static String colorToCSS(int color) {
-        return String.format(Locale.getDefault(),"rgba(%d, %d, %d, %d)", Color.red(color), Color.green(color),
+        return String.format(Locale.getDefault(), "rgba(%d, %d, %d, %d)", Color.red(color), Color.green(color),
                 Color.blue(color), Color.alpha(color)); // on API 29, WebView doesn't load with hex colors
     }
 
@@ -84,11 +85,14 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
             // Inject color values for WebView body background and links
             final boolean isDark = ATHUtil.INSTANCE.isWindowBackgroundDark(this);
+            final int accentColor = ThemeStore.Companion.accentColor(this);
             final String backgroundColor = colorToCSS(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface, Color.parseColor(isDark ? "#424242" : "#ffffff")));
             final String contentColor = colorToCSS(Color.parseColor(isDark ? "#ffffff" : "#000000"));
             final String textColor = colorToCSS(Color.parseColor(isDark ? "#60FFFFFF" : "#80000000"));
+            final String accentColorString = colorToCSS(ThemeStore.Companion.accentColor(this));
+            final String accentTextColor = colorToCSS(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.INSTANCE.isColorLight(accentColor)));
             final String changeLog = buf.toString()
-                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; } li {color: %s;}", backgroundColor, contentColor, textColor))
+                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; } li {color: %s;} .colorHeader {background-color: %s; color: %s;} .tag {color: %s;}", backgroundColor, contentColor, textColor, accentColorString, accentTextColor,accentColorString ))
                     .replace("{link-color}", colorToCSS(ThemeStore.Companion.accentColor(this)))
                     .replace("{link-color-active}", colorToCSS(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))));
             webView.loadData(changeLog, "text/html", "UTF-8");
