@@ -20,6 +20,8 @@ class SongsViewModel(application: Application) : AndroidViewModel(application) {
         val result = RepositoryImpl(getApplication()).allSongs()
         if (result is Success) {
             songs.value = result.data
+        } else {
+            songs.value = listOf()
         }
     }
 }

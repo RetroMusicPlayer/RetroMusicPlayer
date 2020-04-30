@@ -183,7 +183,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         mToolbar = findViewById(R.id.toolbar);
         mAppBarLayout = findViewById(R.id.appBarLayout);
 
-        checkShowChangelog();
+        //checkShowChangelog();
         AppRater.appLaunched(this);
         setupToolbar();
         checkUpdate();

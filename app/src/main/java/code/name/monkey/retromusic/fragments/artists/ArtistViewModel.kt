@@ -20,6 +20,8 @@ class ArtistViewModel(application: Application) : AndroidViewModel(application) 
         val result = RepositoryImpl(getApplication()).allArtists()
         if (result is Result.Success) {
             artists.value = result.data
+        } else {
+            artists.value = listOf()
         }
     }
 }

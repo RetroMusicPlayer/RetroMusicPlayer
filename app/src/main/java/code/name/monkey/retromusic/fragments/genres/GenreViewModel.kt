@@ -20,6 +20,8 @@ class GenreViewModel(application: Application) : AndroidViewModel(application) {
         val result = RepositoryImpl(getApplication()).allGenres()
         if (result is Success) {
             genres.value = result.data
+        }else {
+            genres.value = listOf()
         }
     }
 }

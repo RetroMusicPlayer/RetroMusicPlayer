@@ -27,9 +27,7 @@ import code.name.monkey.retromusic.adapter.ContributorAdapter
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -121,7 +119,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.donateLink -> NavigationUtil.goToSupportDevelopment(this)
             R.id.instagramLink -> openUrl(APP_INSTAGRAM_LINK)
             R.id.twitterLink -> openUrl(APP_TWITTER_LINK)
-            R.id.changelog -> showChangeLogOptions()
+            R.id.changelog -> openUrl(TELEGRAM_CHANGE_LOG)
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
             R.id.bugReportLink -> NavigationUtil.bugReport(this)
         }
