@@ -37,6 +37,7 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
 import java.util.*
 
@@ -71,8 +72,10 @@ class LrcView @JvmOverloads constructor(
     private var mCurrentPlayLineColor: Int = 0
     private var mNoLrcTextSize: Float = 0.toFloat()
     private var mNoLrcTextColor: Int = 0
+
     //是否拖拽中，否的话响应onClick事件
     private var isDragging: Boolean = false
+
     //用户开始操作
     private var isUserScroll: Boolean = false
     private var isAutoAdjustPosition = true
@@ -213,7 +216,9 @@ class LrcView @JvmOverloads constructor(
             isAntiAlias = true
             textAlign = Paint.Align.LEFT
             textSize = mLrcTextSize
-            typeface = ResourcesCompat.getFont(context, R.font.circular)
+           /* if (BuildConfig.FLAVOR != "nofont") {
+                typeface = ResourcesCompat.getFont(context, R.font.circular)
+            }*/
         }
         mDefaultContent = DEFAULT_CONTENT
 

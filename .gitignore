@@ -42,3 +42,4 @@ app/normal/release/
 app/font/
 app/src/debug/ 
 /app/nofont/
+/crowdin.properties

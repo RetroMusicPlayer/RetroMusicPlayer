@@ -178,6 +178,96 @@
     <array name="pref_album_details_style_layout">
         <item>@layout/activity_album</item>
     </array>
-
-    <string name="tiny_card_style">Tiny card</string>
+    <string-array name="pref_language_names">
+        <item>System default</item>
+        <item>Afrikaans</item>
+        <item>Arabic</item>
+        <item>Basque</item>
+        <item>Bengali</item>
+        <item>Catalan</item>
+        <item>China</item>
+        <item>Hong kong China</item>
+        <item>Taiwan</item>
+        <item>Croatian</item>
+        <item>Czech</item>
+        <item>Danish</item>
+        <item>Dutch</item>
+        <item>Finnish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Greek</item>
+        <item>Hebrew</item>
+        <item>Hindi</item>
+        <item>Hungarian</item>
+        <item>Indonesian</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Kannada</item>
+        <item>Korean</item>
+        <item>Malayalam</item>
+        <item>Nepali</item>
+        <item>Norwegian</item>
+        <item>Oriya</item>
+        <item>Persian</item>
+        <item>Polish</item>
+        <item>Portuguese</item>
+        <item>Romanian</item>
+        <item>Russian</item>
+        <item>Serbian</item>
+        <item>Slovak</item>
+        <item>Spain</item>
+        <item>Swedish</item>
+        <item>Tamil</item>
+        <item>Telugu</item>
+        <item>Turkish</item>
+        <item>Ukrainian</item>
+        <item>Urdu</item>
+        <item>Vietnamese</item>
+    </string-array>
+    <string-array name="pref_language_codes">
+        <item>auto</item>
+        <item>af-ZA</item>
+        <item>ar-SA</item>
+        <item>eu-ES</item>
+        <item>bn-IN</item>
+        <item>ca-ES</item>
+        <item>zh-CN</item>
+        <item>zh-HK</item>
+        <item>zh-TW</item>
+        <item>hr</item>
+        <item>cs-cz</item>
+        <item>da-DK</item>
+        <item>nl-NL</item>
+        <item>fi-FI</item>
+        <item>fr</item>
+        <item>de</item>
+        <item>el</item>
+        <item>iw</item>
+        <item>hi</item>
+        <item>hu</item>
+        <item>in</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>kn</item>
+        <item>ko</item>
+        <item>ml</item>
+        <item>ne</item>
+        <item>no</item>
+        <item>or</item>
+        <item>fa</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sr</item>
+        <item>sk</item>
+        <item>es</item>
+        <item>sw</item>
+        <item>ta</item>
+        <item>te</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>vi</item>
+    </string-array>
 </resources>

@@ -73,7 +73,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
         return super.dispatchKeyEvent(event)
     }
 
-    protected fun showOverflowMenu() {
+    private fun showOverflowMenu() {
     }
 
     protected open fun requestPermissions() {

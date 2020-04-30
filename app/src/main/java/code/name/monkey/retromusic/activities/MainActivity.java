@@ -51,6 +51,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
@@ -308,7 +309,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 key.equals(PreferenceUtil.TOGGLE_HOME_BANNER) || key.equals(PreferenceUtil.TOGGLE_ADD_CONTROLS) ||
                 key.equals(PreferenceUtil.ALBUM_COVER_STYLE) || key.equals(PreferenceUtil.HOME_ARTIST_GRID_STYLE) ||
                 key.equals(PreferenceUtil.ALBUM_COVER_TRANSFORM) || key.equals(PreferenceUtil.DESATURATED_COLOR) ||
-                key.equals(PreferenceUtil.TAB_TEXT_MODE) || key.equals(PreferenceUtil.LIBRARY_CATEGORIES)
+                key.equals(PreferenceUtil.TAB_TEXT_MODE) || key.equals(PreferenceUtil.LANGUAGE_NAME) ||
+                key.equals(PreferenceUtil.LIBRARY_CATEGORIES)
         ) {
             postRecreate();
         }
@@ -768,5 +770,11 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 setTitle(R.string.action_search);
             }
         }, 3000);
+
+        Locale[] locales = Locale.getAvailableLocales();
+
+        for (Locale l : locales) {
+            Log.d(TAG, "setupToolbar: " + l.toLanguageTag());
+        }
     }
 }

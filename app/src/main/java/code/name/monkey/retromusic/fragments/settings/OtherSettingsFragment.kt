@@ -19,6 +19,7 @@ import android.view.View
 import androidx.preference.Preference
 
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.preferences.MaterialListPreference
 
 /**
  * @author Hemanth S (h4h13).
@@ -26,7 +27,11 @@ import code.name.monkey.retromusic.R
 
 class OtherSettingsFragment : AbsSettingsFragment() {
     override fun invalidateSettings() {
-
+        val languagePreference: MaterialListPreference = findPreference("language_name")!!
+        languagePreference.setOnPreferenceChangeListener { _, _ ->
+            requireActivity().recreate()
+            return@setOnPreferenceChangeListener true
+        }
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -37,5 +42,7 @@ class OtherSettingsFragment : AbsSettingsFragment() {
         super.onViewCreated(view, savedInstanceState)
         val preference: Preference = findPreference("last_added_interval")!!
         setSummary(preference)
+        val languagePreference: Preference = findPreference("language_name")!!
+        setSummary(languagePreference)
     }
 }

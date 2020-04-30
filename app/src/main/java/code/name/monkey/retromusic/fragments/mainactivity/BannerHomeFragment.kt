@@ -22,6 +22,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants
 import code.name.monkey.retromusic.Constants.USER_BANNER
@@ -84,8 +86,20 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             .asBitmap()
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
-            .placeholder(R.drawable.ic_person_flat)
-            .error(R.drawable.ic_person_flat)
+            .placeholder(
+                TintHelper.createTintedDrawable(
+                    requireContext(),
+                    R.drawable.ic_account_white_24dp,
+                    ThemeStore.accentColor(requireContext())
+                )
+            )
+            .error(
+                TintHelper.createTintedDrawable(
+                    requireContext(),
+                    R.drawable.ic_account_white_24dp,
+                    ThemeStore.accentColor(requireContext())
+                )
+            )
             .into(userImage)
     }
 

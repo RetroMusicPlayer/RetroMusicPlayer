@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TWITTER_LINK
@@ -106,6 +107,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         openSource.setOnClickListener(this)
         pinterestLink.setOnClickListener(this)
         bugReportLink.setOnClickListener(this)
+        translators.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
@@ -123,6 +125,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.changelog -> showChangeLogOptions()
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
             R.id.bugReportLink -> NavigationUtil.bugReport(this)
+            R.id.translators -> openUrl("");
         }
     }
 
@@ -141,8 +144,9 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
 
     private fun getAppVersion(): String {
         return try {
+            val isPro = if (App.isProVersion()) "Pro" else "Free"
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
-            packageInfo.versionName
+            "${packageInfo.versionName} $isPro"
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             "0.0.0"
@@ -156,11 +160,10 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
     }
 
     private fun loadContributors() {
-        val data = assetJsonData
         val type = object : TypeToken<List<Contributor>>() {
 
         }.type
-        val contributors = Gson().fromJson<List<Contributor>>(data, type)
+        val contributors = Gson().fromJson<List<Contributor>>(assetJsonData, type)
 
         val contributorAdapter = ContributorAdapter(contributors)
         recyclerView.layoutManager = LinearLayoutManager(this)

@@ -20,8 +20,8 @@ android {
         applicationId "code.name.monkey.retromusic"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 416
-        versionName '3.5.010'
+        versionCode 417
+        versionName '3.5.100'
 
         renderscriptTargetApi 29 //must match target sdk and build tools
         multiDexEnabled true
@@ -153,7 +153,7 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
-    implementation 'com.google.android.material:material:1.2.0-alpha05'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
 
 
 // Third party

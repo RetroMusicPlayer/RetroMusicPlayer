@@ -23,12 +23,13 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.getActionButton
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
 class MaterialListPreference @JvmOverloads constructor(
@@ -72,7 +73,7 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
         val position: Int = arguments?.getInt(EXTRA_POSITION) ?: 0
-        materialDialog = MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT))
+        materialDialog = MaterialDialog(requireContext())
             .title(text = materialListPreference.title.toString())
             .positiveButton(R.string.set)
             .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
@@ -94,6 +95,8 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
                 }
                 dismiss()
             }
+        materialDialog.getActionButton(WhichButton.POSITIVE)
+            .updateTextColor(ThemeStore.accentColor(requireContext()))
         return materialDialog
     }
 
