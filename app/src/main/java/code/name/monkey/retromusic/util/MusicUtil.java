@@ -373,8 +373,8 @@ public class MusicUtil {
         if (artistName.equals(Artist.UNKNOWN_ARTIST_DISPLAY_NAME)) {
             return true;
         }
-        artistName = artistName.trim().toLowerCase();
-        return artistName.equals("unknown") || artistName.equals("<unknown>");
+        String tempName = artistName.trim().toLowerCase();
+        return tempName.equals("unknown") || tempName.equals("<unknown>");
     }
 
     public static boolean isFavorite(@NonNull final Context context, @NonNull final Song song) {

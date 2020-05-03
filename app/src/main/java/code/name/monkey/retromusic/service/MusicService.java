@@ -752,45 +752,43 @@ public class MusicService extends Service implements
 
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
-        if (intent != null) {
-            if (intent.getAction() != null) {
-                restoreQueuesAndPositionIfNecessary();
-                String action = intent.getAction();
-                switch (action) {
-                    case ACTION_TOGGLE_PAUSE:
-                        if (isPlaying()) {
-                            pause();
-                        } else {
-                            play();
-                        }
-                        break;
-                    case ACTION_PAUSE:
+        if (intent != null && intent.getAction() != null) {
+            restoreQueuesAndPositionIfNecessary();
+            String action = intent.getAction();
+            switch (action) {
+                case ACTION_TOGGLE_PAUSE:
+                    if (isPlaying()) {
                         pause();
-                        break;
-                    case ACTION_PLAY:
+                    } else {
                         play();
-                        break;
-                    case ACTION_PLAY_PLAYLIST:
-                        playFromPlaylist(intent);
-                        break;
-                    case ACTION_REWIND:
-                        back(true);
-                        break;
-                    case ACTION_SKIP:
-                        playNextSong(true);
-                        break;
-                    case ACTION_STOP:
-                    case ACTION_QUIT:
-                        pendingQuit = false;
-                        quit();
-                        break;
-                    case ACTION_PENDING_QUIT:
-                        pendingQuit = true;
-                        break;
-                    case TOGGLE_FAVORITE:
-                        MusicUtil.toggleFavorite(getApplicationContext(), getCurrentSong());
-                        break;
-                }
+                    }
+                    break;
+                case ACTION_PAUSE:
+                    pause();
+                    break;
+                case ACTION_PLAY:
+                    play();
+                    break;
+                case ACTION_PLAY_PLAYLIST:
+                    playFromPlaylist(intent);
+                    break;
+                case ACTION_REWIND:
+                    back(true);
+                    break;
+                case ACTION_SKIP:
+                    playNextSong(true);
+                    break;
+                case ACTION_STOP:
+                case ACTION_QUIT:
+                    pendingQuit = false;
+                    quit();
+                    break;
+                case ACTION_PENDING_QUIT:
+                    pendingQuit = true;
+                    break;
+                case TOGGLE_FAVORITE:
+                    MusicUtil.toggleFavorite(getApplicationContext(), getCurrentSong());
+                    break;
             }
         }
 

@@ -68,8 +68,8 @@ public class ArtistGlideRequest {
 
         final Artist artist;
         final RequestManager requestManager;
-        boolean forceDownload;
-        boolean noCustomImage;
+        private boolean forceDownload;
+        private boolean noCustomImage;
 
         private Builder(@NonNull RequestManager requestManager, Artist artist) {
             this.requestManager = requestManager;

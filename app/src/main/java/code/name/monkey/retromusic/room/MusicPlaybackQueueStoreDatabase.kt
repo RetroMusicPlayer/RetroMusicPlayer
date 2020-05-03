@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.model.Song
 
-@Database(entities = [Song::class, SongEntity::class], version = 3, exportSchema = false)
+@Database(entities = [SongQueueEntity::class, SongEntity::class], version = 8, exportSchema = false)
 abstract class MusicPlaybackQueueStoreDatabase : RoomDatabase() {
 
     abstract fun queueDao(): QueueDao

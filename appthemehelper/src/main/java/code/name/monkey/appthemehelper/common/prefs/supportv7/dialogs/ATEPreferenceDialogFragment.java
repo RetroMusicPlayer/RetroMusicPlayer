@@ -18,12 +18,14 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Window;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.preference.DialogPreference;
+
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
@@ -72,7 +74,7 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
                     onDialogClosed(false);
                 });
 
-        this.onPrepareDialogBuilder(materialDialog);
+        //this.onPrepareDialogBuilder(materialDialog);
         AlertDialog dialog = materialDialog.create();
         if (this.needInputMethod()) {
             this.requestInputMethod(dialog);
@@ -84,11 +86,11 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
 
     }
 
-    protected boolean needInputMethod() {
-        return false;
+    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
     }
 
-    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
+    protected boolean needInputMethod() {
+        return false;
     }
 
     private void requestInputMethod(Dialog dialog) {

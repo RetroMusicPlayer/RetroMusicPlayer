@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+
 import androidx.annotation.CheckResult;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
@@ -26,9 +27,12 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
-import code.name.monkey.appthemehelper.R;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.lang.reflect.Field;
+
+import code.name.monkey.appthemehelper.R;
 
 /**
  * @author afollestad, plusCubed
@@ -80,7 +84,7 @@ public final class TintHelper {
     @CheckResult
     @NonNull
     public static Drawable createTintedDrawable(Context context,
-            @DrawableRes int res, @ColorInt int color) {
+                                                @DrawableRes int res, @ColorInt int color) {
         Drawable drawable = ContextCompat.getDrawable(context, res);
         return createTintedDrawable(drawable, color);
     }
@@ -105,9 +109,9 @@ public final class TintHelper {
         if (drawable == null) {
             return null;
         }
-        drawable = DrawableCompat.wrap(drawable.mutate());
-        DrawableCompat.setTintList(drawable, sl);
-        return drawable;
+        Drawable temp = DrawableCompat.wrap(drawable.mutate());
+        DrawableCompat.setTintList(temp, sl);
+        return temp;
     }
 
     public static void setCursorTint(@NonNull EditText editText, @ColorInt int color) {
@@ -278,13 +282,13 @@ public final class TintHelper {
     }
 
     public static void setTintAuto(final @NonNull View view, final @ColorInt int color,
-            boolean background) {
+                                   boolean background) {
         setTintAuto(view, color, background, ATHUtil.INSTANCE.isWindowBackgroundDark(view.getContext()));
     }
 
     @SuppressWarnings("deprecation")
     public static void setTintAuto(final @NonNull View view, final @ColorInt int color,
-            boolean background, final boolean isDark) {
+                                   boolean background, final boolean isDark) {
         if (!background) {
             if (view instanceof FloatingActionButton) {
                 setTint((FloatingActionButton) view, color, isDark);
@@ -346,7 +350,7 @@ public final class TintHelper {
 
     @SuppressWarnings("deprecation")
     public static void setTintSelector(@NonNull View view, @ColorInt final int color, final boolean darker,
-            final boolean useDarkTheme) {
+                                       final boolean useDarkTheme) {
         final boolean isColorLight = ColorUtil.INSTANCE.isColorLight(color);
         final int disabled = ContextCompat.getColor(view.getContext(),
                 useDarkTheme ? R.color.ate_button_disabled_dark : R.color.ate_button_disabled_light);
@@ -438,7 +442,7 @@ public final class TintHelper {
     }
 
     private static Drawable modifySwitchDrawable(@NonNull Context context, @NonNull Drawable from, @ColorInt int tint,
-            boolean thumb, boolean compatSwitch, boolean useDarker) {
+                                                 boolean thumb, boolean compatSwitch, boolean useDarker) {
         if (useDarker) {
             tint = ColorUtil.INSTANCE.shiftColor(tint, 1.1f);
         }

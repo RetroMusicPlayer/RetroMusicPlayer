@@ -92,7 +92,8 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     private SongFileAdapter adapter;
     private BreadCrumbLayout breadCrumbs;
     private MaterialCab cab;
-    private View coordinatorLayout, empty;
+    private View coordinatorLayout;
+    private View empty;
     private TextView emojiText;
     private Comparator<File> fileComparator = (lhs, rhs) -> {
         if (lhs.isDirectory() && !rhs.isDirectory()) {

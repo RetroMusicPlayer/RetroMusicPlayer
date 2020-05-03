@@ -18,6 +18,7 @@ import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.TestPlayerFragment
 import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
@@ -241,6 +242,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             TINY -> TinyPlayerFragment()
             PEAK -> PeakPlayerFragment()
             CIRCLE -> CirclePlayerFragment()
+            EXAMPLE -> TestPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)

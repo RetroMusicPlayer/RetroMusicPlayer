@@ -32,12 +32,6 @@ import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class WhatsNewActivity extends AbsBaseActivity {
 
-    AppBarLayout appBarLayout;
-
-    Toolbar toolbar;
-
-    WebView webView;
-
     private static String colorToCSS(int color) {
         return String.format(Locale.getDefault(), "rgba(%d, %d, %d, %d)", Color.red(color), Color.green(color),
                 Color.blue(color), Color.alpha(color)); // on API 29, WebView doesn't load with hex colors
@@ -62,9 +56,9 @@ public class WhatsNewActivity extends AbsBaseActivity {
         setNavigationbarColorAuto();
         setTaskDescriptionColorAuto();
 
-        webView = findViewById(R.id.webView);
-        toolbar = findViewById(R.id.toolbar);
-        appBarLayout = findViewById(R.id.appBarLayout);
+        WebView webView = findViewById(R.id.webView);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
 
         toolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
         //setSupportActionBar(toolbar);
@@ -92,7 +86,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
             final String accentColorString = colorToCSS(ThemeStore.Companion.accentColor(this));
             final String accentTextColor = colorToCSS(MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.INSTANCE.isColorLight(accentColor)));
             final String changeLog = buf.toString()
-                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; } li {color: %s;} .colorHeader {background-color: %s; color: %s;} .tag {color: %s;}", backgroundColor, contentColor, textColor, accentColorString, accentTextColor,accentColorString ))
+                    .replace("{style-placeholder}", String.format("body { background-color: %s; color: %s; } li {color: %s;} .colorHeader {background-color: %s; color: %s;} .tag {color: %s;}", backgroundColor, contentColor, textColor, accentColorString, accentTextColor, accentColorString))
                     .replace("{link-color}", colorToCSS(ThemeStore.Companion.accentColor(this)))
                     .replace("{link-color-active}", colorToCSS(ColorUtil.INSTANCE.lightenColor(ThemeStore.Companion.accentColor(this))));
             webView.loadData(changeLog, "text/html", "UTF-8");

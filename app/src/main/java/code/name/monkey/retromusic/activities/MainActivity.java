@@ -121,8 +121,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         }
     };
     private final IntentFilter mIntentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-    @Nullable
-    MainActivityFragmentCallbacks currentFragment;
+    private MainActivityFragmentCallbacks currentFragment;
     private boolean blockRequestPermissions = false;
     private MaterialCab cab;
     private AppBarLayout mAppBarLayout;
@@ -231,11 +230,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         registerReceiver(mBroadcastReceiver, mIntentFilter);
         PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
 
-        if (getIntent().hasExtra(EXPAND_PANEL) && PreferenceUtil.getInstance(this).isExpandPanel()) {
-            if (getIntent().getBooleanExtra(EXPAND_PANEL, false)) {
-                expandPanel();
-                getIntent().putExtra(EXPAND_PANEL, false);
-            }
+        if (getIntent().hasExtra(EXPAND_PANEL) && getIntent().getBooleanExtra(EXPAND_PANEL, false) && PreferenceUtil.getInstance(this).isExpandPanel()) {
+            expandPanel();
+            getIntent().putExtra(EXPAND_PANEL, false);
         }
         appUpdateManager.getAppUpdateInfo()
                 .addOnSuccessListener(appUpdateInfo -> {

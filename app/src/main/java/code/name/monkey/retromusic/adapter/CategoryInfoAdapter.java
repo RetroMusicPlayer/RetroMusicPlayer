@@ -122,12 +122,9 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
-        MaterialCheckBox checkBox;
-
-        View dragView;
-
-        TextView title;
+        private MaterialCheckBox checkBox;
+        private View dragView;
+        private TextView title;
 
         ViewHolder(View view) {
             super(view);

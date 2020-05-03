@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.getSuitableColorFor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest.Builder
@@ -143,7 +145,14 @@ class ColorFragment : AbsPlayerFragment() {
                         val swatch = RetroColorUtil.getSwatch(palette)
 
                         val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = swatch.rgb
+                        val backgroundColor = getSuitableColorFor(
+                            palette,
+                            ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
+                            Color.BLACK
+                        )
+                        if (ATHUtil.isWindowBackgroundDark(requireContext())) {
+                            ColorUtil.desaturateColor(backgroundColor, 0.5f)
+                        }
 
                         setColors(backgroundColor, textColor)
                     }

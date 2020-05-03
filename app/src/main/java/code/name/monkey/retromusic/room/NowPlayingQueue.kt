@@ -17,7 +17,7 @@ class NowPlayingQueue(context: Context) {
     }
 
     fun saveOriginalQueue(songs: List<Song>) = GlobalScope.launch(Dispatchers.Default) {
-        musicQueueRepository.insertOriginalQueue(songs.map { Song.toSongEntity(it) })
+        musicQueueRepository.insertOriginalQueue(songs)
     }
 
     fun getQueue(): List<Song> {
@@ -25,6 +25,6 @@ class NowPlayingQueue(context: Context) {
     }
 
     fun getOriginalQueue(): List<Song> {
-        return musicQueueRepository.getOriginalQueue().map { SongEntity.toSong(it) }
+        return musicQueueRepository.getOriginalQueue()
     }
 }

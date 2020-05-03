@@ -17,7 +17,7 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.interfaces.CabHolder;
 
 
-public abstract class AbsMultiSelectAdapter<VH extends RecyclerView.ViewHolder, I> extends RecyclerView.Adapter<VH>
+public abstract class AbsMultiSelectAdapter<V extends RecyclerView.ViewHolder, I> extends RecyclerView.Adapter<V>
         implements MaterialCab.Callback {
 
     @Nullable

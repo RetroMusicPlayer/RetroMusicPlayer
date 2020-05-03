@@ -331,7 +331,7 @@ public class MultiPlayer implements Playback, MediaPlayer.OnErrorListener, Media
      */
     @Override
     public void onCompletion(final MediaPlayer mp) {
-        if (mp == mCurrentMediaPlayer && mNextMediaPlayer != null) {
+        if (mp.equals(mCurrentMediaPlayer) && mNextMediaPlayer != null) {
             mIsInitialized = false;
             mCurrentMediaPlayer.release();
             mCurrentMediaPlayer = mNextMediaPlayer;

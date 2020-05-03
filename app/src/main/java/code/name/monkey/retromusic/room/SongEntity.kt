@@ -3,11 +3,12 @@ package code.name.monkey.retromusic.room
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.model.Song
 
-@Entity(tableName = "original_playing_queue")
-class SongEntity(
-    @PrimaryKey val id: Int,
+@Entity(tableName = "original_playing_queue_${BuildConfig.FLAVOR}")
+data class SongEntity(
+    @ColumnInfo(name = "id") val id: Int,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "track_number") val trackNumber: Int,
     @ColumnInfo(name = "year") val year: Int,
@@ -20,6 +21,10 @@ class SongEntity(
     @ColumnInfo(name = "artist_name") val artistName: String,
     @ColumnInfo(name = "composer") val composer: String?
 ) {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "primary_id")
+    var primaryId: Int? = null
+
     companion object {
         fun toSong(song: SongEntity): Song {
             return Song(

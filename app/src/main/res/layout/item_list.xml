@@ -22,8 +22,7 @@
         android:visibility="gone"
         app:srcCompat="@drawable/ic_drag_vertical_white_24dp"
         app:tint="?attr/colorControlNormal"
-        tools:ignore="ContentDescription"
-        tools:visibility="visible" />
+        tools:ignore="ContentDescription" />
 
     <FrameLayout
         android:id="@+id/imageContainer"

@@ -26,4 +26,5 @@ enum class NowPlayingScreen constructor(
     PLAIN(R.string.plain, R.drawable.np_plain, 3),
     SIMPLE(R.string.simple, R.drawable.np_simple, 8),
     TINY(R.string.tiny, R.drawable.np_tiny, 7),
+    EXAMPLE(R.string.tiny, R.drawable.np_tiny, 16),
 }

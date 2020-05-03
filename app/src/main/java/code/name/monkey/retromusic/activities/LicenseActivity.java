@@ -56,7 +56,7 @@ public class LicenseActivity extends AbsBaseActivity {
         WebView webView = findViewById(R.id.license);
         try {
             StringBuilder buf = new StringBuilder();
-            InputStream json = getAssets().open("index.html");
+            InputStream json = getAssets().open("oldindex.html");
             BufferedReader in = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8));
             String str;
             while ((str = in.readLine()) != null) {
