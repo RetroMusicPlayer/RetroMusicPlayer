@@ -30,10 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:labelBehavior="gone"
-        app:layout_constraintBottom_toTopOf="@id/playPauseButton"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
-        app:layout_constraintTop_toBottomOf="@id/songInfo"
+        app:layout_constraintTop_toTopOf="parent"
         app:thumbRadius="@dimen/slider_thumb_radius"
         app:trackHeight="@dimen/slider_track_height"
         tools:ignore="RtlHardcoded,UnusedAttribute"
@@ -62,7 +61,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/progressSlider">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -115,10 +114,7 @@
         android:paddingEnd="16dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/progressSlider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/playPauseButton"
         app:layout_constraintTop_toBottomOf="@+id/text"
         tools:text="@tools:sample/lorem/random" />
 
@@ -159,11 +155,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/roundSelector"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
-        app:layout_constraintTop_toBottomOf="@+id/progressSlider"
+        app:layout_constraintTop_toBottomOf="@+id/songInfo"
         app:srcCompat="@drawable/ic_pause_sharp_white_64dp"
         tools:tint="@color/md_black_1000" />
 
@@ -198,12 +194,15 @@
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
+
     <FrameLayout
         android:id="@+id/volumeFragmentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        tools:backgroundTint="@color/md_red_400"
+        tools:layout_height="52dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

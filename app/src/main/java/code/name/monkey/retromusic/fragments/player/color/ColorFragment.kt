@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.fragment_color_player.*
 class ColorFragment : AbsPlayerFragment() {
 
     private var lastColor: Int = 0
-    private var backgroundColor: Int = 0
     private lateinit var playbackControlsFragment: ColorPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
 
@@ -29,7 +28,7 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     override val paletteColor: Int
-        get() = backgroundColor
+        get() = lastColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setDark(color)
@@ -114,20 +113,6 @@ class ColorFragment : AbsPlayerFragment() {
                 requireActivity()
             )
         }
-    }
-
-    private fun setColors(colors: MediaNotificationProcessor) {
-        this.lastColor = colors.backgroundColor
-        this.backgroundColor = colors.backgroundColor
-        playbackControlsFragment.setDark(colors)
-        colorGradientBackground?.setBackgroundColor(colors.backgroundColor)
-        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(colors.backgroundColor))
-        callbacks?.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            colors.secondaryTextColor,
-            requireActivity()
-        )
     }
 
     companion object {

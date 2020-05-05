@@ -44,22 +44,38 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.addOnPageChangeListener(this)
-        val nowPlayingScreen = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen
+        val nps = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen
 
-        if (PreferenceUtil.getInstance(requireContext()).carouselEffect() &&
-            !((nowPlayingScreen == FULL) || (nowPlayingScreen == ADAPTIVE) || (nowPlayingScreen == FIT))
-        ) {
+        if (nps == FULL || nps == CLASSIC || nps == FIT) {
+            viewPager.offscreenPageLimit = 2
+        } else if (PreferenceUtil.getInstance(requireContext()).carouselEffect()) {
             viewPager.clipToPadding = false
             viewPager.setPadding(40, 40, 40, 0)
             viewPager.pageMargin = 0
             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
-        } else {
+        }else{
             viewPager.offscreenPageLimit = 2
             viewPager.setPageTransformer(
                 true,
                 PreferenceUtil.getInstance(requireContext()).albumCoverTransform
             )
         }
+
+        /* if (PreferenceUtil.getInstance(requireContext()).carouselEffect() &&
+             !((nps == FULL) || (nps == ADAPTIVE) || (nps == FIT))
+         ) {
+             viewPager.clipToPadding = false
+             viewPager.setPadding(40, 40, 40, 0)
+             viewPager.pageMargin = 0
+             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
+         } else if () {
+         } else {
+             viewPager.offscreenPageLimit = 2
+             viewPager.setPageTransformer(
+                 true,
+                 PreferenceUtil.getInstance(requireContext()).albumCoverTransform
+             )
+         }*/
     }
 
     override fun onDestroyView() {
