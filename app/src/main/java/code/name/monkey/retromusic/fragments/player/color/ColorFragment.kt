@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.getSuitableColorFor
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest.Builder
@@ -21,7 +19,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
 import kotlinx.android.synthetic.main.fragment_color_player.*
@@ -131,7 +129,7 @@ class ColorFragment : AbsPlayerFragment() {
             .generatePalette(requireContext())
             .build()
             .into(object : RetroMusicColoredTarget(playerImage) {
-                override fun onColorReady(color: Int) {
+                override fun onColorReady(colors: MediaNotificationProcessor) {
 
                 }
 
@@ -141,20 +139,26 @@ class ColorFragment : AbsPlayerFragment() {
                 ) {
                     super.onResourceReady(resource, glideAnimation)
                     resource?.let {
-                        val palette = resource.palette
-                        val swatch = RetroColorUtil.getSwatch(palette)
 
-                        val textColor = RetroColorUtil.getTextColor(palette)
-                        val backgroundColor = getSuitableColorFor(
-                            palette,
-                            ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
-                            Color.BLACK
-                        )
-                        if (ATHUtil.isWindowBackgroundDark(requireContext())) {
-                            ColorUtil.desaturateColor(backgroundColor, 0.5f)
-                        }
 
-                        setColors(backgroundColor, textColor)
+                        val colors =
+                            MediaNotificationProcessor(requireContext(), resource.bitmap)
+
+
+                        /* val palette = resource.palette
+                         val swatch = RetroColorUtil.getSwatch(palette)
+
+                         val textColor = RetroColorUtil.getTextColor(palette)
+                         val backgroundColor = getSuitableColorFor(
+                             palette,
+                             ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
+                             Color.BLACK
+                         )
+                         if (ATHUtil.isWindowBackgroundDark(requireContext())) {
+                             ColorUtil.desaturateColor(backgroundColor, 0.5f)
+                         }
+ */
+                        setColors(colors)
                     }
 
                 }
@@ -168,19 +172,23 @@ class ColorFragment : AbsPlayerFragment() {
                             true
                         )
                         else MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-                    setColors(backgroundColor, textColor)
+                    //setColors(backgroundColor, textColor)
                 }
             })
     }
 
-    private fun setColors(backgroundColor: Int, componentsColor: Int) {
-        this.lastColor = componentsColor
-        this.backgroundColor = backgroundColor
-        playbackControlsFragment.setDark(componentsColor, backgroundColor)
-        colorGradientBackground?.setBackgroundColor(backgroundColor)
-        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(backgroundColor))
+    private fun setColors(colors: MediaNotificationProcessor) {
+        this.lastColor = colors.backgroundColor
+        this.backgroundColor = colors.backgroundColor
+        playbackControlsFragment.setDark(colors)
+        colorGradientBackground?.setBackgroundColor(colors.backgroundColor)
+        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(colors.backgroundColor))
         callbacks?.onPaletteColorChanged()
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, componentsColor, requireActivity())
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            colors.secondaryTextColor,
+            requireActivity()
+        )
     }
 
     companion object {

@@ -11,6 +11,7 @@ import code.name.monkey.retromusic.helper.HorizontalAdapterHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 
 class HorizontalAlbumAdapter(
@@ -44,8 +45,8 @@ class HorizontalAlbumAdapter(
                     setColors(albumArtistFooterColor, holder)
                 }
 
-                override fun onColorReady(color: Int) {
-                    setColors(color, holder)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    setColors(colors.backgroundColor,holder)
                 }
             })
     }

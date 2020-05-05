@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_card_blur_player.*
 
@@ -133,11 +134,14 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
             .checkIgnoreMediaStore(requireContext())
             .generatePalette(requireContext()).build()
             .dontAnimate()
-            .transform(BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat()).build())
+            .transform(
+                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+                    .build()
+            )
             .into(object : RetroMusicColoredTarget(colorBackground) {
-                override fun onColorReady(color: Int) {
-                    if (color == defaultFooterColor) {
-                        colorBackground.setColorFilter(color)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    if (colors.backgroundColor == defaultFooterColor) {
+                        colorBackground.setColorFilter(colors.backgroundColor)
                     }
                 }
             })

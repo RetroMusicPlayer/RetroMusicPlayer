@@ -32,6 +32,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.Share
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_share_instagram.*
 
@@ -70,9 +71,9 @@ class ShareInstagramStory : AbsBaseActivity() {
                 .generatePalette(this@ShareInstagramStory)
                 .build()
                 .into(object : RetroMusicColoredTarget(image) {
-                    override fun onColorReady(color: Int) {
-                        val isColorLight = ColorUtil.isColorLight(color)
-                        setColors(isColorLight, color)
+                    override fun onColorReady(colors: MediaNotificationProcessor) {
+                        val isColorLight = ColorUtil.isColorLight(colors.backgroundColor)
+                        setColors(isColorLight, colors.backgroundColor)
                     }
                 })
 

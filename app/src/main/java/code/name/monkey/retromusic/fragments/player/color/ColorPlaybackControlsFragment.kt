@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_color_player_playback_controls.*
 
 class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -95,26 +96,23 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    fun setDark(textColor: Int, background: Int) {
-        setDark(textColor)
-        TintHelper.setTintAuto(playPauseButton, background, false)
-        TintHelper.setTintAuto(playPauseButton, textColor, true)
+    fun setDark(colors: MediaNotificationProcessor) {
+        setDark(colors.secondaryTextColor)
+        TintHelper.setTintAuto(playPauseButton, colors.backgroundColor, false)
+        TintHelper.setTintAuto(playPauseButton, colors.primaryTextColor, true)
+
+        title.setTextColor(colors.primaryTextColor)
+        text.setTextColor(colors.secondaryTextColor)
+        songInfo.setTextColor(colors.secondaryTextColor)
+        ViewUtil.setProgressDrawable(progressSlider, colors.primaryTextColor, true)
+        songCurrentProgress.setTextColor(colors.secondaryTextColor)
+        songTotalTime.setTextColor(colors.secondaryTextColor)
+        volumeFragment?.setTintableColor(colors.primaryTextColor)
     }
 
     override fun setDark(color: Int) {
         lastPlaybackControlsColor = color
-        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color, 0.5f)
-
-        title.setTextColor(lastPlaybackControlsColor)
-        text.setTextColor(lastDisabledPlaybackControlsColor)
-        songInfo.setTextColor(lastDisabledPlaybackControlsColor)
-
-        ViewUtil.setProgressDrawable(progressSlider, lastPlaybackControlsColor, true)
-
-        volumeFragment?.setTintableColor(color)
-
-        songCurrentProgress.setTextColor(lastDisabledPlaybackControlsColor)
-        songTotalTime.setTextColor(lastDisabledPlaybackControlsColor)
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color, 0.25f)
 
         updateRepeatState()
         updateShuffleState()

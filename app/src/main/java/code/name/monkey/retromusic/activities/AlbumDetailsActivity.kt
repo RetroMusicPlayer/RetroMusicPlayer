@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_album.*
@@ -247,7 +248,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             .dontAnimate()
             .dontTransform()
             .into(object : RetroMusicColoredTarget(artistImage) {
-                override fun onColorReady(color: Int) {
+                override fun onColorReady(colors: MediaNotificationProcessor) {
                 }
             })
     }
@@ -261,8 +262,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             .dontAnimate()
             .dontTransform()
             .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(color: Int) {
-                    setColors(color)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    setColors(colors.backgroundColor)
                 }
             })
     }

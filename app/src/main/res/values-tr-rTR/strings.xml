@@ -147,7 +147,7 @@
     <string name="dialog_message_set_ringtone">Retro Müzik\'in ses ayarlarını değiştirmesine izin verin</string>
     <string name="dialog_title_set_ringtone">Zil sesini ayarla</string>
     <string name="do_you_want_to_clear_the_blacklist">Kara listeyi temizlemek istiyor musunuz?</string>
-    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Kara listeden <b>%1$s</b>'i kaldırmak istiyor musunuz?]]></string>
+    <string name="do_you_want_to_remove_from_the_blacklist"><![CDATA[Kara listeden <b>%1$s</b>\'i kaldırmak istiyor musunuz?]]></string>
     <string name="donate">Bağış yapın</string>
     <string name="donate_summary">Çalışmalarımın karşılığı olarak para hakettiğimi düşünüyorsanız bana biraz bahşiş bırakabilirsiniz</string>
     <string name="donation_header">Bağışlayacağınız tutar:</string>

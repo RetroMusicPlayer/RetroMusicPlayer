@@ -175,7 +175,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
             MusicPlayerRemote.position,
             R.layout.item_queue
         )
-        recyclerView.apply {
+        recyclerView .apply {
             adapter = queueAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
