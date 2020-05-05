@@ -14,13 +14,14 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
     private val colorReceiver = object : AlbumCoverFragment.ColorReceiver {
-        override fun onColorReady(color: Int, request: Int) {
+        override fun onColorReady(color: MediaNotificationProcessor, request: Int) {
             if (currentPosition == request) {
                 notifyColorChange(color)
             }
@@ -103,7 +104,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     override fun onPageScrollStateChanged(state: Int) {
     }
 
-    private fun notifyColorChange(color: Int) {
+    private fun notifyColorChange(color: MediaNotificationProcessor) {
         callbacks?.onColorChanged(color)
     }
 
@@ -117,7 +118,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
 
     interface Callbacks {
 
-        fun onColorChanged(color: Int)
+        fun onColorChanged(color: MediaNotificationProcessor)
 
         fun onFavoriteToggled()
     }

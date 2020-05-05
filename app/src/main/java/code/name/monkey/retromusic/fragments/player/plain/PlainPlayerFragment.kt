@@ -12,6 +12,7 @@ import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_plain_player.*
 
 class PlainPlayerFragment : AbsPlayerFragment() {
@@ -93,9 +94,9 @@ class PlainPlayerFragment : AbsPlayerFragment() {
         return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
-    override fun onColorChanged(color: Int) {
-        plainPlaybackControlsFragment.setDark(color)
-        lastColor = color
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        plainPlaybackControlsFragment.setDark(color.backgroundColor)
+        lastColor = color.backgroundColor
         callbacks!!.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,

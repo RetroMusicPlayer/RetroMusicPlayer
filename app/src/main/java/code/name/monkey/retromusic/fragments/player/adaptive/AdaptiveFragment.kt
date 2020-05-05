@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player.*
 
 class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
@@ -194,9 +195,9 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-    override fun onColorChanged(color: Int) {
-        playbackControlsFragment.setDark(color)
-        lastColor = color
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        playbackControlsFragment.setDark(color.backgroundColor)
+        lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,

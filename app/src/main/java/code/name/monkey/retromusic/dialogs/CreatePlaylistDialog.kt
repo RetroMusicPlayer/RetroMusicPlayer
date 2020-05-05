@@ -24,10 +24,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.layout
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.extensions.appHandleColor
-import code.name.monkey.retromusic.fragments.playlists.PlaylistViewModel
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.room.playlist.PlaylistDatabaseModel
-import code.name.monkey.retromusic.room.playlist.PlaylistEntity
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.LayoutMode
@@ -60,14 +57,13 @@ class CreatePlaylistDialog : DialogFragment() {
                         ?: return@positiveButton
 
                     if (playlistView.text.toString().trim { it <= ' ' }.isNotEmpty()) {
-                        /*val playlistId = PlaylistsUtil.createPlaylist(
+                        val playlistId = PlaylistsUtil.createPlaylist(
                             requireContext(),
                             playlistView.text.toString()
                         )
                         if (playlistId != -1) {
                             PlaylistsUtil.addToPlaylist(requireContext(), songs, playlistId, true)
-                        }*/
-                        PlaylistDatabaseModel().savePlaylist(PlaylistEntity(playlistView.text.toString()))
+                        }
                     }
                 }
             }

@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
 import kotlinx.android.synthetic.main.fragment_flat_player.*
 
@@ -103,18 +104,18 @@ class FlatPlayerFragment : AbsPlayerFragment() {
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
     }
 
-    override fun onColorChanged(color: Int) {
-        lastColor = color
-        flatPlaybackControlsFragment.setDark(color)
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        lastColor = color.backgroundColor
+        flatPlaybackControlsFragment.setDark(color.backgroundColor)
         callbacks?.onPaletteColorChanged()
-        val isLight = ColorUtil.isColorLight(color)
+        val isLight = ColorUtil.isColorLight(color.backgroundColor)
         val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
         if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            colorize(color)
+            colorize(color.backgroundColor)
         }
     }
 

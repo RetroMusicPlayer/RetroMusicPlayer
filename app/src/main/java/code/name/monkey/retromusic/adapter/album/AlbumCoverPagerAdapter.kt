@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
+import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
@@ -63,7 +64,7 @@ class AlbumCoverPagerAdapter(
 
         lateinit var albumCover: ImageView
         private var isColorReady: Boolean = false
-        private var color: Int = 0
+        private lateinit var color: MediaNotificationProcessor
         private lateinit var song: Song
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
@@ -94,17 +95,41 @@ class AlbumCoverPagerAdapter(
             container: ViewGroup?,
             savedInstanceState: Bundle?
         ): View? {
-            val finalLayout = when {
-                PreferenceUtil.getInstance(requireContext())
-                    .carouselEffect() -> R.layout.fragment_album_carousel_cover
-                else -> layout
-            }
-            val view = inflater.inflate(finalLayout, container, false)
+            val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
                 NavigationUtil.goToLyrics(requireActivity())
             }
             return view
+        }
+
+        private fun getLayoutWithPlayerTheme(): Int {
+            return when (PreferenceUtil.getInstance(requireContext()).nowPlayingScreen) {
+                NowPlayingScreen.CARD,
+                NowPlayingScreen.FIT,
+                NowPlayingScreen.TINY,
+                NowPlayingScreen.CLASSIC,
+                NowPlayingScreen.MATERIAL,
+                NowPlayingScreen.FULL -> R.layout.fragment_album_full_cover
+                else -> {
+                    if (PreferenceUtil.getInstance(requireContext())
+                            .carouselEffect()
+                    ) {
+                        R.layout.fragment_album_carousel_cover
+                    } else {
+                        when (PreferenceUtil.getInstance(requireContext()).albumCoverStyle) {
+                            AlbumCoverStyle.NORMAL -> R.layout.fragment_album_cover
+                            AlbumCoverStyle.FLAT -> R.layout.fragment_album_flat_cover
+                            AlbumCoverStyle.CIRCLE -> R.layout.fragment_album_circle_cover
+                            AlbumCoverStyle.CARD -> R.layout.fragment_album_card_cover
+                            AlbumCoverStyle.MATERIAL -> R.layout.fragment_album_material_cover
+                            AlbumCoverStyle.FULL -> R.layout.fragment_album_full_cover
+                            AlbumCoverStyle.FULL_CARD -> R.layout.fragment_album_full_card_cover
+                            else -> R.layout.fragment_album_cover
+                        }
+                    }
+                }
+            }
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,12 +148,12 @@ class AlbumCoverPagerAdapter(
                 .generatePalette(requireContext()).build()
                 .into(object : RetroMusicColoredTarget(albumCover) {
                     override fun onColorReady(colors: MediaNotificationProcessor) {
-                        setColor(colors.backgroundColor)
+                        setColor(colors)
                     }
                 })
         }
 
-        private fun setColor(color: Int) {
+        private fun setColor(color: MediaNotificationProcessor) {
             this.color = color
             isColorReady = true
             if (colorReceiver != null) {
@@ -147,7 +172,7 @@ class AlbumCoverPagerAdapter(
         }
 
         interface ColorReceiver {
-            fun onColorReady(color: Int, request: Int)
+            fun onColorReady(color: MediaNotificationProcessor, request: Int)
         }
 
         companion object {

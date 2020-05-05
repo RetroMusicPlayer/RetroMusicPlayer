@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest.Builder
-import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.animation.GlideAnimation
 import kotlinx.android.synthetic.main.fragment_color_player.*
 
 class ColorFragment : AbsPlayerFragment() {
@@ -38,12 +31,22 @@ class ColorFragment : AbsPlayerFragment() {
     override val paletteColor: Int
         get() = backgroundColor
 
-    override fun onColorChanged(color: Int) {
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        playbackControlsFragment.setDark(color)
+        lastColor = color.backgroundColor
+        callbacks?.onPaletteColorChanged()
 
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            color.secondaryTextColor,
+            requireActivity()
+        )
+        colorGradientBackground?.setBackgroundColor(color.backgroundColor)
+        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
     }
 
     override fun onFavoriteToggled() {
-        //toggleFavorite(MusicPlayerRemote.currentSong)
+        toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
     override fun onShow() {
@@ -90,9 +93,9 @@ class ColorFragment : AbsPlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpSubFragments()
         setUpPlayerToolbar()
-        playerImage.setOnClickListener {
-            NavigationUtil.goToLyrics(requireActivity())
-        }
+        val playerAlbumCoverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        playerAlbumCoverFragment.setCallbacks(this)
     }
 
     private fun setUpSubFragments() {
@@ -113,70 +116,6 @@ class ColorFragment : AbsPlayerFragment() {
         }
     }
 
-    override fun onPlayingMetaChanged() {
-        super.onPlayingMetaChanged()
-        updateSong()
-    }
-
-    override fun onServiceConnected() {
-        super.onServiceConnected()
-        updateSong()
-    }
-
-    private fun updateSong() {
-        Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-            .checkIgnoreMediaStore(requireContext())
-            .generatePalette(requireContext())
-            .build()
-            .into(object : RetroMusicColoredTarget(playerImage) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-
-                }
-
-                override fun onResourceReady(
-                    resource: BitmapPaletteWrapper?,
-                    glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
-                ) {
-                    super.onResourceReady(resource, glideAnimation)
-                    resource?.let {
-
-
-                        val colors =
-                            MediaNotificationProcessor(requireContext(), resource.bitmap)
-
-
-                        /* val palette = resource.palette
-                         val swatch = RetroColorUtil.getSwatch(palette)
-
-                         val textColor = RetroColorUtil.getTextColor(palette)
-                         val backgroundColor = getSuitableColorFor(
-                             palette,
-                             ATHUtil.resolveColor(requireContext(), R.attr.colorSurface),
-                             Color.BLACK
-                         )
-                         if (ATHUtil.isWindowBackgroundDark(requireContext())) {
-                             ColorUtil.desaturateColor(backgroundColor, 0.5f)
-                         }
- */
-                        setColors(colors)
-                    }
-
-                }
-
-                override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
-                    super.onLoadFailed(e, errorDrawable)
-                    val backgroundColor = defaultFooterColor
-                    val textColor =
-                        if (ColorUtil.isColorLight(defaultFooterColor)) MaterialValueHelper.getPrimaryTextColor(
-                            requireContext(),
-                            true
-                        )
-                        else MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-                    //setColors(backgroundColor, textColor)
-                }
-            })
-    }
-
     private fun setColors(colors: MediaNotificationProcessor) {
         this.lastColor = colors.backgroundColor
         this.backgroundColor = colors.backgroundColor
@@ -193,10 +132,7 @@ class ColorFragment : AbsPlayerFragment() {
 
     companion object {
         fun newInstance(): ColorFragment {
-            val args = Bundle()
-            val fragment = ColorFragment()
-            fragment.arguments = args
-            return fragment
+            return ColorFragment()
         }
     }
 }

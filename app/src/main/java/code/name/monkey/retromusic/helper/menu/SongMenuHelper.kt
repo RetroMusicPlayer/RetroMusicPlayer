@@ -29,17 +29,12 @@ import code.name.monkey.retromusic.dialogs.SongDetailDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.PaletteColorHolder
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.room.playlist.PlaylistDatabaseModel
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.RingtoneManager
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 object SongMenuHelper {
-    val MENU_RES = R.menu.menu_item_song
+    const val MENU_RES = R.menu.menu_item_song
 
     fun handleMenuClick(activity: FragmentActivity, song: Song, menuItemId: Int): Boolean {
         when (menuItemId) {
@@ -66,15 +61,8 @@ object SongMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                /* AddToPlaylistDialog.create(song)
-                     .show(activity.supportFragmentManager, "ADD_PLAYLIST")*/
-
-                GlobalScope.launch(Dispatchers.IO) {
-                    val names = async { PlaylistDatabaseModel().getPlaylistNames() }.await()
-                    println(names.toString())
-                    AddToPlaylistDialog.create(arrayListOf(song), names)
-                        .show(activity.supportFragmentManager, "ADD_PLAYLIST")
-                }
+                AddToPlaylistDialog.create(song)
+                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_play_next -> {

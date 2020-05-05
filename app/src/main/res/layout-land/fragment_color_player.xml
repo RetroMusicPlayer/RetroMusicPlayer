@@ -36,24 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.google.android.material.card.MaterialCardView
+                <fragment
+                    android:id="@+id/playerAlbumCoverFragment"
+                    android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="12dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="8dp"
-                    app:cardPreventCornerOverlap="false"
-                    app:cardUseCompatPadding="true">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/playerImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic[10]" />
-
-                </com.google.android.material.card.MaterialCardView>
-
+                    tools:layout="@layout/fragment_album_cover" />
             </code.name.monkey.retromusic.views.HeightFitSquareLayout>
 
             <LinearLayout

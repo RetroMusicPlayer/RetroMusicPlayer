@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_tiny_player.*
 
 class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
@@ -71,10 +72,10 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     private var textColorPrimary = 0
     private var textColorPrimaryDisabled = 0
 
-    override fun onColorChanged(color: Int) {
+    override fun onColorChanged(color: MediaNotificationProcessor) {
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.backgroundColor
         } else {
             ThemeStore.accentColor(requireContext())
         }
