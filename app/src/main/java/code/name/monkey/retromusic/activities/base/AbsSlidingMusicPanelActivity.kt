@@ -246,7 +246,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             TINY -> TinyPlayerFragment()
             PEAK -> PeakPlayerFragment()
             CIRCLE -> CirclePlayerFragment()
-            EXAMPLE -> ClassicPlayerFragment()
+            CLASSIC -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction().replace(R.id.playerFragmentContainer, fragment)

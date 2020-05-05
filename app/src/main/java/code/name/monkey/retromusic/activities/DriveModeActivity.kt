@@ -34,6 +34,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_drive_mode.*
 import kotlinx.coroutines.CoroutineScope
@@ -217,7 +218,7 @@ class DriveModeActivity : AbsMusicServiceActivity(), Callback {
             .build()
             .transform(BlurTransformation.Builder(this).build())
             .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(color: Int) {
+                override fun onColorReady(color: MediaNotificationProcessor) {
                 }
             })
     }

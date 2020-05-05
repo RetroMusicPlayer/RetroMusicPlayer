@@ -20,29 +20,24 @@ import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.room.playlist.PlaylistDatabaseModel
-import code.name.monkey.retromusic.room.playlist.PlaylistEntity
+import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class AddToPlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-
-        val names = requireArguments().getParcelableArrayList<PlaylistEntity>("names")
         val playlists = PlaylistLoader.getAllPlaylists(requireContext())
         val playlistNames: MutableList<String> = mutableListOf()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
-        for (p in names!!) {
-            playlistNames.add(p.playlistName)
+        for (p in playlists) {
+            playlistNames.add(p.name)
         }
-
 
         return MaterialDialog(requireContext()).show {
             title(R.string.add_playlist_title)
@@ -57,18 +52,12 @@ class AddToPlaylistDialog : DialogFragment() {
                     }
                 } else {
                     dialog.dismiss()
-                    /*PlaylistsUtil.addToPlaylist(
+                    PlaylistsUtil.addToPlaylist(
                         requireContext(),
                         songs,
                         playlists[index - 1].id,
                         true
-                    )*/
-
-                    GlobalScope.launch(Dispatchers.IO) {
-                        PlaylistDatabaseModel().also {
-                            it.addSongsToPlaylist(songs, names[index - 1])
-                        }
-                    }
+                    )
                 }
             }
         }
@@ -86,18 +75,6 @@ class AddToPlaylistDialog : DialogFragment() {
             val dialog = AddToPlaylistDialog()
             val args = Bundle()
             args.putParcelableArrayList("songs", ArrayList(songs))
-            dialog.arguments = args
-            return dialog
-        }
-
-        fun create(
-            songs: ArrayList<Song>,
-            names: List<PlaylistEntity>
-        ): AddToPlaylistDialog {
-            val dialog = AddToPlaylistDialog()
-            val args = Bundle()
-            args.putParcelableArrayList("songs", ArrayList(songs))
-            args.putParcelableArrayList("names", ArrayList(names))
             dialog.arguments = args
             return dialog
         }

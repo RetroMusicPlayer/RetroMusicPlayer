@@ -140,9 +140,9 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_white_64dp)
+            playPauseButton.setImageResource(R.drawable.ic_pause_sharp_white_64dp)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp)
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_sharp_white_64dp)
         }
     }
 
@@ -189,18 +189,18 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     override fun updateRepeatState() {
         when (MusicPlayerRemote.repeatMode) {
             MusicService.REPEAT_MODE_NONE -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_sharp_white_24dp)
                 repeatButton.setColorFilter(
                     lastDisabledPlaybackControlsColor,
                     PorterDuff.Mode.SRC_IN
                 )
             }
             MusicService.REPEAT_MODE_ALL -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_sharp_white_24dp)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
             MusicService.REPEAT_MODE_THIS -> {
-                repeatButton.setImageResource(R.drawable.ic_repeat_one_white_24dp)
+                repeatButton.setImageResource(R.drawable.ic_repeat_one_sharp_white_24dp)
                 repeatButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
             }
         }

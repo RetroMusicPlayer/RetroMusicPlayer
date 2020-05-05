@@ -21,11 +21,6 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.room.playlist.PlaylistDatabaseModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import java.util.*
 
 
@@ -45,12 +40,8 @@ object SongsMenuHelper {
                 return true
             }
             R.id.action_add_to_playlist -> {
-                GlobalScope.launch(Dispatchers.IO) {
-                    val names = async { PlaylistDatabaseModel().getPlaylistNames() }.await()
-                    println(names.toString())
-                    /*AddToPlaylistDialog.create(songs, names.await())
-                        .show(activity.supportFragmentManager, "ADD_PLAYLIST")*/
-                }
+                AddToPlaylistDialog.create(songs)
+                    .show(activity.supportFragmentManager, "ADD_PLAYLIST")
                 return true
             }
             R.id.action_delete_from_device -> {

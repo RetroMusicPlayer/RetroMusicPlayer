@@ -38,13 +38,15 @@ class ColorFragment : AbsPlayerFragment() {
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            color.secondaryTextColor,
             requireActivity()
         )
+        colorGradientBackground?.setBackgroundColor(color.backgroundColor)
+        playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
     }
 
     override fun onFavoriteToggled() {
-        //toggleFavorite(MusicPlayerRemote.currentSong)
+        toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
     override fun onShow() {
@@ -130,10 +132,7 @@ class ColorFragment : AbsPlayerFragment() {
 
     companion object {
         fun newInstance(): ColorFragment {
-            val args = Bundle()
-            val fragment = ColorFragment()
-            fragment.arguments = args
-            return fragment
+            return ColorFragment()
         }
     }
 }

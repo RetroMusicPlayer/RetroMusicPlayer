@@ -146,7 +146,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/repeatButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_previous_white_24dp"
+        app:srcCompat="@drawable/ic_skip_previous_sharp_white_24dp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -160,7 +160,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
         app:layout_constraintTop_toBottomOf="@+id/songInfo"
-        app:srcCompat="@drawable/ic_pause_white_64dp"
+        app:srcCompat="@drawable/ic_pause_sharp_white_64dp"
         tools:tint="@color/md_black_1000" />
 
     <androidx.appcompat.widget.AppCompatImageButton
@@ -175,7 +175,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/playPauseButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton"
-        app:srcCompat="@drawable/ic_skip_next_white_24dp"
+        app:srcCompat="@drawable/ic_skip_next_sharp_white_24dp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
@@ -190,7 +190,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/nextButton"
-        app:srcCompat="@drawable/ic_shuffle_white_24dp"
+        app:srcCompat="@drawable/ic_shuffle_sharp_white_24dp"
         tools:ignore="MissingPrefix"
         tools:tint="@color/md_black_1000" />
 
