@@ -1,15 +1,17 @@
 /*
- * Copyright (c) 2019 Hemanth Savarala.
+ * Copyright (C) 2017 The Android Open Source Project
  *
- * Licensed under the GNU General Public License v3
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
  */
 
 package code.name.monkey.retromusic.util.color;
@@ -20,16 +22,19 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 
-import androidx.annotation.VisibleForTesting;
+import androidx.annotation.ColorInt;
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
 import androidx.palette.graphics.Palette;
 
 import java.util.List;
 
-import code.name.monkey.appthemehelper.util.ColorUtil;
+import static androidx.core.graphics.ColorUtils.RGBToXYZ;
 
 /**
- * @author Hemanth S (h4h13).
+ * A class the processes media notifications and extracts the right text and background colors.
  */
 public class MediaNotificationProcessor {
 
@@ -37,20 +42,24 @@ public class MediaNotificationProcessor {
      * The fraction below which we select the vibrant instead of the light/dark vibrant color
      */
     private static final float POPULATION_FRACTION_FOR_MORE_VIBRANT = 1.0f;
+
     /**
      * Minimum saturation that a muted color must have if there exists if deciding between two
      * colors
      */
     private static final float MIN_SATURATION_WHEN_DECIDING = 0.19f;
+
     /**
      * Minimum fraction that any color must have to be picked up as a text color
      */
     private static final double MINIMUM_IMAGE_FRACTION = 0.002;
+
     /**
      * The population fraction to select the dominant color as the text color over a the colored
      * ones.
      */
     private static final float POPULATION_FRACTION_FOR_DOMINANT = 0.01f;
+
     /**
      * The population fraction to select a white or black color as the background over a color.
      */
@@ -58,85 +67,159 @@ public class MediaNotificationProcessor {
     private static final float BLACK_MAX_LIGHTNESS = 0.08f;
     private static final float WHITE_MIN_LIGHTNESS = 0.90f;
     private static final int RESIZE_BITMAP_AREA = 150 * 150;
-    private final Context mContext;
+    private static final ThreadLocal<double[]> TEMP_ARRAY = new ThreadLocal<>();
     /**
-     * The context of the notification. This is the app context of the package posting the
-     * notification.
+     * The lightness difference that has to be added to the primary text color to obtain the
+     * secondary text color when the background is light.
      */
-    private final Context mPackageContext;
+    private static final int LIGHTNESS_TEXT_DIFFERENCE_LIGHT = 20;
+    /**
+     * The lightness difference that has to be added to the primary text color to obtain the
+     * secondary text color when the background is dark.
+     * A bit less then the above value, since it looks better on dark backgrounds.
+     */
+    private static final int LIGHTNESS_TEXT_DIFFERENCE_DARK = -10;
     private float[] mFilteredBackgroundHsl = null;
-    private Palette.Filter mBlackWhiteFilter = (rgb, hsl) -> !isWhiteOrBlack(hsl);
+    private Palette.Filter mBlackWhiteFilter = new Palette.Filter() {
+        @Override
+        public boolean isAllowed(int rgb, @NonNull float[] hsl) {
+            return !isWhiteOrBlack(hsl);
+        }
+    };
     private boolean mIsLowPriority;
-    private onColorThing onColorThing;
+    private int backgroundColor;
+    private int secondaryTextColor;
+    private int primaryTextColor;
+    private int actionBarColor;
+    private Drawable drawable;
+    private Context context;
 
-    public MediaNotificationProcessor(Context context, Context packageContext, onColorThing thing) {
-        this(context, packageContext);
-        onColorThing = thing;
+    public MediaNotificationProcessor(Context context, Drawable drawable) {
+        this.context = context;
+        this.drawable = drawable;
+        getMediaPalette();
     }
 
-    @VisibleForTesting
-    MediaNotificationProcessor(Context context, Context packageContext) {
-        mContext = context;
-        mPackageContext = packageContext;
+    public MediaNotificationProcessor(Context context, Bitmap bitmap) {
+        this.context = context;
+        this.drawable = new BitmapDrawable(context.getResources(), bitmap);
+        getMediaPalette();
+    }
+
+
+    public MediaNotificationProcessor(Context context) {
+        this.context = context;
+    }
+
+    private static boolean isColorLight(int backgroundColor) {
+        return calculateLuminance(backgroundColor) > 0.5f;
     }
 
     /**
-     * Processes a builder of a media notification and calculates the appropriate colors that should
-     * be used.
-     *
-     * @param notification the notification that is being processed
-     * @param builder      the recovered builder for the notification. this will be modified
+     * Returns the luminance of a color as a float between {@code 0.0} and {@code 1.0}.
+     * <p>Defined as the Y component in the XYZ representation of {@code color}.</p>
      */
-    public int processNotification(Bitmap image) {
+    @FloatRange(from = 0.0, to = 1.0)
+    private static double calculateLuminance(@ColorInt int color) {
+        final double[] result = getTempDouble3Array();
+        colorToXYZ(color, result);
+        // Luminance is the Y component
+        return result[1] / 100;
+    }
+
+    private static double[] getTempDouble3Array() {
+        double[] result = TEMP_ARRAY.get();
+        if (result == null) {
+            result = new double[3];
+            TEMP_ARRAY.set(result);
+        }
+        return result;
+    }
+
+    private static void colorToXYZ(@ColorInt int color, @NonNull double[] outXyz) {
+        RGBToXYZ(Color.red(color), Color.green(color), Color.blue(color), outXyz);
+    }
+
+    public void getPaletteAsync(final OnPaletteLoadedListener onPaletteLoadedListener, Drawable drawable) {
+        this.drawable = drawable;
+        final Handler handler = new Handler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getMediaPalette();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        onPaletteLoadedListener.onPaletteLoaded(MediaNotificationProcessor.this);
+                    }
+                });
+            }
+        }).start();
+
+    }
+
+    public void getPaletteAsync(OnPaletteLoadedListener onPaletteLoadedListener, Bitmap bitmap) {
+        this.drawable = new BitmapDrawable(context.getResources(), bitmap);
+        getPaletteAsync(onPaletteLoadedListener, this.drawable);
+    }
+
+    /**
+     * Processes a drawable and calculates the appropriate colors that should
+     * be used.
+     */
+    private void getMediaPalette() {
         Bitmap bitmap;
-        Drawable drawable = new BitmapDrawable(mPackageContext.getResources(), image);
+        if (drawable != null) {
+            // We're transforming the builder, let's make sure all baked in RemoteViews are
+            // rebuilt!
 
-        int backgroundColor = 0;
+            int width = drawable.getIntrinsicWidth();
+            int height = drawable.getIntrinsicHeight();
+            int area = width * height;
+            if (area > RESIZE_BITMAP_AREA) {
+                double factor = Math.sqrt((float) RESIZE_BITMAP_AREA / area);
+                width = (int) (factor * width);
+                height = (int) (factor * height);
 
-        int width = drawable.getIntrinsicWidth();
-        int height = drawable.getIntrinsicHeight();
-        int area = width * height;
-        if (area > RESIZE_BITMAP_AREA) {
-            double factor = Math.sqrt((float) RESIZE_BITMAP_AREA / area);
-            width = (int) (factor * width);
-            height = (int) (factor * height);
+                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                drawable.setBounds(0, 0, width, height);
+                drawable.draw(canvas);
+
+                // for the background we only take the left side of the image to ensure
+                // a smooth transition
+                Palette.Builder paletteBuilder = Palette.from(bitmap)
+                        .setRegion(0, 0, bitmap.getWidth() / 2, bitmap.getHeight())
+                        .clearFilters() // we want all colors, red / white / black ones too!
+                        .resizeBitmapArea(RESIZE_BITMAP_AREA);
+                Palette palette = paletteBuilder.generate();
+                backgroundColor = findBackgroundColorAndFilter(drawable);
+                // we want most of the full region again, slightly shifted to the right
+                float textColorStartWidthFraction = 0.4f;
+                paletteBuilder.setRegion((int) (bitmap.getWidth() * textColorStartWidthFraction), 0,
+                        bitmap.getWidth(),
+                        bitmap.getHeight());
+                if (mFilteredBackgroundHsl != null) {
+                    paletteBuilder.addFilter(new Palette.Filter() {
+                        @Override
+                        public boolean isAllowed(int rgb, @NonNull float[] hsl) {
+                            // at least 10 degrees hue difference
+                            float diff = Math.abs(hsl[0] - mFilteredBackgroundHsl[0]);
+                            return diff > 10 && diff < 350;
+                        }
+                    });
+                }
+                paletteBuilder.addFilter(mBlackWhiteFilter);
+                palette = paletteBuilder.generate();
+                int foregroundColor = selectForegroundColor(backgroundColor, palette);
+                ensureColors(backgroundColor, foregroundColor);
+            }
         }
-        bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, width, height);
-        drawable.draw(canvas);
-        // for the background we only take the left side of the image to ensure
-        // a smooth transition
-        Palette.Builder paletteBuilder = Palette.from(bitmap)
-                .setRegion(0, 0, bitmap.getWidth() / 2, bitmap.getHeight())
-                .clearFilters() // we want all colors, red / white / black ones too!
-                .resizeBitmapArea(RESIZE_BITMAP_AREA);
-        Palette palette = paletteBuilder.generate();
-        backgroundColor = findBackgroundColorAndFilter(palette);
-        // we want most of the full region again, slightly shifted to the right
 
-
-        float textColorStartWidthFraction = 0.4f;
-        paletteBuilder.setRegion((int) (bitmap.getWidth() * textColorStartWidthFraction), 0,
-                bitmap.getWidth(),
-                bitmap.getHeight());
-        if (mFilteredBackgroundHsl != null) {
-            paletteBuilder.addFilter((rgb, hsl) -> {
-                // at least 10 degrees hue difference
-                float diff = Math.abs(hsl[0] - mFilteredBackgroundHsl[0]);
-                return diff > 10 && diff < 350;
-            });
-        }
-        paletteBuilder.addFilter(mBlackWhiteFilter);
-        palette = paletteBuilder.generate();
-        int foregroundColor = selectForegroundColor(backgroundColor, palette);
-
-        onColorThing.bothColor(backgroundColor, foregroundColor);
-        return backgroundColor;
     }
 
     private int selectForegroundColor(int backgroundColor, Palette palette) {
-        if (ColorUtil.INSTANCE.isColorLight(backgroundColor)) {
+        if (isColorLight(backgroundColor)) {
             return selectForegroundColorForSwatches(palette.getDarkVibrantSwatch(),
                     palette.getVibrantSwatch(),
                     palette.getDarkMutedSwatch(),
@@ -151,6 +234,10 @@ public class MediaNotificationProcessor {
                     palette.getDominantSwatch(),
                     Color.WHITE);
         }
+    }
+
+    public boolean isLight() {
+        return isColorLight(backgroundColor);
     }
 
     private int selectForegroundColorForSwatches(Palette.Swatch moreVibrant,
@@ -224,7 +311,27 @@ public class MediaNotificationProcessor {
                 && (swatch.getPopulation() / (float) RESIZE_BITMAP_AREA > MINIMUM_IMAGE_FRACTION);
     }
 
-    private int findBackgroundColorAndFilter(Palette palette) {
+    public int findBackgroundColorAndFilter(Drawable drawable) {
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        int area = width * height;
+
+        double factor = Math.sqrt((float) RESIZE_BITMAP_AREA / area);
+        width = (int) (factor * width);
+        height = (int) (factor * height);
+
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+
+        // for the background we only take the left side of the image to ensure
+        // a smooth transition
+        Palette.Builder paletteBuilder = Palette.from(bitmap)
+                .setRegion(0, 0, bitmap.getWidth() / 2, bitmap.getHeight())
+                .clearFilters() // we want all colors, red / white / black ones too!
+                .resizeBitmapArea(RESIZE_BITMAP_AREA);
+        Palette palette = paletteBuilder.generate();
         // by default we use the dominant palette
         Palette.Swatch dominantSwatch = palette.getDominantSwatch();
         if (dominantSwatch == null) {
@@ -232,6 +339,7 @@ public class MediaNotificationProcessor {
             mFilteredBackgroundHsl = null;
             return Color.WHITE;
         }
+
         if (!isWhiteOrBlack(dominantSwatch.getHsl())) {
             mFilteredBackgroundHsl = dominantSwatch.getHsl();
             return dominantSwatch.getRgb();
@@ -287,7 +395,88 @@ public class MediaNotificationProcessor {
         mIsLowPriority = isLowPriority;
     }
 
-    public interface onColorThing {
-        void bothColor(int i, int i2);
+    private void ensureColors(int backgroundColor, int mForegroundColor) {
+        {
+            double backLum = NotificationColorUtil.calculateLuminance(backgroundColor);
+            double textLum = NotificationColorUtil.calculateLuminance(mForegroundColor);
+            double contrast = NotificationColorUtil.calculateContrast(mForegroundColor,
+                    backgroundColor);
+            // We only respect the given colors if worst case Black or White still has
+            // contrast
+            boolean backgroundLight = backLum > textLum
+                    && NotificationColorUtil.satisfiesTextContrast(backgroundColor, Color.BLACK)
+                    || backLum <= textLum
+                    && !NotificationColorUtil.satisfiesTextContrast(backgroundColor, Color.WHITE);
+            if (contrast < 4.5f) {
+                if (backgroundLight) {
+                    secondaryTextColor = NotificationColorUtil.findContrastColor(
+                            mForegroundColor,
+                            backgroundColor,
+                            true /* findFG */,
+                            4.5f);
+                    primaryTextColor = NotificationColorUtil.changeColorLightness(
+                            secondaryTextColor, -LIGHTNESS_TEXT_DIFFERENCE_LIGHT);
+                } else {
+                    secondaryTextColor =
+                            NotificationColorUtil.findContrastColorAgainstDark(
+                                    mForegroundColor,
+                                    backgroundColor,
+                                    true /* findFG */,
+                                    4.5f);
+                    primaryTextColor = NotificationColorUtil.changeColorLightness(
+                            secondaryTextColor, -LIGHTNESS_TEXT_DIFFERENCE_DARK);
+                }
+            } else {
+                primaryTextColor = mForegroundColor;
+                secondaryTextColor = NotificationColorUtil.changeColorLightness(
+                        primaryTextColor, backgroundLight ? LIGHTNESS_TEXT_DIFFERENCE_LIGHT
+                                : LIGHTNESS_TEXT_DIFFERENCE_DARK);
+                if (NotificationColorUtil.calculateContrast(secondaryTextColor,
+                        backgroundColor) < 4.5f) {
+                    // oh well the secondary is not good enough
+                    if (backgroundLight) {
+                        secondaryTextColor = NotificationColorUtil.findContrastColor(
+                                secondaryTextColor,
+                                backgroundColor,
+                                true /* findFG */,
+                                4.5f);
+                    } else {
+                        secondaryTextColor
+                                = NotificationColorUtil.findContrastColorAgainstDark(
+                                secondaryTextColor,
+                                backgroundColor,
+                                true /* findFG */,
+                                4.5f);
+                    }
+                    primaryTextColor = NotificationColorUtil.changeColorLightness(
+                            secondaryTextColor, backgroundLight
+                                    ? -LIGHTNESS_TEXT_DIFFERENCE_LIGHT
+                                    : -LIGHTNESS_TEXT_DIFFERENCE_DARK);
+                }
+            }
+        }
+        actionBarColor = NotificationColorUtil.resolveActionBarColor(context,
+                backgroundColor);
+    }
+
+
+    public int getPrimaryTextColor() {
+        return primaryTextColor;
+    }
+
+    public int getSecondaryTextColor() {
+        return secondaryTextColor;
+    }
+
+    public int getActionBarColor() {
+        return actionBarColor;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public interface OnPaletteLoadedListener {
+        void onPaletteLoaded(MediaNotificationProcessor mediaNotificationProcessor);
     }
 }

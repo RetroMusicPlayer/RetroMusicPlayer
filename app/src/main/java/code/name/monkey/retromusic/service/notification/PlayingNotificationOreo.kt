@@ -109,11 +109,14 @@ class PlayingNotificationOreo : PlayingNotification() {
                         resource: BitmapPaletteWrapper,
                         glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
                     ) {
-                        val mediaNotificationProcessor = MediaNotificationProcessor(
-                            service,
-                            service
-                        ) { i, _ -> update(resource.bitmap, i) }
-                        mediaNotificationProcessor.processNotification(resource.bitmap)
+                        /* val mediaNotificationProcessor = MediaNotificationProcessor(
+                             service,
+                             service
+                         ) { i, _ -> update(resource.bitmap, i) }
+                         mediaNotificationProcessor.processNotification(resource.bitmap)*/
+
+                        val colors = MediaNotificationProcessor(service, resource.bitmap)
+                        update(resource.bitmap, colors.backgroundColor)
                     }
 
                     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {

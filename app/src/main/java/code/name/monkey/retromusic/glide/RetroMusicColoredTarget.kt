@@ -20,8 +20,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
-import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.RetroColorUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.request.animation.GlideAnimation
 
 
@@ -33,11 +32,12 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
     protected val albumArtistFooterColor: Int
         get() = ATHUtil.resolveColor(getView().context, R.attr.colorControlNormal)
 
-    abstract fun onColorReady(color: Int)
+    abstract fun onColorReady(colors: MediaNotificationProcessor)
 
     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
         super.onLoadFailed(e, errorDrawable)
-        onColorReady(defaultFooterColor)
+        val colors = MediaNotificationProcessor(getView().context, errorDrawable)
+        onColorReady(colors)
     }
 
     override fun onResourceReady(
@@ -45,15 +45,8 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
         glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
     ) {
         super.onResourceReady(resource, glideAnimation)
-        val defaultColor = defaultFooterColor
-
         resource?.let {
-            onColorReady(
-                if (PreferenceUtil.getInstance(getView().context).isDominantColor)
-                    RetroColorUtil.getDominantColor(it.bitmap, defaultColor)
-                else
-                    RetroColorUtil.getColor(it.palette, defaultColor)
-            )
+            onColorReady(MediaNotificationProcessor(getView().context, it.bitmap))
         }
     }
 }

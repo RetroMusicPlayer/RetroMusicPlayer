@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_peak_player.*
 
@@ -125,8 +126,8 @@ class PeakPlayerFragment : AbsPlayerFragment() {
             .generatePalette(requireContext())
             .build()
             .into(object : RetroMusicColoredTarget(playerImage) {
-                override fun onColorReady(color: Int) {
-                    playbackControlsFragment.setDark(color)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    playbackControlsFragment.setDark(colors.backgroundColor)
                 }
             })
     }

@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import me.zhanghai.android.fastscroll.PopupTextProvider
 import java.util.*
@@ -94,8 +95,8 @@ class ArtistAdapter(
                     setColors(defaultFooterColor, holder)
                 }
 
-                override fun onColorReady(color: Int) {
-                    setColors(color, holder)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    setColors(colors.backgroundColor,holder)
                 }
             })
     }

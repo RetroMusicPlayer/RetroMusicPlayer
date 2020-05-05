@@ -33,6 +33,7 @@ import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.afollestad.materialcab.MaterialCab
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
@@ -199,8 +200,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                 artist.songCount
             )
         songTitle.text = songText
-        albumTitle.text =albumText
-            songAdapter.swapDataSet(artist.songs)
+        albumTitle.text = albumText
+        songAdapter.swapDataSet(artist.songs)
         albumAdapter.swapDataSet(artist.albums!!)
     }
 
@@ -246,9 +247,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     private fun loadArtistImage() {
         ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
             .dontAnimate().into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(color: Int) {
-                    setColors(color)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    setColors(colors.backgroundColor)
                 }
+
             })
     }
 

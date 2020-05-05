@@ -15,6 +15,7 @@ import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 
 class AlbumCoverPagerAdapter(
@@ -121,8 +122,8 @@ class AlbumCoverPagerAdapter(
                 .checkIgnoreMediaStore(requireContext())
                 .generatePalette(requireContext()).build()
                 .into(object : RetroMusicColoredTarget(albumCover) {
-                    override fun onColorReady(color: Int) {
-                        setColor(color)
+                    override fun onColorReady(colors: MediaNotificationProcessor) {
+                        setColor(colors.backgroundColor)
                     }
                 })
         }

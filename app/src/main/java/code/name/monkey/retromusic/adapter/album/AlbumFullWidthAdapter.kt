@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.MetalRecyclerViewPager
 import com.bumptech.glide.Glide
 
@@ -81,7 +82,8 @@ class AlbumFullWidthAdapter(
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onColorReady(color: Int) {
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+
                 }
             })
     }

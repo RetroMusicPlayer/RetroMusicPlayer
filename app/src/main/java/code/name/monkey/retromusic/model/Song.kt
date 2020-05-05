@@ -14,12 +14,10 @@
 package code.name.monkey.retromusic.model
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.room.SongEntity
 import code.name.monkey.retromusic.room.SongQueueEntity
+import code.name.monkey.retromusic.room.playlist.PlaylistEntity
+import code.name.monkey.retromusic.room.playlist.PlaylistSongEntity
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -61,6 +59,24 @@ open class Song(
         fun toSongQueueEntity(song: Song): SongEntity {
             return SongEntity(
                 song.id,
+                song.title,
+                song.trackNumber,
+                song.year,
+                song.duration,
+                song.data,
+                song.dateModified,
+                song.albumId,
+                song.albumName,
+                song.artistId,
+                song.artistName,
+                song.composer
+            )
+        }
+
+        fun toPlaylistSong(song: Song, playlistEntity: PlaylistEntity): PlaylistSongEntity {
+            return PlaylistSongEntity(
+                playlistEntity.playlistId,
+                playlistEntity.playlistName, song.id,
                 song.title,
                 song.trackNumber,
                 song.year,

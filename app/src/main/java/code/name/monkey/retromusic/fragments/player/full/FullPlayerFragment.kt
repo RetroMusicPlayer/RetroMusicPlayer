@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.AbsSynchronizedLyrics
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.NavigationUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_full.*
 import kotlinx.coroutines.CoroutineScope
@@ -241,7 +242,8 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
                     .generatePalette(requireContext())
                     .build()
                     .into(object : RetroMusicColoredTarget(artistImage) {
-                        override fun onColorReady(color: Int) {
+                        override fun onColorReady(colors: MediaNotificationProcessor) {
+
                         }
                     })
             }

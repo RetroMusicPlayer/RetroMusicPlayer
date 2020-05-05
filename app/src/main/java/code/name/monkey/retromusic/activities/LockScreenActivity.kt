@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.fragments.player.lockscreen.LockScreenPlayerC
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import com.r0adkll.slidr.Slidr
 import com.r0adkll.slidr.model.SlidrConfig
@@ -91,8 +92,8 @@ class LockScreenActivity : AbsMusicServiceActivity() {
         SongGlideRequest.Builder.from(Glide.with(this), song).checkIgnoreMediaStore(this)
             .generatePalette(this).build().dontAnimate()
             .into(object : RetroMusicColoredTarget(image) {
-                override fun onColorReady(color: Int) {
-                    fragment?.setDark(color)
+                override fun onColorReady(colors: MediaNotificationProcessor) {
+                    fragment?.setDark(colors.backgroundColor)
                 }
             })
     }
