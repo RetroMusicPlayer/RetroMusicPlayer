@@ -14,7 +14,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.tageditor.AbsTagEditorActivity
 import code.name.monkey.retromusic.activities.tageditor.SongTagEditorActivity
@@ -256,7 +255,6 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.setBackgroundColor(ATHUtil.resolveColor(requireContext(), R.attr.colorSecondary))
         if (PreferenceUtil.getInstance(requireContext()).fullScreenMode &&
             view.findViewById<View>(R.id.status_bar) != null
         ) {

@@ -9,7 +9,6 @@
         android:id="@+id/playerContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
         android:orientation="vertical">
 
         <code.name.monkey.retromusic.views.WidthFitSquareLayout
@@ -21,13 +20,29 @@
                 android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
-        <include
-            android:id="@+id/playerControlsContainer"
-            layout="@layout/fragment_layout_test"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <include layout="@layout/shadow_statusbar_toolbar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <include layout="@layout/status_bar" />
+                </FrameLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/playerToolbar"
+                    style="@style/Toolbar"
+                    android:layout_gravity="bottom"
+                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
+            </LinearLayout>
+        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -36,36 +51,22 @@
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="vertical"
+        android:tag="nested_bottom_sheet"
         app:behavior_hideable="false"
-        app:cardCornerRadius="16dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:cardCornerRadius="0dp"
+        app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
             android:orientation="vertical">
 
-            <View
-                android:id="@+id/handle"
-                android:layout_width="56dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:alpha="0.3"
-                android:background="@drawable/scroll_handler" />
-
-            <FrameLayout
+            <include
+                android:id="@+id/playerControlsContainer"
+                layout="@layout/fragment_classic_controls"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/playerToolbar"
-                    style="@style/Toolbar"
-                    android:layout_gravity="bottom"
-                    android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-                    app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </FrameLayout>
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +86,7 @@
                     android:textColor="?android:attr/textColorSecondary" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/playerQueueRecyclerView"
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="?attr/colorSurface"

@@ -514,6 +514,27 @@
     <string name="tiny_card_style">Apró kártya</string>
     <string name="about_album_label">%s -ról</string>
     <string name="pref_language_name">Válasszon nyelvet</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="translators">Fordítók</string>
+    <string name="translators_summary">Az emberek, akik segítették lefordítani ezt az alkalmazást</string>
+    <string name="try_retro_music_premium">Próbálja ki a Retro Music Premium alkalmazást</string>
+    <plurals name="albumSongs">
+        <item quantity="one">Dal</item>
+        <item quantity="other">Dalok</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="other">Albumok</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="one">%d Dal</item>
+        <item quantity="other">%d Dalok</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d Album</item>
+        <item quantity="other">%d Albumok</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d Előadó</item>
+        <item quantity="other">%d Előadók</item>
+    </plurals>
 </resources>

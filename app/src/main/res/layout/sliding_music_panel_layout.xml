@@ -26,7 +26,7 @@
         android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"

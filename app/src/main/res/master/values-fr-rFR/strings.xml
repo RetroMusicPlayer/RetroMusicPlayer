@@ -94,7 +94,7 @@
     <string name="bug_report_summary">Une erreur imprévue s\'est produite. Nous sommes désolé que vous ayez rencontré ce bug, si l\'application continue de planter, effacez les données de l\'application</string>
     <string name="bug_report_uploading">Envoi du rapport de bug sur GitHub...</string>
     <string name="bug_report_use_account">Envoyer en utilisant un compte GitHub</string>
-    <string name="buy_now">Buy now</string>
+    <string name="buy_now">Acheter maintenant</string>
     <string name="cancel_current_timer">Annuler</string>
     <string name="card">Carte</string>
     <string name="card_circular_style">Circulaire</string>
@@ -299,7 +299,7 @@
     <string name="pref_summary_album_art_on_lockscreen">Utiliser la couverture d\'album de la piste en cours de lecture comme fond sur l\'écran de verrouillage</string>
     <string name="pref_summary_audio_ducking">Baisser le volume quand un son système ou une notification est reçue</string>
     <string name="pref_summary_blacklist">Le contenu des dossiers en liste noire est masqué de votre bibliothèque.</string>
-    <string name="pref_summary_bluetooth_playback">Start playing as soon as connected to bluetooth device</string>
+    <string name="pref_summary_bluetooth_playback">Commencez à jouer dès que vous êtes connecté à un appareil Bluetooth</string>
     <string name="pref_summary_blurred_album_art">Flouter la couverture de l\'album sur l\'écran de verrouillage. Cela peut poser des problèmes avec des applications et widgets tiers.</string>
     <string name="pref_summary_carousel_effect">Effet carousel pour les couvertures d\'albums sur l\'écran de lecture en cours. Veuillez noter que les thèmes Carte et Carte floutée ne fonctionneront pas</string>
     <string name="pref_summary_classic_notification">Utiliser le design classique pour les notifications</string>
@@ -507,9 +507,9 @@
     <string name="you_will_be_forwarded_to_the_issue_tracker_website">Vous allez être redirigé vers le site web de suivi des problèmes.</string>
     <string name="your_account_data_is_only_used_for_authentication">Vos données de compte sont utilisées uniquement pour vous authentifier.</string>
     <string name="amount">Amount</string>
-    <string name="note">Note(Optional)</string>
-    <string name="start_payment">Start payment</string>
+    <string name="note">Note (Optionnel)</string>
+    <string name="start_payment">Commencer le paiement</string>
     <string name="pref_title_expand_now_playing_panel">Show now playing screen</string>
     <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
-    <string name="tiny_card_style">Tiny card</string>
+    <string name="tiny_card_style">Petite carte</string>
 </resources>

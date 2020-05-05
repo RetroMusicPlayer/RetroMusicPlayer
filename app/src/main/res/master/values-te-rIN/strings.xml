@@ -511,5 +511,5 @@
     <string name="start_payment">చెల్లింపు ప్రారంభించండి</string>
     <string name="pref_title_expand_now_playing_panel">ఇప్పుడు ప్లే స్క్రీన్ చూపించు</string>
     <string name="pref_summary_expand_now_playing_panel">నోటిఫికేషన్‌పై క్లిక్ చేస్తే హోమ్ స్క్రీన్‌కు బదులుగా ఇప్పుడు ప్లే స్క్రీన్ కనిపిస్తుంది</string>
-    <string name="tiny_card_style">Tiny card</string>
+    <string name="tiny_card_style">చిన్న కార్డు</string>
 </resources>

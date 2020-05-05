@@ -516,6 +516,22 @@ tetap bermasalah, \"Hapus data Aplikasi\" atau kirim Email </string>
     <string name="tiny_card_style">Kartu kecil</string>
     <string name="about_album_label">Tentang %s</string>
     <string name="pref_language_name">Pilih bahasa</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="translators">Penerjemah</string>
+    <string name="translators_summary">Orang-orang yang membantu menerjemahkan aplikasi ini</string>
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="other">Songs</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="other">Albums</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="other">%d Songs</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="other">%d Albums</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="other">%d Artists</item>
+    </plurals>
 </resources>

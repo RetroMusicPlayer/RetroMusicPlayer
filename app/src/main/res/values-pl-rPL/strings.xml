@@ -513,7 +513,38 @@
     <string name="pref_summary_expand_now_playing_panel">Kliknięcie powiadomienia pokaże teraz odtwarzane zamiast ekranu głównego</string>
     <string name="tiny_card_style">Mała karta</string>
     <string name="about_album_label">O %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="pref_language_name">Wybierz język</string>
+    <string name="translators">Tłumacze</string>
+    <string name="translators_summary">Osoby, które pomogły przetłumaczyć tę aplikację</string>
+    <string name="try_retro_music_premium">Wypróbuj Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="one">Utwór</item>
+        <item quantity="few">Utwory</item>
+        <item quantity="many">Utwory</item>
+        <item quantity="other">Utwory</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="few">Albumy</item>
+        <item quantity="many">Albumy</item>
+        <item quantity="other">Albumy</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="one">%d Utwór</item>
+        <item quantity="few">%d Utworu</item>
+        <item quantity="many">%d Utworu</item>
+        <item quantity="other">%d Utworu</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d Album</item>
+        <item quantity="few">%d Albumu</item>
+        <item quantity="many">%d Albumu</item>
+        <item quantity="other">%d Albumu</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d Artysta</item>
+        <item quantity="few">%d Artyści</item>
+        <item quantity="many">%d Artyści</item>
+        <item quantity="other">%d Artyści</item>
+    </plurals>
 </resources>

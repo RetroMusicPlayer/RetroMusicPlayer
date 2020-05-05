@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_settings_summary">团队，社交链接</string>
-    <string name="accent_color">主题色</string>
-    <string name="accent_color_desc">主题强调色，默认为紫色。</string>
+    <string name="accent_color">强调色</string>
+    <string name="accent_color_desc">主题强调色，默认为紫色</string>
     <string name="action_about">关于</string>
     <string name="action_add_to_favorites">添加到收藏夹</string>
     <string name="action_add_to_playing_queue">添加到播放队列</string>
@@ -51,7 +51,7 @@
     <string name="add_lyrics">添加歌词</string>
     <string name="add_photo">添加\n头像</string>
     <string name="add_playlist_title">"添加到播放列表"</string>
-    <string name="add_time_framed_lryics">添加时间戳歌词</string>
+    <string name="add_time_framed_lryics">添加滚动歌词</string>
     <string name="added_title_to_playing_queue">"已添加1首歌到播放队列。"</string>
     <string name="added_x_titles_to_playing_queue">已添加 %1$d 首歌到播放队列。</string>
     <string name="album">专辑</string>
@@ -297,7 +297,7 @@
     <string name="pref_now_playing_screen_title">单击或划动</string>
     <string name="pref_snow_fall_title">降雪效果</string>
     <string name="pref_summary_album_art_on_lockscreen">将正在播放的歌曲专辑封面设置为锁屏壁纸</string>
-    <string name="pref_summary_audio_ducking">系统音响起或消息提醒时降低音量</string>
+    <string name="pref_summary_audio_ducking">当系统播放声音或收到通知时降低音量</string>
     <string name="pref_summary_blacklist">在媒体库中隐藏列入黑名单的文件夹内容。</string>
     <string name="pref_summary_bluetooth_playback">连接到蓝牙设备后立即开始播放</string>
     <string name="pref_summary_blurred_album_art">在锁屏中显示模糊化的专辑封面
@@ -514,9 +514,25 @@
     <string name="start_payment">开始支付</string>
     <string name="pref_title_expand_now_playing_panel">显示正在播放界面</string>
     <string name="pref_summary_expand_now_playing_panel">点击通知将显示「正在播放界面」而不是「主界面」</string>
-    <string name="tiny_card_style">Tiny card</string>
+    <string name="tiny_card_style">小卡片</string>
     <string name="about_album_label">关于 %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="pref_language_name">选择语言</string>
+    <string name="translators">翻译人员</string>
+    <string name="translators_summary">帮助翻译此应用程序的人</string>
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="other">Songs</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="other">Albums</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="other">%d 首歌曲</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="other">%d 张专辑</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="other">%d 位艺术家</item>
+    </plurals>
 </resources>

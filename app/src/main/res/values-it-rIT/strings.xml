@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="about_settings_summary">Team e pagine social</string>
-    <string name="accent_color">Accento colore</string>
-    <string name="accent_color_desc">Il colore di accento del tema, il predefinito é verde acqua</string>
+    <string name="accent_color">Colore in rilievo</string>
+    <string name="accent_color_desc">Il colore secondario del tema, il predefinito è verde</string>
     <string name="action_about">Informazioni</string>
     <string name="action_add_to_favorites">Aggiungi ai preferiti</string>
     <string name="action_add_to_playing_queue">Aggiungi alla coda</string>
@@ -97,10 +97,10 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="bug_report_use_account">Invia con l\'account GitHub</string>
     <string name="buy_now">Acquista ora</string>
     <string name="cancel_current_timer">Annulla</string>
-    <string name="card">Scheda</string>
+    <string name="card">Card</string>
     <string name="card_circular_style">Circolare</string>
     <string name="card_color_style">Card colorata</string>
-    <string name="card_style">Scheda</string>
+    <string name="card_style">Card</string>
     <string name="carousal">Carosello</string>
     <string name="carousal_effect_on_now_playing_screen">Effetto scorrimento sulla schermata di riproduzione</string>
     <string name="cascading">Cascata</string>
@@ -169,7 +169,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="for_you">Per te</string>
     <string name="free">Gratis</string>
     <string name="full">Pieno</string>
-    <string name="full_card">Scheda intera</string>
+    <string name="full_card">Card intera</string>
     <string name="general_settings_summary">Cambia il tema e i colori dell\'app</string>
     <string name="general_settings_title">Aspetto</string>
     <string name="genre">Genere</string>
@@ -299,7 +299,7 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="pref_snow_fall_title">Effetto neve</string>
     <string name="pref_summary_album_art_on_lockscreen">Imposta la copertina del brano riprodotto come sfondo del blocco schermo</string>
     <string name="pref_summary_audio_ducking">Riduce il volume quando viene riprodotto un suono di sistema o viene ricevuta una notifica</string>
-    <string name="pref_summary_blacklist">Il contenuto delle cartelle nella blacklist non compare nella raccolta.</string>
+    <string name="pref_summary_blacklist">Il contenuto delle cartelle nella blacklist non compare nella raccolta</string>
     <string name="pref_summary_bluetooth_playback">Avvia la riproduzione non appena connesso al dispositivo bluetooth</string>
     <string name="pref_summary_blurred_album_art">Sfoca la copertina dell\'album sulla schermata di blocco. Può causare problemi con app e widget di terze parti</string>
     <string name="pref_summary_carousel_effect">Effetto scorrimento della copertina nella schermata in riproduzione. Non funziona con i temi Scheda e Scheda sfocata</string>
@@ -512,9 +512,30 @@ https://play.google.com/store/apps/details?id=%s</string>
     <string name="start_payment">Inizia pagamento</string>
     <string name="pref_title_expand_now_playing_panel">Mostra la schermata riproduzione</string>
     <string name="pref_summary_expand_now_playing_panel">Cliccando sulla notifica verrà visualizzata la schermata di riproduzione invece della schermata home</string>
-    <string name="tiny_card_style">Tiny card</string>
-    <string name="about_album_label">About %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="tiny_card_style">Card piccola</string>
+    <string name="about_album_label">Info su %s</string>
+    <string name="pref_language_name">Seleziona lingua</string>
+    <string name="translators">Traduttori</string>
+    <string name="translators_summary">Le persone che hanno contribuito a tradurre questa app</string>
+    <string name="try_retro_music_premium">Prova Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="one">Canzone</item>
+        <item quantity="other">Canzoni</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="other">Album</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="one">%d brano</item>
+        <item quantity="other">%d brani</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d album</item>
+        <item quantity="other">%d album</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d artista</item>
+        <item quantity="other">%d artisti</item>
+    </plurals>
 </resources>

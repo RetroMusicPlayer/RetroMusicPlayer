@@ -513,7 +513,38 @@
     <string name="pref_summary_expand_now_playing_panel">При натисканні на сповіщення буде показано екран відтворення замість домашнього екрану</string>
     <string name="tiny_card_style">Крихітна картка</string>
     <string name="about_album_label">Про додаток %s</string>
-    <string name="pref_language_name">Select language</string>
-    <string name="translators">Translators</string>
-    <string name="translators_summary">The people who helped translate this app</string>
+    <string name="pref_language_name">Обрати мову</string>
+    <string name="translators">Перекладачі</string>
+    <string name="translators_summary">Люди, які допомогли перекласти цей додаток</string>
+    <string name="try_retro_music_premium">Спробуйте Retro Music Преміум</string>
+    <plurals name="albumSongs">
+        <item quantity="one">Пісня</item>
+        <item quantity="few">Пісні</item>
+        <item quantity="many">Пісні</item>
+        <item quantity="other">Пісні</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Альбом</item>
+        <item quantity="few">Альбоми</item>
+        <item quantity="many">Альбоми</item>
+        <item quantity="other">Альбоми</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="one">%d Пісня</item>
+        <item quantity="few">%d пісні</item>
+        <item quantity="many">%d пісні</item>
+        <item quantity="other">%d пісні</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d Альбом</item>
+        <item quantity="few">%d Альбоми</item>
+        <item quantity="many">%d Альбоми</item>
+        <item quantity="other">%d Альбоми</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d Виконавець</item>
+        <item quantity="few">%d Виконавці</item>
+        <item quantity="many">%d Виконавці</item>
+        <item quantity="other">%d Виконавці</item>
+    </plurals>
 </resources>

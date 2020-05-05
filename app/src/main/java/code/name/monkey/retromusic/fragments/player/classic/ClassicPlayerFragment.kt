@@ -1,31 +1,30 @@
-package code.name.monkey.retromusic.fragments.player
+package code.name.monkey.retromusic.fragments.player.classic
 
-import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.LinearInterpolator
-import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.retromusic.CustomBottomSheetBehavior
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
-import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
@@ -33,10 +32,11 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
-import kotlinx.android.synthetic.main.fragment_full_player.*
-import kotlinx.android.synthetic.main.fragment_layout_test.*
+import kotlinx.android.synthetic.main.fragment_clasic_player.*
+import kotlinx.android.synthetic.main.fragment_classic_controls.*
+import kotlinx.android.synthetic.main.status_bar.*
 
-class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
+class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     MusicProgressViewUpdateHelper.Callback {
 
     private var lastColor: Int = 0
@@ -46,13 +46,27 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     private lateinit var queueAdapter: PlayingQueueAdapter
     private var volumeFragment: VolumeFragment? = null
 
+
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            handle.alpha = 1 - slideOffset
+            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
+                .setAllowDragging(false)
+
+            playerQueueSheet.setContentPadding(
+                playerQueueSheet.contentPaddingLeft,
+                (slideOffset * status_bar.height).toInt(),
+                playerQueueSheet.contentPaddingRight,
+                playerQueueSheet.contentPaddingBottom
+            )
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
-
+            val activity = requireActivity() as AbsSlidingMusicPanelActivity
+            if (newState == BottomSheetBehavior.STATE_EXPANDED || newState == BottomSheetBehavior.STATE_DRAGGING) {
+                activity.getBottomSheetBehavior().setAllowDragging(false)
+            } else {
+                activity.getBottomSheetBehavior().setAllowDragging(true)
+            }
         }
     }
 
@@ -66,7 +80,7 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_full_player, container, false)
+        return inflater.inflate(R.layout.fragment_clasic_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,6 +95,14 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         coverFragment.setCallbacks(this)
 
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
+
+
+        playerQueueSheet.setOnTouchListener { _, _ ->
+            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
+                .setAllowDragging(false)
+            getQueuePanel().setAllowDragging(true)
+            return@setOnTouchListener false
+        }
     }
 
     private fun hideVolumeIfAvailable() {
@@ -117,9 +139,9 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         progressViewUpdateHelper.stop()
     }
 
-    private fun getQueuePanel(): BottomSheetBehavior<MaterialCardView> {
+    private fun getQueuePanel(): CustomBottomSheetBehavior<MaterialCardView> {
         playerQueueSheet as MaterialCardView
-        return BottomSheetBehavior.from(playerQueueSheet)
+        return CustomBottomSheetBehavior.from(playerQueueSheet) as CustomBottomSheetBehavior<MaterialCardView>
     }
 
     private fun setupPanel() {
@@ -153,7 +175,7 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
             MusicPlayerRemote.position,
             R.layout.item_queue
         )
-        playerQueueRecyclerView.apply {
+        recyclerView.apply {
             adapter = queueAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -197,16 +219,21 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     override fun toolbarIconColor(): Int {
-        return ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
+        return Color.WHITE
     }
 
     override val paletteColor: Int
         get() = lastColor
 
     override fun onColorChanged(color: Int) {
-        playerContainer.setBackgroundColor(color)
-        val colorBg = ATHUtil.resolveColor(requireContext(), color)
-        if (ColorUtil.isColorLight(colorBg)) {
+        lastColor = color
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            Color.WHITE,
+            requireActivity()
+        )
+
+        if (!ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
@@ -237,7 +264,9 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         songInfo.setTextColor(lastDisabledPlaybackControlsColor)
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
-        volumeFragment?.setTintableColor(lastPlaybackControlsColor)
+        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
+        player_queue_sub_header.setTextColor(colorFinal)
+        volumeFragment?.setTintable(colorFinal)
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)
         ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
         updateRepeatState()
@@ -257,15 +286,22 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.max = total
-
-        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
-        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
-        animator.interpolator = LinearInterpolator()
-        animator.start()
-
+        progressSlider.valueTo = total.toFloat()
+        progressSlider.value = progress.toFloat()
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    fun setUpProgressSlider() {
+        progressSlider.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                MusicPlayerRemote.seekTo(value.toInt())
+                onUpdateProgressViews(
+                    MusicPlayerRemote.songProgressMillis,
+                    MusicPlayerRemote.songDurationMillis
+                )
+            }
+        }
     }
 
     override fun onPlayStateChanged() {
@@ -300,19 +336,6 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         setUpProgressSlider()
     }
 
-    fun setUpProgressSlider() {
-        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
-            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                if (fromUser) {
-                    MusicPlayerRemote.seekTo(progress)
-                    onUpdateProgressViews(
-                        MusicPlayerRemote.songProgressMillis,
-                        MusicPlayerRemote.songDurationMillis
-                    )
-                }
-            }
-        })
-    }
 
     private fun setUpPrevNext() {
         updatePrevNextColor()
@@ -379,7 +402,7 @@ class TestPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     ) {
         val height = playerContainer.height
         val width = playerContainer.width
-        val finalHeight = height - (playerControlsContainer.height + width)
+        val finalHeight = height - width
         val panel = getQueuePanel()
         panel.peekHeight = finalHeight
     }

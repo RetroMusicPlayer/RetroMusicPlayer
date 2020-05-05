@@ -45,7 +45,7 @@
     <string name="action_sort_order">ترتيب الفرز</string>
     <string name="action_tag_editor">محرر البطاقة</string>
     <string name="action_toggle_favorite">تبديل المفضلة</string>
-    <string name="action_toggle_shuffle">Toggle shuffle mode</string>
+    <string name="action_toggle_shuffle">تفعيل وضع الخلط</string>
     <string name="adaptive">متكيف</string>
     <string name="add_action">إضافة</string>
     <string name="add_lyrics">اضافة كلمات</string>
@@ -114,7 +114,7 @@
     <string name="clear_blacklist">إزالة القائمة السوداء</string>
     <string name="clear_playing_queue">مسح التسلسل</string>
     <string name="clear_playlist_title">إزالة قائمة التشغيل</string>
-    <string name="clear_playlist_x"><![CDATA[Clear the playlist <b>%1$s</b>? This can\u2019t be undone!]]></string>
+    <string name="clear_playlist_x"><![CDATA[مسح قائمة التشغيل <b>%1$s</b>؟ هذا يمكن\u2019t التراجع عنه!]]></string>
     <string name="close_notification">اغلاق</string>
     <string name="color">لون</string>
     <string name="color_theme_name">لون</string>
@@ -122,7 +122,7 @@
     <string name="composer">المؤلف</string>
     <string name="copied_device_info_to_clipboard">تم نسخ معلومات الجهاز للحافظة.</string>
     <string name="could_not_create_playlist">تعذّر\u2019t إنشاء قائمة.</string>
-    <string name="could_not_download_album_cover">"Couldn\u2019t download a matching album cover."</string>
+    <string name="could_not_download_album_cover">"تعذّر تحميل\u2019t غلاف الألبوم المطابق."</string>
     <string name="could_not_restore_purchase">لايمكن إسترجاع المشتريات</string>
     <string name="could_not_scan_files">لايمكن فحص الملفات %d</string>
     <string name="create_action">إنشاء</string>
@@ -257,7 +257,7 @@
     <string name="password">كلمة السر</string>
     <string name="past_three_months">أخر 3 أشهر</string>
     <string name="paste_lyrics_here">الصق الكلمات هنا</string>
-    <string name="peak">Peak</string>
+    <string name="peak">الذروة</string>
     <string name="permission_external_storage_denied">تم رفض إذن الوصول إلى وحدة التخزين الخارجي.</string>
     <string name="permissions_denied">تم رفض الأذونات.</string>
     <string name="personalize">تخصيص</string>
@@ -307,8 +307,8 @@
     <string name="pref_summary_colored_app">تتغير ألوان أزرار الخلفية والتحكم وفقًا لصورة الألبوم من شاشة التشغيل الآن</string>
     <string name="pref_summary_colored_app_shortcuts">تلوين اختصارات التطبيق باللون الثانوي . في كل مرة تقوم فيها بتغيير اللون ، يرجى تفعيل هذا الخيار ليتم تطبيق التغييرات</string>
     <string name="pref_summary_colored_navigation_bar">تلوين شريط التنقل باللون الاساسي</string>
-    <string name="pref_summary_colored_notification">"Colors the notification in the album cover\u2019s vibrant color"</string>
-    <string name="pref_summary_desaturated_color">As per Material Design guide lines in dark mode colors should be desaturated</string>
+    <string name="pref_summary_colored_notification">"تلوين الإشعارات في غلاف الألبوم\u2019لون نشط"</string>
+    <string name="pref_summary_desaturated_color">حسب خطوط دليل تصميم المواد بالألوان في الوضع المظلم يجب أن لاتكون مشتته</string>
     <string name="pref_summary_dominant_color">سيتم اختيار اللون الأكثر انتشارًا من الألبوم أو غلاف الفنان</string>
     <string name="pref_summary_extra_controls">اضافة المزيد من التحكم في المشغل المصغر</string>
     <string name="pref_summary_extra_song_info">إظهار معلومات الأغنية الإضافية، مثل تنسيق الملف، معدل البت، والتواتر</string>
@@ -366,7 +366,7 @@
     <string name="pref_title_user_info">معلومات المستخدم</string>
     <string name="primary_color">اللون الاساسي</string>
     <string name="primary_color_desc">لون الثيم الاساسي, الافتراضي الان الازرق الرمادي, يتوافق مع الالوان الداكنة</string>
-    <string name="pro">Pro</string>
+    <string name="pro">الكامل</string>
     <string name="pro_summary">تشغيل الآن السمات ، وتأثير التكدس ، وموضوع اللون وأكثر من ذلك ..</string>
     <string name="profile">الملف الشخصي</string>
     <string name="purchase">شراء</string>
@@ -396,12 +396,12 @@
     <string name="restoring_purchase">استرداد عملية الشراء...</string>
     <string name="retro_equalizer">معادل ريترو ميوزك</string>
     <string name="retro_music_player">مشغل الموسيقى Retro</string>
-    <string name="retro_music_pro">Retro Music Pro</string>
+    <string name="retro_music_pro">ريترو ميوزك - الكامل</string>
     <string name="saf_delete_failed">فشل حذف الملف: %s</string>
     <!-- SAF -->
     <string name="saf_error_uri">لا يمكن الحصول على URI SAF</string>
     <string name="saf_guide_slide1_description">فتح قائمة التنقل</string>
-    <string name="saf_guide_slide1_description_before_o">Enable \'Show SD card\' in overflow menu</string>
+    <string name="saf_guide_slide1_description_before_o">تمكين \'إظهار بطاقة الذاكرة\' في القائمة المتداخلة</string>
     <!-- SAF guide -->
     <string name="saf_guide_slide1_title">%s يحتاج الوصول إلى بطاقة SD</string>
     <string name="saf_guide_slide2_description">تحتاج إلى تحديد دليل جذر بطاقة الذاكرة SD</string>
@@ -418,7 +418,7 @@
     <string name="saving_changes">حفظ التغييرات</string>
     <string name="scan_media">فحص الميديا</string>
     <string name="scanned_files">تم فحص %1$d من %2$d ملف.</string>
-    <string name="scrobbles_label">Scrobbles</string>
+    <string name="scrobbles_label">تمريرات</string>
     <string name="search_hint">البحث في مكتبتك...</string>
     <string name="select_all">تحديد الكل</string>
     <string name="select_banner_photo">اختيار صورة البانر</string>
@@ -428,7 +428,7 @@
     <string name="set_artist_image">اختيار صورة الفنان</string>
     <string name="set_photo">تعيين كصورة البروفايل</string>
     <string name="share_app">مشاركة التطبيق</string>
-    <string name="share_to_stories">Share to Stories</string>
+    <string name="share_to_stories">شارك في القصص</string>
     <string name="shuffle">خلط</string>
     <string name="simple">بسيط</string>
     <string name="sleep_timer_canceled">تم إلغاء مؤقت النوم.</string>
@@ -486,7 +486,7 @@
     <string name="twitter_page">تويتر</string>
     <string name="twitter_page_summary">شارك تصميمك مع ريترو ميوزك</string>
     <string name="unlabeled">غير معنون</string>
-    <string name="unplayable_file">Couldn\u2019t play this song.</string>
+    <string name="unplayable_file">تعذّر تشغيل\u2019t هذه الأغنية.</string>
     <string name="up_next">التالي</string>
     <string name="update_image">تحديث الصورة</string>
     <string name="updating">تحديث...</string>
@@ -511,6 +511,6 @@
     <string name="note">ملاحظة (اختياري)</string>
     <string name="start_payment">بدء عملية الدفع</string>
     <string name="pref_title_expand_now_playing_panel">إظهار شاشة التشغيل</string>
-    <string name="pref_summary_expand_now_playing_panel">Clicking on the notification will show now playing screen instead of the home screen</string>
-    <string name="tiny_card_style">Tiny card</string>
+    <string name="pref_summary_expand_now_playing_panel">النقر على الإشعار سيظهر الآن مايتم تشغيله بدلاً من الشاشة الرئيسية لتطبيق</string>
+    <string name="tiny_card_style">بطاقة صغيرة</string>
 </resources>

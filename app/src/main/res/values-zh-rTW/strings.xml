@@ -516,4 +516,20 @@
     <string name="pref_language_name">Select language</string>
     <string name="translators">Translators</string>
     <string name="translators_summary">The people who helped translate this app</string>
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="other">Songs</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="other">Albums</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="other">%d Songs</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="other">%d Albums</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="other">%d Artists</item>
+    </plurals>
 </resources>

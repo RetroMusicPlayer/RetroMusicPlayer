@@ -9,7 +9,7 @@
     <string name="action_add_to_playlist">Zur Playlist hinzufügen...</string>
     <string name="action_clear_playing_queue">Wiedergabeliste leeren</string>
     <string name="action_clear_playlist">Playlist leeren</string>
-    <string name="action_cycle_repeat">Cycle repeat mode</string>
+    <string name="action_cycle_repeat">Wiederholungsmodus wechseln</string>
     <string name="action_delete">Löschen</string>
     <string name="action_delete_from_device">Vom Gerät löschen</string>
     <string name="action_details">Details</string>
@@ -511,9 +511,30 @@
     <string name="start_payment">Zahlung starten</string>
     <string name="pref_title_expand_now_playing_panel">\"Now Playing\" Bildschirm anzeigen</string>
     <string name="pref_summary_expand_now_playing_panel">Wenn Sie auf die Benachrichtigung klicken, wird das \"Now Playing\" Bildschirms statt des Startbildschirms angezeigt</string>
-    <string name="tiny_card_style">Tiny card</string>
+    <string name="tiny_card_style">Kleinkartenschrank</string>
     <string name="about_album_label">About %s</string>
     <string name="pref_language_name">Select language</string>
     <string name="translators">Translators</string>
     <string name="translators_summary">The people who helped translate this app</string>
+    <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <plurals name="albumSongs">
+        <item quantity="one">Song</item>
+        <item quantity="other">Songs</item>
+    </plurals>
+    <plurals name="albums">
+        <item quantity="one">Album</item>
+        <item quantity="other">Albums</item>
+    </plurals>
+    <plurals name="numSongs">
+        <item quantity="one">%d Song</item>
+        <item quantity="other">%d Songs</item>
+    </plurals>
+    <plurals name="numAlbums">
+        <item quantity="one">%d Album</item>
+        <item quantity="other">%d Albums</item>
+    </plurals>
+    <plurals name="numArtists">
+        <item quantity="one">%d Artist</item>
+        <item quantity="other">%d Artists</item>
+    </plurals>
 </resources>
