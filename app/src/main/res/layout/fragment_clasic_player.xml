@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/playerContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +43,7 @@
                     app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
             </LinearLayout>
         </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-    </LinearLayout>
+    </FrameLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerQueueSheet"
@@ -51,7 +51,6 @@
         android:layout_height="wrap_content"
         android:gravity="bottom"
         android:orientation="vertical"
-        android:tag="nested_bottom_sheet"
         app:behavior_hideable="false"
         app:cardCornerRadius="0dp"
         app:layout_behavior="code.name.monkey.retromusic.CustomBottomSheetBehavior">
@@ -92,7 +91,6 @@
                     android:background="?attr/colorSurface"
                     tools:listitem="@layout/item_list" />
             </LinearLayout>
-
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

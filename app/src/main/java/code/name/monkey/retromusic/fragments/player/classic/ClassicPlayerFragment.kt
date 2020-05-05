@@ -117,6 +117,11 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        getQueuePanel().removeBottomSheetCallback(bottomSheetCallbackList)
+    }
+
     private fun updateSong() {
         val song = MusicPlayerRemote.currentSong
         title.text = song.title

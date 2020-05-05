@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
@@ -99,24 +98,22 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(requireContext(), R.attr.colorSurface)
-        if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
-        } else {
+        if (ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
             lastDisabledPlaybackControlsColor =
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
+        }else{
+            lastPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
+            lastDisabledPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         }
-
         updateRepeatState()
         updateShuffleState()
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            lastPlaybackControlsColor
         } else {
             textColorSecondary(requireContext())
         }.ripAlpha()
@@ -126,12 +123,14 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
 
         volumeFragment?.setTintable(colorFinal)
 
-        updatePlayPauseColor(colorFinal)
-        updatePrevNextColor(colorFinal)
+        updateRepeatState()
+        updateShuffleState()
+        updatePlayPauseColor()
+        updatePrevNextColor()
     }
 
-    private fun updatePlayPauseColor(color: Int) {
-        playPauseButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    private fun updatePlayPauseColor() {
+        playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpPlayPauseFab() {
@@ -155,14 +154,14 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun setUpPrevNext() {
-        updatePrevNextColor(textColorSecondary(requireContext()))
+        updatePrevNextColor()
         nextButton.setOnClickListener { MusicPlayerRemote.playNextSong() }
         previousButton.setOnClickListener { MusicPlayerRemote.back() }
     }
 
-    private fun updatePrevNextColor(color: Int) {
-        nextButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
-        previousButton.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    private fun updatePrevNextColor() {
+        nextButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
+        previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
     private fun setUpShuffleButton() {

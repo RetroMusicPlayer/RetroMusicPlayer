@@ -109,6 +109,7 @@ class AlbumCoverPagerAdapter(
                 NowPlayingScreen.FIT,
                 NowPlayingScreen.TINY,
                 NowPlayingScreen.CLASSIC,
+                NowPlayingScreen.MATERIAL,
                 NowPlayingScreen.FULL -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.getInstance(requireContext())
