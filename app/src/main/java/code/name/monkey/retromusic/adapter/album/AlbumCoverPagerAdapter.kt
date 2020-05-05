@@ -63,7 +63,7 @@ class AlbumCoverPagerAdapter(
 
         lateinit var albumCover: ImageView
         private var isColorReady: Boolean = false
-        private var color: Int = 0
+        private lateinit var color: MediaNotificationProcessor
         private lateinit var song: Song
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
@@ -123,12 +123,12 @@ class AlbumCoverPagerAdapter(
                 .generatePalette(requireContext()).build()
                 .into(object : RetroMusicColoredTarget(albumCover) {
                     override fun onColorReady(colors: MediaNotificationProcessor) {
-                        setColor(colors.backgroundColor)
+                        setColor(colors)
                     }
                 })
         }
 
-        private fun setColor(color: Int) {
+        private fun setColor(color: MediaNotificationProcessor) {
             this.color = color
             isColorReady = true
             if (colorReceiver != null) {
@@ -147,7 +147,7 @@ class AlbumCoverPagerAdapter(
         }
 
         interface ColorReceiver {
-            fun onColorReady(color: Int, request: Int)
+            fun onColorReady(color: MediaNotificationProcessor, request: Int)
         }
 
         companion object {

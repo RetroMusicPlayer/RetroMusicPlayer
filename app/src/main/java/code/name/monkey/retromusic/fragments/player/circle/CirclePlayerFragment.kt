@@ -39,6 +39,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.SeekArc
 import code.name.monkey.retromusic.views.SeekArc.OnSeekArcChangeListener
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
@@ -161,7 +162,7 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
     override val paletteColor: Int
         get() = Color.BLACK
 
-    override fun onColorChanged(color: Int) {
+    override fun onColorChanged(color: MediaNotificationProcessor) {
     }
 
     override fun onFavoriteToggled() {

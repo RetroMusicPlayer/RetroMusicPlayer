@@ -100,9 +100,9 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     override val paletteColor: Int
         get() = lastColor
 
-    override fun onColorChanged(color: Int) {
-        playbackControlsFragment.setDark(color)
-        lastColor = color
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        playbackControlsFragment.setDark(color.backgroundColor)
+        lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
     }
 

@@ -27,26 +27,19 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-        <code.name.monkey.retromusic.views.WidthFitSquareCardView
+        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+            android:id="@+id/playerAlbumCoverContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true">
+            android:layout_weight="0">
 
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/playerImage"
+            <fragment
+                android:id="@+id/playerAlbumCoverFragment"
+                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:ignore="ContentDescription,UnusedAttribute"
-                tools:srcCompat="@tools:sample/backgrounds/scenic[10]" />
-
-        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+                tools:layout="@layout/fragment_album_cover" />
+        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
         <FrameLayout
             android:layout_width="match_parent"

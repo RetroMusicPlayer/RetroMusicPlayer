@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.fragment_clasic_player.*
@@ -175,7 +176,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
             MusicPlayerRemote.position,
             R.layout.item_queue
         )
-        recyclerView .apply {
+        recyclerView.apply {
             adapter = queueAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -225,8 +226,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     override val paletteColor: Int
         get() = lastColor
 
-    override fun onColorChanged(color: Int) {
-        lastColor = color
+    override fun onColorChanged(color: MediaNotificationProcessor) {
+        lastColor = color.backgroundColor
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             Color.WHITE,
@@ -246,7 +247,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.backgroundColor
         } else {
             ThemeStore.accentColor(requireContext())
         }.ripAlpha()
