@@ -93,6 +93,7 @@ import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.AppRater;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PremiumShow;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
@@ -184,6 +185,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
 
         //checkShowChangelog();
         AppRater.appLaunched(this);
+        //PremiumShow.launch(this);
         setupToolbar();
         checkUpdate();
     }
