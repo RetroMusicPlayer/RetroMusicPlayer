@@ -476,6 +476,16 @@ public class MediaNotificationProcessor {
         return backgroundColor;
     }
 
+    public int getMightyColor() {
+        if (isColorLight(backgroundColor)) {
+            return primaryTextColor;
+        } else if (isColorLight(primaryTextColor)) {
+            return secondaryTextColor;
+        } else {
+            return backgroundColor;
+        }
+    }
+
     public interface OnPaletteLoadedListener {
         void onPaletteLoaded(MediaNotificationProcessor mediaNotificationProcessor);
     }

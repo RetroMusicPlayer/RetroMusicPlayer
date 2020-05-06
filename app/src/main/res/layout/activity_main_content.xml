@@ -18,8 +18,8 @@
     </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
         android:id="@+id/mainContent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -35,8 +35,10 @@
                 android:id="@+id/toolbarContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 app:cardUseCompatPadding="true"
+                app:cardCornerRadius="8dp"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <FrameLayout
@@ -49,8 +51,8 @@
                         android:layout_height="@dimen/toolbar_height"
                         android:background="?attr/colorSurface"
                         app:popupTheme="?attr/toolbarPopupTheme"
-                        app:titleTextColor="?attr/colorControlNormal"
                         app:titleTextAppearance="@style/TextViewHeadline6"
+                        app:titleTextColor="?attr/colorControlNormal"
                         tools:ignore="UnusedAttribute">
 
                         <com.google.android.material.textview.MaterialTextView
@@ -59,8 +61,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="@string/app_name"
-                            android:textColor="?attr/colorControlNormal"
-                            android:textAppearance="@style/TextViewHeadline6" />
+                            android:textAppearance="@style/TextViewHeadline6"
+                            android:textColor="?attr/colorControlNormal" />
                     </androidx.appcompat.widget.Toolbar>
 
                     <ViewStub

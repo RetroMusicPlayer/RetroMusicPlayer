@@ -54,14 +54,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <code.name.monkey.retromusic.views.WidthFitSquareCardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/artistCoverContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:transitionName="@string/transition_artist_image"
                     app:cardCornerRadius="24dp"
                     app:cardElevation="8dp"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -73,10 +76,10 @@
                         android:scaleType="centerCrop"
                         tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
-                </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                <com.google.android.material.textview.MaterialTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/artistTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -93,7 +96,7 @@
                     tools:ignore="MissingPrefix"
                     tools:text="Title" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

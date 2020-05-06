@@ -54,14 +54,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <code.name.monkey.retromusic.views.WidthFitSquareCardView
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/albumCoverContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:transitionName="@string/transition_album_art"
                     app:cardCornerRadius="24dp"
                     app:cardElevation="8dp"
+                    app:layout_constraintDimensionRatio="1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -73,8 +76,7 @@
                         android:scaleType="centerCrop"
                         tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-                </code.name.monkey.retromusic.views.WidthFitSquareCardView>
-
+                </com.google.android.material.card.MaterialCardView>
 
                 <code.name.monkey.retromusic.views.RetroShapeableImageView
                     android:id="@+id/artistImage"
@@ -88,7 +90,7 @@
                     app:retroCornerSize="26dp"
                     tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/albumTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -105,7 +107,7 @@
                     tools:ignore="MissingPrefix"
                     tools:text="@tools:sample/lorem/random" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/albumText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -119,6 +121,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/artistImage"
                     app:layout_constraintTop_toBottomOf="@id/albumTitle"
+                    app:lineHeightHint="24sp"
                     tools:ignore="MissingPrefix"
                     tools:text="@tools:sample/lorem/random" />
 

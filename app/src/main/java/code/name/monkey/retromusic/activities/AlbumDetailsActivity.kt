@@ -263,7 +263,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             .dontTransform()
             .into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors.backgroundColor)
+                    setColors(colors.primaryTextColor)
                 }
             })
     }
@@ -348,8 +348,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_sort_order_title -> sortOrder = AlbumSongSortOrder.SONG_A_Z
             R.id.action_sort_order_title_desc -> sortOrder = AlbumSongSortOrder.SONG_Z_A
             R.id.action_sort_order_track_list -> sortOrder = AlbumSongSortOrder.SONG_TRACK_LIST
-            R.id.action_sort_order_artist_song_duration -> sortOrder =
-                AlbumSongSortOrder.SONG_DURATION
+            R.id.action_sort_order_artist_song_duration -> sortOrder = AlbumSongSortOrder.SONG_DURATION
         }
         if (sortOrder != null) {
             item.isChecked = true

@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:paddingBottom="12dp"
     tools:ignore="MissingPrefix">
 
 
@@ -159,6 +158,7 @@
         android:id="@+id/playPauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:background="?attr/roundSelector"
         app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"

@@ -18,15 +18,14 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp">
+ >
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="2dp"
         android:layout_weight="1"
         android:text="@string/action_play_all"
         app:backgroundTint="?attr/colorSurface"
@@ -36,8 +35,8 @@
         android:id="@+id/shuffleAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="2dp"
         android:layout_weight="1"
         android:text="@string/shuffle"
         app:backgroundTint="?attr/colorSurface"

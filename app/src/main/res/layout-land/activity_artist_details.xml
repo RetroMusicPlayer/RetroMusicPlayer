@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,15 +9,23 @@
     tools:ignore="UnusedAttribute">
 
     <FrameLayout
+        android:id="@+id/statusBarContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/toolbarContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusBarContainer">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -30,91 +38,83 @@
             android:layout_height="48dp" />
     </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
 
-        <LinearLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/artistCoverContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:transitionName="@string/transition_artist_image"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/container"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:scaleType="centerCrop"
+            tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/artistCoverContainer"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:transitionName="@string/transition_artist_image"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="8dp">
+    </com.google.android.material.card.MaterialCardView>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/artistCoverContainer"
+        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/container"
+        <LinearLayout
+            android:id="@+id/background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:overScrollMode="never">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <LinearLayout
-                    android:id="@+id/background"
+                <code.name.monkey.retromusic.views.BaselineGridTextView
+                    android:id="@+id/artistTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:maxLines="2"
+                    android:textAppearance="@style/TextViewHeadline5"
+                    android:textColor="?android:attr/textColorPrimary"
+                    android:textStyle="bold"
+                    tools:ignore="MissingPrefix"
+                    tools:text="Title" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/artistTitle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:maxLines="2"
-                            android:textAppearance="@style/TextViewHeadline5"
-                            android:textColor="?android:attr/textColorPrimary"
-                            android:textStyle="bold"
-                            tools:ignore="MissingPrefix"
-                            tools:text="Title" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="4dp"
-                            android:textAppearance="@style/TextViewSubtitle2"
-                            android:textColor="?android:attr/textColorSecondary"
-                            tools:ignore="MissingPrefix"
-                            tools:text="Title" />
-
-                    </LinearLayout>
-
-                    <include layout="@layout/activity_artist_content" />
-                </LinearLayout>
-
-                <View
+                <code.name.monkey.retromusic.views.BaselineGridTextView
+                    android:id="@+id/text"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/status_bar_padding" />
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:textAppearance="@style/TextViewSubtitle2"
+                    android:textColor="?android:attr/textColorSecondary"
+                    app:lineHeightHint="24sp"
+                    tools:ignore="MissingPrefix"
+                    tools:text="Title" />
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
-</LinearLayout>
+
+            <include layout="@layout/activity_artist_content" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
