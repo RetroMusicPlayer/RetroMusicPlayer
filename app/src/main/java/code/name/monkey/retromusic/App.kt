@@ -55,8 +55,7 @@ class App : MultiDexApplication() {
                         this@App,
                         R.string.restored_previous_purchase_please_restart,
                         Toast.LENGTH_LONG
-                    )
-                        .show()
+                    ).show()
                 }
 
                 override fun onBillingError(errorCode: Int, error: Throwable?) {}

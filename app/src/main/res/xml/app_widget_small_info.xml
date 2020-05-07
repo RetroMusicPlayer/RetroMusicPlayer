@@ -4,9 +4,8 @@
     android:initialLayout="@layout/app_widget_small"
     android:minWidth="@dimen/app_widget_small_min_width"
     android:minHeight="@dimen/app_widget_small_min_height"
+    android:previewImage="@drawable/widget_small"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:widgetCategory="keyguard|home_screen"
     tools:ignore="UnusedAttribute" />
-
-    <!--android:previewImage="@drawable/app_widget_classic"-->
