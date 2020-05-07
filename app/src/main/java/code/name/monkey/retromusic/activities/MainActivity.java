@@ -126,9 +126,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private boolean blockRequestPermissions = false;
     private MaterialCab cab;
     private AppBarLayout mAppBarLayout;
-    private MaterialTextView mAppTitle;
     private Toolbar mToolbar;
-    private MaterialCardView mToolbarContainer;
     private AppUpdateManager appUpdateManager;
     InstallStateUpdatedListener listener = new InstallStateUpdatedListener() {
         @Override
@@ -178,8 +176,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             restoreCurrentFragment();
         }
 
-        mToolbarContainer = findViewById(R.id.toolbarContainer);
-        mAppTitle = findViewById(R.id.appTitle);
         mToolbar = findViewById(R.id.toolbar);
         mAppBarLayout = findViewById(R.id.appBarLayout);
 
@@ -284,12 +280,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         if (isPlaylistPage()) {
-            menu.add(0, R.id.action_new_playlist, 0, R.string.new_playlist_title)
+            menu.add(0, R.id.action_new_playlist, 1, R.string.new_playlist_title)
                     .setIcon(R.drawable.ic_playlist_add_white_24dp)
                     .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
         if (isHomePage()) {
-            menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
+            menu.add(0, R.id.action_mic, 1, getString(R.string.action_search))
                     .setIcon(R.drawable.ic_mic_white_24dp)
                     .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
@@ -298,7 +294,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             menu.add(0, R.id.action_scan, 0, R.string.scan_media)
                     .setIcon(R.drawable.ic_scanner_white_24dp)
                     .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menu.add(0, R.id.action_go_to_start_directory, 0, R.string.action_go_to_start_directory)
+            menu.add(0, R.id.action_go_to_start_directory, 1, R.string.action_go_to_start_directory)
                     .setIcon(R.drawable.ic_bookmark_music_white_24dp)
                     .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         }
@@ -320,9 +316,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             menu.removeItem(R.id.action_grid_size);
             menu.removeItem(R.id.action_sort_order);
         }
-        menu.add(0, R.id.action_settings, 0, getString(R.string.action_settings))
+        menu.add(0, R.id.action_settings, 6, getString(R.string.action_settings))
                 .setIcon(R.drawable.ic_settings_white_24dp)
                 .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
+                .setIcon(R.drawable.ic_search_white_24dp)
+                .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -345,12 +344,16 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, mToolbarContainer,
-                        getString(R.string.transition_toolbar));
-                NavigationUtil.goToSearch(this, true, options);
+
+                NavigationUtil.goToSearch(this);
                 break;
             case R.id.action_new_playlist:
                 CreatePlaylistDialog.create().show(getSupportFragmentManager(), "CREATE_PLAYLIST");
+                return true;
+            case R.id.action_mic:
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, mToolbar,
+                        getString(R.string.transition_toolbar));
+                NavigationUtil.goToSearch(this, true, options);
                 return true;
             case R.id.action_settings:
                 NavigationUtil.goToSettings(this);
@@ -828,22 +831,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
 
     private void setupToolbar() {
         setTitle(null);
-        mToolbar.setBackgroundColor(Color.TRANSPARENT);
-        mToolbarContainer.setCardBackgroundColor(
-                ColorStateList.valueOf(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface)));
+        mToolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
         setSupportActionBar(mToolbar);
         mToolbar.setOnClickListener(v -> {
             ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(this, mToolbarContainer, getString(R.string.transition_toolbar));
+                    .makeSceneTransitionAnimation(this, mToolbar, getString(R.string.transition_toolbar));
             NavigationUtil.goToSearch(this, options);
         });
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                TransitionManager.beginDelayedTransition(mToolbar);
-                mAppTitle.setVisibility(View.GONE);
-                setTitle(R.string.action_search);
-            }
-        }, 3000);
     }
 }

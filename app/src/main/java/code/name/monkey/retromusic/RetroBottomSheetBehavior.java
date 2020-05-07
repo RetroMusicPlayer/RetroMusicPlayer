@@ -10,16 +10,16 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 
-public class CustomBottomSheetBehavior<V extends View> extends BottomSheetBehavior<V> {
+public class RetroBottomSheetBehavior<V extends View> extends BottomSheetBehavior<V> {
 
     private static final String TAG = "CustomBottomSheetBehavi";
 
     private boolean allowDragging = true;
 
-    public CustomBottomSheetBehavior() {
+    public RetroBottomSheetBehavior() {
     }
 
-    public CustomBottomSheetBehavior(Context context, AttributeSet attrs) {
+    public RetroBottomSheetBehavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

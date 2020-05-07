@@ -26,51 +26,29 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:elevation="0dp"
-            app:elevation="0dp"
             app:liftOnScroll="true">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/toolbarContainer"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                app:cardUseCompatPadding="true"
-                app:cardCornerRadius="8dp"
                 app:layout_scrollFlags="scroll|enterAlways">
 
-                <FrameLayout
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="?attr/colorSurface"
+                    app:popupTheme="?attr/toolbarPopupTheme"
+                    app:title="@string/app_name"
+                    app:titleTextAppearance="@style/ToolbarTextAppearanceNormal.Library"
+                    app:titleTextColor="?attr/colorControlNormal"
+                    tools:ignore="UnusedAttribute" />
 
-                    <androidx.appcompat.widget.Toolbar
-                        android:id="@+id/toolbar"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height"
-                        android:background="?attr/colorSurface"
-                        app:popupTheme="?attr/toolbarPopupTheme"
-                        app:titleTextAppearance="@style/TextViewHeadline6"
-                        app:titleTextColor="?attr/colorControlNormal"
-                        tools:ignore="UnusedAttribute">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/appTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="@string/app_name"
-                            android:textAppearance="@style/TextViewHeadline6"
-                            android:textColor="?attr/colorControlNormal" />
-                    </androidx.appcompat.widget.Toolbar>
-
-                    <ViewStub
-                        android:id="@+id/cab_stub"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/toolbar_height" />
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
+                <ViewStub
+                    android:id="@+id/cab_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/toolbar_height" />
+            </FrameLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout

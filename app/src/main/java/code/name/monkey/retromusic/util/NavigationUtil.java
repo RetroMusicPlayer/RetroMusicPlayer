@@ -131,6 +131,11 @@ public class NavigationUtil {
                 activityOptions.toBundle());
     }
 
+    public static void goToSearch(@NonNull Activity activity) {
+        ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class),
+                null);
+    }
+
     public static void goToSearch(@NonNull Activity activity, boolean isMicOpen,
                                   @NonNull ActivityOptions activityOptions) {
         ActivityCompat.startActivity(activity, new Intent(activity, SearchActivity.class)

@@ -69,20 +69,6 @@ class AlbumCoverPagerAdapter(
         private var colorReceiver: ColorReceiver? = null
         private var request: Int = 0
 
-        private val layout: Int
-            get() {
-                return when (PreferenceUtil.getInstance(requireContext()).albumCoverStyle) {
-                    AlbumCoverStyle.NORMAL -> R.layout.fragment_album_cover
-                    AlbumCoverStyle.FLAT -> R.layout.fragment_album_flat_cover
-                    AlbumCoverStyle.CIRCLE -> R.layout.fragment_album_circle_cover
-                    AlbumCoverStyle.CARD -> R.layout.fragment_album_card_cover
-                    AlbumCoverStyle.MATERIAL -> R.layout.fragment_album_material_cover
-                    AlbumCoverStyle.FULL -> R.layout.fragment_album_full_cover
-                    AlbumCoverStyle.FULL_CARD -> R.layout.fragment_album_full_card_cover
-                    else -> R.layout.fragment_album_cover
-                }
-            }
-
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             if (arguments != null) {
@@ -111,8 +97,7 @@ class AlbumCoverPagerAdapter(
                 NowPlayingScreen.CLASSIC,
                 NowPlayingScreen.FULL -> R.layout.fragment_album_full_cover
                 else -> {
-                    if (PreferenceUtil.getInstance(requireContext())
-                            .carouselEffect()
+                    if (PreferenceUtil.getInstance(requireContext()).carouselEffect()
                     ) {
                         R.layout.fragment_album_carousel_cover
                     } else {

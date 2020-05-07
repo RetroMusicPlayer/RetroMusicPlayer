@@ -58,6 +58,11 @@
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.0125</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:fontFamily">@font/circular</item>
+    </style>
+
+    <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">

@@ -11,7 +11,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.retromusic.CustomBottomSheetBehavior
+import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
@@ -49,7 +49,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
-    private lateinit var bottomSheetBehavior: CustomBottomSheetBehavior<FrameLayout>
+    private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var playerFragment: AbsPlayerFragment? = null
     private var currentNowPlayingScreen: NowPlayingScreen? = null
@@ -98,7 +98,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         updateTabs()
 
         bottomSheetBehavior =
-            BottomSheetBehavior.from(slidingPanel) as CustomBottomSheetBehavior
+            BottomSheetBehavior.from(slidingPanel) as RetroBottomSheetBehavior
 
         val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))

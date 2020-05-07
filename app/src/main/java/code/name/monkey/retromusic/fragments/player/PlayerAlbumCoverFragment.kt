@@ -53,29 +53,13 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
             viewPager.setPadding(40, 40, 40, 0)
             viewPager.pageMargin = 0
             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
-        }else{
+        } else {
             viewPager.offscreenPageLimit = 2
             viewPager.setPageTransformer(
                 true,
                 PreferenceUtil.getInstance(requireContext()).albumCoverTransform
             )
         }
-
-        /* if (PreferenceUtil.getInstance(requireContext()).carouselEffect() &&
-             !((nps == FULL) || (nps == ADAPTIVE) || (nps == FIT))
-         ) {
-             viewPager.clipToPadding = false
-             viewPager.setPadding(40, 40, 40, 0)
-             viewPager.pageMargin = 0
-             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
-         } else if () {
-         } else {
-             viewPager.offscreenPageLimit = 2
-             viewPager.setPageTransformer(
-                 true,
-                 PreferenceUtil.getInstance(requireContext()).albumCoverTransform
-             )
-         }*/
     }
 
     override fun onDestroyView() {

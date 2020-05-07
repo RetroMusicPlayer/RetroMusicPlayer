@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_color_player.*
 class ColorFragment : AbsPlayerFragment() {
 
     private var lastColor: Int = 0
+    private var navigationColor: Int = 0
     private lateinit var playbackControlsFragment: ColorPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
 
@@ -28,11 +29,12 @@ class ColorFragment : AbsPlayerFragment() {
     }
 
     override val paletteColor: Int
-        get() = lastColor
+        get() = navigationColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         playbackControlsFragment.setDark(color)
-        lastColor = color.backgroundColor
+        navigationColor = color.backgroundColor
+        lastColor = color.secondaryTextColor
         callbacks?.onPaletteColorChanged()
 
         ToolbarContentTintHelper.colorizeToolbar(

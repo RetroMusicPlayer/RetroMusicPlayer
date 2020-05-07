@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.*
-import code.name.monkey.retromusic.CustomBottomSheetBehavior
+import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
@@ -145,9 +145,9 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         progressViewUpdateHelper.stop()
     }
 
-    private fun getQueuePanel(): CustomBottomSheetBehavior<MaterialCardView> {
+    private fun getQueuePanel(): RetroBottomSheetBehavior<MaterialCardView> {
         playerQueueSheet as MaterialCardView
-        return CustomBottomSheetBehavior.from(playerQueueSheet) as CustomBottomSheetBehavior<MaterialCardView>
+        return RetroBottomSheetBehavior.from(playerQueueSheet) as RetroBottomSheetBehavior<MaterialCardView>
     }
 
     private fun setupPanel() {
