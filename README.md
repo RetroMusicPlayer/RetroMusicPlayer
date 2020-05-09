@@ -26,19 +26,19 @@
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
 | Classic 	| Adaptive 	| Blur 	| Tiny 	| Peak 	|
 
-### 🧭Navigation never made easier 
+### 🧭 Navigation never made easier 
 Self-explanatory interface without overloaded menus
 
-### 🎨Colorful
+### 🎨 Colorful
 You can choose between three different main themes: Clearly white, Kind
 dark and Just black for AMOLED displays. Select your favorite accent
 color from a color palette.
 
-### 🏠Home
+### 🏠 Home
 Where you can have your recently/ top played Artists, Albums and
 Favorite Songs. No other music player has this feature
 
-### 📦Included Features
+### 📦 Included Features
 -  Base 3 themes (Clearly white, Kinda dark and Just Black)
 -  Choose from 10+ now playing themes
 -  Drive Mode
@@ -75,11 +75,11 @@ sending us an [e-mail](mailto:monkeycode@gmail.com). We will respond or fix Bugs
 possible and if you have any Features/ Suggestions in mind please Follow
 below links to support
 
-### Social links
+### 🔗 Social links
 **Telegram:** https://t.me/retromusicapp  
 **Instagram:** https://instagram.com/retromusicapp
 
-### License
+### 🗂️ License
 
 Retro Music Player is released under the GNU General Public License v3.0
 (GPLv3), which can be found here: [License](LICENSE.md)
