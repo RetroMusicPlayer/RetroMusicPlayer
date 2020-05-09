@@ -1,36 +1,74 @@
-# Retro Music Player
+# Retro Music Player 🎵
 
+![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 
-**Android Material Design music player**
+###### It will become your favorite music player ♥
 
-Retro Music is an open source, local music player for Android.
+**🧭Navigation never made easierSelf-explanatory interface without
+overloaded menus.**
 
-#### Features
+**🎨Colorful**  
+You can choose between three different main themes: Clearly white, Kind
+dark and Just black for AMOLED displays. Select your favorite accent
+color from a color palette.
 
-- Local playback only (based on the MediaStore)
-- Sleep timer
-- Folder browser
-- Home screen widgets
-- Themes (Just Black, Kinda Dark, Clearly White)
-- Now playing themes
-- Volume controls
-- Blacklist
-- Album artist support
+**🏠Home**  
+Where you can have your recently/ top played Artists, Albums and
+Favorite Songs. No other music player has this feature
 
-#### Download
+**📦Included Features**
+-  Base 3 themes (Clearly white, Kinda dark and Just Black)
+-  Choose from 10+ now playing themes
+-  Drive Mode
+-  Headset/Bluetooth support
+-  Music Duration Filter
+-  Folder support - Play song by folder
+-  Gapless playback
+-  Volume controls
+-  More than 10 Now playing themes
+-  Carousel effect for an album cover
+-  Home screen Widgets
+-  Lock Screen Playback Controls
+-  Lyrics Screen(download and sync with music)
+-  Sleep Timer
+-  Home screen Widgets
+-  Easy Drag to Sort Playlist & Play Queue
+-  Tag editor
+-  Create, Edit, Import playlists
+-  Playing queue with reorder
+-  User profile
+-  30 Languages support
+-  Browse and play your music by Songs, Albums, Artists, Playlists,
+  Genre
+-  Smart Auto Playlists - Recently played/Top Played/History Fully
+  playlist support & Build your own playlist on the go
 
-<a href='https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="250" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 
-#### Translations
-Help us translate the app to your language [here](http://monkeycodeapp.oneskyapp.com/collaboration/project?id=238534).
+We are trying our best to bring you the best user experience. Until now
+it is a beta version - bug fixes (if any) and more features are on the
+way. for FAQ's https://goo.gl/DR2mE2
 
+In any case, you find or notice any Bugs/ Crashes please report them by
+sending us an e-mail. We will respond or fix Bugs/ Crashes as soon as
+possible and if you have any Features/ Suggestions in mind please Follow
+below links to support
+
+**Telegram:** https://t.me/retromusicapp  
+**Github:** https://github.com/h4h13/RetroMusicPlayer
+
+##### Licenses for the album covers used in the screenshots:
+https://unsplash.com/photos/aWXVxy8BSzc
+https://unsplash.com/photos/JAHdPHMoaEA
+https://unsplash.com/photos/D_LYjtHnDXE
+https://unsplash.com/photos/49wtmkUVmFQ
+https://unsplash.com/photos/wnX-fXzB6Cw
+https://unsplash.com/photos/c-NBiJrhwdM
 
 #### License
 
-Retro Music Player is released under the GNU General Public License v3.0 (GPLv3), which can be found here: [License](LICENSE.md)
+Retro Music Player is released under the GNU General Public License v3.0
+(GPLv3), which can be found here: [License](LICENSE.md)
 
-#### FAQ [Here](FAQ.md)
-
-#### Change-Log and Release [Here](https://github.com/h4h13/RetroMusicPlayer/releases)
-
+>Please note: Retro Music player is offline local mp3 player app. It
+>doesn't support online music download or music streaming.
