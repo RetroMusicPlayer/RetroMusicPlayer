@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/now_playing"
-        android:icon="@drawable/ic_playlist_play_white_24dp"
+        android:icon="@drawable/ic_queue_music_white_24dp"
         android:orderInCategory="2"
         android:title="@string/now_playing_queue"
         app:showAsAction="ifRoom" />

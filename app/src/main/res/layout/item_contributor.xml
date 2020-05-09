@@ -29,13 +29,14 @@
         android:id="@+id/icon"
         android:layout_width="42dp"
         android:layout_height="42dp"
+        android:scaleType="centerCrop"
         app:civ_border="false"
         app:civ_shadow="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:retroCornerSize="21dp"
-        app:srcCompat="@drawable/ic_person_flat"
+        app:srcCompat="@drawable/ic_account_white_24dp"
         tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
 
     <com.google.android.material.textview.MaterialTextView

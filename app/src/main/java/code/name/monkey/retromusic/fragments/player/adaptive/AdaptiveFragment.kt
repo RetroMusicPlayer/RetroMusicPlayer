@@ -196,8 +196,8 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        playbackControlsFragment.setDark(color.backgroundColor)
-        lastColor = color.backgroundColor
+        playbackControlsFragment.setDark(color.primaryTextColor)
+        lastColor = color.primaryTextColor
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,

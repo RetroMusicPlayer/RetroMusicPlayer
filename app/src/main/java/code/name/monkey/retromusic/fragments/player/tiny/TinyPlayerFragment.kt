@@ -75,7 +75,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     override fun onColorChanged(color: MediaNotificationProcessor) {
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color.backgroundColor
+            color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext())
         }

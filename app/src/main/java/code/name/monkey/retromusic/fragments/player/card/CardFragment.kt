@@ -45,10 +45,9 @@ class CardFragment : AbsPlayerFragment() {
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        playbackControlsFragment.setDark(color.backgroundColor)
-        lastColor = color.backgroundColor
-        callbacks!!.onPaletteColorChanged()
-
+        playbackControlsFragment.setDark(color.primaryTextColor)
+        lastColor = color.primaryTextColor
+        callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }
 

@@ -29,7 +29,7 @@ class SimplePlayerFragment : AbsPlayerFragment() {
     override val paletteColor: Int
         get() = lastColor
 
-    private lateinit var simplePlaybackControlsFragment: SimplePlaybackControlsFragment
+    private lateinit var controlsFragment: SimplePlaybackControlsFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,16 +49,16 @@ class SimplePlayerFragment : AbsPlayerFragment() {
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
-        simplePlaybackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as SimplePlaybackControlsFragment
     }
 
     override fun onShow() {
-        simplePlaybackControlsFragment.show()
+        controlsFragment.show()
     }
 
     override fun onHide() {
-        simplePlaybackControlsFragment.hide()
+        controlsFragment.hide()
     }
 
     override fun onBackPressed(): Boolean {
@@ -72,7 +72,7 @@ class SimplePlayerFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
-        simplePlaybackControlsFragment.setDark(color.backgroundColor)
+        controlsFragment.setDark(color.primaryTextColor)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),

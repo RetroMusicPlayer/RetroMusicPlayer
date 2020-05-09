@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/md_black_1000"
     android:layout_height="match_parent"
+    android:background="@color/md_black_1000"
     android:orientation="vertical">
 
     <View
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:srcCompat="@drawable/ic_invert_colors_white_24dp"
+                app:srcCompat="@drawable/ic_check_circle_white_24dp"
                 app:tint="@color/md_white_1000" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -94,7 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:srcCompat="@drawable/ic_theme_palette_white_24dp"
+                app:srcCompat="@drawable/ic_check_circle_white_24dp"
                 app:tint="@color/md_white_1000" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:srcCompat="@drawable/ic_view_carousel_black_24dp"
+                app:srcCompat="@drawable/ic_check_circle_white_24dp"
                 app:tint="@color/md_white_1000" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -139,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:srcCompat="@drawable/ic_rounded_corner"
+                app:srcCompat="@drawable/ic_check_circle_white_24dp"
                 app:tint="@color/md_white_1000" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:srcCompat="@drawable/ic_favorite_white_24dp"
+                app:srcCompat="@drawable/ic_check_circle_white_24dp"
                 app:tint="@color/md_white_1000" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -180,8 +180,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +190,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="24dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="24dp"
             android:text="@string/try_retro_music_premium"
             android:textAppearance="@style/TextViewHeadline5"
             android:textColor="@color/md_white_1000" />

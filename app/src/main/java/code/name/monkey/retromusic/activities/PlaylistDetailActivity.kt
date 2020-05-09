@@ -185,7 +185,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     private fun setToolbarTitle(title: String) {
-        supportActionBar!!.title = title
+        supportActionBar?.title = title
     }
 
     private fun checkForPadding() {

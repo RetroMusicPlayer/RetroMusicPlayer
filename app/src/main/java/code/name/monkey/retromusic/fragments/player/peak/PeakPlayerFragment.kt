@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_peak_player.*
 
 class PeakPlayerFragment : AbsPlayerFragment() {
 
-    private lateinit var playbackControlsFragment: PeakPlayerControlFragment
+    private lateinit var controlsFragment: PeakPlayerControlFragment
     private var lastColor: Int = 0
 
     override fun onCreateView(
@@ -62,7 +62,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     }
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PeakPlayerControlFragment
     }
 
@@ -101,8 +101,8 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         get() = lastColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        playbackControlsFragment.setDark(color.backgroundColor)
-        lastColor = color.backgroundColor
+        controlsFragment.setDark(color.primaryTextColor)
+        lastColor = color.primaryTextColor
         callbacks?.onPaletteColorChanged()
     }
 
@@ -127,7 +127,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
             .build()
             .into(object : RetroMusicColoredTarget(playerImage) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    playbackControlsFragment.setDark(colors.backgroundColor)
+                    controlsFragment.setDark(colors.primaryTextColor)
                 }
             })
     }

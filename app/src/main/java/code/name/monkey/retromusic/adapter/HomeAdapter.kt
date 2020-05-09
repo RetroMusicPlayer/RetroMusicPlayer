@@ -113,16 +113,16 @@ class HomeAdapter(
     inner class ArtistViewHolder(view: View) : AbsHomeViewItem(view) {
         fun bindView(list: ArrayList<Artist>, titleRes: Int) {
             if (list.isNotEmpty()) {
+                val manager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+                val artistAdapter = ArtistAdapter(
+                    activity,
+                    list,
+                    PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
+                    null
+                )
                 recyclerView.apply {
                     show()
-                    layoutManager =
-                        LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-                    val artistAdapter = ArtistAdapter(
-                        activity,
-                        list,
-                        PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
-                        null
-                    )
+                    layoutManager = manager
                     adapter = artistAdapter
                 }
                 title.text = activity.getString(titleRes)

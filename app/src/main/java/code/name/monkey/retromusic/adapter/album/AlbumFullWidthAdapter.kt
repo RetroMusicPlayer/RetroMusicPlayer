@@ -77,6 +77,7 @@ class AlbumFullWidthAdapter(
         if (holder.image == null) {
             return
         }
+
         AlbumGlideRequest.Builder.from(Glide.with(activity), album.safeGetFirstSong())
             .checkIgnoreMediaStore(activity)
             .generatePalette(activity)

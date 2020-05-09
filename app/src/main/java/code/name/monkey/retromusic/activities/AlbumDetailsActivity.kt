@@ -88,7 +88,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         slide.excludeTarget(R.id.status_bar, true)
         slide.excludeTarget(android.R.id.statusBarBackground, true)
         slide.excludeTarget(android.R.id.navigationBarBackground, true)
-
         window.enterTransition = slide
     }
 
@@ -348,7 +347,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             R.id.action_sort_order_title -> sortOrder = AlbumSongSortOrder.SONG_A_Z
             R.id.action_sort_order_title_desc -> sortOrder = AlbumSongSortOrder.SONG_Z_A
             R.id.action_sort_order_track_list -> sortOrder = AlbumSongSortOrder.SONG_TRACK_LIST
-            R.id.action_sort_order_artist_song_duration -> sortOrder = AlbumSongSortOrder.SONG_DURATION
+            R.id.action_sort_order_artist_song_duration ->
+                sortOrder = AlbumSongSortOrder.SONG_DURATION
         }
         if (sortOrder != null) {
             item.isChecked = true
@@ -364,8 +364,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
             AlbumSongSortOrder.SONG_Z_A -> sortOrder.findItem(R.id.action_sort_order_title_desc)
                 .isChecked = true
             AlbumSongSortOrder.SONG_TRACK_LIST -> sortOrder.findItem(R.id.action_sort_order_track_list)
-                .isChecked =
-                true
+                .isChecked = true
             AlbumSongSortOrder.SONG_DURATION -> sortOrder.findItem(R.id.action_sort_order_artist_song_duration)
                 .isChecked = true
         }
@@ -373,7 +372,29 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
 
     private fun setSaveSortOrder(sortOrder: String?) {
         PreferenceUtil.getInstance(this).albumDetailSongSortOrder = sortOrder
-        reload()
+        when (sortOrder) {
+            AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.trackNumber.compareTo(
+                    o2.trackNumber
+                )
+            })
+            AlbumSongSortOrder.SONG_A_Z -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.title.compareTo(
+                    o2.title
+                )
+            })
+            AlbumSongSortOrder.SONG_Z_A -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o2.title.compareTo(
+                    o1.title
+                )
+            })
+            AlbumSongSortOrder.SONG_DURATION -> album.songs?.sortWith(Comparator { o1, o2 ->
+                o1.duration.compareTo(
+                    o2.duration
+                )
+            })
+        }
+        album.songs?.let { simpleSongAdapter.swapDataSet(it) }
     }
 
     override fun onMediaStoreChanged() {

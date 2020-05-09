@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -66,7 +65,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 playerQueueSheet.contentPaddingRight,
                 playerQueueSheet.contentPaddingBottom
             )
-            val corner = (1 - slideOffset) * DensityUtil.dip2px(requireContext(), 16f)
             shapeDrawable.interpolation = 1 - slideOffset
         }
 
@@ -119,6 +117,11 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 R.style.ClassicThemeOverLay,
                 0
             ).build()
+        )
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            Color.WHITE,
+            requireActivity()
         )
     }
 
@@ -270,6 +273,12 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
+
+        ToolbarContentTintHelper.colorizeToolbar(
+            playerToolbar,
+            Color.WHITE,
+            requireActivity()
+        )
     }
 
     override fun toggleFavorite(song: Song) {

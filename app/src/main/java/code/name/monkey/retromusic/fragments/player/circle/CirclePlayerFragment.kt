@@ -129,7 +129,7 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         if (audioVolumeObserver == null) {
             audioVolumeObserver = AudioVolumeObserver(requireActivity())
         }
-        audioVolumeObserver!!.register(AudioManager.STREAM_MUSIC, this)
+        audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
 
         val audioManager = audioManager
         if (audioManager != null) {
@@ -163,6 +163,7 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         get() = Color.BLACK
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
+
     }
 
     override fun onFavoriteToggled() {

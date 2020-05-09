@@ -125,7 +125,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     private var lastColor: Int = 0
     override val paletteColor: Int
         get() = lastColor
-    private lateinit var fullPlaybackControlsFragment: FullPlaybackControlsFragment
+    private lateinit var controlsFragment: FullPlaybackControlsFragment
 
     private fun setUpPlayerToolbar() {
         playerToolbar.apply {
@@ -174,7 +174,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     private fun setUpSubFragments() {
-        fullPlaybackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FullPlaybackControlsFragment
 
         val playerAlbumCoverFragment =
@@ -199,14 +199,14 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        fullPlaybackControlsFragment.setDark(color.backgroundColor)
+        controlsFragment.setDark(color.primaryTextColor)
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }
 
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
-        fullPlaybackControlsFragment.onFavoriteToggled()
+        controlsFragment.onFavoriteToggled()
     }
 
     override fun toggleFavorite(song: Song) {

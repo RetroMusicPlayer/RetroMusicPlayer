@@ -29,13 +29,13 @@ class FlatPlayerFragment : AbsPlayerFragment() {
     }
 
     private var valueAnimator: ValueAnimator? = null
-    private lateinit var flatPlaybackControlsFragment: FlatPlaybackControlsFragment
+    private lateinit var controlsFragment: FlatPlaybackControlsFragment
     private var lastColor: Int = 0
     override val paletteColor: Int
         get() = lastColor
 
     private fun setUpSubFragments() {
-        flatPlaybackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FlatPlaybackControlsFragment
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
@@ -55,11 +55,11 @@ class FlatPlayerFragment : AbsPlayerFragment() {
 
     private fun colorize(i: Int) {
         if (valueAnimator != null) {
-            valueAnimator!!.cancel()
+            valueAnimator?.cancel()
         }
 
         valueAnimator = ValueAnimator.ofObject(ArgbEvaluator(), android.R.color.transparent, i)
-        valueAnimator!!.addUpdateListener { animation ->
+        valueAnimator?.addUpdateListener { animation ->
             val drawable = DrawableGradient(
                 GradientDrawable.Orientation.TOP_BOTTOM,
                 intArrayOf(animation.animatedValue as Int, android.R.color.transparent), 0
@@ -67,7 +67,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
             colorGradientBackground?.background = drawable
 
         }
-        valueAnimator!!.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong()).start()
+        valueAnimator?.setDuration(ViewUtil.RETRO_MUSIC_ANIM_TIME.toLong())?.start()
     }
 
     override fun onCreateView(
@@ -84,11 +84,11 @@ class FlatPlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onShow() {
-        flatPlaybackControlsFragment.show()
+        controlsFragment.show()
     }
 
     override fun onHide() {
-        flatPlaybackControlsFragment.hide()
+        controlsFragment.hide()
         onBackPressed()
     }
 
@@ -106,7 +106,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        flatPlaybackControlsFragment.setDark(color.backgroundColor)
+        controlsFragment.setDark(color.primaryTextColor)
         callbacks?.onPaletteColorChanged()
         val isLight = ColorUtil.isColorLight(color.backgroundColor)
         val iconColor = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor)

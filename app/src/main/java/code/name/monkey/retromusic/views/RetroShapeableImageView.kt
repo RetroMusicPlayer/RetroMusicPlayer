@@ -37,7 +37,7 @@ class RetroShapeableImageView @JvmOverloads constructor(
         typedArray.recycle()
     }
 
-    fun updateCornerSize(cornerSize: Float) {
+    private fun updateCornerSize(cornerSize: Float) {
         shapeAppearanceModel = ShapeAppearanceModel.Builder()
             .setAllCorners(CornerFamily.ROUNDED, cornerSize)
             .build()

@@ -41,6 +41,8 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
 
     @Nullable
     public ImageView image;
+    @Nullable
+    public ImageView artistImage;
 
     @Nullable
     public ImageView playerImage;
@@ -87,6 +89,7 @@ public class MediaEntryViewHolder extends AbstractDraggableSwipeableItemViewHold
         text = itemView.findViewById(R.id.text);
 
         image = itemView.findViewById(R.id.image);
+        artistImage = itemView.findViewById(R.id.artistImage);
         playerImage = itemView.findViewById(R.id.player_image);
         time = itemView.findViewById(R.id.time);
 

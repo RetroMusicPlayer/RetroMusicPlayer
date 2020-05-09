@@ -28,7 +28,7 @@ class PlayerFragment : AbsPlayerFragment() {
     override val paletteColor: Int
         get() = lastColor
 
-    private lateinit var playbackControlsFragment: PlayerPlaybackControlsFragment
+    private lateinit var controlsFragment: PlayerPlaybackControlsFragment
     private var valueAnimator: ValueAnimator? = null
 
 
@@ -58,11 +58,11 @@ class PlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onShow() {
-        playbackControlsFragment.show()
+        controlsFragment.show()
     }
 
     override fun onHide() {
-        playbackControlsFragment.hide()
+        controlsFragment.hide()
         onBackPressed()
     }
 
@@ -75,7 +75,7 @@ class PlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        playbackControlsFragment.setDark(color.backgroundColor)
+        controlsFragment.setDark(color.primaryTextColor)
         lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
 
@@ -118,7 +118,7 @@ class PlayerFragment : AbsPlayerFragment() {
 
 
     private fun setUpSubFragments() {
-        playbackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PlayerPlaybackControlsFragment
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment

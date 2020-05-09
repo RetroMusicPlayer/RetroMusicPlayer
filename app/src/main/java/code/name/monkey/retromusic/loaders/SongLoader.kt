@@ -31,7 +31,6 @@ import java.util.*
 
 object SongLoader {
 
-
     fun getAllSongs(
         context: Context
     ): ArrayList<Song> {
@@ -128,9 +127,8 @@ object SongLoader {
             return context.contentResolver.query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 baseProjection,
-                selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " + (PreferenceUtil.getInstance(
-                    context
-                ).filterLength * 1000),
+                selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " +
+                        (PreferenceUtil.getInstance(context).filterLength * 1000),
                 selectionValuesFinal,
                 sortOrder
             )

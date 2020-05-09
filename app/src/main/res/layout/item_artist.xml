@@ -2,25 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="112dp"
+    android:layout_width="96dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="?attr/rectSelector"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <code.name.monkey.retromusic.views.RetroShapeableImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            app:civ_border="false"
-            app:retroCornerSize="56dp"
-            tools:src="@tools:sample/avatars" />
-    </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+    <code.name.monkey.retromusic.views.RetroShapeableImageView
+        android:id="@+id/image"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:retroCornerSize="46dp"
+        tools:src="@tools:sample/avatars" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
