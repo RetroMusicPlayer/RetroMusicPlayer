@@ -3,7 +3,7 @@
 ![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 
-## It will become your favorite music player ♥
+# 🆕 Material Design music player for Android music lovers 
 
 ## Screenshots
 ### App Themes
