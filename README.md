@@ -3,21 +3,26 @@
 ![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
 
-###### It will become your favorite music player ♥
+## It will become your favorite music player ♥
 
-**🧭Navigation never made easierSelf-explanatory interface without
-overloaded menus.**
+## Screenshots
+### Player screen
+![Home screen](screenshots/home.jpeg)
+### Now playing themes
+![Home screen](screenshots/np_adaptive.jpeg)
+### 🧭Navigation never made easier 
+Self-explanatory interface without overloaded menus
 
-**🎨Colorful**  
+### 🎨Colorful
 You can choose between three different main themes: Clearly white, Kind
 dark and Just black for AMOLED displays. Select your favorite accent
 color from a color palette.
 
-**🏠Home**  
+### 🏠Home
 Where you can have your recently/ top played Artists, Albums and
 Favorite Songs. No other music player has this feature
 
-**📦Included Features**
+### 📦Included Features
 -  Base 3 themes (Clearly white, Kinda dark and Just Black)
 -  Choose from 10+ now playing themes
 -  Drive Mode
@@ -50,22 +55,15 @@ it is a beta version - bug fixes (if any) and more features are on the
 way. for FAQ's https://goo.gl/DR2mE2
 
 In any case, you find or notice any Bugs/ Crashes please report them by
-sending us an e-mail. We will respond or fix Bugs/ Crashes as soon as
+sending us an [e-mail](mailto:monkeycode@gmail.com). We will respond or fix Bugs/ Crashes as soon as
 possible and if you have any Features/ Suggestions in mind please Follow
 below links to support
 
+### Social links
 **Telegram:** https://t.me/retromusicapp  
-**Github:** https://github.com/h4h13/RetroMusicPlayer
+**Instagram:** https://instagram.com/retromusicapp
 
-##### Licenses for the album covers used in the screenshots:
-https://unsplash.com/photos/aWXVxy8BSzc
-https://unsplash.com/photos/JAHdPHMoaEA
-https://unsplash.com/photos/D_LYjtHnDXE
-https://unsplash.com/photos/49wtmkUVmFQ
-https://unsplash.com/photos/wnX-fXzB6Cw
-https://unsplash.com/photos/c-NBiJrhwdM
-
-#### License
+### License
 
 Retro Music Player is released under the GNU General Public License v3.0
 (GPLv3), which can be found here: [License](LICENSE.md)
