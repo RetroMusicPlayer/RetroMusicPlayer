@@ -18,9 +18,13 @@
 
 ### 9+ Now playing themes
  
-| <img src="screenshots/np_normal.jpeg" width="200"/>	|<img src="screenshots/np_adaptive.jpeg" width="200"/>|   <img src="screenshots/np_blur.jpeg" width="200"/>  	|    <img src="screenshots/np_color.jpeg" width="200"/> 	|     <img src="screenshots/np_material.jpeg" width="200"/>	|
+| <img src="screenshots/np_normal.jpeg" width="200"/>	|<img src="screenshots/np_fit.jpeg" width="200"/>|   <img src="screenshots/np_flat.jpeg" width="200"/>  	|    <img src="screenshots/np_color.jpeg" width="200"/> 	|     <img src="screenshots/np_material.jpeg" width="200"/>	|
 |:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
-| Normal 	| Adaptive 	| Blur 	| Color 	| Material 	|
+| Normal 	| Fit 	| Flat 	| Color 	| Material 	|
+
+| <img src="screenshots/no_classic.jpeg" width="200"/>	|<img src="screenshots/np_adaptive.jpeg" width="200"/>|   <img src="screenshots/np_blur.jpeg" width="200"/>  	|    <img src="screenshots/np_tiny.jpeg" width="200"/> 	|     <img src="screenshots/np_peak.jpeg" width="200"/>	|
+|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
+| Classic 	| Adaptive 	| Blur 	| Tiny 	| Peak 	|
 
 ### 🧭Navigation never made easier 
 Self-explanatory interface without overloaded menus
