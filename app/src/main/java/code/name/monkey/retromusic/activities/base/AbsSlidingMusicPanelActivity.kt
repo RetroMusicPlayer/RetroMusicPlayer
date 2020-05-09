@@ -6,25 +6,24 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.MiniPlayerFragment
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.adaptive.AdaptiveFragment
 import code.name.monkey.retromusic.fragments.player.blur.BlurPlayerFragment
 import code.name.monkey.retromusic.fragments.player.card.CardFragment
 import code.name.monkey.retromusic.fragments.player.cardblur.CardBlurFragment
 import code.name.monkey.retromusic.fragments.player.circle.CirclePlayerFragment
+import code.name.monkey.retromusic.fragments.player.classic.ClassicPlayerFragment
 import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
@@ -41,6 +40,9 @@ import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import kotlinx.android.synthetic.main.sliding_music_panel_layout.*
 
 abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
@@ -49,7 +51,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         val TAG: String = AbsSlidingMusicPanelActivity::class.java.simpleName
     }
 
-    private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<FrameLayout>
+    private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<MaterialCardView>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var playerFragment: AbsPlayerFragment? = null
     private var currentNowPlayingScreen: NowPlayingScreen? = null
@@ -59,6 +61,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private var lightNavigationBar: Boolean = false
     private var navigationBarColorAnimator: ValueAnimator? = null
     protected abstract fun createContentView(): View
+    private lateinit var shapeDrawable: MaterialShapeDrawable
     private val panelState: Int
         get() = bottomSheetBehavior.state
 
@@ -68,6 +71,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             setMiniPlayerAlphaProgress(slideOffset)
             dimBackground.show()
             dimBackground.alpha = slideOffset
+            shapeDrawable.interpolation = 1 - slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -97,11 +101,18 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
         updateTabs()
 
-        bottomSheetBehavior =
-            BottomSheetBehavior.from(slidingPanel) as RetroBottomSheetBehavior
+        bottomSheetBehavior = BottomSheetBehavior.from(slidingPanel) as RetroBottomSheetBehavior
 
         val themeColor = ATHUtil.resolveColor(this, android.R.attr.windowBackground, Color.GRAY)
         dimBackground.setBackgroundColor(ColorUtil.withAlpha(themeColor, 0.5f))
+        shapeDrawable = MaterialShapeDrawable(
+            ShapeAppearanceModel.builder(
+                this,
+                R.style.ClassicThemeOverLay,
+                0
+            ).build()
+        )
+        slidingPanel.background = shapeDrawable
     }
 
     override fun onResume() {
@@ -309,6 +320,8 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
+            } else if (currentNowPlayingScreen == CLASSIC) {
+                super.setLightStatusbar(false)
             } else if (currentNowPlayingScreen == FIT) {
                 super.setLightStatusbar(false)
             } else {

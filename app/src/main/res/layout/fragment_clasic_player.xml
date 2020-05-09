@@ -50,28 +50,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:orientation="vertical"
         app:behavior_hideable="false"
         app:cardCornerRadius="0dp"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:cardElevation="12dp"
+        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior"
+        app:shapeAppearance="@style/ClassicThemeOverLay">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSurface"
             android:orientation="vertical">
 
-            <com.google.android.material.card.MaterialCardView
+            <include
+                android:id="@+id/playerControlsContainer"
+                layout="@layout/fragment_classic_controls"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="0dp">
-
-                <include
-                    android:id="@+id/playerControlsContainer"
-                    layout="@layout/fragment_classic_controls"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.card.MaterialCardView>
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="?attr/colorSurface"
+                    android:overScrollMode="never"
                     tools:listitem="@layout/item_list" />
             </LinearLayout>
         </LinearLayout>

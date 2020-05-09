@@ -52,7 +52,7 @@
     <dimen name="pref_title_padding">72dp</dimen>
     <dimen name="slider_thumb_radius">6dp</dimen>
     <dimen name="slider_track_height">3dp</dimen>
-    <dimen name="adaptive_icon_size">48dp</dimen>
+    <dimen name="adaptive_icon_size">46dp</dimen>
     <dimen name="adaptive_icon_padding">12dp</dimen>
     <dimen name="about_card_radius">16dp</dimen>
     <dimen name="about_card_elevation">2dp</dimen>

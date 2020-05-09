@@ -10,9 +10,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.theme.ThemeMode.*
 
-/**
- * @author Paolo Valerdi
- */
 object ThemeManager {
 
     @StyleRes

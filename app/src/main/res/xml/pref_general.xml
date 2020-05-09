@@ -53,13 +53,6 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app_shortcuts"
             android:title="@string/pref_title_app_shortcuts" />
-
-        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
-            android:defaultValue="false"
-            android:key="dominant_color"
-            android:layout="@layout/list_item_view_switch"
-            android:summary="@string/pref_summary_dominant_color"
-            android:title="@string/pref_title_toggle_dominant_color" />
-
+        
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

@@ -499,10 +499,10 @@ public final class PreferenceUtil {
 
     @NonNull
     public ThemeMode getGeneralThemeValue() {
-        if (isBlackMode()) {
+        String themeMode = mPreferences.getString(GENERAL_THEME, "dark");
+        if (isBlackMode() && themeMode.equals("dark")) {
             return ThemeMode.BLACK;
         } else {
-            String themeMode = mPreferences.getString(GENERAL_THEME, "dark");
             switch (themeMode) {
                 case "light":
                     return ThemeMode.LIGHT;
@@ -764,7 +764,7 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(INTRO_SHOWN, false);
     }
 
-    public boolean isBlackMode() {
+    private boolean isBlackMode() {
         return mPreferences.getBoolean(BLACK_THEME, false);
     }
 

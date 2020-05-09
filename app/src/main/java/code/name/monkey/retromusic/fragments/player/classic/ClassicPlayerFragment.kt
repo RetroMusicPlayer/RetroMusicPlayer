@@ -1,23 +1,26 @@
 package code.name.monkey.retromusic.fragments.player.classic
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
-import code.name.monkey.retromusic.RetroBottomSheetBehavior
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -27,15 +30,19 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
+import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.ShapeAppearanceModel
 import kotlinx.android.synthetic.main.fragment_clasic_player.*
 import kotlinx.android.synthetic.main.fragment_classic_controls.*
 import kotlinx.android.synthetic.main.status_bar.*
+
 
 class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     MusicProgressViewUpdateHelper.Callback {
@@ -46,7 +53,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
     private lateinit var queueAdapter: PlayingQueueAdapter
     private var volumeFragment: VolumeFragment? = null
-
+    private lateinit var shapeDrawable: MaterialShapeDrawable
 
     private val bottomSheetCallbackList = object : BottomSheetBehavior.BottomSheetCallback() {
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -59,6 +66,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 playerQueueSheet.contentPaddingRight,
                 playerQueueSheet.contentPaddingBottom
             )
+            val corner = (1 - slideOffset) * DensityUtil.dip2px(requireContext(), 16f)
+            shapeDrawable.interpolation = 1 - slideOffset
         }
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -97,13 +106,20 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
 
-
         playerQueueSheet.setOnTouchListener { _, _ ->
             (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
                 .setAllowDragging(false)
             getQueuePanel().setAllowDragging(true)
             return@setOnTouchListener false
         }
+
+        shapeDrawable = MaterialShapeDrawable(
+            ShapeAppearanceModel.builder(
+                requireContext(),
+                R.style.ClassicThemeOverLay,
+                0
+            ).build()
+        )
     }
 
     private fun hideVolumeIfAvailable() {
@@ -146,7 +162,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     private fun getQueuePanel(): RetroBottomSheetBehavior<MaterialCardView> {
-        playerQueueSheet as MaterialCardView
         return RetroBottomSheetBehavior.from(playerQueueSheet) as RetroBottomSheetBehavior<MaterialCardView>
     }
 
@@ -233,48 +248,25 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            Color.WHITE,
-            requireActivity()
-        )
+        lastPlaybackControlsColor = color.primaryTextColor
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
+        shapeDrawable.fillColor = ColorStateList.valueOf(color.backgroundColor)
+        playerQueueSheet.background = shapeDrawable
 
-        if (!ATHUtil.isWindowBackgroundDark(requireContext())) {
-            lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
-        } else {
-            lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
-        }
+        title.setTextColor(color.primaryTextColor)
+        text.setTextColor(color.secondaryTextColor)
+        songInfo.setTextColor(color.secondaryTextColor)
 
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color.backgroundColor
-        } else {
-            ThemeStore.accentColor(requireContext())
-        }.ripAlpha()
-
-        TintHelper.setTintAuto(
-            playPauseButton,
-            MaterialValueHelper.getPrimaryTextColor(
-                requireContext(),
-                ColorUtil.isColorLight(colorFinal)
-            ),
-            false
-        )
-        title.setTextColor(lastPlaybackControlsColor)
-        text.setTextColor(lastDisabledPlaybackControlsColor)
-        songInfo.setTextColor(lastDisabledPlaybackControlsColor)
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
-        player_queue_sub_header.setTextColor(colorFinal)
-        volumeFragment?.setTintable(colorFinal)
-        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
+
+        ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
+        volumeFragment?.setTintableColor(color.primaryTextColor)
+
+        player_queue_sub_header.setTextColor(color.secondaryTextColor)
+
+        TintHelper.setTintAuto(playPauseButton, color.primaryTextColor, true)
+        TintHelper.setTintAuto(playPauseButton, color.backgroundColor, false)
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
@@ -410,6 +402,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         val width = playerContainer.width
         val finalHeight = height - width
         val panel = getQueuePanel()
-        panel.peekHeight = finalHeight
+        panel.peekHeight = finalHeight + DensityUtil.dip2px(requireContext(), 16f)
     }
 }
