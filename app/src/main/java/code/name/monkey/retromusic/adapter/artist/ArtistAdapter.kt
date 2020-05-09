@@ -8,8 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
@@ -67,19 +65,13 @@ class ArtistAdapter(
         loadArtistImage(artist, holder)
     }
 
-    fun setColors(color: Int, holder: ViewHolder) {
+    fun setColors(processor: MediaNotificationProcessor, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer?.setBackgroundColor(color)
-            holder.title?.setTextColor(
-                MaterialValueHelper.getPrimaryTextColor(
-                    activity, ColorUtil.isColorLight(
-                        color
-                    )
-                )
-            )
+            holder.paletteColorContainer?.setBackgroundColor(processor.backgroundColor)
+            holder.title?.setTextColor(processor.primaryTextColor)
         }
-        holder.imageContainerCard?.setCardBackgroundColor(color)
-        holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
+        holder.imageContainerCard?.setCardBackgroundColor(processor.backgroundColor)
+        holder.mask?.backgroundTintList = ColorStateList.valueOf(processor.backgroundColor)
     }
 
     private fun loadArtistImage(artist: Artist, holder: ViewHolder) {
@@ -92,11 +84,11 @@ class ArtistAdapter(
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
-                    setColors(defaultFooterColor, holder)
+                    //setColors(defaultFooterColor, holder)
                 }
 
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors.backgroundColor,holder)
+                    setColors(colors, holder)
                 }
             })
     }

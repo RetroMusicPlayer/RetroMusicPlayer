@@ -74,7 +74,7 @@ public class PlaylistsUtil {
                 }
             } catch (SecurityException e) {
                 e.printStackTrace();
-                Toast.makeText(context, "Don't have permission for adding to playlist", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Unable to add music to playlist due to Android 10 limitations", Toast.LENGTH_SHORT).show();
             }
         }
         if (id == -1) {
@@ -140,7 +140,7 @@ public class PlaylistsUtil {
             }
         } catch (SecurityException ignored) {
             ignored.printStackTrace();
-            Toast.makeText(context, "Don't have permission for adding to playlist", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Unable to add music to playlist due to Android 10 limitations", Toast.LENGTH_SHORT).show();
         }
     }
 

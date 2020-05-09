@@ -8,8 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.base.AbsMultiSelectAdapter
 import code.name.monkey.retromusic.adapter.base.MediaEntryViewHolder
@@ -83,23 +81,13 @@ open class AlbumAdapter(
         loadAlbumCover(album, holder)
     }
 
-    protected open fun setColors(color: Int, holder: ViewHolder) {
+    protected open fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.title?.setTextColor(
-                MaterialValueHelper.getPrimaryTextColor(
-                    activity,
-                    ColorUtil.isColorLight(color)
-                )
-            )
-            holder.text?.setTextColor(
-                MaterialValueHelper.getSecondaryTextColor(
-                    activity,
-                    ColorUtil.isColorLight(color)
-                )
-            )
-            holder.paletteColorContainer?.setBackgroundColor(color)
+            holder.title?.setTextColor(color.primaryTextColor)
+            holder.text?.setTextColor(color.secondaryTextColor)
+            holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
         }
-        holder.mask?.backgroundTintList = ColorStateList.valueOf(color)
+        holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
     }
 
     protected open fun loadAlbumCover(album: Album, holder: ViewHolder) {
@@ -118,7 +106,7 @@ open class AlbumAdapter(
                 }
 
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors.backgroundColor, holder)
+                    setColors(colors, holder)
                 }
             })
     }
