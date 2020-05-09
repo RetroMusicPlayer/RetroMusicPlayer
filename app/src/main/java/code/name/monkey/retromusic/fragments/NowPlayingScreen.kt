@@ -16,6 +16,7 @@ enum class NowPlayingScreen constructor(
     BLUR_CARD(R.string.blur_card, R.drawable.np_blur_card, 9),
     CARD(R.string.card, R.drawable.np_card, 6),
     CIRCLE(R.string.circle, R.drawable.np_minimalistic_circle, 15),
+    CLASSIC(R.string.classic, R.drawable.np_classic, 16),
     COLOR(R.string.color, R.drawable.np_color, 5),
     FIT(R.string.fit, R.drawable.np_fit, 12),
     FLAT(R.string.flat, R.drawable.np_flat, 1),
@@ -26,5 +27,4 @@ enum class NowPlayingScreen constructor(
     PLAIN(R.string.plain, R.drawable.np_plain, 3),
     SIMPLE(R.string.simple, R.drawable.np_simple, 8),
     TINY(R.string.tiny, R.drawable.np_tiny, 7),
-    CLASSIC(R.string.classic, R.drawable.np_classic, 16),
 }

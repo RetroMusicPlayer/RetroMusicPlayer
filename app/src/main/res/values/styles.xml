@@ -62,7 +62,8 @@
     </style>
 
     <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
+        </item>
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">
@@ -83,15 +84,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="BottomSheetItemTextAppearanceInactive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+    <style name="BottomSheetItemTextAppearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:fontFamily">@font/circular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="BottomSheetItemTextAppearanceActive" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:fontFamily">@font/circular</item>
-        <item name="android:textSize">14sp</item>
-    </style>
 
     <style name="Fab" parent="FabParent" />
 
