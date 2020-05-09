@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.full
 
 import android.app.ActivityOptions
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -142,7 +143,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lyricsLayout = view.findViewById(R.id.player_lyrics)
+        lyricsLayout = view.findViewById(R.id.playerLyrics)
         lyricsLine1 = view.findViewById(R.id.player_lyrics_line1)
         lyricsLine2 = view.findViewById(R.id.player_lyrics_line2)
 
@@ -199,7 +200,8 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        controlsFragment.setDark(color.primaryTextColor)
+        mask.backgroundTintList = ColorStateList.valueOf(color.backgroundColor)
+        controlsFragment.setDark(color)
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }

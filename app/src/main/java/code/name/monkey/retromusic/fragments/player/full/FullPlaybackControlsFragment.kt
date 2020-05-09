@@ -30,6 +30,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
 
 /**
@@ -90,6 +91,29 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
             scaleY = 0f
             rotation = 0f
         }
+    }
+
+    fun setDark(color: MediaNotificationProcessor) {
+        lastPlaybackControlsColor = color.primaryTextColor
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
+
+        val tintList=ColorStateList.valueOf(color.primaryTextColor)
+        playerMenu.imageTintList = tintList
+        songFavourite.imageTintList = tintList
+        volumeFragment?.setTintableColor(color.primaryTextColor)
+        ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
+        title.setTextColor(color.primaryTextColor)
+        text.setTextColor(color.secondaryTextColor)
+        songInfo.setTextColor(color.secondaryTextColor)
+        songCurrentProgress.setTextColor(color.secondaryTextColor)
+        songTotalTime.setTextColor(color.secondaryTextColor)
+
+        playPauseButton.backgroundTintList = tintList
+        playPauseButton.imageTintList = ColorStateList.valueOf(color.backgroundColor)
+
+        updateRepeatState()
+        updateShuffleState()
+        updatePrevNextColor()
     }
 
     override fun setDark(color: Int) {
@@ -319,4 +343,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
     fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
+
+
 }

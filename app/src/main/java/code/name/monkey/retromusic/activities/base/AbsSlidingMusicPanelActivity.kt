@@ -54,7 +54,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     private lateinit var bottomSheetBehavior: RetroBottomSheetBehavior<MaterialCardView>
     private var miniPlayerFragment: MiniPlayerFragment? = null
     private var playerFragment: AbsPlayerFragment? = null
-    private var currentNowPlayingScreen: NowPlayingScreen? = null
+    private var cps: NowPlayingScreen? = null
     private var navigationBarColor: Int = 0
     private var taskColor: Int = 0
     private var lightStatusBar: Boolean = false
@@ -117,7 +117,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
     override fun onResume() {
         super.onResume()
-        if (currentNowPlayingScreen != PreferenceUtil.getInstance(this).nowPlayingScreen) {
+        if (cps != PreferenceUtil.getInstance(this).nowPlayingScreen) {
             postRecreate()
         }
         bottomSheetBehavior.addBottomSheetCallback(bottomSheetCallbackList)
@@ -190,7 +190,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                if (currentNowPlayingScreen != PEAK) {
+                if (cps != PEAK) {
                     val params = slidingPanel.layoutParams as ViewGroup.LayoutParams
                     params.height = ViewGroup.LayoutParams.MATCH_PARENT
                     slidingPanel.layoutParams = params
@@ -239,9 +239,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     private fun chooseFragmentForTheme() {
-        currentNowPlayingScreen = PreferenceUtil.getInstance(this).nowPlayingScreen
+        cps = PreferenceUtil.getInstance(this).nowPlayingScreen
 
-        val fragment: Fragment = when (currentNowPlayingScreen) {
+        val fragment: Fragment = when (cps) {
             BLUR -> BlurPlayerFragment()
             ADAPTIVE -> AdaptiveFragment()
             NORMAL -> PlayerFragment()
@@ -309,20 +309,24 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
 
-            if (PreferenceUtil.getInstance(this).adaptiveColor && (currentNowPlayingScreen == NORMAL || currentNowPlayingScreen == FLAT)) {
+            if (PreferenceUtil.getInstance(this).adaptiveColor && (cps == NORMAL || cps == FLAT)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
-            } else if (currentNowPlayingScreen == FULL || currentNowPlayingScreen == CARD || currentNowPlayingScreen == BLUR || currentNowPlayingScreen == BLUR_CARD) {
+            } else if (cps == CARD || cps == BLUR || cps == BLUR_CARD) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
                 super.setNavigationbarColor(Color.BLACK)
-            } else if (currentNowPlayingScreen == COLOR || currentNowPlayingScreen == TINY) {
+            } else if (cps == COLOR || cps == TINY) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
-            } else if (currentNowPlayingScreen == CLASSIC) {
+            } else if (cps == FULL) {
+                super.setNavigationbarColor(paletteColor)
+                super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(false)
-            } else if (currentNowPlayingScreen == FIT) {
+            } else if (cps == CLASSIC) {
+                super.setLightStatusbar(false)
+            } else if (cps == FIT) {
                 super.setLightStatusbar(false)
             } else {
                 super.setLightStatusbar(

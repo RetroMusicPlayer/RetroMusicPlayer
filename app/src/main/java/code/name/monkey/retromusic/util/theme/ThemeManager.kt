@@ -1,9 +1,6 @@
 package code.name.monkey.retromusic.util.theme
 
 import android.content.Context
-import android.content.res.Configuration.UI_MODE_NIGHT_MASK
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.os.PowerManager
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatDelegate
 import code.name.monkey.retromusic.R
@@ -30,17 +27,6 @@ object ThemeManager {
         BLACK -> AppCompatDelegate.MODE_NIGHT_YES
         AUTO -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
-
-    private fun isSystemDarkModeEnabled(context: Context): Boolean {
-        val isBatterySaverEnabled =
-            (context.getSystemService(Context.POWER_SERVICE) as PowerManager?)?.isPowerSaveMode
-                ?: false
-        val isDarkModeEnabled =
-            (context.resources.configuration.uiMode and UI_MODE_NIGHT_MASK) == UI_MODE_NIGHT_YES
-
-        return isBatterySaverEnabled or isDarkModeEnabled
-    }
-
 }
 
 val Context.generalThemeValue: ThemeMode

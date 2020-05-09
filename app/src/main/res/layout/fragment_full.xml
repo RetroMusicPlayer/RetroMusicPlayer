@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,155 +7,161 @@
     android:clickable="true"
     android:focusable="true">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorSurface" />
 
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout="@layout/fragment_album_full_cover" />
 
     <View
+        android:id="@+id/mask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shadow_up_full_theme" />
+        android:background="@drawable/shadow_up_full_theme"
+        android:backgroundTint="@color/md_red_500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/playbackControlsFragment"
+        android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_full_player_controls" />
 
-        <fragment
-            android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            tools:layout="@layout/fragment_full_player_controls" />
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:background="@drawable/shadow_down" />
-
-    <LinearLayout
-        android:id="@+id/toolbar_container"
+    <FrameLayout
+        android:id="@+id/statusBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <FrameLayout
+        <include layout="@layout/status_bar" />
+    </FrameLayout>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playerToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        app:contentInsetEndWithActions="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/statusBarContainer"
+        app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
+        app:titleMargin="0dp"
+        app:titleMargins="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/status_bar" />
-        </FrameLayout>
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/playerToolbar"
-            style="@style/Toolbar"
-            android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
-            app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/nextSongLabel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:alpha="0.75"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="@string/next_song"
-                    android:textAppearance="@style/TextViewSubtitle2"
-                    android:textColor="@color/md_white_1000"
-                    app:layout_constraintEnd_toStartOf="@+id/artistImage"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/nextSong"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:singleLine="true"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textColor="@color/md_white_1000"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/artistImage"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nextSongLabel"
-                    tools:text="@tools:sample/lorem/random" />
-
-                <code.name.monkey.retromusic.views.CircularImageView
-                    android:id="@+id/artistImage"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="8dp"
-                    android:elevation="10dp"
-                    app:civ_border="false"
-                    app:civ_shadow="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/default_artist_art" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.appbar.MaterialToolbar>
-
-        <FrameLayout
-            android:id="@+id/player_lyrics"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:alpha="0"
-            android:clipToPadding="false"
-            android:elevation="20dp"
-            android:padding="16dp"
-            android:visibility="gone"
-            tools:visibility="visible">
-
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player_lyrics_line1"
-                android:layout_width="match_parent"
+                android:id="@+id/nextSongLabel"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:shadowColor="@color/md_black_1000"
-                android:shadowRadius="4"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextViewHeadline6"
+                android:alpha="0.75"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingHorizontal="8dp"
+                android:text="@string/next_song"
+                android:textAppearance="@style/TextViewSubtitle2"
                 android:textColor="@color/md_white_1000"
-                android:visibility="gone" />
+                app:layout_constraintEnd_toStartOf="@+id/artistImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/player_lyrics_line2"
-                android:layout_width="match_parent"
+                android:id="@+id/nextSong"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:shadowColor="@color/md_black_1000"
-                android:shadowRadius="4"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextViewHeadline6"
-                android:textColor="@color/md_white_1000" />
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="@color/md_white_1000"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/artistImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nextSongLabel"
+                tools:text="@tools:sample/lorem/random" />
 
-        </FrameLayout>
-    </LinearLayout>
-</FrameLayout>
+            <code.name.monkey.retromusic.views.CircularImageView
+                android:id="@+id/artistImage"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp"
+                android:elevation="10dp"
+                app:civ_border="false"
+                app:civ_shadow="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/default_artist_art" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <FrameLayout
+        android:id="@+id/playerLyrics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:clipToPadding="false"
+        android:elevation="20dp"
+        android:padding="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/playbackControlsFragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/playerToolbar"
+        tools:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/player_lyrics_line1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:shadowColor="@color/md_black_1000"
+            android:shadowRadius="4"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textColor="@color/md_white_1000"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/player_lyrics_line2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:shadowColor="@color/md_black_1000"
+            android:shadowRadius="4"
+            android:textAppearance="@style/TextViewHeadline6"
+            android:textColor="@color/md_white_1000" />
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
