@@ -7,9 +7,16 @@
 
 ## Screenshots
 ### Player screen
-![Home screen](screenshots/home.jpeg)
+| <img src="screenshots/home.jpeg" width="200"/>| <img src="screenshots/home.jpeg" width="200"/>| <img src="screenshots/home.jpeg" width="200"/>| <img src="screenshots/home.jpeg" width="200"/>|
+|:---:|:---:|:---:|:---:|
+| Home | Songs | Albums | Settings |
+
 ### Now playing themes
-![Home screen](screenshots/np_adaptive.jpeg)
+ 
+| <img src="screenshots/np_normal.jpeg" width="200"/>	|<img src="screenshots/np_adaptive.jpeg" width="200"/>|   <img src="screenshots/np_blur.jpeg" width="200"/>  	|    <img src="screenshots/np_color.jpeg" width="200"/> 	|     <img src="screenshots/np_material.jpeg" width="200"/>	|
+|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
+| Normal 	| Adaptive 	| Blur 	| Color 	| Material 	|
+
 ### 🧭Navigation never made easier 
 Self-explanatory interface without overloaded menus
 
