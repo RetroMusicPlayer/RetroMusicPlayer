@@ -43,7 +43,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.fragment_clasic_player.*
+import kotlinx.android.synthetic.main.fragment_classic_player.*
 import kotlinx.android.synthetic.main.fragment_classic_controls.*
 import kotlinx.android.synthetic.main.status_bar.*
 
@@ -106,7 +106,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_clasic_player, container, false)
+        return inflater.inflate(R.layout.fragment_classic_player, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
