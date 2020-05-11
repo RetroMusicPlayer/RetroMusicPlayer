@@ -95,8 +95,6 @@ public final class PreferenceUtil {
 
     public static final String TOGGLE_HEADSET = "toggle_headset";
 
-    public static final String DOMINANT_COLOR = "dominant_color";
-
     public static final String GENERAL_THEME = "general_theme";
 
     public static final String CIRCULAR_ALBUM_ART = "circular_album_art";
@@ -772,9 +770,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(NOW_PLAYING_SCREEN, false);
     }
 
-    public boolean isDominantColor() {
-        return mPreferences.getBoolean(DOMINANT_COLOR, false);
-    }
 
     public boolean isExtraControls() {
         return mPreferences.getBoolean(TOGGLE_ADD_CONTROLS, false);

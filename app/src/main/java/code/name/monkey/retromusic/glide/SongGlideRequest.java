@@ -120,7 +120,7 @@ public class SongGlideRequest {
             return createBaseRequest(builder.requestManager, builder.song, builder.ignoreMediaStore)
                     .asBitmap()
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }
@@ -141,7 +141,7 @@ public class SongGlideRequest {
                     .asBitmap()
                     .transcode(new BitmapPaletteTranscoder(context), BitmapPaletteWrapper.class)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.song));
         }

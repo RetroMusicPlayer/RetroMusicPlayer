@@ -41,6 +41,7 @@ import com.bumptech.glide.request.target.Target
 
 class PlayingNotificationImpl : PlayingNotification() {
     private var target: Target<BitmapPaletteWrapper>? = null
+
     @Synchronized
     override fun update() {
         stopped = false
@@ -83,13 +84,8 @@ class PlayingNotificationImpl : PlayingNotification() {
                         glideAnimation: GlideAnimation<in BitmapPaletteWrapper>
                     ) {
                         update(
-                            resource.bitmap, when {
-                                PreferenceUtil.getInstance(service).isDominantColor -> RetroColorUtil.getDominantColor(
-                                    resource.bitmap,
-                                    Color.TRANSPARENT
-                                )
-                                else -> RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
-                            }
+                            resource.bitmap,
+                            RetroColorUtil.getColor(resource.palette, Color.TRANSPARENT)
                         )
                     }
 

@@ -373,7 +373,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     public void onSharedPreferenceChanged(final @NonNull SharedPreferences sharedPreferences,
                                           final @NonNull String key) {
         if (key.equals(PreferenceUtil.GENERAL_THEME) || key.equals(PreferenceUtil.BLACK_THEME) ||
-                key.equals(PreferenceUtil.ADAPTIVE_COLOR_APP) || key.equals(PreferenceUtil.DOMINANT_COLOR) ||
+                key.equals(PreferenceUtil.ADAPTIVE_COLOR_APP) ||
                 key.equals(PreferenceUtil.USER_NAME) || key.equals(PreferenceUtil.TOGGLE_FULL_SCREEN) ||
                 key.equals(PreferenceUtil.TOGGLE_VOLUME) || key.equals(PreferenceUtil.ROUND_CORNERS) ||
                 key.equals(PreferenceUtil.CAROUSEL_EFFECT) || key.equals(PreferenceUtil.NOW_PLAYING_SCREEN_ID) ||

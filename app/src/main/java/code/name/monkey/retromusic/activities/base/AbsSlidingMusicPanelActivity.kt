@@ -222,7 +222,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             behavior.isHideable = true
             behavior.peekHeight = 0
             bottomNavigationView.elevation = DensityUtil.dip2px(this, 10f).toFloat()
-            playerFragmentContainer.removeAllViews()
+            collapsePanel()
         } else {
             if (MusicPlayerRemote.playingQueue.isNotEmpty()) {
                 slidingPanel.elevation = DensityUtil.dip2px(this, 10f).toFloat()

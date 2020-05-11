@@ -737,7 +737,6 @@ public class MusicService extends Service implements
                 updateMediaSessionMetaData();
                 break;
             case PreferenceUtil.COLORED_NOTIFICATION:
-            case PreferenceUtil.DOMINANT_COLOR:
                 updateNotification();
                 break;
             case PreferenceUtil.CLASSIC_NOTIFICATION:

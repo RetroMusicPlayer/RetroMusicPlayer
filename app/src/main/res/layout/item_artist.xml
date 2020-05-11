@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="96dp"
+    android:layout_width="112dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="?attr/rectSelector"
@@ -10,10 +10,10 @@
 
     <code.name.monkey.retromusic.views.RetroShapeableImageView
         android:id="@+id/image"
-        android:layout_width="96dp"
+        android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:retroCornerSize="46dp"
+        app:retroCornerSize="56dp"
         app:srcCompat="@drawable/default_artist_art"
         tools:src="@tools:sample/avatars" />
 
