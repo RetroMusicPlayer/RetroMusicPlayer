@@ -28,7 +28,7 @@
         android:nestedScrollingEnabled="false"
         android:overScrollMode="never"
         android:visibility="gone"
-        app:itemMargin="96dp"
+        app:itemMargin="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
