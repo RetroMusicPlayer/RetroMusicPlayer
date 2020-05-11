@@ -28,7 +28,7 @@ class HorizontalAlbumAdapter(
         return ViewHolder(view)
     }
 
-    fun setColors(color: Int, holder: ViewHolder) {
+    override fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
         holder.title?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorPrimary))
         holder.text?.setTextColor(ATHUtil.resolveColor(activity, android.R.attr.textColorSecondary))
     }
@@ -42,7 +42,7 @@ class HorizontalAlbumAdapter(
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
-                    setColors(albumArtistFooterColor, holder)
+                    //setColors(albumArtistFooterColor, holder)
                 }
 
                 override fun onColorReady(colors: MediaNotificationProcessor) {

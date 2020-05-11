@@ -48,7 +48,7 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/playerQueueSheet"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="bottom"
         app:behavior_hideable="false"
         app:cardCornerRadius="0dp"
@@ -58,7 +58,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <include
@@ -69,7 +69,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/colorSurface"
                 android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView

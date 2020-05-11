@@ -11,10 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
@@ -118,6 +115,10 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 0
             ).build()
         )
+        shapeDrawable.fillColor =
+            ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        playerQueueSheet.background = shapeDrawable
+
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             Color.WHITE,
@@ -253,23 +254,29 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         lastColor = color.backgroundColor
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
-        shapeDrawable.fillColor = ColorStateList.valueOf(color.backgroundColor)
-        playerQueueSheet.background = shapeDrawable
+
 
         title.setTextColor(color.primaryTextColor)
-        text.setTextColor(color.secondaryTextColor)
-        songInfo.setTextColor(color.secondaryTextColor)
-
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
 
         ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
-        volumeFragment?.setTintableColor(color.primaryTextColor)
-
-        player_queue_sub_header.setTextColor(color.secondaryTextColor)
+        volumeFragment?.setTintableColor(
+            ATHUtil.resolveColor(
+                requireContext(),
+                android.R.attr.textColorPrimary
+            )
+        )
 
         TintHelper.setTintAuto(playPauseButton, color.primaryTextColor, true)
-        TintHelper.setTintAuto(playPauseButton, color.backgroundColor, false)
+        TintHelper.setTintAuto(
+            playPauseButton,
+            MaterialValueHelper.getPrimaryTextColor(
+                requireContext(),
+                ColorUtil.isColorLight(color.primaryTextColor)
+            ),
+            false
+        )
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()

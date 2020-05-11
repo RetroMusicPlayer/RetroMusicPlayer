@@ -19,17 +19,14 @@
         android:focusable="true"
         android:visibility="gone" />
 
-    <com.google.android.material.card.MaterialCardView
+    <FrameLayout
         android:id="@+id/slidingPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="bottom"
+        android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="12dp"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior"
-        app:shapeAppearance="@style/ClassicThemeOverLay">
+        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
@@ -43,7 +40,7 @@
             android:layout_height="48dp"
             tools:layout="@layout/fragment_mini_player" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
     <code.name.monkey.retromusic.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"

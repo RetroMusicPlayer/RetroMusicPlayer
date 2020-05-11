@@ -60,8 +60,7 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        toggleBottomNavigationView(true)
-
+        setBottomBarVisibility(View.GONE)
         if (intent.extras != null) {
             genre = intent?.extras?.getParcelable(EXTRA_GENRE_ID)!!
         } else {

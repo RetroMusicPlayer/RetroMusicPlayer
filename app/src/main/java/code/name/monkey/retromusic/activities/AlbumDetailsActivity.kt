@@ -94,11 +94,11 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
-        toggleBottomNavigationView(true)
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
+        setBottomBarVisibility(View.GONE)
         window.sharedElementsUseOverlay = true
 
         App.musicComponent.inject(this)

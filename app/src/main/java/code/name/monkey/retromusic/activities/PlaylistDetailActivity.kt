@@ -49,7 +49,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setNavigationbarColorAuto()
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
-        toggleBottomNavigationView(true)
+        setBottomBarVisibility(View.GONE)
 
         App.musicComponent.inject(this)
         playlistSongsPresenter.attachView(this)

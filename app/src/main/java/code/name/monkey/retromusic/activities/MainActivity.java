@@ -23,11 +23,8 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
@@ -39,14 +36,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.transition.TransitionManager;
 
 import com.afollestad.materialcab.MaterialCab;
 import com.afollestad.materialcab.MaterialCab.Callback;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
@@ -93,7 +87,6 @@ import code.name.monkey.retromusic.service.MusicService;
 import code.name.monkey.retromusic.util.AppRater;
 import code.name.monkey.retromusic.util.NavigationUtil;
 import code.name.monkey.retromusic.util.PreferenceUtil;
-import code.name.monkey.retromusic.util.PremiumShow;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.RetroUtil;
 
@@ -184,7 +177,9 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         //PremiumShow.launch(this);
         setupToolbar();
         checkUpdate();
+        updateTabs();
     }
+
 
     private void checkUpdate() {
         appUpdateManager = AppUpdateManagerFactory.create(this);
@@ -832,11 +827,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private void setupToolbar() {
         setTitle(null);
         mToolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
+        mAppBarLayout.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
         setSupportActionBar(mToolbar);
-        mToolbar.setOnClickListener(v -> {
-            ActivityOptions options = ActivityOptions
-                    .makeSceneTransitionAnimation(this, mToolbar, getString(R.string.transition_toolbar));
-            NavigationUtil.goToSearch(this, options);
-        });
     }
 }
