@@ -108,6 +108,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
+        android:paddingBottom="8dp"
         android:paddingHorizontal="16dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"

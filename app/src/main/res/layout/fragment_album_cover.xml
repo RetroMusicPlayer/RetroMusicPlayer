@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareCardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="12dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp">
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/player_image"
@@ -20,5 +25,5 @@
             tools:ignore="ContentDescription,UnusedAttribute"
             tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
 
-    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
-</FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

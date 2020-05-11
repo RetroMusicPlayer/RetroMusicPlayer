@@ -55,7 +55,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
-    private lateinit var queueAdapter: PlayingQueueAdapter
     private var volumeFragment: VolumeFragment? = null
     private lateinit var shapeDrawable: MaterialShapeDrawable
     private lateinit var wrappedAdapter: RecyclerView.Adapter<*>

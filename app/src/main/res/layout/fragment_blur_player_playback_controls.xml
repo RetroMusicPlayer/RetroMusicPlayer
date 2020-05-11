@@ -41,7 +41,6 @@
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
         android:splitTrack="false"
         app:haloColor="@color/md_white_semi_transparent"
         app:haloRadius="0dp"
@@ -73,9 +72,9 @@
 
     <LinearLayout
         android:id="@+id/titleContainer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/text"
+        app:layout_constraintBottom_toTopOf="@+id/textContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,32 +91,45 @@
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingHorizontal="16dp"
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:textAppearance="@style/TextViewHeadline6"
             android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="@tools:sample/lorem" />
     </LinearLayout>
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textAppearance="@style/TextViewBody1"
-        android:textColor="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toTopOf="@+id/songInfo"
-        app:layout_constraintTop_toBottomOf="@+id/titleContainer"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleContainer">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:textAppearance="@style/TextViewBody1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintBottom_toTopOf="@+id/songInfo"
+            app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+            tools:text="@tools:sample/lorem" />
+    </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songInfo"
@@ -127,12 +139,12 @@
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/playPauseButton"
-        app:layout_constraintTop_toBottomOf="@+id/text"
+        app:layout_constraintTop_toBottomOf="@+id/textContainer"
         tools:text="@tools:sample/lorem/random" />
 
     <androidx.appcompat.widget.AppCompatImageButton

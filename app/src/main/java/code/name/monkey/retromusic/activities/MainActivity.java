@@ -156,13 +156,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         hideStatusBar();
         setBottomBarVisibility(View.VISIBLE);
 
-        getBottomNavigationView().setSelectedItemId(PreferenceUtil.getInstance(this).getLastPage());
-        getBottomNavigationView().setOnNavigationItemSelectedListener(item -> {
-            PreferenceUtil.getInstance(MainActivity.this).setLastPage(item.getItemId());
-            selectedFragment(item.getItemId());
-            return true;
-        });
-
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
         } else {
@@ -178,6 +171,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         setupToolbar();
         checkUpdate();
         updateTabs();
+        getBottomNavigationView().setSelectedItemId(PreferenceUtil.getInstance(this).getLastPage());
+        getBottomNavigationView().setOnNavigationItemSelectedListener(item -> {
+            PreferenceUtil.getInstance(MainActivity.this).setLastPage(item.getItemId());
+            selectedFragment(item.getItemId());
+            return true;
+        });
     }
 
 
