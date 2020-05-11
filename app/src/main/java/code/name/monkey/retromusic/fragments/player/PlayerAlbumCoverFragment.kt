@@ -17,6 +17,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
+
 class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChangeListener {
     private var callbacks: Callbacks? = null
     private var currentPosition: Int = 0
@@ -46,11 +47,21 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         viewPager.addOnPageChangeListener(this)
         val nps = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen
 
+        val metrics = resources.displayMetrics
+        val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
+
+
         if (nps == FULL || nps == CLASSIC || nps == FIT) {
             viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.getInstance(requireContext()).carouselEffect()) {
             viewPager.clipToPadding = false
-            viewPager.setPadding(40, 40, 40, 0)
+            val padding =
+                if (ratio >= 1.777f) {
+                    40
+                } else {
+                    100
+                }
+            viewPager.setPadding(padding, 0, padding, 0)
             viewPager.pageMargin = 0
             viewPager.setPageTransformer(false, CarousalPagerTransformer(requireContext()))
         } else {

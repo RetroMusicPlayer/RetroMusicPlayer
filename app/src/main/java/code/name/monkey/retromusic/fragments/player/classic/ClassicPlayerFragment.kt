@@ -43,8 +43,8 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropM
 import com.h6ah4i.android.widget.advrecyclerview.swipeable.RecyclerViewSwipeManager
 import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchActionGuardManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
-import kotlinx.android.synthetic.main.fragment_classic_player.*
 import kotlinx.android.synthetic.main.fragment_classic_controls.*
+import kotlinx.android.synthetic.main.fragment_classic_player.*
 import kotlinx.android.synthetic.main.status_bar.*
 
 
@@ -87,6 +87,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 }
                 BottomSheetBehavior.STATE_COLLAPSED -> {
                     resetToCurrentPosition()
+                    activity.getBottomSheetBehavior().setAllowDragging(true)
                 }
                 else -> {
                     activity.getBottomSheetBehavior().setAllowDragging(true)
@@ -245,10 +246,13 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     override fun onBackPressed(): Boolean {
+        var wasExpanded = false
         if (getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED) {
+            wasExpanded = getQueuePanel().state == BottomSheetBehavior.STATE_EXPANDED
             getQueuePanel().state = BottomSheetBehavior.STATE_COLLAPSED
+            return wasExpanded
         }
-        return false
+        return wasExpanded
     }
 
     override fun toolbarIconColor(): Int {
