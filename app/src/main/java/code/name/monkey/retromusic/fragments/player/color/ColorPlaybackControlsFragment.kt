@@ -98,8 +98,8 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     fun setDark(colors: MediaNotificationProcessor) {
         setDark(colors.secondaryTextColor)
-        TintHelper.setTintAuto(playPauseButton, colors.backgroundColor, false)
         TintHelper.setTintAuto(playPauseButton, colors.primaryTextColor, true)
+        TintHelper.setTintAuto(playPauseButton, colors.backgroundColor, false)
 
         title.setTextColor(colors.primaryTextColor)
         text.setTextColor(colors.secondaryTextColor)

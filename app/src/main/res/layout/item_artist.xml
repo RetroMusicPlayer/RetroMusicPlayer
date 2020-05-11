@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         app:retroCornerSize="46dp"
+        app:srcCompat="@drawable/default_artist_art"
         tools:src="@tools:sample/avatars" />
 
     <com.google.android.material.textview.MaterialTextView

@@ -16,8 +16,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="128dp"
     android:layout_height="128dp"
-    app:cardCornerRadius="16dp"
-    app:cardUseCompatPadding="true">
+
+    android:layout_margin="4dp"
+    app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/paletteColorContainer"
@@ -35,6 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:retroCornerSize="21dp"
+            app:srcCompat="@drawable/default_album_art"
             tools:src="@tools:sample/avatars" />
 
         <com.google.android.material.textview.MaterialTextView

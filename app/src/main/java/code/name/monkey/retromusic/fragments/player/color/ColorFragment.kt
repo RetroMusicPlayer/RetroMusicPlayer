@@ -32,9 +32,9 @@ class ColorFragment : AbsPlayerFragment() {
         get() = navigationColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
+        lastColor = color.secondaryTextColor
         playbackControlsFragment.setDark(color)
         navigationColor = color.backgroundColor
-        lastColor = color.secondaryTextColor
         callbacks?.onPaletteColorChanged()
 
         ToolbarContentTintHelper.colorizeToolbar(

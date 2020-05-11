@@ -29,9 +29,6 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
     protected val defaultFooterColor: Int
         get() = ATHUtil.resolveColor(getView().context, R.attr.colorControlNormal)
 
-    protected val albumArtistFooterColor: Int
-        get() = ATHUtil.resolveColor(getView().context, R.attr.colorControlNormal)
-
     abstract fun onColorReady(colors: MediaNotificationProcessor)
 
     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {

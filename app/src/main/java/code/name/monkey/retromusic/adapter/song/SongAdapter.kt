@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.adapter.song
 
 import android.app.ActivityOptions
+import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -84,10 +85,13 @@ open class SongAdapter(
         loadAlbumCover(song, holder)
     }
 
-    private fun setColors(color: Int, holder: ViewHolder) {
+    private fun setColors(color: MediaNotificationProcessor, holder: ViewHolder) {
         if (holder.paletteColorContainer != null) {
-            holder.paletteColorContainer?.setBackgroundColor(color)
+            holder.title?.setTextColor(color.primaryTextColor)
+            holder.text?.setTextColor(color.secondaryTextColor)
+            holder.paletteColorContainer?.setBackgroundColor(color.backgroundColor)
         }
+        holder.mask?.backgroundTintList = ColorStateList.valueOf(color.primaryTextColor)
     }
 
     protected open fun loadAlbumCover(song: Song, holder: ViewHolder) {
@@ -100,11 +104,11 @@ open class SongAdapter(
             .into(object : RetroMusicColoredTarget(holder.image!!) {
                 override fun onLoadCleared(placeholder: Drawable?) {
                     super.onLoadCleared(placeholder)
-                    setColors(defaultFooterColor, holder)
+
                 }
 
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors.backgroundColor, holder)
+                    setColors(colors, holder)
                 }
             })
     }
