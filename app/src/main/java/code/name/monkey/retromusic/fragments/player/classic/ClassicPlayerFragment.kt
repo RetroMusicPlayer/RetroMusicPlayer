@@ -45,8 +45,6 @@ import com.h6ah4i.android.widget.advrecyclerview.touchguard.RecyclerViewTouchAct
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.fragment_classic_controls.*
 import kotlinx.android.synthetic.main.fragment_classic_player.*
-import kotlinx.android.synthetic.main.status_bar.*
-
 
 class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     MusicProgressViewUpdateHelper.Callback {
@@ -80,6 +78,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             val activity = requireActivity() as AbsSlidingMusicPanelActivity
+            val isDark = ATHUtil.isWindowBackgroundDark(requireContext());
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {

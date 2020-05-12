@@ -33,6 +33,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.WeakHashMap;
 
@@ -348,28 +349,26 @@ public class NotificationColorUtil {
         return ColorUtilsFromCompat.LABToColor(result[0], result[1], result[2]);
     }
 
-    //    public static int resolvePrimaryColor(Context context, int backgroundColor) {
-//        boolean useDark = shouldUseDark(backgroundColor);
-//        if (useDark) {
-//            return context.getColor(
-//                    com.android.internal.R.color.notification_primary_text_color_light);
-//        } else {
-//            return context.getColor(
-//                    com.android.internal.R.color.notification_primary_text_color_dark);
-//        }
-//    }
-//
-//    public static int resolveSecondaryColor(Context context, int backgroundColor) {
-//        boolean useDark = shouldUseDark(backgroundColor);
-//        if (useDark) {
-//            return context.getColor(
-//                    com.android.internal.R.color.notification_secondary_text_color_light);
-//        } else {
-//            return context.getColor(
-//                    com.android.internal.R.color.notification_secondary_text_color_dark);
-//        }
-//    }
-//
+    public static int resolvePrimaryColor(Context context, int backgroundColor) {
+        boolean useDark = shouldUseDark(backgroundColor);
+        if (useDark) {
+            return ContextCompat.getColor(context, android.R.color.primary_text_light);
+        } else {
+            return ContextCompat.getColor(context, android.R.color.primary_text_light);
+        }
+    }
+
+
+    public static int resolveSecondaryColor(Context context, int backgroundColor) {
+        boolean useDark = shouldUseDark(backgroundColor);
+        if (useDark) {
+            return ContextCompat.getColor(context,
+                    android.R.color.secondary_text_light);
+        } else {
+            return ContextCompat.getColor(context, android.R.color.secondary_text_dark);
+        }
+    }
+
     public static int resolveActionBarColor(Context context, int backgroundColor) {
         if (backgroundColor == Notification.COLOR_DEFAULT) {
             return Color.BLACK;
@@ -377,16 +376,16 @@ public class NotificationColorUtil {
         return getShiftedColor(backgroundColor, 7);
     }
 
-//    /**
-//     * Resolves {@param color} to an actual color if it is {@link Notification#COLOR_DEFAULT}
-//     */
-//    public static int resolveColor(Context context, int color) {
-//        if (color == Notification.COLOR_DEFAULT) {
-//            return context.getColor(com.android.internal.R.color.notification_icon_default_color);
-//        }
-//        return color;
-//    }
-//
+    /**
+     * Resolves {@param color} to an actual color if it is {@link Notification#COLOR_DEFAULT}
+     */
+    public static int resolveColor(Context context, int color) {
+        if (color == Notification.COLOR_DEFAULT) {
+            return ContextCompat.getColor(context, android.R.color.background_dark);
+        }
+        return color;
+    }
+
 //
 //    public static int resolveContrastColor(Context context, int notificationColor,
 //                                           int backgroundColor) {
@@ -449,24 +448,24 @@ public class NotificationColorUtil {
         return ColorUtilsFromCompat.LABToColor(result[0], result[1], result[2]);
     }
 
-//    public static int resolveAmbientColor(Context context, int notificationColor) {
-//        final int resolvedColor = resolveColor(context, notificationColor);
-//
-//        int color = resolvedColor;
-//        color = NotificationColorUtil.ensureTextContrastOnBlack(color);
-//
-//        if (color != resolvedColor) {
-//            if (DEBUG){
-//                Log.w(TAG, String.format(
-//                        "Ambient contrast of notification for %s is %s (over black)"
-//                                + " by changing #%s to #%s",
-//                        context.getPackageName(),
-//                        NotificationColorUtil.contrastChange(resolvedColor, color, Color.BLACK),
-//                        Integer.toHexString(resolvedColor), Integer.toHexString(color)));
-//            }
-//        }
-//        return color;
-//    }
+    public static int resolveAmbientColor(Context context, int notificationColor) {
+        final int resolvedColor = resolveColor(context, notificationColor);
+
+        int color = resolvedColor;
+        color = NotificationColorUtil.ensureTextContrastOnBlack(color);
+
+        if (color != resolvedColor) {
+            if (DEBUG) {
+                Log.w(TAG, String.format(
+                        "Ambient contrast of notification for %s is %s (over black)"
+                                + " by changing #%s to #%s",
+                        context.getPackageName(),
+                        NotificationColorUtil.contrastChange(resolvedColor, color, Color.BLACK),
+                        Integer.toHexString(resolvedColor), Integer.toHexString(color)));
+            }
+        }
+        return color;
+    }
 
     private static boolean shouldUseDark(int backgroundColor) {
         boolean useDark = backgroundColor == Notification.COLOR_DEFAULT;

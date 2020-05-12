@@ -250,20 +250,10 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors.backgroundColor)
                 }
-
             })
     }
 
     private fun setColors(color: Int) {
-        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
-            color.ripAlpha()
-        else
-            ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
-
-        albumTitle.setTextColor(textColor)
-        songTitle.setTextColor(textColor)
-        biographyTitle.setTextColor(textColor)
-
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color.ripAlpha()
         else

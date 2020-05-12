@@ -31,6 +31,9 @@ import androidx.palette.graphics.Palette;
 
 import java.util.List;
 
+import code.name.monkey.appthemehelper.util.ATHUtil;
+import code.name.monkey.appthemehelper.util.ColorUtil;
+
 import static androidx.core.graphics.ColorUtils.RGBToXYZ;
 
 /**
@@ -477,13 +480,13 @@ public class MediaNotificationProcessor {
     }
 
     public int getMightyColor() {
-        if (isColorLight(backgroundColor)) {
-            return primaryTextColor;
-        } else if (isColorLight(primaryTextColor)) {
-            return secondaryTextColor;
-        } else {
-            return backgroundColor;
+        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
+            if (!ColorUtil.INSTANCE.isColorLight(primaryTextColor)) {
+                return NotificationColorUtil.ensureTextContrastOnBlack(primaryTextColor);
+            }
+            return NotificationColorUtil.ensureTextBackgroundColor(backgroundColor, primaryTextColor, secondaryTextColor);
         }
+        return primaryTextColor;
     }
 
     public interface OnPaletteLoadedListener {

@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.fragments.player.color
 
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,14 +37,16 @@ class ColorFragment : AbsPlayerFragment() {
         playbackControlsFragment.setDark(color)
         navigationColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
-
-        ToolbarContentTintHelper.colorizeToolbar(
-            playerToolbar,
-            color.secondaryTextColor,
-            requireActivity()
-        )
         colorGradientBackground?.setBackgroundColor(color.backgroundColor)
         playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
+        Handler().postDelayed(Runnable {
+            ToolbarContentTintHelper.colorizeToolbar(
+                playerToolbar,
+                color.secondaryTextColor,
+                requireActivity()
+            )
+        }, 100)
+
     }
 
     override fun onFavoriteToggled() {

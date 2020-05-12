@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
@@ -20,18 +19,20 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/shadow_down_strong"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/shadow_down_strong"
+            app:layout_constraintBottom_toBottomOf="@id/dummy_statusbar_actionbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/dummy_statusbar_actionbar" />
+
         <LinearLayout
+            android:id="@+id/dummy_statusbar_actionbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -39,12 +40,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <FrameLayout
+            <code.name.monkey.retromusic.views.StatusBarView
+                android:id="@+id/status_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include layout="@layout/status_bar" />
-            </FrameLayout>
+                android:layout_height="@dimen/status_bar_padding" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/playerToolbar"
@@ -53,7 +52,6 @@
                 android:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp"
                 app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -88,7 +86,6 @@
                     android:id="@+id/player_queue_sub_header"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/listPreferredItemHeightSmall"
-                    android:background="?attr/colorSurface"
                     android:gravity="center_vertical"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
@@ -100,7 +97,6 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="?attr/colorSurface"
                     android:overScrollMode="never"
                     tools:listitem="@layout/item_list" />
             </LinearLayout>

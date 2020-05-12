@@ -268,15 +268,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: Int) {
-        val textColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
-            color.ripAlpha()
-        else
-            ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
-
-        songTitle.setTextColor(textColor)
-        moreTitle.setTextColor(textColor)
-        aboutAlbumTitle.setTextColor(textColor)
-
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
             color.ripAlpha()
         else
