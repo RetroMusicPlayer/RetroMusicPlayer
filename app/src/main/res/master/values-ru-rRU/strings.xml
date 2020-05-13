@@ -62,11 +62,11 @@
     <string name="app_share">Эй, попробуй этот крутой музыкальный плеер: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Перемешать</string>
     <string name="app_shortcut_top_tracks_short">Топ треков</string>
-    <string name="app_widget_big_name">Retro music - Большой</string>
-    <string name="app_widget_card_name">Retro music - Карточка</string>
-    <string name="app_widget_classic_name">Retro music - Классический</string>
-    <string name="app_widget_small_name">Retro music - Маленький</string>
-    <string name="app_widget_text_name">Retro music - Текст</string>
+    <string name="app_widget_big_name">Большой</string>
+    <string name="app_widget_card_name">Карточка</string>
+    <string name="app_widget_classic_name">Классический</string>
+    <string name="app_widget_small_name">Маленький</string>
+    <string name="app_widget_text_name">Текст</string>
     <string name="artist">Исполнитель</string>
     <string name="artists">Исполнители</string>
     <string name="audio_focus_denied">Фокус на аудио отключен.</string>

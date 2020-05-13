@@ -62,11 +62,11 @@
     <string name="app_share">Isprobaj ovaj fantastican plejer na: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Reprodukuj nasumicno</string>
     <string name="app_shortcut_top_tracks_short">Najvise slusano</string>
-    <string name="app_widget_big_name">Retro Music - Big</string>
-    <string name="app_widget_card_name">Retro music - Card</string>
-    <string name="app_widget_classic_name">Retro music - Classic</string>
-    <string name="app_widget_small_name">Retro Music - Small</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_big_name">Big</string>
+    <string name="app_widget_card_name">Card</string>
+    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Izvodjac</string>
     <string name="artists">Izvodjac</string>
     <string name="audio_focus_denied">Zvuk se vec reprodukuje</string>

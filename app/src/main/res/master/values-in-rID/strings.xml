@@ -63,11 +63,11 @@
 https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Acak</string>
     <string name="app_shortcut_top_tracks_short">Lagu teratas</string>
-    <string name="app_widget_big_name">Retro Music - Besar</string>
-    <string name="app_widget_card_name">Retro music - Kartu</string>
-    <string name="app_widget_classic_name">Retro music - Klasik</string>
-    <string name="app_widget_small_name">Retro music - Kecil</string>
-    <string name="app_widget_text_name">Retro music - Teks</string>
+    <string name="app_widget_big_name">Besar</string>
+    <string name="app_widget_card_name">Kartu</string>
+    <string name="app_widget_classic_name">Klasik</string>
+    <string name="app_widget_small_name">Kecil</string>
+    <string name="app_widget_text_name">Teks</string>
     <string name="artist">Artis</string>
     <string name="artists">Artis</string>
     <string name="audio_focus_denied">Fokus audio ditolak.</string>

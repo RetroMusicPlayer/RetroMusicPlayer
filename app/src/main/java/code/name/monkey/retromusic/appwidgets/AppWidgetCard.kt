@@ -50,14 +50,13 @@ class AppWidgetCard : BaseAppWidget() {
 
         appWidgetView.setViewVisibility(R.id.media_titles, View.INVISIBLE)
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
+        val secondaryColor = MaterialValueHelper.getSecondaryTextColor(context, true)
         appWidgetView.setImageViewBitmap(
             R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
                     R.drawable.ic_skip_next_white_24dp,
-                    MaterialValueHelper.getSecondaryTextColor(
-                        context, true
-                    )
+                    secondaryColor
                 )!!, 1f
             )
         )
@@ -66,9 +65,7 @@ class AppWidgetCard : BaseAppWidget() {
                 RetroUtil.getTintedVectorDrawable(
                     context,
                     R.drawable.ic_skip_previous_white_24dp,
-                    MaterialValueHelper.getSecondaryTextColor(
-                        context, true
-                    )
+                    secondaryColor
                 )!!, 1f
             )
         )
@@ -77,9 +74,7 @@ class AppWidgetCard : BaseAppWidget() {
                 RetroUtil.getTintedVectorDrawable(
                     context,
                     R.drawable.ic_play_arrow_white_32dp,
-                    MaterialValueHelper.getSecondaryTextColor(
-                        context, true
-                    )
+                    secondaryColor
                 )!!, 1f
             )
         )

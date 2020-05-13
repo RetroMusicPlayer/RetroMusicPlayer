@@ -62,11 +62,11 @@
     <string name="app_share">嗨，看看這個很有型的播放器吧: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_short">歌曲榜</string>
-    <string name="app_widget_big_name">Retro Music - 大型模式</string>
-    <string name="app_widget_card_name">Retro Music - 卡片模式</string>
-    <string name="app_widget_classic_name">Retro Music - 經典模式</string>
-    <string name="app_widget_small_name">Retro Music - 小型模式</string>
-    <string name="app_widget_text_name">Retro Music - 文字模式</string>
+    <string name="app_widget_big_name">大型模式</string>
+    <string name="app_widget_card_name">卡片模式</string>
+    <string name="app_widget_classic_name">經典模式</string>
+    <string name="app_widget_small_name">小型模式</string>
+    <string name="app_widget_text_name">文字模式</string>
     <string name="artist">歌手</string>
     <string name="artists">歌手</string>
     <string name="audio_focus_denied">無法找到音頻焦點。</string>

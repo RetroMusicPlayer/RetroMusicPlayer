@@ -45,28 +45,28 @@ class AppWidgetBig : BaseAppWidget() {
      */
     override fun defaultAppWidget(context: Context, appWidgetIds: IntArray) {
         val appWidgetView = RemoteViews(
-            context.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
+            context.packageName, R.layout.app_widget_big
         )
 
         appWidgetView.setViewVisibility(
-            code.name.monkey.retromusic.R.id.media_titles,
+            R.id.media_titles,
             View.INVISIBLE
         )
         appWidgetView.setImageViewResource(R.id.image, R.drawable.default_audio_art)
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, BaseAppWidget.createBitmap(
+            R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
+                    R.drawable.ic_skip_next_white_24dp,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
             )
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, BaseAppWidget.Companion.createBitmap(
+            R.id.button_prev, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
+                    R.drawable.ic_skip_previous_white_24dp,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
             )
@@ -75,7 +75,7 @@ class AppWidgetBig : BaseAppWidget() {
             R.id.button_toggle_play_pause, BaseAppWidget.Companion.createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     context,
-                    code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp,
+                    R.drawable.ic_play_arrow_white_32dp,
                     MaterialValueHelper.getPrimaryTextColor(context, false)
                 )!!, 1f
             )
@@ -90,7 +90,7 @@ class AppWidgetBig : BaseAppWidget() {
      */
     override fun performUpdate(service: MusicService, appWidgetIds: IntArray?) {
         val appWidgetView = RemoteViews(
-            service.packageName, code.name.monkey.retromusic.R.layout.app_widget_big
+            service.packageName, R.layout.app_widget_big
         )
 
         val isPlaying = service.isPlaying
@@ -99,50 +99,51 @@ class AppWidgetBig : BaseAppWidget() {
         // Set the titles and artwork
         if (TextUtils.isEmpty(song.title) && TextUtils.isEmpty(song.artistName)) {
             appWidgetView.setViewVisibility(
-                code.name.monkey.retromusic.R.id.media_titles,
+                R.id.media_titles,
                 View.INVISIBLE
             )
         } else {
             appWidgetView.setViewVisibility(
-                code.name.monkey.retromusic.R.id.media_titles,
+                R.id.media_titles,
                 View.VISIBLE
             )
-            appWidgetView.setTextViewText(code.name.monkey.retromusic.R.id.title, song.title)
+            appWidgetView.setTextViewText(R.id.title, song.title)
             appWidgetView.setTextViewText(
-                code.name.monkey.retromusic.R.id.text,
+                R.id.text,
                 getSongArtistAndAlbum(song)
             )
         }
 
+        val primaryColor = MaterialValueHelper.getPrimaryTextColor(service, false)
         // Set correct drawable for pause state
         val playPauseRes =
-            if (isPlaying) code.name.monkey.retromusic.R.drawable.ic_pause_white_24dp else code.name.monkey.retromusic.R.drawable.ic_play_arrow_white_32dp
+            if (isPlaying) R.drawable.ic_pause_white_24dp else R.drawable.ic_play_arrow_white_32dp
         appWidgetView.setImageViewBitmap(
-            R.id.button_toggle_play_pause, BaseAppWidget.createBitmap(
+            R.id.button_toggle_play_pause, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     service,
                     playPauseRes,
-                    MaterialValueHelper.getPrimaryTextColor(service, false)
+                    primaryColor
                 )!!, 1f
             )
         )
 
         // Set prev/next button drawables
         appWidgetView.setImageViewBitmap(
-            R.id.button_next, BaseAppWidget.Companion.createBitmap(
+            R.id.button_next, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     service,
-                    code.name.monkey.retromusic.R.drawable.ic_skip_next_white_24dp,
-                    MaterialValueHelper.getPrimaryTextColor(service, false)
+                    R.drawable.ic_skip_next_white_24dp,
+                    primaryColor
                 )!!, 1f
             )
         )
         appWidgetView.setImageViewBitmap(
-            R.id.button_prev, BaseAppWidget.Companion.createBitmap(
+            R.id.button_prev, createBitmap(
                 RetroUtil.getTintedVectorDrawable(
                     service,
-                    code.name.monkey.retromusic.R.drawable.ic_skip_previous_white_24dp,
-                    MaterialValueHelper.getPrimaryTextColor(service, false)
+                    R.drawable.ic_skip_previous_white_24dp,
+                    primaryColor
                 )!!, 1f
             )
         )
@@ -184,7 +185,7 @@ class AppWidgetBig : BaseAppWidget() {
                         }
                         pushUpdate(appContext, appWidgetIds, appWidgetView)
                     }
-                });
+                })
         }
     }
 
@@ -192,7 +193,7 @@ class AppWidgetBig : BaseAppWidget() {
      * Link up various button actions using [PendingIntent].
      */
     private fun linkButtons(context: Context, views: RemoteViews) {
-        val action = Intent(context, MainActivity::class.java).putExtra("expand", true)
+        val action = Intent(context, MainActivity::class.java).putExtra(MainActivity.EXPAND_PANEL, true)
         var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)
@@ -213,8 +214,6 @@ class AppWidgetBig : BaseAppWidget() {
         // Next track
         pendingIntent = buildPendingIntent(context, ACTION_SKIP, serviceName)
         views.setOnClickPendingIntent(R.id.button_next, pendingIntent)
-
-
     }
 
     companion object {

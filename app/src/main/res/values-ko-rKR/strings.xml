@@ -62,11 +62,11 @@
     <string name="app_share">이 멋진 뮤직 플레이어를 한 번 써보세요!: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">무작위</string>
     <string name="app_shortcut_top_tracks_short">자주 재생한 음악</string>
-    <string name="app_widget_big_name">Retro music - 대형</string>
-    <string name="app_widget_card_name">Retro music - 카드</string>
-    <string name="app_widget_classic_name">Retro music - 클래식</string>
-    <string name="app_widget_small_name">Retro music - 소형</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_big_name">대형</string>
+    <string name="app_widget_card_name">카드</string>
+    <string name="app_widget_classic_name">클래식</string>
+    <string name="app_widget_small_name">소형</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">아티스트</string>
     <string name="artists">아티스트</string>
     <string name="audio_focus_denied">오디오 포커스가 거부되었습니다.</string>

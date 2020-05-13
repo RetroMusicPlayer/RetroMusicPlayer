@@ -62,11 +62,11 @@
     <string name="app_share">Hej, pogledajte ovaj cool reproduktor glazbe: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Izmiješaj</string>
     <string name="app_shortcut_top_tracks_short">Najslušanije pjesme</string>
-    <string name="app_widget_big_name">Retro Music - Velik</string>
-    <string name="app_widget_card_name">Retro Music - Kartica</string>
-    <string name="app_widget_classic_name">Retro Music - Klasičan</string>
-    <string name="app_widget_small_name">Retro Music - Malen</string>
-    <string name="app_widget_text_name">Retro Music - Tekst</string>
+    <string name="app_widget_big_name">Velik</string>
+    <string name="app_widget_card_name">Kartica</string>
+    <string name="app_widget_classic_name">Klasičan</string>
+    <string name="app_widget_small_name">Malen</string>
+    <string name="app_widget_text_name">Tekst</string>
     <string name="artist">Izvođač</string>
     <string name="artists">Izvođači</string>
     <string name="audio_focus_denied">Fokus zvuka je odbijen.</string>

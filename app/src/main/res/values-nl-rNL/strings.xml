@@ -62,11 +62,11 @@
     <string name="app_share">Hey, bekijk deze coole muziekspeler op:https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top tracks</string>
-    <string name="app_widget_big_name">Retro music - Groot</string>
-    <string name="app_widget_card_name">Retro music - Kaart</string>
-    <string name="app_widget_classic_name">Retro music - Klassiek</string>
-    <string name="app_widget_small_name">Retro music - Klein</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_big_name">Groot</string>
+    <string name="app_widget_card_name">Kaart</string>
+    <string name="app_widget_classic_name">Klassiek</string>
+    <string name="app_widget_small_name">Klein</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Artiest</string>
     <string name="artists">Artiesten</string>
     <string name="audio_focus_denied">Geluid focus geweigerd </string>

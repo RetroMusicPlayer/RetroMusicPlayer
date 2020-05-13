@@ -105,11 +105,11 @@
     <string name="app_shortcut_shuffle_all_short">Shuffle</string>
     <string name="app_shortcut_top_tracks_short">Top Tracks</string>
 
-    <string name="app_widget_big_name">Retro music - Big</string>
-    <string name="app_widget_card_name">Retro music - Card</string>
-    <string name="app_widget_classic_name">Retro music - Classic</string>
-    <string name="app_widget_small_name">Retro music - Small</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_big_name">Full Image</string>
+    <string name="app_widget_card_name">Card</string>
+    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_text_name">Minimal Text</string>
 
     <string name="artist">Artist</string>
 

@@ -62,11 +62,11 @@
     <string name="app_share">Hej sprawdź ten fajny odtwarzacz muzyki na: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Losowo</string>
     <string name="app_shortcut_top_tracks_short">Najczęściej odtwarzane utwory</string>
-    <string name="app_widget_big_name">Retro music - Duży</string>
-    <string name="app_widget_card_name">Retro music - Karta</string>
-    <string name="app_widget_classic_name">Retro music - Klasyczny</string>
-    <string name="app_widget_small_name">Retro music - mały</string>
-    <string name="app_widget_text_name">Retro music - Tekst</string>
+    <string name="app_widget_big_name">Duży</string>
+    <string name="app_widget_card_name">Karta</string>
+    <string name="app_widget_classic_name">Klasyczny</string>
+    <string name="app_widget_small_name">mały</string>
+    <string name="app_widget_text_name">Tekst</string>
     <string name="artist">Artysta</string>
     <string name="artists">Artyści</string>
     <string name="audio_focus_denied">Odrzucono fokus dźwiękowy.</string>

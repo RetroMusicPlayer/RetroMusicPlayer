@@ -62,8 +62,8 @@
     <string name="app_share">Hé, nézd meg ezt a menő zenelejátszót itt: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Keverés</string>
     <string name="app_shortcut_top_tracks_short">Legjobb zeneszámok</string>
-    <string name="app_widget_big_name">Retro music - Nagy</string>
-    <string name="app_widget_card_name">Retro music - Kártya</string>
+    <string name="app_widget_big_name">Nagy</string>
+    <string name="app_widget_card_name">Kártya</string>
     <string name="app_widget_classic_name">Retro zene - Klasszikus</string>
     <string name="app_widget_small_name">Retro zene - Kicsi</string>
     <string name="app_widget_text_name">Retro zene - Szöveg</string>

@@ -62,11 +62,11 @@
     <string name="app_share">Hey, schau dir diesen coolen Music Player an: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Zufällig</string>
     <string name="app_shortcut_top_tracks_short">Top Songs</string>
-    <string name="app_widget_big_name">Retro Music - Big</string>
+    <string name="app_widget_big_name">Big</string>
     <string name="app_widget_card_name">Retro Musik - Karte</string>
-    <string name="app_widget_classic_name">Retro Music - Classic</string>
-    <string name="app_widget_small_name">Retro Music - Klein</string>
-    <string name="app_widget_text_name">Retro Music - Text</string>
+    <string name="app_widget_classic_name">Classic</string>
+    <string name="app_widget_small_name">Klein</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">Künstler</string>
     <string name="artists">Künstler</string>
     <string name="audio_focus_denied">Audio Fokus verweigert.</string>

@@ -65,8 +65,8 @@
     <string name="app_widget_big_name">रेट्रो म्यूजिक - बिग</string>
     <string name="app_widget_card_name">रेट्रो म्यूजिक - कार्ड</string>
     <string name="app_widget_classic_name">रेट्रो म्यूजिक - क्लासिक</string>
-    <string name="app_widget_small_name">Retro music - Small</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_small_name">Small</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">कलाकार</string>
     <string name="artists">कलाकार</string>
     <string name="audio_focus_denied">ऑडियो फोकस से इनकार किया।</string>

@@ -62,11 +62,11 @@
     <string name="app_share">Hey check out this cool music player at: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">隨機播放</string>
     <string name="app_shortcut_top_tracks_short">最佳單曲</string>
-    <string name="app_widget_big_name">Retro music - 大型</string>
-    <string name="app_widget_card_name">Retro music - Card</string>
-    <string name="app_widget_classic_name">Retro music - 經典</string>
-    <string name="app_widget_small_name">Retro music - 小型</string>
-    <string name="app_widget_text_name">Retro music - Text</string>
+    <string name="app_widget_big_name">大型</string>
+    <string name="app_widget_card_name">Card</string>
+    <string name="app_widget_classic_name">經典</string>
+    <string name="app_widget_small_name">小型</string>
+    <string name="app_widget_text_name">Text</string>
     <string name="artist">演唱者</string>
     <string name="artists">演唱者</string>
     <string name="audio_focus_denied">無法控制音訊焦點。</string>

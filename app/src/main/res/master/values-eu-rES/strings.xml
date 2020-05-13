@@ -62,11 +62,11 @@
     <string name="app_share">Begiratu musika erreproduzitzaile hau: https://play.google.com/store/apps/details?id=%s</string>
     <string name="app_shortcut_shuffle_all_short">Nahastu</string>
     <string name="app_shortcut_top_tracks_short">Pista onenak</string>
-    <string name="app_widget_big_name">Retro music - Handia</string>
-    <string name="app_widget_card_name">Retro music - Txartela</string>
-    <string name="app_widget_classic_name">Retro music - Klasikoa</string>
-    <string name="app_widget_small_name">Retro music - Txikia</string>
-    <string name="app_widget_text_name">Retro music - Testua</string>
+    <string name="app_widget_big_name">Handia</string>
+    <string name="app_widget_card_name">Txartela</string>
+    <string name="app_widget_classic_name">Klasikoa</string>
+    <string name="app_widget_small_name">Txikia</string>
+    <string name="app_widget_text_name">Testua</string>
     <string name="artist">Artista</string>
     <string name="artists">Artistak</string>
     <string name="audio_focus_denied">Audio fokatzea ukatua</string>
