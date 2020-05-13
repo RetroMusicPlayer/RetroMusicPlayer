@@ -12,14 +12,15 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
+import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.RetroBottomSheetBehavior
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -136,8 +137,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 0
             ).build()
         )
-        shapeDrawable.fillColor =
-            ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        shapeDrawable.fillColor = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         playerQueueSheet.background = shapeDrawable
 
         ToolbarContentTintHelper.colorizeToolbar(
@@ -263,45 +263,32 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
-        if (ATHUtil.isWindowBackgroundDark(requireContext())) {
-            lastPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
-        } else {
-            lastPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
-        }
+        lastPlaybackControlsColor = color.primaryTextColor
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
+         
+        title.setTextColor(color.primaryTextColor)
+        text.setTextColor(color.secondaryTextColor)
+        songInfo.setTextColor(color.secondaryTextColor)
 
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color.primaryTextColor
-        } else {
-            ThemeStore.accentColor(requireContext())
-        }.ripAlpha()
+        songCurrentProgress.setTextColor(lastPlaybackControlsColor)
+        songTotalTime.setTextColor(lastPlaybackControlsColor)
 
-        TintHelper.setTintAuto(
-            playPauseButton,
-            MaterialValueHelper.getPrimaryTextColor(
-                requireContext(),
-                ColorUtil.isColorLight(colorFinal)
-            ),
-            false
-        )
-        TintHelper.setTintAuto(playPauseButton, colorFinal, true)
+        ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
+        volumeFragment?.setTintableColor(color.primaryTextColor)
 
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
-        volumeFragment?.setTintable(colorFinal)
+        player_queue_sub_header.setTextColor(color.secondaryTextColor)
+
+        TintHelper.setTintAuto(playPauseButton, color.primaryTextColor, true)
+        TintHelper.setTintAuto(playPauseButton, color.backgroundColor, false)
+        updateRepeatState()
+        updateShuffleState()
+        updatePrevNextColor()
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             Color.WHITE,
             requireActivity()
         )
-        updateRepeatState()
-        updateShuffleState()
-        updatePrevNextColor()
     }
 
     override fun toggleFavorite(song: Song) {
@@ -349,7 +336,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         }
         val height = playerContainer.height
         val width = playerContainer.width
-        val finalHeight = height - (playerControlsContainer.height + width)
+        val finalHeight = height - width
         val panel = getQueuePanel()
         panel.peekHeight = finalHeight
     }
