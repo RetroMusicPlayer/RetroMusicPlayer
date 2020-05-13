@@ -79,7 +79,9 @@ below links to support
 
 ### 🔗 Social links
 **Telegram:** https://t.me/retromusicapp  
-**Instagram:** https://instagram.com/retromusicapp
+**Instagram:** https://instagram.com/retromusicapp  
+**Pinterest:** https://pinterest.com/retromusicapp/  
+**Twitter:** https://twitter.com/retromusicapp/
 
 ### 🗂️ License
 
