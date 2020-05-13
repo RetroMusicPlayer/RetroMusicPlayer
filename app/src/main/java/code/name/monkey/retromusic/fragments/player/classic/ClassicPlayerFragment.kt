@@ -495,8 +495,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     ) {
         val height = playerContainer.height
         val width = playerContainer.width
-        val finalHeight = height - width
+        val finalHeight = height - (playerControlsContainer.height + width)
         val panel = getQueuePanel()
-        panel.peekHeight = finalHeight + DensityUtil.dip2px(requireContext(), 16f)
+        panel.peekHeight = finalHeight
     }
 }

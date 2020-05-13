@@ -496,9 +496,11 @@ public final class PreferenceUtil {
     }
 
     @NonNull
-    public ThemeMode getGeneralThemeValue() {
+    public ThemeMode getGeneralThemeValue(boolean isSystemDark) {
         String themeMode = mPreferences.getString(GENERAL_THEME, "dark");
-        if (isBlackMode() && themeMode.equals("dark")) {
+        if (isBlackMode() && isSystemDark) {
+            return ThemeMode.BLACK;
+        } else if (isBlackMode() && themeMode.equals("dark")) {
             return ThemeMode.BLACK;
         } else {
             switch (themeMode) {

@@ -54,6 +54,7 @@ object ViewUtil {
         }
         val colorWithAlpha = ColorUtil.withAlpha(color, 0.25f)
         progressSlider.haloColor = ColorStateList.valueOf(colorWithAlpha)
+        progressSlider.haloRadius = 0
         progressSlider.trackColorActive = ColorStateList.valueOf(color)
         progressSlider.trackColorInactive = ColorStateList.valueOf(colorWithAlpha)
     }
