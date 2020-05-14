@@ -21,7 +21,7 @@
     <style name="BottomSheetItemTextAppearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="android:breakStrategy">simple</item>
         <item name="android:hyphenationFrequency">none</item>
-        <item name="android:fontFamily">@font/circular</item>
+
         <item name="android:textSize">13sp</item>
     </style>
 </resources>

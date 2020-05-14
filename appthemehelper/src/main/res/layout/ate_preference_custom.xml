@@ -42,7 +42,6 @@
             android:layout_alignParentLeft="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            android:fontFamily="@font/circular"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:textColor="?android:attr/textColorPrimary"
@@ -56,7 +55,6 @@
             android:layout_alignStart="@android:id/title"
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/circular"
             android:maxLines="4"
             tools:text="@tools:sample/lorem/random" />
 

@@ -39,14 +39,13 @@ class ColorFragment : AbsPlayerFragment() {
         callbacks?.onPaletteColorChanged()
         colorGradientBackground?.setBackgroundColor(color.backgroundColor)
         playerActivity?.setLightNavigationBar(ColorUtil.isColorLight(color.backgroundColor))
-        Handler().postDelayed(Runnable {
+        Handler().post {
             ToolbarContentTintHelper.colorizeToolbar(
                 playerToolbar,
                 color.secondaryTextColor,
                 requireActivity()
             )
-        }, 100)
-
+        }
     }
 
     override fun onFavoriteToggled() {

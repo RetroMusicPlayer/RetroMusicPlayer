@@ -15,13 +15,11 @@
 <resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="md_font_title">@font/circular</item>
-        <item name="md_font_body">@font/circular</item>
-        <item name="md_font_button">@font/circular</item>
+
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
         <item name="windowActionBarOverlay">true</item>
-        <item name="android:fontFamily">@font/circular</item>
+
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
@@ -34,14 +32,10 @@
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="md_font_title">@font/circular</item>
-        <item name="md_font_body">@font/circular</item>
-        <item name="md_font_button">@font/circular</item>
         <item name="md_color_button_text">@color/md_white_1000</item>
         <item name="md_background_color">@color/darkColorPrimary</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:fontFamily">@font/circular</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
@@ -59,9 +53,6 @@
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="md_font_title">@font/circular</item>
-        <item name="md_font_body">@font/circular</item>
-        <item name="md_font_button">@font/circular</item>
         <item name="md_color_button_text">@color/md_black_1000</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
@@ -72,7 +63,6 @@
         <item name="android:actionOverflowButtonStyle">@style/Widget.ActionButton.Overflow</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:fontFamily">@font/circular</item>
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>

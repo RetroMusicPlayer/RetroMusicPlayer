@@ -15,13 +15,11 @@
 <resources>
 
     <style name="Theme.RetroMusic.Base.Adaptive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="md_font_title">@font/circular</item>
-        <item name="md_font_body">@font/circular</item>
-        <item name="md_font_button">@font/circular</item>
+
         <item name="md_background_color">?attr/colorSurface</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
-        <item name="android:fontFamily">@font/circular</item>
+
         <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="mcab_popup_theme">@style/ThemeOverlay.AppCompat.Dark</item>
         <item name="windowActionBarOverlay">true</item>

@@ -62,16 +62,6 @@ android {
             versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
         }
-        font {
-            versionCode defaultConfig.versionCode + 10000
-            versionName defaultConfig.versionName + "_" + getDate()
-            dimension "default"
-        }
-        nofont {
-            versionCode defaultConfig.versionCode + 10000
-            versionName defaultConfig.versionName + "_" + getDate()
-            dimension "default"
-        }
     }
 
     packagingOptions {
@@ -123,7 +113,6 @@ static def getDate() {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':appthemehelper')
-    implementation project(':fonts')
     implementation 'androidx.multidex:multidex:2.0.1'
 
     implementation "androidx.gridlayout:gridlayout:1.0.0"

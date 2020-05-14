@@ -44,7 +44,7 @@
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="contentInsetStart">0dp</item>
         <item name="titleMarginStart">16dp</item>
-        <item name="android:fontFamily">@font/circular</item>
+
     </style>
 
 
@@ -58,18 +58,14 @@
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.0125</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:fontFamily">@font/circular</item>
     </style>
 
     <style name="ToolbarTextAppearanceNormal.Library" parent="ToolbarTextAppearanceNormal">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
-        </item>
+        <item name="android:textAppearance">@style/TextViewHeadline6</item>
     </style>
 
     <style name="BigTitleTextAppearanceToolbar">
-        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6
-        </item>
-        <item name="android:fontFamily">@font/circular_std_medium</item>
+        <item name="android:textAppearance">@style/TextViewHeadline6</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
@@ -85,10 +81,8 @@
     </style>
 
     <style name="BottomSheetItemTextAppearance" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="android:fontFamily">@font/circular</item>
         <item name="android:textSize">13sp</item>
     </style>
-
 
     <style name="Fab" parent="FabParent" />
 
@@ -110,59 +104,38 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-
-    </style>
+    <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
     <style name="TextViewNormal">
-        <item name="android:fontFamily">@font/circular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
-    <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewHeadline5" parent="TextAppearance.MaterialComponents.Headline5" />
 
-    <style name="TextViewCaption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewCaption" parent="TextAppearance.MaterialComponents.Caption" />
 
-    <style name="TextViewHeadline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewHeadline6" parent="TextAppearance.MaterialComponents.Headline6" />
 
-    <style name="TextViewHeadline3" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewHeadline3" parent="TextAppearance.MaterialComponents.Headline3" />
 
-    <style name="TextViewHeadline2" parent="TextAppearance.MaterialComponents.Headline2">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewHeadline2" parent="TextAppearance.MaterialComponents.Headline2" />
 
-    <style name="TextViewSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewSubtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" />
 
-    <style name="TextViewSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:fontFamily">@font/circular</item>
-    </style>
+    <style name="TextViewSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
 
     <style name="TextViewBody1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:fontFamily">@font/circular</item>
         <item name="lineHeightHint">24sp</item>
     </style>
 
     <style name="TextViewBody2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="android:fontFamily">@font/circular</item>
         <item name="lineHeightHint">24sp</item>
     </style>
 
     <style name="TextViewOverline" parent="TextAppearance.MaterialComponents.Overline">
-        <item name="android:fontFamily">@font/circular</item>
+
     </style>
 
     <style name="TopCornerCardView">

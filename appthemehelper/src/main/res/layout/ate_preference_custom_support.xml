@@ -42,7 +42,7 @@
             android:layout_alignParentLeft="true"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
-            android:fontFamily="@font/circular"
+
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:textColor="?android:attr/textColorPrimary"
@@ -57,7 +57,7 @@
             android:layout_alignStart="@android:id/title"
             android:layout_alignLeft="@android:id/title"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/circular"
+
             android:maxLines="4"
             android:textColor="?android:attr/textColorSecondary"
             tools:text="I have one solution for you.you can change font size for specific preference by managing layout file." />
