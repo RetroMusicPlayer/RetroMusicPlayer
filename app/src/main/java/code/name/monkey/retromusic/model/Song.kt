@@ -14,14 +14,9 @@
 package code.name.monkey.retromusic.model
 
 import android.os.Parcelable
-import code.name.monkey.retromusic.room.SongEntity
-import code.name.monkey.retromusic.room.SongQueueEntity
-import code.name.monkey.retromusic.room.playlist.PlaylistEntity
-import code.name.monkey.retromusic.room.playlist.PlaylistSongEntity
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-
 open class Song(
     val id: Int,
     val title: String,
@@ -39,57 +34,6 @@ open class Song(
 
 
     companion object {
-        fun toSongEntity(song: Song): SongQueueEntity {
-            return SongQueueEntity(
-                song.id,
-                song.title,
-                song.trackNumber,
-                song.year,
-                song.duration,
-                song.data,
-                song.dateModified,
-                song.albumId,
-                song.albumName,
-                song.artistId,
-                song.artistName,
-                song.composer
-            )
-        }
-
-        fun toSongQueueEntity(song: Song): SongEntity {
-            return SongEntity(
-                song.id,
-                song.title,
-                song.trackNumber,
-                song.year,
-                song.duration,
-                song.data,
-                song.dateModified,
-                song.albumId,
-                song.albumName,
-                song.artistId,
-                song.artistName,
-                song.composer
-            )
-        }
-
-        fun toPlaylistSong(song: Song, playlistEntity: PlaylistEntity): PlaylistSongEntity {
-            return PlaylistSongEntity(
-                playlistEntity.playlistId,
-                playlistEntity.playlistName, song.id,
-                song.title,
-                song.trackNumber,
-                song.year,
-                song.duration,
-                song.data,
-                song.dateModified,
-                song.albumId,
-                song.albumName,
-                song.artistId,
-                song.artistName,
-                song.composer
-            )
-        }
 
         @JvmStatic
         val emptySong = Song(
