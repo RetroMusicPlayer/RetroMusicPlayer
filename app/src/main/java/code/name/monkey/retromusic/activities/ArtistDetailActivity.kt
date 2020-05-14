@@ -248,14 +248,14 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         ArtistGlideRequest.Builder.from(Glide.with(this), artist).generatePalette(this).build()
             .dontAnimate().into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    setColors(colors.backgroundColor)
+                    setColors(colors)
                 }
             })
     }
 
-    private fun setColors(color: Int) {
+    private fun setColors(color: MediaNotificationProcessor) {
         val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
-            color.ripAlpha()
+            color.backgroundColor.ripAlpha()
         else
             ATHUtil.resolveColor(this, R.attr.colorSurface)
 

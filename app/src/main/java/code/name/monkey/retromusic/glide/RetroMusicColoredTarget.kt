@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.glide
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteTarget
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
@@ -33,8 +34,11 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
 
     override fun onLoadFailed(e: Exception?, errorDrawable: Drawable?) {
         super.onLoadFailed(e, errorDrawable)
-        val colors = MediaNotificationProcessor(getView().context, errorDrawable)
+       val colors = MediaNotificationProcessor(App.getContext(),errorDrawable)
         onColorReady(colors)
+        /* MediaNotificationProcessor(App.getContext()).getPaletteAsync({
+            onColorReady(it)
+        }, errorDrawable)*/
     }
 
     override fun onResourceReady(
@@ -42,8 +46,10 @@ abstract class RetroMusicColoredTarget(view: ImageView) : BitmapPaletteTarget(vi
         glideAnimation: GlideAnimation<in BitmapPaletteWrapper>?
     ) {
         super.onResourceReady(resource, glideAnimation)
-        resource?.let {
-            onColorReady(MediaNotificationProcessor(getView().context, it.bitmap))
+        resource?.let { bitmapWrap ->
+            MediaNotificationProcessor(App.getContext()).getPaletteAsync({
+                onColorReady(it)
+            }, bitmapWrap.bitmap)
         }
     }
 }

@@ -489,6 +489,7 @@ public class MediaNotificationProcessor {
         return primaryTextColor;
     }
 
+
     public interface OnPaletteLoadedListener {
         void onPaletteLoaded(MediaNotificationProcessor mediaNotificationProcessor);
     }
