@@ -100,13 +100,9 @@ public final class PreferenceUtil {
 
     public static final String USER_NAME = "user_name";
 
-    public static final String USER_BIO = "user_bio";
-
     public static final String TOGGLE_FULL_SCREEN = "toggle_full_screen";
 
     public static final String TOGGLE_VOLUME = "toggle_volume";
-
-    public static final String TOGGLE_TAB_TITLES = "toggle_tab_titles";
 
     public static final String ROUND_CORNERS = "corner_window";
 
@@ -141,11 +137,8 @@ public final class PreferenceUtil {
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LAST_PAGE = "last_start_page";
     private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
-    private static final String LAST_MUSIC_CHOOSER = "last_music_chooser";
-    private static final String DEFAULT_START_PAGE = "default_start_page";
     private static final String INITIALIZED_BLACKLIST = "initialized_blacklist";
     private static final String ARTIST_SORT_ORDER = "artist_sort_order";
-    private static final String ARTIST_SONG_SORT_ORDER = "artist_song_sort_order";
     private static final String ARTIST_ALBUM_SORT_ORDER = "artist_album_sort_order";
     private static final String ALBUM_SORT_ORDER = "album_sort_order";
     private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
@@ -154,10 +147,6 @@ public final class PreferenceUtil {
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
     private static final String ARTIST_GRID_SIZE = "artist_grid_size";
     private static final String ARTIST_GRID_SIZE_LAND = "artist_grid_size_land";
-    private static final String ALBUM_COLORED_FOOTERS = "album_colored_footers";
-    private static final String SONG_COLORED_FOOTERS = "song_colored_footers";
-    private static final String ARTIST_COLORED_FOOTERS = "artist_colored_footers";
-    private static final String ALBUM_ARTIST_COLORED_FOOTERS = "album_artist_colored_footers";
     private static final String COLORED_APP_SHORTCUTS = "colored_app_shortcuts";
     private static final String AUDIO_DUCKING = "audio_ducking";
     private static final String LAST_ADDED_CUTOFF = "last_added_interval";
@@ -165,25 +154,16 @@ public final class PreferenceUtil {
     private static final String NEXT_SLEEP_TIMER_ELAPSED_REALTIME = "next_sleep_timer_elapsed_real_time";
     private static final String IGNORE_MEDIA_STORE_ARTWORK = "ignore_media_store_artwork";
     private static final String LAST_CHANGELOG_VERSION = "last_changelog_version";
-    private static final String INTRO_SHOWN = "intro_shown";
     private static final String AUTO_DOWNLOAD_IMAGES_POLICY = "auto_download_images_policy";
     private static final String START_DIRECTORY = "start_directory";
-    private static final String SYNCHRONIZED_LYRICS_SHOW = "synchronized_lyrics_show";
     private static final String LOCK_SCREEN = "lock_screen";
     private static final String ALBUM_DETAIL_SONG_SORT_ORDER = "album_detail_song_sort_order";
-    private static final String ARTIST_DETAIL_SONG_SORT_ORDER = "artist_detail_song_sort_order";
     private static final String LYRICS_OPTIONS = "lyrics_tab_position";
     private static final String CHOOSE_EQUALIZER = "choose_equalizer";
     private static final String TOGGLE_SHUFFLE = "toggle_shuffle";
     private static final String SONG_GRID_STYLE = "song_grid_style";
-    private static final String TOGGLE_ANIMATIONS = "toggle_animations";
-    private static final String LAST_KNOWN_LYRICS_TYPE = "LAST_KNOWN_LYRICS_TYPE";
-    private static final String ALBUM_DETAIL_STYLE = "album_detail_style";
     private static final String PAUSE_ON_ZERO_VOLUME = "pause_on_zero_volume";
-    private static final String NOW_PLAYING_SCREEN = "now_playing_screen";
-    private static final String SNOW_FALL_EFFECT = "snow_fall_effect";
     private static final String FILTER_SONG = "filter_song";
-    private static final String TAG = "PreferenceUtil";
     private static final String EXPAND_NOW_PLAYING_PANEL = "expand_now_playing_panel";
     private static PreferenceUtil sInstance;
     private final SharedPreferences mPreferences;
@@ -231,18 +211,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(ALBUM_ART_ON_LOCKSCREEN, true);
     }
 
-    public final boolean albumArtistColoredFooters() {
-        return mPreferences.getBoolean(ALBUM_ARTIST_COLORED_FOOTERS, true);
-    }
-
-    public final boolean albumColoredFooters() {
-        return mPreferences.getBoolean(ALBUM_COLORED_FOOTERS, false);
-    }
-
-    public final boolean artistColoredFooters() {
-        return mPreferences.getBoolean(ARTIST_COLORED_FOOTERS, true);
-    }
-
     public final boolean audioDucking() {
         return mPreferences.getBoolean(AUDIO_DUCKING, true);
     }
@@ -277,10 +245,6 @@ public final class PreferenceUtil {
 
     public boolean desaturatedColor() {
         return mPreferences.getBoolean(DESATURATED_COLOR, false);
-    }
-
-    public boolean enableAnimations() {
-        return mPreferences.getBoolean(TOGGLE_ANIMATIONS, false);
     }
 
     public final boolean gaplessPlayback() {
@@ -339,21 +303,6 @@ public final class PreferenceUtil {
         edit.apply();
     }
 
-    public String getAlbumDetailsStyle() {
-        return mPreferences.getString(ALBUM_DETAIL_STYLE, "0");
-    }
-
-    public int getAlbumDetailsStyle(Context context) {
-        int pos = Integer.parseInt(Objects.requireNonNull(mPreferences.getString(ALBUM_DETAIL_STYLE, "0")));
-        TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_album_details_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
-        typedArray.recycle();
-        if (layoutRes == -1) {
-            return R.layout.activity_album;
-        }
-        return layoutRes;
-    }
-
     public final int getAlbumGridSize(@NonNull Context context) {
         return mPreferences
                 .getInt(ALBUM_GRID_SIZE, context.getResources().getInteger(R.integer.default_grid_columns));
@@ -395,17 +344,6 @@ public final class PreferenceUtil {
         return mPreferences.getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR);
     }
 
-    public String getArtistDetailSongSortOrder() {
-        return mPreferences
-                .getString(ARTIST_DETAIL_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
-    }
-
-    public void setArtistDetailSongSortOrder(String sortOrder) {
-        Editor edit = this.mPreferences.edit();
-        edit.putString(ARTIST_DETAIL_SONG_SORT_ORDER, sortOrder);
-        edit.apply();
-    }
-
     public final int getArtistGridSize(Context context) {
         return mPreferences.getInt(ARTIST_GRID_SIZE,
                 context.getResources().getInteger(R.integer.default_list_artist_columns));
@@ -423,10 +361,6 @@ public final class PreferenceUtil {
 
     public void setArtistGridStyle(@LayoutRes int artistGridStyle) {
         mPreferences.edit().putInt(ARTIST_GRID_STYLE, artistGridStyle).apply();
-    }
-
-    public final String getArtistSongSortOrder() {
-        return mPreferences.getString(ARTIST_SONG_SORT_ORDER, SortOrder.ArtistSongSortOrder.SONG_A_Z);
     }
 
     public final String getArtistSortOrder() {
@@ -461,10 +395,6 @@ public final class PreferenceUtil {
         return defaultCategoryInfos;
     }
 
-    public final int getDefaultStartPage() {
-        return Integer.parseInt(mPreferences.getString(DEFAULT_START_PAGE, "-1"));
-    }
-
     public float getDialogCorner() {
         return mPreferences.getInt(DIALOG_CORNER, 16);
     }
@@ -477,38 +407,27 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_FULL_SCREEN, false);
     }
 
-    public void setFullScreenMode(int newValue) {
-        mPreferences.edit().putInt(TOGGLE_FULL_SCREEN, newValue).apply();
-    }
-
-    public int getGeneralTheme() {
-        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "dark"));
-    }
-
-    public void setGeneralTheme(String theme) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(GENERAL_THEME, theme);
-        editor.apply();
-    }
-
     @NonNull
     public ThemeMode getGeneralThemeValue(boolean isSystemDark) {
-        String themeMode = mPreferences.getString(GENERAL_THEME, "dark");
+        String themeMode = mPreferences.getString(GENERAL_THEME, "auto");
         if (isBlackMode() && isSystemDark) {
             return ThemeMode.BLACK;
-        } else if (isBlackMode() && themeMode.equals("dark")) {
-            return ThemeMode.BLACK;
-        } else {
-            switch (themeMode) {
-                case "light":
-                    return ThemeMode.LIGHT;
-                case "dark":
-                    return ThemeMode.DARK;
-                case "auto":
-                default:
-                    return ThemeMode.AUTO;
+        } else if (themeMode != null) {
+            if (isBlackMode() && themeMode.equals("dark")) {
+                return ThemeMode.BLACK;
+            } else {
+                switch (themeMode) {
+                    case "light":
+                        return ThemeMode.LIGHT;
+                    case "dark":
+                        return ThemeMode.DARK;
+                    case "auto":
+                    default:
+                        return ThemeMode.AUTO;
+                }
             }
         }
+        return ThemeMode.AUTO;
     }
 
     public final String getGenreSortOrder() {
@@ -521,11 +440,15 @@ public final class PreferenceUtil {
 
     @LayoutRes
     public int getHomeGridStyle(@NonNull Context context) {
-        int pos = Integer.parseInt(mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0"));
+        String position = mPreferences.getString(HOME_ARTIST_GRID_STYLE, "0");
+        int pos = 0;
+        if (position != null) {
+            pos = Integer.parseInt(position);
+        }
         TypedArray typedArray = context.getResources().obtainTypedArray(R.array.pref_home_grid_style_layout);
-        int layoutRes = typedArray.getResourceId(pos, -1);
+        int layoutRes = typedArray.getResourceId(pos, 0);
         typedArray.recycle();
-        if (layoutRes == -1) {
+        if (layoutRes == 0) {
             return R.layout.item_artist;
         }
         return layoutRes;
@@ -533,37 +456,33 @@ public final class PreferenceUtil {
 
     public long getLastAddedCutoff() {
         final CalendarUtil calendarUtil = new CalendarUtil();
-        long interval;
-
-        switch (mPreferences.getString(LAST_ADDED_CUTOFF, "")) {
-            case "today":
-                interval = calendarUtil.getElapsedToday();
-                break;
-            case "this_week":
-                interval = calendarUtil.getElapsedWeek();
-                break;
-            case "past_three_months":
-                interval = calendarUtil.getElapsedMonths(3);
-                break;
-            case "this_year":
-                interval = calendarUtil.getElapsedYear();
-                break;
-            case "this_month":
-            default:
-                interval = calendarUtil.getElapsedMonth();
-                break;
+        long interval = calendarUtil.getElapsedMonth();
+        String cutOff = mPreferences.getString(LAST_ADDED_CUTOFF, "this_month");
+        if (cutOff != null) {
+            switch (cutOff) {
+                case "today":
+                    interval = calendarUtil.getElapsedToday();
+                    break;
+                case "this_week":
+                    interval = calendarUtil.getElapsedWeek();
+                    break;
+                case "past_three_months":
+                    interval = calendarUtil.getElapsedMonths(3);
+                    break;
+                case "this_year":
+                    interval = calendarUtil.getElapsedYear();
+                    break;
+                case "this_month":
+                default:
+                    interval = calendarUtil.getElapsedMonth();
+                    break;
+            }
         }
-
         return (System.currentTimeMillis() - interval) / 1000;
     }
 
     public final int getLastChangelogVersion() {
         return mPreferences.getInt(LAST_CHANGELOG_VERSION, -1);
-    }
-
-
-    public void setLastMusicChooser(int value) {
-        mPreferences.edit().putInt(LAST_MUSIC_CHOOSER, value).apply();
     }
 
     public final int getLastPage() {
@@ -702,8 +621,12 @@ public final class PreferenceUtil {
     }
 
     public final File getStartDirectory() {
-        return new File(mPreferences
-                .getString(START_DIRECTORY, FoldersFragment.getDefaultStartDirectory().getPath()));
+        String folderPath = FoldersFragment.getDefaultStartDirectory().getPath();
+        String file = mPreferences.getString(START_DIRECTORY, folderPath);
+        if (file != null) {
+            return new File(file);
+        }
+        return new File(FoldersFragment.getDefaultStartDirectory().getPath());
     }
 
     public void setStartDirectory(File file) {
@@ -714,7 +637,11 @@ public final class PreferenceUtil {
 
     @LabelVisibilityMode
     public int getTabTitleMode() {
-        int mode = Integer.parseInt(mPreferences.getString(TAB_TEXT_MODE, "1"));
+        String textMode = mPreferences.getString(TAB_TEXT_MODE, "1");
+        int mode = 0;
+        if (textMode != null) {
+            mode = Integer.parseInt(textMode);
+        }
         switch (mode) {
             default:
             case 1:
@@ -728,13 +655,6 @@ public final class PreferenceUtil {
         }
     }
 
-    public String getUserBio() {
-        return mPreferences.getString(USER_BIO, "");
-    }
-
-    public void setUserBio(String bio) {
-        mPreferences.edit().putString(USER_BIO, bio).apply();
-    }
 
     public String getUserName() {
         return mPreferences.getString(USER_NAME, "User");
@@ -756,16 +676,8 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(INITIALIZED_BLACKLIST, false);
     }
 
-    public final boolean introShown() {
-        return mPreferences.getBoolean(INTRO_SHOWN, false);
-    }
-
     private boolean isBlackMode() {
         return mPreferences.getBoolean(BLACK_THEME, false);
-    }
-
-    public boolean isClickOrSave() {
-        return mPreferences.getBoolean(NOW_PLAYING_SCREEN, false);
     }
 
 
@@ -773,9 +685,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_ADD_CONTROLS, false);
     }
 
-    public boolean isGenreShown() {
-        return mPreferences.getBoolean(TOGGLE_GENRE, false);
-    }
 
     public final boolean isHomeBanner() {
         return mPreferences.getBoolean(TOGGLE_HOME_BANNER, false);
@@ -793,9 +702,6 @@ public final class PreferenceUtil {
         return mPreferences.getBoolean(TOGGLE_SHUFFLE, false);
     }
 
-    public boolean isSnowFall() {
-        return mPreferences.getBoolean(SNOW_FALL_EFFECT, false);
-    }
 
     public boolean isSongInfo() {
         return mPreferences.getBoolean(EXTRA_SONG_INFO, false);
@@ -810,29 +716,11 @@ public final class PreferenceUtil {
         mPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
     }
 
-    public void resetCarouselEffect() {
-        mPreferences.edit().putBoolean(CAROUSEL_EFFECT, false).apply();
-    }
-
-    public void resetCircularAlbumArt() {
-        mPreferences.edit().putBoolean(CIRCULAR_ALBUM_ART, false).apply();
-    }
 
     public void saveProfileImage(String profileImagePath) {
         mPreferences.edit().putString(PROFILE_IMAGE_PATH, profileImagePath).apply();
     }
 
-    public void setAlbumArtistColoredFooters(final boolean value) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(ALBUM_ARTIST_COLORED_FOOTERS, value);
-        editor.apply();
-    }
-
-    public void setAlbumColoredFooters(final boolean value) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(ALBUM_COLORED_FOOTERS, value);
-        editor.apply();
-    }
 
     public void setAlbumGridSize(final int gridSize) {
         final SharedPreferences.Editor editor = mPreferences.edit();
@@ -846,11 +734,6 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
-    public void setArtistColoredFooters(final boolean value) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(ARTIST_COLORED_FOOTERS, value);
-        editor.apply();
-    }
 
     public void setArtistGridSize(final int gridSize) {
         final SharedPreferences.Editor editor = mPreferences.edit();
@@ -897,31 +780,14 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
-    @SuppressLint("CommitPrefEdits")
-    public void setIntroShown() {
-        // don't use apply here
-        mPreferences.edit().putBoolean(INTRO_SHOWN, true).commit();
-    }
-
     public void setLastChangeLogVersion(int version) {
         mPreferences.edit().putInt(LAST_CHANGELOG_VERSION, version).apply();
     }
 
-    public void setLastLyricsType(int group) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putInt(LAST_KNOWN_LYRICS_TYPE, group);
-        editor.apply();
-    }
 
     public void setNextSleepTimerElapsedRealtime(final long value) {
         final SharedPreferences.Editor editor = mPreferences.edit();
         editor.putLong(NEXT_SLEEP_TIMER_ELAPSED_REALTIME, value);
-        editor.apply();
-    }
-
-    public void setSongColoredFooters(final boolean value) {
-        final SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(SONG_COLORED_FOOTERS, value);
         editor.apply();
     }
 
@@ -936,11 +802,6 @@ public final class PreferenceUtil {
         editor.putInt(SONG_GRID_SIZE_LAND, gridSize);
         editor.apply();
     }
-
-    public final boolean songColoredFooters() {
-        return mPreferences.getBoolean(SONG_COLORED_FOOTERS, false);
-    }
-
 
     public void unregisterOnSharedPreferenceChangedListener(
             @NonNull OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {
