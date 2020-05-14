@@ -146,10 +146,8 @@
     </style>
 
     <style name="ClassicThemeOverLay">
-        <item name="cornerFamily">rounded</item>
+        <item name="cornerFamily">cut</item>
         <item name="cornerSize">0dp</item>
-        <item name="cornerSizeTopRight">8dp</item>
-        <item name="cornerSizeTopLeft">8dp</item>
     </style>
 
     <style name="TopCornerCardViewStyle" parent="@style/Widget.MaterialComponents.CardView">

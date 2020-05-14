@@ -16,7 +16,7 @@ enum class NowPlayingScreen constructor(
     BlurCard(R.string.blur_card, R.drawable.np_blur_card, 9),
     Card(R.string.card, R.drawable.np_card, 6),
     Circle(R.string.circle, R.drawable.np_minimalistic_circle, 15),
-    //Classic(R.string.classic, R.drawable.np_classic, 16),
+    Classic(R.string.classic, R.drawable.np_classic, 16),
     Color(R.string.color, R.drawable.np_color, 5),
     Fit(R.string.fit, R.drawable.np_fit, 12),
     Flat(R.string.flat, R.drawable.np_flat, 1),

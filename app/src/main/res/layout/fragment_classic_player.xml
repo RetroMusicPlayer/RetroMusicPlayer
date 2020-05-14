@@ -55,22 +55,14 @@
         </LinearLayout>
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/playbackControlsFragmentContainer"
+        <include
+            android:id="@+id/playerControlsContainer"
+            layout="@layout/fragment_classic_controls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="0dp"
-            app:cardElevation="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment">
-
-            <include
-                android:id="@+id/playerControlsContainer"
-                layout="@layout/fragment_classic_controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.card.MaterialCardView
@@ -80,7 +72,7 @@
         android:gravity="bottom"
         app:behavior_hideable="false"
         app:cardCornerRadius="0dp"
-        app:cardElevation="24dp"
+        app:cardElevation="12dp"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
         <LinearLayout
@@ -88,6 +80,38 @@
             android:layout_height="match_parent"
             android:background="?attr/colorSurface"
             android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:paddingHorizontal="16dp"
+                android:textAppearance="@style/TextViewBody1"
+                android:textColor="?android:attr/textColorSecondary"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@+id/songInfo"
+                app:layout_constraintTop_toBottomOf="@+id/titleContainer"
+                tools:text="@tools:sample/lorem/random" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/player_queue_sub_header"

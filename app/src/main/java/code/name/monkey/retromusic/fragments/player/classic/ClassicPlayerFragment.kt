@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.classic
 
+import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -7,6 +8,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -23,14 +26,15 @@ import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -74,6 +78,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 playerQueueSheet.contentPaddingRight,
                 playerQueueSheet.contentPaddingBottom
             )
+
             shapeDrawable.interpolation = 1 - slideOffset
         }
 
@@ -123,13 +128,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
 
-        playerQueueSheet.setOnTouchListener { _, _ ->
-            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
-                .setAllowDragging(false)
-            getQueuePanel().setAllowDragging(true)
-            return@setOnTouchListener false
-        }
-
         shapeDrawable = MaterialShapeDrawable(
             ShapeAppearanceModel.builder(
                 requireContext(),
@@ -139,6 +137,13 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         )
         shapeDrawable.fillColor = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         playerQueueSheet.background = shapeDrawable
+
+        playerQueueSheet.setOnTouchListener { _, _ ->
+            (requireActivity() as AbsSlidingMusicPanelActivity).getBottomSheetBehavior()
+                .setAllowDragging(false)
+            getQueuePanel().setAllowDragging(true)
+            return@setOnTouchListener false
+        }
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
@@ -264,12 +269,13 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
+
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
-         
-        title.setTextColor(color.primaryTextColor)
-        text.setTextColor(color.secondaryTextColor)
-        songInfo.setTextColor(color.secondaryTextColor)
+
+        playerContainer.setBackgroundColor(color.backgroundColor)
+        songInfo.setTextColor(color.primaryTextColor)
+        player_queue_sub_header.setTextColor(color.backgroundColor)
 
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)
@@ -277,10 +283,9 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
         volumeFragment?.setTintableColor(color.primaryTextColor)
 
-        player_queue_sub_header.setTextColor(color.secondaryTextColor)
-
         TintHelper.setTintAuto(playPauseButton, color.primaryTextColor, true)
         TintHelper.setTintAuto(playPauseButton, color.backgroundColor, false)
+
         updateRepeatState()
         updateShuffleState()
         updatePrevNextColor()
@@ -304,12 +309,16 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.valueTo = total.toFloat()
-        progressSlider.value = progress.toFloat()
+        progressSlider.max = total
+
+        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
+        animator.interpolator = LinearInterpolator()
+        animator.start()
+
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
-
 
     private fun updateQueuePosition() {
         playingQueueAdapter?.setCurrent(MusicPlayerRemote.position)
@@ -384,15 +393,17 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     fun setUpProgressSlider() {
-        progressSlider.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) {
-                MusicPlayerRemote.seekTo(value.toInt())
-                onUpdateProgressViews(
-                    MusicPlayerRemote.songProgressMillis,
-                    MusicPlayerRemote.songDurationMillis
-                )
+        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    MusicPlayerRemote.seekTo(progress)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
+                }
             }
-        }
+        })
     }
 
     private fun setUpPlayPauseFab() {

@@ -29,7 +29,6 @@ import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
-import code.name.monkey.retromusic.fragments.player.home.HomePlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
@@ -257,7 +256,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             Tiny -> TinyPlayerFragment()
             Peak -> PeakPlayerFragment()
             Circle -> CirclePlayerFragment()
-            //Classic -> ClassicPlayerFragment()
+            Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction()
@@ -325,9 +324,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(false)
-            } /*else if (cps == Classic  ) {
+            } else if (cps == Classic  ) {
                 super.setLightStatusbar(false)
-            }*/ else if (cps == Fit) {
+            } else if (cps == Fit) {
                 super.setLightStatusbar(false)
             } else {
                 super.setLightStatusbar(

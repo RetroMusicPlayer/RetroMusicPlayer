@@ -94,7 +94,7 @@ class AlbumCoverPagerAdapter(
                 Card,
                 Fit,
                 Tiny,
-                //Classic,
+                Classic,
                 Full -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.getInstance(requireContext()).carouselEffect()
