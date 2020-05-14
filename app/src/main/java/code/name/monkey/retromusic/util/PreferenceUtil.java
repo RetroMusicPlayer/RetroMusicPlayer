@@ -24,7 +24,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -419,14 +418,11 @@ public final class PreferenceUtil {
 
     @LayoutRes
     public int getArtistGridStyle() {
-        if (mPreferences.contains(ARTIST_GRID_STYLE)) {
-            Log.i(TAG, "getArtistGridStyle: " + mPreferences.getInt(ARTIST_GRID_STYLE, -10));
-        }
         return mPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid);
     }
 
-    public void setArtistGridStyle(int viewAs) {
-        mPreferences.edit().putInt(ARTIST_GRID_STYLE, viewAs).apply();
+    public void setArtistGridStyle(@LayoutRes int artistGridStyle) {
+        mPreferences.edit().putInt(ARTIST_GRID_STYLE, artistGridStyle).apply();
     }
 
     public final String getArtistSongSortOrder() {
