@@ -83,9 +83,9 @@ class AlbumCoverPagerAdapter(
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
-            /*albumCover.setOnClickListener {
+            albumCover.setOnClickListener {
                 NavigationUtil.goToLyrics(requireActivity())
-            }*/
+            }
             return view
         }
 
@@ -94,7 +94,7 @@ class AlbumCoverPagerAdapter(
                 Card,
                 Fit,
                 Tiny,
-                Classic,
+                //Classic,
                 Full -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.getInstance(requireContext()).carouselEffect()

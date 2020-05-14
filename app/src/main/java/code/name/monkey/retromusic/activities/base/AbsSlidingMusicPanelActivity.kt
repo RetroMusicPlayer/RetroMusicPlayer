@@ -257,7 +257,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             Tiny -> TinyPlayerFragment()
             Peak -> PeakPlayerFragment()
             Circle -> CirclePlayerFragment()
-            Classic -> ClassicPlayerFragment()
+            //Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction()
@@ -325,9 +325,9 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(false)
-            } else if (cps == Classic  ) {
+            } /*else if (cps == Classic  ) {
                 super.setLightStatusbar(false)
-            } else if (cps == Fit) {
+            }*/ else if (cps == Fit) {
                 super.setLightStatusbar(false)
             } else {
                 super.setLightStatusbar(
