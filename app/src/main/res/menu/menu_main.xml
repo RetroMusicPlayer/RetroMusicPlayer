@@ -22,7 +22,7 @@
         android:id="@+id/action_grid_size"
         android:icon="@drawable/ic_grid_size_white_24dp"
         android:title="@string/action_grid_size"
-        android:orderInCategory="2"
+        android:orderInCategory="5"
         app:showAsAction="ifRoom">
         <menu>
             <group
@@ -87,7 +87,7 @@
         </menu>
     </item>
     <item
-        android:orderInCategory="5"
+        android:orderInCategory="2"
         android:id="@+id/action_sort_order"
         android:icon="@drawable/ic_sort_white_24dp"
         android:title="@string/action_sort_order"
