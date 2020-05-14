@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -8,33 +8,38 @@
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imageContainer"
         android:layout_width="112dp"
         android:layout_height="156dp"
-        android:layout_margin="4dp"
+        android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
-            app:srcCompat="@drawable/default_album_art"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
+            app:srcCompat="@drawable/default_album_art"
             tools:src="@tools:sample/avatars" />
     </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingStart="12dp"
-        android:paddingEnd="8dp"
-        android:paddingBottom="4dp"
+        android:padding="8dp"
         android:textAppearance="@style/TextViewNormal"
         android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageContainer"
         tools:ignore="MissingPrefix"
         tools:text="@tools:sample/full_names" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

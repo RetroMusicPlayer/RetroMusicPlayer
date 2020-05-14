@@ -5,27 +5,33 @@
     android:id="@+id/imageContainerCard"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:background="?attr/rectSelector"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="112dp"
             android:layout_height="156dp"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <FrameLayout
             android:id="@+id/paletteColorContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title"
@@ -33,9 +39,8 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="8dp"
                 android:textAppearance="@style/TextViewNormal"
                 tools:text="@string/home" />
         </FrameLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

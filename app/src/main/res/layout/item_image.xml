@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
@@ -8,12 +8,17 @@
     android:orientation="vertical">
 
     <code.name.monkey.retromusic.views.WidthFitSquareCardView
+        android:id="@+id/imageContainer"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
-        app:cardPreventCornerOverlap="true">
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
@@ -26,11 +31,14 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="8dp"
         android:textAppearance="@style/TextViewNormal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageContainer"
         tools:text="Song name" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

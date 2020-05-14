@@ -16,7 +16,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="128dp"
     android:layout_height="128dp"
-
     android:layout_margin="4dp"
     app:cardCornerRadius="16dp">
 
@@ -24,7 +23,8 @@
         android:id="@+id/paletteColorContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/artist_card_gradient_effect">
+        android:background="@drawable/artist_card_gradient_effect"
+        tools:backgroundTint="@color/md_red_500">
 
         <code.name.monkey.retromusic.views.RetroShapeableImageView
             android:id="@+id/image"

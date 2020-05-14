@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="2dp"
+    android:layout_margin="4dp"
     android:background="?attr/rectSelector"
     android:clickable="true"
     android:focusable="true"
@@ -14,56 +14,53 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
         tools:ignore="MissingPrefix">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/paletteColorContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?rectSelector"
-            android:gravity="center"
-            android:orientation="vertical"
-            tools:ignore="UnusedAttribute,UselessParent">
+            android:layout_height="wrap_content">
 
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@tools:sample/avatars" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription"
-                    tools:src="@tools:sample/avatars" />
 
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                android:padding="12dp">
+                android:paddingHorizontal="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="4dp"
+                android:singleLine="true"
+                android:textAppearance="@style/TextViewSubtitle1"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/image"
+                tools:text="@string/bug_report_summary" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:textAppearance="@style/TextViewSubtitle1"
-                    android:textStyle="bold"
-                    tools:text="@string/bug_report_summary" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp"
+                android:paddingBottom="8dp"
+                android:singleLine="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="@string/bug_report_summary" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="4dp"
-                    android:singleLine="true"
-                    tools:text="@string/bug_report_summary" />
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

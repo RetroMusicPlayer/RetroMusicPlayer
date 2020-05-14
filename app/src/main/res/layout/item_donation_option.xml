@@ -8,11 +8,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         app:cardCornerRadius="8dp"
-        app:cardUseCompatPadding="true"
         app:contentPadding="12dp">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -25,23 +25,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:textAppearance="@style/TextViewBody2"
+                android:textAppearance="@style/TextViewSubtitle1"
                 android:textStyle="bold"
-                tools:ignore="MissingPrefix" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="$9" />
 
-            <code.name.monkey.retromusic.views.WidthFitSquareLayout
-                android:layout_width="36dp"
-                android:layout_height="36dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/itemImage"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemPrice"
+                app:srcCompat="@drawable/ic_github_circle_white_24dp"
+                app:tint="?attr/colorControlNormal" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/itemImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_github_circle_white_24dp"
-                    app:tint="?attr/colorControlNormal" />
-
-            </code.name.monkey.retromusic.views.WidthFitSquareLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/itemTitle"
@@ -49,6 +51,9 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@style/TextViewBody2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemImage"
                 tools:text="@tools:sample/full_names" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -56,7 +61,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextViewBody1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/itemTitle"
                 tools:text="@tools:sample/full_names" />
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

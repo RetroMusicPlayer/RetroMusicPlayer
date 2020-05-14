@@ -2,7 +2,6 @@ package code.name.monkey.retromusic.adapter.artist
 
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -66,12 +65,12 @@ class ArtistAdapter(
     }
 
     fun setColors(processor: MediaNotificationProcessor, holder: ViewHolder) {
+        holder.mask?.backgroundTintList = ColorStateList.valueOf(processor.primaryTextColor)
         if (holder.paletteColorContainer != null) {
             holder.paletteColorContainer?.setBackgroundColor(processor.backgroundColor)
             holder.title?.setTextColor(processor.primaryTextColor)
         }
         holder.imageContainerCard?.setCardBackgroundColor(processor.backgroundColor)
-        holder.mask?.backgroundTintList = ColorStateList.valueOf(processor.backgroundColor)
     }
 
     private fun loadArtistImage(artist: Artist, holder: ViewHolder) {
@@ -82,11 +81,6 @@ class ArtistAdapter(
             .generatePalette(activity)
             .build()
             .into(object : RetroMusicColoredTarget(holder.image!!) {
-                override fun onLoadCleared(placeholder: Drawable?) {
-                    super.onLoadCleared(placeholder)
-                    //setColors(defaultFooterColor, holder)
-                }
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     setColors(colors, holder)
                 }

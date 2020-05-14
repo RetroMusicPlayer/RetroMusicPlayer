@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
+    android:layout_margin="2dp"
     android:background="?rectSelector"
     android:clickable="true"
     android:focusable="true"
+    android:padding="4dp"
     tools:ignore="MissingPrefix">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:ignore="UnusedAttribute,UselessParent">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imageContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <code.name.monkey.retromusic.views.RetroShapeableImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            app:retroCornerSize="8dp"
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="8dp">
+    </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textStyle="bold"
-                tools:text="@string/bug_report_summary" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
+        android:textAppearance="@style/TextViewSubtitle1"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageContainer"
+        tools:text="@tools:sample/lorem/random" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="4dp"
-                android:singleLine="true"
-                android:textColor="?android:attr/textColorSecondary"
-                tools:text="@string/bug_report_summary" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp"
+        android:paddingBottom="8dp"
+        android:singleLine="true"
+        android:textColor="?android:attr/textColorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:text="@tools:sample/lorem/random" />
 
-        </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
