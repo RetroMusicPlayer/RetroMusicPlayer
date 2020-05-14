@@ -27,13 +27,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/shadow_down_strong"
-            app:layout_constraintBottom_toBottomOf="@id/dummy_statusbar_actionbar"
+            app:layout_constraintBottom_toBottomOf="@id/toolbarContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dummy_statusbar_actionbar" />
+            app:layout_constraintTop_toTopOf="@id/toolbarContainer" />
 
         <LinearLayout
-            android:id="@+id/dummy_statusbar_actionbar"
+            android:id="@+id/toolbarContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

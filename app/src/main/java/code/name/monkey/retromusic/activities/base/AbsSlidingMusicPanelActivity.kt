@@ -1,7 +1,6 @@
 package code.name.monkey.retromusic.activities.base
 
 import android.animation.ValueAnimator
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -30,6 +29,7 @@ import code.name.monkey.retromusic.fragments.player.color.ColorFragment
 import code.name.monkey.retromusic.fragments.player.fit.FitFragment
 import code.name.monkey.retromusic.fragments.player.flat.FlatPlayerFragment
 import code.name.monkey.retromusic.fragments.player.full.FullPlayerFragment
+import code.name.monkey.retromusic.fragments.player.home.HomePlayerFragment
 import code.name.monkey.retromusic.fragments.player.material.MaterialFragment
 import code.name.monkey.retromusic.fragments.player.normal.PlayerFragment
 import code.name.monkey.retromusic.fragments.player.peak.PeakPlayerFragment
@@ -190,7 +190,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 slidingPanel.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                if (cps != PEAK) {
+                if (cps != Peak) {
                     val params = slidingPanel.layoutParams as ViewGroup.LayoutParams
                     params.height = ViewGroup.LayoutParams.MATCH_PARENT
                     slidingPanel.layoutParams = params
@@ -242,22 +242,22 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
         cps = PreferenceUtil.getInstance(this).nowPlayingScreen
 
         val fragment: Fragment = when (cps) {
-            BLUR -> BlurPlayerFragment()
-            ADAPTIVE -> AdaptiveFragment()
-            NORMAL -> PlayerFragment()
-            CARD -> CardFragment()
-            BLUR_CARD -> CardBlurFragment()
-            FIT -> FitFragment()
-            FLAT -> FlatPlayerFragment()
-            FULL -> FullPlayerFragment()
-            PLAIN -> PlainPlayerFragment()
-            SIMPLE -> SimplePlayerFragment()
-            MATERIAL -> MaterialFragment()
-            COLOR -> ColorFragment()
-            TINY -> TinyPlayerFragment()
-            PEAK -> PeakPlayerFragment()
-            CIRCLE -> CirclePlayerFragment()
-            CLASSIC -> ClassicPlayerFragment()
+            Blur -> BlurPlayerFragment()
+            Adaptive -> AdaptiveFragment()
+            Normal -> PlayerFragment()
+            Card -> CardFragment()
+            BlurCard -> CardBlurFragment()
+            Fit -> FitFragment()
+            Flat -> FlatPlayerFragment()
+            Full -> FullPlayerFragment()
+            Plain -> PlainPlayerFragment()
+            Simple -> SimplePlayerFragment()
+            Material -> MaterialFragment()
+            Color -> ColorFragment()
+            Tiny -> TinyPlayerFragment()
+            Peak -> PeakPlayerFragment()
+            Circle -> CirclePlayerFragment()
+            Classic -> ClassicPlayerFragment()
             else -> PlayerFragment()
         } // must implement AbsPlayerFragment
         supportFragmentManager.beginTransaction()
@@ -310,24 +310,24 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
 
-            if (PreferenceUtil.getInstance(this).adaptiveColor && (cps == NORMAL || cps == FLAT)) {
+            if (PreferenceUtil.getInstance(this).adaptiveColor && (cps == Normal || cps == Flat)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
-            } else if (cps == CARD || cps == BLUR || cps == BLUR_CARD) {
+            } else if (cps == Card || cps == Blur || cps == BlurCard) {
                 super.setLightStatusbar(false)
                 super.setLightNavigationBar(true)
                 super.setNavigationbarColor(Color.BLACK)
-            } else if (cps == COLOR || cps == TINY) {
+            } else if (cps == Color || cps == Tiny) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(isColorLight)
-            } else if (cps == FULL) {
+            } else if (cps == Full) {
                 super.setNavigationbarColor(paletteColor)
                 super.setLightNavigationBar(isColorLight)
                 super.setLightStatusbar(false)
-            } else if (cps == CLASSIC) {
+            } else if (cps == Classic  ) {
                 super.setLightStatusbar(false)
-            } else if (cps == FIT) {
+            } else if (cps == Fit) {
                 super.setLightStatusbar(false)
             } else {
                 super.setLightStatusbar(
@@ -386,8 +386,4 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
             bottomNavigationView.hide()
         }
     }
-}
-
-fun Context.dim(dimen: Int) {
-
 }

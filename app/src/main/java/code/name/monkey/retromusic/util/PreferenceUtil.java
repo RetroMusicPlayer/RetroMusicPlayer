@@ -641,7 +641,7 @@ public final class PreferenceUtil {
                 return nowPlayingScreen;
             }
         }
-        return NowPlayingScreen.ADAPTIVE;
+        return NowPlayingScreen.Adaptive;
     }
 
     @SuppressLint("CommitPrefEdits")

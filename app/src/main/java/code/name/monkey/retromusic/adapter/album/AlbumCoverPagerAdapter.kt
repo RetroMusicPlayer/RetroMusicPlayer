@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
-import code.name.monkey.retromusic.fragments.NowPlayingScreen
+import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
@@ -83,19 +83,19 @@ class AlbumCoverPagerAdapter(
         ): View? {
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
-            albumCover.setOnClickListener {
+            /*albumCover.setOnClickListener {
                 NavigationUtil.goToLyrics(requireActivity())
-            }
+            }*/
             return view
         }
 
         private fun getLayoutWithPlayerTheme(): Int {
             return when (PreferenceUtil.getInstance(requireContext()).nowPlayingScreen) {
-                NowPlayingScreen.CARD,
-                NowPlayingScreen.FIT,
-                NowPlayingScreen.TINY,
-                NowPlayingScreen.CLASSIC,
-                NowPlayingScreen.FULL -> R.layout.fragment_album_full_cover
+                Card,
+                Fit,
+                Tiny,
+                Classic,
+                Full -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.getInstance(requireContext()).carouselEffect()
                     ) {

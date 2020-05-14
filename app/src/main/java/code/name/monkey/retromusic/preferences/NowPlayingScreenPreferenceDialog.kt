@@ -171,14 +171,14 @@ private class NowPlayingScreenAdapter(private val context: Context) : PagerAdapt
 }
 
 private fun isNowPlayingThemes(screen: NowPlayingScreen): Boolean {
-    return (screen == FULL ||
-            screen == CARD ||
-            screen == PLAIN ||
-            screen == BLUR ||
-            screen == COLOR ||
-            screen == SIMPLE ||
-            screen == BLUR_CARD ||
-            screen == CIRCLE ||
-            screen == ADAPTIVE)
+    return (screen == Full ||
+            screen == Card ||
+            screen == Plain ||
+            screen == Blur ||
+            screen == Color ||
+            screen == Simple ||
+            screen == BlurCard ||
+            screen == Circle ||
+            screen == Adaptive)
             && !App.isProVersion()
 }
