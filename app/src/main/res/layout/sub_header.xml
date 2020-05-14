@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="start"
     android:gravity="start"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
     android:textAppearance="@style/TextViewHeadline6"
     android:textStyle="bold"
-    tools:text="@tools:sample/lorem" />
+    tools:text="@tools:sample/full_names" />
