@@ -20,14 +20,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.extensions.ripAlpha
-import code.name.monkey.retromusic.extensions.setRange
-import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -36,6 +33,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_peak_control_player.*
 
 /**
@@ -85,9 +83,20 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun hide() {
     }
 
-    override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
-        if (ColorUtil.isColorLight(colorBg)) {
+    fun setDark(color: MediaNotificationProcessor) {
+        val controlsColor =
+            if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
+                color.secondaryTextColor
+            } else {
+                ThemeStore.accentColor(requireContext())
+            }
+        ViewUtil.setProgressDrawable(progressSlider, controlsColor, true)
+        volumeFragment?.setTintableColor(controlsColor)
+        playPauseButton.setColorFilter(controlsColor, PorterDuff.Mode.SRC_IN)
+        nextButton.setColorFilter(controlsColor, PorterDuff.Mode.SRC_IN)
+        previousButton.setColorFilter(controlsColor, PorterDuff.Mode.SRC_IN)
+
+        if (!ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
@@ -98,20 +107,11 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
             lastDisabledPlaybackControlsColor =
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
-
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            lastPlaybackControlsColor = color
-            color
-        } else {
-            textColorSecondary(requireContext())
-        }.ripAlpha()
-
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
-        volumeFragment?.setTintableColor(colorFinal)
-        playPauseButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
         updateRepeatState()
         updateShuffleState()
-        updatePrevNextColor()
+    }
+
+    override fun setDark(color: Int) {
     }
 
     private fun updatePlayPauseDrawableState() {
@@ -228,4 +228,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun onShuffleModeChanged() {
         updateShuffleState()
     }
+
+
 }

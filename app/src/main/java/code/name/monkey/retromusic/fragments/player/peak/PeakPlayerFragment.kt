@@ -101,7 +101,6 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         get() = lastColor
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        controlsFragment.setDark(color.primaryTextColor)
         lastColor = color.primaryTextColor
         callbacks?.onPaletteColorChanged()
     }
@@ -127,7 +126,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
             .build()
             .into(object : RetroMusicColoredTarget(playerImage) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    controlsFragment.setDark(colors.primaryTextColor)
+                    controlsFragment.setDark(colors)
                 }
             })
     }

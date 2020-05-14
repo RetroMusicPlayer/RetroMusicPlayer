@@ -25,7 +25,6 @@ class TinyPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setDark(color: Int) {
-
         if (ColorUtil.isColorLight(color)) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryTextColor(requireContext(), true)

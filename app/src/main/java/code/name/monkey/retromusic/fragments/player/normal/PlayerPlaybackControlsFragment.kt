@@ -1,7 +1,5 @@
 package code.name.monkey.retromusic.fragments.player.normal
 
-import android.content.SharedPreferences
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -27,8 +25,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import kotlinx.android.synthetic.main.fragment_player_playback_controls.*
 
-class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(),
-    OnSharedPreferenceChangeListener {
+class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
@@ -58,7 +55,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(),
             showBonceAnimation(playPauseButton)
         }
         title.isSelected = true
-        PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
+
     }
 
     override fun setDark(color: Int) {
@@ -252,18 +249,5 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment(),
                 )
             }
         }
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-
-        if (key == PreferenceUtil.EXTRA_SONG_INFO) {
-            if (activity != null) updateSong()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        PreferenceUtil.getInstance(requireContext())
-            .unregisterOnSharedPreferenceChangedListener(this)
     }
 }

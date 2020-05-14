@@ -382,8 +382,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 key.equals(PreferenceUtil.TOGGLE_HOME_BANNER) || key.equals(PreferenceUtil.TOGGLE_ADD_CONTROLS) ||
                 key.equals(PreferenceUtil.ALBUM_COVER_STYLE) || key.equals(PreferenceUtil.HOME_ARTIST_GRID_STYLE) ||
                 key.equals(PreferenceUtil.ALBUM_COVER_TRANSFORM) || key.equals(PreferenceUtil.DESATURATED_COLOR) ||
-                key.equals(PreferenceUtil.TAB_TEXT_MODE) || key.equals(PreferenceUtil.LANGUAGE_NAME) ||
-                key.equals(PreferenceUtil.LIBRARY_CATEGORIES)
+                key.equals(PreferenceUtil.EXTRA_SONG_INFO) || key.equals(PreferenceUtil.TAB_TEXT_MODE) ||
+                key.equals(PreferenceUtil.LANGUAGE_NAME) || key.equals(PreferenceUtil.LIBRARY_CATEGORIES)
         ) {
             postRecreate();
         }
