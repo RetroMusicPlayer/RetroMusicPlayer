@@ -173,7 +173,10 @@ public final class PreferenceUtil {
             case "only_wifi":
                 final ConnectivityManager connectivityManager = (ConnectivityManager) context
                         .getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
+                NetworkInfo netInfo = null;
+                if (connectivityManager != null) {
+                    netInfo = connectivityManager.getActiveNetworkInfo();
+                }
                 return netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI && netInfo
                         .isConnectedOrConnecting();
             case "never":
