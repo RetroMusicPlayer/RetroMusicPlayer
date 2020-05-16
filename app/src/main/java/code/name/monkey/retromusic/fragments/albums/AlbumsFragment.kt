@@ -15,7 +15,7 @@ class AlbumsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    lateinit var albumViewModel: AlbumViewModel
+    private lateinit var albumViewModel: AlbumViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

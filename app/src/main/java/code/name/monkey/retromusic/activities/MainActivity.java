@@ -100,10 +100,16 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     public static final int APP_INTRO_REQUEST = 100;
     public static final String EXPAND_PANEL = "expand_panel";
     private static final int APP_UPDATE_REQUEST_CODE = 9002;
+    private final IntentFilter mIntentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
+    private MainActivityFragmentCallbacks currentFragment;
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action = intent.getAction();
+            Log.i(TAG, "onReceive: " + action);
+            if (action != null && action.equals(MusicService.MEDIA_STORE_CHANGED)) {
+                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG, true);
+            }
             if (action != null && action.equals(Intent.ACTION_SCREEN_OFF)) {
                 if (PreferenceUtil.getInstance(context).getLockScreen() && MusicPlayerRemote.isPlaying()) {
                     final Intent activity = new Intent(context, LockScreenActivity.class);
@@ -114,8 +120,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             }
         }
     };
-    private final IntentFilter mIntentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-    private MainActivityFragmentCallbacks currentFragment;
     private boolean blockRequestPermissions = false;
     private MaterialCab cab;
     private AppBarLayout mAppBarLayout;
@@ -177,6 +181,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             selectedFragment(item.getItemId());
             return true;
         });
+        mIntentFilter.addAction(MusicService.MEDIA_STORE_CHANGED);
     }
 
 
@@ -208,8 +213,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             blockRequestPermissions = false;
             if (!hasPermissions()) {
                 requestPermissions();
-            } else {
-                selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
             }
         } else if (requestCode == APP_UPDATE_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
@@ -412,12 +415,14 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         mAppBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    public void setCurrentFragment(@NonNull Fragment fragment, @NonNull String tag) {
+    public void setCurrentFragment(@NonNull Fragment fragment, @NonNull String tag, boolean force) {
         String currentTag = null;
         if (getSupportFragmentManager().findFragmentByTag(tag) != null) {
             currentTag = getSupportFragmentManager().findFragmentByTag(tag).getTag();
         }
-
+        if (force) {
+            currentTag = null;
+        }
         if (!tag.equals(currentTag)) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -681,29 +686,29 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private void selectedFragment(final int itemId) {
         switch (itemId) {
             case R.id.action_album:
-                setCurrentFragment(AlbumsFragment.newInstance(), AlbumsFragment.TAG);
+                setCurrentFragment(AlbumsFragment.newInstance(), AlbumsFragment.TAG, false);
                 break;
             case R.id.action_artist:
-                setCurrentFragment(ArtistsFragment.newInstance(), ArtistsFragment.TAG);
+                setCurrentFragment(ArtistsFragment.newInstance(), ArtistsFragment.TAG, false);
                 break;
             case R.id.action_playlist:
-                setCurrentFragment(PlaylistsFragment.newInstance(), PlaylistsFragment.TAG);
+                setCurrentFragment(PlaylistsFragment.newInstance(), PlaylistsFragment.TAG, false);
                 break;
             case R.id.action_genre:
-                setCurrentFragment(GenresFragment.newInstance(), GenresFragment.TAG);
+                setCurrentFragment(GenresFragment.newInstance(), GenresFragment.TAG, false);
                 break;
             case R.id.action_playing_queue:
-                setCurrentFragment(PlayingQueueFragment.newInstance(), PlayingQueueFragment.TAG);
+                setCurrentFragment(PlayingQueueFragment.newInstance(), PlayingQueueFragment.TAG, false);
                 break;
             case R.id.action_song:
-                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG);
+                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG, false);
                 break;
             case R.id.action_folder:
-                setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG);
+                setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG, false);
                 break;
             default:
             case R.id.action_home:
-                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG);
+                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG,false);
                 break;
         }
     }

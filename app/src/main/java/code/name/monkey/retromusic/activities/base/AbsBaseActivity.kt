@@ -63,6 +63,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
 
     protected open fun onHasPermissionsChanged(hasPermissions: Boolean) {
         // implemented by sub classes
+        println(hasPermissions)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent): Boolean {
@@ -136,7 +137,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                 }
             }
             hadPermissions = true
-            onHasPermissionsChanged(true)
+             onHasPermissionsChanged(true)
         }
     }
 

@@ -17,7 +17,7 @@ class SongsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    lateinit var songViewModel: SongsViewModel
+    private lateinit var songViewModel: SongsViewModel
 
     override val emptyMessage: Int
         get() = R.string.no_songs

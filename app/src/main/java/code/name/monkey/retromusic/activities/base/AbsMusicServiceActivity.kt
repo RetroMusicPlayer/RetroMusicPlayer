@@ -133,6 +133,7 @@ abstract class AbsMusicServiceActivity : AbsBaseActivity(), MusicServiceEventLis
             true
         ) // just in case we need to know this at some point
         sendBroadcast(intent)
+        println("sendBroadcast $hasPermissions")
     }
 
     override fun getPermissionsToRequest(): Array<String> {
