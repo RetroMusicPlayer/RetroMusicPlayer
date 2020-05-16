@@ -336,7 +336,7 @@ public final class PreferenceUtil {
 
     @LayoutRes
     public int getArtistGridStyle() {
-        return mPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid);
+        return mPreferences.getInt(ARTIST_GRID_STYLE, R.layout.item_grid_circle);
     }
 
     public void setArtistGridStyle(@LayoutRes int artistGridStyle) {
