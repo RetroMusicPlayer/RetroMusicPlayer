@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
         android:padding="8dp"
         android:textAppearance="@style/TextViewNormal"
         android:textColor="?android:attr/textColorPrimary"
@@ -41,5 +41,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageContainer"
         tools:ignore="MissingPrefix"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/lorem/random" />
 </androidx.constraintlayout.widget.ConstraintLayout>

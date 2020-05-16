@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/about_card_radius"
-    app:cardUseCompatPadding="true">
+    android:layout_margin="4dp"
+    app:cardCornerRadius="@dimen/about_card_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             android:id="@+id/sb2"
@@ -107,6 +106,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bugReportLink"
             app:listItemIcon="@drawable/ic_share_white_24dp"
+            app:listItemSummary="@string/share_summary"
             app:listItemTitle="@string/action_share" />
 
         <code.name.monkey.retromusic.views.ListItemView
@@ -119,6 +119,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appShare"
             app:listItemIcon="@drawable/ic_help_white_24dp"
+            app:listItemSummary="@string/help_summary"
             app:listItemTitle="@string/faq" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

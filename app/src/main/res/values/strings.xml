@@ -851,6 +851,8 @@
     <string name="translators">Translators</string>
     <string name="translators_summary">The people who helped translate this app</string>
     <string name="try_retro_music_premium">Try Retro Music Premium</string>
+    <string name="share_summary">Share the app with your friends and family</string>
+    <string name="help_summary">Need more help?</string>
 
     <plurals name="albumSongs">
         <item quantity="one">Song</item>

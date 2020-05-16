@@ -45,7 +45,6 @@ import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle;
 import code.name.monkey.retromusic.fragments.NowPlayingScreen;
 import code.name.monkey.retromusic.fragments.mainactivity.FoldersFragment;
-import code.name.monkey.retromusic.helper.SortOrder;
 import code.name.monkey.retromusic.helper.SortOrder.AlbumSongSortOrder;
 import code.name.monkey.retromusic.model.CategoryInfo;
 import code.name.monkey.retromusic.model.CategoryInfo.Category;
@@ -58,6 +57,13 @@ import code.name.monkey.retromusic.transform.VerticalFlipTransformation;
 import code.name.monkey.retromusic.transform.VerticalStackTransformer;
 import code.name.monkey.retromusic.util.theme.ThemeMode;
 
+import static code.name.monkey.retromusic.helper.SortOrder.AlbumSortOrder;
+import static code.name.monkey.retromusic.helper.SortOrder.ArtistAlbumSortOrder;
+import static code.name.monkey.retromusic.helper.SortOrder.ArtistSongSortOrder;
+import static code.name.monkey.retromusic.helper.SortOrder.ArtistSortOrder;
+import static code.name.monkey.retromusic.helper.SortOrder.GenreSortOrder;
+import static code.name.monkey.retromusic.helper.SortOrder.SongSortOrder;
+
 public final class PreferenceUtil {
 
     public static final String LIBRARY_CATEGORIES = "library_categories";
@@ -67,73 +73,41 @@ public final class PreferenceUtil {
     public static final String DESATURATED_COLOR = "desaturated_color";
 
     public static final String BLACK_THEME = "black_theme";
-
-    public static final String DIALOG_CORNER = "dialog_corner";
-
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
-
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
-
     public static final String NOW_PLAYING_SCREEN_ID = "now_playing_screen_id";
-
     public static final String CAROUSEL_EFFECT = "carousel_effect";
-
     public static final String COLORED_NOTIFICATION = "colored_notification";
-
     public static final String CLASSIC_NOTIFICATION = "classic_notification";
-
     public static final String GAPLESS_PLAYBACK = "gapless_playback";
-
     public static final String ALBUM_ART_ON_LOCKSCREEN = "album_art_on_lockscreen";
-
     public static final String BLURRED_ALBUM_ART = "blurred_album_art";
-
     public static final String NEW_BLUR_AMOUNT = "new_blur_amount";
-
-    public static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
-
     public static final String TOGGLE_HEADSET = "toggle_headset";
-
     public static final String GENERAL_THEME = "general_theme";
-
     public static final String CIRCULAR_ALBUM_ART = "circular_album_art";
-
     public static final String USER_NAME = "user_name";
-
     public static final String TOGGLE_FULL_SCREEN = "toggle_full_screen";
-
     public static final String TOGGLE_VOLUME = "toggle_volume";
-
     public static final String ROUND_CORNERS = "corner_window";
-
     public static final String TOGGLE_GENRE = "toggle_genre";
-
     public static final String PROFILE_IMAGE_PATH = "profile_image_path";
-
     public static final String BANNER_IMAGE_PATH = "banner_image_path";
-
     public static final String ADAPTIVE_COLOR_APP = "adaptive_color_app";
-
     public static final String TOGGLE_SEPARATE_LINE = "toggle_separate_line";
-
-    public static final String ALBUM_GRID_STYLE = "album_grid_style_home";
-
     public static final String HOME_ARTIST_GRID_STYLE = "home_artist_grid_style";
-
-    public static final String ARTIST_GRID_STYLE = "artist_grid_style_home";
-
     public static final String TOGGLE_ADD_CONTROLS = "toggle_add_controls";
-
     public static final String ALBUM_COVER_STYLE = "album_cover_style_id";
-
     public static final String ALBUM_COVER_TRANSFORM = "album_cover_transform";
-
     public static final String TAB_TEXT_MODE = "tab_text_mode";
-
-    public static final String SAF_SDCARD_URI = "saf_sdcard_uri";
-    public static final String SONG_SORT_ORDER = "song_sort_order";
-    public static final String SONG_GRID_SIZE = "song_grid_size";
     public static final String LANGUAGE_NAME = "language_name";
+    private static final String DIALOG_CORNER = "dialog_corner";
+    private static final String SLEEP_TIMER_FINISH_SONG = "sleep_timer_finish_song";
+    private static final String ALBUM_GRID_STYLE = "album_grid_style_home";
+    private static final String ARTIST_GRID_STYLE = "artist_grid_style_home";
+    private static final String SAF_SDCARD_URI = "saf_sdcard_uri";
+    private static final String SONG_SORT_ORDER = "song_sort_order";
+    private static final String SONG_GRID_SIZE = "song_grid_size";
     private static final String GENRE_SORT_ORDER = "genre_sort_order";
     private static final String LAST_PAGE = "last_start_page";
     private static final String BLUETOOTH_PLAYBACK = "bluetooth_playback";
@@ -142,6 +116,7 @@ public final class PreferenceUtil {
     private static final String ARTIST_ALBUM_SORT_ORDER = "artist_album_sort_order";
     private static final String ALBUM_SORT_ORDER = "album_sort_order";
     private static final String ALBUM_SONG_SORT_ORDER = "album_song_sort_order";
+    private static final String ARTIST_SONG_SORT_ORDER = "artist_song_sort_order";
     private static final String ALBUM_GRID_SIZE = "album_grid_size";
     private static final String ALBUM_GRID_SIZE_LAND = "album_grid_size_land";
     private static final String SONG_GRID_SIZE_LAND = "song_grid_size_land";
@@ -330,8 +305,13 @@ public final class PreferenceUtil {
                 .getString(ALBUM_SONG_SORT_ORDER, AlbumSongSortOrder.SONG_TRACK_LIST);
     }
 
+    public final String getArtistSongSortOrder() {
+        return mPreferences
+                .getString(ARTIST_SONG_SORT_ORDER, ArtistSongSortOrder.SONG_A_Z);
+    }
+
     public final String getAlbumSortOrder() {
-        return mPreferences.getString(ALBUM_SORT_ORDER, SortOrder.AlbumSortOrder.ALBUM_A_Z);
+        return mPreferences.getString(ALBUM_SORT_ORDER, AlbumSortOrder.ALBUM_A_Z);
     }
 
     public void setAlbumSortOrder(final String sortOrder) {
@@ -341,7 +321,7 @@ public final class PreferenceUtil {
     }
 
     public final String getArtistAlbumSortOrder() {
-        return mPreferences.getString(ARTIST_ALBUM_SORT_ORDER, SortOrder.ArtistAlbumSortOrder.ALBUM_YEAR);
+        return mPreferences.getString(ARTIST_ALBUM_SORT_ORDER, ArtistAlbumSortOrder.ALBUM_A_Z);
     }
 
     public final int getArtistGridSize(Context context) {
@@ -364,7 +344,7 @@ public final class PreferenceUtil {
     }
 
     public final String getArtistSortOrder() {
-        return mPreferences.getString(ARTIST_SORT_ORDER, SortOrder.ArtistSortOrder.ARTIST_A_Z);
+        return mPreferences.getString(ARTIST_SORT_ORDER, ArtistSortOrder.ARTIST_A_Z);
     }
 
     public void setArtistSortOrder(final String sortOrder) {
@@ -378,7 +358,7 @@ public final class PreferenceUtil {
     }
 
     public String getBaseTheme() {
-        return mPreferences.getString(GENERAL_THEME, "dark");
+        return mPreferences.getString(GENERAL_THEME, "auto");
     }
 
     @NonNull
@@ -431,7 +411,7 @@ public final class PreferenceUtil {
     }
 
     public final String getGenreSortOrder() {
-        return mPreferences.getString(GENRE_SORT_ORDER, SortOrder.GenreSortOrder.GENRE_A_Z);
+        return mPreferences.getString(GENRE_SORT_ORDER, GenreSortOrder.GENRE_A_Z);
     }
 
     public boolean getHeadsetPlugged() {
@@ -611,7 +591,7 @@ public final class PreferenceUtil {
     }
 
     public final String getSongSortOrder() {
-        return mPreferences.getString(SONG_SORT_ORDER, SortOrder.SongSortOrder.SONG_A_Z);
+        return mPreferences.getString(SONG_SORT_ORDER, SongSortOrder.SONG_A_Z);
     }
 
     public void setSongSortOrder(final String sortOrder) {

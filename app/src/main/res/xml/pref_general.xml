@@ -6,7 +6,7 @@
         android:title="@string/pref_header_general">
 
         <code.name.monkey.retromusic.preferences.MaterialListPreference
-            android:defaultValue="dark"
+            android:defaultValue="auto"
             android:entries="@array/pref_general_theme_list_titles"
             android:entryValues="@array/pref_general_theme_list_values"
             android:key="general_theme"
@@ -53,6 +53,5 @@
             android:layout="@layout/list_item_view_switch"
             android:summary="@string/pref_summary_colored_app_shortcuts"
             android:title="@string/pref_title_app_shortcuts" />
-        
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
 </androidx.preference.PreferenceScreen>

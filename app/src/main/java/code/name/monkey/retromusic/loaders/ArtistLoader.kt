@@ -22,11 +22,9 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 
 object ArtistLoader {
     private fun getSongLoaderSortOrder(context: Context): String {
-        return PreferenceUtil.getInstance(context).artistSortOrder + ", " + PreferenceUtil.getInstance(
-            context
-        ).artistAlbumSortOrder + ", " + PreferenceUtil.getInstance(
-            context
-        ).albumSongSortOrder
+        return PreferenceUtil.getInstance(context).artistSortOrder + ", " +
+                PreferenceUtil.getInstance(context).artistAlbumSortOrder + ", " +
+                PreferenceUtil.getInstance(context).artistSongSortOrder
     }
 
     fun getAllArtists(context: Context): ArrayList<Artist> {

@@ -208,6 +208,8 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             blockRequestPermissions = false;
             if (!hasPermissions()) {
                 requestPermissions();
+            } else {
+                selectedFragment(PreferenceUtil.getInstance(this).getLastPage());
             }
         } else if (requestCode == APP_UPDATE_REQUEST_CODE) {
             if (resultCode != RESULT_OK) {
