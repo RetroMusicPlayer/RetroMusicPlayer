@@ -275,7 +275,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         playerContainer.setBackgroundColor(color.backgroundColor)
         songInfo.setTextColor(color.primaryTextColor)
-        player_queue_sub_header.setTextColor(color.backgroundColor)
+        player_queue_sub_header.setTextColor(color.primaryTextColor)
 
         songCurrentProgress.setTextColor(lastPlaybackControlsColor)
         songTotalTime.setTextColor(lastPlaybackControlsColor)

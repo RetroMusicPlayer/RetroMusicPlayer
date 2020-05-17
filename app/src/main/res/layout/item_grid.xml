@@ -37,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="2"
+        android:paddingHorizontal="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="4dp"
         android:textAppearance="@style/TextViewSubtitle1"

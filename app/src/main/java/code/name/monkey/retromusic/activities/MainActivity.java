@@ -101,15 +101,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     public static final String EXPAND_PANEL = "expand_panel";
     private static final int APP_UPDATE_REQUEST_CODE = 9002;
     private final IntentFilter mIntentFilter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
-    private MainActivityFragmentCallbacks currentFragment;
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action = intent.getAction();
-            Log.i(TAG, "onReceive: " + action);
-            if (action != null && action.equals(MusicService.MEDIA_STORE_CHANGED)) {
-                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG, true);
-            }
             if (action != null && action.equals(Intent.ACTION_SCREEN_OFF)) {
                 if (PreferenceUtil.getInstance(context).getLockScreen() && MusicPlayerRemote.isPlaying()) {
                     final Intent activity = new Intent(context, LockScreenActivity.class);
@@ -120,6 +115,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             }
         }
     };
+    private MainActivityFragmentCallbacks currentFragment;
     private boolean blockRequestPermissions = false;
     private MaterialCab cab;
     private AppBarLayout mAppBarLayout;
@@ -415,14 +411,12 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         mAppBarLayout.removeOnOffsetChangedListener(onOffsetChangedListener);
     }
 
-    public void setCurrentFragment(@NonNull Fragment fragment, @NonNull String tag, boolean force) {
+    public void setCurrentFragment(@NonNull Fragment fragment, @NonNull String tag) {
         String currentTag = null;
         if (getSupportFragmentManager().findFragmentByTag(tag) != null) {
             currentTag = getSupportFragmentManager().findFragmentByTag(tag).getTag();
         }
-        if (force) {
-            currentTag = null;
-        }
+
         if (!tag.equals(currentTag)) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -525,6 +519,7 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 layoutRes = R.layout.item_image_gradient;
                 break;
         }
+        Log.i(TAG, "handleLayoutResType: " + layoutRes);
         if (layoutRes != -1) {
             item.setChecked(true);
             fragment.setAndSaveLayoutRes(layoutRes);
@@ -686,29 +681,29 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
     private void selectedFragment(final int itemId) {
         switch (itemId) {
             case R.id.action_album:
-                setCurrentFragment(AlbumsFragment.newInstance(), AlbumsFragment.TAG, false);
+                setCurrentFragment(AlbumsFragment.newInstance(), AlbumsFragment.TAG);
                 break;
             case R.id.action_artist:
-                setCurrentFragment(ArtistsFragment.newInstance(), ArtistsFragment.TAG, false);
+                setCurrentFragment(ArtistsFragment.newInstance(), ArtistsFragment.TAG);
                 break;
             case R.id.action_playlist:
-                setCurrentFragment(PlaylistsFragment.newInstance(), PlaylistsFragment.TAG, false);
+                setCurrentFragment(PlaylistsFragment.newInstance(), PlaylistsFragment.TAG);
                 break;
             case R.id.action_genre:
-                setCurrentFragment(GenresFragment.newInstance(), GenresFragment.TAG, false);
+                setCurrentFragment(GenresFragment.newInstance(), GenresFragment.TAG);
                 break;
             case R.id.action_playing_queue:
-                setCurrentFragment(PlayingQueueFragment.newInstance(), PlayingQueueFragment.TAG, false);
+                setCurrentFragment(PlayingQueueFragment.newInstance(), PlayingQueueFragment.TAG);
                 break;
             case R.id.action_song:
-                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG, false);
+                setCurrentFragment(SongsFragment.newInstance(), SongsFragment.TAG);
                 break;
             case R.id.action_folder:
-                setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG, false);
+                setCurrentFragment(FoldersFragment.newInstance(this), FoldersFragment.TAG);
                 break;
             default:
             case R.id.action_home:
-                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG,false);
+                setCurrentFragment(BannerHomeFragment.newInstance(), BannerHomeFragment.TAG);
                 break;
         }
     }

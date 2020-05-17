@@ -47,6 +47,11 @@ class ArtistAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        itemLayoutRes = if (itemLayoutRes >= -1) {
+            itemLayoutRes
+        } else {
+            R.layout.item_grid_circle
+        }
         val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
         return createViewHolder(view)
     }

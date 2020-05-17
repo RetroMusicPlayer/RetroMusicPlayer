@@ -47,6 +47,11 @@ open class AlbumAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        itemLayoutRes = if (itemLayoutRes >= -1) {
+            itemLayoutRes
+        } else {
+            R.layout.item_grid
+        }
         val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
         return createViewHolder(view, viewType)
     }

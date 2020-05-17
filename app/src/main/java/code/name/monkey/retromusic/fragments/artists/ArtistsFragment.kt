@@ -88,9 +88,6 @@ class ArtistsFragment :
         PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
     }
 
-    override fun setLayoutRes(layoutRes: Int) {
-    }
-
     override fun loadLayoutRes(): Int {
         return PreferenceUtil.getInstance(requireContext()).artistGridStyle
     }

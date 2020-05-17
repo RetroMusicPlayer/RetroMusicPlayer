@@ -82,8 +82,6 @@ class AlbumsFragment :
         albumViewModel.getAlbums()
     }
 
-    override fun setLayoutRes(layoutRes: Int) {
-    }
 
     override fun loadLayoutRes(): Int {
         return PreferenceUtil.getInstance(requireContext()).albumGridStyle

@@ -50,7 +50,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
 
 import code.name.monkey.appthemehelper.ThemeStore;
 import code.name.monkey.appthemehelper.util.ATHUtil;
@@ -596,7 +595,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         private WeakReference<FoldersFragment> fragmentWeakReference;
 
         AsyncFileLoader(FoldersFragment foldersFragment) {
-            super(Objects.requireNonNull(foldersFragment.getActivity()));
+            super(foldersFragment.requireActivity());
             fragmentWeakReference = new WeakReference<>(foldersFragment);
         }
 
