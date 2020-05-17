@@ -1,9 +1,7 @@
 package code.name.monkey.retromusic.adapter.song
 
-import android.graphics.PorterDuff.Mode
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -35,7 +33,6 @@ class PlayingQueueAdapter(
     SwipeableItemAdapter<PlayingQueueAdapter.ViewHolder>,
     PopupTextProvider {
 
-    private var color = -1
     private var songToRemove: Song? = null
 
     override fun createViewHolder(view: View): SongAdapter.ViewHolder {
@@ -48,23 +45,6 @@ class PlayingQueueAdapter(
         holder.time?.text = MusicUtil.getReadableDurationString(dataSet[position].duration)
         if (holder.itemViewType == HISTORY || holder.itemViewType == CURRENT) {
             setAlpha(holder, 0.5f)
-        }
-    }
-
-    private fun setColor(holder: SongAdapter.ViewHolder, white: Int) {
-
-        if (holder.title != null) {
-            holder.title!!.setTextColor(white)
-            if (color != -1) {
-                holder.title!!.setTextColor(color)
-            }
-        }
-
-        holder.text?.setTextColor(white)
-        holder.time?.setTextColor(white)
-        holder.imageText?.setTextColor(white)
-        if (holder.menu != null) {
-            (holder.menu as ImageView).setColorFilter(white, Mode.SRC_IN)
         }
     }
 
@@ -139,7 +119,6 @@ class PlayingQueueAdapter(
     }
 
     inner class ViewHolder(itemView: View) : SongAdapter.ViewHolder(itemView) {
-
         @DraggableItemStateFlags
         private var mDragStateFlags: Int = 0
 

@@ -8,7 +8,7 @@
     android:focusable="true">
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="0dp"
@@ -31,14 +31,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playbackControlsFragment"
         android:name="code.name.monkey.retromusic.fragments.player.full.FullPlaybackControlsFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="wrap"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout="@layout/fragment_full_player_controls" />
 
@@ -143,7 +144,6 @@
         android:elevation="20dp"
         android:padding="16dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/playbackControlsFragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/playerToolbar"

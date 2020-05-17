@@ -32,7 +32,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     fun removeSlideEffect() {
         val transformer = ParallaxPagerTransformer(R.id.player_image)
         transformer.setSpeed(0.3f)
-        viewPager.setPageTransformer(true, transformer)
+        //viewPager.setPageTransformer(true, transformer)
     }
 
     override fun onCreateView(
@@ -50,8 +50,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         val metrics = resources.displayMetrics
         val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
 
-
-        if (nps == Full || nps == Classic || nps == Fit) {
+        if (nps == Full || nps == Classic || nps == Fit || nps == Gradient) {
             viewPager.offscreenPageLimit = 2
         } else if (PreferenceUtil.getInstance(requireContext()).carouselEffect()) {
             viewPager.clipToPadding = false

@@ -135,7 +135,8 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
                 0
             ).build()
         )
-        shapeDrawable.fillColor = ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
+        shapeDrawable.fillColor =
+            ColorStateList.valueOf(ATHUtil.resolveColor(requireContext(), R.attr.colorSurface))
         playerQueueSheet.background = shapeDrawable
 
         playerQueueSheet.setOnTouchListener { _, _ ->
@@ -358,7 +359,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
-            ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),
+            Color.WHITE,
             requireActivity()
         )
     }

@@ -339,7 +339,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
         int id = item.getItemId();
         switch (id) {
             case R.id.action_search:
-
                 NavigationUtil.goToSearch(this);
                 break;
             case R.id.action_new_playlist:
@@ -520,11 +519,13 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 break;
         }
         Log.i(TAG, "handleLayoutResType: " + layoutRes);
+
         if (layoutRes != -1) {
             item.setChecked(true);
             fragment.setAndSaveLayoutRes(layoutRes);
             return true;
         }
+
         return false;
     }
 
@@ -807,9 +808,6 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
             case R.layout.item_card:
                 subMenu.findItem(R.id.action_layout_card).setChecked(true);
                 break;
-            case R.layout.item_grid:
-                subMenu.findItem(R.id.action_layout_normal).setChecked(true);
-                break;
             case R.layout.item_card_color:
                 subMenu.findItem(R.id.action_layout_colored_card).setChecked(true);
                 break;
@@ -821,6 +819,10 @@ public class MainActivity extends AbsSlidingMusicPanelActivity
                 break;
             case R.layout.item_image_gradient:
                 subMenu.findItem(R.id.action_layout_gradient_image).setChecked(true);
+                break;
+            default:
+            case R.layout.item_grid:
+                subMenu.findItem(R.id.action_layout_normal).setChecked(true);
                 break;
         }
     }

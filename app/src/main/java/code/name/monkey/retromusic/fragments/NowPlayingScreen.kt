@@ -21,6 +21,7 @@ enum class NowPlayingScreen constructor(
     Fit(R.string.fit, R.drawable.np_fit, 12),
     Flat(R.string.flat, R.drawable.np_flat, 1),
     Full(R.string.full, R.drawable.np_full, 2),
+    Gradient(R.string.gradient, R.drawable.np_gradient, 17),
     Material(R.string.material, R.drawable.np_material, 11),
     Normal(R.string.normal, R.drawable.np_normal, 0),
     Peak(R.string.peak, R.drawable.np_peak, 14),

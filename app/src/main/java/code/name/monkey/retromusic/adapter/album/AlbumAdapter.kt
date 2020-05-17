@@ -47,6 +47,7 @@ open class AlbumAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        println("onCreateViewHolder $itemLayoutRes")
         itemLayoutRes = if (itemLayoutRes >= -1) {
             itemLayoutRes
         } else {

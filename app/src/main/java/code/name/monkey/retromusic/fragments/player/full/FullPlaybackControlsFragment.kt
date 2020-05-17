@@ -42,7 +42,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
     private var lastPlaybackControlsColor: Int = 0
     private var lastDisabledPlaybackControlsColor: Int = 0
-    private var progressViewUpdateHelper: MusicProgressViewUpdateHelper? = null
+    private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,12 +68,12 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
     override fun onResume() {
         super.onResume()
-        progressViewUpdateHelper!!.start()
+        progressViewUpdateHelper.start()
     }
 
     override fun onPause() {
         super.onPause()
-        progressViewUpdateHelper!!.stop()
+        progressViewUpdateHelper.stop()
     }
 
 
@@ -97,7 +97,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
 
-        val tintList=ColorStateList.valueOf(color.primaryTextColor)
+        val tintList = ColorStateList.valueOf(color.primaryTextColor)
         playerMenu.imageTintList = tintList
         songFavourite.imageTintList = tintList
         volumeFragment?.setTintableColor(color.primaryTextColor)

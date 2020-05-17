@@ -84,6 +84,7 @@ class AlbumsFragment :
 
 
     override fun loadLayoutRes(): Int {
+        println("loadLayoutRes ${PreferenceUtil.getInstance(requireContext()).albumGridStyle}")
         return PreferenceUtil.getInstance(requireContext()).albumGridStyle
     }
 
