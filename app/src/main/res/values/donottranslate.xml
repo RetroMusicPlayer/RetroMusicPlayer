@@ -11,7 +11,7 @@
         <item>code_name_monkey_donate_8</item>
     </string-array>
 
-    <string name="app_name" translatable="false">Retro Music</string>
+    <string name="app_name" translatable="false">Retro</string>
     <string name="git_hub" translatable="false">GitHub</string>
 
 
