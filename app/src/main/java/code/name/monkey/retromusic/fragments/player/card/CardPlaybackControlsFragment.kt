@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 
@@ -109,14 +110,8 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
-
-        if (ColorUtil.isColorLight(
-                ATHUtil.resolveColor(
-                    requireContext(),
-                    android.R.attr.windowBackground
-                )
-            )
+    override fun setColor(color: MediaNotificationProcessor) {
+        if (ATHUtil.isWindowBackgroundDark(requireContext())
         ) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
             lastDisabledPlaybackControlsColor =
@@ -134,7 +129,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateProgressTextColor()
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext()).ripAlpha()
         }

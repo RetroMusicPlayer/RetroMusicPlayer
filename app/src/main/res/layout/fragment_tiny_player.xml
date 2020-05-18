@@ -7,7 +7,7 @@
     android:clickable="true"
     android:focusable="true">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/playerAlbumCoverFragment"
         android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/playbackControlsFragment"
             android:name="code.name.monkey.retromusic.fragments.player.tiny.TinyPlaybackControlsFragment"
             android:layout_width="match_parent"
@@ -128,6 +128,8 @@
         android:singleLine="true"
         android:textAppearance="@style/TextViewHeadline3"
         android:textStyle="bold"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_bar"
@@ -139,12 +141,14 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:ellipsize="end"
+        android:fadingEdge="horizontal"
         android:gravity="start"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:rotation="0"
         android:textAppearance="@style/TextViewHeadline6"
+        app:layout_constrainedHeight="true"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toTopOf="@id/toolbarContainer"
         app:layout_constraintStart_toEndOf="@+id/title"

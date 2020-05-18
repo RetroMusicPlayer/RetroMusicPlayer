@@ -15,7 +15,6 @@ import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
-import code.name.monkey.retromusic.extensions.setRange
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -25,6 +24,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.songInfo
 import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.nextButton
 import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.playPauseButton
@@ -139,28 +139,33 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
         previousButton.setColorFilter(lastPlaybackControlsColor, PorterDuff.Mode.SRC_IN)
     }
 
-    override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(context!!, android.R.attr.colorBackground)
+    override fun setColor(color: MediaNotificationProcessor) {
+        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
-            lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(context!!, true)
+            lastPlaybackControlsColor =
+                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getSecondaryDisabledTextColor(context!!, true)
+                MaterialValueHelper.getSecondaryDisabledTextColor(requireContext(), true)
         } else {
-            lastPlaybackControlsColor = MaterialValueHelper.getPrimaryTextColor(context!!, false)
+            lastPlaybackControlsColor =
+                MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
             lastDisabledPlaybackControlsColor =
-                MaterialValueHelper.getPrimaryDisabledTextColor(context!!, false)
+                MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.primaryTextColor
         } else {
-            ThemeStore.accentColor(context!!)
+            ThemeStore.accentColor(requireContext())
         }
         volumeFragment?.setTintable(colorFinal)
 
         TintHelper.setTintAuto(
             playPauseButton,
-            MaterialValueHelper.getPrimaryTextColor(context!!, ColorUtil.isColorLight(colorFinal)),
+            MaterialValueHelper.getPrimaryTextColor(
+                requireContext(),
+                ColorUtil.isColorLight(colorFinal)
+            ),
             false
         )
         TintHelper.setTintAuto(playPauseButton, colorFinal, true)

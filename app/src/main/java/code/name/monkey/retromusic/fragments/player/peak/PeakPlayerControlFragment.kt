@@ -83,10 +83,10 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
     override fun hide() {
     }
 
-    fun setDark(color: MediaNotificationProcessor) {
+    override fun setColor(color: MediaNotificationProcessor) {
         val controlsColor =
             if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-                color.secondaryTextColor
+                color.primaryTextColor
             } else {
                 ThemeStore.accentColor(requireContext())
             }
@@ -109,9 +109,6 @@ class PeakPlayerControlFragment : AbsPlayerControlsFragment() {
         }
         updateRepeatState()
         updateShuffleState()
-    }
-
-    override fun setDark(color: Int) {
     }
 
     private fun updatePlayPauseDrawableState() {

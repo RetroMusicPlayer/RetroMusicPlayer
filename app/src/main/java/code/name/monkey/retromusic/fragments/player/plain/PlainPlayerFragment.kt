@@ -95,7 +95,7 @@ class PlainPlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        plainPlaybackControlsFragment.setDark(color.primaryTextColor)
+        plainPlaybackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
         callbacks!!.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(

@@ -33,6 +33,7 @@ import java.util.List;
 
 import code.name.monkey.appthemehelper.util.ATHUtil;
 import code.name.monkey.appthemehelper.util.ColorUtil;
+import code.name.monkey.retromusic.R;
 
 import static androidx.core.graphics.ColorUtils.RGBToXYZ;
 
@@ -82,6 +83,7 @@ public class MediaNotificationProcessor {
      * A bit less then the above value, since it looks better on dark backgrounds.
      */
     private static final int LIGHTNESS_TEXT_DIFFERENCE_DARK = -10;
+    private static final String TAG = "ColorPicking";
     private float[] mFilteredBackgroundHsl = null;
     private Palette.Filter mBlackWhiteFilter = new Palette.Filter() {
         @Override
@@ -103,12 +105,12 @@ public class MediaNotificationProcessor {
         getMediaPalette();
     }
 
+
     public MediaNotificationProcessor(Context context, Bitmap bitmap) {
         this.context = context;
         this.drawable = new BitmapDrawable(context.getResources(), bitmap);
         getMediaPalette();
     }
-
 
     public MediaNotificationProcessor(Context context) {
         this.context = context;
@@ -462,7 +464,6 @@ public class MediaNotificationProcessor {
                 backgroundColor);
     }
 
-
     public int getPrimaryTextColor() {
         return primaryTextColor;
     }
@@ -479,16 +480,26 @@ public class MediaNotificationProcessor {
         return backgroundColor;
     }
 
-    public int getMightyColor() {
-        if (ATHUtil.INSTANCE.isWindowBackgroundDark(context)) {
-            if (!ColorUtil.INSTANCE.isColorLight(primaryTextColor)) {
-                return NotificationColorUtil.ensureTextContrastOnBlack(primaryTextColor);
-            }
-            return NotificationColorUtil.ensureTextBackgroundColor(backgroundColor, primaryTextColor, secondaryTextColor);
-        }
-        return primaryTextColor;
+    boolean isWhiteColor(int color) {
+        return calculateLuminance(color) > 0.6f;
     }
 
+    public int getMightyColor() {
+        boolean isDarkBg = ColorUtil.INSTANCE.isColorLight(ATHUtil.INSTANCE.resolveColor(context, R.attr.colorSurface));
+        if (isDarkBg) {
+            if (isColorLight(backgroundColor)) {
+                return primaryTextColor;
+            } else {
+                return backgroundColor;
+            }
+        } else {
+            if (isColorLight(backgroundColor)) {
+                return backgroundColor;
+            } else {
+                return primaryTextColor;
+            }
+        }
+    }
 
     public interface OnPaletteLoadedListener {
         void onPaletteLoaded(MediaNotificationProcessor mediaNotificationProcessor);

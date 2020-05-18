@@ -72,7 +72,7 @@ class SimplePlayerFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
-        controlsFragment.setDark(color.primaryTextColor)
+        controlsFragment.setColor(color)
         ToolbarContentTintHelper.colorizeToolbar(
             playerToolbar,
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal),

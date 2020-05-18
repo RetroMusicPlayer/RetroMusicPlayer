@@ -12,14 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.PopupMenu
-import androidx.core.content.ContextCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
-import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -93,7 +89,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
         }
     }
 
-    fun setDark(color: MediaNotificationProcessor) {
+    override fun setColor(color: MediaNotificationProcessor) {
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
 
@@ -110,34 +106,6 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
 
         playPauseButton.backgroundTintList = tintList
         playPauseButton.imageTintList = ColorStateList.valueOf(color.backgroundColor)
-
-        updateRepeatState()
-        updateShuffleState()
-        updatePrevNextColor()
-    }
-
-    override fun setDark(color: Int) {
-        lastPlaybackControlsColor = Color.WHITE
-        lastDisabledPlaybackControlsColor =
-            ContextCompat.getColor(requireContext(), R.color.md_grey_500)
-
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
-        } else {
-            ThemeStore.accentColor(requireContext()).ripAlpha()
-        }
-        volumeFragment?.setTintableColor(colorFinal)
-        text.setTextColor(colorFinal)
-
-        ViewUtil.setProgressDrawable(progressSlider, colorFinal, true)
-
-        playPauseButton.backgroundTintList = ColorStateList.valueOf(colorFinal)
-        playPauseButton.imageTintList = ColorStateList.valueOf(
-            MaterialValueHelper.getPrimaryTextColor(
-                context,
-                ColorUtil.isColorLight(colorFinal)
-            )
-        )
 
         updateRepeatState()
         updateShuffleState()

@@ -93,7 +93,7 @@ class LockScreenActivity : AbsMusicServiceActivity() {
             .generatePalette(this).build().dontAnimate()
             .into(object : RetroMusicColoredTarget(image) {
                 override fun onColorReady(colors: MediaNotificationProcessor) {
-                    fragment?.setDark(colors.backgroundColor)
+                    fragment?.setColor(colors)
                 }
             })
     }

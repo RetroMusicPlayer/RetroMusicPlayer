@@ -46,23 +46,16 @@
                 app:navigationIcon="@drawable/ic_keyboard_arrow_down_black_24dp" />
         </FrameLayout>
 
-        <code.name.monkey.retromusic.views.WidthFitSquareCardView
-            android:id="@+id/imageContainer"
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playerAlbumCoverFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_marginStart="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardUseCompatPadding="true"
+            app:layout_constraintHeight_percent="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/playerImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                tools:src="@tools:sample/avatars" />
-        </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+            app:layout_constraintTop_toBottomOf="@id/toolbarContainer" />
 
         <LinearLayout
             android:id="@+id/titleContainer"
@@ -70,7 +63,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
             app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
 
             <com.google.android.material.textview.MaterialTextView
@@ -101,7 +94,7 @@
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toTopOf="@+id/songInfo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
             app:layout_constraintTop_toBottomOf="@+id/titleContainer"
             tools:text="@tools:sample/lorem" />
 
@@ -115,24 +108,21 @@
             android:maxLines="1"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/imageContainer"
+            app:layout_constraintBottom_toBottomOf="@id/playerAlbumCoverFragment"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/playerAlbumCoverFragment"
             app:layout_constraintTop_toBottomOf="@+id/text"
             tools:text="@tools:sample/lorem/random" />
 
-        <FrameLayout
-            android:id="@+id/playbackControlsFragmentContainer"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/playbackControlsFragment"
+            android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/songInfo">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/songInfo"
+            tools:layout="@layout/fragment_peak_control_player" />
 
-            <fragment
-                android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.peak.PeakPlayerControlFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_peak_control_player" />
-        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

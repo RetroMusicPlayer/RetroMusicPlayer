@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_flat_player_playback_controls.*
 
 class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
@@ -77,10 +78,8 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         }
     }
 
-    override fun setDark(color: Int) {
-        val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
-        val isDark = ColorUtil.isColorLight(colorBg)
-        if (isDark) {
+    override fun setColor(color: MediaNotificationProcessor) {
+        if (ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
             lastDisabledPlaybackControlsColor =
@@ -93,7 +92,7 @@ class FlatPlaybackControlsFragment : AbsPlayerControlsFragment(), Callback {
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext()).ripAlpha()
         }

@@ -20,6 +20,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_material_playback_controls.*
 
 /**
@@ -97,7 +98,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
+    override fun setColor(color: MediaNotificationProcessor) {
         if (ATHUtil.isWindowBackgroundDark(requireContext())) {
             lastPlaybackControlsColor =
                 MaterialValueHelper.getPrimaryTextColor(requireContext(), false)

@@ -44,7 +44,7 @@ class FitFragment : AbsPlayerFragment() {
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        playbackControlsFragment.setDark(color.primaryTextColor)
+        playbackControlsFragment.setColor(color)
         lastColor = color.primaryTextColor
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(

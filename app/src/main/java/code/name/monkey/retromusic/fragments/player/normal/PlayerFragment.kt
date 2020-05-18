@@ -75,7 +75,7 @@ class PlayerFragment : AbsPlayerFragment() {
     }
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-        controlsFragment.setDark(color.primaryTextColor)
+        controlsFragment.setColor(color)
         lastColor = color.backgroundColor
         callbacks?.onPaletteColorChanged()
 

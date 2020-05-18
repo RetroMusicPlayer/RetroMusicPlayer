@@ -95,6 +95,7 @@ class AlbumCoverPagerAdapter(
                 Fit,
                 Tiny,
                 Classic,
+                Peak,
                 Gradient,
                 Full -> R.layout.fragment_album_full_cover
                 else -> {

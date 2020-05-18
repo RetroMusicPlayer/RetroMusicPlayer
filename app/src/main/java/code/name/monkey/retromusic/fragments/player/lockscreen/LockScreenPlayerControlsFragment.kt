@@ -35,6 +35,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_lock_screen_playback_controls.*
 
 /**
@@ -105,7 +106,7 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
+    override fun setColor(color: MediaNotificationProcessor) {
 
         val colorBg = ATHUtil.resolveColor(requireContext(), android.R.attr.colorBackground)
         if (ColorUtil.isColorLight(colorBg)) {
@@ -121,7 +122,7 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         }
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.primaryTextColor
         } else {
             textColorSecondary(requireContext())
         }.ripAlpha()

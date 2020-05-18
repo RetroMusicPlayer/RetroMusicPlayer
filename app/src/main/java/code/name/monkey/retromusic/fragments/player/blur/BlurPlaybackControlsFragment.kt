@@ -22,6 +22,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
 
 class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -106,7 +107,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
+    override fun setColor(color: MediaNotificationProcessor) {
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor =
             ContextCompat.getColor(requireContext(), R.color.md_grey_500)

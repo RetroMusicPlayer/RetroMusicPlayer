@@ -201,7 +201,7 @@ class FullPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
         mask.backgroundTintList = ColorStateList.valueOf(color.backgroundColor)
-        controlsFragment.setDark(color)
+        controlsFragment.setColor(color)
         callbacks?.onPaletteColorChanged()
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, Color.WHITE, activity)
     }

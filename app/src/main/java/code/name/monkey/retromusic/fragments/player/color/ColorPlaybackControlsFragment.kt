@@ -96,23 +96,20 @@ class ColorPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    fun setDark(colors: MediaNotificationProcessor) {
-        setDark(colors.secondaryTextColor)
-        TintHelper.setTintAuto(playPauseButton, colors.primaryTextColor, true)
-        TintHelper.setTintAuto(playPauseButton, colors.backgroundColor, false)
+    override fun setColor(color: MediaNotificationProcessor) {
+        TintHelper.setTintAuto(playPauseButton, color.primaryTextColor, true)
+        TintHelper.setTintAuto(playPauseButton, color.backgroundColor, false)
 
-        title.setTextColor(colors.primaryTextColor)
-        text.setTextColor(colors.secondaryTextColor)
-        songInfo.setTextColor(colors.secondaryTextColor)
-        ViewUtil.setProgressDrawable(progressSlider, colors.primaryTextColor, true)
-        songCurrentProgress.setTextColor(colors.secondaryTextColor)
-        songTotalTime.setTextColor(colors.secondaryTextColor)
-        volumeFragment?.setTintableColor(colors.primaryTextColor)
-    }
+        title.setTextColor(color.primaryTextColor)
+        text.setTextColor(color.secondaryTextColor)
+        songInfo.setTextColor(color.secondaryTextColor)
+        ViewUtil.setProgressDrawable(progressSlider, color.primaryTextColor, true)
+        songCurrentProgress.setTextColor(color.secondaryTextColor)
+        songTotalTime.setTextColor(color.secondaryTextColor)
+        volumeFragment?.setTintableColor(color.primaryTextColor)
 
-    override fun setDark(color: Int) {
-        lastPlaybackControlsColor = color
-        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color, 0.25f)
+        lastPlaybackControlsColor = color.secondaryTextColor
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.secondaryTextColor, 0.25f)
 
         updateRepeatState()
         updateShuffleState()

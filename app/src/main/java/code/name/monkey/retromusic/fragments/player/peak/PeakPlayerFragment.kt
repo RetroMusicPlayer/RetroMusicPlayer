@@ -25,13 +25,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
-import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
-import code.name.monkey.retromusic.glide.SongGlideRequest
+import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
-import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_peak_player.*
 
 /**
@@ -56,14 +53,16 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         setUpPlayerToolbar()
         setUpSubFragments()
         title.isSelected = true
-        playerImage.setOnClickListener {
-            NavigationUtil.goToLyrics(requireActivity())
-        }
+
     }
 
     private fun setUpSubFragments() {
         controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as PeakPlayerControlFragment
+
+        val coverFragment =
+            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
+        coverFragment.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {
@@ -103,6 +102,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.primaryTextColor
         callbacks?.onPaletteColorChanged()
+        controlsFragment.setColor(color)
     }
 
     override fun onFavoriteToggled() {
@@ -119,16 +119,6 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         } else {
             songInfo.hide()
         }
-
-        SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
-            .checkIgnoreMediaStore(requireContext())
-            .generatePalette(requireContext())
-            .build()
-            .into(object : RetroMusicColoredTarget(playerImage) {
-                override fun onColorReady(colors: MediaNotificationProcessor) {
-                    controlsFragment.setDark(colors)
-                }
-            })
     }
 
     override fun onServiceConnected() {

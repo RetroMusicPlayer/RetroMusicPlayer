@@ -3,14 +3,12 @@ package code.name.monkey.retromusic.fragments.player.tiny
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.widget.Toolbar
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ColorUtil
-import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.hide
@@ -27,6 +25,7 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_tiny_player.*
+import kotlinx.android.synthetic.main.fragment_tiny_player.playerToolbar
 
 class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
     override fun onUpdateProgressViews(progress: Int, total: Int) {
@@ -62,55 +61,41 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     override fun toolbarIconColor(): Int {
-        return textColorPrimary
+        return lastColor
     }
 
     private var lastColor: Int = 0
+
     override val paletteColor: Int
         get() = lastColor
 
-    private var textColorPrimary = 0
-    private var textColorPrimaryDisabled = 0
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
-
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color.primaryTextColor
-        } else {
-            ThemeStore.accentColor(requireContext())
-        }
-
-        if (ColorUtil.isColorLight(colorFinal)) {
-            textColorPrimary = MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-            textColorPrimaryDisabled =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), true)
-        } else {
-            textColorPrimary = MaterialValueHelper.getPrimaryTextColor(requireContext(), false)
-            textColorPrimaryDisabled =
-                MaterialValueHelper.getSecondaryTextColor(requireContext(), false)
-        }
-
-        this.lastColor = colorFinal
-
+        lastColor = color.backgroundColor
+        controlsFragment.setColor(color)
         callbacks?.onPaletteColorChanged()
 
-        tinyPlaybackControlsFragment.setDark(colorFinal)
+        title.setTextColor(color.primaryTextColor)
+        playerSongTotalTime.setTextColor(color.primaryTextColor)
+        text.setTextColor(color.secondaryTextColor)
+        songInfo.setTextColor(color.secondaryTextColor)
+        ViewUtil.setProgressDrawable(progressBar, color.backgroundColor)
 
-        ViewUtil.setProgressDrawable(progressBar, colorFinal)
 
-        title.setTextColor(textColorPrimary)
-        text.setTextColor(textColorPrimaryDisabled)
-        songInfo.setTextColor(textColorPrimaryDisabled)
-        playerSongTotalTime.setTextColor(textColorPrimary)
-
-        ToolbarContentTintHelper.colorizeToolbar(playerToolbar, textColorPrimary, requireActivity())
+        Handler().post {
+            ToolbarContentTintHelper.colorizeToolbar(
+                playerToolbar,
+                color.secondaryTextColor,
+                requireActivity()
+            )
+        }
     }
 
     override fun onFavoriteToggled() {
         toggleFavorite(MusicPlayerRemote.currentSong)
     }
 
-    private lateinit var tinyPlaybackControlsFragment: TinyPlaybackControlsFragment
+    private lateinit var controlsFragment: TinyPlaybackControlsFragment
     private lateinit var progressViewUpdateHelper: MusicProgressViewUpdateHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -160,7 +145,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     private fun setUpSubFragments() {
-        tinyPlaybackControlsFragment =
+        controlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as TinyPlaybackControlsFragment
         val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment

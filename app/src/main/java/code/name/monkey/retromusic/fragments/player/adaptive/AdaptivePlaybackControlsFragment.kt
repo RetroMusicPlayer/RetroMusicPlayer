@@ -23,6 +23,7 @@ import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.SliderReadTimeLabelFormatter
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 
 class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
@@ -104,7 +105,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         updateShuffleState()
     }
 
-    override fun setDark(color: Int) {
+    override fun setColor(color: MediaNotificationProcessor) {
         if (ColorUtil.isColorLight(
                 ATHUtil.resolveColor(
                     requireContext(),
@@ -127,7 +128,7 @@ class AdaptivePlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePlayPauseColor()
 
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
-            color
+            color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext())
         }.ripAlpha()

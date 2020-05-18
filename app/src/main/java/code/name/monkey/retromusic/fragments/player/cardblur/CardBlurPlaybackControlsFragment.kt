@@ -21,6 +21,7 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
+import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_card_blur_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
 
@@ -52,7 +53,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         setUpMusicControllers()
     }
 
-    override fun setDark(color: Int) {
+    override fun setColor(color: MediaNotificationProcessor) {
         lastPlaybackControlsColor = Color.WHITE
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(Color.WHITE, 0.3f)
 
