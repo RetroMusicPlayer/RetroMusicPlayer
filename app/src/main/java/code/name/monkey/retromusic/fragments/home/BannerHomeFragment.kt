@@ -48,7 +48,7 @@ import java.util.*
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
 
     private lateinit var homeAdapter: HomeAdapter
-    lateinit var homeModel: HomeViewModel
+    private lateinit var homeModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,

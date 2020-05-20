@@ -17,7 +17,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         loadHome()
     }
 
-    fun loadHome() = viewModelScope.launch {
+    private fun loadHome() = viewModelScope.launch {
         val list = mutableListOf<Home>()
         val result = listOf(
             repository.topArtists(),
@@ -27,8 +27,8 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             repository.favoritePlaylist()
         )
         for (r in result) {
-            when (r) {
-                is Result.Success -> list.add(r.data)
+            if (r is Result.Success) {
+                list.add(r.data)
             }
         }
         sections.value = list
