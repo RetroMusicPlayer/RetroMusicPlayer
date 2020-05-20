@@ -122,59 +122,6 @@
         <item>this_year</item>
     </string-array>
 
-    <string-array name="night">
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/44.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/40.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/36.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/32.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/28.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/24.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/20.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/16.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/12.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/8.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/4.png</item>
-    </string-array>
-    <string-array name="evening">
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/43.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/39.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/35.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/31.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/27.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/23.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/19.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/15.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/11.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/7.png</item>
-    </string-array>
-    <string-array name="after_noon">
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/42.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/38.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/34.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/30.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/26.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/22.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/18.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/14.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/10.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/6.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/2.png</item>
-    </string-array>
-    <string-array name="morning">
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/41.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/37.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/33.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/29.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/25.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/21.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/17.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/13.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/9.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/5.png</item>
-        <item>https://cdn.techjuice.pk/wp-content/uploads/2016/07/1.png</item>
-    </string-array>
-
-
     <array name="pref_album_details_style_layout">
         <item>@layout/activity_album</item>
     </array>

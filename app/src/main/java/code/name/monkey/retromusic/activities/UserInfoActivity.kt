@@ -27,6 +27,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.dhaval2404.imagepicker.constant.ImageProvider
 import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -100,16 +101,17 @@ class UserInfoActivity : AbsBaseActivity() {
 
     private fun selectBannerImage() {
         ImagePicker.with(this)
-            .compress(1024)
+            .compress(1440)
+            .provider(ImageProvider.GALLERY)
             .crop(16f, 9f)
             .start(PICK_BANNER_REQUEST)
     }
 
     private fun pickNewPhoto() {
         ImagePicker.with(this)
-            .galleryOnly()
+            .provider(ImageProvider.GALLERY)
             .cropSquare()
-            .compress(1024)
+            .compress(1440)
             .start(PICK_IMAGE_REQUEST)
     }
 
