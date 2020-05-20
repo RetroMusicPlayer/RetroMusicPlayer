@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.adapter.album
 
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -47,13 +48,12 @@ open class AlbumAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        println("onCreateViewHolder $itemLayoutRes")
-        itemLayoutRes = if (itemLayoutRes >= -1) {
-            itemLayoutRes
-        } else {
-            R.layout.item_grid
-        }
-        val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
+        val view =
+            try {
+                LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
+            } catch (e: Resources.NotFoundException) {
+                LayoutInflater.from(activity).inflate(R.layout.item_grid, parent, false)
+            }
         return createViewHolder(view, viewType)
     }
 

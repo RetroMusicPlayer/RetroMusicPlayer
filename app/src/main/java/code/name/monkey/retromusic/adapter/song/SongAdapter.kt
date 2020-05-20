@@ -2,6 +2,7 @@ package code.name.monkey.retromusic.adapter.song
 
 import android.app.ActivityOptions
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -63,7 +64,12 @@ open class SongAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
+        val view =
+            try {
+                LayoutInflater.from(activity).inflate(itemLayoutRes, parent, false)
+            } catch (e: Resources.NotFoundException) {
+                LayoutInflater.from(activity).inflate(R.layout.item_list, parent, false)
+            }
         return createViewHolder(view)
     }
 
