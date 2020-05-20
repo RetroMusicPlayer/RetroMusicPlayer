@@ -15,7 +15,6 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.PreferenceUtil
-import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import kotlinx.android.synthetic.main.fragment_volume.*
@@ -99,15 +98,14 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     fun tintWhiteColor() {
-        val iconColor = Color.WHITE
-        volumeDown.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-        volumeUp.setColorFilter(iconColor, PorterDuff.Mode.SRC_IN)
-
-        ViewUtil.setProgressDrawable(volumeSeekBar, iconColor, true)
+        val color = Color.WHITE
+        volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        volumeSeekBar.applyColor(color)
     }
 
     fun setTintable(color: Int) {
-       volumeSeekBar.applyColor(color)
+        volumeSeekBar.applyColor(color)
     }
 
     fun removeThumb() {
@@ -126,7 +124,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         volumeDown.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         volumeUp.setColorFilter(color, PorterDuff.Mode.SRC_IN)
         //TintHelper.setTint(volumeSeekBar, color, false)
-        ViewUtil.setProgressDrawable(volumeSeekBar, color, true)
+        volumeSeekBar.applyColor(color)
     }
 
     companion object {

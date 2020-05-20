@@ -24,7 +24,6 @@ import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
-import com.google.android.material.slider.Slider
 
 @Suppress("UNCHECKED_CAST")
 fun <T : View> ViewGroup.inflate(@LayoutRes layout: Int): T {
@@ -49,13 +48,6 @@ fun EditText.appHandleColor(): EditText {
     TintHelper.colorHandles(this, ThemeStore.accentColor(context))
     return this
 }
-
-fun Slider.setRange(progress: Float, to: Float) {
-    valueFrom = 0F
-    valueTo = to
-    value = progress
-}
-
 
 fun SeekBar.applyColor(@ColorInt color: Int) {
     thumbTintList = ColorStateList.valueOf(color)
