@@ -14,3 +14,13 @@
 
 package code.name.monkey.retromusic.extensions
 
+import androidx.appcompat.app.AppCompatActivity
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import com.google.android.material.appbar.MaterialToolbar
+
+fun AppCompatActivity.applyToolbar(toolbar: MaterialToolbar) {
+    toolbar.setBackgroundColor(surfaceColor())
+    ToolbarContentTintHelper.colorBackButton(toolbar)
+    setSupportActionBar(toolbar)
+}
+

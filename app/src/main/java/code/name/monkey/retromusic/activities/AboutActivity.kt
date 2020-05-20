@@ -9,8 +9,6 @@ import android.view.View
 import androidx.core.app.ShareCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.Constants.APP_INSTAGRAM_LINK
 import code.name.monkey.retromusic.Constants.APP_TELEGRAM_LINK
@@ -24,6 +22,7 @@ import code.name.monkey.retromusic.Constants.TRANSLATE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.adapter.ContributorAdapter
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
@@ -67,10 +66,7 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
 
-        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
-        ToolbarContentTintHelper.colorBackButton(toolbar)
-        setSupportActionBar(toolbar)
+        applyToolbar(toolbar)
         version.setSummary(getAppVersion())
         setUpView()
         loadContributors()

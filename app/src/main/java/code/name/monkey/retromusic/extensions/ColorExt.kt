@@ -18,6 +18,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.widget.Toolbar
+import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
@@ -26,8 +27,12 @@ fun Int.ripAlpha(): Int {
     return ColorUtil.stripAlpha(this)
 }
 
-fun Any.surfaceColor(context: Context): Int {
-    return ATHUtil.resolveColor(context, R.attr.colorSurface, Color.WHITE)
+fun Context.accentColor(): Int {
+    return ThemeStore.accentColor(this)
+}
+
+fun Context.surfaceColor(): Int {
+    return ATHUtil.resolveColor(this, R.attr.colorSurface, Color.WHITE)
 }
 
 fun Toolbar.backgroundTintList() {
@@ -36,14 +41,14 @@ fun Toolbar.backgroundTintList() {
     backgroundTintList = colorStateList
 }
 
-fun textColorSecondary(context: Context): Int {
-    return ATHUtil.resolveColor(context, android.R.attr.textColorSecondary)
+fun Context.textColorSecondary(): Int {
+    return ATHUtil.resolveColor(this, android.R.attr.textColorSecondary)
 }
 
-fun colorControlNormal(context: Context): Int {
-    return ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
+fun Context.colorControlNormal(): Int {
+    return ATHUtil.resolveColor(this, android.R.attr.colorControlNormal)
 }
 
-fun textColorPrimary(context: Context): Int {
-    return ATHUtil.resolveColor(context, android.R.attr.textColorPrimary)
+fun Context.textColorPrimary(): Int {
+    return ATHUtil.resolveColor(this, android.R.attr.textColorPrimary)
 }
