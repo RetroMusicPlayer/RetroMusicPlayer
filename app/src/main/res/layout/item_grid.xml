@@ -32,34 +32,33 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:paddingHorizontal="8dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="4dp"
-        android:textAppearance="@style/TextViewSubtitle1"
-        android:textColor="?android:attr/textColorPrimary"
-        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageContainer"
-        tools:text="@tools:sample/lorem/random" />
+        app:layout_constraintTop_toBottomOf="@id/imageContainer">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="8dp"
-        android:paddingBottom="8dp"
-        android:singleLine="true"
-        android:textColor="?android:attr/textColorSecondary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="@tools:sample/lorem/random" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textAppearance="@style/TextViewSubtitle1"
+            android:textStyle="bold"
+            tools:text="@tools:sample/full_names" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:singleLine="true"
+            tools:text="@tools:sample/full_names" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,34 +34,33 @@
                 tools:ignore="ContentDescription"
                 tools:src="@tools:sample/avatars" />
 
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="4dp"
-                android:singleLine="true"
-                android:textAppearance="@style/TextViewSubtitle1"
-                android:textStyle="bold"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image"
-                tools:text="@string/bug_report_summary" />
+                app:layout_constraintTop_toBottomOf="@id/image">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingBottom="8dp"
-                android:singleLine="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="@string/bug_report_summary" />
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextViewSubtitle1"
+                    android:textStyle="bold"
+                    tools:text="@tools:sample/full_names"/>
 
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:singleLine="true"
+                    tools:text="@tools:sample/full_names"/>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </FrameLayout>
