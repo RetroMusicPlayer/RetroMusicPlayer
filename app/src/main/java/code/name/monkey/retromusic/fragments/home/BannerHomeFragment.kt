@@ -22,13 +22,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.TintHelper
-import code.name.monkey.retromusic.Constants
-import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.fragments.base.AbsMainActivityFragment
+import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
+import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.loaders.SongLoader
@@ -38,12 +36,9 @@ import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
-import java.io.File
-import java.util.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
 
@@ -63,31 +58,10 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
     }
 
     private fun loadImageFromStorage() {
-        Glide.with(requireContext())
-            .load(
-                File(
-                    PreferenceUtil.getInstance(requireContext()).profileImage,
-                    Constants.USER_PROFILE
-                )
-            )
-            .asBitmap()
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true)
-            .placeholder(
-                TintHelper.createTintedDrawable(
-                    requireContext(),
-                    R.drawable.ic_account_white_24dp,
-                    ThemeStore.accentColor(requireContext())
-                )
-            )
-            .error(
-                TintHelper.createTintedDrawable(
-                    requireContext(),
-                    R.drawable.ic_account_white_24dp,
-                    ThemeStore.accentColor(requireContext())
-                )
-            )
-            .into(userImage)
+        UserProfileGlideRequest.Builder.from(
+            Glide.with(requireActivity()),
+            UserProfileGlideRequest.getUserModel()
+        ).build().into(userImage)
     }
 
     private val displayMetrics: DisplayMetrics
@@ -151,58 +125,24 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         homeModel.sections.observe(viewLifecycleOwner, androidx.lifecycle.Observer { sections ->
             homeAdapter.swapData(sections)
         })
+        loadProfile()
     }
 
     override fun handleBackPress(): Boolean {
         return false
     }
 
-    override fun onResume() {
-        super.onResume()
-        getTimeOfTheDay()
-    }
-
-    private fun getTimeOfTheDay() {
-        val calendar = Calendar.getInstance()
-        val timeOfDay = calendar.get(Calendar.HOUR_OF_DAY)
-        var images = arrayOf<String>()
-        when (timeOfDay) {
-            in 0..5 -> images = resources.getStringArray(R.array.night)
-            in 6..11 -> images = resources.getStringArray(R.array.morning)
-            in 12..15 -> images = resources.getStringArray(R.array.after_noon)
-            in 16..19 -> images = resources.getStringArray(R.array.evening)
-            in 20..23 -> images = resources.getStringArray(R.array.night)
-        }
-        val day = images[Random().nextInt(images.size)]
-        loadTimeImage(day)
-    }
-
-    private fun loadTimeImage(day: String) {
+    private fun loadProfile() {
         bannerImage?.let {
-            val request = Glide.with(requireContext())
-            if (PreferenceUtil.getInstance(requireContext()).bannerImage.isEmpty()) {
-                request.load(day)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .placeholder(R.drawable.material_design_default)
-                    .error(R.drawable.material_design_default)
-                    .into(it)
-            } else {
-                request.load(
-                    File(
-                        PreferenceUtil.getInstance(requireContext()).bannerImage,
-                        USER_BANNER
-                    )
-                )
-                    .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
-                    .skipMemoryCache(true)
-                    .placeholder(R.drawable.material_design_default)
-                    .error(R.drawable.material_design_default)
-                    .into(it)
-            }
+            ProfileBannerGlideRequest.Builder.from(
+                Glide.with(requireContext()),
+                ProfileBannerGlideRequest.getBannerModel()
+            ).build().into(it)
         }
-        loadImageFromStorage()
+        UserProfileGlideRequest.Builder.from(
+            Glide.with(requireActivity()),
+            UserProfileGlideRequest.getUserModel()
+        ).build().into(userImage)
     }
 
     companion object {

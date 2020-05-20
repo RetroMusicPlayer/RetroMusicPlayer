@@ -67,11 +67,8 @@ import static code.name.monkey.retromusic.helper.SortOrder.SongSortOrder;
 public final class PreferenceUtil {
 
     public static final String LIBRARY_CATEGORIES = "library_categories";
-
     public static final String EXTRA_SONG_INFO = "extra_song_info";
-
     public static final String DESATURATED_COLOR = "desaturated_color";
-
     public static final String BLACK_THEME = "black_theme";
     public static final String KEEP_SCREEN_ON = "keep_screen_on";
     public static final String TOGGLE_HOME_BANNER = "toggle_home_banner";
@@ -549,9 +546,6 @@ public final class PreferenceUtil {
         editor.apply();
     }
 
-    public String getProfileImage() {
-        return mPreferences.getString(PROFILE_IMAGE_PATH, "");
-    }
 
     public final String getSAFSDCardUri() {
         return mPreferences.getString(SAF_SDCARD_URI, "");
@@ -697,11 +691,6 @@ public final class PreferenceUtil {
     public void registerOnSharedPreferenceChangedListener(
             SharedPreferences.OnSharedPreferenceChangeListener sharedPreferenceChangeListener) {
         mPreferences.registerOnSharedPreferenceChangeListener(sharedPreferenceChangeListener);
-    }
-
-
-    public void saveProfileImage(String profileImagePath) {
-        mPreferences.edit().putString(PROFILE_IMAGE_PATH, profileImagePath).apply();
     }
 
 
