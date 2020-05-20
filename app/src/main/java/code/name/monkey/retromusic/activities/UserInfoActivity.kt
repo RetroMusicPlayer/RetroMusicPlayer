@@ -153,29 +153,29 @@ class UserInfoActivity : AbsBaseActivity() {
                     isFromMemoryCache: Boolean,
                     isFirstResource: Boolean
                 ): Boolean {
-                    resource?.let { saveBannerImage(it) }
+                    resource?.let { saveImage(it, USER_BANNER) }
                     return false
                 }
             })
             .into(bannerImage)
     }
 
-    private fun saveBannerImage(bitmap: Bitmap) {
+    private fun saveImage(bitmap: Bitmap, fileName: String) {
         CoroutineScope(Dispatchers.IO).launch() {
             val appDir = applicationContext.filesDir
-            val file = File(appDir, USER_BANNER)
+            val file = File(appDir, fileName)
             var successful = false
             try {
                 val os = BufferedOutputStream(FileOutputStream(file))
                 successful = ImageUtil.resizeBitmap(bitmap, 2048)
                     .compress(Bitmap.CompressFormat.WEBP, 100, os)
-                os.close()
+                withContext(Dispatchers.IO) { os.close() }
             } catch (e: IOException) {
                 e.printStackTrace()
             }
             if (successful) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@UserInfoActivity, "Done", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@UserInfoActivity, "Updated", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -203,33 +203,13 @@ class UserInfoActivity : AbsBaseActivity() {
                     isFromMemoryCache: Boolean,
                     isFirstResource: Boolean
                 ): Boolean {
-                    resource?.let { saveImage(it) }
+                    resource?.let { saveImage(it, USER_PROFILE) }
                     return false
                 }
             })
             .into(userImage)
     }
 
-    private fun saveImage(bitmap: Bitmap) {
-        CoroutineScope(Dispatchers.IO).launch() {
-            val appDir = applicationContext.filesDir
-            val file = File(appDir, USER_PROFILE)
-            var successful = false
-            try {
-                val os = BufferedOutputStream(FileOutputStream(file))
-                successful = ImageUtil.resizeBitmap(bitmap, 2048)
-                    .compress(Bitmap.CompressFormat.WEBP, 100, os)
-                os.close()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            if (successful) {
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@UserInfoActivity, "Done", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
 
     companion object {
         private const val PICK_IMAGE_REQUEST = 9002

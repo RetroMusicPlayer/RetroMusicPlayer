@@ -164,6 +164,8 @@
 
     <string name="card_style">Card</string>
 
+    <string name="card_square">Square Card</string>
+
     <string name="carousal">Carousel</string>
 
     <string name="carousal_effect_on_now_playing_screen">Carousel effect on the now playing screen</string>

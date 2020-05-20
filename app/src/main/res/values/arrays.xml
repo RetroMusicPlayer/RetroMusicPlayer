@@ -45,11 +45,13 @@
         <item>@string/dark_theme_name</item>
         <item>@string/follow_system</item>
     </string-array>
+
     <string-array name="pref_general_theme_list_values">
         <item>light</item>
         <item>dark</item>
         <item>auto</item>
     </string-array>
+
     <string-array name="pref_grid_style_list_titles">
         <item>@string/normal_style</item>
         <item>@string/card_style</item>
@@ -82,6 +84,7 @@
         <item>@string/card_color_style</item>
         <item>@string/card_style</item>
         <item>@string/tiny_card_style</item>
+        <item>@string/card_square</item>
     </string-array>
 
     <string-array name="pref_home_grid_style_list_values">
@@ -89,6 +92,7 @@
         <item>1</item>
         <item>2</item>
         <item>3</item>
+        <item>4</item>
     </string-array>
 
     <array name="pref_home_grid_style_layout">
@@ -96,15 +100,14 @@
         <item>@layout/item_artist_square</item>
         <item>@layout/item_album_card</item>
         <item>@layout/item_artist_card</item>
+        <item>@layout/item_image</item>
     </array>
-
 
     <array name="pref_auto_download_images_values">
         <item>always</item>
         <item>only_wifi</item>
         <item>never</item>
     </array>
-
 
     <string-array name="pref_playlists_last_added_interval_titles">
         <item>@string/today</item>
