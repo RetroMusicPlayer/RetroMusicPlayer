@@ -14,6 +14,7 @@
 
 package code.name.monkey.retromusic.fragments.player.circle
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -22,6 +23,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
+import android.widget.SeekBar
 import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
@@ -29,13 +32,17 @@ import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper.Callback
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
@@ -98,9 +105,8 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
             ThemeStore.accentColor(requireContext()),
             false
         )
-        volumeSeekBar.progressColor = ThemeStore.accentColor(requireContext())
-        volumeSeekBar.arcColor = ColorUtil
-            .withAlpha(ThemeStore.accentColor(requireContext()), 0.25f)
+        volumeSeekBar.progressColor = accentColor()
+        volumeSeekBar.arcColor = ColorUtil.withAlpha(accentColor(), 0.25f)
         setUpPlayPauseFab()
         setUpPrevNext()
         setUpPlayerToolbar()
@@ -204,13 +210,12 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
         }
     }
 
-    override fun onAudioVolumeChanged(currentVolume: Float, maxVolume: Float) {
+    override fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int) {
         if (volumeSeekBar == null) {
             return
         }
-
-        volumeSeekBar.max = maxVolume.toInt()
-        volumeSeekBar.progress = currentVolume.toInt()
+        volumeSeekBar.max = maxVolume
+        volumeSeekBar.progress = currentVolume
     }
 
     override fun onDestroyView() {
@@ -231,22 +236,30 @@ class CirclePlayerFragment : AbsPlayerFragment(), Callback, OnAudioVolumeChanged
     override fun onStopTrackingTouch(seekArc: SeekArc?) {
     }
 
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.valueTo = total.toFloat()
-        progressSlider.value = progress.toFloat()
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    fun setUpProgressSlider() {
+        progressSlider.applyColor(accentColor())
+        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    MusicPlayerRemote.seekTo(progress)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
+                }
+            }
+        })
     }
 
-    fun setUpProgressSlider() {
-        progressSlider.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) {
-                MusicPlayerRemote.seekTo(value.toInt())
-                onUpdateProgressViews(
-                    MusicPlayerRemote.songProgressMillis,
-                    MusicPlayerRemote.songDurationMillis
-                )
-            }
-        }
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        progressSlider.max = total
+
+        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
+        animator.interpolator = LinearInterpolator()
+        animator.start()
+
+        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
 }

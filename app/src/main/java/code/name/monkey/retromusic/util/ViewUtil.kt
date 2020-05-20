@@ -41,8 +41,7 @@ object ViewUtil {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             val layerDrawable = progressSlider.progressDrawable as LayerDrawable
             val progressDrawable = layerDrawable.findDrawableByLayerId(android.R.id.progress)
-            progressDrawable.colorFilter =
-                BlendModeColorFilterCompat.createBlendModeColorFilterCompat(newColor, SRC_IN)
+            progressDrawable.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(newColor, SRC_IN)
         } else {
             progressSlider.progressTintList = ColorStateList.valueOf(newColor)
         }

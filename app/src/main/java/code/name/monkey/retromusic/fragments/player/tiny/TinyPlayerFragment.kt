@@ -25,26 +25,11 @@ import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_tiny_player.*
-import kotlinx.android.synthetic.main.fragment_tiny_player.playerToolbar
 
 class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Callback {
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressBar.max = total
+    private var lastColor: Int = 0
+    private var toolbarColor: Int = 0
 
-        val animator = ObjectAnimator.ofInt(progressBar, "progress", progress)
-
-        val animatorSet = AnimatorSet()
-        animatorSet.playSequentially(animator)
-
-        animatorSet.duration = 1500
-        animatorSet.interpolator = LinearInterpolator()
-        animatorSet.start()
-
-        playerSongTotalTime.text = String.format(
-            "%s/%s", MusicUtil.getReadableDurationString(total.toLong()),
-            MusicUtil.getReadableDurationString(progress.toLong())
-        )
-    }
 
     override fun playerToolbar(): Toolbar {
         return playerToolbar
@@ -61,10 +46,9 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     }
 
     override fun toolbarIconColor(): Int {
-        return lastColor
+        return toolbarColor
     }
 
-    private var lastColor: Int = 0
 
     override val paletteColor: Int
         get() = lastColor
@@ -72,6 +56,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
 
     override fun onColorChanged(color: MediaNotificationProcessor) {
         lastColor = color.backgroundColor
+        toolbarColor = color.secondaryTextColor
         controlsFragment.setColor(color)
         callbacks?.onPaletteColorChanged()
 
@@ -80,7 +65,6 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         text.setTextColor(color.secondaryTextColor)
         songInfo.setTextColor(color.secondaryTextColor)
         ViewUtil.setProgressDrawable(progressBar, color.backgroundColor)
-
 
         Handler().post {
             ToolbarContentTintHelper.colorizeToolbar(
@@ -175,5 +159,23 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
     override fun onPlayingMetaChanged() {
         super.onPlayingMetaChanged()
         updateSong()
+    }
+
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        progressBar.max = total
+
+        val animator = ObjectAnimator.ofInt(progressBar, "progress", progress)
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playSequentially(animator)
+
+        animatorSet.duration = 1500
+        animatorSet.interpolator = LinearInterpolator()
+        animatorSet.start()
+
+        playerSongTotalTime.text = String.format(
+            "%s/%s", MusicUtil.getReadableDurationString(total.toLong()),
+            MusicUtil.getReadableDurationString(progress.toLong())
+        )
     }
 }

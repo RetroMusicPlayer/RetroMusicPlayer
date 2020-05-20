@@ -14,5 +14,5 @@
 package code.name.monkey.retromusic.volume
 
 interface OnAudioVolumeChangedListener {
-    fun onAudioVolumeChanged(currentVolume: Float, maxVolume: Float)
+    fun onAudioVolumeChanged(currentVolume: Int, maxVolume: Int)
 }

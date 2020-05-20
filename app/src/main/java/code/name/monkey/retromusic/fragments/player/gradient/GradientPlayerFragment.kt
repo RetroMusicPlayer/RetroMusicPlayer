@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.fragments.player.gradient
 
+import android.animation.ObjectAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -8,7 +9,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.LinearInterpolator
 import android.widget.PopupMenu
+import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -26,10 +29,12 @@ import code.name.monkey.retromusic.extensions.hide
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.VolumeFragment
+import code.name.monkey.retromusic.fragments.base.AbsPlayerControlsFragment
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
+import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
@@ -305,24 +310,6 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         }
     }
 
-    override fun onUpdateProgressViews(progress: Int, total: Int) {
-        progressSlider.valueTo = total.toFloat()
-        progressSlider.value = progress.toFloat()
-        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
-        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
-    }
-
-    fun setUpProgressSlider() {
-        progressSlider.addOnChangeListener { _, value, fromUser ->
-            if (fromUser) {
-                MusicPlayerRemote.seekTo(value.toInt())
-                onUpdateProgressViews(
-                    MusicPlayerRemote.songProgressMillis,
-                    MusicPlayerRemote.songDurationMillis
-                )
-            }
-        }
-    }
 
     private fun setUpPlayPauseFab() {
         playPauseButton.setOnClickListener(PlayPauseButtonOnClickHandler())
@@ -469,7 +456,33 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         linearLayoutManager.scrollToPositionWithOffset(MusicPlayerRemote.position + 1, 0)
     }
 
-    fun updateFavorite() {
+    fun setUpProgressSlider() {
+        progressSlider.setOnSeekBarChangeListener(object : SimpleOnSeekbarChangeListener() {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    MusicPlayerRemote.seekTo(progress)
+                    onUpdateProgressViews(
+                        MusicPlayerRemote.songProgressMillis,
+                        MusicPlayerRemote.songDurationMillis
+                    )
+                }
+            }
+        })
+    }
+
+    override fun onUpdateProgressViews(progress: Int, total: Int) {
+        progressSlider.max = total
+
+        val animator = ObjectAnimator.ofInt(progressSlider, "progress", progress)
+        animator.duration = AbsPlayerControlsFragment.SLIDER_ANIMATION_TIME
+        animator.interpolator = LinearInterpolator()
+        animator.start()
+
+        songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
+        songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
+    }
+
+    private fun updateFavorite() {
         if (updateIsFavoriteTask != null) {
             updateIsFavoriteTask?.cancel(false)
         }

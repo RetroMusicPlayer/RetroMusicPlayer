@@ -207,11 +207,9 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     override fun onShow() {
-        playbackControlsFragment.show()
     }
 
     override fun onHide() {
-        playbackControlsFragment.hide()
         onBackPressed()
     }
 

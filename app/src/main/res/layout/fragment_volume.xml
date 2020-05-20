@@ -24,21 +24,18 @@
         app:srcCompat="@drawable/ic_volume_down_white_24dp"
         app:tint="?attr/colorControlNormal" />
 
-    <com.google.android.material.slider.Slider
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/volumeSeekBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:maxHeight="2dp"
         android:progressDrawable="@drawable/color_progress_seek"
-        app:labelBehavior="gone"
         app:layout_constraintBottom_toBottomOf="@+id/volumeDown"
         app:layout_constraintEnd_toStartOf="@+id/volumeUp"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/volumeDown"
-        app:layout_constraintTop_toTopOf="@+id/volumeDown"
-        app:thumbRadius="@dimen/slider_thumb_radius"
-        app:trackHeight="2dp" />
+        app:layout_constraintTop_toTopOf="@+id/volumeDown" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/volumeUp"

@@ -128,14 +128,12 @@
         app:layout_constraintStart_toEndOf="@+id/nextButton"
         app:layout_constraintTop_toTopOf="@+id/playPauseButton">
 
-        <com.google.android.material.slider.Slider
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/songTotalTime"
             android:layout_toRightOf="@id/songCurrentProgress"
-            app:labelBehavior="gone"
-            app:thumbColor="?attr/colorSurface"
             tools:ignore="RtlHardcoded,UnusedAttribute"
             tools:progress="20" />
 

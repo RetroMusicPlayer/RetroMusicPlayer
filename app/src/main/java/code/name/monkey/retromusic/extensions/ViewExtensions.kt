@@ -14,10 +14,13 @@
 
 package code.name.monkey.retromusic.extensions
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.SeekBar
+import androidx.annotation.ColorInt
 import androidx.annotation.LayoutRes
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.TintHelper
@@ -51,4 +54,11 @@ fun Slider.setRange(progress: Float, to: Float) {
     valueFrom = 0F
     valueTo = to
     value = progress
+}
+
+
+fun SeekBar.applyColor(@ColorInt color: Int) {
+    thumbTintList = ColorStateList.valueOf(color)
+    progressTintList = ColorStateList.valueOf(color)
+    progressBackgroundTintList = ColorStateList.valueOf(color)
 }

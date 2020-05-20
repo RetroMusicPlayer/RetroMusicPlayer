@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:ignore="MissingPrefix">
 
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songCurrentProgress"
         android:layout_width="wrap_content"
@@ -24,16 +23,13 @@
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
-    <com.google.android.material.slider.Slider
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:haloRadius="0dp"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
-        app:layout_constraintTop_toTopOf="parent"
-        app:thumbRadius="@dimen/slider_thumb_radius"
-        app:trackHeight="@dimen/slider_track_height" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
@@ -85,6 +81,7 @@
         android:id="@+id/playPauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="?attr/roundSelector"
         app:layout_constraintBottom_toTopOf="@+id/volumeFragmentContainer"
         app:layout_constraintEnd_toStartOf="@+id/nextButton"

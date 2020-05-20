@@ -48,8 +48,8 @@ public class AudioVolumeContentObserver extends ContentObserver {
     @Override
     public void onChange(boolean selfChange, Uri uri) {
         if (mAudioManager != null && mListener != null) {
-            float maxVolume = mAudioManager.getStreamMaxVolume(mAudioStreamType);
-            float currentVolume = mAudioManager.getStreamVolume(mAudioStreamType);
+            int maxVolume = mAudioManager.getStreamMaxVolume(mAudioStreamType);
+            int currentVolume = mAudioManager.getStreamVolume(mAudioStreamType);
             if (currentVolume != mLastVolume) {
                 mLastVolume = currentVolume;
                 mListener.onAudioVolumeChanged(currentVolume, maxVolume);

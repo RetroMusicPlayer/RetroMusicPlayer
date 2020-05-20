@@ -37,22 +37,14 @@
         tools:ignore="RtlHardcoded,RtlSymmetry"
         tools:text="00:22" />
 
-    <com.google.android.material.slider.Slider
+    <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:splitTrack="false"
-        app:haloColor="@color/md_white_semi_transparent"
-        app:haloRadius="0dp"
-        app:labelBehavior="gone"
         app:layout_constraintEnd_toStartOf="@id/songTotalTime"
         app:layout_constraintStart_toEndOf="@id/songCurrentProgress"
-        app:layout_constraintTop_toTopOf="parent"
-        app:thumbColor="@color/md_white_1000"
-        app:thumbRadius="@dimen/slider_thumb_radius"
-        app:trackColorActive="@color/md_white_1000"
-        app:trackColorInactive="@color/md_white_semi_transparent"
-        app:trackHeight="@dimen/slider_track_height" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
@@ -120,10 +112,10 @@
             android:freezesText="true"
             android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:textAppearance="@style/TextViewBody1"
             android:textColor="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toTopOf="@+id/songInfo"

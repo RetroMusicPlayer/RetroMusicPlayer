@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/playback_controls"
     android:layout_width="match_parent"
@@ -54,20 +53,12 @@
                 tools:text="22.00" />
         </LinearLayout>
 
-        <com.google.android.material.slider.Slider
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            app:haloColor="@color/md_white_semi_transparent"
-            app:haloRadius="0dp"
-            app:labelBehavior="gone"
-            app:thumbColor="@color/md_white_1000"
-            app:thumbRadius="@dimen/slider_thumb_radius"
-            app:trackColorActive="@color/md_white_1000"
-            app:trackColorInactive="@color/md_white_semi_transparent"
-            app:trackHeight="@dimen/slider_track_height"
             tools:progress="20" />
 
         <com.google.android.material.textview.MaterialTextView
