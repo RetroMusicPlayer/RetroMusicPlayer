@@ -124,7 +124,7 @@ class LockScreenPlayerControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             color.primaryTextColor
         } else {
-            textColorSecondary(requireContext())
+            textColorSecondary( )
         }.ripAlpha()
 
         volumeFragment?.setTintable(colorFinal)

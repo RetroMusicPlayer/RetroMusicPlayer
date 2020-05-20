@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
@@ -154,13 +155,12 @@ class AdaptiveFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Call
     }
 
     private fun setUpPlayerToolbar() {
-        val primaryColor = ATHUtil.resolveColor(requireContext(), R.attr.colorPrimary)
         playerToolbar.apply {
             inflateMenu(R.menu.menu_player)
             setNavigationOnClickListener { requireActivity().onBackPressed() }
-            ToolbarContentTintHelper.colorizeToolbar(this, primaryColor, requireActivity())
-            setTitleTextColor(textColorPrimary(requireContext()))
-            setSubtitleTextColor(textColorSecondary(requireContext()))
+            ToolbarContentTintHelper.colorizeToolbar(this, surfaceColor(), requireActivity())
+            setTitleTextColor(textColorPrimary())
+            setSubtitleTextColor(textColorSecondary())
             setOnMenuItemClickListener(this@AdaptiveFragment)
         }
     }

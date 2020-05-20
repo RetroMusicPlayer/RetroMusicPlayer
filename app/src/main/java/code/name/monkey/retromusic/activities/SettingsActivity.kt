@@ -8,6 +8,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -33,12 +34,7 @@ class SettingsActivity : AbsBaseActivity() {
 
     private fun setupToolbar() {
         setTitle(R.string.action_settings)
-        toolbar.apply {
-            setBackgroundColor(ATHUtil.resolveColor(this@SettingsActivity, R.attr.colorSurface))
-            setNavigationOnClickListener { onBackPressed() }
-            ToolbarContentTintHelper.colorBackButton(toolbar)
-        }
-        setSupportActionBar(toolbar)
+        applyToolbar(toolbar)
     }
 
     fun setupFragment(fragment: Fragment, @StringRes titleName: Int) {

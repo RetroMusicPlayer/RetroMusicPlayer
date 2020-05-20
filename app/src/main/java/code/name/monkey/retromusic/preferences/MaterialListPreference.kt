@@ -43,7 +43,7 @@ class MaterialListPreference @JvmOverloads constructor(
 
     init {
         icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-            colorControlNormal(context),
+            context.colorControlNormal(),
             SRC_IN
         )
     }

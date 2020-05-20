@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.adapter.song.PlayingQueueAdapter
+import code.name.monkey.retromusic.extensions.accentColor
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.util.MusicUtil
 import com.h6ah4i.android.widget.advrecyclerview.animator.DraggableItemAnimator
@@ -174,13 +174,11 @@ open class PlayingQueueActivity : AbsMusicServiceActivity() {
 
     private fun setupToolbar() {
         toolbar.subtitle = getUpNextAndQueueTime()
-
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
+        toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
-        val accentColor = ThemeStore.accentColor(this)
-        clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor)
+        clearQueue.backgroundTintList = ColorStateList.valueOf(accentColor())
         ColorStateList.valueOf(
-            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(accentColor))
+            MaterialValueHelper.getPrimaryTextColor(this, ColorUtil.isColorLight(accentColor()))
         ).apply {
             clearQueue.setTextColor(this)
             clearQueue.iconTint = this

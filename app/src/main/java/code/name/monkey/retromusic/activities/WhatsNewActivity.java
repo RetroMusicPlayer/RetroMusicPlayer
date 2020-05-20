@@ -11,9 +11,6 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.widget.NestedScrollView;
-
-import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -58,14 +55,9 @@ public class WhatsNewActivity extends AbsBaseActivity {
 
         WebView webView = findViewById(R.id.webView);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
-
         toolbar.setBackgroundColor(ATHUtil.INSTANCE.resolveColor(this, R.attr.colorSurface));
-        //setSupportActionBar(toolbar);
-
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
         ToolbarContentTintHelper.colorBackButton(toolbar);
-        NestedScrollView nestedScrollView = findViewById(R.id.container);
 
         try {
             StringBuilder buf = new StringBuilder();

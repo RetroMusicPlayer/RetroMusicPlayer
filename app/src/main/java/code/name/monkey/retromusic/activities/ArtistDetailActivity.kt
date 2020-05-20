@@ -24,6 +24,7 @@ import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
@@ -262,8 +263,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
+
+        toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

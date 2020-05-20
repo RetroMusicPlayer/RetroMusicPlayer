@@ -27,6 +27,7 @@ import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
+import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.glide.AlbumGlideRequest
 import code.name.monkey.retromusic.glide.ArtistGlideRequest
 import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
@@ -276,8 +277,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
+
+        toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
         supportActionBar?.title = null
     }

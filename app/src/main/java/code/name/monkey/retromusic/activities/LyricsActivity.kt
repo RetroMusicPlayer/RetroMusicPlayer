@@ -22,6 +22,8 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
 import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
+import code.name.monkey.retromusic.extensions.surfaceColor
+import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
@@ -33,9 +35,7 @@ import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.input.getInputLayout
 import com.afollestad.materialdialogs.input.input
 import kotlinx.android.synthetic.main.activity_lyrics.*
@@ -111,9 +111,9 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
             addOnPageChangeListener(this@LyricsActivity)
         }
 
-        val toolbarColor = ATHUtil.resolveColor(this, R.attr.colorSurface)
-        toolbar.setBackgroundColor(toolbarColor)
-        tabs.setBackgroundColor(toolbarColor)
+
+        toolbar.setBackgroundColor(surfaceColor())
+        tabs.setBackgroundColor(surfaceColor())
         ToolbarContentTintHelper.colorBackButton(toolbar)
         setSupportActionBar(toolbar)
         tabs.setupWithViewPager(viewPager)
@@ -126,7 +126,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
             )
         )
         tabs.setTabTextColors(
-            ATHUtil.resolveColor(this, android.R.attr.textColorSecondary),
+            textColorSecondary(),
             ThemeStore.accentColor(this)
         )
         tabs.setSelectedTabIndicatorColor(ThemeStore.accentColor(this))

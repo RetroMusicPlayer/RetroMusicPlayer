@@ -84,10 +84,10 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         val song = MusicPlayerRemote.currentSong
         val title = SpannableString(song.title)
-        title.setSpan(ForegroundColorSpan(textColorPrimary(requireContext())), 0, title.length, 0)
+        title.setSpan(ForegroundColorSpan(textColorPrimary()), 0, title.length, 0)
 
         val text = SpannableString(song.artistName)
-        text.setSpan(ForegroundColorSpan(textColorSecondary(requireContext())), 0, text.length, 0)
+        text.setSpan(ForegroundColorSpan(textColorSecondary()), 0, text.length, 0)
 
         builder.append(title).append(" • ").append(text)
 

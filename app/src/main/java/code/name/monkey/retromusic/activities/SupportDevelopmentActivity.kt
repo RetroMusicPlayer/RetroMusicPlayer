@@ -212,9 +212,9 @@ class SkuDetailsAdapter(
         val titleTextColor = if (purchased) ATHUtil.resolveColor(
             donationsDialog,
             android.R.attr.textColorHint
-        ) else textColorPrimary(donationsDialog)
+        ) else donationsDialog.textColorPrimary()
         val contentTextColor =
-            if (purchased) titleTextColor else textColorSecondary(donationsDialog)
+            if (purchased) titleTextColor else donationsDialog.textColorSecondary()
 
         viewHolder.title.setTextColor(titleTextColor)
         viewHolder.text.setTextColor(contentTextColor)

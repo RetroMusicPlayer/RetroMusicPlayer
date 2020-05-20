@@ -116,7 +116,7 @@ class MaterialControlsFragment : AbsPlayerControlsFragment() {
         val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
             lastPlaybackControlsColor
         } else {
-            textColorSecondary(requireContext())
+            textColorSecondary( )
         }.ripAlpha()
 
         text.setTextColor(colorFinal)

@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.loaders.PlaylistLoader
@@ -117,8 +118,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
     }
 
     private fun setUpToolBar() {
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-        setSupportActionBar(toolbar)
+        applyToolbar(toolbar)
         title = playlist.name
     }
 

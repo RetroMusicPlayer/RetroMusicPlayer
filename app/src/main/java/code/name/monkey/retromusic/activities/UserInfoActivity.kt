@@ -14,7 +14,6 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.widget.Toast
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
@@ -23,12 +22,11 @@ import code.name.monkey.retromusic.Constants.USER_BANNER
 import code.name.monkey.retromusic.Constants.USER_PROFILE
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.util.Compressor
 import code.name.monkey.retromusic.util.ImageUtil.getResizedBitmap
 import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 import kotlinx.android.synthetic.main.activity_user_info.*
 import kotlinx.coroutines.CoroutineScope
@@ -49,9 +47,7 @@ class UserInfoActivity : AbsBaseActivity() {
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
 
-        toolbar.setBackgroundColor(ATHUtil.resolveColor(this, R.attr.colorSurface))
-        setSupportActionBar(toolbar)
-
+        applyToolbar(toolbar)
         MaterialUtil.setTint(nameContainer, false)
         name.setText(PreferenceUtil.getInstance(this).userName)
 
@@ -91,7 +87,8 @@ class UserInfoActivity : AbsBaseActivity() {
                 { _, position, _ ->
                     when (position) {
                         0 -> selectBannerImage()
-                        1 -> PreferenceUtil.getInstance(this@UserInfoActivity).setBannerImagePath("")
+                        1 -> PreferenceUtil.getInstance(this@UserInfoActivity)
+                            .setBannerImagePath("")
                     }
                 }
             }
