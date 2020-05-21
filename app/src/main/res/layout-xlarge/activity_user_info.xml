@@ -23,7 +23,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="128dp"
@@ -31,130 +31,122 @@
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="24dp"
+            app:cardCornerRadius="24dp"
+            app:layout_constraintDimensionRatio="21:10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/bannerImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintDimensionRatio="16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/material_design_default" />
+
+                <View
+                    android:id="@+id/bannerSelect"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/twenty_percent_black_overlay"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?roundSelector"
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="@id/bannerImage"
+                    app:layout_constraintEnd_toEndOf="@id/bannerImage"
+                    app:layout_constraintStart_toStartOf="@id/bannerImage"
+                    app:layout_constraintTop_toTopOf="@id/bannerImage"
+                    app:srcCompat="@drawable/ic_add_photo_white_24dp"
+                    app:tint="@color/md_white_1000" />
+
+                <code.name.monkey.retromusic.views.RetroShapeableImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:retroCornerSize="36dp"
+                    app:srcCompat="@drawable/ic_account_white_24dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:gravity="center"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_add_photo_white_24dp"
+                    app:layout_constraintBottom_toBottomOf="@id/userImage"
+                    app:layout_constraintEnd_toEndOf="@id/userImage"
+                    app:layout_constraintStart_toStartOf="@id/userImage"
+                    app:layout_constraintTop_toTopOf="@id/userImage"
+                    app:tint="?android:attr/colorControlNormal" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameContainer"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="true"
+            app:layout_constraintBottom_toBottomOf="@id/next"
+            app:layout_constraintEnd_toStartOf="@id/next"
+            app:layout_constraintStart_toStartOf="@id/imageContainer"
+            app:layout_constraintTop_toTopOf="@id/next">
 
-            <com.google.android.material.card.MaterialCardView
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardUseCompatPadding="true">
+                android:background="@null"
+                android:hint="@string/my_name"
+                android:inputType="textPersonName|textCapWords|text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <FrameLayout
-                    android:id="@+id/imageContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/bannerImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="228dp"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/material_design_default" />
-
-                    <View
-                        android:id="@+id/bannerSelect"
-                        android:layout_width="match_parent"
-                        android:layout_height="228dp"
-                        android:background="@color/twenty_percent_black_overlay" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="?roundSelector"
-                        android:padding="16dp"
-                        app:srcCompat="@drawable/ic_add_photo_white_24dp"
-                        app:tint="@color/md_white_1000" />
-
-                    <FrameLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_margin="8dp">
-
-                        <code.name.monkey.retromusic.views.RetroShapeableImageView
-                            android:id="@+id/userImage"
-                            android:layout_width="72dp"
-                            android:layout_height="72dp"
-                            android:layout_gravity="center"
-                            android:scaleType="centerCrop"
-                            app:retroCornerSize="36dp"
-                            app:srcCompat="@drawable/ic_person_flat"
-                            app:strokeColor="?attr/colorSurface"
-                            app:strokeWidth="2dp" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="16dp"
-                            android:gravity="center"
-                            android:padding="12dp"
-                            android:src="@drawable/ic_add_photo_white_24dp"
-                            app:tint="?android:attr/colorControlNormal" />
-                    </FrameLayout>
-
-                </FrameLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nameContainer"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:hintEnabled="true">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/my_name"
-                    android:inputType="textPersonName|textCapWords|text"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/bioContainer"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                app:hintEnabled="true">
-
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:hint="@string/bio"
-                    android:inputType="textPersonName|textCapWords|text"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:visibility="gone" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="@string/save"
-        app:icon="@drawable/ic_save_white_24dp"
-        app:iconGravity="textStart" />
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/save"
+            app:icon="@drawable/ic_save_white_24dp"
+            app:iconGravity="textStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageContainer"
+            app:layout_constraintStart_toEndOf="@id/nameContainer"
+            app:layout_constraintTop_toBottomOf="@id/imageContainer" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
