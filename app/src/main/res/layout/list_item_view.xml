@@ -31,8 +31,10 @@
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="@android:id/title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@android:id/title"
         app:tint="?attr/colorControlNormal"
         tools:srcCompat="@drawable/ic_telegram_white" />
 

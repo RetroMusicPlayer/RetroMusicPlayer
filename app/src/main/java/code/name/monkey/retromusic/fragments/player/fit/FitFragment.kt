@@ -82,10 +82,9 @@ class FitFragment : AbsPlayerFragment() {
     private fun setUpSubFragments() {
         playbackControlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as FitPlaybackControlsFragment
-        val playerAlbumCoverFragment: PlayerAlbumCoverFragment =
+        val playerAlbumCoverFragment =
             childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment
         playerAlbumCoverFragment.setCallbacks(this)
-        playerAlbumCoverFragment.removeEffect()
     }
 
     private fun setUpPlayerToolbar() {

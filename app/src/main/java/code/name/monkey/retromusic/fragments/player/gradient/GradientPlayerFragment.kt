@@ -207,7 +207,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         container.setBackgroundColor(ColorUtil.darkenColor(color.backgroundColor))
 
         lastPlaybackControlsColor = color.primaryTextColor
-        lastDisabledPlaybackControlsColor = color.secondaryTextColor
+        lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
 
         title.setTextColor(lastPlaybackControlsColor)
         text.setTextColor(lastDisabledPlaybackControlsColor)
@@ -304,9 +304,9 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
 
     private fun updatePlayPauseDrawableState() {
         if (MusicPlayerRemote.isPlaying) {
-            playPauseButton.setImageResource(R.drawable.ic_pause_sharp_white_64dp)
+            playPauseButton.setImageResource(R.drawable.ic_pause_white_64dp)
         } else {
-            playPauseButton.setImageResource(R.drawable.ic_play_arrow_sharp_white_64dp)
+            playPauseButton.setImageResource(R.drawable.ic_play_arrow_white_64dp)
         }
     }
 

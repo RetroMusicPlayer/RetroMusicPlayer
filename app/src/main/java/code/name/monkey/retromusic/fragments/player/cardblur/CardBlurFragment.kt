@@ -88,12 +88,7 @@ class CardBlurFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPreferen
     private fun setUpSubFragments() {
         playbackControlsFragment =
             childFragmentManager.findFragmentById(R.id.playbackControlsFragment) as CardBlurPlaybackControlsFragment
-        val playerAlbumCoverFragment =
-            childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?
-        if (playerAlbumCoverFragment != null) {
-            playerAlbumCoverFragment.setCallbacks(this)
-            playerAlbumCoverFragment.removeEffect()
-        }
+        (childFragmentManager.findFragmentById(R.id.playerAlbumCoverFragment) as PlayerAlbumCoverFragment?)?.setCallbacks(this)
     }
 
     private fun setUpPlayerToolbar() {

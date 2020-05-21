@@ -122,9 +122,6 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
         callbacks = listener
     }
 
-    fun removeEffect() {
-        viewPager.setPageTransformer(false, null)
-    }
 
     interface Callbacks {
 

@@ -111,7 +111,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     override fun setColor(color: MediaNotificationProcessor) {
-        if (ATHUtil.isWindowBackgroundDark(requireContext())
+        if (!ATHUtil.isWindowBackgroundDark(requireContext())
         ) {
             lastPlaybackControlsColor = MaterialValueHelper.getSecondaryTextColor(activity, true)
             lastDisabledPlaybackControlsColor =
