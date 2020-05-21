@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include layout="@layout/shadow_statusbar_toolbar" />
-    
+
     <FrameLayout
         android:id="@+id/statusBarContainer"
         android:layout_width="match_parent"

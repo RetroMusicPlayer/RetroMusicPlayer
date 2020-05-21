@@ -38,7 +38,6 @@ class SongsFragment :
     }
 
     override fun createLayoutManager(): GridLayoutManager {
-        println("createLayoutManager: ${getGridSize()}")
         return GridLayoutManager(requireActivity(), getGridSize()).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
@@ -118,7 +117,6 @@ class SongsFragment :
     }
 
     companion object {
-
         @JvmField
         var TAG: String = SongsFragment::class.java.simpleName
 
