@@ -9,16 +9,16 @@
         android:id="@+id/timerDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp"
         android:textAppearance="@style/TextViewHeadline6" />
-
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
-        android:paddingTop="12dp"
         android:splitTrack="false"
         tools:progress="20" />
 
@@ -26,7 +26,9 @@
         android:id="@+id/shouldFinishLastSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/finish_last_song"
         android:textAppearance="@style/TextViewSubtitle1" />
 

@@ -18,29 +18,30 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_PLAYLIST
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.*
 
 class DeletePlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val playlists = requireArguments().getParcelableArrayList<Playlist>("playlist")
+        val playlists = extraNotNull<List<Playlist>>(EXTRA_PLAYLIST).value
         val title: Int
         val message: CharSequence
         //noinspection ConstantConditions
-        if (playlists!!.size > 1) {
+        if (playlists.size > 1) {
             title = R.string.delete_playlists_title
             message = HtmlCompat.fromHtml(
-                getString(R.string.delete_x_playlists, playlists.size),
+                String.format(getString(R.string.delete_x_playlists), playlists.size),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         } else {
             title = R.string.delete_playlist_title
             message = HtmlCompat.fromHtml(
-                getString(R.string.delete_playlist_x, playlists[0].name),
+                String.format(getString(R.string.delete_playlist_x), playlists[0].name),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         }
@@ -69,7 +70,7 @@ class DeletePlaylistDialog : DialogFragment() {
         fun create(playlist: ArrayList<Playlist>): DeletePlaylistDialog {
             val dialog = DeletePlaylistDialog()
             val args = Bundle()
-            args.putParcelableArrayList("playlist", playlist)
+            args.putParcelableArrayList(EXTRA_PLAYLIST, playlist)
             dialog.arguments = args
             return dialog
         }

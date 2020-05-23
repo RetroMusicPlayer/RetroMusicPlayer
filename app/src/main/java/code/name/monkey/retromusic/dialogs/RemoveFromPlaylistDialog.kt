@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.PlaylistSong
@@ -27,7 +28,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 class RemoveFromPlaylistDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val songs = requireArguments().getParcelableArrayList<PlaylistSong>("songs")
+        val songs = requireArguments().getParcelableArrayList<PlaylistSong>(EXTRA_SONG)
 
         var title = 0
         var message: CharSequence = ""
@@ -35,14 +36,14 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             if (songs.size > 1) {
                 title = R.string.remove_songs_from_playlist_title
                 message = HtmlCompat.fromHtml(
-                    getString(string.remove_x_songs_from_playlist, songs.size),
+                    String.format(getString(string.remove_x_songs_from_playlist), songs.size),
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
             } else {
                 title = R.string.remove_song_from_playlist_title
                 message = HtmlCompat.fromHtml(
-                    getString(
-                        code.name.monkey.retromusic.R.string.remove_song_x_from_playlist,
+                    String.format(
+                        getString(string.remove_song_x_from_playlist),
                         songs[0].title
                     ),
                     HtmlCompat.FROM_HTML_MODE_LEGACY
@@ -50,8 +51,10 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
         }
 
-        return MaterialAlertDialogBuilder(requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(R.string.remove_action) { _, _ ->
@@ -75,7 +78,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         fun create(songs: ArrayList<PlaylistSong>): RemoveFromPlaylistDialog {
             val dialog = RemoveFromPlaylistDialog()
             val args = Bundle()
-            args.putParcelableArrayList("songs", songs)
+            args.putParcelableArrayList(EXTRA_SONG, songs)
             dialog.arguments = args
             return dialog
         }

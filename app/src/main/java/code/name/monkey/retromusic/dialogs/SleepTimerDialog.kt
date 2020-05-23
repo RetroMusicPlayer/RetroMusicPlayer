@@ -35,9 +35,7 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
 import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
-import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtilKT
-import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
 import com.afollestad.materialdialogs.actions.getActionButton
@@ -169,19 +167,12 @@ class SleepTimerDialog : DialogFragment() {
         ) {
 
         override fun onTick(millisUntilFinished: Long) {
-            materialDialog.getActionButton(WhichButton.NEGATIVE).text = String.format(
-                "%s %s",
-                materialDialog.context.getString(R.string.cancel_current_timer),
-                " (" + MusicUtil.getReadableDurationString(millisUntilFinished) + ")"
-            )
+            println("onTick: $millisUntilFinished")
+            seekBar.progress = millisUntilFinished.toInt()
         }
 
         override fun onFinish() {
             updateCancelButton()
         }
-    }
-
-    private fun setProgressBarColor(dark: Int) {
-        ViewUtil.setProgressDrawable(progressSlider = seekBar, newColor = dark)
     }
 }

@@ -20,6 +20,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.extensions.extraNotNull
@@ -39,25 +40,27 @@ class DeleteSongsDialog : DialogFragment() {
     private var deleteSongsAsyncTask: DeleteSongsAsyncTask? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val songs = extraNotNull<List<Song>>("songs¬").value
+        val songs = extraNotNull<List<Song>>(EXTRA_SONG).value
         var title = 0
         var message: CharSequence = ""
         if (songs.size > 1) {
             title = R.string.delete_songs_title
             message = HtmlCompat.fromHtml(
-                getString(R.string.delete_x_songs, songs.size),
+                String.format(getString(R.string.delete_x_songs), songs.size),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         } else {
             title = R.string.delete_song_title
             message = HtmlCompat.fromHtml(
-                getString(R.string.delete_song_x, songs[0].title),
+                String.format(getString(R.string.delete_song_x), songs[0].title),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         }
 
-        return MaterialAlertDialogBuilder(requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
             .setTitle(title)
             .setMessage(message)
             .setCancelable(false)
@@ -111,7 +114,7 @@ class DeleteSongsDialog : DialogFragment() {
         fun create(songs: List<Song>): DeleteSongsDialog {
             val dialog = DeleteSongsDialog()
             val args = Bundle()
-            args.putParcelableArrayList("songs", ArrayList(songs))
+            args.putParcelableArrayList(EXTRA_SONG, ArrayList(songs))
             dialog.arguments = args
             return dialog
         }

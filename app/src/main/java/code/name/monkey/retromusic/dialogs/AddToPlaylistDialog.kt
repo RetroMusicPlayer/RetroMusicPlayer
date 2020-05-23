@@ -17,6 +17,7 @@ package code.name.monkey.retromusic.dialogs
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.loaders.PlaylistLoader
@@ -41,21 +42,20 @@ class AddToPlaylistDialog : DialogFragment() {
             R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
         )
             .setTitle(R.string.add_playlist_title)
-            .setItems(playlistNames.toTypedArray()) { dialog, which ->
-                val songs = extraNotNull<ArrayList<Song>>("songs")
+            .setItems(playlistNames.toTypedArray()) { _, which ->
+                val songs = extraNotNull<ArrayList<Song>>(EXTRA_SONG).value
                 if (which == 0) {
-                    CreatePlaylistDialog.create(songs.value)
-                        .show(childFragmentManager, "ADD_TO_PLAYLIST")
-                    dismiss()
+                    CreatePlaylistDialog.create(songs)
+                        .show(requireActivity().supportFragmentManager, "ADD_TO_PLAYLIST")
                 } else {
                     PlaylistsUtil.addToPlaylist(
                         requireContext(),
-                        songs.value,
+                        songs,
                         playlists[which - 1].id,
                         true
                     )
-                    dismiss()
                 }
+                dismiss()
             }
             .create()
     }
@@ -71,7 +71,7 @@ class AddToPlaylistDialog : DialogFragment() {
         fun create(songs: List<Song>): AddToPlaylistDialog {
             val dialog = AddToPlaylistDialog()
             val args = Bundle()
-            args.putParcelableArrayList("songs", ArrayList(songs))
+            args.putParcelableArrayList(EXTRA_SONG, ArrayList(songs))
             dialog.arguments = args
             return dialog
         }

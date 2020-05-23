@@ -42,8 +42,10 @@ class RenamePlaylistDialog : DialogFragment() {
             layout.findViewById(R.id.actionNewPlaylistContainer)
         MaterialUtil.setTint(nameContainer, false)
 
-        return MaterialAlertDialogBuilder(requireContext(),
-            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
             .setTitle(R.string.rename_playlist_title)
             .setView(layout)
             .setNegativeButton(android.R.string.cancel, null)

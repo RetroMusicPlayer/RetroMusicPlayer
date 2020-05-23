@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.model.Song
@@ -26,10 +27,13 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SongShareDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val song: Song? = requireArguments().getParcelable("song")
+        val song: Song? = requireArguments().getParcelable(EXTRA_SONG)
         val listening: String =
-            getString(R.string.currently_listening_to_x_by_x, song?.title, song?.artistName)
-
+            String.format(
+                getString(R.string.currently_listening_to_x_by_x),
+                song?.title,
+                song?.artistName
+            )
         return MaterialAlertDialogBuilder(
             requireContext(),
             R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
@@ -92,7 +96,7 @@ class SongShareDialog : DialogFragment() {
         fun create(song: Song): SongShareDialog {
             val dialog = SongShareDialog()
             val args = Bundle()
-            args.putParcelable("song", song)
+            args.putParcelable(EXTRA_SONG, song)
             dialog.arguments = args
             return dialog
         }

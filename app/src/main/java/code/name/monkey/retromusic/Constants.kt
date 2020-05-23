@@ -54,6 +54,8 @@ object Constants {
 
 }
 
+const val EXTRA_SONG = "extra_songs"
+const val EXTRA_PLAYLIST = "extra_list"
 const val LIBRARY_CATEGORIES = "library_categories"
 const val EXTRA_SONG_INFO = "extra_song_info"
 const val DESATURATED_COLOR = "desaturated_color"

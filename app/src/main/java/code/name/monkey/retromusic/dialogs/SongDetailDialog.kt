@@ -27,6 +27,7 @@ import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
+import code.name.monkey.retromusic.EXTRA_SONG
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
@@ -52,7 +53,7 @@ class SongDetailDialog : DialogFragment() {
         val context: Context = requireContext()
         val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_file_details, null)
 
-        val song = requireArguments().getParcelable<Song>("song")
+        val song = requireArguments().getParcelable<Song>(EXTRA_SONG)
         val fileName: TextView = dialogView.findViewById(R.id.fileName)
         val filePath: TextView = dialogView.findViewById(R.id.filePath)
         val fileSize: TextView = dialogView.findViewById(R.id.fileSize)
@@ -165,7 +166,7 @@ class SongDetailDialog : DialogFragment() {
         fun create(song: Song): SongDetailDialog {
             val dialog = SongDetailDialog()
             val args = Bundle()
-            args.putParcelable("song", song)
+            args.putParcelable(EXTRA_SONG, song)
             dialog.arguments = args
             return dialog
         }
