@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.playlist.PlaylistAdapter
@@ -16,18 +15,17 @@ class PlaylistsFragment :
     AbsLibraryPagerRecyclerViewFragment<PlaylistAdapter, GridLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    lateinit var playlistViewModel: PlaylistViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        playlistViewModel = ViewModelProvider(this).get(PlaylistViewModel::class.java)
-        playlistViewModel.playlists.observe(viewLifecycleOwner, Observer { playlists ->
-            if (playlists.isNotEmpty()) {
-                adapter?.swapDataSet(playlists)
-            } else {
-                adapter?.swapDataSet(listOf())
-            }
-        })
+        mainActivity.libraryViewModel.allPlaylisits()
+            .observe(viewLifecycleOwner, Observer { playlists ->
+                if (playlists.isNotEmpty()) {
+                    adapter?.swapDataSet(playlists)
+                } else {
+                    adapter?.swapDataSet(listOf())
+                }
+            })
     }
 
     override fun handleBackPress(): Boolean {
@@ -48,11 +46,6 @@ class PlaylistsFragment :
             R.layout.item_list,
             mainActivity
         )
-    }
-
-    override fun onMediaStoreChanged() {
-        super.onMediaStoreChanged()
-        playlistViewModel.loadPlaylist()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

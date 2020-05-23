@@ -20,7 +20,7 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
@@ -34,7 +34,6 @@ import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.util.NavigationUtil
-
 import code.name.monkey.retromusic.util.PreferenceUtilKT
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
@@ -42,9 +41,7 @@ import kotlinx.android.synthetic.main.fragment_banner_home.*
 import kotlinx.android.synthetic.main.home_content.*
 
 class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallbacks {
-
     private lateinit var homeAdapter: HomeAdapter
-    private lateinit var homeModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -122,10 +119,12 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             layoutManager = LinearLayoutManager(mainActivity)
             adapter = homeAdapter
         }
-        homeModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeModel.sections.observe(viewLifecycleOwner, androidx.lifecycle.Observer { sections ->
-            homeAdapter.swapData(sections)
-        })
+
+        mainActivity.libraryViewModel.homeSections()
+            .observe(viewLifecycleOwner, Observer { sections ->
+                homeAdapter.swapData(sections)
+            })
+
         loadProfile()
     }
 

@@ -17,7 +17,6 @@ package code.name.monkey.retromusic.fragments.genres
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
@@ -28,8 +27,6 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    private lateinit var genreViewModel: GenreViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.musicComponent.inject(this)
@@ -37,14 +34,14 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        genreViewModel = ViewModelProvider(this).get(GenreViewModel::class.java)
-        genreViewModel.genres.observe(viewLifecycleOwner, Observer { genres ->
-            if (genres.isNotEmpty()) {
-                adapter?.swapDataSet(genres)
-            } else {
-                adapter?.swapDataSet(listOf())
-            }
-        })
+        mainActivity.libraryViewModel.allGenres().observe(
+            viewLifecycleOwner, Observer { genres ->
+                if (genres.isNotEmpty()) {
+                    adapter?.swapDataSet(genres)
+                } else {
+                    adapter?.swapDataSet(listOf())
+                }
+            })
     }
 
     override fun handleBackPress(): Boolean {
@@ -62,10 +59,6 @@ class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearL
 
     override val emptyMessage: Int
         get() = R.string.no_genres
-
-    override fun onMediaStoreChanged() {
-        genreViewModel.loadGenre()
-    }
 
     companion object {
         @JvmField

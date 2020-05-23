@@ -4,38 +4,34 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.GridLayoutManager
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
+import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
 import code.name.monkey.retromusic.util.PreferenceUtilKT
 import java.util.*
-import javax.inject.Inject
 
 class SongsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
     SongView, MainActivityFragmentCallbacks {
-
-    @Inject
-    lateinit var songPresenter: SongPresenter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mainActivity.libraryViewModel.allSongs()
+            .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+                if (it.isNotEmpty()) {
+                    adapter?.swapDataSet(it)
+                } else {
+                    adapter?.swapDataSet(listOf())
+                }
+            })
+    }
 
     override val emptyMessage: Int
         get() = R.string.no_songs
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        App.musicComponent.inject(this)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        songPresenter.attachView(this)
-    }
 
     override fun createLayoutManager(): GridLayoutManager {
         return GridLayoutManager(requireActivity(), getGridSize()).apply {
@@ -65,10 +61,6 @@ class SongsFragment :
         adapter?.swapDataSet(songs)
     }
 
-    override fun onMediaStoreChanged() {
-        songPresenter.loadSongs()
-    }
-
     override fun loadGridSize(): Int {
         return PreferenceUtilKT.songGridSize
     }
@@ -87,17 +79,6 @@ class SongsFragment :
 
     override fun setGridSize(gridSize: Int) {
         adapter?.notifyDataSetChanged()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (adapter?.dataSet.isNullOrEmpty())
-            songPresenter.loadSongs()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        songPresenter.detachView()
     }
 
     override fun showEmptyView() {
@@ -122,7 +103,7 @@ class SongsFragment :
     }
 
     override fun setSortOrder(sortOrder: String) {
-        songPresenter.loadSongs()
+        mainActivity.libraryViewModel.forceReload(ReloadType.Songs)
     }
 
     companion object {
@@ -131,10 +112,7 @@ class SongsFragment :
 
         @JvmStatic
         fun newInstance(): SongsFragment {
-            val args = Bundle()
-            val fragment = SongsFragment()
-            fragment.arguments = args
-            return fragment
+            return SongsFragment()
         }
     }
 

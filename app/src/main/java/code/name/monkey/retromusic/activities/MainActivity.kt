@@ -13,12 +13,14 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.*
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.dialogs.CreatePlaylistDialog.Companion.create
+import code.name.monkey.retromusic.fragments.LibraryViewModel
 import code.name.monkey.retromusic.fragments.albums.AlbumsFragment
 import code.name.monkey.retromusic.fragments.artists.ArtistsFragment
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
@@ -70,6 +72,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         const val APP_UPDATE_REQUEST_CODE = 9002
     }
 
+    lateinit var libraryViewModel: LibraryViewModel
     private lateinit var cab: MaterialCab
     private val intentFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
     private lateinit var currentFragment: MainActivityFragmentCallbacks
@@ -117,6 +120,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         setTaskDescriptionColorAuto()
         hideStatusBar()
         setBottomBarVisibility(View.VISIBLE)
+
+        libraryViewModel = ViewModelProvider(this).get(LibraryViewModel::class.java)
+        addMusicServiceEventListener(libraryViewModel)
 
         if (savedInstanceState == null) {
             selectedFragment(PreferenceUtilKT.lastPage)
