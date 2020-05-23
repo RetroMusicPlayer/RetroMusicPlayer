@@ -16,8 +16,10 @@ package code.name.monkey.retromusic.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.BitmapRequestBuilder;
 import com.bumptech.glide.DrawableRequestBuilder;
@@ -29,6 +31,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.target.Target;
 
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.glide.artistimage.ArtistImage;
@@ -65,15 +69,16 @@ public class ArtistGlideRequest {
     }
 
     public static class Builder {
-
         final Artist artist;
         final RequestManager requestManager;
+        private Drawable error;
         private boolean forceDownload;
         private boolean noCustomImage;
 
         private Builder(@NonNull RequestManager requestManager, Artist artist) {
             this.requestManager = requestManager;
             this.artist = artist;
+            error = TintHelper.createTintedDrawable(ContextCompat.getDrawable(App.Companion.getContext(), R.drawable.default_artist_art), ThemeStore.Companion.accentColor(App.Companion.getContext()));
         }
 
         public static Builder from(@NonNull RequestManager requestManager, Artist artist) {
@@ -89,6 +94,7 @@ public class ArtistGlideRequest {
             return createBaseRequest(requestManager, artist, noCustomImage, forceDownload)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
                     .animate(DEFAULT_ANIMATION)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .priority(Priority.LOW)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
                     .dontTransform()
