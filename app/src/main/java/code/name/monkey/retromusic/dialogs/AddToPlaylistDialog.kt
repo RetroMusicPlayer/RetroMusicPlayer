@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -41,7 +41,7 @@ class AddToPlaylistDialog : DialogFragment() {
 
         return MaterialDialog(requireContext()).show {
             title(R.string.add_playlist_title)
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             listItems(items = playlistNames) { dialog, index, _ ->
                 val songs =
                     requireArguments().getParcelableArrayList<Song>("songs") ?: return@listItems

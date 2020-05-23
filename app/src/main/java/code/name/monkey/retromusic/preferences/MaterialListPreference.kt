@@ -26,7 +26,6 @@ import androidx.preference.PreferenceDialogFragmentCompat
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorControlNormal
-import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
 import com.afollestad.materialdialogs.actions.getActionButton
@@ -76,7 +75,6 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         materialDialog = MaterialDialog(requireContext())
             .title(text = materialListPreference.title.toString())
             .positiveButton(R.string.set)
-            .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .listItemsSingleChoice(
                 items = entries,
                 initialSelection = position,

@@ -13,7 +13,8 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.transform.CarousalPagerTransformer
 import code.name.monkey.retromusic.transform.ParallaxPagerTransformer
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_player_album_cover.*
 
@@ -45,14 +46,14 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewPager.addOnPageChangeListener(this)
-        val nps = PreferenceUtil.getInstance(requireContext()).nowPlayingScreen
+        val nps = PreferenceUtilKT.nowPlayingScreen
 
         val metrics = resources.displayMetrics
         val ratio = metrics.heightPixels.toFloat() / metrics.widthPixels.toFloat()
 
         if (nps == Full || nps == Classic || nps == Fit || nps == Gradient) {
             viewPager.offscreenPageLimit = 2
-        } else if (PreferenceUtil.getInstance(requireContext()).carouselEffect()) {
+        } else if (PreferenceUtilKT.isCarouselEffect) {
             viewPager.clipToPadding = false
             val padding =
                 if (ratio >= 1.777f) {
@@ -67,7 +68,7 @@ class PlayerAlbumCoverFragment : AbsMusicServiceFragment(), ViewPager.OnPageChan
             viewPager.offscreenPageLimit = 2
             viewPager.setPageTransformer(
                 true,
-                PreferenceUtil.getInstance(requireContext()).albumCoverTransform
+                PreferenceUtilKT.albumCoverTransform
             )
         }
     }

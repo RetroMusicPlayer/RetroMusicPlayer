@@ -255,7 +255,7 @@ abstract class AbsPlayerFragment : AbsMusicServiceFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (PreferenceUtil.getInstance(requireContext()).fullScreenMode &&
+        if (PreferenceUtilKT.isFullScreenMode &&
             view.findViewById<View>(R.id.status_bar) != null
         ) {
             view.findViewById<View>(R.id.status_bar).visibility = View.GONE

@@ -35,13 +35,12 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
 import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.ViewUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
 import com.afollestad.materialdialogs.actions.getActionButton
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.callbacks.onShow
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
@@ -60,18 +59,12 @@ class SleepTimerDialog : DialogFragment() {
 
         materialDialog = MaterialDialog(requireContext())
             .title(R.string.action_sleep_timer)
-            .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .positiveButton(R.string.action_set) {
-                PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic =
-                    shouldFinishLastSong.isChecked
-
+                PreferenceUtilKT.isSleepTimerFinishMusic = shouldFinishLastSong.isChecked
                 val minutes = seekArcProgress
-
                 val pi = makeTimerPendingIntent(PendingIntent.FLAG_CANCEL_CURRENT)
-
                 val nextSleepTimerElapsedTime = SystemClock.elapsedRealtime() + minutes * 60 * 1000
-                PreferenceUtil.getInstance(requireContext())
-                    .setNextSleepTimerElapsedRealtime(nextSleepTimerElapsedTime)
+                PreferenceUtilKT.nextSleepTimerElapsedRealTime = nextSleepTimerElapsedTime.toInt()
                 val am = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
                 am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextSleepTimerElapsedTime, pi)
 
@@ -131,11 +124,11 @@ class SleepTimerDialog : DialogFragment() {
             false
         )
 
-        val finishMusic = PreferenceUtil.getInstance(requireContext()).sleepTimerFinishMusic
+        val finishMusic = PreferenceUtilKT.isSleepTimerFinishMusic
         shouldFinishLastSong.isChecked = finishMusic
 
 
-        seekArcProgress = PreferenceUtil.getInstance(requireContext()).lastSleepTimerValue
+        seekArcProgress = PreferenceUtilKT.lastSleepTimerValue
         updateTimeDisplayTime()
         seekBar.progress = seekArcProgress
 
@@ -155,7 +148,7 @@ class SleepTimerDialog : DialogFragment() {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                PreferenceUtil.getInstance(requireContext()).lastSleepTimerValue = seekArcProgress
+                PreferenceUtilKT.lastSleepTimerValue = seekArcProgress
             }
         })
 
@@ -187,10 +180,11 @@ class SleepTimerDialog : DialogFragment() {
         }
     }
 
-    private inner class TimerUpdater internal constructor() : CountDownTimer(
-        PreferenceUtil.getInstance(requireContext()).nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(),
-        1000
-    ) {
+    private inner class TimerUpdater internal constructor() :
+        CountDownTimer(
+            PreferenceUtilKT.nextSleepTimerElapsedRealTime - SystemClock.elapsedRealtime(),
+            1000
+        ) {
 
         override fun onTick(millisUntilFinished: Long) {
             materialDialog.getActionButton(WhichButton.NEGATIVE).text = String.format(

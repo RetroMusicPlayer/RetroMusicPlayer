@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.drawable
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
 import com.afollestad.materialdialogs.LayoutMode
@@ -53,7 +53,6 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
 
     protected val show: MaterialDialog
         get() = MaterialDialog(this).show {
-            cornerRadius(PreferenceUtil.getInstance(this@AbsTagEditorActivity).dialogCorner)
             title(R.string.update_image)
             listItems(items = items) { _, position, _ ->
                 when (position) {

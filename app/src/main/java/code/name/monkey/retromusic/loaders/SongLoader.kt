@@ -22,7 +22,8 @@ import code.name.monkey.retromusic.Constants.BASE_SELECTION
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import java.util.*
 
 /**
@@ -106,7 +107,7 @@ object SongLoader {
         context: Context,
         selection: String?,
         selectionValues: Array<String>?,
-        sortOrder: String = PreferenceUtil.getInstance(context).songSortOrder
+        sortOrder: String = PreferenceUtilKT.songSortOrder
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
@@ -128,7 +129,7 @@ object SongLoader {
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 baseProjection,
                 selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " +
-                        (PreferenceUtil.getInstance(context).filterLength * 1000),
+                        (PreferenceUtilKT.filterLength * 1000),
                 selectionValuesFinal,
                 sortOrder
             )

@@ -68,7 +68,7 @@ import code.name.monkey.retromusic.misc.WrappedAsyncTaskLoader;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.DensityUtil;
 import code.name.monkey.retromusic.util.FileUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PreferenceUtilKT;
 import code.name.monkey.retromusic.util.RetroColorUtil;
 import code.name.monkey.retromusic.util.ThemedFastScroller;
 import code.name.monkey.retromusic.views.BreadCrumbLayout;
@@ -134,7 +134,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
     }
 
     public static FoldersFragment newInstance(Context context) {
-        return newInstance(PreferenceUtil.getInstance(context).getStartDirectory());
+        return newInstance(PreferenceUtilKT.INSTANCE.getStartDirectory());
     }
 
     private static File tryGetCanonicalFile(File file) {
@@ -238,7 +238,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                                 getFileComparator()));
                         return true;
                     case R.id.action_set_as_start_directory:
-                        PreferenceUtil.getInstance(requireContext()).setStartDirectory(file);
+                        PreferenceUtilKT.INSTANCE.setStartDirectory(file);
                         Toast.makeText(getActivity(),
                                 String.format(getString(R.string.new_start_directory), file.getPath()),
                                 Toast.LENGTH_SHORT).show();
@@ -341,7 +341,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
         switch (item.getItemId()) {
             case R.id.action_go_to_start_directory:
                 setCrumb(new BreadCrumbLayout.Crumb(
-                        tryGetCanonicalFile(PreferenceUtil.getInstance(requireContext()).getStartDirectory())), true);
+                        tryGetCanonicalFile(PreferenceUtilKT.INSTANCE.getStartDirectory())), true);
                 return true;
             case R.id.action_scan:
                 BreadCrumbLayout.Crumb crumb = getActiveCrumb();

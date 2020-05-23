@@ -25,9 +25,6 @@ import code.name.monkey.retromusic.adapter.ContributorAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.model.Contributor
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItems
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_about.*
@@ -118,19 +115,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             R.id.changelog -> openUrl(TELEGRAM_CHANGE_LOG)
             R.id.openSource -> NavigationUtil.goToOpenSource(this)
             R.id.bugReportLink -> NavigationUtil.bugReport(this)
-        }
-    }
-
-    private fun showChangeLogOptions() {
-        MaterialDialog(this).show {
-            cornerRadius(PreferenceUtil.getInstance(this@AboutActivity).dialogCorner)
-            listItems(items = listOf("Telegram Channel", "App")) { _, position, _ ->
-                if (position == 0) {
-                    openUrl(TELEGRAM_CHANGE_LOG)
-                } else {
-                    NavigationUtil.gotoWhatNews(this@AboutActivity)
-                }
-            }
         }
     }
 

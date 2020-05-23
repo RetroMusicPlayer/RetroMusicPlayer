@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.animation.GlideAnimation
@@ -149,9 +149,8 @@ class PlayingNotificationImpl : PlayingNotification() {
                                     .setShowActionsInCompactView(1, 2, 3)
                             )
                                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O && PreferenceUtil.getInstance(
-                                    service
-                                ).coloredNotification()
+                            if (Build.VERSION.SDK_INT <=
+                                Build.VERSION_CODES.O && PreferenceUtilKT.isColoredNotification
                             ) {
                                 builder.color = color
                             }

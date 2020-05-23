@@ -18,6 +18,7 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
@@ -29,10 +30,10 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
-import java.util.*
 
 class LibraryPreference @JvmOverloads constructor(
     context: Context,
@@ -59,17 +60,9 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
     lateinit var adapter: CategoryInfoAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val view = requireActivity().layoutInflater.inflate(
-            R.layout.preference_dialog_library_categories,
-            null
-        )
-
-        val categoryInfos: List<CategoryInfo> = if (savedInstanceState != null) {
-            savedInstanceState.getParcelableArrayList(PreferenceUtil.LIBRARY_CATEGORIES)!!
-        } else {
-            PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos
-        }
-        adapter = CategoryInfoAdapter(categoryInfos)
+        val view = LayoutInflater.from(requireContext())
+            .inflate(R.layout.preference_dialog_library_categories, null)
+        adapter = CategoryInfoAdapter(PreferenceUtilKT.libraryCategory)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -79,7 +72,6 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
 
         return MaterialDialog(requireContext())
             .title(R.string.library_categories)
-            .cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
             .customView(view = view)
             .positiveButton(android.R.string.ok) {
                 updateCategories(adapter.categoryInfos)
@@ -89,18 +81,9 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
                 dismiss()
             }
             .neutralButton(R.string.reset_action) {
-                adapter.categoryInfos =
-                    PreferenceUtil.getInstance(requireContext()).defaultLibraryCategoryInfos
+                adapter.categoryInfos = PreferenceUtilKT.defaultCategories
             }
             .noAutoDismiss()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putParcelableArrayList(
-            PreferenceUtil.LIBRARY_CATEGORIES,
-            ArrayList(adapter.categoryInfos)
-        )
     }
 
     private fun updateCategories(categories: List<CategoryInfo>) {
@@ -109,7 +92,7 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
             Toast.makeText(context, "Not more than 5 items", Toast.LENGTH_SHORT).show()
             return
         }
-        PreferenceUtil.getInstance(requireContext()).libraryCategoryInfos = categories
+        PreferenceUtilKT.libraryCategory = categories
     }
 
     private fun getSelected(categories: List<CategoryInfo>): Int {
@@ -122,13 +105,8 @@ class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
     }
 
     companion object {
-
-        fun newInstance(key: String): LibraryPreferenceDialog {
-            val bundle = Bundle()
-            bundle.putString(ARG_KEY, key)
-            val fragment = LibraryPreferenceDialog()
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(): LibraryPreferenceDialog {
+            return LibraryPreferenceDialog()
         }
     }
 }

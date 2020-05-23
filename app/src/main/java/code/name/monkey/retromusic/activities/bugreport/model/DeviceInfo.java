@@ -11,7 +11,7 @@ import androidx.annotation.IntRange;
 import java.util.Arrays;
 import java.util.Locale;
 
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PreferenceUtilKT;
 
 public class DeviceInfo {
 
@@ -75,10 +75,10 @@ public class DeviceInfo {
             versionCode = -1;
             versionName = null;
         }
-        baseTheme = PreferenceUtil.getInstance(context).getBaseTheme();
-        nowPlayingTheme = context.getString(PreferenceUtil.getInstance(context).getNowPlayingScreen().getTitleRes());
-        isAdaptive = PreferenceUtil.getInstance(context).getAdaptiveColor();
-        selectedLang = PreferenceUtil.getInstance(context).getLanguageCode();
+        baseTheme = PreferenceUtilKT.INSTANCE.getBaseTheme();
+        nowPlayingTheme = context.getString(PreferenceUtilKT.INSTANCE.getNowPlayingScreen().getTitleRes());
+        isAdaptive = PreferenceUtilKT.INSTANCE.isAdaptiveColor();
+        selectedLang = PreferenceUtilKT.INSTANCE.getLanguageCode();
     }
 
     public String toMarkdown() {

@@ -19,8 +19,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
+import code.name.monkey.retromusic.CAROUSEL_EFFECT
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 class PersonalizeSettingsFragment : AbsSettingsFragment(),
     SharedPreferences.OnSharedPreferenceChangeListener {
@@ -40,7 +42,7 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PreferenceUtil.getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
 
         var preference: Preference? = findPreference("home_artist_grid_style")
         setSummary(preference!!)
@@ -50,13 +52,12 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(),
 
     override fun onDestroyView() {
         super.onDestroyView()
-        PreferenceUtil.getInstance(requireContext())
-            .unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtilKT.unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         when (key) {
-            PreferenceUtil.CAROUSEL_EFFECT -> invalidateSettings()
+            CAROUSEL_EFFECT -> invalidateSettings()
         }
     }
 }

@@ -23,7 +23,7 @@ import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -88,7 +88,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         ) {
             return MaterialDialog(requireActivity()).show {
                 title(R.string.md_error_label)
-                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
                 message(R.string.md_storage_perm_error)
                 positiveButton(android.R.string.ok)
             }
@@ -105,7 +105,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
 
         return MaterialDialog(requireContext()).show {
             title(text = parentFolder!!.absolutePath)
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             listItems(items = contentsArray(), waitForPositiveButton = false) { _, index, _ ->
                 onSelection(index)
             }
@@ -146,7 +146,7 @@ class BlacklistFolderChooserDialog : DialogFragment() {
         val dialog = dialog as MaterialDialog?
 
         dialog?.apply {
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             setTitle(parentFolder!!.absolutePath)
             listItems(items = contentsArray()) { _, index, _ ->
                 onSelection(index)

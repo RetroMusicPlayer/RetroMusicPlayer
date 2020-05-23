@@ -67,8 +67,6 @@ object AppRater {
     private fun showRateDialog(context: Context, editor: SharedPreferences.Editor) {
         MaterialDialog(context)
             .show {
-
-                cornerRadius(PreferenceUtil.getInstance(context).dialogCorner)
                 title(text = "Rate this App")
                 message(text = "If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
                 positiveButton(R.string.app_name) {

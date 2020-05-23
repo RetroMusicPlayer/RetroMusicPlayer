@@ -255,7 +255,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+        val buttonColor = if (PreferenceUtilKT.isAdaptiveColor)
             color.backgroundColor.ripAlpha()
         else
             ATHUtil.resolveColor(this, R.attr.colorSurface)

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.preference.PreferenceManager
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
+import code.name.monkey.retromusic.NEW_BLUR_AMOUNT
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
@@ -17,7 +18,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_blur.*
@@ -98,7 +98,7 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
 
     private fun updateBlur() {
         val blurAmount = PreferenceManager.getDefaultSharedPreferences(requireContext())
-            .getInt(PreferenceUtil.NEW_BLUR_AMOUNT, 25)
+            .getInt(NEW_BLUR_AMOUNT, 25)
         colorBackground.clearColorFilter()
         SongGlideRequest.Builder.from(Glide.with(requireActivity()), MusicPlayerRemote.currentSong)
             .checkIgnoreMediaStore(requireContext())
@@ -141,7 +141,7 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == PreferenceUtil.NEW_BLUR_AMOUNT) {
+        if (key == NEW_BLUR_AMOUNT) {
             updateBlur()
         }
     }

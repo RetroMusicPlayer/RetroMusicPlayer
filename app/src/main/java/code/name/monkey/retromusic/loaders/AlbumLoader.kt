@@ -16,11 +16,10 @@ package code.name.monkey.retromusic.loaders
 
 import android.content.Context
 import android.provider.MediaStore.Audio.AudioColumns
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,7 +39,7 @@ object AlbumLoader {
                 context,
                 AudioColumns.ALBUM + " LIKE ?",
                 arrayOf("%$query%"),
-                getSongLoaderSortOrder(context)
+                getSongLoaderSortOrder()
             )
         )
         return splitIntoAlbums(songs)
@@ -56,7 +55,7 @@ object AlbumLoader {
                 context,
                 AudioColumns.ALBUM_ID + "=?",
                 arrayOf(albumId.toString()),
-                getSongLoaderSortOrder(context)
+                getSongLoaderSortOrder()
             )
         )
         val album = Album(songs)
@@ -72,7 +71,7 @@ object AlbumLoader {
                 context,
                 null,
                 null,
-                getSongLoaderSortOrder(context)
+                getSongLoaderSortOrder()
             )
         )
         return splitIntoAlbums(songs)
@@ -108,7 +107,7 @@ object AlbumLoader {
     }
 
     private fun sortSongsByTrackNumber(album: Album) {
-        when (PreferenceUtil.getInstance(App.getContext()).albumDetailSongSortOrder) {
+        when (PreferenceUtilKT.albumDetailSongSortOrder) {
             SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
                 o1.trackNumber.compareTo(
                     o2.trackNumber
@@ -132,8 +131,8 @@ object AlbumLoader {
         }
     }
 
-    private fun getSongLoaderSortOrder(context: Context): String {
-        return PreferenceUtil.getInstance(context).albumSortOrder + ", " +
-                PreferenceUtil.getInstance(context).albumSongSortOrder
+    private fun getSongLoaderSortOrder(): String {
+        return PreferenceUtilKT.albumSortOrder + ", " +
+                PreferenceUtilKT.albumSongSortOrder
     }
 }

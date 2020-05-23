@@ -74,7 +74,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     private lateinit var artistImage: ImageView
     private var cab: MaterialCab? = null
     private val savedSortOrder: String
-        get() = PreferenceUtil.getInstance(this).albumDetailSongSortOrder
+        get() = PreferenceUtilKT.albumDetailSongSortOrder
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_album)
@@ -256,7 +256,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     private fun loadAlbumCover() {
         AlbumGlideRequest.Builder.from(Glide.with(this), album.safeGetFirstSong())
             .checkIgnoreMediaStore(this)
-            .ignoreMediaStore(PreferenceUtil.getInstance(this).ignoreMediaStoreArtwork())
+            .ignoreMediaStore(PreferenceUtilKT.isIgnoreMediaStoreArtwork)
             .generatePalette(this)
             .build()
             .dontAnimate()
@@ -269,7 +269,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        val buttonColor = if (PreferenceUtil.getInstance(this).adaptiveColor)
+        val buttonColor = if (PreferenceUtilKT.isAdaptiveColor)
             color.backgroundColor.ripAlpha()
         else
             ATHUtil.resolveColor(this, R.attr.colorSurface)
@@ -362,8 +362,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
     }
 
-    private fun setSaveSortOrder(sortOrder: String?) {
-        PreferenceUtil.getInstance(this).albumDetailSongSortOrder = sortOrder
+    private fun setSaveSortOrder(sortOrder: String) {
+        PreferenceUtilKT.albumDetailSongSortOrder = sortOrder
         when (sortOrder) {
             AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
                 o1.trackNumber.compareTo(

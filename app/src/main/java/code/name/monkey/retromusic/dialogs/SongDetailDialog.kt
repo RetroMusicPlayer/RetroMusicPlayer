@@ -29,7 +29,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -63,7 +63,7 @@ class SongDetailDialog : DialogFragment() {
                 )
                 positiveButton(android.R.string.ok)
                 title(string.action_details)
-                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             }
         val dialogView = materialDialog.getCustomView()
 

@@ -29,7 +29,8 @@ import androidx.core.content.ContextCompat
 import code.name.monkey.retromusic.loaders.SongLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import java.io.File
 import java.util.*
 
@@ -212,7 +213,7 @@ object MusicPlayerRemote {
             ) && musicService != null
         ) {
             musicService?.openQueue(queue, startPosition, startPlaying)
-            if (PreferenceUtil.getInstance(musicService).isShuffleModeOn)
+            if (PreferenceUtilKT.isShuffleModeOn)
                 setShuffleMode(MusicService.SHUFFLE_MODE_NONE)
         }
     }

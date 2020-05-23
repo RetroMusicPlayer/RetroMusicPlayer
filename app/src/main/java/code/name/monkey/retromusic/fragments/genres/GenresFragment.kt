@@ -28,7 +28,7 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 class GenresFragment : AbsLibraryPagerRecyclerViewFragment<GenreAdapter, LinearLayoutManager>(),
     MainActivityFragmentCallbacks {
 
-    lateinit var genreViewModel: GenreViewModel
+    private lateinit var genreViewModel: GenreViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

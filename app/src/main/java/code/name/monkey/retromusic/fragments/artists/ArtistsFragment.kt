@@ -9,7 +9,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.artist.ArtistAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 class ArtistsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<ArtistAdapter, GridLayoutManager>(),
@@ -60,19 +60,19 @@ class ArtistsFragment :
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getArtistGridSize(requireActivity())
+        return PreferenceUtilKT.artistGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setArtistGridSize(gridColumns)
+        PreferenceUtilKT.artistGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getArtistGridSizeLand(requireActivity())
+        return PreferenceUtilKT.artistGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setArtistGridSizeLand(gridColumns)
+        PreferenceUtilKT.artistGridSizeLand = gridColumns
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -81,19 +81,19 @@ class ArtistsFragment :
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.getInstance(requireContext()).artistSortOrder
+        return PreferenceUtilKT.artistSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.getInstance(requireContext()).artistSortOrder = sortOrder
+        PreferenceUtilKT.artistSortOrder = sortOrder
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtil.getInstance(requireContext()).artistGridStyle
+        return PreferenceUtilKT.artistGridStyle
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.getInstance(requireContext()).artistGridStyle = layoutRes
+        PreferenceUtilKT.artistGridStyle = layoutRes
     }
 
     companion object {

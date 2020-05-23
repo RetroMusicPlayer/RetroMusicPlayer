@@ -9,7 +9,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 class AlbumsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
@@ -51,27 +51,27 @@ class AlbumsFragment :
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.getInstance(requireContext()).albumSortOrder
+        return PreferenceUtilKT.albumSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.getInstance(requireContext()).albumSortOrder = sortOrder
+        PreferenceUtilKT.albumSortOrder = sortOrder
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSize(requireContext())
+        return PreferenceUtilKT.albumGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setAlbumGridSize(gridColumns)
+        PreferenceUtilKT.albumGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getAlbumGridSizeLand(requireContext())
+        return PreferenceUtilKT.albumGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setAlbumGridSizeLand(gridColumns)
+        PreferenceUtilKT.albumGridSizeLand = gridColumns
     }
 
     override fun onMediaStoreChanged() {
@@ -84,12 +84,11 @@ class AlbumsFragment :
 
 
     override fun loadLayoutRes(): Int {
-        println("loadLayoutRes ${PreferenceUtil.getInstance(requireContext()).albumGridStyle}")
-        return PreferenceUtil.getInstance(requireContext()).albumGridStyle
+        return PreferenceUtilKT.albumGridStyle
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtil.getInstance(requireContext()).albumGridStyle = layoutRes
+        PreferenceUtilKT.albumGridStyle = layoutRes
     }
 
     override fun handleBackPress(): Boolean {

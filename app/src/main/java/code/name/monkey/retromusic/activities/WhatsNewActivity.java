@@ -25,7 +25,7 @@ import code.name.monkey.appthemehelper.util.MaterialValueHelper;
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PreferenceUtilKT;
 
 public class WhatsNewActivity extends AbsBaseActivity {
 
@@ -38,7 +38,7 @@ public class WhatsNewActivity extends AbsBaseActivity {
         try {
             PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             int currentVersion = pInfo.versionCode;
-            PreferenceUtil.getInstance(context).setLastChangeLogVersion(currentVersion);
+            PreferenceUtilKT.INSTANCE.setLastVersion(currentVersion);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

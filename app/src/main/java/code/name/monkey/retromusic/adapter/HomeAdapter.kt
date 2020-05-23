@@ -20,7 +20,8 @@ import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.model.Playlist
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 class HomeAdapter(
     private val activity: AppCompatActivity,
@@ -117,7 +118,7 @@ class HomeAdapter(
                 val artistAdapter = ArtistAdapter(
                     activity,
                     list,
-                    PreferenceUtil.getInstance(activity).getHomeGridStyle(activity),
+                    PreferenceUtilKT.homeGridStyle,
                     null
                 )
                 recyclerView.apply {

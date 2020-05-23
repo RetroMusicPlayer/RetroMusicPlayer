@@ -15,7 +15,8 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
 
@@ -90,7 +91,7 @@ class AlbumCoverPagerAdapter(
         }
 
         private fun getLayoutWithPlayerTheme(): Int {
-            return when (PreferenceUtil.getInstance(requireContext()).nowPlayingScreen) {
+            return when (PreferenceUtilKT.nowPlayingScreen) {
                 Card,
                 Fit,
                 Tiny,
@@ -99,11 +100,10 @@ class AlbumCoverPagerAdapter(
                 Gradient,
                 Full -> R.layout.fragment_album_full_cover
                 else -> {
-                    if (PreferenceUtil.getInstance(requireContext()).carouselEffect()
-                    ) {
+                    if (PreferenceUtilKT.isCarouselEffect) {
                         R.layout.fragment_album_carousel_cover
                     } else {
-                        when (PreferenceUtil.getInstance(requireContext()).albumCoverStyle) {
+                        when (PreferenceUtilKT.albumCoverStyle) {
                             AlbumCoverStyle.NORMAL -> R.layout.fragment_album_cover
                             AlbumCoverStyle.FLAT -> R.layout.fragment_album_flat_cover
                             AlbumCoverStyle.CIRCLE -> R.layout.fragment_album_circle_cover
@@ -111,7 +111,6 @@ class AlbumCoverPagerAdapter(
                             AlbumCoverStyle.MATERIAL -> R.layout.fragment_album_material_cover
                             AlbumCoverStyle.FULL -> R.layout.fragment_album_full_cover
                             AlbumCoverStyle.FULL_CARD -> R.layout.fragment_album_full_card_cover
-                            else -> R.layout.fragment_album_cover
                         }
                     }
                 }

@@ -36,7 +36,7 @@ import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -89,9 +89,7 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
         viewPager.adapter = NowPlayingScreenAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem =
-            PreferenceUtil.getInstance(requireContext()).nowPlayingScreen.ordinal
-
+        viewPager.currentItem = PreferenceUtilKT.nowPlayingScreen.ordinal
 
         return MaterialDialog(requireContext()).show {
             title(R.string.pref_title_now_playing_screen_appearance)
@@ -103,10 +101,10 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(requireContext())
                 } else {
-                    PreferenceUtil.getInstance(requireContext()).nowPlayingScreen = nowPlayingScreen
+                    PreferenceUtilKT.nowPlayingScreen = nowPlayingScreen
                 }
             }
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)
         }

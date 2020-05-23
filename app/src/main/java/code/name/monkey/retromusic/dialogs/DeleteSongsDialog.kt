@@ -25,7 +25,7 @@ import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import code.name.monkey.retromusic.util.SAFUtil
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
@@ -65,7 +65,7 @@ class DeleteSongsDialog : DialogFragment() {
             negativeButton(android.R.string.cancel) {
                 dismiss()
             }
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             noAutoDismiss()
             positiveButton(R.string.action_delete) {
                 if (songs != null) {

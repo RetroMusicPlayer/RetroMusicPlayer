@@ -27,7 +27,8 @@ import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.fragments.base.AbsPlayerFragment
 import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
+
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_peak_player.*
 
@@ -113,7 +114,7 @@ class PeakPlayerFragment : AbsPlayerFragment() {
         title.text = song.title
         text.text = song.artistName
 
-        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+        if (PreferenceUtilKT.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {

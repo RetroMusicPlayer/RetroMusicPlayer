@@ -23,7 +23,7 @@ import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.RetroColorUtil
 
 
@@ -46,7 +46,7 @@ class ColorIconsImageView @JvmOverloads constructor(
 
     fun setIconBackgroundColor(color: Int) {
         background = ContextCompat.getDrawable(context, R.drawable.color_circle_gradient)
-        if (ATHUtil.isWindowBackgroundDark(context) && PreferenceUtil.getInstance(context).desaturatedColor()) {
+        if (ATHUtil.isWindowBackgroundDark(context) && PreferenceUtilKT.isDesaturatedColor) {
             val desaturatedColor = RetroColorUtil.desaturateColor(color, 0.4f)
             backgroundTintList = ColorStateList.valueOf(desaturatedColor)
             imageTintList =

@@ -23,7 +23,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
 import code.name.monkey.retromusic.R
@@ -33,7 +33,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -123,7 +123,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                         super.onLoadFailed(e, errorDrawable)
                         update(
                             null,
-                            ATHUtil.resolveColor(service, R.attr.colorSurface, Color.WHITE)
+                            resolveColor(service, R.attr.colorSurface, Color.WHITE)
                         )
                     }
 
@@ -143,9 +143,8 @@ class PlayingNotificationOreo : PlayingNotification() {
                             )
                         }
 
-                        if (!PreferenceUtil.getInstance(service).coloredNotification()) {
-                            bgColorFinal =
-                                ATHUtil.resolveColor(service, R.attr.colorPrimary, Color.WHITE)
+                        if (!PreferenceUtilKT.isColoredNotification) {
+                            bgColorFinal = resolveColor(service, R.attr.colorPrimary, Color.WHITE)
                         }
                         setBackgroundColor(bgColorFinal)
                         setNotificationContent(ColorUtil.isColorLight(bgColorFinal))

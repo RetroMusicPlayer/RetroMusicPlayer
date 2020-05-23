@@ -14,7 +14,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import kotlinx.android.synthetic.main.fragment_volume.*
@@ -113,11 +113,10 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
-        if (PreferenceUtil.getInstance(requireContext())
-                .pauseOnZeroVolume()
-        ) if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume) {
-            MusicPlayerRemote.pauseSong()
-        }
+        if (PreferenceUtilKT.isPauseOnZeroVolume)
+            if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume)
+                MusicPlayerRemote.pauseSong()
+
     }
 
     fun setTintableColor(color: Int) {

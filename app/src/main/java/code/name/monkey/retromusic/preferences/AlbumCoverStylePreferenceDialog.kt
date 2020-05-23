@@ -37,7 +37,8 @@ import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.ViewUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
@@ -80,11 +81,11 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
         viewPager.adapter = AlbumCoverStyleAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtil.getInstance(requireContext()).albumCoverStyle.ordinal
+        viewPager.currentItem = PreferenceUtilKT.albumCoverStyle.ordinal
 
         return MaterialDialog(requireActivity()).show {
             title(R.string.pref_title_album_cover_style)
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             positiveButton(R.string.set) {
                 val coverStyle = values()[viewPagerPosition]
                 if (isAlbumCoverStyle(coverStyle)) {
@@ -92,9 +93,8 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(requireActivity())
                 } else {
-                    PreferenceUtil.getInstance(requireContext()).albumCoverStyle = coverStyle
+                    PreferenceUtilKT.albumCoverStyle = coverStyle
                 }
-
             }
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)

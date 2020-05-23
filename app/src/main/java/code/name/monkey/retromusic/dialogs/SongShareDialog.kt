@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -37,7 +37,7 @@ class SongShareDialog : DialogFragment() {
         return MaterialDialog(requireContext())
             .title(R.string.what_do_you_want_to_share)
             .show {
-                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
                 listItems(
                     items = listOf(
                         getString(code.name.monkey.retromusic.R.string.the_audio_file),

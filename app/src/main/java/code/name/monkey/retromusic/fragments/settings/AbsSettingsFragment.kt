@@ -75,7 +75,7 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {
         return when (preference) {
-            is LibraryPreference -> LibraryPreferenceDialog.newInstance(preference.key)
+            is LibraryPreference -> LibraryPreferenceDialog.newInstance()
             is NowPlayingScreenPreference -> NowPlayingScreenPreferenceDialog.newInstance(preference.key)
             is AlbumCoverStylePreference -> AlbumCoverStylePreferenceDialog.newInstance(preference.key)
             is MaterialListPreference -> {

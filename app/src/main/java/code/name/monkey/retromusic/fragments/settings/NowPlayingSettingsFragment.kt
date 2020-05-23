@@ -19,9 +19,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.App
-import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtil.*
+import code.name.monkey.retromusic.*
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 /**
  * @author Hemanth S (h4h13).
@@ -50,24 +49,24 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
 
     private fun updateAlbumCoverStyleSummary() {
         val preference: Preference = findPreference(ALBUM_COVER_STYLE)!!
-        preference.setSummary(getInstance(requireContext()).albumCoverStyle.titleRes)
+        preference.setSummary(PreferenceUtilKT.albumCoverStyle.titleRes)
     }
 
     private fun updateNowPlayingScreenSummary() {
         val preference: Preference = findPreference(NOW_PLAYING_SCREEN_ID)!!
-        preference.setSummary(getInstance(requireContext()).nowPlayingScreen.titleRes)
+        preference.setSummary(PreferenceUtilKT.nowPlayingScreen.titleRes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getInstance(requireContext()).registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
         val preference: Preference = findPreference("album_cover_transform")!!
         setSummary(preference)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        getInstance(requireContext()).unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtilKT.unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {

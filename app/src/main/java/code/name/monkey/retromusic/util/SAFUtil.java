@@ -119,19 +119,19 @@ public class SAFUtil {
     public static void saveTreeUri(Context context, Intent data) {
         Uri uri = data.getData();
         context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        PreferenceUtil.getInstance(context).setSAFSDCardUri(uri);
+        PreferenceUtilKT.INSTANCE.setSafSdCardUri(uri.toString());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean isTreeUriSaved(Context context) {
-        return !TextUtils.isEmpty(PreferenceUtil.getInstance(context).getSAFSDCardUri());
+        return !TextUtils.isEmpty(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean isSDCardAccessGranted(Context context) {
         if (!isTreeUriSaved(context)) return false;
 
-        String sdcardUri = PreferenceUtil.getInstance(context).getSAFSDCardUri();
+        String sdcardUri = PreferenceUtilKT.INSTANCE.getSafSdCardUri();
 
         List<UriPermission> perms = context.getContentResolver().getPersistedUriPermissions();
         for (UriPermission perm : perms) {
@@ -198,7 +198,7 @@ public class SAFUtil {
 
         if (isTreeUriSaved(context)) {
             List<String> pathSegments = new ArrayList<>(Arrays.asList(audio.getFile().getAbsolutePath().split("/")));
-            Uri sdcard = Uri.parse(PreferenceUtil.getInstance(context).getSAFSDCardUri());
+            Uri sdcard = Uri.parse(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
             uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
         }
 
@@ -271,7 +271,7 @@ public class SAFUtil {
 
         if (isTreeUriSaved(context)) {
             List<String> pathSegments = new ArrayList<>(Arrays.asList(path.split("/")));
-            Uri sdcard = Uri.parse(PreferenceUtil.getInstance(context).getSAFSDCardUri());
+            Uri sdcard = Uri.parse(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
             uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
         }
 

@@ -11,6 +11,7 @@ import android.view.*
 import android.view.animation.DecelerateInterpolator
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.textColorPrimary
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
@@ -18,7 +19,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
@@ -56,16 +57,16 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
         setUpMiniPlayer()
 
         if (RetroUtil.isTablet()) {
-            actionNext.visibility = View.VISIBLE
-            actionPrevious.visibility = View.VISIBLE
-            actionNext?.visibility = View.VISIBLE
-            actionPrevious?.visibility = View.VISIBLE
+            actionNext.show()
+            actionPrevious.show()
+            actionNext?.show()
+            actionPrevious?.show()
 
         } else {
             actionNext.visibility =
-                if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+                if (PreferenceUtilKT.isExtraControls) View.VISIBLE else View.GONE
             actionPrevious.visibility =
-                if (PreferenceUtil.getInstance(requireContext()).isExtraControls) View.VISIBLE else View.GONE
+                if (PreferenceUtilKT.isExtraControls) View.VISIBLE else View.GONE
         }
         actionNext.setOnClickListener(this)
         actionPrevious.setOnClickListener(this)
@@ -103,7 +104,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
                     Glide.with(requireContext()),
                     MusicPlayerRemote.currentSong
                 ).checkIgnoreMediaStore(requireContext())
-                    .ignoreMediaStore(PreferenceUtil.isAllowedToDownloadMetadata(requireContext()))
+                    .ignoreMediaStore(PreferenceUtilKT.isAllowedToDownloadMetadata())
                     .asBitmap()
                     .build()
                     .into(it)

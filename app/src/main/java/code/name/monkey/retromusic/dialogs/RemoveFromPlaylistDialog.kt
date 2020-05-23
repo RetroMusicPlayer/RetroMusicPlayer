@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
@@ -67,7 +67,7 @@ class RemoveFromPlaylistDialog : DialogFragment() {
                         songs as MutableList<PlaylistSong>
                     )
                 }
-                cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             }
     }
 

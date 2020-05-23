@@ -34,7 +34,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PreferenceUtilKT;
 
 /**
  * Created by hemanths on 2019-09-15.
@@ -88,7 +88,7 @@ public class SongGlideRequest {
 
         @NonNull
         public Builder checkIgnoreMediaStore(@NonNull Context context) {
-            return ignoreMediaStore(PreferenceUtil.getInstance(context).ignoreMediaStoreArtwork());
+            return ignoreMediaStore(PreferenceUtilKT.INSTANCE.isIgnoreMediaStoreArtwork());
         }
 
         @NonNull

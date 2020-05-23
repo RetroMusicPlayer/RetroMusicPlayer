@@ -21,7 +21,8 @@ import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
+
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_tiny_player.*
@@ -102,7 +103,7 @@ class TinyPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelper.Ca
         title.text = song.title
         text.text = String.format("%s \nby - %s", song.albumName, song.artistName)
 
-        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+        if (PreferenceUtilKT.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {

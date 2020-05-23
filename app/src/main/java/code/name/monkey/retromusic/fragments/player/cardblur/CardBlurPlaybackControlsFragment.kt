@@ -23,7 +23,8 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
+
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_card_blur_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
@@ -113,7 +114,7 @@ class CardBlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updateSong() {
-        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+        if (PreferenceUtilKT.isSongInfo) {
             songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
             songInfo.show()
         } else {

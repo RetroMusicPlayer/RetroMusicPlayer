@@ -13,7 +13,7 @@ import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.SongPresenter
 import code.name.monkey.retromusic.mvp.presenter.SongView
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import java.util.*
 import javax.inject.Inject
 
@@ -70,19 +70,19 @@ class SongsFragment :
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getSongGridSize(requireContext())
+        return PreferenceUtilKT.songGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setSongGridSize(gridColumns)
+        PreferenceUtilKT.songGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtil.getInstance(requireContext()).getSongGridSizeLand(requireContext())
+        return PreferenceUtilKT.songGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtil.getInstance(requireContext()).setSongGridSizeLand(gridColumns)
+        PreferenceUtilKT.songGridSizeLand = gridColumns
     }
 
     override fun setGridSize(gridSize: Int) {
@@ -105,11 +105,20 @@ class SongsFragment :
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtil.getInstance(requireContext()).songSortOrder
+        return PreferenceUtilKT.songSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtil.getInstance(requireContext()).songSortOrder = sortOrder
+        PreferenceUtilKT.songSortOrder = sortOrder
+    }
+
+    @LayoutRes
+    override fun loadLayoutRes(): Int {
+        return PreferenceUtilKT.songGridStyle
+    }
+
+    override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
+        PreferenceUtilKT.songGridStyle = layoutRes
     }
 
     override fun setSortOrder(sortOrder: String) {
@@ -129,14 +138,6 @@ class SongsFragment :
         }
     }
 
-    @LayoutRes
-    override fun loadLayoutRes(): Int {
-        return PreferenceUtil.getInstance(requireContext()).songGridStyle
-    }
-
-    override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
-        PreferenceUtil.getInstance(requireContext()).songGridStyle = layoutRes
-    }
 
     override fun handleBackPress(): Boolean {
         return false

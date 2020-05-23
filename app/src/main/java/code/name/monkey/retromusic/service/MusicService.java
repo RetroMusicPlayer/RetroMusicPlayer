@@ -81,8 +81,15 @@ import code.name.monkey.retromusic.service.notification.PlayingNotificationImpl;
 import code.name.monkey.retromusic.service.notification.PlayingNotificationOreo;
 import code.name.monkey.retromusic.service.playback.Playback;
 import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.PreferenceUtil;
+import code.name.monkey.retromusic.util.PreferenceUtilKT;
 import code.name.monkey.retromusic.util.RetroUtil;
+
+import static code.name.monkey.retromusic.ConstantsKt.ALBUM_ART_ON_LOCKSCREEN;
+import static code.name.monkey.retromusic.ConstantsKt.BLURRED_ALBUM_ART;
+import static code.name.monkey.retromusic.ConstantsKt.CLASSIC_NOTIFICATION;
+import static code.name.monkey.retromusic.ConstantsKt.COLORED_NOTIFICATION;
+import static code.name.monkey.retromusic.ConstantsKt.GAPLESS_PLAYBACK;
+import static code.name.monkey.retromusic.ConstantsKt.TOGGLE_HEADSET;
 
 /**
  * @author Karim Abou Zeid (kabouzeid), Andrew Neal
@@ -250,7 +257,7 @@ public class MusicService extends Service implements
             String action = intent.getAction();
             if (action != null) {
                 if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action) &&
-                        PreferenceUtil.getInstance(context).bluetoothSpeaker()) {
+                        PreferenceUtilKT.INSTANCE.isBluetoothSpeaker()) {
                     if (VERSION.SDK_INT >= VERSION_CODES.M) {
                         if (getAudioManager().getDevices(AudioManager.GET_DEVICES_OUTPUTS).length > 0) {
                             play();
@@ -381,7 +388,7 @@ public class MusicService extends Service implements
         getContentResolver()
                 .registerContentObserver(MediaStore.Audio.Playlists.INTERNAL_CONTENT_URI, true, mediaStoreObserver);
 
-        PreferenceUtil.getInstance(this).registerOnSharedPreferenceChangedListener(this);
+        PreferenceUtilKT.INSTANCE.registerOnSharedPreferenceChangedListener(this);
 
         restoreState();
 
@@ -411,7 +418,7 @@ public class MusicService extends Service implements
         quit();
         releaseResources();
         getContentResolver().unregisterContentObserver(mediaStoreObserver);
-        PreferenceUtil.getInstance(this).unregisterOnSharedPreferenceChangedListener(this);
+        PreferenceUtilKT.INSTANCE.unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
 
         sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
@@ -656,8 +663,8 @@ public class MusicService extends Service implements
     }
 
     public void initNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && !PreferenceUtil.getInstance(this)
-                .classicNotification()) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N &&
+                !PreferenceUtilKT.INSTANCE.isClassicNotification()) {
             playingNotification = new PlayingNotificationImpl();
         } else {
             playingNotification = new PlayingNotificationOreo();
@@ -719,7 +726,7 @@ public class MusicService extends Service implements
     @Override
     public void onSharedPreferenceChanged(@NonNull SharedPreferences sharedPreferences, @NonNull String key) {
         switch (key) {
-            case PreferenceUtil.GAPLESS_PLAYBACK:
+            case GAPLESS_PLAYBACK:
                 if (sharedPreferences.getBoolean(key, false)) {
                     prepareNext();
                 } else {
@@ -728,18 +735,18 @@ public class MusicService extends Service implements
                     }
                 }
                 break;
-            case PreferenceUtil.ALBUM_ART_ON_LOCKSCREEN:
-            case PreferenceUtil.BLURRED_ALBUM_ART:
+            case ALBUM_ART_ON_LOCKSCREEN:
+            case BLURRED_ALBUM_ART:
                 updateMediaSessionMetaData();
                 break;
-            case PreferenceUtil.COLORED_NOTIFICATION:
+            case COLORED_NOTIFICATION:
                 updateNotification();
                 break;
-            case PreferenceUtil.CLASSIC_NOTIFICATION:
+            case CLASSIC_NOTIFICATION:
                 initNotification();
                 updateNotification();
                 break;
-            case PreferenceUtil.TOGGLE_HEADSET:
+            case TOGGLE_HEADSET:
                 registerHeadsetEvents();
                 break;
         }
@@ -1103,13 +1110,13 @@ public class MusicService extends Service implements
                 .putBitmap(MediaMetadataCompat.METADATA_KEY_ALBUM_ART, null)
                 .putLong(MediaMetadataCompat.METADATA_KEY_NUM_TRACKS, getPlayingQueue().size());
 
-        if (PreferenceUtil.getInstance(this).albumArtOnLockscreen()) {
+        if (PreferenceUtilKT.INSTANCE.isAlbumArtOnLockScreen()) {
             final Point screenSize = RetroUtil.getScreenSize(MusicService.this);
             final BitmapRequestBuilder<?, Bitmap> request = SongGlideRequest.Builder
                     .from(Glide.with(MusicService.this), song)
                     .checkIgnoreMediaStore(MusicService.this)
                     .asBitmap().build();
-            if (PreferenceUtil.getInstance(this).blurredAlbumArt()) {
+            if (PreferenceUtilKT.INSTANCE.isBlurredAlbumArt()) {
                 request.transform(new BlurTransformation.Builder(MusicService.this).build());
             }
             runOnUiThread(new Runnable() {
@@ -1252,7 +1259,7 @@ public class MusicService extends Service implements
     }
 
     private void registerHeadsetEvents() {
-        if (!headsetReceiverRegistered && PreferenceUtil.getInstance(this).getHeadsetPlugged()) {
+        if (!headsetReceiverRegistered && PreferenceUtilKT.INSTANCE.isHeadsetPlugged()) {
             registerReceiver(headsetReceiver, headsetReceiverIntentFilter);
             headsetReceiverRegistered = true;
         }

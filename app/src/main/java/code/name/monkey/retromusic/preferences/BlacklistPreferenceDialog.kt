@@ -27,7 +27,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.dialogs.BlacklistFolderChooserDialog
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.providers.BlacklistStore
-import code.name.monkey.retromusic.util.PreferenceUtil
+
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import java.io.File
@@ -63,7 +63,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         refreshBlacklistData()
         return MaterialDialog(requireContext()).show {
             title(R.string.blacklist)
-            cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
             positiveButton(android.R.string.ok) {
                 dismiss()
             }
@@ -71,7 +71,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
                 MaterialDialog(requireContext()).show {
                     title(code.name.monkey.retromusic.R.string.clear_blacklist)
                     message(code.name.monkey.retromusic.R.string.do_you_want_to_clear_the_blacklist)
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
                     positiveButton(code.name.monkey.retromusic.R.string.clear_action) {
                         BlacklistStore.getInstance(requireContext()).clear()
                         refreshBlacklistData()
@@ -86,7 +86,7 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
             }
             listItems(items = paths, waitForPositiveButton = false) { _, _, text ->
                 MaterialDialog(requireContext()).show {
-                    cornerRadius(PreferenceUtil.getInstance(requireContext()).dialogCorner)
+
                     title(code.name.monkey.retromusic.R.string.remove_from_blacklist)
                     message(
                         text = HtmlCompat.fromHtml(

@@ -23,7 +23,7 @@ import code.name.monkey.retromusic.Constants.BASE_SELECTION
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtil
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 
 
 object GenreLoader {
@@ -98,7 +98,7 @@ object GenreLoader {
                 baseProjection,
                 BASE_SELECTION,
                 null,
-                PreferenceUtil.getInstance(context).songSortOrder
+                PreferenceUtilKT.songSortOrder
             )
         } catch (e: SecurityException) {
             return null
@@ -154,7 +154,7 @@ object GenreLoader {
                 projection,
                 null,
                 null,
-                PreferenceUtil.getInstance(context).genreSortOrder
+                PreferenceUtilKT.genreSortOrder
             )
         } catch (e: SecurityException) {
             return null

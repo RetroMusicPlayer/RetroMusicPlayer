@@ -24,7 +24,8 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtil
+
+import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_card_player_playback_controls.*
 import kotlinx.android.synthetic.main.media_button.*
@@ -68,7 +69,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         title.text = song.title
         text.text = song.artistName
 
-        if (PreferenceUtil.getInstance(requireContext()).isSongInfo) {
+        if (PreferenceUtilKT.isSongInfo) {
             songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
             songInfo.show()
         } else {
@@ -128,7 +129,7 @@ class CardPlaybackControlsFragment : AbsPlayerControlsFragment() {
         updatePlayPauseColor()
         updateProgressTextColor()
 
-        val colorFinal = if (PreferenceUtil.getInstance(requireContext()).adaptiveColor) {
+        val colorFinal = if (PreferenceUtilKT.isAdaptiveColor) {
             color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext()).ripAlpha()
