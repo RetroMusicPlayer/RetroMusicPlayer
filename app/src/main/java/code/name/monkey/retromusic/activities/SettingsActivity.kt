@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.extensions.applyToolbar
@@ -23,7 +21,6 @@ class SettingsActivity : AbsBaseActivity() {
         setStatusbarColorAuto()
         setNavigationbarColorAuto()
         setLightNavigationBar(true)
-
         setupToolbar()
 
         if (savedInstanceState == null) {
@@ -49,7 +46,6 @@ class SettingsActivity : AbsBaseActivity() {
         fragmentTransaction.replace(R.id.contentFrame, fragment, fragment.tag)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
         setTitle(titleName)
     }
 

@@ -26,7 +26,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
-import androidx.preference.PreferenceDialogFragmentCompat
+import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
@@ -38,9 +38,8 @@ import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
 import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.ViewUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NowPlayingScreenPreference @JvmOverloads constructor(
     context: Context,
@@ -63,8 +62,7 @@ class NowPlayingScreenPreference @JvmOverloads constructor(
     }
 }
 
-class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
-    ViewPager.OnPageChangeListener {
+class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChangeListener {
 
     private var viewPagerPosition: Int = 0
 
@@ -78,9 +76,6 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
         this.viewPagerPosition = position
     }
 
-    override fun onDialogClosed(positiveResult: Boolean) {
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireContext())
             .inflate(R.layout.preference_dialog_now_playing_screen, null)
@@ -91,7 +86,23 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtilKT.nowPlayingScreen.ordinal
 
-        return MaterialDialog(requireContext()).show {
+        return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.pref_title_now_playing_screen_appearance)
+            .setCancelable(false)
+            .setPositiveButton(R.string.set) { _, _ ->
+                val nowPlayingScreen = values()[viewPagerPosition]
+                if (isNowPlayingThemes(nowPlayingScreen)) {
+                    val result =
+                        getString(nowPlayingScreen.titleRes) + " theme is Pro version feature."
+                    Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
+                    NavigationUtil.goToProVersion(requireContext())
+                } else {
+                    PreferenceUtilKT.nowPlayingScreen = nowPlayingScreen
+                }
+            }
+            .setView(view)
+            .create()
+        /*.show {
             title(R.string.pref_title_now_playing_screen_appearance)
             positiveButton(R.string.set) {
                 val nowPlayingScreen = values()[viewPagerPosition]
@@ -107,16 +118,12 @@ class NowPlayingScreenPreferenceDialog : PreferenceDialogFragmentCompat(),
 
             negativeButton(android.R.string.cancel)
             customView(view = view, scrollable = false, noVerticalPadding = false)
-        }
+        }*/
     }
 
     companion object {
-        fun newInstance(key: String): NowPlayingScreenPreferenceDialog {
-            val bundle = Bundle()
-            bundle.putString(ARG_KEY, key)
-            val fragment = NowPlayingScreenPreferenceDialog()
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(): NowPlayingScreenPreferenceDialog {
+            return NowPlayingScreenPreferenceDialog()
         }
     }
 }

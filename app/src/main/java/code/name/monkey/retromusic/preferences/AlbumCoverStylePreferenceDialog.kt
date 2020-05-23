@@ -27,7 +27,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
-import androidx.preference.PreferenceDialogFragmentCompat
+import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
@@ -37,12 +37,10 @@ import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
-
 import code.name.monkey.retromusic.util.PreferenceUtilKT
 import code.name.monkey.retromusic.util.ViewUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AlbumCoverStylePreference @JvmOverloads constructor(
     context: Context,
@@ -66,10 +64,8 @@ class AlbumCoverStylePreference @JvmOverloads constructor(
     }
 }
 
-class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
+class AlbumCoverStylePreferenceDialog : DialogFragment(),
     ViewPager.OnPageChangeListener {
-    override fun onDialogClosed(positiveResult: Boolean) {
-    }
 
     private var viewPagerPosition: Int = 0
 
@@ -83,10 +79,9 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtilKT.albumCoverStyle.ordinal
 
-        return MaterialDialog(requireActivity()).show {
-            title(R.string.pref_title_album_cover_style)
-
-            positiveButton(R.string.set) {
+        return MaterialAlertDialogBuilder(requireActivity())
+            .setTitle(R.string.pref_title_album_cover_style)
+            .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]
                 if (isAlbumCoverStyle(coverStyle)) {
                     val result = getString(coverStyle.titleRes) + " theme is Pro version feature."
@@ -96,9 +91,11 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
                     PreferenceUtilKT.albumCoverStyle = coverStyle
                 }
             }
-            negativeButton(android.R.string.cancel)
-            customView(view = view, scrollable = false, noVerticalPadding = false)
-        }
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                dismiss()
+            }
+            .setView(view)
+            .create()
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
@@ -162,12 +159,8 @@ class AlbumCoverStylePreferenceDialog : PreferenceDialogFragmentCompat(),
     companion object {
         val TAG: String = AlbumCoverStylePreferenceDialog::class.java.simpleName
 
-        fun newInstance(key: String): AlbumCoverStylePreferenceDialog {
-            val bundle = Bundle()
-            bundle.putString(ARG_KEY, key)
-            val fragment = AlbumCoverStylePreferenceDialog()
-            fragment.arguments = bundle
-            return fragment
+        fun newInstance(): AlbumCoverStylePreferenceDialog {
+            return AlbumCoverStylePreferenceDialog()
         }
     }
 }

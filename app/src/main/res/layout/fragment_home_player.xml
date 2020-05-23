@@ -67,6 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/full_names"
         tools:textColor="@color/md_black_1000" />
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"

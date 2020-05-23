@@ -42,8 +42,7 @@ public class CategoryInfoAdapter extends RecyclerView.Adapter<CategoryInfoAdapte
     private List<CategoryInfo> categoryInfos;
     private ItemTouchHelper touchHelper;
 
-    public CategoryInfoAdapter(@NonNull List<CategoryInfo> categoryInfos) {
-        this.categoryInfos = categoryInfos;
+    public CategoryInfoAdapter() {
         SwipeAndDragHelper swipeAndDragHelper = new SwipeAndDragHelper(this);
         touchHelper = new ItemTouchHelper(swipeAndDragHelper);
     }

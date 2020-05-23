@@ -51,7 +51,7 @@
                     android:singleLine="true"
                     android:textAppearance="@style/TextViewSubtitle1"
                     android:textStyle="bold"
-                    tools:text="@tools:sample/full_names"/>
+                    tools:text="@tools:sample/full_names" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/text"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="4dp"
                     android:singleLine="true"
-                    tools:text="@tools:sample/full_names"/>
+                    tools:text="@tools:sample/full_names" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

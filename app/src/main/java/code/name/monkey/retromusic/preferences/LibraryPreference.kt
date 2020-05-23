@@ -14,15 +14,17 @@
 
 package code.name.monkey.retromusic.preferences
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
-import androidx.preference.PreferenceDialogFragmentCompat
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEDialogPreference
@@ -30,60 +32,52 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
-
 import code.name.monkey.retromusic.util.PreferenceUtilKT
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+
 
 class LibraryPreference @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = -1,
-    defStyleRes: Int = -1
-) :
-    ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
-
+    defStyleAttr: Int = 0,
+    defStyleRes: Int = 0
+) : ATEDialogPreference(context, attrs, defStyleAttr, defStyleRes) {
     init {
-        icon?.colorFilter =
-            BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                context.colorControlNormal(),
-                SRC_IN
-            )
+        icon?.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+            context.colorControlNormal(),
+            SRC_IN
+        )
     }
 }
 
-class LibraryPreferenceDialog : PreferenceDialogFragmentCompat() {
+class LibraryPreferenceDialog : DialogFragment() {
 
-    override fun onDialogClosed(positiveResult: Boolean) {
-    }
-
-    lateinit var adapter: CategoryInfoAdapter
-
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val view = LayoutInflater.from(requireContext())
             .inflate(R.layout.preference_dialog_library_categories, null)
-        adapter = CategoryInfoAdapter(PreferenceUtilKT.libraryCategory)
 
+        val categoryAdapter = CategoryInfoAdapter()
+        categoryAdapter.categoryInfos = PreferenceUtilKT.libraryCategory
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = categoryAdapter
+        categoryAdapter.attachToRecyclerView(recyclerView)
 
-        adapter.attachToRecyclerView(recyclerView)
 
-        return MaterialDialog(requireContext())
-            .title(R.string.library_categories)
-            .customView(view = view)
-            .positiveButton(android.R.string.ok) {
-                updateCategories(adapter.categoryInfos)
-                dismiss()
+        return MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.library_categories)
+            .setNeutralButton(
+                R.string.reset_action
+            ) { _, _ ->
+                categoryAdapter.categoryInfos = PreferenceUtilKT.defaultCategories
             }
-            .negativeButton(android.R.string.cancel) {
-                dismiss()
-            }
-            .neutralButton(R.string.reset_action) {
-                adapter.categoryInfos = PreferenceUtilKT.defaultCategories
-            }
-            .noAutoDismiss()
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(
+                android.R.string.ok
+            ) { _, _ -> updateCategories(categoryAdapter.categoryInfos) }
+            .setView(view)
+            .create()
     }
 
     private fun updateCategories(categories: List<CategoryInfo>) {

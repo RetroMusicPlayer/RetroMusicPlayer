@@ -99,6 +99,7 @@ class EqualizerHelper private constructor() : EqualizerInterface {
 
     companion object {
         private val TAG = "EqualizerHelper"
+
         @Volatile
         private var ourInstance: EqualizerHelper? = null
 

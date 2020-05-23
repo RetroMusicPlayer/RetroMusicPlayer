@@ -36,7 +36,8 @@ class LastAddedShortcutType(context: Context) : BaseShortcutType(context) {
                 context,
                 R.drawable.ic_app_shortcut_last_added
             )
-        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_LAST_ADDED)).build()
+        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_LAST_ADDED))
+            .build()
 
     companion object {
 

@@ -28,6 +28,7 @@ object SearchQueryHelper {
     private const val ARTIST_SELECTION = "lower(" + MediaStore.Audio.AudioColumns.ARTIST + ") = ?"
     private const val AND = " AND "
     var songs = ArrayList<Song>()
+
     @JvmStatic
     fun getSongs(context: Context, extras: Bundle): ArrayList<Song> {
         val query = extras.getString(SearchManager.QUERY, null)

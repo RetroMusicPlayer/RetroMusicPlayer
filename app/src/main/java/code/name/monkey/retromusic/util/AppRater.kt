@@ -20,11 +20,9 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import android.net.Uri
 import code.name.monkey.retromusic.R
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.WhichButton
 import com.afollestad.materialdialogs.actions.getActionButton
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
 object AppRater {
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name
@@ -34,6 +32,7 @@ object AppRater {
 
     private const val DAYS_UNTIL_PROMPT = 3//Min number of days
     private const val LAUNCHES_UNTIL_PROMPT = 5//Min number of launches
+
     @JvmStatic
     fun appLaunched(context: Context) {
         val prefs = context.getSharedPreferences(APP_RATING, 0)

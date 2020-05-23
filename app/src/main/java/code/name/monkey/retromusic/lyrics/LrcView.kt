@@ -35,7 +35,6 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import code.name.monkey.retromusic.BuildConfig
 import code.name.monkey.retromusic.R
@@ -216,9 +215,9 @@ class LrcView @JvmOverloads constructor(
             isAntiAlias = true
             textAlign = Paint.Align.LEFT
             textSize = mLrcTextSize
-           /* if (BuildConfig.FLAVOR != "nofont") {
-                typeface = ResourcesCompat.getFont(context, R.font.circular)
-            }*/
+            /* if (BuildConfig.FLAVOR != "nofont") {
+                 typeface = ResourcesCompat.getFont(context, R.font.circular)
+             }*/
         }
         mDefaultContent = DEFAULT_CONTENT
 

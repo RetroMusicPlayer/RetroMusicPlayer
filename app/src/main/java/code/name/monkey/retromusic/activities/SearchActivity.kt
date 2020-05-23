@@ -33,8 +33,6 @@ import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.emptyList
 
 class SearchActivity : AbsMusicServiceActivity(), OnQueryTextListener, TextWatcher, SearchView {
     @Inject

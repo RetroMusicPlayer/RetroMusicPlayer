@@ -137,7 +137,7 @@ abstract class AbsBaseActivity : AbsThemeActivity() {
                 }
             }
             hadPermissions = true
-             onHasPermissionsChanged(true)
+            onHasPermissionsChanged(true)
         }
     }
 

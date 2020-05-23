@@ -5,16 +5,19 @@
     <style name="Theme.RetroMusic.Light" parent="Theme.RetroMusic.Base.Light">
         <item name="android:windowBackground">@color/window_color_light</item>
         <item name="android:scrollbars">none</item>
+        <item name="dialogCornerRadius">16dp</item>
     </style>
 
     <style name="Theme.RetroMusic.Black" parent="Theme.RetroMusic.Base.Black">
         <item name="android:windowBackground">@color/window_color_dark</item>
         <item name="android:scrollbars">none</item>
+        <item name="dialogCornerRadius">16dp</item>
     </style>
 
     <style name="Theme.RetroMusic.FollowSystem" parent="Theme.RetroMusic.Base.Adaptive">
         <item name="android:windowBackground">@color/window_color</item>
         <item name="android:scrollbars">none</item>
+        <item name="dialogCornerRadius">16dp</item>
     </style>
 
     <style name="Theme.RetroMusic.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent" />

@@ -63,7 +63,6 @@ class BlacklistPreferenceDialog : DialogFragment(), BlacklistFolderChooserDialog
         refreshBlacklistData()
         return MaterialDialog(requireContext()).show {
             title(R.string.blacklist)
-
             positiveButton(android.R.string.ok) {
                 dismiss()
             }

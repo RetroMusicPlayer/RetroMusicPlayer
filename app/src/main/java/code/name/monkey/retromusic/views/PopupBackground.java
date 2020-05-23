@@ -118,7 +118,7 @@ public class PopupBackground extends Drawable {
         updatePath();
         return true;
     }
- 
+
 
     @Override
     protected void onBoundsChange(@NonNull Rect bounds) {

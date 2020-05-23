@@ -34,7 +34,8 @@ class ShuffleAllShortcutType(context: Context) : BaseShortcutType(context) {
             AppShortcutIconGenerator.generateThemedIcon(
                 context, R.drawable.ic_app_shortcut_shuffle_all
             )
-        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_SHUFFLE_ALL)).build()
+        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_SHUFFLE_ALL))
+            .build()
 
     companion object {
 

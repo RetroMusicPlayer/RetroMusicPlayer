@@ -10,6 +10,7 @@ object PremiumShow {
     private const val PREF_NAME = "premium_show"
     private const val LAUNCH_COUNT = "launch_count"
     private const val DATE_FIRST_LAUNCH = "date_first_launch"
+
     @JvmStatic
     fun launch(context: Context) {
         val pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

@@ -193,7 +193,8 @@ class AppWidgetBig : BaseAppWidget() {
      * Link up various button actions using [PendingIntent].
      */
     private fun linkButtons(context: Context, views: RemoteViews) {
-        val action = Intent(context, MainActivity::class.java).putExtra(MainActivity.EXPAND_PANEL, true)
+        val action =
+            Intent(context, MainActivity::class.java).putExtra(MainActivity.EXPAND_PANEL, true)
         var pendingIntent: PendingIntent
 
         val serviceName = ComponentName(context, MusicService::class.java)

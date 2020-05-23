@@ -52,7 +52,6 @@ object Constants {
     const val NUMBER_OF_TOP_TRACKS = 99
 
 
-
 }
 
 const val LIBRARY_CATEGORIES = "library_categories"

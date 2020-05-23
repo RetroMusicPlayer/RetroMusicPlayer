@@ -22,10 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.ShareInstagramStory
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.list.listItems
 
 class SongShareDialog : DialogFragment() {

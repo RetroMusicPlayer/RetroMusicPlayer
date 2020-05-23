@@ -20,7 +20,7 @@ class AlbumViewModel(application: Application) : AndroidViewModel(application) {
         val result = RepositoryImpl(getApplication()).allAlbums()
         if (result is Result.Success) {
             albums.value = result.data
-        }else {
+        } else {
             albums.value = listOf()
         }
     }

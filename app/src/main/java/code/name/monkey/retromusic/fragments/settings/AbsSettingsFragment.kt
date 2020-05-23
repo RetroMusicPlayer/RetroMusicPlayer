@@ -19,11 +19,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
-import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.preferences.*
@@ -33,7 +32,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
  * @author Hemanth S (h4h13).
  */
 
-abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
+abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
         Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT)
@@ -73,16 +72,25 @@ abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
         invalidateSettings()
     }
 
-    override fun onCreatePreferenceDialog(preference: Preference): DialogFragment? {
-        return when (preference) {
-            is LibraryPreference -> LibraryPreferenceDialog.newInstance()
-            is NowPlayingScreenPreference -> NowPlayingScreenPreferenceDialog.newInstance(preference.key)
-            is AlbumCoverStylePreference -> AlbumCoverStylePreferenceDialog.newInstance(preference.key)
-            is MaterialListPreference -> {
-                MaterialListPreferenceDialog.newInstance(preference)
+    override fun onDisplayPreferenceDialog(preference: Preference?) {
+        when (preference) {
+            is LibraryPreference -> {
+                val fragment = LibraryPreferenceDialog.newInstance()
+                fragment.show(childFragmentManager, preference.key)
             }
-            is BlacklistPreference -> BlacklistPreferenceDialog.newInstance()
-            else -> super.onCreatePreferenceDialog(preference)
+            is NowPlayingScreenPreference -> {
+                val fragment = NowPlayingScreenPreferenceDialog.newInstance()
+                fragment.show(childFragmentManager, preference.key)
+            }
+            is AlbumCoverStylePreference -> {
+                val fragment = AlbumCoverStylePreferenceDialog.newInstance()
+                fragment.show(childFragmentManager, preference.key)
+            }
+            is BlacklistPreference -> {
+                val fragment = BlacklistPreferenceDialog.newInstance()
+                fragment.show(childFragmentManager, preference.key)
+            }
+            else -> super.onDisplayPreferenceDialog(preference)
         }
     }
 }

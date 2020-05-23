@@ -20,10 +20,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
-
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
 
 class ClearSmartPlaylistDialog : DialogFragment() {

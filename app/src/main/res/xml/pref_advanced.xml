@@ -17,7 +17,7 @@
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_playlists">
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="this_month"
             android:entries="@array/pref_playlists_last_added_interval_titles"
             android:entryValues="@array/pref_playlists_last_added_interval_values"

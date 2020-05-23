@@ -25,15 +25,13 @@ import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.MusicUtil
-
 import code.name.monkey.retromusic.util.SAFUtil
-import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 
 class DeleteSongsDialog : DialogFragment() {
     @JvmField
     var currentSong: Song? = null
+
     @JvmField
     var songsToRemove: List<Song>? = null
 

@@ -34,7 +34,8 @@ class TopTracksShortcutType(context: Context) : BaseShortcutType(context) {
             AppShortcutIconGenerator.generateThemedIcon(
                 context, R.drawable.ic_app_shortcut_top_tracks
             )
-        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_TOP_TRACKS)).build()
+        ).setIntent(getPlaySongsIntent(AppShortcutLauncherActivity.SHORTCUT_TYPE_TOP_TRACKS))
+            .build()
 
     companion object {
 
