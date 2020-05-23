@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.glide;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
@@ -13,6 +14,8 @@ import com.bumptech.glide.signature.MediaStoreSignature;
 
 import java.io.File;
 
+import code.name.monkey.appthemehelper.ThemeStore;
+import code.name.monkey.appthemehelper.util.TintHelper;
 import code.name.monkey.retromusic.App;
 import code.name.monkey.retromusic.R;
 
@@ -39,10 +42,12 @@ public class UserProfileGlideRequest {
     public static class Builder {
         private RequestManager requestManager;
         private File profile;
+        private Drawable error;
 
         private Builder(RequestManager requestManager, File profile) {
             this.requestManager = requestManager;
             this.profile = profile;
+            error = TintHelper.createTintedDrawable(App.Companion.getContext(), R.drawable.ic_account_white_24dp, ThemeStore.Companion.accentColor(App.Companion.getContext()));
         }
 
         public static Builder from(@NonNull RequestManager requestManager, File profile) {
@@ -51,10 +56,9 @@ public class UserProfileGlideRequest {
 
         @NonNull
         public BitmapRequestBuilder<File, Bitmap> build() {
-            //noinspection unchecked
             return createBaseRequest(requestManager, profile)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(error)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(profile));
         }
@@ -68,10 +72,9 @@ public class UserProfileGlideRequest {
         }
 
         public BitmapRequestBuilder<?, Bitmap> build() {
-            //noinspection unchecked
             return createBaseRequest(builder.requestManager, builder.profile)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .error(DEFAULT_ERROR_IMAGE)
+                    .error(builder.error)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(builder.profile));
         }

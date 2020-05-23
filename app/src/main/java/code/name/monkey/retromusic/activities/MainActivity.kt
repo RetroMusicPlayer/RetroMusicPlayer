@@ -59,12 +59,11 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.InstallStatus
-import com.google.android.play.core.install.model.InstallStatus.*
+import com.google.android.play.core.install.model.InstallStatus.DOWNLOADED
+import com.google.android.play.core.install.model.InstallStatus.INSTALLED
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.activity_main_content.*
-import java.math.BigInteger
 import java.util.*
 
 class MainActivity : AbsSlidingMusicPanelActivity(),
@@ -621,6 +620,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         supportFragmentManager.commit {
             replace(R.id.fragment_container, fragment, tag)
         }
+        currentFragment = fragment as MainActivityFragmentCallbacks
     }
 
     private fun selectedFragment(itemId: Int) {

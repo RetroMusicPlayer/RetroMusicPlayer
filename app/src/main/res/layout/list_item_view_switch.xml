@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toStartOf="@android:id/checkbox"
         app:layout_constraintStart_toStartOf="@+id/guideline_front_margin"
         app:layout_constraintTop_toBottomOf="@android:id/title"
-        app:lineHeightHint="20sp"
+        android:textAppearance="@style/TextViewNormal"
         tools:maxLines="2"
         tools:text="@tools:sample/lorem/random" />
 

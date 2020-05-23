@@ -109,9 +109,7 @@
 
     <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
-    <style name="TextViewNormal">
-        <item name="android:textSize">14sp</item>
-    </style>
+    <style name="TextViewNormal" parent="TextAppearance.AppCompat.Body2" />
 
     <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
