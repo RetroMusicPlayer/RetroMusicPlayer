@@ -26,3 +26,14 @@ fun Context.isSystemDarkModeEnabled(): Boolean {
         (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
     return isBatterySaverEnabled or isDarkModeEnabled
 }
+
+
+inline fun <reified T : Any> Fragment.extra(key: String, default: T? = null) = lazy {
+    val value = arguments?.get(key)
+    if (value is T) value else default
+}
+
+inline fun <reified T : Any> Fragment.extraNotNull(key: String, default: T? = null) = lazy {
+    val value = arguments?.get(key)
+    requireNotNull(if (value is T) value else default) { key }
+}

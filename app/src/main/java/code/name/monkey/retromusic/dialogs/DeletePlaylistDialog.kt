@@ -19,10 +19,9 @@ import android.os.Bundle
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.*
 
 class DeletePlaylistDialog : DialogFragment() {
@@ -30,33 +29,33 @@ class DeletePlaylistDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val playlists = requireArguments().getParcelableArrayList<Playlist>("playlist")
         val title: Int
-        val content: CharSequence
+        val message: CharSequence
         //noinspection ConstantConditions
         if (playlists!!.size > 1) {
-            title = string.delete_playlists_title
-            content = HtmlCompat.fromHtml(
-                getString(string.delete_x_playlists, playlists.size),
+            title = R.string.delete_playlists_title
+            message = HtmlCompat.fromHtml(
+                getString(R.string.delete_x_playlists, playlists.size),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         } else {
-            title = string.delete_playlist_title
-            content = HtmlCompat.fromHtml(
-                getString(string.delete_playlist_x, playlists[0].name),
+            title = R.string.delete_playlist_title
+            message = HtmlCompat.fromHtml(
+                getString(R.string.delete_playlist_x, playlists[0].name),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
         }
 
-        return MaterialDialog(requireContext())
-            .show {
-
-                title(title)
-                message(text = content)
-                negativeButton(android.R.string.cancel)
-                positiveButton(R.string.action_delete) {
-                    PlaylistsUtil.deletePlaylists(requireContext(), playlists)
-                }
-                negativeButton(android.R.string.cancel)
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
+            .setTitle(title)
+            .setMessage(message)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(R.string.action_delete) { _, _ ->
+                PlaylistsUtil.deletePlaylists(requireContext(), playlists)
             }
+            .create()
     }
 
     companion object {

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import code.name.monkey.appthemehelper.ThemeStore.Companion.accentColor
+import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.*
@@ -59,9 +60,11 @@ import com.google.android.play.core.install.InstallState
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.InstallStatus.*
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import kotlinx.android.synthetic.main.activity_main_content.*
+import java.math.BigInteger
 import java.util.*
 
 class MainActivity : AbsSlidingMusicPanelActivity(),
@@ -73,7 +76,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     lateinit var libraryViewModel: LibraryViewModel
-    private lateinit var cab: MaterialCab
+    private var cab: MaterialCab? = null
     private val intentFilter = IntentFilter(Intent.ACTION_SCREEN_OFF)
     private lateinit var currentFragment: MainActivityFragmentCallbacks
     private var appUpdateManager: AppUpdateManager? = null
@@ -81,10 +84,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     private val listener = object : InstallStateUpdatedListener {
         override fun onStateUpdate(state: InstallState) {
             when {
-                state.installStatus() == InstallStatus.DOWNLOADED -> {
+                state.installStatus() == DOWNLOADED -> {
                     popupSnackBarForCompleteUpdate()
                 }
-                state.installStatus() == InstallStatus.INSTALLED -> {
+                state.installStatus() == INSTALLED -> {
                     appUpdateManager?.unregisterListener(this)
                 }
                 else -> {
@@ -156,7 +159,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
 
         appUpdateManager?.appUpdateInfo
             ?.addOnSuccessListener { appUpdateInfo: AppUpdateInfo ->
-                if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                if (appUpdateInfo.installStatus() == DOWNLOADED) {
                     popupSnackBarForCompleteUpdate()
                 }
                 try {
@@ -213,10 +216,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
                 gridSizeItem.setTitle(R.string.action_grid_size_land)
             }
             setUpGridSizeMenu(fragment, gridSizeItem.subMenu)
-
-            val layoutItem: MenuItem = menu.findItem(R.id.action_layout_type)
-            setupLayoutMenu(fragment, layoutItem.subMenu)
-
+            setupLayoutMenu(fragment, menu.findItem(R.id.action_layout_type).subMenu)
             setUpSortOrderMenu(fragment, menu.findItem(R.id.action_sort_order).subMenu)
         } else {
             menu.removeItem(R.id.action_layout_type)
@@ -425,8 +425,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
                     R.id.action_album_sort_order_asc,
                     0,
                     R.string.sort_order_a_z
-                ).isChecked =
-                    currentSortOrder == AlbumSortOrder.ALBUM_A_Z
+                ).isChecked = currentSortOrder == AlbumSortOrder.ALBUM_A_Z
                 sortOrderMenu.add(
                     0,
                     R.id.action_album_sort_order_desc,
@@ -565,13 +564,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (!hasPermissions()) {
             requestPermissions()
         }
-
     }
-
 
     private fun setupToolbar() {
         toolbar.setBackgroundColor(resolveColor(this, R.attr.colorSurface))
@@ -748,7 +744,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
                 try {
                     id = idString.toLong()
                 } catch (e: NumberFormatException) {
-                    Log.e(MainActivity.TAG, e.message)
+                    Log.e(TAG, e.message)
                 }
             }
         }
@@ -756,26 +752,29 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     }
 
     override fun handleBackPress(): Boolean {
-        if (cab.isActive) {
-            cab.finish()
+        if (cab != null && cab!!.isActive) {
+            cab?.finish()
             return true
         }
         return super.handleBackPress() || currentFragment.handleBackPress()
     }
 
     override fun openCab(menuRes: Int, callback: MaterialCab.Callback): MaterialCab {
-        if (cab != null && cab.isActive) {
-            cab.finish()
+        cab?.let {
+            if (it.isActive) it.finish()
         }
         cab = MaterialCab(this, R.id.cab_stub)
             .setMenu(menuRes)
             .setCloseDrawableRes(R.drawable.ic_close_white_24dp)
             .setBackgroundColor(
                 RetroColorUtil.shiftBackgroundColorForLightText(
-                    resolveColor(this, R.attr.colorSurface)
+                    ATHUtil.resolveColor(
+                        this,
+                        R.attr.colorSurface
+                    )
                 )
             )
             .start(callback)
-        return cab
+        return cab as MaterialCab
     }
 }

@@ -55,7 +55,8 @@ public class DeleteSongsAsyncTask extends DialogAsyncTask<DeleteSongsAsyncTask.L
     @NonNull
     @Override
     protected Dialog createDialog(@NonNull Context context) {
-        return new MaterialAlertDialogBuilder(context)
+        return new MaterialAlertDialogBuilder(context,
+                R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle(R.string.deleting_songs)
                 .setView(R.layout.loading)
                 .setCancelable(false)

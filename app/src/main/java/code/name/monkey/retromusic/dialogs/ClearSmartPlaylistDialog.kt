@@ -20,7 +20,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.model.smartplaylist.AbsSmartPlaylist
-import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class ClearSmartPlaylistDialog : DialogFragment() {
@@ -30,23 +30,22 @@ class ClearSmartPlaylistDialog : DialogFragment() {
         val playlist = requireArguments().getParcelable<AbsSmartPlaylist>("playlist")
         val title = R.string.clear_playlist_title
 
-        val content = HtmlCompat.fromHtml(
+        val message = HtmlCompat.fromHtml(
             getString(R.string.clear_playlist_x, playlist!!.name),
             HtmlCompat.FROM_HTML_MODE_LEGACY
         )
 
-        return MaterialDialog(requireContext()).show {
-            title(title)
-
-            message(text = content)
-            positiveButton(R.string.clear_action) {
-                if (activity == null) {
-                    return@positiveButton
-                }
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.clear_action) { _, _ ->
                 playlist.clear(requireActivity())
             }
-            negativeButton { (android.R.string.cancel) }
-        }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
     }
 
     companion object {

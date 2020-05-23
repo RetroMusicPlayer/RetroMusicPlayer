@@ -80,15 +80,14 @@ object GenreLoader {
     }
 
     private fun makeAllSongsWithGenreCursor(context: Context): Cursor? {
-        try {
-            return context.contentResolver.query(
+        return try {
+            context.contentResolver.query(
                 Uri.parse("content://media/external/audio/genres/all/members"),
                 arrayOf(Genres.Members.AUDIO_ID), null, null, null
             )
         } catch (e: SecurityException) {
-            return null
+            null
         }
-
     }
 
     private fun makeGenreSongCursor(context: Context, genreId: Int): Cursor? {

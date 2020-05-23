@@ -54,7 +54,6 @@ class AboutActivity : AbsBaseActivity(), View.OnClickListener {
             return json
         }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)

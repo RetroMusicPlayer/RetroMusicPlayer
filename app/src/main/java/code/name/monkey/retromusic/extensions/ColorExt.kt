@@ -18,6 +18,8 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.widget.CheckBox
+import android.widget.SeekBar
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -65,3 +67,14 @@ fun Fragment.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
 
 fun Dialog.resolveColor(@AttrRes attr: Int, fallBackColor: Int = 0) =
     ATHUtil.resolveColor(context, attr, fallBackColor)
+
+
+fun CheckBox.addAccentColor() {
+    buttonTintList = ColorStateList.valueOf(ThemeStore.accentColor(context))
+}
+
+fun SeekBar.addAccentColor() {
+    val colorState = ColorStateList.valueOf(ThemeStore.accentColor(context))
+    progressTintList = colorState
+    thumbTintList = colorState
+}

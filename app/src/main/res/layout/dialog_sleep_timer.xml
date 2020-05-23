@@ -19,9 +19,7 @@
         android:layout_height="wrap_content"
         android:maxHeight="3dp"
         android:paddingTop="12dp"
-        android:progressDrawable="@drawable/color_progress_seek"
         android:splitTrack="false"
-        android:thumb="@drawable/switch_thumb_material"
         tools:progress="20" />
 
     <com.google.android.material.checkbox.MaterialCheckBox

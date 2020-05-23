@@ -79,7 +79,8 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
         viewPager.currentItem = PreferenceUtilKT.albumCoverStyle.ordinal
 
-        return MaterialAlertDialogBuilder(requireActivity())
+        return MaterialAlertDialogBuilder(requireActivity(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
             .setTitle(R.string.pref_title_album_cover_style)
             .setPositiveButton(R.string.set) { _, _ ->
                 val coverStyle = values()[viewPagerPosition]

@@ -14,70 +14,60 @@
 
 package code.name.monkey.retromusic.dialogs
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.TextView
+import android.text.TextUtils
+import android.view.LayoutInflater
+import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.R.layout
-import code.name.monkey.retromusic.R.string
-import code.name.monkey.retromusic.extensions.appHandleColor
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 class CreatePlaylistDialog : DialogFragment() {
 
-    private lateinit var playlistView: TextInputEditText
-    private lateinit var actionNewPlaylistContainer: TextInputLayout
-
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(
         savedInstanceState: Bundle?
     ): Dialog {
-        val materialDialog = MaterialDialog(requireContext())
-            .show {
+        val view = LayoutInflater.from(requireActivity()).inflate(R.layout.dialog_playlist, null)
+        val playlistView: TextInputEditText = view.findViewById(R.id.actionNewPlaylist)
+        val playlistContainer: TextInputLayout = view.findViewById(R.id.actionNewPlaylistContainer)
+        MaterialUtil.setTint(playlistContainer, false)
 
-                title(string.new_playlist_title)
-                customView(layout.dialog_playlist)
-                negativeButton(android.R.string.cancel)
-                positiveButton(string.create_action) {
-                    if (activity == null) {
-                        return@positiveButton
-                    }
-                    val songs = requireArguments().getParcelableArrayList<Song>("songs")
-                        ?: return@positiveButton
-
-                    if (playlistView.text.toString().trim { it <= ' ' }.isNotEmpty()) {
-                        val playlistId = PlaylistsUtil.createPlaylist(
-                            requireContext(),
-                            playlistView.text.toString()
-                        )
-                        if (playlistId != -1) {
-                            PlaylistsUtil.addToPlaylist(requireContext(), songs, playlistId, true)
-                        }
+        return MaterialAlertDialogBuilder(requireActivity(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+            .setTitle(R.string.new_playlist_title)
+            .setView(view)
+            .setNegativeButton(android.R.string.cancel, null)
+            .setPositiveButton(
+                R.string.create_action
+            ) { _, _ ->
+                val extra = extraNotNull<ArrayList<Song>>("songs")
+                val playlistName = playlistView.text.toString()
+                if (!TextUtils.isEmpty(playlistName)) {
+                    val playlistId = PlaylistsUtil.createPlaylist(
+                        requireContext(),
+                        playlistView.text.toString()
+                    )
+                    if (playlistId != -1) {
+                        PlaylistsUtil.addToPlaylist(requireContext(), extra.value, playlistId, true)
                     }
                 }
             }
+            .create()
+    }
 
-        val dialogView = materialDialog.getCustomView()
-        playlistView = dialogView.findViewById(R.id.actionNewPlaylist)
-        actionNewPlaylistContainer = dialogView.findViewById(R.id.actionNewPlaylistContainer)
-
-        MaterialUtil.setTint(actionNewPlaylistContainer, false)
-
-        val playlistId = requireArguments().getLong(MediaStore.Audio.Playlists.Members.PLAYLIST_ID)
-        playlistView.appHandleColor()
-            .setText(
-                PlaylistsUtil.getNameForPlaylist(requireContext(), playlistId),
-                TextView.BufferType.EDITABLE
-            )
-        return materialDialog
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        (dialog as AlertDialog)
     }
 
     companion object {

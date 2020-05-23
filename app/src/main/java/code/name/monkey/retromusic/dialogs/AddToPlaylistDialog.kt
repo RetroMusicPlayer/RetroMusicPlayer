@@ -18,11 +18,11 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.loaders.PlaylistLoader
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItems
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class AddToPlaylistDialog : DialogFragment() {
 
@@ -30,34 +30,34 @@ class AddToPlaylistDialog : DialogFragment() {
         savedInstanceState: Bundle?
     ): Dialog {
         val playlists = PlaylistLoader.getAllPlaylists(requireContext())
-        val playlistNames: MutableList<String> = mutableListOf()
+        val playlistNames = mutableListOf<CharSequence>()
         playlistNames.add(requireContext().resources.getString(R.string.action_new_playlist))
         for (p in playlists) {
             playlistNames.add(p.name)
         }
 
-        return MaterialDialog(requireContext()).show {
-            title(R.string.add_playlist_title)
-
-            listItems(items = playlistNames) { dialog, index, _ ->
-                val songs =
-                    requireArguments().getParcelableArrayList<Song>("songs") ?: return@listItems
-                if (index == 0) {
-                    dialog.dismiss()
-                    activity?.supportFragmentManager?.let {
-                        CreatePlaylistDialog.create(songs).show(it, "ADD_TO_PLAYLIST")
-                    }
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
+            .setTitle(R.string.add_playlist_title)
+            .setItems(playlistNames.toTypedArray()) { dialog, which ->
+                val songs = extraNotNull<ArrayList<Song>>("songs")
+                if (which == 0) {
+                    CreatePlaylistDialog.create(songs.value)
+                        .show(childFragmentManager, "ADD_TO_PLAYLIST")
+                    dismiss()
                 } else {
-                    dialog.dismiss()
                     PlaylistsUtil.addToPlaylist(
                         requireContext(),
-                        songs,
-                        playlists[index - 1].id,
+                        songs.value,
+                        playlists[which - 1].id,
                         true
                     )
+                    dismiss()
                 }
             }
-        }
+            .create()
     }
 
     companion object {

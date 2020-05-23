@@ -22,7 +22,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.R.string
 import code.name.monkey.retromusic.model.PlaylistSong
 import code.name.monkey.retromusic.util.PlaylistsUtil
-import com.afollestad.materialdialogs.MaterialDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RemoveFromPlaylistDialog : DialogFragment() {
 
@@ -30,17 +30,17 @@ class RemoveFromPlaylistDialog : DialogFragment() {
         val songs = requireArguments().getParcelableArrayList<PlaylistSong>("songs")
 
         var title = 0
-        var content: CharSequence = ""
+        var message: CharSequence = ""
         if (songs != null) {
             if (songs.size > 1) {
                 title = R.string.remove_songs_from_playlist_title
-                content = HtmlCompat.fromHtml(
+                message = HtmlCompat.fromHtml(
                     getString(string.remove_x_songs_from_playlist, songs.size),
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
             } else {
                 title = R.string.remove_song_from_playlist_title
-                content = HtmlCompat.fromHtml(
+                message = HtmlCompat.fromHtml(
                     getString(
                         code.name.monkey.retromusic.R.string.remove_song_x_from_playlist,
                         songs[0].title
@@ -50,22 +50,18 @@ class RemoveFromPlaylistDialog : DialogFragment() {
             }
         }
 
-
-        return MaterialDialog(requireContext())
-            .show {
-                title(title)
-                message(text = content)
-                negativeButton(android.R.string.cancel)
-                positiveButton(R.string.remove_action) {
-                    if (activity == null)
-                        return@positiveButton
-                    PlaylistsUtil.removeFromPlaylist(
-                        requireContext(),
-                        songs as MutableList<PlaylistSong>
-                    )
-                }
-
+        return MaterialAlertDialogBuilder(requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(R.string.remove_action) { _, _ ->
+                PlaylistsUtil.removeFromPlaylist(
+                    requireContext(),
+                    songs as MutableList<PlaylistSong>
+                )
             }
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
     }
 
     companion object {
