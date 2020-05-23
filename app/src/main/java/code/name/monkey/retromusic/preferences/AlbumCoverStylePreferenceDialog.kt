@@ -92,9 +92,6 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
                     PreferenceUtilKT.albumCoverStyle = coverStyle
                 }
             }
-            .setNegativeButton(android.R.string.cancel) { _, _ ->
-                dismiss()
-            }
             .setView(view)
             .create()
     }
