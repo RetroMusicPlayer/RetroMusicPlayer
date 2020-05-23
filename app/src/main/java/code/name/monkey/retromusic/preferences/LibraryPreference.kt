@@ -21,7 +21,6 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.fragment.app.DialogFragment
@@ -65,7 +64,10 @@ class LibraryPreferenceDialog : DialogFragment() {
         categoryAdapter.attachToRecyclerView(recyclerView)
 
 
-        return MaterialAlertDialogBuilder(requireContext())
+        return MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+        )
             .setTitle(R.string.library_categories)
             .setNeutralButton(
                 R.string.reset_action
