@@ -135,13 +135,13 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         appLaunched(this)
         setupToolbar()
         checkUpdate()
+        updateTabs()
         getBottomNavigationView().selectedItemId = PreferenceUtilKT.lastPage
         getBottomNavigationView().setOnNavigationItemSelectedListener {
             PreferenceUtilKT.lastPage = it.itemId
             selectedFragment(it.itemId)
             true
         }
-        updateTabs()
     }
 
     override fun onResume() {
