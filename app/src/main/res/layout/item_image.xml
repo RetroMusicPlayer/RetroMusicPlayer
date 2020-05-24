@@ -14,7 +14,7 @@
         android:layout_margin="8dp"
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        app:cardElevation="0dp"
         app:cardPreventCornerOverlap="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
