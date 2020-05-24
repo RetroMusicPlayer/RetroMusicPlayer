@@ -16,7 +16,6 @@ package code.name.monkey.appthemehelper.common.prefs.supportv7
 import android.content.Context
 import android.util.AttributeSet
 import androidx.preference.ListPreference
-import code.name.monkey.appthemehelper.R.layout
 
 class ATEListPreference @JvmOverloads constructor(
     context: Context,
@@ -26,7 +25,6 @@ class ATEListPreference @JvmOverloads constructor(
 ) : ListPreference(context, attrs, defStyleAttr, defStyleRes) {
 
     init {
-        layoutResource = layout.ate_preference_custom_support
         if (summary == null || summary.toString().trim { it <= ' ' }.isEmpty()) {
             summary = "%s"
         }

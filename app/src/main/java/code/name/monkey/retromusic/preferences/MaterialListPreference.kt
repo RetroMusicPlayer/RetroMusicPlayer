@@ -23,13 +23,10 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat.SRC_IN
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceDialogFragmentCompat
-import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.WhichButton
-import com.afollestad.materialdialogs.actions.getActionButton
-import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MaterialListPreference @JvmOverloads constructor(
     context: Context,
@@ -72,30 +69,31 @@ class MaterialListPreferenceDialog : PreferenceDialogFragmentCompat() {
         val entries = arguments?.getStringArrayList(EXTRA_ENTRIES)
         val entriesValues = arguments?.getStringArrayList(EXTRA_ENTRIES_VALUES)
         val position: Int = arguments?.getInt(EXTRA_POSITION) ?: 0
-        materialDialog = MaterialDialog(requireContext())
-            .title(text = materialListPreference.title.toString())
-            .positiveButton(R.string.set)
-            .listItemsSingleChoice(
-                items = entries,
-                initialSelection = position,
-                waitForPositiveButton = true
-            ) { _, index, _ ->
-                entriesValues?.let {
-                    materialListPreference.callChangeListener(it[index])
-                    materialListPreference.setCustomValue(it[index])
-                }
-                entries?.let {
-                    materialListPreference.summary = it[index]
-                    val value = materialListPreference.entryValues[index].toString()
-                    if (materialListPreference.callChangeListener(value)) {
-                        materialListPreference.value = value
-                    }
-                }
-                dismiss()
-            }
-        materialDialog.getActionButton(WhichButton.POSITIVE)
-            .updateTextColor(ThemeStore.accentColor(requireContext()))
-        return materialDialog
+        /* materialDialog = MaterialDialog(requireContext())
+             .title(text = materialListPreference.title.toString())
+             .positiveButton(R.string.set)
+             .listItemsSingleChoice(
+                 items = entries,
+                 initialSelection = position,
+                 waitForPositiveButton = true
+             ) { _, index, _ ->
+                 entriesValues?.let {
+                     materialListPreference.callChangeListener(it[index])
+                     materialListPreference.setCustomValue(it[index])
+                 }
+                 entries?.let {
+                     materialListPreference.summary = it[index]
+                     val value = materialListPreference.entryValues[index].toString()
+                     if (materialListPreference.callChangeListener(value)) {
+                         materialListPreference.value = value
+                     }
+                 }
+                 dismiss()
+             }
+         materialDialog.getActionButton(WhichButton.POSITIVE)
+             .updateTextColor(ThemeStore.accentColor(requireContext()))
+         return materialDialog*/
+        return MaterialAlertDialogBuilder(requireContext()).create()
     }
 
     override fun onDestroyView() {

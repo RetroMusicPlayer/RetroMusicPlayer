@@ -48,20 +48,23 @@ class NowPlayingSettingsFragment : AbsSettingsFragment(),
     }
 
     private fun updateAlbumCoverStyleSummary() {
-        val preference: Preference = findPreference(ALBUM_COVER_STYLE)!!
-        preference.setSummary(PreferenceUtilKT.albumCoverStyle.titleRes)
+        val preference: Preference? = findPreference(ALBUM_COVER_STYLE)
+        preference?.setSummary(PreferenceUtilKT.albumCoverStyle.titleRes)
     }
 
     private fun updateNowPlayingScreenSummary() {
-        val preference: Preference = findPreference(NOW_PLAYING_SCREEN_ID)!!
-        preference.setSummary(PreferenceUtilKT.nowPlayingScreen.titleRes)
+        val preference: Preference? = findPreference(NOW_PLAYING_SCREEN_ID)
+        preference?.setSummary(PreferenceUtilKT.nowPlayingScreen.titleRes)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
-        val preference: Preference = findPreference("album_cover_transform")!!
-        setSummary(preference)
+        val preference: Preference? = findPreference("album_cover_transform")
+        preference?.setOnPreferenceChangeListener { albumPrefs, newValue ->
+            setSummary(albumPrefs, newValue)
+            true
+        }
     }
 
     override fun onDestroyView() {

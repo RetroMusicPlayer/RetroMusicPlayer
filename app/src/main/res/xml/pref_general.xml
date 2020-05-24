@@ -5,12 +5,14 @@
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_general">
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="auto"
             android:entries="@array/pref_general_theme_list_titles"
             android:entryValues="@array/pref_general_theme_list_values"
             android:key="general_theme"
             android:layout="@layout/list_item_view"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
             android:title="@string/pref_title_general_theme"
             app:icon="@drawable/ic_color_lens_white_24dp" />
 

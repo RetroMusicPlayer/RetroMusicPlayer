@@ -36,9 +36,8 @@ import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.ACTION_PENDING_QUIT
 import code.name.monkey.retromusic.service.MusicService.ACTION_QUIT
 import code.name.monkey.retromusic.util.PreferenceUtilKT
+import com.afollestad.materialdialogs.DialogAction
 import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.WhichButton
-import com.afollestad.materialdialogs.actions.getActionButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SleepTimerDialog : DialogFragment() {
@@ -153,10 +152,10 @@ class SleepTimerDialog : DialogFragment() {
     private fun updateCancelButton() {
         val musicService = MusicPlayerRemote.musicService
         if (musicService != null && musicService.pendingQuit) {
-            materialDialog.getActionButton(WhichButton.NEGATIVE).text =
+            materialDialog.getActionButton(DialogAction.NEUTRAL).text =
                 materialDialog.context.getString(R.string.cancel_current_timer)
         } else {
-            materialDialog.getActionButton(WhichButton.NEGATIVE).text = null
+            materialDialog.getActionButton(DialogAction.NEUTRAL).text = null
         }
     }
 

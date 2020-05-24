@@ -25,5 +25,5 @@
         android:paddingTop="16dp"
         android:paddingEnd="16dp"
         android:textAppearance="@style/TextViewOverline"
-        tools:text="@string/about_settings_summary" />
+        tools:text="@tools:sample/full_names" />
 </LinearLayout>

@@ -277,7 +277,6 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         MaterialUtil.setTint(button = shuffleAction, color = buttonColor)
         MaterialUtil.setTint(button = playAction, color = buttonColor)
 
-
         toolbar.setBackgroundColor(surfaceColor())
         setSupportActionBar(toolbar)
         supportActionBar?.title = null

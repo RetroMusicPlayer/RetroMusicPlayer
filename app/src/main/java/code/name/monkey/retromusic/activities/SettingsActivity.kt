@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import code.name.monkey.appthemehelper.ThemeStore
+import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
+import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.fragments.settings.MainSettingsFragment
+import com.afollestad.materialdialogs.color.ColorChooserDialog
 import kotlinx.android.synthetic.main.activity_settings.*
 
-class SettingsActivity : AbsBaseActivity() {
+class SettingsActivity : AbsBaseActivity(), ColorChooserDialog.ColorCallback {
 
     private val fragmentManager = supportFragmentManager
 
@@ -68,5 +72,20 @@ class SettingsActivity : AbsBaseActivity() {
 
     companion object {
         const val TAG: String = "SettingsActivity"
+    }
+
+    override fun onColorSelection(dialog: ColorChooserDialog, selectedColor: Int) {
+        when (dialog.title) {
+            R.string.accent_color -> {
+                ThemeStore.editTheme(this).accentColor(selectedColor).commit()
+                if (VersionUtils.hasNougatMR())
+                    DynamicShortcutManager(this).updateDynamicShortcuts()
+            }
+        }
+        recreate()
+    }
+
+    override fun onColorChooserDismissed(dialog: ColorChooserDialog) {
+
     }
 }

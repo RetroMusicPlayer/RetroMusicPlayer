@@ -5,7 +5,7 @@
         android:layout="@layout/preference_category_title"
         app:title="@string/home">
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
             android:entries="@array/pref_home_grid_style_list_titles"
             android:entryValues="@array/pref_home_grid_style_list_values"
@@ -36,7 +36,7 @@
             android:title="@string/library_categories"
             app:icon="@drawable/ic_library_music_white_24dp" />
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
             android:entries="@array/pref_tab_text_mode_titles"
             android:entryValues="@array/pref_tab_text_mode_values"

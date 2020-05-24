@@ -10,7 +10,7 @@
         android:title="@string/pref_title_ignore_media_store_artwork"
         app:icon="@drawable/ic_image_white_24dp" />
 
-    <code.name.monkey.retromusic.preferences.MaterialListPreference
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
         android:defaultValue="only_wifi"
         android:entries="@array/pref_auto_download_images_titles"
         android:entryValues="@array/pref_auto_download_images_values"

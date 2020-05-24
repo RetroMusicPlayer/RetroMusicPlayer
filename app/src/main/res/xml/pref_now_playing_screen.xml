@@ -25,7 +25,7 @@
             android:title="@string/pref_title_album_cover_style"
             app:icon="@drawable/ic_image_white_24dp" />
 
-        <code.name.monkey.retromusic.preferences.MaterialListPreference
+        <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
             android:defaultValue="0"
             android:entries="@array/pref_album_cover_transform_entities"
             android:entryValues="@array/pref_album_cover_transform_values"

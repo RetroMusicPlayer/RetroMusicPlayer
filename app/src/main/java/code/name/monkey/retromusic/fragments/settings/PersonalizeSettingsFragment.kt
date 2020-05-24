@@ -14,21 +14,15 @@
 
 package code.name.monkey.retromusic.fragments.settings
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.retromusic.CAROUSEL_EFFECT
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
 import code.name.monkey.retromusic.R
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
-
-class PersonalizeSettingsFragment : AbsSettingsFragment(),
-    SharedPreferences.OnSharedPreferenceChangeListener {
+class PersonalizeSettingsFragment : AbsSettingsFragment() {
 
     override fun invalidateSettings() {
-
         val toggleFullScreen: TwoStatePreference = findPreference("toggle_full_screen")!!
         toggleFullScreen.setOnPreferenceChangeListener { _, _ ->
             requireActivity().recreate()
@@ -42,22 +36,15 @@ class PersonalizeSettingsFragment : AbsSettingsFragment(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
-
-        var preference: Preference? = findPreference("home_artist_grid_style")
-        setSummary(preference!!)
-        preference = findPreference("tab_text_mode")
-        setSummary(preference!!)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        PreferenceUtilKT.unregisterOnSharedPreferenceChangedListener(this)
-    }
-
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
-        when (key) {
-            CAROUSEL_EFFECT -> invalidateSettings()
+        val homeArtistStyle: ATEListPreference? = findPreference("home_artist_grid_style")
+        homeArtistStyle?.setOnPreferenceChangeListener { preference, newValue ->
+            setSummary(preference, newValue)
+            true
+        }
+        val tabTextMode: ATEListPreference? = findPreference("tab_text_mode")
+        tabTextMode?.setOnPreferenceChangeListener { prefs, newValue ->
+            setSummary(prefs, newValue)
+            true
         }
     }
 }

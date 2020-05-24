@@ -6,7 +6,6 @@ import android.content.res.ColorStateList
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
-import android.text.InputType
 import android.text.TextUtils
 import android.view.*
 import androidx.annotation.StringRes
@@ -16,12 +15,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
 import code.name.monkey.appthemehelper.ThemeStore
-import code.name.monkey.appthemehelper.util.*
 import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
+import code.name.monkey.appthemehelper.util.ColorUtil
+import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import code.name.monkey.appthemehelper.util.TintHelper
+import code.name.monkey.appthemehelper.util.ToolbarContentTintHelper
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsMusicServiceActivity
-import code.name.monkey.retromusic.activities.tageditor.WriteTagsAsyncTask
 import code.name.monkey.retromusic.extensions.surfaceColor
 import code.name.monkey.retromusic.extensions.textColorSecondary
 import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
@@ -34,18 +35,10 @@ import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.PreferenceUtilKT
-import code.name.monkey.retromusic.util.RetroUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.input.getInputLayout
-import com.afollestad.materialdialogs.input.input
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
 import kotlinx.android.synthetic.main.fragment_synced.*
-import org.jaudiotagger.tag.FieldKey
 import java.io.File
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.set
 
 class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
     ViewPager.OnPageChangeListener {
@@ -170,7 +163,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
             e.printStackTrace()
         }
 
-        val materialDialog = MaterialDialog(this)
+        /*val materialDialog = MaterialDialog(this)
             .show {
                 title(R.string.add_time_framed_lryics)
                 negativeButton(R.string.action_search) {
@@ -188,7 +181,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
                 }
             }
 
-        MaterialUtil.setTint(materialDialog.getInputLayout(), false)
+        MaterialUtil.setTint(materialDialog.getInputLayout(), false)*/
     }
 
     private fun updateSong() {
@@ -206,7 +199,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
             lyricsString!!
         }
 
-        val materialDialog = MaterialDialog(
+        /*val materialDialog = MaterialDialog(
             this
         ).show {
 
@@ -231,7 +224,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
                 updateSong()
             }
         }
-        MaterialUtil.setTint(materialDialog.getInputLayout(), false)
+        MaterialUtil.setTint(materialDialog.getInputLayout(), false)*/
     }
 
     private fun getSongPaths(song: Song): ArrayList<String> {

@@ -16,7 +16,6 @@ package code.name.monkey.retromusic.preferences
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.AttributeSet
 import androidx.core.graphics.BlendModeColorFilterCompat

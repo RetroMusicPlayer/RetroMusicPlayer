@@ -18,8 +18,6 @@ import android.os.Build
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
-import code.name.monkey.appthemehelper.ACCENT_COLORS
-import code.name.monkey.appthemehelper.ACCENT_COLORS_SUB
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEColorPreference
 import code.name.monkey.appthemehelper.common.prefs.supportv7.ATESwitchPreference
@@ -30,9 +28,7 @@ import code.name.monkey.retromusic.DESATURATED_COLOR
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
 import code.name.monkey.retromusic.util.PreferenceUtilKT
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.color.colorChooser
-
+import com.afollestad.materialdialogs.color.ColorChooserDialog
 
 /**
  * @author Hemanth S (h4h13).
@@ -62,21 +58,12 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         accentColorPref.setColor(accentColor, ColorUtil.darkenColor(accentColor))
 
         accentColorPref.setOnPreferenceClickListener {
-            MaterialDialog(requireActivity()).show {
-                title(R.string.accent_color)
-                positiveButton(R.string.set)
-                colorChooser(
-                    colors = ACCENT_COLORS,
-                    allowCustomArgb = true,
-                    subColors = ACCENT_COLORS_SUB
-                ) { _, color ->
-                    ThemeStore.editTheme(requireContext()).accentColor(color).commit()
-                    if (VersionUtils.hasNougatMR())
-                        DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
-
-                    requireActivity().recreate()
-                }
-            }
+            ColorChooserDialog.Builder(requireContext(), R.string.accent_color)
+                .accentMode(true)
+                .allowUserColorInput(true)
+                .allowUserColorInputAlpha(false)
+                .preselect(accentColor)
+                .show(requireActivity())
             return@setOnPreferenceClickListener true
         }
         val blackTheme: ATESwitchPreference? = findPreference("black_theme")

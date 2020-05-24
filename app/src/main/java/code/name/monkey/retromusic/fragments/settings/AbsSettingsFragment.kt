@@ -21,8 +21,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
+import code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceFragmentCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.preferences.*
@@ -32,7 +32,7 @@ import code.name.monkey.retromusic.util.NavigationUtil
  * @author Hemanth S (h4h13).
  */
 
-abstract class AbsSettingsFragment : PreferenceFragmentCompat() {
+abstract class AbsSettingsFragment : ATEPreferenceFragmentCompat() {
 
     internal fun showProToastAndNavigate(message: String) {
         Toast.makeText(requireContext(), "$message is Pro version feature.", Toast.LENGTH_SHORT)

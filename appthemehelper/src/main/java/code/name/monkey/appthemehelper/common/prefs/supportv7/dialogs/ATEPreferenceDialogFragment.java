@@ -14,16 +14,17 @@
 
 package code.name.monkey.appthemehelper.common.prefs.supportv7.dialogs;
 
-
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.preference.DialogPreference;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -33,10 +34,10 @@ import code.name.monkey.appthemehelper.R;
 /**
  * @author Karim Abou Zeid (kabouzeid)
  */
-public class ATEPreferenceDialogFragment extends DialogFragment {
-
-    static final String ARG_KEY = "key";
-
+public class ATEPreferenceDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
+    protected static final String ARG_KEY = "key";
+    private static final String TAG = "ATEPreferenceDialog";
+    private int mWhichButtonClicked;
     private DialogPreference mPreference;
 
     public static ATEPreferenceDialogFragment newInstance(String key) {
@@ -59,34 +60,27 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
         }
     }
 
-    public DialogPreference getPreference() {
-        return this.mPreference;
-    }
-
     @NonNull
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        MaterialAlertDialogBuilder materialDialog = new MaterialAlertDialogBuilder(requireActivity(),
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        FragmentActivity context = this.getActivity();
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context,
                 R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-                .setTitle(mPreference.getTitle())
-                .setIcon(mPreference.getIcon())
-                .setMessage(mPreference.getDialogMessage())
-                .setPositiveButton(mPreference.getPositiveButtonText(), (dialogInterface, i) -> {
-                    onDialogClosed(true);
-                })
-                .setNegativeButton(mPreference.getNegativeButtonText(), (dialogInterface, i) -> {
-                    onDialogClosed(false);
-                });
+                .setTitle(this.mPreference.getDialogTitle())
+                .setIcon(this.mPreference.getDialogIcon())
+                .setMessage(this.mPreference.getDialogMessage())
+                .setPositiveButton(this.mPreference.getPositiveButtonText(), this)
+                .setNegativeButton(this.mPreference.getNegativeButtonText(), this);
 
-        //this.onPrepareDialogBuilder(materialDialog);
-        AlertDialog dialog = materialDialog.create();
+        this.onPrepareDialogBuilder(builder);
+        AlertDialog dialog = builder.create();
         if (this.needInputMethod()) {
             this.requestInputMethod(dialog);
         }
         return dialog;
     }
 
-    public void onDialogClosed(boolean positiveResult) {
-
+    public DialogPreference getPreference() {
+        return this.mPreference;
     }
 
     protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
@@ -99,5 +93,23 @@ public class ATEPreferenceDialogFragment extends DialogFragment {
     private void requestInputMethod(Dialog dialog) {
         Window window = dialog.getWindow();
         window.setSoftInputMode(5);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Log.i(TAG, "onDismiss: " + mWhichButtonClicked);
+        onDialogClosed(mWhichButtonClicked == DialogInterface.BUTTON_POSITIVE);
+    }
+
+    public void onDialogClosed(boolean positiveResult) {
+
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        Log.i(TAG, "onClick: " + which);
+        mWhichButtonClicked = which;
+        onDialogClosed(which == DialogInterface.BUTTON_POSITIVE);
     }
 }

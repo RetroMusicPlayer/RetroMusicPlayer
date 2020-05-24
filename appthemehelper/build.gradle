@@ -31,9 +31,8 @@ dependencies {
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Used for the list preference classes
-    implementation 'com.afollestad.material-dialogs:core:3.1.1'
-    implementation 'com.afollestad.material-dialogs:input:3.1.1'
-    implementation 'com.afollestad.material-dialogs:color:3.1.1'
-    implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.1'
+    def material_dialog_version = "0.9.6.0"
+    implementation "com.afollestad.material-dialogs:core:$material_dialog_version"
+    implementation "com.afollestad.material-dialogs:commons:$material_dialog_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

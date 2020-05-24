@@ -17,12 +17,9 @@ package code.name.monkey.retromusic.util
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.net.Uri
 import code.name.monkey.retromusic.R
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.WhichButton
-import com.afollestad.materialdialogs.actions.getActionButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 object AppRater {
     private const val DO_NOT_SHOW_AGAIN = "do_not_show_again"// Package Name
@@ -64,30 +61,24 @@ object AppRater {
     }
 
     private fun showRateDialog(context: Context, editor: SharedPreferences.Editor) {
-        MaterialDialog(context)
-            .show {
-                title(text = "Rate this App")
-                message(text = "If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
-                positiveButton(R.string.app_name) {
-                    context.startActivity(
-                        Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse("market://details?id=${context.packageName}")
-                        )
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Rate this App")
+            .setMessage("If you enjoy using Retro Music, please take a moment to rate it. Thanks for your support!")
+            .setPositiveButton(R.string.app_name) { _, _ ->
+                context.startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=${context.packageName}")
                     )
-                    editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
-                    editor.commit()
-                    dismiss()
-                }
-                negativeButton(text = "Later") {
-                    dismiss()
-                }
-                neutralButton(text = " No thanks") {
-                    editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
-                    editor.commit()
-                    dismiss()
-                }
-                getActionButton(WhichButton.POSITIVE).updateTextColor(Color.RED)
+                )
+                editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
+                editor.commit()
             }
+            .setNeutralButton("Not now", null)
+            .setNegativeButton("No thanks") { _, _ ->
+                editor.putBoolean(DO_NOT_SHOW_AGAIN, true)
+                editor.commit()
+            }
+            .show()
     }
 }

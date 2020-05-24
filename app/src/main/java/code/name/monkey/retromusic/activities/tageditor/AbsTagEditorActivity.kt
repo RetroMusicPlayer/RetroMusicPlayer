@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.OvershootInterpolator
+import androidx.appcompat.app.AlertDialog
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
@@ -24,9 +25,8 @@ import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import code.name.monkey.retromusic.activities.saf.SAFGuideActivity
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.SAFUtil
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItems
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_album_tag_editor.*
 import org.jaudiotagger.audio.AudioFile
 import org.jaudiotagger.audio.AudioFileIO
@@ -48,17 +48,18 @@ abstract class AbsTagEditorActivity : AbsBaseActivity() {
     private var savedTags: Map<FieldKey, String>? = null
     private var savedArtworkInfo: ArtworkInfo? = null
 
-    protected val show: MaterialDialog
-        get() = MaterialDialog(this).show {
-            title(R.string.update_image)
-            listItems(items = items) { _, position, _ ->
-                when (position) {
-                    0 -> startImagePicker()
-                    1 -> searchImageOnWeb()
-                    2 -> deleteImage()
+    protected val show: AlertDialog
+        get() =
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.update_image)
+                .setItems(items.toTypedArray()) { _, position ->
+                    when (position) {
+                        0 -> startImagePicker()
+                        1 -> searchImageOnWeb()
+                        2 -> deleteImage()
+                    }
                 }
-            }
-        }
+                .show()
     protected abstract val contentViewLayout: Int
 
     internal val albumArtist: String?

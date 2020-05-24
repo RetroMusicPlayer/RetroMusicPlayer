@@ -4,15 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import androidx.annotation.AttrRes
-import androidx.annotation.CheckResult
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
+import code.name.monkey.appthemehelper.util.ATHUtil.resolveColor
 import code.name.monkey.appthemehelper.util.ColorUtil
+
 
 /**
  * @author Aidan Follestad (afollestad), Karim Abou Zeid (kabouzeid)
@@ -183,7 +181,10 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
 
         @CheckResult
         fun prefs(context: Context): SharedPreferences {
-            return context.getSharedPreferences(ThemeStorePrefKeys.CONFIG_PREFS_KEY_DEFAULT, Context.MODE_PRIVATE)
+            return context.getSharedPreferences(
+                ThemeStorePrefKeys.CONFIG_PREFS_KEY_DEFAULT,
+                Context.MODE_PRIVATE
+            )
         }
 
         fun markChanged(context: Context) {
@@ -224,12 +225,18 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         fun navigationBarColor(context: Context): Int {
             return if (!coloredNavigationBar(context)) {
                 Color.BLACK
-            } else prefs(context).getInt(ThemeStorePrefKeys.KEY_NAVIGATION_BAR_COLOR, primaryColor(context))
+            } else prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_NAVIGATION_BAR_COLOR,
+                primaryColor(context)
+            )
         }
 
         @CheckResult
         fun coloredStatusBar(context: Context): Boolean {
-            return prefs(context).getBoolean(ThemeStorePrefKeys.KEY_APPLY_PRIMARYDARK_STATUSBAR, true)
+            return prefs(context).getBoolean(
+                ThemeStorePrefKeys.KEY_APPLY_PRIMARYDARK_STATUSBAR,
+                true
+            )
         }
 
         @CheckResult
@@ -245,6 +252,42 @@ private constructor(private val mContext: Context) : ThemeStorePrefKeys, ThemeSt
         @CheckResult
         fun isConfigured(context: Context): Boolean {
             return prefs(context).getBoolean(ThemeStorePrefKeys.IS_CONFIGURED_KEY, false)
+        }
+
+        @CheckResult
+        @ColorInt
+        fun textColorPrimary(context: Context): Int {
+            return prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_TEXT_COLOR_PRIMARY,
+                resolveColor(context, android.R.attr.textColorPrimary)
+            )
+        }
+
+        @CheckResult
+        @ColorInt
+        fun textColorPrimaryInverse(context: Context): Int {
+            return prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_TEXT_COLOR_PRIMARY_INVERSE,
+                resolveColor(context, android.R.attr.textColorPrimaryInverse)
+            )
+        }
+
+        @CheckResult
+        @ColorInt
+        fun textColorSecondary(context: Context): Int {
+            return prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_TEXT_COLOR_SECONDARY,
+                resolveColor(context, android.R.attr.textColorSecondary)
+            )
+        }
+
+        @CheckResult
+        @ColorInt
+        fun textColorSecondaryInverse(context: Context): Int {
+            return prefs(context).getInt(
+                ThemeStorePrefKeys.KEY_TEXT_COLOR_SECONDARY_INVERSE,
+                resolveColor(context, android.R.attr.textColorSecondaryInverse)
+            )
         }
 
         @SuppressLint("CommitPrefEdits")

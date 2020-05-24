@@ -228,6 +228,12 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         menu.add(0, R.id.action_search, 0, getString(R.string.action_search))
             .setIcon(R.drawable.ic_search_white_24dp)
             .setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS)
+        ToolbarContentTintHelper.handleOnCreateOptionsMenu(
+            this,
+            toolbar,
+            menu,
+            getToolbarBackgroundColor(toolbar)
+        )
         return super.onCreateOptionsMenu(menu)
     }
 

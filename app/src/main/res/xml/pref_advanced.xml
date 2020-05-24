@@ -70,7 +70,7 @@
             app:showSeekBarValue="true" />
 
     </code.name.monkey.appthemehelper.common.prefs.supportv7.ATEPreferenceCategory>
-    <code.name.monkey.retromusic.preferences.MaterialListPreference
+    <code.name.monkey.appthemehelper.common.prefs.supportv7.ATEListPreference
         android:defaultValue="auto"
         android:entries="@array/pref_language_names"
         android:entryValues="@array/pref_language_codes"

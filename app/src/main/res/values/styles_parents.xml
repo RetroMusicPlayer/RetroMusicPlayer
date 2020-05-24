@@ -16,7 +16,6 @@
     </style>
 
     <style name="Theme.RetroMusic.Base" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="md_color_button_text">@color/md_white_1000</item>
         <item name="md_background_color">@color/darkColorSurface</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:windowActivityTransitions">true</item>
@@ -54,7 +53,6 @@
     </style>
 
     <style name="Theme.RetroMusic.Base.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="md_color_button_text">@color/md_black_1000</item>
         <item name="android:windowActionBarOverlay">true</item>
         <item name="windowActionBarOverlay">true</item>
         <item name="roundSelector">@drawable/round_selector</item>
@@ -67,6 +65,7 @@
         <item name="windowActionBar">false</item>
         <item name="materialAlertDialogTheme">@style/MaterialAlertDialogTheme</item>
         <item name="materialButtonStyle">@style/MaterialButtonTheme</item>
+
     </style>
 
 
