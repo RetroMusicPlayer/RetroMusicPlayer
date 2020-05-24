@@ -186,7 +186,7 @@ open class SongAdapter(
                         val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
                             activity,
                             imageContainerCard ?: image,
-                            "${activity.getString(R.string.transition_album_art)}_${song.albumId}"
+                            activity.getString(R.string.transition_album_art)
                         )
                         NavigationUtil.goToAlbumOptions(activity, song.albumId, activityOptions)
                         return true

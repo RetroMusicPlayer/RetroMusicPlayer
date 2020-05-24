@@ -91,7 +91,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
         setDrawUnderStatusBar()
         super.onCreate(savedInstanceState)
         window.sharedElementsUseOverlay = true
-        imageContainer?.transitionName = "${getString(R.string.transition_album_art)}_$id"
+        imageContainer?.transitionName = getString(R.string.transition_album_art)
         windowEnterTransition()
         setUpViews()
         setupToolbar()
@@ -162,7 +162,7 @@ class AlbumTagEditorActivity : AbsTagEditorActivity(), TextWatcher {
 
         writeValuesToFiles(
             fieldKeyValueMap,
-            if (deleteAlbumArt) ArtworkInfo(id, null)
+            if (deleteAlbumArt) AbsTagEditorActivity.ArtworkInfo(id, null)
             else if (albumArtBitmap == null) null else ArtworkInfo(id, albumArtBitmap!!)
         )
     }

@@ -74,7 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -94,7 +94,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/artistCoverContainer"
                     tools:ignore="MissingPrefix"
-                    tools:text="Title" />
+                    tools:text="@tools:sample/full_names" />
 
                 <code.name.monkey.retromusic.views.BaselineGridTextView
                     android:id="@+id/text"
@@ -109,7 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/artistTitle"
                     tools:ignore="MissingPrefix"
-                    tools:text="Title" />
+                    tools:text="@tools:sample/full_names" />
 
                 <include
                     layout="@layout/activity_artist_content"

@@ -22,11 +22,13 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorSurface"
             app:liftOnScroll="true">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="@style/Toolbar"
+                android:background="?attr/colorSurface"
                 app:layout_collapseMode="pin"
                 app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
                 app:title="@string/action_about"
@@ -36,9 +38,9 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/container"
-            android:overScrollMode="never"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:overScrollMode="never"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <include layout="@layout/activity_about_content" />

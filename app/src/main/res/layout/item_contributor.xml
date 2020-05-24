@@ -32,16 +32,15 @@
         android:scaleType="centerCrop"
         app:civ_border="false"
         app:civ_shadow="false"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:retroCornerSize="21dp"
         app:srcCompat="@drawable/ic_account_white_24dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[20]" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:textAppearance="@style/TextViewSubtitle1"
@@ -54,9 +53,11 @@
 
     <code.name.monkey.retromusic.views.BaselineGridTextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="?android:attr/textColorSecondary"
         app:layout_constrainedWidth="true"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
@@ -64,6 +65,6 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/icon"
         app:lineHeightHint="24sp"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/lorem/random" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

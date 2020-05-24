@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/about_card_radius"
-    app:cardUseCompatPadding="true">
+    android:layout_margin="4dp"
+    app:cardCornerRadius="@dimen/about_card_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
 
         <code.name.monkey.appthemehelper.common.views.ATEAccentTextView
             android:id="@+id/sb1"
@@ -36,7 +36,9 @@
             android:overScrollMode="never"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sb1" />
+            app:layout_constraintTop_toBottomOf="@+id/sb1"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_contributor" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

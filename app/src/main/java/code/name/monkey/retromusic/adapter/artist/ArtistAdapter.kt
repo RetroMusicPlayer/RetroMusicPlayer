@@ -142,7 +142,7 @@ class ArtistAdapter(
                 val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
                     activity,
                     imageContainerCard ?: image,
-                    "${activity.getString(R.string.transition_artist_image)}_${dataSet[layoutPosition].id}"
+                    activity.getString(R.string.transition_artist_image)
                 )
                 NavigationUtil.goToArtistOptions(
                     activity, dataSet[layoutPosition].id, activityOptions

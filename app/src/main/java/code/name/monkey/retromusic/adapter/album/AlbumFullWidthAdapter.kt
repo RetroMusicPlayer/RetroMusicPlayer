@@ -100,7 +100,7 @@ class AlbumFullWidthAdapter(
             val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
                 activity,
                 imageContainerCard ?: image,
-                "${activity.getString(R.string.transition_album_art)}_${dataSet[layoutPosition].id}"
+                activity.getString(R.string.transition_album_art)
             )
             NavigationUtil.goToAlbumOptions(activity, dataSet[layoutPosition].id, activityOptions)
         }

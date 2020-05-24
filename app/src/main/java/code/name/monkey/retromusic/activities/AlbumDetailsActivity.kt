@@ -25,6 +25,7 @@ import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
 import code.name.monkey.retromusic.dialogs.AddToPlaylistDialog
 import code.name.monkey.retromusic.dialogs.DeleteSongsDialog
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.extensions.ripAlpha
 import code.name.monkey.retromusic.extensions.show
 import code.name.monkey.retromusic.extensions.surfaceColor
@@ -101,34 +102,23 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
         window.sharedElementsUseOverlay = true
+        windowEnterTransition()
 
         App.musicComponent.inject(this)
         albumDetailsPresenter.attachView(this)
+        val albumId = extraNotNull<Int>(EXTRA_ALBUM_ID).value
+        albumDetailsPresenter.loadAlbum(albumId)
 
-        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
-            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let {
-                albumDetailsPresenter.loadAlbum(it)
-                albumCoverContainer?.transitionName =
-                    "${getString(R.string.transition_album_art)}_$it"
-            }
-        } else {
-            finish()
-        }
-
-        windowEnterTransition()
         ActivityCompat.postponeEnterTransition(this)
-
-
-        artistImage = findViewById(R.id.artistImage)
-
         setupRecyclerView()
 
+        artistImage = findViewById(R.id.artistImage)
         artistImage.setOnClickListener {
             val artistPairs = ActivityOptions.makeSceneTransitionAnimation(
                 this,
                 UtilPair.create(
                     artistImage,
-                    "${getString(R.string.transition_artist_image)}_${album.artistId}"
+                    getString(R.string.transition_artist_image)
                 )
             )
             NavigationUtil.goToArtistOptions(this, album.artistId, artistPairs)
@@ -394,11 +384,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
     }
 
     private fun reload() {
-        if (intent.extras!!.containsKey(EXTRA_ALBUM_ID)) {
-            intent.extras?.getInt(EXTRA_ALBUM_ID)?.let { albumDetailsPresenter.loadAlbum(it) }
-        } else {
-            finish()
-        }
+        val albumId = extraNotNull<Int>(EXTRA_ALBUM_ID).value
+        albumDetailsPresenter.loadAlbum(albumId)
     }
 
     override fun onBackPressed() {
