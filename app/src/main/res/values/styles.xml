@@ -109,7 +109,9 @@
 
     <style name="ErrorHandlingTheme" parent="Theme.MaterialComponents.Light.NoActionBar" />
 
-    <style name="TextViewNormal" parent="TextAppearance.AppCompat.Body2" />
+    <style name="TextViewNormal" parent="">
+        <item name="android:textSize">14sp</item>
+    </style>
 
     <style name="TextViewHeadline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
@@ -127,17 +129,11 @@
 
     <style name="TextViewSubtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
 
-    <style name="TextViewBody1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="lineHeightHint">24sp</item>
-    </style>
+    <style name="TextViewBody1" parent="TextAppearance.MaterialComponents.Body1" />
 
-    <style name="TextViewBody2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="lineHeightHint">24sp</item>
-    </style>
+    <style name="TextViewBody2" parent="TextAppearance.MaterialComponents.Body2" />
 
-    <style name="TextViewOverline" parent="TextAppearance.MaterialComponents.Overline">
-
-    </style>
+    <style name="TextViewOverline" parent="TextAppearance.MaterialComponents.Overline" />
 
     <style name="TopCornerCardView">
         <item name="cornerFamilyTopLeft">rounded</item>
