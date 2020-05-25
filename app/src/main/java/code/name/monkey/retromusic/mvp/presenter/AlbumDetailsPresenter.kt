@@ -14,14 +14,16 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -57,19 +59,15 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
 
         override fun loadMore(artistId: Int) {
             launch {
-                when (val result = repository.artistById(artistId)) {
-                    is Success -> withContext(Dispatchers.Main) { showArtistImage(result.data) }
-                    is Error -> withContext(Dispatchers.Main) {}
-                }
+                val result = repository.artistById(artistId)
+                showArtistImage(result)
             }
         }
 
         override fun aboutAlbum(artist: String, album: String) {
             launch {
-                when (val result = repository.albumInfo(artist, album)) {
-                    is Success -> withContext(Dispatchers.Main) { view.aboutAlbum(result.data) }
-                    is Error -> withContext(Dispatchers.Main) {}
-                }
+                val result = repository.albumInfo(artist, album)
+                view.aboutAlbum(result)
             }
         }
 
@@ -83,13 +81,10 @@ interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
 
         override fun loadAlbum(albumId: Int) {
             launch {
-                when (val result = repository.albumById(albumId)) {
-                    is Success -> withContext(Dispatchers.Main) {
-                        album = result.data
-                        view?.album(result.data)
-                    }
-                    is Error -> withContext(Dispatchers.Main) { view?.complete() }
-                }
+                val result = repository.albumById(albumId)
+                album = result
+                view?.album(result)
+
             }
         }
 

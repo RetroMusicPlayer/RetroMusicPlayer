@@ -14,7 +14,10 @@
 
 package code.name.monkey.retromusic.dagger
 
-import code.name.monkey.retromusic.activities.*
+import code.name.monkey.retromusic.activities.ArtistDetailActivity
+import code.name.monkey.retromusic.activities.GenreDetailsActivity
+import code.name.monkey.retromusic.activities.PlaylistDetailActivity
+import code.name.monkey.retromusic.activities.SearchActivity
 import code.name.monkey.retromusic.dagger.module.AppModule
 import code.name.monkey.retromusic.dagger.module.PresenterModule
 import code.name.monkey.retromusic.fragments.albums.AlbumsFragment
@@ -49,8 +52,6 @@ interface MusicComponent {
     fun inject(playlistsFragment: PlaylistsFragment)
 
     fun inject(artistDetailActivity: ArtistDetailActivity)
-
-    fun inject(albumDetailsActivity: AlbumDetailsActivity)
 
     fun inject(playlistDetailActivity: PlaylistDetailActivity)
 

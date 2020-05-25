@@ -105,7 +105,7 @@
                 <data android:mimeType="vnd.android.cursor.dir/audio" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.AlbumDetailsActivity" />
+        <activity android:name=".activities.albums.AlbumDetailsActivity" />
         <activity android:name=".activities.ArtistDetailActivity" />
         <activity android:name=".activities.PlaylistDetailActivity" />
         <activity android:name=".activities.PlayingQueueActivity" />

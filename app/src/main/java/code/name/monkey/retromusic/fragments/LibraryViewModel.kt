@@ -5,8 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import code.name.monkey.retromusic.Result.Error
-import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.fragments.ReloadType.*
 import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.*
@@ -60,8 +58,8 @@ class LibraryViewModel(application: Application) :
             _repository.favoritePlaylist()
         )
         for (r in result) {
-            if (r is Success) {
-                list.add(r.data)
+            if (r != null) {
+                list.add(r)
             }
         }
         _homeSections.value = list
@@ -69,41 +67,27 @@ class LibraryViewModel(application: Application) :
 
     private val loadSongs: Deferred<List<Song>>
         get() = viewModelScope.async(IO) {
-            when (val result = _repository.allSongs()) {
-                is Success -> result.data
-                is Error -> arrayListOf()
-            }
+            _repository.allSongs()
         }
 
     private val loadAlbums: Deferred<List<Album>>
         get() = viewModelScope.async(IO) {
-            when (val result = _repository.allAlbums()) {
-                is Success -> result.data
-                is Error -> arrayListOf()
-            }
+            _repository.allAlbums()
         }
+
     private val loadArtists: Deferred<List<Artist>>
         get() = viewModelScope.async(IO) {
-            when (val result = _repository.allArtists()) {
-                is Success -> result.data
-                is Error -> arrayListOf()
-            }
+            _repository.allArtists()
         }
 
     private val loadPlaylists: Deferred<List<Playlist>>
         get() = viewModelScope.async(IO) {
-            when (val result = _repository.allPlaylists()) {
-                is Success -> result.data
-                is Error -> arrayListOf()
-            }
+            _repository.allPlaylists()
         }
 
     private val loadGenres: Deferred<List<Genre>>
         get() = viewModelScope.async(IO) {
-            when (val result = _repository.allGenres()) {
-                is Success -> result.data
-                is Error -> arrayListOf()
-            }
+            _repository.allGenres()
         }
 
     fun forceReload(reloadType: ReloadType) = viewModelScope.launch {

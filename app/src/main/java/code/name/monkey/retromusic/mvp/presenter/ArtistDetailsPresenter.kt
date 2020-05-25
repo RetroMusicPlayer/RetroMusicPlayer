@@ -14,15 +14,16 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result.Error
-import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -60,19 +61,15 @@ interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
 
         override fun loadBiography(name: String, lang: String?, cache: String?) {
             launch {
-                when (val result = repository.artistInfo(name, lang, cache)) {
-                    is Success -> withContext(Dispatchers.Main) { view?.artistInfo(result.data) }
-                    is Error -> withContext(Dispatchers.Main) {}
-                }
+                val result = repository.artistInfo(name, lang, cache)
+                view?.artistInfo(result)
             }
         }
 
         override fun loadArtist(artistId: Int) {
             launch {
-                when (val result = repository.artistById(artistId)) {
-                    is Success -> withContext(Dispatchers.Main) { view?.artist(result.data) }
-                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
-                }
+                val result = repository.artistById(artistId)
+                view?.artist(result)
             }
         }
 

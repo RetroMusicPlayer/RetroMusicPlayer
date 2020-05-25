@@ -14,14 +14,15 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result.Error
-import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -49,10 +50,8 @@ interface ArtistsPresenter : Presenter<ArtistsView> {
 
         override fun loadArtists() {
             launch {
-                when (val result = repository.allArtists()) {
-                    is Success -> withContext(Dispatchers.Main) { view?.artists(result.data) }
-                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
-                }
+                val result = repository.allArtists()
+                view?.artists(result)
             }
         }
     }

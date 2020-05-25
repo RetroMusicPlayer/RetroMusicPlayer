@@ -307,10 +307,10 @@ public class FoldersFragment extends AbsMainActivityFragment implements
                             String.format(getString(R.string.not_listed_in_media_store), file1.getName())),
                             Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_scan,
-                                    v -> new ListPathsAsyncTask(getActivity(), this::scanPaths)
+                                    v -> new ListPathsAsyncTask(requireActivity(), this::scanPaths)
                                             .execute(
                                                     new ListPathsAsyncTask.LoadingInfo(finalFile, AUDIO_FILE_FILTER)))
-                            .setActionTextColor(ThemeStore.Companion.accentColor(getActivity()))
+                            .setActionTextColor(ThemeStore.Companion.accentColor(requireActivity()))
                             .show();
                 }
             }).execute(new ListSongsAsyncTask.LoadingInfo(toList(file.getParentFile()), fileFilter,

@@ -14,14 +14,15 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result.Error
-import code.name.monkey.retromusic.Result.Success
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -53,10 +54,8 @@ interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
 
         override fun loadGenreSongs(genreId: Int) {
             launch {
-                when (val result = repository.getGenre(genreId)) {
-                    is Success -> withContext(Dispatchers.Main) { view?.songs(result.data) }
-                    is Error -> withContext(Dispatchers.Main) { view?.showEmptyView() }
-                }
+                val result = repository.getGenre(genreId)
+                view?.songs(result)
             }
         }
     }

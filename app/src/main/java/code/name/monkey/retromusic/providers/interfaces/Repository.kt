@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.providers.interfaces
 
-import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.*
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.rest.model.LastFmArtist
@@ -25,37 +24,37 @@ import code.name.monkey.retromusic.rest.model.LastFmArtist
 
 interface Repository {
 
-    suspend fun allAlbums(): Result<ArrayList<Album>>
+    suspend fun allAlbums(): List<Album>
 
-    suspend fun albumById(albumId: Int): Result<Album>
+    suspend fun albumById(albumId: Int): Album
 
-    suspend fun allSongs(): Result<ArrayList<Song>>
+    suspend fun allSongs(): List<Song>
 
-    suspend fun allArtists(): Result<ArrayList<Artist>>
+    suspend fun allArtists(): List<Artist>
 
-    suspend fun allPlaylists(): Result<ArrayList<Playlist>>
+    suspend fun allPlaylists(): List<Playlist>
 
-    suspend fun allGenres(): Result<ArrayList<Genre>>
+    suspend fun allGenres(): List<Genre>
 
-    suspend fun search(query: String?): Result<MutableList<Any>>
+    suspend fun search(query: String?): MutableList<Any>
 
-    suspend fun getPlaylistSongs(playlist: Playlist): Result<ArrayList<Song>>
+    suspend fun getPlaylistSongs(playlist: Playlist): ArrayList<Song>
 
-    suspend fun getGenre(genreId: Int): Result<ArrayList<Song>>
+    suspend fun getGenre(genreId: Int): ArrayList<Song>
 
-    suspend fun recentArtists(): Result<Home>
+    suspend fun recentArtists(): Home?
 
-    suspend fun topArtists(): Result<Home>
+    suspend fun topArtists(): Home?
 
-    suspend fun topAlbums(): Result<Home>
+    suspend fun topAlbums(): Home?
 
-    suspend fun recentAlbums(): Result<Home>
+    suspend fun recentAlbums(): Home?
 
-    suspend fun favoritePlaylist(): Result<Home>
+    suspend fun favoritePlaylist(): Home?
 
-    suspend fun artistInfo(name: String, lang: String?, cache: String?): Result<LastFmArtist>
+    suspend fun artistInfo(name: String, lang: String?, cache: String?): LastFmArtist
 
-    suspend fun albumInfo(artist: String, album: String): Result<LastFmAlbum>
+    suspend fun albumInfo(artist: String, album: String): LastFmAlbum
 
-    suspend fun artistById(artistId: Int): Result<Artist>
+    suspend fun artistById(artistId: Int): Artist
 }

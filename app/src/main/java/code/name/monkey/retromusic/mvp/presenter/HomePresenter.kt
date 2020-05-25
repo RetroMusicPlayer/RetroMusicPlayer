@@ -14,7 +14,6 @@
 
 package code.name.monkey.retromusic.mvp.presenter
 
-import code.name.monkey.retromusic.Result
 import code.name.monkey.retromusic.model.Home
 import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
@@ -56,9 +55,7 @@ interface HomePresenter : Presenter<HomeView> {
                     repository.favoritePlaylist()
                 )
                 for (r in recentArtistResult) {
-                    when (r) {
-                        is Result.Success -> list.add(r.data)
-                    }
+                    r?.let { list.add(it) }
                 }
                 withContext(Dispatchers.Main) {
                     if (list.isNotEmpty()) view?.sections(list) else view?.showEmptyView()
