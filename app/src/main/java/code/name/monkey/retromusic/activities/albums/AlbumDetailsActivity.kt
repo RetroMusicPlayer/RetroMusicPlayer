@@ -189,8 +189,8 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
         loadAlbumCover()
         simpleSongAdapter.swapDataSet(album.songs)
-        viewModel.loadArtistAsync(album.artistId)
-        viewModel.loadAlbumInfoAsync(album)
+        viewModel.loadArtist(album.artistId)
+        viewModel.loadAlbumInfo(album)
     }
 
     override fun moreAlbums(albums: List<Album>) {

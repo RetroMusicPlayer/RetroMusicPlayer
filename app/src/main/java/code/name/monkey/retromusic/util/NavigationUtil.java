@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
 import code.name.monkey.retromusic.activities.albums.AlbumDetailsActivity;
-import code.name.monkey.retromusic.activities.ArtistDetailActivity;
+import code.name.monkey.retromusic.activities.artists.ArtistDetailActivity;
 import code.name.monkey.retromusic.activities.DriveModeActivity;
 import code.name.monkey.retromusic.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;

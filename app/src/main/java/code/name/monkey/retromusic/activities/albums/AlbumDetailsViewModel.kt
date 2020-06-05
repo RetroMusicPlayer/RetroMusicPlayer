@@ -32,17 +32,16 @@ class AlbumDetailsViewModel(
     }
 
     private fun loadDetails() = viewModelScope.launch {
-        _album.postValue(
-            loadAlbumAsync.await() ?: throw NullPointerException("Album couldn't found")
-        )
+        val album = loadAlbumAsync.await() ?: throw NullPointerException("Album couldn't found")
+        _album.postValue(album)
     }
 
-    fun loadAlbumInfoAsync(album: Album) = viewModelScope.launch(Dispatchers.IO) {
+    fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
         val lastFmAlbum = _repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
         _lastFmAlbum.postValue(lastFmAlbum)
     }
 
-    fun loadArtistAsync(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
         val artist = _repository.artistById(artistId)
         _artist.postValue(artist)
     }

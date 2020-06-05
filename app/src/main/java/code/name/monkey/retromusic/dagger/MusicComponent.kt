@@ -14,7 +14,7 @@
 
 package code.name.monkey.retromusic.dagger
 
-import code.name.monkey.retromusic.activities.ArtistDetailActivity
+import code.name.monkey.retromusic.activities.artists.ArtistDetailActivity
 import code.name.monkey.retromusic.activities.GenreDetailsActivity
 import code.name.monkey.retromusic.activities.PlaylistDetailActivity
 import code.name.monkey.retromusic.activities.SearchActivity

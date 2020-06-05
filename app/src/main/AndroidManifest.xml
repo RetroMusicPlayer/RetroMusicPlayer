@@ -106,7 +106,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.albums.AlbumDetailsActivity" />
-        <activity android:name=".activities.ArtistDetailActivity" />
+        <activity android:name=".activities.artists.ArtistDetailActivity" />
         <activity android:name=".activities.PlaylistDetailActivity" />
         <activity android:name=".activities.PlayingQueueActivity" />
         <activity android:name=".activities.AboutActivity" />

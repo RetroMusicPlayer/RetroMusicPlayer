@@ -1,4 +1,4 @@
-package code.name.monkey.retromusic.activities
+package code.name.monkey.retromusic.activities.artists
 
 import android.app.Activity
 import android.content.Intent
@@ -11,13 +11,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.text.HtmlCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
+import code.name.monkey.retromusic.activities.albums.AlbumDetailsViewModelFactory
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
@@ -31,7 +32,6 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsView
 import code.name.monkey.retromusic.rest.model.LastFmArtist
 import code.name.monkey.retromusic.util.*
@@ -41,7 +41,6 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_artist_content.*
 import kotlinx.android.synthetic.main.activity_artist_details.*
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, CabHolder {
@@ -70,13 +69,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     private lateinit var songAdapter: SimpleSongAdapter
     private lateinit var albumAdapter: HorizontalAlbumAdapter
     private var forceDownload: Boolean = false
+    private lateinit var viewModel: ArtistDetailsViewModel
 
     override fun createContentView(): View {
         return wrapSlidingMusicPanel(R.layout.activity_artist_details)
     }
-
-    @Inject
-    lateinit var artistDetailsPresenter: ArtistDetailsPresenter
 
     private fun windowEnterTransition() {
         val slide = Slide()
@@ -98,11 +95,17 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         window.sharedElementsUseOverlay = true
         windowEnterTransition()
 
-        App.musicComponent.inject(this)
-        artistDetailsPresenter.attachView(this)
         val artistId = extraNotNull<Int>(EXTRA_ARTIST_ID).value
-        artistDetailsPresenter.loadArtist(artistId)
-
+        val viewModelFactory = ArtistDetailsViewModelFactory(application, artistId)
+        viewModel =
+            ViewModelProvider(this, viewModelFactory).get(ArtistDetailsViewModel::class.java)
+        viewModel.getArtist().observe(this, androidx.lifecycle.Observer {
+            ActivityCompat.startPostponedEnterTransition(this@ArtistDetailActivity)
+            artist(it)
+        })
+        viewModel.getArtistInfo().observe(this, androidx.lifecycle.Observer {
+            artistInfo(it)
+        })
         ActivityCompat.postponeEnterTransition(this)
 
         setupRecyclerView()
@@ -121,11 +124,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                 biographyText.maxLines = 4
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        artistDetailsPresenter.detachView()
     }
 
     private fun setupRecyclerView() {
@@ -152,7 +150,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
                 }
             }
             else -> if (resultCode == Activity.RESULT_OK) {
-                reload()
+                //reload()
             }
         }
     }
@@ -205,7 +203,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     ) {
         biography = null
         this.lang = lang
-        artistDetailsPresenter.loadBiography(name, lang, null)
+        viewModel.loadBiography(name, lang, null)
     }
 
     override fun artistInfo(lastFmArtist: LastFmArtist?) {
@@ -315,19 +313,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onMediaStoreChanged() {
-        super.onMediaStoreChanged()
-        reload()
-    }
-
-    private fun reload() {
-        if (intent.extras!!.containsKey(EXTRA_ARTIST_ID)) {
-            intent.extras?.getInt(EXTRA_ARTIST_ID)?.let { artistDetailsPresenter.loadArtist(it) }
-        } else {
-            finish()
-        }
-    }
-
     override fun onBackPressed() {
         if (cab != null && cab!!.isActive) {
             cab?.finish()
@@ -337,7 +322,6 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     companion object {
-
         const val EXTRA_ARTIST_ID = "extra_artist_id"
         const val REQUEST_CODE_SELECT_IMAGE = 9003
     }
