@@ -5,7 +5,7 @@ import android.content.res.Configuration
 import android.os.PowerManager
 import androidx.annotation.IntegerRes
 import androidx.fragment.app.Fragment
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 fun Fragment.getIntRes(@IntegerRes int: Int): Int {
     return resources.getInteger(int)
@@ -16,7 +16,7 @@ fun Context.getIntRes(@IntegerRes int: Int): Int {
 }
 
 val Context.generalThemeValue
-    get() = PreferenceUtilKT.getGeneralThemeValue(isSystemDarkModeEnabled())
+    get() = PreferenceUtil.getGeneralThemeValue(isSystemDarkModeEnabled())
 
 
 fun Context.isSystemDarkModeEnabled(): Boolean {

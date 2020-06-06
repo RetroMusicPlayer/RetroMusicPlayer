@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.activities.albums.AlbumDetailsViewModelFactory
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.album.HorizontalAlbumAdapter
 import code.name.monkey.retromusic.adapter.song.SimpleSongAdapter
@@ -246,7 +245,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
     }
 
     private fun setColors(color: MediaNotificationProcessor) {
-        val buttonColor = if (PreferenceUtilKT.isAdaptiveColor)
+        val buttonColor = if (PreferenceUtil.isAdaptiveColor)
             color.backgroundColor.ripAlpha()
         else
             ATHUtil.resolveColor(this, R.attr.colorSurface)

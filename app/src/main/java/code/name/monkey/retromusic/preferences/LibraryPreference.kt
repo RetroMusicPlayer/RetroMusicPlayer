@@ -31,7 +31,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.CategoryInfoAdapter
 import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.model.CategoryInfo
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
@@ -57,7 +57,7 @@ class LibraryPreferenceDialog : DialogFragment() {
             .inflate(R.layout.preference_dialog_library_categories, null)
 
         val categoryAdapter = CategoryInfoAdapter()
-        categoryAdapter.categoryInfos = PreferenceUtilKT.libraryCategory
+        categoryAdapter.categoryInfos = PreferenceUtil.libraryCategory
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = categoryAdapter
@@ -72,7 +72,7 @@ class LibraryPreferenceDialog : DialogFragment() {
             .setNeutralButton(
                 R.string.reset_action
             ) { _, _ ->
-                categoryAdapter.categoryInfos = PreferenceUtilKT.defaultCategories
+                categoryAdapter.categoryInfos = PreferenceUtil.defaultCategories
             }
             .setNegativeButton(android.R.string.cancel, null)
             .setPositiveButton(
@@ -88,7 +88,7 @@ class LibraryPreferenceDialog : DialogFragment() {
             Toast.makeText(context, "Not more than 5 items", Toast.LENGTH_SHORT).show()
             return
         }
-        PreferenceUtilKT.libraryCategory = categories
+        PreferenceUtil.libraryCategory = categories
     }
 
     private fun getSelected(categories: List<CategoryInfo>): Int {

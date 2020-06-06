@@ -15,18 +15,12 @@
 package code.name.monkey.retromusic.dagger.module
 
 import android.content.Context
-import code.name.monkey.retromusic.mvp.presenter.*
-import code.name.monkey.retromusic.mvp.presenter.AlbumDetailsPresenter.AlbumDetailsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.AlbumsPresenter.AlbumsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.ArtistDetailsPresenter.ArtistDetailsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.ArtistsPresenter.ArtistsPresenterImpl
+import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter.GenreDetailsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.GenresPresenter.GenresPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.HomePresenter.HomePresenterImpl
+import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter.PlaylistSongsPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.PlaylistsPresenter.PlaylistsPresenterImpl
+import code.name.monkey.retromusic.mvp.presenter.SearchPresenter
 import code.name.monkey.retromusic.mvp.presenter.SearchPresenter.SearchPresenterImpl
-import code.name.monkey.retromusic.mvp.presenter.SongPresenter.SongPresenterImpl
 import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import dagger.Module
@@ -45,37 +39,7 @@ class PresenterModule {
     }
 
     @Provides
-    fun providesAlbumsPresenter(presenter: AlbumsPresenterImpl): AlbumsPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesAlbumDetailsPresenter(presenter: AlbumDetailsPresenterImpl): AlbumDetailsPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesArtistDetailsPresenter(presenter: ArtistDetailsPresenterImpl): ArtistDetailsPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesArtistsPresenter(presenter: ArtistsPresenterImpl): ArtistsPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesGenresPresenter(presenter: GenresPresenterImpl): GenresPresenter {
-        return presenter
-    }
-
-    @Provides
     fun providesGenreDetailsPresenter(presenter: GenreDetailsPresenterImpl): GenreDetailsPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesHomePresenter(presenter: HomePresenterImpl): HomePresenter {
         return presenter
     }
 
@@ -85,17 +49,7 @@ class PresenterModule {
     }
 
     @Provides
-    fun providesPlaylistsPresenter(presenter: PlaylistsPresenterImpl): PlaylistsPresenter {
-        return presenter
-    }
-
-    @Provides
     fun providesSearchPresenter(presenter: SearchPresenterImpl): SearchPresenter {
-        return presenter
-    }
-
-    @Provides
-    fun providesSongPresenter(presenter: SongPresenterImpl): SongPresenter {
         return presenter
     }
 }

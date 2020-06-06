@@ -98,7 +98,7 @@ class EqualizerHelper private constructor() : EqualizerInterface {
     }
 
     companion object {
-        private val TAG = "EqualizerHelper"
+        private const val TAG = "EqualizerHelper"
 
         @Volatile
         private var ourInstance: EqualizerHelper? = null

@@ -119,19 +119,19 @@ public class SAFUtil {
     public static void saveTreeUri(Context context, Intent data) {
         Uri uri = data.getData();
         context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        PreferenceUtilKT.INSTANCE.setSafSdCardUri(uri.toString());
+        PreferenceUtil.INSTANCE.setSafSdCardUri(uri.toString());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean isTreeUriSaved(Context context) {
-        return !TextUtils.isEmpty(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
+        return !TextUtils.isEmpty(PreferenceUtil.INSTANCE.getSafSdCardUri());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean isSDCardAccessGranted(Context context) {
         if (!isTreeUriSaved(context)) return false;
 
-        String sdcardUri = PreferenceUtilKT.INSTANCE.getSafSdCardUri();
+        String sdcardUri = PreferenceUtil.INSTANCE.getSafSdCardUri();
 
         List<UriPermission> perms = context.getContentResolver().getPersistedUriPermissions();
         for (UriPermission perm : perms) {
@@ -198,7 +198,7 @@ public class SAFUtil {
 
         if (isTreeUriSaved(context)) {
             List<String> pathSegments = new ArrayList<>(Arrays.asList(audio.getFile().getAbsolutePath().split("/")));
-            Uri sdcard = Uri.parse(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
+            Uri sdcard = Uri.parse(PreferenceUtil.INSTANCE.getSafSdCardUri());
             uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
         }
 
@@ -271,7 +271,7 @@ public class SAFUtil {
 
         if (isTreeUriSaved(context)) {
             List<String> pathSegments = new ArrayList<>(Arrays.asList(path.split("/")));
-            Uri sdcard = Uri.parse(PreferenceUtilKT.INSTANCE.getSafSdCardUri());
+            Uri sdcard = Uri.parse(PreferenceUtil.INSTANCE.getSafSdCardUri());
             uri = findDocument(DocumentFile.fromTreeUri(context, sdcard), pathSegments);
         }
 

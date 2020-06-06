@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.extensions.applyToolbar
 import code.name.monkey.retromusic.glide.ProfileBannerGlideRequest
 import code.name.monkey.retromusic.glide.UserProfileGlideRequest
 import code.name.monkey.retromusic.util.ImageUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
@@ -50,7 +50,7 @@ class UserInfoActivity : AbsBaseActivity() {
         applyToolbar(toolbar)
 
         MaterialUtil.setTint(nameContainer, false)
-        name.setText(PreferenceUtilKT.userName)
+        name.setText(PreferenceUtil.userName)
 
         userImage.setOnClickListener {
             pickNewPhoto()
@@ -66,7 +66,7 @@ class UserInfoActivity : AbsBaseActivity() {
                 Toast.makeText(this, "Umm name is empty", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            PreferenceUtilKT.userName = nameString
+            PreferenceUtil.userName = nameString
             setResult(Activity.RESULT_OK)
             finish()
         }

@@ -18,7 +18,7 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
@@ -99,7 +99,7 @@ class FlatPlayerFragment : AbsPlayerFragment() {
 
     override fun toolbarIconColor(): Int {
         val isLight = ColorUtil.isColorLight(paletteColor)
-        return if (PreferenceUtilKT.isAdaptiveColor)
+        return if (PreferenceUtil.isAdaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
@@ -110,12 +110,12 @@ class FlatPlayerFragment : AbsPlayerFragment() {
         controlsFragment.setColor(color)
         callbacks?.onPaletteColorChanged()
         val isLight = ColorUtil.isColorLight(color.backgroundColor)
-        val iconColor = if (PreferenceUtilKT.isAdaptiveColor)
+        val iconColor = if (PreferenceUtil.isAdaptiveColor)
             MaterialValueHelper.getPrimaryTextColor(requireContext(), isLight)
         else
             ATHUtil.resolveColor(requireContext(), R.attr.colorControlNormal)
         ToolbarContentTintHelper.colorizeToolbar(playerToolbar, iconColor, requireActivity())
-        if (PreferenceUtilKT.isAdaptiveColor) {
+        if (PreferenceUtil.isAdaptiveColor) {
             colorize(color.backgroundColor)
         }
     }

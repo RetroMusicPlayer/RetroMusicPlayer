@@ -9,7 +9,7 @@ import code.name.monkey.retromusic.adapter.album.AlbumAdapter
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 class AlbumsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<AlbumAdapter, GridLayoutManager>(),
@@ -50,27 +50,27 @@ class AlbumsFragment :
     }
 
     override fun loadSortOrder(): String {
-        return PreferenceUtilKT.albumSortOrder
+        return PreferenceUtil.albumSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtilKT.albumSortOrder = sortOrder
+        PreferenceUtil.albumSortOrder = sortOrder
     }
 
     override fun loadGridSize(): Int {
-        return PreferenceUtilKT.albumGridSize
+        return PreferenceUtil.albumGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtilKT.albumGridSize = gridColumns
+        PreferenceUtil.albumGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtilKT.albumGridSizeLand
+        return PreferenceUtil.albumGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtilKT.albumGridSizeLand = gridColumns
+        PreferenceUtil.albumGridSizeLand = gridColumns
     }
 
     override fun setSortOrder(sortOrder: String) {
@@ -78,11 +78,11 @@ class AlbumsFragment :
     }
 
     override fun loadLayoutRes(): Int {
-        return PreferenceUtilKT.albumGridStyle
+        return PreferenceUtil.albumGridStyle
     }
 
     override fun saveLayoutRes(layoutRes: Int) {
-        PreferenceUtilKT.albumGridStyle = layoutRes
+        PreferenceUtil.albumGridStyle = layoutRes
     }
 
     override fun handleBackPress(): Boolean {

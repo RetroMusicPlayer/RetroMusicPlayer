@@ -18,7 +18,7 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
-import code.name.monkey.retromusic.Constants.BASE_SELECTION
+import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.PlaylistSong
@@ -105,7 +105,7 @@ object PlaylistSongsLoader {
                     MediaStore.Audio.Playlists.Members._ID,//11
                     AudioColumns.COMPOSER
                 )// 12
-                , BASE_SELECTION, null,
+                , IS_MUSIC, null,
                 MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER
             )
         } catch (e: SecurityException) {

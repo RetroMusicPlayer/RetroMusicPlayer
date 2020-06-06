@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.gradient
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -18,7 +19,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.TintHelper
 import code.name.monkey.retromusic.R
@@ -38,8 +38,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -82,7 +81,6 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             val activity = requireActivity() as AbsSlidingMusicPanelActivity
-            val isDark = ATHUtil.isWindowBackgroundDark(requireContext());
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {
@@ -145,6 +143,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         setupFavourite()
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupSheet() {
         getQueuePanel().addBottomSheetCallback(bottomSheetCallbackList)
         playerQueueSheet.setOnTouchListener { _, _ ->
@@ -205,7 +204,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         callbacks?.onPaletteColorChanged()
         mask.backgroundTintList = ColorStateList.valueOf(color.backgroundColor)
         colorBackground.setBackgroundColor(color.backgroundColor)
-        container.setBackgroundColor(ColorUtil.darkenColor(color.backgroundColor))
+        playerQueueSheet.setBackgroundColor(ColorUtil.darkenColor(color.backgroundColor))
 
         lastPlaybackControlsColor = color.primaryTextColor
         lastDisabledPlaybackControlsColor = ColorUtil.withAlpha(color.primaryTextColor, 0.3f)
@@ -244,7 +243,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
     }
 
     private fun hideVolumeIfAvailable() {
-        if (PreferenceUtilKT.isVolumeVisibilityMode) {
+        if (PreferenceUtil.isVolumeVisibilityMode) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.volumeFragmentContainer, VolumeFragment.newInstance())
                 .commit()
@@ -285,7 +284,7 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         title.text = song.title
         text.text = song.artistName
         updateLabel()
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {
@@ -482,12 +481,13 @@ class GradientPlayerFragment : AbsPlayerFragment(), MusicProgressViewUpdateHelpe
         songTotalTime.text = MusicUtil.getReadableDurationString(total.toLong())
         songCurrentProgress.text = MusicUtil.getReadableDurationString(progress.toLong())
     }
-
+    @SuppressLint("StaticFieldLeak")
     private fun updateFavorite() {
         if (updateIsFavoriteTask != null) {
             updateIsFavoriteTask?.cancel(false)
         }
-        updateIsFavoriteTask = object : AsyncTask<Song, Void, Boolean>() {
+        updateIsFavoriteTask =
+        object : AsyncTask<Song, Void, Boolean>() {
             override fun doInBackground(vararg params: Song): Boolean? {
                 val activity = activity
                 return if (activity != null) {

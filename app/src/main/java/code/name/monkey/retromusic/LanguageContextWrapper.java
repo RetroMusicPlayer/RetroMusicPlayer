@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.LocaleList;
@@ -9,7 +10,7 @@ import java.util.Locale;
 
 import code.name.monkey.appthemehelper.util.VersionUtils;
 
-public class LanguageContextWrapper extends android.content.ContextWrapper {
+public class LanguageContextWrapper extends ContextWrapper {
 
     public LanguageContextWrapper(Context base) {
         super(base);

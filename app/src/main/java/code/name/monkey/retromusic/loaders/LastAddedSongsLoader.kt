@@ -20,7 +20,7 @@ import android.provider.MediaStore
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 /**
  * Created by hemanths on 16/08/17.
@@ -33,7 +33,7 @@ object LastAddedSongsLoader {
     }
 
     private fun makeLastAddedCursor(context: Context): Cursor? {
-        val cutoff = PreferenceUtilKT.lastAddedCutoff
+        val cutoff = PreferenceUtil.lastAddedCutoff
         return SongLoader.makeSongCursor(
             context,
             MediaStore.Audio.Media.DATE_ADDED + ">?",

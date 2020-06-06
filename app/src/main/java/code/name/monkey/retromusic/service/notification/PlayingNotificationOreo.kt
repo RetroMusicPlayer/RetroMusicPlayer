@@ -33,7 +33,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.service.MusicService.*
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.RetroUtil.createBitmap
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
@@ -143,7 +143,7 @@ class PlayingNotificationOreo : PlayingNotification() {
                             )
                         }
 
-                        if (!PreferenceUtilKT.isColoredNotification) {
+                        if (!PreferenceUtil.isColoredNotification) {
                             bgColorFinal = resolveColor(service, R.attr.colorPrimary, Color.WHITE)
                         }
                         setBackgroundColor(bgColorFinal)

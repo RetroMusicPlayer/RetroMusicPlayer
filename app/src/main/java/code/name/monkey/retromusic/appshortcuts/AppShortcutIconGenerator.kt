@@ -25,13 +25,13 @@ import android.util.TypedValue
 import androidx.annotation.RequiresApi
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 
 @RequiresApi(Build.VERSION_CODES.N_MR1)
 object AppShortcutIconGenerator {
     fun generateThemedIcon(context: Context, iconId: Int): Icon {
-        return if (PreferenceUtilKT.isColoredAppShortcuts) {
+        return if (PreferenceUtil.isColoredAppShortcuts) {
             generateUserThemedIcon(context, iconId)
         } else {
             generateDefaultThemedIcon(context, iconId)

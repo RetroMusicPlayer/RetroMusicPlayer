@@ -27,7 +27,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_adaptive_player_playback_controls.*
 import kotlinx.android.synthetic.main.fragment_plain_controls_fragment.nextButton
@@ -74,7 +74,7 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     private fun updateSong() {
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.text = getSongInfo(MusicPlayerRemote.currentSong)
             songInfo.show()
         } else {
@@ -157,7 +157,7 @@ class PlainPlaybackControlsFragment : AbsPlayerControlsFragment() {
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
-        val colorFinal = if (PreferenceUtilKT.isAdaptiveColor) {
+        val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext())

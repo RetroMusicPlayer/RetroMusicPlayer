@@ -39,7 +39,7 @@ import code.name.monkey.retromusic.fragments.player.tiny.TinyPlayerFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.CategoryInfo
 import code.name.monkey.retromusic.util.DensityUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.views.BottomNavigationBarTinted
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -117,7 +117,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
     override fun onResume() {
         super.onResume()
-        if (cps != PreferenceUtilKT.nowPlayingScreen) {
+        if (cps != PreferenceUtil.nowPlayingScreen) {
             postRecreate()
         }
         behavior.addBottomSheetCallback(bottomSheetCallbackList)
@@ -239,7 +239,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
     }
 
     private fun chooseFragmentForTheme() {
-        cps = PreferenceUtilKT.nowPlayingScreen
+        cps = PreferenceUtil.nowPlayingScreen
         val fragment: Fragment = when (cps) {
             Blur -> BlurPlayerFragment()
             Adaptive -> AdaptiveFragment()
@@ -310,7 +310,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
             val isColorLight = ColorUtil.isColorLight(paletteColor)
 
-            if (PreferenceUtilKT.isAdaptiveColor && (cps == Normal || cps == Flat)) {
+            if (PreferenceUtil.isAdaptiveColor && (cps == Normal || cps == Flat)) {
                 super.setLightNavigationBar(true)
                 super.setLightStatusbar(isColorLight)
             } else if (cps == Card || cps == Blur || cps == BlurCard) {
@@ -374,7 +374,7 @@ abstract class AbsSlidingMusicPanelActivity : AbsMusicServiceActivity(),
 
     fun updateTabs() {
         bottomNavigationView.menu.clear()
-        val currentTabs: List<CategoryInfo> = PreferenceUtilKT.libraryCategory
+        val currentTabs: List<CategoryInfo> = PreferenceUtil.libraryCategory
         for (tab in currentTabs) {
             if (tab.visible) {
                 val menu = tab.category

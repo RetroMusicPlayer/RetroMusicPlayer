@@ -36,7 +36,7 @@ import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.NowPlayingScreen
 import code.name.monkey.retromusic.fragments.NowPlayingScreen.*
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -84,7 +84,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
         viewPager.adapter = NowPlayingScreenAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtilKT.nowPlayingScreen.ordinal
+        viewPager.currentItem = PreferenceUtil.nowPlayingScreen.ordinal
 
         return MaterialAlertDialogBuilder(
             requireContext(),
@@ -100,7 +100,7 @@ class NowPlayingScreenPreferenceDialog : DialogFragment(), ViewPager.OnPageChang
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(requireContext())
                 } else {
-                    PreferenceUtilKT.nowPlayingScreen = nowPlayingScreen
+                    PreferenceUtil.nowPlayingScreen = nowPlayingScreen
                 }
             }
             .setView(view)

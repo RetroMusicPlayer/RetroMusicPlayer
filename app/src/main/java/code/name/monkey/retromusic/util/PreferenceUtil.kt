@@ -23,18 +23,18 @@ import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import java.io.File
 
-object PreferenceUtilKT {
+object PreferenceUtil {
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getContext())
 
     val defaultCategories = listOf(
-        CategoryInfo(CategoryInfo.Category.HOME, true),
-        CategoryInfo(CategoryInfo.Category.SONGS, true),
-        CategoryInfo(CategoryInfo.Category.ALBUMS, true),
-        CategoryInfo(CategoryInfo.Category.ARTISTS, true),
-        CategoryInfo(CategoryInfo.Category.PLAYLISTS, true),
-        CategoryInfo(CategoryInfo.Category.GENRES, false),
-        CategoryInfo(CategoryInfo.Category.QUEUE, false),
-        CategoryInfo(CategoryInfo.Category.FOLDER, false)
+        CategoryInfo(CategoryInfo.Category.Home, true),
+        CategoryInfo(CategoryInfo.Category.Songs, true),
+        CategoryInfo(CategoryInfo.Category.Albums, true),
+        CategoryInfo(CategoryInfo.Category.Artists, true),
+        CategoryInfo(CategoryInfo.Category.Playlists, true),
+        CategoryInfo(CategoryInfo.Category.Genres, false),
+        CategoryInfo(CategoryInfo.Category.Queue, false),
+        CategoryInfo(CategoryInfo.Category.Folder, false)
     )
 
     var libraryCategory: List<CategoryInfo>
@@ -484,7 +484,7 @@ object PreferenceUtilKT {
                     return albumCoverStyle
                 }
             }
-            return AlbumCoverStyle.CARD
+            return AlbumCoverStyle.Card
         }
         set(value) = sharedPreferences.edit { putInt(ALBUM_COVER_STYLE, value.id) }
 

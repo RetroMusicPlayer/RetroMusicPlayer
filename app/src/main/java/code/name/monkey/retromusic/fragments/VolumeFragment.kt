@@ -14,7 +14,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.extensions.applyColor
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.volume.AudioVolumeObserver
 import code.name.monkey.retromusic.volume.OnAudioVolumeChangedListener
 import kotlinx.android.synthetic.main.fragment_volume.*
@@ -45,7 +45,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
         if (audioVolumeObserver == null) {
             audioVolumeObserver = AudioVolumeObserver(requireActivity())
         }
-        audioVolumeObserver!!.register(AudioManager.STREAM_MUSIC, this)
+        audioVolumeObserver?.register(AudioManager.STREAM_MUSIC, this)
 
         val audioManager = audioManager
         if (audioManager != null) {
@@ -67,9 +67,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if (audioVolumeObserver != null) {
-            audioVolumeObserver!!.unregister()
-        }
+        audioVolumeObserver?.unregister()
     }
 
     override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
@@ -113,7 +111,7 @@ class VolumeFragment : Fragment(), SeekBar.OnSeekBarChangeListener, OnAudioVolum
     }
 
     private fun setPauseWhenZeroVolume(pauseWhenZeroVolume: Boolean) {
-        if (PreferenceUtilKT.isPauseOnZeroVolume)
+        if (PreferenceUtil.isPauseOnZeroVolume)
             if (MusicPlayerRemote.isPlaying && pauseWhenZeroVolume)
                 MusicPlayerRemote.pauseSong()
 

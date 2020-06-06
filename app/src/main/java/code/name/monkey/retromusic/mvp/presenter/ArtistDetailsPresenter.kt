@@ -16,17 +16,7 @@ package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.mvp.BaseView
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.PresenterImpl
-import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import java.util.*
-import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
@@ -38,44 +28,4 @@ interface ArtistDetailsView : BaseView {
     fun artistInfo(lastFmArtist: LastFmArtist?)
 
     fun complete()
-}
-
-interface ArtistDetailsPresenter : Presenter<ArtistDetailsView> {
-
-    fun loadArtist(artistId: Int)
-
-    fun loadBiography(
-        name: String,
-        lang: String? = Locale.getDefault().language,
-        cache: String?
-    )
-
-    class ArtistDetailsPresenterImpl @Inject constructor(
-        private val repository: Repository
-    ) : PresenterImpl<ArtistDetailsView>(), ArtistDetailsPresenter, CoroutineScope {
-
-        override val coroutineContext: CoroutineContext
-            get() = Dispatchers.IO + job
-
-        private val job = Job()
-
-        override fun loadBiography(name: String, lang: String?, cache: String?) {
-            launch {
-                val result = repository.artistInfo(name, lang, cache)
-                view?.artistInfo(result)
-            }
-        }
-
-        override fun loadArtist(artistId: Int) {
-            launch {
-                val result = repository.artistById(artistId)
-                view?.artist(result)
-            }
-        }
-
-        override fun detachView() {
-            super.detachView()
-            job.cancel()
-        }
-    }
 }

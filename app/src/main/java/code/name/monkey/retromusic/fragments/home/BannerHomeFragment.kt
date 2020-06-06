@@ -34,7 +34,7 @@ import code.name.monkey.retromusic.model.smartplaylist.HistoryPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.LastAddedPlaylist
 import code.name.monkey.retromusic.model.smartplaylist.MyTopTracksPlaylist
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.abs_playlists.*
 import kotlinx.android.synthetic.main.fragment_banner_home.*
@@ -49,7 +49,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            if (PreferenceUtilKT.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
+            if (PreferenceUtil.isHomeBanner) R.layout.fragment_banner_home else R.layout.fragment_home,
             viewGroup,
             false
         )
@@ -112,7 +112,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
         titleWelcome?.text =
-            String.format("%s", PreferenceUtilKT.userName)
+            String.format("%s", PreferenceUtil.userName)
 
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
         recyclerView.apply {

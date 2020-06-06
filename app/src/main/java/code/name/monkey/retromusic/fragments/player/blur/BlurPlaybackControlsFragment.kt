@@ -25,7 +25,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_blur_player_playback_controls.*
 
@@ -69,7 +69,7 @@ class BlurPlaybackControlsFragment : AbsPlayerControlsFragment() {
         title.text = song.title
         text.text = String.format("%s • %s", song.artistName, song.albumName)
 
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.show()
             songInfo?.text = getSongInfo(song)
         } else {

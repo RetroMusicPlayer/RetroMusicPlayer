@@ -47,7 +47,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.AppRater.appLaunched
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import com.afollestad.materialcab.MaterialCab
@@ -99,7 +99,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         override fun onReceive(context: Context, intent: Intent) {
             val action = intent.action
             if (action != null && action == Intent.ACTION_SCREEN_OFF) {
-                if (PreferenceUtilKT.isLockScreen && isPlaying) {
+                if (PreferenceUtil.isLockScreen && isPlaying) {
                     val activity = Intent(context, LockScreenActivity::class.java)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     activity.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
@@ -127,7 +127,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         addMusicServiceEventListener(libraryViewModel)
 
         if (savedInstanceState == null) {
-            selectedFragment(PreferenceUtilKT.lastPage)
+            selectedFragment(PreferenceUtil.lastPage)
         } else {
             restoreCurrentFragment()
         }
@@ -136,9 +136,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         setupToolbar()
         checkUpdate()
         updateTabs()
-        getBottomNavigationView().selectedItemId = PreferenceUtilKT.lastPage
+        getBottomNavigationView().selectedItemId = PreferenceUtil.lastPage
         getBottomNavigationView().setOnNavigationItemSelectedListener {
-            PreferenceUtilKT.lastPage = it.itemId
+            PreferenceUtil.lastPage = it.itemId
             selectedFragment(it.itemId)
             true
         }
@@ -147,10 +147,10 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     override fun onResume() {
         super.onResume()
         registerReceiver(broadcastReceiver, intentFilter)
-        PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
         if (intent.hasExtra(EXPAND_PANEL) &&
             intent.getBooleanExtra(EXPAND_PANEL, false) &&
-            PreferenceUtilKT.isExpandPanel
+            PreferenceUtil.isExpandPanel
         ) {
             expandPanel()
             intent.removeExtra(EXPAND_PANEL)
@@ -179,7 +179,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(broadcastReceiver)
-        PreferenceUtilKT.unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {

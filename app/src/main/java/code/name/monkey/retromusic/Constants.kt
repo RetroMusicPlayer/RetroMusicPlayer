@@ -32,7 +32,7 @@ object Constants {
     const val FAQ_LINK = "https://github.com/h4h13/RetroMusicPlayer/blob/master/FAQ.md"
     const val PINTEREST = "https://in.pinterest.com/retromusicapp/"
 
-    const val BASE_SELECTION =
+    const val IS_MUSIC =
         MediaStore.Audio.AudioColumns.IS_MUSIC + "=1" + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"
 
     val baseProjection = arrayOf(
@@ -47,11 +47,9 @@ object Constants {
         MediaStore.Audio.AudioColumns.ALBUM, // 8
         MediaStore.Audio.AudioColumns.ARTIST_ID, // 9
         MediaStore.Audio.AudioColumns.ARTIST,// 10
-        MediaStore.Audio.AudioColumns.COMPOSER
-    )// 11
+        MediaStore.Audio.AudioColumns.COMPOSER// 11
+    )
     const val NUMBER_OF_TOP_TRACKS = 99
-
-
 }
 
 const val EXTRA_SONG = "extra_songs"
@@ -113,8 +111,7 @@ const val COLORED_APP_SHORTCUTS = "colored_app_shortcuts"
 const val AUDIO_DUCKING = "audio_ducking"
 const val LAST_ADDED_CUTOFF = "last_added_interval"
 const val LAST_SLEEP_TIMER_VALUE = "last_sleep_timer_value"
-const val NEXT_SLEEP_TIMER_ELAPSED_REALTIME =
-    "next_sleep_timer_elapsed_real_time"
+const val NEXT_SLEEP_TIMER_ELAPSED_REALTIME = "next_sleep_timer_elapsed_real_time"
 const val IGNORE_MEDIA_STORE_ARTWORK = "ignore_media_store_artwork"
 const val LAST_CHANGELOG_VERSION = "last_changelog_version"
 const val AUTO_DOWNLOAD_IMAGES_POLICY = "auto_download_images_policy"

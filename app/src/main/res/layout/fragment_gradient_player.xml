@@ -16,7 +16,7 @@
             android:id="@+id/playerAlbumCoverFragment"
             android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toTopOf="@id/playbackControlsFragment"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playerAlbumCoverFragment" />
 
-
         <FrameLayout
             android:id="@+id/statusBarContainer"
             android:layout_width="match_parent"
@@ -57,14 +56,12 @@
             <include layout="@layout/status_bar" />
         </FrameLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/playerQueueSheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
 
@@ -144,6 +141,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="?attr/colorSurface"
             android:overScrollMode="never"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

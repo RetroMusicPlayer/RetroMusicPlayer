@@ -28,7 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import code.name.monkey.retromusic.util.FileUtil;
-import code.name.monkey.retromusic.util.PreferenceUtilKT;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 import static code.name.monkey.retromusic.service.MusicService.MEDIA_STORE_CHANGED;
 
@@ -47,13 +47,13 @@ public class BlacklistStore extends SQLiteOpenHelper {
     public static synchronized BlacklistStore getInstance(@NonNull final Context context) {
         if (sInstance == null) {
             sInstance = new BlacklistStore(context.getApplicationContext());
-            if (!PreferenceUtilKT.INSTANCE.isInitializedBlacklist()) {
+            if (!PreferenceUtil.INSTANCE.isInitializedBlacklist()) {
                 // blacklisted by default
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_ALARMS));
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_NOTIFICATIONS));
                 sInstance.addPathImpl(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_RINGTONES));
 
-                PreferenceUtilKT.INSTANCE.setInitializedBlacklist(true);
+                PreferenceUtil.INSTANCE.setInitializedBlacklist(true);
             }
         }
         return sInstance;

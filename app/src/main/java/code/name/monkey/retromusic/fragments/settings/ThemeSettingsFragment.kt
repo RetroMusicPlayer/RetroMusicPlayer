@@ -27,7 +27,7 @@ import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.DESATURATED_COLOR
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 
 /**
@@ -45,7 +45,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 ThemeStore.markChanged(requireContext())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                    requireActivity().setTheme(PreferenceUtilKT.themeResFromPrefValue(theme))
+                    requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue(theme))
                     DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 }
                 requireActivity().recreate()
@@ -74,7 +74,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
             }
             ThemeStore.markChanged(requireContext())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-                requireActivity().setTheme(PreferenceUtilKT.themeResFromPrefValue("black"))
+                requireActivity().setTheme(PreferenceUtil.themeResFromPrefValue("black"))
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
             }
             requireActivity().recreate()
@@ -88,7 +88,7 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
                 .edit()
                 .putBoolean("desaturated_color", desaturated)
                 .apply()
-            PreferenceUtilKT.isDesaturatedColor = desaturated
+            PreferenceUtil.isDesaturatedColor = desaturated
             requireActivity().recreate()
             true
         }
@@ -98,9 +98,9 @@ class ThemeSettingsFragment : AbsSettingsFragment() {
         if (!VersionUtils.hasNougatMR()) {
             colorAppShortcuts.isVisible = false
         } else {
-            colorAppShortcuts.isChecked = PreferenceUtilKT.isColoredAppShortcuts
+            colorAppShortcuts.isChecked = PreferenceUtil.isColoredAppShortcuts
             colorAppShortcuts.setOnPreferenceChangeListener { _, newValue ->
-                PreferenceUtilKT.isColoredAppShortcuts = newValue as Boolean
+                PreferenceUtil.isColoredAppShortcuts = newValue as Boolean
                 DynamicShortcutManager(requireContext()).updateDynamicShortcuts()
                 true
             }

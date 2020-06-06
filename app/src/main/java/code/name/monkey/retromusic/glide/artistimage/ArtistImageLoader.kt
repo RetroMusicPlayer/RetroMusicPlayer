@@ -18,7 +18,7 @@ import android.content.Context
 import code.name.monkey.retromusic.deezer.Data
 import code.name.monkey.retromusic.deezer.DeezerApiService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import com.bumptech.glide.Priority
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.data.DataFetcher
@@ -63,7 +63,7 @@ class ArtistImageFetcher(
 
     override fun loadData(priority: Priority?): InputStream? {
         if (!MusicUtil.isArtistNameUnknown(model.artistName) &&
-            PreferenceUtilKT.isAllowedToDownloadMetadata()
+            PreferenceUtil.isAllowedToDownloadMetadata()
         ) {
             val artists = model.artistName.split(",")
             val response = deezerApiService.getArtistImage(artists[0]).execute()

@@ -22,7 +22,7 @@ import androidx.preference.Preference
 import androidx.preference.TwoStatePreference
 import code.name.monkey.retromusic.CLASSIC_NOTIFICATION
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 
 /**
@@ -47,10 +47,10 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
             classicNotification?.isVisible = false
         } else {
             classicNotification?.apply {
-                isChecked = PreferenceUtilKT.isClassicNotification
+                isChecked = PreferenceUtil.isClassicNotification
                 setOnPreferenceChangeListener { _, newValue ->
                     // Save preference
-                    PreferenceUtilKT.isClassicNotification = newValue as Boolean
+                    PreferenceUtil.isClassicNotification = newValue as Boolean
                     invalidateSettings()
                     true
                 }
@@ -59,12 +59,12 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
 
         val coloredNotification: TwoStatePreference? = findPreference("colored_notification")
         if (VERSION.SDK_INT >= VERSION_CODES.O) {
-            coloredNotification?.isEnabled = PreferenceUtilKT.isClassicNotification
+            coloredNotification?.isEnabled = PreferenceUtil.isClassicNotification
         } else {
             coloredNotification?.apply {
-                isChecked = PreferenceUtilKT.isColoredNotification
+                isChecked = PreferenceUtil.isColoredNotification
                 setOnPreferenceChangeListener { _, newValue ->
-                    PreferenceUtilKT.isColoredNotification = newValue as Boolean
+                    PreferenceUtil.isColoredNotification = newValue as Boolean
                     true
                 }
             }
@@ -73,12 +73,12 @@ class NotificationSettingsFragment : AbsSettingsFragment(),
 
     override fun onResume() {
         super.onResume()
-        PreferenceUtilKT.registerOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.registerOnSharedPreferenceChangedListener(this)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        PreferenceUtilKT.unregisterOnSharedPreferenceChangedListener(this)
+        PreferenceUtil.unregisterOnSharedPreferenceChangedListener(this)
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {

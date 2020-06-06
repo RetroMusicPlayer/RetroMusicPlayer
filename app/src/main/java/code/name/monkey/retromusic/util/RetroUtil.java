@@ -142,7 +142,7 @@ public class RetroUtil {
     }
 
     public static boolean isAllowedToDownloadMetadata(final @NonNull Context context) {
-        switch (PreferenceUtilKT.INSTANCE.getAutoDownloadImagesPolicy()) {
+        switch (PreferenceUtil.INSTANCE.getAutoDownloadImagesPolicy()) {
             case "always":
                 return true;
             case "only_wifi":

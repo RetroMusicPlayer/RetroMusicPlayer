@@ -34,7 +34,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.LyricUtil
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_lyrics.*
 import kotlinx.android.synthetic.main.fragment_lyrics.*
 import kotlinx.android.synthetic.main.fragment_synced.*
@@ -54,7 +54,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
     }
 
     override fun onPageSelected(position: Int) {
-        PreferenceUtilKT.lyricsOption = position
+        PreferenceUtil.lyricsOption = position
         if (position == 0) fab.text = getString(R.string.synced_lyrics)
         else if (position == 1) fab.text = getString(R.string.lyrics)
     }
@@ -100,7 +100,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
 
         viewPager.apply {
             adapter = PagerAdapter(supportFragmentManager)
-            currentItem = PreferenceUtilKT.lyricsOption
+            currentItem = PreferenceUtil.lyricsOption
             addOnPageChangeListener(this@LyricsActivity)
         }
 

@@ -18,13 +18,13 @@ import android.content.Context
 import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 object ArtistLoader {
     private fun getSongLoaderSortOrder(): String {
-        return PreferenceUtilKT.artistSortOrder + ", " +
-                PreferenceUtilKT.artistAlbumSortOrder + ", " +
-                PreferenceUtilKT.artistSongSortOrder
+        return PreferenceUtil.artistSortOrder + ", " +
+                PreferenceUtil.artistAlbumSortOrder + ", " +
+                PreferenceUtil.artistSongSortOrder
     }
 
     fun getAllArtists(context: Context): ArrayList<Artist> {

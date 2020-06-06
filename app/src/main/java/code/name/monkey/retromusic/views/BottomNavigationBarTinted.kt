@@ -25,7 +25,7 @@ import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.NavigationViewUtil
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RippleUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -36,7 +36,7 @@ class BottomNavigationBarTinted @JvmOverloads constructor(
 ) : BottomNavigationView(context, attrs, defStyleAttr) {
 
     init {
-        labelVisibilityMode = PreferenceUtilKT.tabTitleMode
+        labelVisibilityMode = PreferenceUtil.tabTitleMode
 
         val iconColor = ATHUtil.resolveColor(context, android.R.attr.colorControlNormal)
         val accentColor = ThemeStore.accentColor(context)

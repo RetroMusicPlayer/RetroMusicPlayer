@@ -16,7 +16,7 @@ import code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.model.Song
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import code.name.monkey.retromusic.views.DrawableGradient
@@ -86,7 +86,7 @@ class PlayerFragment : AbsPlayerFragment() {
             requireActivity()
         )
 
-        if (PreferenceUtilKT.isAdaptiveColor) {
+        if (PreferenceUtil.isAdaptiveColor) {
             colorize(color.backgroundColor)
         }
     }

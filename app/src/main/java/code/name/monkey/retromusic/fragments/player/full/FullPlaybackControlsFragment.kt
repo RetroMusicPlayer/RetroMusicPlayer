@@ -29,7 +29,7 @@ import code.name.monkey.retromusic.misc.SimpleOnSeekbarChangeListener
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_full_player_controls.*
@@ -129,7 +129,7 @@ class FullPlaybackControlsFragment : AbsPlayerControlsFragment(),
         title.text = song.title
         text.text = song.artistName
         updateIsFavorite()
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {

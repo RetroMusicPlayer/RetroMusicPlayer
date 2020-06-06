@@ -18,12 +18,12 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.provider.MediaStore.Audio.AudioColumns
-import code.name.monkey.retromusic.Constants.BASE_SELECTION
+import code.name.monkey.retromusic.Constants.IS_MUSIC
 import code.name.monkey.retromusic.Constants.baseProjection
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.providers.BlacklistStore
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 
 /**
@@ -107,14 +107,14 @@ object SongLoader {
         context: Context,
         selection: String?,
         selectionValues: Array<String>?,
-        sortOrder: String = PreferenceUtilKT.songSortOrder
+        sortOrder: String = PreferenceUtil.songSortOrder
     ): Cursor? {
         var selectionFinal = selection
         var selectionValuesFinal = selectionValues
         selectionFinal = if (selection != null && selection.trim { it <= ' ' } != "") {
-            "$BASE_SELECTION AND $selectionFinal"
+            "$IS_MUSIC AND $selectionFinal"
         } else {
-            BASE_SELECTION
+            IS_MUSIC
         }
 
         // Blacklist
@@ -129,7 +129,7 @@ object SongLoader {
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 baseProjection,
                 selectionFinal + " AND " + MediaStore.Audio.Media.DURATION + ">= " +
-                        (PreferenceUtilKT.filterLength * 1000),
+                        (PreferenceUtil.filterLength * 1000),
                 selectionValuesFinal,
                 sortOrder
             )

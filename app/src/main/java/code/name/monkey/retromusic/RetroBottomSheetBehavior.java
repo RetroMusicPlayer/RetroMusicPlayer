@@ -9,10 +9,12 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class RetroBottomSheetBehavior<V extends View> extends BottomSheetBehavior<V> {
 
-    private static final String TAG = "CustomBottomSheetBehavi";
+    private static final String TAG = "RetroBottomSheetBehavior";
 
     private boolean allowDragging = true;
 
@@ -28,7 +30,7 @@ public class RetroBottomSheetBehavior<V extends View> extends BottomSheetBehavio
     }
 
     @Override
-    public boolean onInterceptTouchEvent(CoordinatorLayout parent, V child, MotionEvent event) {
+    public boolean onInterceptTouchEvent(@NotNull CoordinatorLayout parent, @NotNull V child, @NotNull MotionEvent event) {
         if (!allowDragging) {
             return false;
         }

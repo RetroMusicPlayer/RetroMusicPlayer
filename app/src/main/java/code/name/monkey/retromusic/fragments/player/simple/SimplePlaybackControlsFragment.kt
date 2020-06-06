@@ -21,7 +21,7 @@ import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import kotlinx.android.synthetic.main.fragment_simple_controls_fragment.*
 
@@ -156,7 +156,7 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
         title.text = song.title
         text.text = song.artistName
 
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {
@@ -213,7 +213,7 @@ class SimplePlaybackControlsFragment : AbsPlayerControlsFragment() {
                 MaterialValueHelper.getPrimaryDisabledTextColor(requireContext(), false)
         }
 
-        val colorFinal = if (PreferenceUtilKT.isAdaptiveColor) {
+        val colorFinal = if (PreferenceUtil.isAdaptiveColor) {
             color.primaryTextColor
         } else {
             ThemeStore.accentColor(requireContext())

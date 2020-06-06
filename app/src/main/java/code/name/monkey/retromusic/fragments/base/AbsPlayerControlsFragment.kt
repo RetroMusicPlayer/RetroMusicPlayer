@@ -8,7 +8,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.fragments.VolumeFragment
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 
 /**
@@ -63,7 +63,7 @@ abstract class AbsPlayerControlsFragment : AbsMusicServiceFragment(),
     protected var volumeFragment: VolumeFragment? = null
 
     private fun hideVolumeIfAvailable() {
-        if (PreferenceUtilKT.isVolumeVisibilityMode) {
+        if (PreferenceUtil.isVolumeVisibilityMode) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.volumeFragmentContainer, VolumeFragment()).commit()
             childFragmentManager.executePendingTransactions()

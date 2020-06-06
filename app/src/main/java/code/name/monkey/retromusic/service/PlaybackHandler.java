@@ -23,7 +23,7 @@ import androidx.annotation.NonNull;
 
 import java.lang.ref.WeakReference;
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 import static code.name.monkey.retromusic.service.MusicService.DUCK;
 import static code.name.monkey.retromusic.service.MusicService.META_CHANGED;
@@ -52,7 +52,7 @@ class PlaybackHandler extends Handler {
 
         switch (msg.what) {
             case MusicService.DUCK:
-                if (PreferenceUtilKT.INSTANCE.isAudioDucking()) {
+                if (PreferenceUtil.INSTANCE.isAudioDucking()) {
                     currentDuckVolume -= .05f;
                     if (currentDuckVolume > .2f) {
                         sendEmptyMessageDelayed(DUCK, 10);
@@ -66,7 +66,7 @@ class PlaybackHandler extends Handler {
                 break;
 
             case MusicService.UNDUCK:
-                if (PreferenceUtilKT.INSTANCE.isAudioDucking()) {
+                if (PreferenceUtil.INSTANCE.isAudioDucking()) {
                     currentDuckVolume += .03f;
                     if (currentDuckVolume < 1f) {
                         sendEmptyMessageDelayed(MusicService.UNDUCK, 10);

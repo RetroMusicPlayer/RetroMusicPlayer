@@ -19,7 +19,7 @@ import android.provider.MediaStore.Audio.AudioColumns
 import code.name.monkey.retromusic.helper.SortOrder
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -107,7 +107,7 @@ object AlbumLoader {
     }
 
     private fun sortSongsByTrackNumber(album: Album) {
-        when (PreferenceUtilKT.albumDetailSongSortOrder) {
+        when (PreferenceUtil.albumDetailSongSortOrder) {
             SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST -> album.songs?.sortWith(Comparator { o1, o2 ->
                 o1.trackNumber.compareTo(
                     o2.trackNumber
@@ -132,7 +132,7 @@ object AlbumLoader {
     }
 
     private fun getSongLoaderSortOrder(): String {
-        return PreferenceUtilKT.albumSortOrder + ", " +
-                PreferenceUtilKT.albumSongSortOrder
+        return PreferenceUtil.albumSortOrder + ", " +
+                PreferenceUtil.albumSongSortOrder
     }
 }

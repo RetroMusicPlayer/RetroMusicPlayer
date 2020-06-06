@@ -10,14 +10,11 @@ import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.fragments.ReloadType
 import code.name.monkey.retromusic.fragments.base.AbsLibraryPagerRecyclerViewCustomGridSizeFragment
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks
-import code.name.monkey.retromusic.model.Song
-import code.name.monkey.retromusic.mvp.presenter.SongView
-import code.name.monkey.retromusic.util.PreferenceUtilKT
-import java.util.*
+import code.name.monkey.retromusic.util.PreferenceUtil
 
 class SongsFragment :
     AbsLibraryPagerRecyclerViewCustomGridSizeFragment<SongAdapter, GridLayoutManager>(),
-    SongView, MainActivityFragmentCallbacks {
+    MainActivityFragmentCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainActivity.libraryViewModel.allSongs()
@@ -57,49 +54,41 @@ class SongsFragment :
         )
     }
 
-    override fun songs(songs: List<Song>) {
-        adapter?.swapDataSet(songs)
-    }
-
     override fun loadGridSize(): Int {
-        return PreferenceUtilKT.songGridSize
+        return PreferenceUtil.songGridSize
     }
 
     override fun saveGridSize(gridColumns: Int) {
-        PreferenceUtilKT.songGridSize = gridColumns
+        PreferenceUtil.songGridSize = gridColumns
     }
 
     override fun loadGridSizeLand(): Int {
-        return PreferenceUtilKT.songGridSizeLand
+        return PreferenceUtil.songGridSizeLand
     }
 
     override fun saveGridSizeLand(gridColumns: Int) {
-        PreferenceUtilKT.songGridSizeLand = gridColumns
+        PreferenceUtil.songGridSizeLand = gridColumns
     }
 
     override fun setGridSize(gridSize: Int) {
         adapter?.notifyDataSetChanged()
     }
-
-    override fun showEmptyView() {
-        adapter?.swapDataSet(ArrayList())
-    }
-
+ 
     override fun loadSortOrder(): String {
-        return PreferenceUtilKT.songSortOrder
+        return PreferenceUtil.songSortOrder
     }
 
     override fun saveSortOrder(sortOrder: String) {
-        PreferenceUtilKT.songSortOrder = sortOrder
+        PreferenceUtil.songSortOrder = sortOrder
     }
 
     @LayoutRes
     override fun loadLayoutRes(): Int {
-        return PreferenceUtilKT.songGridStyle
+        return PreferenceUtil.songGridStyle
     }
 
     override fun saveLayoutRes(@LayoutRes layoutRes: Int) {
-        PreferenceUtilKT.songGridStyle = layoutRes
+        PreferenceUtil.songGridStyle = layoutRes
     }
 
     override fun setSortOrder(sortOrder: String) {

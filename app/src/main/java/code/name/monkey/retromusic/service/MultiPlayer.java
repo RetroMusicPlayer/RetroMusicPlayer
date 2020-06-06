@@ -29,7 +29,7 @@ import androidx.annotation.Nullable;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.service.playback.Playback;
-import code.name.monkey.retromusic.util.PreferenceUtilKT;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 /**
  * @author Andrew Neal, Karim Abou Zeid (kabouzeid)
@@ -130,7 +130,7 @@ public class MultiPlayer implements Playback, MediaPlayer.OnErrorListener, Media
         if (path == null) {
             return;
         }
-        if (PreferenceUtilKT.INSTANCE.isGapLessPlayback()) {
+        if (PreferenceUtil.INSTANCE.isGapLessPlayback()) {
             mNextMediaPlayer = new MediaPlayer();
             mNextMediaPlayer.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK);
             mNextMediaPlayer.setAudioSessionId(getAudioSessionId());

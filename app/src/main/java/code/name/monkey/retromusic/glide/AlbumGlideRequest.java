@@ -20,7 +20,7 @@ import code.name.monkey.retromusic.glide.palette.BitmapPaletteTranscoder;
 import code.name.monkey.retromusic.glide.palette.BitmapPaletteWrapper;
 import code.name.monkey.retromusic.model.Song;
 import code.name.monkey.retromusic.util.MusicUtil;
-import code.name.monkey.retromusic.util.PreferenceUtilKT;
+import code.name.monkey.retromusic.util.PreferenceUtil;
 
 public class AlbumGlideRequest {
     private static final DiskCacheStrategy DEFAULT_DISK_CACHE_STRATEGY = DiskCacheStrategy.NONE;
@@ -70,7 +70,7 @@ public class AlbumGlideRequest {
 
         @NonNull
         public Builder checkIgnoreMediaStore(@NonNull Context context) {
-            return ignoreMediaStore(PreferenceUtilKT.INSTANCE.isIgnoreMediaStoreArtwork());
+            return ignoreMediaStore(PreferenceUtil.INSTANCE.isIgnoreMediaStoreArtwork());
         }
 
         @NonNull

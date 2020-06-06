@@ -18,7 +18,7 @@ import code.name.monkey.appthemehelper.util.MaterialDialogsUtil
 import code.name.monkey.appthemehelper.util.VersionUtils
 import code.name.monkey.retromusic.LanguageContextWrapper
 import code.name.monkey.retromusic.R
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.theme.ThemeManager
 import java.util.*
@@ -44,7 +44,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     private fun toggleScreenOn() {
-        if (PreferenceUtilKT.isScreenOnEnabled) {
+        if (PreferenceUtil.isScreenOnEnabled) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
@@ -63,7 +63,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     fun hideStatusBar() {
-        hideStatusBar(PreferenceUtilKT.isFullScreenMode)
+        hideStatusBar(PreferenceUtil.isFullScreenMode)
     }
 
     private fun hideStatusBar(fullscreen: Boolean) {
@@ -166,7 +166,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
         val flags =
             (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
-        if (PreferenceUtilKT.isFullScreenMode) {
+        if (PreferenceUtil.isFullScreenMode) {
             window.decorView.systemUiVisibility = flags
         }
     }
@@ -199,7 +199,7 @@ abstract class AbsThemeActivity : ATHToolbarActivity(), Runnable {
     }
 
     override fun attachBaseContext(newBase: Context?) {
-        val code = PreferenceUtilKT.languageCode
+        val code = PreferenceUtil.languageCode
         if (code != "auto") {
             super.attachBaseContext(LanguageContextWrapper.wrap(newBase, Locale(code)))
         } else super.attachBaseContext(newBase)

@@ -16,16 +16,7 @@ package code.name.monkey.retromusic.mvp.presenter
 
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
-import code.name.monkey.retromusic.mvp.Presenter
-import code.name.monkey.retromusic.mvp.PresenterImpl
-import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by hemanths on 20/08/17.
@@ -41,59 +32,4 @@ interface AlbumDetailsView {
     fun moreAlbums(albums: List<Album>)
 
     fun aboutAlbum(lastFmAlbum: LastFmAlbum)
-}
-
-interface AlbumDetailsPresenter : Presenter<AlbumDetailsView> {
-    fun loadAlbum(albumId: Int)
-
-    fun loadMore(artistId: Int)
-
-    fun aboutAlbum(artist: String, album: String)
-
-    class AlbumDetailsPresenterImpl @Inject constructor(
-        private val repository: Repository
-    ) : PresenterImpl<AlbumDetailsView>(), AlbumDetailsPresenter, CoroutineScope {
-
-        private val job = Job()
-        private lateinit var album: Album
-
-        override fun loadMore(artistId: Int) {
-            launch {
-                val result = repository.artistById(artistId)
-                showArtistImage(result)
-            }
-        }
-
-        override fun aboutAlbum(artist: String, album: String) {
-            launch {
-                val result = repository.albumInfo(artist, album)
-                view.aboutAlbum(result)
-            }
-        }
-
-        private fun showArtistImage(artist: Artist) {
-            view?.loadArtistImage(artist)
-
-            artist.albums?.filter { it.id != album.id }?.let {
-                if (it.isNotEmpty()) view?.moreAlbums(ArrayList(it))
-            }
-        }
-
-        override fun loadAlbum(albumId: Int) {
-            launch {
-                val result = repository.albumById(albumId)
-                album = result
-                view?.album(result)
-
-            }
-        }
-
-        override fun detachView() {
-            super.detachView()
-            job.cancel()
-        }
-
-        override val coroutineContext: CoroutineContext
-            get() = Dispatchers.IO + job
-    }
 }

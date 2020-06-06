@@ -19,7 +19,7 @@ import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.helper.PlayPauseButtonOnClickHandler
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.RetroUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
@@ -64,9 +64,9 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
 
         } else {
             actionNext.visibility =
-                if (PreferenceUtilKT.isExtraControls) View.VISIBLE else View.GONE
+                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
             actionPrevious.visibility =
-                if (PreferenceUtilKT.isExtraControls) View.VISIBLE else View.GONE
+                if (PreferenceUtil.isExtraControls) View.VISIBLE else View.GONE
         }
         actionNext.setOnClickListener(this)
         actionPrevious.setOnClickListener(this)
@@ -104,7 +104,7 @@ open class MiniPlayerFragment : AbsMusicServiceFragment(), MusicProgressViewUpda
                     Glide.with(requireContext()),
                     MusicPlayerRemote.currentSong
                 ).checkIgnoreMediaStore(requireContext())
-                    .ignoreMediaStore(PreferenceUtilKT.isAllowedToDownloadMetadata())
+                    .ignoreMediaStore(PreferenceUtil.isAllowedToDownloadMetadata())
                     .asBitmap()
                     .build()
                     .into(it)

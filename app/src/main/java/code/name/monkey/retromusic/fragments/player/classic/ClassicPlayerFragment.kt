@@ -1,6 +1,7 @@
 package code.name.monkey.retromusic.fragments.player.classic
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -37,7 +38,7 @@ import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.service.MusicService
 import code.name.monkey.retromusic.util.MusicUtil
 
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -85,7 +86,6 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
 
         override fun onStateChanged(bottomSheet: View, newState: Int) {
             val activity = requireActivity() as AbsSlidingMusicPanelActivity
-            val isDark = ATHUtil.isWindowBackgroundDark(requireContext());
             when (newState) {
                 BottomSheetBehavior.STATE_EXPANDED,
                 BottomSheetBehavior.STATE_DRAGGING -> {
@@ -115,6 +115,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         return inflater.inflate(R.layout.fragment_classic_player, container, false)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupPanel()
@@ -155,7 +156,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
     }
 
     private fun hideVolumeIfAvailable() {
-        if (PreferenceUtilKT.isVolumeVisibilityMode) {
+        if (PreferenceUtil.isVolumeVisibilityMode) {
             childFragmentManager.beginTransaction()
                 .replace(R.id.volumeFragmentContainer, VolumeFragment.newInstance())
                 .commit()
@@ -186,7 +187,7 @@ class ClassicPlayerFragment : AbsPlayerFragment(), View.OnLayoutChangeListener,
         title.text = song.title
         text.text = song.artistName
 
-        if (PreferenceUtilKT.isSongInfo) {
+        if (PreferenceUtil.isSongInfo) {
             songInfo.text = getSongInfo(song)
             songInfo.show()
         } else {

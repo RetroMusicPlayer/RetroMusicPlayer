@@ -37,7 +37,7 @@ import code.name.monkey.retromusic.extensions.colorControlNormal
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle
 import code.name.monkey.retromusic.fragments.AlbumCoverStyle.*
 import code.name.monkey.retromusic.util.NavigationUtil
-import code.name.monkey.retromusic.util.PreferenceUtilKT
+import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.ViewUtil
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -77,7 +77,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
         viewPager.adapter = AlbumCoverStyleAdapter(requireContext())
         viewPager.addOnPageChangeListener(this)
         viewPager.pageMargin = ViewUtil.convertDpToPixel(32f, resources).toInt()
-        viewPager.currentItem = PreferenceUtilKT.albumCoverStyle.ordinal
+        viewPager.currentItem = PreferenceUtil.albumCoverStyle.ordinal
 
         return MaterialAlertDialogBuilder(requireActivity(),
             R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
@@ -89,7 +89,7 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
                     Toast.makeText(context, result, Toast.LENGTH_SHORT).show()
                     NavigationUtil.goToProVersion(requireActivity())
                 } else {
-                    PreferenceUtilKT.albumCoverStyle = coverStyle
+                    PreferenceUtil.albumCoverStyle = coverStyle
                 }
             }
             .setView(view)
@@ -164,5 +164,5 @@ class AlbumCoverStylePreferenceDialog : DialogFragment(),
 }
 
 private fun isAlbumCoverStyle(style: AlbumCoverStyle): Boolean {
-    return (!App.isProVersion() && (style == CIRCLE || style == CARD || style == FULL_CARD))
+    return (!App.isProVersion() && (style == Circle || style == Card || style == FullCard))
 }
