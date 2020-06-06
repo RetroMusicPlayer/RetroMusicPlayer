@@ -8,6 +8,6 @@
     android:gravity="start"
     android:paddingHorizontal="16dp"
     android:paddingVertical="12dp"
-    android:textAppearance="@style/TextViewHeadline6"
+    android:textAppearance="@style/TextViewOverline"
     android:textStyle="bold"
     tools:text="@tools:sample/full_names" />

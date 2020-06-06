@@ -18,10 +18,7 @@ import code.name.monkey.retromusic.mvp.BaseView
 import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -55,7 +52,7 @@ interface SearchPresenter : Presenter<SearchView> {
         override fun search(query: String?) {
             launch {
                 val result = repository.search(query)
-                view?.showData(result)
+                withContext(Dispatchers.Main) { view?.showData(result) }
             }
         }
     }
