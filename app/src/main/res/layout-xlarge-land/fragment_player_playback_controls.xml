@@ -165,7 +165,7 @@
         app:layout_constraintEnd_toStartOf="@id/progressSlider"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
@@ -195,7 +195,7 @@
         app:layout_constraintStart_toEndOf="@id/progressSlider"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
 
     <FrameLayout

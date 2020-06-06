@@ -26,7 +26,7 @@
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
-            tools:text="00:00" />
+            tools:text="@tools:sample/date/hhmmss" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songTotalTime"
@@ -39,7 +39,7 @@
             android:textColor="?colorOnSecondary"
             android:textSize="12sp"
             tools:ignore="RtlHardcoded,RtlSymmetry"
-            tools:text="00:00" />
+            tools:text="@tools:sample/date/hhmmss" />
 
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"

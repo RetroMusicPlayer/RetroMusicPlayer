@@ -220,7 +220,7 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     public override fun show() {
-        playPauseButton!!.animate()
+        playPauseButton.animate()
             .scaleX(1f)
             .scaleY(1f)
             .rotation(360f)
@@ -229,12 +229,10 @@ class PlayerPlaybackControlsFragment : AbsPlayerControlsFragment() {
     }
 
     public override fun hide() {
-        if (playPauseButton != null) {
-            playPauseButton!!.apply {
-                scaleX = 0f
-                scaleY = 0f
-                rotation = 0f
-            }
+        playPauseButton.apply {
+            scaleX = 0f
+            scaleY = 0f
+            rotation = 0f
         }
     }
 

@@ -201,7 +201,7 @@
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
         app:layout_constraintStart_toStartOf="@id/repeatButton"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
@@ -213,6 +213,6 @@
         app:layout_constraintBottom_toTopOf="@id/playPauseButton"
         app:layout_constraintEnd_toEndOf="@id/shuffleButton"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,7 +90,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
@@ -105,7 +105,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/songTotalTime"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:gravity="center"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressSlider"
         tools:ignore="RtlHardcoded,RtlSymmetry"
-        tools:text="00:22" />
+         tools:text="@tools:sample/date/hhmmss" />
 
 
     <androidx.appcompat.widget.AppCompatImageButton
