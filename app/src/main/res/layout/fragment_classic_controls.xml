@@ -22,6 +22,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/songCurrentProgress"
             android:layout_width="0dp"
+            android:minWidth="40dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical|left|end"
