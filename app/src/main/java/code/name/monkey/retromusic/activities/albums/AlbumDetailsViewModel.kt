@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Album
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.providers.RepositoryImpl
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 class AlbumDetailsViewModel(
     application: Application,
     private val albumId: Int
-) : AndroidViewModel(application) {
+) : AndroidViewModel(application), MusicServiceEventListener {
     private val _repository = RepositoryImpl(application.applicationContext)
     private val _album = MutableLiveData<Album>()
     private val _artist = MutableLiveData<Artist>()
@@ -28,10 +29,10 @@ class AlbumDetailsViewModel(
     fun getAlbumInfo(): LiveData<LastFmAlbum> = _lastFmAlbum
 
     init {
-        loadDetails()
+        loadAlbumDetails()
     }
 
-    private fun loadDetails() = viewModelScope.launch {
+    private fun loadAlbumDetails() = viewModelScope.launch {
         val album = loadAlbumAsync.await() ?: throw NullPointerException("Album couldn't found")
         _album.postValue(album)
     }
@@ -50,4 +51,16 @@ class AlbumDetailsViewModel(
         get() = viewModelScope.async(Dispatchers.IO) {
             _repository.albumById(albumId)
         }
+
+    override fun onMediaStoreChanged() {
+        loadAlbumDetails()
+    }
+
+    override fun onServiceConnected() {}
+    override fun onServiceDisconnected() {}
+    override fun onQueueChanged() {}
+    override fun onPlayingMetaChanged() {}
+    override fun onPlayStateChanged() {}
+    override fun onRepeatModeChanged() {}
+    override fun onShuffleModeChanged() {}
 }

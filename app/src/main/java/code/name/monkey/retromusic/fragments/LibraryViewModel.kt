@@ -36,7 +36,6 @@ class LibraryViewModel(application: Application) :
     init {
         viewModelScope.launch {
             loadLibraryContent()
-            loadHomeSections()
         }
     }
 
@@ -46,6 +45,7 @@ class LibraryViewModel(application: Application) :
         _artists.value = loadArtists.await()
         _playlist.value = loadPlaylists.await()
         _genre.value = loadGenres.await()
+        loadHomeSections()
     }
 
     private fun loadHomeSections() = viewModelScope.launch {

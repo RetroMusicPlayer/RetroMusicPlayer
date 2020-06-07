@@ -104,6 +104,7 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         ActivityCompat.postponeEnterTransition(this)
         val viewModelFactory = AlbumDetailsViewModelFactory(application, albumId)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AlbumDetailsViewModel::class.java)
+        addMusicServiceEventListener(viewModel)
         viewModel.getAlbum().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@AlbumDetailsActivity)
             album(it)
@@ -388,6 +389,10 @@ class AlbumDetailsActivity : AbsSlidingMusicPanelActivity(), AlbumDetailsView, C
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        removeMusicServiceEventListener(viewModel)
+    }
     companion object {
 
         const val EXTRA_ALBUM_ID = "extra_album_id"

@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import code.name.monkey.retromusic.interfaces.MusicServiceEventListener
 import code.name.monkey.retromusic.model.Artist
 import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.rest.model.LastFmArtist
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 class ArtistDetailsViewModel(
     application: Application,
     private val artistId: Int
-) : AndroidViewModel(application) {
+) : AndroidViewModel(application), MusicServiceEventListener {
 
     private val loadArtistDetailsAsync: Deferred<Artist?>
         get() = viewModelScope.async(Dispatchers.IO) {
@@ -43,4 +44,16 @@ class ArtistDetailsViewModel(
         val info = _repository.artistInfo(name, lang, cache)
         _lastFmArtist.postValue(info)
     }
+
+    override fun onMediaStoreChanged() {
+        loadArtistDetails()
+    }
+
+    override fun onServiceConnected() {}
+    override fun onServiceDisconnected() {}
+    override fun onQueueChanged() {}
+    override fun onPlayingMetaChanged() {}
+    override fun onPlayStateChanged() {}
+    override fun onRepeatModeChanged() {}
+    override fun onShuffleModeChanged() {}
 }

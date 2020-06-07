@@ -106,8 +106,8 @@ object PlaylistLoader {
                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
                 arrayOf(
                     BaseColumns._ID, /* 0 */
-                    PlaylistsColumns.NAME
-                ), /* 1 */
+                    PlaylistsColumns.NAME /* 1 */
+                ),
                 selection,
                 values,
                 MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER

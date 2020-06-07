@@ -98,6 +98,7 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         val viewModelFactory = ArtistDetailsViewModelFactory(application, artistId)
         viewModel =
             ViewModelProvider(this, viewModelFactory).get(ArtistDetailsViewModel::class.java)
+        addMusicServiceEventListener(viewModel)
         viewModel.getArtist().observe(this, androidx.lifecycle.Observer {
             ActivityCompat.startPostponedEnterTransition(this@ArtistDetailActivity)
             artist(it)
@@ -318,6 +319,11 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), ArtistDetailsView, 
         } else {
             super.onBackPressed()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeMusicServiceEventListener(viewModel)
     }
 
     companion object {
