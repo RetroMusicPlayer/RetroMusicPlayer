@@ -1,17 +1,3 @@
-/*
- * Copyright (c) 2019 Hemanth Savarala.
- *
- * Licensed under the GNU General Public License v3
- *
- * This is free software: you can redistribute it and/or modify it under
- * the terms of the GNU General Public License as published by
- *  the Free Software Foundation either version 3 of the License, or (at your option) any later version.
- *
- * This software is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- * See the GNU General Public License for more details.
- */
-
 package code.name.monkey.retromusic.lyrics;
 
 import android.content.Context;
@@ -42,8 +28,8 @@ public class LrcHelper {
 
     private static final String CHARSET = "utf-8";
     //[03:56.00][03:18.00][02:06.00][01:07.00]原谅我这一生不羁放纵爱自由
-    private static final String LINE_REGEX = "((\\[\\d{2}:\\d{2}\\.\\d{2,3}])+)(.*)";
-    private static final String TIME_REGEX = "\\[(\\d{2}):(\\d{2})\\.(\\d{2,3})]";
+    private static final String LINE_REGEX = "((\\[\\d{2}:\\d{2}\\.\\d{2}])+)(.*)";
+    private static final String TIME_REGEX = "\\[(\\d{2}):(\\d{2})\\.(\\d{2})]";
 
     public static List<Lrc> parseLrcFromAssets(Context context, String fileName) {
         try {
@@ -127,14 +113,8 @@ public class LrcHelper {
             String mil = timeMatcher.group(3);
             Lrc lrc = new Lrc();
             if (content != null && content.length() != 0) {
-                if (Integer.parseInt(mil) < 100) {
-                    lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
-                            + Long.parseLong(mil) * 10);
-                } else {
-                    lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
-                            + Long.parseLong(mil)
-                    );
-                }
+                lrc.setTime(Long.parseLong(min) * 60 * 1000 + Long.parseLong(sec) * 1000
+                        + Long.parseLong(mil) * 10);
                 lrc.setText(content);
                 lrcs.add(lrc);
             }

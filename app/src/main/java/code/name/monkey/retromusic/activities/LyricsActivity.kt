@@ -29,7 +29,6 @@ import code.name.monkey.retromusic.fragments.base.AbsMusicServiceFragment
 import code.name.monkey.retromusic.helper.MusicPlayerRemote
 import code.name.monkey.retromusic.helper.MusicProgressViewUpdateHelper
 import code.name.monkey.retromusic.lyrics.LrcHelper
-import code.name.monkey.retromusic.lyrics.LrcView
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.model.lyrics.Lyrics
 import code.name.monkey.retromusic.util.LyricUtil
@@ -162,7 +161,6 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         /*val materialDialog = MaterialDialog(this)
             .show {
                 title(R.string.add_time_framed_lryics)
@@ -381,11 +379,7 @@ class LyricsActivity : AbsMusicServiceActivity(), View.OnClickListener,
                     )
                 )
                 setNoLrcTextColor(resolveColor(requireContext(), attr.textColorPrimary))
-                setOnPlayIndicatorLineListener(object : LrcView.OnPlayIndicatorLineListener {
-                    override fun onPlay(time: Long, content: String) {
-                        MusicPlayerRemote.seekTo(time.toInt())
-                    }
-                })
+                setOnPlayIndicatorLineListener { time, _ -> MusicPlayerRemote.seekTo(time.toInt()) }
             }
         }
 

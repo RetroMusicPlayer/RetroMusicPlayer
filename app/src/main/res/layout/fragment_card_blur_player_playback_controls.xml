@@ -56,6 +56,8 @@
         <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/progressSlider"
             android:layout_width="match_parent"
+            android:maxHeight="2dp"
+            android:progressDrawable="@drawable/color_progress_seek"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"

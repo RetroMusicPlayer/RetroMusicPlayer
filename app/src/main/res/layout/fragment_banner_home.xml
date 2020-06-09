@@ -30,7 +30,7 @@
             android:id="@+id/imageContainer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="24dp"
+            app:cardCornerRadius="16dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintDimensionRatio="21:10"
             app:layout_constraintEnd_toEndOf="parent"

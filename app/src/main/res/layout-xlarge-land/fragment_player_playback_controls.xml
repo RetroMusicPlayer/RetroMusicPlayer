@@ -170,6 +170,8 @@
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/progressSlider"
         android:layout_width="0dp"
+        android:maxHeight="2dp"
+        android:progressDrawable="@drawable/color_progress_seek"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_toLeftOf="@id/songTotalTime"

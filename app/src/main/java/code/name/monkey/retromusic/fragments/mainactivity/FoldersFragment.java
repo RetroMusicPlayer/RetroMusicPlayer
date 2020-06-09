@@ -60,7 +60,6 @@ import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.helper.menu.SongMenuHelper;
 import code.name.monkey.retromusic.helper.menu.SongsMenuHelper;
 import code.name.monkey.retromusic.interfaces.CabHolder;
-import code.name.monkey.retromusic.interfaces.LoaderIds;
 import code.name.monkey.retromusic.interfaces.MainActivityFragmentCallbacks;
 import code.name.monkey.retromusic.misc.DialogAsyncTask;
 import code.name.monkey.retromusic.misc.UpdateToastMediaScannerCompletionListener;
@@ -87,7 +86,7 @@ public class FoldersFragment extends AbsMainActivityFragment implements
             FileUtil.fileIsMimeType(file, "application/ogg", MimeTypeMap.getSingleton()));
     private static final String PATH = "path";
     private static final String CRUMBS = "crumbs";
-    private static final int LOADER_ID = LoaderIds.Companion.getFOLDERS_FRAGMENT();
+    private static final int LOADER_ID = 5;
     private SongFileAdapter adapter;
     private BreadCrumbLayout breadCrumbs;
     private MaterialCab cab;
