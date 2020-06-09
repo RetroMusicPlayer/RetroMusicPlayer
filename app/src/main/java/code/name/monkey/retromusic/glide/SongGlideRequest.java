@@ -102,7 +102,7 @@ public class SongGlideRequest {
             //noinspection unchecked
             return createBaseRequest(requestManager, song, ignoreMediaStore)
                     .diskCacheStrategy(DEFAULT_DISK_CACHE_STRATEGY)
-                    .placeholder(DEFAULT_ERROR_IMAGE)
+                    .error(DEFAULT_ERROR_IMAGE)
                     .animate(DEFAULT_ANIMATION)
                     .signature(createSignature(song));
         }

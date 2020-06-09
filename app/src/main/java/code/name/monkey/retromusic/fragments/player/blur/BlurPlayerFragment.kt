@@ -105,11 +105,11 @@ class BlurPlayerFragment : AbsPlayerFragment(), SharedPreferences.OnSharedPrefer
             .generatePalette(requireContext()).build()
             .dontAnimate()
             .transform(
-                BlurTransformation.Builder(requireContext()).blurRadius(blurAmount.toFloat())
+                BlurTransformation.Builder(requireContext())
+                    .blurRadius(blurAmount.toFloat())
                     .build()
             )
             .into(object : RetroMusicColoredTarget(colorBackground) {
-
                 override fun onColorReady(colors: MediaNotificationProcessor) {
                     if (colors.backgroundColor == defaultFooterColor) {
                         colorBackground.setColorFilter(colors.backgroundColor)
