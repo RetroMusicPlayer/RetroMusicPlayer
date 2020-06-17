@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <code.name.monkey.retromusic.views.ColorIconsImageView
+        <io.github.muntashirakon.music.views.ColorIconsImageView
             android:id="@+id/v1"
             android:layout_width="@dimen/adaptive_icon_size"
             android:layout_height="@dimen/adaptive_icon_size"
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toEndOf="@+id/history"
         app:layout_constraintTop_toTopOf="@+id/history">
 
-        <code.name.monkey.retromusic.views.ColorIconsImageView
+        <io.github.muntashirakon.music.views.ColorIconsImageView
             android:id="@+id/v2"
             android:layout_width="@dimen/adaptive_icon_size"
             android:layout_height="@dimen/adaptive_icon_size"
@@ -90,7 +90,7 @@
         app:layout_constraintStart_toEndOf="@+id/lastAdded"
         app:layout_constraintTop_toTopOf="@+id/lastAdded">
 
-        <code.name.monkey.retromusic.views.ColorIconsImageView
+        <io.github.muntashirakon.music.views.ColorIconsImageView
             android:id="@+id/v3"
             android:layout_width="@dimen/adaptive_icon_size"
             android:layout_height="@dimen/adaptive_icon_size"
@@ -126,7 +126,7 @@
         app:layout_constraintStart_toEndOf="@+id/topPlayed"
         app:layout_constraintTop_toTopOf="@+id/topPlayed">
 
-        <code.name.monkey.retromusic.views.ColorIconsImageView
+        <io.github.muntashirakon.music.views.ColorIconsImageView
             android:id="@+id/v4"
             android:layout_width="@dimen/adaptive_icon_size"
             android:layout_height="@dimen/adaptive_icon_size"

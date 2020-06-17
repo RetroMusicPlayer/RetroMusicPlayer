@@ -45,7 +45,7 @@
         <include layout="@layout/status_bar" />
     </FrameLayout>
 
-    <code.name.monkey.retromusic.views.VerticalTextView
+    <io.github.muntashirakon.music.views.VerticalTextView
         android:id="@+id/playerSongTotalTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
         tools:ignore="MissingPrefix"
         tools:text="@tools:sample/date/hhmm" />
 
-    <code.name.monkey.retromusic.views.VerticalTextView
+    <io.github.muntashirakon.music.views.VerticalTextView
         android:id="@+id/songInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
 
     </LinearLayout>
 
-    <code.name.monkey.retromusic.views.VerticalTextView
+    <io.github.muntashirakon.music.views.VerticalTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -136,7 +136,7 @@
         tools:ignore="MissingPrefix"
         tools:text="@tools:sample/lorem/random" />
 
-    <code.name.monkey.retromusic.views.VerticalTextView
+    <io.github.muntashirakon.music.views.VerticalTextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

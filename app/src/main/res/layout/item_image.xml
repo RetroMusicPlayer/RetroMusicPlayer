@@ -7,7 +7,7 @@
     android:background="?rectSelector"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.WidthFitSquareCardView
+    <io.github.muntashirakon.music.views.WidthFitSquareCardView
         android:id="@+id/imageContainer"
         android:layout_width="156dp"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/backgrounds/scenic[16]" />
 
-    </code.name.monkey.retromusic.views.WidthFitSquareCardView>
+    </io.github.muntashirakon.music.views.WidthFitSquareCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/title"

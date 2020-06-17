@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/playerAlbumCoverFragment"
-        android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+        android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_album_full_cover" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <code.name.monkey.retromusic.views.StatusBarView
+            <io.github.muntashirakon.music.views.StatusBarView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/status_bar_padding" />
 
@@ -55,7 +55,7 @@
 
         <fragment
             android:id="@+id/playbackControlsFragment"
-            android:name="code.name.monkey.retromusic.fragments.player.card.CardPlaybackControlsFragment"
+            android:name="io.github.muntashirakon.music.fragments.player.card.CardPlaybackControlsFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_card_player_playback_controls" />

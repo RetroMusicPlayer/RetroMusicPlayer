@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="code.name.monkey.retromusic">
+    package="io.github.muntashirakon.music">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -15,8 +15,6 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="com.android.vending.BILLING" />
-
 
     <application
         android:name=".App"
@@ -115,10 +113,8 @@
         <activity android:name=".activities.SettingsActivity" />
         <activity android:name=".activities.LyricsActivity" />
         <activity android:name=".activities.UserInfoActivity" />
-        <activity android:name=".activities.SupportDevelopmentActivity" />
         <activity android:name=".activities.GenreDetailsActivity" />
         <activity android:name=".activities.LicenseActivity" />
-        <activity android:name=".activities.PurchaseActivity" />
         <activity android:name=".activities.WhatsNewActivity" />
         <activity android:name=".activities.bugreport.BugReportActivity" />
         <activity android:name=".activities.ShareInstagramStory" />
@@ -257,7 +253,7 @@
             android:value="true" />
 
         <meta-data
-            android:name="code.name.monkey.retromusic.glide.RetroMusicGlideModule"
+            android:name="io.github.muntashirakon.music.glide.RetroMusicGlideModule"
             android:value="GlideModule" />
 
         <meta-data

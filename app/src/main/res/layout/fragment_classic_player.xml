@@ -41,7 +41,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <code.name.monkey.retromusic.views.StatusBarView
+            <io.github.muntashirakon.music.views.StatusBarView
                 android:id="@+id/status_bar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/status_bar_padding" />
@@ -73,7 +73,7 @@
         app:behavior_hideable="false"
         app:cardCornerRadius="0dp"
         app:cardElevation="12dp"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:layout_behavior="code.name.monkey.retromusic.io.github.muntashirakon.music.RetroBottomSheetBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -14,7 +14,7 @@ proguardDictionaries {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion = '29.0.3'
+    buildToolsVersion = '30.0.0 rc4'
 
     defaultConfig {
         minSdkVersion 21
@@ -23,29 +23,17 @@ android {
         renderscriptTargetApi 29 //must match target sdk and build tools
         vectorDrawables.useSupportLibrary = true
 
-        applicationId "code.name.monkey.retromusic"
-        versionCode 437
-        versionName '3.5.600'
+        applicationId 'io.github.muntashirakon.Music'
+        versionCode 440
+        versionName '3.5.8'
 
         multiDexEnabled true
-
-        buildConfigField("String", "GOOGLE_PLAY_LICENSING_KEY", "\"${getProperty(getProperties('../public.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
-    }
-    signingConfigs {
-        release {
-            Properties properties = getProperties('/Users/h4h13/Documents/Github/retro.properties')
-            storeFile file(getProperty(properties, 'storeFile'))
-            keyAlias getProperty(properties, 'keyAlias')
-            storePassword getProperty(properties, 'storePassword')
-            keyPassword getProperty(properties, 'keyPassword')
-        }
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix '.debug'
@@ -124,8 +112,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.preference:preference:1.1.1'
 
-    implementation 'androidx.core:core-ktx:1.2.0'
-    implementation 'androidx.fragment:fragment-ktx:1.2.4'
+    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
     implementation 'androidx.palette:palette-ktx:1.0.0'
 
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -152,7 +140,6 @@ dependencies {
     /*UI Library*/
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
 
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     def kotlin_coroutines_version = "1.3.3"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
@@ -165,7 +152,6 @@ dependencies {
 
     implementation 'com.github.AdrienPoupa:jaudiotagger:2.2.3'
 
-    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.1.0'
     implementation 'com.heinrichreimersoftware:material-intro:1.6'
     implementation 'me.zhanghai.android.fastscroll:library:1.1.0'
@@ -180,7 +166,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    implementation 'com.google.android.play:core:1.7.2'
     implementation 'me.jorgecastillo:androidcolorx:0.2.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'

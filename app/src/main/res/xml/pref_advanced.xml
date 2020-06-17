@@ -5,7 +5,7 @@
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_blacklist">
 
-        <code.name.monkey.retromusic.preferences.BlacklistPreference
+        <io.github.muntashirakon.music.preferences.BlacklistPreference
             android:key="blacklist"
             android:layout="@layout/list_item_view"
             android:summary="@string/pref_summary_blacklist"

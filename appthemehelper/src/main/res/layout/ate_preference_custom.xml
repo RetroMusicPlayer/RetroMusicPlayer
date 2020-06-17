@@ -47,7 +47,7 @@
             android:textColor="?android:attr/textColorPrimary"
             tools:text="@tools:sample/lorem/random" />
 
-        <code.name.monkey.retromusic.views.BaselineGridTextView
+        <io.github.muntashirakon.music.views.BaselineGridTextView
             android:id="@android:id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

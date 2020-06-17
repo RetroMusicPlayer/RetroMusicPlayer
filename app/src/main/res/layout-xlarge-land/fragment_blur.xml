@@ -36,7 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <code.name.monkey.retromusic.views.WidthFitSquareLayout
+        <io.github.muntashirakon.music.views.WidthFitSquareLayout
             android:id="@+id/album_cover_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,11 +45,11 @@
 
             <fragment
                 android:id="@+id/playerAlbumCoverFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.PlayerAlbumCoverFragment"
+                android:name="io.github.muntashirakon.music.fragments.player.PlayerAlbumCoverFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_album_cover" />
-        </code.name.monkey.retromusic.views.WidthFitSquareLayout>
+        </io.github.muntashirakon.music.views.WidthFitSquareLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 
             <fragment
                 android:id="@+id/playbackControlsFragment"
-                android:name="code.name.monkey.retromusic.fragments.player.blur.BlurPlaybackControlsFragment"
+                android:name="io.github.muntashirakon.music.fragments.player.blur.BlurPlaybackControlsFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </FrameLayout>

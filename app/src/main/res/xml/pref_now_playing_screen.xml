@@ -2,7 +2,7 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <code.name.monkey.retromusic.preferences.NowPlayingScreenPreference
+    <io.github.muntashirakon.music.preferences.NowPlayingScreenPreference
         android:key="now_playing_screen_id"
         android:layout="@layout/list_item_view"
         android:title="@string/pref_title_now_playing_screen_appearance"
@@ -19,7 +19,7 @@
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_album">
 
-        <code.name.monkey.retromusic.preferences.AlbumCoverStylePreference
+        <io.github.muntashirakon.music.preferences.AlbumCoverStylePreference
             android:key="album_cover_style_id"
             android:layout="@layout/list_item_view"
             android:title="@string/pref_title_album_cover_style"

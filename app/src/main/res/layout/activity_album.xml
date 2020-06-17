@@ -79,7 +79,7 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-                <code.name.monkey.retromusic.views.RetroShapeableImageView
+                <io.github.muntashirakon.music.views.RetroShapeableImageView
                     android:id="@+id/artistImage"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
@@ -91,7 +91,7 @@
                     app:retroCornerSize="26dp"
                     tools:srcCompat="@tools:sample/backgrounds/scenic[11]" />
 
-                <code.name.monkey.retromusic.views.BaselineGridTextView
+                <io.github.muntashirakon.music.views.BaselineGridTextView
                     android:id="@+id/albumTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
                     tools:ignore="MissingPrefix"
                     tools:text="@tools:sample/lorem/random" />
 
-                <code.name.monkey.retromusic.views.BaselineGridTextView
+                <io.github.muntashirakon.music.views.BaselineGridTextView
                     android:id="@+id/albumText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

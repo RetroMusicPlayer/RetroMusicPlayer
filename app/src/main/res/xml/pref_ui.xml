@@ -29,7 +29,7 @@
         android:layout="@layout/preference_category_title"
         android:title="@string/pref_header_library">
 
-        <code.name.monkey.retromusic.preferences.LibraryPreference
+        <io.github.muntashirakon.music.preferences.LibraryPreference
             android:key="library_categories"
             android:layout="@layout/list_item_view"
             android:summary="@string/pref_summary_library_categories"

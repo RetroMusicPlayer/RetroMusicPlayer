@@ -79,7 +79,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <code.name.monkey.retromusic.views.BaselineGridTextView
+                <io.github.muntashirakon.music.views.BaselineGridTextView
                     android:id="@+id/artistTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     tools:ignore="MissingPrefix"
                     tools:text="@tools:sample/full_names" />
 
-                <code.name.monkey.retromusic.views.BaselineGridTextView
+                <io.github.muntashirakon.music.views.BaselineGridTextView
                     android:id="@+id/text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <code.name.monkey.retromusic.views.ListItemView
+        <io.github.muntashirakon.music.views.ListItemView
             android:id="@+id/changelog"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             app:listItemSummary="@string/changelog_summary"
             app:listItemTitle="@string/changelog" />
 
-        <code.name.monkey.retromusic.views.ListItemView
+        <io.github.muntashirakon.music.views.ListItemView
             android:id="@+id/openSource"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             app:listItemSummary="@string/pref_summary_open_source_licences"
             app:listItemTitle="@string/pref_title_open_source_licences" />
 
-        <code.name.monkey.retromusic.views.ListItemView
+        <io.github.muntashirakon.music.views.ListItemView
             android:id="@+id/version"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,19 +68,5 @@
             app:listItemSummary="@string/pref_summary_open_source_licences"
             app:listItemTitle="@string/version" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/madeText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/made_with_love"
-            android:textAppearance="@style/TextViewBody1"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/version" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

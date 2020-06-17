@@ -26,7 +26,7 @@
         android:background="?attr/colorSurface"
         app:behavior_hideable="false"
         app:behavior_peekHeight="0dp"
-        app:layout_behavior="code.name.monkey.retromusic.RetroBottomSheetBehavior">
+        app:layout_behavior="io.github.muntashirakon.music.RetroBottomSheetBehavior">
 
         <FrameLayout
             android:id="@+id/playerFragmentContainer"
@@ -35,14 +35,14 @@
 
         <fragment
             android:id="@+id/miniPlayerFragment"
-            android:name="code.name.monkey.retromusic.fragments.MiniPlayerFragment"
+            android:name="io.github.muntashirakon.music.fragments.MiniPlayerFragment"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             tools:layout="@layout/fragment_mini_player" />
 
     </FrameLayout>
 
-    <code.name.monkey.retromusic.views.BottomNavigationBarTinted
+    <io.github.muntashirakon.music.views.BottomNavigationBarTinted
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

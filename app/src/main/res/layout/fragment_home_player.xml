@@ -86,7 +86,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <code.name.monkey.retromusic.views.StatusBarView
+        <io.github.muntashirakon.music.views.StatusBarView
             android:id="@+id/status_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/status_bar_padding" />

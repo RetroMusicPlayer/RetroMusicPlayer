@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <code.name.monkey.retromusic.views.StatusBarView
+    <io.github.muntashirakon.music.views.StatusBarView
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -42,7 +42,7 @@
             android:layout_gravity="fill_vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <code.name.monkey.retromusic.views.LollipopFixedWebView
+            <io.github.muntashirakon.music.views.LollipopFixedWebView
                 android:id="@+id/license"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

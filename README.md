@@ -1,11 +1,6 @@
-# Retro Music Player 🎵
+# M
 
-[![Generic badge](https://img.shields.io/badge/Platform-Android-green.svg)](https://github.com/h4h13/RetroMusicPlayer)
-[![Generic badge](https://img.shields.io/badge/minSdkVersion-21-green.svg)](https://github.com/h4h13/RetroMusicPlayer)
-[![Generic badge](https://img.shields.io/badge/Download-Google_Play-green.svg)](https://play.google.com/store/apps/details?id=code.name.monkey.retromusic&hl=en_IN)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://github.com/h4h13/RetroMusicPlayer/blob/master/LICENSE.txt)
-![Twitter Follow](https://img.shields.io/twitter/follow/retromusicapp?style=social)
-## 🆕 Material Design music player for Android music lovers 
+Material Design music player for Android music lovers
 
 ## Screenshots
 ### App Themes
@@ -72,24 +67,7 @@ We are trying our best to bring you the best user experience. Until now
 it is a beta version - bug fixes (if any) and more features are on the
 way. for FAQ's https://goo.gl/DR2mE2
 
-In any case, you find or notice any Bugs/ Crashes please report them by
-sending us an [e-mail](mailto:monkeycode@gmail.com). We will respond or fix Bugs/ Crashes as soon as
-possible and if you have any Features/ Suggestions in mind please Follow
-below links to support
-
-### 🔗 Social links
-**Telegram:** https://t.me/retromusicapp  
-**Instagram:** https://instagram.com/retromusicapp  
-**Pinterest:** https://pinterest.com/retromusicapp/  
-**Twitter:** https://twitter.com/retromusicapp/
-
 ### 🗂️ License
 
-Retro Music Player is released under the GNU General Public License v3.0
+M is released under the GNU General Public License v3.0
 (GPLv3), which can be found here: [License](LICENSE.md)
-
-### ☝️ FAQ's
-Try the link [here](FAQ.md)
-
->Please note: Retro Music player is offline local mp3 player app. It
->doesn't support online music download or music streaming.

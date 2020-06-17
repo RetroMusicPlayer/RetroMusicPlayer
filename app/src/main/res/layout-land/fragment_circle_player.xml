@@ -55,7 +55,7 @@
         tools:layout_editor_absoluteY="24dp" />
 
 
-    <code.name.monkey.retromusic.views.SeekArc
+    <io.github.muntashirakon.music.views.SeekArc
         android:id="@+id/volumeSeekBar"
         android:layout_width="0dp"
         android:layout_height="0dp"
