@@ -39,14 +39,14 @@ public class LyricUtil {
     private static final String TAG = "LyricUtil";
 
     @Nullable
-    public static File writeLrcToLoc(@NonNull String title, @NonNull String artist, @NonNull String lrcContext) {
+    public static File writeLrcToLoc(@NonNull String artist, @NonNull String title, @NonNull String lrcContext) {
         FileWriter writer = null;
         try {
-            File file = new File(getLrcPath(title, artist));
+            File file = new File(getLrcPath(artist, title));
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
-            writer = new FileWriter(getLrcPath(title, artist));
+            writer = new FileWriter(getLrcPath(artist, title));
             writer.write(lrcContext);
             return file;
         } catch (IOException e) {
@@ -62,19 +62,19 @@ public class LyricUtil {
         }
     }
 
-    public static boolean deleteLrcFile(@NonNull String title, @NonNull String artist) {
-        File file = new File(getLrcPath(title, artist));
+    public static boolean deleteLrcFile(@NonNull String artist, @NonNull String title) {
+        File file = new File(getLrcPath(artist, title));
         return file.delete();
     }
 
-    public static boolean isLrcFileExist(@NonNull String title, @NonNull String artist) {
-        File file = new File(getLrcPath(title, artist));
+    public static boolean isLrcFileExist(@NonNull String artist, @NonNull String title) {
+        File file = new File(getLrcPath(artist, title));
         return file.exists();
     }
 
     @Nullable
-    public static File getLocalLyricFile(@NonNull String title, @NonNull String artist) {
-        File file = new File(getLrcPath(title, artist));
+    public static File getLocalLyricFile(@NonNull String artist, @NonNull String title) {
+        File file = new File(getLrcPath(artist, title));
         if (file.exists()) {
             return file;
         } else {
@@ -82,8 +82,8 @@ public class LyricUtil {
         }
     }
 
-    private static String getLrcPath(String title, String artist) {
-        return lrcRootPath + title + " - " + artist + ".lrc";
+    private static String getLrcPath(String artist, String title) {
+        return lrcRootPath + artist + " - " + title + ".lrc";
     }
 
     @NonNull
@@ -104,8 +104,8 @@ public class LyricUtil {
     }
 
     @NonNull
-    public static String getStringFromFile(@NonNull String title, @NonNull String artist) throws Exception {
-        File file = new File(getLrcPath(title, artist));
+    public static String getStringFromFile(@NonNull String artist, @NonNull String title) throws Exception {
+        File file = new File(getLrcPath(artist, title));
         FileInputStream fin = new FileInputStream(file);
         String ret = convertStreamToString(fin);
         fin.close();
