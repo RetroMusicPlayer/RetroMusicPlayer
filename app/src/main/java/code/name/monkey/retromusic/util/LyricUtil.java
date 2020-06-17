@@ -83,7 +83,7 @@ public class LyricUtil {
     }
 
     private static String getLrcPath(String title, String artist) {
-        return lrcRootPath + title + " - " + artist + ".lrc";
+        return lrcRootPath + artist + " - " + title + ".lrc";
     }
 
     @NonNull
