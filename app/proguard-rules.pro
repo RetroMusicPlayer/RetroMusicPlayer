@@ -60,7 +60,7 @@
 #-keep class org.jaudiotagger.** { *; }
 
 #For cast
--keep class code.name.monkey.retromusic.cast.CastOptionsProvider { *; }
+-keep class io.github.muntashirakon.music.cast.CastOptionsProvider { *; }
 -keep class android.support.** { *; }
 -keep class com.google.** { *; }
 -keep class java.nio.file.** { *; }

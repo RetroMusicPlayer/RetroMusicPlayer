@@ -98,7 +98,7 @@ public class MusicService extends Service implements
         SharedPreferences.OnSharedPreferenceChangeListener, Playback.PlaybackCallbacks {
 
     public static final String TAG = MusicService.class.getSimpleName();
-    public static final String RETRO_MUSIC_PACKAGE_NAME = "code.name.monkey.retromusic";
+    public static final String RETRO_MUSIC_PACKAGE_NAME = "io.github.muntashirakon.music";
     public static final String MUSIC_PACKAGE_NAME = "com.android.music";
     public static final String ACTION_TOGGLE_PAUSE = RETRO_MUSIC_PACKAGE_NAME + ".togglepause";
     public static final String ACTION_PLAY = RETRO_MUSIC_PACKAGE_NAME + ".play";
@@ -392,7 +392,7 @@ public class MusicService extends Service implements
 
         restoreState();
 
-        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_CREATED"));
+        sendBroadcast(new Intent(RETRO_MUSIC_PACKAGE_NAME + ".RETRO_MUSIC_SERVICE_CREATED"));
 
         registerHeadsetEvents();
         registerBluetoothConnected();
@@ -421,7 +421,7 @@ public class MusicService extends Service implements
         PreferenceUtil.INSTANCE.unregisterOnSharedPreferenceChangedListener(this);
         wakeLock.release();
 
-        sendBroadcast(new Intent("code.name.monkey.retromusic.RETRO_MUSIC_SERVICE_DESTROYED"));
+        sendBroadcast(new Intent(RETRO_MUSIC_PACKAGE_NAME + ".RETRO_MUSIC_SERVICE_DESTROYED"));
     }
 
     public void acquireWakeLock(long milli) {
@@ -1053,17 +1053,15 @@ public class MusicService extends Service implements
 
         final Song song = getCurrentSong();
 
-        if (song != null) {
-            intent.putExtra("id", song.getId());
-            intent.putExtra("artist", song.getArtistName());
-            intent.putExtra("album", song.getAlbumName());
-            intent.putExtra("track", song.getTitle());
-            intent.putExtra("duration", song.getDuration());
-            intent.putExtra("position", (long) getSongProgressMillis());
-            intent.putExtra("playing", isPlaying());
-            intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME);
-            sendStickyBroadcast(intent);
-        }
+        intent.putExtra("id", song.getId());
+        intent.putExtra("artist", song.getArtistName());
+        intent.putExtra("album", song.getAlbumName());
+        intent.putExtra("track", song.getTitle());
+        intent.putExtra("duration", song.getDuration());
+        intent.putExtra("position", (long) getSongProgressMillis());
+        intent.putExtra("playing", isPlaying());
+        intent.putExtra("scrobbling_source", RETRO_MUSIC_PACKAGE_NAME);
+        sendStickyBroadcast(intent);
     }
 
     public void toggleShuffle() {
@@ -1350,7 +1348,7 @@ public class MusicService extends Service implements
                 0);
 
         mediaSession = new MediaSessionCompat(this,
-                "RetroMusicPlayer",
+                "M",
                 mediaButtonReceiverComponentName,
                 mediaButtonReceiverPendingIntent);
         MediaSessionCallback mediasessionCallback = new MediaSessionCallback(

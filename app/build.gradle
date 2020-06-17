@@ -24,7 +24,7 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'io.github.muntashirakon.Music'
-        versionCode 440
+        versionCode 441
         versionName '3.5.8'
 
         multiDexEnabled true
