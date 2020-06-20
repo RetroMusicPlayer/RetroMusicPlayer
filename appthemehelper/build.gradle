@@ -28,7 +28,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.2.0-alpha05'
-    implementation 'androidx.preference:preference:1.1.0'
+    implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Used for the list preference classes
     def material_dialog_version = "0.9.6.0"
