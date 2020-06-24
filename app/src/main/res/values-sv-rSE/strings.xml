@@ -16,7 +16,7 @@
     <string name="action_go_to_album">Gå till album</string>
     <string name="action_go_to_artist">Gå till artisten</string>
     <string name="action_go_to_genre">Gå till genren</string>
-    <string name="action_go_to_start_directory">Gå till startsökväg</string>
+    <string name="action_go_to_start_directory">Gå till startmapp</string>
     <string name="action_grant">Godkänn</string>
     <string name="action_grid_size">Rutnätsstorlek</string>
     <string name="action_grid_size_land">Rutnätsstorlek (land)</string>
@@ -36,7 +36,7 @@
     <string name="action_search">Sök</string>
     <string name="action_set">Start</string>
     <string name="action_set_as_ringtone">Använd som ringsignal</string>
-    <string name="action_set_as_start_directory">Ställ in som startsökväg</string>
+    <string name="action_set_as_start_directory">Ställ in som startmapp</string>
     <string name="action_settings">"Inställningar"</string>
     <string name="action_share">Dela</string>
     <string name="action_shuffle_all">Shuffle alla</string>
@@ -120,7 +120,7 @@
     <string name="color_theme_name">Färg</string>
     <string name="colors">Färger</string>
     <string name="composer">Kompositör</string>
-    <string name="copied_device_info_to_clipboard">Kopierad enhetsinfo till urklipp.</string>
+    <string name="copied_device_info_to_clipboard">Kopierade enhetsinfo till urklipp.</string>
     <string name="could_not_create_playlist">Det gick inte att skapa spellista.</string>
     <string name="could_not_download_album_cover">"Kunde inte ladda ner ett matchande albumomslag."</string>
     <string name="could_not_restore_purchase">Det gick inte att återställa köpet.</string>
@@ -225,7 +225,7 @@
     <string name="new_banner_photo">Ny bannerbild</string>
     <string name="new_playlist_title">Ny spellista</string>
     <string name="new_profile_photo">Ny profilbild</string>
-    <string name="new_start_directory">%s är den nya startsökvägen.</string>
+    <string name="new_start_directory">%s är den nya startmappen.</string>
     <string name="next_song">Nästa låt</string>
     <string name="no_albums">Du har inga album</string>
     <string name="no_artists">Du har inga artister</string>
@@ -264,9 +264,9 @@
     <string name="pick_from_local_storage">Välj från lokal lagring</string>
     <string name="pick_image_intent_text">Välj bild</string>
     <string name="pinterest_page">Pinterest</string>
-    <string name="pinterest_page_summary">Följ Pinterest-sidan för lite designinspiration till Retro Music</string>
+    <string name="pinterest_page_summary">Följ vår Pinterestsida för lite designinspiration till Retro Music</string>
     <string name="plain">Enkel</string>
-    <string name="playing_notification_description">Notisen ger åtgärder för play/pause etc.</string>
+    <string name="playing_notification_description">Notisen har knappar för play/pause etc.</string>
     <string name="playing_notification_name">Notis</string>
     <string name="playlist_empty_text">Tom spellista</string>
     <string name="playlist_is_empty">Spellistan är tom</string>
@@ -276,7 +276,7 @@
     <string name="pref_blur_amount_summary">Mängden oskärpa som används för suddiga teman, lägre är snabbare</string>
     <string name="pref_blur_amount_title">Oskärpa</string>
     <string name="pref_dialog_corner_summary">Justera rundheten på den nedre dialogrutans hörn</string>
-    <string name="pref_dialog_corner_title">Dialogrutehörn</string>
+    <string name="pref_dialog_corner_title">Hörn på dialogruta </string>
     <string name="pref_filter_song_summary">Filtrera låtar efter dess längd</string>
     <string name="pref_filter_song_title">Filtrera låtlängd</string>
     <string name="pref_header_advanced">Avancerad</string>
@@ -289,7 +289,7 @@
     <string name="pref_header_library">Bibliotek</string>
     <string name="pref_header_lockscreen">Låsskärm</string>
     <string name="pref_header_playlists">Spellistor</string>
-    <string name="pref_keep_pause_on_zero_volume_summary">Pausar låten när volymen minskar till noll och börjar spela upp när volymen stiger igen. Fungerar även utanför appen</string>
+    <string name="pref_keep_pause_on_zero_volume_summary">Pausar låten när volymen sänks till noll och börjar spela igen när volymen höjs. Fungerar även utanför appen</string>
     <string name="pref_keep_pause_on_zero_volume_title">Pausa på noll</string>
     <string name="pref_keep_screen_on_summary">Tänk på att aktivering av den här funktionen kan påverka batteritiden</string>
     <string name="pref_keep_screen_on_title">Håll skärmen på</string>
@@ -308,7 +308,7 @@
     <string name="pref_summary_colored_navigation_bar">Färgar navigeringsfältet i primärfärgen</string>
     <string name="pref_summary_colored_notification">"Färgar notisen i albumomslagets framträdande färg"</string>
     <string name="pref_summary_desaturated_color">I enlighet med riktlinjer för Material Design ska färger desatureras i mörkt läge</string>
-    <string name="pref_summary_dominant_color">Den mest dominerande färgen väljs från artist eller albumomslag</string>
+    <string name="pref_summary_dominant_color">Den dominantaste färgen väljs från artist eller albumomslag</string>
     <string name="pref_summary_extra_controls">Lägg till extra kontroller för minispelaren</string>
     <string name="pref_summary_extra_song_info">Visa extra låtinformation, till exempel filformat, bitrate och frekvens</string>
     <string name="pref_summary_gapless_playback">"Kan orsaka uppspelningsproblem på vissa enheter."</string>
