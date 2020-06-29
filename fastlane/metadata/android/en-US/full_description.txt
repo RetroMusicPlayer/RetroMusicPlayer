@@ -1,1 +1,15 @@
-M is a fork of Retro Music Player with Google Play API removed and all pro features unlocked.
+<i>M</i> is a fork of <a href="https://apt.izzysoft.de/fdroid/index/apk/code.name.monkey.retromusic">Retro Music</a> with Google Play API removed and all pro features unlocked.
+
+<b>Features:</b>
+<ul>
+    <li>Local playback only (based on the MediaStore)</li>
+    <li>Sleep timer</li>
+    <li>Folder browser</li>
+    <li>Home screen widgets</li>
+    <li>Themes (Just Black, Kinda Dark, Clearly White)</li>
+    <li>Now playing themes</li>
+    <li>Volume controls</li>
+    <li>Blacklist</li>
+    <li>Album artist support</li>
+    <li>Auto-download artist images from Last.fm</li>
+</ul>

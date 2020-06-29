@@ -11,9 +11,8 @@
         <item>code_name_monkey_donate_8</item>
     </string-array>
 
-    <string name="app_name" translatable="false">M</string>
+    <string name="app_name" translatable="false">Metro</string>
     <string name="git_hub" translatable="false">GitHub</string>
-
 
     <string name="app_shortcut_last_added_long" translatable="false">@string/last_added</string>
     <string name="app_shortcut_last_added_short" translatable="false">@string/last_added</string>

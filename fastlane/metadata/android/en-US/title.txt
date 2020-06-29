@@ -1,1 +1,1 @@
-M - A music player for Android
+Metro - A music player for Android

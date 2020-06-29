@@ -14,7 +14,7 @@ proguardDictionaries {
 
 android {
     compileSdkVersion 29
-    buildToolsVersion = '30.0.0 rc4'
+    buildToolsVersion = '30.0.0'
 
     defaultConfig {
         minSdkVersion 21
@@ -24,8 +24,8 @@ android {
         vectorDrawables.useSupportLibrary = true
 
         applicationId 'io.github.muntashirakon.Music'
-        versionCode 441
-        versionName '3.5.8'
+        versionCode 10442
+        versionName '3.5.9'
 
         multiDexEnabled true
     }
@@ -46,8 +46,6 @@ android {
 
     productFlavors {
         normal {
-            versionCode defaultConfig.versionCode + 10000
-            versionName defaultConfig.versionName + "_" + getDate()
             dimension "default"
         }
     }
@@ -79,23 +77,6 @@ android {
     kapt {
         generateStubs = true
     }
-}
-
-def getProperties(String fileName) {
-    final Properties properties = new Properties()
-    def file = file(fileName)
-    if (file.exists()) {
-        file.withInputStream { stream -> properties.load(stream) }
-    }
-    return properties
-}
-
-static def getProperty(Properties properties, String name) {
-    return properties.getProperty(name) ?: "$name missing"
-}
-
-static def getDate() {
-    new Date().format('MMdd')
 }
 
 
