@@ -38,8 +38,10 @@ class AlbumDetailsViewModel(
     }
 
     fun loadAlbumInfo(album: Album) = viewModelScope.launch(Dispatchers.IO) {
-        val lastFmAlbum = _repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
-        _lastFmAlbum.postValue(lastFmAlbum)
+        try {
+            val lastFmAlbum = _repository.albumInfo(album.artistName ?: "-", album.title ?: "-")
+            _lastFmAlbum.postValue(lastFmAlbum)
+        } catch (ignored: Exception) {}
     }
 
     fun loadArtist(artistId: Int) = viewModelScope.launch(Dispatchers.IO) {
