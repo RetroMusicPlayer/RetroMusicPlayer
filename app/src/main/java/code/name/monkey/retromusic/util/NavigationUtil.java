@@ -29,8 +29,6 @@ import org.jetbrains.annotations.NotNull;
 
 import code.name.monkey.retromusic.R;
 import code.name.monkey.retromusic.activities.AboutActivity;
-import code.name.monkey.retromusic.activities.albums.AlbumDetailsActivity;
-import code.name.monkey.retromusic.activities.artists.ArtistDetailActivity;
 import code.name.monkey.retromusic.activities.DriveModeActivity;
 import code.name.monkey.retromusic.activities.GenreDetailsActivity;
 import code.name.monkey.retromusic.activities.LicenseActivity;
@@ -43,6 +41,8 @@ import code.name.monkey.retromusic.activities.SettingsActivity;
 import code.name.monkey.retromusic.activities.SupportDevelopmentActivity;
 import code.name.monkey.retromusic.activities.UserInfoActivity;
 import code.name.monkey.retromusic.activities.WhatsNewActivity;
+import code.name.monkey.retromusic.activities.albums.AlbumDetailsActivity;
+import code.name.monkey.retromusic.activities.artists.ArtistDetailActivity;
 import code.name.monkey.retromusic.activities.bugreport.BugReportActivity;
 import code.name.monkey.retromusic.helper.MusicPlayerRemote;
 import code.name.monkey.retromusic.model.Genre;

@@ -201,7 +201,7 @@ class SkuDetailsAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
         val skuDetails = skuDetailsList[i]
-        viewHolder.title.text = skuDetails.title.replace("(Retro Music Player \uD83C\uDFB5)", "")
+        viewHolder.title.text = skuDetails.title.replace("Music Player - MP3 Player - Retro", "")
             .trim { it <= ' ' }
         viewHolder.text.text = skuDetails.description
         viewHolder.text.visibility = View.GONE

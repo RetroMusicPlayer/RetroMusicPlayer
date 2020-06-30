@@ -96,7 +96,10 @@ object PreferenceUtil {
     val languageCode get() = sharedPreferences.getString(LANGUAGE_NAME, "auto")
 
     var userName
-        get() = sharedPreferences.getString(USER_NAME, "User Name")
+        get() = sharedPreferences.getString(
+            USER_NAME,
+            App.getContext().getString(R.string.user_name)
+        )
         set(value) = sharedPreferences.edit {
             putString(USER_NAME, value)
         }
@@ -420,7 +423,7 @@ object PreferenceUtil {
     var songGridSize
         get() = sharedPreferences.getInt(
             SONG_GRID_SIZE,
-            App.getContext().getIntRes(R.integer.default_grid_columns)
+            App.getContext().getIntRes(R.integer.default_list_columns)
         )
         set(value) = sharedPreferences.edit {
             putInt(SONG_GRID_SIZE, value)

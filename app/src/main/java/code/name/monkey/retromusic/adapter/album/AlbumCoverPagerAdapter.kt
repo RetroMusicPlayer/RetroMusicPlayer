@@ -14,11 +14,16 @@ import code.name.monkey.retromusic.glide.RetroMusicColoredTarget
 import code.name.monkey.retromusic.glide.SongGlideRequest
 import code.name.monkey.retromusic.misc.CustomFragmentStatePagerAdapter
 import code.name.monkey.retromusic.model.Song
+import code.name.monkey.retromusic.util.MusicUtil
 import code.name.monkey.retromusic.util.NavigationUtil
-
 import code.name.monkey.retromusic.util.PreferenceUtil
 import code.name.monkey.retromusic.util.color.MediaNotificationProcessor
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumCoverPagerAdapter(
     fragmentManager: FragmentManager,
@@ -85,20 +90,33 @@ class AlbumCoverPagerAdapter(
             val view = inflater.inflate(getLayoutWithPlayerTheme(), container, false)
             albumCover = view.findViewById(R.id.player_image)
             albumCover.setOnClickListener {
-                NavigationUtil.goToLyrics(requireActivity())
+                showLyricsDialog()
             }
             return view
         }
 
+        private fun showLyricsDialog() {
+            GlobalScope.launch(Dispatchers.IO) {
+                val data = MusicUtil.getLyrics(song)
+                withContext(Dispatchers.Main) {
+                    MaterialAlertDialogBuilder(
+                        requireContext(),
+                        R.style.ThemeOverlay_MaterialComponents_Dialog_Alert
+                    ).apply {
+                        setTitle(song.title)
+                        setMessage(data)
+                        setNegativeButton(R.string.synced_lyrics) { _, _ ->
+                            NavigationUtil.goToLyrics(requireActivity())
+                        }
+                        show()
+                    }
+                }
+            }
+        }
+
         private fun getLayoutWithPlayerTheme(): Int {
             return when (PreferenceUtil.nowPlayingScreen) {
-                Card,
-                Fit,
-                Tiny,
-                Classic,
-                Peak,
-                Gradient,
-                Full -> R.layout.fragment_album_full_cover
+                Card, Fit, Tiny, Classic, Peak, Gradient, Full -> R.layout.fragment_album_full_cover
                 else -> {
                     if (PreferenceUtil.isCarouselEffect) {
                         R.layout.fragment_album_carousel_cover
