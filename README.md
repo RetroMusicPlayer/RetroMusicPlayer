@@ -69,5 +69,5 @@ way. for FAQ's https://goo.gl/DR2mE2
 
 ### 🗂️ License
 
-M is released under the GNU General Public License v3.0
+Metro is released under the GNU General Public License v3.0
 (GPLv3), which can be found here: [License](LICENSE.md)
