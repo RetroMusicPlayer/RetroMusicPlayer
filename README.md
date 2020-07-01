@@ -2,6 +2,11 @@
 
 Material Design music player for Android music lovers
 
+## Differences between RetroMusicPlayer and Metro
+- Google Play libraries removed (in favor for F-Droid)
+- Pro features for free
+- Bug fixes
+
 ## Screenshots
 ### App Themes
 | <img src="screenshots/home.jpeg" width="200"/> | <img src="screenshots/home_dark.jpeg" width="200"/> | <img src="screenshots/home_black.jpeg" width="200"/> |
