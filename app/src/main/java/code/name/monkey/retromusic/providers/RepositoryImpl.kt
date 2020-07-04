@@ -23,9 +23,8 @@ import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFmClient
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
 import code.name.monkey.retromusic.rest.model.LastFmArtist
-import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val context: Context) : Repository {
+class RepositoryImpl constructor(private val context: Context) : Repository {
 
     override suspend fun allAlbums(): List<Album> = AlbumLoader.getAllAlbums(context)
 

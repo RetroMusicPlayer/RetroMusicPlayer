@@ -38,7 +38,7 @@ interface GenreDetailsView : BaseView {
 interface GenreDetailsPresenter : Presenter<GenreDetailsView> {
     fun loadGenreSongs(genreId: Int)
 
-    class GenreDetailsPresenterImpl @Inject constructor(
+    class GenreDetailsPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<GenreDetailsView>(), GenreDetailsPresenter, CoroutineScope {
 

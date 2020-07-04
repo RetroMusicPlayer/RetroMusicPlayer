@@ -12,6 +12,7 @@ import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.MaterialUtil
 import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.BuildConfig
+import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsBaseActivity
 import com.anjlab.android.iab.v3.BillingProcessor
@@ -49,7 +50,7 @@ class PurchaseActivity : AbsBaseActivity(), BillingProcessor.IBillingHandler {
 
         }
         purchaseButton.setOnClickListener {
-            billingProcessor.purchase(this@PurchaseActivity, App.PRO_VERSION_PRODUCT_ID)
+            billingProcessor.purchase(this@PurchaseActivity, PRO_VERSION_PRODUCT_ID)
         }
         bannerContainer.backgroundTintList =
             ColorStateList.valueOf(ThemeStore.accentColor(this))

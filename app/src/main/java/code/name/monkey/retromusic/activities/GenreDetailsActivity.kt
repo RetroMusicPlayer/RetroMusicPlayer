@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
@@ -18,13 +17,14 @@ import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Genre
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter
+import code.name.monkey.retromusic.mvp.presenter.GenreDetailsPresenter.GenreDetailsPresenterImpl
 import code.name.monkey.retromusic.mvp.presenter.GenreDetailsView
+import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
 import com.afollestad.materialcab.MaterialCab
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
 import java.util.*
-import javax.inject.Inject
 
 /**
  * @author Hemanth S (h4h13).
@@ -32,9 +32,8 @@ import javax.inject.Inject
 
 class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDetailsView {
 
-    @Inject
-    lateinit var genreDetailsPresenter: GenreDetailsPresenter
 
+    private lateinit var genreDetailsPresenter: GenreDetailsPresenter
     private lateinit var genre: Genre
     private lateinit var songAdapter: ShuffleButtonSongAdapter
     private var cab: MaterialCab? = null
@@ -71,7 +70,8 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setUpToolBar()
         setupRecyclerView()
 
-        App.musicComponent.inject(this)
+        genreDetailsPresenter =
+            GenreDetailsPresenterImpl(RepositoryImpl(this))
         genreDetailsPresenter.attachView(this)
     }
 

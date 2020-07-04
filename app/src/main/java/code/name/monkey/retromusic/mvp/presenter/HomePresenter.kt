@@ -30,7 +30,7 @@ interface HomeView : BaseView {
 interface HomePresenter : Presenter<HomeView> {
     fun loadSections()
 
-    class HomePresenterImpl @Inject constructor(
+    class HomePresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<HomeView>(), HomePresenter, CoroutineScope {
 

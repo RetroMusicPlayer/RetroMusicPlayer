@@ -38,7 +38,7 @@ interface PlaylistSongsView : BaseView {
 interface PlaylistSongsPresenter : Presenter<PlaylistSongsView> {
     fun loadPlaylistSongs(playlist: Playlist)
 
-    class PlaylistSongsPresenterImpl @Inject constructor(
+    class PlaylistSongsPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<PlaylistSongsView>(), PlaylistSongsPresenter, CoroutineScope {
 

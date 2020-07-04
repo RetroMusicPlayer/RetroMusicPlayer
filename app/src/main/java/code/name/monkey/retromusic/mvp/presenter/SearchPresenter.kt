@@ -35,7 +35,7 @@ interface SearchPresenter : Presenter<SearchView> {
 
     fun search(query: String?)
 
-    class SearchPresenterImpl @Inject constructor(
+    class SearchPresenterImpl constructor(
         private val repository: Repository
     ) : PresenterImpl<SearchView>(), SearchPresenter, CoroutineScope {
 

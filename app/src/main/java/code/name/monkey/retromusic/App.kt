@@ -18,10 +18,8 @@ import android.widget.Toast
 import androidx.multidex.MultiDexApplication
 import code.name.monkey.appthemehelper.ThemeStore
 import code.name.monkey.appthemehelper.util.VersionUtils
+import code.name.monkey.retromusic.Constants.PRO_VERSION_PRODUCT_ID
 import code.name.monkey.retromusic.appshortcuts.DynamicShortcutManager
-import code.name.monkey.retromusic.dagger.DaggerMusicComponent
-import code.name.monkey.retromusic.dagger.MusicComponent
-import code.name.monkey.retromusic.dagger.module.AppModule
 import com.anjlab.android.iab.v3.BillingProcessor
 import com.anjlab.android.iab.v3.TransactionDetails
 
@@ -32,7 +30,6 @@ class App : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        musicComponent = initDagger(this)
 
         // default theme
         if (!ThemeStore.isConfigured(this, 3)) {
@@ -64,11 +61,6 @@ class App : MultiDexApplication() {
             })
     }
 
-    private fun initDagger(app: App): MusicComponent =
-        DaggerMusicComponent.builder()
-            .appModule(AppModule(app))
-            .build()
-
     override fun onTerminate() {
         super.onTerminate()
         billingProcessor.release()
@@ -86,9 +78,5 @@ class App : MultiDexApplication() {
                 PRO_VERSION_PRODUCT_ID
             )
         }
-
-        lateinit var musicComponent: MusicComponent
-
-        const val PRO_VERSION_PRODUCT_ID = "pro_version"
     }
 }

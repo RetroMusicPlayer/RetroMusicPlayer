@@ -7,7 +7,6 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import code.name.monkey.appthemehelper.util.ATHUtil
-import code.name.monkey.retromusic.App
 import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
@@ -21,7 +20,9 @@ import code.name.monkey.retromusic.model.AbsCustomPlaylist
 import code.name.monkey.retromusic.model.Playlist
 import code.name.monkey.retromusic.model.Song
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter
+import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsPresenter.PlaylistSongsPresenterImpl
 import code.name.monkey.retromusic.mvp.presenter.PlaylistSongsView
+import code.name.monkey.retromusic.providers.RepositoryImpl
 import code.name.monkey.retromusic.util.DensityUtil
 import code.name.monkey.retromusic.util.PlaylistsUtil
 import code.name.monkey.retromusic.util.RetroColorUtil
@@ -30,13 +31,11 @@ import com.h6ah4i.android.widget.advrecyclerview.animator.RefactoredDefaultItemA
 import com.h6ah4i.android.widget.advrecyclerview.draggable.RecyclerViewDragDropManager
 import com.h6ah4i.android.widget.advrecyclerview.utils.WrapperAdapterUtils
 import kotlinx.android.synthetic.main.activity_playlist_detail.*
-import javax.inject.Inject
 
 class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, PlaylistSongsView {
 
-    @Inject
-    lateinit var playlistSongsPresenter: PlaylistSongsPresenter
 
+    private lateinit var presenter: PlaylistSongsPresenter
     private lateinit var playlist: Playlist
     private var cab: MaterialCab? = null
     private lateinit var adapter: SongAdapter
@@ -52,8 +51,8 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
 
-        App.musicComponent.inject(this)
-        playlistSongsPresenter.attachView(this)
+        presenter = PlaylistSongsPresenterImpl(RepositoryImpl(this))
+        presenter.attachView(this)
 
         if (intent.extras != null) {
             playlist = intent.extras!!.getParcelable(EXTRA_PLAYLIST)!!
@@ -114,7 +113,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
 
     override fun onResume() {
         super.onResume()
-        playlistSongsPresenter.loadPlaylistSongs(playlist)
+        presenter.loadPlaylistSongs(playlist)
     }
 
     private fun setUpToolBar() {
@@ -181,7 +180,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
                 setToolbarTitle(playlist.name)
             }
         }
-        playlistSongsPresenter.loadPlaylistSongs(playlist)
+        presenter.loadPlaylistSongs(playlist)
     }
 
     private fun setToolbarTitle(title: String) {
@@ -227,7 +226,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
             wrappedAdapter = null
         }
         super.onDestroy()
-        playlistSongsPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun showEmptyView() {
