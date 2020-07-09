@@ -19,7 +19,7 @@ import code.name.monkey.retromusic.mvp.Presenter
 import code.name.monkey.retromusic.mvp.PresenterImpl
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import kotlinx.coroutines.*
-import javax.inject.Inject
+
 import kotlin.coroutines.CoroutineContext
 
 /**
