@@ -13,6 +13,7 @@ import code.name.monkey.retromusic.adapter.song.OrderablePlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.PlaylistSongAdapter
 import code.name.monkey.retromusic.adapter.song.SongAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.helper.menu.PlaylistMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.loaders.PlaylistLoader
@@ -54,11 +55,7 @@ class PlaylistDetailActivity : AbsSlidingMusicPanelActivity(), CabHolder, Playli
         presenter = PlaylistSongsPresenterImpl(RepositoryImpl(this))
         presenter.attachView(this)
 
-        if (intent.extras != null) {
-            playlist = intent.extras!!.getParcelable(EXTRA_PLAYLIST)!!
-        } else {
-            finish()
-        }
+        playlist = extraNotNull<Playlist>(EXTRA_PLAYLIST).value
 
         setUpToolBar()
         setUpRecyclerView()

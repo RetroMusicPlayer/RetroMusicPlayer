@@ -12,6 +12,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.activities.base.AbsSlidingMusicPanelActivity
 import code.name.monkey.retromusic.adapter.song.ShuffleButtonSongAdapter
 import code.name.monkey.retromusic.extensions.applyToolbar
+import code.name.monkey.retromusic.extensions.extraNotNull
 import code.name.monkey.retromusic.helper.menu.GenreMenuHelper
 import code.name.monkey.retromusic.interfaces.CabHolder
 import code.name.monkey.retromusic.model.Genre
@@ -61,11 +62,8 @@ class GenreDetailsActivity : AbsSlidingMusicPanelActivity(), CabHolder, GenreDet
         setTaskDescriptionColorAuto()
         setLightNavigationBar(true)
         setBottomBarVisibility(View.GONE)
-        if (intent.extras != null) {
-            genre = intent?.extras?.getParcelable(EXTRA_GENRE_ID)!!
-        } else {
-            finish()
-        }
+
+        genre = extraNotNull<Genre>(EXTRA_GENRE_ID).value
 
         setUpToolBar()
         setupRecyclerView()
