@@ -133,7 +133,7 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.3.0-alpha01'
 
-    def retrofit_version = '2.8.1'
+    def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
@@ -176,7 +176,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    implementation 'com.google.android.play:core:1.7.2'
+    implementation 'com.google.android.play:core:1.7.3'
     implementation 'me.jorgecastillo:androidcolorx:0.2.0'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
     implementation 'com.github.dhaval2404:imagepicker:1.7.1'

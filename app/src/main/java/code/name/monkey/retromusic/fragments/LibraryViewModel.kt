@@ -55,7 +55,8 @@ class LibraryViewModel(application: Application) :
             _repository.topAlbums(),
             _repository.recentArtists(),
             _repository.recentAlbums(),
-            _repository.favoritePlaylist()
+            _repository.favoritePlaylist(),
+            _repository.suggestions()
         )
         for (r in result) {
             if (r != null) {

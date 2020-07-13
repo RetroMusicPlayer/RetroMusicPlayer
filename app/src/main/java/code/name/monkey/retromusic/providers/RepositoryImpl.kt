@@ -19,6 +19,7 @@ import code.name.monkey.retromusic.R
 import code.name.monkey.retromusic.adapter.HomeAdapter
 import code.name.monkey.retromusic.loaders.*
 import code.name.monkey.retromusic.model.*
+import code.name.monkey.retromusic.model.smartplaylist.NotRecentlyPlayedPlaylist
 import code.name.monkey.retromusic.providers.interfaces.Repository
 import code.name.monkey.retromusic.rest.LastFmClient
 import code.name.monkey.retromusic.rest.model.LastFmAlbum
@@ -41,6 +42,18 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
     override suspend fun artistById(artistId: Int): Artist =
         ArtistLoader.getArtist(context, artistId)
 
+    override suspend fun suggestions(): Home? {
+        val songs = NotRecentlyPlayedPlaylist(context).getSongs(context).shuffled().subList(0, 9)
+        if (songs.isNotEmpty()) {
+            return Home(
+                songs,
+                HomeAdapter.SUGGESTIONS,
+                R.drawable.ic_audiotrack_white_24dp
+            )
+        }
+        return null
+    }
+
     override suspend fun search(query: String?): MutableList<Any> =
         SearchLoader.searchAll(context, query)
 
@@ -58,8 +71,6 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
     override suspend fun recentArtists(): Home? {
         val artists = LastAddedSongsLoader.getLastAddedArtists(context)
         return if (artists.isNotEmpty()) Home(
-            0,
-            R.string.recent_artists,
             artists,
             HomeAdapter.RECENT_ARTISTS,
             R.drawable.ic_artist_white_24dp
@@ -68,56 +79,40 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
 
     override suspend fun recentAlbums(): Home? {
         val albums = LastAddedSongsLoader.getLastAddedAlbums(context)
-        return if (albums.isNotEmpty()) {
-            Home(
-                1,
-                R.string.recent_albums,
-                albums,
-                HomeAdapter.RECENT_ALBUMS,
-                R.drawable.ic_album_white_24dp
-            )
-        } else null
+        return if (albums.isNotEmpty()) Home(
+            albums,
+            HomeAdapter.RECENT_ALBUMS,
+            R.drawable.ic_album_white_24dp
+        ) else null
     }
 
     override suspend fun topAlbums(): Home? {
         val albums = TopAndRecentlyPlayedTracksLoader.getTopAlbums(context)
-        return if (albums.isNotEmpty()) {
-            Home(
-                3,
-                R.string.top_albums,
-                albums,
-                HomeAdapter.TOP_ALBUMS,
-                R.drawable.ic_album_white_24dp
-            )
-        } else null
+        return if (albums.isNotEmpty()) Home(
+            albums,
+            HomeAdapter.TOP_ALBUMS,
+            R.drawable.ic_album_white_24dp
+        ) else null
     }
 
     override suspend fun topArtists(): Home? {
 
         val artists = TopAndRecentlyPlayedTracksLoader.getTopArtists(context)
-        return if (artists.isNotEmpty()) {
-            Home(
-                2,
-                R.string.top_artists,
-                artists,
-                HomeAdapter.TOP_ARTISTS,
-                R.drawable.ic_artist_white_24dp
-            )
-        } else null
+        return if (artists.isNotEmpty()) Home(
+            artists,
+            HomeAdapter.TOP_ARTISTS,
+            R.drawable.ic_artist_white_24dp
+        ) else null
 
     }
 
     override suspend fun favoritePlaylist(): Home? {
         val playlists = PlaylistLoader.getFavoritePlaylist(context)
-        return if (playlists.isNotEmpty()) {
-            Home(
-                4,
-                R.string.favorites,
-                playlists,
-                HomeAdapter.PLAYLISTS,
-                R.drawable.ic_favorite_white_24dp
-            )
-        } else null
+        return if (playlists.isNotEmpty()) Home(
+            playlists,
+            HomeAdapter.PLAYLISTS,
+            R.drawable.ic_favorite_white_24dp
+        ) else null
     }
 
     override suspend fun artistInfo(

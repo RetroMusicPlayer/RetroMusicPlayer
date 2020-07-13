@@ -1,5 +1,6 @@
 package code.name.monkey.retromusic.util
 
+import android.content.Context
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
@@ -22,6 +23,7 @@ import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 import com.google.gson.reflect.TypeToken
 import java.io.File
+
 
 object PreferenceUtil {
     private val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(App.getContext())
@@ -536,6 +538,44 @@ object PreferenceUtil {
                 FileUtil.safeGetCanonicalPath(value)
             )
         }
+
+    fun getRecentlyPlayedCutoffTimeMillis(): Long {
+        return getCutoffTimeMillis(RECENTLY_PLAYED_CUTOFF)
+    }
+
+    fun getRecentlyPlayedCutoffText(context: Context): String? {
+        return getCutoffText(RECENTLY_PLAYED_CUTOFF, context)
+    }
+
+    private fun getCutoffText(
+        cutoff: String,
+        context: Context
+    ): String? {
+        return when (sharedPreferences.getString(cutoff, "")) {
+            "today" -> context.getString(R.string.today)
+            "this_week" -> context.getString(R.string.this_week)
+            "past_seven_days" -> context.getString(R.string.past_seven_days)
+            "past_three_months" -> context.getString(R.string.past_three_months)
+            "this_year" -> context.getString(R.string.this_year)
+            "this_month" -> context.getString(R.string.this_month)
+            else -> context.getString(R.string.this_month)
+        }
+    }
+
+    private fun getCutoffTimeMillis(cutoff: String): Long {
+        val calendarUtil = CalendarUtil()
+        val interval: Long
+        interval = when (sharedPreferences.getString(cutoff, "")) {
+            "today" -> calendarUtil.elapsedToday
+            "this_week" -> calendarUtil.elapsedWeek
+            "past_seven_days" -> calendarUtil.getElapsedDays(7)
+            "past_three_months" -> calendarUtil.getElapsedMonths(3)
+            "this_year" -> calendarUtil.elapsedYear
+            "this_month" -> calendarUtil.elapsedMonth
+            else -> calendarUtil.elapsedMonth
+        }
+        return System.currentTimeMillis() - interval
+    }
 
     val lastAddedCutoff: Long
         get() {

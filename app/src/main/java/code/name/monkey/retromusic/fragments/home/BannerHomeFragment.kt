@@ -55,13 +55,6 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
         )
     }
 
-    private fun loadImageFromStorage() {
-        UserProfileGlideRequest.Builder.from(
-            Glide.with(requireActivity()),
-            UserProfileGlideRequest.getUserModel()
-        ).build().into(userImage)
-    }
-
     private val displayMetrics: DisplayMetrics
         get() {
             val display = mainActivity.windowManager.defaultDisplay
@@ -111,8 +104,7 @@ class BannerHomeFragment : AbsMainActivityFragment(), MainActivityFragmentCallba
             )
             NavigationUtil.goToUserInfo(requireActivity(), options)
         }
-        titleWelcome?.text =
-            String.format("%s", PreferenceUtil.userName)
+        titleWelcome?.text = String.format("%s", PreferenceUtil.userName)
 
         homeAdapter = HomeAdapter(mainActivity, displayMetrics)
         recyclerView.apply {
