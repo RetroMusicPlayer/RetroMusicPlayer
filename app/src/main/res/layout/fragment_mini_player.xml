@@ -62,6 +62,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical">
 
+            <com.google.android.material.progressindicator.ProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:circularRadius="16dp"
+                app:indicatorType="circular"
+                app:indicatorWidth="2dp"
+                app:linearSeamless="true"
+                tools:progress="10" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/miniPlayerPlayPauseButton"
                 android:layout_width="40dp"
@@ -72,17 +82,6 @@
                 app:srcCompat="@drawable/ic_pause_white_24dp"
                 app:tint="?attr/colorControlNormal"
                 tools:ignore="ContentDescription" />
-
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_gravity="center"
-                android:indeterminate="false"
-                android:progressDrawable="@drawable/circle_progress"
-                android:rotation="270"
-                tools:progress="80" />
         </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -95,4 +94,6 @@
             app:srcCompat="@drawable/ic_skip_next_white_24dp"
             app:tint="?attr/colorControlNormal" />
     </LinearLayout>
+
+
 </FrameLayout>

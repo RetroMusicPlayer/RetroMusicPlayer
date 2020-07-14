@@ -17,8 +17,12 @@
     android:height="64dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-
-    <path
-        android:fillColor="@color/md_white_1000"
-        android:pathData="M8 5v14l11-7L8 5z" />
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:rotation="90">
+        <path
+            android:fillColor="@color/md_white_1000"
+            android:pathData="M8 5v14l11-7L8 5z" />
+    </group>
 </vector>

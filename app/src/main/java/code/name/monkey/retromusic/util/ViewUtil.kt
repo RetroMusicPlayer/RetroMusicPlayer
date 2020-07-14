@@ -27,6 +27,7 @@ import androidx.core.view.ViewCompat
 import code.name.monkey.appthemehelper.util.ATHUtil
 import code.name.monkey.appthemehelper.util.ColorUtil
 import code.name.monkey.appthemehelper.util.MaterialValueHelper
+import com.google.android.material.progressindicator.ProgressIndicator
 
 object ViewUtil {
 
@@ -74,6 +75,10 @@ object ViewUtil {
                     0.65f
                 ), SRC_IN
             )
+    }
+
+    fun setProgressDrawable(progressIndicator: ProgressIndicator, newColor: Int) {
+        progressIndicator.progressTintList = ColorStateList.valueOf(newColor)
     }
 
     fun hitTest(v: View, x: Int, y: Int): Boolean {
