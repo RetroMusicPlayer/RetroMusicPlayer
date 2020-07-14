@@ -110,7 +110,7 @@ class RepositoryImpl constructor(private val context: Context) : Repository {
         val playlists = PlaylistLoader.getFavoritePlaylist(context)
         return if (playlists.isNotEmpty()) Home(
             playlists,
-            HomeAdapter.PLAYLISTS,
+            HomeAdapter.FAVOURITES,
             R.drawable.ic_favorite_white_24dp
         ) else null
     }

@@ -40,7 +40,7 @@ class HomeAdapter(
             .inflate(R.layout.section_recycler_view, parent, false)
         return when (viewType) {
             RECENT_ARTISTS, TOP_ARTISTS -> ArtistViewHolder(layout)
-            PLAYLISTS -> PlaylistViewHolder(layout)
+            FAVOURITES -> PlaylistViewHolder(layout)
             SUGGESTIONS -> {
                 SuggestionsViewHolder(
                     LayoutInflater.from(activity).inflate(
@@ -89,17 +89,17 @@ class HomeAdapter(
                 val viewHolder = holder as ArtistViewHolder
                 viewHolder.bindView(list[position].arrayList as List<Artist>, R.string.top_artists)
             }
-            PLAYLISTS -> {
-                val viewHolder = holder as PlaylistViewHolder
-                viewHolder.bindView(
-                    list[position].arrayList as List<Playlist>,
-                    R.string.favorites
-                )
-            }
             SUGGESTIONS -> {
                 val viewHolder = holder as SuggestionsViewHolder
                 viewHolder.bindView(
                     list[position].arrayList as List<Song>
+                )
+            }
+            FAVOURITES -> {
+                val viewHolder = holder as PlaylistViewHolder
+                viewHolder.bindView(
+                    list[position].arrayList as List<Playlist>,
+                    R.string.favorites
                 )
             }
         }
@@ -116,7 +116,7 @@ class HomeAdapter(
 
     companion object {
 
-        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, PLAYLISTS, SUGGESTIONS)
+        @IntDef(RECENT_ALBUMS, TOP_ALBUMS, RECENT_ARTISTS, TOP_ARTISTS, SUGGESTIONS, FAVOURITES)
         @Retention(AnnotationRetention.SOURCE)
         annotation class HomeSection
 
@@ -124,8 +124,8 @@ class HomeAdapter(
         const val TOP_ALBUMS = 1
         const val RECENT_ARTISTS = 2
         const val TOP_ARTISTS = 0
-        const val SUGGESTIONS = 4
-        const val PLAYLISTS = 5
+        const val SUGGESTIONS = 5
+        const val FAVOURITES = 4
     }
 
     private inner class AlbumViewHolder(view: View) : AbsHomeViewItem(view) {

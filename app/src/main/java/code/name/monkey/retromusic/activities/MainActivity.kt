@@ -623,6 +623,7 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
         fragment: Fragment,
         tag: String
     ) {
+
         supportFragmentManager.commit {
             replace(R.id.fragment_container, fragment, tag)
         }
